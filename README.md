@@ -23,6 +23,8 @@ This project is split into several levels that you should complete each week of 
 
 You can find each of the levels split into separate files, linked below.
 
+**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+
 ### Week 1 - Front End
 
 - [Level 100](./100.md)
