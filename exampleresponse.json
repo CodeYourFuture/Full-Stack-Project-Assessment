@@ -3,21 +3,18 @@
     "id": 1,
     "title": "Never Gonna Give You Up",
     "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "rating": 23,
-    "uploadedAt": 1618501657
+    "rating": 23
   },
   {
     "id": 2,
     "title": "The Coding Train",
     "link": "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    "rating": 230,
-    "uploadedAt": 1618500657
+    "rating": 230
   },
   {
     "id": 3,
     "title": "Mac & Cheese | Basics with Babish",
     "link": "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    "rating": 2111,
-    "uploadedAt": 1618502657
+    "rating": 2111
   }
 ]

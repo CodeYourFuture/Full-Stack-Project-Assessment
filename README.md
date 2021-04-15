@@ -15,7 +15,6 @@ In this project you will be building a project that fulfills the following User 
 - As a user, I want to be able to watch the videos embedded in the website.
 - As a user, I want to be able to "Up Vote" a video if I like it.
 - As a user, I want to be able to "Down Vote" a video if I dislike.
-- As a user, I don't want to see any videos that have a negative score.
 
 ## Levels
 
