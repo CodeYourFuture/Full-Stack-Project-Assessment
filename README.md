@@ -49,6 +49,10 @@ You can find each of the levels split into separate files, linked below.
 - [Level 999](./999.md) (Optional)
   - More optional goals for if you have time
 
+## Design
+
+You are welcome to use Bootstrap or any other design framework to help you build this app.
+
 ## Getting Started
 
 Fork this repository and then clone it to your computer.
