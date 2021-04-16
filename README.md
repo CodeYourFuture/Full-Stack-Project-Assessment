@@ -52,7 +52,7 @@ You can find each of the levels split into separate files, linked below.
 
 ## Design
 
-You are welcome to use Bootstrap or any other design framework to help you build this app.
+You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
 
 ## Getting Started
 
