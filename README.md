@@ -1,4 +1,4 @@
-# Full Stack Project Assessment
+# "Video Recommendation App!"
 
 ## Background
 
@@ -6,10 +6,11 @@ Before you continue to final projects we have to make sure that you can meaningf
 
 This means that we need to be sure that you can create a Full Stack App.
 
-## Challenge - "Video Recommendation Engine!"
+## Challenge
 
 In this project you will be building a project that fulfills the following User Stories
 
+- As a user, I want to be able to view a list of all videos posted on the site
 - As a user, I want to be able to post videos that I like to my website.
 - As a user, I want to be able to delete videos from the website that I no longer like.
 - As a user, I want to be able to watch the videos embedded in the website.
