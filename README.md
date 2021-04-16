@@ -48,3 +48,9 @@ You can find each of the levels split into separate files, linked below.
   - Stretch goals for the database if you have time
 - [Level 999](./999.md) (Optional)
   - More optional goals for if you have time
+
+## Getting Started
+
+Fork this repository and then clone it to your computer.
+
+Progress to Level 100 when you are ready.
