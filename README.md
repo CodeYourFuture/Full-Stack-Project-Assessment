@@ -1,4 +1,4 @@
-# "Video Recommendation App!"
+# Video Recommendation App
 
 ## Background
 
