@@ -28,21 +28,23 @@ You can find each of the levels split into separate files, linked below.
 
 - [Level 100](./100.md)
   - A core version of the React front end of the app
-- [Level 150](./150.md) (Optional)
+- [Level 199](./199.md) (Optional)
   - Stretch goals for the front end if you have time
 
 ### Week 2 - Back End (without Database)
 
 - [Level 200](./200.md)
   - A core version of the Node + Express back end of the app
-- [Level 200](./250.md) (Optional)
+- [Level 250](./200.md)
+  - Connect your Front End and Back End together
+- [Level 299](./299.md) (Optional)
   - Stretch goals for the back end if you have time
 
 ### Week 3 - Back End (with Database)
 
 - [Level 300](./300.md)
   - Integrate the back end with a database
-- [Level 350](./350.md) (Optional)
+- [Level 399](./399.md) (Optional)
   - Stretch goals for the database if you have time
 - [Level 999](./999.md) (Optional)
   - More optional goals for if you have time
