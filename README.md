@@ -36,7 +36,7 @@ You can find each of the levels split into separate files, linked below.
 
 - [Level 200](./200.md)
   - A core version of the Node + Express back end of the app
-- [Level 250](./200.md)
+- [Level 250](./250.md)
   - Connect your Front End and Back End together
 - [Level 299](./299.md) (Optional)
   - Stretch goals for the back end if you have time
