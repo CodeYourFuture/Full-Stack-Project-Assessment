@@ -52,6 +52,14 @@ You can find each of the levels split into separate files, linked below.
 - [Level 999](./999.md) (Optional)
   - More optional goals for if you have time
 
+## Example of Level 100
+
+Here is an example of **some** of the requirements of Level 100 to get you started.
+
+https://video-rec.netlify.app/
+
+Note: This is only half of Level 100.
+
 ## Design
 
 You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
