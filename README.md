@@ -52,13 +52,17 @@ You can find each of the levels split into separate files, linked below.
 - [Level 999](./999.md) (Optional)
   - More optional goals for if you have time
 
-## Example of Level 100
+## Sample Solution
 
-Here is an example of **some** of the requirements of Level 100 to get you started.
+Here is an example solution of the Front End:
 
-https://video-rec.netlify.app/
+https://vid-rec2.netlify.app/
 
-Note: This is only half of Level 100.
+**Note:** You can design the website to look however you like.
+
+Here is an example solution for the Back End:
+
+https://video-rec.herokuapp.com
 
 ## Design
 
