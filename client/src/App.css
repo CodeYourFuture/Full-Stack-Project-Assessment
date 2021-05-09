@@ -1,3 +1,22 @@
 .App {
   text-align: center;
 }
+.embedded-video {
+  height: 16em;
+  margin: auto;
+  text-align: center;
+}
+.video-container {
+  display: block;
+  width: 100%;
+}
+.display-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 98%;
+}
+.video-and-title {
+  width: 30%;
+  margin-bottom: 1em;
+}
