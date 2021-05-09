@@ -1,5 +1,44 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css);
 .App {
   text-align: center;
+  margin-left: 2em;
+}
+.App-header {
+  background-color: rgb(168, 196, 194);
+  padding: 1em;
+  margin-left: -2em;
+  margin-bottom: 2em;
+}
+.add-button-and-search-wrapper {
+  display: inline-flexbox;
+}
+.add-button {
+  margin-bottom: 2em;
+}
+.search-input-wrapper {
+ background-color: aliceblue;
+ display: flex;
+ width: 40%;
+ align-items: center;
+ justify-content: space-around;
+ margin: auto;
+ color: aliceblue;
+ padding: 0.4em;
+ border-radius: 0.2em;
+ margin-bottom: 2em;
+}
+.search-bar {
+  background-color: aliceblue;
+  font-size: 1.2em;
+  border-radius: 0.25em;
+  padding-left: 0.5em;
+  width: 90%;
+  border: none;
+  outline: none;
+}
+.fa-search {
+  color: rgb(133, 136, 138);
+  font-size: x-large;
 }
 .embedded-video {
   height: 16em;
@@ -11,12 +50,30 @@
   width: 100%;
 }
 .display-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
   width: 98%;
+  justify-content: center;
 }
 .video-and-title {
-  width: 30%;
-  margin-bottom: 1em;
+  display: grid;
+  grid-auto-rows: minmax(1em, auto);
 }
+
+.video-and-title:last-child:nth-child(3n - 2) {
+  grid-column-end: 3;
+}
+.buttons-container {
+  display: inline-flexbox;
+  margin-top: -1em;
+}
+
+.like,
+.dislike {
+  display: inline-block;
+  cursor: pointer;
+  margin: 1em 1em 0 1em;
+  font-size: xx-large;
+}
+
