@@ -11,22 +11,49 @@ library.add(faThumbsUp);
 library.add(faThumbsDown);
 
 const MiniYouTube = () => {
-  const [searchInput, setSearchInput] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [videos, setVideos] = useState(exampleresponse);
-  console.log(videos);
+
   const handleSearchInput = (e) => {
     console.log(e.target.value);
     setSearchInput(e.target.value.toLowerCase());
+    const searchResult = videos.filter((video) =>
+      video.title.toLowerCase().includes(searchInput)
+    );
+    setVideos(searchResult);
+    if (e.target.value === '') setVideos(exampleresponse);
   };
+
   const videoRemover = (e) => {
     const toBeRemoved = e.target.parentElement.id;
-    const filteredData = videos.filter(
+    const remainingVideos = videos.filter(
       (video) => video.id.toString() !== toBeRemoved
     );
-    return setVideos(filteredData);
+    return setVideos(remainingVideos);
   };
+
   const addNewVideo = (title, url) => {
     setVideos([...videos, { id: '', title: title, url: url, rating: '' }]);
+  };
+
+  const incrementRating = (e) => {
+    const id = e.target.parentElement.parentElement.id;
+    const likedVideo = videos.find((video) => video.id.toString() === id);
+    likedVideo.rating = likedVideo.rating + 1;
+    const i = videos.findIndex((video) => video.id === likedVideo.id);
+    let newArray = [...videos];
+    newArray[i] = likedVideo;
+    setVideos(newArray);
+  };
+
+  const decrementRating = (e) => {
+    const id = e.target.parentElement.parentElement.id;
+    const dislikedVideo = videos.find((video) => video.id.toString() === id);
+    dislikedVideo.rating = dislikedVideo.rating - 1;
+    const i = videos.findIndex((video) => video.id === dislikedVideo.id);
+    let newArray = [...videos];
+    newArray[i] = dislikedVideo;
+    setVideos(newArray);
   };
 
   return (
@@ -45,7 +72,6 @@ const MiniYouTube = () => {
           />
         </div>
       </div>
-
       <div className='display-wrapper'>
         {videos.map((video) => {
           return (
@@ -60,6 +86,7 @@ const MiniYouTube = () => {
               <h4 className='rating'>Rating:{video.rating}</h4>
               <div id={video.id} className='buttons-container'>
                 <FontAwesomeIcon
+                  onClick={decrementRating}
                   className='link-danger dislike'
                   icon={'thumbs-down'}
                 />
@@ -67,6 +94,7 @@ const MiniYouTube = () => {
                   Delete
                 </Button>
                 <FontAwesomeIcon
+                  onClick={incrementRating}
                   className='link-danger like'
                   icon={'thumbs-up'}
                 />
