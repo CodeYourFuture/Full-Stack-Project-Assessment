@@ -15,6 +15,9 @@
 .add-button {
   margin-bottom: 2em;
 }
+.reveal-form {
+  margin-bottom: 2em;
+}
 .search-input-wrapper {
  background-color: aliceblue;
  display: flex;
@@ -64,9 +67,12 @@
 .video-and-title:last-child:nth-child(3n - 2) {
   grid-column-end: 3;
 }
+.rating {
+  margin-top: 0.5em;
+}
 .buttons-container {
   display: inline-flexbox;
-  margin-top: -1em;
+  margin-top: -2em;
 }
 
 .like,
