@@ -16,12 +16,11 @@ const AddVideoForm = ({ addNewVideo }) => {
     addNewVideo(title, url);
     setTitle('');
     setUrl('');
-    alert("You've successfully added a video!");
   };
 
   return (
     <div>
-      <Button onClick={addVideo} className='add-button' variant='primary'>
+      <Button onClick={addVideo} className='add-button' variant='light'>
         Add Video
       </Button>
       <form
@@ -34,6 +33,7 @@ const AddVideoForm = ({ addNewVideo }) => {
           id='title'
           name='title'
           placeholder='Enter title'
+          className='form-input'
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
@@ -42,10 +42,11 @@ const AddVideoForm = ({ addNewVideo }) => {
           id='url'
           name='url'
           placeholder='Enter url'
+          className='form-input'
           onChange={(e) => setUrl(e.target.value)}
           value={url}
         />
-        <input className='primary' type='submit' value='Add a video' />
+        <input className='form-submit' type='submit' value='Add a video' />
       </form>
     </div>
   );

@@ -1,10 +1,17 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 .App {
+  font-family: 'Courgette', cursive;
   text-align: center;
-  margin-left: 2em;
+  /* padding-left: 2em; */
+  background-color: darkslategrey;
+  background-color: rgb(32, 30, 30);
 }
 .App-header {
-  background-color: rgb(168, 196, 194);
+  font-family: 'Courgette', cursive;
+  background-color: rgb(47, 49, 49);
+  
+  color: rgb(176, 3, 250);
   padding: 1em;
   margin-left: -2em;
   margin-bottom: 2em;
@@ -18,8 +25,16 @@
 .reveal-form {
   margin-bottom: 2em;
 }
+.form-input {
+  background-color: rgb(47, 49, 49);
+  border-style: none;
+  font-size: 1.5em;
+}
+.form-submit {
+  font-size: 1.5em;
+}
 .search-input-wrapper {
- background-color: aliceblue;
+ background-color: rgb(47, 49, 49);
  display: flex;
  width: 40%;
  align-items: center;
@@ -32,7 +47,9 @@
 }
 .search-bar {
   background-color: aliceblue;
-  font-size: 1.2em;
+  background-color: rgb(47, 49, 49);
+  color: rgb(176, 3, 250);
+  font-size: 1.4em;
   border-radius: 0.25em;
   padding-left: 0.5em;
   width: 90%;
@@ -41,10 +58,21 @@
 }
 .fa-search {
   color: rgb(133, 136, 138);
+ color: rgb(176, 3, 250);
   font-size: x-large;
+}
+::placeholder {
+  color: rgb(176, 3, 250);
+}
+:-ms-input-placeholder {
+  color: rgb(176, 3, 250);
+}
+::-ms-input-placeholder {
+  color: rgb(176, 3, 250);
 }
 .embedded-video {
   height: 16em;
+  width: 25em;
   margin: auto;
   text-align: center;
 }
@@ -56,12 +84,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2em;
-  width: 98%;
+  width: 100%;
   justify-content: center;
+  align-items: center;
 }
 .video-and-title {
+  color: rgb(166, 143, 177);
   display: grid;
   grid-auto-rows: minmax(1em, auto);
+  grid-auto-columns: minmax(10em, auto);
 }
 
 .video-and-title:last-child:nth-child(3n - 2) {
@@ -81,5 +112,7 @@
   cursor: pointer;
   margin: 1em 1em 0 1em;
   font-size: xx-large;
+  color: rgb(113, 94, 121);
+  color: rgb(166, 143, 177);
 }
 

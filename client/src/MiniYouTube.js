@@ -33,7 +33,14 @@ const MiniYouTube = () => {
   };
 
   const addNewVideo = (title, url) => {
-    setVideos([...videos, { id: '', title: title, url: url, rating: '' }]);
+    const regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    const match = url.match(regExp);
+    if (title === '') {
+      alert('Title should not be empty!');
+    } else if (url === '' || !match) {
+      alert('Invalid url!');
+    } else
+      setVideos([{ id: '', title: title, url: url, rating: '' }, ...videos]);
   };
 
   const incrementRating = (e) => {
@@ -57,11 +64,11 @@ const MiniYouTube = () => {
   };
 
   return (
-    <div>
-      <div className='add-button-and-search-wrapper'>
+    <div key='mainWrapper'>
+      <div key='buttonAndSearch' className='add-button-and-search-wrapper'>
         <AddVideoForm addNewVideo={addNewVideo} />
         <div key='input-form' className='search-input-wrapper'>
-          <i class='fas fa-search'></i>
+          <i key='fasIcon' className='fas fa-search'></i>
           <input
             key='search-input'
             type='text'
@@ -72,22 +79,22 @@ const MiniYouTube = () => {
           />
         </div>
       </div>
-      <div className='display-wrapper'>
-        {videos.map((video) => {
+      <div key='displayWrapper' className='display-wrapper'>
+        {videos.map((video, index) => {
           return (
-            <div className='video-and-title'>
+            <div key={index} className='video-and-title'>
               <h4>{video.title}</h4>
               <ReactPlayer
                 width='560'
                 height='315'
                 className='embedded-video'
-                url={video.url.toString()}
+                url={video.url}
               />
               <h4 className='rating'>Rating:{video.rating}</h4>
               <div id={video.id} className='buttons-container'>
                 <FontAwesomeIcon
                   onClick={decrementRating}
-                  className='link-danger dislike'
+                  className='dislike'
                   icon={'thumbs-down'}
                 />
                 <Button onClick={videoRemover} variant='danger'>
@@ -95,7 +102,7 @@ const MiniYouTube = () => {
                 </Button>
                 <FontAwesomeIcon
                   onClick={incrementRating}
-                  className='link-danger like'
+                  className=' like'
                   icon={'thumbs-up'}
                 />
               </div>
