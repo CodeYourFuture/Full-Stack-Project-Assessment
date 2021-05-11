@@ -15,7 +15,6 @@ const MiniYouTube = () => {
   const [videos, setVideos] = useState(exampleresponse);
 
   const handleSearchInput = (e) => {
-    console.log(e.target.value);
     setSearchInput(e.target.value.toLowerCase());
     const searchResult = videos.filter((video) =>
       video.title.toLowerCase().includes(searchInput)
@@ -41,7 +40,13 @@ const MiniYouTube = () => {
       alert('Invalid url!');
     } else
       setVideos([
-        { id: Date.now(), title: title, url: url, rating: '' },
+        {
+          id: Date.now(),
+          title: title,
+          url: url,
+          rating: '',
+          posted: new Date().toString(),
+        },
         ...videos,
       ]);
   };
@@ -65,6 +70,11 @@ const MiniYouTube = () => {
     newArray[i] = dislikedVideo;
     setVideos(newArray);
   };
+
+  videos.sort((a, b) => {
+    if (a.rating > b.rating) return -1;
+    else return 1;
+  });
 
   return (
     <div key='mainWrapper'>
@@ -93,7 +103,8 @@ const MiniYouTube = () => {
                 className='embedded-video'
                 url={video.url}
               />
-              <h4 className='rating'>Rating:{video.rating}</h4>
+              <h5 className='rating'>Rating: {video.rating}</h5>
+              <h6 className={video.posted ? 'posted' : 'd-none'}>Posted: {video.posted}</h6>
               <div id={video.id} className='buttons-container'>
                 <FontAwesomeIcon
                   onClick={decrementRating}

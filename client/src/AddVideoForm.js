@@ -10,7 +10,7 @@ const AddVideoForm = ({ addNewVideo }) => {
   const addVideo = () => {
     setReveal(true);
   };
-  
+
   const submitNewVideo = (e) => {
     e.preventDefault();
     addNewVideo(title, url);
@@ -20,7 +20,7 @@ const AddVideoForm = ({ addNewVideo }) => {
 
   return (
     <div>
-      <Button onClick={addVideo} className='add-button' variant='light'>
+      <Button onClick={addVideo} className='add-button' variant='dark'>
         Add Video
       </Button>
       <form
@@ -28,25 +28,40 @@ const AddVideoForm = ({ addNewVideo }) => {
         className={reveal ? 'reveal-form' : 'd-none'}
         action='submit'
       >
-        <input
-          type='text'
-          id='title'
-          name='title'
-          placeholder='Enter title'
-          className='form-input'
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        />
-        <input
-          type='text'
-          id='url'
-          name='url'
-          placeholder='Enter url'
-          className='form-input'
-          onChange={(e) => setUrl(e.target.value)}
-          value={url}
-        />
-        <input className='form-submit' type='submit' value='Add a video' />
+        <div className='form-group'>
+          <label className='form-label text-light' htmlFor='Title'>
+            Title
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='title'
+            name='title'
+            placeholder='Enter a title'
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          />
+        </div>
+        <div className='form-group'>
+          <label className='form-label text-light' htmlFor='url'>
+            URL
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='url'
+            name='url'
+            placeholder='Enter a url'
+            onChange={(e) => setUrl(e.target.value)}
+            value={url}
+          />
+          <small id='info' className='form-text text-muted'>
+            Please make sure you enter a valid YouTube url.
+          </small>
+        </div>
+        <Button type='submit' className='submit-btn' variant='dark'>
+          Submit
+        </Button>
       </form>
     </div>
   );
