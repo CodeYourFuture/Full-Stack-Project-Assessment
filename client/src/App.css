@@ -82,7 +82,7 @@
 }
 .display-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-columns: 1fr; */
   gap: 2em;
   width: 100%;
   justify-content: center;
@@ -116,3 +116,14 @@
   color: rgb(166, 143, 177);
 }
 
+@media screen and (min-width: 1025px) {
+  .display-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1340px) {
+  .display-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

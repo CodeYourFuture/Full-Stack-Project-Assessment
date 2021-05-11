@@ -40,7 +40,10 @@ const MiniYouTube = () => {
     } else if (url === '' || !match) {
       alert('Invalid url!');
     } else
-      setVideos([{ id: '', title: title, url: url, rating: '' }, ...videos]);
+      setVideos([
+        { id: Date.now(), title: title, url: url, rating: '' },
+        ...videos,
+      ]);
   };
 
   const incrementRating = (e) => {

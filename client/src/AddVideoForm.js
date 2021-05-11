@@ -10,7 +10,7 @@ const AddVideoForm = ({ addNewVideo }) => {
   const addVideo = () => {
     setReveal(true);
   };
-
+  
   const submitNewVideo = (e) => {
     e.preventDefault();
     addNewVideo(title, url);
