@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import exampleresponse from './exampleresponse.json';
 import ReactPlayer from 'react-player';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,16 @@ library.add(faThumbsDown);
 const MiniYouTube = () => {
   const [searchInput, setSearchInput] = useState('');
   const [videos, setVideos] = useState(exampleresponse);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setVideos(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value.toLowerCase());
