@@ -24,6 +24,26 @@ const MiniYouTube = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const ascendingOrder = () => {
+    fetch(`http://127.0.0.1:5000/?order=asc`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setVideos(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const descendingOrder = () => {
+    fetch(`http://127.0.0.1:5000/?order=desc`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setVideos(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value.toLowerCase());
     const searchResult = videos.filter((video) =>
@@ -81,15 +101,23 @@ const MiniYouTube = () => {
     setVideos(newArray);
   };
 
-  videos.sort((a, b) => {
-    if (a.rating > b.rating) return -1;
-    else return 1;
-  });
-
   return (
     <div key='mainWrapper'>
       <div key='buttonAndSearch' className='add-button-and-search-wrapper'>
+        <header className='App-header'>
+          <div>
+            <Button onClick={ascendingOrder} variant='light'>Ascending</Button>
+          </div>
+          <div>
+            <h1>Video Recommendation</h1>
+          </div>
+          <div>
+            <Button onClick={descendingOrder} variant='light'>Descending</Button>
+          </div>
+        </header>
+
         <AddVideoForm addNewVideo={addNewVideo} />
+
         <div key='input-form' className='search-input-wrapper'>
           <i key='fasIcon' className='fas fa-search'></i>
           <input
@@ -114,7 +142,9 @@ const MiniYouTube = () => {
                 url={video.url}
               />
               <h5 className='rating'>Rating: {video.rating}</h5>
-              <h6 className={video.posted ? 'posted' : 'd-none'}>Posted: {video.posted}</h6>
+              <h6 className={video.posted ? 'posted' : 'd-none'}>
+                Posted: {video.posted}
+              </h6>
               <div id={video.id} className='buttons-container'>
                 <FontAwesomeIcon
                   onClick={decrementRating}

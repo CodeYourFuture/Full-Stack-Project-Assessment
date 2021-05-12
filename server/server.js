@@ -8,8 +8,6 @@ app.use(express.json());
 app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [];
 videos.push(exampleresponse);
 function* flatten(array, depth) {
@@ -27,9 +25,21 @@ function* flatten(array, depth) {
 
 videos = [...flatten(videos, Infinity)];
 
-// GET "/"
 app.get('/', (req, res) => {
-  res.json(videos);
+  let copyVideos = [...videos];
+  let copyVideos2 = [...videos];
+  if (!req.query.order) res.json(videos);
+    else if (req.query.order === 'asc') {
+      const ascendingOrder = copyVideos.sort(
+        (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+      );
+      res.json(ascendingOrder);
+    } else if (req.query.order === 'desc') {
+      const descendingOrder = copyVideos2.sort(
+        (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
+      );
+      res.json(descendingOrder);
+    }
 });
 
 app.post('/', (req, res) => {

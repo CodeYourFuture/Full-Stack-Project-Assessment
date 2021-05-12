@@ -7,11 +7,12 @@
 }
 
 .App-header {
+  display: flex;
+  justify-content: space-evenly;
   font-family: 'Courgette', cursive;
   background-color: rgb(19, 18, 18);
   color: antiquewhite;
   padding: 1em;
-  margin-left: -2em;
   margin-bottom: 2em;
 }
 
