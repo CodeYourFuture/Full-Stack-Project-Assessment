@@ -12,7 +12,7 @@ library.add(faThumbsDown);
 
 const MiniYouTube = () => {
   const [searchInput, setSearchInput] = useState('');
-  const [videos, setVideos] = useState(exampleresponse);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5000`)
@@ -54,11 +54,17 @@ const MiniYouTube = () => {
   };
 
   const videoRemover = (e) => {
-    const toBeRemoved = e.target.parentElement.id;
+    const id = e.target.parentElement.id;
     const remainingVideos = videos.filter(
-      (video) => video.id.toString() !== toBeRemoved
+      (video) => video.id.toString() !== id
     );
-    return setVideos(remainingVideos);
+    fetch(`http://127.0.0.1:5000/${id}`, {method: 'DELETE'})
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setVideos(remainingVideos);
+      })
+      .catch((err) => console.log(err));
   };
 
   const addNewVideo = (title, url) => {
@@ -80,6 +86,7 @@ const MiniYouTube = () => {
         ...videos,
       ]);
   };
+
 
   const incrementRating = (e) => {
     const id = e.target.parentElement.parentElement.id;

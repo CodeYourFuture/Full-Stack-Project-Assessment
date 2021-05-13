@@ -1,5 +1,5 @@
 {
-  "name": "to-do-server",
+  "name": "video-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,10 @@
     "start": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Biruk Kebede",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {

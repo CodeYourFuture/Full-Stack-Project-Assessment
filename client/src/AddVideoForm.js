@@ -1,22 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddVideoForm = ({ addNewVideo }) => {
   const [reveal, setReveal] = useState(false);
+  const [controller, setController] = useState(false);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
 
   const addVideo = () => {
     setReveal(true);
   };
+   const submitNewVideo = (e) => {
+     e.preventDefault();
+     setController(true);
+     addNewVideo(title, url)
+      setTitle('');
+      setUrl('');
+     
 
-  const submitNewVideo = (e) => {
-    e.preventDefault();
-    addNewVideo(title, url);
-    setTitle('');
-    setUrl('');
-  };
+     // fetch('http://127.0.0.1:5000', { method: 'POST', body: JSON.stringify({title: title.toString(), url: url.toString()}) })
+     //   .then((res) => res.json())
+     //   .then((data) => {
+     //     console.log(data);
+     //     //setVideos(data);
+     //   })
+     // .catch((err) => console.log(err));
+     //addNewVideo(title, url);
+     //setTitle('');
+     //setUrl('');
+   };
+
+  useEffect(() => {
+    if (controller) {
+      fetch(`http://127.0.0.1:5000`, {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json' },
+        body: {
+          'title': title,
+          'url': url
+        }
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      
+       
+         
+        
+      }).catch((err) => console.log(err));
+      
+     
+    } 
+     
+    
+
+     }, [controller, title, url]);
+
+ 
 
   return (
     <div>

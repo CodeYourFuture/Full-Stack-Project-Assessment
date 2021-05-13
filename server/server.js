@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const exampleresponse = require('../exampleresponse');
+const exampleresponse = require('./exampleresponse');
 const cors = require('cors');
 const port = process.env.PORT || 5000;
 
@@ -58,7 +58,7 @@ app.post('/', (req, res) => {
     res.json({ Result: 'failure', message: 'Title should not be empty!' });
   } else if (url === '' || !match) {
     res.json({ Result: 'failure', message: 'Invalid url!' });
-  } else
+  } else return
     videos = [
       ...videos,
       {
