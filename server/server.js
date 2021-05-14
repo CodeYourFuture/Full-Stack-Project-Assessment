@@ -1,27 +1,115 @@
 const express = require('express');
-const path = require('path');
-
+const exampleresponse = require('./exampleresponse.json');
 const port = process.env.PORT || 5000;
-
 const server = express();
-const http = require('http');
-
 const hostname = '127.0.0.1';
 
-server.use(express.static(path.resolve(__dirname, '../client/build')));
+server.use(express.json());
 
-
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('Hello World');
-// });
-server.get('/api', (req, res) => {
-  res.json({ message: 'Hello from server!' });
+server.use ((req, res, next) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'http://localhost:3000'
+  );
+  res.setHeader('Access-Control-Allow-Methods', '*')
+  res.setHeader('Access-Control-Allow-Headers', 'application/json')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
 });
 
-server.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+let videos = [];
+videos.push(exampleresponse);
+function* flatten(array, depth) {
+  if (depth === undefined) {
+    depth = 1;
+  }
+  for (const item of array) {
+    if (Array.isArray(item) && depth > 0) {
+      yield* flatten(item, depth - 1);
+    } else {
+      yield item;
+    }
+  }
+}
+
+videos = [...flatten(videos, Infinity)];
+
+server.get('/', (req, res) => {
+  let copyVideos = [...videos];
+  let copyVideos2 = [...videos];
+  if (!req.query.order) res.json(videos);
+  else if (req.query.order === 'asc') {
+    const ascendingOrder = copyVideos.sort(
+      (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+    );
+    return res.json(ascendingOrder);
+  } else if (req.query.order === 'desc') {
+    const descendingOrder = copyVideos2.sort(
+      (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
+    );
+    return res.json(descendingOrder);
+  }
+});
+
+server.post('/', (req, res) => {
+  let newVideo = [];
+  let title;
+  let url;
+  newVideo.push(req.body);
+  newVideo.map((video) => {
+    url = video.url;
+    title = video.title;
+  });
+ 
+  const regExp =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  const match = url.match(regExp);
+  if (title !== '' && match) {
+    videos = [
+      ...videos,
+      {
+        id: Date.now(),
+        title: title,
+        url: url,
+        rating: '',
+        posted: new Date().toString(),
+      },
+    ];
+    return res.status(201).json({
+      Result: 'Success!',
+      Message: `Your video with a new id: ${Date.now()} is saved!`,
+    })
+  }
+  else if (title === '') {
+    return res.json({ Result: 'failure', message: 'Title should not be empty!' });
+  } else if (url === '' || !match) {
+    return res.json({ Result: 'failure', message: 'Invalid url!' });
+  }
+
+});
+
+server.get('/:id', (req, res) => {
+  const id = req.params.id;
+  const videoById = videos.find((video) => video.id.toString() === id);
+  if (videoById) res.json(videoById);
+  else
+    res.status(404).json({ message: `Video by id: ${id} could not be found!` });
+});
+
+server.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const remainingVideos = videos.filter((video) => video.id.toString() !== id);
+  if (videos.length - remainingVideos.length === 1) {
+    videos = remainingVideos;
+    res.json({ Server: `A video by the id: ${id} is successfully deleted!` });
+  } else
+    res
+      .status(404)
+      .json({ Server: `A video by the id: ${id} could not be found!` });
 });
 
 server.listen(port, hostname, () => {
