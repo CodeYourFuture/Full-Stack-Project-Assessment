@@ -1,3 +1,126 @@
 .App {
   text-align: center;
+  width:90vw;
+  margin:0 auto;
+  color: rgb(19, 55, 95);
+}
+
+/* FORM STYLES */
+
+div.form-container {
+  text-align: left;
+  margin: 2.5rem 2rem;
+  padding: 1.5rem 2rem;
+  border: 2px solid rgb(215, 227, 243);
+  border-radius: 1rem;
+  background-color: rgb(250, 250, 245);
+}
+
+div.form-container .form-title {
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid #eee;
+}
+
+#form-add {
+  margin-top: 0.8rem;
+}
+
+#form-add input {
+  margin-right: 0.8rem;
+  padding: 0.3rem;
+  border: 2px solid #eee;
+  border-radius: 0.3rem;
+}
+
+#form-add label {
+  font-weight: 600;
+}
+
+input[id="title"] {
+  width: 25vw;
+}
+
+input[id="url"] {
+  width: 40vw;
+}
+
+button[id="add"] {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+  background-color: rgb(47, 120, 204);
+}
+
+/* VIDEO CARDS STYLING */
+
+div.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  width: 20%;
+  margin: 0 1rem 3rem;
+  padding: 0 1px;
+  border: 2px solid #eee;
+  border-radius: 0.3rem 0.3rem 0.5rem 0.5rem;
+  background-color: rgb(250, 250, 245);
+}
+
+div.card > div:first-of-type {
+  text-align: right;
+}
+
+.card .title {
+  margin: 0.3rem auto 0.5rem;
+  padding: 0 0.3rem;
+}
+
+.card iframe {
+  width: 100%;
+  height: 200px;
+}
+
+.card .controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.8rem 0 0.4rem;
+  padding: 0 0.3rem;
+}
+
+.controls div.votes {
+  text-align: left;
+}
+
+.fa-thumbs-up,
+.fa-thumbs-down {
+  margin: 0 0.1rem;
+  padding: 0.15rem;
+  background-color: rgb(134, 187, 204);
+  border: 1.5px solid #333;
+  border-radius: 0.15rem;
+}
+
+.fa-thumbs-up {
+  color: darkgreen;
+}
+
+.fa-thumbs-down {
+  color: #e00;
+}
+
+button[id="remove"] {
+  font-size: 1rem;
+  color: rgb(241, 241, 235);
+  padding: 0.3rem 0.6rem;
+  background-color: rgb(189, 31, 31);
+  border-radius: 0.15rem;
 }
