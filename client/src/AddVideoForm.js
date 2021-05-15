@@ -16,19 +16,21 @@ const AddVideoForm = ({ addNewVideo }) => {
     e.preventDefault();
     setController(true);
     addNewVideo(title, url);
+    setData({ id: Date.now(), title: title, url: url, rating: '', posted: new Date().toString()});
     setTitle('');
     setUrl('');
-    setData({title: title, url: url});
+    setController(false)
   };
-    
+
   if (controller) {
     const rules = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }
-    console.log(JSON.stringify(data));
-    fetch('http://127.0.0.1:5000', rules);
+      body: JSON.stringify(data),
+    };
+    fetch('http://127.0.0.1:5000', rules)
+      .then(response => response.json())
+      .then(data => console.log(data));
   }
 
   return (

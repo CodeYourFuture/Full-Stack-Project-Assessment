@@ -6,13 +6,10 @@ const hostname = '127.0.0.1';
 
 server.use(express.json());
 
-server.use ((req, res, next) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'http://localhost:3000'
-  );
-  res.setHeader('Access-Control-Allow-Methods', '*')
-  res.setHeader('Access-Control-Allow-Headers', 'application/json')
+server.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'application/json');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -63,7 +60,7 @@ server.post('/', (req, res) => {
     url = video.url;
     title = video.title;
   });
- 
+
   const regExp =
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
   const match = url.match(regExp);
@@ -81,14 +78,15 @@ server.post('/', (req, res) => {
     return res.status(201).json({
       Result: 'Success!',
       Message: `Your video with a new id: ${Date.now()} is saved!`,
-    })
-  }
-  else if (title === '') {
-    return res.json({ Result: 'failure', message: 'Title should not be empty!' });
+    });
+  } else if (title === '') {
+    return res.json({
+      Result: 'failure',
+      message: 'Title should not be empty!',
+    });
   } else if (url === '' || !match) {
     return res.json({ Result: 'failure', message: 'Invalid url!' });
   }
-
 });
 
 server.get('/:id', (req, res) => {
@@ -101,7 +99,6 @@ server.get('/:id', (req, res) => {
 
 server.delete('/:id', (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const remainingVideos = videos.filter((video) => video.id.toString() !== id);
   if (videos.length - remainingVideos.length === 1) {
     videos = remainingVideos;

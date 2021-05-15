@@ -28,7 +28,6 @@ const MiniYouTube = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
   const ascendingOrder = () => {
     fetch(`http://127.0.0.1:5000/?order=asc`)
       .then((res) => res.json())
@@ -109,7 +108,6 @@ const MiniYouTube = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           return setVideos(remainingVideos);
         })
         .catch((err) => console.log(err));
