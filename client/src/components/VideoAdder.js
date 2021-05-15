@@ -4,6 +4,7 @@ const Form = (props) => {
   const addNewVideo = (event) => {
     event.preventDefault();
     props.onAdd(getFormData(event.target));
+    event.target.reset();
   };
   return (
     <div class="form-container">
