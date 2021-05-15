@@ -10,9 +10,15 @@ function App() {
   // EVENT HANDLERS
   const addNewVideo = ({ title, url }) => {
     const newVideo = { id: videos.length, title, url };
-    console.log(newVideo)
     setVideos([...videos, newVideo]);
-  }
+  };
+
+  const deleteVideo = (videoId) => {
+    const index = videos.findIndex((v) => v.id === videoId);
+    videos.splice(index, 1);
+    setVideos([...videos]);
+  };
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +26,7 @@ function App() {
       </header>
       <div className="container">
         <YouTubeVideoAdder onAdd={addNewVideo} />
-        <YouTubeVideosContainer content={videos}/>
+        <YouTubeVideosContainer content={videos} onDelete={deleteVideo} />
       </div>
     </div>
   );

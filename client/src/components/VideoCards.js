@@ -1,10 +1,10 @@
 import Card from "./VideoCard";
 
-const VideoCards = ({ content }) => {
+const VideoCards = (props) => {
   return (
     <div className="cards-container">
-      {content.map((videoData, index) => (
-        <Card key={index} data={videoData} />
+      {props.content.map((videoData, index) => (
+        <Card key={index} data={videoData} onDelete={props.onDelete}/>
       ))}
     </div>
   );
