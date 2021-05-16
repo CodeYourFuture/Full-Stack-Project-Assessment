@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Card = ({ data,onDelete }) => {
-  const [votes, setVotes] = useState(0);
+  const [votes, setVotes] = useState(data.rating);
   const id = data.url.substring(data.url.indexOf("=") + 1);
   let title = data.title;
   if (title.length > 30) {
