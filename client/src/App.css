@@ -5,3 +5,8 @@
   background-color: rgb(216, 68, 93);
   color: white;
 }
+.thumbs-up,
+.thumbs-down {
+  background-color: rgb(218, 42, 71);
+  margin-left: 20px;
+}
