@@ -1,11 +1,16 @@
 import React from "react";
 
-const VideoRatings = ({ video }) => {
+const VideoRatings = ({ rating }) => {
   return (
-    <div>
-      <button>Like {video.rating}</button>
+    <div className="votes">
+      <button className="btn btn-success">
+        <i className="fas fa-thumbs-up vote">&#128077;</i>
+      </button>
       <p>Votes</p>
-      <button>Dislike{video.rating}</button>
+
+      <button className="btn btn-success">
+        <i className="fas fa-thumbs-down vote">&#128078;</i>
+      </button>
     </div>
   );
 };
