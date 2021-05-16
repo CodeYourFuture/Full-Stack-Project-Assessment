@@ -1,4 +1,5 @@
 const express = require("express");
+const cors=require("cors")
 const youTubeVideos = require("./data/exampleresponse.json");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -6,6 +7,9 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 let videos = [...youTubeVideos];
+
+// enable CORS
+app.use(cors());
 
 // GET "/"
 app.get("/", (req, res) => {
