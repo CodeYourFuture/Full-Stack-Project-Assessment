@@ -1,7 +1,9 @@
-export function getFormData(form) {
+export function createVideoData(form) {
   return {
     title: form.querySelector("#title").value,
     url: form.querySelector("#url").value,
+    rating: 0,
+    dateUploaded:new Date().toLocaleDateString(),
   };
 }
 
@@ -39,4 +41,16 @@ function checkVideoUrlFormat(formData) {
   return url.includes(urlFormat) && url.length > urlFormat.length
     ? []
     : [`Error: invalid URL. Please enter a valid YouTube video URL.`];
+}
+
+export function sortVideosByRating(videos) {
+  return videos.sort((video1, video2) => {
+    if (video1.rating < video2.rating) {
+      return 1;
+    } else if (video1.rating > video2.rating) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 }
