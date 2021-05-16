@@ -77,7 +77,7 @@ router
     // !IMPORTANT: How to do up and down vote within DB
     // TEMPORARY SOLUTION
     const query = req.params.id;
-    const vote = req.body.vote;
+    const vote = req.body;
     const index = arrayOfVideosObj.findIndex((item) => +item.id === +query);
     if (index === -1) {
       return res.status(404).json({
