@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getFormData, validateForm } from "../functions";
+import { createVideoData, validateForm } from "../functions";
 
 const Form = (props) => {
   const [errors, setErrors] = useState([]);
@@ -10,10 +10,11 @@ const Form = (props) => {
       return setErrors(errors);
     }
     setErrors([]);
-    props.onAdd(getFormData(event.target));
-    alert("Video added successfully");
+    props.onAdd(createVideoData(event.target));
+    alert("Video added successfully.");
     event.target.reset();
   };
+
   return (
     <div class="form-container">
       <h2 className="form-title">Add YouTube Video</h2>
