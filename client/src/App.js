@@ -1,9 +1,9 @@
-import './App.css';
+import "./App.css";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 //!IMPORTANT - just test of redux and thunk
-import { connect } from 'react-redux';
-import * as actions from './store/actions/videos';
+import { connect } from "react-redux";
+import * as actions from "./store/actions/videos";
 
 function App(props) {
   useEffect(() => {
