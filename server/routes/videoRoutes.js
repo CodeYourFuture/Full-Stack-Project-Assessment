@@ -72,6 +72,29 @@ router
 
       data: [],
     });
+  })
+  .patch((req, res) => {
+    // !IMPORTANT: How to do up and down vote within DB
+    // TEMPORARY SOLUTION
+    const query = req.params.id;
+    const vote = req.body.vote;
+    const index = arrayOfVideosObj.findIndex((item) => +item.id === +query);
+    if (index === -1) {
+      return res.status(404).json({
+        status: "fail",
+        msg: "No video with this id",
+      });
+    }
+
+    arrayOfVideosObj = [
+      ...arrayOfVideosObj,
+      (arrayOfVideosObj[index].rating += +vote),
+    ];
+    res.status(200).json({
+      status: "success",
+
+      data: arrayOfVideosObj[index],
+    });
   });
 
 module.exports = router;
