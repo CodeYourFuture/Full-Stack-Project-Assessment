@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+.delete > button {
+  background-color: rgb(216, 68, 93);
+  color: white;
+}

@@ -1,4 +1,5 @@
 import "./App.css";
+import Deletevideo from "./Deletevideo";
 import exampleresource from "./exampleresponse.json";
 import Video from "./Video";
 function App() {
@@ -7,7 +8,10 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
         {exampleresource.map((el, index) => (
-          <Video key={index} url={el.url} videoTitle={el.title} />
+          <div key={index}>
+            <Video url={el.url} videoTitle={el.title} />
+            <Deletevideo />
+          </div>
         ))}
       </header>
     </div>
