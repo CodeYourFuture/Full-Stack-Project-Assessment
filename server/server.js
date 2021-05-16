@@ -7,7 +7,7 @@ const cors = require('cors');
 // !IMPORTANT
 // temporary solution to start working in inside the client with async
 
-const arrayOfVideosObj = require('./../exampleresponse.json');
+const arrayOfVideosObj = require('../exampleresponse.json');
 
 app.use(cors());
 
