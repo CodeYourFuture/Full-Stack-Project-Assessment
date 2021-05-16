@@ -3,13 +3,14 @@ import "./App.css";
 import YouTubeVideoAdder from "./components/VideoAdder";
 import YouTubeVideosContainer from "./components/VideoCards";
 import youTubeVideos from "./data/exampleresponse.json";
+import { sortVideosByRating } from "./functions";
 
 function App() {
-  const [videos, setVideos] = useState(youTubeVideos);
+  const [videos, setVideos] = useState(sortVideosByRating(youTubeVideos));
 
   // EVENT HANDLERS
-  const addNewVideo = ({ title, url }) => {
-    const newVideo = { id: videos.length, title, url };
+  const addNewVideo = (videoData) => {
+    const newVideo = { id: videos.length, ...videoData };
     setVideos([...videos, newVideo]);
   };
 
