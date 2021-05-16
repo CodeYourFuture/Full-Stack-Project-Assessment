@@ -5,17 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  background-color: rgb(246, 247, 248);
 }
 
 /* RESET */
 div,
 h2,
 h4,
+p,
 button,
 span,
 i,
