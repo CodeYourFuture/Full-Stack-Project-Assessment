@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { getFormData, validateForm } from "../functions";
 
 const Form = (props) => {
+  const [errors, setErrors] = useState([]);
   const addNewVideo = (event) => {
     event.preventDefault();
+    const errors = validateForm(event.target);
+    if (errors.length > 0) {
+      return setErrors(errors);
+    }
+    setErrors([]);
     props.onAdd(getFormData(event.target));
+    alert("Video added successfully");
     event.target.reset();
   };
   return (
     <div class="form-container">
-      <h2 className="form-title">Add Video</h2>
+      <h2 className="form-title">Add YouTube Video</h2>
       <form id="form-add" onSubmit={addNewVideo}>
+        {errors.map((e, index) => (
+          <p key={index} className="error">
+            {e}
+          </p>
+        ))}
         <label htmlFor="title">Title: </label>
         <input type="text" id="title" name="title"></input>
         <label htmlFor="url">URL: </label>
@@ -23,10 +36,3 @@ const Form = (props) => {
 };
 
 export default Form;
-
-export function getFormData(form) {
-  return {
-    title: form.querySelector("#title").value,
-    url: form.querySelector("#url").value,
-  };
-}
