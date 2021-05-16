@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+.App-header {
+  background-color: rgb(28, 28, 65);
+  color: white;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
 .delete > button {
   background-color: rgb(216, 68, 93);
   color: white;
@@ -9,4 +15,6 @@
 .thumbs-down {
   background-color: rgb(218, 42, 71);
   margin-left: 20px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }

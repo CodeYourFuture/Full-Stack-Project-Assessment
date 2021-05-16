@@ -1,8 +1,11 @@
 import React from "react";
+import Votes from "./Votes";
+
 const Video = (props) => {
   return (
     <div className="video">
       <h5>{props.videoTitle}</h5>
+      <Votes />
       <iframe
         width="560"
         height="315"
