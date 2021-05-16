@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 
 // REDUX
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
-import videoReducer from './store/reducers/videos';
+import videoReducer from "./store/reducers/videos";
 
 const rootReducer = combineReducers({
   videos: videoReducer,
@@ -21,5 +21,5 @@ ReactDOM.render(
     <App />
   </Provider>,
 
-  document.getElementById('root')
+  document.getElementById("root")
 );
