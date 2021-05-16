@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-const arrayOfVideosObj = require('../../exampleresponse.json');
+let arrayOfVideosObj = require("../../exampleresponse.json");
 
 // TODO: temporary solution just for now - implement MODEL - CONTROLLER
 
 router
-  .route('/')
+  .route("/")
   .get((req, res) => {
     res.status(200).json({
-      status: 'success',
+      status: "success",
       length: arrayOfVideosObj.length,
       data: arrayOfVideosObj,
     });
@@ -29,10 +29,48 @@ router
     //dirty temporary solution - mutating existing array
     arrayOfVideosObj.push(newVideo);
 
-    res.status(200).json({
-      status: 'success',
+    res.status(201).json({
+      status: "success",
 
       data: newVideo,
+    });
+  });
+
+router
+  .route("/:id")
+  .get((req, res) => {
+    const query = req.params.id;
+
+    const video = arrayOfVideosObj.find((item) => +item.id === +query);
+
+    if (!video) {
+      return res.status(404).json({
+        status: "fail",
+        msg: "No video with this id",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+
+      data: video,
+    });
+  })
+  .delete((req, res) => {
+    const query = req.params.id;
+
+    const index = arrayOfVideosObj.findIndex((item) => +item.id === +query);
+    if (index === -1) {
+      return res.status(404).json({
+        status: "fail",
+        msg: "No video with this id",
+      });
+    }
+
+    arrayOfVideosObj = arrayOfVideosObj.slice(index, 1);
+    res.status(204).json({
+      status: "success",
+
+      data: [],
     });
   });
 
