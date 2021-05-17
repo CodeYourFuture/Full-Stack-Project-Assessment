@@ -2,9 +2,11 @@ import "./App.css";
 import exampleResource from "./exampleResponse.json";
 import { useState } from "react";
 import Video from "./Video";
+import AddVideo from "./AddVideo";
 
 function App() {
-  const videoData = exampleResource;
+  const [videos, setVideos] = useState(exampleResource);
+  //const videoData = exampleResource;
 
   // delete video function
   function deleteVideo(event) {
@@ -12,6 +14,11 @@ function App() {
     const target = event.target;
     const videoId = target.parentNode.parentNode.id;
     console.log(videoId);
+    const filteredVideos = videos.filter(
+      // videoId is a string needs to be changed to a number
+      (video) => video.id !== Number(videoId)
+    );
+    setVideos(filteredVideos);
   }
 
   return (
@@ -21,8 +28,9 @@ function App() {
           <em>Video Recommendation</em>
         </h1>
       </header>
+      <AddVideo />
       <div className="videos-container">
-        {videoData.map((video, index) => (
+        {videos.map((video, index) => (
           /* video info holder div with unique sid  */
           <Video
             key={index}
