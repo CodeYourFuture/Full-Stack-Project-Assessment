@@ -1,24 +1,18 @@
-import "./App.css";
+import './App.css';
 
-import { useEffect } from "react";
+// import { useEffect } from 'react';
 //!IMPORTANT - just test of redux and thunk
-import { connect } from "react-redux";
-import * as actions from "./store/actions/videos";
+import { connect } from 'react-redux';
+import * as actions from './store/actions/videos';
+
+import Layout from './hoc/Layout/Layout';
+import VideosConstructor from './containers/VideosConstructor/VideosConstructor';
 
 function App(props) {
-  useEffect(() => {
-    props.onInitVideos();
-  }, [props.onInitVideos]);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-        {props.videos.map((item) => (
-          <div>{item.title}</div>
-        ))}
-      </header>
-    </div>
+    <Layout>
+      <VideosConstructor></VideosConstructor>
+    </Layout>
   );
 }
 
