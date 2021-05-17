@@ -1,3 +1,5 @@
+import Button from '../UI/Button';
+
 const VideoWidget = (props) => {
   const videoId = props.video.url.split('=')[1];
 
@@ -8,12 +10,15 @@ const VideoWidget = (props) => {
         height="315"
         src={`https://www.youtube.com/embed/${videoId}`}
         title={props.video.title}
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <h3>{props.video.title}</h3>
+      <Button clicked={props.videoUpVote}>Plus</Button>
       <p>{props.video.rating}</p>
+      <Button clicked={props.videoDownVote}>Minus</Button>
+      <Button>Delete</Button>
     </div>
   );
 };

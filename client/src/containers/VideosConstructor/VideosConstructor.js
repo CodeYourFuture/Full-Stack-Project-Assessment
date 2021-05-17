@@ -11,7 +11,12 @@ function VideosConstructor(props) {
   }, [props.onInitVideos]);
 
   const videosWidgetArray = props.videos.map((item) => (
-    <VideoWidget key={item.id} video={item} />
+    <VideoWidget
+      videoUpVote={() => props.videoUpVote(item.id)}
+      videoDownVote={() => props.videoDownVote(item.id)}
+      key={item.id}
+      video={item}
+    />
   ));
 
   return <div className="App">{videosWidgetArray}</div>;
@@ -26,6 +31,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitVideos: () => dispatch(actions.initVideos()),
+    videoUpVote: (id) => dispatch(actions.videoUpVote(id)),
+    videoDownVote: (id) => dispatch(actions.videoDownVote(id)),
   };
 };
 
