@@ -11,6 +11,11 @@ import AddVid from "./component/AddVid";
 
 function App() {
   const [searchVal, setSearchVal] = useState();
+  const [deleteVid, setDeleteVid] = useState([]);
+  const handleDeleteVid = (index) => {
+    data.splice(index, 1);
+    setDeleteVid(deleteVid);
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -23,7 +28,7 @@ function App() {
           <VideoTitle title={video.title} />
           <VideoRatings rating={video.rating} />
           <Videos video={video.url} />
-          <DeleteVideo />
+          <DeleteVideo handleDeleteVid = {handleDeleteVid}/>
         </div>
       ))}
     </div>
