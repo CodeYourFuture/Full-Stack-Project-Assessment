@@ -7,6 +7,8 @@ import App from './App';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+//routing
+import { BrowserRouter } from 'react-router-dom';
 
 import videoReducer from './store/reducers/videos';
 
@@ -26,8 +28,12 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
 
   document.getElementById('root')
 );
+
+console.log(process.env.NODE_ENV);
