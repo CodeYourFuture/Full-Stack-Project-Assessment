@@ -7,6 +7,23 @@
   padding-top: 1%;
   padding-bottom: 1%;
 }
+.add-video-container {
+  margin-top: 50px;
+}
+.add-video {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-left: 50px;
+}
+.add-video > button {
+  background-color: rgb(216, 68, 93);
+}
+.add-video :first-child,
+.add-video :nth-child(2) {
+  margin-top: 20px;
+  margin-right: 20px;
+}
 .videos-container {
   display: grid;
   grid-template-columns: repeat(3, 400px);
