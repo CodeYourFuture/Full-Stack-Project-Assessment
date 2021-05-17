@@ -24,6 +24,7 @@ router
       id,
       title,
       url,
+      rating: 0,
     };
 
     //dirty temporary solution - mutating existing array
@@ -31,7 +32,6 @@ router
 
     res.status(201).json({
       status: "success",
-
       data: newVideo,
     });
   });
