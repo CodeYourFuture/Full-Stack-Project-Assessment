@@ -1,9 +1,14 @@
+/*************** VARIABLES AND CONSTANTS *************/
+const URL = `http://localhost:5000`;
+
+
+/********************** FUNCTIONS *************************/
+
 export function createVideoData(form) {
   return {
     title: form.querySelector("#title").value,
     url: form.querySelector("#url").value,
-    rating: 0,
-    dateUploaded:new Date().toLocaleDateString(),
+    dateUploaded: new Date().toLocaleDateString(),
   };
 }
 
@@ -43,6 +48,7 @@ function checkVideoUrlFormat(formData) {
     : [`Error: invalid URL. Please enter a valid YouTube video URL.`];
 }
 
+// SORT VIDEO DATA FETCHED FROM SERVER
 export function sortVideosByRating(videos) {
   return videos.sort((video1, video2) => {
     if (video1.rating < video2.rating) {
@@ -53,4 +59,48 @@ export function sortVideosByRating(videos) {
       return 0;
     }
   });
+}
+
+// FETCH DATA FROM SERVER
+export async function fetchVideoData(api) {
+  return await fetch(api).then((res) => res.json());
+}
+
+// ADD VIDEO DATA TO SERVER
+export async function addVideoToServer(form) {
+  const video = createVideoData(form);
+  const response = await fetch(URL, {
+    method: "POST",
+    body: JSON.stringify(video),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.status === 201) {
+    window.location.reload();
+    return alert("Video has been added successfully.");
+  }
+  response.json().then((error) => alert(error.message));
+}
+
+// REMOVE VIDEO DATA FROM SERVER
+export async function removeVideoFromServer(videoId) {
+  const response = await fetch(`${URL}/${videoId}`, {
+    method: "DELETE",
+  });
+  if (response.status === 204) {
+    window.location.reload();
+    return alert("Video has been removed successfully.");
+  }
+  response.json().then((error) => alert(error.message));
+}
+
+// UPDATE VIDEO DATA ON SERVER (video rating)
+export async function updateVideoRatingOnServer(videoId, numVotes) {
+  const response = await fetch(`${URL}/${videoId}`, {
+    method: "PUT",
+    body: JSON.stringify({rating:numVotes}),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.status !== 200) {
+    response.json().then((error) => alert(error.message));
+  }
 }
