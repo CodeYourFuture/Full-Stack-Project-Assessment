@@ -81,3 +81,19 @@ export const videoDeletedSuccessfully = (id) => {
     id,
   };
 };
+
+export const videoAdding = (video) => {
+  return (dispatch) => {
+    axiosInstance.post('api/videos/', video).then((res) => {
+      console.log(res);
+      dispatch(videoSuccessfullyAdded(res.data.data));
+    });
+  };
+};
+
+export const videoSuccessfullyAdded = (newVideo) => {
+  return {
+    type: actionTypes.VIDEO_SUCCESSFULLY_ADDED,
+    newVideo,
+  };
+};

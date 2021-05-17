@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/videos';
 
-import VideoWidget from '../../components/Video/VideoWidget';
+import VideoWidget from '../../components/VideoWidget/VideoWidget';
 
 function VideosConstructor(props) {
   useEffect(() => {

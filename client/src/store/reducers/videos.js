@@ -7,6 +7,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   let id;
   let index;
+  let newVideo;
 
   switch (action.type) {
     case actionTypes.SET_VIDEOS:
@@ -42,6 +43,13 @@ const reducer = (state = initialState, action) => {
         ],
       };
 
+    case actionTypes.VIDEO_SUCCESSFULLY_ADDED:
+      newVideo = action.newVideo;
+
+      return {
+        ...state,
+        videos: [...state.videos, newVideo],
+      };
     default:
       return state;
   }
