@@ -14,6 +14,7 @@ function VideosConstructor(props) {
     <VideoWidget
       videoUpVote={() => props.videoUpVote(item.id)}
       videoDownVote={() => props.videoDownVote(item.id)}
+      videoDeleting={() => props.videoDeleting(item.id)}
       key={item.id}
       video={item}
     />
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     onInitVideos: () => dispatch(actions.initVideos()),
     videoUpVote: (id) => dispatch(actions.videoUpVote(id)),
     videoDownVote: (id) => dispatch(actions.videoDownVote(id)),
+    videoDeleting: (id) => dispatch(actions.videoDeleting(id)),
   };
 };
 

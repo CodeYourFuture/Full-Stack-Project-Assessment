@@ -18,7 +18,7 @@ const VideoWidget = (props) => {
       <Button clicked={props.videoUpVote}>Plus</Button>
       <p>{props.video.rating}</p>
       <Button clicked={props.videoDownVote}>Minus</Button>
-      <Button>Delete</Button>
+      <Button clicked={props.videoDeleting}>Delete</Button>
     </div>
   );
 };

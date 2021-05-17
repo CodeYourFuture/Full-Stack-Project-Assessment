@@ -28,15 +28,9 @@ export const initVideos = () => {
 VOTING SYSTEM FOR VIDEOS 
 */
 
-export const videoVotingSuccessful = (id, patchedVideo) => {
-  return {
-    type: actionTypes.VIDEO_VOTING_SUCCESSFUL,
-    id,
-    patchedVideo,
-  };
-};
-
 // TODO:" REFACTOR IT - repetitive code
+
+//!IMPORTANT: - create error handling!!!! !TODO:
 export const videoUpVote = (id) => {
   const upVoteValue = 1;
   console.log('videoUpVote');
@@ -60,5 +54,30 @@ export const videoDownVote = (id) => {
         console.log(res);
         dispatch(videoVotingSuccessful(id, res.data.data));
       });
+  };
+};
+
+export const videoVotingSuccessful = (id, patchedVideo) => {
+  return {
+    type: actionTypes.VIDEO_VOTING_SUCCESSFUL,
+    id,
+    patchedVideo,
+  };
+};
+
+// DELETING VIDEO
+export const videoDeleting = (id) => {
+  return (dispatch) => {
+    axiosInstance.delete('api/videos/' + id).then((res) => {
+      console.log(res);
+      dispatch(videoDeletedSuccessfully(id));
+    });
+  };
+};
+
+export const videoDeletedSuccessfully = (id) => {
+  return {
+    type: actionTypes.VIDEO_SUCCESSFULLY_DELETED,
+    id,
   };
 };

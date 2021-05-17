@@ -66,7 +66,10 @@ router
       });
     }
 
-    arrayOfVideosObj = arrayOfVideosObj.slice(index, 1);
+    arrayOfVideosObj = [
+      ...arrayOfVideosObj.slice(0, index),
+      ...arrayOfVideosObj.slice(index + 1),
+    ];
     res.status(204).json({
       status: "success",
 

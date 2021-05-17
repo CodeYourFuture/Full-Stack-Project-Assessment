@@ -5,6 +5,9 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  let id;
+  let index;
+
   switch (action.type) {
     case actionTypes.SET_VIDEOS:
       const fetchedVideos = action.videos;
@@ -14,15 +17,27 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.VIDEO_VOTING_SUCCESSFUL:
-      const id = action.id;
+      id = action.id;
       const patchedVideo = action.patchedVideo;
-      const index = state.videos.findIndex((item) => item.id === id);
+      index = state.videos.findIndex((item) => item.id === id);
 
       return {
         ...state,
         videos: [
           ...state.videos.slice(0, index),
           patchedVideo,
+          ...state.videos.slice(index + 1),
+        ],
+      };
+
+    case actionTypes.VIDEO_SUCCESSFULLY_DELETED:
+      id = action.id;
+      index = state.videos.findIndex((item) => item.id === id);
+
+      return {
+        ...state,
+        videos: [
+          ...state.videos.slice(0, index),
           ...state.videos.slice(index + 1),
         ],
       };
