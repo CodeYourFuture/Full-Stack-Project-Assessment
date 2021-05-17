@@ -9,7 +9,7 @@ const Search = ({ searchValue, setSearchValue }) => {
     <div className="searchBar">
       <input
         type="text"
-        placeholder="Type a name..."
+        placeholder="Search..."
         value={searchValue}
         onChange={handleNameSearch}
       ></input>
