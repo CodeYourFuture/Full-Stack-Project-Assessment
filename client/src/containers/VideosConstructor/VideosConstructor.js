@@ -3,21 +3,24 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/videos';
 
+import VideoWidget from '../../components/VideoWidget/VideoWidget';
+
 function VideosConstructor(props) {
   useEffect(() => {
     props.onInitVideos();
   }, [props.onInitVideos]);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-        {props.videos.map((item) => (
-          <div key={item.id}>{item.title}</div>
-        ))}
-      </header>
-    </div>
-  );
+  const videosWidgetArray = props.videos.map((item) => (
+    <VideoWidget
+      videoUpVote={() => props.videoUpVote(item.id)}
+      videoDownVote={() => props.videoDownVote(item.id)}
+      videoDeleting={() => props.videoDeleting(item.id)}
+      key={item.id}
+      video={item}
+    />
+  ));
+
+  return <div className="App">{videosWidgetArray}</div>;
 }
 
 const mapStateToProps = (state) => {
@@ -29,6 +32,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitVideos: () => dispatch(actions.initVideos()),
+    videoUpVote: (id) => dispatch(actions.videoUpVote(id)),
+    videoDownVote: (id) => dispatch(actions.videoDownVote(id)),
+    videoDeleting: (id) => dispatch(actions.videoDeleting(id)),
   };
 };
 

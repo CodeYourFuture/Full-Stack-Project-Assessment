@@ -24,6 +24,7 @@ router
       id,
       title,
       url,
+      rating: 0,
     };
 
     //dirty temporary solution - mutating existing array
@@ -31,7 +32,6 @@ router
 
     res.status(201).json({
       status: "success",
-
       data: newVideo,
     });
   });
@@ -66,7 +66,10 @@ router
       });
     }
 
-    arrayOfVideosObj = arrayOfVideosObj.slice(index, 1);
+    arrayOfVideosObj = [
+      ...arrayOfVideosObj.slice(0, index),
+      ...arrayOfVideosObj.slice(index + 1),
+    ];
     res.status(204).json({
       status: "success",
 
@@ -77,7 +80,7 @@ router
     // !IMPORTANT: How to do up and down vote within DB
     // TEMPORARY SOLUTION
     const query = req.params.id;
-    const vote = req.body;
+    const { vote } = req.body;
     const index = arrayOfVideosObj.findIndex((item) => +item.id === +query);
     if (index === -1) {
       return res.status(404).json({
@@ -86,10 +89,10 @@ router
       });
     }
 
-    arrayOfVideosObj = [
-      ...arrayOfVideosObj,
-      (arrayOfVideosObj[index].rating += +vote),
-    ];
+    const arrayOfVideosObjCopy = [...arrayOfVideosObj];
+    arrayOfVideosObjCopy[index].rating = arrayOfVideosObj[index].rating + +vote;
+    arrayOfVideosObj = [...arrayOfVideosObjCopy];
+
     res.status(200).json({
       status: "success",
 

@@ -1,19 +1,23 @@
-import './App.css';
-
-// import { useEffect } from 'react';
-//!IMPORTANT - just test of redux and thunk
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from './store/actions/videos';
 
+import * as actions from './store/actions/videos';
 import Layout from './hoc/Layout/Layout';
 import VideosConstructor from './containers/VideosConstructor/VideosConstructor';
+import VideoUploader from './containers/VideoUploader/VideoUploader';
+
+import './App.css';
 
 function App(props) {
-  return (
-    <Layout>
-      <VideosConstructor></VideosConstructor>
-    </Layout>
+  let Routes = (
+    <Switch>
+      <Route path="/upload" component={VideoUploader} />
+      <Route path="/" exact component={VideosConstructor} />
+      <Redirect to="/" />
+    </Switch>
   );
+
+  return <Layout>{Routes}</Layout>;
 }
 
 const mapStateToProps = (state) => {
@@ -28,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

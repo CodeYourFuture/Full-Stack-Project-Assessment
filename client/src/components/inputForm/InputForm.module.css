@@ -1,0 +1,96 @@
+.title {
+  font-size: 36px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  height: 72vh;
+  justify-content: center;
+  margin: 15vh auto;
+  max-height: 550px;
+  min-height: 480px;
+  padding-top: 2vh;
+  text-align: center;
+  width: 90%;
+}
+
+.inputContainer {
+  margin: 2vh 0;
+  padding: 4px 0 4px;
+  position: relative;
+}
+
+.inputFieldName {
+  color: black;
+  font-weight: 900;
+  display: block-inline;
+  font-size: 20px;
+  height: 50px;
+  margin: auto;
+  padding-top: 10px;
+  text-align: left;
+  width: 90%;
+}
+
+.invalidInputMsg {
+  position: absolute;
+  margin-left: 5%;
+  bottom: -38px;
+  color: red;
+  font-style: italic;
+  text-align: left;
+}
+
+.flexContainerGeneral {
+  bottom: 0;
+  display: flex;
+  margin-top: 30px;
+}
+
+.flexContainerToRight {
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.flexContainerCentered {
+  justify-content: space-around;
+  padding: 0 5%;
+}
+
+.buttonWrapper {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 700px) and (min-width: 481px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 701px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1001px) {
+  .container {
+    max-width: 500px;
+    width: 50%;
+  }
+
+  .flexContainerCentered {
+    justify-content: space-evenly;
+    padding: 0 5%;
+  }
+
+  .flexContainerToRight {
+    justify-content: flex-end;
+  }
+}

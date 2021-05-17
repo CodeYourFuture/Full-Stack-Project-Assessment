@@ -1,0 +1,22 @@
+.inputClass {
+    color: rgb(87, 85, 85);
+    display: block;
+    font-family: lato;
+    font-weight: bold;
+    font-size: 20px;
+    height: 50px;
+    margin: auto;
+    padding-left: 8px;
+    width: 90%;
+}
+
+.inputClass::placeholder {
+    font-style: italic;
+    opacity: 0.6;
+}
+
+.Invalid {
+    background-color: #FFCCCB;
+    border: 1px solid red;
+}
+
