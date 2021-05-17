@@ -21,17 +21,19 @@ function App() {
           <em>Video Recommendation</em>
         </h1>
       </header>
-      {videoData.map((video, index) => (
-        /* video info holder div with unique sid  */
-        <Video
-          key={index}
-          id={video.id}
-          title={video.title}
-          url={video.url}
-          deleteVideo={deleteVideo}
-          rating={video.rating}
-        />
-      ))}
+      <div className="videos-container">
+        {videoData.map((video, index) => (
+          /* video info holder div with unique sid  */
+          <Video
+            key={index}
+            id={video.id}
+            title={video.title}
+            url={video.url}
+            deleteVideo={deleteVideo}
+            rating={video.rating}
+          />
+        ))}
+      </div>
     </div>
   );
 }

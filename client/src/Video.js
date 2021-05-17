@@ -6,6 +6,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
 
   // votes
   function vote(event) {
+    event.preventDefault();
     if (event.target.className === "fa fa-thumbs-up") {
       setNumberOfVotes(numberOfVotes++);
     } else {
@@ -13,7 +14,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
     }
   }
   return (
-    <div id={id}>
+    <div id={id} className="oneVideo">
       <h5>{title}</h5>
       {/* separate div for votes  */}
       <div className="votes">
@@ -23,8 +24,8 @@ function Video({ id, title, url, rating, deleteVideo }) {
       </div>
       {/* iframe for video  */}
       <iframe
-        width="560"
-        height="315"
+        width="400"
+        height="250"
         src={url.replace("watch?v=", "embed/")}
         title="YouTube video player"
         frameBorder="0"
