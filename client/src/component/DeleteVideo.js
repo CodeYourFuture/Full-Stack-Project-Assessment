@@ -1,9 +1,11 @@
 import React from "react";
 
-const DeleteVideo = () => {
+const DeleteVideo = ({ handleDeleteVid }) => {
   return (
     <div>
-      <button className="btn btn-danger">Delete</button>
+      <button className="btn btn-danger" onClick={() => handleDeleteVid()}>
+        Delete
+      </button>
     </div>
   );
 };
