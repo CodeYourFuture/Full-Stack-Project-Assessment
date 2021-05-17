@@ -4,14 +4,24 @@ import VideoFrame from "./VideoFrame";
 import VideoTitle from "./VideoTitle";
 import VideoVotingButtons from "./VideoVotingButtons";
 
-const VideoContainer = ({ videoId, videoTitle, videoRating }) => {
+const VideoContainer = ({
+  videoId,
+  videoTitle,
+  videoRating,
+  videoList,
+  setVideoList,
+}) => {
   const [rating, setRating] = useState(videoRating);
   return (
     <div>
       <VideoTitle videoTitle={videoTitle} />
       <VideoFrame videoId={videoId} videoTitle={videoTitle} />
       <VideoVotingButtons rating={rating} setRating={setRating} />
-      <VideoDeleteButton />
+      <VideoDeleteButton
+        videoTitle={videoTitle}
+        videoList={videoList}
+        setVideoList={setVideoList}
+      />
     </div>
   );
 };

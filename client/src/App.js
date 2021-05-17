@@ -31,7 +31,7 @@ function App() {
         videoList={videoList}
         setVideoList={setVideoList}
       />
-      <VideoGrid videoList={videoList} />
+      <VideoGrid videoList={videoList} setVideoList={setVideoList} />
     </div>
   );
 }

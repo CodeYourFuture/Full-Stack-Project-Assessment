@@ -1,7 +1,7 @@
 import React from "react";
 import VideoContainer from "./VideoContainer";
 
-const VideoGrid = ({ videoList }) => {
+const VideoGrid = ({ videoList, setVideoList }) => {
   console.log("type of videoList is : " + typeof videoList);
   console.log(videoList);
 
@@ -13,6 +13,8 @@ const VideoGrid = ({ videoList }) => {
           videoId={video.url.split("=")[1]}
           videoTitle={video.title}
           videoRating={video.rating}
+          videoList={videoList}
+          setVideoList={setVideoList}
         />
       ))}
     </div>
