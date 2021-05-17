@@ -1,21 +1,36 @@
 import "./App.css";
-import DeleteVideo from "./DeleteVideo";
 import exampleResource from "./exampleResponse.json";
+import { useState } from "react";
 import Video from "./Video";
 
 function App() {
   const videoData = exampleResource;
+
+  // delete video function
+  function deleteVideo(event) {
+    event.preventDefault();
+    const target = event.target;
+    const videoId = target.parentNode.parentNode.id;
+    console.log(videoId);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>
+          <em>Video Recommendation</em>
+        </h1>
       </header>
       {videoData.map((video, index) => (
-        <div key={index}>
-          <Video url={video.url} videoTitle={video.title} />
-          <p>Rating: {video.rating}</p>
-          <DeleteVideo />
-        </div>
+        /* video info holder div with unique sid  */
+        <Video
+          key={index}
+          id={video.id}
+          title={video.title}
+          url={video.url}
+          deleteVideo={deleteVideo}
+          rating={video.rating}
+        />
       ))}
     </div>
   );
