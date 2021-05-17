@@ -86,10 +86,10 @@ router
       });
     }
 
-    arrayOfVideosObj = [
-      ...arrayOfVideosObj,
-      (arrayOfVideosObj[index].rating += +vote),
-    ];
+    const arrayOfVideosObjCopy = [...arrayOfVideosObj];
+    arrayOfVideosObjCopy[index].rating = arrayOfVideosObj[index].rating + +vote;
+    arrayOfVideosObj = [...arrayOfVideosObjCopy];
+
     res.status(200).json({
       status: "success",
 
