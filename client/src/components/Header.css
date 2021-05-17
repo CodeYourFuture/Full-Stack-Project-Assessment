@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logo {
+  height: 75px;
+  object-fit: contain;
+  margin-left: 20px;
+}
+
+.header__left {
+  align-items: center;
+}
+
+.header__center {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  border: 1px solid #777;
+}
+
+.header__center > input {
+  flex: 1;
+  border: 0;
+}
+
+.searchIcon {
+  border-left: 1px solid #777;
+}
+
+input:focus {
+  outline: none;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
