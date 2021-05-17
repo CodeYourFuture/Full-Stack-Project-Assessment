@@ -4,13 +4,13 @@ const AddVideo = () => {
 
   return (
     <div className="add-video-container">
-      <h5
+      <p
         onClick={() => {
           setClick(true);
         }}
       >
         Add Video
-      </h5>
+      </p>
       {click ? (
         <div className="add-video">
           <p>Title</p>

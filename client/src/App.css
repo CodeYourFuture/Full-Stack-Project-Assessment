@@ -2,13 +2,17 @@
   text-align: center;
 }
 .App-header {
-  background-color: rgba(9, 44, 90, 0.815);
+  background-color: rgba(2, 32, 71, 0.884);
   color: white;
   padding-top: 1%;
   padding-bottom: 1%;
 }
 .add-video-container {
   margin-top: 50px;
+}
+.add-video-container :first-child {
+  color: rgba(26, 71, 129, 0.884);
+  font-weight: 600;
 }
 .add-video {
   display: flex;
@@ -17,7 +21,7 @@
   margin-left: 50px;
 }
 .add-video > button {
-  background-color: rgb(216, 68, 93);
+  background-color: rgb(228, 37, 69);
 }
 .add-video :first-child,
 .add-video :nth-child(2) {
@@ -32,7 +36,7 @@
   margin-left: 8%;
 }
 .oneVideo button {
-  background-color: rgb(216, 68, 93);
+  background-color: rgb(228, 37, 69);
   color: white;
 }
 .votes {
