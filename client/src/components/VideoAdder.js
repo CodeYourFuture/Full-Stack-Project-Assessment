@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { createVideoData, validateForm } from "../functions";
+import { addVideoToServer, validateForm } from "../functions";
 
-const Form = (props) => {
+const Form = () => {
   const [errors, setErrors] = useState([]);
   const addNewVideo = (event) => {
     event.preventDefault();
@@ -10,9 +10,7 @@ const Form = (props) => {
       return setErrors(errors);
     }
     setErrors([]);
-    props.onAdd(createVideoData(event.target));
-    alert("Video added successfully.");
-    event.target.reset();
+    addVideoToServer(event.target);
   };
 
   return (

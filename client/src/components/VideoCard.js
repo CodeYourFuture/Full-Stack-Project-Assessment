@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { removeVideoFromServer, updateVideoRatingOnServer } from "../functions";
 
-const Card = ({ data,onDelete }) => {
+const Card = ({ data }) => {
   const [votes, setVotes] = useState(data.rating);
   const id = data.url.substring(data.url.indexOf("=") + 1);
   let title = data.title;
@@ -11,11 +12,17 @@ const Card = ({ data,onDelete }) => {
   const removeVideo = (event) => {
     event.preventDefault();
     const videoId = Number(event.target.parentNode.parentNode.id);
-    onDelete(videoId);
+    removeVideoFromServer(videoId);
   };
 
-  const voteUpOrDown = (e) => {
-    e.target.id === "vote-up" ? setVotes(votes + 1) : setVotes(votes - 1);
+  const voteUpOrDown = (event) => {
+    const videoId = Number(event.target.parentNode.parentNode.parentNode.id);
+    let numVotes = 0;
+    event.target.id === "vote-up"
+      ? (numVotes = votes + 1)
+      : (numVotes = votes - 1);
+    setVotes(numVotes);
+    updateVideoRatingOnServer(videoId, numVotes);
   };
 
   return (
