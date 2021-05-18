@@ -11,12 +11,13 @@
   width: 100%;
   height: auto;
   display: flex;
+  justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .videoInfo {
-  width: 30%;
+  width: 20%;
   margin: 1em;
   list-style-type: none;
 }
