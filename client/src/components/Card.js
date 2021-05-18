@@ -17,7 +17,7 @@ const Card = (props) => {
                 height='300px'
             />
 
-            <Likes />
+            <Likes clicked={() => props.clicked(props.id)} />
 
 
 

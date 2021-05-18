@@ -28,10 +28,14 @@
   border-radius: 1px;
 }
 
-.counter-color-pos {
-  color: rgb(5, 182, 5);
+.icon {
+  cursor: pointer;
+}
+
+/* .counter-color-pos {
+  color: rgb(0, 248, 54);
 }
 
 .counter-color-neg {
   color: red;
-}
+} */
