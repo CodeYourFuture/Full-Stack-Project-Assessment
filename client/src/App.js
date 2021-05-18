@@ -5,10 +5,15 @@ import Video from "./Video";
 import AddVideo from "./AddVideo";
 
 function App() {
-  const [videos, setVideos] = useState(exampleResource);
-  //const videoData = exampleResource;
+  let [videos, setVideos] = useState(exampleResource);
+  let [giveId, setGiveId] = useState(1000);
+  const [newVideo, setNewVideo] = useState({
+    title: "",
+    url: "",
+  });
 
   // delete video function
+
   function deleteVideo(event) {
     event.preventDefault();
     const target = event.target;
@@ -20,8 +25,40 @@ function App() {
     );
     setVideos(filteredVideos);
   }
-  // add video function
 
+  // data validator
+  function validateInput(newVideo) {
+    // regex expression for checking a youtube video
+    const regex = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
+    if (newVideo.title.length > 0 && newVideo.url.match(regex)) {
+      return newVideo;
+    } else {
+      alert("insert data ");
+    }
+  }
+  // handle multiple input change
+
+  function handleChange(evt) {
+    evt.preventDefault();
+    const value = evt.target.value;
+    setNewVideo({
+      ...newVideo,
+      [evt.target.name]: value,
+    });
+  }
+
+  // handle submit button
+
+  function handleSubmit(event) {
+    validateInput(newVideo);
+    setGiveId((giveId) => giveId++);
+    newVideo["id"] = giveId++;
+    newVideo["rating"] = 20;
+    videos.push(newVideo);
+    setVideos(videos);
+    console.log(videos);
+    event.preventDefault();
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -29,10 +66,10 @@ function App() {
           <em>Video Recommendation</em>
         </h1>
       </header>
-      <AddVideo />
+      <AddVideo handleChange={handleChange} handleSubmit={handleSubmit} />
       <div className="videos-container">
         {videos.map((video, index) => (
-          /* video info holder div with unique sid  */
+          /* video info holder div with unique id  */
           <Video
             key={index}
             id={video.id}

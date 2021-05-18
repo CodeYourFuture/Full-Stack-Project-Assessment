@@ -7,10 +7,13 @@
   padding-top: 1%;
   padding-bottom: 1%;
 }
+h1 {
+  font-weight: 300;
+}
 .add-video-container {
   margin-top: 50px;
 }
-.add-video-container :first-child {
+.add-video-text {
   color: rgba(26, 71, 129, 0.884);
   font-weight: 600;
 }
@@ -27,30 +30,48 @@
 .add-video :nth-child(2) {
   margin-top: 20px;
   margin-right: 20px;
+  width: 100%;
+}
+.add-video-buttons :first-child {
+  font-weight: 500;
+  width: 90px;
+}
+.add-video-buttons :nth-child(2) {
+  background-color: rgb(228, 37, 69);
+  font-weight: 500;
+  width: 90px;
 }
 .videos-container {
   display: grid;
   grid-template-columns: repeat(3, 400px);
   gap: 50px;
-  margin-top: 15%;
+  margin-top: 50px;
   margin-left: 8%;
 }
 .oneVideo button {
   background-color: rgb(228, 37, 69);
   color: white;
+  border: none;
+  margin-top: 10px;
 }
 .votes {
   display: flex;
   flex-direction: row;
-  margin-left: 45%;
+  margin-right: 150px;
+  margin-left: 150px;
 }
 .votes :first-child,
 .votes :nth-child(3) {
   color: rgb(218, 42, 71);
-  margin-left: 2%;
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 .votes :nth-child(2) {
   color: black;
-  margin-right: 2%;
-  margin-left: 2%;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
