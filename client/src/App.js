@@ -1,40 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
+import VideoInfo from "./VideoInfo";
 import movieData from "./movieData.json";
 // import Iframe from "react-iframe";
-// import VideoInfo from "./VideoInfo";
 
 function App() {
+  // const [vote, setVote] = useState();
+
+  // const voteUp = (movie) => {
+  //   setVote(movie.rating);
+  //   movie.rating = vote + 1;
+  // };
+  // const voteDown = (movie) => {
+  //   setVote(movie.rating);
+  //   movie.rating = vote - 1;
+  // };
   return (
-    <div className="App">
+    <div className="App container-fluid">
       <header className="App-header bg-dark">
         <h1>Video Recommendation</h1>
       </header>
-      <main>
-        <VideoInfo />
+
+      <main className="videoContainer">
+        {movieData.map((movie, index) => (
+          <VideoInfo key={index} movie={movie} />
+        ))}
       </main>
     </div>
-  );
-}
-
-function VideoInfo() {
-  return (
-    <ul className="videoContainer">
-      {movieData.map((movie, key) => (
-        <li className="videoInfo" key={movie.id}>
-          <h3>{movie.title}</h3>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </li>
-      ))}
-    </ul>
   );
 }
 
