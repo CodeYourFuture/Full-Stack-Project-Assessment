@@ -1,16 +1,12 @@
 import React from 'react';
 
 import Aux from '../Auxilary/Auxilary';
+import Toolbar from '../../components/navigations/Toolbar/Toolbar';
 
 const Layout = (props) => {
   return (
     <Aux>
-      <nav className="App">
-        <div>
-          <h1>Video Recommendation</h1>
-          <h2>Nav Placeholder</h2>
-        </div>
-      </nav>
+      <Toolbar />
       <main>{props.children}</main>
       <footer className="App">
         <div>
