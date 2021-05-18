@@ -1,19 +1,28 @@
 {
-  "name": "to-do-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "server": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+	"name": "video-recommendation-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cbaggini/video-recommendation-backend.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/cbaggini/video-recommendation-backend/issues"
+	},
+	"homepage": "https://github.com/cbaggini/video-recommendation-backend#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^9.0.2",
+		"express": "^4.17.1",
+		"pg": "^8.6.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.7"
+	}
 }

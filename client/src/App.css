@@ -1,3 +1,66 @@
-.App {
+.upper {
+  margin: 0.5rem;
+}
+
+nav,
+section {
+  margin: 2rem;
+}
+
+header {
+  background-color: lightblue;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgoldenrodyellow;
+  border-radius: 5px;
+  border: 2px solid darkgoldenrod;
+  padding: 2rem;
+  margin: 2rem;
+  max-width: 500px;
+}
+
+.rating {
+  padding-top: 1rem;
+}
+
+input {
+  margin: 0.5rem;
+}
+
+h1 {
   text-align: center;
+  padding: 1rem;
+}
+
+.like {
+  width: 60px;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h2 {
+  height: 25%;
+}
+
+@media only screen and (max-width: 500px) {
+  h2 {
+    height: 30%;
+  }
+  article {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.btn-primary,
+.btn-info {
+  color: black;
 }
