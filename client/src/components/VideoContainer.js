@@ -12,16 +12,20 @@ const VideoContainer = ({
   setVideoList,
 }) => {
   const [rating, setRating] = useState(videoRating);
+
+  const handleDeleteVideo = () => {
+    const newVideoList = videoList.filter(
+      (video) => video.title !== videoTitle
+    );
+    setVideoList(newVideoList);
+  };
+
   return (
     <div>
       <VideoTitle videoTitle={videoTitle} />
       <VideoFrame videoId={videoId} videoTitle={videoTitle} />
       <VideoVotingButtons rating={rating} setRating={setRating} />
-      <VideoDeleteButton
-        videoTitle={videoTitle}
-        videoList={videoList}
-        setVideoList={setVideoList}
-      />
+      <VideoDeleteButton handleDeleteVideo={handleDeleteVideo} />
     </div>
   );
 };

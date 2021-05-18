@@ -2,9 +2,6 @@ import React from "react";
 import VideoContainer from "./VideoContainer";
 
 const VideoGrid = ({ videoList, setVideoList }) => {
-  console.log("type of videoList is : " + typeof videoList);
-  console.log(videoList);
-
   return (
     <div>
       {videoList.map((video) => (

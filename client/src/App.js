@@ -13,9 +13,6 @@ function App() {
   const [videoList, setVideoList] = useState(ExampleVideos);
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
 
-  console.log("App.js");
-  console.log(typeof videoList);
-  console.log(videoList);
   return (
     <div className="App">
       <header className="App-header">

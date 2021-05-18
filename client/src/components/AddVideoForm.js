@@ -11,8 +11,6 @@ const AddVideoForm = ({ showAddVideoForm, videoList, setVideoList }) => {
       url: videoUrl,
       rating: 0,
     };
-    console.log("in addVideoForm");
-    console.log(newVideo);
     /*
      videoList.push(newVideo) returns the index of the new element
      and thus cannot be used in setVideoList function
