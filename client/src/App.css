@@ -1,3 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+}
+
+.videoContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.videoInfo {
+  width: 30%;
+  margin: 1em;
+  list-style-type: none;
 }
