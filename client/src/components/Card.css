@@ -9,33 +9,32 @@
 }
 
 .vid-title {
-  font-size: 1rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.rating {
-  margin-top: 1rem;
+@media only screen and (min-width: 790px) {
+  .vid-title {
+    font-size: 1rem;
+  }
 }
 
-.card-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border: 1px solid #777;
-  width: 100%;
-  height: auto;
-  padding: 20px;
-  border-radius: 1px;
+@media only screen and (max-width: 789px) {
+  .card {
+    width: 70%;
+  }
+
+  .vid-title {
+    font-size: 1rem;
+  }
 }
 
-.icon {
-  cursor: pointer;
-}
+@media only screen and (max-width: 500px) {
+  .card {
+    width: 75%;
+  }
 
-/* .counter-color-pos {
-  color: rgb(0, 248, 54);
+  .vid-title {
+    font-size: 1rem;
+  }
 }
-
-.counter-color-neg {
-  color: red;
-} */

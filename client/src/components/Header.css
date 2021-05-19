@@ -41,3 +41,25 @@ input:focus {
   align-items: center;
   gap: 2rem;
 }
+
+@media only screen and (max-width: 550px) {
+  .header {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .header__left {
+    margin-bottom: 2rem;
+  }
+  .header__center {
+    width: 80%;
+  }
+
+  .header__right {
+    margin-top: 2rem;
+  }
+
+  .searchIcon {
+    display: none;
+  }
+}

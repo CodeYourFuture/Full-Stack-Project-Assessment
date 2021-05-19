@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.App {
+  font-family: "Hind Siliguri", sans-serif;
 }
 
 .main-container {
@@ -10,4 +16,13 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 2rem;
+}
+
+@media only screen and (max-width: 789px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

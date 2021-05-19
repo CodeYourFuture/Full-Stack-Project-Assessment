@@ -19,3 +19,9 @@ input {
   box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
   cursor: pointer;
 }
+
+@media only screen and (max-width: 789px) {
+  .add-btn {
+    padding: 1rem;
+  }
+}

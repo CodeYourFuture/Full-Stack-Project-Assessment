@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Likes.css';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
@@ -27,7 +28,13 @@ const Likes = (props) => {
             <p className="counter-color-pos">{count}</p>
             <ThumbDownIcon onClick={handleDislike} className='icon' />
             <p className="counter-color-neg">{count2}</p>
+
+            {/* <div className='rating'>
+                <h4>Ratings</h4>
+                <p>{props.rating}</p>
+            </div> */}
         </div>
+
     )
 }
 

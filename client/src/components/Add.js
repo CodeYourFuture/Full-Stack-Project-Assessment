@@ -21,6 +21,10 @@ const Add = (props) => {
 
     function submitVid(event) {
         props.onAdd(newVid);
+        setNewVid({
+            title: '',
+            url: ''
+        })
         event.preventDefault()
     }
 

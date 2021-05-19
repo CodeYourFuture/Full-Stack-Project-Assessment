@@ -4,6 +4,7 @@ import './Card.css';
 import Likes from '../components/Likes';
 
 
+
 const Card = (props) => {
     return (
         <div className="card">
@@ -16,8 +17,9 @@ const Card = (props) => {
                 width='100%'
                 height='300px'
             />
+            <Likes clicked={() => props.clicked(props.id)} rating={props.rating} />
 
-            <Likes clicked={() => props.clicked(props.id)} />
+
 
 
 

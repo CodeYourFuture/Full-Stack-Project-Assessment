@@ -1,0 +1,38 @@
+.rating {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid #777;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  border-radius: 1px;
+}
+
+.icon {
+  cursor: pointer;
+  box-shadow: 4px 10px 10px 0px rgba(0, 0, 0, 0.24);
+  border-radius: 20px;
+  transition: 0.2s all;
+}
+
+.icon:active {
+  transform: scale(0.98);
+
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+/* .counter-color-pos {
+    color: rgb(0, 248, 54);
+  }
+  
+  .counter-color-neg {
+    color: red;
+  } */

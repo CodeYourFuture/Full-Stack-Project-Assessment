@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 function createCard(video, delete2) {
   return (
     <Card
+
       clicked={delete2}
       key={video.id}
       id={video.id}
@@ -23,6 +24,7 @@ function createCard(video, delete2) {
 function App() {
 
   const [vid, setVid] = useState(videos);
+  const [search, setSearch] = useState('');
 
   const deleteVid = (id) => {
     console.log(id);
@@ -37,14 +39,18 @@ function App() {
   }
 
 
+
   return (
     <div className="App">
-      <Header />
+
+      <Header handleSearch={setSearch} />
 
       <Add onAdd={addVid} />
 
       <div className="main-container">
+
         {vid.map(item => createCard(item, deleteVid))}
+
       </div>
 
       <div className='footer'>

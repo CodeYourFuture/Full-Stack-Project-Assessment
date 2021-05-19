@@ -6,7 +6,7 @@ import AppsIcon from "@material-ui/icons/Apps"
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Logo from '../img/Logo.png'
 
-const Header = () => {
+const Header = ({ handleSearch }) => {
     return (
         <div className='header'>
 
@@ -15,8 +15,14 @@ const Header = () => {
             </div>
 
             <div className="header__center">
-                <input type='text' placeholder="Search" />
-                <SearchIcon className="searchIcon" />
+                <input
+                    type='text'
+                    onChange={(event) => handleSearch(event.target.value)}
+                    placeholder="Search">
+                </input>
+                <SearchIcon
+                    type='submit'
+                    className="searchIcon" />
 
             </div>
 
