@@ -10,7 +10,7 @@ const App = () => {
   const [videos, setVideos] = useState(YouTubeData);
   const searchVideo = (elem) => {
     if (elem.target.value) {
-      const result = YouTubeData.filter((video) =>
+      const result = videos.filter((video) =>
         video.title
           .toLocaleLowerCase()
           .includes(elem.target.value.toLocaleLowerCase())
@@ -21,9 +21,8 @@ const App = () => {
     }
   };
 
-  // Delete Video  
+  // Delete Video
   const deleteVideo = (e) => {
-    // e.preventDefault();
     const updatedVideos = videos.filter((video) => video.id !== e);
     setVideos(updatedVideos);
   };
