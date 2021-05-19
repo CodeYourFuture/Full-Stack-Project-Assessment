@@ -2,13 +2,13 @@ import React from "react";
 import DeleteVideo from "./DeleteVideo";
 import Votes from "./Votes";
 
-const YouTubeVideos = (props) => {
+const YouTubeVideos = ({ videoSearched }) => {
   return (
     <>
-      {props.YouTubeData.map((elem, index) => (
+      {videoSearched.map((elem, index) => (
         <div key={index}>
           <h3>{elem.title}</h3>
-          <Votes elem={elem}/>
+          <Votes elem={elem} />
           <iframe
             width="560"
             height="315"
