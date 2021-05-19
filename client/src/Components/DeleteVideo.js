@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const DeleteVideo = () => {
-    return (
-        <div>
-            <button>Delete Video</button>
-        </div>
-    )
-}
+const DeleteVideo = ({ deleteVideo, id }) => {
 
-export default DeleteVideo
+  return (
+    <div>
+      <button onClick={() => deleteVideo(id)}>Delete Video</button>
+    </div>
+  );
+};
+
+export default DeleteVideo;

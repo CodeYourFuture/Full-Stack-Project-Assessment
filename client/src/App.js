@@ -7,7 +7,7 @@ import Search from "./Components/Search";
 
 const App = () => {
   // Search Video
-  const [videoSearched, setVideoSearched] = useState(YouTubeData);
+  const [videos, setVideos] = useState(YouTubeData);
   const searchVideo = (elem) => {
     if (elem.target.value) {
       const result = YouTubeData.filter((video) =>
@@ -15,15 +15,18 @@ const App = () => {
           .toLocaleLowerCase()
           .includes(elem.target.value.toLocaleLowerCase())
       );
-      setVideoSearched(result);
+      setVideos(result);
     } else {
-      setVideoSearched(YouTubeData);
+      setVideos(YouTubeData);
     }
   };
 
-  function test(videoSearched) {
-    console.log(videoSearched);
-  }
+  // Delete Video  
+  const deleteVideo = (e) => {
+    // e.preventDefault();
+    const updatedVideos = videos.filter((video) => video.id !== e);
+    setVideos(updatedVideos);
+  };
 
   return (
     <div className="App">
@@ -32,13 +35,14 @@ const App = () => {
       </header>
       <Search searchVideo={searchVideo} />
       <AddVideo />
-      {videoSearched.map((video) => (
+      {videos.map((video) => (
         <YouTubeVideos
           key={video.id}
+          id={video.id}
           title={video.title}
           url={video.url}
           rating={video.rating}
-          test={test(video.id)}
+          deleteVideo={deleteVideo}
         />
       ))}
     </div>

@@ -2,9 +2,9 @@ import React from "react";
 import DeleteVideo from "./DeleteVideo";
 import Votes from "./Votes";
 
-const YouTubeVideos = ({ title, url, rating, deleteVideo }) => {
+const YouTubeVideos = ({ id, title, url, rating, deleteVideo }) => {
   return (
-    <>
+    <div className='aVideo'>
       <h3>{title}</h3>
       <Votes rating={rating} />
       <iframe
@@ -16,8 +16,8 @@ const YouTubeVideos = ({ title, url, rating, deleteVideo }) => {
         allow="autoplay; encrypted-media"
         allowFullScreen
       ></iframe>
-      <DeleteVideo deleteVideo={deleteVideo} />
-    </>
+      <DeleteVideo deleteVideo={deleteVideo} id={id} />
+    </div>
   );
 };
 
