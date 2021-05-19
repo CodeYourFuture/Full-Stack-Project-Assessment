@@ -30,7 +30,7 @@
   display: block;
   margin: 1em auto;
   text-align: center;
-  width: 15%;
+  width: 15em;
   height: 27px;
 }
 .movieAdder {
@@ -58,6 +58,10 @@
   .videoInfo {
     width: 100%;
   }
+}
+
+*:focus {
+  outline: blue solid 2px;
 }
 
 /* Medium
