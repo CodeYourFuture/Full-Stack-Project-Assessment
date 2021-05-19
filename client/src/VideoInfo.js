@@ -12,27 +12,27 @@ function VideoInfo(props) {
 
   return (
     <li className="videoInfo" key={props.movie.id}>
-      <h4>{props.movie.title}</h4>
+      <h4 className="text-center">{props.movie.title}</h4>
 
       <iframe
         width="100%"
         height="auto"
         src={props.movie.url}
-        title="YouTube video player"
+        title={props.movie.title}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
 
-      <button className="btn btn-secondary" onClick={upVote}>
+      <button className="btn btn-primary m-2" onClick={upVote}>
         UpVote
       </button>
-      <span>{vote}</span>
-      <button className="btn btn-secondary" onClick={downVote}>
+      <span className="m-4">{vote}</span>
+      <button className="btn btn-primary m-2" onClick={downVote}>
         downVote
       </button>
       <button
         onClick={() => props.deleteHandler(props.movie.id)}
-        className="btn btn-danger"
+        className="btn btn-danger m-2"
       >
         Delete
       </button>

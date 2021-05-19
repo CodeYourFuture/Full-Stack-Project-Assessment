@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #272640;
+  color: white;
 }
 /* .App {
   text-align: center;
@@ -20,11 +22,33 @@
   width: 20%;
   margin: 1em;
   list-style-type: none;
+  background-color: #5e6472;
 }
-.movieVideo {
-  position: relative;
-  width: 20%;
-  height: auto;
+.searchInput {
+  background-color: white;
+  color: black;
+  display: block;
+  margin: 1em auto;
+  text-align: center;
+  width: 15%;
+  height: 27px;
+}
+.movieAdder {
+  margin: 0 auto;
+  width: 15em;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+
+  margin: 1em;
+}
+.formField {
+  padding: 0.4em;
+  margin: 0.8em;
+}
+.btnColor {
+  background-color: red;
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
@@ -36,17 +60,42 @@
   }
 }
 
-/* // Medium devices (tablets, 768px and up) */
+/* Medium
+  devices
+  (tablets, 768px and up) */
 @media (min-width: 577px) and (max-width: 768px) {
+  .videoContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
   .videoInfo {
-    width: 50%;
+    width: 40%;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .videoContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .videoInfo {
+    width: 40%;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .videoContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .videoInfo {
+    width: 30%;
   }
 }
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-}
+/* @media (min-width: 992px) {
+} */
 
-/* // Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
+/* Extra large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) {
+/* }  */

@@ -3,6 +3,8 @@ import "./App.css";
 import VideoInfo from "./VideoInfo";
 import movieData from "./movieData.json";
 import SearchMovie from "./SearchMovie";
+import AddButton from "./AddButton";
+import AddMovie from "./AddMovie";
 // import Iframe from "react-iframe";
 
 function App() {
@@ -10,6 +12,7 @@ function App() {
   const [data, setData] = useState(movieData);
   const [inputValue, setInputValue] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [showAdd, setShowAdd] = useState(false);
 
   const onChangeHandler = (e) => {
     setInputValue(e.target.value.toLowerCase());
@@ -19,6 +22,10 @@ function App() {
     console.log(id);
     const remainingMovies = data.filter((movie) => movie.id !== id);
     setData(remainingMovies);
+  };
+
+  const onAddMovie = (movie) => {
+    filteredMovies.concat(movie);
   };
 
   /* In this case our data hold either the whole list or the remainingMovies,
@@ -32,18 +39,21 @@ function App() {
     setFilteredMovies(movieList);
   }, [inputValue, data]);
 
+  const onClickAdd = () => {
+    setShowAdd(!showAdd);
+  };
+
   return (
     <div className="App container-fluid">
       <nav>
         <header className="App-header text-center mt-1 bg-dark text-light ">
           <h1>Video Recommendation</h1>
         </header>
-        <form action="" method="post">
-          <SearchMovie handler={onChangeHandler} />
-          <input type="text" />
-          <input type="text" />
-          <button>Add</button>
-        </form>
+        <SearchMovie handler={onChangeHandler} />
+
+        <AddButton onClickHandler={onClickAdd} showAddValue={showAdd} />
+
+        {showAdd && <AddMovie caddHandler={onAddMovie} />}
       </nav>
 
       <main>
