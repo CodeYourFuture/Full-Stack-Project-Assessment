@@ -8,7 +8,6 @@ function SearchMovie(props) {
         placeholder="Search for a movie"
         className="searchInput"
         name="searchInput"
-        value={props.searchValue}
         onChange={props.handler}
       />
     </div>
