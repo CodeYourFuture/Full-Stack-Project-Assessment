@@ -1,5 +1,5 @@
 import "./App.css";
-import React, {useState}  from "react";
+import React, { useState } from "react";
 import YouTubeData from "./Data/YouTubeData.json";
 import YouTubeVideos from "./Components/YouTubeVideos";
 import AddVideo from "./Components/AddVideo";
@@ -10,14 +10,19 @@ const App = () => {
   const [videoSearched, setVideoSearched] = useState(YouTubeData);
   const searchVideo = (elem) => {
     if (elem.target.value) {
-      const result = YouTubeData.filter(
-        (video) =>
-         video.title.toLocaleLowerCase().includes(elem.target.value.toLocaleLowerCase())
-      )
-      setVideoSearched(result)
+      const result = YouTubeData.filter((video) =>
+        video.title
+          .toLocaleLowerCase()
+          .includes(elem.target.value.toLocaleLowerCase())
+      );
+      setVideoSearched(result);
     } else {
-      setVideoSearched(YouTubeData)
+      setVideoSearched(YouTubeData);
     }
+  };
+
+  function test(videoSearched) {
+    console.log(videoSearched);
   }
 
   return (
@@ -27,9 +32,17 @@ const App = () => {
       </header>
       <Search searchVideo={searchVideo} />
       <AddVideo />
-      <YouTubeVideos videoSearched={videoSearched} />
+      {videoSearched.map((video) => (
+        <YouTubeVideos
+          key={video.id}
+          title={video.title}
+          url={video.url}
+          rating={video.rating}
+          test={test(video.id)}
+        />
+      ))}
     </div>
   );
-}
+};
 
 export default App;
