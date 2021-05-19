@@ -1,4 +1,6 @@
 import React from "react";
+import DeleteVideo from "./DeleteVideo";
+import Votes from "./Votes";
 
 const YouTubeVideos = (props) => {
   return (
@@ -6,11 +8,7 @@ const YouTubeVideos = (props) => {
       {props.YouTubeData.map((elem, index) => (
         <div key={index}>
           <h3>{elem.title}</h3>
-          <div id="voting">
-              <i className="fa fa-thumbs-up fa-1x"></i>
-              <h5>{elem.rating} votes</h5>
-              <i className="fa fa-thumbs-down fa-1x"></i>
-          </div>
+          <Votes elem={elem}/>
           <iframe
             width="560"
             height="315"
@@ -20,6 +18,7 @@ const YouTubeVideos = (props) => {
             allow="autoplay; encrypted-media"
             allowFullScreen
           ></iframe>
+          <DeleteVideo />
         </div>
       ))}
     </>
