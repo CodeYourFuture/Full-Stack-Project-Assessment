@@ -10,38 +10,33 @@ function VideoInfo(props) {
     setVote(vote - 1);
   };
 
-  // const deleteMovie = (movie) => {
-  //   console.log(movie.id);
-  // };
   return (
-    <ul className="videoInfo">
-      {
-        <li key={props.movie.id}>
-          <h4>{props.movie.title}</h4>
-          <iframe
-            width="100%"
-            height="auto"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
-          <button className="btn btn-secondary" onClick={upVote}>
-            UpVote
-          </button>
-          <span>{vote}</span>
-          <button className="btn btn-secondary" onClick={downVote}>
-            downVote
-          </button>
-          <button
-            onClick={() => props.deleteHandler(props.movie.id)}
-            className="btn btn-danger"
-          >
-            Delete
-          </button>
-        </li>
-      }
-    </ul>
+    <li className="videoInfo" key={props.movie.id}>
+      <h4>{props.movie.title}</h4>
+
+      <iframe
+        width="100%"
+        height="auto"
+        src={props.movie.url}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      ></iframe>
+
+      <button className="btn btn-secondary" onClick={upVote}>
+        UpVote
+      </button>
+      <span>{vote}</span>
+      <button className="btn btn-secondary" onClick={downVote}>
+        downVote
+      </button>
+      <button
+        onClick={() => props.deleteHandler(props.movie.id)}
+        className="btn btn-danger"
+      >
+        Delete
+      </button>
+    </li>
   );
 }
 

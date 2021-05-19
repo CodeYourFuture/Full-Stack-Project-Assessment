@@ -20,7 +20,6 @@ function App() {
     const remainingMovies = data.filter((movie) => movie.id !== id);
     setData(remainingMovies);
   };
-  console.log(data);
 
   /* In this case our data hold either the whole list or the remainingMovies,
    and it will filtered the data against the inputValue
@@ -47,10 +46,12 @@ function App() {
         </form>
       </nav>
 
-      <main className="videoContainer">
-        {filteredMovies.map((movie, index) => (
-          <VideoInfo key={index} deleteHandler={deleteMovie} movie={movie} />
-        ))}
+      <main>
+        <ul className="videoContainer">
+          {filteredMovies.map((movie, index) => (
+            <VideoInfo key={index} deleteHandler={deleteMovie} movie={movie} />
+          ))}
+        </ul>
       </main>
     </div>
   );

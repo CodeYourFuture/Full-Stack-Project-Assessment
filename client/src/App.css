@@ -21,7 +21,11 @@
   margin: 1em;
   list-style-type: none;
 }
-
+.movieVideo {
+  position: relative;
+  width: 20%;
+  height: auto;
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
   .videoContainer {
