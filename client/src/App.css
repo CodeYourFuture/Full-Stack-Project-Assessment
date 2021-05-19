@@ -1,13 +1,13 @@
 .App {
   text-align: center;
-  width:90vw;
-  margin:0 auto;
+  width: 90vw;
+  margin: 0 auto;
   color: rgb(19, 55, 95);
 }
 
 /* FORM STYLES */
 
-div.form-container {
+.form-container {
   text-align: left;
   margin: 2.5rem 2rem;
   padding: 1.5rem 2rem;
@@ -16,7 +16,7 @@ div.form-container {
   background-color: rgb(250, 250, 245);
 }
 
-div.form-container .form-title {
+.form-container .form-title {
   padding-bottom: 0.15rem;
   border-bottom: 2px solid #eee;
 }
@@ -25,9 +25,9 @@ div.form-container .form-title {
   margin-top: 0.8rem;
 }
 
-p.error{
-  margin-bottom:0.3rem;
-  color:#f00;
+p.error {
+  margin-bottom: 0.3rem;
+  color: #f00;
 }
 
 #form-add input {
@@ -55,12 +55,16 @@ button[id="add"] {
   color: #fff;
   padding: 0.3rem 1rem;
   border-radius: 0.3rem;
-  background-color: rgb(47, 120, 204);
+  background-color: rgb(35, 109, 194);
+}
+
+button[id="add"]:focus {
+  font-size: 1.2rem;
 }
 
 /* VIDEO CARDS STYLING */
 
-div.cards-container {
+.cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -78,11 +82,13 @@ div.cards-container {
   background-color: rgb(250, 250, 245);
 }
 
-div.card > div:first-of-type {
+.card > div:first-of-type {
   text-align: right;
 }
 
-.card .title {
+.card .video-title {
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0.3rem auto 0.5rem;
   padding: 0 0.3rem;
 }
@@ -101,17 +107,24 @@ div.card > div:first-of-type {
   padding: 0 0.3rem;
 }
 
-.controls div.votes {
+.controls .votes {
   text-align: left;
 }
 
-.fa-thumbs-up,
-.fa-thumbs-down {
-  margin: 0 0.1rem;
-  padding: 0.15rem;
+button.vote{
+  font-size: 1rem;
+  margin: 0 0.2rem;
   background-color: rgb(134, 187, 204);
-  border: 1.5px solid #333;
   border-radius: 0.15rem;
+}
+
+button.vote:focus {
+  font-size: 1.2rem;
+  border: 2px solid #333;
+}
+
+.fas {
+  padding: 0.2rem;
 }
 
 .fa-thumbs-up {
@@ -122,7 +135,12 @@ div.card > div:first-of-type {
   color: #e00;
 }
 
-button[id="remove"] {
+span.num-votes {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+button[class=remove] {
   font-size: 1rem;
   color: rgb(241, 241, 235);
   padding: 0.3rem 0.6rem;

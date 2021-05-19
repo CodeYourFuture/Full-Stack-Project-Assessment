@@ -11,14 +11,14 @@ const Card = ({ data }) => {
   // EVENT HANDLERS
   const removeVideo = (event) => {
     event.preventDefault();
-    const videoId = Number(event.target.parentNode.parentNode.id);
+    const videoId = Number(data.id);
     removeVideoFromServer(videoId);
   };
 
   const voteUpOrDown = (event) => {
-    const videoId = Number(event.target.parentNode.parentNode.parentNode.id);
+    const videoId = Number(data.id);
     let numVotes = 0;
-    event.target.id === "vote-up"
+    event.target.className === "vote-up"
       ? (numVotes = votes + 1)
       : (numVotes = votes - 1);
     setVotes(numVotes);
@@ -27,7 +27,7 @@ const Card = ({ data }) => {
 
   return (
     <div id={data.id} className="card">
-      <h4 className="title">{title}</h4>
+      <p className="title">{title}</p>
       <iframe
         src={`https://www.youtube.com/embed/${id}`}
         title="YouTube video player"
@@ -37,19 +37,15 @@ const Card = ({ data }) => {
       ></iframe>
       <div className="controls">
         <div className="votes">
-          <span id="num-votes">{votes}</span>{" "}
-          <span
-            id="vote-up"
-            className="fas fa-thumbs-up"
-            onClick={voteUpOrDown}
-          ></span>
-          <span
-            id="vote-down"
-            className="fas fa-thumbs-down"
-            onClick={voteUpOrDown}
-          ></span>
+          <button className="vote vote-up" aria-label="button-vote-up">
+            <span className="fas fa-thumbs-up" onClick={voteUpOrDown}></span>
+          </button>{" "}
+          <span className="num-votes">{votes}</span>{" "}
+          <button className="vote vote-down" aria-label="button-vote-down">
+            <span className="fas fa-thumbs-down" onClick={voteUpOrDown}></span>
+          </button>
         </div>
-        <button id="remove" onClick={removeVideo}>
+        <button className="remove" aria-label="button-remove" onClick={removeVideo}>
           Remove
         </button>
       </div>
