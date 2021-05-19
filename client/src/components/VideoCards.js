@@ -25,7 +25,7 @@ const VideoCards = (props) => {
   
   return (
     <div>
-      <div className="sorter">
+      <div className="video-sorter">
         <label htmlFor="sort">Sort by rating:</label>
         <button id="sort" onClick={sortVideos}>
           {buttonCaption}
