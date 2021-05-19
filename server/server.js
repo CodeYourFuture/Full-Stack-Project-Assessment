@@ -55,6 +55,20 @@ app.delete("/:id", (req, res) => {
   });
 });
 
+// PUT "/{id}" (update video rating)
+app.put("/:id", (req, res) => {
+  const videoId = Number(req.params.id);
+  let plusOrMinus = 0;
+  req.body.rating === "plus" ? (plusOrMinus = 1) : (plusOrMinus = -1);
+  const videoToUpdate = videos.find((v) => v.id === videoId);
+  if (videoToUpdate) {
+    videoToUpdate.rating = videoToUpdate.rating + plusOrMinus;
+    videos.splice(videos.indexOf(videoToUpdate), 1, { ...videoToUpdate });
+    return res.sendStatus(200);
+  }
+  res.status(404).json({ message: "Video could not be updated." });
+});
+
 // DATA VALIDATION
 function validateVideoData(videoData) {
   return videoData.title && videoData.url
