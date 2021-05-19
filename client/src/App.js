@@ -12,6 +12,16 @@ function App() {
     url: "",
   });
 
+  // sort videos by rating highest to lowest
+  function sorter(videos) {
+    videos.sort((a, b) => {
+      if (a.rating > b.rating) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  }
   // delete video function
 
   function deleteVideo(event) {
@@ -69,6 +79,7 @@ function App() {
       </header>
       <AddVideo handleChange={handleChange} handleSubmit={handleSubmit} />
       <div className="videos-container">
+        {sorter(videos)}
         {videos.map((video, index) => (
           /* video info holder div with unique id  */
           <Video
