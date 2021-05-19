@@ -8,9 +8,9 @@ function Video({ id, title, url, rating, deleteVideo }) {
   function vote(event) {
     event.preventDefault();
     if (event.target.className === "fa fa-thumbs-up") {
-      setNumberOfVotes(numberOfVotes++);
+      setNumberOfVotes(++numberOfVotes);
     } else {
-      setNumberOfVotes(numberOfVotes--);
+      setNumberOfVotes(--numberOfVotes);
     }
   }
   return (

@@ -36,6 +36,7 @@ function App() {
       alert("insert data ");
     }
   }
+
   // handle multiple input change
 
   function handleChange(evt) {
@@ -50,14 +51,14 @@ function App() {
   // handle submit button
 
   function handleSubmit(event) {
-    validateInput(newVideo);
-    setGiveId((giveId) => giveId++);
-    newVideo["id"] = giveId++;
-    newVideo["rating"] = 20;
-    videos.push(newVideo);
-    setVideos(videos);
-    console.log(videos);
     event.preventDefault();
+    validateInput(newVideo);
+    // ++giveId gets the value of giveId after increment
+    setGiveId((giveId) => ++giveId);
+    newVideo["id"] = ++giveId;
+    newVideo["rating"] = 0;
+    setVideos(videos.concat(newVideo));
+    console.log(videos);
   }
   return (
     <div className="App">
