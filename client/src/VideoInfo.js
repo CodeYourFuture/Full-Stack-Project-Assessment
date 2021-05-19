@@ -9,6 +9,10 @@ function VideoInfo(props) {
   const downVote = () => {
     setVote(vote - 1);
   };
+
+  // const deleteMovie = (movie) => {
+  //   console.log(movie.id);
+  // };
   return (
     <ul className="videoInfo">
       {
@@ -22,9 +26,19 @@ function VideoInfo(props) {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>
-          <button onClick={upVote}>UpVote</button>
+          <button className="btn btn-secondary" onClick={upVote}>
+            UpVote
+          </button>
           <span>{vote}</span>
-          <button onClick={downVote}>downVote</button>
+          <button className="btn btn-secondary" onClick={downVote}>
+            downVote
+          </button>
+          <button
+            onClick={() => props.deleteHandler(props.movie.id)}
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
         </li>
       }
     </ul>

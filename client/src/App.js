@@ -1,29 +1,47 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./App.css";
 import VideoInfo from "./VideoInfo";
 import movieData from "./movieData.json";
+import SearchMovie from "./SearchMovie";
 // import Iframe from "react-iframe";
 
 function App() {
-  // const [vote, setVote] = useState();
+  // const [id, setId] = useState();
+  const [data, setData] = useState(movieData);
+  const [inputValue, setInputValue] = useState("");
+  // const [filteredMovies, setFilteredMovies] = useState([]);
 
-  // const voteUp = (movie) => {
-  //   setVote(movie.rating);
-  //   movie.rating = vote + 1;
-  // };
-  // const voteDown = (movie) => {
-  //   setVote(movie.rating);
-  //   movie.rating = vote - 1;
-  // };
+  const onChangeHandler = (e) => {
+    setInputValue(e.target.value.toLowerCase());
+  };
+  const deleteMovie = (id) => {
+    console.log(id);
+    const remainingMovies = data.filter((movie) => movie.id !== id);
+    setData(remainingMovies);
+  };
+
+  // useEffect(() => {
+  //   let movieList = !inputValue
+  //     ? data
+  //     : data.filter((movie) => movie.title.toLowerCase().includes(inputValue));
+  //   // setFilteredMovies(movieList);
+  //   setData(movieList);
+  // }, [inputValue, data]);
+
   return (
     <div className="App container-fluid">
-      <header className="App-header bg-dark">
-        <h1>Video Recommendation</h1>
-      </header>
+      <nav>
+        <header className="App-header text-center mt-1 bg-dark text-light ">
+          <h1>Video Recommendation</h1>
+        </header>
+        <form action="" method="post">
+          <SearchMovie handler={onChangeHandler} />
+        </form>
+      </nav>
 
       <main className="videoContainer">
-        {movieData.map((movie, index) => (
-          <VideoInfo key={index} movie={movie} />
+        {data.map((movie, index) => (
+          <VideoInfo key={index} deleteHandler={deleteMovie} movie={movie} />
         ))}
       </main>
     </div>
