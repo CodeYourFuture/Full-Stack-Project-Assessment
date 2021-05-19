@@ -1,7 +1,6 @@
 /*************** VARIABLES AND CONSTANTS *************/
 const URL = `http://localhost:5000`;
 
-
 /********************** FUNCTIONS *************************/
 
 export function createVideoData(form) {
@@ -48,22 +47,9 @@ function checkVideoUrlFormat(formData) {
     : [`Error: invalid URL. Please enter a valid YouTube video URL.`];
 }
 
-// SORT VIDEO DATA FETCHED FROM SERVER
-export function sortVideosByRating(videos) {
-  return videos.sort((video1, video2) => {
-    if (video1.rating < video2.rating) {
-      return 1;
-    } else if (video1.rating > video2.rating) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-}
-
 // FETCH DATA FROM SERVER
-export async function fetchVideoData(api) {
-  return await fetch(api).then((res) => res.json());
+export async function fetchVideosData(param) {
+  return await fetch(`${URL}/${param}`).then((res) => res.json());
 }
 
 // ADD VIDEO DATA TO SERVER
@@ -95,12 +81,18 @@ export async function removeVideoFromServer(videoId) {
 
 // UPDATE VIDEO DATA ON SERVER (video rating)
 export async function updateVideoRatingOnServer(videoId, numVotes) {
-  const response = await fetch(`${URL}/${videoId}`, {
+  const response= await fetch(`${URL}/${videoId}`, {
     method: "PUT",
-    body: JSON.stringify({rating:numVotes}),
+    body: JSON.stringify({ rating: numVotes }),
     headers: { "Content-Type": "application/json" },
   });
-  if (response.status !== 200) {
-    response.json().then((error) => alert(error.message));
+  return response.status;
+}
+
+// GET SINGLE VIDEO FROM SERVER
+export async function fetchSingleVideoData(videoId) {
+  const response = await fetch(`${URL}/${videoId}`);
+  if (response.status === 200) {
+    return await response.json();
   }
 }
