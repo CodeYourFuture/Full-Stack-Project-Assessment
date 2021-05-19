@@ -111,25 +111,5 @@ function sortVideosByRating(videos, order) {
         return 0;
     }
   });
-  // console.log(sortedVideos);
   return sortedVideos;
 }
-
-/** 
- * const sortedVideos=videos.sort((video1, video2) => {
-    let orderVal = 0;
-    video1.rating < video2.rating
-      ? order === "asc"
-        ? (orderVal = 1)
-        : (orderVal = -1)
-      : video1.rating > video2.rating
-      ? order === "asc"
-        ? (orderVal = -1)
-        : (orderVal = 1)
-      : orderVal;
-    return orderVal;
-  });
-
-  console.log(sortedVideos);
-  return sortedVideos;
- */
