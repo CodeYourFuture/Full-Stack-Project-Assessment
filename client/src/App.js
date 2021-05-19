@@ -10,27 +10,63 @@ import data from "./data/exampleresponse.json";
 import AddVid from "./component/AddVid";
 
 function App() {
-  const [searchVal, setSearchVal] = useState();
+  const [searchValue, setSearchValue] = useState("");
   const [videos, setVideos] = useState(data);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [showVideoForm, setShowVideoForm] = useState(false);
 
-  const handleDeleteVid = (index) => {
-    const findVidIndex = videos.findIndex((vid) => vid.id === index);
-    videos.splice(findVidIndex, 1);
-    setVideos([...videos]);
+  // Search functionality
+  const filteredTitle = videos.filter((video) =>
+    video.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  // Handle submit function when a new video is added
+  const addNewVidSubmit = (e) => {
+    e.preventDefault();
+    let newVideo = { title, url, rating: 0 };
+    setVideos(() => [...videos, newVideo]);
+    setTitle({ title: "" });
+    setUrl({ url: "" });
+  };
+
+  // On change function to handle new video title to add
+  const handleVideoTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  // On change function to handle new video url to add
+  const handleVideoUrlChange = (event) => {
+    setUrl(event.target.value);
+  };
+
+  // Delete function to handle deletion of video from page
+  const handleDeleteVid = (videoId) => {
+    const deleteVideo = videos.filter((video) => video.id !== videoId);
+    setVideos(deleteVideo);
   };
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="text-white bg-primary">Video Recommendation</h1>
       </header>
-      <AddVid />
-      <Search searchVal={searchVal} setSearchVal={setSearchVal} />
-      {videos.map((video, index) => (
-        <div key={index} className="container">
-          <VideoTitle title={video.title} />
+      <AddVid
+        handleVideoUrlChange={handleVideoUrlChange}
+        handleVideoTitleChange={handleVideoTitleChange}
+        addNewVidSubmit={addNewVidSubmit}
+        showVideoForm={showVideoForm}
+        setShowVideoForm={setShowVideoForm}
+      />
+      <Search
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+      {filteredTitle.map((video) => (
+        <div key={video.id} className="container mt-3">
+          <VideoTitle title={video.title} searchValue={searchValue} />
           <VideoRatings rating={video.rating} />
           <Videos video={video.url} />
-          <DeleteVideo id = {video.id} handleDeleteVid={handleDeleteVid} />
+          <DeleteVideo id={video.id} handleDeleteVid={handleDeleteVid} />
         </div>
       ))}
     </div>

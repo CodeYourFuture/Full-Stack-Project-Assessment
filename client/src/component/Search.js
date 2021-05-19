@@ -1,20 +1,20 @@
-import React from 'react'
+import React from "react";
 
-const Search = ({setSearchVAl}) => {
-    const handleSearch = (e) => {
-        console.log(e.target.value)
-    //   setSearchVAl(e.target.value);
-    };
-    return (
-      <div>
-        <input
-          className="m-5"
-          type="text"
-          placeholder="Search videos ..."
-          onChange={handleSearch}
-        />
-      </div>
-    );
-}
+const Search = ({ searchValue, setSearchValue }) => {
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+  return (
+    <div>
+      <input
+        className="m-5"
+        type="text"
+        placeholder="Search videos ..."
+        value={searchValue}
+        onChange={handleSearch}
+      />
+    </div>
+  );
+};
 
-export default Search
+export default Search;

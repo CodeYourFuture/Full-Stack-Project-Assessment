@@ -7,14 +7,16 @@ const VideoRatings = ({ rating }) => {
     const newRating = increase ? ratings + 1 : ratings - 1;
     setRatings(newRating);
   };
-  return (  
+  return (
     <div className="votes">
-      <button className="btn btn-success" onClick={()=>handleRating(true)}>
-        <i className="fas fa-thumbs-up vote">&#128077;</i>
+      <button className="btn btn-success">
+        <i className="fas fa-thumbs-up vote" onClick={() => handleRating(true)}>
+          &#128077;
+        </i>
       </button>
       <p>Votes: {ratings}</p>
 
-      <button className="btn btn-success" onClick={()=>handleRating(false)}>
+      <button className="btn btn-success" onClick={() => handleRating(false)}>
         <i className="fas fa-thumbs-down vote">&#128078;</i>
       </button>
     </div>

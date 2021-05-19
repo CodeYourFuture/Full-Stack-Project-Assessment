@@ -2,9 +2,14 @@
   text-align: center;
 }
 
-.votes{
+.votes {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.text-primary{
+  cursor: pointer;
   font-size: 1.5rem;
 }
