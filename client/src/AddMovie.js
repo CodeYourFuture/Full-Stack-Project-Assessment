@@ -1,8 +1,10 @@
 import React, {useState} from "react";
+// import {validateUrl} from "youtube-validate";
 
 function AddMovie(props) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  // const [validator, setValidator] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,7 +25,6 @@ function AddMovie(props) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Enter Movie Name"
-        required
       />
 
       <input
@@ -32,7 +33,6 @@ function AddMovie(props) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Enter Movie Url"
-        required
       />
 
       <input className="formField" type="submit" value="Save Movie" />

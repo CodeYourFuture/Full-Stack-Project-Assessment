@@ -19,14 +19,12 @@ function App() {
   };
   // will filter all the movies in the remaining movies except the movie with the matching id
   const deleteMovie = (id) => {
-    console.log(id);
     const remainingMovies = data.filter((movie) => movie.id !== id);
     setData(remainingMovies);
   };
 
   const onAddMovie = (newMovie) => {
     setData(data.concat(newMovie));
-    console.log(data);
   };
 
   /* In this case our data hold either the whole list or the remainingMovies,

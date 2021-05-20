@@ -61,7 +61,7 @@
 }
 
 *:focus {
-  outline: blue solid 2px;
+  outline: rgb(147, 210, 252) solid 2px;
 }
 
 /* Medium
