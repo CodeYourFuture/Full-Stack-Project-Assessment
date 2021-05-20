@@ -1,3 +1,42 @@
-.App {
+.App-header {
   text-align: center;
+  background-color: rgb(126, 245, 245);
+}
+.videoframes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgb(145, 225, 240);
+  margin: 3rem;
+  /* margin-left: 3rem; */
+}
+.oneVideoFrame{
+  min-width: 20rem;
+  min-height: 25rem;
+  margin-left: 3rem;
+}
+
+.voteCounts {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1rem;
+}
+
+.addvideo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: blue;
+  /* padding: 1rem; */
+  /* margin: 1rem; */
+}
+
+.addNdel {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+
+.addVideoSearch {
+  display: flex;
+  justify-content: space-around;
 }
