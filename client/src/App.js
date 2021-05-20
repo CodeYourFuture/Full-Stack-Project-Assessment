@@ -24,8 +24,9 @@ function App() {
     setData(remainingMovies);
   };
 
-  const onAddMovie = (movie) => {
-    filteredMovies.concat(movie);
+  const onAddMovie = (newMovie) => {
+    setData(data.concat(newMovie));
+    console.log(data);
   };
 
   /* In this case our data hold either the whole list or the remainingMovies,
@@ -53,7 +54,7 @@ function App() {
 
         <AddButton onClickHandler={onClickAdd} showAddValue={showAdd} />
 
-        {showAdd && <AddMovie caddHandler={onAddMovie} />}
+        {showAdd && <AddMovie addHandler={onAddMovie} />}
       </nav>
 
       <main>

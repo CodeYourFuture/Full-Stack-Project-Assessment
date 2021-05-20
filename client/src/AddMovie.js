@@ -1,34 +1,37 @@
 import React, {useState} from "react";
 
 function AddMovie(props) {
-  const [movieName, setMovieName] = useState("");
-  const [movieUrl, setMovieUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // will div a random id to the new movie
+    let id = Math.floor(Math.random() * 1000000) + 1;
+    let rating = 0;
 
-    props.addHandler({movieName, movieUrl});
+    props.addHandler({id, title, url, rating});
 
-    setMovieName("");
-    setMovieUrl("");
+    setTitle("");
+    setUrl("");
   };
   return (
     <form className="movieAdder" onSubmit={submitHandler}>
       <input
         className="formField"
         type="text"
-        value={movieName}
-        onChange={(e) => setMovieName(e.target.value)}
-        placeholder="Movie Name"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter Movie Name"
         required
       />
 
       <input
         className="formField"
         type="text"
-        value={movieUrl}
-        onChange={(e) => setMovieUrl(e.target.value)}
-        placeholder="Movie Url"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        placeholder="Enter Movie Url"
         required
       />
 
