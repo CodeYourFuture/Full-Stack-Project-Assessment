@@ -50,6 +50,8 @@
 .btnColor {
   background-color: red;
 }
+
+/* Media queries */
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
   .videoContainer {
