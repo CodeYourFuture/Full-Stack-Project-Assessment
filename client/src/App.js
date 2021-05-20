@@ -6,8 +6,9 @@ import AddVideo from "./Components/AddVideo";
 import Search from "./Components/Search";
 
 const App = () => {
-  // Search Video
   const [videos, setVideos] = useState(YouTubeData);
+
+  // Search Video
   const searchVideo = (elem) => {
     if (elem.target.value) {
       const result = videos.filter((video) =>
@@ -21,6 +22,12 @@ const App = () => {
     }
   };
 
+  // Add Video
+  const addVideo = (newVideo) => {
+    setVideos(oldVideo => {
+      return [newVideo, ...oldVideo];}
+    )};
+
   // Delete Video
   const deleteVideo = (e) => {
     const updatedVideos = videos.filter((video) => video.id !== e);
@@ -28,23 +35,23 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <Search searchVideo={searchVideo} />
-      <AddVideo />
-      {videos.map((video) => (
-        <YouTubeVideos
-          key={video.id}
-          id={video.id}
-          title={video.title}
-          url={video.url}
-          rating={video.rating}
-          deleteVideo={deleteVideo}
-        />
-      ))}
-    </div>
+      <div className="App">
+        <header className="App-header">
+          <h1>Video Recommendation</h1>
+        </header>
+        <Search searchVideo={searchVideo} />
+        <AddVideo addVid={addVideo} />
+        {videos.map((video) => (
+          <YouTubeVideos
+            key={video.id}
+            id={video.id}
+            title={video.title}
+            url={video.url}
+            rating={video.rating}
+            deleteVideo={deleteVideo}
+          />
+        ))}
+      </div>
   );
 };
 

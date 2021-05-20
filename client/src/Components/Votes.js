@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Votes = ({ rating }) => {
   let [votes, setVotes] = useState(rating);
   const voteCount = (elem) => {
-    // rating will not less than 0
+    // rating will not work when value is 0
     if (votes > 0) {
       if (elem.target.className === "fa fa-thumbs-up fa-2x") {
         setVotes((votes = votes + 1));
