@@ -9,9 +9,17 @@ import VideoFrames from './videoFrames.js';
 
 const AllVideoFiles = () => {
     const [deleteVideos, setDeleteVideos] = useState(Data);
-    const [searchVideos, setSearchVideos] = useState([]);
-    const handleDelete = (event) => {
-        
+    let [upDownVoteCount, setUpDownVoteCount] = useState(0);
+
+    const handleUpVoteCount = (event) => {
+        const noOfVoteCount = event.currentTarget;
+        console.log(noOfVoteCount);
+        if( noOfVoteCount){
+            setUpDownVoteCount(upDownVoteCount + 1)
+        }
+    }
+
+    const handleDelete = (event) => {        
         const videoTitle = event.currentTarget.parentNode.childNodes[0].textContent;
         const removedVideo = []
         const videoToDelete = deleteVideos.filter((obj) => {
@@ -21,7 +29,6 @@ const AllVideoFiles = () => {
         })
         setDeleteVideos(videoToDelete);
     }
-
     const handleSearch = (event) => {
         const searchedVideo = event.target.value.toLowerCase();
         console.log(searchedVideo);
@@ -31,17 +38,17 @@ const AllVideoFiles = () => {
                 selectedVideo.push(obj)
             }
         })
-        console.log(selectedVideo)
-        console.log(selectVideo)
-        setDeleteVideos(selectedVideo);
+         setDeleteVideos(selectedVideo);
     }
+
+        
 return (
     <div>
         <div className = "addVideoSearch">
             <AddVideo />
             <Search handleSearch = {handleSearch} />
         </div>
-    <VideoFrames Data = {deleteVideos} handleDelete = {handleDelete}/>
+    <VideoFrames Data = {deleteVideos} handleDelete = {handleDelete} upDownVoteCount = {upDownVoteCount} handleUpVoteCount = {handleUpVoteCount} />
     
     </div>
 )
