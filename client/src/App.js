@@ -26,6 +26,7 @@ function App() {
   const [vid, setVid] = useState(videos);
   const [search, setSearch] = useState('');
 
+
   const deleteVid = (id) => {
     console.log(id);
     const index = vid.findIndex(item => item.id === id)
@@ -39,7 +40,6 @@ function App() {
   }
 
 
-
   return (
     <div className="App">
 
@@ -49,7 +49,8 @@ function App() {
 
       <div className="main-container">
 
-        {vid.map(item => createCard(item, deleteVid))}
+        {vid.filter((video) => video.title.toLowerCase().includes(search)).map(item => createCard(item, deleteVid))}
+
 
       </div>
 
