@@ -25,6 +25,7 @@ function AddMovie(props) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Enter Movie Name"
+        required
       />
 
       <input
@@ -33,6 +34,7 @@ function AddMovie(props) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Enter Movie Url"
+        pattern="^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$"
       />
 
       <input className="formField" type="submit" value="Save Movie" />
