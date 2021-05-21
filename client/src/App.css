@@ -1,3 +1,47 @@
 .App {
   text-align: center;
 }
+
+h1 {
+  background-color: rgb(73, 73, 173);
+  padding: 3%;
+  color: white;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 2px solid rgb(146, 23, 23);
+  margin: 5%;
+}
+
+.cards {
+  padding: 5%;
+}
+
+.add-search {
+  display: flex;
+}
+
+.vote-for-video {
+  display: flex;
+  justify-content: center;
+}
+
+.vote-for-video p {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.upVotes {
+  color: red;
+  font-size: 30px;
+}
+
+.downVotes {
+  color: red;
+  font-size: 30px;
+}
+
