@@ -1,41 +1,25 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from '@material-ui/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddVideoForm = ({ addNewVideo }) => {
   const [reveal, setReveal] = useState(false);
-  const [controller, setController] = useState(false);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
-  const [data, setData] = useState({});
 
   const addVideo = () => {
     setReveal(true);
   };
   const submitNewVideo = (e) => {
     e.preventDefault();
-    setController(true);
     addNewVideo(title, url);
-    setData({ id: Date.now(), title: title, url: url, rating: '', posted: new Date().toString()});
     setTitle('');
     setUrl('');
-    setController(false)
   };
-
-  if (controller) {
-    const rules = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    };
-    fetch('http://127.0.0.1:5000', rules)
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }
 
   return (
     <div>
-      <Button onClick={addVideo} className='add-button' variant='dark'>
+      <Button onClick={addVideo} className='add-button' variant='contained' color='default'>
         Add Video
       </Button>
       <form
@@ -74,8 +58,8 @@ const AddVideoForm = ({ addNewVideo }) => {
             Please make sure you enter a valid YouTube url.
           </small>
         </div>
-        <Button type='submit' className='submit-btn' variant='dark'>
-          Submit
+        <Button type='submit' className='submit-btn' variant='contained' color='default'>
+          Upload
         </Button>
       </form>
     </div>

@@ -1,17 +1,23 @@
 const express = require('express');
 const exampleresponse = require('./exampleresponse.json');
-const port = process.env.PORT || 5000;
+//const cors = require('cors');
 const server = express();
+const port = process.env.PORT || 5000;
 const hostname = '127.0.0.1';
 
 server.use(express.json());
+//server.use(cors({ origin: 'http://localhost:5000'}));
 
 server.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'application/json');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.header(
     'Access-Control-Allow-Headers',
+    // 'Access-Control-Allow-Methods',
+    // 'Access-Control-Allow-Origin',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   next();
@@ -75,6 +81,7 @@ server.post('/', (req, res) => {
         posted: new Date().toString(),
       },
     ];
+    console.log(videos)
     return res.status(201).json({
       Result: 'Success!',
       Message: `Your video with a new id: ${Date.now()} is saved!`,
@@ -99,11 +106,12 @@ server.get('/:id', (req, res) => {
 
 server.delete('/:id', (req, res) => {
   const id = req.params.id;
+  const existingId = videos.find(video => video.id === id);
   const remainingVideos = videos.filter((video) => video.id.toString() !== id);
   if (videos.length - remainingVideos.length === 1) {
     videos = remainingVideos;
     res.json({ Server: `A video by the id: ${id} is successfully deleted!` });
-  } else
+  } else if (!existingId)
     res
       .status(404)
       .json({ Server: `A video by the id: ${id} could not be found!` });
