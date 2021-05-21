@@ -32,7 +32,7 @@ const MiniYouTube = () => {
     } else if (!match) {
       alert('Invalid url!');
     } else
-      setVideos([...videos, { id: '', title: title, url: url, rating: 0 }]);
+      setVideos([...videos, { id: '', title: title, url: url, rating: 0, posted: new Date().toString()}]);
   };
 
   const ascendingOrder = () => {
@@ -41,7 +41,7 @@ const MiniYouTube = () => {
       (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
     );
     setVideos(ascend)
-  }
+  };
 
   const descendingOrder = () => {
     const descend = [...videos];
@@ -49,7 +49,7 @@ const MiniYouTube = () => {
       (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
     );
     setVideos(descend);
-  }
+  };
 
   const voteUpdater = (videoObj, newVote) => {
     let updatedVideo = { ...videoObj, rating: newVote };
@@ -57,12 +57,12 @@ const MiniYouTube = () => {
     const i = newData.findIndex((video) => video.id === videoObj.id);
     newData[i] = updatedVideo;
     setVideos(newData);
-  }
+  };
 
   const videoRemover = (id) => {
     const remainingVideos = videos.filter(video => video.id !== id);
     setVideos(remainingVideos);
-  }
+  };
 
   return (
     <div key='main-wrapper'>

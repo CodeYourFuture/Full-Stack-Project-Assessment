@@ -8,7 +8,6 @@ const LikeDislikeDelete = ({ video, rating, id, voteUpdater, videoRemover }) => 
   return (
     <div className='buttons-container'>
       <ThumbDownAltTwoToneIcon
-        // id={id}
         onClick={() => voteUpdater(video, rating - 1)}
         className='dislike'
         fontSize='large'
@@ -26,7 +25,6 @@ const LikeDislikeDelete = ({ video, rating, id, voteUpdater, videoRemover }) => 
         Delete
       </Button>
       <ThumbUpAltTwoToneIcon
-        // id={video.id}
         onClick={() => voteUpdater(video, rating + 1)}
         className='like'
         fontSize='large'
@@ -34,8 +32,8 @@ const LikeDislikeDelete = ({ video, rating, id, voteUpdater, videoRemover }) => 
         style={{ color: 'antiquewhite' }}
       />
     </div>
-  )
+  );
 
-}
+};
 
 export default LikeDislikeDelete;

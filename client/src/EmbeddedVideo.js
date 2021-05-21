@@ -13,7 +13,7 @@ const EmbeddedVideo = ({ id }) => {
         allowFullScreen
       ></iframe>
     </div>
-  )
-}
+  );
+};
 
 export default EmbeddedVideo;

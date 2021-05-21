@@ -103,7 +103,7 @@ html, body {
 .video-title {
   font-size: x-large;
 }
-.votes {
+.votes, .posted {
   margin-bottom: 2em;
   font-size: larger;
 }

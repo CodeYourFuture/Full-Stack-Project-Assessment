@@ -34,9 +34,9 @@ function* flatten(array, depth) {
       yield* flatten(item, depth - 1);
     } else {
       yield item;
-    }
-  }
-}
+    };
+  };
+};
 
 videos = [...flatten(videos, Infinity)];
 
@@ -78,7 +78,7 @@ server.post('/', (req, res) => {
         title: title,
         url: url,
         rating: '',
-        posted: new Date().toString(),
+        posted: new Date().toString()
       },
     ];
     console.log(videos)
