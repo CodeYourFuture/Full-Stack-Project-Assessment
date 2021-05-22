@@ -13,9 +13,10 @@ const YouTubeVideos = () => {
   const [backupVideos, setBackupVideos] = useState([]);
 
   useEffect(() => {
-    fetch('/api')
+    fetch('http://localhost:8000')
       .then(res => res.json())
       .then((data) => {
+        console.log(data)
         setVideos(data);
         setBackupVideos(data);
       })
@@ -23,7 +24,7 @@ const YouTubeVideos = () => {
   }, []);
 
   const ascendingOrder = () => {
-    fetch('/api/?order=asc')
+    fetch('http://localhost:8000/?order=asc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -32,7 +33,7 @@ const YouTubeVideos = () => {
   };
 
   const descendingOrder = () => {
-    fetch('/api/?order=desc')
+    fetch('http://localhost:8000/?order=desc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -78,7 +79,7 @@ const YouTubeVideos = () => {
     setVideos(newData);
 
     const requestBody = { id: videoObj.id, rating: newVote };
-    fetch('/api', { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'Field-Name': 'Accept-Patch' }, body: JSON.stringify(requestBody) })
+    fetch('http://localhost:8000', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
@@ -91,7 +92,7 @@ const YouTubeVideos = () => {
       (video) => video.id !== id
     );
     setVideos(remainingVideos);
-    fetch(`/api/${id}`, {
+    fetch(`http://localhost:8000/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })

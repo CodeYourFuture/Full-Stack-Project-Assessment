@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
-const path = require('path');
+//const path = require('path');
 const exampleresponse = require('../exampleresponse.json');
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+//app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get("/", (req, res) => {
-  res.json({ message: 'Server is ready!' });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: 'Server is ready!' });
+// });
 
 let videos = [];
 videos.push(exampleresponse);
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   let copyVideos = [...videos];
   let copyVideos2 = [...videos];
   if (!req.query.order) res.json(videos);
@@ -59,7 +59,7 @@ app.get('/api', (req, res) => {
   }
 });
 
-app.post('/api', (req, res) => {
+app.post('/', (req, res) => {
   let newVideo = [];
   let title;
   let url;
@@ -98,7 +98,7 @@ app.post('/api', (req, res) => {
 
 });
 
-app.patch('/api', (req, res) => {
+app.patch('/', (req, res) => {
   const videoToBeUpdated = videos.find(video => video.id === req.body.id);
   const updatedVideo = { ...videoToBeUpdated, rating: req.body.rating }
   const overallUpdate = videos.filter(video => video !== videoToBeUpdated);
@@ -106,7 +106,7 @@ app.patch('/api', (req, res) => {
   res.json({ message: `The rating of the video by the id: ${req.body.id} is successfully updated!` })
 });
 
-app.get('/api/:id', (req, res) => {
+app.get('/:id', (req, res) => {
   const id = req.params.id;
   const videoById = videos.find((video) => video.id.toString() === id);
   if (videoById) res.json(videoById);
@@ -114,7 +114,7 @@ app.get('/api/:id', (req, res) => {
     res.status(404).json({ message: `Video by id: ${id} could not be found!` });
 });
 
-app.delete('/api/:id', (req, res) => {
+app.delete('/:id', (req, res) => {
   const id = req.params.id;
   const remainingVideos = videos.filter(video => video.id !== id);
   videos = remainingVideos;
