@@ -13,7 +13,7 @@ const YouTubeVideos = () => {
   const [backupVideos, setBackupVideos] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000')
+    fetch('https://fullstackvideos.herokuapp.com/api')
       .then(res => res.json())
       .then((data) => {
         console.log(data)
@@ -24,7 +24,7 @@ const YouTubeVideos = () => {
   }, []);
 
   const ascendingOrder = () => {
-    fetch('http://localhost:8000/?order=asc')
+    fetch('https://fullstackvideos.herokuapp.com/api/?order=asc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -33,7 +33,7 @@ const YouTubeVideos = () => {
   };
 
   const descendingOrder = () => {
-    fetch('http://localhost:8000/?order=desc')
+    fetch('https://fullstackvideos.herokuapp.com/api/?order=desc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -79,7 +79,7 @@ const YouTubeVideos = () => {
     setVideos(newData);
 
     const requestBody = { id: videoObj.id, rating: newVote };
-    fetch('http://localhost:8000', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
+    fetch('https://fullstackvideos.herokuapp.com/api', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
@@ -92,7 +92,7 @@ const YouTubeVideos = () => {
       (video) => video.id !== id
     );
     setVideos(remainingVideos);
-    fetch(`http://localhost:8000/${id}`, {
+    fetch(`https://fullstackvideos.herokuapp.com/api/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
