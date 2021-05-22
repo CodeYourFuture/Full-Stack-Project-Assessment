@@ -1,0 +1,19 @@
+{
+  "name": "full-stack-videos-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "14.16.1"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

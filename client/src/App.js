@@ -1,11 +1,12 @@
 import React from "react";
+import YouTubeVideos from './YouTubeVideos';
 import "./App.css";
-import MiniYouTube from './MiniYouTube';
+
 
 function App() {
   return (
-    <div className="App">
-      <MiniYouTube />
+    <div className='App'>
+      <YouTubeVideos />
     </div>
   );
 }
