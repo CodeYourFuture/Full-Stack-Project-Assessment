@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import "./App.css";
-import videos from '../src/data';
+// import videos from '../src/data';
 import Header from '../src/components/Header';
 import Add from '../src/components/Add';
 import Card from '../src/components/Card';
 import Footer from './components/Footer';
+
+
 
 function createCard(video, delete2) {
   return (
@@ -21,10 +24,25 @@ function createCard(video, delete2) {
 }
 
 
+
+
 function App() {
 
-  const [vid, setVid] = useState(videos);
+
+  const [vid, setVid] = useState([]);
   const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/videos')
+      .then(res => {
+        console.log(res)
+        setVid(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, []);
+
 
 
   const deleteVid = (id) => {
@@ -49,8 +67,7 @@ function App() {
 
       <div className="main-container">
 
-        {vid.filter((video) => video.title.toLowerCase().includes(search)).map(item => createCard(item, deleteVid))}
-
+        {videos.filter((video) => video.title.toLowerCase().includes(search)).map(item => createCard(item, deleteVid))}
 
       </div>
 
