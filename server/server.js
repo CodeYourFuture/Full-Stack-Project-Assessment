@@ -1,15 +1,67 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const videos = require("/home/cyf/Documents/GitHub/Full-Stack-Project-Assessment/client/src/exampleResponse.json");
+//body parser
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.status(200).json(videos);
 });
+
+// get video by id
+app.get("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  const video = videos.filter((video) => video.id === videoId);
+  if (video.length > 0) {
+    res.status(200).json(video);
+  } else {
+    res.send({ msg: `video with id ${videoId} not found` });
+  }
+});
+
+//post request
+let idCounter = 1;
+let rating = 0;
+app.post("/", (req, res) => {
+  const video = req.body;
+  if (video.title && video.url) {
+    const newVideo = {
+      id: idCounter++,
+      title: video.title,
+      url: video.url,
+      rating: rating,
+    };
+    videos.push(newVideo);
+    res.status(201).json({
+      id: newVideo.id,
+    });
+  } else {
+    res.send({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  }
+});
+
+// delete request
+app.delete("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  const videoIndex = videos.findIndex((video) => video.id === videoId);
+  if (videoIndex !== -1) {
+    videos.splice(videoIndex);
+    res.status(204).json(videos);
+  } else {
+    res.send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
+app.listen(port, () => console.log(`Listening on port ${port}`));
