@@ -4,7 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
 import ThumbDownAltTwoToneIcon from '@material-ui/icons/ThumbDownAltTwoTone';
 
-const LikeDislikeDelete = ({ video, rating, id, voteUpdater, videoRemover }) => {
+const LikeDislikeDeleteButtons = ({ video, rating, id, voteUpdater, videoRemover }) => {
   return (
     <div className='buttons-container'>
       <ThumbDownAltTwoToneIcon
@@ -36,4 +36,4 @@ const LikeDislikeDelete = ({ video, rating, id, voteUpdater, videoRemover }) => 
 
 };
 
-export default LikeDislikeDelete;
+export default LikeDislikeDeleteButtons;

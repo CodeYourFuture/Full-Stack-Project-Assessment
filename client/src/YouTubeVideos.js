@@ -5,7 +5,7 @@ import UploadVideoForm from './UploadVideoForm';
 import Title from './Title';
 import EmbeddedVideos from './EmbeddedVideos';
 import Votes from './Votes';
-import LikeDislikeDelete from './LikeDislikeDelete';
+import LikeDislikeDeleteButtons from './LikeDislikeDeleteButtons';
 
 const YouTubeVideos = () => {
   const [videos, setVideos] = useState([]);
@@ -16,7 +16,6 @@ const YouTubeVideos = () => {
     fetch('https://fullstackvideos.herokuapp.com/api')
       .then(res => res.json())
       .then((data) => {
-        console.log(data)
         setVideos(data);
         setBackupVideos(data);
       })
@@ -142,10 +141,7 @@ const YouTubeVideos = () => {
               <Title title={video.title} />
               <EmbeddedVideos id={video_id} />
               <Votes vote={video.rating} />
-              {/* <h6 className={video.posted ? 'posted' : 'd-none'}>
-                Posted: {video.posted}
-              </h6> */}
-              <LikeDislikeDelete video={video} rating={video.rating} id={video.id} voteUpdater={voteUpdater} videoRemover={videoRemover} />
+              <LikeDislikeDeleteButtons video={video} rating={video.rating} id={video.id} voteUpdater={voteUpdater} videoRemover={videoRemover} />
             </div>
           );
         })}

@@ -1,15 +1,9 @@
 const express = require('express');
 const app = express();
-//const path = require('path');
 const exampleresponse = require('../exampleresponse.json');
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
-//app.use(express.static(path.resolve(__dirname, '../client/build')));
-
-// app.get("/", (req, res) => {
-//   res.json({ message: 'Server is ready!' });
-// });
 
 let videos = [];
 videos.push(exampleresponse);

@@ -1,6 +1,7 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css);
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-html, body {
+html,
+body {
   min-width: fit-content;
   margin: 0;
 }
@@ -25,7 +26,8 @@ html, body {
   margin-bottom: 2em;
 }
 
-.ascending, .descending {
+.ascending,
+.descending {
   margin-top: 0.6em !important;
 }
 
@@ -56,17 +58,17 @@ html, body {
 }
 
 .search-input-wrapper {
- background-color: #6a6c86;
- background-color: #100e26;
- color: silver;
- display: flex;
- width: 40%;
- align-items: center;
- justify-content: space-around;
- margin: auto;
- padding: 0.4em;
- border-radius: 0.2em;
- margin-bottom: 2em;
+  background-color: #6a6c86;
+  background-color: #100e26;
+  color: silver;
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  padding: 0.4em;
+  border-radius: 0.2em;
+  margin-bottom: 2em;
 }
 
 .search-bar {
@@ -147,7 +149,7 @@ html, body {
   background-color: crimson !important;
 }
 
-@media screen and (min-width: 360px)  and (max-width: 1024px) {
+@media screen and (min-width: 360px) and (max-width: 1024px) {
   .main-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(1, 1fr);
@@ -160,7 +162,7 @@ html, body {
     grid-template-rows: 1fr 4fr 0.5fr 0.5fr;
     place-items: center;
     background-color: #1f213d;
-  } 
+  }
   .embedded-video {
     max-width: fit-content;
   }
@@ -180,8 +182,7 @@ html, body {
     margin: auto;
     gap: 1em;
   }
-
-   .video-and-details-wrapper {
+  .video-and-details-wrapper {
     display: grid;
     place-items: center;
     margin: auto;
@@ -191,17 +192,14 @@ html, body {
     grid-template-columns: repeat(3, 1fr);
     place-items: center;
     margin-bottom: 2em;
-    
   }
-
 }
 
 @media screen and (min-width: 1560px) {
-    .main-container {
+  .main-container {
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
     margin: auto;
     gap: 2em;
   }
-
 }
