@@ -12,7 +12,7 @@ const AddVideo = ({ handleChange, setTitle, setUrl, handleSubmit }) => {
       >
         Add Video
       </p>
-      {click ? (
+      {click && (
         <div className="add-video">
           <p>Title</p>
           <input
@@ -37,7 +37,7 @@ const AddVideo = ({ handleChange, setTitle, setUrl, handleSubmit }) => {
             </button>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
