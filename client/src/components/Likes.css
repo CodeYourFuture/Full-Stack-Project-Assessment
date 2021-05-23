@@ -16,9 +16,15 @@
   border-radius: 1px;
 }
 
+.add-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .icon {
   cursor: pointer;
-  box-shadow: 4px 10px 10px 0px rgba(0, 0, 0, 0.24);
+  /* box-shadow: 4px 10px 10px 0px rgba(0, 0, 0, 0.24); */
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.4));
   border-radius: 20px;
   transition: 0.2s all;
 }

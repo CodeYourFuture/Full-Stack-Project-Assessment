@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Add.css';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const Add = (props) => {
 
@@ -48,7 +49,12 @@ const Add = (props) => {
                 placeholder="https://example.com">
 
             </input>
-            <button onClick={submitVid} className="add-btn">ADD</button>
+            {/* <button onClick={submitVid} className="add-btn">ADD</button> */}
+            <div className="add-container">
+
+                <AddBoxIcon onClick={submitVid} fontSize="large" className="add-icon" />
+                <p>ADD</p>
+            </div>
 
 
         </div>

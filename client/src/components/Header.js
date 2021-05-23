@@ -15,10 +15,13 @@ const Header = ({ handleSearch }) => {
             </div>
 
             <div className="header__center">
+
                 <input
+                    onChange={(event) => handleSearch(event.target.value)
+                    }
                     type='text'
-                    onChange={(event) => handleSearch(event.target.value)}
                     placeholder="Search">
+
                 </input>
                 <SearchIcon
                     type='submit'
