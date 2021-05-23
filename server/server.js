@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const videos = require("/home/cyf/Documents/GitHub/Full-Stack-Project-Assessment/client/src/exampleResponse.json");
+const cors = require("cors");
+app.use(cors());
 //body parser
 app.use(express.json());
 app.use(

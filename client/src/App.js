@@ -1,17 +1,20 @@
 import "./App.css";
-import exampleResource from "./exampleResponse.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 
 function App() {
-  let [videos, setVideos] = useState(exampleResource);
+  let [videos, setVideos] = useState([]);
   let [giveId, setGiveId] = useState(1000);
   const [newVideo, setNewVideo] = useState({
     title: "",
     url: "",
   });
-
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then((res) => res.json())
+      .then((data) => setVideos(data));
+  }, []);
   // sort videos by rating highest to lowest
   function sorter(videos) {
     videos.sort((a, b) => {
