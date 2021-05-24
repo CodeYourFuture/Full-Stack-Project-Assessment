@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Header';
 import UploadVideoForm from './UploadVideoForm';
+import SearchBar from './SearchBar';
 import Title from './Title';
 import EmbeddedVideos from './EmbeddedVideos';
 import Votes from './Votes';
@@ -9,7 +10,6 @@ import LikeDislikeDeleteButtons from './LikeDislikeDeleteButtons';
 
 const YouTubeVideos = () => {
   const [videos, setVideos] = useState([]);
-  const [searchInput, setSearchInput] = useState('');
   const [backupVideos, setBackupVideos] = useState([]);
 
   useEffect(() => {
@@ -61,14 +61,9 @@ const YouTubeVideos = () => {
       ]);
   };
 
-  const handleSearchInput = (e) => {
-    setSearchInput(e.target.value.toLowerCase());
-    const searchResult = videos.filter((video) =>
-      video.title.toLowerCase().includes(searchInput)
-    );
-    setVideos(searchResult);
-    if (e.target.value === '') setVideos(backupVideos);
-  };
+  const stateUpdater = (updatedState) => {
+    setVideos(updatedState);
+  }
 
   const voteUpdater = (videoObj, newVote) => {
     let updatedVideo = { ...videoObj, rating: newVote };
@@ -100,38 +95,14 @@ const YouTubeVideos = () => {
         console.log(data)
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <div key='mainWrapper'>
       <div key='buttonAndSearch' className='add-button-and-search-wrapper'>
-        <header className='App-header'>
-          <div>
-            <Button className='ascending' onClick={ascendingOrder} variant='contained' color='default'>
-              Ascending
-            </Button>
-          </div>
-          <div>
-            <h1>Video Recommendation</h1>
-          </div>
-          <div>
-            <Button className='descending' onClick={descendingOrder} variant='contained' color='default'>
-              Descending
-            </Button>
-          </div>
-        </header>
+        <Header ascendingOrder={ascendingOrder} descendingOrder={descendingOrder} />
         <UploadVideoForm addNewVideo={addNewVideo} />
-        <div key='input-form' className='search-input-wrapper'>
-          <i key='fasIcon' className='fas fa-search'></i>
-          <input
-            key='search-input'
-            type='text'
-            className='search-bar'
-            placeholder='Search for a video ...'
-            value={searchInput}
-            onChange={handleSearchInput}
-          />
-        </div>
+        <SearchBar stateUpdater={stateUpdater} videos={backupVideos} />
       </div>
       <div key='displayWrapper' className='main-container'>
         {videos.map((video, index) => {
