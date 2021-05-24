@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from "react";
 
-const AddVideoForm = ({ showAddVideoForm, videoList, setVideoList }) => {
+const AddVideoForm = ({
+  showAddVideoForm,
+  extractVideoId,
+  videoList,
+  setVideoList,
+}) => {
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let newVideo = {
-      title: videoTitle,
-      url: videoUrl,
-      rating: 0,
-    };
-    /*
+    const videoId = extractVideoId(videoUrl);
+    if (videoId !== null && videoTitle !== "") {
+      let newVideo = {
+        title: videoTitle,
+        url: videoUrl,
+        rating: 0,
+      };
+      /*
      videoList.push(newVideo) returns the index of the new element
      and thus cannot be used in setVideoList function
     */
-    setVideoList(() => [...videoList, newVideo]);
+      setVideoList(() => [...videoList, newVideo]);
+    } else {
+      alert("Enter a valid Video Title and URL!");
+    }
+
     setVideoTitle("");
     setVideoUrl("");
   };

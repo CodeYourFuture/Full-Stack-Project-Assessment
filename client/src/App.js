@@ -13,6 +13,12 @@ function App() {
   const [videoList, setVideoList] = useState(ExampleVideos);
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
 
+  const extractVideoId = (videoUrl) => {
+    const regex = /(?<=v=|v\/|vi=|vi\/|youtu\.be\/)[a-zA-Z0-9_-]{11}/g;
+    const videoId = videoUrl.match(regex);
+    return videoId;
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,10 +31,16 @@ function App() {
       />
       <AddVideoForm
         showAddVideoForm={showAddVideoForm}
+        extractVideoId={extractVideoId}
         videoList={videoList}
         setVideoList={setVideoList}
       />
-      <VideoGrid videoList={videoList} setVideoList={setVideoList} />
+      <VideoGrid
+        searchValue={searchValue}
+        videoList={videoList}
+        setVideoList={setVideoList}
+        extractVideoId={extractVideoId}
+      />
     </div>
   );
 }
