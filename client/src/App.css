@@ -1,77 +1,212 @@
+/* global styling */
+
 .App {
   text-align: center;
 }
 .App-header {
   background-color: rgba(2, 32, 71, 0.884);
   color: white;
-  padding-top: 1%;
-  padding-bottom: 1%;
 }
-h1 {
-  font-weight: 300;
-}
-.add-video-container {
-  margin-top: 50px;
-}
-.add-video-text {
-  color: rgba(26, 71, 129, 0.884);
-  font-weight: 600;
-}
-.add-video {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-left: 50px;
-}
-.add-video > button {
-  background-color: rgb(228, 37, 69);
-}
-.add-video :first-child,
-.add-video :nth-child(2) {
-  margin-top: 20px;
-  margin-right: 20px;
+.App {
+  font-size: large;
   width: 100%;
-}
-.add-video-buttons :first-child {
-  font-weight: 500;
-  width: 90px;
-}
-.add-video-buttons :nth-child(2) {
-  background-color: rgb(228, 37, 69);
-  font-weight: 500;
-  width: 90px;
-}
-.videos-container {
-  display: grid;
-  grid-template-columns: repeat(3, 400px);
-  gap: 50px;
-  margin-top: 50px;
-  margin-left: 8%;
 }
 .oneVideo button {
   background-color: rgb(228, 37, 69);
   color: white;
   border: none;
-  margin-top: 10px;
 }
 .votes {
   display: flex;
   flex-direction: row;
-  margin-right: 150px;
-  margin-left: 150px;
+  justify-content: center;
 }
-.votes :first-child,
-.votes :nth-child(3) {
-  color: rgb(218, 42, 71);
-  font-size: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+.votes > i {
+  margin-left: 0.5rem;
+  color: rgb(228, 37, 69);
 }
-.votes :nth-child(2) {
-  color: black;
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-right: 20px;
-  margin-bottom: 10px;
+/* styling for screen 320-414px */
+@media only screen and (min-width: 320px) and (max-width: 414px) {
+  .App {
+    text-align: center;
+  }
+  .App-header {
+    background-color: rgba(2, 32, 71, 0.884);
+    color: white;
+  }
+  .App {
+    font-size: large;
+    width: 100%;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: larger;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .add-video-container {
+    margin-top: 1rem;
+  }
+
+  .add-video-text {
+    color: rgba(26, 71, 129, 0.884);
+    font-weight: 400;
+  }
+
+  .add-video {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 2rem;
+  }
+  .add-video > input {
+    margin-bottom: 0rem;
+  }
+  .add-video > p {
+    text-align: left;
+    margin-bottom: 0px;
+  }
+  .add-video-buttons > button {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .videos-container {
+    display: grid;
+    grid-template-rows: none;
+  }
+
+  .oneVideo {
+    border: none;
+  }
+  .oneVideo h5 {
+    font-size: medium;
+  }
+  .oneVideo iframe {
+    width: 96%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .votes p {
+    margin-left: 0.5rem;
+    color: black;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .App {
+    font-size: large;
+    width: 100%;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: larger;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .add-video-container {
+    margin-top: 1rem;
+  }
+
+  .add-video-text {
+    color: rgba(26, 71, 129, 0.884);
+    font-weight: 400;
+  }
+
+  .add-video {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 2rem;
+  }
+  .add-video > input {
+    margin-bottom: 0rem;
+  }
+  .add-video > p {
+    text-align: left;
+    margin-bottom: 0px;
+  }
+  .add-video-buttons > button {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .videos-container {
+    display: grid;
+    grid-template-rows: none;
+  }
+
+  .oneVideo {
+    border: none;
+  }
+  .oneVideo h5 {
+    font-size: medium;
+  }
+  .oneVideo iframe {
+    width: 96%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .oneVideo button {
+    background-color: rgb(228, 37, 69);
+    color: white;
+    border: none;
+  }
+  .votes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .votes > i {
+    margin-left: 0.5rem;
+    color: rgb(228, 37, 69);
+  }
+  .votes p {
+    margin-left: 0.5rem;
+    color: black;
+  }
+}
+
+/* style for device 415px - 768px */
+
+@media only screen and (min-device-width: 415px) and (max-device-width: 768px) {
+  .oneVideo iframe {
+    height: 300px;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 3rem;
+  }
+  .add-video {
+    justify-content: space-around;
+  }
+  .add-video-text {
+    font-size: 2rem;
+  }
+
+  .add-video-buttons > button {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  .add-video > p {
+    font-size: 1.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .videos-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+  }
+  .oneVideo iframe {
+    width: 220px;
+    height: 150px;
+  }
 }

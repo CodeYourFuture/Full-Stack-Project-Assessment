@@ -24,8 +24,6 @@ function Video({ id, title, url, rating, deleteVideo }) {
       </div>
       {/* iframe for video  */}
       <iframe
-        width="400"
-        height="250"
         src={url.replace("watch?v=", "embed/")}
         title="YouTube video player"
         frameBorder="0"
