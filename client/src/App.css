@@ -17,6 +17,8 @@ height: 100%
   /* margin-left: 3rem; */
 }
 .oneVideoFrame{
+  /* display: grid; */
+  /* grid-template-columns: repeat(3, 1fr); */
   min-width: 25rem;
   min-height: 25rem;
   margin-left: 3rem;
@@ -40,6 +42,13 @@ height: 100%
   /* margin: 1rem; */
 }
 
+.titleUrl {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: blue;
+}
+
 .addNdel {
   display: flex;
   justify-content: space-evenly;
@@ -49,4 +58,8 @@ height: 100%
 .addVideoSearch {
   display: flex;
   justify-content: space-around;
+}
+
+.displayclass {
+  display: none;
 }
