@@ -7,6 +7,7 @@ import Search from "./Components/Search";
 
 const App = () => {
   const [videos, setVideos] = useState(YouTubeData);
+  const [filterVid, setFilterVid] = useState(YouTubeData);
 
   // Search Video
   const searchVideo = (elem) => {
@@ -18,7 +19,7 @@ const App = () => {
       );
       setVideos(result);
     } else {
-      setVideos(YouTubeData);
+      setVideos(filterVid);
     }
   };
 
@@ -32,6 +33,7 @@ const App = () => {
   const deleteVideo = (e) => {
     const updatedVideos = videos.filter((video) => video.id !== e);
     setVideos(updatedVideos);
+    setFilterVid(updatedVideos);
   };
 
   return (
