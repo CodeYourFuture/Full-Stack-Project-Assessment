@@ -36,12 +36,28 @@ function App() {
     axios.get('http://localhost:5000/videos')
       .then(res => {
         console.log(res)
-        setVid(res.data)
+        console.log(res.data.data.videos)
+        setVid(res.data.data.videos)
       })
       .catch(err => {
         console.log(err)
       })
   }, []);
+
+
+  // function test() {
+  //   axios.get('http://localhost:5000/videos')
+  //     .then(res => {
+  //       console.log(res)
+  //       console.log(res.data.data.videos)
+  //       setVid(res.data.data.videos)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
+
+
 
 
 
@@ -67,7 +83,7 @@ function App() {
 
       <div className="main-container">
 
-        {videos.filter((video) => video.title.toLowerCase().includes(search)).map(item => createCard(item, deleteVid))}
+        {vid.filter((video) => video.title.toLowerCase().includes(search)).map(item => createCard(item, deleteVid))}
 
       </div>
 

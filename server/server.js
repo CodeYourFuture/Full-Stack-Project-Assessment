@@ -33,10 +33,9 @@ app.post("/videos", (req, res) => {
   let newVideo = req.body;
 
   if (
-    !newVideo.id ||
+    // !newVideo.id ||
     !newVideo.title ||
     !newVideo.url
-
 
   ) {
     res.status(400);
