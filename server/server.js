@@ -12,6 +12,16 @@ app.use(
   })
 );
 
+// video sorter
+function sorter(videos) {
+  videos.sort((a, b) => {
+    if (a.rating > b.rating) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+}
 // GET "/"
 app.get("/", (req, res) => {
   res.status(200).json(videos);
