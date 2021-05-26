@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import vidsData from "../vidsData.json"
+import React, { useState, useEffect } from "react";
+import vidsData from "../vidsData.json";
+import AddVids from "./AddVids";
 
-
-const YoutubeV= () => {
+const YoutubeV = () => {
   const [filterVids, setFilterVids] = useState(vidsData);
   const [counter, setCounter] = useState(0);
+  
 
+  // counter
   function increment() {
     setCounter((counter) => counter + 1);
   }
@@ -14,22 +16,32 @@ const YoutubeV= () => {
     setCounter((counter) => counter - 1);
   }
 
+  //delete video
   function deleteVideo(filterVid) {
-    filterVids.filter((i) => i !== filterVid.id);
+    let newList = filterVids.filter((i) => i.id !== filterVid.id); 
+    setFilterVids(newList)
   }
+
+  function addVideo(newVid) {
+    setFilterVids(filterVids.push(newVid))
+  }
+  
+
 
   return (
     <div className="main-container">
+       <AddVids addVideo={addVideo}/>
       {filterVids.map((filterVid) => (
         <div className="cards">
           <h3>{filterVid.title}</h3>
           <div className="vote-for-video">
-            <i className="fa fa-thumbs-o-up upVotes" onClick={increment}></i>
+            <button className="upVote" onClick={increment}>
+              LIKE
+            </button>
             <p>{counter} Votes</p>
-            <i
-              className="fa fa-thumbs-o-down downVotes"
-              onClick={decrement}
-            ></i>
+            <button className="downVote" onClick={decrement}>
+              DISLIKE
+            </button>
           </div>
           <iframe
             width="560"
@@ -40,7 +52,7 @@ const YoutubeV= () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <button onClick={deleteVideo}>Delete</button>
+          <button onClick={() => deleteVideo(filterVid)}>Delete</button>
         </div>
       ))}
     </div>
