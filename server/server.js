@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const { Pool } = require("pg");
+
+const password = process.env.PASSWORD;
 const dbConfig = {
   host: "localhost",
   port: 5432,
@@ -28,10 +31,13 @@ const videos = `select  * from videos`;
 app.get("/", (req, res) => {
   pool
     .query(videos)
-    .then((result) => res.send(result.rows))
+    .then((result) => {
+      if ((req.query.order = "asc")) {
+        res.send(result.rows);
+      }
+    })
     .catch((error) => res.status(500).send(error));
 });
-
 // get video by id
 
 app.get("/:id", async function (req, res) {
