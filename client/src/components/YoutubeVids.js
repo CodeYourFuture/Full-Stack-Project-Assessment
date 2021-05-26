@@ -5,7 +5,6 @@ import AddVids from "./AddVids";
 const YoutubeV = () => {
   const [filterVids, setFilterVids] = useState(vidsData);
   const [counter, setCounter] = useState(0);
-  
 
   // counter
   function increment() {
@@ -18,19 +17,18 @@ const YoutubeV = () => {
 
   //delete video
   function deleteVideo(filterVid) {
-    let newList = filterVids.filter((i) => i.id !== filterVid.id); 
-    setFilterVids(newList)
+    let newList = filterVids.filter((i) => i.id !== filterVid.id);
+    setFilterVids(newList);
   }
-
+  //Add new Video
   function addVideo(newVid) {
-    setFilterVids(filterVids.push(newVid))
+    let newVids = [...filterVids, newVid];
+    setFilterVids(newVids);
   }
-  
-
 
   return (
     <div className="main-container">
-       <AddVids addVideo={addVideo}/>
+      <AddVids addVideo={addVideo} />
       {filterVids.map((filterVid) => (
         <div className="cards">
           <h3>{filterVid.title}</h3>
