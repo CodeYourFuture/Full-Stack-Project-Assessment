@@ -10,8 +10,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 const movies = require("./movieData.json");
@@ -19,18 +17,23 @@ const movies = require("./movieData.json");
 // post
 app.post("/", function (request, response) {
   let newMovie = request.body;
-  const urlRegex = new RegExp(
-    "/^((?:https?:)?//)?((?:www|m).)?((?:youtube.com|youtu.be))(/(?:[w-]+?v=|embed/|v/)?)([w-]+)(S+)?$/gm"
-  );
-
+  console.log(newMovie);
+  // const urlRegex = new RegExp(
+  //   "^((?:https?:)?//)?((?:www|m).)?((?:youtube.com|youtu.be))(/(?:[w-]+?v=|embed/|v/)?)([w-]+)(S+)?$"
+  // );
+  // console.log(urlRegex.test(newMovie.url));
   // checks if one of the booking details is empty
+  console.log(!newMovie.title);
+  console.log(!newMovie.url);
+  console.log(!newMovie.id);
+  console.log(!newMovie.url.includes("youtube.com"));
   if (
     !newMovie.title ||
     !newMovie.url ||
     !newMovie.id ||
-    urlRegex.test(newMovie.url)
+    !newMovie.url.includes("youtube.com")
   ) {
-    response.send({
+    response.status(400).send({
       result: "failure",
       message: "Video could not be saved",
     });
@@ -42,7 +45,7 @@ app.post("/", function (request, response) {
   } else {
     movies.push(newMovie);
     response.status(201);
-    response.send(newMovie);
+    response.send({Id: newMovie.id});
   }
 });
 
@@ -73,7 +76,7 @@ app.delete("/:id", (request, response) => {
   if (deletedMovieIndex > -1) {
     movies.splice(deletedMovieIndex, 1);
     // response.status(204);
-    response.send("Movie Successfully deleted");
+    response.send({});
   } else {
     response.send({
       result: "failure",
@@ -81,3 +84,5 @@ app.delete("/:id", (request, response) => {
     });
   }
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -8,23 +8,31 @@ import AddMovie from "./AddMovie";
 // import Iframe from "react-iframe";
 
 function App() {
-  const [data, setData] = useState(movieData);
+  const [data, setData] = useState([]);
   // const [data, setData] = useState(movieData);
   const [inputValue, setInputValue] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
-  // consst [fetched, setFetched] = useState([]);
+  // const [fetchedMovies, setFetchedMovies] = useState([]);
+
+  // fetch("http://localhost:5000").then((res) =>
+  //   res.json().then((data1) => {
+  //     setFetchedMovies(data1);
+  //     console.log(data1);
+  //   })
+  // );
+  useEffect(() => {
+    movieApi();
+  }, []);
 
   async function movieApi() {
     const response = await fetch(`http://localhost:5000`);
     const data1 = await response.json();
-    console.log(data1);
-    return data1;
+    setData(data1);
   }
 
   const onChangeHandler = (e) => {
     setInputValue(e.target.value.toLowerCase());
-    movieApi();
   };
   // will filter all the movies in the remaining movies except the movie with the matching id
   const deleteMovie = (id) => {
@@ -32,7 +40,15 @@ function App() {
     setData(remainingMovies);
   };
 
-  const onAddMovie = (newMovie) => {
+  const onAddMovie = async (newMovie) => {
+    const addedMovie = await fetch("http://localhost:5000", {
+      method: "POST",
+      headers: {"content-type": "application/json"},
+      body: JSON.stringify(newMovie),
+    });
+
+    console.log(addedMovie);
+
     // console.log(fetched);
     setData(data.concat(newMovie));
   };
