@@ -4,7 +4,7 @@ const Videos = ({ video }) => {
   return (
     <div>
       <iframe
-        width="560"
+        width="100%"
         height="315"
         src={`https://www.youtube.com/embed/${video.split("=")[1]}`}
         title="YouTube video player"

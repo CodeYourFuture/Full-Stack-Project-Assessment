@@ -5,8 +5,6 @@ import VideoRatings from "./component/VideoRatings";
 import Videos from "./component/Videos";
 import VideoTitle from "./component/VideoTitle";
 import React, { useState, useEffect } from "react";
-
-// import data from "./data/exampleresponse.json";
 import AddVid from "./component/AddVid";
 
 function App() {
@@ -46,8 +44,8 @@ function App() {
     e.preventDefault();
     let newVideo = { title, url, rating: 0 };
     setVideos(() => [...videos, newVideo]);
-    setTitle({ title: "" });
-    setUrl({ url: "" });
+    setTitle("");
+    setUrl("");
   };
 
   // On change function to handle new video title to add
@@ -78,14 +76,16 @@ function App() {
         setShowVideoForm={setShowVideoForm}
       />
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-      {filteredTitle.map((video) => (
-        <div key={video.id} className="container mt-3">
-          <VideoTitle title={video.title} searchValue={searchValue} />
-          <VideoRatings rating={video.rating} />
-          <Videos video={video.url} />
-          <DeleteVideo id={video.id} handleDeleteVid={handleDeleteVid} />
-        </div>
-      ))}
+      <div className="main-container">
+        {filteredTitle.map((video) => (
+          <div key={video.id} className="container">
+            <VideoTitle title={video.title} searchValue={searchValue} />
+            <VideoRatings rating={video.rating} />
+            <Videos video={video.url} />
+            <DeleteVideo id={video.id} handleDeleteVid={handleDeleteVid} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
