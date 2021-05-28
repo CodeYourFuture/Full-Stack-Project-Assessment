@@ -13,16 +13,19 @@ h1 {
   flex-wrap: wrap;
   margin-left: 10%;
   margin-right: 10%;
-  border: 2px solid rgb(146, 23, 23);
+
   margin: 5%;
 }
 
 .cards {
-  padding: 5%;
+  margin-left: 13%;
+  width: 30%;
 }
 
 .add-search {
   display: flex;
+  justify-content: space-around;
+  margin: 5%;
 }
 
 .vote-for-video {
