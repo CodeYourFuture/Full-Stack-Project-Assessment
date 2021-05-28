@@ -58,9 +58,7 @@ function App() {
   // }
 
 
-
-
-
+  //delete the vid 
   const deleteVid = (id) => {
     console.log(id);
     const index = vid.findIndex(item => item.id === id)
