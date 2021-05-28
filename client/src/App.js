@@ -13,14 +13,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
-  // const [fetchedMovies, setFetchedMovies] = useState([]);
 
-  // fetch("http://localhost:5000").then((res) =>
-  //   res.json().then((data1) => {
-  //     setFetchedMovies(data1);
-  //     console.log(data1);
-  //   })
-  // );
   useEffect(() => {
     movieApi();
   }, []);
