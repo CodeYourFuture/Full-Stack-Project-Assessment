@@ -1,13 +1,26 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YouTubeData from "./Data/YouTubeData.json";
 import YouTubeVideos from "./Components/YouTubeVideos";
 import AddVideo from "./Components/AddVideo";
 import Search from "./Components/Search";
 
 const App = () => {
-  const [videos, setVideos] = useState(YouTubeData);
-  const [filterVid, setFilterVid] = useState(YouTubeData);
+  const [videos, setVideos] = useState([]);
+  const [filterVid, setFilterVid] = useState([]);
+
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1/5000`)
+      .then((response) => {
+        console.log(response);
+        response.json()
+      })
+      .then((data) => {
+        setVideos(data);
+        setFilterVid(data);
+      });
+  }, [])
 
   // Search Video
   const searchVideo = (elem) => {

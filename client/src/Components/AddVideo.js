@@ -29,7 +29,7 @@ const AddVideo = ({addVid}) => {
   };
 
   return (
-    <form id="addContainer" onClick={onSubmit}>
+    <form id="addContainer">
       <input
         type="text"
         value={newVideo.title}
@@ -44,7 +44,7 @@ const AddVideo = ({addVid}) => {
         placeholder="Enter video URL"
         onChange={onChangeAdd}
       />
-      <button type="onSubmit">Add Video</button>
+      <button type="onSubmit" onClick={onSubmit}>Add Video</button>
     </form>
   );
 };
