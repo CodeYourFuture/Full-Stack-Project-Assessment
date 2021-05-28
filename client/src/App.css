@@ -1,3 +1,77 @@
 .App {
   text-align: center;
 }
+.App-header {
+    color: #fff;
+    font-style: oblique;
+    background-color: #254e70;
+    padding: 2rem 0;
+    margin-bottom: 2em;
+}
+embedded-video {
+  height: 16em;
+  margin: auto;
+  text-align: center;
+}
+.video-container {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.display-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 98%;
+}
+.video-and-title {
+  width: 30%;
+  margin-bottom: 1em;
+}
+.Rating {
+  display: flex;
+  justify-content: center;
+  gap:12px;
+}
+.like,
+.dislike {
+  display: inline-block;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: xx-large;
+}
+.add-button {
+  margin-bottom: 2em;
+  margin-left: 2rem;
+}
+.search-input-wrapper {
+    
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    
+    padding: 0.4em;
+    border-radius: 0.2em;
+    margin-bottom: 2em;
+   }
+
+.add-button-and-search-wrapper {
+  display:flex;
+  margin-bottom: 10em;
+}
+.buttons-container {
+  display: inline-flexbox;
+  margin-top: 1em;
+  margin-bottom:2em ;
+}
+.search-bar {
+  background-color: aliceblue;
+  font-size: 1.2em;
+  border-radius: 0.25em;
+  padding-left: 0.5em;
+  width: 90%;
+  border: none;
+  outline: none;
+}
