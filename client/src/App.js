@@ -13,9 +13,21 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+  // consst [fetched, setFetched] = useState([]);
+
+  // fetch("http://localhost:5000")
+  //   .then((res) => res.json())
+  //   .then((data1) => console.log(setFetched(data1)));
+
+  async function fetchFunction() {
+    const response = await fetch(`http://localhost:5000`);
+    const data1 = await response.json();
+    console.log(data1);
+  }
 
   const onChangeHandler = (e) => {
     setInputValue(e.target.value.toLowerCase());
+    fetchFunction();
   };
   // will filter all the movies in the remaining movies except the movie with the matching id
   const deleteMovie = (id) => {
@@ -24,6 +36,7 @@ function App() {
   };
 
   const onAddMovie = (newMovie) => {
+    // console.log(fetched);
     setData(data.concat(newMovie));
   };
 
