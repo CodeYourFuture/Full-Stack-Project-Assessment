@@ -1,14 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const services = require("./videosService");
-const youTubeVideos = require("../exampleresponse.json");
-
-let videos = [...youTubeVideos];
 
 // GET "/"
 router.get("/", (req, res) => {
   const sortOrder = req.query.order;
-  const sortedVideos = services.sortVideosByRating(videos, sortOrder);
+  const sortedVideos = services.sortVideosByRating(sortOrder);
   res.status(200).send(sortedVideos);
 });
 
