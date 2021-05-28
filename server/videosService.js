@@ -6,7 +6,7 @@ function validateVideoData(vData) {
   return vData.title && vData.url;
 }
 
-// construct a video data model to be sent to the client
+// construct a video model data to be sent to the client
 function buildNewVideoData(vData) {
   return {
     id: Math.floor(Math.random(0, 1) * 1000000),
@@ -16,7 +16,7 @@ function buildNewVideoData(vData) {
   };
 }
 
-//
+// add video to list
 function addNewVideo(vData) {
   const dataIsValid = validateVideoData(vData);
   if (dataIsValid) {
@@ -30,7 +30,7 @@ function addNewVideo(vData) {
   };
 }
 
-// search/find a video
+// search/find a video from list
 function getVideoById(vId) {
   return videos.find((v) => v.id === Number(vId));
 }
@@ -55,7 +55,7 @@ function updateVideoRating(vId, plusOrMinus) {
 }
 
 // sort videos
-function sortVideosByRating(videos, sortOrder) {
+function sortVideosByRating(sortOrder) {
   const sortedVideos = videos.sort((video1, video2) => {
     switch (sortOrder) {
       case "asc":
