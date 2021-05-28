@@ -4,17 +4,37 @@ import Search from "./component/Search";
 import VideoRatings from "./component/VideoRatings";
 import Videos from "./component/Videos";
 import VideoTitle from "./component/VideoTitle";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import data from "./data/exampleresponse.json";
+// import data from "./data/exampleresponse.json";
 import AddVid from "./component/AddVid";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [showVideoForm, setShowVideoForm] = useState(false);
+
+  // using `fetch` to retrieve data from the API.
+  useEffect(() => {
+    fetch(`http://localhost:5000`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          alert(response.status);
+          alert("Something went wrong!!!");
+        }
+        response.json();
+      })
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch((error) => {
+        console.error("Error while fetching data", error);
+      });
+  }, []);
 
   // Search functionality
   const filteredTitle = videos.filter((video) =>
@@ -57,10 +77,7 @@ function App() {
         showVideoForm={showVideoForm}
         setShowVideoForm={setShowVideoForm}
       />
-      <Search
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       {filteredTitle.map((video) => (
         <div key={video.id} className="container mt-3">
           <VideoTitle title={video.title} searchValue={searchValue} />
