@@ -20,8 +20,8 @@ function App() {
 
   async function movieApi() {
     const response = await fetch(`http://localhost:5000`);
-    const data1 = await response.json();
-    setData(data1);
+    const fetchedData = await response.json();
+    setData(fetchedData);
   }
 
   const onChangeHandler = (e) => {
