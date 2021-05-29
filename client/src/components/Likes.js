@@ -7,15 +7,15 @@ import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 
 const Likes = (props) => {
 
-    const [count, setCount] = useState(0);
-    const [count2, setCount2] = useState(0);
+    const [count, setCount] = useState(props.rating);
+    // const [count2, setCount2] = useState(0);
 
     const handleLike = () => {
         setCount(prevCount => prevCount + 1);
     };
 
     const handleDislike = () => {
-        setCount2(prevCount => prevCount + 1);
+        setCount(prevCount => prevCount - 1);
     };
 
     return (
@@ -27,7 +27,7 @@ const Likes = (props) => {
             <ThumbUpAltIcon onClick={handleLike} className='icon' />
             <p className="counter-color-pos">{count}</p>
             <ThumbDownIcon onClick={handleDislike} className='icon' />
-            <p className="counter-color-neg">{count2}</p>
+            {/* <p className="counter-color-neg">{count2}</p> */}
 
             {/* <div className='rating'>
                 <h4>Ratings</h4>

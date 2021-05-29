@@ -5,6 +5,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 const Add = (props) => {
 
     const [newVid, setNewVid] = useState({
+
         title: '',
         url: ''
     })
@@ -23,6 +24,7 @@ const Add = (props) => {
     function submitVid(event) {
         props.onAdd(newVid);
         setNewVid({
+
             title: '',
             url: ''
         })

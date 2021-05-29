@@ -24,8 +24,6 @@ function createCard(video, delete2) {
 }
 
 
-
-
 function App() {
 
 
@@ -35,8 +33,8 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:5000/videos')
       .then(res => {
-        console.log(res)
-        console.log(res.data.data.videos)
+        // console.log(res)
+        // console.log(res.data.data.videos)
         setVid(res.data.data.videos)
       })
       .catch(err => {
@@ -45,31 +43,32 @@ function App() {
   }, []);
 
 
-  // function test() {
-  //   axios.get('http://localhost:5000/videos')
-  //     .then(res => {
-  //       console.log(res)
-  //       console.log(res.data.data.videos)
-  //       setVid(res.data.data.videos)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }
+  //Add a video
+  function addVid(newVid) {
+    const url = 'http://localhost:5000/videos';
+
+    axios.post(url, newVid)
+      .then(res => {
+        console.log(res)
+        setVid(prevVid => {
+          return [res.data, ...prevVid];
+        })
+
+
+      })
+  }
+
 
 
   //delete the vid 
   const deleteVid = (id) => {
     console.log(id);
     const index = vid.findIndex(item => item.id === id)
+    axios.delete('http://localhost:5000/videos/' + id)
+
     setVid([...vid.slice(0, index), ...vid.slice(index + 1)])
   }
 
-  function addVid(newVid) {
-    setVid(prevVid => {
-      return [newVid, ...prevVid];
-    })
-  }
 
 
   return (

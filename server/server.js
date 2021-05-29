@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+
   next();
 });
 
@@ -44,6 +46,8 @@ app.post("/videos", (req, res) => {
     res.status(400);
     res.send("Video already exists");
   } else {
+    newVideo.id = Math.floor(Math.random() * 100);
+    newVideo.rating = 0;
     videos.push(newVideo);
     res.status(201);
     console.log(newVideo);
@@ -53,15 +57,17 @@ app.post("/videos", (req, res) => {
 });
 
 
-//Delete a booking by an id
+
+//Delete a video by an id
 app.delete("/videos/:id", (req, res) => {
   const index = videos.findIndex((video) => video.id === parseInt(req.params.id)
   );
+  console.log(req.params.id)
   if (index >= 0) {
     videos.splice(index, 1);
     return res.json(videos)
   } else {
-    res.sendStatus(404).send('The video requested to be deleted does not exist');
+    res.status(404).send('The video requested to be deleted does not exist');
   }
 });
 
