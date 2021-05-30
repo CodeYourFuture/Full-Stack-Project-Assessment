@@ -172,6 +172,25 @@ html, body {
   grid-column-end: 3;
 } */
 
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5em;
+  background-color:#9f9deb;
+  margin: auto;
+}
+.footer-inner-div {
+  display: grid;  
+  width: 30%;
+  place-items: center;
+  grid-template-columns: repeat(10, 1fr);
+  color: #100e26;
+  height: 5em;
+
+}
+
 @media screen and (min-width: 300px)  and (max-width: 1024px) {
   .search-input-wrapper  {
     width: 70%;
