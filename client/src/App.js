@@ -9,6 +9,18 @@ import AddVideoButton from "./components/AddVideoButton";
 import AddVideoForm from "./components/AddVideoForm";
 
 function App() {
+  // useEffect(() => {
+  //   movieApi();
+  // }, []);
+
+  // fetch(url).then(response => response.json()).then(data => console.log(data));
+
+  async function movieApi() {
+    // const response = await fetch(`http://localhost:5000`);
+    // const data1 = await response.json();
+    // console.log(data1);
+  }
+
   const [searchValue, setSearchValue] = useState("");
   const [videoList, setVideoList] = useState(ExampleVideos);
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
@@ -28,6 +40,7 @@ function App() {
       <AddVideoButton
         showAddVideoForm={showAddVideoForm}
         setShowAddVideoForm={setShowAddVideoForm}
+        movieApi={movieApi}
       />
       <AddVideoForm
         showAddVideoForm={showAddVideoForm}
