@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddToQueueRoundedIcon from '@material-ui/icons/AddToQueueRounded';
 
 const UploadVideoForm = ({ addNewVideo }) => {
   const [reveal, setReveal] = useState(false);
@@ -12,19 +13,26 @@ const UploadVideoForm = ({ addNewVideo }) => {
   };
   const submitNewVideo = (e) => {
     e.preventDefault();
-    const requestBody = { title: title, url: url.toString() }
-    fetch('/api', { method: 'POST', body: JSON.stringify(requestBody), headers: { 'Content-Type': 'application/json' } })
+    addNewVideo(title, url);
+    const requestBody = { title: title, url: url }
+    fetch('https://fullstackvideos.herokuapp.com/api', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: { 'Content-Type': 'application/json' }
+    })
       .then(response => response.json())
       .then(data => console.log(data));
-    addNewVideo(title, url);
     setTitle('');
     setUrl('');
+    setReveal(false);
   };
 
   return (
-    <div>
-      <Button onClick={addVideo} className='add-button' variant='contained' color='default'>
-        Add Video
+    <div className='upload-video-form-and-buttons'>
+      <Button onClick={addVideo} className='add-button'
+        variant='contained' color='primary'>
+        Add Video &nbsp;
+        <AddToQueueRoundedIcon />
       </Button>
       <form
         onSubmit={submitNewVideo}
@@ -62,7 +70,8 @@ const UploadVideoForm = ({ addNewVideo }) => {
             Please make sure you enter a valid YouTube url.
           </small>
         </div>
-        <Button type='submit' className='submit-btn' variant='contained' color='default'>
+        <Button type='submit' className='submit-btn'
+          variant='contained' color='primary'>
           Upload
         </Button>
       </form>

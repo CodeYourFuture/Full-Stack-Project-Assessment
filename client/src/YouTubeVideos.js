@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from '@material-ui/core/Button';
 import Header from './Header';
 import UploadVideoForm from './UploadVideoForm';
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBar'
 import Title from './Title';
 import EmbeddedVideos from './EmbeddedVideos';
 import Votes from './Votes';
-import LikeDislikeDeleteButtons from './LikeDislikeDeleteButtons';
+import DeleteButton from './DeleteButton';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const YouTubeVideos = () => {
   const [videos, setVideos] = useState([]);
@@ -16,6 +19,7 @@ const YouTubeVideos = () => {
     fetch('https://fullstackvideos.herokuapp.com/api')
       .then(res => res.json())
       .then((data) => {
+        console.log(data)
         setVideos(data);
         setBackupVideos(data);
       })
@@ -48,8 +52,9 @@ const YouTubeVideos = () => {
       alert('Title should not be empty!');
     } else if (url === '' || !match) {
       alert('Invalid url!');
-    } else
-      return setVideos([
+    } else {
+      let newArray = videos;
+      newArray = [
         {
           id: Date.now(),
           title: title,
@@ -57,28 +62,11 @@ const YouTubeVideos = () => {
           rating: 0,
           posted: new Date().toString(),
         },
-        ...videos,
-      ]);
-  };
-
-  const stateUpdater = (updatedState) => {
-    setVideos(updatedState);
-  }
-
-  const voteUpdater = (videoObj, newVote) => {
-    let updatedVideo = { ...videoObj, rating: newVote };
-    let newData = [...videos];
-    const i = newData.findIndex((video) => video.id === videoObj.id);
-    newData[i] = updatedVideo;
-    setVideos(newData);
-
-    const requestBody = { id: videoObj.id, rating: newVote };
-    fetch('https://fullstackvideos.herokuapp.com/api', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((err) => console.log(err));
+        ...newArray
+      ];
+      alert('Your video is successfully uploaded!')
+      return setVideos(newArray);
+    };
   };
 
   const videoRemover = (id) => {
@@ -96,13 +84,35 @@ const YouTubeVideos = () => {
       })
       .catch((err) => console.log(err));
   };
+  const stateUpdater = (updatedState) => {
+    let newState = updatedState;
+    return setVideos(newState);
+  };
 
   return (
     <div key='mainWrapper'>
-      <div key='buttonAndSearch' className='add-button-and-search-wrapper'>
-        <Header ascendingOrder={ascendingOrder} descendingOrder={descendingOrder} />
-        <UploadVideoForm addNewVideo={addNewVideo} />
-        <SearchBar stateUpdater={stateUpdater} videos={backupVideos} />
+      <Header />
+      <UploadVideoForm addNewVideo={addNewVideo} />
+      <SearchBar
+        stateUpdater={stateUpdater}
+        videos={backupVideos} />
+      <div className='order'>
+        <div>
+          <Button className='ascending'
+            onClick={ascendingOrder}
+            variant='contained'
+            color='primary'>
+            Asc Order &nbsp;
+            <ArrowUpwardIcon />
+          </Button>
+        </div>
+        <Button className='descending'
+          onClick={descendingOrder}
+          variant='contained'
+          color='primary'>
+          Desc Order &nbsp;
+          <ArrowDownwardIcon />
+        </Button>
       </div>
       <div key='displayWrapper' className='main-container'>
         {videos.map((video, index) => {
@@ -111,8 +121,11 @@ const YouTubeVideos = () => {
             <div key={index} className='video-and-details-wrapper'>
               <Title title={video.title} />
               <EmbeddedVideos id={video_id} />
-              <Votes vote={video.rating} />
-              <LikeDislikeDeleteButtons video={video} rating={video.rating} id={video.id} voteUpdater={voteUpdater} videoRemover={videoRemover} />
+              <Votes vote={video.rating} video={video}
+                videos={videos} rating={video.rating} stateUpdater={stateUpdater} />
+              <DeleteButton
+                id={video.id} videoRemover={videoRemover}
+              />
             </div>
           );
         })}
