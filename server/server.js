@@ -16,18 +16,36 @@ res.json(Data);
 
 // POST "/newvideo"
 app.use(express.json());
-app.post("/newvideo", (req, res) => {
+let videoVoteCount = 1;
+let rating = 0;
+app.post("/", (req, res) => {
   const addedVideo = req.body;
-  if(!(addedVideo.hasOwnProperty('title')) || (!(addedVideo.hasOwnProperty('url')))) {
-    res.status(400)
-    res.send("Enter Valid title or Url")
-  } else {
-    Data.push(addedVideo);
-  }    
-  res.json(Data);
+  const newVideoKeys = ["title", "url"];
+  const urlValidation = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
+  newVideoKeys.filter((newVideoKey) => {
+    if((addedVideo.hasOwnProperty(newVideoKey)) && (!(addedVideo[newVideoKey].toString().trim() === "")) && addedVideo["url"].match(urlValidation)){
+      const newVideoToAdd = {
+        "id": videoVoteCount++,
+        "title": addedVideo["title"],
+        "url": addedVideo["url"],
+        "rating": rating
+      }
+      Data.push(newVideoToAdd)
+      res.json({
+        "id": newVideoToAdd["id"]
+      })
+    } else {
+        res.status(400)
+        res.json({
+          "result": "failure",
+          "message": "Video could not be saved"
+        })
+      }
+  })
+    
   });
 
-  app.get("/video/:ID", (req, res) => {
+  app.get("/:ID", (req, res) => {
     const videoID = req.params.ID;
     const oneVideo = Data.find((obj) => {
       return obj["id"] === parseInt(videoID)
@@ -35,19 +53,16 @@ app.post("/newvideo", (req, res) => {
     res.json(oneVideo)
     });
 
-    app.delete("/deleteVideo/:ID", (req, res) => {
+    app.delete("/:ID", (req, res) => {
       const videoToDelete = req.params.ID;
-      console.log(videoToDelete);
-      const videoIndex = Data.indexOf((obj) => {
-        if(obj["id"] === (videoToDelete)){
-          return obj
-        }
-      }) 
-      console.log(videoIndex);
-      Data.splice(videoIndex, 1)
-      res.send("DELETED");
-      if(!videoIndex){
+      const videoIndex = Data.findIndex((obj) => {
+        return(obj["id"] === parseInt(videoToDelete))
+      })      
+      if(videoIndex === -1){
         res.status(400).send("Error");
+      }else{
+        Data.splice(videoIndex, 1)
+        res.send("DELETED");
       }
     });
 
