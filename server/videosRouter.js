@@ -3,46 +3,52 @@ const router = express.Router();
 const services = require("./videosService");
 
 // GET "/"
-router.get("/", (req, res) => {
-  const sortOrder = req.query.order;
-  const sortedVideos = services.sortVideosByRating(sortOrder);
-  res.status(200).send(sortedVideos);
+router.get("/", async (req, res) => {
+  const result = await services.getAllVideos(req.query.order);
+  return res.status(200).send(result.rows);
 });
 
 // POST "/"
 router.use(express.json());
-router.post("/", (req, res) => {
-  const result = services.addNewVideo(req.body);
-  res.status(200).send(result);
+router.post("/", async (req, res) => {
+  const videoIsAdded = await services.addNewVideo(req.body);
+  return videoIsAdded
+    ? res.status(201).send({ id: req.body.id })
+    : res.status(400).send({
+        result: "Failure",
+        message: "Video could not be saved",
+      });
 });
 
 // GET "/{id}"
-router.get("/:id", (req, res) => {
-  const video = services.getVideoById(req.params.id);
-  video ? res.status(200).send(video) : res.sendStatus(404);
+router.get("/:id", async (req, res) => {
+  const result = await services.getVideoById(req.params.id);
+  result.length > 0 ? res.status(200).send(result) : res.sendStatus(404);
 });
 
 // DELETE "/{id}"
-router.delete("/:id", (req, res) => {
-  const videoDelted = services.deleteVideoById(req.params.id);
-  if (videoDelted) {
-    return res.sendStatus(204);
-  }
-  res.status(400).send({
-    result: "failure",
-    message: "Video could not be deleted",
-  });
+router.delete("/:id", async (req, res) => {
+  const videoIsDelted = await services.deleteVideoById(req.params.id);
+  return videoIsDelted
+    ? res.sendStatus(204)
+    : res.status(400).send({
+        result: "Failure",
+        message: "Video could not be deleted",
+      });
 });
 
 // PUT "/{id}" (update video rating)
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   const videoId = req.params.id;
-  const videoExists = services.findVideo(videoId);
-  if (videoExists) {
-    services.updateVideoRating(videoId, req.body.rating);
-    return res.sendStatus(200);
-  }
-  res.status(404).json({ message: "Video could not be updated." });
+  const rating = req.body.rating;
+
+  const videoIsUpdated = await services.updateVideoRating(videoId, rating);
+  return videoIsUpdated
+    ? res.sendStatus(200)
+    : res.status(404).json({
+        result: "Failure",
+        message: "Video could not be updated",
+      });
 });
 
 module.exports = router;

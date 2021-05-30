@@ -1,9 +1,65 @@
-const youTubeVideos = require("../exampleresponse.json");
-const videos = [...youTubeVideos];
+const repository = require("./videosRepository");
+
+// get all videos, sorted by rating
+async function getAllVideos(sortOrder) {
+  !sortOrder || sortOrder === "desc"
+    ? (sortOrder = "DESC")
+    : (sortOrder = "ASC");
+  return await repository.getAllVideos(sortOrder);
+}
+
+// add video to list
+async function addNewVideo(vData) {
+  const dataIsValid = validateVideoData(vData);
+  if (dataIsValid) {
+    const newVideo = buildNewVideoData(vData);
+    try {
+      await repository.addNewVideo(newVideo);
+      return true;
+    } catch (error) {
+      // if there is database connection issue
+      console.log(error);
+    }
+  }
+  return false;
+}
 
 // validate incoming video data
 function validateVideoData(vData) {
   return vData.title && vData.url;
+}
+
+// update user rating of a video
+async function updateVideoRating(vId, vRating) {
+  try {
+    return await repository.updateVideoRating(vId, vRating);
+  } catch (error) {
+    // if there is database connection issue
+    console.log(error);
+  }
+}
+
+// search/find a video from list
+async function getVideoById(vId) {
+  try {
+    const result = await repository.getVideoById(vId);
+    return result.rows;
+  } catch (error) {
+    // if there is database connection issue
+    console.log(error);
+  }
+}
+
+// remove video from list
+async function deleteVideoById(vId) {
+  try {
+    const result = await repository.deleteVideoById(vId);
+    return true;
+  } catch (error) {
+    // if there is database connection issue
+    console.log(result);
+    return false;
+  }
 }
 
 // construct a video model data to be sent to the client
@@ -12,88 +68,14 @@ function buildNewVideoData(vData) {
     id: Math.floor(Math.random(0, 1) * 1000000),
     title: vData.title,
     url: vData.url,
-    rating: 0,
   };
-}
-
-// add video to list
-function addNewVideo(vData) {
-  const dataIsValid = validateVideoData(vData);
-  if (dataIsValid) {
-    const newVideo = buildNewVideoData(vData);
-    videos.push(newVideo);
-    return { id: newVideo.id };
-  }
-  return {
-    result: "failure",
-    message: "Video could not be saved",
-  };
-}
-
-// search/find a video from list
-function getVideoById(vId) {
-  return videos.find((v) => v.id === Number(vId));
-}
-
-// find video index
-function findVideo(vId) {
-  const video = getVideoById(vId);
-  if (videos.indexOf(video !== -1)) {
-    return true;
-  }
-  return false;
-}
-
-// update user rating of a video
-function updateVideoRating(vId, plusOrMinus) {
-  const videoToUpdate = getVideoById(vId);
-  console.log(videoToUpdate.rating);
-  const rating = videoToUpdate.rating;
-  plusOrMinus === "plus"
-    ? (videoToUpdate.rating = rating + 1)
-    : (videoToUpdate.rating = rating - 1);
-}
-
-// sort videos
-function sortVideosByRating(sortOrder) {
-  const sortedVideos = videos.sort((video1, video2) => {
-    switch (sortOrder) {
-      case "asc":
-        if (video1.rating < video2.rating) {
-          return -1;
-        } else if (video1.rating > video2.rating) {
-          return 1;
-        }
-        return 0;
-      case "desc":
-      default:
-        if (video1.rating < video2.rating) {
-          return 1;
-        } else if (video1.rating > video2.rating) {
-          return -1;
-        }
-        return 0;
-    }
-  });
-  return sortedVideos;
-}
-
-// remove video from list
-function deleteVideoById(vId) {
-  const index = videos.findIndex((v) => v.id === Number(vId));
-  if (index !== -1) {
-    videos.splice(index, 1);
-    return true;
-  }
-  return false;
 }
 
 module.exports = {
   validateVideoData,
   buildNewVideoData,
-  sortVideosByRating,
+  getAllVideos,
   addNewVideo,
-  findVideo,
   getVideoById,
   updateVideoRating,
   deleteVideoById,
