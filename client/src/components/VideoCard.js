@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  fetchSingleVideoData,
-  removeVideoFromServer,
-  updateVideoRatingOnServer,
-} from "../functions";
+import { removeVideoFromServer, updateVideoRatingOnServer } from "../functions";
 
 const Card = (props) => {
-  const [cardIsUpdated, setCardIsUpdated] = useState(false);
   const [numVotes, setVotes] = useState();
 
   const componentId = props.data.id;
@@ -17,27 +12,19 @@ const Card = (props) => {
   }
   // SIDE EFFECT
   useEffect(() => {
-    if (cardIsUpdated) {
-      const response = fetchSingleVideoData(componentId);
-      if (response) {
-        response.then((data) => setVotes(data.rating));
-      }
-      setCardIsUpdated(false);
-      return;
-    } else {
       setVotes(props.data.rating);
-    }
-  }, [props.data.rating, cardIsUpdated, componentId]);
+  }, [props.data.rating]);
 
   // EVENT HANDLERS
-  const removeVideo = (event) => {
+  const removeVideo = async (event) => {
     event.preventDefault();
     removeVideoFromServer(componentId);
   };
-  const handleVoting = async (plusOrMinus) => {
-    const status = await updateVideoRatingOnServer(componentId, plusOrMinus);
+  const handleVoting = async (plusOrMinusOne) => {
+    const newRating = numVotes + plusOrMinusOne;
+    const status = await updateVideoRatingOnServer(componentId, newRating);
     if (status === 200) {
-      setCardIsUpdated(true);
+      setVotes(newRating);
     }
   };
 
@@ -47,9 +34,9 @@ const Card = (props) => {
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <div className="controls">
         <Votes onVoteClicked={handleVoting} votes={numVotes} />
@@ -68,11 +55,11 @@ export default Card;
 
 export const Votes = (props) => {
   const voteUpOrDown = async (event) => {
-    let plusOrMinus = "";
+    let plusOrMinusOne = 0;
     event.target.className.toString().includes("thumbs-up")
-      ? (plusOrMinus = "plus")
-      : (plusOrMinus = "minus");
-    props.onVoteClicked(plusOrMinus);
+      ? (plusOrMinusOne = 1)
+      : (plusOrMinusOne = -1);
+    props.onVoteClicked(plusOrMinusOne);
   };
   return (
     <div className="votes">

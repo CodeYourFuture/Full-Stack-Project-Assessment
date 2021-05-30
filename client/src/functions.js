@@ -1,5 +1,5 @@
 /*************** VARIABLES AND CONSTANTS *************/
-const URL = `http://localhost:5000`;
+const URL = `https://video-recommendations-server.herokuapp.com`;
 
 /********************** FUNCTIONS *************************/
 
@@ -64,7 +64,7 @@ export async function addVideoToServer(form) {
     window.location.reload();
     return alert("Video has been added successfully.");
   }
-  response.json().then((error) => alert(error.message));
+  response.json().then((error) => alert(error));
 }
 
 // REMOVE VIDEO DATA FROM SERVER
@@ -76,23 +76,15 @@ export async function removeVideoFromServer(videoId) {
     window.location.reload();
     return alert("Video has been removed successfully.");
   }
-  response.json().then((error) => alert(error.message));
+  response.json().then((error) => alert(error));
 }
 
 // UPDATE VIDEO DATA ON SERVER (video rating)
-export async function updateVideoRatingOnServer(videoId, numVotes) {
+export async function updateVideoRatingOnServer(videoId, newRating) {
   const response= await fetch(`${URL}/${videoId}`, {
     method: "PUT",
-    body: JSON.stringify({ rating: numVotes }),
+    body: JSON.stringify({ rating: newRating }),
     headers: { "Content-Type": "application/json" },
   });
   return response.status;
-}
-
-// GET SINGLE VIDEO FROM SERVER
-export async function fetchSingleVideoData(videoId) {
-  const response = await fetch(`${URL}/${videoId}`);
-  if (response.status === 200) {
-    return await response.json();
-  }
 }
