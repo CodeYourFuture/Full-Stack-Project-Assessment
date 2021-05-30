@@ -14,7 +14,7 @@ const Form = () => {
   };
 
   return (
-    <div class="form-container">
+    <div className="form-container">
       <h2 className="form-title">Add YouTube Video</h2>
       <form id="form-add" onSubmit={addNewVideo}>
         {errors.map((e, index) => (
@@ -23,9 +23,9 @@ const Form = () => {
           </p>
         ))}
         <label htmlFor="title">Title: </label>
-        <input type="text" id="title" name="title"></input>
+        <input type="text" id="title" name="title" />
         <label htmlFor="url">URL: </label>
-        <input type="text" id="url" name="url"></input>
+        <input type="text" id="url" name="url" />
         <button type="submit" id="add">
           Add
         </button>
