@@ -20,9 +20,8 @@ html, body {
   margin: auto;
   text-align: center;
   font-family: 'Courgette', cursive;
-  background-color: #372fa3;
-  background-color: #100e26;
-  color: antiquewhite;
+  background-color: #252336;
+  color: aliceblue;
   width: 100%;
   padding: 1.5em;
 }
@@ -51,13 +50,17 @@ html, body {
   font-size: 1.5em;
 }
 
-.submit-btn {
-  margin-bottom: 2em !important;
+.upload-and-cancel-buttons {
+  display: grid;
+  width: 50%;
+  margin: auto;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  margin-bottom: 2em;
 }
 
 .search-input-wrapper {
- background-color: #100e26;
- color: silver;
+ background-color: #9f9deb;
  display: flex;
  width: 40%;
  align-items: center;
@@ -67,10 +70,15 @@ html, body {
  border-radius: 0.2em;
  margin-bottom: 2em;
 }
+.alert {
+  display: block;
+  width: 40%;
+  text-align: center;
+  margin: auto;
+}
 
 .search-bar {
-  background-color: #100e26;
-  color: silver;
+  background-color: #9f9deb;
   font-size: 1.25em;
   border-radius: 0.25em;
   padding-left: 0.5em;
@@ -80,18 +88,18 @@ html, body {
 }
 
 .fa-search {
-  color: silver;
+  color: #100e26;
   font-size: x-large;
 }
 
 ::placeholder {
-  color: silver;
+  color: #100e26;
 }
 :-ms-input-placeholder {
-  color: silver;
+  color: #100e26;
 }
 ::-ms-input-placeholder {
-  color: silver;
+  color: #100e26;
 }
 
 .order {
@@ -105,9 +113,7 @@ html, body {
   color: antiquewhite;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
-  /* grid-template-rows: repeat(auto, 1fr); */
   place-items: center;
-  /* background-color: #100e26; */
   width: 95%;
   gap: 2em;
   margin: auto;
@@ -117,10 +123,7 @@ html, body {
 .video-and-details-wrapper {
   display: grid;
   grid-template-rows: 1fr 4fr 0.5fr 0.5fr;
-  /* max-width: 458px; */
   place-items: center;
-  /* background-color: #1f213d;
-  background-color: #100e26; */
   margin: auto;
 }
 
@@ -128,20 +131,22 @@ html, body {
   font-size: x-large;
   width: 100%;
   height: 100%;
-  background-color: #100e26;
+  background-color: #343353;
+  color: aliceblue;
   display: grid;
   place-items: center;
+}
+
+.embedded-video {
+  width: 100% !important;
 }
 
 .votes-container {
   display: inline-flex;
   justify-content: center;
   width: 100%;
-  background-color: #1f213d;
-  background-color: #626da3;
-  color: #cd201f;
-  color: #b92b27;
-  color: #22014b;
+  background-color: #9f9deb;
+  color: #100e26;
 }
 .votes {
   font-size: larger;
@@ -157,20 +162,14 @@ html, body {
   font-weight: bolder;
 }
 
-.delete-button {
-  background-color: crimson !important;
-  font-weight: bold !important;
-}
 .delete-button-container {
   width: 100%;
-  /* background-color: #100e26; */
- background-color: #626da3;
+  background-color: #9f9deb;
   margin-top: -0.5em;
 }
-
-/* .video-and-details-wrapper:last-child:nth-child(3n - 2) {
-  grid-column-end: 3;
-} */
+.delete-button {
+  background-color: crimson !important;
+}
 
 .footer {
   display: flex;
@@ -190,7 +189,6 @@ html, body {
   height: 5em;
 
 }
-
 @media screen and (min-width: 300px)  and (max-width: 1024px) {
   .search-input-wrapper  {
     width: 70%;
@@ -209,9 +207,6 @@ html, body {
     align-items: center;
     width: 100%;
   }
-  .embedded-video {
-    width: 100% !important;
-  }
   .votes {
     margin-bottom: 1em;
     font-size: medium;
@@ -223,7 +218,6 @@ html, body {
   .main-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* grid-template-rows: repeat(auto, 1fr); */
     grid-auto-rows: 1fr;
     place-items: center;
     width: 95%;
@@ -236,9 +230,6 @@ html, body {
     place-items: center;
     margin: auto;
     width: 90%;
-  }
-  .embedded-video {
-    width: 100% !important;
   }
 
 }
@@ -260,9 +251,9 @@ html, body {
     place-items: center;
     margin: auto;
   }
-  .embedded-video {
-    width: 100% !important;
-  }
+  .video-and-details-wrapper:last-child:nth-child(3n - 2) {
+  grid-column-end: 3;
+  } 
 }
 
 @media screen and (min-width: 1960px) {
@@ -281,9 +272,6 @@ html, body {
     width: 100%;
     place-items: center;
     margin: auto;
-  }
-  .embedded-video {
-    width: 100% !important;
   }
 
 }

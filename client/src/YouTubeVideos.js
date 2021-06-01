@@ -17,10 +17,9 @@ const YouTubeVideos = () => {
   const [backupVideos, setBackupVideos] = useState([]);
 
   useEffect(() => {
-    fetch('https://fullstackvideos.herokuapp.com/api')
+    fetch('/api')
       .then(res => res.json())
       .then((data) => {
-        console.log(data)
         setVideos(data);
         setBackupVideos(data);
       })
@@ -28,7 +27,7 @@ const YouTubeVideos = () => {
   }, []);
 
   const ascendingOrder = () => {
-    fetch('https://fullstackvideos.herokuapp.com/api/?order=asc')
+    fetch('/api/?order=asc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -37,7 +36,7 @@ const YouTubeVideos = () => {
   };
 
   const descendingOrder = () => {
-    fetch('https://fullstackvideos.herokuapp.com/api/?order=desc')
+    fetch('/api/?order=desc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -46,28 +45,18 @@ const YouTubeVideos = () => {
   };
 
   const addNewVideo = (title, url) => {
-    const regExp =
-      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    const match = url.match(regExp);
-    if (title === '') {
-      alert('Title should not be empty!');
-    } else if (url === '' || !match) {
-      alert('Invalid url!');
-    } else {
-      let newArray = videos;
-      newArray = [
-        {
-          id: Date.now(),
-          title: title,
-          url: url,
-          rating: 0,
-          posted: new Date().toString(),
-        },
-        ...newArray
-      ];
-      alert('Your video is successfully uploaded!')
-      return setVideos(newArray);
-    };
+    let newArray = videos;
+    newArray = [
+      {
+        id: Date.now(),
+        title: title,
+        url: url,
+        rating: 0,
+        posted: new Date().toString(),
+      },
+      ...newArray
+    ];
+    return setVideos(newArray);
   };
 
   const videoRemover = (id) => {
@@ -75,14 +64,12 @@ const YouTubeVideos = () => {
       (video) => video.id !== id
     );
     setVideos(remainingVideos);
-    fetch(`https://fullstackvideos.herokuapp.com/api/${id}`, {
+    fetch(`/api/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      })
+      .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
   const stateUpdater = (updatedState) => {
@@ -131,7 +118,7 @@ const YouTubeVideos = () => {
           );
         })}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

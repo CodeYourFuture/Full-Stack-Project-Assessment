@@ -3,8 +3,6 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const DeleteButton = ({ id, videoRemover }) => {
-
-
   return (
     <div className='delete-button-container'>
       <Button
@@ -19,7 +17,6 @@ const DeleteButton = ({ id, videoRemover }) => {
       </Button>
     </div>
   );
-
 };
 
 export default DeleteButton;

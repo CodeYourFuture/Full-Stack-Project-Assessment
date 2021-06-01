@@ -2,29 +2,49 @@ import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddToQueueRoundedIcon from '@material-ui/icons/AddToQueueRounded';
+import Alert from '@material-ui/lab/Alert';
 
 const UploadVideoForm = ({ addNewVideo }) => {
   const [reveal, setReveal] = useState(false);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [titleErrorAlert, setTitleErrorAlert] = useState(false);
+  const [urlErrorAlert, setUrlErrorAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   const addVideo = () => {
     setReveal(true);
   };
   const submitNewVideo = (e) => {
     e.preventDefault();
-    addNewVideo(title, url);
+    const regExp =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    const match = url.match(regExp);
+    if (title === '' && reveal) {
+      setTitleErrorAlert(true)
+    } else if ((url === '' || !match) && reveal) {
+      setUrlErrorAlert(true)
+    } else if (title !== '' && match && reveal) {
+      addNewVideo(title, url);
+      setSuccessAlert(true);
+      const alertTimer = () => {
+        setSuccessAlert(false)
+      }
+      setTimeout(alertTimer, 3000);
+    }
     const requestBody = { title: title, url: url }
-    fetch('https://fullstackvideos.herokuapp.com/api', {
+    fetch('/api', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json())
       .then(data => console.log(data));
-    setTitle('');
-    setUrl('');
-    setReveal(false);
+    if (title !== '' && url !== '') {
+      setTitle('');
+      setUrl('');
+      setReveal(false)
+    }
   };
 
   return (
@@ -34,6 +54,11 @@ const UploadVideoForm = ({ addNewVideo }) => {
         Add Video &nbsp;
         <AddToQueueRoundedIcon />
       </Button>
+      <div className='alert-messages'>
+        <Alert className={titleErrorAlert ? 'alert' : 'd-none'} severity='error' onClose={() => setTitleErrorAlert(false)}>Failure! — Title field should not be empty!</Alert>
+        <Alert className={urlErrorAlert ? 'alert' : 'd-none'} severity='error' onClose={() => setUrlErrorAlert(false)}>Failure! — You have not entered a valid URL!</Alert>
+        <Alert className={successAlert ? 'alert' : 'd-none'} onClose={() => setSuccessAlert(false)}>Success! — Your videos is successfully uploaded!</Alert>
+      </div>
       <form
         onSubmit={submitNewVideo}
         className={reveal ? 'reveal-form' : 'd-none'}
@@ -70,10 +95,14 @@ const UploadVideoForm = ({ addNewVideo }) => {
             Please make sure you enter a valid YouTube url.
           </small>
         </div>
-        <Button type='submit' className='submit-btn'
-          variant='contained' color='primary'>
-          Upload
+        <div className='upload-and-cancel-buttons'>
+          <Button type='cancel' className='cancel-button'
+            variant='contained' color='secondary' onClick={() => setReveal(false)}>Cancel</Button>
+          <Button type='submit' className='submit-btn'
+            variant='contained' color='primary'>
+            Upload
         </Button>
+        </div>
       </form>
     </div>
   );
