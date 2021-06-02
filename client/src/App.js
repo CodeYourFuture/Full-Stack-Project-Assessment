@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import YouTubeData from "./Data/YouTubeData.json";
 import YouTubeVideos from "./Components/YouTubeVideos";
 import AddVideo from "./Components/AddVideo";
 import Search from "./Components/Search";
@@ -9,18 +8,27 @@ const App = () => {
   const [videos, setVideos] = useState([]);
   const [filterVid, setFilterVid] = useState([]);
 
-
+// Fetch data from server (backend)
   useEffect(() => {
-    fetch(`http://127.0.0.1/5000`)
+    fetch(`http://127.0.0.1:5000`)
       .then((response) => {
-        console.log(response);
-        response.json()
+        if (response.ok) {
+          return response.json();
+        } else {
+          alert (response.status);
+          alert ("Error! Data not found")
+        }
       })
       .then((data) => {
         setVideos(data);
-        setFilterVid(data);
+      })
+      .catch((error) => {
+        console.error("Error while fetching data")
       });
-  }, [])
+  }, []);
+
+  console.log(videos);
+  console.log(setVideos);
 
   // Search Video
   const searchVideo = (elem) => {
