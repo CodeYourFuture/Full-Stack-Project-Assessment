@@ -59,7 +59,7 @@ button[id="add"] {
 }
 
 button[id="add"]:focus {
-  font-size: 1.2rem;
+  border: 2px solid #333;
 }
 
 /* VIDEO CARDS STYLING */
@@ -68,6 +68,29 @@ button[id="add"]:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.video-searcher-sorter{
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+  margin:0 2rem 2rem;
+  font-weight: 500;
+}
+
+.video-searcher-sorter input[id=search]{
+  width: 30vw;
+  padding: 0.3rem;
+  border: 2px solid #eee;
+  border-radius: 0.3rem;
+}
+
+.video-searcher-sorter button[id=sort]{
+  font-size: 1rem;
+  padding:0.3rem;
+  color:#fff;
+  background-color: darkgreen;
+  border-radius: 0.3rem;
 }
 
 .card {
@@ -146,4 +169,12 @@ button[class=remove] {
   padding: 0.3rem 0.6rem;
   background-color: rgb(189, 31, 31);
   border-radius: 0.15rem;
+}
+
+.info{
+  font-size: 0.9em;
+  font-weight: 400;
+  background-color: #fff;
+  color:rgb(12, 122, 247);
+  padding:0.5rem 0;
 }
