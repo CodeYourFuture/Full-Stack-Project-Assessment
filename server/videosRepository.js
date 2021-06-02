@@ -26,19 +26,25 @@ const getVideoByIdQuery = `SELECT * FROM videos WHERE id = $1`;
 const addNewVideoQuery = `INSERT INTO videos (id, title, url) VALUES ($1, $2, $3)`;
 const updateVideoRatingQuery = `UPDATE videos SET rating = $1 WHERE id = $2`;
 const deleteVideoByIdQuery = `DELETE FROM videos WHERE id = $1`;
+const getVideoByUrlQuery = `SELECT * FROM videos WHERE url = $1`;
 
 // get all videos
 function getAllVideos(sortOrder) {
   return client.query(`${getAllVideosQuery} ${sortOrder}`);
 }
 
-// search/find a video from list
+// search/find a video from list by video id
 function getVideoById(vId) {
   return client.query(getVideoByIdQuery, [vId]);
 }
 
+// 
+async function getVideoByUrl(vUrl) {
+  return client.query(getVideoByUrlQuery,[vUrl]);
+}
+
 // add video to list
-function addNewVideo({id,title,url}) {
+function addNewVideo({id,title,url,datePosted}) {
   // const 
   return client.query(addNewVideoQuery, [id,title,url]);
 }
@@ -59,4 +65,5 @@ module.exports = {
   getVideoById,
   updateVideoRating,
   deleteVideoById,
+  getVideoByUrl
 };
