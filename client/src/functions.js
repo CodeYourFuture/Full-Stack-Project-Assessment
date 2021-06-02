@@ -7,7 +7,7 @@ export function createVideoData(form) {
   return {
     title: form.querySelector("#title").value,
     url: form.querySelector("#url").value,
-    dateUploaded: new Date().toLocaleDateString(),
+    datePosted: new Date().toLocaleDateString(),
   };
 }
 
@@ -19,9 +19,9 @@ export function validateForm(form) {
 }
 
 function getFormFields(formId) {
-  return [
-    ...document.getElementById(formId).querySelectorAll("input"),
-  ].map((input) => ({ id: input.id, value: input.value }));
+  return [...document.getElementById(formId).querySelectorAll("input")].map(
+    (input) => ({ id: input.id, value: input.value })
+  );
 }
 
 function getFormErrors(formData) {
@@ -62,9 +62,8 @@ export async function addVideoToServer(form) {
   });
   if (response.status === 201) {
     window.location.reload();
-    return alert("Video has been added successfully.");
   }
-  response.json().then((error) => alert(error));
+  await response.json().then((result) => alert(result.message));
 }
 
 // REMOVE VIDEO DATA FROM SERVER
@@ -81,10 +80,23 @@ export async function removeVideoFromServer(videoId) {
 
 // UPDATE VIDEO DATA ON SERVER (video rating)
 export async function updateVideoRatingOnServer(videoId, newRating) {
-  const response= await fetch(`${URL}/${videoId}`, {
+  const response = await fetch(`${URL}/${videoId}`, {
     method: "PUT",
     body: JSON.stringify({ rating: newRating }),
     headers: { "Content-Type": "application/json" },
   });
   return response.status;
+}
+
+// format video upload date
+export function getFormattedDate(dateValue) {
+  const date = new Date(dateValue);
+  const displayFormat = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const dateFormat = new Intl.DateTimeFormat("en-GB", displayFormat);
+  return dateFormat.format(date);
 }
