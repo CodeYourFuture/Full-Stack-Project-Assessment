@@ -27,9 +27,6 @@ const App = () => {
       });
   }, []);
 
-  console.log(videos);
-  console.log(setVideos);
-
   // Search Video
   const searchVideo = (elem) => {
     if (elem.target.value) {
