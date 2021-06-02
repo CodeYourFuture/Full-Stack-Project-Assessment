@@ -11,13 +11,10 @@ router.get("/", async (req, res) => {
 // POST "/"
 router.use(express.json());
 router.post("/", async (req, res) => {
-  const videoIsAdded = await services.addNewVideo(req.body);
-  return videoIsAdded
-    ? res.status(201).send({ id: req.body.id })
-    : res.status(400).send({
-        result: "Failure",
-        message: "Video could not be saved",
-      });
+  const result = await services.addNewVideo(req.body);
+  return result.status === "OK"
+    ? res.status(201).send({ id: result.value, message: result.message })
+    : res.status(400).send({ result: "failure", message: result.message });
 });
 
 // GET "/{id}"
