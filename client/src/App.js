@@ -15,8 +15,8 @@ const [inputValue, setInputValue] = useState("");
 const [videos, setVideos] = useState([]);
 const [allVideos, setAllVideos] = useState([]);
 
-// const [allVideos, setAllVideos] = useState(null);
 
+// fetch data
 useEffect(()=> {
 fetch("http://127.0.0.1:5000")
       .then((res) => res.json())
@@ -24,6 +24,7 @@ fetch("http://127.0.0.1:5000")
 },[])
 
 
+// filter video [input field]
 useEffect(()=> {
 let filter = allVideos.filter((video) => (
           video.title.toLowerCase().includes(inputValue.toLowerCase())
@@ -32,6 +33,7 @@ let filter = allVideos.filter((video) => (
 }, [inputValue, allVideos]) 
 
 
+// Function to add a video  
 function addVideo (video){
 
   fetch("http://127.0.0.1:5000", {
@@ -47,6 +49,7 @@ setAllVideos(allVideos.concat(video))
 }
 
 
+// Function to delete a video with ID
  function deleteVideo(id) {
   const newList = allVideos.filter((item) => item.id !== id);
   setAllVideos(newList);
