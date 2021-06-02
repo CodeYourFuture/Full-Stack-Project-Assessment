@@ -3,6 +3,7 @@ import { addVideoToServer, validateForm } from "../functions";
 
 const Form = () => {
   const [errors, setErrors] = useState([]);
+  // EVENT HANDLERS
   const addNewVideo = (event) => {
     event.preventDefault();
     const errors = validateForm(event.target);
@@ -22,10 +23,10 @@ const Form = () => {
             {e}
           </p>
         ))}
-        <label htmlFor="title">Title: </label>
-        <input type="text" id="title" name="title" />
-        <label htmlFor="url">URL: </label>
-        <input type="text" id="url" name="url" />
+          <label htmlFor="title">Title: </label>
+          <input type="text" id="title" name="title" />
+          <label htmlFor="url">URL: </label>
+          <input type="text" id="url" name="url" />
         <button type="submit" id="add">
           Add
         </button>
