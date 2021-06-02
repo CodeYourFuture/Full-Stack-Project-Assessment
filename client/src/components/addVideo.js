@@ -7,10 +7,10 @@ const AddVideo = (props) => {
                     Title <input></input>
                     URL <input></input>
                 </div>
-            <div className = "addNdel">
-                <button>Cancel</button>
-                <button>ADD</button>
-            </div>
+                <div className = "addNdel">
+                    <button>Cancel</button>
+                    <button>ADD</button>
+                </div>
             </div>
        </div>
     )

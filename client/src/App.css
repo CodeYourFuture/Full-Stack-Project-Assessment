@@ -63,3 +63,14 @@ height: 100%
 .displayclass {
   display: none;
 }
+
+
+/* useEffect(() => {
+  fetch("http://127.0.0.1:5000")
+    .then((response) => response.json())
+    .then((data) => {
+      //   console.log (data);
+      setAllVideos(data);
+    })
+    .catch((error) => alert("Refresh The page, something went wrong"));
+}, []); */

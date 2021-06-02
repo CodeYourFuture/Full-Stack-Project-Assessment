@@ -1,11 +1,14 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import { FaThumbsUp, FaThumbsDown} from "react-icons/fa";
 import "../App.css";
 import DeleteVideo from './deleteVideo.js';
 
 
 const OneVideoFrame = (props) => {
-    let [upDownVoteCount, setUpDownVoteCount] = useState(props.rating);
+    let [upDownVoteCount, setUpDownVoteCount] = useState();
+    useEffect(() => {
+        setUpDownVoteCount(props.rating)
+    }, [props.rating])
         
     const handleUpDownVoteCount = (event) => {
         const noOfVoteCount = event.currentTarget;

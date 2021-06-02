@@ -1,6 +1,6 @@
-import {React, useState} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import "../App.css";
-import Data from '../Data.json';
+// import Data from '../Data.json';
 import AddVideo from './addVideo';
 import Search from './search.js';
 import VideoFrames from './videoFrames.js';
@@ -8,33 +8,40 @@ import VideoFrames from './videoFrames.js';
 
 
 const AllVideoFiles = () => {
-    const [allVideos, setAllVideos] = useState(Data);   
+    const allVideos = useRef([]); 
+    // const allVideosCurrent =allVideos.current;
+    const [searchedVideos, setSearchedVideos] = useState([]);
+    
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000")
+          .then(response => response.json())
+          .then(data => {
+            allVideos.current = data;
+            setSearchedVideos(data);
+        }).catch(error => alert("Refresh The page, something went wrong"));
+        }, [])
 
     const handleDelete = (event) => {        
         const videoTitle = event.currentTarget.parentNode.childNodes[0].textContent;
-        const videoToDelete = allVideos.filter((obj) => {
-            if(!(obj["title"] === videoTitle)){
+        const videosRemaining = allVideos.current.filter((obj) => {
+            if((obj["title"] !== videoTitle)){
             return obj;
             }
         })
-        setAllVideos(videoToDelete);
+        allVideos.current = videosRemaining;
+        setSearchedVideos(videosRemaining);
     }
     const handleSearch = (event) => {
         const searchedVideo = event.target.value.toLowerCase();
-        console.log(searchedVideo);
-        const selectedVideo = [];
-         allVideos.filter((obj) => {
-            if(obj["title"].toLowerCase().includes(searchedVideo)){
-                selectedVideo.push(obj)
-            }
+        const selectedVideo = allVideos.current.filter((obj) => {
+            return (obj["title"].toLowerCase().includes(searchedVideo))
         })
-         setAllVideos(selectedVideo);
+         setSearchedVideos(selectedVideo);
     }
 
     const handleAddVideo = (event) => {
-        const videoAdd = event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[1];
+        // const videoAdd = event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[1];
         const videoToAdd = event.target.textContent;
-        console.log(videoAdd)
         if(videoToAdd === "Add Video") {
             if (event.currentTarget.childNodes[1].classList.contains("displayclass")){
                 event.currentTarget.childNodes[1].classList.remove("displayclass")
@@ -45,28 +52,35 @@ const AllVideoFiles = () => {
             event.currentTarget.childNodes[1].classList.add("displayclass")
         } else if (videoToAdd === "ADD") {
            const title = event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[1].value;
+           event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[1].value = "";
            const url = event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[3].value;
-        
-        const newVideoToAdd = {
-            "title": {title},
-            "url": {url},
-            "rating": 0
+           event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[3].value = ""
+           const urlValidation = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
+           const videoList = []
+           const newVideoToAdd = {
+                 title,
+                "rating": 0,
+                 url
+                
+        } 
+        if (!(title.toString().trim().length === 0) && (url.match(urlValidation))){
+        videoList.push(newVideoToAdd);
+        allVideos.current = [...allVideos.current, ...videoList]
+        setSearchedVideos(allVideos.current)    
+    } else {
+            alert("Enter a valid title or URL")
         }
-        console.log(newVideoToAdd);
-        allVideos.push(newVideoToAdd);
-        console.log(allVideos);
     }
-    setAllVideos(allVideos);
+    
     }
 
-        
-return (
+    return  (
     <div>
         <div className = "addVideoSearch">
             <AddVideo handleAddVideo ={handleAddVideo}/>
             <Search handleSearch = {handleSearch} />
         </div>
-        <VideoFrames Data = {allVideos} handleDelete = {handleDelete} />
+        <VideoFrames Data = {searchedVideos} handleDelete = {handleDelete} />
     
     </div>
 )
