@@ -80,11 +80,11 @@ async function getVideoById(vId) {
 // remove video from list
 async function deleteVideoById(vId) {
   try {
-    const result = await repository.deleteVideoById(vId);
+    await repository.deleteVideoById(vId);
     return true;
   } catch (error) {
     // if there is database connection issue
-    console.log(result);
+    console.log(error);
     return false;
   }
 }
