@@ -12,21 +12,48 @@ async function getAllVideos(sortOrder) {
 async function addNewVideo(vData) {
   const dataIsValid = validateVideoData(vData);
   if (dataIsValid) {
-    const newVideo = buildNewVideoData(vData);
     try {
-      await repository.addNewVideo(newVideo);
-      return true;
+      const videoIsNew = await videoDoesntExist(vData.url);
+      if (videoIsNew) {
+        const newVideo = buildNewVideoData(vData);
+        await repository.addNewVideo(newVideo);
+        return {
+          status: "OK",
+          value: { id: newVideo.id },
+          message:"Video has been added successfully."
+        };
+      }
+      return {
+        status: "FAIL",
+        value:null,
+        message:
+          "Video with the same url already exists and could not be saved.",
+      };
     } catch (error) {
       // if there is database connection issue
-      console.log(error);
+      return console.log(error);
     }
   }
-  return false;
+  return {
+    status: "FAIL",
+    value:null,
+    message: "Video could not be saved. Missing video title or url.",
+  };
 }
 
 // validate incoming video data
-function validateVideoData(vData) {
-  return vData.title && vData.url;
+async function validateVideoData(vData) {
+  return vData.title && vData.url && (await videoDoesntExist(vData.url));
+}
+
+// check existence of a video before posting
+async function videoDoesntExist(vUrl) {
+  try {
+    const result = await repository.getVideoByUrl(vUrl);
+    return result.rowCount === 0;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // update user rating of a video
