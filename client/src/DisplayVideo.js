@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleVideo from './SingleVideo';
 
-const DisplayVideo = ({videos, inputValue, deleteVideo}) => {
+const DisplayVideo = ({videos, deleteVideo}) => {
 
 
     return (

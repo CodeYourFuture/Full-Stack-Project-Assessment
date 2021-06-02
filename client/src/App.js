@@ -1,5 +1,5 @@
 import "./App.css";
-import data from "./exampleresponse.json";
+// import data from "./exampleresponse.json";
 import Header from "./Header";
 import SearchVideo from "./SearchVideo";
 import AddVideo from "./AddVideo";
@@ -12,9 +12,16 @@ function App() {
 
 const [showAddVideo, setShowAddVideo] = useState(false);
 const [inputValue, setInputValue] = useState("");
-const [videos, setVideos] = useState(data);
-const [allVideos, setAllVideos] = useState(data);
+const [videos, setVideos] = useState([]);
+const [allVideos, setAllVideos] = useState([]);
 
+// const [allVideos, setAllVideos] = useState(null);
+
+useEffect(()=> {
+fetch("http://127.0.0.1:5000")
+      .then((res) => res.json())
+      .then((allVideos) => setAllVideos(allVideos));
+},[])
 
 
 useEffect(()=> {
@@ -24,7 +31,18 @@ let filter = allVideos.filter((video) => (
      setVideos(filter);
 }, [inputValue, allVideos]) 
 
+
 function addVideo (video){
+
+  fetch("http://127.0.0.1:5000", {
+  method: "POST", 
+  headers: {
+          'Content-Type': 'application/json',
+      },
+  body: JSON.stringify(video)
+}).then(res => {
+  console.log("Request complete! response:", res);
+});
 setAllVideos(allVideos.concat(video))
 }
 
