@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { removeVideoFromServer, updateVideoRatingOnServer } from "../functions";
+import {
+  getFormattedDate,
+  removeVideoFromServer,
+  updateVideoRatingOnServer,
+} from "../functions";
 
 const Card = (props) => {
   const [numVotes, setVotes] = useState();
@@ -10,9 +14,10 @@ const Card = (props) => {
   if (title.length > 30) {
     title = `${title.substring(0, 30)}...`;
   }
+  const datePosted = getFormattedDate(props.data.date_posted);
   // SIDE EFFECT
   useEffect(() => {
-      setVotes(props.data.rating);
+    setVotes(props.data.rating);
   }, [props.data.rating]);
 
   // EVENT HANDLERS
@@ -22,6 +27,7 @@ const Card = (props) => {
   };
   const handleVoting = async (plusOrMinusOne) => {
     const newRating = numVotes + plusOrMinusOne;
+
     const status = await updateVideoRatingOnServer(componentId, newRating);
     if (status === 200) {
       setVotes(newRating);
@@ -30,7 +36,7 @@ const Card = (props) => {
 
   return (
     <div id={componentId} className="card">
-      <p className="title">{title}</p>
+      <p className="video-title">{title}</p>
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
         title="YouTube video player"
@@ -47,6 +53,9 @@ const Card = (props) => {
         >
           Remove
         </button>
+      </div>
+      <div className="info">
+        <span >Added on:{" "}{datePosted}</span>
       </div>
     </div>
   );
