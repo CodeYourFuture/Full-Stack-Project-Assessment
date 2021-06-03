@@ -26,55 +26,16 @@ html, body {
   padding: 1.5em;
 }
 
-.upload-video-form-and-buttons {
-  display: flexbox;
-  margin: auto;
-  text-align: center;
-}
-
-.add-button {
-  margin: 2em 0 2em 0 !important;
-}
-
-.reveal-form {
-  width: 40%;
-  margin: auto;
-}
-
-.form-control {
-  border-style: none;
-  font-size: 1.5em;
-}
-
-.form-submit {
-  font-size: 1.5em;
-}
-
-.upload-and-cancel-buttons {
-  display: grid;
-  width: 50%;
-  margin: auto;
-  grid-template-columns: repeat(2, 1fr);
-  place-items: center;
-  margin-bottom: 2em;
-}
-
 .search-input-wrapper {
- background-color: #9f9deb;
- display: flex;
- width: 40%;
- align-items: center;
- justify-content: space-around;
- margin: auto;
- padding: 0.4em;
- border-radius: 0.2em;
- margin-bottom: 2em;
-}
-.alert {
-  display: block;
+  background-color: #9f9deb;
+  display: flex;
   width: 40%;
-  text-align: center;
+  align-items: center;
+  justify-content: space-around;
   margin: auto;
+  padding: 0.4em;
+  border-radius: 0.2em;
+  margin-top: 2em;
 }
 
 .search-bar {
@@ -102,10 +63,56 @@ html, body {
   color: #100e26;
 }
 
-.order {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 2em;
+.main-buttons {
+  display: block;
+  width: 100%;
+  margin: 2em 0 2em 0;
+  text-align: center;
+}
+.inline-button {
+  display: inline-block;
+}
+.divider {
+  display: inline-block;
+  height: auto;
+}
+
+.modal .modal-content {
+  background-color: #a9bcff;
+}
+.modal-text {
+  font-size: 1.2em !important;
+  background-color:  #bbc9fa !important;
+  color:  #bbc9fa !important;
+}
+.add-button {
+  background-color: #9f9deb !important;
+  color: #100e26;
+  font-weight: bold !important;
+}
+.add-button:hover {
+  background-color: #9390f1 !important;
+}
+
+.upload-and-cancel-buttons {
+  display: grid;
+  width: 80%;
+  margin: auto;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+}
+
+.alert {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+.success-alert {
+  display: block;
+  width: 40%;
+  margin: auto;
+  text-align: center;
 }
 
 .main-container {
@@ -211,6 +218,9 @@ html, body {
     margin-bottom: 1em;
     font-size: medium;
   }
+  .divider {
+    width: 1em;
+  }
 
 }
 
@@ -230,6 +240,9 @@ html, body {
     place-items: center;
     margin: auto;
     width: 90%;
+  }
+  .divider {
+    width: 5em;
   }
 
 }
@@ -254,6 +267,9 @@ html, body {
   .video-and-details-wrapper:last-child:nth-child(3n - 2) {
   grid-column-end: 3;
   } 
+  .divider {
+    width: 8em;
+  }
 }
 
 @media screen and (min-width: 1960px) {
@@ -272,6 +288,9 @@ html, body {
     width: 100%;
     place-items: center;
     margin: auto;
+  }
+  .divider {
+    width: 12em;
   }
 
 }

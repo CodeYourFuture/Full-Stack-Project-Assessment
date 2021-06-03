@@ -4,7 +4,6 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-
 app.use(express.json());
 
 const client = new Client({
@@ -58,7 +57,6 @@ app.get('/api', async (req, res) => {
     }
   }
 });
-
 
 app.get("/", (req, res) => {
   res.json({ message: 'Server is ready!' });

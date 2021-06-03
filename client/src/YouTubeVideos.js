@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '@material-ui/core/Button';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import UploadVideoModal from './UploadVideoModal';
+import Alert from '@material-ui/lab/Alert';
 import Header from './Header';
-import UploadVideoForm from './UploadVideoForm';
 import SearchBar from './SearchBar'
 import Title from './Title';
 import EmbeddedVideos from './EmbeddedVideos';
 import Votes from './Votes';
 import DeleteButton from './DeleteButton';
 import Footer from './Footer';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const YouTubeVideos = () => {
   const [videos, setVideos] = useState([]);
   const [backupVideos, setBackupVideos] = useState([]);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   useEffect(() => {
-    fetch('/api')
+    fetch('https://fullstackvideos.herokuapp.com/api')
       .then(res => res.json())
       .then((data) => {
         setVideos(data);
@@ -27,7 +29,7 @@ const YouTubeVideos = () => {
   }, []);
 
   const ascendingOrder = () => {
-    fetch('/api/?order=asc')
+    fetch('https://fullstackvideos.herokuapp.com/api/?order=asc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -36,7 +38,7 @@ const YouTubeVideos = () => {
   };
 
   const descendingOrder = () => {
-    fetch('/api/?order=desc')
+    fetch('https://fullstackvideos.herokuapp.com/api/?order=desc')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -56,6 +58,11 @@ const YouTubeVideos = () => {
       },
       ...newArray
     ];
+    setSuccessAlert(true);
+    const hideSuccessAlert = () => {
+      setSuccessAlert(false)
+    }
+    setTimeout(hideSuccessAlert, 4000);
     return setVideos(newArray);
   };
 
@@ -64,7 +71,7 @@ const YouTubeVideos = () => {
       (video) => video.id !== id
     );
     setVideos(remainingVideos);
-    fetch(`/api/${id}`, {
+    fetch(`https://fullstackvideos.herokuapp.com/api/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -80,21 +87,24 @@ const YouTubeVideos = () => {
   return (
     <div key='mainWrapper'>
       <Header />
-      <UploadVideoForm addNewVideo={addNewVideo} />
+      <div className={successAlert ? 'success-alert' : 'd-none'}>
+        <Alert className='alert-success' onClose={() => setSuccessAlert(false)}>Success! — Your videos is successfully uploaded!</Alert>
+      </div>
       <SearchBar
         stateUpdater={stateUpdater}
         videos={backupVideos} />
-      <div className='order'>
-        <div>
-          <Button className='ascending'
-            onClick={ascendingOrder}
-            variant='contained'
-            color='primary'>
-            Asc Order &nbsp;
-            <ArrowUpwardIcon />
-          </Button>
-        </div>
-        <Button className='descending'
+      <div className='main-buttons'>
+        <Button className='inline-button'
+          onClick={ascendingOrder}
+          variant='contained'
+          color='primary'>
+          Asc Order &nbsp;
+          <ArrowUpwardIcon />
+        </Button>
+        <div className="divider" />
+        <UploadVideoModal className='inline-button' addNewVideo={addNewVideo} />
+        <div className="divider" />
+        <Button className='inline-button'
           onClick={descendingOrder}
           variant='contained'
           color='primary'>
