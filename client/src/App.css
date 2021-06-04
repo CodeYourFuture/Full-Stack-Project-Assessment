@@ -96,7 +96,7 @@ html, body {
 
 .upload-and-cancel-buttons {
   display: grid;
-  width: 80%;
+  width: 100%;
   margin: auto;
   grid-template-columns: repeat(2, 1fr);
   place-items: center;
