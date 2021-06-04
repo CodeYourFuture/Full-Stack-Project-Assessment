@@ -45,8 +45,43 @@ app.post("/", function (request, response) {
 });
 
 // GET "/"
-app.get("/", (req, res) => {
-  res.send(movies);
+
+app.get("/", function (request, response) {
+  let order = request.query.order;
+
+  // if no order value given it wil set it to desc as default
+  if (order === undefined) {
+    order = "desc";
+  }
+
+  order = order.toLowerCase();
+  if (order === "asc") {
+    movies.sort(function (a, b) {
+      return parseInt(a.rating) - parseInt(b.rating);
+    });
+    console.log(movies);
+    return response.send(movies);
+  } else if (order === "desc") {
+    movies.sort(function (a, b) {
+      return parseInt(b.rating) - parseInt(a.rating);
+    });
+    return response.send(movies);
+  }
+});
+
+app.delete("/:id", (request, response) => {
+  let id = parseInt(request.params.id);
+  let deletedMovieIndex = movies.findIndex((movie) => movie.id === id);
+  if (deletedMovieIndex > -1) {
+    movies.splice(deletedMovieIndex, 1);
+    // response.status(204);
+    response.send({});
+  } else {
+    response.send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
 });
 
 // Reading a movies by ID
@@ -63,21 +98,6 @@ app.get("/:id", function (request, response) {
     return;
   }
   response.send(filteredMovies);
-});
-
-app.delete("/:id", (request, response) => {
-  let id = parseInt(request.params.id);
-  let deletedMovieIndex = movies.findIndex((movie) => movie.id === id);
-  if (deletedMovieIndex > -1) {
-    movies.splice(deletedMovieIndex, 1);
-    // response.status(204);
-    response.send({});
-  } else {
-    response.send({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

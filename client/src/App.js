@@ -21,6 +21,11 @@ function App() {
   async function movieApi() {
     const response = await fetch(`http://localhost:5000`);
     const fetchedData = await response.json();
+    fetchedData.sort(function (a, b) {
+      return parseInt(a.rating) - parseInt(b.rating);
+    });
+
+    console.log(fetchedData);
     setData(fetchedData);
   }
 
