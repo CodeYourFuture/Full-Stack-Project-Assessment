@@ -1,10 +1,12 @@
 const { response } = require("express");
 const cors = require("cors");
+const path = require("path");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const Data = require("./Data.json");
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -68,10 +70,9 @@ app.post("/", (req, res) => {
       }
     });
 
-      
-        
-  
-
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname + '/client/build/index.html'))
+    })  
 
   app.listen(port, () => console.log(`Listening on port ${port}`));
 
