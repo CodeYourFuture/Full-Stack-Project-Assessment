@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
-import vidsData from "../vidsData.json";
+import React, { useState} from "react";
+import vidsData from "./vidsData.json";
 import AddVids from "./AddVids";
 
+
+
 const YoutubeV = () => {
+  console.log(vidsData)
   const [filterVids, setFilterVids] = useState(vidsData);
   const [counter, setCounter] = useState(0);
 

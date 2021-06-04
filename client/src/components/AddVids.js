@@ -1,24 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-const AddVids = (props) => {
-  function addVideo() {
-    props.addVideo({
-      id: props.id,
-      title: props.title,
-      url: props.url,
-      rating: props.rating,
-    });
-  }
+const AddVids = () => {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+
+  function addVideo() {}
+  console.log(title)
 
   return (
     <>
       <button onClick={addVideo}>Add Video</button>
       <form>
         <label>Title</label>
-        <input type="text"></input>
+        <input onChange={(e) => setTitle(e.target.value)} type="text" />
 
         <label>URL</label>
-        <input type="text"></input>
+        <input onChange={(e) => setUrl(e.target.value)} type="text" />
       </form>
     </>
   );
