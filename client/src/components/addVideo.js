@@ -8,8 +8,8 @@ const AddVideo = (props) => {
                     URL <input></input>
                 </div>
                 <div className = "addNdel">
-                    <button>Cancel</button>
-                    <button>ADD</button>
+                    <button className="btn btn-warning">Cancel</button>
+                    <button className="btn btn-primary">ADD</button>
                 </div>
             </div>
        </div>

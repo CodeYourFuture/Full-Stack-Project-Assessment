@@ -17,7 +17,7 @@ const VideoFrames = (props) => {
 
     return (    
           <div className = "videoframes"> 
-          {sortAllVideos(props.Data)}
+          {/* {sortAllVideos(props.Data)} */}
        {props.Data.map((obj, index) => {
             const videoID = obj["url"].split("=")[1];
             const rating = obj["rating"];

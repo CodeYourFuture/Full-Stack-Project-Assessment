@@ -3,6 +3,7 @@ import "../App.css";
 // import Data from '../Data.json';
 import AddVideo from './addVideo';
 import Search from './search.js';
+import SortButton from './sortButton';
 import VideoFrames from './videoFrames.js';
 
 
@@ -10,33 +11,52 @@ import VideoFrames from './videoFrames.js';
 const AllVideoFiles = () => {
     const allVideos = useRef([]); 
     // const allVideosCurrent =allVideos.current;
-    const [searchedVideos, setSearchedVideos] = useState([]);
-    
+    const [displayVideos, setDisplayVideos] = useState([]);
+    const [sortVideoButton, setSortVideoButton] = useState("Ascending");
+
     useEffect(() => {
         fetch("http://127.0.0.1:5000")
           .then(response => response.json())
           .then(data => {
             allVideos.current = data;
-            setSearchedVideos(data);
+            setDisplayVideos(data);
         }).catch(error => alert("Refresh The page, something went wrong"));
         }, [])
 
     const handleDelete = (event) => {        
-        const videoTitle = event.currentTarget.parentNode.childNodes[0].textContent;
+        const videoTitle = event.currentTarget.parentNode.parentNode.childNodes[0].textContent;
+        // const videoTitle = event.currentTarget.parentNode.childNodes[0].textContent;
+        // console.log(videoTitle);
         const videosRemaining = allVideos.current.filter((obj) => {
             if((obj["title"] !== videoTitle)){
             return obj;
             }
         })
         allVideos.current = videosRemaining;
-        setSearchedVideos(videosRemaining);
+        setDisplayVideos(videosRemaining);
     }
     const handleSearch = (event) => {
         const searchedVideo = event.target.value.toLowerCase();
         const selectedVideo = allVideos.current.filter((obj) => {
             return (obj["title"].toLowerCase().includes(searchedVideo))
         })
-         setSearchedVideos(selectedVideo);
+         setDisplayVideos(selectedVideo);
+    }
+
+    const handleSort = (event) => {
+        // const videoSort = [...searchedVideos]
+        const buttonSort = event.target.textContent;
+        if(buttonSort === "Descending"){
+            setSortVideoButton("Ascending")
+            // videoSort.sort( (a, b) => a.rating > b.rating? 1 : -1)
+            // console.log(videoSort)
+            setDisplayVideos([...displayVideos].sort( (a, b) => a.rating > b.rating? -1 : 1))
+        } else {
+            setSortVideoButton("Descending")
+            // videoSort.sort( (a, b) => a.rating > b.rating? 1 : -1)
+            // console.log(videoSort)
+            setDisplayVideos([...displayVideos].sort( (a, b) => a.rating > b.rating? 1 : -1))
+        }
     }
 
     const handleAddVideo = (event) => {
@@ -66,21 +86,33 @@ const AllVideoFiles = () => {
         if (!(title.toString().trim().length === 0) && (url.match(urlValidation))){
         videoList.push(newVideoToAdd);
         allVideos.current = [...allVideos.current, ...videoList]
-        setSearchedVideos(allVideos.current)    
+        setDisplayVideos(allVideos.current)    
     } else {
             alert("Enter a valid title or URL")
         }
+    }    
     }
-    
-    }
+
+    // function sortAllVideosAsc(allVideos) {
+    //     allVideos.sort((a, b) => {
+    //       return (a.rating - b.rating) 
+    //   })
+    // }
+
+    // function sortAllVideosDesc(allVideos) {
+    //     allVideos.sort((a, b) => {
+    //       return (b.rating - a.rating) 
+    //   })
+    // }
 
     return  (
     <div>
         <div className = "addVideoSearch">
             <AddVideo handleAddVideo ={handleAddVideo}/>
             <Search handleSearch = {handleSearch} />
+            <SortButton  sortVideoButton = {sortVideoButton} handleSort = {handleSort}/>
         </div>
-        <VideoFrames Data = {searchedVideos} handleDelete = {handleDelete} />
+        <VideoFrames Data = {displayVideos} handleDelete = {handleDelete} />
     
     </div>
 )
