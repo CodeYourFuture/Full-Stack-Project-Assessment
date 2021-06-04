@@ -13,18 +13,57 @@ app.use(cors());
 let videos = require("./data/exampleresponse.json");
 
 // GET "/"
+// Display all the videos
 app.get("/", (req, res) => {
   res.send(videos);
 });
 
+// POST "/"
+// Add a new video to the list of videos
 app.post("/", (req, res) => {
-  const newVideo = req.body;
-  console.log(newVideo);
-  videos.push(newVideo);
-  res.status(201);
-  res.send({ id: newVideo.id });
+  let newVideo = req.body;
+
+  const extractVideoId = (videoUrl) => {
+    const regex = /(?<=v=|v\/|vi=|vi\/|youtu\.be\/)[a-zA-Z0-9_-]{11}/g;
+    const videoId = videoUrl.match(regex);
+    return videoId;
+  };
+
+  // needs to be improved
+  if (newVideo.title !== undefined && newVideo.url !== undefined) {
+    let videoId = extractVideoId(newVideo.url);
+    if (videoId !== null && newVideo.title !== "") {
+      newVideo = { id: videos.length, ...newVideo, rating: 0 };
+      videos.push(newVideo);
+      res.status(201);
+      res.send({ id: newVideo.id });
+    } else {
+      /*
+     Unprocessable Entity - the syntax of the request entity is correct
+     (thus a 400 (Bad Request) status code is inappropriate) but was unable
+     to process the contained instructions.
+    */
+      res.status(422);
+      res.send({
+        result: "failure",
+        message: "Video could not be saved",
+      });
+    }
+  } else {
+    /*
+     Unprocessable Entity - the syntax of the request entity is correct
+     (thus a 400 (Bad Request) status code is inappropriate) but was unable
+     to process the contained instructions.
+    */
+    res.status(422);
+    res.send({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  }
 });
 
+// GET "/{id}"
 app.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   let filteredVideo = videos.filter((video) => video.id === id);
@@ -37,11 +76,17 @@ app.get("/:id", (req, res) => {
   }
 });
 
+// DELETE "/{id}"
 app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
+  let initialLength = videos.length;
   videos = videos.filter((video) => video.id !== id);
-  res.send({});
-  // res.send({ result: "failure", message: "Video could not be deleted" });
+  let finalLength = videos.length;
+  if (initialLength > finalLength) {
+    res.send({});
+  } else {
+    res.send({ result: "failure", message: "Video could not be deleted" });
+  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
