@@ -18,12 +18,7 @@ const movies = require("./movieData.json");
 app.post("/", function (request, response) {
   let newMovie = request.body;
   console.log(newMovie);
-  // const urlRegex = new RegExp(
-  //   "^((?:https?:)?//)?((?:www|m).)?((?:youtube.com|youtu.be))(/(?:[w-]+?v=|embed/|v/)?)([w-]+)(S+)?$"
-  // );
-  // console.log(urlRegex.test(newMovie.url));
-  // checks if one of the booking details is empty
-  console.log(!newMovie.title);
+
   console.log(!newMovie.url);
   console.log(!newMovie.id);
   console.log(!newMovie.url.includes("youtube.com"));
