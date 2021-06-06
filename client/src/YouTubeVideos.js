@@ -86,13 +86,15 @@ const YouTubeVideos = () => {
 
   return (
     <div key='mainWrapper'>
-      <Header />
+      <div className='App-header'>
+        <Header />
+        <SearchBar
+          stateUpdater={stateUpdater}
+          videos={backupVideos} />
+      </div>
       <div className={successAlert ? 'success-alert' : 'd-none'}>
         <Alert className='alert-success' onClose={() => setSuccessAlert(false)}>Success! — Your videos is successfully uploaded!</Alert>
       </div>
-      <SearchBar
-        stateUpdater={stateUpdater}
-        videos={backupVideos} />
       <div className='main-buttons'>
         <Button className='inline-button'
           onClick={ascendingOrder}

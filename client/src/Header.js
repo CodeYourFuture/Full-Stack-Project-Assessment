@@ -2,10 +2,8 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className='App-header'>
-      <div>
+    <header className='header'>
         <h1>Video Recommendation</h1>
-      </div>
     </header>
   );
 };

@@ -16,33 +16,33 @@ html, body {
 }
 
 .App-header {
-  display: block;
-  margin: auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   font-family: 'Courgette', cursive;
   background-color: #252336;
   color: aliceblue;
   width: 100%;
-  padding: 1.5em;
+  padding: 1.5em 0 1.5em 0;
 }
 
 .search-input-wrapper {
   background-color: #9f9deb;
   display: flex;
-  width: 40%;
+  width: 70%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: auto;
-  padding: 0.4em;
+  padding: 0.25em;
   border-radius: 0.2em;
-  margin-top: 2em;
 }
 
 .search-bar {
   background-color: #9f9deb;
-  font-size: 1.25em;
+  font-size: 1.5em;
   border-radius: 0.25em;
-  padding-left: 0.5em;
   width: 90%;
   border: none;
   outline: none;
@@ -50,7 +50,7 @@ html, body {
 
 .fa-search {
   color: #100e26;
-  font-size: x-large;
+  font-size: xx-large;
 }
 
 ::placeholder {
@@ -198,7 +198,7 @@ html, body {
 }
 @media screen and (min-width: 300px)  and (max-width: 1024px) {
   .search-input-wrapper  {
-    width: 70%;
+    width: 80%;
   }
   .video-and-details-wrapper {
     display: grid;
@@ -225,6 +225,9 @@ html, body {
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1448px) {
+  .search-input-wrapper {
+    width: 60%;
+  }
   .main-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -242,12 +245,15 @@ html, body {
     width: 90%;
   }
   .divider {
-    width: 5em;
+    width: 8em;
   }
 
 }
 
 @media screen and (min-width: 1448px) and (max-width: 1960px)  {
+  .search-input-wrapper {
+    width: 70%;
+  }
   .main-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -268,11 +274,14 @@ html, body {
   grid-column-end: 3;
   } 
   .divider {
-    width: 8em;
+    width: 15em;
   }
 }
 
 @media screen and (min-width: 1960px) {
+  .search-input-wrapper {
+    width: 75%;
+  }
   .main-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -290,7 +299,7 @@ html, body {
     margin: auto;
   }
   .divider {
-    width: 12em;
+    width: 17em;
   }
 
 }
