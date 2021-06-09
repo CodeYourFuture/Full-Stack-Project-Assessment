@@ -33,9 +33,9 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:5000/videos')
       .then(res => {
-        // console.log(res)
-        // console.log(res.data.data.videos)
-        setVid(res.data.data.videos)
+        console.log(res)
+        console.log(res.data.data.videos)
+        setVid(res.data.data)
       })
       .catch(err => {
         console.log(err)

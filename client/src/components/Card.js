@@ -15,7 +15,8 @@ const Card = (props) => {
                 url={props.url}
                 className="react-player"
                 width='100%'
-                height='300px'
+                height='400px'
+
             />
             <Likes clicked={() => props.clicked(props.id)} rating={props.rating} />
 

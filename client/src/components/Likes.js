@@ -27,12 +27,6 @@ const Likes = (props) => {
             <ThumbUpAltIcon onClick={handleLike} className='icon' />
             <p className="counter-color-pos">{count}</p>
             <ThumbDownIcon onClick={handleDislike} className='icon' />
-            {/* <p className="counter-color-neg">{count2}</p> */}
-
-            {/* <div className='rating'>
-                <h4>Ratings</h4>
-                <p>{props.rating}</p>
-            </div> */}
         </div>
 
     )
