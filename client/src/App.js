@@ -7,17 +7,20 @@ import Input from "./Input";
 
 function App() {
   let [videos, setVideos] = useState([]);
-  let [giveId, setGiveId] = useState(1000);
   const [newVideo, setNewVideo] = useState({
     title: "",
     url: "",
   });
-  useEffect(() => {
-    fetch("http://localhost:5000/")
+  const fetchedVideos = () => {
+    fetch("http://localhost:5000/", {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:5000/",
+      },
+    })
       .then((res) => res.json())
       .then((data) => setVideos(data));
-  }, []);
-
+  };
   function deleteVideo(event) {
     event.preventDefault();
     const target = event.target;
@@ -28,17 +31,6 @@ function App() {
       (video) => video.id !== Number(videoId)
     );
     setVideos(filteredVideos);
-  }
-
-  // data validator
-  function validateInput(newVideo) {
-    // regex expression for checking a youtube video
-    const regex = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
-    if (newVideo.title.length > 0 && newVideo.url.match(regex)) {
-      return newVideo;
-    } else {
-      alert("insert data ");
-    }
   }
 
   // handle multiple input change
@@ -56,12 +48,23 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    validateInput(newVideo);
-    // ++giveId gets the value of giveId after increment
-    setGiveId((giveId) => ++giveId);
-    newVideo["id"] = ++giveId;
-    newVideo["rating"] = 0;
-    setVideos(videos.concat(newVideo));
+    const regex = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
+    if (newVideo.title && newVideo.url && newVideo.url.match(regex)) {
+      fetch("http://localhost:5000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          fetchedVideos();
+          setNewVideo({});
+        });
+    }
   }
   //get video
 
