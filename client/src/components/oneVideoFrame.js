@@ -27,7 +27,7 @@ const OneVideoFrame = (props) => {
                 title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
                 </iframe>
                 <div className = "delVot">
-                <DeleteVideo handleDelete = {props.handleDelete} />  
+                <DeleteVideo setDisplayVideos = {props.setDisplayVideos} allVideos = {props.allVideos} />  
                 <div className = "voteCounts">
                     <button onClick = {handleUpDownVoteCount}  className = "upVotes btn btn-warning" ><FaThumbsUp className = "classIcon"/></button>
                     <h4>{upDownVoteCount} votes</h4>
