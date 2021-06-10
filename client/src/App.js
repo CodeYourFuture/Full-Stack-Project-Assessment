@@ -21,17 +21,30 @@ function App() {
       .then((res) => res.json())
       .then((data) => setVideos(data));
   };
-  function deleteVideo(event) {
+  useEffect(fetchedVideos, []);
+
+  const deleteVideo = (event, id) => {
     event.preventDefault();
-    const target = event.target;
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:5000/",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        fetchedVideos();
+      })
+      .catch((error) => console.log(error));
+    /* const target = event.target;
     const videoId = target.parentNode.parentNode.id;
     console.log(videoId);
     const filteredVideos = videos.filter(
       // videoId is a string needs to be changed to a number
       (video) => video.id !== Number(videoId)
     );
-    setVideos(filteredVideos);
-  }
+    setVideos(filteredVideos); */
+  };
 
   // handle multiple input change
 

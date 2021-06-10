@@ -100,24 +100,13 @@ app.post("/", async function (req, res) {
         newVideoUrl,
       ])
       .catch((error) => res.send(error));
-    const newVideoCreated = await pool
-      .query("select id from videos where title = $1 and url=$2 ", [
-        newVideoTitle,
-        newVideoUrl,
-      ])
-      .then((result) => {
-        console.log(result.rows);
-        if (result.rows.length > 0) {
-          console.log(result.rows[result.rows.length - 1].id);
+    const newVideoCreated = await pool.query(
+      "select id from videos where title = $1 and url=$2 ",
+      [newVideoTitle, newVideoUrl]
+    );
 
-          res.json({ id: result.rows[result.rows.length - 1].id });
-        } else {
-          res.status(400);
-        }
-      });
+    console.log(newVideoCreated.rows);
 
-    // console.log(newVideoCreated);
-    /*
     if (newVideoCreated.rows.length > 0) {
       res.json({ id: newVideoCreated.rows[0].id });
     } else {
@@ -125,23 +114,16 @@ app.post("/", async function (req, res) {
     }
   } else {
     res.status(400);
-   */
   }
 });
 
 // delete  by id end point
 
-app.delete("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-  const videoIndex = videos.findIndex((video) => video.id === videoId);
-  if (videoIndex !== -1) {
-    videos.splice(videoIndex);
-    res.status(204).json(videos);
-  } else {
-    res.send({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  }
+app.delete("/:id", async function (req, res) {
+  const videoId = req.params.id;
+  await pool
+    .query("delete from videos where id=$1 ", [videoId])
+    .then(() => res.json({ msg: "gfhhfhhf" }))
+    .catch((error) => res.send(error));
 });
 app.listen(port, () => console.log(`Listening on port ${port}`));
