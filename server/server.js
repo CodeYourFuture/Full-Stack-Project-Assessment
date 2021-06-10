@@ -41,7 +41,8 @@ let newVideoID = 1;
 let rating = 0;
 app.post("/", (req, res) => {
   const addedVideo = req.body;
-  const newVideoKeys = ["title", "url"];
+  console.log(addedVideo);
+  // const newVideoKeys = ["title", "url"];
   const urlValidation = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
   
     if((addedVideo.hasOwnProperty("title")) && (addedVideo.hasOwnProperty("url")) && (!(addedVideo["title"].toString().trim() === "")) && addedVideo["url"].match(urlValidation)){
@@ -52,10 +53,15 @@ app.post("/", (req, res) => {
 
       
       pool.query(newVideoInsertQuery, [video_id, title, url, rating])
-      .then(result =>
-       res.status(201).send(result.rows[0])).catch(error => res.status(500).send(error))
+      .then(result => {
+        pool.query(allVideosQuery)
+      .then(result => {
+       res.status(201).send(result.rows)
+      console.log(result.rows)
+      })
+      }).catch(error => res.status(500).send(error))
        
-    } else {
+     } else {
         res.status(400)
         res.json({
           "result": "failure",
@@ -82,13 +88,22 @@ app.post("/", (req, res) => {
     });
 
     app.delete("/:ID", (req, res) => {
-      const videoToDelete = parseInt(req.params.ID);
+      const videoToDelete = req.body[0].id;
+      // const vidDel = req.params.ID;   
         if (!isValidID(videoToDelete)) {
-        res.status(404).send({message: "Supplier not found"});
-    } else {
+        res.status(404).send({message: "Video not found"});
+      } else {
         pool.query(videoDeleteQuery, [videoToDelete])
-            .then(() => res.status(200).send({message: "Video deleted successfully"}))
-            .catch(error => res.status(500).send(error));
+
+        .then(() => {
+          pool.query(allVideosQuery)
+        .then(result => {
+         res.status(201).send(result.rows)
+        console.log(result.rows)
+        })
+        }).catch(error => res.status(500).send(error))      
+            // .then(() => res.status(200).send({message: "Video deleted successfully"}))
+            // .catch(error => res.status(500).send(error));
     }
     });
 
