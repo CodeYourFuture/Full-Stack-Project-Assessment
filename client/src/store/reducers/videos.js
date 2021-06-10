@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.VIDEO_VOTING_SUCCESSFUL:
       id = action.id;
       const patchedVideo = action.patchedVideo;
-      index = state.videos.findIndex((item) => item.id === id);
+      index = state.videos.findIndex((item) => item.video_id === id);
 
       return {
         ...state,
@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.VIDEO_SUCCESSFULLY_DELETED:
       id = action.id;
-      index = state.videos.findIndex((item) => item.id === id);
+      index = state.videos.findIndex((item) => item.video_id === id);
 
       return {
         ...state,
