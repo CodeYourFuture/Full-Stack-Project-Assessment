@@ -25,6 +25,7 @@ function App() {
 
   const deleteVideo = (event, id) => {
     event.preventDefault();
+
     fetch(`http://localhost:5000/${id}`, {
       method: "DELETE",
       headers: {
@@ -36,14 +37,6 @@ function App() {
         fetchedVideos();
       })
       .catch((error) => console.log(error));
-    /* const target = event.target;
-    const videoId = target.parentNode.parentNode.id;
-    console.log(videoId);
-    const filteredVideos = videos.filter(
-      // videoId is a string needs to be changed to a number
-      (video) => video.id !== Number(videoId)
-    );
-    setVideos(filteredVideos); */
   };
 
   // handle multiple input change

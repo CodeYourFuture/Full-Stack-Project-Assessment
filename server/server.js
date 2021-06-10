@@ -17,19 +17,9 @@ const dbConfig = {
   password,
   database,
 };
-/* 
-const dbConfig = {
-  host,
-  prt,
-  user,
-  password,
-  database,
-  uri,
-}; */
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(cors());
-//body parser
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -54,13 +44,6 @@ pool.connect((err, client, release) => {
 // GET "/"
 
 app.get("/", (req, res) => {
-  /*  if (req.query.order === "asc") {
-    videos = videos.replace("desc", "asc");
-  }
-  if (req.query.order === "desc") {
-    videos = videos.replace("asc", "desc");
-  }
-  console.log("getting /"); */
   pool
     .query(videos)
     .then((result) => {
