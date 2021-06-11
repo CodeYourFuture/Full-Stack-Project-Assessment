@@ -1,7 +1,7 @@
 const Search = (props) => {
     return (
     <div>
-        Search <input onChange = {props.handleSearch}></input>
+        <label>Search </label> <input onChange = {props.handleSearch} placeholder = "search videos"></input>
     </div>
     )
 }

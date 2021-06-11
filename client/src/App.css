@@ -1,6 +1,6 @@
 .App-header {
   text-align: center;
-  background-color: rgb(126, 245, 245);
+  background-color: rgb(250, 225, 157);
 }
 
 body {
@@ -30,11 +30,6 @@ background-color: blueviolet;
   border-radius: 0.5rem;
 }
 
-.voteCounts {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1rem;
-}
 
 .addvideo {
   display: flex;
@@ -78,26 +73,25 @@ background-color: blueviolet;
 
  .upVotes {
    color: rgb(2, 90, 56);
-   /* background-color: rgb(223, 158, 78); */
+   background-color: rgb(102, 245, 190);
  }
 
  .downVotes {
-   color: rgb(223, 32, 32);
-   /* background-color: rgb(236, 136, 14); */
+   color: rgb(204, 5, 5);
+   background-color: rgb(197, 113, 113);
+   border-radius: 0.5rem;
  }
 
  .delVot {
    display: flex;
-   justify-content: space-evenly;
-   padding: 1rem;
+   justify-content: space-between;
+   padding: 2rem 2rem 0rem 2rem;
+   width: 100%;
  }
 
-/* useEffect(() => {
-  fetch("http://127.0.0.1:5000")
-    .then((response) => response.json())
-    .then((data) => {
-      //   console.log (data);
-      setAllVideos(data);
-    })
-    .catch((error) => alert("Refresh The page, something went wrong"));
-}, []); */
+ .voteCounts {
+  display: flex;
+  width: 60%;
+  justify-content: space-evenly;
+  padding:0rem 2rem 0rem 2rem;
+}

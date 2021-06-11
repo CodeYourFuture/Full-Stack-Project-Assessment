@@ -29,9 +29,9 @@ const OneVideoFrame = (props) => {
                 <div className = "delVot">
                 <DeleteVideo setDisplayVideos = {props.setDisplayVideos} allVideos = {props.allVideos} />  
                 <div className = "voteCounts">
-                    <button onClick = {handleUpDownVoteCount}  className = "upVotes btn btn-warning" ><FaThumbsUp className = "classIcon"/></button>
+                    <button onClick = {handleUpDownVoteCount}  className = "upVotes" ><FaThumbsUp className = "classIcon"/></button>
                     <h4>{upDownVoteCount} votes</h4>
-                    <button onClick = {handleUpDownVoteCount} className = "downVotes btn btn-warning"><FaThumbsDown className = "classIcon"/></button>   
+                    <button onClick = {handleUpDownVoteCount} className = "downVotes"><FaThumbsDown className = "classIcon"/></button>   
                 </div>  
                 </div>                
             </div>   

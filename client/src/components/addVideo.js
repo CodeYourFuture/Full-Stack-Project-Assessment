@@ -15,7 +15,6 @@ const AddVideo = (props) => {
            const url = event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[3].value;
            event.currentTarget.parentNode.childNodes[0].childNodes[1].childNodes[0].childNodes[3].value = ""
            const urlValidation = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
-           const videoList = []
            const newVideoToAdd = {
                  title,
                 "rating": 0,
@@ -23,13 +22,6 @@ const AddVideo = (props) => {
         } 
 
         if (!(title.toString().trim().length === 0) && (url.match(urlValidation))){
-            // videoList.push(newVideoToAdd);
-            // console.log(props.allVideos);
-            // props.allVideos = [{...props.allVideos, ...videoList}]
-            // console.log(props.allVideos);
-            // props.setDisplayVideos(props.allVideos)    
-         
-
         fetch("http://127.0.0.1:5000", {
             method: "POST",
             headers: {
@@ -43,18 +35,12 @@ const AddVideo = (props) => {
             props.setDisplayVideos(data);
         })
         .catch(error => console.error(error));
-    //     if (!(title.toString().trim().length === 0) && (url.match(urlValidation))){
-    //     videoList.push(newVideoToAdd);
-    //     props.allVideos.current = [...props.allVideos.current, ...videoList]
-    //     props.setDisplayVideos(props.allVideos.current)    
     } 
     else {
             alert("Enter a valid title or URL")
         }
     }    
     }
-
-
 
     return(
         <div onClick = {handleAddVideo} className = "addvideo">
