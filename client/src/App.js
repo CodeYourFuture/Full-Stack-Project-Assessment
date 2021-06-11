@@ -18,15 +18,14 @@ function App() {
   // fetch videos from url
 
   const fetchedVideos = () => {
-    fetch(`http://localhost:5000/?order=${order}`, {
+    fetch(`https://get-my-videos.herokuapp.com/?order=${order}`, {
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": `http://localhost:5000/?order=${order}`,
+        "Access-Control-Allow-Origin": `https://get-my-videos.herokuapp.com/?order=${order}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setVideos((videos) => data);
       });
   };
@@ -34,10 +33,10 @@ function App() {
 
   // get video by id
   /*  const getVideoById = (search) => {
-    fetch(`http://localhost:5000/search/${search}`, {
+    fetch(`https://get-my-videos.herokuapp.com/search/${search}`, {
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:5000/",
+        "Access-Control-Allow-Origin": "https://get-my-videos.herokuapp.com/",
       },
     })
       .then((res) => res.json())
@@ -50,10 +49,10 @@ function App() {
   /**************delete element by id ************/
 
   const deleteVideo = (id) => {
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`https://get-my-videos.herokuapp.com/${id}`, {
       method: "DELETE",
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:5000/",
+        "Access-Control-Allow-Origin": "https://get-my-videos.herokuapp.com/",
       },
     })
       .then((res) => res.json())
@@ -83,7 +82,7 @@ function App() {
     event.preventDefault();
     const regex = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
     if (newVideo.title && newVideo.url && newVideo.url.match(regex)) {
-      fetch("http://localhost:5000/", {
+      fetch("https://get-my-videos.herokuapp.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

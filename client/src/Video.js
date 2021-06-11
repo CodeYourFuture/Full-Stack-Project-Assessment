@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 
 function Video({ id, title, url, rating, deleteVideo }) {
   // setting number of votes to be rating initially
-  let [votes, setVotes] = useState(rating);
-
+  let [votes, setVotes] = useState();
+  useEffect(() => {
+    setVotes(rating);
+  }, [rating]);
   // votes
   const vote = (newRating, videoId, event) => {
     // check using class name  then increase/decrease votes by 1
@@ -15,7 +17,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
       newRating = --votes;
     }
 
-    fetch(`http://localhost:5000/${videoId}`, {
+    fetch(`https://get-my-videos.herokuapp.com/${videoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

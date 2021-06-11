@@ -1,22 +1,35 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
 const { Pool } = require("pg");
-
+/* require("dotenv").config();
+const {
+  Pool,
+} = require("pg"); */
+/* 
 const password = process.env.PASSWORD;
 const host = process.env.HOST;
 const prt = process.env.DB_PORT;
 const user = process.env.USER;
 const database = process.env.DATABASE;
+const uri = process.env.URI; */
+
 //const uri = process.env.URI;
 
 const dbConfig = {
-  host,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  /* host,
   prt,
   user,
   password,
   database,
+  uri, */
 };
+/* 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+}); */
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 const { query } = require("express");
@@ -30,7 +43,7 @@ app.use(
 
 const pool = new Pool(dbConfig);
 //let videos = `select  * from videos`;
-pool.connect((err, client, release) => {
+/* pool.connect((err, client, release) => {
   if (err) {
     return console.error("Error acquiring client", err.stack);
   }
@@ -41,7 +54,7 @@ pool.connect((err, client, release) => {
     }
     console.log(result.rows);
   });
-});
+}); */
 // GET "/"
 
 app.get("/", (req, res) => {
