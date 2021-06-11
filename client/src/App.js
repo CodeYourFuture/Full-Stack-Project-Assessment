@@ -7,25 +7,50 @@ import Input from "./Input";
 
 function App() {
   let [videos, setVideos] = useState([]);
+  let [search, setSearch] = useState("");
+
+  const [order, setOrder] = useState("asc");
   const [newVideo, setNewVideo] = useState({
     title: "",
     url: "",
   });
+
+  // fetch videos from url
+
   const fetchedVideos = () => {
-    fetch("http://localhost:5000/", {
+    fetch(`http://localhost:5000/?order=${order}`, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": `http://localhost:5000/?order=${order}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setVideos((videos) => data);
+        console.log(data);
+      });
+  };
+  useEffect(fetchedVideos, [order]);
+
+  // get video by id
+  /*  const getVideoById = (search) => {
+    fetch(`http://localhost:5000/search/${search}`, {
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "http://localhost:5000/",
       },
     })
       .then((res) => res.json())
-      .then((data) => setVideos(data));
-  };
-  useEffect(fetchedVideos, []);
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }; */
 
-  const deleteVideo = (event, id) => {
-    event.preventDefault();
+  /**************delete element by id ************/
 
+  const deleteVideo = (id) => {
     fetch(`http://localhost:5000/${id}`, {
       method: "DELETE",
       headers: {
@@ -34,12 +59,15 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data) {
+          alert("video will be deleted ");
+        }
         fetchedVideos();
       })
       .catch((error) => console.log(error));
   };
 
-  // handle multiple input change
+  /*********************handle multiple input change****************/
 
   function handleChange(evt) {
     evt.preventDefault();
@@ -50,7 +78,7 @@ function App() {
     });
   }
 
-  // handle submit button
+  /**********************handle submit button *********************/
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -72,10 +100,7 @@ function App() {
         });
     }
   }
-  //get video
 
-  // order handler function
-  function orderHandler() {}
   return (
     <div className="App">
       <header className="App-header">
@@ -84,9 +109,13 @@ function App() {
         </h1>
       </header>
       <div className="order-input-box">
-        <Order orderHandler={orderHandler} />
+        <Order order={order} setOrder={setOrder} />
         <AddVideo handleChange={handleChange} handleSubmit={handleSubmit} />
-        <Input />
+        <Input
+          search={search}
+          setSearch={setSearch}
+          // getVideoById={getVideoById}
+        />
       </div>
 
       <div className="videos-container">

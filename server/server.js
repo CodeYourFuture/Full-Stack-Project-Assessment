@@ -29,7 +29,7 @@ app.use(
 );
 
 const pool = new Pool(dbConfig);
-let videos = `select  * from videos order by rating desc`;
+//let videos = `select  * from videos`;
 pool.connect((err, client, release) => {
   if (err) {
     return console.error("Error acquiring client", err.stack);
@@ -45,12 +45,23 @@ pool.connect((err, client, release) => {
 // GET "/"
 
 app.get("/", (req, res) => {
-  pool
-    .query(videos)
-    .then((result) => {
-      res.send(result.rows);
-    })
-    .catch((error) => res.status(500).send(error));
+  const order = req.query.order;
+  if (order) {
+    pool
+      .query(`select * from videos order by rating ${order}`)
+      .then((result) => {
+        console.log(result.rows);
+        res.json(result.rows);
+      })
+      .catch((error) => res.status(500).send(error));
+  } else {
+    pool
+      .query(`select * from videos order by rating desc `)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((error) => res.status(500).send(error));
+  }
 });
 
 // get video by id
@@ -101,7 +112,7 @@ app.post("/", async function (req, res) {
 
 // put end point
 
-app.put("/update/:id", (req, res) => {
+app.put("/:id", (req, res) => {
   const videoId = req.params.id;
   const newRating = req.body.rating;
 

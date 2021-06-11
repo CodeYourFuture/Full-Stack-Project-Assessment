@@ -15,7 +15,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
       newRating = --votes;
     }
 
-    fetch(`http://localhost:5000/update/${videoId}`, {
+    fetch(`http://localhost:5000/${videoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
