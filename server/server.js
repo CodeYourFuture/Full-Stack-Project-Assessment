@@ -19,6 +19,7 @@ const dbConfig = {
 };
 const port = process.env.PORT || 5000;
 const cors = require("cors");
+const { query } = require("express");
 app.use(cors());
 app.use(express.json());
 app.use(
@@ -54,20 +55,18 @@ app.get("/", (req, res) => {
 
 // get video by id
 
-app.get("/:id", async function (req, res) {
-  const videoId = req.params.id;
-  try {
-    const video = await pool.query("select  * from videos where id=$1", [
-      videoId,
-    ]);
-    if (video.rows.length > 0) {
-      res.status(200).json(video.rows[0]);
-    } else {
-      res.status(404).json({ msg: `video with id= ${videoId} doesn't exist` });
-    }
-  } catch (error) {
-    res.send(error.message);
-  }
+app.get("/:search", async function (req, res) {
+  const search = req.params.search;
+  console.log(search);
+  pool
+    .query(`select * from videos where lower (title) like '%${search}%'`, [
+      search,
+    ])
+    .then((result) => {
+      res.json(result.rows);
+      console.log(result.rows);
+    })
+    .catch((err) => err);
 });
 
 //post request add a video with title and url
@@ -100,13 +99,24 @@ app.post("/", async function (req, res) {
   }
 });
 
+// put end point
+
+app.put("/update/:id", (req, res) => {
+  const videoId = req.params.id;
+  const newRating = req.body.rating;
+
+  pool
+    .query(`update videos set rating=$1 where id=$2`, [newRating, videoId])
+    .then(res.json({ rating: newRating }))
+    .catch((error) => res.send(error));
+});
 // delete  by id end point
 
 app.delete("/:id", async function (req, res) {
   const videoId = req.params.id;
   await pool
     .query("delete from videos where id=$1 ", [videoId])
-    .then(() => res.json({ msg: "gfhhfhhf" }))
+    .then(() => res.json({}))
     .catch((error) => res.send(error));
 });
 app.listen(port, () => console.log(`Listening on port ${port}`));

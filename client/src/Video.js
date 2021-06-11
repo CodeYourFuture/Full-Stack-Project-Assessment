@@ -2,25 +2,49 @@ import "./App.css";
 import { useState } from "react";
 
 function Video({ id, title, url, rating, deleteVideo }) {
-  let [numberOfVotes, setNumberOfVotes] = useState(rating);
+  // setting number of votes to be rating initially
+  let [votes, setVotes] = useState(rating);
 
   // votes
-  function vote(event) {
-    event.preventDefault();
+  const vote = (newRating, videoId, event) => {
+    // check using class name  then increase/decrease votes by 1
     if (event.target.className === "fa fa-thumbs-up") {
-      setNumberOfVotes(++numberOfVotes);
-    } else {
-      setNumberOfVotes(--numberOfVotes);
+      newRating = ++votes;
     }
-  }
+    if (event.target.className === "fa fa-thumbs-down") {
+      newRating = --votes;
+    }
+
+    fetch(`http://localhost:5000/update/${videoId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: newRating }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setVotes((votes) => data.rating);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div id={id} className="oneVideo">
       <h5>{title}</h5>
       {/* separate div for votes  */}
       <div className="votes">
-        <i className="fa fa-thumbs-up" onClick={vote}></i>
-        <p className="voteCount">{numberOfVotes}</p>
-        <i className="fa fa-thumbs-down" onClick={vote}></i>
+        <i
+          className="fa fa-thumbs-up"
+          onClick={(event) => vote(rating, id, event)}
+        ></i>
+        <p className="voteCount">{votes}</p>
+        <i
+          className="fa fa-thumbs-down"
+          onClick={(event) => vote(rating, id, event)}
+        ></i>
       </div>
       {/* iframe for video  */}
       <iframe
@@ -32,7 +56,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
       ></iframe>
       {/* delete button */}
       <div>
-        <button className=" btn btn-primary" onClick={deleteVideo}>
+        <button className=" btn btn-primary" onClick={() => deleteVideo(id)}>
           Delete
         </button>
       </div>
