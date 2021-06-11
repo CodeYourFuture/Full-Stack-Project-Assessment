@@ -41,8 +41,6 @@ let newVideoID = 1;
 let rating = 0;
 app.post("/", (req, res) => {
   const addedVideo = req.body;
-  console.log(addedVideo);
-  // const newVideoKeys = ["title", "url"];
   const urlValidation = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]+)/;
   
     if((addedVideo.hasOwnProperty("title")) && (addedVideo.hasOwnProperty("url")) && (!(addedVideo["title"].toString().trim() === "")) && addedVideo["url"].match(urlValidation)){
@@ -89,21 +87,16 @@ app.post("/", (req, res) => {
 
     app.delete("/:ID", (req, res) => {
       const videoToDelete = req.body[0].id;
-      // const vidDel = req.params.ID;   
         if (!isValidID(videoToDelete)) {
         res.status(404).send({message: "Video not found"});
       } else {
         pool.query(videoDeleteQuery, [videoToDelete])
-
         .then(() => {
           pool.query(allVideosQuery)
         .then(result => {
          res.status(201).send(result.rows)
-        console.log(result.rows)
         })
-        }).catch(error => res.status(500).send(error))      
-            // .then(() => res.status(200).send({message: "Video deleted successfully"}))
-            // .catch(error => res.status(500).send(error));
+        }).catch(error => res.status(500).send(error))
     }
     });
 
