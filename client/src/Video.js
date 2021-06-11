@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Video({ id, title, url, rating, deleteVideo }) {
   // setting number of votes to be rating initially
@@ -31,6 +31,7 @@ function Video({ id, title, url, rating, deleteVideo }) {
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <div id={id} className="oneVideo">
       <h5>{title}</h5>

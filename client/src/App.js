@@ -28,7 +28,6 @@ function App() {
       .then((data) => {
         console.log(data);
         setVideos((videos) => data);
-        console.log(data);
       });
   };
   useEffect(fetchedVideos, [order]);
@@ -121,6 +120,7 @@ function App() {
       <div className="videos-container">
         {videos.map((video, index) => (
           /* video info holder div with unique id  */
+
           <Video
             key={index}
             id={video.id}

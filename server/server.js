@@ -50,7 +50,6 @@ app.get("/", (req, res) => {
     pool
       .query(`select * from videos order by rating ${order}`)
       .then((result) => {
-        console.log(result.rows);
         res.json(result.rows);
       })
       .catch((error) => res.status(500).send(error));
