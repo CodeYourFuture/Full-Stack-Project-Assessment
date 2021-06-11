@@ -13,6 +13,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+  const [sort, setSort] = useState(false);
 
   useEffect(() => {
     movieApi();
@@ -21,8 +22,26 @@ function App() {
   async function movieApi() {
     const response = await fetch(`http://localhost:5000`);
     const fetchedData = await response.json();
+    fetchedData.sort(function (a, b) {
+      return parseInt(a.rating) - parseInt(b.rating);
+    });
+
+    console.log(fetchedData);
     setData(fetchedData);
   }
+  const movieSorter = () => {
+    if (sort === true) {
+      data.sort(function (a, b) {
+        setSort(!sort);
+        return parseInt(a.rating) - parseInt(b.rating);
+      });
+    } else {
+      data.sort(function (a, b) {
+        setSort(!sort);
+        return parseInt(b.rating) - parseInt(a.rating);
+      });
+    }
+  };
 
   const onChangeHandler = (e) => {
     setInputValue(e.target.value.toLowerCase());
@@ -70,6 +89,9 @@ function App() {
         <SearchMovie handler={onChangeHandler} />
 
         <AddButton onClickHandler={onClickAdd} showAddValue={showAdd} />
+        <button className=" sorter btn btn-light" onClick={movieSorter}>
+          {sort ? "Asc" : "Desc"}
+        </button>
 
         {showAdd && <AddMovie addHandler={onAddMovie} />}
       </nav>

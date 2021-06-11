@@ -50,6 +50,11 @@
 .btnColor {
   background-color: red;
 }
+.sorter {
+  float: right;
+  width: 5em;
+  margin-right: 1.5em;
+}
 
 /* Media queries */
 /* Small devices (landscape phones, 576px and up) */
