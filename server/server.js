@@ -7,6 +7,14 @@ app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+const dbConfig = {
+  host: "localhost",
+  port: 5432,
+  user: "Lisha",
+  password: "ELISHA13",
+  database: "cyf_ecommerce",
+};
+
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [];

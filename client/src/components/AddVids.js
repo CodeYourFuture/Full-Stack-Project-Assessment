@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, use Effect } from "react";
 
-const AddVids = () => {
+const AddVids = (props) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+ 
 
-  function addVideo() {}
-  console.log(title)
+  function addVideo() {
+
+  }
+
+  //fetch data
+  // useEffect(()=> {
+  // fetch("http://127.0.0.1:5000")
+  //       .then((res) => res.json())
+  //       .then((props) => addVideos(props)
+  // },[])
+
 
   return (
     <>

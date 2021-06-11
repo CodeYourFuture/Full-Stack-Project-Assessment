@@ -9,6 +9,8 @@ const YoutubeV = () => {
   const [filterVids, setFilterVids] = useState(vidsData);
   const [counter, setCounter] = useState(0);
 
+ 
+
   // counter
   function increment() {
     setCounter((counter) => counter + 1);
@@ -33,7 +35,7 @@ const YoutubeV = () => {
     <div className="main-container">
       <AddVids addVideo={addVideo} />
       {filterVids.map((filterVid) => (
-        <div className="cards">
+        <div key={filterVid.url}>
           <h3>{filterVid.title}</h3>
           <div className="vote-for-video">
             <button className="upVote" onClick={increment}>
