@@ -12,10 +12,10 @@ function VideosConstructor(props) {
 
   const videosWidgetArray = props.videos.map((item) => (
     <VideoWidget
-      videoUpVote={() => props.videoUpVote(item.id)}
-      videoDownVote={() => props.videoDownVote(item.id)}
-      videoDeleting={() => props.videoDeleting(item.id)}
-      key={item.id}
+      videoUpVote={() => props.videoUpVote(item.video_id)}
+      videoDownVote={() => props.videoDownVote(item.video_id)}
+      videoDeleting={() => props.videoDeleting(item.video_id)}
+      key={item.video_id}
       video={item}
     />
   ));
