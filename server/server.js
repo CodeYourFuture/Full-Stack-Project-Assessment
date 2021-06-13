@@ -57,6 +57,7 @@ app.get("/", function (request, response) {
   order = order.toLowerCase();
   if (order === "asc") {
     movies.sort(function (a, b) {
+      0;
       return parseInt(a.rating) - parseInt(b.rating);
     });
     console.log(movies);
