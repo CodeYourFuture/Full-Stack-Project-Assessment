@@ -10,8 +10,8 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 const dbConfig = {
   host: "localhost",
   port: 5432,
-  user: "Lisha",
-  password: "ELISHA13",
+  user: "user",
+  password: "password",
   database: "cyf_ecommerce",
 };
 
