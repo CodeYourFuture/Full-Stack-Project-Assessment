@@ -1,3 +1,20 @@
 .App {
   text-align: center;
 }
+
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: gray;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+}
+
+.title {
+  padding-right: 50px;
+}
