@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Data from "./exampleresponse.json"
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     console.log(Data);
+    const [data, setData] = useState(Data);
     return (
-        <AppContext.Provider value="hello">
+        <AppContext.Provider value={
+            {
+                data,
+                setData
+            }
+
+        }>
             {children}
         </AppContext.Provider>
     );
