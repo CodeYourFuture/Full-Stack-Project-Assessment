@@ -1,6 +1,5 @@
 import React from "react";
 import VideoVotes from "./VideoVotes";
-import VideoDelete from "./VideoDelete";
 
 const SingleVideo = ({ video, videoData, setVideoData }) => {
   function youTubeGetID(url) {
@@ -11,10 +10,11 @@ const SingleVideo = ({ video, videoData, setVideoData }) => {
   const videoID = youTubeGetID(video.url);
   video.url = `https://www.youtube.com/embed/${videoID}`;
 
-
   return (
-    <>
-      <VideoVotes video={video}/>
+    <div className="d-flex flex-column m-5 single-video">
+      <div className="title-video d-flex m-5 align-content-center justify-content-center">
+        <h4 className="text-center">{video.title}</h4>
+      </div>
       <iframe
         width="560"
         height="315"
@@ -23,14 +23,15 @@ const SingleVideo = ({ video, videoData, setVideoData }) => {
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        className="m-3"
       ></iframe>
-
-      <VideoDelete
+      <VideoVotes
         video={video}
         videoData={videoData}
         setVideoData={setVideoData}
       />
-    </>
+
+    </div>
   );
 };
 

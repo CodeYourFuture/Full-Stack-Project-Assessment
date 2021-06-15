@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import SingleVideo from "./SingleVideo";
 // import data from "../exampleresponse.json";
-const VideosBoard = ({ data }) => {
-  const [videoData, setVideoData] = useState(data);
+const VideosBoard = ({ videoData,setVideoData }) => {
+  // const [videoData, setVideoData] = useState(data);
   return (
     <>
-      {videoData.map((video) => {
-        return (
-          <SingleVideo
-            video={video}
-            videoData={videoData}
-            setVideoData={setVideoData}
-          />
-        );
-      })}
+      <div className="d-flex flex-wrap justify-content-center">
+        {videoData.map((video) => {
+          return (
+            <SingleVideo
+              video={video}
+              videoData={videoData}
+              setVideoData={setVideoData}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
