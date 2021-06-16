@@ -1,3 +1,11 @@
-.rating-container {
-	
+.thumbs {
+	height: 2rem;
+}
+
+.thumbs:hover {
+	cursor: pointer;
+}
+
+.thumbs:active {
+	transform: scale(0.95);
 }
