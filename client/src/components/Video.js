@@ -1,32 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "../Context"
 import ReactPlayer from "react-player"
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 const Video = () => {
-    const { data } = useGlobalContext();
+    const { data, setData } = useGlobalContext();
+
     console.log(data);
+
+    const votePlus = (id) => {
+        const updatedArray = data.map(element => {
+            console.log(element)
+            return element.id === id ? { id: element.id, title: element.title, url: element.url, rating: element.rating += 1 } : element
+        })
+        setData(updatedArray)
+    }
+
+    const voteNegative = () => {
+
+    }
     return (
-        <div>
+        <div className="col">
             {data.map(element => {
                 const { id, title, url, rating } = element
+                const videoId = url.split("=");
+                const urlVideo = `https://www.youtube.com/embed/${videoId[1]}`
                 return (
-                    <li key={id} className="media">
-                        <ReactPlayer url={url}/>
+                    <div key={id} className="media col-m-3 p-1 list-group-item ">
+                        <iframe width="560" height="315" src={urlVideo} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         <div className="media-body">
                             <h5 className="mt-0 mb-1">{title}</h5>
                             <p>
-                                <FaThumbsDown />
+                                <FaThumbsDown color="red" onClick={() => { voteNegative(id) }} />
                                 {rating}
-                                <FaThumbsUp />
+                                <FaThumbsUp color="green" onClick={() => { votePlus(id) }} />
                             </p>
                         </div>
-                    </li>
+                    </div>
                 )
             })}
-
         </div>
     )
 }
+
 
 export default Video;

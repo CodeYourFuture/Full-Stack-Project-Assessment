@@ -7,7 +7,7 @@ const Videos = () => {
     
     return (
         <div>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled flex-row d-inline">
               <Video/> 
             </ul>
         </div>
