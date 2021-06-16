@@ -1,35 +1,42 @@
 import React from "react";
 import { useGlobalContext } from "../context";
-import ReactPlayer from "react-player"
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 const Video = () => {
-    const { data } = useGlobalContext();
-    console.log(data)
-    return(
-        <div>
+    const { data, setData } = useGlobalContext();
+
+    const upVote = (rating,id) => {
+        let updatedData = data.map((element) => element.id !== id ? element : { id: element.id , title: element.title, url: element.url, rating: rating + 1} )
+        setData(updatedData);
+    }
+    const downVote = (rating,id) => {
+        let updatedData = data.map((element) => element.id !== id ? element : { id: element.id , title: element.title, url: element.url, rating: rating - 1} )
+        setData(updatedData);
+    }
+    return (
+        <div className="col video">
             {data.map((video) => {
                 const { id, title, url, rating } = video;
-                return(
-                <li className="media" key={id}>
-                    {/* <iframe width="560" height="315"
-                     src={url} 
-                     title="YouTube video player" 
-                     frameBorder="0" 
-                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                     allowFullScreen></iframe> */}
-                     <ReactPlayer 
-                     width='30%'
-                     height='100%'
-                     url={url}/>
-                    <div className="media-body">
-                    <h5 className="mt-0 mb-1">{title}</h5>
-                    <p>
-                    <FaThumbsDown/>    
-                     {rating}
-                     <FaThumbsUp />    
-                    </p>
+                const videoId = url.split('v=');
+                return (
+                    <div key={id}>
+                        <div className="mx-auto" style={{ width:"26rem", height:"22rem"}}> 
+                        <iframe
+                            src={`https://www.youtube.com/embed/${videoId[1]}`}
+                            title="YouTube video player"
+                            style={{ width: "90%", height: "90%" }}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen></iframe>
+                        </div>
+                        <div className="media-body">
+                            <h5 className="mt-0 mb-1">{title}</h5>
+                            <p>
+                                <span>{rating}</span>
+                                <FaThumbsUp color="green" onClick={() => upVote(rating ,id)}/>
+                                <FaThumbsDown color="red" onClick={() => downVote(rating ,id)} />
+                            </p>
+                        </div>
                     </div>
-                </li>
 
                 )
             })}

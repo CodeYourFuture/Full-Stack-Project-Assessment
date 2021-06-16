@@ -4,9 +4,9 @@ import Video from "./Video"
 const Videos = () => {
     return (
         <div>
-            <ul className="list-unstyled">
+            <div className="row">
                 <Video />
-            </ul>
+            </div>
         </div>
     )
 }
