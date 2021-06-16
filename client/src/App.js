@@ -6,7 +6,7 @@ import VideoCard from "../src/components/VideoCard";
 import data from "../src/data/exampleresponse.json";
 
 const App = () => {
-  console.log(data)
+
   return (
     <div className="App">
       <Header />

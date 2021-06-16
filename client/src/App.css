@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -14,4 +18,27 @@
 .App-AddVideo h5 {
   color:darkblue;
   cursor:pointer;
+}
+
+.voteUp {
+  color: forestgreen;
+}
+
+.voteDown {
+color: red;
+}
+
+.voteUp:hover {
+  cursor: pointer;
+  color: limegreen
+}
+
+.voteDown:hover {
+  cursor: pointer;
+  color: lightcoral
+}
+
+.card .title {
+  color: darkblue;
+  cursor: pointer;
 }
