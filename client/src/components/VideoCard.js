@@ -9,8 +9,24 @@ const VideoCard = ({ videoData }) => {
 	const [ratingDown, setRatingDown] = useState(false);
 	const [ratingNr, setRatingNr] = useState(videoData.rating);
 
-	const modifyRating = () => {
+	const incrementRating = () => {
+		if (!ratingUp) {
+			setRatingUp(!ratingUp);
+			setRatingNr(ratingNr + 1);
+		} else {
+			setRatingUp(!ratingUp);
+			setRatingNr(ratingNr - 1);
+		}
+	}
 
+	const decrementRating = () => {
+		if (!ratingDown) {
+			setRatingDown(!ratingDown);
+			setRatingNr(ratingNr - 1);
+		} else {
+			setRatingDown(!ratingDown);
+			setRatingNr(ratingNr + 1);
+		}
 	}
 
 	const videoID = videoData.url.split('v=');
@@ -27,9 +43,9 @@ const VideoCard = ({ videoData }) => {
 			<Flex direction='row' maxH='3rem' p='2' justifyContent='space-between' alignItems='center'>
 				<h4 w='50%'>{videoData.title}</h4>
 				<Flex direction='row' w='50%' justifyContent='space-around'>
-					<a><img src={thumbsUp} alt='thumbs up' className='thumbs' /></a>
-					<Box className='rating'>{videoData.rating}</Box>
-					<a><img src={thumbsDown} alt='thumbs down' className='thumbs' /></a>
+					<a onClick={() => incrementRating()}><img src={thumbsUp} alt='thumbs up' className='thumbs' /></a>
+					<Box className='rating'>{ratingNr}</Box>
+					<a onClick={() => decrementRating()}><img src={thumbsDown} alt='thumbs down' className='thumbs' /></a>
 				</Flex>
 			</Flex>
 		</Box>
