@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+header{
+  background-color: rgb(116, 116, 179);
+  color: white;
+  padding: 20px;
+}
+
+input:focus {
+ border: gray blue;
+}
+input:hover{
+  border: gray solid
+}
