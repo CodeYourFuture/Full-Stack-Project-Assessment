@@ -2,13 +2,13 @@ import "./App.css";
 import React from 'react';
 import videos from './data/exampleresponse.json';
 import VideoCardContainer from './components/VideoCardContainer';
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    <div className="App">
-      {/* {videos.map((vid, index) => (<div>{vid.title}</div>))} */}
+    <ChakraProvider>
       <VideoCardContainer videos={videos} />
-    </div>
+    </ChakraProvider>
   );
 }
 
