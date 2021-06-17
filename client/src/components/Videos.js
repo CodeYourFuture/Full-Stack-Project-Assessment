@@ -3,7 +3,7 @@ import Video from "./Video"
 import VideoForm from "./VideoForm";
 const Videos = () => {
     return (
-        <div>
+        <div className="ml-3">
             <VideoForm />
             <div className="row">
                 <Video />
