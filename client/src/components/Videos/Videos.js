@@ -17,10 +17,6 @@ function Videos({video,deleteVideo}) {
     }
   
 
-
-
-
-
   const videoID = video.url.split('v=');
 
     return (
@@ -30,7 +26,7 @@ function Videos({video,deleteVideo}) {
                      <h4>{video.title}</h4>
                      <div className="thumbes-container">
                      <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
-                       <span>{like}</span>
+                       <span className="vote">Vote:  {like}</span>
                      <img onClick={() => decrementRating()} src={thumbsDown} alt='thumbs down' className='thumbs' /> 
                      </div>
                        <iframe 
@@ -41,7 +37,7 @@ function Videos({video,deleteVideo}) {
                          src={`https://www.youtube.com/embed/${videoID[1]}`}
                         >
                         </iframe> 
-                        <button  onClick={() => deleteVideo(video.id)}>Delete</button>                      
+                        <button  className="delete" onClick={() => deleteVideo(video.id)}>Delete</button>                      
                  </div>
              
       

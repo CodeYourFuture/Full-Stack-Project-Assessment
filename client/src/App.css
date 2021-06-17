@@ -1,3 +1,22 @@
 .App {
   text-align: center;
 }
+
+.add-video{
+  padding: 10px;
+}
+.add{
+  padding: 20px;
+margin-left: 20px;
+  background-color: rgb(30, 180, 30);
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.7s ease-in;
+  color: white;
+}
+
+.add:hover{
+  background-color: rgb(62, 99, 8);
+}

@@ -1,0 +1,36 @@
+.input-container{
+
+    padding: 20px;
+}
+
+.input-container input{
+padding: 15px;
+border: none;
+outline: none;
+border-radius: 10px;
+margin-top: 10px;
+width: 30%;
+margin-bottom: 10px;
+background-color: gainsboro;
+
+}
+
+.input-container button{
+    width: 10%;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(245, 181, 19);
+    transition: all 1.7s ease-in-out;
+
+}
+
+
+.btn-addvideo-container{
+    
+    display: flex;
+    justify-content: center;
+}
