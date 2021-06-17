@@ -17,10 +17,9 @@ const Video = () => {
     }
     return (
         <div className="col video">
-            {updateData.map((video) => {
+            {updateData.reverse().map((video) => {
                 const { id, title, url, rating } = video;
                 const videoId = url.split('watch?v=');
-                console.log(videoId[1]);
                 return (
                     <div key={id}>
                         <div className="mx-auto" style={{ width:"26rem", height:"22rem"}}> 

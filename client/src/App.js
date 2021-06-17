@@ -3,6 +3,9 @@ import Videos from "./components/Videos";
 function App() {
   return (
     <div className="App container">
+      <header className="app-header">
+        <h4>Video Recommendation</h4>
+      </header>
       <Videos />
     </div>
   );
