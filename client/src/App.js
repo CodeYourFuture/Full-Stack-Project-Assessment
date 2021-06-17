@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import videos from './data/exampleresponse.json';
 import VideoCardContainer from './components/VideoCardContainer';
-import { ChakraProvider } from "@chakra-ui/react";
+import Header from './components/headerComponents/Header';
 
 function App() {
   const [videosArr, setVideosArr] = useState([]);
@@ -12,9 +12,10 @@ function App() {
   }, []);
   
   return (
-    <ChakraProvider>
+    <div>
+      <Header />
       <VideoCardContainer videosArr={videosArr} setVideosArr={setVideosArr}/>
-    </ChakraProvider>
+    </div>
   );
 }
 

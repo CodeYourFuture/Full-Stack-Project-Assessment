@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { AspectRatio, Flex, Box } from "@chakra-ui/react";
+import { AspectRatio, Flex, Box, Heading, IconButton } from "@chakra-ui/react";
 import './VideoCard.css';
-import thumbsUp from '../images/thumbs-up.svg';
-import thumbsDown from '../images/thumbs-down.svg';
-import deleteIcon from '../images/delete.svg';
+import { FaThumbsUp, FaThumbsDown, FaBan } from 'react-icons/fa';
 
 const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 	const [ratingUp, setRatingUp] = useState(false);
@@ -37,9 +35,9 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 	const videoID = videoData.url.split('v=');
 
 	return (
-		<Box className='video-card' w='30vw' overflow='hidden' m='3' boxShadow="md" rounded="md" bg="#E2E8F0">
-			<a onClick={() => removeVideo(videoData.id)}><img src={deleteIcon} alt='delete icon' className='thumbs' /></a>
-			<AspectRatio w="30vw" ratio={16 / 9} m='0' p='0'>
+		<Box className='video-card' w={{ lg: '30vw', md: '40vw', sm: '80vw' }} m='3' boxShadow="md" rounded="md">
+			<IconButton icon={<FaBan />} onClick={() => removeVideo(videoData.id)} color='red' p='-0.5' className='icons' />
+			<AspectRatio w="100%" ratio={16 / 9} m='0' p='0'>
 				<iframe
 					title={videoData.title}
 					src={`https://www.youtube.com/embed/${videoID[1]}`}
@@ -47,11 +45,11 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 				/>
 			</AspectRatio>
 			<Flex direction='row' h='4rem' p='2' justifyContent='space-between' alignItems='center'>
-				<h4 maxW='70%'>{videoData.title}</h4>
-				<Flex direction='row' w='30%' justifyContent='space-around'>
-					<a onClick={() => incrementRating()}><img src={thumbsUp} alt='thumbs up' className='thumbs' /></a>
+				<Heading maxW='70%' size='xs'>{videoData.title}</Heading>
+				<Flex direction='row' w='30%' justifyContent='space-around' alignItems='center'>
+					<IconButton icon={<FaThumbsUp />} onClick={() => incrementRating()} aria-label="Thumbs Up" className='icons' />
 					<Box className='rating'>{ratingNr}</Box>
-					<a onClick={() => decrementRating()}><img src={thumbsDown} alt='thumbs down' className='thumbs' /></a>
+					<IconButton icon={<FaThumbsDown />} onClick={() => decrementRating()} aria-label="Thumbs Down" className='icons' />
 				</Flex>
 			</Flex>
 		</Box>

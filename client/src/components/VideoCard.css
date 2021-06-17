@@ -1,11 +1,10 @@
-.thumbs {
-	height: 2rem;
-}
-
-.thumbs:hover {
-	cursor: pointer;
-}
-
-.thumbs:active {
+.icons:active {
 	transform: scale(0.95);
+	border: none !important;
+	outline: none !important;
+}
+
+.icons:focus {
+	border: none !important;
+	outline: none !important;
 }
