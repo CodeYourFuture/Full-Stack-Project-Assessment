@@ -29,7 +29,7 @@ const Video = () => {
     console.log(data)
 
     return (
-        <div className="col">
+        <div className="row">
             {data
                 .filter(element => element.title.toLowerCase().includes(keyword.toLowerCase()))
                 .map(element => {

@@ -3,7 +3,7 @@ import SearchBox from "./SearchBox";
 
 const VideoForm = () => {
     return (
-        <div>
+        <div className="row">
             <form className="w-25 ml-3">
                 <div className="mb-3">
                     <label className="form-label">Title</label>
@@ -16,6 +16,9 @@ const VideoForm = () => {
                 <button type="submit" className="btn btn-primary m-2">Submit</button>
                 <button type="cancel" className="btn btn-warning m-2">Cancel</button>
             </form>
+            <div className="m-5">
+                <SearchBox />
+            </div>
         </div>
     )
 }
