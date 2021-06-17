@@ -1,0 +1,13 @@
+.video-container{
+   
+    /* display: grid;
+    background-color: crimson;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) ); */
+}
+
+.main-videos{
+    border: 4px solid green;
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(400px, 1fr) );  
+  }
+       
