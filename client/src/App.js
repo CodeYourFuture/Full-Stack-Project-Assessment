@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect, useState } from 'react';
 import videos from './data/exampleresponse.json';
 import VideoCardContainer from './components/VideoCardContainer';

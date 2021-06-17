@@ -31,8 +31,7 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 	}
 
 	const removeVideo = (id) => {
-		const indexOfVid = videosArr.indexOf(videosArr.find(video => video.id === id));
-		setVideosArr([...videosArr.slice(indexOfVid + 1)]);
+		setVideosArr(videosArr.filter(video => video.id !== id));
 	}
 
 	const videoID = videoData.url.split('v=');
