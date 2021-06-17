@@ -18,3 +18,7 @@ code {
   grid-template-columns: 1fr 1fr ;
   margin: 90px;
 }
+
+input {
+  width: 50px;
+}

@@ -2,8 +2,7 @@ import React from "react";
 import { useGlobalContext } from "../context";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 const Video = () => {
-    const { data, setData } = useGlobalContext();
-
+    const { data, setData, updateData } = useGlobalContext();
     const upVote = (rating,id) => {
         let updatedData = data.map((element) => element.id !== id ? element : { id: element.id , title: element.title, url: element.url, rating: rating + 1} )
         setData(updatedData);
@@ -12,9 +11,13 @@ const Video = () => {
         let updatedData = data.map((element) => element.id !== id ? element : { id: element.id , title: element.title, url: element.url, rating: rating - 1} )
         setData(updatedData);
     }
+    const remove = (id) => {
+        const filteredData = data.filter(video => video.id === id ? !video : video )
+        setData(filteredData)
+    }
     return (
         <div className="col video">
-            {data.map((video) => {
+            {updateData.map((video) => {
                 const { id, title, url, rating } = video;
                 const videoId = url.split('v=');
                 return (
@@ -36,6 +39,7 @@ const Video = () => {
                                 <FaThumbsDown color="red" onClick={() => downVote(rating ,id)} />
                             </p>
                         </div>
+                            <button className="btn btn-danger mb-3" onClick={() => remove(id)}>Delete</button>
                     </div>
 
                 )
