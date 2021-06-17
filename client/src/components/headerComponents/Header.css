@@ -1,0 +1,15 @@
+.form-validation {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: tomato;
+	margin: 10px;
+	padding: 6.6px;
+	width: 50vw;
+}
+
+.form-field {
+	width: 80%;
+	margin: 5px 2px 5px 2px;
+}

@@ -13,6 +13,7 @@ import {
 import { FaSun, FaMoon, FaSearch } from "react-icons/fa";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
 
 const videObjSchema = Yup.object().shape({
 	id: Yup.number().required('Required'),
@@ -24,7 +25,6 @@ const videObjSchema = Yup.object().shape({
 const Header = ({ setVideosArr, videosArr }) => {
 	const { colorMode, toggleColorMode } = useColorMode();
 
-	const idNumber = () => Number(Math.floor(Math.random() * 100000));
 	const ratingNumber = () => Number(Math.floor(Math.random() * 10000));
 
 	return (
@@ -37,11 +37,15 @@ const Header = ({ setVideosArr, videosArr }) => {
 				<IconButton icon={colorMode === 'light' ? <FaSun /> : <FaMoon />} alignSelf='flex-end' onClick={toggleColorMode} isRound='true' />
 			</HStack>
 			<Formik initialValues={{
-				id: idNumber(),
+				id: 0,
 				title: '',
 				url: '',
-				rating: ratingNumber()
-			}} validationSchema={videObjSchema} onSubmit={values => setVideosArr([...videosArr, values])}>
+				rating: 0
+			}} validationSchema={videObjSchema} onSubmit={values => {
+				values.id = uuidv4();
+				values.rating = ratingNumber();
+				setVideosArr([...videosArr, values])
+			}}>
 				{({ errors, touched }) => (
 					<Form className='form-validation' w={{ lg: '50vw', md: '60vw', sm: '70vw' }}>
 						<Field name="title" className='form-field' />
