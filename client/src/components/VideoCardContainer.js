@@ -6,7 +6,7 @@ import { Flex } from '@chakra-ui/layout';
 const VideoCardContainer = ({ videosArr, setVideosArr }) => {
 	return (
 		<Flex className='video-card-container' direction='row' wrap='wrap' justifyContent='space-evenly'>
-			{videosArr.map(videoData => (<VideoCard key={videoData.id} videoData={videoData}
+			{videosArr.sort((vid1, vid2) => vid1.rating - vid2.rating).reverse().map(videoData => (<VideoCard key={videoData.id} videoData={videoData}
 				videosArr={videosArr} setVideosArr={setVideosArr} />))}
 		</Flex>
 	)

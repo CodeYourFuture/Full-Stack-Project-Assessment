@@ -35,8 +35,8 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 	const videoID = videoData.url.split('v=');
 
 	return (
-		<Box className='video-card' w={{ lg: '30vw', md: '40vw', sm: '80vw' }} m='3' boxShadow="md" rounded="md">
-			<IconButton icon={<FaBan />} onClick={() => removeVideo(videoData.id)} color='red' p='-0.5' className='icons' />
+		<Box className='video-card' w={{ lg: '30vw', md: '45vw', sm: '70vw'}} m='3' boxShadow="lg" rounded="lg" bg='teal' overflow='hidden'>
+			<IconButton icon={<FaBan />} onClick={() => removeVideo(videoData.id)} color='red' p='-0.5' className='icons' bg='teal' _hover='teal' _active='teal' outline='none' />
 			<AspectRatio w="100%" ratio={16 / 9} m='0' p='0'>
 				<iframe
 					title={videoData.title}
@@ -44,12 +44,12 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 					allowFullScreen
 				/>
 			</AspectRatio>
-			<Flex direction='row' h='4rem' p='2' justifyContent='space-between' alignItems='center'>
+			<Flex direction='row' h='4rem' p='2' justifyContent='space-between' alignItems='center' bg='teal'>
 				<Heading maxW='70%' size='xs'>{videoData.title}</Heading>
 				<Flex direction='row' w='30%' justifyContent='space-around' alignItems='center'>
-					<IconButton icon={<FaThumbsUp />} onClick={() => incrementRating()} aria-label="Thumbs Up" className='icons' />
+					<IconButton icon={<FaThumbsUp />} onClick={() => incrementRating()} aria-label="Thumbs Up" className='icons' isRound='true' bg='teal' _hover='teal' _active='teal' />
 					<Box className='rating'>{ratingNr}</Box>
-					<IconButton icon={<FaThumbsDown />} onClick={() => decrementRating()} aria-label="Thumbs Down" className='icons' />
+					<IconButton icon={<FaThumbsDown />} onClick={() => decrementRating()} aria-label="Thumbs Down" className='icons' isRound='true' bg='teal' _hover='teal' _active='teal' />
 				</Flex>
 			</Flex>
 		</Box>
