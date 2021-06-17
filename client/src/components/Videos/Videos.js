@@ -23,7 +23,7 @@ function Videos({video,deleteVideo}) {
         <div  className="main-videos" >    
         
                  <div className="iframe-container" >
-                     <h4>{video.title}</h4>
+                     <p>{video.title}</p>
                      <div className="thumbes-container">
                      <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
                        <span className="vote">Vote:  {like}</span>

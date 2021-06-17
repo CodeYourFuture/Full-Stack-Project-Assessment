@@ -8,15 +8,16 @@
 .add{
   padding: 20px;
 margin-left: 20px;
-  background-color: rgb(30, 180, 30);
+  background-color: #1E5917;
   border-radius: 10px;
   border: none;
   outline: none;
   cursor: pointer;
   transition: all 0.7s ease-in;
-  color: white;
+  color: #ffffff;
 }
 
 .add:hover{
-  background-color: rgb(62, 99, 8);
+  background-color: rgb(125, 201, 11);
+  color: black;
 }

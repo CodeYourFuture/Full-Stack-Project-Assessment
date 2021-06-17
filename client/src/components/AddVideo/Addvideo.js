@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import "./Addvideo.css";
-const Addvideo = ({addVideo,showAddVideo,setShowAddVideo}) => {
+const Addvideo = ({addVideo,setShowAddVideo}) => {
     const [add, setAdd] = useState({title: "", url: ""});
 
    const onClickHandler =  () =>{

@@ -32,18 +32,23 @@ cursor: pointer;
   width: 30%;
   border: none;
   outline: none;
- background-color: red;
+ background-color: #9B1212;
   cursor: pointer;
-  color: white;
+  color: #FDEAE7;
   border-radius: 10px;
   transition:  all 3s ease-out;
 }
 
 .delete:hover{
 background-color: rgb(99, 6, 6);
+
 }
 
 .vote{
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.iframe-container p{
+  font-size: 1.2rem;
 }
