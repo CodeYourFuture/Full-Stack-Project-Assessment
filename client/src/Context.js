@@ -4,11 +4,14 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     console.log(Data);
     const [data, setData] = useState(Data);
+    const [keyword, setKeyword] = useState("")
     return (
         <AppContext.Provider value={
             {
                 data,
-                setData
+                setData,
+                keyword,
+                setKeyword
             }
 
         }>
