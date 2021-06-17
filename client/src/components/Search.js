@@ -4,7 +4,6 @@ import { useGlobalContext } from "../context";
 
 const Search = () => {
     const {  searchValue, setSearchValue } = useGlobalContext();
-    console.log(searchValue)
     const searchVideos = (e) => {
         setSearchValue(e.target.value)
     }
