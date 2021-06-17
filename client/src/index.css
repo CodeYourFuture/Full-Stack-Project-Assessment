@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,11 +13,17 @@ code {
     monospace;
 }
 
+.App {
+  text-align: center;
+  background-color: rgb(84, 155, 111);
+  margin: auto;
+}
+
 
 .video {
   display: grid;
   grid-template-columns: 1fr 1fr ;
-  margin: 90px;
+  margin: 70px;
 }
 
 input {
@@ -27,4 +34,12 @@ input {
     font-style: oblique;
     background-color: #254e70;
     padding: 2rem 0;
+}
+p{
+  font-weight: 900;
+}
+
+.btn{
+  font-size: larger;
+  font-weight: 900;
 }

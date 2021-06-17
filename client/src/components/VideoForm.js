@@ -33,9 +33,9 @@ const VideoForm = () => {
         })
     }
     return (
-        <div  className="d-flex justify-content-between" style={{ width:"70%", marginLeft:"10rem", height:"12rem"  }}>
+        <div  className="d-flex justify-content-between " style={{ width:"70%", marginLeft:"10rem", height:"12rem"  }}>
             <div>
-           { <button className="btn btn-primary m-3 " onClick={openform}>{clicked ? "Close [X]" : "Add Video"}</button> }
+           { <button className="btn btn-primary m-3"  onClick={openform}>{clicked ? "Close [X]" : "Add Video"}</button> }
             {clicked ? 
             <>
                 <div className="form-floating">
