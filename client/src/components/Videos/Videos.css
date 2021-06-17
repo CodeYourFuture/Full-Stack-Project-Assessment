@@ -45,8 +45,10 @@ background-color: rgb(99, 6, 6);
 }
 
 .vote{
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
+  width: 100%;
+
 }
 
 .iframe-container p{
