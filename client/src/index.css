@@ -17,12 +17,13 @@ code {
   text-align: center;
   background-color: rgb(84, 155, 111);
   margin: auto;
+  box-sizing: border-box;
 }
 
 
 .video {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: 70px;
 }
 
@@ -44,5 +45,5 @@ p{
   font-weight: 900;
 }
 .post {
-  color: #254e70;
+  color: #fff;
 }
