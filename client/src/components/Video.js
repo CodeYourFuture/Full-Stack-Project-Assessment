@@ -5,15 +5,13 @@ import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 const Video = () => {
     const { data, setData, keyword } = useGlobalContext();
-
-    console.log(data);
-
     const votePlus = (id) => {
         const updatedArray = data.map(element => {
             console.log(element)
             return element.id === id ? { id: element.id, title: element.title, url: element.url, rating: element.rating += 1 } : element
         })
         setData(updatedArray)
+        console.log(data)
     }
 
     const voteNegative = () => {
@@ -25,9 +23,9 @@ const Video = () => {
             return element.id !== id ? element : !element
         })
         setData(deletedVideoArray)
+        console.log(data)
     }
-    console.log(data)
-
+    
     return (
         <div className="row">
             {data

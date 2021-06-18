@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Data from "./exampleresponse.json"
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
-    console.log(Data);
+
     const [data, setData] = useState(Data);
     const [keyword, setKeyword] = useState("")
     return (
