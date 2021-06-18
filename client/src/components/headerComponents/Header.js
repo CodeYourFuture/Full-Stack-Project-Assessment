@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const videObjSchema = Yup.object().shape({
 	id: Yup.number().required('Required'),
+	time: Yup.date(),
 	title: Yup.string().min(3, 'Too short!').max(100, 'Too long!').required('Required'),
 	url: Yup.string().max(100).url().required('Please enter valid URL'),
 	rating: Yup.number().required('Required')
@@ -44,15 +45,16 @@ const Header = ({ setVideosArr, videosArr }) => {
 			}} validationSchema={videObjSchema} onSubmit={values => {
 				values.id = uuidv4();
 				values.rating = ratingNumber();
+				values.time = Date();
 				setVideosArr([...videosArr, values])
 			}}>
 				{({ errors, touched }) => (
 					<Form className='form-validation' w={{ lg: '50vw', md: '60vw', sm: '70vw' }}>
-						<Field name="title" className='form-field' />
+						<Field name="title" className='form-field' placeholder='Please enter video title'/>
 						{errors.title && touched.title ? (
 							<div>{errors.title}</div>
 						) : null}
-						<Field name="url" className='form-field' />
+						<Field name="url" className='form-field' placeholder='Please enter YouTube video URL'/>
 						{errors.url && touched.url ? <div>{errors.url}</div> : null}
 						<Button type="submit">Submit</Button>
 					</Form>

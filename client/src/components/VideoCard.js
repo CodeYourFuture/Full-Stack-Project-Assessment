@@ -35,8 +35,9 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 	const videoID = videoData.url.split('v=');
 
 	return (
-		<Box className='video-card' w={{ lg: '30vw', md: '45vw', sm: '70vw'}} m='3' boxShadow="lg" rounded="lg" bg='teal' overflow='hidden'>
-			<IconButton icon={<FaBan />} onClick={() => removeVideo(videoData.id)} color='red' p='-0.5' className='icons' bg='teal' _hover='teal' _active='teal' outline='none' />
+		<Box className='video-card' w={{ lg: '30vw', md: '45vw', sm: '70vw' }} m='3' boxShadow="lg" rounded="lg" bg='teal' overflow='hidden'>
+				<IconButton icon={<FaBan />} onClick={() => removeVideo(videoData.id)} color='red' p='-0.5' className='icons' bg='teal' _hover='teal' _active='teal' outline='none' />
+				{videoData.time && <Box>This video was posted at: {videoData.time}</Box>}
 			<AspectRatio w="100%" ratio={16 / 9} m='0' p='0'>
 				<iframe
 					title={videoData.title}
@@ -52,7 +53,7 @@ const VideoCard = ({ videoData, videosArr, setVideosArr }) => {
 					<IconButton icon={<FaThumbsDown />} onClick={() => decrementRating()} aria-label="Thumbs Down" className='icons' isRound='true' bg='teal' _hover='teal' _active='teal' />
 				</Flex>
 			</Flex>
-		</Box>
+		</Box >
 	)
 }
 
