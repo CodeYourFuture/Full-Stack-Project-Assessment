@@ -27,5 +27,33 @@ export const postVideos = (req,res) => {
     res.status(200).json(newVideo)
 }
 
+export const remove = (req, res) => {
+    let temp;
+    for (let i = 0; i < youTubeVideos.length; i++) {
+        if (youTubeVideos[i].id.toString() === req.params.id) {
+            temp = youTubeVideos[i];
+            youTubeVideos.splice(i, 1);
+        }
+    }
+    if (temp === undefined) {
+        res.status(404);
+        res.send(`The video ${req.params.id} is not exist`);
+    } else {
+        res.status(200);
+        res.send(`The video ${req.params.id} has been deleted`);
+    }
+};
 
-
+export const search = (req, res) => {
+    let title = req.query.title;
+    if (title) {
+        const titlefound = youTubeVideos.some(video => video.title.toLowerCase().includes(title)
+            || video.title.toLowerCase().includes(title))
+        if (titlefound) {
+            res.status(200).json(youTubeVideos.filter(video => video.title.toLowerCase().includes(title)
+                || video.title.toLowerCase().includes(title)))
+        } else {
+            res.status(400).json({ msg: `No booking with the title of ${title}` });
+        }
+    }
+}
