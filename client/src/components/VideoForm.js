@@ -5,8 +5,7 @@ import Search from "./Search";
 
 
 const VideoForm = () => {
-    const date = new Date()
-    console.log(date)
+    const date = new Date();
     const { data, setData } =useGlobalContext();
     const [clicked, setClicked] = useState(false)
     const [addVideo, setAddVideo] = useState({

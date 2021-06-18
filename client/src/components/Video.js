@@ -19,7 +19,6 @@ const Video = () => {
         <div className="col video ">
             {updateData.sort(function (a, b) { return b.rating - a.rating }).map((video) => {
                 const { id, title, url, rating, date } = video;
-                console.log(date)
                 const videoId = url.split('watch?v=');
                 const videostyle = 
                     {
