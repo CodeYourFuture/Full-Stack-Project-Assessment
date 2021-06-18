@@ -1,15 +1,22 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import videos from "./routes/videos.js"
+
 const app = express();
-const port = process.env.PORT || 5000;
+app.use(express.json( {limit: "30mb", extended: true }))
+app.use(express.urlencoded( {limit: "30mb", extended: true }))
+app.use(cors());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const PORT =  process.env.PORT || 5000;
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+app.use("/", videos)
+
+
+// if(process.env.NODE_ENV === "production"){
+//     // set static folder
+//     app.use("/", express.static("client/build"));
+// }
+
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
