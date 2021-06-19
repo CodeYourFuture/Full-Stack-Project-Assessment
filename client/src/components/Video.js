@@ -12,8 +12,16 @@ const Video = () => {
         setData(updatedData);
     }
     const remove = (id) => {
-        const filteredData = data.filter(video => video.id === id ? !video : video)
-        setData(filteredData)
+        // const filteredData = data.filter(video => video.id === id ? !video : video)
+        // setData(filteredData)
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" }
+        };
+        fetch(`http://localhost:5000/${id}`, requestOptions)
+            .then((res) =>  res.json())
+            .then(data => setData(data))
     }
     return (
         <div className="col video ">

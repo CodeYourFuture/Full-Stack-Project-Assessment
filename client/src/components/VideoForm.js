@@ -6,7 +6,7 @@ import Search from "./Search";
 
 const VideoForm = () => {
     const date = new Date();
-    const { data, setData } =useGlobalContext();
+    const { data,setData } =useGlobalContext();
     const [clicked, setClicked] = useState(false)
     const [addVideo, setAddVideo] = useState({
         id:uuidv4(),
@@ -23,24 +23,54 @@ const VideoForm = () => {
         setAddVideo(newVideo)
     }
 
-    const add = (e) => {
-        e.preventDefault();
-        if(!addVideo.url.includes("youtube.com")){
-            alert("make sure you have added youTube videos")
-        }else if(!addVideo.title){
-            alert("please make sure you have added title of your video")
-        }else {
-            setData(data.concat(addVideo));
-            setAddVideo({
-                id:uuidv4(),
-                title:"",
-                url:"",
-                rating:0,
-                date:""
-                })
+    // const add = (e) => {
+    //     e.preventDefault();
+    //     if(!addVideo.url.includes("youtube.com")){
+    //         alert("make sure you have added youTube videos")
+    //     }else if(!addVideo.title){
+    //         alert("please make sure you have added title of your video")
+    //     }else {
+    //         setData(data.concat(addVideo));
+    //         setAddVideo({
+    //             id:uuidv4(),
+    //             title:"",
+    //             url:"",
+    //             rating:0,
+    //             date:""
+    //             })
+    //     }
+    // }
 
-        }
-    }
+    const add = event => {
+        event.preventDefault();
+        
+    
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(addVideo)
+        };
+        fetch(
+          "http://localhost:5000/",
+          requestOptions
+        )
+          .then(response => response.json())
+          .then(element => {
+            setData(data.concat(element));
+          })
+          .catch(error => {
+            console.error("Error:", error);
+          });
+          setAddVideo({
+            id:uuidv4(),
+            title:"",
+            url:"",
+            rating:0,
+            date:""
+            })
+      };
+
+
     return (
         <div  className="d-flex justify-content-between " style={{ width:"70%", marginLeft:"10rem", height:"12rem"  }}>
             <div>

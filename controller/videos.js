@@ -33,14 +33,12 @@ export const remove = (req, res) => {
         if (youTubeVideos[i].id.toString() === req.params.id) {
             temp = youTubeVideos[i];
             youTubeVideos.splice(i, 1);
-        }
-    }
+            res.status(200).json(youTubeVideos)
+        }}
     if (temp === undefined) {
-        res.status(404);
-        res.send(`The video ${req.params.id} is not exist`);
+        res.status(404).send(`The video ${req.params.id} is not exist`);
     } else {
-        res.status(200);
-        res.send(`The video ${req.params.id} has been deleted`);
+        res.status(200).send(`The video ${req.params.id} has been deleted`);
     }
 };
 
