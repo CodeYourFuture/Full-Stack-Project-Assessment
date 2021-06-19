@@ -1,3 +1,37 @@
 .App {
   text-align: center;
 }
+
+/* HEADER */
+
+.App-header {
+  text-align: center;
+  padding: 20px;
+  font-family: "Lora", serif;
+  background-color: aquamarine;
+}
+
+/* ADDING */
+
+.container {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "main sidebar";
+}
+
+.add-video {
+  margin: 15px;
+  grid-area: main;
+}
+
+.search {
+  margin: 15px;
+  grid-area: sidebar;
+}
+
+/* RATINGS */
+.emoji {
+  font-family: Segoe UI Emoji, Segoe UI Symbol, Quivira, Symbola;
+}
