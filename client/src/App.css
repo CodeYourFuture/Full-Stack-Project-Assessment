@@ -1,3 +1,14 @@
 .App {
   text-align: center;
 }
+
+header {
+  background-color: #005f73;
+  height: 8rem;
+  color: #e9d8a6;
+}
+
+ .fa-custom{
+  font-size: 32px;
+ color: red;
+ }
