@@ -38,7 +38,7 @@ const Video = () => {
                             <iframe
                                 src={`https://www.youtube.com/embed/${videoId[1]}`}
                                 title="YouTube video player"
-                                allowfullscreen
+                                allowFullScreen
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 style={{ width: "100%", height: "100%",border: "3px red solid",borderRadius:"20px" }}
                                 ></iframe>
