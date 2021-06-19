@@ -14,10 +14,20 @@ const App = () => {
     <div className="App">
       <Header />
       <div className="d-flex">
-        <AddVideo data={data} setData={setData} />
-        <Search search={search} setSearch={setSearch} />
+        <AddVideo
+          data={data}
+          setData={setData}
+        />
+        <Search
+          search={search}
+          setSearch={setSearch}
+        />
       </div>
-      <VideoCards data={data} setData={setData} search={search} />
+      <VideoCards
+        data={data}
+        setData={setData}
+        search={search}
+      />
     </div>
   );
 }

@@ -13,8 +13,8 @@ const VideoCards = ({ data, setData, search }) => {
         <div className="row row-cols-1 row-cols-md-3 g-4 mx-4 my-3">
             {data
             .filter(video => video.title.toUpperCase().includes(search.toUpperCase()))
-            .map((video, index) => (
-                <SingleVideoCard key={index} video={video} handleDelete={handleDelete} />
+            .map((video) => (
+                <SingleVideoCard key={video.id} video={video} handleDelete={handleDelete} />
             ))}
         </div>
     )

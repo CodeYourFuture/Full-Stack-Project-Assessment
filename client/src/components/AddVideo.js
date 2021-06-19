@@ -14,6 +14,8 @@ const AddVideo = ({ data, setData }) => {
             rating: 0
         };
         setData(data.concat(newVideo));
+        setTitle("");
+        setUrl("");
     }
 
     return (
@@ -22,19 +24,42 @@ const AddVideo = ({ data, setData }) => {
             {displayAddVideo && (
                 <form className="mx-4">
                     <div className="mb-3">
-                        <label htmlFor="title" className="form-label fst-italic">Title</label>
-                        <input type="text" className="form-control" onChange={(e) => setTitle(e.target.value)} id="title" />
+                        <label
+                            htmlFor="title" className="form-label fst-italic">Title
+                        </label>
+                        <input
+                            type="text" 
+                            value={title}
+                            id="title" className="form-control"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="url" className="form-label fst-italic">URL</label>
-                        <input type="text" className="form-control" id="url" onChange={(e) => setUrl(e.target.value)} />
+                        <label
+                            htmlFor="url"
+                            className="form-label fst-italic">URL
+                        </label>
+                        <input
+                            type="text" className="form-control"
+                            id="url"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                        />
                     </div>
                     <div className="d-flex justify-content-around">
-                        <button type="button" onClick={() => setDisplayAddVideo(!displayAddVideo)} className="btn btn-warning ">Cancel</button>
-                        <button type="button" className="btn btn-danger" onClick={handleAdd}>Add</button>
+                        <button
+                            className="btn btn-warning"
+                            type="button"
+                            onClick={() => setDisplayAddVideo(!displayAddVideo)}
+                        >Cancel
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={handleAdd}>Add
+                        </button>
                     </div>
                 </form>
-
             )
             }
         </div>
