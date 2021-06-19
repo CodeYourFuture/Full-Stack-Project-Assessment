@@ -1,3 +1,19 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  font-size: calc(10px + 1vmin);
+  background-color:rgb(4, 4, 68) ;
+  color: white;
+  }
+
+.thumps {
+  color: red;
+  font-size: 30px;
+}
+
+.Add-video {
+  color:rgb(63, 63, 172);
+  cursor:pointer;
+}
