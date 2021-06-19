@@ -1,7 +1,20 @@
 import React, { useState } from 'react'
 
-const AddVideo = () => {
+const AddVideo = ({ data, setData }) => {
     const [displayAddVideo, setDisplayAddVideo] = useState(false);
+    const [title, setTitle] = useState("");
+    const [url, setUrl] = useState("");
+
+    const handleAdd = (e) => {
+        const videoId = Math.floor(Math.random() * 100000);
+        const newVideo = {
+            id: videoId,
+            title: title,
+            url: url,
+            rating: 0
+        };
+        setData(data.concat(newVideo));
+    }
 
     return (
         <div className="App-AddVideo my-3 col-6 col-md-3">
@@ -10,15 +23,15 @@ const AddVideo = () => {
                 <form className="mx-4">
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label fst-italic">Title</label>
-                        <input type="text" className="form-control" id="title" />
+                        <input type="text" className="form-control" onChange={(e) => setTitle(e.target.value)} id="title" />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="url" className="form-label fst-italic">URL</label>
-                        <input type="text" className="form-control" id="url" />
+                        <input type="text" className="form-control" id="url" onChange={(e) => setUrl(e.target.value)} />
                     </div>
                     <div className="d-flex justify-content-around">
                         <button type="button" onClick={() => setDisplayAddVideo(!displayAddVideo)} className="btn btn-warning ">Cancel</button>
-                        <button type="button" className="btn btn-danger">Add</button>
+                        <button type="button" className="btn btn-danger" onClick={handleAdd}>Add</button>
                     </div>
                 </form>
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 const SingleVideoCard = ({ video, handleDelete }) => {
-    let [vote, setVote] = useState(0);
+    let [vote, setVote] = useState(video.rating);
 
     const { id, title, url } = video;
     const embedUrl = url.split("=");
