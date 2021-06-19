@@ -13,8 +13,10 @@ function App() {
   const [videoData, setVideoData] = useState(data);
   const [search, setSearch] = useState("");
 
-  const filteredData = videoData.filter((video) => video.title.toUpperCase().includes(search.toUpperCase()));
+  const sortedData = videoData.sort((video1, video2) => (video2.rating) - (video1.rating))
+                              .filter((video) => video.title.toUpperCase().includes(search.toUpperCase()));
   
+
    return (
     <div className="App">
       <Header />
@@ -22,7 +24,7 @@ function App() {
         <AddVideo videoData={videoData} setVideoData={setVideoData}/>
         <Search search={search} handleSearch={(e) => setSearch(e.target.value)}/>
       </div>      
-      <DisplayVideo filteredData={filteredData} videoData={videoData} setVideoData={setVideoData}/>
+      <DisplayVideo sortedData={sortedData} videoData={videoData} setVideoData={setVideoData}/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import SingleVideo from "./SingleVideo";
 
 
-const DisplayVideo = ({videoData, filteredData, setVideoData}) => {    
+const DisplayVideo = ({videoData, sortedData, setVideoData}) => {    
     
     const handleDeleteVideo = (id) => {
         const newData = videoData.filter(video => video.id !== id);
@@ -11,10 +11,10 @@ const DisplayVideo = ({videoData, filteredData, setVideoData}) => {
 
     return (
         <div className="row">        
-            {filteredData.map((video, index) => (           
+            {sortedData.map((video) => (           
                 <SingleVideo 
                     video={video} 
-                    key={index}
+                    key={video.id}
                     handleDeleteVideo={handleDeleteVideo}
                 />
             ))}          

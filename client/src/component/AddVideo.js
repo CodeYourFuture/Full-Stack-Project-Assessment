@@ -6,6 +6,19 @@ const AddVideo = ({videoData, setVideoData}) => {
     const [titleValue, setTitleValue] = useState();
     const [urlValue, setUrlValue] = useState();
 
+    // const handleAddVideo = () => {
+    //     const videoId = Math.floor(Math.random()*1000000);
+    //     const newVideoData = {
+    //       id: videoId,
+    //       title: titleValue,
+    //       url: urlValue,
+    //       rating: 0,
+    //     };
+    //     setVideoData(videoData.concat(newVideoData));
+    //     console.log(newVideoData);
+    //     console.log(videoData);
+    // };
+
     const handleAddVideo = () => {
         const videoId = Math.floor(Math.random()*1000000);
         const newVideoData = {
@@ -13,11 +26,27 @@ const AddVideo = ({videoData, setVideoData}) => {
           title: titleValue,
           url: urlValue,
           rating: 0,
+          timeSent: new Date()
         };
-        setVideoData(videoData.concat(newVideoData));
-        console.log(newVideoData);
-        console.log(videoData);
+
+        const matchYoutubeUrl = ((url) => {
+            const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            if (url.match(p)) {
+                return url.match(p)[1];
+                }
+                 return false;
+        })
+        if(newVideoData.title && matchYoutubeUrl(newVideoData.url)) {
+            setVideoData(videoData.concat(newVideoData));
+            console.log(newVideoData);
+            console.log(videoData);
+        } else if(!newVideoData.title) {
+            alert("Please add a title")
+        } else if(!matchYoutubeUrl(newVideoData.url)) {
+            alert("Please add a valid url")
+        }        
     };
+
  
     return (
         <div className="Add-video m-4 col-6 col-md-2">
