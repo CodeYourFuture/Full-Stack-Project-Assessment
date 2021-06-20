@@ -45,7 +45,7 @@ const Header = ({ setVideosArr, videosArr }) => {
 			}} validationSchema={videObjSchema} onSubmit={values => {
 				values.id = uuidv4();
 				values.rating = ratingNumber();
-				values.time = Date();
+				values.uploadDate = Date();
 				setVideosArr([...videosArr, values])
 			}}>
 				{({ errors, touched }) => (
