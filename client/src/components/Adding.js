@@ -6,7 +6,7 @@ import "../App.css";
 const Adding = () => {
   const [showResults, setShowResults] = useState(false);
   const onClick = () => {
-    // I had
+    // I had help on the next line to ensure the button displays or hides the fields
     let newValue = !showResults;
     setShowResults(newValue);
   };
