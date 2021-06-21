@@ -29,10 +29,12 @@ const videoSchema = {
 // GET "/"
 app.get("/", (req, res) => res.send(videos));
 
-app.post('/', validate(videoSchema, {}, {}), (req, res) => {
-  const { id, title, url, rating, uploadDate} = req.body;
+app.get('/')
 
-  if (!url.includes('https://www.youtube.com/watch?v=')){
+app.post('/', validate(videoSchema, {}, {}), (req, res) => {
+  const { id, title, url, rating, uploadDate } = req.body;
+
+  if (!url.includes('https://www.youtube.com/watch?v=')) {
     res.status(404).send('Not a valid YouTube URL');
   };
 
@@ -47,6 +49,19 @@ app.post('/', validate(videoSchema, {}, {}), (req, res) => {
   videos.push(newVideoData);
   res.json(200);
 
+})
+
+app.delete('/:id', (req, res) => {
+  const videoFound = videos.indexOf(videos.find(video => video.id === Number(req.params.id)));
+  if (videoFound > -1) {
+    videos.splice(videoFound, 1);
+    res.status(200).send({});
+  } else {
+    res.status(404).send({
+      "result": "failure",
+      "message": "Video could not be deleted"
+    });
+  }
 })
 
 app.use(function (err, req, res, next) {
