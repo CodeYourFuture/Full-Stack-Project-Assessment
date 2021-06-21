@@ -1,6 +1,6 @@
 import "./App.css";
 import videosData from "./exampleresponse.json";
-import Videos from "components/Videos";
+import Videos from "./components/Videos";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <Videos videosData={videosData} />
     </div>
   );
 }
