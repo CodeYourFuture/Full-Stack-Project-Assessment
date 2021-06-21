@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+.videos {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1rem;
+  padding: 10px;
+  margin: 2rem auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .videos {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0 auto;
+  }
+}
