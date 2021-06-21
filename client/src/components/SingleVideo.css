@@ -1,0 +1,10 @@
+.video-card {
+  text-align: center;
+}
+
+.votes-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: aquamarine; */
+}
