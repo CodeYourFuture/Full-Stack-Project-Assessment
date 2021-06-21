@@ -1,4 +1,6 @@
 import "./App.css";
+import videosData from "./exampleresponse.json";
+import Videos from "components/Videos";
 
 function App() {
   return (
