@@ -8,15 +8,18 @@ const Search = () => {
         setSearchValue(e.target.value)
     }
     return (
-        <div className="form-floating m-3">
-            <label htmlFor="search">Search</label>
+        <div className="row m-3">
+            <label htmlFor="search" className="col-sm-2 col-form-label">Search</label>
+            <div className="col-md-10"> 
             <input 
             type="text" 
             className="form-control" 
             id="search" 
             placeholder="Search"
             value={searchValue}
-            onChange={searchVideos} />
+            onChange={searchVideos}
+             />
+            </div>
         </div>
     )
 }

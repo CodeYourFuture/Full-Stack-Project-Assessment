@@ -1,7 +1,10 @@
 import express from "express";
-import {  getVideos , postVideos, remove, search } from "../controller/videos.js"
+import {  getVideos , postVideos, remove, search, order } from "../controller/videos.js"
 const router = express.Router();
 
+
+// video order
+router.get("/", order)
 
 // view all videos
 router.get("/", getVideos)
@@ -14,6 +17,11 @@ router.delete("/:id", remove);
 
 // video search
 router.get("/search", search)
+
+
+
+
+
 
 
 

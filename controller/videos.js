@@ -4,6 +4,22 @@ const { v4: uuidv4 } = require("uuid");
 const youTubeVideos = require("../data/videos.json");
 
 
+
+export const order = (req, res) => {
+    let order = req.query.order;
+    if (order === 'asc') {
+        const orderByAsc = youTubeVideos.sort((a,b) => { return a.rating - b.rating })
+        console.log(orderByAsc)
+        res.json(orderByAsc)
+    }else if (order === 'desc') {
+        const orderByDesc = youTubeVideos.sort((a,b) => { return b.rating - a.rating })
+       res.json(orderByDesc)
+    }else {
+        res.send({msg: "something went wrong"})
+    }
+}
+
+
 export const getVideos = (req,res) => {
     res.json(youTubeVideos)
 }
@@ -35,11 +51,11 @@ export const remove = (req, res) => {
             youTubeVideos.splice(i, 1);
             res.status(200).json(youTubeVideos)
         }}
-    if (temp === undefined) {
-        res.status(404).send(`The video ${req.params.id} is not exist`);
-    } else {
-        res.status(200).send(`The video ${req.params.id} has been deleted`);
-    }
+    // if (temp === undefined) {
+    //     res.status(404).send(`The video ${req.params.id} is not exist`);
+    // } else {
+    //     res.status(200).send(`The video ${req.params.id} has been deleted`);
+    // }
 };
 
 export const search = (req, res) => {

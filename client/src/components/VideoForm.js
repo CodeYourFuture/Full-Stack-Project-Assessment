@@ -77,8 +77,9 @@ const VideoForm = () => {
            { <button className="btn btn-primary m-3"  onClick={openform}>{clicked ? "Close [X]" : "Add Video"}</button> }
             {clicked ? 
             <form className="needs-validation" noValidate>
-                <div className="form-floating">
-                    <label htmlFor="title">Title</label>
+                <div className="mb-3 row">
+                    <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
+                    <div className="col-sm-10">
                     <input 
                     type="text"
                     className="form-control" 
@@ -88,9 +89,12 @@ const VideoForm = () => {
                     onChange={handleInput}
                     required
                      />
+                    
+                    </div>
                 </div>
-                <div className="form-floating">
-                    <label htmlFor="url">URL</label>
+                <div className="mb-3 row">
+                    <label htmlFor="url" className="col-sm-2 col-form-label">URL</label>
+                    <div className="col-sm-10">
                     <input 
                     type="text" 
                     className="form-control" 
@@ -100,6 +104,7 @@ const VideoForm = () => {
                     onChange={handleInput}
                     required
                     />
+                    </div>
                 </div>
                 <div>
                     <button className="btn btn-success m-2" onClick={add}>Add</button>
