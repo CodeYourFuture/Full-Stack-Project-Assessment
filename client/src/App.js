@@ -2,12 +2,15 @@ import "./App.css";
 import SearchBox from "./components/SearchBox";
 import Videos from "./components/Videos"
 import VideoForm from "./components/VideoForm";
+import Header from "./components/Header"
+
 
 
 function App() {
 
   return (
     <div className="App">
+      <Header />
       <VideoForm />
       <Videos />
     </div>

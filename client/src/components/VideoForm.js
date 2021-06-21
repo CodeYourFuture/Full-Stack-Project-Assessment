@@ -62,13 +62,15 @@ const VideoForm = () => {
 
 
     return (
-        <div className="row">
-            <button type="button" className="btn btn-primary" onClick={handleClick}>Primary</button>
+        <div className="row justify-content-around">
+        <div className="w-25 mt-5">
+            <button type="button" className="row btn btn-primary ml-2 mb-1" onClick={handleClick}>Add Video</button>
             {click ?
                 <div>
-                    <form className="w-25 ml-3" noValidate>
-                        <div className="mb-3">
-                            <label htmlFor="title"  className="form-label">Title</label>
+                    <form className="ml-3" noValidate>
+                        <div className="row m-3">
+                            <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
                             <input
                                 id="title"
                                 type="text"
@@ -76,9 +78,11 @@ const VideoForm = () => {
                                 value={video.title}
                                 className="form-control"
                                 onChange={handleChange} required />
+                            </div>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="url" className="form-label">URL</label>
+                        <div className="row m-3">
+                            <label htmlFor="url" className="col-sm-2 col-form-label">URL</label>
+                            <div class="col-sm-10">
                             <input
                                 name="url"
                                 id="url"
@@ -86,15 +90,18 @@ const VideoForm = () => {
                                 value={video.url}
                                 className="form-control"
                                 onChange={handleChange} required />
+                            </div>
                         </div>
                         <button type="submit" className="btn btn-primary m-2" onClick={handleAddVideo}>Submit</button>
                         <button type="cancel" className="btn btn-warning m-2" onClick={handleClick}>Cancel</button>
                     </form>
-                    <div className="m-5">
-                    </div>
-                    <SearchBox />
+                    
                 </div> : null
             }
+        </div>
+            <div className="m-5">
+                <SearchBox />
+            </div>
         </div>
 
     )

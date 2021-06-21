@@ -27,7 +27,7 @@ const Video = () => {
     }
     
     return (
-        <div className="row">
+        <div className="row justify-content-center align-items-center">
             {data
                 .filter(element => element.title.toLowerCase().includes(keyword.toLowerCase()))
                 .map(element => {
@@ -35,15 +35,18 @@ const Video = () => {
                     const videoId = url.split("=");
                     const urlVideo = `https://www.youtube.com/embed/${videoId[1]}`
                     return (
-                        <div key={id} className="media col-m-3 p-1 list-group-item ">
-                            <iframe width="560" height="315" src={urlVideo} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        <div key={id} className="m-2 col-3">
                             <div className="media-body">
-                                <h5 className="mt-0 mb-1">{title}</h5>
-                                <p>
-                                    <FaThumbsDown color="red" onClick={() => { voteNegative(id) }} />
-                                    {rating}
-                                    <FaThumbsUp color="green" onClick={() => { votePlus(id) }} />
-                                </p>
+                            <h6 className="header-six mt-0 mb-1">{title}</h6>
+                            <p>
+                                <FaThumbsDown color="red" onClick={() => { voteNegative(id) }} />
+                                {rating}
+                                <FaThumbsUp color="green" onClick={() => { votePlus(id) }} />
+                            </p>
+                            </div>
+                            <iframe className="w-75 h-50" src={urlVideo} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <div>
+                                
                                 <button className="btn btn-danger" onClick={() => { deleteVideo(id) }}>Delete</button>
                             </div>
                         </div>
