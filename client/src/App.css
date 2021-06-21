@@ -1,3 +1,48 @@
 .App {
   text-align: center;
 }
+
+.video-container{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.remove-button{
+    margin-top:10px;
+    height:10vh;
+}
+
+.voting-score-container{
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 3vh;
+}
+.up-vote{
+    color: rgb(139, 131, 131);
+    margin-right:2vw;
+    border: none;
+    background-color: transparent;
+}
+.up-vote:hover{
+    color:dodgerblue;
+    cursor: pointer;
+}
+.up-vote:focus{
+    color:dodgerblue;
+}
+
+.down-vote{
+    color: rgb(139, 131, 131);
+    margin-left: 2vw;
+    border: none;
+    background-color: transparent;
+}
+.down-vote:hover{
+    color: tomato;
+    cursor: pointer;
+}
+.down-vote:focus{
+    color: tomato;
+}
