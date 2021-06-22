@@ -1,14 +1,12 @@
 import "./App.css";
-import videosData from "./exampleresponse.json";
+import Header from "./components/Header";
 import Videos from "./components/Videos";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <Videos videosData={videosData} />
+      <Header />
+      <Videos />
     </div>
   );
 }
