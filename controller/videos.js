@@ -5,7 +5,7 @@ const youTubeVideos = require("../data/videos.json");
 
 
 
-export const order = (req, res) => {
+export const order = (req, res,next) => {
     let order = req.query.order;
     if (order === 'asc') {
         const orderByAsc = youTubeVideos.sort((a,b) => { return a.rating - b.rating })
@@ -14,9 +14,8 @@ export const order = (req, res) => {
     }else if (order === 'desc') {
         const orderByDesc = youTubeVideos.sort((a,b) => { return b.rating - a.rating })
        res.json(orderByDesc)
-    }else {
-        res.send({msg: "something went wrong"})
     }
+    next()
 }
 
 
@@ -59,7 +58,7 @@ export const remove = (req, res) => {
 };
 
 export const search = (req, res) => {
-    let title = req.query.title;
+    let title = req.query.title.toLowerCase();
     if (title) {
         const titlefound = youTubeVideos.some(video => video.title.toLowerCase().includes(title)
             || video.title.toLowerCase().includes(title))
@@ -67,7 +66,7 @@ export const search = (req, res) => {
             res.status(200).json(youTubeVideos.filter(video => video.title.toLowerCase().includes(title)
                 || video.title.toLowerCase().includes(title)))
         } else {
-            res.status(400).json({ msg: `No booking with the title of ${title}` });
+            res.status(400).json({ msg: `No videos with the title of ${title}` });
         }
     }
 }
