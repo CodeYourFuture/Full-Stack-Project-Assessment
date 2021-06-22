@@ -21,7 +21,8 @@ const videoSchema = {
     id: Joi.required(),
     title: Joi.string().min(2).max(100).required(),
     url: Joi.string().min(2).max(100).required(),
-    rating: Joi.number().integer().required()
+    rating: Joi.number().integer().required(),
+    uploadDate: Joi.date().required()
   })
 };
 
@@ -61,7 +62,6 @@ app.post('/', validate(videoSchema, {}, {}), (req, res) => {
 
   videos.push(newVideoData);
   res.json(200);
-
 })
 
 app.delete('/:id', (req, res) => {

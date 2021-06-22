@@ -24,8 +24,17 @@ const videObjSchema = Yup.object().shape({
 	rating: Yup.number().required('Required')
 })
 
-const Header = ({ setVideosArr, videosArr, setOrderBy, orderBy }) => {
+const Header = ({ setVideosArrUpdated, videosArrUpdated, setOrderBy, orderBy }) => {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const postVideo = (values) => {
+		fetch('http://localhost:5000/', {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(values),
+		}).then(res => res.json()).then(() => setVideosArrUpdated(videosArrUpdated + 1)).catch(err => console.error(err))
+	}
 
 	const ratingNumber = () => Number(Math.floor(Math.random() * 10000));
 
@@ -47,7 +56,8 @@ const Header = ({ setVideosArr, videosArr, setOrderBy, orderBy }) => {
 				values.id = uuidv4();
 				values.rating = ratingNumber();
 				values.uploadDate = Date();
-				setVideosArr([...videosArr, values])
+				postVideo(values);
+				// setVideosArr([...videosArr, values])
 			}}>
 				{({ errors, touched }) => (
 					<Form className='form-validation' w={{ lg: '50vw', md: '60vw', sm: '70vw' }}>
