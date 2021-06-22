@@ -9,6 +9,7 @@ const Videos = () => {
   const sortedVideosData = staticData.sort((a, b) => b.rating - a.rating);
   const [videosData, setVideosData] = useState(sortedVideosData);
   const [searchValue, setSearchValue] = useState("");
+  const [showError, setShowError] = useState(false);
 
   // delete video (for SingleVideo)
   const handleDeleteVideoClick = (id) => {
@@ -22,17 +23,31 @@ const Videos = () => {
     setSearchValue(event.target.value);
   };
 
-  const handleAddVideo = (title, url) => {
-    const newVideoObj = {
-      id: Date.now(),
-      title,
-      url,
-      rating: 0,
-    };
+  // matchYoutubeUrl was copied from here: https://www.codegrepper.com/code-examples/javascript/javascript+validate+url+to+match+youtube+video
+  const matchYoutubeUrl = (url) => {
+    var p =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+      return url.match(p)[1];
+    }
+    return false;
+  };
 
-    const newVideosData = [...videosData]; // creates copy of videosData
-    newVideosData.push(newVideoObj);
-    setVideosData(newVideosData);
+  const handleAddVideo = (title, url) => {
+    if (title !== "" && url !== "" && matchYoutubeUrl(url)) {
+      const newVideoObj = {
+        id: Date.now(),
+        title,
+        url,
+        rating: 0,
+      };
+
+      const newVideosData = [...videosData]; // creates copy of videosData
+      newVideosData.push(newVideoObj);
+      setVideosData(newVideosData);
+    } else {
+      setShowError(true);
+    }
   };
 
   // filter by user input (for Search)
@@ -42,6 +57,11 @@ const Videos = () => {
 
   return (
     <>
+      {showError && (
+        <p className="error-message">
+          Please fill both fields and provide a valid YouTube url
+        </p>
+      )}
       <AddVideoForm handleAddVideo={handleAddVideo} />
       <Search handleSearch={handleSearch} searchValue={searchValue} />
       <section className="videos">

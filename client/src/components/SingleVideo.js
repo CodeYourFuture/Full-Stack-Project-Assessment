@@ -5,7 +5,7 @@ import "./SingleVideo.css";
 const SingleVideo = ({ video, handleDeleteVideoClick }) => {
   const { title, url, rating, id } = video;
   const [votes, setVotes] = useState(0); // can be 0, 1 or -1 => to add to rating when thumbsUp or ThumbsDown is clicked
-
+ 
   const handleUpVote = () => {
     setVotes(1);
   };

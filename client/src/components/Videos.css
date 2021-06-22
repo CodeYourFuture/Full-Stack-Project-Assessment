@@ -10,6 +10,12 @@
   margin: 2rem auto;
 }
 
+.error-message {
+  color: red;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
   .videos {
     display: flex;
