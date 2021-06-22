@@ -9,7 +9,6 @@ export const order = (req, res,next) => {
     let order = req.query.order;
     if (order === 'asc') {
         const orderByAsc = youTubeVideos.sort((a,b) => { return a.rating - b.rating })
-        console.log(orderByAsc)
         res.json(orderByAsc)
     }else if (order === 'desc') {
         const orderByDesc = youTubeVideos.sort((a,b) => { return b.rating - a.rating })
