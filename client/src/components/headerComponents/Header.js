@@ -1,5 +1,6 @@
 import './Header.css';
 import React from "react";
+import SortComponent from './SortComponent';
 import {
 	IconButton,
 	HStack,
@@ -23,7 +24,7 @@ const videObjSchema = Yup.object().shape({
 	rating: Yup.number().required('Required')
 })
 
-const Header = ({ setVideosArr, videosArr }) => {
+const Header = ({ setVideosArr, videosArr, setOrderBy, orderBy }) => {
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	const ratingNumber = () => Number(Math.floor(Math.random() * 10000));
@@ -50,16 +51,17 @@ const Header = ({ setVideosArr, videosArr }) => {
 			}}>
 				{({ errors, touched }) => (
 					<Form className='form-validation' w={{ lg: '50vw', md: '60vw', sm: '70vw' }}>
-						<Field name="title" className='form-field' placeholder='Please enter video title'/>
+						<Field name="title" className='form-field' placeholder='Please enter video title' />
 						{errors.title && touched.title ? (
 							<div>{errors.title}</div>
 						) : null}
-						<Field name="url" className='form-field' placeholder='Please enter YouTube video URL'/>
+						<Field name="url" className='form-field' placeholder='Please enter YouTube video URL' />
 						{errors.url && touched.url ? <div>{errors.url}</div> : null}
 						<Button type="submit">Submit</Button>
 					</Form>
 				)}
 			</Formik>
+			<SortComponent setOrderBy={setOrderBy} orderBy={orderBy} />
 		</VStack>
 	)
 }

@@ -31,15 +31,14 @@ const videoSchema = {
 // GET "/"
 app.get('/', (req, res) => {
   const orderBy = req.query.order;
-  if (!orderBy) { 
-    res.status(200).send(videos) 
-  }
   if (orderBy === 'asc') {
     const sortAsc = videos.sort((vidA, vidB) => vidA.rating - vidB.rating);
     res.status(200).send(sortAsc);
   } else if (orderBy === 'desc') {
     const sortDesc = videos.sort((vidA, vidB) => vidA.rating - vidB.rating).reverse();
     res.status(200).send(sortDesc);
+  } else if (!orderBy) {
+    res.status(200).send(videos);
   } else {
     res.status(404).send('Not a valid query')
   }
