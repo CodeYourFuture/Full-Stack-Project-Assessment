@@ -29,9 +29,21 @@ const videoSchema = {
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET "/"
-app.get("/", (req, res) => res.send(videos));
-
-app.get('/')
+app.get('/', (req, res) => {
+  const orderBy = req.query.order;
+  if (!orderBy) { 
+    res.status(200).send(videos) 
+  }
+  if (orderBy === 'asc') {
+    const sortAsc = videos.sort((vidA, vidB) => vidA.rating - vidB.rating);
+    res.status(200).send(sortAsc);
+  } else if (orderBy === 'desc') {
+    const sortDesc = videos.sort((vidA, vidB) => vidA.rating - vidB.rating).reverse();
+    res.status(200).send(sortDesc);
+  } else {
+    res.status(404).send('Not a valid query')
+  }
+});
 
 app.post('/', validate(videoSchema, {}, {}), (req, res) => {
   const { id, title, url, rating, uploadDate } = req.body;
