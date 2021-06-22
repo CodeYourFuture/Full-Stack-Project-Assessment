@@ -4,7 +4,7 @@ import "./SingleVideo.css";
 
 const SingleVideo = ({ video, handleDeleteVideoClick }) => {
   const { title, url, rating, id } = video;
-  const [votes, setVotes] = useState(0);
+  const [votes, setVotes] = useState(0); // can be 0, 1 or -1
 
   const handleUpVote = () => {
     setVotes(1);
@@ -40,8 +40,8 @@ const SingleVideo = ({ video, handleDeleteVideoClick }) => {
         <iframe
           className="responsive-iframe"
           width="360"
-          height="300"
-          src={`https://www.youtube.com/embed/${url.split("=")[1]}`}
+          height="310"
+          src={`https://www.youtube.com/embed/${url.split("v=")[1]}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
