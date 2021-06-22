@@ -3,7 +3,7 @@ const Search = ({ handleSearch, searchValue }) => {
     <label htmlFor="search-field">
       <input
         type="text"
-        placeholder="type a name"
+        placeholder="type something..."
         value={searchValue}
         onChange={handleSearch}
       ></input>
