@@ -6,7 +6,8 @@ import SingleVideo from "./SingleVideo";
 import "./Videos.css";
 
 const Videos = () => {
-  const [videosData, setVideosData] = useState(staticData);
+  const sortedVideosData = staticData.sort((a, b) => b.rating - a.rating);
+  const [videosData, setVideosData] = useState(sortedVideosData);
   const [searchValue, setSearchValue] = useState("");
 
   // delete video (for SingleVideo)
