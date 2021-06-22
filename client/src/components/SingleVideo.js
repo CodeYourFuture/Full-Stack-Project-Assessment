@@ -2,8 +2,8 @@ import { useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import "./SingleVideo.css";
 
-const SingleVideo = ({ video }) => {
-  const { title, url, rating } = video;
+const SingleVideo = ({ video, handleDeleteVideoClick }) => {
+  const { title, url, rating, id } = video;
   const [votes, setVotes] = useState(0);
 
   const handleUpVote = () => {
@@ -36,8 +36,9 @@ const SingleVideo = ({ video }) => {
           />
         </div>
       </div>
-      <div>
+      <div className="iframe-container">
         <iframe
+          className="responsive-iframe"
           width="360"
           height="300"
           src={`https://www.youtube.com/embed/${url.split("=")[1]}`}
@@ -46,8 +47,13 @@ const SingleVideo = ({ video }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <button>Delete</button>
       </div>
+      <button
+        onClick={() => handleDeleteVideoClick(id)}
+        className="delete-video-btn"
+      >
+        Delete
+      </button>
     </div>
   );
 };
