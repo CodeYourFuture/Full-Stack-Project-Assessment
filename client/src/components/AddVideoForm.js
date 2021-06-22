@@ -12,7 +12,7 @@ const AddVideoForm = ({ handleAddVideo }) => {
       </label>
       <label htmlFor="movie-url">
         URL
-        <input ref={urlRef} type="text" name="movie-url" id="movie-url" />
+        <input ref={urlRef} type="url" name="movie-url" id="movie-url" />
       </label>
       <br />
       <button>CANCEL</button>
@@ -23,7 +23,7 @@ const AddVideoForm = ({ handleAddVideo }) => {
         }}
       >
         ADD
-      </button>{" "}
+      </button>
       <br />
     </form>
   );
