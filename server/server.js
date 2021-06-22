@@ -1,13 +1,17 @@
 const express = require("express");
 const cors = require('cors');
 const { validate, ValidationError, Joi } = require('express-validation');
-
 const app = express();
 
 const port = process.env.PORT || 5000;
 
+const corsOptions = {
+  origin: "http://localhost:3000"
+}
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 
 const videos = require('./exampleresponse.json');
@@ -20,8 +24,6 @@ const videoSchema = {
     rating: Joi.number().integer().required()
   })
 };
-
-
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
