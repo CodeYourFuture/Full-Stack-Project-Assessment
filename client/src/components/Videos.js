@@ -9,7 +9,7 @@ const Videos = () => {
   const [videosData, setVideosData] = useState(staticData);
   const [searchValue, setSearchValue] = useState("");
 
-  // delete video
+  // delete video (for SingleVideo)
   const handleDeleteVideoClick = (id) => {
     const newVideosData = videosData.filter((video) => {
       return video.id !== id;
@@ -18,18 +18,30 @@ const Videos = () => {
   };
 
   const handleSearch = (event) => {
-    console.log(event.target.value);
     setSearchValue(event.target.value);
   };
 
-  // filter by user input
+  const handleAddVideo = (title, url) => {
+    const newVideoObj = {
+      id: Date.now(),
+      title,
+      url,
+      rating: 0,
+    };
+
+    const newVideosData = [...videosData]; // creates copy of videosData
+    newVideosData.push(newVideoObj);
+    setVideosData(newVideosData);
+  };
+
+  // filter by user input (for Search)
   const filteredVideos = videosData.filter((data) => {
     return data.title.toLowerCase().includes(searchValue.toLowerCase());
   });
 
   return (
     <>
-      <AddVideoForm />
+      <AddVideoForm handleAddVideo={handleAddVideo} />
       <Search handleSearch={handleSearch} searchValue={searchValue} />
       <section className="videos">
         {filteredVideos.map((video, index) => {
