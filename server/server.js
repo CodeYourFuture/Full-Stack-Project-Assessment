@@ -31,9 +31,9 @@ app.get("/search", (req, res) => {
     const filteredVideo = videos.filter((video) => video.title.toUpperCase().includes(name.toUpperCase()));
 
     if (filteredVideo.length > 0) {
-      res.json(filteredVideo)
+      return res.json(filteredVideo)
     } else {
-      res.status(404).json({ message: `No video found` })
+      return res.status(404).json({ message: `No video found` })
     }
   }
 });
@@ -70,9 +70,9 @@ app.get("/:id", (req, res) => {
   const isVideoIdFound = videos.some((video) => String(video.id) === selectedId);
 
   if (isVideoIdFound) {
-    res.json(videos.filter((video) => String(video.id) === selectedId));
+    return res.json(videos.filter((video) => String(video.id) === selectedId));
   } else {
-    res.status(404).json({ message: `No video with the id of ${selectedId}` });
+    return res.status(404).json({ message: `No video with the id of ${selectedId}` });
   }
 });
 
@@ -89,8 +89,8 @@ app.delete("/:id", (req, res) => {
         videos.splice(index, 1);
       }
     })
-    res.json({ msg: `Video id ${req.params.id} deleted on ${new Date().toLocaleString()}`, deletedVideo });
+    return res.json({ msg: `Video id ${req.params.id} deleted on ${new Date().toLocaleString()}`, deletedVideo });
   } else {
-    res.status(404).json({ message: `No video with the id of ${req.params.id}`, result: "Video could not be deleted" });
+    return res.status(404).json({ message: `No video with the id of ${req.params.id}`, result: "Video could not be deleted" });
   }
 });

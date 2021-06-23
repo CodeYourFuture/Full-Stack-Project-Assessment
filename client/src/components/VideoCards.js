@@ -6,7 +6,6 @@ const VideoCards = ({ data, setData, search }) => {
     const handleDelete = (id) => {
         const updatedData = data.filter(video => video.id !== id);
         setData(updatedData);
-        console.log(updatedData)
     }
 
     return (

@@ -1,14 +1,22 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./App.css";
 import Header from "../src/components/Header";
 import AddVideo from "../src/components/AddVideo";
 import Search from "../src/components/Search";
 import VideoCards from "../src/components/VideoCards";
-import staticData from "../src/data/exampleresponse.json";
+// import staticData from "../src/data/exampleresponse.json";
 
 const App = () => {
-  const [data, setData] = useState(staticData);
+  // const [data, setData] = useState(staticData);
+  const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((error) => console.log(error))
+  }, []);
 
   return (
     <div className="App">
@@ -21,6 +29,8 @@ const App = () => {
         <Search
           search={search}
           setSearch={setSearch}
+          data={data}
+          setData={setData}
         />
       </div>
       <VideoCards
