@@ -39,23 +39,30 @@ const VideoForm = () => {
                     "id": uuid.v4(),
                     "title": video.title,
                     "url": value,
-                    "rating": 0
+                    "rating": 0,
+                    "time": new Date()
+                    
                 }
             )
         }
 
     }
-    console.log(video)
+    console.log(new Date())
 
     function handleAddVideo(e) {
         e.preventDefault()
-        video.title && video.url ? setData(data.concat(video)) : alert("Please fill both title and url sections")
+        const videoId = video.url.split("=");
+        const urlVideo = `https://www.youtube.com/embed/${videoId[1]}`
+        
+        video.title && urlVideo ? setData(data.concat(video)) : alert("Please fill both title and url sections with YouTube url")
+        
         setVideo(
             {
                 "id": uuid.v4(),
                 "title": "",
                 "url": "",
                 "rating": 0
+               
             }
         )
     }
