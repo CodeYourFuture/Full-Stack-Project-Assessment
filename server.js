@@ -1,23 +1,21 @@
 import express from "express";
 import cors from "cors";
-import videos from "./routes/videos.js"
+// import videos from "./routes/videos.js"
 import path from "path";
-const dotenv = require('dotenv');
-const { Pool } = require('pg');
-  
-dotenv.config();
+import sql_videos from "./routes/sql_videos.js";
+// import dotenv  from 'dotenv';
 const app = express();
+  
+// dotenv.config();
 app.use(express.json( {limit: "30mb", extended: true }))
 app.use(express.urlencoded( {limit: "30mb", extended: true }))
 app.use(cors());
 
 const PORT =  process.env.PORT || 5000;
 
-const pool = new Pool({
-    // connect with  connection string
-    connectionString:process.env.CONNECTIONSTRING,
-});
-app.use("/", videos)
+
+// app.use("/", videos)
+app.use("/",sql_videos);
 
 
 if(process.env.NODE_ENV === "production"){
