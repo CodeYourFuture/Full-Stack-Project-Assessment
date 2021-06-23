@@ -63,11 +63,11 @@ const Videos = () => {
       <AddVideoForm handleAddVideo={handleAddVideo} />
       <Search handleSearch={handleSearch} searchValue={searchValue} />
       <section className="videos">
-        {filteredVideos.map((video, index) => {
+        {filteredVideos.map((video) => {
           return (
             <SingleVideo
               video={video}
-              key={index}
+              key={video.id}
               searchValue={searchValue}
               handleDeleteVideoClick={handleDeleteVideoClick}
             />
