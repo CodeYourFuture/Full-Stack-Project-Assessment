@@ -1,20 +1,28 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cors());
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+ const corsOptions = {
+   origin: 'http://localhost:3000/',
+   optionsSuccessStatus: 200,
+ }
+
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 // let videos = [];
-let videos = require("../client/src/data/exampleresponse.json");
+let videos = require("./data/exampleresponse.json");
+
 
 // GET "/" This endpoint is used to return all of the videos.
 app.get("/", (req, res) => {
-  res.json(videos);
+  res.send({videos});
 });
 
 // POST "/" This endpoint is used to add a video to the API. 

@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
-import data from "./data/exampleresponse.json";
+// import data from "./data/exampleresponse.json";
 import Header from "./component/Header";
 import AddVideo from "./component/AddVideo";
 import Search from "./component/Search";
 import DisplayVideo from "./component/DisplayVideo";
 
-
- 
-
 function App() {
-  const [videoData, setVideoData] = useState(data);
+  const [videoData, setVideoData] = useState([]);
   const [search, setSearch] = useState("");
 
-  const sortedData = videoData.sort((video1, video2) => (video2.rating) - (video1.rating))
-                              .filter((video) => video.title.toUpperCase().includes(search.toUpperCase()));
-  
 
-   return (
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("There is an error with the service");
+        }
+      })
+      .then((videoData) => {
+        console.log(videoData.videos);
+        setVideoData(videoData.videos)
+      })
+      .catch(e => console.log(e));    
+  }, [])
+
+
+  return (
     <div className="App">
       <Header />
       <div className="d-flex justify-content-center align-items-center">
         <AddVideo videoData={videoData} setVideoData={setVideoData}/>
         <Search search={search} handleSearch={(e) => setSearch(e.target.value)}/>
       </div>      
-      <DisplayVideo sortedData={sortedData} videoData={videoData} setVideoData={setVideoData}/>
+        <DisplayVideo videoData={videoData} setVideoData={setVideoData} search={search} />
     </div>
   );
 }

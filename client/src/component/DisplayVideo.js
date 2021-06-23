@@ -1,7 +1,12 @@
 import SingleVideo from "./SingleVideo";
 
 
-const DisplayVideo = ({videoData, sortedData, setVideoData}) => {    
+const DisplayVideo = ({videoData, setVideoData, search}) => {    
+
+    const sortedData = videoData.sort((video1, video2) => (video2.rating) - (video1.rating))
+                              .filter((video) => video.title.toUpperCase().includes(search.toUpperCase()));
+
+  
     
     const handleDeleteVideo = (id) => {
         const newData = videoData.filter(video => video.id !== id);
