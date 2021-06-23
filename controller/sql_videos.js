@@ -59,7 +59,7 @@
 //     const rating = req.body.rating
 //     const id =req.body.id
 //     console.log(title)
-//     var SQL = "INSERT INTO videos (id, title, url, rating) VALUES ('" + id + "', '" + title + "', '" + url + "', '" + rating + "')";
+//     let SQL = "INSERT INTO videos (id, title, url, rating) VALUES ('" + id + "', '" + title + "', '" + url + "', '" + rating + "')";
 //     pool.query(SQL, (err, result) => {
 //         if(err) throw err;
 //       res.status(200).json(result.rows);
