@@ -11,11 +11,14 @@ const Video = () => {
             return element.id === id ? { id: element.id, title: element.title, url: element.url, rating: element.rating += 1 } : element
         })
         setData(updatedArray)
-        console.log(data)
     }
 
-    const voteNegative = () => {
-
+    const voteNegative = (id) => {
+        const updatedArray = data.map(element => {
+            console.log(element)
+            return element.id === id ? { id: element.id, title: element.title, url: element.url, rating: element.rating -= 1 } : element
+        })
+        setData(updatedArray)
     }
 
     function deleteVideo(id) {
@@ -29,6 +32,7 @@ const Video = () => {
     return (
         <div className="row justify-content-around align-items-center">
             {data
+                .sort((a, b) => b.rating - a.rating)
                 .filter(element => element.title.toLowerCase().includes(keyword.toLowerCase()))
                 .map(element => {
                     const { id, title, url, rating } = element
@@ -39,9 +43,9 @@ const Video = () => {
                             <div className="media-body">
                                 <h6 className="header-six mt-2 mb-1">{title}</h6>
                                 <p>
-                                    <FaThumbsDown color="red" onClick={() => { voteNegative(id) }} />
+                                    <FaThumbsDown className=" fa-thumbs mt-2" color="red" onClick={() => { voteNegative(id) }} />
                                     {rating}
-                                    <FaThumbsUp color="green" onClick={() => { votePlus(id) }} />
+                                    <FaThumbsUp className="fa-thumbs mt-2" color="green" onClick={() => { votePlus(id) }} />
                                 </p>
                             </div>
                             <iframe className="w-75 h-75" src={urlVideo} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
