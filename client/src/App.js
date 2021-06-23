@@ -8,7 +8,7 @@ import AddVideo from "./AddVideo";
 
 function App() {
   const [videoList, SetVideoList] = useState(videos);
-  const[videosFiltered,setVideoFiltered]=useState(videos);
+  const [videosFiltered, setVideoFiltered] = useState(videos);
   const handleClickButton = (id) => {
     setVideoFiltered(videosFiltered.filter((video) => video.id !== id));
   };
@@ -26,9 +26,9 @@ function App() {
       url: `https://www.youtube.com/watch?v=${urlValue}`,
       rating: 1,
     };
-   SetVideoList( videoList.concat(newVideo));
-   setVideoFiltered(videosFiltered.concat(newVideo));
-   console.log(videoList);
+    SetVideoList(videoList.concat(newVideo));
+    setVideoFiltered(videosFiltered.concat(newVideo));
+    console.log(videoList);
   };
   return (
     <div className="App">
@@ -39,13 +39,17 @@ function App() {
         <AddVideo addVideo={addVideo} />
         <Search search={search} />
       </div>
-      {videosFiltered.map((video, index) => (
-        <DisplayVideos
-          video={video}
-          handleClickButton={handleClickButton}
-          index={index}
-        />
-      ))}
+      <div className="container">
+        <div className="row">
+          {videosFiltered.map((video, index) => (
+            <DisplayVideos
+              video={video}
+              handleClickButton={handleClickButton}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
