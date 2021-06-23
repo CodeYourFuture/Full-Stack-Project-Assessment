@@ -6,16 +6,16 @@ import SingleVideo from "./SingleVideo";
 import "./Videos.css";
 
 const Videos = () => {
-  const sortedVideosData = staticData.sort((a, b) => b.rating - a.rating);
-  const [videosData, setVideosData] = useState(sortedVideosData);
+  // const sortedVideosData = staticData.sort((a, b) => b.rating - a.rating);
+  const [videosData, setVideosData] = useState(() =>
+    staticData.sort((a, b) => b.rating - a.rating)
+  );
   const [searchValue, setSearchValue] = useState("");
   const [showError, setShowError] = useState(false);
 
   // delete video (for SingleVideo)
   const handleDeleteVideoClick = (id) => {
-    const newVideosData = videosData.filter((video) => {
-      return video.id !== id;
-    });
+    const newVideosData = videosData.filter((video) => video.id !== id);
     setVideosData(newVideosData);
   };
 
@@ -42,9 +42,7 @@ const Videos = () => {
         rating: 0,
       };
 
-      const newVideosData = [...videosData]; // creates copy of videosData
-      newVideosData.push(newVideoObj);
-      setVideosData(newVideosData);
+      setVideosData([...videosData, newVideoObj]);
     } else {
       setShowError(true);
     }
@@ -59,7 +57,7 @@ const Videos = () => {
     <>
       {showError && (
         <p className="error-message">
-          Please fill both fields and provide a valid YouTube url
+          Please fill both fields and provide a valid YouTube url!
         </p>
       )}
       <AddVideoForm handleAddVideo={handleAddVideo} />
