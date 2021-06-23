@@ -55,12 +55,13 @@ export const order = (req, res) => {
 export const postVideos = (req,res) => {
     const title = req.body.title
     const url = req.body.url
-    // const rating = req.body.rating
-    console.log(title, url)
-    // pool.query(`INSERT INTO videos (title, url, rating) VALUES (${title}, ${url})`, (error, result) => {
-    //     if(err) throw err;
-    //   res.status(200).json(result.rows);
-    // })
+    const rating = req.body.rating
+    const id =req.body.id
+    const SQL = "INSERT INTO videos (id,title, url, rating) VALUES (" + `${id}, ${title}, ${url}, ${rating}`  + ")"
+    pool.query(SQL, (err, result) => {
+        if(err) throw err;
+      res.status(200).json(result.rows);
+    })
 }
 
 
