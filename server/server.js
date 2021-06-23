@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+const exampleData = require("../client/src/exampleresponse.json")
+console.log(exampleData)
 
 // middleware
 app.use(express.json());
@@ -35,9 +37,7 @@ app.get("/", (req, res) => {
 
 // 1. list of all videos
 app.get("/videos", function (req, res) {
-  pool.query('SELECT * FROM videos', (error, result) => {
-    res.json(result.rows);
-  });
+    res.json(exampleData);
 });
 
 // // 2. get a particular hotel
