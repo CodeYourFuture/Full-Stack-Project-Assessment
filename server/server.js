@@ -1,9 +1,11 @@
 const { response, request } = require("express");
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const videos = require("../exampleresponse.json");
 const lodash = require("lodash");
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -7,7 +7,12 @@ import Search from "./Search";
 import AddVideo from "./AddVideo";
 
 function App() {
-  const [videoList, SetVideoList] = useState(videos);
+  const [videoList, SetVideoList] = useState([]);
+  console.log(videoList);
+fetch("http://localhost:5000")
+  .then((res) => res.json())
+  .then((data) => SetVideoList(data))
+  .catch((err) => console.error(err));
   const [videosFiltered, setVideoFiltered] = useState(videos);
   const handleClickButton = (id) => {
     setVideoFiltered(videosFiltered.filter((video) => video.id !== id));
