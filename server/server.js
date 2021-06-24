@@ -45,11 +45,8 @@ app.get("/videos", function (req, res) {
 });
 
 // ###`POST` "/"
-
 // This endpoint is used to add a video to the API.
-
 // Both fields - title and url - must be included and be valid for this to succeed.
-
 // ** Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
 app.post("/videos", (req, res) => {
   const newVideo = {
@@ -68,13 +65,20 @@ app.post("/videos", (req, res) => {
 })
 console.log(exampleData)
 
-// 3. delete a particular video
-// app.delete("/video/:id", function (req, res) {
-//   pool.query(`DELETE FROM videos where ${req.params.id} = videos.id`, (error, result) => {
-//     res.status(200).json(result.rows);
+// ###`GET` "/{id}"
+// Returns the video with the ID contained within the`{id}` parameter
+app.get("/videos/:id", (req, res) => {
+const videoId = req.params.id
+const found = exampleData.some(element => element.id === videoId)
+if(found){
+  const filteredData = exampleData.filter(element => element.id === videoId)
+  res.status(200).json(filteredData)
+} else res.status(404).json({msg: `There is no video with id : ${videoId}`})
+})
 
-//   })
-// })
+// ###`DELETE` "/{id}"
+// Deletes the video with the ID container within the`{id}` parameter
+
 
 // // 4. update name of a particular bookings night
 // app.put("/video/:id", function (req, res) {
