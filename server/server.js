@@ -34,10 +34,10 @@ const pool = new Pool({
 // let videos = [];
 
 // GET "/"
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+//   res.send({ express: "Your Backend Service is Running" });
+// });
 
 // 1. list of all videos
 app.get("/videos", function (req, res) {
@@ -51,26 +51,30 @@ app.get("/videos", function (req, res) {
 // Both fields - title and url - must be included and be valid for this to succeed.
 
 // ** Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
-app.post("/video", (req, res) => {
+app.post("/videos", (req, res) => {
   const newVideo = {
     "id": uuidv4(),
     "title": req.body.title,
     "url": req.body.url,
     "rating": 0,
-    timePost: new Date().toLocaleString
+    "timePost": new Date().toLocaleString
   }
   if (!newVideo.title || !newVideo.url) {
-    res.status(400).json({ msg: `something is missing!` })
-  } else res.status(200).json(concat(newVideo))
+    res.status(400).json({
+      "result": "failure",
+      "message": "Video could not be saved"
+    })
+  } else res.status(200).json(exampleData.push(newVideo))
 })
+console.log(exampleData)
 
 // 3. delete a particular video
-app.delete("/video/:id", function (req, res) {
-  pool.query(`DELETE FROM videos where ${req.params.id} = videos.id`, (error, result) => {
-    res.status(200).json(result.rows);
+// app.delete("/video/:id", function (req, res) {
+//   pool.query(`DELETE FROM videos where ${req.params.id} = videos.id`, (error, result) => {
+//     res.status(200).json(result.rows);
 
-  })
-})
+//   })
+// })
 
 // // 4. update name of a particular bookings night
 // app.put("/video/:id", function (req, res) {
@@ -81,16 +85,16 @@ app.delete("/video/:id", function (req, res) {
 // })
 
 // 5. insert a new video
-app.post("/videos", function (req, res) {
-  const title = req.body.title
-  const url = req.body.url
-  const id = req.body.id
-  const rating = req.body.rating
-  console.log(title, url)
-  pool.query(`INSERT INTO videos (id, title, url, rating) VALUES (${id}, ${title}, ${url}, ${rating} )`, (error, result) => {
-    res.status(200).json(result.rows);
+// app.post("/videos", function (req, res) {
+//   const title = req.body.title
+//   const url = req.body.url
+//   const id = req.body.id
+//   const rating = req.body.rating
+//   console.log(title, url)
+//   pool.query(`INSERT INTO videos (id, title, url, rating) VALUES (${id}, ${title}, ${url}, ${rating} )`, (error, result) => {
+//     res.status(200).json(result.rows);
 
-  })
-})
+//   })
+// })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
