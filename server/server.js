@@ -93,4 +93,17 @@ app.delete("/videos/:id", (req, res) => {
 })
 
 
+// When you return all of the videos from endpoint you should add an optional parameter that will change the ordering of the data
+// /?order=asc
+// and
+// /?order=desc
+app.get("/videos/search", (req, res) => {
+  const searchTerm = req.query.order.toLowerCase()
+  const found = exampleData.some(video => video.text.toLowerCase().includes(searchTerm))
+  if (found) {
+    const filteredMessages = messages.filter(message => message.text.toLowerCase().includes(searchTerm))
+    res.json(filteredMessages)
+  } else res.json({ msg: `No message with that search term!` })
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
