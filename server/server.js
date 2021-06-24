@@ -78,27 +78,16 @@ if(found){
 
 // ###`DELETE` "/{id}"
 // Deletes the video with the ID container within the`{id}` parameter
+app.delete("/videos/:id", (req, res) => {
+  const id = req.params.id
+  const found = exampleData.some(video => video.id === id)
+  if (found) {
+    exampleData = exampleData.filter(video => {
+      return video.id !== id
+    })
+    res.status(200).json({ msg: `video with id: ${id} is deleted` })
+  } else res.status(400).json({ msg: `there is no video with id: ${id}` })
+})
 
-
-// // 4. update name of a particular bookings night
-// app.put("/video/:id", function (req, res) {
-//   pool.query(`UPDATE bookings SET nights= 999 where ${req.params.id} = bookings.id`, (error, result) => {
-//     res.status(200).json(result.rows);
-
-//   })
-// })
-
-// 5. insert a new video
-// app.post("/videos", function (req, res) {
-//   const title = req.body.title
-//   const url = req.body.url
-//   const id = req.body.id
-//   const rating = req.body.rating
-//   console.log(title, url)
-//   pool.query(`INSERT INTO videos (id, title, url, rating) VALUES (${id}, ${title}, ${url}, ${rating} )`, (error, result) => {
-//     res.status(200).json(result.rows);
-
-//   })
-// })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
