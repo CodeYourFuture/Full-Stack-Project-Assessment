@@ -86,7 +86,10 @@ app.delete("/videos/:id", (req, res) => {
       return video.id !== id
     })
     res.status(200).json({ msg: `video with id: ${id} is deleted` })
-  } else res.status(400).json({ msg: `there is no video with id: ${id}` })
+  } else res.status(400).json({
+    "result": "failure",
+    "message": "Video could not be deleted"
+  })
 })
 
 
