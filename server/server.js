@@ -35,7 +35,7 @@ const pool = new Pool({
 
 // GET "/"
 // app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
+// Delete this line after you've confirmed your server is running
 //   res.send({ express: "Your Backend Service is Running" });
 // });
 
@@ -68,28 +68,29 @@ console.log(exampleData)
 // ###`GET` "/{id}"
 // Returns the video with the ID contained within the`{id}` parameter
 app.get("/videos/:id", (req, res) => {
-const videoId = req.params.id
-const found = exampleData.some(element => element.id === videoId)
-if(found){
-  const filteredData = exampleData.filter(element => element.id === videoId)
-  res.status(200).json(filteredData)
-} else res.status(404).json({msg: `There is no video with id : ${videoId}`})
+  const videoId = req.params.id
+  const found = exampleData.some(element => element.id.toString() === videoId)
+  if (found) {
+    const filteredData = exampleData.filter(element => element.id.toString() === videoId)
+    res.status(200).json(filteredData)
+  } else res.status(404).json({ msg: `There is no video with id : ${videoId}` })
 })
 
 // ###`DELETE` "/{id}"
 // Deletes the video with the ID container within the`{id}` parameter
 app.delete("/videos/:id", (req, res) => {
   const id = req.params.id
-  const found = exampleData.some(video => video.id === id)
-  if (found) {
-    exampleData = exampleData.filter(video => {
-      return video.id !== id
-    })
+  const videoDelete = exampleData.findIndex(video => video.id.toString() === id)
+  if (videoDelete !== -1) {
+    exampleData.splice(videoDelete, 1)
     res.status(200).json({ msg: `video with id: ${id} is deleted` })
   } else res.status(400).json({
     "result": "failure",
     "message": "Video could not be deleted"
   })
+  // exampleData = pleData.filter(video => {
+  //   return video.id.toString() !== id
+  // })
 })
 
 
