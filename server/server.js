@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const exampleData = require("../client/src/exampleresponse.json")
-console.log(exampleData)
+const { v4: uuidv4 } = require('uuid');
 
 // middleware
 app.use(express.json());
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 
 // 1. list of all videos
 app.get("/videos", function (req, res) {
-    res.json(exampleData);
+  res.json(exampleData);
 });
 
 // ###`POST` "/"
@@ -51,7 +51,7 @@ app.get("/videos", function (req, res) {
 // Both fields - title and url - must be included and be valid for this to succeed.
 
 // ** Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
-app.post("/videos", (req, res) => {
+app.post("/video", (req, res) => {
   const newVideo = {
     "id": uuidv4(),
     "title": req.body.title,
@@ -59,7 +59,9 @@ app.post("/videos", (req, res) => {
     "rating": 0,
     timePost: new Date().toLocaleString
   }
-  res.status(200).json({msg:`You added a new video!`})
+  if (!newVideo.title || !newVideo.url) {
+    res.status(400).json({ msg: `something is missing!` })
+  } else res.status(200).json(concat(newVideo))
 })
 
 // 3. delete a particular video
