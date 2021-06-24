@@ -67,7 +67,7 @@ app.delete("/:id", (req, res) => {
 
   const videoToDelete = videos.findIndex((video) => {
     return video.id === videoID;
-    // returns index of the booking || -1
+    // returns index of the video|| -1
   });
 
   if (videoToDelete !== -1) {
