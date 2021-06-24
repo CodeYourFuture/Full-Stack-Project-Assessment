@@ -8,7 +8,7 @@ const Addvideo = ({addVideo,setShowAddVideo}) => {
     const onClickHandler =  () =>{ 
         if(values.title === ""){
             alert("Please add a valid title")
-        }else if (!matchYoutubeUrl(values.url)){
+        }else if (!validateUrl(values.url)){
             alert("Please add a valid url")        
         }else{
             addVideo(values);
@@ -17,7 +17,7 @@ const Addvideo = ({addVideo,setShowAddVideo}) => {
     }
     
    
-const matchYoutubeUrl = ((url) => {
+const validateUrl = ((url) => {
     const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         if (url.match(p)) {
             return url.match(p)[1];

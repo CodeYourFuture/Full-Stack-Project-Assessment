@@ -15,7 +15,9 @@ app.use(express.json());
 // GET "/" This endpoint is used to return all of the videos.
 app.get("/", (req, res) => {
   res.send({videos});
+
 });
+
 
 
 app.post("/", (req, res) => {
