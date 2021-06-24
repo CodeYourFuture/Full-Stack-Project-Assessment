@@ -1,10 +1,19 @@
-import React, { useContext, useState } from "react";
-import Data from "./exampleresponse.json"
+import React, { useContext, useState, useEffect } from "react";
+// import Data from "./exampleresponse.json"
 const AppContext = React.createContext();
+
 const AppProvider = ({ children }) => {
 
-    const [data, setData] = useState(Data);
+    const [data, setData] = useState([]);
     const [keyword, setKeyword] = useState("")
+    useEffect(() => {
+        fetch(
+            `http://localhost:5000/videos`)
+            .then((res) => res.json())
+            .then((data) => {
+                setData(data);
+            });
+    }, []);
     return (
         <AppContext.Provider value={
             {

@@ -8,6 +8,10 @@ console.log(exampleData)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// middleware for cors policy
+const cors = require("cors");
+app.use(cors());
+
 
 const { Pool } = require('pg');
 
@@ -40,12 +44,23 @@ app.get("/videos", function (req, res) {
     res.json(exampleData);
 });
 
-// // 2. get a particular hotel
-// app.get("/video/:id", function (req, res) {
-//   pool.query(`SELECT * FROM hotels where ${req.params.id} = hotels.id`, (error, result) => {
-//     res.json(result.rows);
-//   })
-// })
+// ###`POST` "/"
+
+// This endpoint is used to add a video to the API.
+
+// Both fields - title and url - must be included and be valid for this to succeed.
+
+// ** Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
+app.post("/videos", (req, res) => {
+  const newVideo = {
+    "id": uuidv4(),
+    "title": req.body.title,
+    "url": req.body.url,
+    "rating": 0,
+    timePost: new Date().toLocaleString
+  }
+  res.status(200).json({msg:`You added a new video!`})
+})
 
 // 3. delete a particular video
 app.delete("/video/:id", function (req, res) {
