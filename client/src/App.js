@@ -1,15 +1,34 @@
 import "./App.css";
 import VideosContainer from "./components/VideosContainer/VideosContainer";
-import videos from './data/exampleresponse.json';
+//import videos from './data/exampleresponse.json';
 import Header from "./components/Header/Header";
 import AddVideo from "./components/AddVideo/Addvideo";
 import Search from "./components/Search/Search";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 function App() {
   
-  const [allVideos, setAllVideos] = useState(videos);
+  const [allVideos, setAllVideos] = useState([]);
   const [showAddVideo, setShowAddVideo] = useState(false);
   const [search, setSearch] = useState("");
+
+
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("There is an error with the service");
+        }
+      })
+      .then((allVideos) => {
+        setAllVideos(allVideos.videos)
+      })
+      .catch(e => console.log(e));    
+  }, [])
+
+
 
 // Function to delete a video with ID
   const deleteVideo = (id) => {
