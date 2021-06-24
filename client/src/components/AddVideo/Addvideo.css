@@ -34,3 +34,7 @@ background-color: gainsboro;
     display: flex;
     justify-content: center;
 }
+
+.errors{
+    color: red;
+}

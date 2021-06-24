@@ -11,7 +11,13 @@
 
 }
 
+.notPosted{
+  display: none;
+}
 
+.posted{
+  color: red;
+}
 .thumbes-container{
   display: flex;
   justify-content: space-between;

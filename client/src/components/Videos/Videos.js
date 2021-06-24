@@ -6,7 +6,7 @@ import thumbsDown from  "../../images/thumb-down.svg";
 function Videos({video,deleteVideo}) {
  
 	const [like, setLike] = useState(video.rating);
-   
+  
 
 	const incrementRating = () => {
 		setLike(like + 1);
@@ -17,6 +17,9 @@ function Videos({video,deleteVideo}) {
     }
   
 
+
+
+
   const videoID = video.url.split('v=');
 
     return (
@@ -24,6 +27,8 @@ function Videos({video,deleteVideo}) {
         
                  <div className="iframe-container" >
                      <p>{video.title}</p>
+                     {/* <h6 >Date Video Added: {video.posted}</h6> */}
+                     <h6 className={video.posted ? 'posted' : 'notPosted'}>Posted On: {video.posted}</h6>
                      <div className="thumbes-container">
                      <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
                        <span className="vote">Vote:  {like}</span>

@@ -1,0 +1,13 @@
+
+.serach-input{
+    padding: 10px;
+    width: 20%;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(232, 235, 235);
+}
+
+.lb{
+    padding-right: 6px;
+}
