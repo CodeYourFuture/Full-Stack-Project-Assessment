@@ -1,3 +1,28 @@
 .App {
   text-align: center;
 }
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+i {
+  pointer-events: none;
+}
+
+.video-title {
+  font-size: 1.2rem;
+}
+
+.vote-btns {
+  padding: 0.2rem;
+}
+
+.delete-btn {
+  margin: 1rem;
+}
+
+.form-submit {
+  background-color: green;
+}
