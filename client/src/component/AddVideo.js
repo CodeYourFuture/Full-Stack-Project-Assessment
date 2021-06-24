@@ -2,23 +2,9 @@ import React, { useState } from 'react';
 
 const AddVideo = ({videoData, setVideoData}) => {
     const [showAddVideo, setShowAddVideo] = useState(false);
-
     const [titleValue, setTitleValue] = useState();
     const [urlValue, setUrlValue] = useState();
-
-    // const handleAddVideo = () => {
-    //     const videoId = Math.floor(Math.random()*1000000);
-    //     const newVideoData = {
-    //       id: videoId,
-    //       title: titleValue,
-    //       url: urlValue,
-    //       rating: 0,
-    //     };
-    //     setVideoData(videoData.concat(newVideoData));
-    //     console.log(newVideoData);
-    //     console.log(videoData);
-    // };
-
+    
     const handleAddVideo = () => {
         const videoId = Math.floor(Math.random()*1000000);
         const newVideoData = {
@@ -30,9 +16,9 @@ const AddVideo = ({videoData, setVideoData}) => {
         };
 
         const matchYoutubeUrl = ((url) => {
-            const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-            if (url.match(p)) {
-                return url.match(p)[1];
+            const path = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            if (url.match(path)) {
+                return url.match(path)[1];
                 }
                  return false;
         })

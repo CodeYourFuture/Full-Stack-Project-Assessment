@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import ConfirmModal from "./ConfirmModal";
 
 
 const SingleVideo = ({video, handleDeleteVideo}) => {
-    const [voteCounter, setVoteCounter] = useState(video.rating);    
-
+    const [voteCounter, setVoteCounter] = useState(video.rating); 
 
   return (
+      <>
     <div className="col my-4">
         <div className= "d-flex-column m-2">
         <h4>{video.title}</h4>
@@ -25,10 +26,13 @@ const SingleVideo = ({video, handleDeleteVideo}) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen>
             </iframe>
-        </div>
-        <button onClick={() => handleDeleteVideo(video.id)} className="btn btn-danger">Delete</button>
+        </div>        
+            <ConfirmModal 
+            buttonText="Delete"
+            handleConfirm={handleDeleteVideo}
+            />
     </div>                
-   
+   </>
   );
 }
 

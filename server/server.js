@@ -6,13 +6,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
- const corsOptions = {
-   origin: 'http://localhost:3000/',
-   optionsSuccessStatus: 200,
- }
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with

@@ -5,7 +5,6 @@ import Header from "./component/Header";
 import AddVideo from "./component/AddVideo";
 import Search from "./component/Search";
 import DisplayVideo from "./component/DisplayVideo";
-
 function App() {
   const [videoData, setVideoData] = useState([]);
   const [search, setSearch] = useState("");
