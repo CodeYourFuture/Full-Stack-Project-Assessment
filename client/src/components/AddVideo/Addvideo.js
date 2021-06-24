@@ -2,7 +2,6 @@ import React,{useState} from 'react'
 import "./Addvideo.css";
 
 const Addvideo = ({addVideo,setShowAddVideo}) => {
-    //const [add, setAdd] = useState({title: "", url: ""});
     const [values, setValues] = useState({title: "", url: "",rating:0, posted: new Date().toLocaleString()});
      
     const onClickHandler =  () =>{ 
