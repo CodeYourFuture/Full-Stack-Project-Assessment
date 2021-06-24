@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ThumbUp, ThumbDown, DeleteForever } from "@material-ui/icons";
+import { VideoContext } from "../contexts/VideoContext";
 
-function VideoCard({ data, handleDelete }) {
+function VideoCard({ data }) {
+  const { videoList, setVideoList } = useContext(VideoContext);
   const [rating, setRating] = useState(data.rating);
+
+  function handleDelete(id) {
+    setVideoList(videoList.filter((data) => data.id !== id));
+  }
 
   function handleThumbDown() {
     setRating(rating - 1);
@@ -24,7 +30,7 @@ function VideoCard({ data, handleDelete }) {
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        title="Embedded youtube"
+        title={data.title}
       />
 
       <div className="card-body">

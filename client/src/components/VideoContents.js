@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import data from "../exampleresponse.json";
+import React, { useContext } from "react";
+import AddVideo from "./AddVideo";
 import VideoCard from "./VideoCard";
 
-function VideoContents() {
-  const [dataArray, setDataArray] = useState(data);
+import { VideoContext } from "../contexts/VideoContext";
 
-  function handleDelete(id) {
-    console.log(id);
-    setDataArray(dataArray.filter((data) => data.id !== id));
-  }
+function VideoContents() {
+  const { videoList, searchText } = useContext(VideoContext);
+  console.log(videoList);
 
   return (
-    <div className="row d-flex justify-content-center m-3">
-      {dataArray.map((video, index) => {
-        return (
-          <VideoCard key={index} data={video} handleDelete={handleDelete} />
-        );
-      })}
+    <div className="d-flex flex-column align-items-center">
+      <AddVideo />
+      <div className="row d-flex justify-content-center m-3">
+        {videoList
+          .filter((video) => video.title.includes(searchText))
+          .map((video, index) => {
+            return <VideoCard key={video.id} data={video} />;
+          })}
+      </div>
     </div>
   );
 }
