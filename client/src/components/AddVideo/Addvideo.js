@@ -37,14 +37,10 @@ const validateUrl = ((url) => {
         <div className="input-container">
             
             <label>Title </label>
-            {/* <input type="text" value={add.title} onChange={(e)=> setAdd({...add, title: e.target.value})}></input> */}
             <input type="text"  name="title" value={values.title} onChange={handelChange}></input>
-            {/* {errors.title && <p className="errors">{errors.title}</p>} */}
             <br />
             <label>URL </label>
-            {/* <input type="text" value={add.url} onChange={(e)=> setAdd({...add, url: e.target.value})}></input> */}
             <input type="text" name="url" value={values.url} onChange={handelChange}></input>
-            {/* {errors.url && <p className="errors">{errors.url}</p>} */}
             <br />
             <div className="btn-addvideo-container">
             <button onClick={() => setShowAddVideo(false)}>Cancel</button>
