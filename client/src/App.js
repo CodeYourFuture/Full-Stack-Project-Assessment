@@ -1,11 +1,13 @@
 import "./App.css";
+import Content from "./Components/Content";
+import Header from "./Components/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <Content />
     </div>
   );
 }
