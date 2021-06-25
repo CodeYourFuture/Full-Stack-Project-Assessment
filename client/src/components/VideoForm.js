@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SearchBox from "./SearchBox";
 import { useGlobalContext } from "../Context"
 import uuid from 'react-native-uuid';
+import ToggleButton from "./ToggleButton";
+
 
 
 
@@ -47,7 +49,7 @@ const VideoForm = () => {
         }
 
     }
-    console.log(new Date())
+    
 
     const matchYouTubeUrl = (url) => {
         var p =
@@ -123,6 +125,9 @@ const VideoForm = () => {
 
                     </div> : null
                 }
+            </div>
+            <div className="m-5">
+                <ToggleButton />
             </div>
             <div className="m-5">
                 <SearchBox />

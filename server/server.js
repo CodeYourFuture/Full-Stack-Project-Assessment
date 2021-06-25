@@ -65,6 +65,26 @@ app.post("/videos", (req, res) => {
 })
 console.log(exampleData)
 
+// When you return all of the videos from endpoint you should add an optional parameter that will change the ordering of the data
+// /?order=asc
+// and
+// /?order=desc
+app.get("/videos/search", (req, res) => {
+
+  const searchTerm = req.query.order.toLowerCase()
+
+  if (searchTerm === "asc") {
+    const ascVideos = exampleData.sort((a, b) => a.rating - b.rating)
+    return res.json(ascVideos)
+  } else if (searchTerm === "desc") {
+    const descVideos = exampleData.sort((a, b) => b.rating - a.rating)
+    return res.json(descVideos)
+  } else {
+    return res.json({ msg: `Choose asc or desc order to show videos with your preference of rating!` })
+  }
+
+});
+
 // ###`GET` "/{id}"
 // Returns the video with the ID contained within the`{id}` parameter
 app.get("/videos/:id", (req, res) => {
@@ -82,29 +102,21 @@ app.delete("/videos/:id", (req, res) => {
   const id = req.params.id
   const videoDelete = exampleData.findIndex(video => video.id.toString() === id)
   if (videoDelete !== -1) {
+
     exampleData.splice(videoDelete, 1)
     res.status(200).json({ msg: `video with id: ${id} is deleted` })
-  } else res.status(400).json({
-    "result": "failure",
-    "message": "Video could not be deleted"
-  })
-  // exampleData = pleData.filter(video => {
-  //   return video.id.toString() !== id
-  // })
+
+  } else {
+
+    res.status(400).json({
+      "result": "failure",
+      "message": "Video could not be deleted"
+    })
+  }
+
 })
 
 
-// When you return all of the videos from endpoint you should add an optional parameter that will change the ordering of the data
-// /?order=asc
-// and
-// /?order=desc
-app.get("/videos/search", (req, res) => {
-  const searchTerm = req.query.order.toLowerCase()
-  const found = exampleData.some(video => video.text.toLowerCase().includes(searchTerm))
-  if (found) {
-    const filteredMessages = messages.filter(message => message.text.toLowerCase().includes(searchTerm))
-    res.json(filteredMessages)
-  } else res.json({ msg: `No message with that search term!` })
-});
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

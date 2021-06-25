@@ -26,13 +26,12 @@ const Video = () => {
             return element.id !== id ? element : !element
         })
         setData(deletedVideoArray)
-        console.log(data)
     }
 
     return (
         <div className="row justify-content-around align-items-center">
             {data
-                .sort((a, b) => b.rating - a.rating)
+                // .sort((a, b) => a.rating - b.rating)
                 .filter(element => element.title.toLowerCase().includes(keyword.toLowerCase()))
                 .map(element => {
                     const { id, title, url, rating } = element
