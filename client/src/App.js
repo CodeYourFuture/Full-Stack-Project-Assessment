@@ -10,8 +10,8 @@ function App() {
   const [allVideos, setAllVideos] = useState([]);
   const [showAddVideo, setShowAddVideo] = useState(false);
   const [search, setSearch] = useState("");
-
-
+  // const [sorted, setSorted] = useState('');
+  // const [videosArrUpdated, setVideosArrUpdated] = useState(1);
 
   useEffect(() => {
     fetch("http://localhost:5000")
@@ -23,11 +23,19 @@ function App() {
         }
       })
       .then((allVideos) => {
-        setAllVideos(allVideos.videos)
+        setAllVideos(allVideos)
+        console.log(allVideos);
       })
       .catch(e => console.log(e));    
   }, [])
 
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/?order=${sorted}`)
+  //     .then(res => res.json())
+  //     .then(allVideos => setAllVideos(allVideos))
+  //     .catch(err => console.error(err))
+  // }, [sorted, videosArrUpdated])
 
 
 // Function to delete a video with ID
@@ -47,7 +55,7 @@ const addVideo = (video) =>{
   return (
     <div className="App">
       <header className="App-header">
-        <Header/>
+        <Header />
         <Search search={search} handleSearch={(e) => setSearch(e.target.value)}/>
          <div className="add-video">
           <button className="add" onClick={()=> setShowAddVideo(true)}>Add Video</button>

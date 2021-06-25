@@ -7,6 +7,7 @@ function VideosContainer({videoData,deleteVideo,search}) {
     const sortedData = videoData.sort((video1, video2) => (video2.rating) - (video1.rating))
     .filter((video) => video.title.toUpperCase().includes(search.toUpperCase()));
 
+    
     return (
         
         <div className="main-videos">     

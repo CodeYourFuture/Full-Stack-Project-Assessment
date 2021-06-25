@@ -9,13 +9,26 @@ let videos = require("./data/exampleresponse.json");
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 //let videos = [];
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.json());
 // GET "/"
 // GET "/" This endpoint is used to return all of the videos.
-app.get("/", (req, res) => {
-  res.send({videos});
+app.get('/', (req, res) => {
+  const sorted = req.query.order;
+  if (!sorted) { 
+    res.send(videos) 
+  }
 
+  if (sorted === 'asc') {
+    const Asc = videos.sort((videoA, videoB) => videoA.rating - videoB.rating);
+    res.send(Asc);
+  } else if (sorted === 'desc') {
+    const Desc = videos.sort((videoA, videoB) => videoA.rating - videoB.rating).reverse();
+    res.send(Desc);
+  } else {
+    res.status(404).send('Not a valid query')
+  }
 });
 
 
