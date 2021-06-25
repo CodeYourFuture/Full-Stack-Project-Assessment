@@ -21,8 +21,8 @@ function VideoCard({ data }) {
   return (
     <div
       key={data.id}
-      className="card col-12 col-md-3 m-3"
-      style={{ width: "18rem" }}
+      className="card col-12 col-md-3 m-3 p-0"
+      style={{ width: "16rem" }}
     >
       <iframe
         className="card-img-top"
@@ -33,7 +33,7 @@ function VideoCard({ data }) {
         title={data.title}
       />
 
-      <div className="card-body">
+      <div className="card-body justify-content-between">
         <h5 className="card-title">{data.title}</h5>
         <div className="d-flex justify-content-between">
           <div onClick={handleThumbUp}>

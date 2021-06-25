@@ -26,7 +26,7 @@ function AddVideo() {
 
   return (
     <div className="border rounded row col-10 align-items-center justify-content-center">
-      <div className="m-1 col-12 col-md-7">
+      <div className="col-12 col-md-7 p-1">
         <div className="input-group">
           <span className="input-group-text" id="basic-addon3">
             https://www.youtube.com/watch?v=
@@ -41,7 +41,7 @@ function AddVideo() {
           />
         </div>
       </div>
-      <div className="m-1 col-12 col-md-3">
+      <div className="col-12 col-md-4 p-1">
         <div className="input-group ">
           <span className="input-group-text" id="basic-addon3">
             Title
