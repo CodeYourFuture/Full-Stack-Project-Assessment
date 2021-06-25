@@ -4,14 +4,14 @@ import "./App.css";
 
 const DisplayVideos = ({ video, handleClickButton, index }) => {
   const videoId = video.url.split("=");
-  const [votes, setVotes] = useState(0);
+  const [votes, setVotes] = useState(video.rating);
+  
   return (
-    <div className="col-lg-4 col-md-6 mx-auto p-2 my-5">
+    <div className="col-lg-4 col-md-6 mx-auto p-2 my-5" key={index}>
       <div className="video-header">
         <p className="m-2">{video.title}</p>
         <div>
           <button
-            key={index + 1}
             name="increaseVote"
             aria-label="Like video"
             className="btn btn-danger mx-2"
@@ -21,10 +21,9 @@ const DisplayVideos = ({ video, handleClickButton, index }) => {
           </button>
           <label>{votes} Votes </label>
           <button
-            key={index + 2}
             name="decreaseVote"
             aria-label="Dislike video"
-            className="btn btn-danger mx-2"
+            className="btn btn-danger mx-2 py-1 px-2"
             onClick={() => setVotes(votes - 1)}
           >
             <IoHeartDislikeSharp />
@@ -33,7 +32,7 @@ const DisplayVideos = ({ video, handleClickButton, index }) => {
       </div>
       <div>
         <iframe
-          key={index}
+          key={index+1}
           width="350px"
           height="250px"
           src={`https://www.youtube.com/embed/${videoId[1]}`}
@@ -45,7 +44,7 @@ const DisplayVideos = ({ video, handleClickButton, index }) => {
       </div>
       <button
         name="deleteVideo"
-        key={index}
+        key={index+2}
         className="btn btn-danger mt-2"
         onClick={() => handleClickButton(video.id)}
       >

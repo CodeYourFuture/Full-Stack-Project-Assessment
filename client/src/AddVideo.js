@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 
-const AddVideo = ({addVideo}) => {
+const AddVideo = ({ addVideo,isAdded }) => {
   const [displayAddBox, setDisplayAddBox] = useState(false);
   const [titleValue, setTitleValue] = useState();
   const [urlValue, setUrlValue] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const onChangeTitle = (event) => setTitleValue(event.target.value);
   const onChangeUrl = (event) => setUrlValue(event.target.value);
   const handleClickButton = () => {
-      const urlId = urlValue.split("=");
-    addVideo(titleValue, urlId[1]);
+    setErrorMessage("");
+    const url = urlValue;
+    const title = titleValue;
+    setTitleValue("");
+    setUrlValue("");
+    if (url && title) {
+      var regExp =
+        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match && match[2].length == 11) {
+        const urlId = url.split("=");
+        addVideo(title, urlId[1]);
+        if(isAdded===1) setErrorMessage("The video is added")
+      } else {
+        console.log("The url is not valid");
+        setErrorMessage("The url is not valid");
+      }
+    } else setErrorMessage("Please enter info");
   };
   return (
     <div className="col-6">
@@ -53,6 +70,9 @@ const AddVideo = ({addVideo}) => {
             ADD
           </button>
         </div>
+        <p>
+          <label className="text-danger m-3">{errorMessage}</label>
+        </p>
       </div>
     </div>
   );

@@ -9,9 +9,11 @@ const Search = ({ search }) => {
   };
   return (
     <div className="col-5 m-5 mx-auto">
-      <label htmlFor="search" className="m-2">Search</label>
+      <label htmlFor="search" className="m-2">
+        Search
+      </label>
       <input
-      id="search"
+        id="search"
         type="text"
         value={searchInput}
         className="input mx-2"
