@@ -15,11 +15,13 @@ const SingleVideo = ({
 
   const videoID = youTubeGetID(video.url);
   video.url = `https://www.youtube.com/embed/${videoID}`;
-
   return (
-    <div className="d-flex flex-column m-5 single-video">
+    <div className="d-flex flex-column m-3 single-video">
       <div className="title-video d-flex m-5 align-content-center justify-content-center">
-        <p className="text-center">{video.title}</p>
+        <p className="text-center font-weight-bold lead">{video.title}</p>
+      </div>
+      <div className="date-video d-flex justify-content-end mr-3 ">
+        <p className="text-center font-italic">Date added: {video.dateadded}</p>
       </div>
       <iframe
         title={video.title}

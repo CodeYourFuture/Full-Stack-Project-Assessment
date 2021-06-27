@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [videoData, setVideoData] = useState();
   const [isDataUpdating, setIsDataUpdating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   console.log("app is render");
 
   useEffect(() => {
@@ -17,26 +18,32 @@ function App() {
       })
       .then((data) => {
         setVideoData(data);
+        setIsLoading(false);
         // setIsUpdatingData(false);
       });
-  }, [isDataUpdating]);
+  }, [isDataUpdating, isLoading]);
 
   return (
     <>
       <Navbar />
-      {/* <SearchBar /> */}
       <AddBar
         setVideoData={setVideoData}
         videoData={videoData}
         setIsDataUpdating={setIsDataUpdating}
         isDataUpdating={isDataUpdating}
       />
-      <VideosBoard
-        videoData={videoData}
-        setVideoData={setVideoData}
-        setIsDataUpdating={setIsDataUpdating}
-        isDataUpdating={isDataUpdating}
-      />
+      {isLoading ? (
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      ) : (
+        <VideosBoard
+          videoData={videoData}
+          setVideoData={setVideoData}
+          setIsDataUpdating={setIsDataUpdating}
+          isDataUpdating={isDataUpdating}
+        />
+      )}
     </>
   );
 }

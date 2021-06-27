@@ -14,35 +14,39 @@ const AddBar = ({
   function youTubeGetID(url) {
     url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
     return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
-        // return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : "error";
-
+    // return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : "error";
   }
   function submitHandler(e) {
     e.preventDefault();
-    console.log("submithandler");
-    const videoID = youTubeGetID(videoURL);
-    console.log(videoID)
-    const url = `https://www.youtube.com/embed/${videoID}`;
-    const body = {
-      url: url,
-      title: videoTitle,
-    };
-    console.log(body);
-    fetch("http://localhost:5000", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    })
-      .then((response) => response.json())
-      .then((body) => {
-        console.log("Success:", body);
-        setIsDataUpdating(!isDataUpdating);
+    if (videoURL && videoTitle) {
+      console.log("submithandler");
+      const videoID = youTubeGetID(videoURL);
+      console.log(videoID);
+      const url = `https://www.youtube.com/embed/${videoID}`;
+      const body = {
+        url: url,
+        title: videoTitle,
+      };
+      console.log(body);
+      fetch("http://localhost:5000", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
       })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((body) => {
+          console.log("Success:", body);
+          setIsDataUpdating(!isDataUpdating);
+          setShowAddfeature(false);
+          setVideoURL("");
+          setVideoTitle("");
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }
   }
 
   return (

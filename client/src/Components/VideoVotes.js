@@ -13,8 +13,9 @@ const VideoVotes = ({
   setIsDataUpdating,
   isDataUpdating,
 }) => {
-  const [videoLike, setVideoLike] = useState(video.like);
-  const [videoDislike, setVideoDislike] = useState(video.dislike);
+  let newcount = video.likecount;
+  const [videoLike, setVideoLike] = useState(video.likecount);
+  const [videoDislike, setVideoDislike] = useState(video.dislikecount);
   function handleDelete(id) {
     // const filteredData = videoData.filter((da) => {
     //   return da.id !== id;
@@ -30,6 +31,26 @@ const VideoVotes = ({
       .then((data) => setIsDataUpdating(!isDataUpdating));
   }
 
+  function handleLikeCount(id) {
+    // setVideoLike(videoLike + 1);
+    console.log("handlelike called");
+    // newcount = newcount + 1;
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id }),
+    };
+    fetch("http://localhost:5000", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fetch put called");
+        console.log(data);
+        // setVideoLike(data)
+        setIsDataUpdating(!isDataUpdating);
+        // setVideoLike(data);
+      });
+  }
+
   return (
     <div className="d-flex justify-content-center align-content-center m-5">
       <div className="d-flex  m-4">
@@ -41,7 +62,7 @@ const VideoVotes = ({
           <HeartFill
             // color="red"
             size={30}
-            onClick={() => setVideoLike(videoLike + 1)}
+            onClick={() => handleLikeCount(video.id)}
           />
         </button>
       </div>
