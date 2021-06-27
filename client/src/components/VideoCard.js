@@ -21,12 +21,12 @@ function VideoCard({ data }) {
       />
 
       <div className="card-body justify-content-between">
-        <h1 className="card-title">{data.title}</h1>
+        <h5 className="card-title">{data.title}</h5>
         <div className="d-flex justify-content-between">
           <div onClick={() => dispatch({ type: "THUMBUP", payload: data.id })}>
             <ThumbUp />
           </div>
-          <h2 className="card-text">Rating: {data.rating}</h2>
+          <h6 className="card-text">Rating: {data.rating}</h6>
           <div
             onClick={() => dispatch({ type: "THUMBDOWN", payload: data.id })}
           >
