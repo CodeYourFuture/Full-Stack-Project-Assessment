@@ -12,11 +12,11 @@ function SearchVideo() {
         type="text"
         value={state.searchText}
         className="form-control"
-        id="basic-url"
+        id="search-box"
         aria-describedby="basic-addon3"
         onChange={(e) => dispatch({ type: "SEARCH", payload: e.target.value })}
       />
-      <span className="input-group-text" id="basic-addon3">
+      <span className="input-group-text" id="search-icon">
         <Search />
       </span>
     </div>

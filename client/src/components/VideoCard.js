@@ -1,18 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ThumbUp, ThumbDown, DeleteForever } from "@material-ui/icons";
 import { VideoContext } from "../contexts/VideoContext";
 
 function VideoCard({ data }) {
-  const { state, dispatch } = useContext(VideoContext);
-  const [rating, setRating] = useState(data.rating);
-
-  function handleThumbDown() {
-    setRating(rating - 1);
-  }
-
-  function handleThumbUp() {
-    setRating(rating + 1);
-  }
+  const { dispatch } = useContext(VideoContext);
 
   return (
     <div
@@ -30,12 +21,12 @@ function VideoCard({ data }) {
       />
 
       <div className="card-body justify-content-between">
-        <h5 className="card-title">{data.title}</h5>
+        <h1 className="card-title">{data.title}</h1>
         <div className="d-flex justify-content-between">
           <div onClick={() => dispatch({ type: "THUMBUP", payload: data.id })}>
             <ThumbUp />
           </div>
-          <p className="card-text">Rating: {data.rating}</p>
+          <h2 className="card-text">Rating: {data.rating}</h2>
           <div
             onClick={() => dispatch({ type: "THUMBDOWN", payload: data.id })}
           >

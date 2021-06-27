@@ -35,7 +35,7 @@ function AddVideo() {
             placeholder="poQXNp9ItL4"
             type="text"
             className="form-control"
-            id="basic-url"
+            id="youtube-url"
             aria-describedby="basic-addon3"
             onChange={(e) => setUrlId(e.target.value)}
           />
@@ -43,14 +43,14 @@ function AddVideo() {
       </div>
       <div className="col-12 col-md-4 p-1">
         <div className="input-group ">
-          <span className="input-group-text" id="basic-addon3">
+          <span className="input-group-text" id="title-header">
             Title
           </span>
           <input
             placeholder="Name of video"
             type="text"
             className="form-control"
-            id="basic-url"
+            id="title-text"
             aria-describedby="basic-addon3"
             onChange={(e) => setTitle(e.target.value)}
           />
