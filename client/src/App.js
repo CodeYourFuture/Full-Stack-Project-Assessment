@@ -7,7 +7,7 @@ function App() {
   return (
     <VideoProvider>
       <div className="App">
-        <header className="App-header row justify-content-center">
+        <header className="App-header row">
           <div className="col-10 col-md-8 p-3">
             <h1>Video Recommendation</h1>
           </div>

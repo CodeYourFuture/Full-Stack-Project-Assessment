@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { VideoContext } from "../contexts/VideoContext";
 
 function AddVideo() {
-  const { videoList, setVideoList } = useContext(VideoContext);
+  const { dispatch } = useContext(VideoContext);
   const [urlId, setUrlId] = useState("");
   const [title, setTitle] = useState("");
 
@@ -21,7 +21,7 @@ function AddVideo() {
         rating: 0,
       },
     ];
-    setVideoList(newVideo.concat(videoList));
+    dispatch({ type: "ADD", payload: newVideo }); //setVideoList(newVideo.concat(videoList));
   }
 
   return (

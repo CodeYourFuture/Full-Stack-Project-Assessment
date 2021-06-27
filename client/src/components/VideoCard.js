@@ -3,12 +3,8 @@ import { ThumbUp, ThumbDown, DeleteForever } from "@material-ui/icons";
 import { VideoContext } from "../contexts/VideoContext";
 
 function VideoCard({ data }) {
-  const { videoList, setVideoList } = useContext(VideoContext);
+  const { state, dispatch } = useContext(VideoContext);
   const [rating, setRating] = useState(data.rating);
-
-  function handleDelete(id) {
-    setVideoList(videoList.filter((data) => data.id !== id));
-  }
 
   function handleThumbDown() {
     setRating(rating - 1);
@@ -36,15 +32,17 @@ function VideoCard({ data }) {
       <div className="card-body justify-content-between">
         <h5 className="card-title">{data.title}</h5>
         <div className="d-flex justify-content-between">
-          <div onClick={handleThumbUp}>
+          <div onClick={() => dispatch({ type: "THUMBUP", payload: data.id })}>
             <ThumbUp />
           </div>
-          <p className="card-text">Rating: {rating}</p>
-          <div onClick={handleThumbDown}>
+          <p className="card-text">Rating: {data.rating}</p>
+          <div
+            onClick={() => dispatch({ type: "THUMBDOWN", payload: data.id })}
+          >
             <ThumbDown />
           </div>
         </div>
-        <div onClick={() => handleDelete(data.id)}>
+        <div onClick={() => dispatch({ type: "DELETE", payload: data.id })}>
           <DeleteForever fontSize="large" color="secondary" />
         </div>
       </div>
