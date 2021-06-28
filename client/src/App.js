@@ -7,11 +7,6 @@ import AddVideo from './AddVideo';
 
 function App() {
   const [videos, setVideos] = useState(vidData);
-  const voteCounter = videos.map(vid => {
-    return {id: vid.id,
-    rating: vid.rating};
-  });
-  const [votes, setVotes] = useState(voteCounter);
   
   function formSubmitClick(e) {
     e.preventDefault();
@@ -41,7 +36,7 @@ function App() {
       }
       return vid
     })
-    setVotes(updateVotes);
+    setVideos(updateVotes);
   }
 
   function downVoteClick(e) {
@@ -53,7 +48,7 @@ function App() {
       }
       return vid
     })
-    setVotes(updateVotes);
+    setVideos(updateVotes);
   }
 
   function deleteVideoClick(e){
