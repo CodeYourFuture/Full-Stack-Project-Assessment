@@ -1,8 +1,5 @@
 .add-video-form {
   width: 50vw;
-  /* height: 20vh; */
-  /* background-color: rgb(122, 122, 50); */
-  /* padding: 2rem; */
   margin: 0 auto;
 }
 
@@ -16,14 +13,6 @@ input[type="text"] {
   margin: 1rem;
   width: 30%;
   height: 30px;
-}
-
-.form-buttons {
-  /* margin: 1rem; */
-  /* background-color: pink; */
-  /* display: flex;
-  justify-content: center; */
-  /* align-items: baseline; */
 }
 
 .btn {

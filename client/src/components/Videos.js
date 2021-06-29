@@ -10,15 +10,6 @@ const Videos = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showError, setShowError] = useState(false);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setVideosData(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
-
   useEffect(() => {
     fetch("http://localhost:5000")
       .then((res) => res.json())
