@@ -1,12 +1,19 @@
 import Video from "./Video";
-import data from "../data/exampleresponse.json";
-import { useState } from "react";
+// import data from "../data/exampleresponse.json";
+import { useEffect, useState } from "react";
 import AddVideos from "./AddVideos";
 import Search from "./Search";
 
 const Content = () => {
-  const [videoData, setVideoData] = useState(data);
-const [searchInput, setSearchInput] = useState("");
+  const [videoData, setVideoData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then((res) => res.json())
+      .then((data) => setVideoData(data))
+      .catch((err) => console.error(err));
+  }, []);
   const handleDelete = (id) => {
     const updatedVideoData = videoData.filter(
       (eachVideo) => eachVideo.id !== id
