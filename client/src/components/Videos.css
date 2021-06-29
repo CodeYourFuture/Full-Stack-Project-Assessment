@@ -4,25 +4,13 @@
 
 .videos {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   gap: 1.5rem;
   padding: 1rem;
-  margin: 2rem auto;
 }
 
 .error-message {
   color: red;
   font-size: 1.4rem;
   font-weight: bold;
-}
-
-@media only screen and (max-width: 600px) {
-  .videos {
-    display: flex;
-    flex-direction: column;
-    /* display: grid;
-    grid-template-columns: 100%; */
-    padding: 0;
-    margin: 0 auto;
-  }
 }

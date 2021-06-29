@@ -1,0 +1,44 @@
+.add-video-form {
+  width: 50vw;
+  /* height: 20vh; */
+  /* background-color: rgb(122, 122, 50); */
+  /* padding: 2rem; */
+  margin: 0 auto;
+}
+
+.form-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+input[type="text"] {
+  margin: 1rem;
+  width: 30%;
+  height: 30px;
+}
+
+.form-buttons {
+  /* margin: 1rem; */
+  /* background-color: pink; */
+  /* display: flex;
+  justify-content: center; */
+  /* align-items: baseline; */
+}
+
+.btn {
+  padding: 0.5rem;
+  color: white;
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+}
+
+.add-video-btn {
+  background-color: green;
+  border: 1px solid green;
+}
+
+.cancel-btn {
+  background-color: red;
+  border: 1px solid red;
+}

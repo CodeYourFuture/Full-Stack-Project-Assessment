@@ -1,17 +1,30 @@
-import { useState } from "react";
-import staticData from "../exampleresponse.json";
+import { useState, useEffect } from "react";
+// import staticData from "../exampleresponse.json";
 import AddVideoForm from "./AddVideoForm";
 import Search from "./Search";
 import SingleVideo from "./SingleVideo";
 import "./Videos.css";
 
 const Videos = () => {
-  // const sortedVideosData = staticData.sort((a, b) => b.rating - a.rating);
-  const [videosData, setVideosData] = useState(() =>
-    staticData.sort((a, b) => b.rating - a.rating)
-  );
+  const [videosData, setVideosData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [showError, setShowError] = useState(false);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setVideosData(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((res) => res.json())
+      .then((data) => setVideosData(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   // delete video (for SingleVideo)
   const handleDeleteVideoClick = (id) => {

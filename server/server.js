@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 const Joi = require("joi");
 const videosData = require("./exampleresponse.json");
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cors());
+
 let videos = videosData;
 
 app.get("/", (req, res) => {
@@ -21,7 +24,7 @@ app.get("/:id", (req, res) => {
 
   foundVideo !== undefined
     ? res.status(200).send(foundVideo)
-    : res.status(404).send(`There is no booking with id ${videoID}`);
+    : res.status(404).send(`There is no video with id ${videoID}`);
 });
 
 app.post("/", (req, res) => {
@@ -42,7 +45,6 @@ app.post("/", (req, res) => {
     return;
   }
 
-  // get title and url from req.body
   const { title, url } = req.body;
   // check if the link is valid
   if (!url.includes("https://www.youtube.com/watch?v=")) {
@@ -67,7 +69,7 @@ app.delete("/:id", (req, res) => {
 
   const videoToDelete = videos.findIndex((video) => {
     return video.id === videoID;
-    // returns index of the video|| -1
+    // returns index of the video || -1
   });
 
   if (videoToDelete !== -1) {
