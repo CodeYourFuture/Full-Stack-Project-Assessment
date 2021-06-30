@@ -13,7 +13,7 @@ const VideosBoard = ({
   if (videoData) {
     sortVideoData = videoData.map((a) => ({ ...a }));
     sortVideoData.sort((video, nextVideo) => {
-      return nextVideo["like"] - video["like"];
+      return video["like"] - nextVideo["like"];
     });
   }
 

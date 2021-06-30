@@ -17,6 +17,7 @@ function App() {
         return resp.json();
       })
       .then((data) => {
+        console.log("fetching data again");
         setVideoData(data);
         setIsLoading(false);
         // setIsUpdatingData(false);
