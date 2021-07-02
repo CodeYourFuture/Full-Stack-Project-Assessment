@@ -1,20 +1,25 @@
+import React, { useState } from "react";
 import "./App.css";
+import AddVideo from "./components/AddVideo";
+import Search from "./components/Search";
+import Videos from "./components/Videos";
+import data from "./exampleresponse.json";
 
 function App() {
+  const [videoData, setVideoData] = useState(data);
+  const [search, setSearch] = useState("");
+  const searchingData = videoData.filter((video) =>
+    video.title.toUpperCase().includes(search.toUpperCase())
+  );
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
       </header>
+      <AddVideo />
+      <Search setSearch={setSearch} search={search} />
+      <Videos videoData={videoData} searchingData={searchingData} />
     </div>
   );
 }
