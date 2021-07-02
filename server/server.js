@@ -7,21 +7,32 @@ app.use(cors());
 const moment = require("moment");
 const { Pool } = require("pg");
 
-const pool = new Pool({
-  user: "codeyourfuture",
-  host: "localhost",
-  database: "videos",
-  password: "codeyourfuture",
-  port: 5432,
-});
+// const pool = new Pool({
+//   user: "codeyourfuture",
+//   host: "localhost",
+//   database: "videos",
+//   password: "codeyourfuture",
+//   port: 5432,
+// });
 
+const pool = new Pool({
+  user: "qsheykcsepemxx",
+  host: "ec2-52-86-2-228.compute-1.amazonaws.com",
+  database: "d35012gec0g7i1",
+  password: "7f4e86a4a7508fb33177c09bcc0682c4b30763acddc96cc127033cac6e92f7e7",
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("/", (req, res) => {
-  pool.query("SELECT * FROM videos ORDER BY likecount", (error, result) => {
+  // pool.query("SELECT * FROM videos ORDER BY likecount", (error, result) => {
+  pool.query("SELECT * FROM videos", (error, result) => {
     res.json(result.rows);
   });
 });
@@ -43,24 +54,27 @@ app.post("/", (req, res) => {
     title: req.body.title,
     url: req.body.url,
     rating: 0,
-    like: 0,
-    dislike: 0,
-    dateAdded: moment().format("MMM Do YY"),
+    likecount: 0,
+    dislikecount: 0,
+    dateadded: moment(new Date()).format("YYYY-MM-DD"),
   };
+  console.log(newData.dateadded);
   pool.query(
+    // "INSERT INTO videos (id,title,url,rating,like,dislike,dateAdded) VALUES ($1,$2,$3,$4,$5,$6,$7)",
     "INSERT INTO videos (id,title,url,rating,likecount,dislikecount,dateadded) VALUES ($1,$2,$3,$4,$5,$6,$7)",
+
     [
       newData.id,
       newData.title,
       newData.url,
       newData.rating,
-      newData.like,
-      newData.dislike,
-      newData.dateAdded,
+      newData.likecount,
+      newData.dislikecount,
+      newData.dateadded,
     ],
 
     (error, result) => {
-      console.log(newData.dislike);
+      console.log(newData.dislikecount);
       res.json(result);
     }
   );
