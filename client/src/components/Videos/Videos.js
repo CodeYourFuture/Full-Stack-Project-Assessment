@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import "./Videos.css";
 import thumbsUp from  "../../images/thumb-up.svg";
 import thumbsDown from  "../../images/thumb-down.svg"; 
 
 function Videos({video,deleteVideo}) {
  
-	const [like, setLike] = useState(video.rating);
+	const [like, setLike] = useState();
   
 
 	const incrementRating = () => {
@@ -16,8 +16,9 @@ function Videos({video,deleteVideo}) {
         setLike(like - 1);
     }
   
-
-
+    useEffect(() => {
+      setLike(video.rating)
+  }, [video.rating])
 
 
   const videoID = video.url.split('v=');
@@ -27,13 +28,15 @@ function Videos({video,deleteVideo}) {
         
                  <div className="iframe-container" >
                      <p>{video.title}</p>
-                     {/* <h6 >Date Video Added: {video.posted}</h6> */}
+                  
                      <h6 className={video.posted ? 'posted' : 'notPosted'}>Posted On: {video.posted}</h6>
+                   
                      <div className="thumbes-container">
-                     <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
-                       <span className="vote">Vote:  {like}</span>
-                     <img onClick={() => decrementRating()} src={thumbsDown} alt='thumbs down' className='thumbs' /> 
+                        <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
+                          <span className="vote">Vote:  {like}</span>
+                        <img onClick={() => decrementRating()} src={thumbsDown} alt='thumbs down' className='thumbs' /> 
                      </div>
+
                        <iframe 
                          title="YouTube video player" 
                          frameBorder="0"
@@ -52,3 +55,5 @@ function Videos({video,deleteVideo}) {
 }
 
 export default Videos
+
+

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./Header.css";
-import {FormControlLabel, Radio,RadioGroup} from '@material-ui/core';
+//import {FormControlLabel, Radio,RadioGroup} from '@material-ui/core';
 function Header() {
 
-    const [sorted, setSorted] = useState('desc');
+   // const [sorted, setSorted] = useState('desc');
 
 	
 
@@ -11,10 +11,10 @@ function Header() {
         <div>
          <header className="header">
              <h1>Video Recommendation</h1>
-             <RadioGroup value={sorted} onChange={(e)=>setSorted(e.target.value)}>
+             {/* <RadioGroup value={sorted} onChange={(e)=>setSorted(e.target.value)}>
                <FormControlLabel value="asc" control={<Radio/>}  label="Accending" />
                <FormControlLabel value="desc" control={<Radio/>}  label="Deccending" />
-             </RadioGroup>
+             </RadioGroup> */}
              
          </header>   
         </div>

@@ -21,3 +21,8 @@ margin-left: 20px;
   background-color: rgb(125, 201, 11);
   color: black;
 }
+
+.sort-btn-container{
+  text-align: left;
+  padding-left: 30px;
+}
