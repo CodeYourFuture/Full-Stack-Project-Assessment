@@ -9,10 +9,16 @@ function VideosContainer({videoData,deleteVideo }) {
         <div className="main-videos">  
                {videoData.map((video,index) => (
                <Videos
+
                 key={index} 
                 video={video}        
                 deleteVideo={deleteVideo}/>))}
                    
+
+                  
+                 
+                     
+
         </div>
         
     );

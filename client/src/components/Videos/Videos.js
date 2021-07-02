@@ -25,16 +25,23 @@ function Videos({video,deleteVideo}) {
 
     return (
         <div  className="main-videos" >    
-        
+                 <p>{video.title}</p>
                  <div className="iframe-container" >
-                     <p>{video.title}</p>
+
+                    
+
                   
                      <h6 className={video.posted ? 'posted' : 'notPosted'}>Posted On: {video.posted}</h6>
                    
                      <div className="thumbes-container">
+
                         <img  onClick={() => incrementRating()}  src={thumbsUp} alt='thumbs up' className='thumbs'  />
                           <span className="vote">Vote:  {like}</span>
                         <img onClick={() => decrementRating()} src={thumbsDown} alt='thumbs down' className='thumbs' /> 
+
+                       
+                     
+
                      </div>
 
                        <iframe 
