@@ -14,6 +14,8 @@ function reducer(state, action) {
       };
     case "SEARCH":
       return { ...state, searchText: action.payload };
+    case "SORTBY":
+      return { ...state, sortStatus: action.payload };
     case "THUMBDOWN":
       return {
         ...state,

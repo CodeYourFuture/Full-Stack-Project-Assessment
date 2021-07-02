@@ -19,6 +19,7 @@ function AddVideo() {
         title: title,
         url: `https://www.youtube.com/watch?v=${urlId}`,
         rating: 0,
+        time: new Date().toISOString,
       },
     ];
     dispatch({ type: "ADD", payload: newVideo }); //setVideoList(newVideo.concat(videoList));
