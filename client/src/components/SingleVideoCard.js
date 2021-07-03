@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const SingleVideoCard = ({ video, handleDelete }) => {
     const { id, title, url, rating } = video;
-
     const [vote, setVote] = useState(rating);
     const embedUrl = url.split("=");
 
@@ -29,11 +28,12 @@ const SingleVideoCard = ({ video, handleDelete }) => {
                 <button
                     className="btn btn-danger col-md-4 mb-3"
                     type="button"
-                    onClick={() => handleDelete(id)} >Delete
+                    onClick={() => handleDelete(id)} >
+                    Delete
                 </button>
             </div>
         </div>
     )
 }
 
-export default SingleVideoCard
+export default SingleVideoCard;

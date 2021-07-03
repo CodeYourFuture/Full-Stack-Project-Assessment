@@ -1,23 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
-const AddVideo = ({ data, setData }) => {
+const AddVideo = ({setData}) => {
     const [displayAddVideo, setDisplayAddVideo] = useState(false);
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
-
-    // const handleAdd = (e) => {
-    //     e.preventDefault()
-    //     const videoId = Math.floor(Math.random() * 100000);
-    //     const newVideo = {
-    //         id: videoId,
-    //         title: title,
-    //         url: url,
-    //         rating: 0
-    //     };
-    //     setData(data.concat(newVideo));
-    //     setTitle("");
-    //     setUrl("");
-    // }
 
     const handleAdd = async (e) => {
         e.preventDefault();
@@ -38,13 +24,6 @@ const AddVideo = ({ data, setData }) => {
         setTitle("");
         setUrl("");
     }
-
-    useEffect(() => {
-        fetch("https://askin-full-stack-project-db.herokuapp.com/")
-          .then((res) => res.json())
-          .then((data) => setData(data))
-          .catch((error) => console.log(error))
-      }, [url]);
 
     return (
         <div className="App-AddVideo my-3 col-6 col-md-3">
@@ -94,4 +73,4 @@ const AddVideo = ({ data, setData }) => {
     )
 }
 
-export default AddVideo
+export default AddVideo;
