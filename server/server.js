@@ -14,7 +14,7 @@ const pool = new Pool({
     user: "osuceosjjbpuuq",
     host: "ec2-54-155-87-214.eu-west-1.compute.amazonaws.com",
     database: "db4tgrcf7b55ru",
-    password: "",
+    password: "c0dfb6cf8c0a14ac13c41c0ddb6b8f3c202a66e3b0083edbde40f00ac6d5f4c7",
     port: 5432,
     connectionString: process.env.DATABASE_URL,
     ssl: {
