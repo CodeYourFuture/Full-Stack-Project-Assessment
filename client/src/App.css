@@ -1,48 +1,159 @@
-.App {
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffe3e0;
+}
+
+.app {
   text-align: center;
 }
 
-.video-container{
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+.app-header{
+    color: black;
+    padding-top: 3vh;
+    height:15vh;
+    background-color :#f6fff8;
+} 
+
+.dialog-button{
+    margin-top: 7vh;
+    margin-bottom:7vh;
 }
 
-.remove-button{
-    margin-top:10px;
-    height:10vh;
+.video-container{
+    height: 58vh;
+    margin-bottom: 3vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6fff8;
+}
+
+.video-title{
+    width: 100%;
+    height:15%;
+    font-size: 22px;
+    font-weight:bold;
+    margin-top:2vh;
 }
 
 .voting-score-container{
     display: flex;
     align-items: baseline;
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
 }
+
+.video-content{
+    width: 90%;
+    height:250px;
+}
+
+iframe{
+    width:100%;
+    height:100%;
+}
+
 .up-vote{
+    font-size: 30px;
     color: rgb(139, 131, 131);
     margin-right:2vw;
     border: none;
     background-color: transparent;
 }
+
 .up-vote:hover{
     color:dodgerblue;
     cursor: pointer;
 }
+
 .up-vote:focus{
     color:dodgerblue;
 }
 
+.voting-score{
+    font-size: 17px;
+}
+
 .down-vote{
+    font-size: 30px;
     color: rgb(139, 131, 131);
     margin-left: 2vw;
     border: none;
     background-color: transparent;
 }
+
 .down-vote:hover{
     color: tomato;
     cursor: pointer;
 }
 .down-vote:focus{
     color: tomato;
+}
+
+.remove-button{
+    font-size: 18px;
+    margin-top:5vh;
+    margin-bottom:2vh;
+    height:12%;
+}
+
+@media (max-width : 350px){
+    
+    .app-header{
+        height: 20vh;
+    }  
+
+    .video-title{
+        overflow: auto;
+    }
+    .video-container{
+        height:80vh;
+    }
+
+    .remove-button{
+        height:10%;
+    }
+
+}
+
+@media (max-width:768px ){
+
+     .video-container{
+        height:60vh;
+    }
+
+    .video-content{
+        width: 90%;
+        height:480px;
+    }
+
+}
+
+@media (min-width:992px ){
+
+    .video-title{
+        font-size: 25px;
+    }
+
+    .voting-score{
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width:1200px ){
+    .app-header{
+        height: 20vh;
+    }
+
+    .video-container{
+        height:70vh;
+    }
+
+    .video-content{
+        width: 90%;
+        height:480px;
+    }
+   
 }

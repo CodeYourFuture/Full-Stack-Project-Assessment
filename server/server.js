@@ -95,8 +95,8 @@ app.delete("/:id", (req, res) => {
     pool
         .query("DELETE FROM videos WHERE id=$1 RETURNING *", [videoId])
         .then((result) => {
-            console.log(result)
             if (result.rowCount) {
+
                 res.json({
                     "result": "success",
                     "message": `Video ${videoId} is deleted`
@@ -110,5 +110,35 @@ app.delete("/:id", (req, res) => {
         })
         .catch((error) => console.error(error));
 })
+
+//UPDATE "/id"
+app.put("/:id", (req, res) => {
+    const customerId = +req.params.id;
+
+    pool
+        .query("SELECT * FROM videos WHERE id=$1", [customerId])
+        .then((result) => {
+            const newTitle = req.body.title;
+            const newUrl = req.body.url;
+            const newRating = req.body.rating;
+
+            const currentName = result.rows[0].title;
+            const currentUrl = result.rows[0].url;
+            const currentRating = result.rows[0].rating;
+
+            const query =
+                "UPDATE videos SET title=$1, url=$2, rating=$3 WHERE id=$4";
+            pool
+                .query(query, [newTitle || currentName, newUrl || currentUrl, newRating || currentRating, customerId])
+                .then(() => res.json({
+                    "result": "success",
+                    "message": "Video is updated"
+                }))
+                .catch((e) => console.log(e));
+        })
+        .catch((e) => console.log(e));
+})
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

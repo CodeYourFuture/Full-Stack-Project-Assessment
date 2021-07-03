@@ -12,7 +12,7 @@ function Videos() {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Encountered Something Unexpected ${response.status}`)
+                    throw new Error(`Encountered Something Unexpected ${response.status}}`)
                 }
             })
             .then(
@@ -22,19 +22,19 @@ function Videos() {
                 error => {
                     console.log(error)
                 });
-    }, [])
-
-    function remove(video) {
-        setVideos(videos.filter(item => item !== video))
-    }
+    }, [videos])
 
     return (
         <>
             <div className="videos-list">
-                <AddVideo />
-                {videos.map((video, index) => (
-                    <DisplayVideos key={index} video={video} remove={remove} />
-                ))}
+                <AddVideo video={setVideos} />
+                <div className="container">
+                    <div className="row gx-5">
+                        {videos.map((video, index) => (
+                            <DisplayVideos key={index} video={video} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
     );
