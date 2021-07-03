@@ -32,10 +32,6 @@ footer {
 
 /* ADDING VIDEOS */
 
-/* .container {
-  padding: 25px;
-} */
-
 .add-video,
 .search {
   margin: 15px auto;
@@ -67,6 +63,11 @@ footer {
   /* grid-area: sidebar; */
 }
 
+.sortButton {
+  margin: auto;
+  width: 97%;
+}
+
 /* VIDEO GRID AS A WHOLE */
 
 .videoGrid {
@@ -75,6 +76,7 @@ footer {
   flex-wrap: wrap;
   width: 100%;
   gap: 12px;
+  margin: 10px;
 }
 
 /* VIDEO SECTION INDIVIDUALLY */

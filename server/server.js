@@ -14,16 +14,17 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const lodash = require("lodash");
+// const { request } = require("express");
 
-// const { Pool } = require("pg");
+const { Pool } = require("pg");
 
-// let pool = new Pool({
-//   user: "postgres",
-//   host: "localhost",
-//   database: "cyf_hotel",
-//   password: "",
-//   port: 5432,
-// });
+let pool = new Pool({
+  user: "ohxytdcegoysjs",
+  host: "ec2-54-73-68-39.eu-west-1.compute.amazonaws.com",
+  database: "d5siirmd57b7m5",
+  password: "XXXXXXXXX",
+  port: 5432,
+});
 
 // Store and retrieve your videos from here
 
@@ -91,21 +92,22 @@ let videos = [
   },
 ];
 
-let ascendingVideos = videos.sort((a, b) => {  
-  return a - b;
-})
-
-// let descendingVideos = videos.sort((a, b) => {  
-//   return b - a;
-// })
-
 // GET "/" is used to return all the videos
 
-app.get("/", function (_, response) {
-  if (ascendingVideos) {
-    response.send(videos);
+// I had some help here as my variables outside the endpoint were not getting called
+
+app.get("/", function (request, response) {
+  if (request.query.order && request.query.order === "asc") {
+    let ascendingVideos = videos.sort((a, b) => {
+      return a.rating - b.rating;
+    });
+    response.send(ascendingVideos);
+  } else {
+    let descendingVideos = videos.sort((a, b) => {
+      return b.rating - a.rating;
+    });
+    response.send(descendingVideos);
   }
-  
 });
 
 // POST "/" is used to add a video to the API

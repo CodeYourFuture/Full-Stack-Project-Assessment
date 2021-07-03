@@ -25,12 +25,21 @@ function App() {
     setVideoList(videoList.concat(newVideo));
   }
 
+  // I had some help with this setOrder function
+  function setOrder(isDescending) {
+    const order = isDescending ? "desc" : "asc";
+    fetch(URL + `?order=${order}`)
+      .then((res) => res.json())
+      .then((data) => setVideoList(data))
+      .catch((err) => console.error(err));
+  }
+
   return (
     <div className="App">
       <Header />
       <div>
         <Adding addVideo={addVideo} />
-        <Search />
+        <Search callback={setOrder} />
       </div>
       {
         <div>
