@@ -1,5 +1,7 @@
 GET http://localhost:5000
 ###
+GET http://localhost:5000/?order=asc
+###
 POST http://localhost:5000
 Content-Type: application/json
 

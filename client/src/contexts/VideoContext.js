@@ -1,10 +1,14 @@
-import React, { createContext, useReducer } from "react";
-import data from "../exampleresponse.json";
+import React, { createContext, useReducer, useEffect } from "react";
+//import data from "../exampleresponse.json";
+import axios from "axios";
 
 export const VideoContext = createContext();
+const apiUrl = "http://localhost:5000";
 
 function reducer(state, action) {
   switch (action.type) {
+    case "LOAD":
+      return { ...state, data: action.payload };
     case "ADD":
       return { ...state, data: state.data.concat(action.payload) };
     case "DELETE":
@@ -45,10 +49,16 @@ function reducer(state, action) {
 
 export const VideoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    data,
+    data: [],
     searchText: "",
     sortStatus: "",
   });
+
+  useEffect(() => {
+    axios(`${apiUrl}/`)
+      .then((res) => dispatch({ type: "LOAD", payload: res.data }))
+      .catch((err) => console.log("Error"));
+  }, []);
 
   //const [videoList, setVideoList] = useState(data);
   //const [searchText, setSearchText] = useState("");

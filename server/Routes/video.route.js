@@ -4,17 +4,41 @@ const router = express.Router();
 let videos = require("../exampleresponse.json");
 
 router.get("/", function (req, res) {
-  res.json(videos);
+  if (req.query.order === "asc") {
+    res.json(videos.sort((a, b) => a.rating - b.rating));
+  } else if (req.query.order === "desc") {
+    res.json(videos.sort((a, b) => b.rating - a.rating));
+  } else {
+    res.json(videos.sort((a, b) => b.rating - a.rating));
+  }
 });
 
 router.get("/:id", function (req, res) {
   res.json(videos.filter((item) => item.id.toString() === req.params.id));
 });
 
+router.put("/:id", function (req, res) {
+  videos = videos.map((video) =>
+    video.id.toString() === req.params.id
+      ? { ...video, rating: req.body.rating }
+      : video
+  );
+
+  if (true) {
+    // succesfull
+    res.json({});
+  } else {
+    res.json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  }
+});
+
 router.delete("/:id", function (req, res) {
   videos = videos.filter((video) => video.id.toString() !== req.params.id);
   if (true) {
-    res.status(200).json({});
+    res.json({});
   } else {
     res.status(406).json({
       result: "failure",
@@ -31,7 +55,8 @@ router.post("/", (req, res) => {
     time: new Date(),
   };
   videos.push(data);
-  if (true) {// succesfull
+  if (true) {
+    // succesfull
     res.json({ id: data.id });
   } else {
     res.json({

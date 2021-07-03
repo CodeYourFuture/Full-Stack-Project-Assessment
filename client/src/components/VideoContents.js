@@ -7,7 +7,6 @@ import SortBy from "./SortBy";
 
 function VideoContents() {
   const { state } = useContext(VideoContext);
-  console.log(state.data);
 
   return (
     <div className="d-flex flex-column align-items-center">

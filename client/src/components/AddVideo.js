@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import { AddCircleOutline } from "@material-ui/icons";
 import { v4 as uuidv4 } from "uuid";
 import { VideoContext } from "../contexts/VideoContext";
+import axios from "axios";
+
+const apiUrl = "http://localhost:5000";
 
 function AddVideo() {
   const { dispatch } = useContext(VideoContext);
@@ -22,6 +25,19 @@ function AddVideo() {
         time: new Date().toISOString,
       },
     ];
+    axios
+      .post(`${apiUrl}/`, {
+        title,
+        url: `https://www.youtube.com/watch?v=${urlId}`,
+      })
+      .then((res) => {
+        if (res.status === "200") {
+          axios(`${apiUrl}/`).then((res) =>
+            dispatch({ type: "LOAD", payload: res.data })
+          );
+        }
+      })
+      .catch((err) => console.log(err));
     dispatch({ type: "ADD", payload: newVideo }); //setVideoList(newVideo.concat(videoList));
   }
 
