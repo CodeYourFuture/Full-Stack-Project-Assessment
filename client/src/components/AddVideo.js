@@ -45,7 +45,7 @@ function AddVideo(props) {
             url: url,
         }
 
-        fetch('http://localhost:5000/', {
+        fetch('https://nameless-stream-61236.herokuapp.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

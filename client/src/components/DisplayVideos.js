@@ -5,7 +5,7 @@ function DisplayVideos(props) {
     const [value, setValue] = useState(props.video.rating);
 
     function removeVideo() {
-        fetch(`http://localhost:5000/${props.video.id}`, {
+        fetch(`https://nameless-stream-61236.herokuapp.com/${props.video.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ function DisplayVideos(props) {
 
     function handleUpVote() {
         let newValue = { rating: value + 1 };
-        fetch(`http://localhost:5000/${props.video.id}`, {
+        fetch(`https://nameless-stream-61236.herokuapp.com/${props.video.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ function DisplayVideos(props) {
 
     function handleDownVote() {
         let newValue = { rating: value - 1 };
-        fetch(`http://localhost:5000/${props.video.id}`, {
+        fetch(`https://nameless-stream-61236.herokuapp.com/${props.video.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

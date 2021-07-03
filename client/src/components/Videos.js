@@ -7,7 +7,7 @@ function Videos() {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/')
+        fetch('https://nameless-stream-61236.herokuapp.com/')
             .then(response => {
                 if (response.ok) {
                     return response.json()
