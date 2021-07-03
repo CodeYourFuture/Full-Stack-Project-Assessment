@@ -1,0 +1,114 @@
+GET http://localhost:5000
+###
+POST http://localhost:5000
+Content-Type: application/json
+
+{
+	"title": "hello",
+	"url": "http://youtube.com"
+}
+###
+GET http://localhost:5000/523523
+###
+DELETE http://localhost:5000/523523
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+POST http://localhost:5000
+Content-Type: application/json
+
+{
+    "name": "hotel ",
+    "title": "tit"
+}
+###
+GET http://localhost:5000/hello
+Content-Type: application/json
+
+{
+	"title": "hello",
+	"url": "http://youtube.com",
+}
+###
+POST http://localhost:5000/hello
+Content-Type: application/json
+
+{
+	"title": "hello",
+	"url": "http://youtube.com",
+}
+###
+GET http://localhost:5000/customers
+###
+GET http://localhost:5000/customers/2
+###
+GET http://localhost:5000/customers/1/bookings
+###
+GET http://localhost:5000/hotels
+###
+GET http://localhost:5000/hotels/2
+###
+DELETE http://localhost:5000/hotels/2
+###
+
+DELETE http://localhost:5000/customers/1
+###
+PUT http://localhost:5000/hotels
+Content-Type: application/json
+
+{
+    "name": "hotel name"
+}
+###
+PUT customers/1 HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+	"email": "hello Hotel"
+}
+###
+PUT http://localhost:5000/customers/1
+Content-Type: application/json
+
+{
+    "email": "hello@hello.com"
+}
+###
+POST http://localhost:5000/hotels
+Content-Type: application/json
+
+{
+	"name": "  ",
+	"rooms": 2,
+	"postcode": "NW1"
+	
+}
+###
+// id |    name    |         email         |   address   |   city    | postcode | country
+POST http://localhost:5000/customers
+Content-Type: application/json
+
+{
+	"name": "helo",
+	"email": "email ",
+	"address": "26",
+    "city":"London",
+    "postcode":"NW1",
+    "country":"UK"
+}
