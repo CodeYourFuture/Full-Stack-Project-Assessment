@@ -3,7 +3,7 @@ import React from 'react'
 const Search = ({ search, setSearch }) => {
     
     return (
-        <div className="App-Search mt-3 offset-md-2 col-md-3">
+        <div className="App-Search mt-3 col-md-4">
             <form className="mx-4">
                 <div className="mb-3 d-flex align-items-center justify-content-center">
                     <label

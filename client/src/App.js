@@ -20,16 +20,14 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <div className="d-flex">
-        <AddVideo
-          data={data}
-          setData={setData}
-        />
-        <Search
-          search={search}
-          setSearch={setSearch}
-        />
-      </div>
+      <AddVideo
+        data={data}
+        setData={setData}
+      />
+      <Search
+        search={search}
+        setSearch={setSearch}
+      />
       <VideoCards
         data={data}
         setData={setData}
