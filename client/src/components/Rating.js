@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./App.css";
+import "../App.css";
 
 const Rating = () => {
   const [count, setCount] = useState(0);
@@ -16,11 +16,11 @@ const Rating = () => {
   };
   return (
     <div>
-      <span classname="emoji" onClick={increment}>
+      <span className="emoji" onClick={increment}>
         &#x1F44D;
       </span>{" "}
       {count}{" "}
-      <span classname="emoji" onClick={decrement}>
+      <span className="emoji" onClick={decrement}>
         &#128078;
       </span>
     </div>

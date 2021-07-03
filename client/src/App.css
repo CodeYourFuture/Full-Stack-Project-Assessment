@@ -1,5 +1,14 @@
+/* GENERAL */
+
+* {
+  box-sizing: border-box;
+  font-family: "Lora", serif;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /* HEADER */
@@ -7,31 +16,121 @@
 .App-header {
   text-align: center;
   padding: 20px;
-  font-family: "Lora", serif;
-  background-color: aquamarine;
+  color: white;
+  background-color: rgb(48, 2, 70);
 }
 
-/* ADDING */
+/* FOOTER */
 
-.container {
+footer {
+  background-color: rgb(48, 96, 158);
+  color: white;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* ADDING VIDEOS */
+
+/* .container {
   padding: 25px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "main sidebar";
+} */
+
+.add-video,
+.search {
+  margin: 15px auto;
+  width: 97%;
 }
 
-.add-video {
-  margin: 15px;
-  grid-area: main;
+.addClearButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.addButton,
+.clearButton {
+  width: 45%;
+}
+
+/* RATING AND TIME CONTAINER */
+
+.rateAndTimeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 70%;
+  padding: 15px;
 }
 
 .search {
-  margin: 15px;
-  grid-area: sidebar;
+  /* grid-area: sidebar; */
+}
+
+/* VIDEO GRID AS A WHOLE */
+
+.videoGrid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 12px;
+}
+
+/* VIDEO SECTION INDIVIDUALLY */
+
+.videoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 70%;
+  border: 3px double rgb(87, 3, 121);
+  border-radius: 30px;
+  padding: 10px;
+  height: 270px;
+}
+
+.videoTitle {
+  margin-top: 20px;
+}
+
+.videoPlay {
+  width: 80%;
 }
 
 /* RATINGS */
+
 .emoji {
   font-family: Segoe UI Emoji, Segoe UI Symbol, Quivira, Symbola;
+}
+
+@media only screen and (min-width: 600px) {
+  .videoContainer {
+    width: 50%;
+    height: 280px;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .videoGrid {
+    flex-direction: row;
+  }
+  .videoContainer {
+    width: 45%;
+    height: 320px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .videoContainer {
+    height: 390px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .videoPlay {
+    width: 75%;
+  }
 }
