@@ -27,7 +27,6 @@ function AddVideo(props) {
     }
 
     function handleUrlChange(event) {
-        console.log(event.target.validationMessage)
         if (event.target.validationMessage) {
             setUrl(event.target.value)
             setError(true)
