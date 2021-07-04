@@ -43,33 +43,6 @@ app.get("/", function (req, res) {
   });
 });
 
-// POST "/" This endpoint is used to add a video to the API. 
-// Both fields - title and url - must be included and be valid for this to succeed.
-app.post("/", (req, res) => {
-  const newVideo = req.body;
-  newVideo.id = Math.floor(Math.random()*1000000);
-  newVideo.rating = 0;
-
-  const matchYoutubeUrl = ((url) => {
-    const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    if (url.match(p)) {
-        return url.match(p)[1];
-        } return false;
-  })
-  const errorMessage = {
-    "result": "failure",
-    "message": "Video could not be saved"
-  };
-
-  if(!newVideo.title || !matchYoutubeUrl(newVideo.url)){
-    res.status(400).send(errorMessage);
-  }  else {
-    videos.push(newVideo);    
-    res.status(201).send(videos); 
-  };  
-        
-});
-
 // POST with pool
 app.post("/", (req, res) => {
   const newVideoTitle = req.body.title;
@@ -111,7 +84,7 @@ app.post("/", (req, res) => {
           .catch((e) => res.send(JSON.stringify(e)));
       }
     })
-    .catch((e) => res.send(JSON.stringify(e)));
+    .catch((e) => res.send(JSON.stringify(`catch error ${e}`)));
 });
 
 
@@ -142,3 +115,30 @@ app.delete("/:id", (req, res) => {
   } 
     res.status(404).send(errorMessage);
 });
+
+// POST "/" This endpoint is used to add a video to the API. 
+// Both fields - title and url - must be included and be valid for this to succeed.
+// app.post("/", (req, res) => {
+//   const newVideo = req.body;
+//   newVideo.id = Math.floor(Math.random()*1000000);
+//   newVideo.rating = 0;
+
+//   const matchYoutubeUrl = ((url) => {
+//     const p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+//     if (url.match(p)) {
+//         return url.match(p)[1];
+//         } return false;
+//   })
+//   const errorMessage = {
+//     "result": "failure",
+//     "message": "Video could not be saved"
+//   };
+
+//   if(!newVideo.title || !matchYoutubeUrl(newVideo.url)){
+//     res.status(400).send(errorMessage);
+//   }  else {
+//     videos.push(newVideo);    
+//     res.status(201).send(videos); 
+//   };  
+        
+// });
