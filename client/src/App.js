@@ -11,7 +11,7 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("http://localhost:5000/")
       .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -20,10 +20,10 @@ function App() {
         }
       })
       .then((videoData) => {
-        console.log(videoData.videos);
-        setVideoData(videoData.videos)
+        console.log(videoData);
+        setVideoData(videoData);
       })
-      .catch(e => console.log(e));    
+      .catch((e) => console.log(e));    
   }, [])
 
 
