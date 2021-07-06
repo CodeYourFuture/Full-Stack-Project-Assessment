@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const Search = ({ search }) => {
+const Search = ({ search, setSearchKey }) => {
   const [searchInput, setSearchInput] = useState("");
   const handleChangeInput = (event) => {
     const searchWord = event.target.value.toLowerCase();
     setSearchInput(searchWord);
-    search(searchWord);
+setSearchKey(searchWord);
+  //  search(searchWord);
   };
   return (
     <div className="col-5 m-5 mx-auto">

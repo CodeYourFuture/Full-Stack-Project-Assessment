@@ -1,54 +1,83 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import DisplayVideos from "./DisplayVideos";
 //import videos from "./data/video.json";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
+import OrderList from "./OrderList";
 
 function App() {
   const [videoList, SetVideoList] = useState([]);
   const [videosFiltered, setVideoFiltered] = useState([]);
   const [isAdded, setIsAdded] = useState(0);
-  useEffect(() => {
-     
-    fetch("http://localhost:5000")
+  const [order, setOrder] = useState("desc");
+  const [searchKey, setSearchKey] = useState("");
+  const fetchData = () => {
+    fetch(`http://localhost:5000/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
-        data.videos.sort((video1, video2) => video2.rating - video1.rating);
-        SetVideoList(data.videos);
-        setVideoFiltered(data.videos);
-        console.log(videoList);
+        SetVideoList(data);
+        setVideoFiltered(search(searchKey));
       })
       .catch((err) => console.error(err));
-  }, []);
+  };
 
-  const handleClickButton = (id) => {
-    setVideoFiltered(videosFiltered.filter((video) => video.id !== id));
+  useEffect(() => {
+    fetchData();
+  }, [order, videoList]);
+
+  const handleSortButton = (isAsc) => {
+    const sort = isAsc ? "asc" : "desc";
+    setOrder(sort);
+  };
+
+  const handleDeleteButton = (id) => {
+    //setVideoFiltered(videosFiltered.filter((video) => video.id !== id));
+
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("from fetch", data);
+      });
+    // const changeOrder = order === "asc" ? "desc" : "asc";
+    // setOrder(changeOrder);
+    console.log("deleted");
   };
 
   const search = (searchWord) => {
-    console.log(searchWord);
-    const result = videoList.filter((video) =>
-      video.title.toLowerCase().includes(searchWord)
-    );
-    setVideoFiltered(result);
-    console.log(result);
+    console.log(searchKey);
+    const result = searchKey
+      ? videoList.filter((video) =>
+          video.title.toLowerCase().includes(searchKey)
+        )
+      : videoList;
+    //setVideoFiltered(result);
+    console.log(searchKey);
+    return result;
+
+    //console.log(videosFiltered);
   };
 
-  const addVideo = (titleValue, urlValue) => {
-    const videoId = Math.floor(Math.random() * 10000000 + 1);
-    const newVideo = {
-      id: videoId,
-      title: titleValue,
-      url: `https://www.youtube.com/watch?v=${urlValue}`,
-      rating: 1,
-      timeSent: new Date(),
-    };
-    SetVideoList(videoList.concat(newVideo));
-    setVideoFiltered(videosFiltered.concat(newVideo));
+  const addVideo = (title, urlId) => {
+    const url = `https://www.youtube.com/watch?v=${urlId}`;
+    fetch(`http://localhost:5000`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, url }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    // const changeOrder = order === "asc" ? "desc" : "asc";
+    // setOrder(changeOrder);
     setIsAdded(1);
-    console.log(videoList);
   };
   return (
     <div className="App">
@@ -57,14 +86,15 @@ function App() {
       </header>
       <div className="row ">
         <AddVideo addVideo={addVideo} isAdded={isAdded} />
-        <Search search={search} />
+        <OrderList handleSortButton={handleSortButton} />
+        <Search search={search} setSearchKey={setSearchKey} />
       </div>
       <div className="container">
         <div className="row">
           {videosFiltered.map((video, index) => (
             <DisplayVideos
               video={video}
-              handleClickButton={handleClickButton}
+              handleDeleteButton={handleDeleteButton}
               index={index}
             />
           ))}
