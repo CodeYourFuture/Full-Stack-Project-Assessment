@@ -19,13 +19,15 @@ const Boxes = (props) => {
 
 return (
   <div>
-    {props.data.map((data) => (
-      <div key={data.id}>
+    {props.array.map((array) => (
+      <div key={array.id}>
         <Box
-          embed={data.url.slice(32)}
-          title={data.title}
-          id={data.id}
-          rating={data.rating}
+          embed={array.url.slice(32)}
+          title={array.title}
+          id={array.id}
+          rating={array.rating}
+          setArray={props.setArray}
+          array={props.array}
         />
       </div>
     ))}

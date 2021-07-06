@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import IFrame from "./Iframe";
 
 const Box = (props) => {
-    const [isBoxSelected, setIsBoxSelected] = useState(true);
+    // const [isBoxSelected, setIsBoxSelected] = useState(true);
     const [rating, setRating] = useState(props.rating);
-
     return (
-      <div className={isBoxSelected ? "box" : "delete"}>
+      <div className="box">
         Title: {props.title}
         <br></br>
         <IFrame embed={props.embed} />
@@ -17,7 +16,7 @@ const Box = (props) => {
         Rating: {rating} 
         <button onClick={() => setRating(rating - 1)}>👎</button>
         <br></br>
-        <button onClick={() => setIsBoxSelected(!isBoxSelected)}>Delete</button>
+        <button onClick={() => props.setArray(props.array.filter(x=>x.id!==props.id))}>Delete</button>
       </div>
     );
 }

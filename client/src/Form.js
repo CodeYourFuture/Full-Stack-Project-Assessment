@@ -40,7 +40,7 @@ const [array,setArray] =useState(data);
         </div>
       </form>
 
-      <Boxes data={array} />
+      <Boxes array={array} setArray={setArray} />
     </div>
   );
 };
