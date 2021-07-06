@@ -7,7 +7,7 @@ var data = require('./exampleresponse.json');
 
 const Form = () => {
 
-
+const [array,setArray] =useState(data);
   const [input, setInput] = useState("");
 
   function handleInput(event) {
@@ -18,7 +18,7 @@ const Form = () => {
   function handleSubmit(event) {
     console.log({ input });
     event.preventDefault();
-    data.push({ title: "test", rating: 11, id: 999999, url: input });
+    setArray(array.concat({ title: "test", rating: 11, id: 999999, url: input }));
     console.log(data);
   }
 
@@ -39,7 +39,7 @@ const Form = () => {
         </div>
       </form>
 
-      <Boxes data={data} />
+      <Boxes data={array} />
     </div>
   );
 };
