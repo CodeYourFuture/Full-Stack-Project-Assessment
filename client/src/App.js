@@ -1,13 +1,20 @@
 import "./App.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import uuid from 'react-uuid';
-import vidData from './exampleresponse.json';
 import DisplayVideo from './DisplayVideo';
 import AddVideo from './AddVideo';
 
 function App() {
-  const [videos, setVideos] = useState(vidData);
-  
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then(res => res.json())
+      .then(data =>
+       setVideos(data))
+      .catch(e => console.error(e))
+  }, []);
+
   function formSubmitClick(e) {
     e.preventDefault();
     const submissionTitle = e.target.elements.title.value;
@@ -70,7 +77,8 @@ function App() {
       </header>
       <AddVideo submitClick={formSubmitClick}/>
       <div className="row">
-      {videos.map(data => <DisplayVideo key={data.id} data={data} upVote={upVoteClick} downVote={downVoteClick} deleteClick={deleteVideoClick}/>)}
+      {videos.map(data => 
+        <DisplayVideo key={data.id} data={data} upVote={upVoteClick} downVote={downVoteClick} deleteClick={deleteVideoClick}/>)}
       </div>
     </div>
   );
