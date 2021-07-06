@@ -24,7 +24,7 @@ const pool = new Pool ({
 
 
 
-// cd Documents/CYF/Full-Stack-Project-Assessment/server
+// cd Documents/CYF/Full-Stack-Project-Assessment
 
 const port = process.env.PORT || 5000;
 
