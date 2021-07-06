@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Box from "./Box";
 
 // var data = require('./exampleresponse.json'); // forward slashes will depend on the file location
@@ -20,16 +20,15 @@ const Boxes = (props) => {
 return (
   <div>
     {props.data.map((data) => (
-      <div>
+      <div key={data.id}>
         <Box
           embed={data.url.slice(32)}
           title={data.title}
           id={data.id}
           rating={data.rating}
         />
-           </div>
+      </div>
     ))}
-    
   </div>
 );}
 export default Boxes;

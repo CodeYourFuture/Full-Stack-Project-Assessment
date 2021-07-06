@@ -1,5 +1,4 @@
 import "./App.css";
-import Boxes from "./Boxes";
 import Form from "./Form";
 
 function App() {

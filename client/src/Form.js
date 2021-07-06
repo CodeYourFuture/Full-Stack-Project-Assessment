@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Boxes from "./Boxes";
 
 var data = require('./exampleresponse.json'); 
-
+let id = 10000;
 // Currently form adds data to end of data array but doesnt add a box. I think useEffect can be used to add a new box every time the array is updated
 
 const Form = () => {
@@ -18,7 +18,8 @@ const [array,setArray] =useState(data);
   function handleSubmit(event) {
     console.log({ input });
     event.preventDefault();
-    setArray(array.concat({ title: "test", rating: 11, id: 999999, url: input }));
+    setArray(array.concat({ title: "test", rating: 11, id: id, url: input }))
+    id++;
     console.log(data);
   }
 
