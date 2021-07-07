@@ -148,11 +148,3 @@ app.delete("/:videoId", (req, res) => {
     res.status(400).send(`There's no video with the id ${req.params.messageId}`);
   }
 })
-
-
-CREATE TABLE videos (
-  id        SERIAL PRIMARY KEY,
-  title     VARCHAR(120) NOT NULL,
-  url       VARCHAR(120) NOT NULL,
-  rating    INT
-);
