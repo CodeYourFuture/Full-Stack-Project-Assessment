@@ -22,10 +22,11 @@ const port = process.env.PORT || 5000;
 
 const pool = new Pool ({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: ssl: {
+    rejectUnauthorized: false
+  }
 })
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
 
 
 
@@ -147,3 +148,11 @@ app.delete("/:videoId", (req, res) => {
     res.status(400).send(`There's no video with the id ${req.params.messageId}`);
   }
 })
+
+
+CREATE TABLE videos (
+  id        SERIAL PRIMARY KEY,
+  title     VARCHAR(120) NOT NULL,
+  url       VARCHAR(120) NOT NULL,
+  rating    INT
+);
