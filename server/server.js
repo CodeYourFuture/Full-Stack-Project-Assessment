@@ -9,24 +9,25 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
-// const pool = new Pool({
-//   user: 'eekhljmwtumkzw',
-//   host: 'ec2-54-228-139-34.eu-west-1.compute.amazonaws.com',
-//   database: 'drgdq67t8dlo4',
-//   password: '375a5b9ef9cf477752aecf214a42d6d31375668b897ee1d4687ab1f94417e966',
-//   port: 5432
-// })
+
+const pool = new Pool({
+  user: 'rxdgwbpmfprsmd',
+  host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
+  database: 'deg7lsujgq5jaa',
+  password: '054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc',
+  port: 5432
+})
 
 // cd Documents/CYF/Full-Stack-Project-Assessment
 const port = process.env.PORT || 5000;
 const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc@ec2-3-226-134-153.compute-1.amazonaws.com:5432/deg7lsujgq5jaa";
 
-const pool = new Pool ({
-  connectionString: process.env.databaseUrl,
-  ssl: {
-    rejectUnauthorized: false
-  }
-})
+// const pool = new Pool ({
+//   connectionString: process.env.databaseUrl,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// })
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
@@ -98,7 +99,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("/", (req, res) => {
-  console.log(process.env.databaseUrl);
+  console.log(process.env.port);
   pool.query('select * from videos', (error, result) => {
     console.log(result)
     res.json(result.rows);
