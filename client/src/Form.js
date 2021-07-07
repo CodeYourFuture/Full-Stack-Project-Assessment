@@ -3,7 +3,6 @@ import Boxes from "./Boxes";
 
 var data = require('./exampleresponse.json'); 
 let id = 10000;
-// Currently form adds data to end of data array but doesnt add a box. I think useEffect can be used to add a new box every time the array is updated
 
 const Form = () => {
 

@@ -1,23 +1,46 @@
 import React, { useState } from "react";
 import IFrame from "./Iframe";
 
-const Box = (props) => {
-    // const [isBoxSelected, setIsBoxSelected] = useState(true);
-    const [rating, setRating] = useState(props.rating);
-    return (
-      <div className="box">
-        Title: {props.title}
-        <br></br>
-        <IFrame embed={props.embed} />
-        <br></br>
-        ID: {props.id}
-        <br></br>
-        <button onClick={() => setRating(rating + 1)}>👍</button>
-        Rating: {rating} 
-        <button onClick={() => setRating(rating - 1)}>👎</button>
-        <br></br>
-        <button onClick={() => props.setArray(props.array.filter(x=>x.id!==props.id))}>Delete</button>
-      </div>
-    );
-}
+//rename array to something clearer
+// destructuring
+
+const Box = ({ id, title, rating: ratingProp, embed, array, setArray }) => {
+  const [rating, setRating] = useState(ratingProp);
+  const ratingUpperBound = ratingProp + 1;
+  const ratingLowerBound = ratingProp - 1;
+
+  return (
+    <div className="box">
+      Title: {title}
+      <br></br>
+      <IFrame embed={embed} />
+      <br></br>
+      ID: {id}
+      <br></br>
+      <button
+        onClick={() => {
+          rating >= ratingUpperBound
+            ? setRating(rating - 1)
+            : setRating(rating + 1);
+        }}
+      >
+        👍
+      </button>
+      Rating: {rating}
+      <button
+        onClick={() => {
+          rating <= ratingLowerBound
+            ? setRating(rating + 1)
+            : setRating(rating - 1);
+        }}
+      >
+        👎
+      </button>
+      <br></br>
+      <button onClick={() => setArray(array.filter((x) => x.id !== id))}>
+        Delete
+      </button>
+    </div>
+  );
+};
 export default Box;
