@@ -5,6 +5,9 @@
     "server": "node server/index.js"
   },
   "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "bcrypt": "^0.8.5",
     "react-uuid": "^1.0.2"
   }
 }
