@@ -98,10 +98,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("/", (req, res) => {
-  pool.query('select * from videos', (error, result) => {
-    console.log(result)
-    res.json(result.rows);
-  })
+  pool
+  .query('select * from videos')
+  ,then((result) => res.json(result.rows))
+  .catch((e) =>  console.error(e)) 
 });
 
 app.post("/", (req, res) => {
