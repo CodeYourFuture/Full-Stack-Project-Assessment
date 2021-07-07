@@ -10,17 +10,16 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-const pool = new Pool({
-  user: 'rxdgwbpmfprsmd',
-  host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
-  database: 'deg7lsujgq5jaa',
-  password: '054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc',
-  port: 5432
-})
+// const pool = new Pool({
+//   user: 'rxdgwbpmfprsmd',
+//   host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
+//   database: 'deg7lsujgq5jaa',
+//   password: '054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc',
+//   port: 5432
+// })
 
-// cd Documents/CYF/Full-Stack-Project-Assessment
 const port = process.env.PORT || 5000;
-const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc@ec2-3-226-134-153.compute-1.amazonaws.com:5432/deg7lsujgq5jaa";
+// const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc@ec2-3-226-134-153.compute-1.amazonaws.com:5432/deg7lsujgq5jaa";
 
 // const pool = new Pool ({
 //   connectionString: process.env.databaseUrl,
@@ -29,6 +28,78 @@ const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212
 //   }
 // })
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+pool.connect();
+
+pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  pool.end();
+});
+
+// GET "/"
+app.get("/", (req, res) => {
+  console.log(process.env.port);
+  pool.query('select * from videos', (error, result) => {
+    console.log(result)
+    res.json(result.rows);
+  })
+});
+
+app.post("/", (req, res) => {
+  let newVid = {
+    id: uuid.v4(),
+    title: req.body.title,
+    url: req.body.url,
+    rating: 0
+  }
+
+  const foundVideo = videos.filter(vid => {
+    vid.url === newVid.url
+  } );
+
+
+  //last endpoint will work correctly when database added
+  if (!newVid.title) {
+    return res.status(400).json(`Please enter a title`);
+  } else if (!newVid.url) {
+    return res.status(400).json(`Please enter a url`);
+  } else if (foundVideo.length === 0) {
+    videos.push(newVid)
+    return res.json(videos);
+  }
+  res.status(400).json(`Video already added`)
+});
+
+app.get("/:videoId", (req, res) => {
+
+  const requestedVid = videos.filter(vid => {
+  vid.id = vid.id.toString();
+  return vid.id === req.params.videoId}); 
+  res.json(requestedVid);
+})
+
+app.delete("/:videoId", (req, res) => {
+  const found = videos.some(
+    vid => vid.id.toString() === req.params.videoId
+  );;
+
+  if (found) {
+   res.json(videos.filter(vid => vid.id.toString() !== req.params.videoId)); 
+  } else {
+    res.status(400).send(`There's no video with the id ${req.params.messageId}`);
+  }
+})
 
 
 // Store and retrieve your videos from here
@@ -96,57 +167,3 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 //   }
 // ]
 // ;
-
-// GET "/"
-app.get("/", (req, res) => {
-  console.log(process.env.port);
-  pool.query('select * from videos', (error, result) => {
-    console.log(result)
-    res.json(result.rows);
-  })
-});
-
-app.post("/", (req, res) => {
-  let newVid = {
-    id: uuid.v4(),
-    title: req.body.title,
-    url: req.body.url,
-    rating: 0
-  }
-
-  const foundVideo = videos.filter(vid => {
-    vid.url === newVid.url
-  } );
-
-
-  //last endpoint will work correctly when database added
-  if (!newVid.title) {
-    return res.status(400).json(`Please enter a title`);
-  } else if (!newVid.url) {
-    return res.status(400).json(`Please enter a url`);
-  } else if (foundVideo.length === 0) {
-    videos.push(newVid)
-    return res.json(videos);
-  }
-  res.status(400).json(`Video already added`)
-});
-
-app.get("/:videoId", (req, res) => {
-
-  const requestedVid = videos.filter(vid => {
-  vid.id = vid.id.toString();
-  return vid.id === req.params.videoId}); 
-  res.json(requestedVid);
-})
-
-app.delete("/:videoId", (req, res) => {
-  const found = videos.some(
-    vid => vid.id.toString() === req.params.videoId
-  );;
-
-  if (found) {
-   res.json(videos.filter(vid => vid.id.toString() !== req.params.videoId)); 
-  } else {
-    res.status(400).send(`There's no video with the id ${req.params.messageId}`);
-  }
-})
