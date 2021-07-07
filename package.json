@@ -1,6 +1,0 @@
-{
-  "proxy": "http://localhost:5000",
-  "dependencies": {
-    "react-uuid": "^1.0.2"
-  }
-}
