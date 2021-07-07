@@ -98,7 +98,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("/", (req, res) => {
-  console.log(process.env.DATABASE_URL);
+  console.log(process.env.databaseUrl);
   pool.query('select * from videos', (error, result) => {
     console.log(result)
     res.json(result.rows);
