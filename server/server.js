@@ -19,15 +19,15 @@ app.use(express.urlencoded({
 
 // cd Documents/CYF/Full-Stack-Project-Assessment
 const port = process.env.PORT || 5000;
+const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc@ec2-3-226-134-153.compute-1.amazonaws.com:5432/deg7lsujgq5jaa";
 
 const pool = new Pool ({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.databaseUrl,
   ssl: {
     rejectUnauthorized: false
   }
 })
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
 
 
 // Store and retrieve your videos from here
@@ -98,6 +98,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("/", (req, res) => {
+  console.log(process.env.DATABASE_URL);
   pool.query('select * from videos', (error, result) => {
     console.log(result)
     res.json(result.rows);
