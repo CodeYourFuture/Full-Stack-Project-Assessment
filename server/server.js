@@ -50,7 +50,7 @@ pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (er
 // GET "/"
 app.get("/", (req, res) => {
   console.log(process.env.port);
-  pool.query('select * from videos', (error, result) => {
+  pool.query('select * from videos;', (error, result) => {
     console.log(result)
     res.json(result.rows);
   })
@@ -167,3 +167,10 @@ app.delete("/:videoId", (req, res) => {
 //   }
 // ]
 // ;
+
+CREATE TABLE videos (
+  id               SERIAL PRIMARY KEY,
+  title            VARCHAR(120),
+  url              VARCHAR(120),
+  rating           INT
+);*****************
