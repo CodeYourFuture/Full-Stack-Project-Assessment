@@ -4,31 +4,7 @@ const { Pool } = require('pg');
 const uuid = require("uuid");
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
-
-// const pool = new Pool({
-//   user: 'rxdgwbpmfprsmd',
-//   host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
-//   database: 'deg7lsujgq5jaa',
-//   password: '054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc',
-//   port: 5432
-// })
-
 const port = process.env.PORT || 5000;
-// const databaseUrl = "postgres://rxdgwbpmfprsmd:054988be3b918089b19abdfbe10969212ffa56613ba7989439b027ed036a9ddc@ec2-3-226-134-153.compute-1.amazonaws.com:5432/deg7lsujgq5jaa";
-
-// const pool = new Pool ({
-//   connectionString: process.env.databaseUrl,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// })
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -39,13 +15,11 @@ const pool = new Pool({
 
 pool.connect();
 
-pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  pool.end();
-});
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: false
+}));
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -99,7 +73,9 @@ app.delete("/:videoId", (req, res) => {
   } else {
     res.status(400).send(`There's no video with the id ${req.params.messageId}`);
   }
-})
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
 // Store and retrieve your videos from here
@@ -168,9 +144,9 @@ app.delete("/:videoId", (req, res) => {
 // ]
 // ;
 
-CREATE TABLE videos (
-  id               SERIAL PRIMARY KEY,
-  title            VARCHAR(120),
-  url              VARCHAR(120),
-  rating           INT
-);*****************
+// CREATE TABLE videos (
+//   id               SERIAL PRIMARY KEY,
+//   title            VARCHAR(120),
+//   url              VARCHAR(120),
+//   rating           INT
+// );
