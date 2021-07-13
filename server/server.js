@@ -11,10 +11,10 @@ const port = process.env.PORT || 5000;
 const { Pool } = require("pg");
 
 const pool = new Pool({
-    user: "osuceosjjbpuuq",
-    host: "ec2-54-155-87-214.eu-west-1.compute.amazonaws.com",
-    database: "db4tgrcf7b55ru",
-    password: "c0dfb6cf8c0a14ac13c41c0ddb6b8f3c202a66e3b0083edbde40f00ac6d5f4c7",
+    user: "hlzrmxabrkmmof",
+    host: "ec2-54-216-17-9.eu-west-1.compute.amazonaws.com",
+    database: "ddun96vkpdvh8p",
+    password: "bb110d1b141748c657962562d8d43240a71f3abaa03afa9241b2057402c76c6f",
     port: 5432,
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -22,7 +22,7 @@ const pool = new Pool({
     }
 })
 
-//GET "/?order=asc OR desc"
+//GET "/?order=asc OR desc   " 
 app.get("/", (req, res) => {
     pool
         .query("SELECT * FROM videos")
