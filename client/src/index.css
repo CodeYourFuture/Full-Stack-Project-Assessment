@@ -1,13 +1,151 @@
-body {
+
+*, *::before, *::after {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  /* background-image: linear-gradient( 63.1deg,  rgba(5,23,111,1) 16.4%, rgba(24,95,240,1) 64.5% ); */
+  /* background-image: linear-gradient( 178.2deg,  rgba(118,8,23,1) 10.9%, rgba(158,12,33,1) 62.6% ); */
+  background-color: rgba(118,8,23,1);
+  color: white;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+
+h1 {
+  font-size: 56px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+.app {
+  /* border: 1px red solid; */
+  border-top: 2px red solid;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1400px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.input-section {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+}
+.input-section > div {
+  /* border: 1px solid blue; */
+  width: 50%;
+  padding: 1rem;
+}
+
+label, input {
+  display: block;
+  margin: 1rem;
+}
+
+label {
+  font-size: 24px;
+}
+
+input {
+  font-size: 30px;
+  font-weight: 500;
+  width: 250px;
+  padding: 12px 24px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+button {
+  font-size: 24px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  display: inline-block;
+  margin: 1rem;
+  font-weight: 600;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+input:focus, button:focus {
+  border: 1px solid pink;
+}
+
+.cancel {
+  background-color: yellow;
+  color: black;
+}
+
+.add-vid {
+  background-color: rgb(80, 253, 0);
+}
+
+.vid-display-div {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  column-gap: 4rem;
+  row-gap: 2.5rem;
+}
+
+.vid-container-div {
+  width: 100%;
+  text-align: center;
+}
+
+.iframe-container {
+  width: 100%;
+  padding-top: 75%;
+  /* border: 1px solid green; */
+  position: relative;
+}
+
+iframe {
+  position: absolute;
+  inset: 0;
+}
+
+.title-container,
+.ratings-container {
+  width: 100%;
+  height: 100px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.ratings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ratings-container h3 {
+  font-size: 40px;
+  margin: 0 30px;
+}
+
+.thumb-icon {
+  font-size: 40px;
+}
+.thumb-icon:hover {
+  color: rgb(78, 211, 255);
 }
