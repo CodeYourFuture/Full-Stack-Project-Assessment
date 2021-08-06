@@ -1,15 +1,24 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
-.App-header{
-  background-color: darkcyan;
-  padding: 2%;
+.App-header {
+	background-color: darkcyan;
+	padding: 2%;
 }
-h1{
-  color: rgb(122, 3, 29);
+h1 {
+	color: rgb(122, 3, 29);
 }
-.Container{
-  display: flex;
-  margin-top: 2%;
-  justify-content: space-around;
+.Container {
+	display: flex;
+	margin-top: 2%;
+	justify-content: space-around;
+}
+#addVideo {
+	border: none;
+}
+#addVideo:hover {
+	background-color: orangered;
+	color: rgb(0, 255, 106);
+  transition-duration: 0.5s;
+	transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }

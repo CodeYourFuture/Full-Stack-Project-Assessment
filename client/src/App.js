@@ -7,7 +7,7 @@ function App() {
 				<h1>Video Recommendation</h1>
 			</header>
 			<div className="Container">
-				<button>Add Video</button>
+				<button id="addVideo">Add Video</button>
 				<div id="search">
 					<label for="searchInput">Search:</label>
 					<input
