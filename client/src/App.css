@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+.App-header{
+  background-color: darkcyan;
+  padding: 2%;
+}
+h1{
+  color: rgb(122, 3, 29);
+}
+.Container{
+  display: flex;
+  margin-top: 2%;
+  justify-content: space-around;
+}
