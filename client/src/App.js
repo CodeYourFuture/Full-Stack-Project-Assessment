@@ -1,13 +1,25 @@
 import "./App.css";
+import VideoInput from "./VideoInput";
 
 function App() {
+	let count = 0;
+	const renderForm = () => {
+    console.log(count);
+		count === 0 ? count++ : count--;
+	};
 	return (
 		<div className="App">
 			<header className="App-header">
 				<h1>Video Recommendation</h1>
 			</header>
 			<div className="Container">
-				<button id="addVideo">Add Video</button>
+				{count === 0 ? (
+					<button id="addVideo" onClick={renderForm}>
+						Add Video
+					</button>
+				) : (
+					<VideoInput />
+				)}
 				<div id="search">
 					<label for="searchInput">Search:</label>
 					<input
