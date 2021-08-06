@@ -1,11 +1,12 @@
 import "./App.css";
 import VideoInput from "./VideoInput";
+import { useState } from "react";
 
 function App() {
-	let count = 0;
+	let [count, setCount] = useState(0)
 	const renderForm = () => {
     console.log(count);
-		count === 0 ? count++ : count--;
+		count === 0 ? setCount(1) : setCount(0);
 	};
 	return (
 		<div className="App">
@@ -18,7 +19,7 @@ function App() {
 						Add Video
 					</button>
 				) : (
-					<VideoInput />
+					<VideoInput reset={renderForm}/>
 				)}
 				<div id="search">
 					<label for="searchInput">Search:</label>
