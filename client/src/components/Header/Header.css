@@ -1,16 +1,16 @@
 .header {
-    
+    margin-top: -46px;
     width: 100%;
     cursor: pointer;
     position: fixed;
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    background-color: #39445a;
+    background-color: #1e1e20;
     font-family: "Montserrat", sans-serif;
     font-size: 5vw;
-    padding-bottom: 15px;
-    box-shadow: 0px 1px 5px black;
+    padding-bottom: 5px;
+    box-shadow: 0px 1px 6px rgb(224, 13, 13);
     border-radius: 7px;
     color: white;
     z-index: 100;
@@ -19,8 +19,12 @@
   
   @media (max-width: 1000px) {
     .header {
-      padding-top: 15px;
+      padding-top: 10px;
       font-size: 6.4vw;
     }
   }
   
+   /* .background {
+    background-image: url(./client/src/components/Header/background.jpg)
+  }
+    */
