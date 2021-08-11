@@ -4,12 +4,13 @@ import React from "react";
 const Search = ({ search, setSearch }) => {
     
     return (
-        <div className="App-Search mt-1 mb-2 col-md-3">
-            <form className="mx-4">
+        <div className="App-Search mt-1 mb-0 col-md-2">
+            <form clssName="mx-4">
                 <div className="mb-3 d-flex align-items-center justify-content-center">
                     <label
+                    ld
                         htmlFor="title"
-                        className="form-label fst-italic mx-2" >Search
+                        className="form-label fst-italic-bold mx-4" >Search
                     </label>
                     <input
                         type="text" 

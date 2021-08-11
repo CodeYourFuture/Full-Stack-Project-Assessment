@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Search from "./components/Search/Search";
-// import AddVideo from "./components/AddVideo/AddVideo";
+import AddVideo from "./components/AddVideo/AddVideo";
 
 
 const App = () => {
@@ -21,10 +21,10 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      {/* <AddVideo
+      <AddVideo
         data={data}
         setData={setData}
-      /> */}
+      />
       <Search
         search={search}
         setSearch={setSearch}
