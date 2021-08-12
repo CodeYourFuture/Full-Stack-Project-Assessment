@@ -1,6 +1,6 @@
 // eslint-disable-next-line 
 import React from "react";
-import background from "./client/src/components/Header/background.jpg";
+// import background from "./client/src/components/Header/background";
 import "./Header.css";
 
 const Header = () => {
