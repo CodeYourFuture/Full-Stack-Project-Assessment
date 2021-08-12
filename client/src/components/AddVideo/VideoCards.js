@@ -1,5 +1,5 @@
 import React from "react";
-import SingleVideoCard from "./components/AddVideo/SingleVideoCard";
+import SingleVideoCard from "./SingleVideoCard";
 
 const VideoCards = ({ data, setData, search }) => {
 
