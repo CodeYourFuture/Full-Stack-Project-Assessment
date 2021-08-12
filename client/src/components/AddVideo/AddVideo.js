@@ -29,7 +29,7 @@ const AddVideo = () => {
         <Fragment>
             <button
                 type="button"
-                className="btn btn-secondary mt-3 mt-md-1 mx-3 col-4 col-md-1"
+                className="btn btn-secondary mt-4 mt-md-3 mx-3 col-4 col-md-1"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">
                 Add Video
