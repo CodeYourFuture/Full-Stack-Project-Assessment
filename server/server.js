@@ -20,8 +20,7 @@ app
 		const { title, url } = req.body;
 		if (!errors.isEmpty()) {
 			return res.status(422).json({ errors: errors.array() });
-		}
-		if (title && url) {
+		} else if (title && url) {
 			videos.push({
 				id: Math.ceil(Math.random() * videos.length * 125),
 				title: title,
