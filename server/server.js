@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+const { check, validationResult } = require("express-validator");
 const videos = require("./exampleresponse.json");
 
 // Store and retrieve your videos from here
@@ -14,8 +15,12 @@ app
 	.get((req, res) => {
 		res.json(videos);
 	})
-	.post((req, res) => {
+	.post([check("url").isURL()], (req, res) => {
+		const errors = validationResult(req);
 		const { title, url } = req.body;
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
 		if (title && url) {
 			videos.push({
 				id: Math.ceil(Math.random() * videos.length * 125),
