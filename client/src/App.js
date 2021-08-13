@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import data from './exampleresponse.json'
+import React, { useState, useEffect } from 'react'
+// import data from './exampleresponse.json'
 import {FaThumbsUp} from 'react-icons/fa'
 import {FaThumbsDown} from 'react-icons/fa'
+import Header from './Components/Header'
 
 function App() {
-  const [vidData, setVidData] = useState(data)
+  const [vidData, setVidData] = useState(null)
   const [newVidTitle, setNewVidTitle] = useState("")
   const [newVidUrl, setNewVidUrl] = useState("")
   const [searchString, setSearchString] = useState("")
@@ -44,12 +45,36 @@ function App() {
     setNewVidTitle("")
     setNewVidUrl("")
   }
+  
+  // const getAllVids = () => {
+  //   fetch("127.0.0.1:5000")
+  //     // .then(response => response.json())
+  //     .then(response => response.text())
+  //     .then(data => console.log(data))
+  //     .catch(error => {
+  //       console.log(error)
+  //       // setVidData(null)
+  //     })
+
+  //   console.log(vidData)
+  // }
+
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then(response => response.json())
+      // .then(response => response.text())
+      .then(data => setVidData(data))
+      .catch(error => {
+        console.log(error)
+        setVidData(null)
+      })
+
+    console.log(vidData)
+  }, [])
 
   return (
     <>
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
       <div className="app">
         <div className="input-section">
           <div className="add-video-div">
@@ -75,6 +100,7 @@ function App() {
 
         <div className="vid-display-div">
             {
+              vidData === null ? <></> :
               vidData
                 .filter(vid => vid.title.toLowerCase().includes(searchString))
                 .map(vid => {
