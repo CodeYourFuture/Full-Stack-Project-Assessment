@@ -3,11 +3,13 @@ const app = express();
 const port = process.env.PORT || 5000;
 const { check, validationResult } = require("express-validator");
 const videos = require("./exampleresponse.json");
+const cors = require("cors");
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 // let videos = [];
 app.use(express.json());
+app.use(cors());
 
 // GET "/"
 
