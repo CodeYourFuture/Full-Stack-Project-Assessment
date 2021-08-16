@@ -10,6 +10,7 @@ const videos = require("./exampleresponse.json");
 app.use(express.json());
 
 // GET "/"
+
 app
 	.route("/")
 	.get((req, res) => {
@@ -26,7 +27,7 @@ app
 				title: title,
 				url: url,
 			});
-			res.json(videos[videos.length - 1].id);
+			res.json({ id: videos[videos.length - 1].id });
 		} else {
 			res.json({
 				result: "failure",
@@ -34,5 +35,24 @@ app
 			});
 		}
 	});
+
+app
+	.route("/:id")
+	.get([check("id").exists()], (req, res) => {
+		const errors = validationResult(req);
+		const strId = req.params.id;
+		const id = parseInt(strId);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		} else if (!videos.some((video) => video.id === id)) {
+			res.status(400).json({
+				error: `No video with id of ${id}`,
+			});
+		} else {
+			const result = videos.filter((video) => video.id === id);
+			res.json(result);
+		}
+	})
+	.delete((req, res), () => {});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
