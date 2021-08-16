@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import staticData from "./exampleresponse.json";
-import Ratings from "./Ratings";
+// import Ratings from "./Ratings";
 
 const Video = ({ Rating, SetRating }) => {
 	const [dataArr, setDataArr] = useState(staticData);
