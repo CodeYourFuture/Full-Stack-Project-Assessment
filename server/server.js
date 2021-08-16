@@ -53,7 +53,7 @@ app
 			res.json(result);
 		}
 	})
-	.delete([check("id").exists()], (req, res), () => {
+	.delete([check("id").exists()], (req, res) => {
 		const errors = validationResult(req);
 		const strId = req.params.id;
 		const id = parseInt(strId);
