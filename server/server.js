@@ -53,6 +53,21 @@ app
 			res.json(result);
 		}
 	})
-	.delete((req, res), () => {});
+	.delete([check("id").exists()], (req, res), () => {
+		const errors = validationResult(req);
+		const strId = req.params.id;
+		const id = parseInt(strId);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		} else if (!videos.some((video) => video.id === id)) {
+			res.status(400).json({
+				result: "failure",
+				message: "Video could not be deleted",
+			});
+		} else {
+			const result = videos.filter((video) => video.id !== id);
+			res.json(result);
+		}
+	});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
