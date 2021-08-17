@@ -6,8 +6,15 @@ const Video = ({ Rating, SetRating }) => {
 	const [dataArr, setDataArr] = useState([]);
 	useEffect(() => {
 		fetch("http://localhost:5000")
-			.then((response) => response.json())
-			.then((result) => setDataArr(result));
+			.then((response) => {
+				if (response.status <= 200) {
+					response.json();
+				} else {
+					throw new Error(`Error ${response.status} : ${response.statusText}`);
+				}
+			})
+			.then((result) => setDataArr(result))
+			.catch((error) => console.log(error));
 	}, []);
 	const ratings = [];
 	for (let item of dataArr) {
