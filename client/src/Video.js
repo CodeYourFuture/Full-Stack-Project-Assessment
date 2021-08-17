@@ -1,11 +1,16 @@
-import React, { useState } from "react";
-import staticData from "./exampleresponse.json";
+import React, { useState, useEffect } from "react";
+// import staticData from "./exampleresponse.json";
 // import Ratings from "./Ratings";
 
 const Video = ({ Rating, SetRating }) => {
-	const [dataArr, setDataArr] = useState(staticData);
+	const [dataArr, setDataArr] = useState([]);
+	useEffect(() => {
+		fetch("http://localhost:5000")
+			.then((response) => response.json())
+			.then((result) => setDataArr(result));
+	}, []);
 	const ratings = [];
-	for (let item of staticData) {
+	for (let item of dataArr) {
 		ratings.push([item.id, item.rating]);
 	}
 	console.log(ratings);
@@ -19,10 +24,10 @@ const Video = ({ Rating, SetRating }) => {
 				const videoCode = video.url.slice(
 					video.url.indexOf("=") + 1,
 					video.url.length
-					);
-					
-					return (
-						<div key={index}>
+				);
+
+				return (
+					<div key={index}>
 						<h3>{video.title}</h3>
 						<iframe
 							width="560"
@@ -36,7 +41,7 @@ const Video = ({ Rating, SetRating }) => {
 						<div id="buttonContainer">
 							<button onClick={() => ratingUpdater(video.id)}>Like</button>
 							<h4>{`Rating: ${Rating ? Rating : video.rating}`}</h4>
-						{/* <Ratings data={dataArr} setData={setDataArr} />; */}
+							{/* <Ratings data={dataArr} setData={setDataArr} />; */}
 							{/* <Ratings data={dataArr} setData={setDataArr} VideoId={video.id} /> */}
 							<button onClick={() => ratingUpdater(video.id)}>Dislike</button>
 						</div>

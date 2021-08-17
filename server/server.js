@@ -16,6 +16,7 @@ app.use(cors());
 app
 	.route("/")
 	.get((req, res) => {
+		console.log("Message received!");
 		res.json(videos);
 	})
 	.post([check("url").isURL()], (req, res) => {
