@@ -5,7 +5,7 @@ const VideoCards = ({ data, setData, search }) => {
 
     const handleDelete = async (id) => {
         try {
-             await fetch(`http://localhost:3000/${id}`, {
+             await fetch(`http://localhost:3001/${id}`, {
                 method: "DELETE"
             });
 
