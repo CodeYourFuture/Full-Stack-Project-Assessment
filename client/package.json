@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "express": "^4.17.1",
+    "jshint": "^2.13.1",
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -49,5 +50,4 @@
   "keywords": [],
   "author": "Lawrence Baatjies",
   "license": "ISC"
-
 }

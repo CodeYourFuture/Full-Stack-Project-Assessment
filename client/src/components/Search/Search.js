@@ -5,7 +5,7 @@ const Search = ({ search, setSearch }) => {
     
     return (
         <div className="App-Search mt-1 mb-0 col-md-2">
-            <form clssName="mx-4">
+            <form className="mx-4">
                 <div className="mb-3 d-flex align-items-center justify-content-center">
                     <label
                     ld
