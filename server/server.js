@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-// const cors = require("cors");
-// const pool = require("./db_fullStackProject");
+const cors = require("cors");
+const pool = require("./db_fullStackProject");
 // const uuid = require("uuid");
 const port = process.env.PORT || 3001;
 
@@ -32,7 +32,24 @@ app.get("/", (req, res) => {
   })
 });
 
+// Delete a video from database
+app.delete("/:id", (req, res) => {
+  const { id } = req.params;
 
+  pool.query('SELECT * FROM videos WHERE id=$1', [id], (db_err, db_res) => {
+    if (db_res.rows.length > 0) {
+      pool.query('DELETE FROM videos WHERE id=$1', [id], (db_err, db_res) => {
+        if (db_err) {
+          res.status(500).send(JSON.stringify(db_err.message));
+        } else {
+          res.json(db_res.rows);
+        }
+      })
+    } else {
+      res.status(400).send("The id you want to delete is not present")
+    }
+  })
+});
 
 
 
