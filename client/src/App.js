@@ -10,7 +10,7 @@ const App = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-        // fetch("https://LawrenceBaatjies-full-stack-project-db.herokuapp.com")
+// fetch("https://LawrenceBaatjies-full-stack-project-db.herokuapp.com")
     fetch("http://localhost:3000")  
       .then((res) => res.json())
       .then((data) => setData(data))

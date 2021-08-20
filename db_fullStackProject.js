@@ -6,7 +6,7 @@ const Pool = require("pg").Pool;
      password: 1234,
      host: "localhost",
      post: 5432,
-     database: "db_fullStackProject"
+     database: "fullStackProject"
  });
 
 module.exports = pool;

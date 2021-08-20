@@ -13,7 +13,7 @@ const AddVideo = () => {
                 url: url,
                 rating: 0
             };
-            await fetch("http://localhost:3000", {
+            await fetch("http://localhost:3001", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newVideo)
