@@ -1,7 +1,7 @@
 import "./App.css";
 import VideoInput from "./VideoInput";
 import Video from "./Video";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
 	let [count, setCount] = useState(0);
@@ -9,6 +9,23 @@ function App() {
 		console.log(count);
 		count === 0 ? setCount(1) : setCount(0);
 	};
+	const [dataArr, setDataArr] = useState(() => []);
+	useEffect(() => {
+		fetch("http://localhost:5000")
+			.then((response) => {
+				if (response.status <= 200) {
+					return response.json();
+				} else {
+					throw new Error(`Error ${response.status} : ${response.statusText}`);
+				}
+			})
+			.then((result) => {
+				console.log(result);
+				setDataArr(result);
+			})
+			.catch((error) => console.log(error));
+	}, []);
+	console.log(dataArr);
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -23,7 +40,7 @@ function App() {
 					<VideoInput reset={renderForm} />
 				)}
 				<div id="search">
-					<label for="searchInput">Search:</label>
+					<label htmlFor="searchInput">Search:</label>
 					<input
 						type="text"
 						id="searchInput"
@@ -31,7 +48,7 @@ function App() {
 					></input>
 				</div>
 			</div>
-			<Video />
+			{dataArr ? <Video data={dataArr} /> : <span>Loading...</span>}
 		</div>
 	);
 }

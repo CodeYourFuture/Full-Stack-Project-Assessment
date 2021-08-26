@@ -17,6 +17,7 @@ app
 	.route("/")
 	.get((req, res) => {
 		console.log("Message received!");
+		// console.log(videos);
 		res.json(videos);
 	})
 	.post([check("url").isURL()], (req, res) => {
