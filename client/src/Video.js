@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 // import staticData from "./exampleresponse.json";
 // import Ratings from "./Ratings";
 
 const Video = ({ Rating, SetRating, data }) => {
-	const [videoData, setVideoData] = useState(data);
+	// const [videoData, setVideoData] = useState(data);
 	const ratings = [];
-	for (let item of videoData) {
+	for (let item of data) {
 		ratings.push([item.id, item.rating]);
 	}
-	console.log(ratings);
+	// console.log(ratings);
 	const ratingUpdater = (VideoId) => {
 		const filteredData = (item) => item.id === VideoId;
 		SetRating(filteredData.rating);
 	};
 	return (
 		<div>
-			{videoData.map((video, index) => {
+			{data.map((video, index) => {
 				const videoCode = video.url.slice(
 					video.url.indexOf("=") + 1,
 					video.url.length
@@ -41,9 +41,9 @@ const Video = ({ Rating, SetRating, data }) => {
 							<button onClick={() => ratingUpdater(video.id)}>Dislike</button>
 						</div>
 						<button
-							onClick={() =>
-								setVideoData(videoData.filter((item) => item.id !== video.id))
-							}
+						// onClick={() =>
+						// 	setVideoData(videoData.filter((item) => item.id !== video.id))
+						// }
 						>
 							Delete
 						</button>

@@ -7,3 +7,6 @@ const options = {
     }
 
     fetch('http://localhost:5000/', options)
+
+    life cycle reading - https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+

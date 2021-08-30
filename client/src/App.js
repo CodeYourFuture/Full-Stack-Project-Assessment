@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 
 function App() {
 	let [count, setCount] = useState(0);
+	const [dataArr, setDataArr] = useState([]);
 	const renderForm = () => {
 		console.log(count);
 		count === 0 ? setCount(1) : setCount(0);
 	};
-	const [dataArr, setDataArr] = useState(() => []);
+	console.log("This is before api call", dataArr);
 	useEffect(() => {
 		fetch("http://localhost:5000")
 			.then((response) => {
@@ -19,13 +20,10 @@ function App() {
 					throw new Error(`Error ${response.status} : ${response.statusText}`);
 				}
 			})
-			.then((result) => {
-				console.log(result);
-				setDataArr(result);
-			})
+			.then((result) => setDataArr(result))
 			.catch((error) => console.log(error));
 	}, []);
-	console.log(dataArr);
+	console.log("This is after api call", dataArr);
 	return (
 		<div className="App">
 			<header className="App-header">
