@@ -1,5 +1,5 @@
 import React from "react";
-// import Ratings from "./Ratings";
+import Ratings from "./Ratings";
 
 const Video = ({ Rating, SetRating, data, setData }) => {
 	// const [videoData, setVideoData] = useState(data);
@@ -35,8 +35,7 @@ const Video = ({ Rating, SetRating, data, setData }) => {
 						<div id="buttonContainer">
 							<button onClick={() => ratingUpdater(video.id)}>Like</button>
 							<h4>{`Rating: ${Rating ? Rating : video.rating}`}</h4>
-							{/* <Ratings data={dataArr} setData={setDataArr} />; */}
-							{/* <Ratings data={dataArr} setData={setDataArr} VideoId={video.id} /> */}
+							<Ratings defaultRating={video.rating} />
 							<button onClick={() => ratingUpdater(video.id)}>Dislike</button>
 						</div>
 						<button
