@@ -1,5 +1,4 @@
 import React from "react";
-// import staticData from "./exampleresponse.json";
 // import Ratings from "./Ratings";
 
 const Video = ({ Rating, SetRating, data, setData }) => {
