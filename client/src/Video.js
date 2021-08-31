@@ -1,17 +1,7 @@
 import React from "react";
 import Ratings from "./Ratings";
 
-const Video = ({ Rating, SetRating, data, setData }) => {
-	// const [videoData, setVideoData] = useState(data);
-	const ratings = [];
-	for (let item of data) {
-		ratings.push([item.id, item.rating]);
-	}
-	// console.log(ratings);
-	const ratingUpdater = (VideoId) => {
-		const filteredData = (item) => item.id === VideoId;
-		SetRating(filteredData.rating);
-	};
+const Video = ({ data, setData }) => {
 	return (
 		<div>
 			{data.map((video, index) => {
@@ -33,10 +23,7 @@ const Video = ({ Rating, SetRating, data, setData }) => {
 							allowFullScreen
 						></iframe>
 						<div id="buttonContainer">
-							<button onClick={() => ratingUpdater(video.id)}>Like</button>
-							<h4>{`Rating: ${Rating ? Rating : video.rating}`}</h4>
 							<Ratings defaultRating={video.rating} />
-							<button onClick={() => ratingUpdater(video.id)}>Dislike</button>
 						</div>
 						<button
 							onClick={() =>

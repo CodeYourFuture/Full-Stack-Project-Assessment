@@ -8,7 +8,7 @@ const Ratings = ({ defaultRating }) => {
 	return (
 		<div>
 			<button onClick={() => setRating(rating + 1)}>Like</button>
-			<h4>Dynamic Rating:{rating}</h4>
+			<h4>Rating:{rating}</h4>
 			<button onClick={() => setRating(rating - 1)}>Unlike</button>
 		</div>
 	);
