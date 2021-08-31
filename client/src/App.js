@@ -46,7 +46,7 @@ function App() {
 					></input>
 				</div>
 			</div>
-			{dataArr[0] ? <Video data={dataArr} /> : <span>Loading...</span>}
+			{dataArr[0] ? <Video data={dataArr} setData={setDataArr} /> : <span>Loading...</span>}
 		</div>
 	);
 }

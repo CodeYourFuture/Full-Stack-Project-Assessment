@@ -2,7 +2,7 @@ import React from "react";
 // import staticData from "./exampleresponse.json";
 // import Ratings from "./Ratings";
 
-const Video = ({ Rating, SetRating, data }) => {
+const Video = ({ Rating, SetRating, data, setData }) => {
 	// const [videoData, setVideoData] = useState(data);
 	const ratings = [];
 	for (let item of data) {
@@ -41,9 +41,9 @@ const Video = ({ Rating, SetRating, data }) => {
 							<button onClick={() => ratingUpdater(video.id)}>Dislike</button>
 						</div>
 						<button
-						// onClick={() =>
-						// 	setVideoData(videoData.filter((item) => item.id !== video.id))
-						// }
+							onClick={() =>
+								setData(data.filter((item) => item.id !== video.id))
+							}
 						>
 							Delete
 						</button>
