@@ -35,7 +35,7 @@ function App() {
 						Add Video
 					</button>
 				) : (
-					<VideoInput reset={renderForm} />
+					<VideoInput reset={renderForm} data={dataArr} setData={setDataArr} />
 				)}
 				<div id="search">
 					<label htmlFor="searchInput">Search:</label>
@@ -46,7 +46,11 @@ function App() {
 					></input>
 				</div>
 			</div>
-			{dataArr[0] ? <Video data={dataArr} setData={setDataArr} /> : <span>Loading...</span>}
+			{dataArr[0] ? (
+				<Video data={dataArr} setData={setDataArr} />
+			) : (
+				<span>Loading...</span>
+			)}
 		</div>
 	);
 }
