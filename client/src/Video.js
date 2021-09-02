@@ -21,6 +21,8 @@ const Video = ({ data, setData }) => {
 							frameBorder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
+							// eslint-disable-next-line react/jsx-no-duplicate-props
+							title={video.title}
 						></iframe>
 						<div id="buttonContainer">
 							<Ratings defaultRating={video.rating} />
