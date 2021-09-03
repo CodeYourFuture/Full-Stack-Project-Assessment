@@ -4,7 +4,7 @@ const port = process.env.PORT || 5000;
 const { check, validationResult } = require("express-validator");
 const videos = require("./exampleresponse.json");
 const cors = require("cors");
-const Pool = require("pg");
+const { Pool } = require("pg");
 require("dotenv").config();
 
 // Store and retrieve your videos from here
@@ -12,6 +12,7 @@ require("dotenv").config();
 // let videos = [];
 app.use(express.json());
 app.use(cors());
+
 const pool = new Pool({
 	user: process.env.DB_User,
 	host: "localhost",
@@ -21,13 +22,21 @@ const pool = new Pool({
 });
 // GET "/"
 
+app.route("/").get((req, res) => {
+	console.log("You're in the DB!");
+	pool
+		.query("SELECT * FROM videos")
+		.then((result) => res.json(result.rows))
+		.catch((err) => console.error(err));
+});
+
 app
 	.route("/")
-	.get((req, res) => {
-		console.log("Message received!");
-		// console.log(videos);
-		res.json(videos);
-	})
+	// .get((req, res) => {
+	// 	console.log("Message received!");
+	// 	// console.log(videos);
+	// 	res.json(videos);
+	// })
 	.post([check("url").isURL()], (req, res) => {
 		const errors = validationResult(req);
 		const { title, url } = req.body;
