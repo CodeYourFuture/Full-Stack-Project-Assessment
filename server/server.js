@@ -5,13 +5,20 @@ const { check, validationResult } = require("express-validator");
 const videos = require("./exampleresponse.json");
 const cors = require("cors");
 const Pool = require("pg");
+require("dotenv").config();
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 // let videos = [];
 app.use(express.json());
 app.use(cors());
-
+const pool = new Pool({
+	user: "",
+	host: "localhost",
+	database: "video_recommendation",
+	password: "",
+	port: 5432,
+});
 // GET "/"
 
 app
