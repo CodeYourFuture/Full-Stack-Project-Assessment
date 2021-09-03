@@ -13,10 +13,10 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors());
 const pool = new Pool({
-	user: "",
+	user: process.env.DB_User,
 	host: "localhost",
 	database: "video_recommendation",
-	password: "",
+	password: process.env.DB_Password,
 	port: 5432,
 });
 // GET "/"
