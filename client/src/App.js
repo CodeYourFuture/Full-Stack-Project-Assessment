@@ -11,8 +11,9 @@ function App() {
 		count === 0 ? setCount(1) : setCount(0);
 	};
 	console.log("This is before api call", dataArr);
+	const url = "http://localhost:5000";
 	useEffect(() => {
-		fetch("http://localhost:5000")
+		fetch(url)
 			.then((response) => {
 				if (response.status <= 200) {
 					return response.json();
