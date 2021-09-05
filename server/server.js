@@ -22,21 +22,15 @@ const pool = new Pool({
 });
 // GET "/"
 
-app.route("/").get((req, res) => {
-	console.log("You're in the DB!");
-	pool
-		.query("SELECT * FROM videos")
-		.then((result) => res.json(result.rows))
-		.catch((err) => console.error(err));
-});
-
 app
 	.route("/")
-	// .get((req, res) => {
-	// 	console.log("Message received!");
-	// 	// console.log(videos);
-	// 	res.json(videos);
-	// })
+	.get((req, res) => {
+		console.log("You're in the DB!");
+		pool
+			.query("SELECT * FROM videos")
+			.then((result) => res.json(result.rows))
+			.catch((err) => console.error(err));
+	})
 	.post([check("url").isURL()], (req, res) => {
 		const errors = validationResult(req);
 		const { title, url } = req.body;
