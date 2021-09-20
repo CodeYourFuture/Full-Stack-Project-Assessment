@@ -1,0 +1,12 @@
+const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newVid)
+    }
+
+    fetch('http://localhost:5000/', options)
+
+    life cycle reading - https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+
