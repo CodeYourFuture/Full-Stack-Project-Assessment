@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Search(props) {
+const Search = ({ setSearch, search }) => {
   return (
     <div className="App-Search mt-3 offset-md-2 col-md-3">
       <form className="mx-4">
@@ -12,11 +12,13 @@ export default function Search(props) {
             type="text"
             className="form-control"
             id="title"
-            onChange={(e) => props.setSearch(e.target.value)}
-            value={props.search}
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
           />
         </div>
       </form>
     </div>
   );
-}
+};
+
+export default Search;

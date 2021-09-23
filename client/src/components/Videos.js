@@ -1,12 +1,13 @@
-import React from "react";
 import SingleVideo from "./SingleVideo";
 
-export default function Videos(props) {
+const Videos = ({ searchingData, count, setCount }) => {
   return (
     <div>
-      {props.searchingData.map((video, index) => (
-        <SingleVideo video={video} key={index} />
+      {searchingData.map((video) => (
+        <SingleVideo video={video} key={video.id} />
       ))}
     </div>
   );
-}
+};
+
+export default Videos;

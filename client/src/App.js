@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AddVideo from "./components/AddVideo";
 import Search from "./components/Search";
@@ -8,6 +9,7 @@ import data from "./exampleresponse.json";
 function App() {
   const [videoData, setVideoData] = useState(data);
   const [search, setSearch] = useState("");
+
   const searchingData = videoData.filter((video) =>
     video.title.toUpperCase().includes(search.toUpperCase())
   );
@@ -17,9 +19,12 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo />
-      <Search setSearch={setSearch} search={search} />
-      <Videos videoData={videoData} searchingData={searchingData} />
+      <div className="videoSearch d-flex mx-5">
+        <AddVideo />
+        <Search setSearch={setSearch} search={search} />
+      </div>
+
+      <Videos searchingData={searchingData} />
     </div>
   );
 }
