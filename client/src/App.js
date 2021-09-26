@@ -20,11 +20,15 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="videoSearch d-flex mx-5">
-        <AddVideo />
+        <AddVideo videoData={videoData} setVideoData={setVideoData} />
         <Search setSearch={setSearch} search={search} />
       </div>
 
-      <Videos searchingData={searchingData} />
+      <Videos
+        searchingData={searchingData}
+        videoData={videoData}
+        setVideoData={setVideoData}
+      />
     </div>
   );
 }

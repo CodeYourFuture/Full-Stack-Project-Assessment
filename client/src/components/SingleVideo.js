@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const SingleVideo = ({ video }) => {
-  const [counter, setCounter] = useState(0);
+const SingleVideo = ({ video, handleDelete }) => {
+  const [counter, setCounter] = useState(video.rating);
 
   const voteUp = () => {
     setCounter(counter + 1);
@@ -15,9 +15,12 @@ const SingleVideo = ({ video }) => {
       <div>
         <h4>{video.title}</h4>
         <div className="vote d-flex justify-content-center">
-          <button onClick={() => voteUp()}>Vote Up </button>
-          <h4>{counter}</h4>
-          <button onClick={() => voteDown()}>Vote Down</button>
+          <i className="fa fa-thumbs-o-up thumps" onClick={() => voteUp()}></i>
+          <h5 className="mx-3">{counter} Votes</h5>
+          <i
+            className="fa fa-thumbs-o-down thumps"
+            onClick={() => voteDown()}
+          ></i>
         </div>
       </div>
       <iframe
@@ -29,8 +32,11 @@ const SingleVideo = ({ video }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div>
-        <button className="btn btn-danger input" type="submit">
+      <div className="delete d-flex justify-content-center">
+        <button
+          onClick={() => handleDelete(video.id)}
+          className="btn btn-danger"
+        >
           Delete
         </button>
       </div>

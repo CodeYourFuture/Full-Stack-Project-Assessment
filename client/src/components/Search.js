@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = ({ setSearch, search }) => {
+const Search = ({ search, setSearch }) => {
   return (
     <div className="App-Search mt-3 offset-md-2 col-md-3">
       <form className="mx-4">
