@@ -1,8 +1,8 @@
 import SingleVideo from "./SingleVideo";
 
-const Videos = ({ searchingData, videoData, setVideoData }) => {
+const Videos = ({ searchingData, sortedVideoData, setVideoData }) => {
   const handleDelete = (id) => {
-    const filteredVideo = videoData.filter((item) => item.id !== id);
+    const filteredVideo = sortedVideoData.filter((item) => item.id !== id);
     setVideoData(filteredVideo);
   };
 

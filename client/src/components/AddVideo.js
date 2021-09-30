@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddVideo = ({ videoData, setVideoData }) => {
+const AddVideo = ({ sortedVideoData, setVideoData }) => {
   const [addingVideo, setAddingVideo] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -8,15 +8,24 @@ const AddVideo = ({ videoData, setVideoData }) => {
   const handleVideoAdder = (e) => {
     e.preventDefault();
     const videoId = Math.floor(Math.random() * 10000);
+
     const newVideoData = {
       id: videoId,
       // id: Date.now(),
       title: title,
       url: url,
       rating: 0,
+      timeSent: new Date(),
     };
 
-    setVideoData(videoData.concat(newVideoData));
+    // setVideoData(sortedVideoData.concat(newVideoData));
+    newVideoData.title && newVideoData.url
+      ? setVideoData(sortedVideoData.concat(newVideoData))
+      : !newVideoData.title
+      ? alert("Please fill the title section")
+      : !newVideoData.url
+      ? alert("Please fill the url section")
+      : alert("error");
   };
   return (
     <div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 import AddVideo from "./components/AddVideo";
 import Search from "./components/Search";
 import Videos from "./components/Videos";
@@ -10,7 +11,12 @@ function App() {
   const [videoData, setVideoData] = useState(data);
   const [search, setSearch] = useState("");
 
-  const searchingData = videoData.filter((video) =>
+  const [sorted, setSorted] = useState(false);
+
+  const sortedVideoData = videoData.sort(
+    (video1, video2) => video2.rating - video1.rating
+  );
+  const searchingData = sortedVideoData.filter((video) =>
     video.title.toUpperCase().includes(search.toUpperCase())
   );
 
@@ -20,13 +26,16 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="videoSearch d-flex mx-5">
-        <AddVideo videoData={videoData} setVideoData={setVideoData} />
+        <AddVideo
+          sortedVideoData={sortedVideoData}
+          setVideoData={setVideoData}
+        />
         <Search setSearch={setSearch} search={search} />
       </div>
 
       <Videos
         searchingData={searchingData}
-        videoData={videoData}
+        sortedVideoData={sortedVideoData}
         setVideoData={setVideoData}
       />
     </div>
