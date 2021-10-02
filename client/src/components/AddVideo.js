@@ -7,14 +7,14 @@ const AddVideo = ({ sortedVideoData, setVideoData }) => {
 
   const handleVideoAdder = (e) => {
     e.preventDefault();
-    const videoId = Math.floor(Math.random() * 10000);
+    const videoId = Math.floor(Math.random() * 1000000);
+    const rating = Math.floor(Math.random() * 10000);
 
     const newVideoData = {
       id: videoId,
-      // id: Date.now(),
       title: title,
       url: url,
-      rating: 0,
+      rating: rating,
       timeSent: new Date(),
     };
 
