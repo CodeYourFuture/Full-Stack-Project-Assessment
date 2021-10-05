@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 5000;
@@ -9,8 +12,12 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Store and retrieve your videos from here
 let videos = require("../client/src/exampleresponse.json");
 // GET "/"
-//200-1- This endpoint is used to return all of the videos
 
+app.get("/", (req, res) => {
+  res.json(videos);
+});
+
+//200-1- This endpoint is used to return all of the videos
 app.get("/videos", (req, res) => {
   res.status(200).json(videos);
 });
