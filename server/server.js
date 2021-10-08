@@ -2,10 +2,15 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-app.use(cors());
-app.use(express.json());
-
 const port = process.env.PORT || 5000;
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+// So the API will be accessible from http://localhost:8080 in our case and blocked for other domains.
+app.use(express.urlencoded({ extended: true })); // sending data for POST and PUT requests
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: false })); // sending data for POST and PUT requests
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -14,7 +19,23 @@ let videos = require("../client/src/exampleresponse.json");
 // GET "/"
 
 app.get("/", (req, res) => {
-  res.json(videos);
+  const orderBy = req.query.order;
+
+  if (orderBy === "asc") {
+    const ascendVideoData = videos.sort(
+      (video1, video2) => video1.rating - video2.rating
+    );
+    res.status(200).json(ascendVideoData);
+  } else if (orderBy === "desc") {
+    const descendVideoData = videos.sort(
+      (video1, video2) => video2.rating - video1.rating
+    );
+    res.status(200).json(descendVideoData);
+  } else if (!orderBy) {
+    res.status(200).json(videos);
+  } else {
+    res.status(404).json("Please input correct query!");
+  }
 });
 
 //200-1- This endpoint is used to return all of the videos
