@@ -10,29 +10,27 @@ import Videos from "./components/Videos";
 function App() {
   const [videoData, setVideoData] = useState([]);
   const [search, setSearch] = useState("");
-  const [orderBy, setOrderBy] = useState("");
-  const [sorted, setSorted] = useState(false);
+  const [orderBy, setOrderBy] = useState("asc");
+  const [isAsc, setIsAsc] = useState(false);
 
-  const handleSort = () => {
-    setSorted(!sorted);
-  };
-
-  const sortedVideoData = videoData.sort((video1, video2) => {
-    if (sorted) {
-      return video1.rating > video2.rating ? 1 : -1;
-    } else {
-      return video1.rating < video2.rating ? 1 : -1;
-    }
-  });
   const searchingData = videoData.filter((video) =>
     video.title.toUpperCase().includes(search.toUpperCase())
   );
+  const handleSort = (isAsc) => {
+    const sorted = isAsc ? "asc" : "desc";
+    setOrderBy(sorted);
+  };
+  const toggleButton = () => {
+    setIsAsc(!isAsc);
+    handleSort(isAsc);
+  };
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/?order=${orderBy}`)
-      .then((res) => res.json())
-      .then((sortedVideoData) => setVideoData(sortedVideoData))
-      // .then((videoData) => console.log(videoData));
-      .catch((err) => console.log(err));
+    orderBy
+      ? fetch(`http://127.0.0.1:5000/?order=${orderBy}`)
+      : fetch(`http://127.0.0.1:5000`)
+          .then((res) => res.json())
+          .then((videoData) => setVideoData(videoData))
+          .catch((err) => console.log(err));
   }, [orderBy]);
 
   return (
@@ -41,18 +39,15 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="videoSearch d-flex mx-5">
-        <AddVideo
-          sortedVideoData={sortedVideoData}
-          setVideoData={setVideoData}
-        />
+        <AddVideo videoData={videoData} setVideoData={setVideoData} />
         <Search setSearch={setSearch} search={search} />
       </div>
 
       <Videos
         searchingData={searchingData}
-        sortedVideoData={sortedVideoData}
+        videoData={videoData}
         setVideoData={setVideoData}
-        handleSort={handleSort}
+        toggleButton={toggleButton}
       />
     </div>
   );
