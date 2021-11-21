@@ -1,12 +1,28 @@
+*{
+  box-sizing: border-box;
+  margin: auto;
+  background-color: lightslategrey;
+}
+
 .App {
   text-align: center;
-  background-color: rgba(139, 115, 161, 0.021);
+  justify-content: center;
+
+  margin:auto;
+  display: flex;
+  padding:2px;
+
+  
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  
 }
 
 .App-header{
 display:flex;
 flex-wrap: wrap;
-background-color: rgb(83, 129, 129);
+background-color: rgb(3, 5, 17);
 justify-content: center;
 justify-items: center;
 
@@ -14,20 +30,43 @@ justify-items: center;
 }
 
 .Video-display{
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   margin: 10px;
-    padding:10px;
+  padding:10px;
+  justify-content:center;
+  justify-items: center;
   border: 5px solid brown;
+  border-radius: 50px;
+  
 
 }
+li{font-size: 1.5em;}
 .videos{
- margin: 10px;
- background-color: rgba(114, 142, 194, 0.349);
+ margin: auto;
+width:100vw;
+  background-color: lightslategrey;
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  justify-content: space-around;
+  grid-template-columns: 1fr;
+    justify-content:center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
 }
+button{
+  width:100px;
+  height:80px;
+  border-radius: 20px;
+  font-size: larger;
+}
+
 .Video-display{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-content: center;
+justify-content: center;
 
   list-style-type:none;
   
@@ -35,5 +74,43 @@ justify-items: center;
 .App-header >h1{
 font-family: 'Preahvihear', sans-serif;
 font-size: 2rem;
+display: flex;
+justify-items: center;
 
+
+}
+
+@media only screen and (min-width: 600px)  {
+
+  .App-header >h1{
+font-family: 'Preahvihear', sans-serif;
+font-size: 3rem;
+display: flex;
+justify-items: center;
+
+
+}
+
+
+.videos{
+ margin: auto;
+ padding:3px;
+  background-color: lightslategrey;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+    justify-content:center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+
+}
+li{
+  font-size: 2.4em;
+}
+button{
+  width:200px;
+  height:80px;
+  border-radius: 20px;
+  font-size: larger;
+}
 }
