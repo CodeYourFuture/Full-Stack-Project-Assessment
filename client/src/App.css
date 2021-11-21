@@ -1,3 +1,39 @@
 .App {
   text-align: center;
+  background-color: rgba(139, 115, 161, 0.021);
+}
+
+.App-header{
+display:flex;
+flex-wrap: wrap;
+background-color: rgb(83, 129, 129);
+justify-content: center;
+justify-items: center;
+
+
+}
+
+.Video-display{
+  margin: 10px;
+    padding:10px;
+  border: 5px solid brown;
+
+}
+.videos{
+ margin: 10px;
+ background-color: rgba(114, 142, 194, 0.349);
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  justify-content: space-around;
+}
+.Video-display{
+
+  list-style-type:none;
+  
+}
+.App-header >h1{
+font-family: 'Preahvihear', sans-serif;
+font-size: 2rem;
+
 }
