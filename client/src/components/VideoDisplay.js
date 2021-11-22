@@ -6,29 +6,12 @@ const VideoDisplay = (prop) => {
 
 
   const [allvideos, setAllVideos] = useState(prop.video);
-  const [newvideo, setNewVideo] = useState([{
-      id: 283634,
-      title: "Learn Unity - Beginner's Game Development Course",
-      url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-      rating: 211,
-    }]);
-  //console.log(allvideos);
   
   
   
-  
-   
-  // const deleteDisplay = () => {
-   
+  const inputVideo = (newvideo) => {
     
-  //   setAddDisplay(false);
-  // };
-  
-  const inputVideo = () => {
     
-    //set();
-    //setAddDisplay(true);
-   // console.log(newvideo);
  
    
     
@@ -65,15 +48,16 @@ const VideoDisplay = (prop) => {
   
 
   return (
-    <>
+    < div className='render'>
       
       <div>
         <AddVideo onClick={inputVideo} />
       </div>{" "}
-      
+      <div className='videos'>
       {[...allvideos].map((videos, index) => {
         let id = videos.url.substr(-11, videos.url.length);
         return (
+          
           <ul
             style={{ display: index === i ? "none" : "flex" }}
             className="Video-display"
@@ -111,10 +95,10 @@ const VideoDisplay = (prop) => {
                 delete{" "}
               </button>
             </li>
-          </ul>
+          </ul> 
         );
-      })}
-    </>
+      })}</div>
+    </div> 
   );
 }
 

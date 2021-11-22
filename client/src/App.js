@@ -13,15 +13,12 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      {}
-      <main className='videos'>
-      
-      
+       
       
         <VideoDisplay className='display'  video={videos}/>
       
           
-        </main>
+    
       
     </div>
   );

@@ -143,6 +143,12 @@ justify-items: center;
 
 
 }
+.render{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
+}
 
 @media only screen and (min-width: 800px)  {
 
