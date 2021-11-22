@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddVideo from "./AddVideo";
 
 const VideoDisplay = (prop) => {
 
@@ -65,37 +66,20 @@ const VideoDisplay = (prop) => {
 
   return (
     <>
-      <h2 className="addVideo">Add Video</h2>
-      <form className="addvideo-form" onSubmit={(e) => e.preventDefault()}>
-        <div className="addvideo">
-          <label htmlFor="title" name="title">
-            Title:
-            <input className="input" type="text" name="title" />
-          </label>
-        </div>
-        <div className="addvideo">
-          <label htmlFor="url" name="url">
-            {" "}
-            URL:
-            <input className="input" type="text" name="url" />
-          </label>
-        </div>
-
-        <div className="addvideo">
-          <button onClick={(event) => inputVideo()}>Add</button>
-          <button>Delete</button>
-        </div>
-      </form>{" "}
+      
+      <div>
+        <AddVideo onClick={inputVideo} />
+      </div>{" "}
       
       {[...allvideos].map((videos, index) => {
         let id = videos.url.substr(-11, videos.url.length);
         return (
           <ul
-            style={{ display: (index===i) ? "none" : "flex" }}
+            style={{ display: index === i ? "none" : "flex" }}
             className="Video-display"
           >
             {/* <li key= {prop.index }> id {prop.video.id} </li> */}
-            <li>{prop.video.title} </li>
+            <li>{videos.title} </li>
             <li>
               <i onClick={() => upVotes()} className="fas fa-thumbs-up"></i>
               <pre> </pre>
@@ -106,10 +90,11 @@ const VideoDisplay = (prop) => {
 
             <li>
               <iframe
+                title={`${videos.title}`}
                 width="460"
                 height="415"
                 src={`https://www.youtube.com/embed/${id}`}
-                title="YouTube video player"
+
                 // frameborder="0"
                 // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 // allowfullscreen

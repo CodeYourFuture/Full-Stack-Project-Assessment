@@ -130,6 +130,11 @@ justify-content: center;
   list-style-type:none;
   
 }
+button:focus,input:focus li>button:focus{
+  background-color: yellow;
+}
+
+
 .App-header >h1{
 font-family: 'Preahvihear', sans-serif;
 font-size: 2rem;
@@ -139,7 +144,7 @@ justify-items: center;
 
 }
 
-@media only screen and (min-width: 600px)  {
+@media only screen and (min-width: 800px)  {
 
   .App-header >h1{
 font-family: 'Preahvihear', sans-serif;
