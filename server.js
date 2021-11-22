@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db_fullStackProject");
-// const uuid = require("uuid");
-const port = process.env.PORT || 3001;
+const uuid = require("uuid");
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -15,10 +15,10 @@ app.use(express.json());
 // let videos = [];
 
 // GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+// app.get("/", (req, res) => {
+//   // Delete this line after you've confirmed your server is running
+//   res.send({ express: "Your Backend Service is Running" });
+// });
 
 
 // /GET data from database
@@ -53,6 +53,26 @@ app.delete("/:id", (req, res) => {
 
 
 
+// Create a new video in the database
+app.post("/", (req, res) => {
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = req.body.rating
+
+  pool
+    .query('SELECT * FROM videos WHERE url=$1', [newUrl])
+    .then((result => {
+      if (result.rows.length > 0) {
+        return res.status(400).send("This url already exists!")
+      } else {
+        const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+        pool
+          .query(query, [newTitle, newUrl, newRating])
+          .then(() => res.send("New video created!"))
+          .catch((e) => console.log(e))
+      }
+    }));
+});
 
 
 
