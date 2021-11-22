@@ -3,10 +3,10 @@ import DeleteButton from "./DeleteButton";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
-const VideoContainer = ({ ExampleResponse }) => {
+const VideoContainer = ({ Response }) => {
   return (
     <div>
-      {ExampleResponse.map((sample, index) => (
+      {Response.map((sample, index) => (
         <div key={index}>
           <h4>{sample.title}</h4>
           <div>
