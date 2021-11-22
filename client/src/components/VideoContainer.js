@@ -1,5 +1,8 @@
 import React from "react";
 import DeleteButton from "./DeleteButton";
+import { FaThumbsUp } from "react-icons/fa";
+import { FaThumbsDown } from "react-icons/fa";
+
 
 const VideoContainer = () => {
   return (
@@ -7,9 +10,9 @@ const VideoContainer = () => {
       <div>
         <h4>Video title</h4>
         <div>
-          <i class="fas fa-thumbs-up vote"></i>
+          <FaThumbsUp />
           <h3>0 VOTE</h3>
-          <i class="fas fa-thumbs-down vote"></i>
+          <FaThumbsDown />
         </div>
         <div>
           <iframe
