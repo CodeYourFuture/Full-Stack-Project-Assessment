@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteButton from "./DeleteButton";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
 const VideoContainer = ({ Response }) => {
+  const [voteCounts,setVoteCounts] = useState(0);
+  const VoteUp = ()=>{
+    setVoteCounts(voteCounts + 1);
+  }
+  const VoteDown = ()=>{
+    setVoteCounts(voteCounts - 1);
+  }
   return (
     <div>
       {Response.map((sample, index) => (
         <div key={index}>
           <h4>{sample.title}</h4>
           <div>
-            <FaThumbsUp />
-            <h3>0 VOTE</h3>
-            <FaThumbsDown />
+            <FaThumbsUp onClick={VoteUp}/>
+            <h3>{voteCounts} VOTE</h3>
+            <FaThumbsDown onClick={VoteDown}/>
           </div>
           <div>
             <iframe
