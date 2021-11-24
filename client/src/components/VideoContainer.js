@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import DeleteButton from "./DeleteButton";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
-const VideoContainer = ({ Response }) => {
+const VideoContainer = ({ Response,handleDelete }) => {
   const [voteCounts,setVoteCounts] = useState(0);
   const VoteUp = ()=>{
     setVoteCounts(voteCounts + 1);
@@ -36,7 +35,7 @@ const VideoContainer = ({ Response }) => {
           </div>
           <h5>rating</h5>
           <div>
-            <DeleteButton />
+            <button name={sample.title} onClick={handleDelete}>DELETE</button>
           </div>
         </div>
       ))}

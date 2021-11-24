@@ -3,7 +3,15 @@ import VideoContainer from "./VideoContainer";
 import ExampleResponse from "../data/exampleresponse.json";
 const AllVideoContainer = () => {
   const [searchVideo, setSearchVideo] = useState("");
-  const FilteredVideo = ExampleResponse.filter((video) =>
+  const [allVideo, setAllVideo] = useState(ExampleResponse);
+  const HandleDelete = (event) => {
+    const name = event.target.getAttribute("name");
+    setAllVideo(allVideo.filter((vc) => vc.title !== name));
+  };
+  const handleOnChange = (event)=>{
+    setSearchVideo(event.target.value);
+  }
+  const FilteredVideo = allVideo.filter((video) =>
     video.title.toLowerCase().includes(searchVideo.toLowerCase())
   );
   return (
@@ -15,15 +23,13 @@ const AllVideoContainer = () => {
             <input
               type="text"
               id="searchVideo"
-              onChange={(event) => {
-                setSearchVideo(event.target.value);
-              }}
+              onChange={handleOnChange}
             />
           </div>
         </form>
       </div>
       <div>
-        <VideoContainer Response={FilteredVideo} />;
+        <VideoContainer Response={FilteredVideo} handleDelete={HandleDelete} />;
       </div>
     </div>
   );
