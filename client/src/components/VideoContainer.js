@@ -27,7 +27,7 @@ const VideoContainer = ({ Response }) => {
               allowFullScreen
             ></iframe>
           </div>
-          <h5>{sample.rating}</h5>
+          <h5>rating</h5>
           <div>
             <DeleteButton />
           </div>
