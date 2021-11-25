@@ -32,7 +32,6 @@ const AddVideo = (prop) => {
   
   return (
     <>
-    
       <h2 className="addVideo">Add Video</h2>
       <form className="addvideo-form" onSubmit={(e) => e.preventDefault()}>
         <div className="addvideo">
@@ -43,6 +42,7 @@ const AddVideo = (prop) => {
               type="text"
               name="title"
               onChange={(e) => handleChange(e)}
+              required
             />
           </label>
         </div>
@@ -52,13 +52,14 @@ const AddVideo = (prop) => {
             URL:
             <input
               className="input"
-              type="text"
+              type="url"
               name="url"
               onChange={(e) => handleChange(e)}
+              required
             />
           </label>
         </div>
-        { console.log(newvideo)}
+        {console.log(newvideo)}
         <div className="addvideo">
           <button onClick={() => prop.onClick(newvideo)}>Add</button>
           <button>Delete</button>
