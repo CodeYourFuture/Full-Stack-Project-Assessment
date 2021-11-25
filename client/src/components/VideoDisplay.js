@@ -6,8 +6,15 @@ const VideoDisplay = (prop) => {
 
 
   const [allvideos, setAllVideos] = useState(prop.video);
-  
-  
+  let a = [];
+  let arrlength = prop.video.length;
+  for (let i = 0; i < arrlength; i++) {
+    a.push(i);
+    // console.log(a)}
+  }
+    
+  const [deletedvideos, setDeletedVideos] = useState([]);
+  const [t, sett] = useState(-1);
   
   const inputVideo = (newvideo) => {
     
@@ -27,7 +34,7 @@ const VideoDisplay = (prop) => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   let video = prop.video;
   const [videos, setVideo] = useState(video);
-  console.log(videos)
+ // console.log(videos)
   const [voteCount, setVoteCount] = useState(0);
 
   const upVotes = () => {
@@ -39,12 +46,13 @@ const VideoDisplay = (prop) => {
       
     setVoteCount(voteCount - 1)
   }
-  const deleteVideo = (index) => {
-    seti(index);
+  const deleteVideo = (ind) => {
     
-    ([...allvideos].splice(index, 1));
-    setAllVideos(allvideos)
-  };
+    setAllVideos([...allvideos].filter((ele, index) => ind!==index)) 
+    
+       
+     }
+  
   
 
   return (
@@ -55,11 +63,12 @@ const VideoDisplay = (prop) => {
       </div>{" "}
       <div className='videos'>
       {[...allvideos].map((videos, index) => {
-        let id = videos.url.substr(-11, videos.url.length);
+        let id1 = videos.url.indexOf('=');
+        let id= videos.url.substr(id1+1, videos.url.length);
         return (
           
           <ul
-            style={{ display: index === i ? "none" : "flex" }}
+            style={{  }}
             className="Video-display"
           >
             {/* <li key= {prop.index }> id {prop.video.id} </li> */}
