@@ -62,7 +62,7 @@ const VideoDisplay = (prop) => {
         <AddVideo onClick={inputVideo} />
       </div>{" "}
       <div className='videos'>
-      {[...allvideos].map((videos, index) => {
+      {[...allvideos].sort((a,b)=> b.rating-a.rating).map((videos, index) => {
         let id1 = videos.url.indexOf('=');
         let id= videos.url.substr(id1+1, videos.url.length);
         return (
