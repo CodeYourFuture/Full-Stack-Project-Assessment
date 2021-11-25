@@ -1,8 +1,24 @@
 import { useState } from "react";
+import Moment from "react-moment";
 
+const dateFormat = (date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${day}-${month}-${year}`;
+};
+
+const timeFormat = (date) => {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${hours}-${minutes}-${seconds}`;
+};
 const AddVideo = (prop) => {
   const [title, settitle] = useState('');
   const [url, setUrl] = useState('');
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
  
   const [newvideo, setNewVideo] = useState([{}]);  
   const handleChange = (e) => {
@@ -15,12 +31,16 @@ const AddVideo = (prop) => {
         setUrl(e.target.value);
       console.log(e.target.value)}
     }
+    setDate(dateFormat(new Date()));
+    setTime(timeFormat(new Date()));
        setNewVideo([
          {
            id: Math.floor(Math.random*100000000+1),
            title: title,
            url: url,
            rating: 222,
+           date: date,
+           time: time 
          },
        ]);
      console.log(newvideo)

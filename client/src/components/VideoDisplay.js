@@ -29,7 +29,7 @@ const VideoDisplay = (prop) => {
 
   
  
-  const [i,seti] = useState(-1);
+  
 
   const [deleteClicked, setDeleteClicked] = useState(false);
   let video = prop.video;
@@ -93,6 +93,8 @@ const VideoDisplay = (prop) => {
                 // allowfullscreen
               ></iframe>
             </li>
+            <li>{videos.date}</li>
+            <li>{videos.time}</li>
 
             <li>
               <button
