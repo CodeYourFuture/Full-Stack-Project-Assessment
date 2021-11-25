@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+
+.card-body {
+  width: 600px;
+}
+
+.App-card {
+margin-top: 50px;
+}
+
+.card {
+  margin-bottom: 40px;
+}

@@ -33,7 +33,7 @@ const AllVideoContainer = () => {
   console.log(allVideo);
   return (
     <div>
-      <div>
+      <div className="d-flex justify-content-around">
         <div>
           <AddVideo
             handleOnChangeAdd={HandleOnChangeAdd}

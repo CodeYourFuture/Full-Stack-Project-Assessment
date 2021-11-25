@@ -1,16 +1,6 @@
 // import React, { useState } from "react";
 import AddButton from "./AddButton";
 const AddVideo = ({ handleOnChangeAdd,handleSubmit,title,url }) => {
-  // const [addNewVc, setAddNewVc] = useState({ title: "", url: "" });
-  // const { title, url } = addNewVc;
-  // const handleOnChange = (event) => {
-  //   setAddNewVc({ ...addNewVc,[event.target.name]: event.target.value });
-  // };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   sampleData.push(addNewVc);
-  //   console.log(sampleData);
-  // };
   return (
     <div>
       <div>

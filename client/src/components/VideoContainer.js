@@ -11,31 +11,39 @@ const VideoContainer = ({ Response,handleDelete }) => {
     setVoteCounts(voteCounts - 1);
   }
   return (
-    <div>
+    <div className="App-card d-flex justify-content-around flex-wrap">
       {Response.map((sample, index) => (
-        <div key={index}>
-          <h4>{sample.title}</h4>
-          <div>
-            <FaThumbsUp onClick={VoteUp}/>
-            <h3>{voteCounts} VOTE</h3>
-            <FaThumbsDown onClick={VoteDown}/>
-          </div>
-          <div>
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${sample.url.substring(
-                sample.url.length - 11
-              )}`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+        <div key={index} className="card border-warning mb-3">
+          <div className="card-body">
+            <h4>{sample.title}</h4>
+            <div className="d-flex justify-content-around">
+              <FaThumbsUp onClick={VoteUp} />
+              <h3>{voteCounts} VOTE</h3>
+              <FaThumbsDown onClick={VoteDown} />
+            </div>
+            <div>
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${sample.url.substring(
+                  sample.url.length - 11
+                )}`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
           <h5>rating</h5>
           <div>
-            <button name={sample.title} onClick={handleDelete}>DELETE</button>
+            <button
+              name={sample.title}
+              onClick={handleDelete}
+              className="btn btn-secondary btn-sm"
+            >
+              DELETE
+            </button>
           </div>
         </div>
       ))}
