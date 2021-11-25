@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import AddButton from "./AddButton";
-import sampleData from "../data/exampleresponse.json";
-const AddVideo = () => {
-  const [addNewVc, setAddNewVc] = useState({ title: "", url: "" });
-  const { title, url } = addNewVc;
-  const handleOnChange = (event) => {
-    setAddNewVc({ ...addNewVc,[event.target.name]: event.target.value });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    sampleData.push(addNewVc);
-    console.log(sampleData);
-  };
+const AddVideo = ({ handleOnChangeAdd,handleSubmit,title,url }) => {
+  // const [addNewVc, setAddNewVc] = useState({ title: "", url: "" });
+  // const { title, url } = addNewVc;
+  // const handleOnChange = (event) => {
+  //   setAddNewVc({ ...addNewVc,[event.target.name]: event.target.value });
+  // };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   sampleData.push(addNewVc);
+  //   console.log(sampleData);
+  // };
   return (
     <div>
       <div>
@@ -27,7 +26,7 @@ const AddVideo = () => {
                   required=""
                   id="newTitle"
                   value={title}
-                  onChange={handleOnChange}
+                  onChange={handleOnChangeAdd}
                 ></input>
               </label>
             </div>
@@ -40,7 +39,7 @@ const AddVideo = () => {
                   required=""
                   id="newUrl"
                   value={url}
-                  onChange={handleOnChange}
+                  onChange={handleOnChangeAdd}
                 ></input>
               </label>
             </div>
