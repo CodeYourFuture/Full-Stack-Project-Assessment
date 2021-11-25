@@ -54,7 +54,11 @@ const AllVideoContainer = () => {
         </form>
       </div>
       <div>
-        <VideoContainer Response={FilteredVideo} handleDelete={HandleDelete} />;
+        <VideoContainer
+          Response={FilteredVideo}
+          handleDelete={HandleDelete}
+        />
+        ;
       </div>
     </div>
   );

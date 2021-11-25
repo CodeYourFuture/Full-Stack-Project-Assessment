@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 import AddButton from "./AddButton";
-const AddVideo = ({ handleOnChangeAdd,handleSubmit,title,url }) => {
+const AddVideo = ({ handleOnChangeAdd, handleSubmit, title, url }) => {
   return (
     <div>
       <div>
