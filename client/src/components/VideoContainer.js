@@ -8,14 +8,14 @@ const VideoContainer = ({ Response,handleDelete }) => {
         <div key={index} className="card border-warning mb-3">
           <div className="card-body">
             <h4>{sample.title}</h4>
-            <div>
-              <VoteComp name={sample.title}/>
+            <div name={sample.title}>
+              <VoteComp />
             </div>
             <div>
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/${sample.url.substring(
+                src={`https://www.youtube-nocookie.com/embed/${sample.url.substring(
                   sample.url.length - 11
                 )}`}
                 title="YouTube video player"

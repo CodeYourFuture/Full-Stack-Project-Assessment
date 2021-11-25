@@ -30,7 +30,7 @@ const AllVideoContainer = () => {
   const FilteredVideo = allVideo.filter((video) =>
     video.title.toLowerCase().includes(searchVideo.toLowerCase())
   );
-  console.log(allVideo);
+  console.log(FilteredVideo);
   return (
     <div>
       <div className="d-flex justify-content-around">
@@ -58,7 +58,6 @@ const AllVideoContainer = () => {
           Response={FilteredVideo}
           handleDelete={HandleDelete}
         />
-        ;
       </div>
     </div>
   );

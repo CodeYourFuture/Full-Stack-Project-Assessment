@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
-const VoteComp = (name)=>{
+const VoteComp = ()=>{
     const [voteCounts, setVoteCounts] = useState(0)
     const voteIn = (e)=>{
       e.preventDefault();
@@ -12,9 +12,10 @@ const VoteComp = (name)=>{
       e.preventDefault();
         setVoteCounts(voteCounts - 1);
     }
+    console.log();
 
     return (
-      <div className="d-flex justify-content-around" name={name}>
+      <div className="d-flex justify-content-around">
         <FaThumbsUp onClick={voteIn} />
         <h3>{voteCounts} VOTE</h3>
         <FaThumbsDown onClick={voteOut} />
