@@ -19,7 +19,10 @@ export default function VideoAdd({ setVideos }) {
       url: url,
       rating: 0,
     };
-    setVideos((prev) => prev.concat(newVideo));
+    //check  valid YouTube URL
+    !url.includes("youtube") || !url.includes("watch?v=")
+      ? window.alert("Please check your youtube url")
+      : setVideos((prev) => prev.concat(newVideo));
   }
   return (
     <section className="videoAdd">
