@@ -1,3 +1,40 @@
+*{
+  padding: 0;
+  margin: 0;
+}
 .App {
   text-align: center;
+  border: 10px solid black;
+  display: flex;
 }
+
+li {
+  list-style: none;
+}
+
+.list-div {
+ 
+  list-style: none;
+  /* width: 100%; */
+  /* border: 1px solid black; */
+}
+
+.list-div p {
+  text-align: center;
+}
+
+/* upvote */
+
+.upvote-div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 5px;
+}
+
+.downvote-div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
