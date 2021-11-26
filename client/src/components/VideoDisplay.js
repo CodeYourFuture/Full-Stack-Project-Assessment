@@ -15,8 +15,8 @@ const VideoDisplay = (prop) => {
   const downVotes = () => {
     setVoteCount(voteCount - 1);
   };
-  const deleteVideo = (ind) => {
-    setAllVideos([...allvideos].filter((ele, index) => ind !== ele.id));
+  const deleteVideo = (id) => {
+    setAllVideos([...allvideos].filter((video, index) => id !== video.id));
   };
 
   return (
@@ -27,11 +27,10 @@ const VideoDisplay = (prop) => {
      
       <div className="videos">
         {[...allvideos].sort((a, b) => b.rating - a.rating).map((videos, index) => {
-            let id1 = videos.url.indexOf("=");
-            let id = videos.url.substr(id1 + 1, videos.url.length);
+            let idIndicator = videos.url.indexOf("=");
+            let id = videos.url.substr(idIndicator + 1, videos.url.length);
             return (
               <ul key={index} style={{}} className="Video-display">
-                {/* <li key= {prop.index }> id {prop.video.id} </li> */}
                 <li>{videos.title} </li>
                 <li>
                   <i onClick={() => upVotes()} className="fas fa-thumbs-up"></i>
@@ -50,14 +49,17 @@ const VideoDisplay = (prop) => {
                     width="460"
                     height="415"
                     src={`https://www.youtube.com/embed/${id}`}
-
-                    // frameborder="0"
-                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    // allowfullscreen
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   ></iframe>
                 </li>
-                <li>{videos.date}</li>
-                <li>{videos.time}</li>
+                <li>
+                  On {videos.date} 
+                </li>
+                <li>
+                  At { videos.time}
+                </li>
 
                 <li>
                   <button

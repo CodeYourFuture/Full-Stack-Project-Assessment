@@ -32,10 +32,10 @@ const AddVideo = (prop) => {
     setTime(timeFormat(new Date()));
     setNewVideo([
       {
-        id: Math.floor(Math.random * 100000000 + 1),
+        id: Math.floor(Math.random() * 100000000 )+ 1,
         title: title,
         url: url,
-        rating: 222,
+        rating:0,
         date: date,
         time: time,
       },
@@ -45,7 +45,7 @@ const AddVideo = (prop) => {
     setClicked(true);
   }
   const handleDelete = () => {
-document.getElementById("addvideo-form").reset();
+document.getElementById("addvideoform").reset();
     setClicked(false);
 
   }
@@ -57,7 +57,7 @@ document.getElementById("addvideo-form").reset();
       <form
         style={{ display: clicked ? "flex" : "none" }}
         className="addvideo-form"
-        id="addvideo-form"
+        id="addvideoform"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="addvideo">
@@ -85,7 +85,7 @@ document.getElementById("addvideo-form").reset();
             />
           </label>
         </div>
-
+        { console.log(newvideo[0].id)}
         <div className="addvideo">
           <button onClick={() => prop.onClick(newvideo)}>Add</button>
           <button onClick={(e) => handleDelete()}>Delete</button>
