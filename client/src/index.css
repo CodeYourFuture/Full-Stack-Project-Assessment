@@ -20,6 +20,10 @@ header {
   margin-bottom: 16px;
   padding: 1rem;
 }
+.logo {
+  cursor: pointer;
+  width: 30px;
+}
 /* Footer Style */
 footer {
   background-color: #222;
