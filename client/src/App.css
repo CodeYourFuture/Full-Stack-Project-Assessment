@@ -1,3 +1,87 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 90vw;
+}
+.videoAdd form {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 4fr;
+}
+form input {
+  /* background-color: #efefef; */
+  border: 1px solid #ebebeb;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin: 1rem;
+}
+form input:focus {
+  outline: none;
+}
+form button,
+.deleteButton {
+  background-color: rgb(68, 146, 235);
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.5s ease;
+}
+form button:hover {
+  opacity: 0.8;
+}
+
+/* videoCard Styles */
+.videoCard iframe {
+  grid-area: video;
+}
+.videoCard p {
+  grid-area: videoName;
+}
+.videoCard .voteContainer {
+  grid-area: voteContainer;
+}
+.videoCard .deleteButton {
+  grid-area: voteDeleteButton;
+}
+.videoCard {
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  justify-items: center;
+  margin: 2rem 0;
+  padding-top: 0.5rem;
+  grid-template-areas:
+    "video video"
+    "videoName videoName"
+    "voteContainer voteDeleteButton";
+}
+/* voteContainer styles */
+.voteContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.voteContainer i {
+  cursor: pointer;
+  padding: 1rem;
+  transition: 0.5s ease;
+}
+.fa-thumbs-up:hover {
+  color: rgb(5, 175, 56);
+}
+.fa-thumbs-down:hover {
+  color: rgb(175, 45, 5);
+}
+.deleteButton {
+  margin: 0.5rem 0;
+}
+.deleteButton:hover {
+  background-color: rgb(151, 6, 6);
 }

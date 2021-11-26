@@ -14,17 +14,17 @@ export default function VideoCard({ videos, setVideos }) {
     );
     return (
       <li key={video.id} className="videoCard">
-        <p>{video.title}</p>
         <iframe
-          width="560"
-          height="315"
+          width="360"
+          height="215"
           src={`https://www.youtube.com/embed/${youtubeID}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <VideoVote />
+        <p>{video.title}</p>
+        <VideoVote rating={video.rating} />
         <button
           className="deleteButton"
           onClick={() => handleDelete(video.id)}

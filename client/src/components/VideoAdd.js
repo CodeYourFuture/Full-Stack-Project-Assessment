@@ -22,7 +22,7 @@ export default function VideoAdd({ setVideos }) {
     setVideos((prev) => prev.concat(newVideo));
   }
   return (
-    <section>
+    <section className="videoAdd">
       <form onSubmit={handleSubmit}>
         <label htmlFor="inputTitle">Title</label>
         <input

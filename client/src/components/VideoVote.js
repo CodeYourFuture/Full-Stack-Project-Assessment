@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-export default function VideoVote() {
-  const [voteCount, setVoteCount] = useState(0);
+export default function VideoVote({ rating }) {
+  const [voteCount, setVoteCount] = useState(rating);
   function handleLike() {
     setVoteCount((prev) => prev + 1);
   }
