@@ -13,11 +13,14 @@ export default function VideoAdd({ setVideos }) {
   //UPGRADE LATER
   function handleSubmit(event) {
     event.preventDefault();
+    const fullDate = new Date();
     const newVideo = {
-      id: url.length + title.length, //LATER > DB will create unique id
+      id: fullDate.getMilliseconds(), //LATER > DB will create unique id
       title: title,
       url: url,
       rating: 0,
+      date: fullDate.toLocaleDateString(),
+      time: `${fullDate.getHours()}:${fullDate.getMinutes()}:${fullDate.getSeconds()}`,
     };
     //check  valid YouTube URL
     !url.includes("youtube") || !url.includes("watch?v=")
