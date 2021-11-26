@@ -12,7 +12,7 @@
     "react-dom": "^17.0.2",
     "react-moment": "^1.1.1",
     "react-scripts": "4.0.3",
-    "homepage":"/.",
+    "homepage": "vide0ss.netlify.app/client",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
