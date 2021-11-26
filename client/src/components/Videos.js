@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import Upvote from "./Upvote";
 import Downvote from "./Downvote";
+import Removebtn from "./Removebtn";
 
 let list = [
     {
@@ -66,7 +67,7 @@ let list = [
 ]
 
 
-function Video() {
+function Videos() {
 
     return (
         
@@ -92,6 +93,8 @@ function Video() {
                      allowfullscreen
                      title="video"
                    />
+                    <Removebtn />
+
                  </li>
                </div>
              );
@@ -101,4 +104,4 @@ function Video() {
     );
 }
 
-export default Video;
+export default Videos;
