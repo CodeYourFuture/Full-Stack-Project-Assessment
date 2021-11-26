@@ -24,9 +24,10 @@ const VideoDisplay = (prop) => {
       <div>
         <AddVideo onClick={inputVideo} />
       </div>{" "}
-     
       <div className="videos">
-        {[...allvideos].sort((a, b) => b.rating - a.rating).map((videos, index) => {
+        {[...allvideos]
+          .sort((a, b) => b.rating - a.rating)
+          .map((videos, index) => {
             let idIndicator = videos.url.indexOf("=");
             let id = videos.url.substr(idIndicator + 1, videos.url.length);
             return (
@@ -54,12 +55,8 @@ const VideoDisplay = (prop) => {
                     allowFullScreen
                   ></iframe>
                 </li>
-                <li>
-                  On {videos.date} 
-                </li>
-                <li>
-                  At { videos.time}
-                </li>
+                <li>On {videos.date}</li>
+                <li>At {videos.time}</li>
 
                 <li>
                   <button
