@@ -1,10 +1,14 @@
 import { useState } from "react";
 import AddVideo from "./AddVideo";
+import SearchVideo from "./SearchVideo"
 
 const VideoDisplay = (prop) => {
   const [allvideos, setAllVideos] = useState(prop.video);
   const inputVideo = (newvideo) => {
     setAllVideos([...allvideos].concat(newvideo));
+  };
+  const onsearch = (newvideo) => {
+    setAllVideos(newvideo);
   };
 
   const [voteCount, setVoteCount] = useState(0);
@@ -23,6 +27,7 @@ const VideoDisplay = (prop) => {
     <div className="render">
       <div>
         <AddVideo onClick={inputVideo} />
+        <SearchVideo videos={prop.video} onClick={onsearch} />
       </div>{" "}
       <div className="videos">
         {[...allvideos]
