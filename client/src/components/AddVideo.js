@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Moment from "react-moment";
 
 const dateFormat = (date) => {
   const year = date.getFullYear();
@@ -15,45 +14,52 @@ const timeFormat = (date) => {
   return `${hours}-${minutes}-${seconds}`;
 };
 const AddVideo = (prop) => {
-  const [title, settitle] = useState('');
-  const [url, setUrl] = useState('');
+  const [title, settitle] = useState("");
+  const [url, setUrl] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
- 
-  const [newvideo, setNewVideo] = useState([{}]);  
+  const [clicked, setClicked] = useState(false);
+  const [newvideo, setNewVideo] = useState([{}]);
   const handleChange = (e) => {
     if (e) {
-      if (e.target.name === 'title') {
+      if (e.target.name === "title") {
         settitle(e.target.value);
-      }
-         
-      else if (e.target.name === 'url') {
+      } else if (e.target.name === "url") {
         setUrl(e.target.value);
-      console.log(e.target.value)}
+      }
     }
     setDate(dateFormat(new Date()));
     setTime(timeFormat(new Date()));
-       setNewVideo([
-         {
-           id: Math.floor(Math.random*100000000+1),
-           title: title,
-           url: url,
-           rating: 222,
-           date: date,
-           time: time 
-         },
-       ]);
-     console.log(newvideo)
-    
+    setNewVideo([
+      {
+        id: Math.floor(Math.random * 100000000 + 1),
+        title: title,
+        url: url,
+        rating: 222,
+        date: date,
+        time: time,
+      },
+    ]);
+  };
+  const handleClick = () => {
+    setClicked(true);
+  }
+  const handleDelete = (e) => {
+document.getElementById("addvideo-form").reset();
+    setClicked(false);
 
   }
-
-
-  
   return (
     <>
-      <h2 className="addVideo">Add Video</h2>
-      <form className="addvideo-form" onSubmit={(e) => e.preventDefault()}>
+      <h2 className="addVideo" onClick={() => handleClick()}>
+        Add Video
+      </h2>
+      <form
+        style={{ display: clicked ? "flex" : "none" }}
+        className="addvideo-form"
+        id="addvideo-form"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="addvideo">
           <label htmlFor="title" name="title">
             Title:
@@ -79,21 +85,14 @@ const AddVideo = (prop) => {
             />
           </label>
         </div>
-        {console.log(newvideo)}
+
         <div className="addvideo">
           <button onClick={() => prop.onClick(newvideo)}>Add</button>
-          <button>Delete</button>
+          <button onClick={(e) => handleDelete(e)}>Delete</button>
         </div>
       </form>{" "}
     </>
   );
- }
-
-
-
-
-
-
-
+};
 
 export default AddVideo;
