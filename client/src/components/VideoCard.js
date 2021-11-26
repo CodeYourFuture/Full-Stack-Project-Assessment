@@ -7,6 +7,8 @@ export default function VideoCard({ videos, setVideos }) {
       previousVideos.filter((video) => video.id !== id)
     );
   }
+  //order the data according to the votes
+  videos.sort((a, b) => b.rating - a.rating);
   //take youtube id from url
   const videoCards = videos.map((video) => {
     const youtubeID = video.url.slice(
