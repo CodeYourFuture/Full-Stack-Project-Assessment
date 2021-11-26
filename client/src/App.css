@@ -10,14 +10,16 @@
   align-items: center;
   grid-template-columns: 1fr 4fr;
 }
-form input {
+form input,
+#searchVideos {
   /* background-color: #efefef; */
   border: 1px solid #ebebeb;
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin: 1rem;
 }
-form input:focus {
+form input:focus,
+#searchVideos:focus {
   outline: none;
 }
 form button,
