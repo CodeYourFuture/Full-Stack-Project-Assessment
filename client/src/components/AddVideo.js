@@ -44,7 +44,7 @@ const AddVideo = (prop) => {
   const handleClick = () => {
     setClicked(true);
   }
-  const handleDelete = (e) => {
+  const handleDelete = () => {
 document.getElementById("addvideo-form").reset();
     setClicked(false);
 
@@ -88,7 +88,7 @@ document.getElementById("addvideo-form").reset();
 
         <div className="addvideo">
           <button onClick={() => prop.onClick(newvideo)}>Add</button>
-          <button onClick={(e) => handleDelete(e)}>Delete</button>
+          <button onClick={(e) => handleDelete()}>Delete</button>
         </div>
       </form>{" "}
     </>

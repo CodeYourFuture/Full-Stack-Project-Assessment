@@ -16,7 +16,7 @@ const VideoDisplay = (prop) => {
     setVoteCount(voteCount - 1);
   };
   const deleteVideo = (ind) => {
-    setAllVideos([...allvideos].filter((ele, index) => ind !== index));
+    setAllVideos([...allvideos].filter((ele, index) => ind !== ele.id));
   };
 
   return (
@@ -24,14 +24,13 @@ const VideoDisplay = (prop) => {
       <div>
         <AddVideo onClick={inputVideo} />
       </div>{" "}
+     
       <div className="videos">
-        {[...allvideos]
-          .sort((a, b) => b.rating - a.rating)
-          .map((videos, index) => {
+        {[...allvideos].sort((a, b) => b.rating - a.rating).map((videos, index) => {
             let id1 = videos.url.indexOf("=");
             let id = videos.url.substr(id1 + 1, videos.url.length);
             return (
-              <ul style={{}} className="Video-display">
+              <ul key={index} style={{}} className="Video-display">
                 {/* <li key= {prop.index }> id {prop.video.id} </li> */}
                 <li>{videos.title} </li>
                 <li>
@@ -63,7 +62,7 @@ const VideoDisplay = (prop) => {
                 <li>
                   <button
                     onClick={() => {
-                      deleteVideo(index);
+                      deleteVideo(videos.id);
                     }}
                   >
                     {" "}
