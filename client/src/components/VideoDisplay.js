@@ -12,14 +12,25 @@ const VideoDisplay = (prop) => {
   const onsearch = (newvideo) => {
     setAllVideos(newvideo);
   };
-
+  
   const [voteCount, setVoteCount] = useState(0);
 
-  const upVotes = () => {
-    setVoteCount(voteCount + 1);
+  const upVotes = (id) => {
+    [...allvideos].filter((video, index) => {
+      if (id === video.id) {
+        setVoteCount(video.rating+=1);
+      }
+    })
+   
   };
-  const downVotes = () => {
-    setVoteCount(voteCount - 1);
+  const downVotes = (id) => {
+    [...allvideos].filter((video, index) => {
+      if (id === video.id)
+      {
+        setVoteCount(video.rating -= 1);
+      }
+    })
+   
   };
   const deleteVideo = (id) => {
     setAllVideos([...allvideos].filter((video, index) => id !== video.id));
@@ -41,12 +52,16 @@ const VideoDisplay = (prop) => {
               <ul key={index} style={{}} className="Video-display">
                 <li>{videos.title} </li>
                 <li>
-                  <i onClick={() => upVotes()} className="fas fa-thumbs-up"></i>
+                  <i
+                    onClick={() => upVotes(videos.id)}
+                    className="fas fa-thumbs-up"
+                  ></i>
+                  {(videos.rating)}
                   <pre> </pre>
-                  {videos.rating + voteCount}
+                
                   <pre> </pre>
                   <i
-                    onClick={() => downVotes()}
+                    onClick={() => downVotes(videos.id)}
                     className="fas fa-thumbs-down"
                   ></i>
                 </li>
