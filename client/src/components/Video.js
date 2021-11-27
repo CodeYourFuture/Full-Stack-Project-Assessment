@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-const Video = ({ videos, video, index }) => {
-  const [videosBeforeDelete, setVideos] = useState(videos)
+const Video = ({ videos, setVideos, video, index }) => {
+  const urlId = video.url.slice(32);
   const formatTitle = (title) => {
     const length = title.length;
     const firstTwenty = title.slice(0, 25);
@@ -9,25 +9,27 @@ const Video = ({ videos, video, index }) => {
     return formattedTitle;
   }
   const handleDelete = () => {
-    videosBeforeDelete.splice(index, 1);
+    setVideos(videos.splice(index, 1));
   }
     return (
-      <div className='p-4'>
+      <div className="p-4">
         <h4>{formatTitle(video.title)}</h4>
         <div>
           <h5>Rating: {video.rating}</h5>
         </div>
         <div>
           <iframe
-            height='250px'
+            height="250px"
             className="vid"
-            src={video.url}
+            src={`https://www.youtube.com/embed/${urlId}`}
             allowFullScreen
             title={video.title}
           ></iframe>
         </div>
         <div>
-          <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+          <button className="btn btn-danger" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       </div>
     );

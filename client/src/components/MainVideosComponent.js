@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import AddAndSearchVideo from "./AddAndSearchVideo";
 import Videos from "./Videos";
-import data from '../exampleresponse2.json'
+import data from '../exampleresponse.json'
 
 const MainVideosComponent = () => {
-  const [videos, setVideos] = useState("");
+  const [videos, setVideos] = useState(data);
   // const url = 'https://....';
   // const getVideos = () => {
   //   fetch(url)
@@ -23,10 +23,10 @@ const MainVideosComponent = () => {
   //     setVideos(searchedVideos);
   // }
   return (
-    <div>
+    <section>
       <AddAndSearchVideo videos={data} setVideos={setVideos} />
-      <Videos videos={data} />
-    </div>
+      <Videos videos={data} setVideos={setVideos} />
+    </section>
   );
 }
 
