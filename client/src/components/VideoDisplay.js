@@ -56,10 +56,10 @@ const VideoDisplay = (prop) => {
                     onClick={() => upVotes(videos.id)}
                     className="fas fa-thumbs-up"
                   ></i>
-                  {(videos.rating)}
                   <pre> </pre>
-                
+                  {videos.rating}
                   <pre> </pre>
+
                   <i
                     onClick={() => downVotes(videos.id)}
                     className="fas fa-thumbs-down"
