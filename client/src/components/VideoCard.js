@@ -1,23 +1,29 @@
 import React from 'react';
-import VideoVotes from './VideoVotes'
+import VideoVotes from './VideoVotes';
+import DeleteVideo from './DeleteVideo';
 
-export default function VideoCard () {
-    return (
-      <div>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/{VIDEO_ID_GOES_HERE}"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-        <div className="video-features">
-            <h2>title</h2>
-            <VideoVotes />
-            <button>Delete</button>
-        </div>
+
+
+export default function VideoCard ( {video} ) {
+  const urlID = video.url.slice(32);
+  console.log(urlID)
+  return (
+    <div>
+      <iframe
+        className="video-embed"
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${urlID}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="video-features">
+        <h2 className="video=title">{video.title}</h2>
+        <VideoVotes />
+        <DeleteVideo />
       </div>
-    );
+    </div>
+  );
 }

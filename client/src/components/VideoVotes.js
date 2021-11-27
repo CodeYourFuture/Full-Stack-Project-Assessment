@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 
 export default function VideoVotes () {
-  const [ votes , setVotes] = useState(0);
+  const [ totalVotes , setTotalVotes] = useState(0);
   function increaseVotesByOne() {
-    setVotes(votes + 1);
+    setTotalVotes(totalVotes + 1);
   }
   function decreaseVotesByOne() {
-    if (votes > 0) {
-      setVotes(votes - 1);
+    if (totalVotes > 0) {
+      setTotalVotes(totalVotes - 1);
     }
   }
 
   return (
     <div className="vote-icons">
-      <i class="fas fa-thumbs-up" onClick={increaseVotesByOne}></i>
-      <i class="fas fa-thumbs-down" onClick={decreaseVotesByOne}></i>
+      <i className="fas fa-thumbs-up" onClick={increaseVotesByOne}></i>
+      <p> {totalVotes} Likes </p>
+      <i className="fas fa-thumbs-down" onClick={decreaseVotesByOne}></i>
     </div>
   );
 }

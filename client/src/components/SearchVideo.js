@@ -16,14 +16,14 @@ import React, { useState } from 'react';
          <div className="search-row">
            <input
              type="text"
-             id="customerName"
+             id="search-video"
              className="form-control"
              placeholder="search video..."
              value={searchInput}
              onChange={handleSearchInput}
            />
            <button type="submit" className="btn btn-primary">
-             <i class="fas fa-search"></i>
+             <i className="fas fa-search"></i>
            </button>
          </div>
        </form>
