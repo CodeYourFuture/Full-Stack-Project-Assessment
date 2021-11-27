@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const SearchVideo = (prop) => {
     let videos = prop.videos;
   const [videoSearch, setvideo] = useState("");
-  const [url, setUrl] = useState("");
+  
   
   const [newvideo, setNewVideo] = useState([{}]);
     const handleChange = (e) => {
