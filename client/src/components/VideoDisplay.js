@@ -4,8 +4,10 @@ import SearchVideo from "./SearchVideo"
 
 const VideoDisplay = (prop) => {
   const [allvideos, setAllVideos] = useState(prop.video);
+  const [allsvideos, setsAllVideos] = useState([]);
   const inputVideo = (newvideo) => {
     setAllVideos([...allvideos].concat(newvideo));
+    setsAllVideos([...allvideos].concat(newvideo));
   };
   const onsearch = (newvideo) => {
     setAllVideos(newvideo);
@@ -27,7 +29,7 @@ const VideoDisplay = (prop) => {
     <div className="render">
       <div>
         <AddVideo onClick={inputVideo} />
-        <SearchVideo videos={prop.video} onClick={onsearch} />
+        <SearchVideo videos={allsvideos} onClick={onsearch} />
       </div>{" "}
       <div className="videos">
         {[...allvideos]
