@@ -1,4 +1,5 @@
 import React from "react";
+import Buttons from "./Buttons";
 import videos from "./exampleresponse.json";
 
 const VideoCards = () => {
@@ -9,7 +10,7 @@ const VideoCards = () => {
           <iframe
             width="560"
             height="315"
-            src={`https://www.youtube.com/embed/${video.url}`}
+            src={`https://www.youtube.com/embed/${video.url.split("=")[1]}`}
             title={video.title}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -19,13 +20,9 @@ const VideoCards = () => {
 
           <div className="card-body">
             <h5 className="card-title">{video.title}</h5>
-            <p className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" className="btn btn-primary">
-              Go somewhere
-            </a>
+          </div>
+          <div>
+            <Buttons />
           </div>
         </div>
       ))}
