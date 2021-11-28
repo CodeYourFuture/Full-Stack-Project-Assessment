@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import postVideo from "../utils/postVideo";
 export default function VideoAdd({ setVideos }) {
   function useFormState(initialState) {
     const [state, setState] = useState(initialState);
@@ -13,19 +13,15 @@ export default function VideoAdd({ setVideos }) {
   //UPGRADE LATER
   function handleSubmit(event) {
     event.preventDefault();
-    const fullDate = new Date();
-    const newVideo = {
-      id: fullDate.getMilliseconds(), //LATER > DB will create unique id
-      title: title,
-      url: url,
-      rating: 0,
-      date: fullDate.toLocaleDateString(),
-      time: `${fullDate.getHours()}:${fullDate.getMinutes()}:${fullDate.getSeconds()}`,
-    };
     //check  valid YouTube URL
-    !url.includes("youtube") || !url.includes("watch?v=")
-      ? window.alert("Please check your youtube url")
-      : setVideos((prev) => prev.concat(newVideo));
+    if (
+      !url.includes("youtube") ||
+      !url.includes("watch?v=")
+    ) {
+      window.alert("Please check your youtube url");
+    } else {
+      postVideo(title, url, setVideos);
+    }
   }
   return (
     <section className="videoAdd">
