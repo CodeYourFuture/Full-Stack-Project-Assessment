@@ -17,8 +17,14 @@ app.listen(port, () =>
 const videos = require("./exampleData.json");
 
 // GET all data "/"
-app.get("/", (req, res) => {
-  res.send(videos);
+app.get("/", (request, response) => {
+  const order = request.query.order;
+  console.log(order);
+  //order the data according to the votes
+  order && order.toLowerCase() === "asc"
+    ? videos.sort((a, b) => a.rating - b.rating)
+    : videos.sort((a, b) => b.rating - a.rating);
+  response.send(videos);
 });
 
 //GET video by id
