@@ -1,13 +1,17 @@
+import React from "react";
 import "./App.css";
+import Header from "./Components/Header/Header";
+import Main from "./Components/Main/Main";
+import Footer from "./Components/Footer/Footer";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
