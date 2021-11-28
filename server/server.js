@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -26,7 +27,7 @@ app.get("/:videoId", (request, response) => {
       });
 });
 
-// Create a new message
+// Create a new video
 app.post("/", (request, response) => {
   const title = request.body.title;
   const url = request.body.url;
@@ -49,4 +50,20 @@ app.post("/", (request, response) => {
   };
   videos.push(newVideo);
   response.send({ id: newVideo.id });
+});
+
+// Delete video specified by an ID
+app.delete("/:videoId", (request, response) => {
+  const videoId = +request.params.videoId;
+  const videoIndex = videos.findIndex(
+    (video) => video.id === videoId
+  );
+  if (videoIndex === -1) {
+    return response.status(404).send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+  videos.splice(videoIndex, 1);
+  response.send({});
 });
