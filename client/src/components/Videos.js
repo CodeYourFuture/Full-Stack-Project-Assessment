@@ -71,7 +71,7 @@ function Videos() {
     return (
         
       <div>
-          <ul>
+          <ul className="video-ul-wrapper">
             {list.map((e, index) => {
 
             // let test = e.url.substring(32); // works to concatenate with the link after embed/
@@ -81,7 +81,7 @@ function Videos() {
                <div className="video-wrapper">
                  <li key={index}>
                          <div>
-                             <p>{<h4>Title:</h4> }{e.title}</p>
+                             <p>{e.title}</p>
                              {/* <h4>Title: {e.title}</h4> */}
                          </div>
                    <Vote />

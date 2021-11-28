@@ -6,17 +6,18 @@ function Vote() {
   const [downCount, setDownCount] = useState(0);
 
   return (
-      <div className = "votebtn">
+      <div className = "votebtn-wrapper">
         <div className = 'upvote-div'>    
-          <button onClick = {() => setUpCount(upCount+1)}> <i
-          className="fa fa-thumbs-up"></i></button>
+      
+        <i className="fa fa-thumbs-up" onClick={() => setUpCount(upCount + 1)}></i>
           <p>{upCount}</p>
         </div>
       
         <div className = 'downvote-div'>    
-            <p>{downCount}</p>
-            <button onClick = {() => setDownCount(downCount-1)}> <i
-            className="fa fa-thumbs-down"></i></button>   
+        <p>{downCount}</p>
+        {/* <i className="fa fa-thumbs-down" onClick={() => setUpCount(upCount - 1)}></i> */} 
+        <i className="fa fa-thumbs-down" onClick={() => setDownCount(downCount - 1)}></i>
+        
         </div>
       </div>
     );

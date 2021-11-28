@@ -2,37 +2,91 @@
   padding: 0;
   margin: 0;
 }
+
+body{
+  background-color: antiquewhite;
+}
+
+.App-header > h1 {
+  background-color: wheat;
+  color: rgb(143, 82, 51);
+  padding: 10px;
+}
+
 .App {
   text-align: center;
   /* display: flex; */
+}
+
+button{
+  border-style: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 li {
   list-style: none;
 }
 
-.video-wrapper {
+.video-ul-wrapper {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.video-wrapper {
   margin: 20px;
-  padding: 5px;
-  border: 1px solid black;
+}
+
+.video-wrapper li {  
+  background-color: wheat;
+  border: 1px solid rgb(143, 82, 51);
+  border-radius: 5px;
+  padding: 10px;
+  width: 350px;
 }
 
 /* Add section */
 
-.add-btn form {
-  /* width: 200px; */
-  margin: 5px;
-  /* border: 1px solid black; */
+.addbtn-wrapper  {
+  /* display: flex;
+  flex-direction: column; */
+  background-color: wheat;
+  width: 300px;
+  border: 1px solid rgb(143, 82, 51);
+  margin: 20px;
 }
+
+.addbtn-wrapper form  {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.addbtn-wrapper button {
+  background-color: rgb(192, 98, 70);
+  padding: 5px 10px;
+  margin: 10px;
+  color: white;
+}
+
+.addbtn-wrapper input {
+  border-radius: 5px;
+  padding: 5px;
+  border-style: none;
+}
+
 
 /* vote button */
 
-.votebtn {
+.votebtn-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 10px;
 }
 
@@ -40,17 +94,33 @@ li {
   display: flex;
 }
 
-.votebtn p {
-  margin: 0 15px;
+.votebtn-wrapper p {
+  margin: 10px 15px;
 }
 
-.votebtn button {
-  border-style: none;
+.votebtn-wrapper i {
+  color: rgb(192, 98, 70);
+  padding: 10px;
+  font-size: 25px;
+  border-radius: 50%;
 }
-
-.votebtn button:hover {
+.votebtn-wrapper i:hover {
   cursor:pointer
 }
+
+/*  */
+
+iframe{
+  width: 100%;
+}
+
+.remove-wrapper button {
+  background-color: rgb(192, 98, 70);
+  color: white;
+  margin: 10px 0;
+}
+
+
 
 
 

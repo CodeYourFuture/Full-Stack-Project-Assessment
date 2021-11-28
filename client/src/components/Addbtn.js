@@ -2,8 +2,8 @@ import React from "react";
 
 function Addbtn() {
     return (
-        <div className = "add-btn">
-            <button>Add This</button>
+        <div className="addbtn-wrapper">
+            <h3>Add Video</h3>
             <form>
                 <label>Title</label>
                 <input></input>
@@ -11,6 +11,7 @@ function Addbtn() {
                 <label>Url</label>
                 <input></input>
             </form>
+            <button>Add</button>
         </div>
     )
 }
