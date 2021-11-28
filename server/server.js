@@ -19,7 +19,6 @@ const videos = require("./exampleData.json");
 // GET all data "/"
 app.get("/", (request, response) => {
   const order = request.query.order;
-  console.log(order);
   //order the data according to the votes
   order && order.toLowerCase() === "asc"
     ? videos.sort((a, b) => a.rating - b.rating)
@@ -41,6 +40,7 @@ app.get("/:videoId", (request, response) => {
 });
 
 // Create a new video
+let temporaryID = 10; //DB WILL CREATE
 app.post("/", (request, response) => {
   const title = request.body.title;
   const url = request.body.url;
@@ -55,13 +55,17 @@ app.post("/", (request, response) => {
       message: "Video could not be saved",
     });
   }
-  const lastMessageId = videos[videos.length - 1].id;
+  temporaryID++; //DB
   const newVideo = {
-    id: lastMessageId + 1,
+    id: temporaryID, //DB
     title: title,
     url: url,
+    date: request.body.date,
+    time: request.body.time,
+    rating: 0,
   };
   videos.push(newVideo);
+  console.log({ temporaryID });
   response.send({ id: newVideo.id });
 });
 
