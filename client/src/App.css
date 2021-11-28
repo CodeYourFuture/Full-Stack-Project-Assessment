@@ -4,37 +4,55 @@
 }
 .App {
   text-align: center;
-  border: 10px solid black;
-  display: flex;
+  /* display: flex; */
 }
 
 li {
   list-style: none;
 }
 
-.list-div {
- 
-  list-style: none;
-  /* width: 100%; */
+.video-wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 20px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+/* Add section */
+
+.add-btn form {
+  /* width: 200px; */
+  margin: 5px;
   /* border: 1px solid black; */
 }
 
-.list-div p {
-  text-align: center;
-}
+/* vote button */
 
-/* upvote */
-
-.upvote-div {
+.votebtn {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 5px;
+  justify-content: space-around;
+  margin: 10px;
 }
 
-.downvote-div {
+.upvote-div, .downvote-div {
   display: flex;
-  justify-content: center;
-  align-content: center;
 }
+
+.votebtn p {
+  margin: 0 15px;
+}
+
+.votebtn button {
+  border-style: none;
+}
+
+.votebtn button:hover {
+  cursor:pointer
+}
+
+
+
+
 

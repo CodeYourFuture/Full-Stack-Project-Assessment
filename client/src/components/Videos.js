@@ -1,6 +1,5 @@
 import React from "react";
-import Upvote from "./Upvote";
-import Downvote from "./Downvote";
+import Vote from "./Vote";
 import Removebtn from "./Removebtn";
 
 let list = [
@@ -72,7 +71,6 @@ function Videos() {
     return (
         
       <div>
-
           <ul>
             {list.map((e, index) => {
 
@@ -80,21 +78,22 @@ function Videos() {
             // console.log(`https://www.youtube.com/embed/${e.url.substring(32)}`); testing
 
              return (
-               <div className="list-div">
+               <div className="video-wrapper">
                  <li key={index}>
-                   <Upvote />
-                   <Downvote />
-                   <br></br>
-                   <p>{`Title: ${e.title} - Rating: ${e.rating}`}</p>
-                   <iframe
+                         <div>
+                             <p>{<h4>Title:</h4> }{e.title}</p>
+                             {/* <h4>Title: {e.title}</h4> */}
+                         </div>
+                   <Vote />
+                    <iframe
                      src={`https://www.youtube.com/embed/${e.url.substring(32)}`}
                      frameborder="0"
                      allow="autoplay; encrypted-media"
                      allowfullscreen
-                     title="video"
-                   />
+                     title="video"/>
+                    
                     <Removebtn />
-
+                         
                  </li>
                </div>
              );
