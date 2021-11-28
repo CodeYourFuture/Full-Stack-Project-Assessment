@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import VideoVote from "./VideoVote";
-
+import fetchVideos from "../utils/fetchVideos";
 export default function VideoCard({ videos, setVideos }) {
   function handleDelete(id) {
     setVideos((previousVideos) =>
       previousVideos.filter((video) => video.id !== id)
     );
   }
-  //order the data according to the votes
-  videos.sort((a, b) => b.rating - a.rating);
+
+  // //order the data according to the votes
+  const [orderVotesAsc, setOrderVotesAsc] = useState(true);
+  function changeOrder() {
+    if (orderVotesAsc) {
+      fetchVideos("?order=asc", setVideos);
+    } else {
+      fetchVideos("?order=desc", setVideos);
+    }
+    setOrderVotesAsc((prev) => !prev);
+  }
   //take youtube id from url
   const videoCards = videos.map((video) => {
     const youtubeID = video.url.slice(
@@ -37,5 +46,12 @@ export default function VideoCard({ videos, setVideos }) {
     );
   });
 
-  return <ul>{videoCards}</ul>;
+  return (
+    <ul>
+      <button className="orderVideos" onClick={changeOrder}>
+        LIKE <i className="fa fa-sort" />
+      </button>
+      {videoCards}
+    </ul>
+  );
 }
