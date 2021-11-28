@@ -19,6 +19,21 @@ app.get("/", (req, res) => {
   data.length ? res.status(200).json(data) : res.status(204).json(data);
 });
 
+// GET endpoint `/:id`
+app.get("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const videoIndex = data.findIndex((data) => data.id === id);
+
+  if (videoIndex > -1) {
+    res.status(200).json(data[videoIndex]);
+  } else {
+    res.status(400).json({
+      result: "failure",
+      message: "No Video with that id",
+    });
+  }
+});
 
 // POST REQUESTS
 
