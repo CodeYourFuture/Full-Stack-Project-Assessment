@@ -23,7 +23,8 @@ form input:focus,
   outline: none;
 }
 form button,
-.deleteButton {
+.deleteButton,
+.orderVideos {
   background-color: rgb(68, 146, 235);
   border: none;
   border-radius: 0.5rem;
@@ -33,8 +34,13 @@ form button,
   padding: 0.5rem 1rem;
   transition: all 0.5s ease;
 }
-form button:hover {
+form button:hover,
+.orderVideos:hover {
   opacity: 0.8;
+}
+/* order button styles */
+.fa-sort {
+  margin-left: 5px;
 }
 
 /* videoCard Styles */
