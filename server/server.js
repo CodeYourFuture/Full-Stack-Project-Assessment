@@ -33,6 +33,7 @@ app.get("/:id", (req, res) => {
       message: "No Video with that id",
     });
   }
+
 });
 
 // POST REQUESTS
@@ -71,8 +72,9 @@ app.delete("/:id", (req, res) => {
   const videoIndex = data.findIndex((data) => data.id === id);
 
   if (videoIndex > -1) {
-    data.splice(data[videoIndex], 1);
+    data.splice(videoIndex, 1);
     res.status(200).json({});
+      console.log(data);
   } else {
     res.status(400).json({
       result: "failure",
