@@ -13,6 +13,19 @@ app.get("/", (req, res) => {
   res.send(videos);
 });
 
+//GET video by id
+app.get("/:videoId", (request, response) => {
+  const videoId = +request.params.videoId;
+  const videoWithId = videos.find(
+    (video) => video.id === videoId
+  );
+  videoWithId
+    ? response.send(videoWithId)
+    : response.status(404).send({
+        msg: `Video with id: ${videoId} does not exist !!!`,
+      });
+});
+
 // Create a new message
 app.post("/", (request, response) => {
   const title = request.body.title;
