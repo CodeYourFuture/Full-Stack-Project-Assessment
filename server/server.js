@@ -62,4 +62,23 @@ app.post("/", (req, res) => {
   }
 });
 
+// DELETE REQUESTS
+
+// DELETE endpoint `/:id` with feedback
+app.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const videoIndex = data.findIndex((data) => data.id === id);
+
+  if (videoIndex > -1) {
+    data.splice(data[videoIndex], 1);
+    res.status(200).json({});
+  } else {
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
