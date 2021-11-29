@@ -1,11 +1,13 @@
 import React from "react";
 import VoteComp from "./voteComp";
 
-const VideoContainer = ({ allVideo, setAllVideo }) => {
-  const HandleDelete = (event) => {
-    event.preventDefault();
-    const name = event.target.getAttribute("name");
-    setAllVideo((allVc)=>allVc.filter((vc) => vc.id !== Number(name)));
+const VideoContainer = ({ allVideo, setAllVideo, fetchData }) => {
+  const deleteFetch = async (id)=>{
+     const res = await fetch(`http://localhost:5000/${id}`,{method:"DELETE"});
+     return res;
+  }
+  const HandleDelete = (id) => {
+    deleteFetch(id).then(()=>fetchData()).then((data)=>setAllVideo(data))
   };
   const eachVideo = allVideo.map((sample) => {
     return (
@@ -25,8 +27,7 @@ const VideoContainer = ({ allVideo, setAllVideo }) => {
         ></iframe>
         <h5>rating</h5>
         <button
-          name={sample.id}
-          onClick={HandleDelete}
+          onClick={(e)=>{HandleDelete(sample.id)}}
           className="btn btn-secondary btn-sm"
         >
           DELETE

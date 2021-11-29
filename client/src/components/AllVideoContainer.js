@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import VideoContainer from "./VideoContainer";
-import ExampleResponse from "../data/exampleresponse.json";
+// import ExampleResponse from "../data/exampleresponse.json";
 import AddVideo from "./AddVideo";
 const AllVideoContainer = () => {
+   const fetchData = async (endpoint = "") => {
+     const res = await fetch(`http://localhost:5000/${endpoint}`);
+     const data = await res.json();
+     return data;   
+   };
+   useEffect(()=>{
+     fetchData().then((data) => {
+       setAllVideo(data);
+     });  
+   },[])
+   
   const [searchVideo, setSearchVideo] = useState("");
-  const [allVideo, setAllVideo] = useState(ExampleResponse);
+  const [allVideo, setAllVideo] = useState([{
+    id: 523427,
+    title: "The Coding Train",
+    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
+    rating: 230,
+  }]);
   const HandleOnChangeSearch = (event) => {
     event.preventDefault();
     setSearchVideo(event.target.value);
@@ -28,7 +44,7 @@ const AllVideoContainer = () => {
       </div>
       <div>
         {/* <VideoContainer allVideo={FilteredVideo} setAllVideo={setAllVideo} /> */}
-        <VideoContainer allVideo={allVideo} setAllVideo={setAllVideo} />
+        <VideoContainer allVideo={allVideo} setAllVideo={setAllVideo} fetchData={fetchData} />
       </div>
     </div>
   );

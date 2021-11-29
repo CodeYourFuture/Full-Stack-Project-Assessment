@@ -4,6 +4,7 @@ const videoData = require("../client/src/data/exampleresponse.json");
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 5000;
 
 // Store and retrieve your videos from here
@@ -58,7 +59,7 @@ app.get("/:videoId", (req, res) => {
 
 app.delete("/:videoId", (req, res) => {
   const index = videos.findIndex((video) => video.id === +req.params.videoId);
-
+  
   if (index === -1) {
     res.status(404).send({
       result: "failure",
