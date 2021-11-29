@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import VideoVote from "./VideoVote";
 import fetchVideos from "../utils/fetchVideos";
+import deleteVideo from "../utils/deleteVideo";
 export default function VideoCard({ videos, setVideos }) {
   function handleDelete(id) {
-    setVideos((previousVideos) =>
-      previousVideos.filter((video) => video.id !== id)
-    );
+    deleteVideo(id, setVideos);
   }
 
   // //order the data according to the votes
