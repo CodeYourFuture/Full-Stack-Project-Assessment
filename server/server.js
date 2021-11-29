@@ -87,6 +87,7 @@ app.delete("/:videoId", (request, response) => {
 //UPDATE votes
 app.put("/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
+  const vote = request.body.vote;
   const videoIndex = videos.findIndex(
     (video) => video.id === videoId
   );
@@ -96,6 +97,6 @@ app.put("/:videoId", (request, response) => {
       message: "Video could not be found",
     });
   }
-  videos[videoIndex].rating++;
+  videos[videoIndex].rating += vote;
   response.send({ rating: videos[videoIndex].rating });
 });
