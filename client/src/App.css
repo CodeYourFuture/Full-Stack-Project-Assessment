@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  background-color: #CD5C5C;
+  border: solid rgb(192, 170, 45) 3px;
+  border-radius: 5px;
+}
