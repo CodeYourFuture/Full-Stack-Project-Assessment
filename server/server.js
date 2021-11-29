@@ -1,17 +1,20 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Import local json data.
+// Import local json data
 const data = require(".././exampleresponse.json");
 
 // Import uuid library
 const { v4: uuidv4 } = require("uuid");
 
-// Enable POST's from a form
+// Enable POST's from a form in app
 app.use(express.urlencoded({ extended: false }));
-
 app.use(express.json());
+
+// Enable cross-origin resource sharing middleware in app
+app.use(cors());
 
 // GET REQUESTS
 

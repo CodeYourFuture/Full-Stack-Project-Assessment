@@ -19,23 +19,21 @@ const AddVideoDrawer = () => {
   );
 
   return (
-    <div>
-      <React.Fragment>
-        <Box sx={{ m: 1 }}>
-          <Fab
-            color="primary"
-            aria-label="add"
-            onClick={() => toggleDrawer(true)}
-          >
-            <AddIcon />
-          </Fab>
-        </Box>
+    <React.Fragment>
+      <Box sx={{ m: 1 }}>
+        <Fab
+          color="primary"
+          aria-label="add"
+          onClick={() => toggleDrawer(true)}
+        >
+          <AddIcon />
+        </Fab>
+      </Box>
 
-        <Drawer open={toggle} onClose={() => toggleDrawer(false)}>
-          {list()}
-        </Drawer>
-      </React.Fragment>
-    </div>
+      <Drawer open={toggle} onClose={() => toggleDrawer(false)}>
+        {list()}
+      </Drawer>
+    </React.Fragment>
   );
 };
 
