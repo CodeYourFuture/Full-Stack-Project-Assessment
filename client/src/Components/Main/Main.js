@@ -2,11 +2,11 @@ import React from "react";
 import AddVideoDrawer from "../AddVideoDrawer/AddVideoDrawer";
 import VideoList from "../VideoList/VideoList";
 
-const Main = () => {
+const Main = ({videos, setVideos}) => {
   return (
     <main>
-      <AddVideoDrawer />
-      <VideoList />
+      <AddVideoDrawer videos={videos}  setVideos={setVideos} />
+      <VideoList videos={videos} setVideos={setVideos} />
     </main>
   );
 };

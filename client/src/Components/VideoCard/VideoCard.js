@@ -7,28 +7,22 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { Tooltip, Zoom, Fade } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import IFrame from "../IFrame/IFrame";
 
-const VideoCard = (props) => {
-  const videoUrlId = props.video.url.split("v=")[1].substring(0, 11);
-  const videoRating = props.video.rating;
-  const videoTitle = props.video.title;
-  //   const arrayId = props.video.id;
+const VideoCard = ({ video, setVideo }) => {
+  const videoUrlId = video.url.split("v=")[1].substring(0, 11);
+  const videoRating = video.rating;
+  const videoTitle = video.title;
+  //   const arrayId = video.id;
 
   const [votes, setVotes] = useState(videoRating);
 
   return (
     <div>
       <Card sx={{ maxWidth: 345, height: 410 }} elevation={6}>
-        <Tooltip
-          transitionComponent={Fade}
-          TransitionProps={{ timeout: 800 }}
-          title="Play"
-          arrow
-        >
-          <IFrame video={videoUrlId} />
-        </Tooltip>
+        <IFrame video={videoUrlId} />
+
         <CardContent>
           <Typography
             sx={{ height: 2 }}
@@ -44,7 +38,6 @@ const VideoCard = (props) => {
                 onClick={() => setVotes((v) => v + 1)}
                 aria-label="like"
                 size="small"
-                transitioncomponent={Zoom}
               >
                 <ThumbUpAltIcon />
               </IconButton>
@@ -54,7 +47,6 @@ const VideoCard = (props) => {
                 onClick={() => setVotes((v) => v - 1)}
                 aria-label="dislike"
                 size="small"
-                transitioncomponent={Zoom}
               >
                 <ThumbDownAltIcon />
               </IconButton>

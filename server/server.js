@@ -9,18 +9,27 @@ const data = require(".././exampleresponse.json");
 // Import uuid library
 const { v4: uuidv4 } = require("uuid");
 
+// Enable cross-origin resource sharing middleware in app
+app.use(cors());
+
 // Enable POST's from a form in app
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Enable cross-origin resource sharing middleware in app
-app.use(cors());
 
 // GET REQUESTS
 
 // GET endpoint `/` with `data` content check
 app.get("/", (req, res) => {
-  data.length ? res.status(200).json(data) : res.status(204).json(data);
+  data.length
+    ? res
+        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        .status(200)
+        .json(data)
+    : res
+        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        .status(204)
+        .json(data);
 });
 
 // GET endpoint `/:id`
@@ -63,6 +72,7 @@ app.post("/", (req, res) => {
     res.status(201).json({
       id: 523523,
     });
+    console.log(newVideo);
   }
 });
 

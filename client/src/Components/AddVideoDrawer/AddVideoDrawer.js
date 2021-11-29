@@ -5,7 +5,7 @@ import AddVideo from "../AddVideo/AddVideo";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 
-const AddVideoDrawer = () => {
+const AddVideoDrawer = ({videos, setVideos}) => {
   const [toggle, setToggle] = React.useState(false);
 
   const toggleDrawer = (open) => {
@@ -14,7 +14,11 @@ const AddVideoDrawer = () => {
 
   const list = () => (
     <Box role="addVideoForm">
-      <AddVideo toggleDrawer={toggleDrawer} />
+      <AddVideo
+        toggleDrawer={toggleDrawer}
+        videos={videos}
+        setVideos={setVideos}
+      />
     </Box>
   );
 

@@ -5,12 +5,13 @@ import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-const AddVideo = ({ toggleDrawer }) => {
+const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
   const [newUrl, setNewUrl] = useState("");
   const [newTitle, setNewTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newVideo = [
       {
         id: uuidv4(),
@@ -19,7 +20,18 @@ const AddVideo = ({ toggleDrawer }) => {
         rating: 0,
       },
     ];
-    console.log(newVideo);
+
+    fetch("http://localhost:5000", {
+      method: "post",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: newTitle,
+        url: newUrl,
+      }),
+    }).then((response) => console.log(response));
+  
+    setVideos(videos.concat(newVideo));
     toggleDrawer(false);
   };
 
