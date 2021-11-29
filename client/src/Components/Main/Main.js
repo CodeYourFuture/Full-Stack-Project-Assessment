@@ -1,7 +1,15 @@
 import React from "react";
+import AddVideoDrawer from "../AddVideoDrawer/AddVideoDrawer";
 
 const Main = () => {
-  return <main>Main</main>;
+  return <main>
+
+<AddVideoDrawer />
+
+
+
+
+  </main>;
 };
 
 export default Main;

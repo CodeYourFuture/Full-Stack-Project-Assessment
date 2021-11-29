@@ -1,11 +1,14 @@
-import React from 'react'
+import { Box } from "@mui/system";
+import React from "react";
 
 const Header = () => {
-    return (
-      <header className="App-header">
+  return (
+    <header className="App-header">
+      <Box sx={{ textAlign: "center" }}>
         <h1>Video Recommendation</h1>
-      </header>
-    );
-}
+      </Box>
+    </header>
+  );
+};
 
-export default Header
+export default Header;
