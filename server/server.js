@@ -1,4 +1,4 @@
-const { response } = require("express");
+const { response, request } = require("express");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -83,4 +83,19 @@ app.delete("/:videoId", (request, response) => {
   }
   videos.splice(videoIndex, 1);
   response.send({});
+});
+//UPDATE votes
+app.put("/:videoId", (request, response) => {
+  const videoId = +request.params.videoId;
+  const videoIndex = videos.findIndex(
+    (video) => video.id === videoId
+  );
+  if (videoIndex === -1) {
+    return response.status(404).send({
+      result: "failure",
+      message: "Video could not be found",
+    });
+  }
+  videos[videoIndex].rating++;
+  response.send({ rating: videos[videoIndex].rating });
 });
