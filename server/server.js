@@ -65,7 +65,6 @@ app.post("/", (request, response) => {
     rating: 0,
   };
   videos.push(newVideo);
-  console.log({ temporaryID });
   response.send({ id: newVideo.id });
 });
 
@@ -82,7 +81,7 @@ app.delete("/:videoId", (request, response) => {
     });
   }
   videos.splice(videoIndex, 1);
-  response.send({});
+  response.status(204).send({});
 });
 //UPDATE votes
 app.put("/:videoId", (request, response) => {
