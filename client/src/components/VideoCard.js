@@ -35,7 +35,7 @@ export default function VideoCard({ videos, setVideos }) {
           allowFullScreen
         ></iframe>
         <p>{video.title}</p>
-        <VideoVote rating={video.rating} />
+        <VideoVote rating={video.rating} id={video.id} />
         <button
           className="deleteButton"
           onClick={() => handleDelete(video.id)}

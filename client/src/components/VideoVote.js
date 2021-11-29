@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-
-export default function VideoVote({ rating }) {
+import updateVote from "../utils/updateVote";
+export default function VideoVote({ rating, id }) {
   const [voteCount, setVoteCount] = useState(rating);
   function handleLike() {
-    setVoteCount((prev) => prev + 1);
+    updateVote(1, id).then((response) => {
+      response.status === 200 &&
+        setVoteCount((prev) => prev + 1);
+    });
   }
   function handleDislike() {
-    setVoteCount((prev) => (prev > 0 ? prev - 1 : 0));
+    updateVote(-1, id).then((response) => {
+      response.status === 200 &&
+        setVoteCount((prev) => (prev > 0 ? prev - 1 : 0));
+    });
   }
+
   return (
     <section className="voteContainer">
       <i
