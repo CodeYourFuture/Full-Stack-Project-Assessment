@@ -12,8 +12,6 @@ const VoteComp = ()=>{
       e.preventDefault();
         setVoteCounts(voteCounts - 1);
     }
-    console.log();
-
     return (
       <div className="d-flex justify-content-around">
         <FaThumbsUp onClick={voteIn} />

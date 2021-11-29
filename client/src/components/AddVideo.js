@@ -1,35 +1,49 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import AddButton from "./AddButton";
-const AddVideo = ({ handleOnChangeAdd, handleSubmit, title, url }) => {
+
+const AddVideo = ({ setAllVideo }) => {
+  const [addNewVc, setAddNewVc] = useState({ title: "", url: "" });
+  const { title, url } = addNewVc;
+
+  const uniId = url.length + title.length;
+  const HandleOnChangeAdd = (event) => {
+    event.preventDefault();
+    const key = event.target.getAttribute("name");
+    setAddNewVc({ ...addNewVc, id: uniId, [key]: event.target.value });
+  };
+  const HandleSubmit = (event) => {
+    event.preventDefault();
+    setAllVideo((allVc) => allVc.concat(addNewVc));
+  };
   return (
     <div>
       <div>
         <h1>Add Video</h1>
         <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={HandleSubmit}>
             <div>
-              <label>
+              <label htmlFor="title">
                 Title
                 <input
                   name="title"
                   type="text"
                   required=""
-                  id="newTitle"
+                  id={""}
                   value={title}
-                  onChange={handleOnChangeAdd}
+                  onChange={HandleOnChangeAdd}
                 ></input>
               </label>
             </div>
             <div>
-              <label>
+              <label htmlFor="url">
                 URL
                 <input
                   name="url"
                   type="text"
                   required=""
-                  id="newUrl"
+                  id={""}
                   value={url}
-                  onChange={handleOnChangeAdd}
+                  onChange={HandleOnChangeAdd}
                 ></input>
               </label>
             </div>
