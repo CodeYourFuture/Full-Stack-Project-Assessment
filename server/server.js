@@ -48,5 +48,15 @@ app.get("/:id", (req, res) => {
   res.send(filteredVideo);
 });
 
+app.delete("/:id", (req, res) => {
+  const index = videoData.findIndex(
+    (video) => video.id === +req.params.id
+  );
+  //console.log(index);
+  videoData.splice(index, 1);
+
+  res.send("delete was successful");
+  console.log("DELETE /album route");
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
