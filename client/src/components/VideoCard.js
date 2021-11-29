@@ -4,7 +4,7 @@ import DeleteVideo from './DeleteVideo';
 
 
 
-export default function VideoCard ( {video} ) {
+export default function VideoCard ( {video, videos, setVideos} ) {
   const urlID = video.url.slice(32);
   console.log(urlID)
   return (
@@ -20,9 +20,9 @@ export default function VideoCard ( {video} ) {
         allowFullScreen
       ></iframe>
       <div className="video-features">
-        <h2 className="video=title">{video.title}</h2>
+        <h2 className="video-title">{video.title}</h2>
         <VideoVotes />
-        <DeleteVideo />
+        <DeleteVideo id={video.id} video={video} videos={videos} setVideos={setVideos} />
       </div>
     </div>
   );

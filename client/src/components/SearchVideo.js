@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
- export default function SearchVideo ({search}) {
-     const [searchInput, setSearchInput] = useState("");
-
+ export default function SearchVideo ({setVideos, videosData}) {
+  
      function handleSearchInput(event) {
-       setSearchInput(event.target.value);
-     }
-     function handleSubmit(event) {
-       event.preventDefault();
-       search(searchInput);
+       const searchedVideo = videosData.filter( video => video.title.toLowerCase().includes(event.target.value.toLowerCase()))
+       setVideos(searchedVideo)
+
      }
 
      return (
-       <form onSubmit={handleSubmit} className="form-group search-box">
+       <form className="form-group search-box">
          <div className="search-row">
            <input
              type="text"
              id="search-video"
              className="form-control"
              placeholder="search video..."
-             value={searchInput}
              onChange={handleSearchInput}
            />
            <button type="submit" className="btn btn-primary">
