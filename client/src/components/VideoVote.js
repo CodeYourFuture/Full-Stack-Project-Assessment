@@ -3,16 +3,10 @@ import updateVote from "../utils/updateVote";
 export default function VideoVote({ rating, id }) {
   const [voteCount, setVoteCount] = useState(rating);
   function handleLike() {
-    updateVote(1, id).then((response) => {
-      response.status === 200 &&
-        setVoteCount((prev) => prev + 1);
-    });
+    updateVote(1, id, setVoteCount);
   }
   function handleDislike() {
-    updateVote(-1, id).then((response) => {
-      response.status === 200 &&
-        setVoteCount((prev) => (prev > 0 ? prev - 1 : 0));
-    });
+    updateVote(-1, id, setVoteCount);
   }
 
   return (

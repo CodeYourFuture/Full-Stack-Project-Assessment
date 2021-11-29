@@ -1,5 +1,9 @@
 import fetchData from "./fetchData";
-export default async function updateVote(vote, id) {
+export default async function updateVote(
+  vote,
+  id,
+  setVoteCount
+) {
   const putObject = {
     method: "PUT",
     headers: {
@@ -9,5 +13,11 @@ export default async function updateVote(vote, id) {
     body: JSON.stringify(vote),
   };
   const response = await fetchData(`/${id}`, { putObject });
-  return response;
+  vote === 1 &&
+    response.status === 200 &&
+    setVoteCount((prev) => prev + 1);
+
+  vote === -1 &&
+    response.status === 200 &&
+    setVoteCount((prev) => (prev > 0 ? prev - 1 : 0));
 }
