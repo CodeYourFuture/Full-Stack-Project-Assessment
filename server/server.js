@@ -84,7 +84,7 @@ app.delete("/:videoId", (request, response) => {
   response.status(204).send({});
 });
 //UPDATE votes
-app.put("/:videoId", (request, response) => {
+app.put("/vote/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
   const vote = request.body.vote;
   const videoIndex = videos.findIndex(
