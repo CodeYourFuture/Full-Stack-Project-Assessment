@@ -3,6 +3,7 @@ import VideoContainer from "./VideoContainer";
 import FetchData from "./fetchData";
 import exampleresponse from "../data/exampleresponse.json"
 import AddVideo from "./AddVideo";
+import SearchVideo from "./SearchVideo";
 const AllVideoContainer = () => {
   //--------------------------use fetch API from server-----------------------------//
  const [allVideo, setAllVideo] = useState(exampleresponse);
@@ -12,15 +13,9 @@ const AllVideoContainer = () => {
      });  
    },[])
    //--------------------------------search bar-------------------------------------// 
-  const [searchVideo, setSearchVideo] = useState("");
-  const HandleOnChangeSearch = (event) => {
-    event.preventDefault();
-    setSearchVideo(event.target.value);
-  };
-  const FilteredVideo = allVideo.filter((video) =>
-    video.title.toLowerCase().includes(searchVideo.toLowerCase())
-  );
-  console.log(FilteredVideo);
+ 
+  
+  
   //---------------------------------------------------------------------------------//
   return (
     <div>
@@ -28,16 +23,7 @@ const AllVideoContainer = () => {
         <div>
           <AddVideo setAllVideo={setAllVideo} FetchData={FetchData} />
         </div>
-        <form>
-          <label htmlFor="videoSearch">Search</label>
-          <div>
-            <input
-              type="text"
-              id="searchVideo"
-              onChange={HandleOnChangeSearch}
-            />
-          </div>
-        </form>
+        <SearchVideo allVideo={allVideo} setAllVideo={setAllVideo}/>
       </div>
       <div>
         {/* <VideoContainer allVideo={FilteredVideo} setAllVideo={setAllVideo} /> */}
