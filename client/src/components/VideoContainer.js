@@ -1,11 +1,11 @@
 import React from "react";
-import DeleteFetch from "./DeleteMethod";
+import DeleteVideo from "./DeleteVideo";
 import VoteComp from "./voteComp";
 
 const VideoContainer = ({ allVideo, setAllVideo, FetchData }) => {
   //------------------Delete Handler------------------------------//
   const HandleDelete = (id) => {
-    DeleteFetch(id)
+    DeleteVideo(id)
       .then(() => FetchData())
       .then((data) => setAllVideo(data));
   };

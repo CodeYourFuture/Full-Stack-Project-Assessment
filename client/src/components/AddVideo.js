@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import PostVideo from "./PostNewVideo";
 import AddButton from "./AddButton";
 
-const AddVideo = ({ setAllVideo }) => {
+const AddVideo = ({ setAllVideo, FetchData}) => {
+  //--------Get value and assign in object key value------------//
   const [addNewVc, setAddNewVc] = useState({ title: "", url: "" });
   const { title, url } = addNewVc;
-
-  const uniId = url.length + title.length;
   const HandleOnChangeAdd = (event) => {
     event.preventDefault();
     const key = event.target.getAttribute("name");
-    setAddNewVc({ ...addNewVc, id: uniId, [key]: event.target.value });
+    setAddNewVc({ ...addNewVc,[key]: event.target.value });
   };
+  //-------------------------------------------------------------//
+  //--------On submit add new video data on server and re-render the page----//
   const HandleSubmit = (event) => {
     event.preventDefault();
-    setAllVideo((allVc) => allVc.concat(addNewVc));
+    PostVideo(addNewVc)
+      .then(() => FetchData())
+      .then((data) => setAllVideo(data));
   };
   return (
     <div>

@@ -1,4 +1,4 @@
-const DeleteFetch = async (id) => {
+const DeleteVideo = async (id) => {
   try {
     const res = await fetch(`http://localhost:5000/${id}`, {
       method: "DELETE",
@@ -8,4 +8,4 @@ const DeleteFetch = async (id) => {
     console.error(err);
   }
 };
-export default DeleteFetch;
+export default DeleteVideo;

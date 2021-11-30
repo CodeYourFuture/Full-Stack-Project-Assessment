@@ -26,18 +26,26 @@ const AllVideoContainer = () => {
     <div>
       <div className="d-flex justify-content-around">
         <div>
-          <AddVideo setAllVideo={setAllVideo} />
+          <AddVideo setAllVideo={setAllVideo} FetchData={FetchData} />
         </div>
         <form>
           <label htmlFor="videoSearch">Search</label>
           <div>
-            <input type="text" id="searchVideo" onChange={HandleOnChangeSearch} />
+            <input
+              type="text"
+              id="searchVideo"
+              onChange={HandleOnChangeSearch}
+            />
           </div>
         </form>
       </div>
       <div>
         {/* <VideoContainer allVideo={FilteredVideo} setAllVideo={setAllVideo} /> */}
-        <VideoContainer allVideo={allVideo} setAllVideo={setAllVideo} FetchData={FetchData} />
+        <VideoContainer
+          allVideo={allVideo}
+          setAllVideo={setAllVideo}
+          FetchData={FetchData}
+        />
       </div>
     </div>
   );
