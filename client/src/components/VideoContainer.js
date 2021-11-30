@@ -1,14 +1,15 @@
 import React from "react";
+import DeleteFetch from "./DeleteMethod";
 import VoteComp from "./voteComp";
 
-const VideoContainer = ({ allVideo, setAllVideo, fetchData }) => {
-  const deleteFetch = async (id)=>{
-     const res = await fetch(`http://localhost:5000/${id}`,{method:"DELETE"});
-     return res;
-  }
+const VideoContainer = ({ allVideo, setAllVideo, FetchData }) => {
+  //------------------Delete Handler------------------------------//
   const HandleDelete = (id) => {
-    deleteFetch(id).then(()=>fetchData()).then((data)=>setAllVideo(data))
+    DeleteFetch(id)
+      .then(() => FetchData())
+      .then((data) => setAllVideo(data));
   };
+  //-------------------------------------------------------------//
   const eachVideo = allVideo.map((sample) => {
     return (
       <li key={sample.id} className="card border-warning mb-3">
@@ -27,7 +28,9 @@ const VideoContainer = ({ allVideo, setAllVideo, fetchData }) => {
         ></iframe>
         <h5>rating</h5>
         <button
-          onClick={(e)=>{HandleDelete(sample.id)}}
+          onClick={(e) => {
+            HandleDelete(sample.id);
+          }}
           className="btn btn-secondary btn-sm"
         >
           DELETE

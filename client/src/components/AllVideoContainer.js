@@ -1,26 +1,18 @@
 import React, { useState,useEffect } from "react";
 import VideoContainer from "./VideoContainer";
-// import ExampleResponse from "../data/exampleresponse.json";
+import FetchData from "./fetchData";
+import exampleresponse from "../data/exampleresponse.json"
 import AddVideo from "./AddVideo";
 const AllVideoContainer = () => {
-   const fetchData = async (endpoint = "") => {
-     const res = await fetch(`http://localhost:5000/${endpoint}`);
-     const data = await res.json();
-     return data;   
-   };
+  //--------------------------use fetch API from server-----------------------------//
+ const [allVideo, setAllVideo] = useState(exampleresponse);
    useEffect(()=>{
-     fetchData().then((data) => {
+     FetchData().then((data) => {
        setAllVideo(data);
      });  
    },[])
-   
+   //--------------------------------search bar-------------------------------------// 
   const [searchVideo, setSearchVideo] = useState("");
-  const [allVideo, setAllVideo] = useState([{
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  }]);
   const HandleOnChangeSearch = (event) => {
     event.preventDefault();
     setSearchVideo(event.target.value);
@@ -29,6 +21,7 @@ const AllVideoContainer = () => {
     video.title.toLowerCase().includes(searchVideo.toLowerCase())
   );
   console.log(FilteredVideo);
+  //---------------------------------------------------------------------------------//
   return (
     <div>
       <div className="d-flex justify-content-around">
@@ -44,7 +37,7 @@ const AllVideoContainer = () => {
       </div>
       <div>
         {/* <VideoContainer allVideo={FilteredVideo} setAllVideo={setAllVideo} /> */}
-        <VideoContainer allVideo={allVideo} setAllVideo={setAllVideo} fetchData={fetchData} />
+        <VideoContainer allVideo={allVideo} setAllVideo={setAllVideo} FetchData={FetchData} />
       </div>
     </div>
   );
