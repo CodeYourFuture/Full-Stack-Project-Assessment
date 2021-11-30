@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import VoteButtons from "./VoteButtons";
 
 const VideoCard = (props) => {
   const [videos, setVideos] = useState(props.videos);
@@ -11,7 +12,7 @@ const VideoCard = (props) => {
     const videoId = video.url.slice(indexNum + 3);
     console.log(videoId);
     return (
-      <div>
+      <div className="videoCard">
         <h5> {video.title}</h5>
         <iframe
           width="560"
@@ -22,6 +23,7 @@ const VideoCard = (props) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+        <VoteButtons />
       </div>
     );
   });
