@@ -10,9 +10,12 @@ export default async function updateVote(
       "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify(vote),
+    body: JSON.stringify({ vote }),
   };
-  const response = await fetchData(`/${id}`, { putObject });
+  const response = await fetchData(
+    `/vote/${id}`,
+    putObject
+  );
   vote === 1 &&
     response.status === 200 &&
     setVoteCount((prev) => prev + 1);
