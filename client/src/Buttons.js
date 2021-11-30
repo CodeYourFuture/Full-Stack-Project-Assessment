@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import videos from "./exampleresponse.json";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 const Buttons = () => {
   const [totalVotes, setTotalVotes] = useState(0);
@@ -16,10 +11,6 @@ const Buttons = () => {
     if (totalVotes >= 0) {
       setTotalVotes(totalVotes - 1);
     }
-  };
-  const handleDelete = ({ id, setVideos }) => {
-    const filteredVideos = videos.filter((video) => video.id !== id);
-    setVideos(filteredVideos);
   };
 
   return (
@@ -39,9 +30,6 @@ const Buttons = () => {
           style={{ color: "red" }}
         />
       </div>
-      {/* <div>
-        <FontAwesomeIcon icon={faTrashAlt} size="2x" onClick={handleDelete} />
-      </div> */}
     </div>
   );
 };
