@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Buttons from "./Buttons";
-import videos from "./exampleresponse.json";
+import data from "./exampleresponse.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const VideoCards = () => {
+  const [videos, setVideos] = useState(data);
+  const handleDelete = (id) => {
+    const filteredVideos = videos.filter((video) => video.id !== id);
+    setVideos(filteredVideos);
+  };
   return (
     <div className="card-group">
       {videos.map((video, index) => (
@@ -17,12 +24,16 @@ const VideoCards = () => {
             allowfullscreen
             key={index}
           ></iframe>
-
           <div className="card-body">
             <h5 className="card-title">{video.title}</h5>
           </div>
           <div>
             <Buttons />
+            <FontAwesomeIcon
+              icon={faTrashAlt}
+              size="2x"
+              onClick={() => handleDelete(video.id)}
+            />
           </div>
         </div>
       ))}

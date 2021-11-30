@@ -17,3 +17,19 @@
   min-width: 28%;
   align-items: center;
 }
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card-body {
+  padding: 1em;
+  margin: 1em;
+}
+
+.votes {
+  padding: 1em;
+  margin: 20px;
+}
