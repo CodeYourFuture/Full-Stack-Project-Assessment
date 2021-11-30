@@ -10,17 +10,19 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip } from "@mui/material";
 import IFrame from "../IFrame/IFrame";
 
-const VideoCard = ({ video, setVideo }) => {
+
+const VideoCard = ({ video, setVideo, deleteVideo }) => {
   const videoUrlId = video.url.split("v=")[1].substring(0, 11);
   const videoRating = video.rating;
   const videoTitle = video.title;
-  //   const arrayId = video.id;
+  const arrayId = video.id;
 
   const [votes, setVotes] = useState(videoRating);
 
+
   return (
     <div>
-      <Card sx={{ maxWidth: 345, height: 410 }} elevation={6}>
+      <Card sx={{ width: 345, height: 410 }} elevation={6}>
         <IFrame video={videoUrlId} />
 
         <CardContent>
@@ -32,7 +34,7 @@ const VideoCard = ({ video, setVideo }) => {
           >
             {videoTitle}
           </Typography>
-          <CardActions sx={{ justifyContent: "end", my: 11 }}>
+          <CardActions sx={{ justifyContent: "end", my: 17 }}>
             <Tooltip title="I like this" arrow>
               <IconButton
                 onClick={() => setVotes((v) => v + 1)}
@@ -56,7 +58,13 @@ const VideoCard = ({ video, setVideo }) => {
             </Typography>
 
             <Tooltip title="Delete video" arrow>
-              <IconButton size="small" color="error" aria-label="delete">
+              <IconButton
+                onClick={() => deleteVideo(arrayId)}
+                value="4"
+                size="small"
+                color="error"
+                aria-label="delete"
+              >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
