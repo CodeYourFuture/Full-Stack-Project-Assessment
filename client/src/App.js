@@ -8,9 +8,11 @@ import Header from "./Components/Header/Header";
 import Main from "./Components/Main/Main";
 import Footer from "./Components/Footer/Footer";
 
-
 const App = () => {
   const [videos, setVideos] = useState([]);
+  const [sortedVideos, setSortedVideos] = useState([]);
+
+  // Fetch Data
   useEffect(() => {
     fetch("http://localhost:5000")
       .then((res) => {
@@ -22,15 +24,20 @@ const App = () => {
       })
       .then((data) => {
         setVideos(data);
-        // console.log(data);
       })
       .catch((err) => console.log(err));
   }, []);
 
+  // Sort initial data in descending order
+  useEffect(() => {
+    const sortedVideos = [...videos].sort((v1, v2) => v2.rating - v1.rating);
+    setSortedVideos(sortedVideos);
+  }, [videos]);
+
   return (
     <div className="App">
       <Header />
-      <Main videos={videos} setVideos={setVideos} />
+      <Main videos={sortedVideos} setVideos={setVideos} />
       <Footer />
     </div>
   );

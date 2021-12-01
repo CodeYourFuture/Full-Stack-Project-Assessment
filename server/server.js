@@ -20,11 +20,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   data.length
     ? res
-        .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
         .status(200)
         .json(data)
     : res
-        .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
         .status(204)
         .json(data);
 });

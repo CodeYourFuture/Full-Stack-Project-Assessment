@@ -18,17 +18,17 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
 
   const [votes, setVotes] = useState(videoRating);
 
-  const voteHandler = (operator, id) => {
+  const voteHandler = (voteOperator, id) => {
     let updatedVote = videoRating;
 
-    operator === "+" ? updatedVote++ : updatedVote--;
+    voteOperator === "+" ? updatedVote++ : updatedVote--;
 
     fetch(`http://localhost:5000/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rating: updatedVote }),
     }).then((res) => {
-      res.status === 200 && operator === "+"
+      res.status === 200 && voteOperator === "+"
         ? setVotes((pV) => pV + 1)
         : setVotes((pV) => pV - 1);
     });
