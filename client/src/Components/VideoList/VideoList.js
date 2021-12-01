@@ -1,10 +1,12 @@
 import React from "react";
 import VideoCard from "../VideoCard/VideoCard";
-import { v4 as uuidv4 } from "uuid";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
+import UUID from "uuid-int";
 
 const VideoList = ({ videos, setVideos }) => {
+const generator = UUID(0);
+
   const deleteVideo = (id) => {
     const filteredVideos = videos.filter((video) => video.id !== id);
 
@@ -17,7 +19,7 @@ const VideoList = ({ videos, setVideos }) => {
     <Container maxWidth="xl" sx={{ alignItems: "center" }}>
       <Grid container spacing={2}>
         {videos.map((video) => (
-          <Grid key={uuidv4()} item xs={12} md={5} lg={4} xl={3}>
+          <Grid key={generator.uuid()} item xs={12} md={5} lg={4} xl={3}>
             <VideoCard
               video={video}
               setVideo={setVideos}

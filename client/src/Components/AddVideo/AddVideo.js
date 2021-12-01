@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
   const [newUrl, setNewUrl] = useState("");
@@ -12,27 +12,38 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newVideo = [
-      {
-        id: uuidv4(),
-        title: newTitle,
-        url: newUrl,
-        rating: 0,
-      },
-    ];
+    const youTubeURLRegex =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
-    fetch("http://localhost:5000", {
-      method: "post",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: newTitle,
-        url: newUrl,
-      }),
-    }).then((response) => console.log(response));
-  
-    setVideos(videos.concat(newVideo));
-    toggleDrawer(false);
+    if (newUrl.match(youTubeURLRegex)) {
+      let newVideo = 
+        {
+          id: 0,
+          title: newTitle,
+          url: newUrl,
+          rating: 0,
+        };
+
+      fetch("http://localhost:5000", {
+        method: "post",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: newTitle,
+          url: newUrl,
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          newVideo.id = res.id;
+          setVideos(videos.concat(newVideo));
+          toggleDrawer(false);
+        });
+    } else {
+      console.log("Notmatch");
+    }
   };
 
   return (

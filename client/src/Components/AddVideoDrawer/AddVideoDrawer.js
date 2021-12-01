@@ -5,7 +5,16 @@ import AddVideo from "../AddVideo/AddVideo";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 
-const AddVideoDrawer = ({videos, setVideos}) => {
+const style = {
+  margin: 0,
+  top: "auto",
+  right: 20,
+  bottom: 20,
+  left: "auto",
+  position: "fixed",
+};
+
+const AddVideoDrawer = ({ videos, setVideos }) => {
   const [toggle, setToggle] = React.useState(false);
 
   const toggleDrawer = (open) => {
@@ -24,7 +33,7 @@ const AddVideoDrawer = ({videos, setVideos}) => {
 
   return (
     <React.Fragment>
-      <Box sx={{ m: 1 }}>
+      <Box style={style}>
         <Fab
           color="primary"
           aria-label="add"

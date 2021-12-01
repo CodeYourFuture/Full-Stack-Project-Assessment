@@ -6,8 +6,8 @@ const port = process.env.PORT || 5000;
 // Import local json data
 const data = require(".././exampleresponse.json");
 
-// Import uuid library
-const { v4: uuidv4 } = require("uuid");
+// Import uuid int library
+const UUID = require("uuid-int");
 
 // Enable cross-origin resource sharing middleware in app
 app.use(cors());
@@ -47,8 +47,10 @@ app.get("/:id", (req, res) => {
 
 // POST endpoint `/` to add new `video` content with valid field check
 app.post("/", (req, res) => {
+  const generator = UUID(0);
+
   const newVideo = {
-    id: uuidv4(),
+    id: generator.uuid(),
     title: req.body.title,
     url: req.body.url,
     rating: 0,
@@ -65,9 +67,8 @@ app.post("/", (req, res) => {
   } else {
     data.push(newVideo);
     res.status(201).json({
-      id: 523523,
+      id: newVideo.id,
     });
-    console.log(newVideo);
   }
 });
 
@@ -80,7 +81,6 @@ app.delete("/:id", (req, res) => {
   if (videoIndex > -1) {
     data.splice(videoIndex, 1);
     res.status(200).json({});
-    console.log(data);
   } else {
     res.status(400).json({
       result: "failure",
