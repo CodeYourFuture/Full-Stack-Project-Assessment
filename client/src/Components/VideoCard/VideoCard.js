@@ -14,6 +14,7 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
   const videoUrlId = video.url.split("v=")[1].substring(0, 11);
   const videoRating = video.rating;
   const videoTitle = video.title;
+  const uploadTimeAndDate = video.uploaded;
   const arrayId = video.id;
 
   const [votes, setVotes] = useState(videoRating);
@@ -36,19 +37,30 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
 
   return (
     <div>
-      <Card sx={{ width: 345, height: 410 }} elevation={6}>
+      <Card sx={{ width: 340, height: 410 }} elevation={6}>
         <IFrame video={videoUrlId} />
 
         <CardContent>
+          <Tooltip title={videoTitle} placement="top" arrow>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              noWrap="false"
+            >
+              {videoTitle}
+            </Typography>
+          </Tooltip>
+
           <Typography
-            sx={{ height: 2 }}
-            gutterBottom
-            variant="body1"
+            sx={{ mt: 1, fontStyle: "italic" }}
+            variant="caption"
             component="div"
           >
-            {videoTitle}
+            {uploadTimeAndDate}
           </Typography>
-          <CardActions sx={{ justifyContent: "end", my: 17 }}>
+
+          <CardActions sx={{ justifyContent: "end", my: 10 }}>
             <Tooltip title="I like this" arrow>
               <IconButton
                 onClick={() => voteHandler("+", arrayId)}

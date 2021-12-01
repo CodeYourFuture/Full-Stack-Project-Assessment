@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
-// import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 
 const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
   const [newUrl, setNewUrl] = useState("");
@@ -16,13 +16,17 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
       /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
     if (newUrl.match(youTubeURLRegex)) {
-      let newVideo = 
-        {
-          id: 0,
-          title: newTitle,
-          url: newUrl,
-          rating: 0,
-        };
+      let uploadDateAndTime = moment().format("MMMM Do YYYY, h:mm:ss a");
+
+      const newVideo = {
+        id: 0,
+        title: newTitle,
+        url: newUrl,
+        rating: 0,
+        uploaded: uploadDateAndTime,
+      };
+
+      console.log(newVideo);
 
       fetch("http://localhost:5000", {
         method: "post",

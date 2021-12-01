@@ -4,6 +4,7 @@ import Drawer from "@mui/material/Drawer";
 import AddVideo from "../AddVideo/AddVideo";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
+import { Tooltip } from "@mui/material";
 
 const style = {
   margin: 0,
@@ -33,15 +34,17 @@ const AddVideoDrawer = ({ videos, setVideos }) => {
 
   return (
     <React.Fragment>
-      <Box style={style}>
-        <Fab
-          color="primary"
-          aria-label="add"
-          onClick={() => toggleDrawer(true)}
-        >
-          <AddIcon />
-        </Fab>
-      </Box>
+      <Tooltip title="Upload Video" placement="top" arrow>
+        <Box style={style}>
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() => toggleDrawer(true)}
+          >
+            <AddIcon />
+          </Fab>
+        </Box>
+      </Tooltip>
 
       <Drawer open={toggle} onClose={() => toggleDrawer(false)}>
         {list()}
