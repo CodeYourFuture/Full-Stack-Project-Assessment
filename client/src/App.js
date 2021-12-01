@@ -7,18 +7,16 @@ import fetchVideos from "./utils/fetchVideos";
 
 function App() {
   const [videos, setVideos] = useState(exampleVideos);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredVideos = videos.filter((video) =>
+    video.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
   useEffect(() => {
     fetchVideos("", setVideos);
   }, []);
 
-  function searchVideos(event) {
-    const searchKey = event.target.value.toLowerCase();
-    const searchedVideos = exampleVideos.filter((video) =>
-      video.title.toLowerCase().includes(searchKey)
-    );
-    setVideos(searchedVideos);
-  }
   return (
     <div className="App">
       <VideoAdd setVideos={setVideos} />
@@ -26,11 +24,14 @@ function App() {
         id="searchVideos"
         type="text"
         placeholder="Search video..."
-        // value={title}
-        onChange={searchVideos}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
 
-      <VideoCard videos={videos} setVideos={setVideos} />
+      <VideoCard
+        videos={filteredVideos}
+        setVideos={setVideos}
+      />
     </div>
   );
 }
