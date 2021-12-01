@@ -2,6 +2,22 @@
   text-align: center;
 }
 
-.App-header {
-  color: black;
+.video-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
+.video-container > div {
+  background-color: #fcfbfb;
+  width: 26rem;
+  height: auto;
+  margin: 1rem;
+  border: 1px solid #c8d6e5;
+  box-shadow: 6px 6px 5px #dcdde1;
+  border-radius: 5px;
+}
+
+
