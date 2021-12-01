@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo"
 
 const VideoDisplay = (prop) => {
-  const [allvideos, setAllVideos] = useState(prop.video);
-  const [searched, setsearchedVideos] = useState(prop.video);
+  const getv = prop.getVideos;
+  const [allvideos, setAllVideos] = useState([]);
+  const [searched, setsearchedVideos] = useState([]);
+
   const inputVideo = (newvideo) => {
     setAllVideos([...allvideos].concat(newvideo));
-    setsearchedVideos([...allvideos].concat(newvideo));
+    //setsearchedVideos([...allvideos].concat(newvideo));
   };
+  useEffect(() => {
+    let o;
+    if (prop.order === true) o = "asc";
+    else {
+      o = "";
+    }
+    fetch(`http://127.0.0.1:5000/?order=${o}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setAllVideos(data);
+          setsearchedVideos(data)
+            ;        }
+      })
+      .catch((e) => console.log(e));
+  }, [prop.order]);
   const onsearch = (newvideo) => {
     setAllVideos(newvideo);
   };
@@ -33,18 +51,28 @@ const VideoDisplay = (prop) => {
    
   };
   const deleteVideo = (id) => {
-    setAllVideos([...allvideos].filter((video, index) => id !== video.id));
+    //setAllVideos([...allvideos].filter((video, index) => id !== video.id));
+
+    fetch(`http://127.0.0.1:5000/${id}`, {
+      method: "delete",
+    })
+      .then((res) => res.json())
+      .then((newVideos) => {
+       
+        setAllVideos(newVideos);
+      })
+      .catch((error) => error);
   };
 
   return (
     <div className="render">
       <div>
-        <AddVideo onClick={inputVideo} />
+        <AddVideo onClick={inputVideo} getVideos={getv}/>
         <SearchVideo videos={searched} onClick={onsearch} />
       </div>{" "}
       <div className="videos">
         {[...allvideos]
-          .sort((a, b) => b.rating - a.rating)
+          //.sort((a, b) => b.rating - a.rating)
           .map((videos, index) => {
             let idIndicator = videos.url.indexOf("=");
             let id = videos.url.substr(idIndicator + 1, videos.url.length);

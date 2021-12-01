@@ -4,7 +4,8 @@ import React, { useState } from "react";
 
 
 const SearchVideo = (prop) => {
-    let videos = prop.videos;
+  let videos = prop.videos;
+  console.log(videos)
   const [videoSearch, setvideo] = useState("");
   
   

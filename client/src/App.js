@@ -1,24 +1,38 @@
 import "./App.css";
-import VideoDisplay from "./components/VideoDisplay";
-import videos from "./data/exampleresponse.json";
+import { useState } from "react";
+import VideoDisplay from "./components/VideoDisplay"
+//import videos from "./data/exampleresponse.json";
 
 
 
 function App() {
-  
+  let [order, SetOrder] = useState(false);
 
   
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-            
-        <VideoDisplay className='display'  video={videos}/>
-          
-      
-    </div>
-  );
-}
+    
+
+    const handleClick = () => {
+
+      SetOrder(!order);
+      console.log(order)
+      //getVideos();
+    }
+
+  
+  
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1>Video Recommendation</h1>
+          </header>
+          <button onClick={handleClick}> order asc/desc</button>
+
+          {
+            <VideoDisplay className="display"  order={order} />
+          }
+        </div>
+      );
+  }
+
 
 export default App;

@@ -54,10 +54,15 @@ const AddVideo = (prop) => {
         Add Video
       </h2>
       <form
+        action="http://127.0.0.1:5000/"
+        method="post"
+        // onSubmit={(e) => {
+        //  e.preventDefault();
+        // }}
+        
         style={{ display: clicked ? "flex" : "none" }}
         className="addvideo-form"
         id="addvideoform"
-        onSubmit={(e) => e.preventDefault()}
       >
         <div className="addvideo">
           <label htmlFor="title" name="title">
@@ -84,9 +89,12 @@ const AddVideo = (prop) => {
             />
           </label>
         </div>
-        {console.log(newvideo[0].id)}
+        {/* {console.log(newvideo[0].id)} */}
         <div className="addvideo">
-          <button onClick={() => prop.onClick(newvideo)}>Add</button>
+          <button type="submit" >
+            Add Video
+           </button>
+          {/* <button type='submit' onClick={() => prop.onClick()}>Add</button> */}
           <button onClick={(e) => handleDelete()}>Delete</button>
         </div>
       </form>{" "}
