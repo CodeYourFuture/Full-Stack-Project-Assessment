@@ -1,41 +1,47 @@
 import React from "react";
+import { useState } from "react";
 
-  let titleInput = function titleInput(titleInput) {
-         return titleInput;
-  }
-
-  let urlInput = function urlInput(urlInput) {
-  return urlInput;
- }
-
- function addVideoToList(){
-    
-     
-
- }
+  
 
 
 
  
 function AddVideo(props){
+    const[title, setTitle] =useState("");
+    const [url, setUrl] = useState("");
 
 
-     addVideoToList = { titleInput, urlInput };
    
 
-    return(
-        <div className ="add-video">
-            <p>Add Video</p>
-            <form action="" method="submit">
-            <label for="title" name="title" >Title</label>
-            <input id="title" type="text" onCompositionEnd={(e)=>{titleInput(e.target.value)}} ></input>
-            <label for="url" name="url">URL</label>
-            <input id="url" type="text" onCompositionEnd={(e)=>{urlInput( e.target.value)}}></input>
-            <button id="add-video" type ="submit" onClick={addVideoToList}> Add Video</button>
-            </form>
-
-        </div>
-    )
+    return (
+      <div className="add-video">
+        <p>Add Video</p>
+        <form action="" method="submit">
+          <label for="title" name="title">
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          ></input>
+          <label for="url" name="url">
+            URL
+          </label>
+          <input
+            id="url"
+            type="text"
+            onChange={(e) => setUrl(e.target.value)}
+            value={url}
+          ></input>
+          <button id="add-video" type="button" onClick={()=> props.addNewVideo(title, url)}>
+            {" "}
+            Add Video
+          </button>
+        </form>
+      </div>
+    );
     }
 
 export default AddVideo;

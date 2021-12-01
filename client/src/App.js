@@ -16,7 +16,11 @@ function App() {
 
   // let[vote,  ] = useState(0);
 
-  
+   function addNewVideo(title, url){
+   const newVideos = [...videos,{ id:videos.length, title , url,rating:0}];
+
+     setVideos(newVideos);
+   }
 
   function deletVideo(id) {
     const remainingVideos = videos.filter((vid) => {
@@ -26,17 +30,14 @@ function App() {
 
     setVideos(remainingVideos);
   }
-     function addVideoToList() {
-    let newVideo = { title:{titleInput}, url:{urlInput }};
-      videos.push(newVideo);
-  }
+    
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
 
-      <AddVideo />
+      <AddVideo addNewVideo={addNewVideo} />
       <Toptext />
 
       {videos.map((video) => (
@@ -47,8 +48,6 @@ function App() {
           url={video.url}
           rating={video.rating}
           delete={deletVideo}
-          addVideoToList ={ addVideoToList }
-
         />
       ))}
     </div>
