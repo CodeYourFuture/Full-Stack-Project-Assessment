@@ -16,18 +16,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
-// GET REQUESTS
-
 // GET endpoint `/` with `data` content check
 app.get("/", (req, res) => {
   data.length
     ? res
-        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        .cookie("cookie2", "value2", { sameSite: "none", secure: true })
         .status(200)
         .json(data)
     : res
-        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
+        .cookie("cookie2", "value2", { sameSite: "none", secure: true })
         .status(204)
         .json(data);
 });
@@ -47,8 +44,6 @@ app.get("/:id", (req, res) => {
     });
   }
 });
-
-// POST REQUESTS
 
 // POST endpoint `/` to add new `video` content with valid field check
 app.post("/", (req, res) => {
@@ -76,8 +71,6 @@ app.post("/", (req, res) => {
   }
 });
 
-// DELETE REQUESTS
-
 // DELETE endpoint `/:id` with feedback
 app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
@@ -92,6 +85,24 @@ app.delete("/:id", (req, res) => {
     res.status(400).json({
       result: "failure",
       message: "Video could not be deleted",
+    });
+  }
+});
+
+// PUT endpoint `/:id`
+app.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const videoIndex = data.findIndex((data) => data.id === id);
+
+  if (videoIndex > -1) {
+    data[videoIndex].rating = req.body.rating;
+
+    res.status(200).json(data[videoIndex]);
+  } else {
+    res.status(400).json({
+      result: "failure",
+      message: "No Video with that id",
     });
   }
 });

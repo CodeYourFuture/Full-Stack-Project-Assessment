@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip } from "@mui/material";
 import IFrame from "../IFrame/IFrame";
 
-
 const VideoCard = ({ video, setVideo, deleteVideo }) => {
   const videoUrlId = video.url.split("v=")[1].substring(0, 11);
   const videoRating = video.rating;
@@ -19,6 +18,21 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
 
   const [votes, setVotes] = useState(videoRating);
 
+  const voteHandler = (operator, id) => {
+    let updatedVote = videoRating;
+
+    operator === "+" ? updatedVote++ : updatedVote--;
+
+    fetch(`http://localhost:5000/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ rating: updatedVote }),
+    }).then((res) => {
+      res.status === 200 && operator === "+"
+        ? setVotes((pV) => pV + 1)
+        : setVotes((pV) => pV - 1);
+    });
+  };
 
   return (
     <div>
@@ -37,7 +51,7 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
           <CardActions sx={{ justifyContent: "end", my: 17 }}>
             <Tooltip title="I like this" arrow>
               <IconButton
-                onClick={() => setVotes((v) => v + 1)}
+                onClick={() => voteHandler("+", arrayId)}
                 aria-label="like"
                 size="small"
               >
@@ -46,7 +60,7 @@ const VideoCard = ({ video, setVideo, deleteVideo }) => {
             </Tooltip>
             <Tooltip title="I dislike this" arrow>
               <IconButton
-                onClick={() => setVotes((v) => v - 1)}
+                onClick={() => voteHandler("-", arrayId)}
                 aria-label="dislike"
                 size="small"
               >
