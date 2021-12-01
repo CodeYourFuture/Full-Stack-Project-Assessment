@@ -27,7 +27,11 @@ let videos = data;
 
 // GET "/"
 app.get("/", (req, res) => {
-  
+  let order = req.query.order;
+  if (order === 'asc') {
+    data.sort((a, b)=>a.rating-b.rating)
+  }
+  else   data.sort((a, b) => b.rating - a.rating);
   res.status(200).json(data);
 });
 
@@ -37,9 +41,23 @@ app.get("/:id", (req, res) => {
   if(result) {
     res.status(200).json(result);
   }
-  else res.status(400).send('video not found')
+  else res.status(400).json({
+    result: "failure",
+    message: "Video could not be found",
+  });
 });
-
+app.delete("/:id", (req, res) => {
+  let videoId = Number(req.params.id);
+  let searchedId;
+  let result = data.find((video, index) => { if (video.id === videoId) { searchedId = index;return video }});
+  if (result) {
+    data.splice(searchedId, 1);
+    res.status(200).json(data);
+  } else res.status(400).json({
+    result: "failure",
+    message: "Video could not be deleted",
+  });
+});
 app.post("/", function (req, res) {
   let id = Math.floor(Math.random() * 100000000) + 1;
   let title = req.body.title;
@@ -53,10 +71,18 @@ app.post("/", function (req, res) {
   let isValid = isvalid(newvideo);
   if (isValid) {
     data.push(newvideo);
-    res.send('video posted')
+    res.json({ msg: 'video posted', data: newvideo })
   }
-  else { res.status(400).send('invalid title or url')}
+  else {
+    res.status(400).json({
+      "result": "failure",
+      "message": "Video could not be saved"
+    })
+  }
 });
+
+
+
 
 const isvalid = ({ title, url }) => {
   if (title.length > 0 && url.length > 0) {
