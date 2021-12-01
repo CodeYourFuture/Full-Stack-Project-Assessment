@@ -1,0 +1,3 @@
+const ucfirst = require('./module/ucfirst')
+const tolower = require('./module/tolower')
+module.exports = {ucfirst:ucfirst,tolower:tolower}
