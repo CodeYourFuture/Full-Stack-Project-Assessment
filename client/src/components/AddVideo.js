@@ -54,7 +54,7 @@ const AddVideo = (prop) => {
       .then((res) => res.json())
       .then((newVideos) => {
        
-        setNewVideoapi(newVideos);
+        prop.input(newVideos);
         // .then(json => console.log(json))
         // .catch(err => console.log(err));
         //     console.log(newvideo);
@@ -101,7 +101,7 @@ const AddVideo = (prop) => {
         
        
         <div className="addvideo">
-          <button type='submit' onClick={(e) => { handleAdd(e); prop.input(newvideoapi)}}>
+          <button type='submit' onClick={(e) => { handleAdd(e)} }>
             Add Video
            </button>
           {/* <button type='submit' onClick={() => prop.onClick()}>Add</button> */}

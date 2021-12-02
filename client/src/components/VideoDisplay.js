@@ -69,7 +69,7 @@ const VideoDisplay = (prop) => {
   return (
     <div className="render">
       <div>
-        <AddVideo  input={inputVideo }/>
+        <AddVideo  input={inputVideo}/>
         <SearchVideo videos={searched} onClick={onsearch} />
       </div>{" "}
       <div className="videos">
