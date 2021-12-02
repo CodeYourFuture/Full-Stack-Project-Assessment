@@ -16,18 +16,41 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// GET endpoint `/` with `data` content check
+// // GET endpoint `/` with `data` content check
+// app.get("/", (req, res) => {
+//   data.length
+//     ? res
+//         .status(200)
+//         .json(data)
+//     : res
+//         .status(204)
+//         .json(data);
+// });
+
+// GET endpoint `/order`
+
 app.get("/", (req, res) => {
-  data.length
-    ? res
-        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
-        .status(200)
-        .json(data)
-    : res
-        // .cookie("cookie2", "value2", { sameSite: "none", secure: true })
-        .status(204)
-        .json(data);
+  const sortOrder = req.query.order;
+  const orderedData = [...data];
+
+  sortOrder === "asc"
+    ? orderedData.sort((v1, v2) => v1.rating - v2.rating)
+    : orderedData.sort((v1, v2) => v2.rating - v1.rating);
+
+  res.status(200).json(orderedData);
+  console.log(sortOrder);
 });
+
+// // GET endpoint `/` with `data` content check
+// app.get("/", (req, res) => {
+//   data.length
+//     ? res
+//         .status(200)
+//         .json(data)
+//     : res
+//         .status(204)
+//         .json(data);
+// });
 
 // GET endpoint `/:id`
 app.get("/:id", (req, res) => {
