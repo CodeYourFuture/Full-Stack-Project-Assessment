@@ -8,8 +8,10 @@ const VideoDisplay = (prop) => {
   const [searched, setsearchedVideos] = useState([]);
 
   const inputVideo = (newvideo) => {
-    setAllVideos([...allvideos].concat(newvideo));
-    //setsearchedVideos([...allvideos].concat(newvideo));
+    //setAllVideos([...allvideos].concat(newvideo));
+    //setsearchedVideos([...allvideos].concat
+    //(newvideo));
+    setAllVideos(newvideo)
   };
   useEffect(() => {
     let o;
@@ -67,7 +69,7 @@ const VideoDisplay = (prop) => {
   return (
     <div className="render">
       <div>
-        <AddVideo onClick={inputVideo} getVideos={getv}/>
+        <AddVideo  input={inputVideo }/>
         <SearchVideo videos={searched} onClick={onsearch} />
       </div>{" "}
       <div className="videos">
@@ -75,7 +77,7 @@ const VideoDisplay = (prop) => {
           //.sort((a, b) => b.rating - a.rating)
           .map((videos, index) => {
             let idIndicator = videos.url.indexOf("=");
-            let id = videos.url.substr(idIndicator + 1, videos.url.length);
+            let id = videos.url.substr(videos.url.length-11, videos.url.length);
             return (
               <ul key={index} style={{}} className="Video-display">
                 <li>{videos.title} </li>

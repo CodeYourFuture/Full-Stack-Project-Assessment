@@ -67,18 +67,18 @@ app.post("/", function (req, res) {
   let time = timeFormat(new Date());
 
   const newvideo = { id, title, url, rating, date, time };
-//res.json(newvideo)
+  
   let isValid = isvalid(newvideo);
   if (isValid) {
-    data.push(newvideo);
-    res.json({ msg: 'video posted', data: newvideo })
+    videos.push(newvideo);
+    res.json(videos);
   }
   else {
     res.status(400).json({
       "result": "failure",
       "message": "Video could not be saved"
     })
-  }
+ }
 });
 
 

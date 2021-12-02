@@ -1,25 +1,13 @@
 import React,{ useState } from "react";
 
-const dateFormat = (date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${day}-${month}-${year}`;
-};
-
-const timeFormat = (date) => {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  return `${hours}-${minutes}-${seconds}`;
-};
 const AddVideo = (prop) => {
-  const [title, settitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  console.log('hi')
+  const [title, settitle] = useState('j');
+  const [url, setUrl] = useState('j');
+ 
   const [clicked, setClicked] = useState(false);
   const [newvideo, setNewVideo] = useState([{}]);
+  const [newvideoapi, setNewVideoapi] = useState([]);
   const handleChange = (e) => {
     if (e) {
       if (e.target.name === "title") {
@@ -28,19 +16,22 @@ const AddVideo = (prop) => {
         setUrl(e.target.value);
       }
     }
-    setDate(dateFormat(new Date()));
-    setTime(timeFormat(new Date()));
+  
+    // setDate(dateFormat(new Date()));
+    // setTime(timeFormat(new Date()));
+    //
+  
     setNewVideo([
       {
-        id: Math.floor(Math.random() * 100000000) + 1,
+        //       //id: Math.floor(Math.random() * 100000000) + 1,
         title: title,
-        url: url,
-        rating: 0,
-        date: date,
-        time: time,
+        url: url
+        //       //rating: 0,
+        //       // date: date,
+        //       // time: time,
       },
     ]);
-  };
+  }
   const handleClick = () => {
     setClicked(true);
   };
@@ -48,23 +39,40 @@ const AddVideo = (prop) => {
     document.getElementById("addvideoform").reset();
     setClicked(false);
   };
+  
+  const handleAdd = (e) => {
+
+    e.preventDefault();
+    fetch('http://127.0.0.1:5000/', {
+      method: "post",
+      headers: { "Accept": "application/json", "Content-type": "application/json" },
+      body: JSON.stringify({ title: title, url: url }),
+      
+    })
+
+      //prop.inputVideo();
+      .then((res) => res.json())
+      .then((newVideos) => {
+       
+        setNewVideoapi(newVideos);
+        // .then(json => console.log(json))
+        // .catch(err => console.log(err));
+        //     console.log(newvideo);
+      })
+  }
+  
   return (
     <>
       <h2 className="addVideo" onClick={() => handleClick()}>
         Add Video
       </h2>
-      <form
-        action="http://127.0.0.1:5000/"
-        method="post"
-        // onSubmit={(e) => {
-        //  e.preventDefault();
-        // }}
+      <form      
         
         style={{ display: clicked ? "flex" : "none" }}
         className="addvideo-form"
         id="addvideoform"
       >
-        <div className="addvideo">
+    <div className="addvideo">
           <label htmlFor="title" name="title">
             Title:
             <input
@@ -84,14 +92,16 @@ const AddVideo = (prop) => {
               className="input"
               type="url"
               name="url"
-              onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChange(e)}
               required
             />
           </label>
         </div>
-        {/* {console.log(newvideo[0].id)} */}
+
+        
+       
         <div className="addvideo">
-          <button type="submit" >
+          <button type='submit' onClick={(e) => { handleAdd(e); prop.input(newvideoapi)}}>
             Add Video
            </button>
           {/* <button type='submit' onClick={() => prop.onClick()}>Add</button> */}
