@@ -28,11 +28,14 @@ let videos = data;
 // GET "/"
 app.get("/", (req, res) => {
   let order = req.query.order;
-  if (order === 'asc') {
-    data.sort((a, b)=>a.rating-b.rating)
+  if (order === 'asc')
+    data.sort((a, b) => a.rating - b.rating)
+  
+  else {
+    data.sort((a, b) => b.rating - a.rating);
   }
-  else   data.sort((a, b) => b.rating - a.rating);
-  res.status(200).json(data);
+    res.status(200).json(data);
+  
 });
 
 app.get("/:id", (req, res) => {
@@ -71,13 +74,16 @@ app.post("/", function (req, res) {
   let isValid = isvalid(newvideo);
   if (isValid) {
     videos.push(newvideo);
-    res.json(videos);
+    res.status(200).json(videos);
   }
   else {
+
+  
     res.status(400).json({
-      "result": "failure",
+      "data": videos,
+       "result": "failure",
       "message": "Video could not be saved"
-    })
+     })
  }
 });
 

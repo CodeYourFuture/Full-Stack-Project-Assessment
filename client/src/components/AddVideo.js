@@ -1,13 +1,13 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 const AddVideo = (prop) => {
-  console.log('hi')
-  const [title, settitle] = useState('j');
-  const [url, setUrl] = useState('j');
- 
+ // let g = prop.video;
+  const [title, settitle] = useState("");
+  const [url, setUrl] = useState("");
+
   const [clicked, setClicked] = useState(false);
-  const [newvideo, setNewVideo] = useState([{}]);
-  const [newvideoapi, setNewVideoapi] = useState([]);
+  //const [newvideo, setNewVideo] = useState([{}]);
+ 
   const handleChange = (e) => {
     if (e) {
       if (e.target.name === "title") {
@@ -16,22 +16,16 @@ const AddVideo = (prop) => {
         setUrl(e.target.value);
       }
     }
-  
-    // setDate(dateFormat(new Date()));
-    // setTime(timeFormat(new Date()));
-    //
-  
-    setNewVideo([
-      {
-        //       //id: Math.floor(Math.random() * 100000000) + 1,
-        title: title,
-        url: url
-        //       //rating: 0,
-        //       // date: date,
-        //       // time: time,
-      },
-    ]);
-  }
+
+    // setNewVideo([
+    //   {
+       
+    //     title: title,
+    //     url: url,
+        
+    //   },
+    // ]);
+  };
   const handleClick = () => {
     setClicked(true);
   };
@@ -39,46 +33,47 @@ const AddVideo = (prop) => {
     document.getElementById("addvideoform").reset();
     setClicked(false);
   };
-  
+
   const handleAdd = (e) => {
-
     e.preventDefault();
-    fetch('http://127.0.0.1:5000/', {
+    fetch("http://127.0.0.1:5000/", {
       method: "post",
-      headers: { "Accept": "application/json", "Content-type": "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
       body: JSON.stringify({ title: title, url: url }),
-      
     })
-
-      //prop.inputVideo();
       .then((res) => res.json())
       .then((newVideos) => {
-       
-        prop.input(newVideos);
-        
-      })
-  }
-  
+        if (newVideos.data) {
+          prop.input(newVideos.data);
+          window.alert(newVideos.message);
+        } else {
+          prop.input(newVideos);
+        }
+      });
+  };
+
   return (
     <>
       <h2 className="addVideo" onClick={() => handleClick()}>
         Add Video
       </h2>
-      <form      
-        
+      <form
         style={{ display: clicked ? "flex" : "none" }}
         className="addvideo-form"
         id="addvideoform"
       >
-    <div className="addvideo">
+        <div className="addvideo">
           <label htmlFor="title" name="title">
             Title:
             <input
               className="input"
               type="text"
               name="title"
-              onChange={(e) => handleChange(e)}
               required
+              onChange={(e) => handleChange(e)}
             />
           </label>
         </div>
@@ -90,19 +85,22 @@ const AddVideo = (prop) => {
               className="input"
               type="url"
               name="url"
-               onChange={(e) => handleChange(e)}
               required
+              onChange={(e) => handleChange(e)}
             />
           </label>
         </div>
 
-        
-       
         <div className="addvideo">
-          <button type='submit' onClick={(e) => { handleAdd(e)} }>
+          <button
+            type="submit"
+            onClick={(e) => {
+              handleAdd(e);
+            }}
+          >
             Add Video
-           </button>
-          {/* <button type='submit' onClick={() => prop.onClick()}>Add</button> */}
+          </button>
+         
           <button onClick={(e) => handleDelete()}>Delete</button>
         </div>
       </form>{" "}
