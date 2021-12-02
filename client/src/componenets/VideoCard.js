@@ -18,6 +18,8 @@ const VideoCard = (props) => {
   return videos.map((video) => {
     const indexNum = video.url.indexOf("?v=");
     const videoId = video.url.slice(indexNum + 3);
+    const videoRating = video.rating;
+    console.log(videoRating);
     return (
       <div className="videoCard">
         <h5> {video.title}</h5>
@@ -31,7 +33,7 @@ const VideoCard = (props) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <VoteButtons videos={videos} />
+        <VoteButtons rating={videoRating} />
         <button onClick={() => deleteHandler(video.id)}>Delete</button>
       </div>
     );

@@ -3,7 +3,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
 const VoteButtons = (props) => {
-  const [vote, setVote] = useState(props.videos.rating);
+  const [vote, setVote] = useState(props.rating);
   const upVote = (e) => {
     e.preventDefault();
     setVote(vote + 1);
