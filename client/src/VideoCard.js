@@ -1,11 +1,13 @@
-import React from "react";
+import { useState } from "react";
 import VideoData from "./exampleresponse.json";
 import VotesButtons from "./VotesButtons";
 
 const VideoCard = () => {
+  const [videos, setVideos] = useState(VideoData);
+
   return (
     <div className="video-container">
-      {VideoData.map((videoDetails, index) => {
+      {videos.map((videoDetails, index) => {
         const youtubeId = videoDetails.url.split("v=")[1];
         return (
           <div>
@@ -18,7 +20,7 @@ const VideoCard = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
-            <VotesButtons />
+            <VotesButtons id={videoDetails.id} videos={videos} setVideos={setVideos} rating={videoDetails.rating}/>
           </div>
         );
       })}
