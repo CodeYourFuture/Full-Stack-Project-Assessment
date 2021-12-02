@@ -6,6 +6,7 @@ const VideoDisplay = (prop) => {
   const getv = prop.getVideos;
   const [allvideos, setAllVideos] = useState([]);
   const [searched, setsearchedVideos] = useState([]);
+       let [voting, setVoting] = useState(0);
 
   const inputVideo = (newvideo) => {
     //setAllVideos([...allvideos].concat(newvideo));
@@ -24,8 +25,8 @@ const VideoDisplay = (prop) => {
       .then((data) => {
         if (data) {
           setAllVideos(data);
-          setsearchedVideos(data)
-            ;        }
+          setsearchedVideos(data);        
+        }
       })
       .catch((e) => console.log(e));
   }, [prop.order]);
@@ -33,12 +34,15 @@ const VideoDisplay = (prop) => {
     setAllVideos(newvideo);
   };
   
-  const [voteCount, setVoteCount] = useState(0);
+ 
 
   const upVotes = (id) => {
     [...allvideos].filter((video, index) => {
       if (id === video.id) {
-        setVoteCount(video.rating+=1);
+        let p = document.getElementById(id);
+        console.log(p.innerText)
+        setVoting(video.rating += 1);
+        p.innerText = voting;
       }
     })
    
@@ -47,7 +51,10 @@ const VideoDisplay = (prop) => {
     [...allvideos].filter((video, index) => {
       if (id === video.id)
       {
-        setVoteCount(video.rating -= 1);
+        let p = document.getElementById(id);
+        console.log(p.innerText);
+        setVoting((video.rating -= 1));
+        p.innerText = voting;
       }
     })
    
@@ -76,6 +83,7 @@ const VideoDisplay = (prop) => {
         {[...allvideos]
           //.sort((a, b) => b.rating - a.rating)
           .map((videos, index) => {
+           // setVoting(videos.rating);
             let idIndicator = videos.url.indexOf("=");
             let id = videos.url.substr(videos.url.length-11, videos.url.length);
             return (
@@ -87,7 +95,8 @@ const VideoDisplay = (prop) => {
                     className="fas fa-thumbs-up"
                   ></i>
                   <pre> </pre>
-                  {videos.rating}
+                  <p id={videos.id}>{videos.rating}</p>
+                  {/* //{videos.rating + voting} */}
                   <pre> </pre>
 
                   <i

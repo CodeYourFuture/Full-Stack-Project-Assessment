@@ -55,9 +55,7 @@ const AddVideo = (prop) => {
       .then((newVideos) => {
        
         prop.input(newVideos);
-        // .then(json => console.log(json))
-        // .catch(err => console.log(err));
-        //     console.log(newvideo);
+        
       })
   }
   
