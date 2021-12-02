@@ -48,4 +48,17 @@ app.get("/:id", (req, res) => {
   res.send(filterVideos);
 });
 
+app.delete("/:id", (req, res) => {
+  const id = +req.params.id;
+  const index = videos.findIndex((video) => video.id === id);
+  if (index === -1) {
+    return res.status(400).send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+  videos.splice(index, 1);
+  res.send({});
+});
+
 app.listen(port, () => console.log(`Listening on port: ${port}`));
