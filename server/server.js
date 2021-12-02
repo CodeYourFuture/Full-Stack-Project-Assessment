@@ -10,7 +10,30 @@ const videos = require("./exampleresponse.json");
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos);
+  res.json(videos);
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.post("/", (req, res) => {
+  console.log(req.body)
+  const title = req.body.title;
+  const url = req.body.url;
+  if(!title || !url ){
+    res.json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+    return
+  }
+  const newVideo = {
+    id: videos[videos.length -1].id +1,
+    title: title,
+    url: url,
+    rating: 0
+  };
+
+  videos.push(newVideo);
+  res.send( {id: newVideo.id} );
+});
+
+
+app.listen(port, () => console.log(`Listening on port: ${port}`));
