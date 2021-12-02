@@ -1,13 +1,9 @@
 import React from "react";
 
-const Search = ({ setVideoData, data }) => {
-  // console.log(videoData);
+const Search = ({ setSearchQuery }) => {
   const handleFilter = (event) => {
     const searchWord = event.target.value.toLowerCase();
-    const newFilter = data.filter((value) =>
-      value.title.toLowerCase().includes(searchWord)
-    );
-    setVideoData(newFilter);
+    setSearchQuery(searchWord);
   };
   return (
     <div className="navbar navbar-dark m-3 justify-content-center">
