@@ -2,30 +2,31 @@ import React, { useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
-const VoteButtons = () => {
-  const [vote, setVote] = useState(0);
-
-  const upVote = () => {
+const VoteButtons = (props) => {
+  const [vote, setVote] = useState(props.videos.rating);
+  const upVote = (e) => {
+    e.preventDefault();
     setVote(vote + 1);
   };
 
-  const downVote = () => {
+  const downVote = (e) => {
+    e.preventDefault();
     setVote(vote - 1);
   };
   return (
     <div className="voteButtons" style={{ marginLeft: "50px" }}>
       <button
         onClick={upVote}
-        style={{ margin: "50px" }}
+        style={{ margin: "20px" }}
         type="button"
         className="btn btn-info"
       >
         <FaRegThumbsUp />
       </button>
-      <p style={{ margin: "50px" }}>{vote}</p>
+      <p style={{ margin: "20px" }}>{vote}</p>
       <button
         onClick={downVote}
-        style={{ margin: "50px" }}
+        style={{ margin: "20px" }}
         type="button"
         className="btn btn-danger"
       >

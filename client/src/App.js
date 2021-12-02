@@ -1,6 +1,7 @@
 import "./App.css";
 import data from "./exampleresponse.json";
 import VideoCard from "./componenets/VideoCard";
+import SearchAreas from "./componenets/SearchAreas";
 
 const videos = data;
 
@@ -9,6 +10,10 @@ data.map((dat) => console.log(dat.url));
 function App() {
   return (
     <div>
+      <div className="search area" style={{ margin: "20px" }}>
+        <SearchAreas />
+      </div>
+
       <div className="App">
         <header className="App-header" style={{ marginBottom: "50px" }}>
           <h1>Video Recommendation</h1>

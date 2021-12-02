@@ -3,31 +3,39 @@ import VoteButtons from "./VoteButtons";
 
 const VideoCard = (props) => {
   const [videos, setVideos] = useState(props.videos);
-
   console.log(videos);
-  const youVids = videos.map((video) => {
-    console.log(video.url);
+
+  const deleteHandler = (id) => {
+    setVideos(
+      videos.filter((video) => {
+        return video.id !== id;
+      })
+    );
+  };
+
+  //   const youVids =
+
+  return videos.map((video) => {
     const indexNum = video.url.indexOf("?v=");
-    console.log(indexNum);
     const videoId = video.url.slice(indexNum + 3);
-    console.log(videoId);
     return (
       <div className="videoCard">
         <h5> {video.title}</h5>
         <iframe
+          className="rounded border "
           width="560"
           height="315"
           src={`https://www.youtube.com/embed/${videoId}`}
           title="YouTube video player"
-          frameborder="0"
+          frameborder="1"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
-        <VoteButtons />
+        <VoteButtons videos={videos} />
+        <button onClick={() => deleteHandler(video.id)}>Delete</button>
       </div>
     );
   });
-  return youVids;
 };
 
 export default VideoCard;
