@@ -26,8 +26,6 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
         uploaded: uploadDateAndTime,
       };
 
-      console.log(newVideo);
-
       fetch("http://localhost:5000", {
         method: "post",
         mode: "cors",
