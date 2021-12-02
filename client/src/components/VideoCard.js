@@ -1,4 +1,5 @@
 import React from "react";
+import VideoVote from "./VideoVote";
 
 const VideoCard = ({ videoData, setVideoData }) => {
   //console.log(videos);
@@ -14,6 +15,14 @@ const VideoCard = ({ videoData, setVideoData }) => {
         //console.log(video);
         return (
           <div key={video.id}>
+            <button
+              type="button"
+              className="close"
+              aria-label="Close"
+              onClick={() => handleDelete(video.id)}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
             <p className="title">{video.title}</p>
             <iframe
               className="video"
@@ -23,11 +32,10 @@ const VideoCard = ({ videoData, setVideoData }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <button onClick={() => handleDelete(video.id)}>Delete</button>
+            <VideoVote />
           </div>
         );
       })}
-      hello there!!!
     </div>
   );
 };
