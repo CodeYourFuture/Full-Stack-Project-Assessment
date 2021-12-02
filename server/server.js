@@ -35,5 +35,17 @@ app.post("/", (req, res) => {
   res.send( {id: newVideo.id} );
 });
 
+app.get("/:id", (req, res) => {
+  const id = +req.params.id;
+  const filterVideos = videos.filter((video) => video.id === id);
+  if (filterVideos.length === 0) {
+    res.json({
+      result: "failure",
+      message: "No videos found",
+    });
+    return;
+  }
+  res.send(filterVideos);
+});
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
