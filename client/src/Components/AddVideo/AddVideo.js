@@ -43,6 +43,8 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
           setVideos(videos.concat(newVideo));
           toggleDrawer(false);
         });
+    } else {
+      alert("Invalid YouTube URL");
     }
   };
 
