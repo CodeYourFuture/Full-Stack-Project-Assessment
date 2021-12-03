@@ -3,7 +3,7 @@ export default async function fetchData(
   methodObj = { method: "GET" }
 ) {
   const response = await fetch(
-    `http://127.0.0.1:5000${endPoint}`,
+    `https://full-stack-project-video-db.herokuapp.com${endPoint}`,
     methodObj
   );
   return response;
