@@ -44,7 +44,7 @@ app.get("/:id", (req, res) => {
   if(result) {
     res.status(200).json(result);
   }
-  else res.status(400).json({
+  else res.status(404).json({
     result: "failure",
     message: "Video could not be found",
   });
@@ -55,7 +55,8 @@ app.delete("/:id", (req, res) => {
   let result = data.find((video, index) => { if (video.id === videoId) { searchedId = index;return video }});
   if (result) {
     data.splice(searchedId, 1);
-    res.status(200).json(data);
+   // data[searchedId] = {}
+    res.status(200).json({});
   } else res.status(400).json({
     result: "failure",
     message: "Video could not be deleted",
@@ -74,7 +75,7 @@ app.post("/", function (req, res) {
   let isValid = isvalid(newvideo);
   if (isValid) {
     videos.push(newvideo);
-    res.status(200).json(videos);
+    res.status(200).json({id});
   }
   else {
 
