@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import exampleVideos from "./exampleresponse.json";
 import VideoCard from "./components/VideoCard";
 import VideoAdd from "./components/VideoAdd";
 import fetchVideos from "./utils/fetchVideos";
 
 function App() {
-  const [videos, setVideos] = useState(exampleVideos);
+  const [videos, setVideos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const filteredVideos = videos.filter((video) =>
     video.title
