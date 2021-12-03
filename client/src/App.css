@@ -1,11 +1,18 @@
+#root {
+  background-color: #181a1b;
+}
 .App {
   text-align: center;
+  color: rgb(232, 230, 227);
   padding: 1em;
-  margin: 0.5em;
 }
 
 .logo {
   width: 5em;
+}
+
+.addVideoContainer {
+  text-align: center;
 }
 
 .card-group {
@@ -32,4 +39,9 @@
 .votes {
   padding: 1em;
   margin: 20px;
+}
+
+.navbar {
+  float: right;
+  background: transparent;
 }
