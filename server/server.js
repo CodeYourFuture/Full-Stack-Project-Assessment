@@ -92,18 +92,18 @@ app.post("/", (request, response) => {
 // Delete video specified by an ID
 app.delete("/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
-  const videoIndex = videos.findIndex(
-    (video) => video.id === videoId
-  );
-  if (videoIndex === -1) {
+  const selectQuery = `DELETE FROM videos WHERE id = ${videoId}`;
+  pool.query(selectQuery, (error, result) => {
+    if (result.rowCount === 1) {
+      return response.status(204).send({});
+    }
     return response.status(404).send({
       result: "failure",
       message: "Video could not be deleted",
     });
-  }
-  videos.splice(videoIndex, 1);
-  response.status(204).send({});
+  });
 });
+
 //UPDATE votes
 app.put("/vote/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
