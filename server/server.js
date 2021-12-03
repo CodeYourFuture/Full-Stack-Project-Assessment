@@ -45,14 +45,15 @@ app.get("/", (request, response) => {
 //GET video by id
 app.get("/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
-  const videoWithId = videos.find(
-    (video) => video.id === videoId
-  );
-  videoWithId
-    ? response.send(videoWithId)
-    : response.status(404).send({
+  const selectQuery = `SELECT * FROM videos WHERE id = ${videoId}`;
+  pool.query(selectQuery, (error, result) => {
+    if (result.rows.length === 0) {
+      return response.status(404).send({
         msg: `Video with id: ${videoId} does not exist !!!`,
       });
+    }
+    response.send(result.rows);
+  });
 });
 
 // Create a new video
