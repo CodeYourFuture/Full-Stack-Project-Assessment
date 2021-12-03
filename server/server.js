@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 
+const { Pool } = require("pg");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded
@@ -16,14 +17,29 @@ app.listen(port, () =>
 
 const videos = require("./exampleData.json");
 
+const pool = new Pool({
+  connectionString:
+    "postgres://raqrjygcappkuw:1263c0253d7fa322c1790ab439a8dc8af974b2255d79cdb2bb457a99d973280d@ec2-54-228-139-34.eu-west-1.compute.amazonaws.com:5432/dapnscot6ihjdt",
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  user: "raqrjygcappkuw",
+  host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
+  database: "dapnscot6ihjdt",
+  password: "",
+  port: 5432,
+});
+
 // GET all data "/"
 app.get("/", (request, response) => {
   const order = request.query.order;
   //order the data according to the votes
-  order && order.toLowerCase() === "asc"
-    ? videos.sort((a, b) => a.rating - b.rating)
-    : videos.sort((a, b) => b.rating - a.rating);
-  response.send(videos);
+  const selectQuery = `SELECT * FROM videos ORDER BY rating ${
+    order === "asc" ? "ASC" : "DESC"
+  }`;
+  pool.query(selectQuery, (error, result) => {
+    response.send(result.rows);
+  });
 });
 
 //GET video by id
