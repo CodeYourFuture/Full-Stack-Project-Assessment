@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 5000;
+const uuid = require('uuid');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -9,7 +10,7 @@ app.use(cors());
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
+const videos = [
   {
     id: 523523,
     title: "Never Gonna Give You Up",
@@ -82,6 +83,7 @@ app.get("/", (req, res) => {
 // POST "/"
 app.post('/', (req, res) => {
   const newVideo = {
+    "id": uuid.v4(),
     "title": req.body.title,
     "url": req.body.url,
     "rating": 0
@@ -93,7 +95,7 @@ app.post('/', (req, res) => {
 })
   }
   videos.push(newVideo);
-  res.send(newVideo); 
+  res.send(videos); 
 }) 
 
 app.get('/:id', (req, res) => {
