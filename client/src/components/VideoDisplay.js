@@ -5,11 +5,22 @@ import SearchVideo from "./SearchVideo";
 const VideoDisplay = (prop) => {
   
   const [allvideos, setAllVideos] = useState([]);
+   
   const [searched, setsearchedVideos] = useState([]);
   let [voting, setVoting] = useState(0);
 
-  const inputVideo = (newvideo) => {
+  const inputVideo = (newvideo, id) => {
+    if (id === 0)
       setAllVideos(newvideo);
+    else {
+      allvideos.find(ele => {
+        if (id === ele.id) {
+        
+          newvideo.date = ele.date;
+          newvideo.time = ele.time;}
+      })
+      setAllVideos([...allvideos].concat(newvideo))
+    }
   };
   useEffect(() => {
     let o;
@@ -22,6 +33,7 @@ const VideoDisplay = (prop) => {
       .then((data) => {
         if (data) {
           setAllVideos(data);
+         
           setsearchedVideos(data);
         }
       })
@@ -58,7 +70,9 @@ const VideoDisplay = (prop) => {
     })
       .then((res) => res.json())
       .then((newVideos) => {
-        setAllVideos(newVideos);
+        setAllVideos([...allvideos].filter((video, index) => video.id!==id ))
+    
+       
       })
       .catch((error) => error);
   };

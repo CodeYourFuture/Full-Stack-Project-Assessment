@@ -17,14 +17,7 @@ const AddVideo = (prop) => {
       }
     }
 
-    // setNewVideo([
-    //   {
-       
-    //     title: title,
-    //     url: url,
-        
-    //   },
-    // ]);
+    
   };
   const handleClick = () => {
     setClicked(true);
@@ -47,10 +40,10 @@ const AddVideo = (prop) => {
       .then((res) => res.json())
       .then((newVideos) => {
         if (newVideos.data) {
-          prop.input(newVideos.data);
+          prop.input(newVideos.data,0);
           window.alert(newVideos.message);
         } else {
-          prop.input(newVideos);
+          prop.input([{ id: newVideos, title: title, url: url, rating: 0 }],newVideos);
         }
       });
   };
