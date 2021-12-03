@@ -16,19 +16,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// // GET endpoint `/` with `data` content check
-// app.get("/", (req, res) => {
-//   data.length
-//     ? res
-//         .status(200)
-//         .json(data)
-//     : res
-//         .status(204)
-//         .json(data);
-// });
-
 // GET endpoint `/order`
-
 app.get("/", (req, res) => {
   const sortOrder = req.query.order;
   const orderedData = [...data];
@@ -38,19 +26,7 @@ app.get("/", (req, res) => {
     : orderedData.sort((v1, v2) => v2.rating - v1.rating);
 
   res.status(200).json(orderedData);
-  console.log(sortOrder);
 });
-
-// // GET endpoint `/` with `data` content check
-// app.get("/", (req, res) => {
-//   data.length
-//     ? res
-//         .status(200)
-//         .json(data)
-//     : res
-//         .status(204)
-//         .json(data);
-// });
 
 // GET endpoint `/:id`
 app.get("/:id", (req, res) => {

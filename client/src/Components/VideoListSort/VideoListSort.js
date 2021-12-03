@@ -15,7 +15,16 @@ const VideoListSort = ({ videoSortOrder, setVideoSortOrder }) => {
       onClick={handleVideoSort}
       type="onclick"
       variant="contained"
-      endIcon={<FilterListIcon />}
+      size="large"
+      endIcon={
+        <FilterListIcon
+          style={
+            videoSortOrder === "asc"
+              ? { transform: "rotate(0deg)" }
+              : { transform: "rotate(180deg)" }
+          }
+        />
+      }
     >
       Sort
     </Button>

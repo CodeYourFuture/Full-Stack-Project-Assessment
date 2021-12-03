@@ -22,7 +22,7 @@ const AddVideoDrawer = ({ videos, setVideos }) => {
     setToggle(open);
   };
 
-  const list = () => (
+  const form = () => (
     <Box role="addVideoForm">
       <AddVideo
         toggleDrawer={toggleDrawer}
@@ -48,7 +48,7 @@ const AddVideoDrawer = ({ videos, setVideos }) => {
       </Tooltip>
 
       <Drawer open={toggle} onClose={() => toggleDrawer(false)}>
-        {list()}
+        {form()}
       </Drawer>
     </React.Fragment>
   );
