@@ -19,6 +19,19 @@ const AddVideo = (prop) => {
 
     
   };
+  const dateFormat = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${day}-${month}-${year}`;
+  };
+
+  const timeFormat = (date) => {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    return `${hours}-${minutes}-${seconds}`;
+  }; 
   const handleClick = () => {
     setClicked(true);
   };
@@ -28,6 +41,8 @@ const AddVideo = (prop) => {
   };
 
   const handleAdd = (e) => {
+    let date = dateFormat(new Date());
+    let time= timeFormat(new Date())
     e.preventDefault();
     fetch("http://127.0.0.1:5000/", {
       method: "post",
@@ -35,7 +50,7 @@ const AddVideo = (prop) => {
         Accept: "application/json",
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ title: title, url: url }),
+      body: JSON.stringify({ title: title, url: url,date:date,time:time}),
     })
       .then((res) => res.json())
       .then((newVideos) => {
@@ -43,7 +58,10 @@ const AddVideo = (prop) => {
           prop.input(newVideos.data,0);
           window.alert(newVideos.message);
         } else {
-          prop.input([{ id: newVideos, title: title, url: url, rating: 0 }],newVideos);
+          prop.input([{
+            id: newVideos.id, title: title, url: url, rating: 0,
+            date:date,time:time
+          }], newVideos.id);
         }
       });
   };

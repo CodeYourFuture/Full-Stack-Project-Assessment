@@ -5,7 +5,7 @@ import SearchVideo from "./SearchVideo";
 const VideoDisplay = (prop) => {
   
   const [allvideos, setAllVideos] = useState([]);
-   
+  
   const [searched, setsearchedVideos] = useState([]);
   let [voting, setVoting] = useState(0);
 
@@ -13,13 +13,8 @@ const VideoDisplay = (prop) => {
     if (id === 0)
       setAllVideos(newvideo);
     else {
-      allvideos.find(ele => {
-        if (id === ele.id) {
-        
-          newvideo.date = ele.date;
-          newvideo.time = ele.time;}
-      })
-      setAllVideos([...allvideos].concat(newvideo))
+      
+     setAllVideos([...allvideos].concat(newvideo));
     }
   };
   useEffect(() => {
