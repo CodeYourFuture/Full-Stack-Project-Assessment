@@ -72,17 +72,21 @@ app.post("/", (request, response) => {
       message: "Video could not be saved",
     });
   }
-  temporaryID++; //DB
   const newVideo = {
-    id: temporaryID, //DB
     title: title,
     url: url,
     date: request.body.date,
     time: request.body.time,
     rating: 0,
   };
-  videos.push(newVideo);
-  response.send({ id: newVideo.id });
+  const selectQuery = `INSERT INTO videos (title, url, date,time,rating) VALUES ('${newVideo.title}','${newVideo.url}','${newVideo.date}','${newVideo.time}',${newVideo.rating}) RETURNING id;`;
+  pool.query(selectQuery, (error, result) => {
+    if (error) {
+      response.send(error);
+    }
+    console.log(result.rows[0].id);
+    response.send({ id: result.rows[0].id });
+  });
 });
 
 // Delete video specified by an ID
