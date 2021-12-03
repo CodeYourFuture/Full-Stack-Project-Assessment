@@ -1,4 +1,3 @@
-const { response, request } = require("express");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -14,8 +13,6 @@ app.use(cors());
 app.listen(port, () =>
   console.log(`Listening on port ${port}`)
 );
-
-const videos = require("./exampleData.json");
 
 const pool = new Pool({
   connectionString:
@@ -38,6 +35,11 @@ app.get("/", (request, response) => {
     order === "asc" ? "ASC" : "DESC"
   }`;
   pool.query(selectQuery, (error, result) => {
+    if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
     response.send(result.rows);
   });
 });
@@ -47,6 +49,11 @@ app.get("/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
   const selectQuery = `SELECT * FROM videos WHERE id = ${videoId}`;
   pool.query(selectQuery, (error, result) => {
+    if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
     if (result.rows.length === 0) {
       return response.status(404).send({
         msg: `Video with id: ${videoId} does not exist !!!`,
@@ -82,9 +89,13 @@ app.post("/", (request, response) => {
   const selectQuery = `INSERT INTO videos (title, url, date,time,rating) VALUES ('${newVideo.title}','${newVideo.url}','${newVideo.date}','${newVideo.time}',${newVideo.rating}) RETURNING id;`;
   pool.query(selectQuery, (error, result) => {
     if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
+    if (error) {
       response.send(error);
     }
-    console.log(result.rows[0].id);
     response.send({ id: result.rows[0].id });
   });
 });
@@ -94,6 +105,11 @@ app.delete("/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
   const selectQuery = `DELETE FROM videos WHERE id = ${videoId}`;
   pool.query(selectQuery, (error, result) => {
+    if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
     if (result.rowCount === 1) {
       return response.status(204).send({});
     }
@@ -108,15 +124,20 @@ app.delete("/:videoId", (request, response) => {
 app.put("/vote/:videoId", (request, response) => {
   const videoId = +request.params.videoId;
   const vote = request.body.vote;
-  const videoIndex = videos.findIndex(
-    (video) => video.id === videoId
-  );
-  if (videoIndex === -1) {
-    return response.status(404).send({
-      result: "failure",
-      message: "Video could not be found",
-    });
-  }
-  videos[videoIndex].rating += vote;
-  response.send({ rating: videos[videoIndex].rating });
+
+  const selectQuery = `UPDATE videos SET rating = rating+${vote} WHERE id = ${videoId} RETURNING rating`;
+  pool.query(selectQuery, (error, result) => {
+    if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
+    if (result.rowCount === 0) {
+      return response.status(404).send({
+        result: "failure",
+        message: "Video could not be found",
+      });
+    }
+    response.send({ rating: result.rows[0].rating });
+  });
 });
