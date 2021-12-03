@@ -1,27 +1,78 @@
-import React from 'react';
-import AddVideoButtons from './AddVideoButtons';
+import React, { useState } from 'react';
 
-const AddVideoForm = ({ clicked, setClicked, videos, setVideos }) => {
+const AddVideoForm = ({ setClicked, videos, setVideos }) => {
+  function useFormState(initialState) {
+    const [state, setState] = useState(initialState);
+    function setEvent(event) {
+      setState(event.target.value);
+    }
+    return [state, setEvent];
+  }
+  const handleCancelButton = () => {
+    setClicked(false);
+  };
+  const [title, setTitle] = useFormState("");
+  const [url, setUrl] = useFormState("");
+  // Set the title and url value to the form input 
+  function handleSubmit (event) {
+    event.preventDefault();
+    const newVideo = {
+      // id: Math.floor(Math.random() * 10000) + title.length + url.length, // create a random id for front-end key value
+      title: title,
+      url: url,
+      rating: 0
+    }
+    const videosIncludeNewVideo = videos.some((vid) => vid.url === url);
+    if(!videosIncludeNewVideo) {
+      setVideos((prev) => prev.concat(newVideo));
+    }else {
+      alert('This video is already in the videos list.');
+    }
+  }
     return (
-      <form>
+      <form
+        onSubmit={handleSubmit}
+        action="http://127.0.0.1:5000/"
+        method="POST"
+      >
         <div>
-          <label>
-            Title
-            <input className="input ml-3" name="title" type="text" required="" />
-          </label>
+          <label htmlFor="inputTitle">Title</label>
+          <input
+            className="input ml-3"
+            name="title"
+            type="text"
+            required=""
+            placeholder="Title..."
+            id="inputTitle"
+            value={title}
+            onChange={setTitle}
+          />
         </div>
         <div>
-          <label>
-            URL
-            <input className="input ml-3" name="vurl" type="text" required="" />
-          </label>
+          <label htmlFor="inputUrl">URL</label>
+          <input
+            className="input ml-3"
+            name="url"
+            type="text"
+            required
+            placeholder="URL..."
+            id="inputUrl"
+            value={url}
+            onChange={setUrl}
+          />
         </div>
-        <AddVideoButtons
-          clicked={clicked}
-          setClicked={setClicked}
-          videos={videos}
-          setVideos={setVideos}
-        />
+        <div>
+          <button
+            className="btn btn-warning input"
+            type="cancel"
+            onClick={handleCancelButton}
+          >
+            Cancel
+          </button>
+          <button className="btn btn-danger input" type="submit">
+            ADD
+          </button>
+        </div>
       </form>
     );
 }

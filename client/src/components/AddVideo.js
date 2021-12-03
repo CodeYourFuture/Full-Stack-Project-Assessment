@@ -13,7 +13,7 @@ const AddVideo = ({ videos, setVideos }) => {
           <h3>Add Video</h3>
         </a>
         {clicked ? 
-        <AddVideoForm clicked={clicked} setClicked={setClicked} videos={videos} setVideos={setVideos} /> 
+        <AddVideoForm setClicked={setClicked} setVideos={setVideos} videos={videos} /> 
         : null}
       </div>
     );
