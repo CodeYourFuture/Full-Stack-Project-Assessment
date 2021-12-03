@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Video = ({ videos, setVideos, video, index }) => {
   const urlId = video.url.slice(32);
@@ -9,7 +9,8 @@ const Video = ({ videos, setVideos, video, index }) => {
     return formattedTitle;
   }
   const handleDelete = () => {
-    setVideos(videos.splice(index, 1));
+    const videosExceptDeletedVideo = videos.slice(0, index).concat(videos.slice(index + 1));
+    setVideos(videosExceptDeletedVideo);
   }
     return (
       <div className="p-4">
