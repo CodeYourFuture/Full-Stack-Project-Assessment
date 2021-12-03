@@ -6,19 +6,7 @@ app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 5000;
 const data = require('../exampleresponse.json');
-const dateFormat = (date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${day}-${month}-${year}`;
-};
 
-const timeFormat = (date) => {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  return `${hours}-${minutes}-${seconds}`;
-};
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -66,16 +54,16 @@ app.post("/", function (req, res) {
   let id = Math.floor(Math.random() * 100000000) + 1;
   let title = req.body.title;
   let url = req.body.url;
+  let date = req.body.date;
+  let time = req.body.time;
   let rating = 0;
-  let date = dateFormat(new Date());
-  let time = timeFormat(new Date());
-
-  const newvideo = { id, title, url, rating, date, time };
+ 
+  const newvideo = { id, title, url,rating:0, date,time};
   
   let isValid = isvalid(newvideo);
   if (isValid) {
     videos.push(newvideo);
-    res.status(200).json({id});
+    res.status(200).json({id:id});
   }
   else {
 
