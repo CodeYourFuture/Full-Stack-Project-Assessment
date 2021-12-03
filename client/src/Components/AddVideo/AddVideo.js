@@ -43,7 +43,7 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
           setVideos(videos.concat(newVideo));
           toggleDrawer(false);
         });
-    } 
+    }
   };
 
   return (
@@ -71,6 +71,7 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
           sx={{ m: 1 }}
           type="submit"
           variant="contained"
+          aria-label="submit"
           endIcon={<CloudUploadIcon />}
         >
           Upload

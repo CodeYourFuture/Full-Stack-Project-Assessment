@@ -13,7 +13,7 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ alignItems: "center" }}>
+    <Container maxWidth="xl">
       <Grid container spacing={2}>
         {videos
           .filter(
@@ -22,7 +22,15 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
               video.url.toUpperCase().includes(searchTerm.toUpperCase())
           )
           .map((video) => (
-            <Grid key={video.id} item xs={12} md={5} lg={4} xl={3}>
+            <Grid
+              key={video.id}
+              item
+              xs={12}
+              md={5}
+              lg={4}
+              xl={3}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <VideoCard video={video} deleteVideo={deleteVideo} />
             </Grid>
           ))}

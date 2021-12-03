@@ -2,7 +2,6 @@ import React from "react";
 import { TextField } from "@mui/material";
 
 const SearchBox = ({ setSearchTerm }) => {
-
   return (
     <TextField
       sx={{ m: 1, p: 1 }}

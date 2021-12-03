@@ -52,7 +52,7 @@ const VideoCard = ({ video, deleteVideo }) => {
           {uploadTimeAndDate}
         </Typography>
         <CardActions sx={{ justifyContent: "end", my: 10 }}>
-          <Tooltip title="I like this" arrow>
+          <Tooltip title="I like this" placement="top" arrow>
             <IconButton
               onClick={() => voteHandler("+", arrayId)}
               aria-label="like"
@@ -61,7 +61,7 @@ const VideoCard = ({ video, deleteVideo }) => {
               <ThumbUpAltIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="I dislike this" arrow>
+          <Tooltip title="I dislike this" placement="top" arrow>
             <IconButton
               onClick={() => voteHandler("-", arrayId)}
               aria-label="dislike"
@@ -73,7 +73,7 @@ const VideoCard = ({ video, deleteVideo }) => {
           <Typography variant="subtitle1" color="text.secondary">
             {`${votes} votes`}
           </Typography>
-          <Tooltip title="Delete video" arrow>
+          <Tooltip title="Delete video" placement="top" arrow>
             <IconButton
               onClick={() => deleteVideo(arrayId)}
               value="4"
