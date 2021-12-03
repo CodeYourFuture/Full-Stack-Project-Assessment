@@ -1,8 +1,15 @@
-const VideoPlayer = ({ data }) => {
-  console.log("videoPlayer.js:", data);
+import VoteComponent from "./VoteComponent";
+
+const VideoPlayer = ({ videos, setVideos }) => {
+  const handleDelete = (id) => {
+    const deletedItem = videos.filter((video) => video.id !== id);
+    console.log("deletedItem,:", deletedItem);
+    setVideos(deletedItem);
+  };
+
   return (
     <div className="display-container">
-      {data.map((video) => {
+      {videos.map((video) => {
         console.log(video.url.slice(32));
         return (
           <div key={video.id}>
@@ -17,9 +24,16 @@ const VideoPlayer = ({ data }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <button type="button" class="btn btn-danger p-1 m-3">
-              Delete Video
-            </button>
+            <VoteComponent />
+            <div>
+              <button
+                onClick={() => handleDelete(video.id)}
+                type="button"
+                class="btn btn-danger p-1 m-3"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         );
       })}
