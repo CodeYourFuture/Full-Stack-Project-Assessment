@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const AddVideo = (prop) => {
  // let g = prop.video;
-  const [title, settitle] = useState("");
+  const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
   const [clicked, setClicked] = useState(false);
@@ -11,7 +11,7 @@ const AddVideo = (prop) => {
   const handleChange = (e) => {
     if (e) {
       if (e.target.name === "title") {
-        settitle(e.target.value);
+        setTitle(e.target.value);
       } else if (e.target.name === "url") {
         setUrl(e.target.value);
       }
@@ -19,30 +19,18 @@ const AddVideo = (prop) => {
 
     
   };
-  const dateFormat = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${day}-${month}-${year}`;
-  };
-
-  const timeFormat = (date) => {
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    return `${hours}-${minutes}-${seconds}`;
-  }; 
+  
   const handleClick = () => {
     setClicked(true);
   };
-  const handleDelete = () => {
+  const cancelAdd = () => {
     document.getElementById("addvideoform").reset();
     setClicked(false);
   };
 
-  const handleAdd = (e) => {
-    let date = dateFormat(new Date());
-    let time= timeFormat(new Date())
+  const addVideo = (e) => {
+    let date = new Date().toLocaleDateString("en-GB");
+    let time = new Date().toLocaleTimeString({ timeZone: "UTC" });
     e.preventDefault();
     fetch("http://127.0.0.1:5000/", {
       method: "post",
@@ -106,13 +94,13 @@ const AddVideo = (prop) => {
           <button
             type="submit"
             onClick={(e) => {
-              handleAdd(e);
+              addVideo(e);
             }}
           >
             Add Video
           </button>
          
-          <button onClick={(e) => handleDelete()}>Delete</button>
+          <button onClick={(e) => cancelAdd()}>Delete</button>
         </div>
       </form>{" "}
     </>

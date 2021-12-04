@@ -35,6 +35,7 @@ const VideoDisplay = (prop) => {
       .catch((e) => console.log(e));
   }, [prop.order]);
   const onsearch = (newvideo) => {
+
     setAllVideos(newvideo);
   };
 
@@ -76,7 +77,7 @@ const VideoDisplay = (prop) => {
     <div className="render">
       <div>
         <AddVideo input={inputVideo} video={allvideos} />
-        <SearchVideo videos={searched} onClick={onsearch} />
+        <SearchVideo videos={searched} onsearch={onsearch} />
       </div>{" "}
       <div className="videos">
         {[...allvideos].map((videos, index) => {
@@ -113,7 +114,7 @@ const VideoDisplay = (prop) => {
                   allowFullScreen
                 ></iframe>
               </li>
-              <li>On {videos.date}</li>
+              <li>On {(videos.hasOwnProperty("date"))?videos.date:new Date().toLocaleDateString()}</li>
               <li>At {videos.time}</li>
 
               <li>
