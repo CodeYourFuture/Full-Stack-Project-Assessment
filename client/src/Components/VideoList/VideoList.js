@@ -8,7 +8,7 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
     const filteredVideos = videos.filter((video) => video.id !== id);
 
     fetch(`http://localhost:5000/${id}`, { method: "delete" }).then((res) =>
-      res.status === 200 ? setVideos(filteredVideos) : console.log(res)
+      res.status === 200 ? setVideos(filteredVideos) : alert("Unable to delete video, please try again")
     );
   };
 
