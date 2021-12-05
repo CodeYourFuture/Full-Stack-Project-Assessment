@@ -1,20 +1,23 @@
 import React from "react";
 
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
+const SearchBar = ({ videoData, setVideoData }) => {
+  const handleSearch = (e) => {
+    const searchVideoData = videoData.filter((video) =>
+      video.title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setVideoData(searchVideoData);
+  };
+
   return (
     <nav className="navbar navbar-light bg-light justify-content-between">
-      <form class="form-inline">
+      <form className="form-inline">
         <input
-          class="form-control mr-sm-2"
-          type="search"
+          className="form-control mr-sm-2"
+          type="text"
           placeholder="Search"
           aria-label="Search"
-          onChange={(e) => setSearchQuery(e.target.value)}
-          value={searchQuery}
+          onChange={handleSearch}
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button">
-          Search
-        </button>
       </form>
     </nav>
   );
