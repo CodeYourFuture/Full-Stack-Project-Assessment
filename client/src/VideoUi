@@ -1,0 +1,29 @@
+ 
+import React from "react";
+import data from "../exampleresponse.json";
+
+function VideoUi() {
+  return (
+    <div className="row d-flex justify-content-center m-3">
+      {data.map((video, index) => {
+        return (
+          <div
+            key={video.id}
+            className="card col-12 col-md-5 m-5"
+            style={{ width: "20rem" }}
+          > 
+            <iframe className="" width="560" height="315" src="https://www.youtube.com/embed/s50vvwTystA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <div className="card-box">
+              <h5 className="card-name">{video.title}</h5>
+              <p className="card-text">Rating: {video.rating}</p>
+              <button className="btn btn-success">Click</button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default VideoUi;
