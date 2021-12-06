@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const AddVideo = (prop) => {
- // let g = prop.video;
+
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
   const [clicked, setClicked] = useState(false);
-  //const [newvideo, setNewVideo] = useState([{}]);
+  
  
   const handleChange = (e) => {
     if (e) {
@@ -56,9 +56,9 @@ const AddVideo = (prop) => {
 
   return (
     <>
-      <h2 className="addVideo" onClick={() => handleClick()}>
+      <button className='add' onClick={() => handleClick()}>
         Add Video
-      </h2>
+      </button>
       <form
         style={{ display: clicked ? "flex" : "none" }}
         className="addvideo-form"
@@ -100,7 +100,7 @@ const AddVideo = (prop) => {
             Add Video
           </button>
          
-          <button onClick={(e) => cancelAdd()}>Delete</button>
+          <button onClick={(e) => cancelAdd()}>Cancel </button>
         </div>
       </form>{" "}
     </>

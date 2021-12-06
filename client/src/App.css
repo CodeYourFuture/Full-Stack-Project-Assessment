@@ -77,8 +77,15 @@ justify-items: center;
 .addvideo{
  background-color:rgb(143, 126, 97);
  justify-content: space-evenly;
+ justify-content: center;
+ align-items: center;
   display:flex;
 }
+
+.add{align-items: center;
+display: flex;
+margin:auto;
+justify-content: center;}
 .Video-display{
   display:flex;
   flex-wrap: wrap;

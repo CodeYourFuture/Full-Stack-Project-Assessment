@@ -88,19 +88,22 @@ const VideoDisplay = (prop) => {
             <ul key={index} style={{}} className="Video-display">
               <li>{videos.title} </li>
               <li>
-                <i
-                  onClick={() => upVotes(videos.id)}
-                  className="fas fa-thumbs-up"
-                ></i>
+                <button className="add" aria-aria-label="upvote"  onClick={() => upVotes(videos.id)}>
+                  <i
+                   
+                    className="fas fa-thumbs-up"
+                  ></i>
+                </button>
                 <pre> </pre>
                 <p id={videos.id}>{videos.rating}</p>
 
                 <pre> </pre>
-
+ <button className="add" aria-aria-label="downvote"  onClick={() => downVotes(videos.id)}>
                 <i
-                  onClick={() => downVotes(videos.id)}
+                 
                   className="fas fa-thumbs-down"
                 ></i>
+                </button>
               </li>
 
               <li>
@@ -114,8 +117,18 @@ const VideoDisplay = (prop) => {
                   allowFullScreen
                 ></iframe>
               </li>
-              <li>On {(videos.hasOwnProperty("date"))?videos.date:new Date().toLocaleDateString()}</li>
-              <li>At {videos.time}</li>
+              <li>
+                On{" "}
+                {videos.hasOwnProperty("date")
+                  ? videos.date
+                  : new Date().toLocaleDateString("en-Gb")}
+              </li>
+              <li>
+                At{" "}
+                {videos.hasOwnProperty("time")
+                  ? videos.time
+                  : new Date().toLocaleTimeString({ timeZone: "UTC" })}
+              </li>
 
               <li>
                 <button
