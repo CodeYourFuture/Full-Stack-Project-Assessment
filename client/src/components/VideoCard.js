@@ -6,7 +6,7 @@ import DeleteVideo from './DeleteVideo';
 
 export default function VideoCard ( {video, videos, setVideos, fetchData} ) {
   const urlID = video.url.slice(32);
-  console.log(urlID)
+
   return (
     <div>
       <iframe
@@ -21,7 +21,7 @@ export default function VideoCard ( {video, videos, setVideos, fetchData} ) {
       ></iframe>
       <div className="video-features">
         <h2 className="video-title">{video.title}</h2>
-        <VideoVotes />
+        <VideoVotes rating={video.rating}/>
         <DeleteVideo
           id={video.id}
           video={video}

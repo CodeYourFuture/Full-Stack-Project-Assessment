@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function VideoVotes () {
-  const [ totalVotes , setTotalVotes] = useState(0);
+export default function VideoVotes ( {rating}) {
+  const [ totalVotes , setTotalVotes] = useState(rating);
   function increaseVotesByOne() {
     setTotalVotes(totalVotes + 1);
   }
