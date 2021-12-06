@@ -1,9 +1,9 @@
 import React from 'react';
 
- export default function SearchVideo ({setVideos, videosData}) {
+ export default function SearchVideo ({setVideos, videos}) {
   
      function handleSearchInput(event) {
-       const searchedVideo = videosData.filter( video => video.title.toLowerCase().includes(event.target.value.toLowerCase()))
+       const searchedVideo = videos.filter( video => video.title.toLowerCase().includes(event.target.value.toLowerCase()))
        setVideos(searchedVideo)
 
      }

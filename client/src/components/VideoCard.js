@@ -4,7 +4,7 @@ import DeleteVideo from './DeleteVideo';
 
 
 
-export default function VideoCard ( {video, videos, setVideos} ) {
+export default function VideoCard ( {video, videos, setVideos, fetchData} ) {
   const urlID = video.url.slice(32);
   console.log(urlID)
   return (
@@ -22,7 +22,13 @@ export default function VideoCard ( {video, videos, setVideos} ) {
       <div className="video-features">
         <h2 className="video-title">{video.title}</h2>
         <VideoVotes />
-        <DeleteVideo id={video.id} video={video} videos={videos} setVideos={setVideos} />
+        <DeleteVideo
+          id={video.id}
+          video={video}
+          videos={videos}
+          setVideos={setVideos}
+          fetchData={fetchData}
+        />
       </div>
     </div>
   );
