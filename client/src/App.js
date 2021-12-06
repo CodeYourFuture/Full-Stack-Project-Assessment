@@ -10,7 +10,10 @@ function App() {
   const fetchData = () => {
     fetch(`http://localhost:5000/`)
       .then((res) => res.json())
-      .then((data) => setVideos(data));
+      .then((data) => {
+        data.sort((a,b) => a.rating - b.rating)
+        setVideos(data)
+      });
   }
   useEffect(()=> {
     fetchData()
@@ -18,7 +21,7 @@ function App() {
    
   return (
     <div className="App">
-      <Header videos={videos} setVideos={setVideos} />
+      <Header videos={videos} setVideos={setVideos} fetchData={fetchData} />
       <AllVideoCards
         videos={videos}
         setVideos={setVideos}
