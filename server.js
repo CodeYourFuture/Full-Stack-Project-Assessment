@@ -24,9 +24,10 @@ const pool = new Pool({
 // GET "/"
 app.get("/", (req, res) => {
     // const rating
-    const selectQuery = `SELECT * FROM videos ORDER BY rating`;
+    const selectQuery = `SELECT * FROM fullstack_videos ORDER BY rating`;
     pool.query(selectQuery, (error, result) => {
       if (error) {
+        console.log(error)
         return res.status(500).send("ERROR");
       }
       res.send(result.rows);
