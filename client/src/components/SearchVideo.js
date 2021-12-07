@@ -2,27 +2,23 @@ import React, { useState } from "react";
 
 const SearchVideo = (prop) => {
   let videos = prop.videos;
-  console.log(videos);
+  
   const [videoSearch, setVideoSearch] = useState("");
 
-  const [newVideo, setNewVideo] = useState([{}]);
+  
   const handleChange = (e) => {
     setVideoSearch(e.target.value.toLowerCase());
-
-    
   };
+  
 
+  let result = videos.filter((video) => {
+    return (
+      video.title.toLowerCase().includes(videoSearch) ||
+      video.url.toLowerCase().includes(videoSearch)
+    )
+     
+  });
 
-  const searchVideo = () => {
-    setNewVideo(
-      videos.filter(
-        (video) =>
-          video.title.toLowerCase().includes(videoSearch) ||
-          video.url.toLowerCase().includes(videoSearch)
-      )
-    );
-    prop.onsearch(newVideo)
-  }
   return (
     <>
       <form className="addvideo-form" onSubmit={(e) => e.preventDefault()}>
@@ -40,7 +36,7 @@ const SearchVideo = (prop) => {
         </div>
 
         <div className="addvideo">
-          <button onClick={() => searchVideo()}>Search Video</button>
+          <button onClick={() => prop.onsearch(result)}>Search Video</button>
         </div>
       </form>{" "}
     </>

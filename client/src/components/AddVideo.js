@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
 const AddVideo = (prop) => {
-
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
   const [clicked, setClicked] = useState(false);
-  
- 
+
   const handleChange = (e) => {
     if (e) {
       if (e.target.name === "title") {
@@ -16,10 +14,8 @@ const AddVideo = (prop) => {
         setUrl(e.target.value);
       }
     }
-
-    
   };
-  
+
   const handleClick = () => {
     setClicked(true);
   };
@@ -38,25 +34,34 @@ const AddVideo = (prop) => {
         Accept: "application/json",
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ title: title, url: url,date:date,time:time}),
+      body: JSON.stringify({ title: title, url: url, date: date, time: time }),
     })
       .then((res) => res.json())
       .then((newVideos) => {
         if (newVideos.data) {
-          prop.input(newVideos.data,0);
+          prop.input(newVideos.data, 0);
           window.alert(newVideos.message);
         } else {
-          prop.input([{
-            id: newVideos.id, title: title, url: url, rating: 0,
-            date:date,time:time
-          }], newVideos.id);
+          prop.input(
+            [
+              {
+                id: newVideos.id,
+                title: title,
+                url: url,
+                rating: 0,
+                date: date,
+                time: time,
+              },
+            ],
+            newVideos.id
+          );
         }
       });
   };
 
   return (
     <>
-      <button className='add' onClick={() => handleClick()}>
+      <button className="add" onClick={() => handleClick()}>
         Add Video
       </button>
       <form
@@ -99,7 +104,7 @@ const AddVideo = (prop) => {
           >
             Add Video
           </button>
-         
+
           <button onClick={(e) => cancelAdd()}>Cancel </button>
         </div>
       </form>{" "}

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
+import VideoCard from "./VideoCard";
 
 const VideoDisplay = (prop) => {
   
   const [allvideos, setAllVideos] = useState([]);
   
   const [searched, setsearchedVideos] = useState([]);
-  let [voting, setVoting] = useState(0);
+ 
 
   const inputVideo = (newvideo, id) => {
     if (id === 0)
@@ -34,44 +35,13 @@ const VideoDisplay = (prop) => {
       })
       .catch((e) => console.log(e));
   }, [prop.order]);
-  const onsearch = (newvideo) => {
-
-    setAllVideos(newvideo);
+  const onsearch = (videoSearch) => {
+   setAllVideos(videoSearch)
   };
 
-  const upVotes = (id) => {
-    [...allvideos].filter((video, index) => {
-      if (id === video.id) {
-        let p = document.getElementById(id);
-        console.log(p.innerText);
-        setVoting((video.rating += 1));
-        p.innerText = voting;
-      }
-    });
-  };
-  const downVotes = (id) => {
-    [...allvideos].filter((video, index) => {
-      if (id === video.id) {
-        let p = document.getElementById(id);
-        console.log(p.innerText);
-        setVoting((video.rating -= 1));
-        p.innerText = voting;
-      }
-    });
-  };
-  const deleteVideo = (id) => {
-   
-    fetch(`http://127.0.0.1:5000/${id}`, {
-      method: "delete",
-    })
-      .then((res) => res.json())
-      .then((newVideos) => {
-        setAllVideos([...allvideos].filter((video, index) => video.id!==id ))
-    
-       
-      })
-      .catch((error) => error);
-  };
+
+ 
+ 
 
   return (
     <div className="render">
@@ -81,67 +51,8 @@ const VideoDisplay = (prop) => {
       </div>{" "}
       <div className="videos">
         {[...allvideos].map((videos, index) => {
-          ;
-
-          let id = videos.url.substr(videos.url.length - 11, videos.url.length);
-          return (
-            <ul key={index} style={{}} className="Video-display">
-              <li>{videos.title} </li>
-              <li>
-                <button className="add" aria-aria-label="upvote"  onClick={() => upVotes(videos.id)}>
-                  <i
-                   
-                    className="fas fa-thumbs-up"
-                  ></i>
-                </button>
-                <pre> </pre>
-                <p id={videos.id}>{videos.rating}</p>
-
-                <pre> </pre>
- <button className="add" aria-aria-label="downvote"  onClick={() => downVotes(videos.id)}>
-                <i
-                 
-                  className="fas fa-thumbs-down"
-                ></i>
-                </button>
-              </li>
-
-              <li>
-                <iframe
-                  title={`${videos.title}`}
-                  width="460"
-                  height="415"
-                  src={`https://www.youtube.com/embed/${id}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </li>
-              <li>
-                On{" "}
-                {videos.hasOwnProperty("date")
-                  ? videos.date
-                  : new Date().toLocaleDateString("en-Gb")}
-              </li>
-              <li>
-                At{" "}
-                {videos.hasOwnProperty("time")
-                  ? videos.time
-                  : new Date().toLocaleTimeString({ timeZone: "UTC" })}
-              </li>
-
-              <li>
-                <button
-                  onClick={() => {
-                    deleteVideo(videos.id);
-                  }}
-                >
-                  {" "}
-                  delete{" "}
-                </button>
-              </li>
-            </ul>
-          );
+          
+          return (<VideoCard videos={videos}/>)
         })}
       </div>
     </div>
