@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
@@ -8,6 +9,17 @@ app.use(cors());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 const videos = require("./exampleresponse.json");
+const pool = new Pool({
+  connectionString:
+"postgres://mhrhxllswldlqf:7a7306697db4035c958b01170453ef4b7c27810455c2edf4e14882db911ea8b7@ec2-34-255-134-200.eu-west-1.compute.amazonaws.com:5432/d893894n24v5ra",  ssl: {
+    rejectUnauthorized: false,
+  },
+  user: "mhrhxllswldlqf",
+  host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
+  database: "dapnscot6ihjdt",
+  password: "",
+  port: 5432,
+});
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -18,6 +30,7 @@ app.post("/", (req, res) => {
   console.log(req.body)
   const title = req.body.title;
   const url = req.body.url;
+ 
   if(!title || !url ){
     res.json({
       result: "failure",
