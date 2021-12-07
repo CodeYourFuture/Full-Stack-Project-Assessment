@@ -23,7 +23,14 @@ const pool = new Pool({
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+    // const rating
+    const selectQuery = `SELECT * FROM videos ORDER BY rating`;
+    pool.query(selectQuery, (error, result) => {
+      if (error) {
+        return res.status(500).send("ERROR");
+      }
+      res.send(result.rows);
+    });
 });
 
 app.post("/", (req, res) => {
