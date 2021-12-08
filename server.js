@@ -38,8 +38,7 @@ app.post("/", (req, res) => {
   console.log(req.body)
   const title = req.body.title;
   const url = req.body.url;
-  // const date
-  // const time
+  
   if(!title || !url ){
     res.json({
       result: "failure",
