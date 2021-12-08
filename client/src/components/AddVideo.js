@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddVideoButton from "./AddVideoButton";
+//import AddVideoButton from "./AddVideoButton";
 
 const AddVideo = ({ videoData, setVideoData }) => {
   const [addVideo, setAddVideo] = useState(false);
@@ -8,19 +8,11 @@ const AddVideo = ({ videoData, setVideoData }) => {
 
   const handleAddVideo = (e) => {
     e.preventDefault();
-
     const newVideoData = {
       title: title,
       url: url,
-      timePosted: new Date().toLocaleDateString(),
     };
-    newVideoData.title && newVideoData.url
-      ? setVideoData(videoData.concat(newVideoData))
-      : !newVideoData.title
-      ? alert("Please provide a title")
-      : !newVideoData.url
-      ? alert("Please provide a valid url")
-      : alert("Sorry, Something went wrong");
+    setVideoData(videoData.concat(newVideoData));
   };
 
   return (
@@ -56,13 +48,18 @@ const AddVideo = ({ videoData, setVideoData }) => {
           <div>
             <button
               onClick={() => setAddVideo(!addVideo)}
-              className="btn btn-warning input"
+              className="btn btn-danger"
               type="cancel"
             >
               Cancel
             </button>
-
-            <AddVideoButton onClick={handleAddVideo} />
+            <button
+              onClick={handleAddVideo}
+              className="btn btn-warning input"
+              type="submit"
+            >
+              Add
+            </button>
           </div>
         </form>
       )}

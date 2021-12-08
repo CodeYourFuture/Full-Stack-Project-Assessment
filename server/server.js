@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 //Get video by ID
 app.get("/:videoId", (req, res) => {
   const videoId = req.params.videoId;
-  const videoWithId = videos.find((video) => video.id === videoId);
+  const videoWithId = videos.find((video) => video.id == videoId);
   videoWithId
     ? res.send(videoWithId)
     : res.status(404).send({ msg: "Video doesn't exist" });
@@ -30,10 +30,10 @@ app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;
 
-  if (!title || !url || !url.includes("youtube") || url.includes("watch?v=")) {
+  if (!title || !url || !url.includes("youtube") || !url.includes("watch?v=")) {
     return res
       .status(400)
-      .send({ result: failure, msg: "Video could not be saved" });
+      .send({ result: "failure", msg: "Video could not be saved" });
   }
   const newVideoToAdd = {
     id: tempId,
@@ -46,7 +46,7 @@ app.post("/", (req, res) => {
 
 app.delete("/:videoId", (req, response) => {
   const videoId = req.params.videoId;
-  const videoIndex = videos.findIndex((video) => video.id === videoId);
+  const videoIndex = videos.findIndex((video) => video.id == videoId);
   if (videoIndex === -1) {
     return response.status(404).send({
       result: "failure",

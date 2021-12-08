@@ -45,3 +45,7 @@
   float: right;
   background: transparent;
 }
+
+.addVideoContainer {
+  text-align: left;
+}
