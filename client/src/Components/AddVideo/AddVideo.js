@@ -33,6 +33,7 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
         body: JSON.stringify({
           title: newTitle,
           url: newUrl,
+          uploaded: uploadDateAndTime,
         }),
       })
         .then((res) => {

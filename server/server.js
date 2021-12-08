@@ -47,16 +47,17 @@ app.get("/:id", (req, res) => {
 // POST endpoint `/` to add new `video` content with valid field check
 app.post("/", (req, res) => {
   const generator = UUID(0);
+  const title = req.body.title;
+  const url = req.body.url;
+  const uploaded = req.body.uploaded;
 
   const newVideo = {
     id: generator.uuid(),
-    title: req.body.title,
-    url: req.body.url,
+    title: title,
+    url: url,
     rating: 0,
+    uploaded: uploaded,
   };
-
-  const title = req.body.title;
-  const url = req.body.url;
 
   if (title === "" || url === "") {
     res.status(400).json({
