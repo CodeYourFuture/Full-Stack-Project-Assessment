@@ -43,17 +43,17 @@ app.get("/", (req, res) => {
 // GET endpoint `/:id`
 app.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
-
-  const videoIndex = data.findIndex((data) => data.id === id);
-
-  if (videoIndex > -1) {
-    res.status(200).json(data[videoIndex]);
-  } else {
-    res.status(400).json({
-      result: "failure",
-      message: "No Video with that id",
-    });
-  }
+  pool.query(
+    `select * FROM youtube_videos AS yv WHERE yv.id = ${id};`,
+    (error, result) => {
+      error
+        ? res.status(400).json({
+            result: "failure",
+            message: "No Video with that id",
+          })
+        : res.status(200).json(result.rows);
+    }
+  );
 });
 
 // POST endpoint `/` to add new `video` content with valid field check
