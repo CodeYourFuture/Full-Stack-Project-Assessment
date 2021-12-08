@@ -24,16 +24,20 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// GET endpoint `/order`
+//GET endpoint `/order`
 app.get("/", (req, res) => {
-  const sortOrder = req.query.order;
-  const orderedData = [...data];
+  pool.query("SELECT * FROM youtube_videos", (error, result) => {
+    const sortOrder = req.query.order;
+    const orderedData = [...result.rows];
 
-  sortOrder === "asc"
-    ? orderedData.sort((v1, v2) => v1.rating - v2.rating)
-    : orderedData.sort((v1, v2) => v2.rating - v1.rating);
+    sortOrder === "asc"
+      ? orderedData.sort((v1, v2) => v1.rating - v2.rating)
+      : orderedData.sort((v1, v2) => v2.rating - v1.rating);
 
-  res.status(200).json(orderedData);
+    error
+      ? res.status(400).json({ success: false })
+      : res.status(200).json(orderedData);
+  });
 });
 
 // GET endpoint `/:id`
