@@ -58,30 +58,20 @@ app.get("/:id", (req, res) => {
 
 // POST endpoint `/` to add new `video` content with valid field check
 app.post("/", (req, res) => {
-  const generator = UUID(0);
   const title = req.body.title;
   const url = req.body.url;
   const uploaded = req.body.uploaded;
 
-  const newVideo = {
-    id: generator.uuid(),
-    title: title,
-    url: url,
-    rating: 0,
-    uploaded: uploaded,
-  };
-
-  if (title === "" || url === "") {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
-  } else {
-    data.push(newVideo);
-    res.status(201).json({
-      id: newVideo.id,
-    });
-  }
+  pool.query(
+    `INSERT INTO youtube_videos (title, url, rating, uploaded) VALUES('${title}', '${url}', '${0}', '${uploaded}');`,
+    (error, result) => {
+      title === undefined || url === undefined || error
+        ? res
+            .status(400)
+            .json({ result: "failure", message: "Video could not be saved" })
+        : res.status(201).json({ id: result.rows.id });
+    }
+  );
 });
 
 // DELETE endpoint `/:id` with feedback
