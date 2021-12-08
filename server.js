@@ -11,10 +11,10 @@ app.use(cors());
 const videos = require("./exampleresponse.json");
 const pool = new Pool({
   connectionString:
-"postgres://mhrhxllswldlqf:7a7306697db4035c958b01170453ef4b7c27810455c2edf4e14882db911ea8b7@ec2-34-255-134-200.eu-west-1.compute.amazonaws.com:5432/d893894n24v5ra",  ssl: {
+"postgres://ldrpixfmeztwlo:9b4bcd97ab74ad228f1d136f9b733c627650b25c6c26deb1d755da98f9cb5db1@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/d81o2tq6p6a4ir",  ssl: {
     rejectUnauthorized: false,
   },
-  user: "mhrhxllswldlqf",
+  user: "ldrpixfmeztwlo",
   host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
   database: "dapnscot6ihjdt",
   password: "",
@@ -38,7 +38,8 @@ app.post("/", (req, res) => {
   console.log(req.body)
   const title = req.body.title;
   const url = req.body.url;
-  
+  // const date
+  // const time
   if(!title || !url ){
     res.json({
       result: "failure",
