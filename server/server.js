@@ -78,17 +78,16 @@ app.post("/", (req, res) => {
 app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
-  const videoIndex = data.findIndex((data) => data.id === id);
-
-  if (videoIndex > -1) {
-    data.splice(videoIndex, 1);
-    res.status(200).json({});
-  } else {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  }
+  pool.query(
+    `DELETE FROM youtube_videos AS yv WHERE yv.id = ${id};`,
+    (error, result) => {
+      error
+        ? res
+            .status(400)
+            .json({ result: "failure", message: "Video could not be deleted" })
+        : res.status(200).json({});
+    }
+  );
 });
 
 // PUT endpoint `/:id`
