@@ -8,33 +8,39 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
     const filteredVideos = videos.filter((video) => video.id !== id);
 
     fetch(`http://localhost:5000/${id}`, { method: "delete" }).then((res) =>
-      res.status === 200 ? setVideos(filteredVideos) : alert("Unable to delete video, please try again")
+      res.status === 200
+        ? setVideos(filteredVideos)
+        : alert("Unable to delete video, please try again")
     );
   };
 
   return (
     <Container maxWidth="xl">
-      <Grid container spacing={2}>
-        {videos
-          .filter(
-            (video) =>
-              video.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
-              video.url.toUpperCase().includes(searchTerm.toUpperCase())
-          )
-          .map((video) => (
-            <Grid
-              key={video.id}
-              item
-              xs={12}
-              md={5}
-              lg={4}
-              xl={3}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <VideoCard video={video} deleteVideo={deleteVideo} />
-            </Grid>
-          ))}
-      </Grid>
+      {videos.length ? (
+        <Grid container spacing={2}>
+          {videos
+            .filter(
+              (video) =>
+                video.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
+                video.url.toUpperCase().includes(searchTerm.toUpperCase())
+            )
+            .map((video) => (
+              <Grid
+                key={video.id}
+                item
+                xs={12}
+                md={5}
+                lg={4}
+                xl={3}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <VideoCard video={video} deleteVideo={deleteVideo} />
+              </Grid>
+            ))}
+        </Grid>
+      ) : (
+        <span>Loading...</span>
+      )}
     </Container>
   );
 };
