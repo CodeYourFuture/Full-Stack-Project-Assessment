@@ -15,7 +15,9 @@ function Vote() {
       
         <div className = 'downvote-div'>    
         <p>{downCount}</p>
-        {/* <i className="fa fa-thumbs-down" onClick={() => setUpCount(upCount - 1)}></i> */} 
+
+        {/* <i className="fa fa-thumbs-down" onClick={() => setUpCount(upCount - 1)}></i>   */} {/* this would work with upcount usestate to decrease the number */}
+        
         <i className="fa fa-thumbs-down" onClick={() => setDownCount(downCount - 1)}></i>
         
         </div>

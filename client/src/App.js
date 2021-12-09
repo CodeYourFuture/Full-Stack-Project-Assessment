@@ -6,6 +6,13 @@ import Videos from "./components/Videos";
 
 function App() {
 
+
+  // function addNewVideo(title, url) {
+  //   const newVideos = [...videos, { id: videos.length, title, url, rating: 0 }];
+
+  //   setVideos(newVideos);
+  // }
+
   return (
     <div className="App">
       <header className="App-header">
