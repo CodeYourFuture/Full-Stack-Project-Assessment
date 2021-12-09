@@ -11,12 +11,6 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-// Import local json data
-const data = require(".././exampleresponse.json");
-
-// Import uuid int library
-const UUID = require("uuid-int");
-
 // Enable cross-origin resource sharing middleware in app
 app.use(cors());
 
