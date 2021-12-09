@@ -90,22 +90,25 @@ app.delete("/:id", (req, res) => {
   );
 });
 
-// PUT endpoint `/:id`
+// PUT endpoint `/:id` to update `youtube-video-db.rating`
 app.put("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
+  const videoId = parseInt(req.params.id);
+  const videoRating = req.body.rating;
 
-  const videoIndex = data.findIndex((data) => data.id === id);
-
-  if (videoIndex > -1) {
-    data[videoIndex].rating = req.body.rating;
-
-    res.status(200).json(data[videoIndex]);
-  } else {
-    res.status(400).json({
-      result: "failure",
-      message: "No Video with that id",
-    });
-  }
+  pool.query(
+    `UPDATE youtube_videos SET rating = ${videoRating} where id = ${videoId}`,
+    (error, result) => {
+      error
+        ? res.status(400).json({
+            result: "failure",
+            message: `Video with id:${videoId} not updated`,
+          })
+        : res.status(200).json({
+            result: "success",
+            message: `Video with id:${videoId} updated!`,
+          });
+    }
+  );
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
