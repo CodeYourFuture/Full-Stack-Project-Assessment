@@ -58,21 +58,25 @@ app.post("/", (req, res) => {
   const url = req.body.url;
   const uploaded = req.body.uploaded;
 
-  pool.query(
-    `INSERT INTO youtube_videos (title, url, rating, uploaded) VALUES('${title}', '${url}', '${0}', '${uploaded}') RETURNING id;`,
-    (error, result) => {
-      title === undefined || url === undefined || error
-        ? res.status(400).json({
-            result: "failure",
-            message: `Video "${title}" could not be saved`,
-          })
-        : res.status(201).json({
-            result: "success",
-            message: `Video "${title}" was saved`,
-            id: result.rows[0].id,
-          });
-    }
-  );
+  const insertNewVideo = `
+  INSERT INTO
+   youtube_videos (title, url, rating, uploaded)
+  VALUES
+   ('${title}', '${url}', '${0}', '${uploaded}') RETURNING id;
+  `;
+
+  pool.query(insertNewVideo, (error, result) => {
+    title === undefined || url === undefined || error
+      ? res.status(400).json({
+          result: "failure",
+          message: `Video "${title}" could not be saved`,
+        })
+      : res.status(201).json({
+          result: "success",
+          message: `Video "${title}" was saved`,
+          id: result.rows[0].id,
+        });
+  });
 });
 
 // DELETE endpoint `/:id`
