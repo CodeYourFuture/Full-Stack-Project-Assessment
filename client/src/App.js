@@ -1,12 +1,22 @@
+import React, { useState } from "react";
 import "./App.css";
+// import 'bootstrap/dist/css/bootstrap.css';
+import Header from "./Header";
+import exampleresponse from "./data/exampleresponse.json";
+import Video from "./Video";
+import AddVideo from "./AddVideo";
+
 
 function App() {
+  const [videoList, setVideoList] = useState(exampleresponse);
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-    </div>
+    <main>
+      <Header />
+      <AddVideo videoList={videoList} setVideoList={setVideoList} />
+      <div className="videos-outer-wrap">
+        <Video videoList={videoList} setVideoList={setVideoList} />
+      </div>
+    </main>
   );
 }
 
