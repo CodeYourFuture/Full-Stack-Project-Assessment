@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 
-const VoteButtons = (props) => {
-  const [vote, setVote] = useState(props.rating);
+const VoteButtons = ({ rating }) => {
+  const [vote, setVote] = useState(rating);
   const upVote = (e) => {
     e.preventDefault();
     setVote(vote + 1);

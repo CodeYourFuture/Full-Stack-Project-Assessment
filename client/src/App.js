@@ -1,26 +1,45 @@
 import "./App.css";
+import { React, useState } from "react";
+// import { nanoid } from "nanoid";
 import data from "./exampleresponse.json";
+import AddNewVideos from "./componenets/AddNewVideo";
 import VideoCard from "./componenets/VideoCard";
-import SearchAreas from "./componenets/SearchAreas";
 
-const videos = data;
-
-data.map((dat) => console.log(dat.url));
+// const videos = data;
+const youTubeVids = data;
 
 function App() {
+  const [videos, setVideos] = useState(youTubeVids);
+
+  const [vote, setVote] = useState();
+
   return (
     <div>
-      <div className="search area" style={{ margin: "20px" }}>
-        <SearchAreas />
-      </div>
-
       <div className="App">
-        <header className="App-header" style={{ marginBottom: "50px" }}>
+        <header className="App-header">
           <h1>Video Recommendation</h1>
+          <AddNewVideos setVideos={setVideos} />
         </header>
-        <VideoCard videos={videos} />
+        {videos.map((video) => {
+          const indexNum = video.url.indexOf("?v=");
+          const videoId = video.url.slice(indexNum + 3);
+          const videoRating = video.rating;
+          const id = video.id;
+          return (
+            <VideoCard
+              key={id}
+              vote={vote}
+              setVote={setVote}
+              videos={videos}
+              videoRating={videoRating}
+              id={id}
+              videoId={videoId}
+              title={video.title}
+              setVideos={setVideos}
+            />
+          );
+        })}
       </div>
-      <div></div>
     </div>
   );
 }
