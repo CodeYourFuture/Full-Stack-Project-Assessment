@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa'
 
 const Video = ({ videos, setVideos, video, index }) => {
+  const [vote, setVote] = useState(0);
+  const handleVoteIncrement = () => {
+    setVote((vote) => vote + 1);
+  }
+  const handleVoteDecrement = () => {
+    const decrementedVote = vote === 0 ? 0 : vote - 1;
+    setVote(decrementedVote);
+  }
   const urlId = video.url.slice(32);
   const formatTitle = (title) => {
     const length = title.length;
@@ -17,6 +26,11 @@ const Video = ({ videos, setVideos, video, index }) => {
         <h4>{formatTitle(video.title)}</h4>
         <div>
           <h5>Rating: {video.rating}</h5>
+        </div>
+        <div className='videoVote'>
+          <FaThumbsUp onClick={handleVoteIncrement} className='iconVote'/>
+          <h4>{vote} {vote === 0 ? `Vote` : `Votes`}</h4>
+          <FaThumbsDown onClick={handleVoteDecrement} className='iconVote'/>
         </div>
         <div>
           <iframe
