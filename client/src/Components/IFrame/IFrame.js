@@ -9,7 +9,6 @@ const IFrame = ({ video }) => {
       width="300"
       height="192"
       frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />
   );
