@@ -52,7 +52,7 @@ app.get("/:id", (req, res) => {
   );
 });
 
-// POST endpoint `/` to add new video content with valid field check
+// POST endpoint `/` to add new video content with valid field / error check
 app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;

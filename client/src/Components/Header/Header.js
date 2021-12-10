@@ -7,7 +7,7 @@ const Header = () => {
     <header className="App-header">
       <Box
         sx={{
-          height: 100,
+          height: 220,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
