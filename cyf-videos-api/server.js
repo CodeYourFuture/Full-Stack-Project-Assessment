@@ -22,7 +22,8 @@ const pool = new Pool({
 app.get("/", function (req, res) {
   let order = req.query.order;
   let query;
-  if (order === "asc") query = "SELECT * FROM videos order by rating";
+    if (order === "asc")
+        query = "SELECT * FROM videos order by rating asc";
   else query = "SELECT * FROM videos order by rating desc";
 
   pool
@@ -33,3 +34,23 @@ app.get("/", function (req, res) {
   )
     .catch((e) => console.error(e));
 });
+
+
+app.get("/:id", (req, res) => {
+    let videoId = Number(req.params.id);
+    
+    const query = "select * from videos where id=$1"
+    //let result = data.find((video) => video.id === videoId);
+ 
+    pool
+      .query(query, [videoId])
+      .then((result) => {
+        if (result.rowCount > 0) res.status(200).json(result.rows);
+        else
+          res.status(404).json({
+            result: "failure",
+            message: "Video could not be found",
+          });
+      })
+      .catch((e) => console.error(e));
+})
