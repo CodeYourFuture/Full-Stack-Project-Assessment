@@ -20,21 +20,20 @@ app.use(express.json());
 
 //GET endpoint `/` to retrieve the complete and sorted video list
 app.get("/", (req, res) => {
-  pool.query("SELECT * FROM youtube_videos").then((result) => {
-    if (result.rows.length <= 0) {
-      res
-        .status(400)
-        .json({ result: "failure", message: "unable to retrieve video list" });
-    } else {
-      const sortOrder = req.query.order;
-      const orderedData = [...result.rows];
+  const sortOrder = req.query.order;
 
-      sortOrder === "asc"
-        ? orderedData.sort((v1, v2) => v1.rating - v2.rating)
-        : orderedData.sort((v1, v2) => v2.rating - v1.rating);
+  const allVideosSortedQuery =
+    sortOrder === "asc"
+      ? "SELECT * FROM youtube_videos ORDER BY rating ASC"
+      : "SELECT * FROM youtube_videos ORDER BY rating DESC";
 
-      res.status(200).json(orderedData);
-    }
+  pool.query(allVideosSortedQuery).then((result) => {
+    result.rows.length <= 0
+      ? res.status(400).json({
+          result: "failure",
+          message: "unable to retrieve video list",
+        })
+      : res.status(200).json(result.rows);
   });
 });
 
