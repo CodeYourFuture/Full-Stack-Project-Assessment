@@ -68,7 +68,7 @@ app.post("/", function (req, res) {
     let count;
     let query;
   let isValid = isvalid(newvideo);
-    //if (isValid) {
+    if (isValid) {
         // videos.push(newvideo);
         // query = 'select * from videos';
         // pool.query(query).then(result => count = result.rowCount);
@@ -80,7 +80,8 @@ app.post("/", function (req, res) {
                 pool.query(query, [title]).then(result =>
                     res.status(200).json({ 'id': result.rows })).catch(e => console.error(e))
             } ).catch();
- //   }
+ 
+    }
      
 
           
