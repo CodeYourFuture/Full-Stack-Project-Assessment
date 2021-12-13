@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Header />
       <AddVideos video={video} setVideo={setVideo} />
-      <div id="container">
+      <div id="cards-container">
         <Cards video={video} setVideo={setVideo} />
       </div>
     </div>

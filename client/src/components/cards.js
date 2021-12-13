@@ -13,7 +13,7 @@ const Cards = (props) => {
   };
 
   return (
-    <div className="videoCards">
+    <div className="video-cards">
       {props.video.map((eachVideo, index) => (
         <div className="response" key={index}>
           <h4 className="videoTitle">{eachVideo.title}</h4>
