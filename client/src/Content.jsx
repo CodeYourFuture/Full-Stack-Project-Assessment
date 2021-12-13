@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './content.css';
 import Form from './Form/Form';
 import Video from './Video/Video';
+import Sort from './Sort/Sort';
 
 const Content = () => {
 	const fakeJSON = [
@@ -68,6 +69,53 @@ const Content = () => {
 		},
 	];
 
+	const sort = (way) => {
+		if (way === 'asc') {
+			setData((prev) => {
+				let sorted = [...prev];
+				sorted.sort((a, b) => {
+					let videoA = a.title.toLowerCase();
+					let videoB = b.title.toLowerCase();
+
+					if (videoA < videoB) {
+						return -1;
+					}
+					if (videoA > videoB) {
+						return 1;
+					}
+					return 0;
+				});
+				if (JSON.stringify(sorted) === JSON.stringify(prev)) {
+					sorted = sorted.reverse();
+				}
+				let next = [...sorted];
+				return next;
+			});
+		} else if (way === 'popular') {
+			setData((prev) => {
+				let sorted = [...prev];
+
+				sorted.sort((a, b) => {
+					let videoA = a.rating;
+					let videoB = b.rating;
+
+					if (videoA > videoB) {
+						return -1;
+					}
+					if (videoA < videoB) {
+						return 1;
+					}
+					return 0;
+				});
+				if (JSON.stringify(sorted) === JSON.stringify(prev)) {
+					sorted = sorted.reverse();
+				}
+				let next = [...sorted];
+				return next;
+			});
+		}
+	};
+
 	const [data, setData] = useState(fakeJSON);
 
 	const addNewVideo = (video) => {
@@ -91,6 +139,7 @@ const Content = () => {
 		<div className="container">
 			<h2>Add video</h2>
 			<Form addNewVideo={addNewVideo}></Form>
+			<Sort sort={sort}></Sort>
 			<div className="video-section-wrap">
 				{data.map((video) => {
 					return (
@@ -102,6 +151,8 @@ const Content = () => {
 							title={video.title}
 							rating={video.rating}
 							deleteVideo={deleteVideo}
+							time={video.time && video.time}
+							date={video.date && video.date}
 						></Video>
 					);
 				})}

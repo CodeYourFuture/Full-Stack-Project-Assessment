@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './video.css';
 
-const Video = ({ id, youtubeID, title, rating, deleteVideo }) => {
+const Video = ({ id, youtubeID, title, rating, deleteVideo, time, date }) => {
 	const [likeCounter, setLikeCounter] = useState(rating);
 
 	const handlePlusOne = () => {
@@ -34,6 +34,7 @@ const Video = ({ id, youtubeID, title, rating, deleteVideo }) => {
 			></iframe>
 			<div className="info-wrap">
 				<h3 className="video-title">{title}</h3>
+
 				<div className="counter-wrap">
 					<div className="counter-inner">
 						<svg
@@ -61,6 +62,13 @@ const Video = ({ id, youtubeID, title, rating, deleteVideo }) => {
 					</span>
 				</div>
 			</div>
+			{date && (
+				<div className="adding-time-date">
+					Added:
+					<div className="adding-time">{time && time},</div>
+					<div className="adding-date">{date && date}</div>
+				</div>
+			)}
 		</div>
 	);
 };

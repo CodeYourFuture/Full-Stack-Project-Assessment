@@ -3,6 +3,8 @@
 	/* height: 300px; */
 	margin: 0 15px;
 	margin-bottom: 30px;
+	display: flex;
+	flex-direction: column;
 }
 
 .info-wrap {
@@ -46,4 +48,13 @@
 
 .delete-btn:active {
 	color: rgb(180, 9, 9);
+}
+
+.adding-time-date {
+	display: flex;
+	font-size: 14px;
+}
+
+.adding-time {
+	margin: 0 10px;
 }
