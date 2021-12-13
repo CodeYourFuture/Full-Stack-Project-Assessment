@@ -1,38 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Cards = ({ data }) => {
-    const id = data.url.substring(data.url.indexOf("=") + 1);
-    const removeVideo = (event) => {
-      event.preventDefault();
-    };
-    return (
-      <div className="videoCards">
-        <h4 className="videoTitle">{data.title}</h4>
-        <iframe
-          width="560"
-          height="315"
-          src={`https://www.youtube.com/embed/${id}`}
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-        <div className="votes">
-          <span id="thumbsUp">
-            <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
-          </span>
-          <span id="votes-numb">
-            <i>votes-numb</i>
-          </span>
-          <span id="thumbsDown">
-            <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
-          </span>
+const Cards = (props) => {
+  
+  const [vote, setVote] = useState(0);
+  // const [video, setVideo] = useState(true);
+
+  // const data = props.video.url.substring(props.video.url.indexOf("=") + 1);
+
+  const handleDelete = (id) => {
+    const newData = props.video.filter((e) => e.id !== id);
+    props.setVideo(newData);
+  };
+
+  return (
+    <div className="videoCards">
+      {props.video.map((eachVideo, index) => (
+        <div className="response" key={index}>
+          <h4 className="videoTitle">{eachVideo.title}</h4>
+
+          <iframe
+            width="300"
+            height="192"
+            src={`https://www.youtube.com/embed/${eachVideo.url.substring(
+              eachVideo.url.indexOf("=") + 1
+            )}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+
+          <div className="votes">
+            <span
+              id="thumbsUp"
+              aria-label="Like Video"
+              onClick={() => setVote(vote + 1)}
+            >
+              <i className="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+            </span>
+
+            <span id="votes-numb">{vote} Votes</span>
+
+            <span
+              id="thumbsDown"
+              aria-label="Dislike"
+              onClick={() => setVote(vote - 1)}
+            >
+              <i className="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              id="remove"
+              onClick={() => handleDelete(eachVideo.id)}
+            >
+              Remove
+            </button>
+          </div>
         </div>
-        <button id="remove" onClick={removeVideo}>
-          Remove
-        </button>
-      </div>
-    );
-}
+      ))}
+    </div>
+  );
+};
 
 export default Cards;

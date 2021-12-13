@@ -1,16 +1,19 @@
+import React, { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
-import Cards from "./components/cards";
+import Cards from "./components/Cards";
 import sampleData from "./data/sampleData.json";
 
+
 function App() {
+
+  const [video, setVideo] = useState(sampleData)
+
   return (
     <div className="App">
       <Header />
-      <div className="container">
-        {sampleData.map((video, index) => (
-          <Cards key={index} data={video} />
-        ))}
+      <div id="container">
+        <Cards video={video} setVideo={setVideo}/>
       </div>
     </div>
   );
