@@ -1,0 +1,49 @@
+.video-wrap {
+	width: 350px;
+	/* height: 300px; */
+	margin: 0 15px;
+	margin-bottom: 30px;
+}
+
+.info-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.video-title {
+	text-align: left;
+}
+
+.counter-wrap {
+	display: flex;
+	flex-direction: column;
+	margin-left: 15px;
+}
+
+.counter-inner {
+	/* flex: 0 0 100px; */
+	display: flex;
+	align-items: center;
+	font-size: 24px;
+	font-weight: bold;
+	color: green;
+	margin-bottom: 10px;
+}
+
+.like-counter {
+	margin: 0 10px;
+}
+
+.delete-btn {
+	cursor: pointer;
+	display: contents;
+}
+
+.delete-btn:hover {
+	color: red;
+}
+
+.delete-btn:active {
+	color: rgb(180, 9, 9);
+}
