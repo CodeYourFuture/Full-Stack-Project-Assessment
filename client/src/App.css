@@ -1,3 +1,10 @@
-.App {
-  text-align: center;
+
+.nav-color{
+  background-color: #194666 !important;
+  text-align: center !important;
+
+ 
+}
+.div-cart{
+  box-shadow: 0 0px 15px rgba(23, 92, 97, 0.5);
 }
