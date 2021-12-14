@@ -2,11 +2,12 @@ import React, {useState} from 'react'
 
 
 function Votes({vote}) {
-
+    
     const [votes, setVotes] = useState(vote);
+    console.log(votes)
    
 
-    const increaseVote = ()=>setVotes(votes +1);
+    const increaseVote = ()=>setVotes(Number(votes) + 1);
     const decreaseVote = ()=>{if(votes>0) setVotes(votes -1)};
   
     return (

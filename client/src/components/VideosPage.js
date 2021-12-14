@@ -10,6 +10,7 @@ function VideosPage({videos, setVideos}) {
             <Title/>
            <div className="container">
            <Search videos={videos} setVideos={setVideos} />
+           
             <Videos videos={videos} setVideos={setVideos}/>    
            </div> 
         </div>

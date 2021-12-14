@@ -5,8 +5,12 @@ function Search({videos,setVideos}) {
 
     function handleSearchInput(event) {
         const searchResualt = videos.filter( video => video.title.toLowerCase().includes(event.target.value.toLowerCase()))
+      console.log('Hello');
+      console.log(event.target.value);
+
         setVideos(searchResualt)
  
+      
       }
      
     
