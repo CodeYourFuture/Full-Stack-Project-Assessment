@@ -1,11 +1,22 @@
+import React, { useState } from "react";
 import "./App.css";
+import Header from "./components/Header";
+import Cards from "./components/Cards";
+import sampleData from "./data/sampleData.json";
+import AddVideos from "./components/AddVideos";
+
 
 function App() {
+
+  const [video, setVideo] = useState(sampleData)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <AddVideos video={video} setVideo={setVideo} />
+      <div id="cards-container">
+        <Cards video={video} setVideo={setVideo} />
+      </div>
     </div>
   );
 }
