@@ -8,7 +8,7 @@ const Buttons = () => {
     setTotalVotes(totalVotes + 1);
   };
   const decreaseVote = () => {
-    if (totalVotes >= 0) {
+    if (totalVotes > 0) {
       setTotalVotes(totalVotes - 1);
     }
   };
@@ -16,19 +16,27 @@ const Buttons = () => {
   return (
     <div>
       <div className="btn-container">
-        <FontAwesomeIcon
-          icon={faThumbsUp}
-          size="3x"
-          onClick={increaseVote}
-          style={{ color: "green" }}
-        />
+        <button>
+          <FontAwesomeIcon
+            aria-label="button"
+            role="button"
+            icon={faThumbsUp}
+            size="3x"
+            onClick={increaseVote}
+            style={{ color: "green" }}
+          />
+        </button>
         <p className="votes">{totalVotes} votes</p>
-        <FontAwesomeIcon
-          icon={faThumbsDown}
-          size="3x"
-          onClick={decreaseVote}
-          style={{ color: "red" }}
-        />
+        <button>
+          <FontAwesomeIcon
+            aria-label="button"
+            role="button"
+            icon={faThumbsDown}
+            size="3x"
+            onClick={decreaseVote}
+            style={{ color: "red" }}
+          />
+        </button>
       </div>
     </div>
   );

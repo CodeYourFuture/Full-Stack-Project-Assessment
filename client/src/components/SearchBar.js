@@ -2,12 +2,13 @@ import React from "react";
 
 const SearchBar = ({ videoData, setVideoData }) => {
   const handleSearch = (e) => {
-    const searchVideoData = videoData.filter((video) =>
-      video.title.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setVideoData(searchVideoData);
+    if (e.target.value.length > 0) {
+      const searchVideoData = videoData.filter((video) =>
+        video.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setVideoData(searchVideoData);
+    }
   };
-
   return (
     <nav className="navbar navbar-light bg-light justify-content-between">
       <form className="form-inline">

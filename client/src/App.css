@@ -13,6 +13,11 @@
 
 .addVideoContainer {
   text-align: center;
+  padding: 1em;
+}
+
+label {
+  padding: 0.5em 0;
 }
 
 .card-group {
@@ -48,4 +53,8 @@
 
 .addVideoContainer {
   text-align: left;
+}
+
+.video {
+  width: 100%;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import AddVideoButton from "./AddVideoButton";
 
 const AddVideo = ({ videoData, setVideoData }) => {
   const [addVideo, setAddVideo] = useState(false);
@@ -17,7 +16,9 @@ const AddVideo = ({ videoData, setVideoData }) => {
 
   return (
     <section className="addVideoContainer">
-      <h4 onClick={() => setAddVideo(!addVideo)}>Add Video</h4>
+      <button className="btn btn-info" onClick={() => setAddVideo(!addVideo)}>
+        <h4>Add Video</h4>
+      </button>
       {addVideo && (
         <form>
           <div>

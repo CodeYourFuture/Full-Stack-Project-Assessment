@@ -14,7 +14,14 @@ const App = () => {
       <Header />
       <SearchBar videoData={videoData} setVideoData={setVideoData} />
       <AddVideo videoData={videoData} setVideoData={setVideoData} />
-      <VideoCards videoData={videoData} setVideoData={setVideoData} />
+      {videoData.map((video, index) => (
+        <VideoCards
+          videoData={videoData}
+          key={index}
+          setVideoData={setVideoData}
+        />
+      ))}
+      {/* <VideoCards videoData={videoData} setVideoData={setVideoData} /> */}
     </div>
   );
 };
