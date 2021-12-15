@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-const videos = require("./exampleresponse.json");
+const videos = require("../exampleresponse.json");
 const pool = new Pool({
   connectionString:
     "postgres://ldrpixfmeztwlo:9b4bcd97ab74ad228f1d136f9b733c627650b25c6c26deb1d755da98f9cb5db1@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/d81o2tq6p6a4ir",
@@ -65,7 +65,7 @@ app.get("/:id", (req, res) => {
     .query(selectQuery, (error, result) => {
       if (result.rows.length === 0) {
         return response.status(404).send({
-          msg: `Video id: ${id} doesn't exist!`,
+          msg: `Video id: ${id} doesn't exist! HEY`,
         
       })
     }
