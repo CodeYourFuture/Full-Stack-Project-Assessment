@@ -25,13 +25,14 @@ const pool = new Pool({
 // GET "/"
 app.get("/", (req, res) => {
   const selectQuery = `SELECT * FROM fullstack_videos ORDER BY rating`;
-  pool.query(selectQuery, (error, result) => {
-    if (error) {
-      console.log(error);
-      return res.status(500).send(`msg: ${error}`);
-    }
-    res.send(result.rows);
-  });
+  pool
+    .query(selectQuery, (error, result) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send(`msg: ${error}`);
+      }
+      res.send(result.rows);
+    });
 });
 
 app.post("/", (req, res) => {
@@ -59,16 +60,16 @@ app.post("/", (req, res) => {
 
 app.get("/:id", (req, res) => {
   const id = +req.params.id;
-  const filterVideos = videos.filter((video) => video.id === id);
-  if (filterVideos.length === 0) {
-    res.json({
-      result: "failure",
-      message: "No videos found",
-    });
-    return;
-  }
-  res.send(filterVideos);
-});
+  const selectQuery =`SELECT from fullstack_videos WHERE id = ${id}`
+  pool
+    .query(selectQuery, (error, result) => {
+      if (result.rows.length === 0) {
+        return response.status(404).send({
+          msg: `Video id: ${id} doesn't exist!`,
+        
+      })
+    }
+})
 
 app.delete("/:id", (req, res) => {
   const id = +req.params.id;
