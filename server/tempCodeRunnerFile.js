@@ -11,10 +11,13 @@ app.listen(port, function () {
 
 const { Pool } = require("pg");
 const pool = new Pool({
+  user: "klzydhijtaanrz",
+
   connectionString:
     "postgres://klzydhijtaanrz:ad95a4e271095b78b9c1b476f66f6524b24ad7f99185033b6487395f3d30d404@ec2-52-54-38-229.compute-1.amazonaws.com:5432/d94341lme3orfj",
   ssl: { rejectUnauthorized: false },
-  user: "klzydhijtaanrz",
+
+  //  "Heroku CLI":"heroku pg:psql postgresql-asymmetrical-78334 --app cyfvideodb",
   host: "ec2-52-54-38-229.compute-1.amazonaws.com",
   database: "d94341lme3orfj",
   password: "ad95a4e271095b78b9c1b476f66f6524b24ad7f99185033b6487395f3d30d404",
@@ -34,16 +37,14 @@ app.get("/", function (req, res) {
 
   let order = req.query.order;
   let query;
-  if (order === "asc")
-    query = "SELECT * FROM videos order by rating";
+  if (order === "asc") query = "SELECT * FROM videos order by rating asc";
   else query = "SELECT * FROM videos order by rating desc";
 
   pool
     .query(query)
     .then((result) => {
-      if (result.rowCount > 0)
-        res.json(result.rows);
-      else res.send("no videos available");
+      if (result.rowCount > 0) res.json(result.rows);
+      else res.send("no data");
     })
     .catch((e) => res.status(500).send("server error"));
 });
