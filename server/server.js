@@ -8,13 +8,14 @@ app.use(express.json());
 app.use(cors());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-const videos = require("./exampleresponse.json");
+const videos = require("../exampleresponse.json");
 const pool = new Pool({
   connectionString:
-"postgres://mhrhxllswldlqf:7a7306697db4035c958b01170453ef4b7c27810455c2edf4e14882db911ea8b7@ec2-34-255-134-200.eu-west-1.compute.amazonaws.com:5432/d893894n24v5ra",  ssl: {
+    "postgres://ldrpixfmeztwlo:9b4bcd97ab74ad228f1d136f9b733c627650b25c6c26deb1d755da98f9cb5db1@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/d81o2tq6p6a4ir",
+  ssl: {
     rejectUnauthorized: false,
   },
-  user: "mhrhxllswldlqf",
+  user: "ldrpixfmeztwlo",
   host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
   database: "dapnscot6ihjdt",
   password: "",
@@ -23,7 +24,15 @@ const pool = new Pool({
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  const selectQuery = `SELECT * FROM fullstack_videos ORDER BY rating`;
+  pool
+    .query(selectQuery, (error, result) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send(`msg: ${error}`);
+      }
+      res.send(result.rows);
+    });
 });
 
 app.post("/", (req, res) => {
@@ -51,16 +60,16 @@ app.post("/", (req, res) => {
 
 app.get("/:id", (req, res) => {
   const id = +req.params.id;
-  const filterVideos = videos.filter((video) => video.id === id);
-  if (filterVideos.length === 0) {
-    res.json({
-      result: "failure",
-      message: "No videos found",
-    });
-    return;
-  }
-  res.send(filterVideos);
-});
+  const selectQuery =`SELECT from fullstack_videos WHERE id = ${id}`
+  pool
+    .query(selectQuery, (error, result) => {
+      if (result.rows.length === 0) {
+        return response.status(404).send({
+          msg: `Video id: ${id} doesn't exist!`,
+        
+      })
+    }
+})
 
 app.delete("/:id", (req, res) => {
   const id = +req.params.id;
