@@ -50,12 +50,12 @@ const VideoDisplay = (prop) => {
         <SearchVideo videos={searched} onsearch={onsearch} />
       </div>{" "}
       <div className="videos">
-        {[...allvideos].map((videos, index) => {
-          return <VideoCard videos={videos}  />;
-        })}
-      </div>
-    </div>
-  );
+      {[...allvideos].map((videos, index) => {
+        return <VideoCard videos={videos} />;
+      })
+      
+      }  </div>
+</div>  );
 };
 
 export default VideoDisplay;
