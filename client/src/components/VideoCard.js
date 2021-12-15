@@ -98,7 +98,9 @@ const VideoCard = (prop) => {
           delete{" "}
         </button>
       </li>
-    </ul> 
+    </ul>
+    
   );
+  visible(false);
 };
 export default VideoCard;
