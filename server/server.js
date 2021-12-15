@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const cors = require(cors);
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 const videos = require("../exampleresponse.json");
 
@@ -12,7 +12,11 @@ app.use(cors);
 
 // GET "/" all videos
 app.get("/", (req, res) => {
-  res.send(videos);
+  if (res.status(200)) {
+    res.send(videos);
+  } else {
+    res.send("error!");
+  }
 });
 
 //Get video by ID

@@ -10,7 +10,7 @@ const SearchBar = ({ videoData, setVideoData }) => {
     }
   };
   return (
-    <nav className="navbar navbar-light bg-light justify-content-between">
+    <nav className="navbar justify-content-between">
       <form className="form-inline">
         <input
           className="form-control mr-sm-2"

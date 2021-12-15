@@ -3,21 +3,15 @@ import Buttons from "./Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-const VideoCards = (props, { videoData, setVideoData }) => {
-  const handleDelete = (id) => {
-    const filteredVideos = videoData.filter((video) => video.id !== id);
-    setVideoData(filteredVideos);
-  };
+const VideoCard = (props) => {
   return (
     <section className="card-group">
-      {/*  {videoData.map((video, index) => ( */}
-      <div className="card" /* key={index} */>
+      <div className="card">
         <iframe
-          className="video"
           width="560"
           height="315"
           title={props.title}
-          src={`https://www.youtube.com/embed/${video.url.split("=")[1]}`}
+          src={`https://www.youtube.com/embed/${props.url.split("=")[1]}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -34,14 +28,13 @@ const VideoCards = (props, { videoData, setVideoData }) => {
               role="button"
               icon={faTrashAlt}
               size="2x"
-              onClick={() => handleDelete(props.id)}
+              onClick={() => props.deleteCard(props.id)}
             />
           </button>
         </div>
       </div>
-      {/* ))} */}
     </section>
   );
 };
 
-export default VideoCards;
+export default VideoCard;

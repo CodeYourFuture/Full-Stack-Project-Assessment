@@ -8,43 +8,39 @@ const AddVideo = ({ videoData, setVideoData }) => {
   const handleAddVideo = (e) => {
     e.preventDefault();
     const newVideoData = {
+      id: Math.floor(Math.random() * 10000),
       title: title,
       url: url,
+      rating: 0,
     };
     setVideoData(videoData.concat(newVideoData));
   };
 
   return (
     <section className="addVideoContainer">
-      <button className="btn btn-info" onClick={() => setAddVideo(!addVideo)}>
-        <h4>Add Video</h4>
+      <button className="btn addVidBtn " onClick={() => setAddVideo(!addVideo)}>
+        <h5>Add Video</h5>
       </button>
       {addVideo && (
         <form>
           <div>
-            <label>
-              Title
-              <input
-                className="input"
-                name="title"
-                type="text"
-                required
-                placeholder="title"
-                onChange={(e) => setTitle(e.target.value)}
-              ></input>
-            </label>
+            <input
+              className="input"
+              name="title"
+              type="text"
+              required
+              placeholder="title"
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
           </div>
           <div>
-            <label>
-              URL
-              <input
-                name="url"
-                type="text"
-                required
-                placeholder="url"
-                onChange={(e) => setUrl(e.target.value)}
-              ></input>
-            </label>
+            <input
+              name="url"
+              type="text"
+              required
+              placeholder="url"
+              onChange={(e) => setUrl(e.target.value)}
+            ></input>
           </div>
           <div>
             <button

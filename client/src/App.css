@@ -1,9 +1,11 @@
 #root {
-  background-color: #181a1b;
+  --dark-mode: #181a1b;
+  --light-text: rgb(232, 230, 227);
+  background-color: var(--dark-mode);
 }
 .App {
   text-align: center;
-  color: rgb(232, 230, 227);
+  color: var(--light-text);
   padding: 1em;
 }
 
@@ -11,13 +13,30 @@
   width: 5em;
 }
 
+nav {
+  background-color: var(--dark-mode);
+  color: var(--light-text);
+}
+
 .addVideoContainer {
   text-align: center;
   padding: 1em;
 }
 
-label {
-  padding: 0.5em 0;
+.addVidBtn {
+  background-color: #0dcaf0;
+  color: var(--light-text);
+  text-shadow: 1px 1px var(--dark-mode);
+}
+
+input {
+  margin: 0.25em 0;
+}
+
+button {
+  background-color: var(--dark-mode);
+  border: transparent;
+  color: var(--light-text);
 }
 
 .card-group {
@@ -25,8 +44,11 @@ label {
   flex-flow: row wrap;
   justify-content: space-around;
 }
+
 .card {
-  min-width: 28%;
+  background-color: var(--dark-mode);
+  color: var(--light-text);
+  width: 35%;
   align-items: center;
 }
 
@@ -53,8 +75,4 @@ label {
 
 .addVideoContainer {
   text-align: left;
-}
-
-.video {
-  width: 100%;
 }
