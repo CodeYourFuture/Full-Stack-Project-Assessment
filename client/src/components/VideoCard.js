@@ -10,13 +10,13 @@ const VideoCard = (prop) => {
   
   const [visible, setVisible] = useState(false);
 
-  const deleteVideo = (id) => {
+  const deleteVideo = () => {
     console.log("hi")
-    fetch(`https://shrouded-spire-27599.herokuapp.com/${id}`, {
+    fetch(`https://shrouded-spire-27599.herokuapp.com/${videos.id}`, {
       method: "delete",
     })
       .then((res) => res.json())
-      .then( )
+      .then()
       .catch((error) => error);
     setVisible(true);
   };
@@ -90,7 +90,7 @@ const VideoCard = (prop) => {
       <li>
         <button
           onClick={() => {
-            deleteVideo(videos.id);
+            deleteVideo();
             
           }}
         >

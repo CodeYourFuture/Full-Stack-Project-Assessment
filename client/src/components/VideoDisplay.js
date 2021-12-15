@@ -6,9 +6,8 @@ import "../App.css";
 
 const VideoDisplay = (prop) => {
   const [allvideos, setAllVideos] = useState([]);
-
   const [searched, setsearchedVideos] = useState([]);
-
+  let [orderValue, setOrderValue] = useState('desc');
   const inputVideo = (newvideo, id) => {
     if (id === 0) setAllVideos(newvideo);
     else {
@@ -16,12 +15,13 @@ const VideoDisplay = (prop) => {
     }
   };
   useEffect(() => {
-    let o;
-    if (prop.order === true) o = "asc";
+
+    if (prop.order === true)
+      setOrderValue("asc");
     else {
-      o = "";
+       setOrderValue("desc");
     }
-    fetch(`https://shrouded-spire-27599.herokuapp.com/?order=${o}`, {
+    fetch(`https://shrouded-spire-27599.herokuapp.com/?order=${orderValue}`, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods":
