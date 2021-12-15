@@ -3,6 +3,7 @@ import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 import VideoCard from "./VideoCard";
 import "../App.css";
+import { formHelperTextClasses } from "@mui/material";
 
 const VideoDisplay = (prop) => {
   const [allvideos, setAllVideos] = useState([]);
@@ -50,7 +51,7 @@ const VideoDisplay = (prop) => {
       </div>{" "}
       <div className="videos">
         {[...allvideos].map((videos, index) => {
-          return <VideoCard videos={videos} />;
+          return <VideoCard videos={videos}  />;
         })}
       </div>
     </div>

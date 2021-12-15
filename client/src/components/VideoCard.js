@@ -1,3 +1,5 @@
+
+import { FormHelperText } from "@mui/material";
 import { useState } from "react";
 
 const VideoCard = (prop) => {
@@ -9,16 +11,18 @@ const VideoCard = (prop) => {
   };
   
   const [visible, setVisible] = useState(false);
-
+  
   const deleteVideo = () => {
     console.log("hi")
     fetch(`https://shrouded-spire-27599.herokuapp.com/${videos.id}`, {
       method: "delete",
     })
       .then((res) => res.json())
-      .then(() => { setVisible(true) })
+      .then((result) => { })
       .catch((error) => error);
-   
+    
+    let a = document.getElementById(prop.videos.id);
+    a.style.display = 'none';
   };
 
   const downVotes = (id) => {
@@ -35,10 +39,10 @@ const VideoCard = (prop) => {
     prop.videos.url.length
   );
   return (
-    <ul
+    <ul id={prop.videos.id}
       key={prop.key}
-      style={{ display: visible ? "none" : "flex" }}
-      className="Video-display"
+      display='flex'
+       className='Video-display'
     >
       <li>{prop.videos.title} </li>
       <li>

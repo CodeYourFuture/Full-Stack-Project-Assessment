@@ -81,7 +81,7 @@ justify-items: center;
  align-items: center;
   display:flex;
 }
-
+.temp{display:none}
 .add{align-items: center;
 display: flex;
 margin:auto;
