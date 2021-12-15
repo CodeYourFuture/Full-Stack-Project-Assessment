@@ -2,20 +2,17 @@ import { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 import VideoCard from "./VideoCard";
+import "../App.css";
 
 const VideoDisplay = (prop) => {
-  
   const [allvideos, setAllVideos] = useState([]);
-  
+
   const [searched, setsearchedVideos] = useState([]);
- 
 
   const inputVideo = (newvideo, id) => {
-    if (id === 0)
-      setAllVideos(newvideo);
+    if (id === 0) setAllVideos(newvideo);
     else {
-      
-     setAllVideos([...allvideos].concat(newvideo));
+      setAllVideos([...allvideos].concat(newvideo));
     }
   };
   useEffect(() => {
@@ -24,24 +21,26 @@ const VideoDisplay = (prop) => {
     else {
       o = "";
     }
-    fetch(`http://127.0.0.1:5000/?order=${o}`)
+    fetch(`https://shrouded-spire-27599.herokuapp.com/?order=${o}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
           setAllVideos(data);
-         
           setsearchedVideos(data);
         }
       })
       .catch((e) => console.log(e));
   }, [prop.order]);
   const onsearch = (videoSearch) => {
-   setAllVideos(videoSearch)
+    setAllVideos(videoSearch);
   };
-
-
- 
- 
 
   return (
     <div className="render">
@@ -51,8 +50,7 @@ const VideoDisplay = (prop) => {
       </div>{" "}
       <div className="videos">
         {[...allvideos].map((videos, index) => {
-          
-          return (<VideoCard videos={videos}/>)
+          return <VideoCard videos={videos} />;
         })}
       </div>
     </div>

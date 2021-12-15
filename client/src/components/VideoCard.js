@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const VideoCard = (prop) => {
   let videos = prop.videos;
   const upVotes = (id) => {
@@ -9,16 +10,15 @@ const VideoCard = (prop) => {
   
   const [visible, setVisible] = useState(false);
 
-  const deleteVideo = () => {
-    fetch(`http://127.0.0.1:5000/${videos.id}`, {
+  const deleteVideo = (id) => {
+    console.log("hi")
+    fetch(`https://shrouded-spire-27599.herokuapp.com/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())
-      .then((newVideos) => {
-        setVisible(true);
-        
-      })
+      .then( )
       .catch((error) => error);
+    setVisible(true);
   };
 
   const downVotes = (id) => {
@@ -28,12 +28,14 @@ const VideoCard = (prop) => {
   };
    
   let [voting, setVoting] = useState(0);
-
+  let date = new Date(Date.parse(prop.videos.daytime));
+  console.log(date);
   let id = prop.videos.url.substr(
     prop.videos.url.length - 11,
     prop.videos.url.length
   );
   return (
+  
     <ul
       key={prop.key}
       style={{ display: visible ? "none" : "flex" }}
@@ -74,21 +76,21 @@ const VideoCard = (prop) => {
       </li>
       <li>
         On{" "}
-        {prop.videos.hasOwnProperty("date")
-          ? prop.videos.date
+        {prop.videos.hasOwnProperty("daytime")
+          ? date.toLocaleDateString('en-Gb')
           : new Date().toLocaleDateString("en-Gb")}
       </li>
       <li>
         At{" "}
-        {prop.videos.hasOwnProperty("time")
-          ? prop.videos.time
+        {prop.videos.hasOwnProperty("daytime")
+          ? date.toLocaleTimeString({ timeZone: "UTC" })
           : new Date().toLocaleTimeString({ timeZone: "UTC" })}
       </li>
 
       <li>
         <button
           onClick={() => {
-            deleteVideo();
+            deleteVideo(videos.id);
             
           }}
         >
@@ -96,7 +98,7 @@ const VideoCard = (prop) => {
           delete{" "}
         </button>
       </li>
-    </ul>
+    </ul> 
   );
 };
 export default VideoCard;

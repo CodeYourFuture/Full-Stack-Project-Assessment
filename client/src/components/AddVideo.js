@@ -28,9 +28,16 @@ const AddVideo = (prop) => {
     let date = new Date().toLocaleDateString("en-GB");
     let time = new Date().toLocaleTimeString({ timeZone: "UTC" });
     e.preventDefault();
-    fetch("http://127.0.0.1:5000/", {
-      method: "post",
+    fetch("https://shrouded-spire-27599.herokuapp.com/", {
+      
+      method: "POST",
+
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+
         Accept: "application/json",
         "Content-type": "application/json",
       },
@@ -42,6 +49,7 @@ const AddVideo = (prop) => {
           prop.input(newVideos.data, 0);
           window.alert(newVideos.message);
         } else {
+          console.log(newVideos.id);
           prop.input(
             [
               {
@@ -49,8 +57,7 @@ const AddVideo = (prop) => {
                 title: title,
                 url: url,
                 rating: 0,
-                date: date,
-                time: time,
+               
               },
             ],
             newVideos.id
