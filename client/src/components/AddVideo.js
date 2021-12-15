@@ -25,6 +25,7 @@ const AddVideo = ({ videoData, setVideoData }) => {
         <form>
           <div>
             <input
+              aria-label="title"
               className="input"
               name="title"
               type="text"
@@ -35,6 +36,7 @@ const AddVideo = ({ videoData, setVideoData }) => {
           </div>
           <div>
             <input
+              aria-label="url"
               name="url"
               type="text"
               required

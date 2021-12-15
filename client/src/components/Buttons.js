@@ -16,9 +16,8 @@ const Buttons = () => {
   return (
     <div>
       <div className="btn-container">
-        <button>
+        <button aria-label="up-vote">
           <FontAwesomeIcon
-            aria-label="button"
             role="button"
             icon={faThumbsUp}
             size="3x"
@@ -27,9 +26,8 @@ const Buttons = () => {
           />
         </button>
         <p className="votes">{totalVotes} votes</p>
-        <button>
+        <button aria-label="down-vote">
           <FontAwesomeIcon
-            aria-label="button"
             role="button"
             icon={faThumbsDown}
             size="3x"

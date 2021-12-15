@@ -8,6 +8,7 @@ const SearchBar = ({ videoData, setVideoData }) => {
       );
       setVideoData(searchVideoData);
     }
+    return setVideoData(videoData);
   };
   return (
     <nav className="navbar justify-content-between">
