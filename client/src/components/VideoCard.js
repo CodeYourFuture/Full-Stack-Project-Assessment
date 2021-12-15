@@ -16,9 +16,9 @@ const VideoCard = (prop) => {
       method: "delete",
     })
       .then((res) => res.json())
-      .then()
+      .then(() => { setVisible(true) })
       .catch((error) => error);
-    setVisible(true);
+   
   };
 
   const downVotes = (id) => {
@@ -35,7 +35,6 @@ const VideoCard = (prop) => {
     prop.videos.url.length
   );
   return (
-  
     <ul
       key={prop.key}
       style={{ display: visible ? "none" : "flex" }}
@@ -62,7 +61,6 @@ const VideoCard = (prop) => {
           <i className="fas fa-thumbs-down"></i>
         </button>
       </li>
-
       <li>
         <iframe
           title={`${prop.videos.title}`}
@@ -77,7 +75,7 @@ const VideoCard = (prop) => {
       <li>
         On{" "}
         {prop.videos.hasOwnProperty("daytime")
-          ? date.toLocaleDateString('en-Gb')
+          ? date.toLocaleDateString("en-Gb")
           : new Date().toLocaleDateString("en-Gb")}
       </li>
       <li>
@@ -86,21 +84,19 @@ const VideoCard = (prop) => {
           ? date.toLocaleTimeString({ timeZone: "UTC" })
           : new Date().toLocaleTimeString({ timeZone: "UTC" })}
       </li>
-
       <li>
         <button
           onClick={() => {
             deleteVideo();
-            
           }}
         >
           {" "}
           delete{" "}
         </button>
       </li>
+      {}
     </ul>
-    
   );
-  visible(false);
+  
 };
 export default VideoCard;
