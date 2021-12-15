@@ -1,5 +1,5 @@
 import React from "react";
-
+import Voting from "./voting";
 const Videolink = (props) => {
   return (
     <div className="onevideo">
@@ -12,6 +12,7 @@ const Videolink = (props) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
+      <Voting />
     </div>
   );
 };
