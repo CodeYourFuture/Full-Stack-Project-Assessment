@@ -12,27 +12,11 @@ const VideoCard = (prop) => {
   
   const [visible, setVisible] = useState(false);
   
-  const deleteVideo = (e) => {
-    let a = document.getElementById(prop.videos.id);
-    a.style.display = "none";
+ 
+
     
-    console.log("hi")
-    fetch(`https://shrouded-spire-27599.herokuapp.com/${videos.id}`, {
-      method: "delete",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.id === {}) {
-           
-          }
-        
-      })
     
-      .catch((error) => error);
-     console.log(e);
-      
-     
-  };
+
 
   const downVotes = (id) => {
    
@@ -99,8 +83,8 @@ const VideoCard = (prop) => {
       </li>
       <li>
         <button
-          onClick={(e) => {
-            deleteVideo(e);
+          onClick={() => {
+            prop.handledelete(prop.videos.id);
           }}
         >
           {" "}

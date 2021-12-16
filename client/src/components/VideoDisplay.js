@@ -15,6 +15,22 @@ const VideoDisplay = (prop) => {
       setAllVideos([...allvideos].concat(newvideo));
     }
   };
+
+  const deletevideos = (id) =>
+  {
+    console.log(id)
+   setAllVideos([...allvideos].filter((video)=>video.id!==id))
+  fetch(`https://shrouded-spire-27599.herokuapp.com/${id}`, {
+    method: "delete",
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      
+    })
+
+    .catch((error) => error);
+  
+  };
   useEffect(() => {
 
     if (prop.order === true)
@@ -51,7 +67,7 @@ const VideoDisplay = (prop) => {
       </div>{" "}
       <div className="videos">
       {[...allvideos].map((videos, index) => {
-        return <VideoCard videos={videos} />;
+        return <VideoCard videos={videos} handledelete={deletevideos} />;
       })
       
       }  </div>
