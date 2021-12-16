@@ -65,7 +65,7 @@ app.get("/:id", (req, res) => {
     .query(selectQuery, (error, result) => {
       if (result.rows.length === 0) {
         return response.status(404).send({
-          msg: `Video id: ${id} doesn't exist! HEY`,
+          msg: `Video id: ${id} doesn't exist!`,
         
       })
     }
