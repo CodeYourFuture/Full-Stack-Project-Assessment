@@ -7,6 +7,7 @@ import SearchVideo from "./SearchVideo";
 const AllVideoContainer = () => {
   //--------------------------use fetch API from server-----------------------------//
  const [allVideo, setAllVideo] = useState(exampleresponse);
+
    useEffect(()=>{
      FetchData().then((data) => {
        setAllVideo(data);

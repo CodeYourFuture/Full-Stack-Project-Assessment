@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 const SearchVideo = ({ allVideo,setAllVideo}) => {
-  const [searchVideo, setSearchVideo] = useState("");
+ const [searchVideo, setSearchVideo] = useState("");
   const HandleOnChangeSearch = (event) => {
     event.preventDefault();
     setSearchVideo(event.target.value);
