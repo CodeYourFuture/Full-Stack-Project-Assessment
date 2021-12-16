@@ -3,11 +3,11 @@ import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 import VideoCard from "./VideoCard";
 import "../App.css";
-import { formHelperTextClasses } from "@mui/material";
+
 
 const VideoDisplay = (prop) => {
   const [allvideos, setAllVideos] = useState([]);
-  const [searched, setsearchedVideos] = useState([]);
+
   let [orderValue, setOrderValue] = useState('desc');
   const inputVideo = (newvideo, id) => {
     if (id === 0) setAllVideos(newvideo);
@@ -50,20 +50,22 @@ const VideoDisplay = (prop) => {
       .then((data) => {
         if (data) {
           setAllVideos(data);
-          setsearchedVideos(data);
+          
         }
       })
       .catch((e) => console.log(e));
   }, [prop.order]);
   const onsearch = (videoSearch) => {
-    setAllVideos(videoSearch);
+    console.log(videoSearch);
+  setAllVideos([...allvideos].filter((video) => videoSearch.includes(video)))
+    
   };
 
   return (
     <div className="render">
       <div>
         <AddVideo input={inputVideo} video={allvideos} />
-        <SearchVideo videos={searched} onsearch={onsearch} />
+        <SearchVideo videos={allvideos} onsearch={onsearch} />
       </div>{" "}
       <div className="videos">
       {[...allvideos].map((videos, index) => {

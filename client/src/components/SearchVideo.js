@@ -7,16 +7,19 @@ const SearchVideo = (prop) => {
 
   
   const handleChange = (e) => {
-    setVideoSearch(e.target.value.toLowerCase());
+  
+      setVideoSearch(e.target.value);
   };
   
 
   let result = videos.filter((video) => {
-    return (
-      video.title.toLowerCase().includes(videoSearch) ||
-      video.url.toLowerCase().includes(videoSearch)
-    )
-     
+    
+      return (
+        video.title.toLowerCase().includes(videoSearch.toLowerCase()) ||
+        video.url.toLowerCase().includes(videoSearch.toLowerCase())
+      )
+  
+    
   });
 
   return (
@@ -30,7 +33,7 @@ const SearchVideo = (prop) => {
               type="text"
               name="title"
               onChange={(e) => handleChange(e)}
-              required
+              
             />
           </label>
         </div>
