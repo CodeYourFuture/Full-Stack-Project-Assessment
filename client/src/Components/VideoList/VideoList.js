@@ -1,7 +1,8 @@
 import React from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import { Grid } from "@mui/material";
-import { Container } from "@mui/material";
+import { Container } from "@mui/material"
+import ProgressSpinner from "../ProgressSpinner/ProgressSpinner"
 
 const VideoList = ({ videos, setVideos, searchTerm }) => {
   const deleteVideoHandler = (id) => {
@@ -39,7 +40,7 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
             ))}
         </Grid>
       ) : (
-        <span>Loading Videos...</span>
+        <ProgressSpinner />
       )}
     </Container>
   );
