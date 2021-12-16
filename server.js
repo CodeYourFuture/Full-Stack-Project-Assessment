@@ -11,13 +11,13 @@ app.use(cors());
 const videos = require("../exampleresponse.json");
 const pool = new Pool({
   connectionString:
-"postgres://ldrpixfmeztwlo:9b4bcd97ab74ad228f1d136f9b733c627650b25c6c26deb1d755da98f9cb5db1@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/d81o2tq6p6a4ir",  ssl: {
+"postgres://fmuuxodppmzogp:946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2@ec2-34-250-92-138.eu-west-1.compute.amazonaws.com:5432/dfosgel6olppk3",  ssl: {
     rejectUnauthorized: false,
   },
-  user: "ldrpixfmeztwlo",
+  user: "fmuuxodppmzogp",
   host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
-  database: "dapnscot6ihjdt",
-  password: "",
+  database: "dfosgel6olppk3",
+  password: "946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2",
   port: 5432,
 });
 
@@ -30,8 +30,8 @@ app.get("/", (req, res) => {
         console.log(error)
         return res.status(500).send(`msg: ${error}`);
       }
-      // res.send(result.rows);
-      res.send("test string")
+      res.send(result.rows);
+      // res.send("test string")
     });
 });
 
@@ -67,25 +67,13 @@ app.get("/:id", (req, res) => {
       if (result.rows.length === 0) {
         return response.status(404).send({
           msg: `Video id: ${id} doesn't exist!`,
-        
-      })
+        })
     }
-})
-  
-// TEST enquiry <<<<<<---------
+   })
+  })
+    
 
-const selectQuery = `SELECT * FROM videos WHERE id = ${videoId}`;
-pool.query(selectQuery, (error, result) => {
-  if (error) {
-    return response.status(500).send({ msg: "Database ERROR" });
-  }
-  if (result.rows.length === 0) {
-    return response.status(404).send({
-      msg: `Video with id: ${videoId} does not exist !!!`,
-    });
-  }
-  response.send(result.rows);
-});
+
 
 app.delete("/:id", (req, res) => {
   const id = +req.params.id;
