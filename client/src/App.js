@@ -6,7 +6,7 @@ import AllVideoCards from './components/AllVideoCards';
 
 function App() {
   const [videos, setVideos] = useState([]);
-
+// fetch data
   const fetchData = () => {
     fetch(`https://gulnihal-fullstack-project.herokuapp.com/`)
       .then((res) => res.json())
