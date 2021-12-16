@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import { Container } from "@mui/material";
 
 const VideoList = ({ videos, setVideos, searchTerm }) => {
-  const deleteVideo = (id) => {
+  const deleteVideoHandler = (id) => {
     const filteredVideos = videos.filter((video) => video.id !== id);
 
     fetch(`http://localhost:5000/${id}`, { method: "delete" }).then((res) =>
@@ -34,12 +34,12 @@ const VideoList = ({ videos, setVideos, searchTerm }) => {
                 xl={3}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-                <VideoCard video={video} deleteVideo={deleteVideo} />
+                <VideoCard video={video} deleteVideoHandler={deleteVideoHandler} />
               </Grid>
             ))}
         </Grid>
       ) : (
-        <span>Loading...</span>
+        <span>Loading Videos...</span>
       )}
     </Container>
   );

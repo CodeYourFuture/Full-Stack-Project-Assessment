@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
+import FormTextField from "../FormTextField/FormTextField";
 import moment from "moment";
 
-const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
+const AddVideo = ({ setDrawerToggle, videos, setVideos }) => {
   const [newUrl, setNewUrl] = useState("");
   const [newTitle, setNewTitle] = useState("");
 
@@ -42,7 +42,7 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
         .then((res) => {
           newVideo.id = res.id;
           setVideos(videos.concat(newVideo));
-          toggleDrawer(false);
+          setDrawerToggle(false);
         });
     } else {
       alert("Invalid YouTube URL");
@@ -52,23 +52,15 @@ const AddVideo = ({ toggleDrawer, videos, setVideos }) => {
   return (
     <form onSubmit={handleSubmit}>
       <FormControl>
-        <TextField
-          sx={{ m: 1 }}
-          id="title-input"
-          label="Title"
-          variant="outlined"
-          size="small"
+        <FormTextField
+          id={"title-input"}
+          label={"Title"}
           onChange={(e) => setNewTitle(e.target.value)}
-          required
         />
-        <TextField
-          sx={{ m: 1 }}
-          id="url-input"
-          label="Url"
-          variant="outlined"
-          size="small"
+        <FormTextField
+          id={"url-input"}
+          label={"Url"}
           onChange={(e) => setNewUrl(e.target.value)}
-          required
         />
         <Button
           sx={{ m: 1 }}

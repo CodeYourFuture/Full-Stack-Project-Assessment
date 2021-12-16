@@ -27,14 +27,17 @@ app.get("/", (req, res) => {
       ? "SELECT * FROM youtube_videos ORDER BY rating ASC"
       : "SELECT * FROM youtube_videos ORDER BY rating DESC";
 
-  pool.query(allVideosSortedQuery).then((result) => {
-    result.rows.length <= 0
-      ? res.status(400).json({
-          result: "failure",
-          message: "unable to retrieve video list",
-        })
-      : res.status(200).json(result.rows);
-  });
+  pool
+    .query(allVideosSortedQuery)
+    .then((result) => {
+      result.rows.length <= 0
+        ? res.status(400).json({
+            result: "failure",
+            message: "BAD REQUEST: Unable to retrieve video list",
+          })
+        : res.status(200).json(result.rows);
+    })
+    .catch((e) => res.status(400).send(e));
 });
 
 // GET endpoint `/:id`
@@ -44,7 +47,7 @@ app.get("/:id", (req, res) => {
   if (!Number.isInteger(videoId)) {
     return res.status(400).json({
       result: "failure",
-      message: "BAD REQUEST: invalid input type",
+      message: "BAD REQUEST: Invalid input type",
     });
   }
 
@@ -57,7 +60,8 @@ app.get("/:id", (req, res) => {
             message: `NOT FOUND: No Video with id:${videoId} in list`,
           })
         : res.status(200).json(result.rows);
-    });
+    })
+    .catch((e) => res.status(400).send(e));
 });
 
 // POST endpoint `/` to add new video content with valid field / error check
@@ -78,15 +82,18 @@ app.post("/", (req, res) => {
     VALUES
       ($1, $2, $3, $4) RETURNING id`;
 
-  pool.query(insertNewVideo, [title, url, rating, uploaded]).then((result) => {
-    id = result.rows[0].id;
+  pool
+    .query(insertNewVideo, [title, url, rating, uploaded])
+    .then((result) => {
+      id = result.rows[0].id;
 
-    res.status(201).json({
-      result: "success",
-      message: `CREATED: Video "${title}" was saved with id:${id}`,
-      id: id,
-    });
-  });
+      res.status(201).json({
+        result: "success",
+        message: `CREATED: Video "${title}" was saved with id:${id}`,
+        id: id,
+      });
+    })
+    .catch((e) => res.status(400).send(e));
 });
 
 // DELETE endpoint `/:id`
@@ -96,7 +103,7 @@ app.delete("/:id", (req, res) => {
   if (!Number.isInteger(videoId)) {
     return res.status(400).json({
       result: "failure",
-      message: "BAD REQUEST: invalid input type",
+      message: "BAD REQUEST: Invalid input type",
     });
   }
 
@@ -116,7 +123,7 @@ app.put("/:id", (req, res) => {
   if (!Number.isInteger(videoId)) {
     return res.status(400).json({
       result: "failure",
-      message: "BAD REQUEST: invalid input type",
+      message: "BAD REQUEST: Invalid input type",
     });
   }
 

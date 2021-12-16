@@ -9,14 +9,10 @@ import { Tooltip } from "@mui/material";
 const AddVideoDrawer = ({ videos, setVideos }) => {
   const [toggle, setToggle] = React.useState(false);
 
-  const toggleDrawer = (open) => {
-    setToggle(open);
-  };
-
   const form = () => (
     <Box role="addVideoForm">
       <AddVideo
-        toggleDrawer={toggleDrawer}
+        setDrawerToggle={setToggle}
         videos={videos}
         setVideos={setVideos}
       />
@@ -36,16 +32,12 @@ const AddVideoDrawer = ({ videos, setVideos }) => {
             position: "fixed",
           }}
         >
-          <Fab
-            color="primary"
-            aria-label="add"
-            onClick={() => toggleDrawer(true)}
-          >
+          <Fab color="primary" aria-label="add" onClick={() => setToggle(true)}>
             <AddIcon />
           </Fab>
         </Box>
       </Tooltip>
-      <Drawer open={toggle} onClose={() => toggleDrawer(false)}>
+      <Drawer open={toggle} onClose={() => setToggle(false)}>
         {form()}
       </Drawer>
     </React.Fragment>

@@ -4,7 +4,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { Tooltip } from "@mui/material";
 
 const VideoListSort = ({ videoSortOrder, setVideoSortOrder }) => {
-  const handleVideoSort = () => {
+  const videoSortHandler = () => {
     videoSortOrder === "asc"
       ? setVideoSortOrder("desc")
       : setVideoSortOrder("asc");
@@ -14,7 +14,7 @@ const VideoListSort = ({ videoSortOrder, setVideoSortOrder }) => {
     <Tooltip title="Sort videos" placement="top" arrow>
       <Button
         sx={{ my: 2, mx: 3, lineHeight: "normal" }}
-        onClick={handleVideoSort}
+        onClick={videoSortHandler}
         type="onclick"
         variant="contained"
         size="large"
@@ -29,7 +29,7 @@ const VideoListSort = ({ videoSortOrder, setVideoSortOrder }) => {
           />
         }
       >
-        Sort
+        Sort by votes
       </Button>
     </Tooltip>
   );

@@ -10,17 +10,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Tooltip } from "@mui/material";
 
-const VideoCard = ({ video, deleteVideo }) => {
+const VideoCard = ({ video, deleteVideoHandler }) => {
   const videoUrlId = video.url.split("v=")[1].substring(0, 11);
-  const videoRating = video.rating;
-  const videoTitle = video.title;
-  const uploadTimeAndDate = video.uploaded;
-  const arrayId = video.id;
-
-  const [votes, setVotes] = useState(videoRating);
+  const { id, rating, title, uploaded } = video;
+  const [votes, setVotes] = useState(rating);
 
   const voteHandler = (voteOperator, id) => {
-    let updatedVote = videoRating;
+    let updatedVote = rating;
 
     voteOperator === "+" ? updatedVote++ : updatedVote--;
 
@@ -36,12 +32,12 @@ const VideoCard = ({ video, deleteVideo }) => {
   };
 
   return (
-    <Card sx={{ width: 340, height: 410 }} elevation={6}>
-      <IFrame video={videoUrlId} />
+    <Card sx={{ width: 340, height: 410 }} elevation={4}>
+      <IFrame videoUrlId={videoUrlId} />
       <CardContent>
-        <Tooltip title={videoTitle} placement="top" arrow>
+        <Tooltip title={title} placement="top" arrow>
           <Typography gutterBottom variant="h6" component="div" noWrap={true}>
-            {videoTitle}
+            {title}
           </Typography>
         </Tooltip>
         <Typography
@@ -49,12 +45,14 @@ const VideoCard = ({ video, deleteVideo }) => {
           variant="caption"
           component="div"
         >
-          {uploadTimeAndDate}
+          {uploaded}
         </Typography>
-        <CardActions sx={{ justifyContent: "end", my: 10 }}>
+        <CardActions
+          sx={{ justifyContent: "end", marginTop: 10, paddingBottom: 0 }}
+        >
           <Tooltip title="I like this" placement="top" arrow>
             <IconButton
-              onClick={() => voteHandler("+", arrayId)}
+              onClick={() => voteHandler("+", id)}
               aria-label="like"
               size="small"
             >
@@ -63,7 +61,7 @@ const VideoCard = ({ video, deleteVideo }) => {
           </Tooltip>
           <Tooltip title="I dislike this" placement="top" arrow>
             <IconButton
-              onClick={() => voteHandler("-", arrayId)}
+              onClick={() => voteHandler("-", id)}
               aria-label="dislike"
               size="small"
             >
@@ -75,7 +73,7 @@ const VideoCard = ({ video, deleteVideo }) => {
           </Typography>
           <Tooltip title="Delete video" placement="top" arrow>
             <IconButton
-              onClick={() => deleteVideo(arrayId)}
+              onClick={() => deleteVideoHandler(id)}
               value="4"
               size="small"
               color="error"

@@ -24,7 +24,7 @@ const App = () => {
       .then((data) => {
         setVideos(data);
       })
-      .catch((err) => console.log(err));
+      .catch((e) => console.log(e));
   }, [videoSortOrder]);
 
   return (
