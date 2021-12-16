@@ -8,11 +8,11 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   const fetchData = () => {
-    fetch(`http://localhost:5000/`)
+    fetch(`https://gulnihal-fullstack-project.herokuapp.com/`)
       .then((res) => res.json())
       .then((data) => {
-        data.sort((a,b) => a.rating - b.rating)
-        setVideos(data)
+        data.sort((a, b) => a.rating - b.rating);
+        setVideos(data);
       });
   }
   useEffect(()=> {
