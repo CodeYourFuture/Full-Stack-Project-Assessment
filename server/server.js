@@ -9,13 +9,34 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
+const { Pool } = require("pg");
+const pool = new Pool({
+  user: "ynehfehljaszas",
+  connectionString:
+    "postgres://ynehfehljaszas:3d0363831d348ea599ceea15b97afcb4019b745bb2ef9164a8a388fe646ee42d@ec2-52-30-133-191.eu-west-1.compute.amazonaws.com:5432/d4u6hoaud3j05c",
+  ssl: { rejectUnauthorized: false },
+  host: "ec2-52-30-133-191.eu-west-1.compute.amazonaws.com",
+  database: "d4u6hoaud3j05c",
+  password: "3d0363831d348ea599ceea15b97afcb4019b745bb2ef9164a8a388fe646ee42d",
+  port: 5432,
+});
+
 // GET "/" all videos
-app.get("/", (req, res) => {
-  if (res.status(200)) {
+app.get("/", (req, res, next) => {
+  pool.query("SELECT * FROM videos", (db_err, db_res) => {
+    if (!db_err) {
+      res.status(200).send(db_res.rows);
+    } else {
+      res.status(500).send(db_err);
+    }
+    next();
+  });
+
+  /*   if (res.status(200)) {
     res.send(videos);
   } else {
     res.status(500).send("error!");
-  }
+  } */
 });
 
 //Get video by ID
