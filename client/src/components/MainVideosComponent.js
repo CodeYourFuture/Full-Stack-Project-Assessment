@@ -6,7 +6,9 @@ import Videos from "./Videos";
 const MainVideosComponent = () => {
   const [videos, setVideos] = useState([]);
   const fetchVideosData = async () => {
-    const url = "http://127.0.0.1:5000";
+    const url = "https://omer-cyf-video-recommendation.herokuapp.com";
+    //https://omer-cyf-video-recommendation.herokuapp.com/
+    //http://127.0.0.1:5000
     try {
       const response = await fetch(url);
       if (response.status === 200) {
