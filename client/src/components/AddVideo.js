@@ -3,15 +3,26 @@ const AddVideo = ({ setVideos }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const newVideo = {
-      id: Math.floor(Math.random() * 1000 + 1),
       title: title,
       url: url,
-      rating: 0,
     };
-    setVideos((element) => element.concat(newVideo));
+
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      body: JSON.stringify(newVideo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.text())
+      .then((response) => {
+        console.log(response);
+        setVideos((data) => data.concat(newVideo));
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <div>

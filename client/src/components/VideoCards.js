@@ -4,10 +4,16 @@ import VoteContainer from "./VoteContainer";
 
 const VideoCards = ({ videos, setVideos }) => {
   const deleteVideoHandler = (vidId) => {
-    setVideos(
-      videos.filter((video) => {
-        return video.id !== vidId;
-      })
+    fetch(`http://localhost:5000/${vidId}`, { method: "delete" }).then(
+      (res) => {
+        if (res.status === 200) {
+          setVideos(
+            videos.filter((video) => {
+              return video.id !== vidId;
+            })
+          );
+        } else console.log(res);
+      }
     );
   };
   return videos.map((video) => {
