@@ -1,3 +1,81 @@
+:root {
+  --boldPink: #ff00a9;
+  --whiteText: #ffffff;
+  --darkBackground:#091d1e;
+  --mediumBackground:#112734;
+  --lightBackground: #1b3d50e5;
+  --offGreenBackground:#1b444b;
+}
+
+
 .App {
   text-align: center;
+}
+
+.App-header{
+  background-color: var(--darkBackground);
+  position: fixed;
+  width: 100%;
+  z-index: 12;
+  color:var(--boldPink);
+}
+
+.addVideoWrapper{
+   z-index: 11;
+  width: 100%;
+ display:flex ;
+  position: fixed;
+  padding-top: 150px;
+  align-content: center;
+  justify-content: center;
+  background-color: var(--darkBackground);
+}
+
+.addVideoBar{
+  
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  align-self: center;
+  align-items: center;
+}
+
+.currentVideoContainer{
+  position: fixed;
+  width: 100%;
+  padding-top: 15%;
+  z-index: 10;
+  background-color: var(--lightBackground);
+  color:var(--whiteText)
+}
+
+.thumbnailContainer{
+  background-color: var(--whiteText);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 60%;
+}
+
+.thumbnailElement{
+  position: relative;
+  text-align: center;
+}
+
+.thumbnailImage{
+  
+}
+
+.thumbnailText{
+  background-color: rgba(128, 128, 128, 0.493);
+  overflow: hidden;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  
 }
