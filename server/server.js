@@ -11,13 +11,13 @@ app.use(cors());
 
 const { Pool } = require("pg");
 const pool = new Pool({
-  user: "ynehfehljaszas",
+  user: "dharma",
   connectionString:
     "postgres://ynehfehljaszas:3d0363831d348ea599ceea15b97afcb4019b745bb2ef9164a8a388fe646ee42d@ec2-52-30-133-191.eu-west-1.compute.amazonaws.com:5432/d4u6hoaud3j05c",
   ssl: { rejectUnauthorized: false },
   host: "ec2-52-30-133-191.eu-west-1.compute.amazonaws.com",
   database: "d4u6hoaud3j05c",
-  password: "3d0363831d348ea599ceea15b97afcb4019b745bb2ef9164a8a388fe646ee42d",
+  password: "",
   port: 5432,
 });
 
