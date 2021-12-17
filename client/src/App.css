@@ -1,3 +1,25 @@
 .App {
   text-align: center;
 }
+
+.videoVote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconVote {
+  margin: 1em;
+}
+
+.iconVote:hover {
+  cursor: pointer;
+}
+
+.iconVote:first-child {
+  color: blue;
+}
+
+.iconVote:last-child {
+  color: red;
+}
