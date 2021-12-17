@@ -1,10 +1,3 @@
-/* :root {
-  --primary-color: white;
-  --secondary-color: red;
-  --tertiary-color: black;
-  --font-color: orange;
-} */
-
 .App {
   text-align: center;
 }
@@ -27,9 +20,26 @@
   margin-top: 2%;
 }
 
+.addVideo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputTitle,
+.inputUrl {
+  width: 100%;
+  height: 25px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .add-btn {
   background-color: orange;
-  width: 15%;
+  width: 100%;
   height: 35px;
   border: 1px solid grey;
   border-radius: 10px;
@@ -63,7 +73,9 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .videoCard {
+  list-style: none;
   font-size: 20px;
   color: orange;
   border-radius: 10px;

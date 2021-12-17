@@ -17,7 +17,7 @@ const VideoCards = ({ videos, setVideos }) => {
     const videoId = video.id;
 
     return (
-      <div className="videoCard">
+      <li className="videoCard" key={video.id}>
         <h3>{videoTitle}</h3>
         <VoteContainer videoRating={videoRating} />
         <div>
@@ -32,7 +32,7 @@ const VideoCards = ({ videos, setVideos }) => {
           ></iframe>
         </div>
         <DeleteVideoButton deleteVideo={deleteVideoHandler} videoId={videoId} />
-      </div>
+      </li>
     );
   });
 };
