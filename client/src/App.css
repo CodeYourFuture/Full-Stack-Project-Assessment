@@ -1,3 +1,78 @@
+#root {
+  --dark-mode: #181a1b;
+  --light-text: rgb(232, 230, 227);
+  background-color: var(--dark-mode);
+}
 .App {
   text-align: center;
+  color: var(--light-text);
+  padding: 1em;
+}
+
+.logo {
+  width: 5em;
+}
+
+nav {
+  background-color: var(--dark-mode);
+  color: var(--light-text);
+}
+
+.addVideoContainer {
+  text-align: center;
+  padding: 1em;
+}
+
+.addVidBtn {
+  background-color: #0dcaf0;
+  color: var(--light-text);
+  text-shadow: 1px 1px var(--dark-mode);
+}
+
+input {
+  margin: 0.25em 0;
+}
+
+button {
+  background-color: var(--dark-mode);
+  border: transparent;
+  color: var(--light-text);
+}
+
+.card-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.card {
+  background-color: var(--dark-mode);
+  color: var(--light-text);
+  width: 35%;
+  align-items: center;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card-body {
+  padding: 1em;
+  margin: 1em;
+}
+
+.votes {
+  padding: 1em;
+  margin: 20px;
+}
+
+.navbar {
+  float: right;
+  background: transparent;
+}
+
+.addVideoContainer {
+  text-align: left;
 }
