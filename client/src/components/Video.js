@@ -20,6 +20,14 @@ const Video = ({ videos, setVideos, video, index }) => {
   const handleDelete = () => {
     const videosExceptDeletedVideo = videos.slice(0, index).concat(videos.slice(index + 1));
     setVideos(videosExceptDeletedVideo);
+
+        fetch(`https://omer-cyf-video-recommendation.herokuapp.com/${video.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => console.log(response));
   }
     return (
       <div className="p-4">
