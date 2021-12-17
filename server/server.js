@@ -5,6 +5,13 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 const uuid = require('uuid');
 
+const cors = require('cors');
+app.use(
+	cors({
+		origin: 'http://localhost:3000',
+	})
+);
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
