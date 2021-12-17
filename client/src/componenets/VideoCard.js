@@ -1,5 +1,3 @@
-// import React, { useState } from "react";
-// import AddNewVideo from "./AddNewVideo";
 import VoteButtons from "./VoteButtons";
 import deleteHandler from "../utils/deleteHandler";
 

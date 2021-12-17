@@ -1,12 +1,10 @@
 import "./App.css";
 import { React, useState } from "react";
-// import { nanoid } from "nanoid";
 import data from "./exampleresponse.json";
 import AddNewVideos from "./componenets/AddNewVideo";
 import VideoCard from "./componenets/VideoCard";
 
-// const videos = data;
-const youTubeVids = data;
+const youTubeVids = data.sort((a, b) => b.rating - a.rating);
 
 function App() {
   const [videos, setVideos] = useState(youTubeVids);

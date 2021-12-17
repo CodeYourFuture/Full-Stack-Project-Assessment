@@ -4,17 +4,7 @@ import { nanoid } from "nanoid";
 const AddNewVideo = ({ setVideos }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  // const [addVideo, SetAddVideo] = useState(video);
 
-  // const handleAddVideo = (e) => {
-  //   e.preventDefault();
-  //   const fieldName = e.target.getAttribute("name");
-  //   const fieldValue = e.target.value;
-
-  //   const newVideo = { ...addVideo };
-  //   newVideo[fieldName] = fieldValue;
-  //   SetAddVideo(newVideo);
-  // };
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
@@ -24,7 +14,6 @@ const AddNewVideo = ({ setVideos }) => {
       url: url,
       rating: 0,
     };
-    // const allVideos = videos.concat(newVideo);
     setVideos((prevs) => prevs.concat(newVideo));
   };
 

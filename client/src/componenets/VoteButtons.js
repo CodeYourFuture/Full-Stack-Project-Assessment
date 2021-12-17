@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaRegThumbsUp } from "react-icons/fa";
-import { FaThumbsDown } from "react-icons/fa";
+import { FaRegThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 const VoteButtons = ({ rating }) => {
   const [vote, setVote] = useState(rating);
