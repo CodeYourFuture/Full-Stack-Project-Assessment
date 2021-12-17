@@ -17,7 +17,7 @@ const AddVideoForm = ({ setClicked, videos, setVideos }) => {
   function handleSubmit (event) {
     event.preventDefault();
     const newVideo = {
-      // id: Math.floor(Math.random() * 10000) + title.length + url.length, // create a random id for front-end key value
+      id: Math.floor(Math.random() * 10000) + title.length + url.length, // create a random id for front-end key value
       title: title,
       url: url,
       rating: 0
@@ -28,12 +28,21 @@ const AddVideoForm = ({ setClicked, videos, setVideos }) => {
     }else {
       alert('This video is already in the videos list.');
     }
+    
+    fetch("https://omer-cyf-video-recommendation.herokuapp.com", {
+      method: "POST",
+      body: JSON.stringify(newVideo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => console.log(response));
   }
     return (
       <form
         onSubmit={handleSubmit}
-        action="http://127.0.0.1:5000/"
-        method="POST"
+        // action="https://omer-cyf-video-recommendation.herokuapp.com"
+        // method="POST"
       >
         <div>
           <label htmlFor="inputTitle">Title</label>
