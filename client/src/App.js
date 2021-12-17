@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import data from "./exampleresponse.json";
+//import data from "./exampleresponse.json";
 import Header from "./components/Header";
 import AddVideo from "./components/AddVideo";
 import SearchBar from "./components/SearchBar";
 import VideoCard from "./components/VideoCard";
 
 const App = () => {
-  const [videoData, setVideoData] = useState(data);
+  const [videoData, setVideoData] = useState([]);
 
-  /*   const fetchVideoData = async () => {
+  const fetchVideoData = async () => {
     const url = "http://127.0.0.1:5000";
     try {
       const response = await fetch(url);
@@ -26,7 +26,7 @@ const App = () => {
   };
   useEffect(() => {
     fetchVideoData();
-  }, [videoData]); */
+  }, [videoData]);
 
   const handleDelete = (id) => {
     const filteredVideos = videoData.filter((video) => video.id !== id);

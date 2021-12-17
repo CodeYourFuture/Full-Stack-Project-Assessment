@@ -4,18 +4,17 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const videos = require("../exampleresponse.json");
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors);
+app.use(cors());
 
 // GET "/" all videos
 app.get("/", (req, res) => {
   if (res.status(200)) {
     res.send(videos);
   } else {
-    res.send("error!");
+    res.status(500).send("error!");
   }
 });
 
@@ -25,25 +24,27 @@ app.get("/:videoId", (req, res) => {
   const videoWithId = videos.find((video) => video.id == videoId);
   videoWithId
     ? res.send(videoWithId)
-    : res.status(404).send({ msg: "Video doesn't exist" });
+    : res.status(404).send({ result: "failure", msg: "Video doesn't exist" });
 });
 
 //Add New Video
 let tempId = Math.floor(Math.random() * 10000);
 app.post("/", (req, res) => {
-  const title = req.body.title;
-  const url = req.body.url;
+  let title = req.body.title;
+  console.log(req.body.url);
+  let url = req.body.url;
+  const newVideoToAdd = {
+    id: tempId,
+    title: title,
+    url: url,
+  };
 
   if (!title || !url || !url.includes("youtube") || !url.includes("watch?v=")) {
     return res
       .status(400)
       .send({ result: "failure", msg: "Video could not be saved" });
   }
-  const newVideoToAdd = {
-    id: tempId,
-    title: title,
-    url: url,
-  };
+
   videos.push(newVideoToAdd);
   res.send({ id: newVideoToAdd.id });
 });
@@ -58,5 +59,9 @@ app.delete("/:videoId", (req, response) => {
     });
   }
   videos.splice(videoIndex, 1);
-  response.status(204).send({});
+  response
+    .status(204)
+    .send({ msg: `Video with the id of ${videoId} was successfully deleted` });
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
