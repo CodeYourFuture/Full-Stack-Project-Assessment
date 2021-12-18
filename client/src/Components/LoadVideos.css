@@ -1,0 +1,30 @@
+
+
+.card-contener {
+  display: grid; 
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2vw;
+  margin:30px;
+}
+.card{
+  font-size: 1.5vw;
+  font-weight: bold;
+  color: rgb(143, 140, 140);
+  padding: .5em;
+  background: rgb(189, 219, 240);
+  text-align: center;
+}
+
+
+.delete-btn {
+    background-color: rgb(122, 121, 121);
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+
+
+

@@ -1,0 +1,35 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.18.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/megumi/Documents/GitHub/Full-Stack-Project-Assessment/package.json: Unexpected token } in JSON at position 62
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "private": true,
+    "workspaces": ["client", "server"],
+    
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
