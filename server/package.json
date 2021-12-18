@@ -1,16 +1,13 @@
 {
-  "name": "to-do-server",
+  "name": "video-recommendation-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "server": "node server.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "5.0.5",
     "cors": "^2.8.5",
     "express": "^4.17.1"
   },

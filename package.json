@@ -1,0 +1,19 @@
+{
+ "private": true,
+ "workspaces": [
+  "client",
+  "server"
+ ],
+ "scripts": {
+  "start": "concurrently --kill-others-on-fail \"cd server && npm start\" \"cd client && npm run start\"",
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "devDependencies": {
+  "concurrently": "^3.6.1"
+ },
+ "dependencies": {
+  "moment": "^2.29.1",
+  "moment-timezone": "^0.5.34",
+  "react-moment": "^1.1.1"
+ }
+}
