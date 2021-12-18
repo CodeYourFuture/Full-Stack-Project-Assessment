@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Voting = () => {
-  const [votes, setVotes] = useState([]);
+  const [votes, setVotes] = useState(0);
 
   const Votesup = () => setVotes(votes + 1);
   const Votesdown = () => {
@@ -9,7 +9,7 @@ const Voting = () => {
   };
 
   return (
-    <div className="voteButtons" style={{ marginLeft: "50px" }}>
+    <div className=" container" style={{ marginLeft: "50px" }}>
       <button
         onClick={Votesup}
         style={{ margin: "50px" }}

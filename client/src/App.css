@@ -9,3 +9,9 @@ section{
 
   background-color: blueviolet;
 }
+.container{
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
