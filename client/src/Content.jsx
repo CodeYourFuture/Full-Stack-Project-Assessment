@@ -70,66 +70,26 @@ const Content = () => {
 	// 	},
 	// ];
 
-	const sort = (way) => {
-		if (way === 'asc') {
-			setData((prev) => {
-				let sorted = [...prev];
-				sorted.sort((a, b) => {
-					let videoA = a.title.toLowerCase();
-					let videoB = b.title.toLowerCase();
-
-					if (videoA < videoB) {
-						return -1;
-					}
-					if (videoA > videoB) {
-						return 1;
-					}
-					return 0;
-				});
-				if (JSON.stringify(sorted) === JSON.stringify(prev)) {
-					sorted = sorted.reverse();
-				}
-				let next = [...sorted];
-				return next;
-			});
-		} else if (way === 'popular') {
-			setData((prev) => {
-				let sorted = [...prev];
-
-				sorted.sort((a, b) => {
-					let videoA = a.rating;
-					let videoB = b.rating;
-
-					if (videoA > videoB) {
-						return -1;
-					}
-					if (videoA < videoB) {
-						return 1;
-					}
-					return 0;
-				});
-				if (JSON.stringify(sorted) === JSON.stringify(prev)) {
-					sorted = sorted.reverse();
-				}
-				let next = [...sorted];
-				return next;
-			});
-		}
-	};
-
 	const [data, setData] = useState([]);
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
-		fetch('http://127.0.0.1:5000/')
+		fetch(`${SERVER}/${search}`)
 			.then((res) => {
-				console.log(res);
 				return res.json();
 			})
 			.then((list) => {
-				console.log('ok');
 				setData(list);
 			});
-	}, []);
+	}, [search]);
+
+	const sort = (way) => {
+		if (way === 'least') {
+			setSearch('?order=asc');
+		} else if (way === 'most') {
+			setSearch('?order=desc');
+		}
+	};
 
 	const addNewVideo = (video) => {
 		console.log(video);
@@ -141,7 +101,6 @@ const Content = () => {
 	const deleteVideo = (videoID) => {
 		setData((prev) => {
 			// let index = prev.findIndex((video) => video.id === videoID); // searching index
-
 			let next = prev.filter((video) => video.id !== videoID);
 			return next;
 		});

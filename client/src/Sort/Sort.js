@@ -2,22 +2,23 @@ import React from 'react';
 import './sort.css';
 
 const Sort = ({ sort }) => {
-	const handlePopluar = () => {
-		sort('popular');
-	};
-	const handleAsc = () => {
-		sort('asc');
+	const handleSort = (e) => {
+		if (e.currentTarget.dataset.most) {
+			sort('most');
+		} else if (e.currentTarget.dataset.least) {
+			sort('least');
+		}
 	};
 
 	return (
 		<div className="sort-wrap">
 			<div>Sort by</div>
-			<div className="sort-way" onClick={handlePopluar}>
+			<div className="sort-way" onClick={handleSort} data-most>
 				most popular
 			</div>
 			/
-			<div className="sort-way" onClick={handleAsc}>
-				name
+			<div className="sort-way" onClick={handleSort} data-least>
+				least popular
 			</div>
 		</div>
 	);

@@ -1,4 +1,3 @@
-const e = require('express');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -82,8 +81,38 @@ let videos = [
 
 // GET "/"
 app.get('/', (req, res) => {
+	let order = req.query.order;
+	const sort = (way) => {
+		if (way === 'asc') {
+			videos.sort((a, b) => {
+				let videoA = a.rating;
+				let videoB = b.rating;
+
+				if (videoA < videoB) return -1;
+				if (videoA > videoB) return 1;
+				return 0;
+			});
+		} else if (way === 'desc') {
+			videos.sort((a, b) => {
+				let videoA = a.rating;
+				let videoB = b.rating;
+
+				if (videoA > videoB) return -1;
+				if (videoA < videoB) return 1;
+				return 0;
+			});
+		}
+	};
+	if (order) {
+		sort(order);
+	}
 	res.json(videos);
 });
+
+// app.get('/', (req, res) => {
+// 	let order = req.query.order;
+// 	console.log(order);
+// });
 
 app.get('/:id', (req, res) => {
 	const id = req.params.id;
