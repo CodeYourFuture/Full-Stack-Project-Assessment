@@ -5,6 +5,18 @@ export default function AddVideo(props){
 
     const [inputs, setInputs] = useState({});
 
+    function isValidHttpUrl(string) {
+      let url;
+  
+      try {
+        url = new URL(string);
+      } catch (_) {
+        return false;  
+      }
+      // console.log(url)
+      return url.protocol === "http:" || url.protocol === "https:";
+    }
+
     const handleChange = (event) => {
       console.log(event.target.title);
 
@@ -13,7 +25,6 @@ export default function AddVideo(props){
       setInputs(values => ({...values, [name]: value}))
       // console.log(inputs);
     }
-
 
     const handleSubmit = (event) => {
       // The prevent default ensures that this only runs once. I have then done a push
@@ -26,9 +37,14 @@ export default function AddVideo(props){
       event.preventDefault(); 
       console.log(inputs)
 
+      let isValid = isValidHttpUrl(inputs.url);
+      console.log(isValid)
+
       if ((inputs.title === undefined) || (inputs.url === undefined)){
         alert("Please ensure both Title and Url input boxes are populated");
-      } else {
+      } else if (isValid === false){ 
+        alert("The url is invalid. Please ensure you include the protocol (e.g. http:)");
+      }else {
         fetch('http://localhost:5000/', {
           method: 'post',
           headers: {

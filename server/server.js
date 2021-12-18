@@ -38,7 +38,7 @@ app.post("/", (req, res) => {
   // }
   
   const title = req.body.title;
-  const url = req.body.url;
+  let url = req.body.url;
   // console.log(req.body);
   console.log(title);
   console.log(url);
@@ -46,6 +46,14 @@ app.post("/", (req, res) => {
   if ((title.length > 0)&&(url.length > 0)){
     // console.log(req.body.title);
     // console.log(req.body.url);
+
+    if(url.includes("&")){
+      console.log("& DETECTED")
+      const startSplit = url.indexOf("&");
+      const thumbnailCode = url.slice(0,startSplit);
+      console.log(thumbnailCode)
+      url = thumbnailCode;
+    }
     
     // Need to add the title and the URL to my json file - both need to be here 
     // The video ID seems to be a random number
@@ -53,7 +61,9 @@ app.post("/", (req, res) => {
     const newVideo = {
       "id":videoData.length,
       "title": req.body.title,
-      "url":req.body.url
+      "url": url,
+      "rating": 0,
+      "dateAdded" : new Date()
     }
     videoData.push(newVideo); 
 
@@ -123,7 +133,7 @@ app.delete("/:id", (req, res) => {
 });
 
 
-// PUT "/" - http://localhost:5000/{id} This will update the rating
+// PUT "/" - UPDATE-  http://localhost:5000/{id} This will update the rating
 app.put("/:id", (req, res) => {
   console.log("PUT update run")
   console.log(req.params.id)
@@ -142,7 +152,7 @@ app.put("/:id", (req, res) => {
   console.log("LOOK BELOW FOR DATA RATING")
   console.log(videoData[indexToUpdate].rating);
 
-  if (indexToRemove > -1) {
+  if (indexToUpdate > -1) {
     videoData[indexToUpdate].rating = req.body.updatedRatings;
     res.json({"message": "rating updated"}); 
   } else {
@@ -156,10 +166,8 @@ app.put("/:id", (req, res) => {
 
 app.get("/videos/:search", function(request, response){
   console.log("/videos/:id run");
-  // console.log(request.query.text)
   console.log(request.params.search);
 
-  
 
     if (request.params.search != undefined) {
       const searchTerm = request.params.search.toLowerCase();
@@ -179,24 +187,4 @@ app.get("/videos/:search", function(request, response){
         "message": "Video could not be found"
       })
     }
-    
-
-
-  // if (messages[request.params.search] != undefined){
-  //   response.json(messages[request.params.search]); 
-  
-  // } else if (request.query.text != undefined) {
-  //   const searchTerm = request.query.text.toLowerCase();
-
-  //   const returnedList = messages.filter((element,index) =>{
-  //     //  console.log(element);
-  //     // console.log(element.text.includes(searchTerm));
-  //     const lowerElement = element.text.toLowerCase();
-  //     if (index < 10){
-  //       return lowerElement.includes(searchTerm)
-  //     }
-  //   });
-  //   console.log(returnedList);
-  //   response.json(returnedList); 
-  // }
 });

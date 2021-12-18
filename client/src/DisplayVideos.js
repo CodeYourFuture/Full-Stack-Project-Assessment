@@ -8,17 +8,24 @@ export default function DisplayVideos(){
     const [ initialVideoData , updateVideoData ] = useState([]);
     const [ currentVideo , updateCurrentVideo ] = useState([]);
     const [ approvalCounter , updateApprovalCounter ] = useState(0);
-    
-    
+    const [selectedOrder,setSelectedOrder] = useState("desc"); //default value
+  
+
+
     useEffect(() => {
     // GET request using fetch inside useEffect React hook
     fetch('http://localhost:5000/')
         .then(response => response.json())
         .then(data => {
             updateVideoData(data);
+            // orderVideos();
             updateCurrentVideo(data[0]);
             updateApprovalCounter(data[0].rating);
-        });
+        })
+        .then(()=>{
+            const defaultOrder = OrderVideos();
+            updateVideoData(defaultOrder);
+        })
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
@@ -61,10 +68,13 @@ export default function DisplayVideos(){
         updateVideoData(data);
     }
 
+    let globalApprovalID = 0;
+
     function likeDislikeCounter(input, id){
         let counterToPass;
         console.log(approvalCounter)
-        
+        globalApprovalID= id;
+
         if (input === true) {
             counterToPass = approvalCounter+1;
             console.log(counterToPass)
@@ -76,8 +86,12 @@ export default function DisplayVideos(){
         }
 
         console.log(approvalCounter);
+        
 
-        fetch(`http://localhost:5000/${id}`, {
+    }
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/${globalApprovalID}`, {
           method: 'put',
           headers: {
             'Content-Type': 'application/json'
@@ -90,7 +104,7 @@ export default function DisplayVideos(){
         .then(data => {
            console.log(data);
         });
-    }
+    }, [approvalCounter]);
 
     function deleteVideo(id){
         console.log(id);
@@ -103,17 +117,51 @@ export default function DisplayVideos(){
     }
 
     
-    function orderVideos(event){
-        console.log(event);
+    function OrderVideos(event){
+        
+        let ascOrDesc;
 
-        let videosOrderedAsc = initialVideoData.sort(function(a, b) { 
-            return a.rating - b.rating;
-        })
-        updateVideoData(videosOrderedAsc)
-        console.log(initialVideoData);
+        if (event === undefined){
+            ascOrDesc = "desc";
+        } else {
+            ascOrDesc = event.target.value;
+        }
+        
+        console.log(ascOrDesc);
+        
+        if (ascOrDesc === "desc"){
 
+            let videosOrderedDesc = initialVideoData.sort(function(a, b) { 
+                return a.rating - b.rating;
+            })
+            // updateVideoData(videosOrderedDesc);
+            console.log("descending")
+            return videosOrderedDesc
+            // console.log(initialVideoData);
+
+        } else {
+            let videosOrderedAsc = initialVideoData.sort(function(a, b) { 
+                return b.rating - a.rating;
+            })
+            console.log("ascending")
+            return videosOrderedAsc;
+            // console.log(videosOrderedAsc)
+            // updateVideoData(videosOrderedAsc);
+            // console.log(initialVideoData);
+        }
     }
+
+//     <select name="ratings" id="ratings" value={selectedOrder} onChange={(event)=>{
+//     let dataToPass=OrderVideos(event);
+//     console.log(dataToPass);
+//     updateVideoData(dataToPass);
+// }}></select>
     
+
+    function handleOrderChange(event){
+        setSelectedOrder(event.target.value);
+        OrderVideos(event);
+    }
 
     return (
         <div>
@@ -122,10 +170,11 @@ export default function DisplayVideos(){
                 <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/>
                 
                 <label for="ratings">Video Order</label>
-                <select name="ratings" id="ratings">
-                  <option value="desc" onChange={(event)=>orderVideos(event)}>Descending</option>
-                  <option value="asc" onChange={(event)=>orderVideos(event)}>Ascending</option>
+                <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
+                  <option value="desc">Ascending</option>
+                  <option value="asc">Descending</option>
                 </select>
+
 
             </div>
 
