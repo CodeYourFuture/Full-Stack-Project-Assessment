@@ -8,7 +8,7 @@ export default function DisplayVideos(){
     const [ initialVideoData , updateVideoData ] = useState([]);
     const [ currentVideo , updateCurrentVideo ] = useState([]);
     const [ approvalCounter , updateApprovalCounter ] = useState(0);
-    const [selectedOrder,setSelectedOrder] = useState("desc"); //default value
+    const [ selectedOrder , setSelectedOrder] = useState("desc"); //default value
   
 
 
@@ -22,10 +22,10 @@ export default function DisplayVideos(){
             updateCurrentVideo(data[0]);
             updateApprovalCounter(data[0].rating);
         })
-        .then(()=>{
-            const defaultOrder = OrderVideos();
-            updateVideoData(defaultOrder);
-        })
+        // .then(()=>{
+        //     const defaultOrder = OrderVideos();
+        //     updateVideoData(defaultOrder);
+        // })
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
@@ -68,12 +68,12 @@ export default function DisplayVideos(){
         updateVideoData(data);
     }
 
-    let globalApprovalID = 0;
+    // let globalApprovalID = 0;
 
     function likeDislikeCounter(input, id){
         let counterToPass;
         console.log(approvalCounter)
-        globalApprovalID= id;
+        // globalApprovalID= id;
 
         if (input === true) {
             counterToPass = approvalCounter+1;
@@ -86,12 +86,8 @@ export default function DisplayVideos(){
         }
 
         console.log(approvalCounter);
-        
 
-    }
-
-    useEffect(()=>{
-        fetch(`http://localhost:5000/${globalApprovalID}`, {
+        fetch(`http://localhost:5000/${id}`, {
           method: 'put',
           headers: {
             'Content-Type': 'application/json'
@@ -104,7 +100,25 @@ export default function DisplayVideos(){
         .then(data => {
            console.log(data);
         });
-    }, [approvalCounter]);
+        
+
+    }
+
+    // useEffect(()=>{
+    //     fetch(`http://localhost:5000/${globalApprovalID}`, {
+    //       method: 'put',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         updatedRatings: approvalCounter
+    //     })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //        console.log(data);
+    //     });
+    // }, [approvalCounter]);
 
     function deleteVideo(id){
         console.log(id);

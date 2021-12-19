@@ -165,7 +165,7 @@ app.put("/:id", (req, res) => {
 
 
 app.get("/videos/:search", function(request, response){
-  console.log("/videos/:id run");
+  console.log("/videos/:search run`  run");
   console.log(request.params.search);
 
 
