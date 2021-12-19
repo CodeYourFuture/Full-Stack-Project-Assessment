@@ -1,0 +1,12 @@
+.container {
+	max-width: 1200px;
+	margin: 0px auto;
+}
+
+.video-section-wrap {
+	/* max-width: 700px; */
+	margin: 0px auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}

@@ -1,0 +1,14 @@
+.sort-wrap {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.sort-way {
+	cursor: pointer;
+	margin: 0 10px;
+}
+
+.sort-way:hover {
+	color: green;
+}

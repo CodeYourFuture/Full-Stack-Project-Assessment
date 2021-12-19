@@ -1,0 +1,31 @@
+.form-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 200px;
+	margin-bottom: 10px;
+}
+
+.form-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px 0;
+}
+
+input[type='button'] {
+	width: 200px;
+	border: none;
+	background-color: green;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+}
+
+input[type='button']:hover {
+	background-color: rgb(2, 104, 2);
+}
+
+input[type='button']:active {
+	background-color: rgb(4, 82, 4);
+}
