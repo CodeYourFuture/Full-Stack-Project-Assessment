@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000;
 const corsOptions = {
   origin: "http://localhost:3000",
 };
-// So the API will be accessible from http://localhost:3000 in our case and blocked for other domains.
+// The API will be accessible from http://localhost:3000 in our case and blocked for other domains.
 app.use(express.urlencoded({ extended: true })); // sending data for POST and PUT requests
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -16,10 +16,10 @@ app.use(express.urlencoded({ extended: false })); // sending data for POST and P
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const pool = new Pool({
-  user: "cgeljihpkewhos",
-  host: "ec2-52-30-81-192.eu-west-1.compute.amazonaws.com",
-  database: "dehsn159cgalfo",
-  password: "67b867433147619d069b29efb4a97739bbb36d752ec01b2dd8cfde7c44e80bd7",
+  user: "mubtqstrwsokgu",
+  host: "ec2-52-0-234-93.compute-1.amazonaws.com",
+  database: "dbi5ahnturoma9",
+  password: "9383af1fcf526a4141720ffa866545ba1d755c213c94edace8d031cd4a6d1b2f",
   post: 5432,
   ssl: {
     rejectUnauthorized: false,
@@ -28,10 +28,11 @@ const pool = new Pool({
 
 // Store and retrieve your videos from here
 // let videos = require("../client/src/exampleresponse.json");
+
 // GET "/"
 
 app.get("/", (req, res) => {
-  const orderBy = req.query.order; // !!! order comes from app.js/useEffect fetch
+  const orderBy = req.query.order; // !!! "?order" comes from app.js/useEffect fetch
 
   const query =
     orderBy === "desc"
@@ -54,19 +55,13 @@ app.get("/videos", (req, res) => {
 
 app.get("/videos/:id", (req, res) => {
   const requestedId = req.params.id;
-  // const findVideo = query.find((video) => video.id === parseInt(requestedId));
 
   requestedId
     ? pool
         .query(`SELECT * FROM example WHERE id=$1`, [requestedId])
         .then((result) => res.status(200).json(result.rows))
+        .catch((error) => console.log(error))
     : res.status(400).json({ message: `No video with this id:${requestedId}` });
-  //   if (query) {
-  // .query(query)
-  // .then((result) => res.json(result.rows))
-  // .catch((error) => console.log(error));
-  //   } else
-  //     res.status(400).json({ message: `No video with this id:${requestedId}` });
 });
 
 //200-2 POST
@@ -83,26 +78,9 @@ app.post("/", (req, res) => {
         .then((result) => res.status(200).json(result.rows))
     : res.status(400).json({
         result: "failure",
-        message: "Video could not be saved",
+        message:
+          "As it does not have title or/and url Video could not be saved",
       });
-  // const newVideoId = Math.floor(Math.random() * 1000000);
-  // const newVideoRating = Math.floor(Math.random() * 10000);
-  // const newVideo = {
-  //   id: newVideoId,
-  //   title: req.body.title,
-  //   url: req.body.url,
-  //   rating: newVideoRating,
-  //   timeSent: new Date().toLocaleString(),
-  // };
-  // if (!req.body.title || !req.body.url) {
-  //   res.status(400).json({
-  //     result: "failure",
-  //     message: "Video could not be saved",
-  //   });
-  // } else {
-  //   videos.push(newVideo);
-  //   res.status(200).json(videos);
-  // }
 });
 
 //DELETE "/{id}" Deletes the video with the ID container within the {id} parameter
@@ -120,19 +98,6 @@ app.delete("/videos/:id", (req, res) => {
         result: "failure",
         message: "Video could not be deleted",
       });
-  // const findVideo = videos.some((video) => video.id === requestedId);
-
-  // if (findVideo) {
-  //   videos = videos.filter((video) => video.id !== requestedId);
-  //   res.status(200).json({
-  //     result: "successful",
-  //     message: "Video has been deleted",
-  //   });
-  // } else
-  //   res.status(400).json({
-  //     result: "failure",
-  //     message: "Video could not be deleted",
-  //   });
 });
 
 app.put("/videos/:id", (req, res) => {

@@ -10,45 +10,51 @@ import Videos from "./components/Videos";
 function App() {
   const [videoData, setVideoData] = useState([]);
   const [search, setSearch] = useState("");
-  const [orderBy, setOrderBy] = useState("asc");
+
   const [isAsc, setIsAsc] = useState(false);
 
   const searchingData = videoData.filter((video) =>
     video.title.toUpperCase().includes(search.toUpperCase())
   );
-  const handleSort = (isAsc) => {
-    const sorted = isAsc ? "asc" : "desc";
-    setOrderBy(sorted);
-  };
+
   const toggleButton = () => {
     setIsAsc(!isAsc);
-    handleSort(isAsc);
   };
+  console.log("Hello");
+
   useEffect(() => {
-    orderBy
-      ? fetch(`http://127.0.0.1:5000/?order=${orderBy}`)
-      : fetch(`http://127.0.0.1:5000`)
-          .then((res) => res.json())
-          .then((videoData) => setVideoData(videoData))
-          .catch((err) => console.log(err));
-  }, [orderBy]);
+    const url = `http://127.0.0.1:5000/?order=${isAsc ? "asc" : "desc"}`;
+    console.log(url);
+    fetch(url)
+      .then((res) => res.json())
+      .then((videoData) => {
+        setVideoData(videoData);
+        console.log(videoData);
+      })
+      .catch((err) => console.log(err));
+  }, [isAsc]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <div className="videoSearch d-flex mx-5">
-        <AddVideo videoData={videoData} setVideoData={setVideoData} />
-        <Search setSearch={setSearch} search={search} />
+    <div className="App ">
+      <div className="addSearch row">
+        <div className="d-flex-- col-md-6">
+          <AddVideo videoData={videoData} setVideoData={setVideoData} />
+          <div>
+            <h1>AdemTube</h1>
+            <Search setSearch={setSearch} search={search} />
+          </div>
+        </div>
       </div>
-
-      <Videos
-        searchingData={searchingData}
-        videoData={videoData}
-        setVideoData={setVideoData}
-        toggleButton={toggleButton}
-      />
+      <div className="videos row--">
+        <div className="d-flex-- col-md-3">
+          <Videos
+            searchingData={searchingData}
+            videoData={videoData}
+            setVideoData={setVideoData}
+            toggleButton={toggleButton}
+          />
+        </div>
+      </div>
     </div>
   );
 }

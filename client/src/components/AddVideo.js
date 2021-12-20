@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddVideo = ({ sortedVideoData, videoData, setVideoData }) => {
+const AddVideo = ({ videoData, setVideoData }) => {
   const [addingVideo, setAddingVideo] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -18,19 +18,14 @@ const AddVideo = ({ sortedVideoData, videoData, setVideoData }) => {
       timeSent: new Date().toLocaleDateString(),
     };
 
-    // setVideoData(sortedVideoData.concat(newVideoData));
     newVideoData.title && newVideoData.url
       ? setVideoData(videoData.concat(newVideoData))
-      : !newVideoData.title
-      ? alert("Please fill the title section")
-      : !newVideoData.url
-      ? alert("Please fill the url section")
-      : alert("error");
+      : alert("Please fill all the sections");
   };
   return (
-    <div>
+    <header>
       <h4 onClick={() => setAddingVideo(!addingVideo)}>Add Video</h4>
-      {addingVideo && (
+      {
         <form>
           <div>
             <label>
@@ -74,8 +69,8 @@ const AddVideo = ({ sortedVideoData, videoData, setVideoData }) => {
             </button>
           </div>
         </form>
-      )}
-    </div>
+      }
+    </header>
   );
 };
 
