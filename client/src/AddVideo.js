@@ -23,10 +23,23 @@ const AddVideo = (props) => {
             "title": videoTitle,
             "url": videoUrl,
             "rating": 0
-          }
+        }
         //   console.log(newVideo)
-        
-        props.setVideoList(props.videoList.concat(newVideo));
+
+        fetch(`http://localhost:5000/`, {
+            method: 'post',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'title': videoTitle,
+                'url': videoUrl
+            })
+        })
+        .then(response => response.json());
+
+        // props.setVideoList(props.videoList.concat(newVideo));
         setVideoTitle("");
         setVideoUrl("");
     }
@@ -43,7 +56,7 @@ const AddVideo = (props) => {
                     <input type="url" name="url" value={videoUrl} onChange={handleUrlInput}></input>
                 </label>
                 <div>
-                <button type="submit" className="add-btn">Add Video</button>
+                    <button type="submit" className="add-btn">Add Video</button>
                 </div>
             </form>
         </div>
