@@ -112,6 +112,9 @@ button {
 }
 
 
+.btn-ion {
+  border: none;
+}
 
 @media only screen and (max-width: 1000px) {
   .video-elem {

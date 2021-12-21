@@ -25,6 +25,7 @@ const AddVideo = (props) => {
             "rating": 0
           }
         //   console.log(newVideo)
+        
         props.setVideoList(props.videoList.concat(newVideo));
         setVideoTitle("");
         setVideoUrl("");
