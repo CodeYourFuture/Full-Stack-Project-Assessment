@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 // POST
 app.post("/", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let newTitle = req.body.title;
   let newUrl = req.body.url;
   // console.log(newUrl)
@@ -45,7 +45,8 @@ app.post("/", (req, res) => {
     };
     // console.log(newVideo)
     videos.push(newVideo);
-    res.status(200).json({ id: newVideo.id })
+    // res.status(200).json({ id: newVideo.id })
+    res.status(200).json(newVideo)
   }
 })
 

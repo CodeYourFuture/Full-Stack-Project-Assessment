@@ -1,4 +1,9 @@
+
+
 import React, { useState } from "react";
+import { v4 as uuid } from 'uuid';
+
+
 
 const AddVideo = (props) => {
     const [videoTitle, setVideoTitle] = useState("");
@@ -15,26 +20,14 @@ const AddVideo = (props) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-
-        fetch(`http://localhost:5000/`, {
-            method: 'post',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'title': videoTitle,
-                'url': videoUrl
-            })
-        })
-            .then(response => response.json())
-            .then(data => props.setVideoList(props.videoList.concat(data)));
-
-        // props.setVideoList([...props.videoList,
-        //     {
-        //         'title': videoTitle,
-        //         'url': videoUrl
-        //     }]);
+        let newVideo = {
+            "id": uuid(),
+            "title": videoTitle,
+            "url": videoUrl,
+            "rating": 0
+          }
+        //   console.log(newVideo)
+        props.setVideoList(props.videoList.concat(newVideo));
         setVideoTitle("");
         setVideoUrl("");
     }
@@ -51,7 +44,7 @@ const AddVideo = (props) => {
                     <input type="url" name="url" value={videoUrl} onChange={handleUrlInput}></input>
                 </label>
                 <div>
-                    <button type="submit" className="add-btn">Add Video</button>
+                <button type="submit" className="add-btn">Add Video</button>
                 </div>
             </form>
         </div>
