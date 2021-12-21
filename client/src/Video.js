@@ -7,9 +7,18 @@ const Video = (props) => {
     // const [initList, setInitList] = useState(props.videoData);
 
     function handleRemove(id) {
-        // console.log(id); 
+        /* ****
+        // before adding the bakend
+        console.log(id); 
         const newList = props.videoList.filter((video) => video.id !== id);
         props.setVideoList(newList)
+        ***** */
+        fetch(`http://localhost:5000/${id}`, {
+            method: 'delete',
+            mode: 'cors'
+        })
+        .then(response => response.json())
+        .then(data => props.setVideoList(data.newVideos));
     }
     return (
         <div className="videos-inner-wrap" >

@@ -61,7 +61,8 @@ app.get("/:id", (req, res) => {
 
 });
 
-// Delete one message by id
+/*
+// Delete one message by id before frontend 
 app.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
   const video = videos.find((video) => video.id === id);
@@ -71,6 +72,31 @@ app.delete("/:id", (req, res) => {
       videos: videos.filter(video => video.id !== id)
     })
   }else {
+    res.status(400).json({
+      "result": "failure",
+      "message": "Video could not be deleted"
+    })
+  }
+  //  videos.splice(id, 1);
+});
+*/
+
+// Delete one message by id
+app.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const foundVideo = videos.find((video) => video.id === id);
+  // console.log(id, foundVideo.id)
+  if (foundVideo) {
+
+    // get index of object with id
+    const removeIndex = videos.findIndex( item => item.id === id );
+    videos.splice( removeIndex, 1 )
+    console.log(videos)
+    res.json({
+      video: "Video Deleted",
+      newVideos: videos
+    })
+  } else {
     res.status(400).json({
       "result": "failure",
       "message": "Video could not be deleted"
