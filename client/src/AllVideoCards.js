@@ -2,7 +2,7 @@ import React from "react";
 import VideoCard from "./VideoCard";
 
 function AllVideoCards({ videos, setVideos }) {
-  console.log(videos);
+  //console.log(videos);
   const allVideos = videos.map((video) => (
     <VideoCard
       video={video}

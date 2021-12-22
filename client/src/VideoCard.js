@@ -4,7 +4,7 @@ import VideoLikes from "./VideoLikes";
 
 function VideoCard({ video, videos, setVideos }) {
   const videoId = video.url.slice(32);
-  console.log(videoId);
+  //console.log(videoId);
   return (
     <div>
       <h2>{videos.title}</h2>
