@@ -1,6 +1,7 @@
 import React, { useState , useEvent , useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
+import button from './button-bg.png'
 
 
 export default function DisplayVideos(){
@@ -104,21 +105,6 @@ export default function DisplayVideos(){
 
     }
 
-    // useEffect(()=>{
-    //     fetch(`http://localhost:5000/${globalApprovalID}`, {
-    //       method: 'put',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         updatedRatings: approvalCounter
-    //     })
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //        console.log(data);
-    //     });
-    // }, [approvalCounter]);
 
     function deleteVideo(id){
         console.log(id);
@@ -165,12 +151,6 @@ export default function DisplayVideos(){
         }
     }
 
-//     <select name="ratings" id="ratings" value={selectedOrder} onChange={(event)=>{
-//     let dataToPass=OrderVideos(event);
-//     console.log(dataToPass);
-//     updateVideoData(dataToPass);
-// }}></select>
-    
 
     function handleOrderChange(event){
         setSelectedOrder(event.target.value);
@@ -179,15 +159,31 @@ export default function DisplayVideos(){
 
     return (
         <div>
-            <div className="addVideoWrapper">
-                <SearchVideo/>
-                <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/>
+            <div className="headerBoxContainer">
+
                 
-                <label for="ratings">Video Order</label>
-                <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
-                  <option value="desc">Ascending</option>
-                  <option value="asc">Descending</option>
-                </select>
+                <div className="headerBox1">
+                    <h2 className="headerBox1Text">Search</h2>
+                    <img src={button} alt="button background"></img>
+                    {/* <SearchVideo/> */}
+                </div>
+                
+                <div className="headerBox2">
+                    <h2 className="headerBox2Text">Add Video</h2>
+                    <img src={button} alt="button background"></img>
+                    {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
+                </div>
+                
+                <div className="headerBox3">
+                    <h2 className="headerBox3Text">Order</h2>
+                    <img src={button} alt="button background"></img>
+                    {/* <label for="ratings">Video Order</label>
+                    <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
+                        <option value="desc">Ascending</option>
+                        <option value="asc">Descending</option>
+                    </select> */}
+                </div>
+
 
 
             </div>
@@ -195,7 +191,7 @@ export default function DisplayVideos(){
             <div className="outerVideoContainer">
                 <div className="currentVideoContainer">
                   <h2>{currentVideo.title}</h2>
-                  <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                  <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   <button type="button" onClick={()=>{likeDislikeCounter(true, currentVideo.id)}}>Like</button>
                   <button type="button" onClick={()=>{likeDislikeCounter(false, currentVideo.id)}}>Dislike</button>
                   <h3>Num of votes : {approvalCounter}</h3>

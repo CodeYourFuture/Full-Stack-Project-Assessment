@@ -5,6 +5,9 @@
   --mediumBackground:#112734;
   --lightBackground: #1b3d50e5;
   --offGreenBackground:#1b444b;
+
+  --sprayPaint: 'Finger Paint';
+  --largeText: 1.5rem;
 }
 
 
@@ -18,18 +21,46 @@
   width: 100%;
   z-index: 12;
   color:var(--boldPink);
+  font-family: var(--sprayPaint);
+  font-size: var(--largeText);
 }
 
-.addVideoWrapper{
-   z-index: 11;
+.headerBoxContainer{
+  z-index: 11;
   width: 100%;
- display:flex ;
+  display:flex ;
   position: fixed;
   padding-top: 150px;
   align-content: center;
-  justify-content: center;
+  justify-content: space-around;
   background-color: var(--darkBackground);
 }
+
+.headerBox1{
+  background-color: var(--mediumBackground);
+  border: 2px solid var(--boldPink);
+  position: relative;
+  text-align: center;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.headerBox2{
+  background-color: blue;
+  border: 2px solid var(--boldPink);
+}
+
+.headerBox3{
+  background-color: green;
+  border: 2px solid var(--boldPink);
+}
+
+
 
 .addVideoBar{
   
