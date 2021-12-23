@@ -5,9 +5,11 @@
   --mediumBackground:#112734;
   --lightBackground: #1b3d50e5;
   --offGreenBackground:#1b444b;
+  /* --gradientBackground: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(9,29,30,1) 34%, rgba(17,39,52,1) 74%, rgba(27,61,80,1) 100%); */
 
   --sprayPaint: 'Finger Paint';
   --largeText: 1.5rem;
+  --mediumText: 1.4rem;
 }
 
 
@@ -23,31 +25,41 @@
   color:var(--boldPink);
   font-family: var(--sprayPaint);
   font-size: var(--largeText);
+    background-image: url("cityBackgroundEdited.jpg");
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center 35%;
+ border-bottom: 5px groove var(--boldPink);
 }
 
 .headerBoxContainer{
   z-index: 11;
   width: 100%;
   display:flex ;
-  position: fixed;
-  padding-top: 150px;
   align-content: center;
   justify-content: space-around;
-  background-color: var(--darkBackground);
 }
 
-.headerBox1{
-  background-color: var(--mediumBackground);
-  border: 2px solid var(--boldPink);
+.headerBox{
   position: relative;
   text-align: center;
+  font-family: var(--sprayPaint);
+  color:var(--darkBackground);
+  width: 100%;
 }
 
-.centered {
+.headerBoxText {
   position: absolute;
-  top: 50%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 12;
+  font-size: var(--mediumText);
+  font-style: italic;
+}
+
+.headerBox :hover{
+  color:var(--boldPink);
 }
 
 .headerBox2{
@@ -75,10 +87,12 @@
 .currentVideoContainer{
   position: fixed;
   width: 100%;
-  padding-top: 15%;
+  padding-top: 20%;
   z-index: 10;
-  background-color: var(--lightBackground);
-  color:var(--whiteText)
+  background: linear-gradient(180deg, rgba(0,0,0,1) 36%, rgba(9,29,30,1) 63%, rgba(17,39,52,1) 88%, rgba(27, 61, 80, 0.74) 100%);
+  color:var(--whiteText);
+
+
 }
 
 .thumbnailContainer{

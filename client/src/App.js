@@ -7,8 +7,8 @@ import AddVideo from "./AddVideo";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>VIDEO RECOMMENDATIONS</h1>
+      <header>
+        
         
         
       </header>

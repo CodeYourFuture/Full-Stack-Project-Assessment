@@ -1,7 +1,8 @@
 import React, { useState , useEvent , useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
-import button from './button-bg.png'
+import button from './button-bg.png';
+import cityBackground from './cityBackgroundEdited.jpg';
 
 
 export default function DisplayVideos(){
@@ -159,23 +160,25 @@ export default function DisplayVideos(){
 
     return (
         <div>
+            <div className="App-header">
+            <h1>VIDEO RECOMMENDATIONS</h1>
+
             <div className="headerBoxContainer">
 
-                
-                <div className="headerBox1">
-                    <h2 className="headerBox1Text">Search</h2>
+                <div className="headerBox">
+                    <h2 className="headerBoxText">SEARCH</h2>
                     <img src={button} alt="button background"></img>
                     {/* <SearchVideo/> */}
                 </div>
                 
-                <div className="headerBox2">
-                    <h2 className="headerBox2Text">Add Video</h2>
+                <div className="headerBox">
+                    <h2 className="headerBoxText">ADD VIDEO</h2>
                     <img src={button} alt="button background"></img>
                     {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
                 </div>
                 
-                <div className="headerBox3">
-                    <h2 className="headerBox3Text">Order</h2>
+                <div className="headerBox">
+                    <h2 className="headerBoxText">VIDEO ORDER</h2>
                     <img src={button} alt="button background"></img>
                     {/* <label for="ratings">Video Order</label>
                     <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
@@ -183,6 +186,8 @@ export default function DisplayVideos(){
                         <option value="asc">Descending</option>
                     </select> */}
                 </div>
+            </div>
+            
 
 
 
@@ -190,6 +195,7 @@ export default function DisplayVideos(){
 
             <div className="outerVideoContainer">
                 <div className="currentVideoContainer">
+                    
                   <h2>{currentVideo.title}</h2>
                   <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   <button type="button" onClick={()=>{likeDislikeCounter(true, currentVideo.id)}}>Like</button>
