@@ -25,7 +25,7 @@ const Video = (props) => {
             {props.videoList.map((video, ind) => (
                 <div key={ind} className="embed-responsive embed-responsive-16by9 video-elem">
                     <h3 className="w-50">{video.title}</h3>
-                    <iframe className="embed-responsive-item" src={video.url} title={video.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    <iframe className="embed-responsive-item" src={video.uri} title={video.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     <div>
                         <Likes likes={video.rating} />
                         <button type="button" className="delete" onClick={() => handleRemove(video.id)}>Delete it</button>

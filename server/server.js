@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { Pool } = require('pg');
 const app = express();
 const videos = require("../client/src/data/exampleresponse.json")
 
@@ -14,10 +15,35 @@ app.use(express.json()); // before our routes definition
 const generator = require("./util/generator");
 const validateYoutube = require("./util/validateYoutube");
 
+
+
+
+const pool = new Pool({
+    user: 'admin',
+    host: 'localhost',
+    database: 'video_app',
+    password: '',
+    port: 5432
+});
+
 // GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send(videos);
+// app.get("/", function(req, res) {
+//     pool.query('SELECT * FROM videos', (error, result) => {
+//       console.log(result.rows)
+//         res.send(videos);
+//     });
+// });
+app.get('/', function(req, res) {
+  pool
+  .query('SELECT * FROM videos')
+  .then((result) => {
+    result.rows.length <= 0
+      ? res.status(400).json({
+          result: "failure",
+          message: "Unable to retrieve video list",
+       })
+      : res.status(200).json(result.rows);
+  }).catch((e) => res.status(400).send(e))
 });
 
 
@@ -91,7 +117,7 @@ app.delete("/:id", (req, res) => {
     // get index of object with id
     const removeIndex = videos.findIndex( item => item.id === id );
     videos.splice( removeIndex, 1 )
-    console.log(videos)
+    // console.log(videos)
     res.json({
       video: "Video Deleted",
       newVideos: videos

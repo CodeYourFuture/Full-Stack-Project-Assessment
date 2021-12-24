@@ -16,15 +16,16 @@ function App() {
     fetch(`http://localhost:5000/`, {
       mode: 'cors'
     })
-    .then((res) =>{
-      if (res.status <= 200) {
-        return res.json();
-      } else {
-        throw new Error(`Error ${res.status} : ${res.statusText}`);
-      }
-    })
-    .then((data) =>
-        setVideoList(data))
+      .then((res) => {
+        if (res.status <= 200) {
+          return res.json();
+        } else {
+          throw new Error(`Error ${res.status} : ${res.statusText}`);
+        }
+      })
+      .then((data) =>
+        setVideoList(data)
+      )
   }, []);
 
   return (
