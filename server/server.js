@@ -145,7 +145,9 @@ app.delete('/:id', (req, res) => {
 			});
 			return;
 		}
-		res.status(200).end();
+		pool.query(`select * from videos`).then((resultAfterDelete) => {
+			res.status(200).json(resultAfterDelete.rows);
+		});
 	});
 });
 

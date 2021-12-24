@@ -35,12 +35,19 @@ const Content = () => {
 	};
 
 	const deleteVideo = (videoID) => {
-		setData((prev) => {
-			// let index = prev.findIndex((video) => video.id === videoID); // searching index
-			let next = prev.filter((video) => video.id !== videoID);
-			return next;
-		});
-		console.log(data);
+		// Вариант без базы данных:
+
+		// setData((prev) => {
+		// 	// let index = prev.findIndex((video) => video.id === videoID); // searching index
+		// 	let next = prev.filter((video) => video.id !== videoID);
+		// 	return next;
+		// });
+
+		fetch(`${SERVER}/${videoID}`, {
+			method: 'DELETE',
+		})
+			.then((res) => res.json())
+			.then((res) => setData(res));
 	};
 
 	return (

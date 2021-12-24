@@ -17,6 +17,7 @@ const Video = ({ id, youtubeID, title, rating, deleteVideo, time, date }) => {
 	};
 
 	const handleDeleteVideo = () => {
+		console.log(id);
 		deleteVideo(id);
 	};
 
