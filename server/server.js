@@ -3,6 +3,16 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 const uuid = require('uuid');
+const { Pool } = require('pg');
+
+const pool = new Pool({
+	user: 'unczpcbmsqldur',
+	host: 'ec2-34-250-92-138.eu-west-1.compute.amazonaws.com',
+	database: 'd10i41fpm2m2b1',
+	password: '20e08ccc8e63fad1e0b68fdf8c5bb0c7eda9682e379c805e9baf48ca2f776b0a',
+	port: 5432,
+	ssl: { rejectUnauthorized: false },
+});
 
 const cors = require('cors');
 app.use(
@@ -106,54 +116,52 @@ app.get('/', (req, res) => {
 	if (order) {
 		sort(order);
 	}
-	res.json(videos);
+	pool.query(`select * from videos`).then((result) => {
+		res.json(result.rows);
+	});
+	// res.json(videos);
 });
-
-// app.get('/', (req, res) => {
-// 	let order = req.query.order;
-// 	console.log(order);
-// });
 
 app.get('/:id', (req, res) => {
 	const id = req.params.id;
-	const videoById = videos.find((video) => video.id == id);
-	if (videoById) {
-		res.status(200).send(videoById);
-	} else {
-		const notFound = {
-			message: 'Sorry we could not find video with such ID',
-		};
-		res.status(404).send(notFound);
-	}
+	pool.query(`select * from videos where id = ${id}`).then((result) => {
+		if (result.rows.length === 0) {
+			res.status(404).send({
+				message: 'Sorry we could not find video with such ID',
+			});
+			return;
+		}
+		res.status(200).json(result.rows);
+	});
 });
 
 app.delete('/:id', (req, res) => {
-	let id = req.params.id;
-	id = +id;
-	if (videos.filter((video) => video.id === id).length === 0) {
-		res.status(400).send({
-			result: 'failure',
-			message: 'Video could not be deleted',
-		});
-	} else {
-		videos = videos.filter((video) => video.id !== id);
+	const id = +req.params.id;
+	pool.query(`delete from videos where id = ${id}`).then((result) => {
+		if (result.rowCount === 0) {
+			res.status(400).send({
+				result: 'failure',
+				message: 'Video could not be deleted',
+			});
+			return;
+		}
 		res.status(200).end();
-	}
+	});
 });
 
 app.post('/', (req, res) => {
-	let title = req.body.title;
-	let url = req.body.url;
+	const title = req.body.title;
+	const url = req.body.url;
 
 	if (title.length > 0 && url.length > 0) {
-		let newVideo = {
-			id: uuid.v4(),
-			title: title,
-			url: url,
-		};
-		console.log(newVideo);
-		videos.push(newVideo);
-		res.sendStatus(202);
+		pool
+			.query(`insert into videos (title, url, rating) values ($1, $2, $3)`, [
+				title,
+				url,
+				0,
+			])
+			.then(() => res.status(202).send('Added'))
+			.catch((e) => console.error(e));
 	} else {
 		let error = {
 			result: 'failure',
