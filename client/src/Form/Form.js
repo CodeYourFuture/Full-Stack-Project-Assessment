@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './form.css';
+import dayjs from 'dayjs';
 
 const Form = ({ addNewVideo }) => {
 	const [title, setTitle] = useState('');
@@ -13,8 +14,8 @@ const Form = ({ addNewVideo }) => {
 		setUrl(e.target.value);
 	};
 
-	const currDate = new Date().toLocaleDateString();
-	const currTime = new Date().toLocaleTimeString().slice(0, -3);
+	const date = dayjs().format('YYYY-MM-DD');
+	const time = dayjs().format('HH:mm');
 
 	const [titlePlaceholder, setTitlePlaceholder] = useState('Enter title');
 	const [urlPlaceholder, setUrlPlaceholder] = useState('Enter URL');
@@ -33,9 +34,10 @@ const Form = ({ addNewVideo }) => {
 			title: title,
 			url: url,
 			rating: 0,
-			time: currTime,
-			date: currDate,
+			time: time,
+			date: date,
 		};
+		// console.log(newVideo); ??? здесь должно быть еще без id но оно уже имеет id
 		addNewVideo(newVideo);
 		setTitle('');
 		setUrl('');

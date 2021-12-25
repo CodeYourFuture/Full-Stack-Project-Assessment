@@ -28,10 +28,30 @@ const Content = () => {
 	};
 
 	const addNewVideo = (video) => {
-		console.log(video);
-		setData((prev) => {
-			return [...prev, video];
-		});
+		// Вариант без базы данных:
+		// setData((prev) => {
+		// 	return [...prev, video];
+		// });
+		console.log(video); /// ?????? тот же вопрос про id
+		fetch(`${SERVER}/`, {
+			method: 'POST',
+			body: JSON.stringify(video),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log(video);
+				video.id = res[0].id;
+				console.log(video);
+				setData((prev) => {
+					const next = [...prev, video];
+					console.log(next); // ????? время уже есть, почему пишет инвалид тайм?
+					return next;
+				});
+				// setData(res);
+			});
 	};
 
 	const deleteVideo = (videoID) => {
@@ -46,8 +66,17 @@ const Content = () => {
 		fetch(`${SERVER}/${videoID}`, {
 			method: 'DELETE',
 		})
-			.then((res) => res.json())
-			.then((res) => setData(res));
+			.then((res) => {
+				if (res.status === 200) {
+					setData((prev) => {
+						let next = prev.filter((video) => video.id !== videoID);
+						return next;
+					});
+					return;
+				}
+			})
+			.catch((e) => console.error(e));
+		// .then((res) => setData(res));
 	};
 
 	return (

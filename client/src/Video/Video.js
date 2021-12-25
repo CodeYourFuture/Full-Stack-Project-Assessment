@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './video.css';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 const Video = ({ id, youtubeID, title, rating, deleteVideo, time, date }) => {
 	const [likeCounter, setLikeCounter] = useState(rating);
@@ -17,10 +20,15 @@ const Video = ({ id, youtubeID, title, rating, deleteVideo, time, date }) => {
 	};
 
 	const handleDeleteVideo = () => {
-		console.log(id);
 		deleteVideo(id);
 	};
 
+	if (time && date) {
+		time = dayjs(time, 'HH:mm:ss').format('HH:mm');
+		date = dayjs(date).format('D-MM-YY');
+	}
+
+	// console.log(dayjs().format('HH:mm'));
 	return (
 		<div className="video-wrap">
 			<iframe
