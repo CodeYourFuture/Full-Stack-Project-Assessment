@@ -5,6 +5,23 @@
   margin: auto;
   width: 90vw;
 }
+.welcome {
+  background-color: #fff;
+  border-radius: 20px;
+  background: linear-gradient(
+    to bottom,
+    hsl(273, 75%, 66%),
+    hsl(240, 73%, 65%)
+  );
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.welcome h2 {
+  color: #fff;
+  font-size: 3rem;
+}
 .videoAdd form {
   display: grid;
   align-items: center;
@@ -23,7 +40,14 @@ form input:focus,
 #searchVideos:focus {
   outline: none;
 }
-form button,
+a {
+  text-decoration: none;
+  color: #fff;
+}
+.buttonContainer {
+  display: flex;
+}
+button,
 .deleteButton,
 .orderVideos {
   background-color: rgb(68, 146, 235);
@@ -32,10 +56,11 @@ form button,
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+  margin: 0.5rem 1rem;
   padding: 0.5rem 1rem;
   transition: all 0.5s ease;
 }
-form button:hover,
+button:hover,
 .orderVideos:hover {
   opacity: 0.8;
 }

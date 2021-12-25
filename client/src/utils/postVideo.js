@@ -24,6 +24,7 @@ export default async function postVideo(
     .then((response) => {
       //if response ok, server will return new id, take id and update page..
       //OR fetch data again but it takes time
+      console.log(`response`, response);
       if (response.status === 200) {
         return response.json();
       }
