@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
-
+require("dotenv").config();
 const { Pool } = require("pg");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,15 +15,14 @@ app.listen(port, () =>
 );
 
 const pool = new Pool({
-  connectionString:
-    "postgres://raqrjygcappkuw:1263c0253d7fa322c1790ab439a8dc8af974b2255d79cdb2bb457a99d973280d@ec2-54-228-139-34.eu-west-1.compute.amazonaws.com:5432/dapnscot6ihjdt",
+  connectionString: process.env.CONNECTIONSTRING,
   ssl: {
     rejectUnauthorized: false,
   },
-  user: "raqrjygcappkuw",
-  host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
-  database: "dapnscot6ihjdt",
-  password: "",
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
   port: 5432,
 });
 
@@ -63,8 +62,7 @@ app.get("/:videoId", (request, response) => {
   });
 });
 
-// Create a new video
-let temporaryID = 10; //DB WILL CREATE
+// ADD a new video
 app.post("/", (request, response) => {
   const title = request.body.title;
   const url = request.body.url;
@@ -86,6 +84,7 @@ app.post("/", (request, response) => {
     time: request.body.time,
     rating: 0,
   };
+  console.log(newVideo);
   const selectQuery = `INSERT INTO videos (title, url, date,time,rating) VALUES ('${newVideo.title}','${newVideo.url}','${newVideo.date}','${newVideo.time}',${newVideo.rating}) RETURNING id;`;
   pool.query(selectQuery, (error, result) => {
     if (error) {
@@ -94,7 +93,7 @@ app.post("/", (request, response) => {
         .send({ msg: "Database ERROR" });
     }
     if (error) {
-      response.send(error);
+      response.send({ error });
     }
     response.send({ id: result.rows[0].id });
   });
