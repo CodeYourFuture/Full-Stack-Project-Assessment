@@ -14,13 +14,14 @@ export default async function postVideo(
   };
   const postObject = {
     method: "POST",
+    mode: "cors",
     headers: {
       "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(newVideo),
   };
-  fetchData("", postObject)
+  fetchData("/", postObject)
     .then((response) => {
       //if response ok, server will return new id, take id and update page..
       //OR fetch data again but it takes time
