@@ -3,6 +3,7 @@ import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 import button from './button-bg.png';
 import cityBackground from './cityBackgroundEdited.jpg';
+import Tester from "./classTester";
 
 
 export default function DisplayVideos(){
@@ -158,26 +159,32 @@ export default function DisplayVideos(){
         OrderVideos(event);
     }
 
+    function showOnClick(){
+
+    }
+
     return (
         <div>
-            <div className="App-header">
-            <h1>VIDEO RECOMMENDATIONS</h1>
+            <div className="mainHeaderContainer">
+
+            <h1 className="headerTitleText">VIDEO RECOMMENDATIONS</h1>
 
             <div className="headerBoxContainer">
 
-                <div className="headerBox">
-                    <h2 className="headerBoxText">SEARCH</h2>
-                    <img src={button} alt="button background"></img>
+                <div className="headerBox" id="boxA" onClick={showOnClick()}>
+
+                    {/* <h3 id="testerAnim">EXPAND ME</h3> */}
+                    <Tester/>
                     {/* <SearchVideo/> */}
                 </div>
                 
-                <div className="headerBox">
+                <div className="headerBox" id="boxB">
                     <h2 className="headerBoxText">ADD VIDEO</h2>
                     <img src={button} alt="button background"></img>
                     {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
                 </div>
                 
-                <div className="headerBox">
+                <div className="headerBox" id="boxC">
                     <h2 className="headerBoxText">VIDEO ORDER</h2>
                     <img src={button} alt="button background"></img>
                     {/* <label for="ratings">Video Order</label>

@@ -17,27 +17,51 @@
   text-align: center;
 }
 
-.App-header{
+.mainHeaderContainer{
   background-color: var(--darkBackground);
   position: fixed;
   width: 100%;
   z-index: 12;
+
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 50% 50%;
+
+
   color:var(--boldPink);
   font-family: var(--sprayPaint);
   font-size: var(--largeText);
-    background-image: url("cityBackgroundEdited.jpg");
+  background-image: url("cityBackgroundEdited.jpg");
   background-size:     cover;                      /* <------ */
   background-repeat:   no-repeat;
   background-position: center 35%;
- border-bottom: 5px groove var(--boldPink);
+  border-bottom: 5px groove var(--boldPink);
 }
 
+.headerTitleText{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 0;
+  grid-row-end: 1;
+}
+
+
+
 .headerBoxContainer{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
   z-index: 11;
-  width: 100%;
-  display:flex ;
+  /* width: 100%; */
+  /* display:flex ;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-around; */
+
 }
 
 .headerBox{
@@ -47,6 +71,44 @@
   color:var(--darkBackground);
   width: 100%;
 }
+
+#boxA{
+  display: grid;
+ background-color: brown;
+ align-self: start; 
+ justify-items: start;
+ justify-content: start;
+ justify-self: start;
+}
+
+#testerAnim{
+  background-color: whitesmoke;
+  border-left:0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  /* height: 100%; */
+  z-index: 100;
+}
+
+/* #testerAnim:hover{
+  width:300%;
+
+} */
+
+#boxB{
+  background-color: yellowgreen;
+}
+
+#boxC{
+  display: grid;
+  justify-self: end;
+  justify-content: end;
+  justify-items: end;
+  background-color: purple;
+  
+}
+
 
 .headerBoxText {
   position: absolute;
