@@ -84,14 +84,23 @@
   align-items: center;
 }
 
+/* .searchContainer{
+  background-color: beige;
+  position: absolute;
+  top: 0px;
+  left:80%;
+  width: 65vw;
+  z-index: 20;
+} */
+
+
 .currentVideoContainer{
   position: fixed;
   width: 100%;
-  padding-top: 20%;
+  padding-top: 16%;
   z-index: 10;
   background: linear-gradient(180deg, rgba(0,0,0,1) 36%, rgba(9,29,30,1) 63%, rgba(17,39,52,1) 88%, rgba(27, 61, 80, 0.74) 100%);
   color:var(--whiteText);
-
 
 }
 
@@ -103,11 +112,14 @@
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 60%;
+
 }
 
 .thumbnailElement{
   position: relative;
   text-align: center;
+
+
 }
 
 .thumbnailImage{

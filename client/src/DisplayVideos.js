@@ -186,15 +186,17 @@ export default function DisplayVideos(){
                         <option value="asc">Descending</option>
                     </select> */}
                 </div>
+                
             </div>
+            </div>
+
             
 
-
-
-            </div>
-
             <div className="outerVideoContainer">
+
+                
                 <div className="currentVideoContainer">
+
                     
                   <h2>{currentVideo.title}</h2>
                   <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
