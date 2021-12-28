@@ -3,7 +3,9 @@ import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 import button from './button-bg.png';
 import cityBackground from './cityBackgroundEdited.jpg';
-import Tester from "./classTester";
+import SearchTornAnimation from "./SearchTornAnimation";
+import AddVideoTornAnimation from "./AddVideoTornAnimation";
+import VideoOrderTornAnimation from "./VideoOrderTornAnimation";
 
 
 export default function DisplayVideos(){
@@ -68,7 +70,10 @@ export default function DisplayVideos(){
     
     function addVideoFromInput(data){
         console.log(data);
-        updateVideoData(data);
+        if (data !=undefined){
+            updateVideoData(data);
+        }
+
     }
 
     // let globalApprovalID = 0;
@@ -174,24 +179,27 @@ export default function DisplayVideos(){
                 <div className="headerBox" id="boxA" onClick={showOnClick()}>
 
                     {/* <h3 id="testerAnim">EXPAND ME</h3> */}
-                    <Tester/>
+                    <SearchTornAnimation/>
                     {/* <SearchVideo/> */}
                 </div>
                 
                 <div className="headerBox" id="boxB">
                     <h2 className="headerBoxText">ADD VIDEO</h2>
                     <img src={button} alt="button background"></img>
+                    <AddVideoTornAnimation passBackParam={(data)=>addVideoFromInput(data)}/>
+                    {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
                     {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
                 </div>
                 
                 <div className="headerBox" id="boxC">
                     <h2 className="headerBoxText">VIDEO ORDER</h2>
                     <img src={button} alt="button background"></img>
-                    {/* <label for="ratings">Video Order</label>
+                    <label for="ratings">Video Order</label>
                     <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
                         <option value="desc">Ascending</option>
                         <option value="asc">Descending</option>
-                    </select> */}
+                    </select>
+                    <VideoOrderTornAnimation/>
                 </div>
                 
             </div>
