@@ -11,7 +11,7 @@ function LoadVideos() {
   const [search, setSearch] = useState("");
   const myDate = moment().format("lll");
   useEffect(() => {
-    fetch(`http://localhost:5000/`)
+    fetch(`http://localhost:5000`)
       .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -41,13 +41,64 @@ function LoadVideos() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const oneVideo = { title, url, rating: 0 };
-    if(matchYoutubeUrl(oneVideo.url)){
-    const newVids = [...videos];
-    newVids.push(oneVideo);
-    setVideos(newVids);
-    window.alert("Valid YouTube video will be added! Click OK!");
-  }}
+    /**
+     * 
+      1. Create video object without ID field.
+      2. post it to the server
+        2.1  server might check if the same video with the same ID already exists,
+        2.2  if not it should generate new unique ID for it
+        2.3  then server adds it to allVideos object (which is going to be a database connection in some future)
+        2.4  lastly, server returns that ID as response body with status code = 200
+      3. client receives OK200 {id: .....} - which means video has been successfully added to the server/database
+      4. client takes that ID and adds to the new video object
+      5. lastly client renders new video component on the screen
+     */
+
+    const newVideo = { title, url, rating: 0 };
+    if(matchYoutubeUrl(newVideo.url)) {
+      // window.alert("Valid YouTube video will be added! Click OK!");
+      
+      // (async () => {
+      //     const rawResponse = await fetch("localhost:5000", {
+      //       method: "POST",
+      //       headers: {
+      //         "Accept": "application/json",
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify(newVideo),
+      //     });
+      //     // TODO: check if there are any errors
+      //     // is rawResponse.status == 200 ?
+      //     const response = await rawResponse.json();
+      //     console.log(response);
+          
+      //     Object.assign(newVideo, {id: response.body.id});
+      //     const newVids = [...videos];
+      //     newVids.push(newVideo);
+      //     setVideos(newVids);
+      //   }
+      // )();
+
+      fetch("http://localhost:5000", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+
+          Object.assign(newVideo, { id: data.id });
+          const newVids = [...videos];
+          newVids.push(newVideo);
+          setVideos(newVids);
+        })
+        .catch((error) => console.error(error));
+    }
+}
 
 
   function handleSearch(e) {
