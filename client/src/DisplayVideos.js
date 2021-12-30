@@ -131,7 +131,7 @@ export default function DisplayVideos(){
         if (event === undefined){
             ascOrDesc = "desc";
         } else {
-            ascOrDesc = event.target.value;
+            ascOrDesc = event;
         }
         
         console.log(ascOrDesc);
@@ -152,57 +152,32 @@ export default function DisplayVideos(){
             })
             console.log("ascending")
             return videosOrderedAsc;
-            // console.log(videosOrderedAsc)
-            // updateVideoData(videosOrderedAsc);
-            // console.log(initialVideoData);
         }
     }
 
 
     function handleOrderChange(event){
-        setSelectedOrder(event.target.value);
+        console.log(event);
+        setSelectedOrder(event);
         OrderVideos(event);
-    }
-
-    function showOnClick(){
-
     }
 
     return (
         <div>
-            <div className="mainHeaderContainer">
+            <div className="headerContainer">
 
-            <h1 className="headerTitleText">VIDEO RECOMMENDATIONS</h1>
-
-            <div className="headerBoxContainer">
-
-                <div className="headerBox" id="boxA" onClick={showOnClick()}>
-
-                    {/* <h3 id="testerAnim">EXPAND ME</h3> */}
-                    <SearchTornAnimation/>
-                    {/* <SearchVideo/> */}
-                </div>
+                <h1 className="headerTitleText">VIDEO RECOMMENDATIONS</h1>
                 
-                <div className="headerBox" id="boxB">
-                    <h2 className="headerBoxText">ADD VIDEO</h2>
-                    <img src={button} alt="button background"></img>
-                    <AddVideoTornAnimation passBackParam={(data)=>addVideoFromInput(data)}/>
-                    {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
-                    {/* <AddVideo passBackParam={(data)=>addVideoFromInput(data)}/> */}
+                <div className="bannerContainer">
+
+                        <SearchTornAnimation/>
+                    
+                        <AddVideoTornAnimation passBackParam={(data)=>addVideoFromInput(data)}/>
+           
+                        <VideoOrderTornAnimation passBackParam={(data)=>handleOrderChange(data)}/>
+        
                 </div>
-                
-                <div className="headerBox" id="boxC">
-                    <h2 className="headerBoxText">VIDEO ORDER</h2>
-                    <img src={button} alt="button background"></img>
-                    <label for="ratings">Video Order</label>
-                    <select name="ratings" id="ratings" value={selectedOrder} onChange={handleOrderChange}>
-                        <option value="desc">Ascending</option>
-                        <option value="asc">Descending</option>
-                    </select>
-                    <VideoOrderTornAnimation/>
-                </div>
-                
-            </div>
+
             </div>
 
             

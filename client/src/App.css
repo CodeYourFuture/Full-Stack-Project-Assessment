@@ -17,10 +17,16 @@
   text-align: center;
 }
 
-.mainHeaderContainer{
+
+/*------------------ Navigation Bar  -------------------*/
+
+.headerContainer{
   background-color: var(--darkBackground);
   position: fixed;
   width: 100%;
+  min-height: 200px;
+  height: 20vh;
+  max-height: 300px;
   z-index: 12;
 
   display: grid;
@@ -43,54 +49,34 @@
   grid-column-end: 3;
   grid-row-start: 0;
   grid-row-end: 1;
+
+  white-space: nowrap;
+ 
 }
 
 
+/*------------------ Navigation Bar - Banner Buttons  -------------------*/
 
-.headerBoxContainer{
+.bannerContainer{
+  display: grid;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
 
-  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
   z-index: 11;
-  /* width: 100%; */
-  /* display:flex ;
-  align-content: center;
-  justify-content: space-around; */
+  /* max-width: 1200px; */
+  
 
 }
 
-.headerBox{
-  position: relative;
-  text-align: center;
-  font-family: var(--sprayPaint);
-  color:var(--darkBackground);
-  width: 100%;
-}
 
-/* #boxA{
-  display: grid;
- background-color: brown;
- align-self: start; 
- justify-items: start;
 
-} */
+/*------------------ Banner Buttons - SEARCH -------------------*/
 
-/* #testerAnim{
-  background-color: whitesmoke;
-  border-left:0;
-  margin: 0;
-  position: absolute;
-  top: 0;
-  height: 90%;
-  z-index: 100;
-} */
-
-.banner_span_container {
+.search_banner_span_container {
   display: grid;
   grid-template-columns: 10vw 1fr;
   grid-template-rows: 1fr;
@@ -98,27 +84,22 @@
 
 }
 
-.banner_text{
+.search_banner_text{
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 1;
   /* background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%); */
+  color: black;
 }
 
-.banner_hidden{
 
-}
-
-.searchContainer{
-  display: inline-block;
-}
-
-.banner_text:hover{
+.search_banner_text:hover{
   color: var(--boldPink);
 }
 
 .searchContainer{
+    display: inline-block;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
@@ -126,73 +107,123 @@
 
 }
 
-#searchInputBox{
-  /* max-width: 20vw; */
-  
-}
-
-/* #testerAnim:hover{
-  width:300%;
-
-} */
-
-#boxB{
-  background-color: yellowgreen;
-}
-
-#boxC{
-  display: grid;
-  justify-self: end;
-  justify-content: end;
-  justify-items: end;
-  background-color: purple;
-  
-}
 
 
-.headerBoxText {
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  font-size: var(--mediumText);
-  font-style: italic;
-}
-
-/* .headerBox :hover{
-  color:var(--boldPink);
-} */
-
-.headerBox2{
-  background-color: blue;
-  border: 2px solid var(--boldPink);
-}
-
-.headerBox3{
-  background-color: green;
-  border: 2px solid var(--boldPink);
-}
+/*------------------ Banner Buttons - ADD VIDEO -------------------*/
 
 
-
-.addVideoBar{
-  
-  align-content: center;
+.addVideo_outer_container{
+  display: flex;
   justify-content: center;
-  justify-self: center;
-  justify-items: center;
-  align-self: center;
-  align-items: center;
+}
+
+.addVideo_banner_span_container {
+  display: grid;
+  grid-template-columns: 10vw 1fr;
+  grid-template-rows: 1fr;
+  /* flex-direction: row; */
+
+}
+
+.addVideo_banner_text{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  overflow: hidden;
+  /* background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%); */
+  color: black;
+}
+
+
+.addVideo_banner_text:hover{
+  color: var(--boldPink);
+}
+
+.fake_banner_text{
+  color: black;
+}
+
+.fake_banner_text:hover{
+  color: var(--boldPink);
+}
+
+.addVideo_fake_banner_left_container{
+    display: flex;
+  /* justify-content: end; */
+  position: absolute;
+  left:0;
+  top:0;
+  direction: rtl;
+  z-index: 200;
+
+}
+
+.addVideo_fake_banner_right_container{
+  display: flex;
+  position: absolute;
+  right:0;
+  top:0;
+  direction: ltr;
+  z-index: 200;
 }
 
 
 
+
+
+/*------------------ Banner Buttons - VIDEO ORDER -------------------*/
+
+.videoOrder_outer_container{
+  display: flex;
+  /* justify-content: end; */
+  position: relative;
+  right:0;
+  direction: rtl;
+}
+
+
+
+.videoOrder_banner_span_container {
+  display: grid;
+  grid-template-columns: 10vw 1fr;
+  grid-template-rows: 1fr;
+  /* flex-direction: row; */
+  justify-self: end;
+  direction: ltr;
+}
+
+.videoOrder_banner_text{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  /* background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%); */
+  color: black;
+}
+
+
+.videoOrder_banner_text:hover{
+  color: var(--boldPink);
+}
+
+
+
+
+
+
+.generalInputBox{
+  
+}
+
+
+
+/*------------------ Main video container -------------------*/
 
 .currentVideoContainer{
   position: fixed;
   width: 100%;
-  padding-top: 16%;
+  padding-top: 20vh;
   z-index: 10;
   background: linear-gradient(180deg, rgba(0,0,0,1) 36%, rgba(9,29,30,1) 63%, rgba(17,39,52,1) 88%, rgba(27, 61, 80, 0.74) 100%);
   color:var(--whiteText);
@@ -200,32 +231,34 @@
 }
 
 .thumbnailContainer{
-  background-color: var(--whiteText);
+  background-color: #1F3D4F;
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
   padding-left: 5%;
   padding-right: 5%;
-  padding-top: 60%;
+  padding-top: 80vh;
 
 }
 
 .thumbnailElement{
   position: relative;
   text-align: center;
-
+  border-top: var(--boldPink) 2px solid;
 
 }
 
 .thumbnailImage{
-  
+  /* background-color: #ffffff; */
 }
 
 .thumbnailText{
-  background-color: rgba(128, 128, 128, 0.493);
+  background-color: var(--whiteText);
+  font-family: var(--sprayPaint);
+  font-size: var(--mediumText);
   overflow: hidden;
   position: absolute;
-  top: 2%;
+  top: -1.5%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;

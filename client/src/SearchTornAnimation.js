@@ -57,10 +57,11 @@ export class SearchTornAnimation extends React.Component {
             <div id="torn_edge_banner" class="torn_container torn_left torn_right">
 	            <div></div>
                 {/* Target below  with width change */}
-	            <div className="banner_span_container"  style={{...styles , width:this.state.width, zIndex : this.state.zIndex}}>
-                    <span className="banner_hidden" style={{display:this.state.display}}><SearchVideo/></span>
-                    {/* <h3>HCRAES</h3> */}
-                    <span class="banner_text" onClick={this.onScale.bind(this)} style={{background:this.state.background}}>SEARCH</span>
+	            <div className="search_banner_span_container"  style={{...styles , width:this.state.width, zIndex : this.state.zIndex}}>
+                    <span class="search_banner_text" onClick={this.onScale.bind(this)} style={{background:this.state.background}}>SEARCH</span>
+                    <span className="search_banner_hidden" style={{display:this.state.display}}>
+                        <SearchVideo/>
+                    </span>
                 </div>
                 
             </div>

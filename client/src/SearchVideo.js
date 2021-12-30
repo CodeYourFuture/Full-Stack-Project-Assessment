@@ -41,7 +41,7 @@ export default function SearchVideo(props){
     return (
         <div className="searchContainer">
           <form onSubmit={handleSubmit} >
-                <input id="searchInputBox" name="search" value={inputs.search || ""} type="text" placeholder="Title.." onChange={handleChange}/>
+                <input id="searchInputBox" className="generalInputBox" name="search" value={inputs.search || ""} type="text" placeholder="Title.." onChange={handleChange}/>
                 <input value="search" type="submit" />	
           </form>
         </div>

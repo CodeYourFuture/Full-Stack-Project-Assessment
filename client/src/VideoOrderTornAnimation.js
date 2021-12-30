@@ -8,6 +8,10 @@ const styles = {
     transition : 'all 500ms ease-in-out'
 }
 
+function handleOrderChange(){
+    console.log("handleOrderChange has been run")
+}
+
 export class VideoOrderTornAnimation extends React.Component {
 
     constructor(){
@@ -19,9 +23,11 @@ export class VideoOrderTornAnimation extends React.Component {
             opacity:0,
             width: '100%',
             zIndex: 10,
-            background: ''
+            background: '',
+            selectedOrder: 'desc'
         };
     }
+
 
     onScale(){
         if (this.state.isOpen === false){
@@ -50,17 +56,30 @@ export class VideoOrderTornAnimation extends React.Component {
 
     }
 
+    
+    passDataToParent(event){
+        console.log("passDataToParent run")
+        console.log(event.target.value)
+        this.props.passBackParam(event.target.value)
+        // return(data)
+    }
+
     render(){
         return (
-        <div>
-
+        <div className="videoOrder_outer_container">
             <div id="torn_edge_banner" class="torn_container torn_left torn_right">
 	            <div></div>
                 {/* Target below  with width change */}
-	            <div className="banner_span_container"  style={{...styles , width:this.state.width, zIndex : this.state.zIndex}}>
-                    <span className="banner_hidden" style={{display:this.state.display}}><SearchVideo/></span>
+	            <div className="videoOrder_banner_span_container"  style={{...styles , width:this.state.width, zIndex : this.state.zIndex}}>
+                    <span className="videoOrder_banner_hidden" style={{display:this.state.display}}>
+                        <select name="ratings" id="ratings" value={this.selectedOrder} onChange={this.passDataToParent.bind(this)}>
+                            <label for="ratings">Video Order</label>
+                            <option value="desc">Ascending</option>
+                            <option value="asc">Descending</option>
+                        </select>
+                    </span>
                     {/* <h3>HCRAES</h3> */}
-                    <span class="banner_text" onClick={this.onScale.bind(this)} style={{background:this.state.background}}>SEARCH</span>
+                    <span class="videoOrder_banner_text" onClick={this.onScale.bind(this)} style={{background:this.state.background}}>VIDEO ORDER</span>
                 </div>
                 
             </div>
