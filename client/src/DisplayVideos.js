@@ -6,6 +6,7 @@ import cityBackground from './cityBackgroundEdited.jpg';
 import SearchTornAnimation from "./SearchTornAnimation";
 import AddVideoTornAnimation from "./AddVideoTornAnimation";
 import VideoOrderTornAnimation from "./VideoOrderTornAnimation";
+import ApprovalCounterFunction from "./ApprovalCounterFunction";
 
 
 export default function DisplayVideos(){
@@ -82,6 +83,11 @@ export default function DisplayVideos(){
         let counterToPass;
         console.log(approvalCounter)
         // globalApprovalID= id;
+
+        // If letter at index === former letter then apply same.css 
+        // else apply pink css
+        // <h3>{sameLetter}<span>{different letter}</span></h3>
+
 
         if (input === true) {
             counterToPass = approvalCounter+1;
@@ -184,17 +190,23 @@ export default function DisplayVideos(){
 
             <div className="outerVideoContainer">
 
-                
-                <div className="currentVideoContainer">
+                <div className="innerVideoContainer">
+                    <div className="currentVideoContainer">
+                        <h2>{currentVideo.title}</h2>
+                        <iframe  id="currentVideoFrame" width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 
-                    
-                  <h2>{currentVideo.title}</h2>
-                  <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                  <button type="button" onClick={()=>{likeDislikeCounter(true, currentVideo.id)}}>Like</button>
-                  <button type="button" onClick={()=>{likeDislikeCounter(false, currentVideo.id)}}>Dislike</button>
-                  <h3>Num of votes : {approvalCounter}</h3>
-                  <button type="button" onClick={()=>{deleteVideo(currentVideo.id)}}>Remove video</button>
-                </div> 
+                        <div className="approvalBanner">
+                              <button href="#" class="hbtn hb-border-left-br3 likeButtons"type="button" onClick={()=>{likeDislikeCounter(false, currentVideo.id)}}><ion-icon id="likeIcons" name="heart-dislike-outline"></ion-icon></button>
+                              <h3>VOTES : <span><ApprovalCounterFunction/></span></h3>
+                              
+                              <button href="#" class="hbtn hb-border-right-br3 likeButtons" type="button" onClick={()=>{likeDislikeCounter(true, currentVideo.id)}}><ion-icon id="likeIcons" name="heart-half-outline"></ion-icon></button>
+                        </div>
+                        <button href="#" class="hbtn hb-border-top-br3 removeButton" type="button" onClick={()=>{deleteVideo(currentVideo.id)}}><span className="removeIcon"><ion-icon name="close"></ion-icon></span><span className="removeText">DELETE</span></button>
+                    </div> 
+                </div>
+
+
+
                 <div className="thumbnailContainer">
                     {initialVideoData.map(function(element){
                     return(
