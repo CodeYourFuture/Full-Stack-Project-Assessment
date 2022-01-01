@@ -116,6 +116,46 @@ function LoadVideos() {
     setVideos(videos.filter((video) => video.id !== id));
   };
 
+  const sortAscending = () => {
+          fetch(`http://localhost:5000`)
+            .then((res) => {
+              if (res.status === 200) {
+                return res.json();
+              }
+              return null;
+            })
+            .then((data) => {
+              data.sort((a, b) => {
+                return a.rating - b.rating;
+              });
+              setVideos(data);
+            })
+            .catch((error) => {
+              console.log("The error is " + error);
+              // setVideos([]);
+            });
+   };
+
+   const sortDescending = () => {
+          fetch(`http://localhost:5000`)
+            .then((res) => {
+              if (res.status === 200) {
+                return res.json();
+              }
+              return null;
+            })
+            .then((data) => {
+              data.sort((a, b) => {
+                return b.rating - a.rating;
+              });
+              setVideos(data);
+            })
+            .catch((error) => {
+              console.log("The error is " + error);
+              // setVideos([]);
+            });
+   };
+
   return (
     <div>
       <div className="add-video">
@@ -162,6 +202,11 @@ function LoadVideos() {
           type="text"
           value={search}
         ></input>
+      </div>
+      <div>
+        Sort by Votes
+        <button onClick={sortDescending}>High to Low</button>
+        <button onClick={sortAscending}>Low to High</button>
       </div>
 
       <div className="card-contener">

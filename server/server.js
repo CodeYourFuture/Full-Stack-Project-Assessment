@@ -17,16 +17,58 @@ let videos = require("../exampleresponse.json");
 const { request, response } = require("express");
 
 // GET "/"
-app.get("/", (requset, response) => {
-  // Delete this line after you've confirmed your server is running
-  // res.send({ express: "Your Backend Service is Running" });
-    response.send(videos);
+app.get("/", (request, response) => {
+
+  /**
+   * GET / localhost:5000/
+   * request.query ---> {}
+   * 
+   * request.query ---> {order : "asc"} 
+   * 
+   * GET / localhost:5000/?order=desc
+   * request.query ---> {order : "desc"} 
+   * 
+   * GET / localhost:5000/?order=ASC
+   * request.query ---> {order : "ASC"}
+   * 
+   * GET / localhost:5000/?order=xkjhkdjhf
+   * request.query ---> {order : "xkjhkdjhf"}
+   * 
+   * GET / localhost:5000/?order=xkjhkdjhf&hhhh=kdfjhkjdhgf
+   * request.query ---> {order : "xkjhkdjhf", hhhh: "kdfjhkjdhgf"}
+   * 
+   * GET / localhost:5000/?order=asc
+   * request = {
+   *  query: {
+   *    order: "asc"
+   *  }
+   * }
+   */
+  
+  if (request.query?.order?.toLowerCase() === "asc") {
+  // if (request.query.hasOwnProperty("order") && request.query.order.toLowerCase() === "asc" ) {
+    // send videos sorted in ASC order as response:
+    response.status(200).send(
+      [...videos].sort((a, b) => {
+        return a.rating - b.rating;
+      })
+    );
+  } else {
+    // send videos sorted in DESC order as response:
+    response.status(200).send(
+      [...videos].sort((a, b) => {
+        return b.rating - a.rating;
+      })
+    );
+  }  
+  
 });
 
 app.get("/id/:id",(request,response) => {
   const video = videos.find((video)=>String(video.id)===request.params.id);
   response.send(video);
 })
+
 
 app.post("/", (request,response) => {
     if(request.body.title === "" || request.body.url === ""){
@@ -48,7 +90,7 @@ app.delete("/:id", (request,response) => {
   const videoIndex = videos.findIndex(
     (video) => String(video.id) === request.params.id
   );
-  if (videoIndex > 0) {
+  if (videoIndex >= 0) {
     videos.splice(videoIndex, 1);
     response.sendStatus(204);
   } else {
