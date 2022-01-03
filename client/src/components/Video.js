@@ -37,7 +37,7 @@ const Video = ({ videos, setVideos, video, index }) => {
         </div>
         <div className='videoVote'>
           <FaThumbsUp onClick={handleVoteIncrement} className='iconVote'/>
-          <h4>{vote} {vote === 0 ? `Vote` : `Votes`}</h4>
+          <h4>{vote} {vote > 1 ? `Votes` : `Vote`}</h4>
           <FaThumbsDown onClick={handleVoteDecrement} className='iconVote'/>
         </div>
         <div>
