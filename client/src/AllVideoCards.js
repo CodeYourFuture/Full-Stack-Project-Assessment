@@ -4,7 +4,7 @@ import AllVideos from "./AllVideos";
 
 function AllVideoCards() {
   const [videos, setVideos] = useState([]);
-  const fetchVideosData = async () => {
+  const fetchData = async () => {
     const url = "http://localhost:5000";
 
     try {
@@ -30,7 +30,7 @@ function AllVideoCards() {
     }
   };
   useEffect(() => {
-    fetchVideosData();
+    fetchData();
   }, []);
 
   return (

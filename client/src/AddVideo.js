@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 const AddVideo = ({ setClicked, videos, setVideos }) => {
-  function useFormState(initialState) {
-    const [state, setState] = useState(initialState);
+  function useFormState(initialValue) {
+    const [state, setState] = useState(initialValue);
     function setEvent(event) {
       setState(event.target.value);
     }
@@ -17,15 +17,15 @@ const AddVideo = ({ setClicked, videos, setVideos }) => {
   function handleSubmit(event) {
     event.preventDefault();
     const newVideo = {
-      id: Math.floor(Math.random() * 10000) + title.length + url.length,
+      id: Math.floor(Math.random() * 1000000) + title.length + url.length,
       title: title,
       url: url,
       rating: 0,
     };
 
-    const videosIncludeNewVideo = videos.some((vid) => vid.url === url);
-    if (!videosIncludeNewVideo) {
-      setVideos((prev) => prev.concat(newVideo));
+    const includesNewVideo = videos.some((video) => video.url === url);
+    if (!includesNewVideo) {
+      setVideos((previousValue) => previousValue.concat(newVideo));
     } else {
       alert("This video is already in the videos list.");
     }

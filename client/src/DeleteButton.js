@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 function DeleteButton({ id, videos, setVideos }) {
   function handleDelete() {
-    const filteredVideos = videos.filter((x) => x.id !== id);
+    const filteredVideos = videos.filter((video) => video.id !== id);
     console.log(filteredVideos);
     setVideos(filteredVideos);
 
