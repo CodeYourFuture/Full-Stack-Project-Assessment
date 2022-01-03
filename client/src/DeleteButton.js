@@ -7,7 +7,7 @@ function DeleteButton({ id, videos, setVideos }) {
     console.log(filteredVideos);
     setVideos(filteredVideos);
 
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`https://humailkhan-assessment-project.herokuapp.com/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
