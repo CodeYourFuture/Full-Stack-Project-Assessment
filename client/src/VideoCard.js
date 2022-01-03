@@ -7,9 +7,9 @@ function VideoCard({ video, videos, setVideos }) {
   //console.log(videoId);
   return (
     <div>
-      <h2>{videos.title}</h2>
       <VideoLikes />
       <div className="embed-responsive embed-responsive-16by9">
+        <p>{video.title}</p>
         <iframe
           className="embed-responsive-item"
           src={`https://www.youtube.com/embed/${videoId}`}

@@ -6,6 +6,14 @@ function DeleteButton({ id, videos, setVideos }) {
     const filteredVideos = videos.filter((x) => x.id !== id);
     console.log(filteredVideos);
     setVideos(filteredVideos);
+
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((response) => console.log(response.json()));
   }
 
   return (

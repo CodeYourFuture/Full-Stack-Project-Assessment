@@ -1,65 +1,85 @@
 import React, { useState } from "react";
 
-const AddVideo = (props) => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-
-  //console.log(props.videos);
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+const AddVideo = ({ setClicked, videos, setVideos }) => {
+  function useFormState(initialState) {
+    const [state, setState] = useState(initialState);
+    function setEvent(event) {
+      setState(event.target.value);
+    }
+    return [state, setEvent];
+  }
+  const handleCancelButton = () => {
+    setClicked(false);
   };
-
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value);
-  };
-  const lastIndex = props.data.length - 1;
-  const lastItem = props.data[lastIndex];
-  const lastId = lastItem.id;
-  const newId = lastId + 1;
-
-  const handleFormSubmit = (event) => {
+  const [title, setTitle] = useFormState("");
+  const [url, setUrl] = useFormState("");
+  // Set the title and url value to the form input
+  function handleSubmit(event) {
     event.preventDefault();
-
-    let newVideo = {
-      id: newId,
+    const newVideo = {
+      id: Math.floor(Math.random() * 10000) + title.length + url.length, // create a random id for front-end key value
       title: title,
       url: url,
       rating: 0,
     };
-    console.log(props.data);
-    let addedVideo = props.data.push(newVideo);
-    props.setVideos(addedVideo);
-  };
+
+    const videosIncludeNewVideo = videos.some((vid) => vid.url === url);
+    if (!videosIncludeNewVideo) {
+      setVideos((prev) => prev.concat(newVideo));
+    } else {
+      alert("This video is already in the videos list.");
+    }
+    fetch("http://localhost:5000", {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(newVideo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => console.log(response.json()));
+  }
 
   return (
-    <div>
-      {
-        <form onSubmit={handleFormSubmit}>
-          <label>
-            Title
-            <input
-              type="text"
-              name="title"
-              placeholder="Type to add your video title"
-              value={title}
-              onChange={handleTitleChange}
-            />
-          </label>
-          <label>
-            URL
-            <input
-              type="url"
-              name="url"
-              placeholder="Add the Video URL"
-              value={url}
-              onChange={handleUrlChange}
-            />
-          </label>
-          <button>Add Video</button>
-        </form>
-      }
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="inputTitle">Title</label>
+        <input
+          className="input ml-3"
+          name="title"
+          type="text"
+          required=""
+          placeholder="Title..."
+          id="inputTitle"
+          value={title}
+          onChange={setTitle}
+        />
+      </div>
+      <div>
+        <label htmlFor="inputUrl">URL</label>
+        <input
+          className="input ml-3"
+          name="url"
+          type="text"
+          required
+          placeholder="URL..."
+          id="inputUrl"
+          value={url}
+          onChange={setUrl}
+        />
+      </div>
+      <div>
+        <button
+          className="btn btn-warning input"
+          type="cancel"
+          onClick={handleCancelButton}
+        >
+          Cancel
+        </button>
+        <button className="btn btn-danger input" type="submit">
+          ADD
+        </button>
+      </div>
+    </form>
   );
 };
 

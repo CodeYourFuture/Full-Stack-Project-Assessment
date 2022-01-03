@@ -1,11 +1,11 @@
 import React from "react";
 
-function Search({ setVideos, data }) {
-  function handleSearchInput(event) {
-    const searchVideo = data.filter((video) =>
+function Search({ setVideos, videos }) {
+  function searchInput(event) {
+    const searchedVideo = videos.filter((video) =>
       video.title.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setVideos(searchVideo);
+    setVideos(searchedVideo);
   }
 
   return (
@@ -17,7 +17,7 @@ function Search({ setVideos, data }) {
             id="search-video"
             className="form-control"
             placeholder="search video..."
-            onChange={handleSearchInput}
+            onChange={(event) => searchInput(event)}
           />
         </div>
       </form>
