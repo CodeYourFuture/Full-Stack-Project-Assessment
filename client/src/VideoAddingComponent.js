@@ -9,7 +9,9 @@ const VideoAddingComponent = ({ videos, setVideos }) => {
   };
   return (
     <div>
-      <button onClick={handleClick}>Add Video</button>
+      <button className="btn btn-success" onClick={handleClick}>
+        Add Video
+      </button>
       {clicked ? (
         <AddVideo
           setClicked={setClicked}

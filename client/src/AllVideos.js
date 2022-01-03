@@ -11,7 +11,11 @@ const AllVideos = ({ videos, setVideos }) => {
       index={index}
     />
   ));
-  return <div className="d-flex flex-wrap">{allVideos}</div>;
+  return (
+    <div className="d-flex flex-wrap justify-content-around flex-row">
+      {allVideos}
+    </div>
+  );
 };
 
 export default AllVideos;

@@ -12,7 +12,7 @@ function VideoLikes() {
   return (
     <div className="vote-icons">
       <i className="fa fa-thumbs-up" onClick={increaseVotes}></i>
-      <p> {votes} Likes </p>
+      <p className="vote-text"> {votes} Likes </p>
       <i className="fa fa-thumbs-down" onClick={decreaseVotes}></i>
     </div>
   );

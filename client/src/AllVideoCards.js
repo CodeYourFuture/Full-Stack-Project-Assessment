@@ -18,12 +18,12 @@ function AllVideoCards() {
         },
       });
       if (response.status === 200) {
-        const json = await response.json();
-        console.log(json);
-        setVideos(json);
+        const result = await response.json();
+        console.log(result);
+        setVideos(result);
       } else {
-        const json = response.json();
-        alert(json.msg);
+        const result = response.json();
+        alert(result.msg);
       }
     } catch (error) {
       console.log("error", error);

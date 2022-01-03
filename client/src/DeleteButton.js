@@ -17,7 +17,7 @@ function DeleteButton({ id, videos, setVideos }) {
   }
 
   return (
-    <Button variant="danger" onClick={handleDelete}>
+    <Button className="del-button" variant="danger" onClick={handleDelete}>
       Delete Video
     </Button>
   );
