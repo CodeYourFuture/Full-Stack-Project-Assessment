@@ -17,6 +17,9 @@ function App() {
       <body>
         <DisplayVideos/>
       </body>
+      <footer>
+        <h3>Website front-end and back-end designed by Erin Dyson </h3>
+      </footer>
     </div>
   );
 }

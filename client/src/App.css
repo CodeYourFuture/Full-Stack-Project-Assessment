@@ -1,6 +1,6 @@
 :root {
   --boldPink: #ff00a9;
-  --boldPinkOpacity: #ff00aa26;
+  --boldPinkOpacity: #ff00aa88;
   --whiteText: #ffffff;
   --darkBackground:#091d1e;
   --mediumBackground:#112734;
@@ -276,6 +276,10 @@ iframe{
   
 }
 
+.approvalCounterToUpdate{
+  color: var(--boldPink);
+}
+
 .approvalBanner{
   display: flex;
   width: 100%;
@@ -352,9 +356,12 @@ color: var(--boldPink);
   display: flex;
   position: relative;
   text-align: center;
-  border-top: var(--boldPink) 2px solid;
-  
+  border-top: var(--boldPinkOpacity) 2px solid;
+}
 
+.thumbnailElement:hover{
+  transition: 0.2s ease-in-out;
+  border-top: var(--boldPink) 2px solid;
 }
 
 .thumbnailImage{
@@ -368,14 +375,15 @@ color: var(--boldPink);
 
 .thumbnailText{
   background-color: var(--whiteText);
-  font-family: var(--sprayPaint);
+  font-family: var(--leagueFont);
   font-size: var(--mediumText);
   white-space: nowrap;
   overflow: hidden;
   position: absolute;
-  top: -1.5%;
+  top: -2.7%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  
   
 }

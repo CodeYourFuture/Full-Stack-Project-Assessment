@@ -13,10 +13,8 @@ export default function DisplayVideos(){
 
     const [ initialVideoData , updateVideoData ] = useState([]);
     const [ currentVideo , updateCurrentVideo ] = useState([]);
-    const [ approvalCounter , updateApprovalCounter ] = useState(0);
     const [ selectedOrder , setSelectedOrder] = useState("desc"); //default value
-  
-
+    
 
     useEffect(() => {
     // GET request using fetch inside useEffect React hook
@@ -26,12 +24,7 @@ export default function DisplayVideos(){
             updateVideoData(data);
             // orderVideos();
             updateCurrentVideo(data[0]);
-            updateApprovalCounter(data[0].rating);
         })
-        // .then(()=>{
-        //     const defaultOrder = OrderVideos();
-        //     updateVideoData(defaultOrder);
-        // })
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
@@ -59,13 +52,6 @@ export default function DisplayVideos(){
                 console.log(data);
                 addThumbnailToElement(data);
                 updateCurrentVideo(data);
-
-                if (data.rating === undefined){
-                    updateApprovalCounter(0);
-                } else {
-                    updateApprovalCounter(data.rating);
-                }
-                
             });
     }
     
@@ -74,47 +60,6 @@ export default function DisplayVideos(){
         if (data !=undefined){
             updateVideoData(data);
         }
-
-    }
-
-    // let globalApprovalID = 0;
-
-    function likeDislikeCounter(input, id){
-        let counterToPass;
-        console.log(approvalCounter)
-        // globalApprovalID= id;
-
-        // If letter at index === former letter then apply same.css 
-        // else apply pink css
-        // <h3>{sameLetter}<span>{different letter}</span></h3>
-
-
-        if (input === true) {
-            counterToPass = approvalCounter+1;
-            console.log(counterToPass)
-            updateApprovalCounter(counterToPass);
-        } else if (input === false) {
-            counterToPass = approvalCounter-1;
-            console.log(counterToPass)
-            updateApprovalCounter(counterToPass);
-        }
-
-        console.log(approvalCounter);
-
-        fetch(`http://localhost:5000/${id}`, {
-          method: 'put',
-          headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            updatedRatings: approvalCounter
-        })
-        })
-        .then(response => response.json())
-        .then(data => {
-           console.log(data);
-        });
-        
 
     }
 
@@ -195,12 +140,10 @@ export default function DisplayVideos(){
                         <h2>{currentVideo.title}</h2>
                         <iframe  id="currentVideoFrame" width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 
-                        <div className="approvalBanner">
-                              <button href="#" class="hbtn hb-border-left-br3 likeButtons"type="button" onClick={()=>{likeDislikeCounter(false, currentVideo.id)}}><ion-icon id="likeIcons" name="heart-dislike-outline"></ion-icon></button>
-                              <h3>VOTES : <span><ApprovalCounterFunction/></span></h3>
-                              
-                              <button href="#" class="hbtn hb-border-right-br3 likeButtons" type="button" onClick={()=>{likeDislikeCounter(true, currentVideo.id)}}><ion-icon id="likeIcons" name="heart-half-outline"></ion-icon></button>
-                        </div>
+                       
+                            <ApprovalCounterFunction passedRating={currentVideo.rating} passedId={currentVideo.id}/>
+                      
+
                         <button href="#" class="hbtn hb-border-top-br3 removeButton" type="button" onClick={()=>{deleteVideo(currentVideo.id)}}><span className="removeIcon"><ion-icon name="close"></ion-icon></span><span className="removeText">DELETE</span></button>
                     </div> 
                 </div>
