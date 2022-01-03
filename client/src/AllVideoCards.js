@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import data from "./exampleresponse.json";
 import VideoOptions from "./VideoOptions";
 import AllVideos from "./AllVideos";
 

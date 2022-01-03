@@ -13,11 +13,11 @@ const AddVideo = ({ setClicked, videos, setVideos }) => {
   };
   const [title, setTitle] = useFormState("");
   const [url, setUrl] = useFormState("");
-  // Set the title and url value to the form input
+
   function handleSubmit(event) {
     event.preventDefault();
     const newVideo = {
-      id: Math.floor(Math.random() * 10000) + title.length + url.length, // create a random id for front-end key value
+      id: Math.floor(Math.random() * 10000) + title.length + url.length,
       title: title,
       url: url,
       rating: 0,
