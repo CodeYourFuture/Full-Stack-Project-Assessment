@@ -28,3 +28,10 @@ h2{
   width: 480px;
   margin-right : 100px;
 }
+button{
+  font-family: 'Times New Roman', Times, serif;
+  border-color: brown;
+  border-radius: 1rem;
+  padding-inline-start: 10px;
+
+}

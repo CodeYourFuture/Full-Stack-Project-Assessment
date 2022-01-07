@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "server": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js --ignore client"
   },
-  "proxy": "http://localhost:5000",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "concurrently": "^6.5.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "parse-json": "^6.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.15"
   }
 }

@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Package from "../data/exampleresponse.json";
 import ReactPlayers from "./ReactPlayers";
+//import axios from "./axios";
 
 const TheVideos = () => {
-  // const [videos, setVideos] = useState([]);
-  const [allVoted, setAllVoted] = useState(0);
+  //const [allVoted, setAllVoted] = useState(0);
 
-  const handleClick = () => {
-    setAllVoted(allVoted + 1);
-  };
+   const [videos, setVideos] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:5000/")
+  .then(res => res.json())
+  .then(data => 
+    console.log(data)
+  )
+  .catch((error) => {
+    console.log("this is rerror" + error);
+  })
+},[]) 
+const handlClick = () => {
+  setVideos(videos + 1);
+}
+
   return (
     <span>
       {Package.map((lik, i) => {
@@ -18,10 +31,10 @@ const TheVideos = () => {
             <p>{lik.id}    "      {lik.rating}</p>
             
               <button id="local"
-                onClick={handleClick}
+                onClick={handlClick}
                 type="button"
                 class="btn btn-primary"
-              >            like{" "}  : {allVoted}
+              >            like{" "}  : {videos}
               </button>
             
             <ReactPlayers url={lik.url} />
@@ -31,4 +44,5 @@ const TheVideos = () => {
     </span>
   );
 };
+
 export default TheVideos;
