@@ -10,10 +10,12 @@ app.use(json());
 app.use(cors());
 
 //get all videos 
-app.get("/", async (req, res) => {
+app.get("/allVideos", async (req, res) => {
   try {
+    const pool = await pool.connect();
     const allVideos = await pool.query('SELECT * FROM videos;');
     res.status(201).send(allVideos.rows);
+    pool.release();
   } catch (error) {
     console.log(error.message);
   }
