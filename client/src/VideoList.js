@@ -1,24 +1,27 @@
-import React from "react"
-import examples from "./exampleresponse.json"
+import React, { useState } from "react";
+
 import Video from "./Video";
 
-const VideoList = () => {
+const VideoList = (props) => {
 
-    const data = examples;
+  return (
+    <div>
+      <ul>
+        {props.data.map((example) => {
+          return (
+            <Video
+              id={example.id}
+              title={example.title}
+              url={example.url.replace("watch?v=", "embed/")}
+              rating={example.rating}
+              key={example.id}
+              delete={props.delete}
+            />
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
-    const deleteHandler=(e)=> {
-        console.log(e.target.id);
-    }
-
-    return ( 
-        <div>
-            <ul>
-                {data.map((example)=> {
-                    return <Video id={example.id} title={example.title} url={example.url.replace("watch?v=","embed/")} rating={example.rating} key={example.id} delete={deleteHandler}/>
-                })}
-            </ul>
-        </div>
-     );
-}
- 
 export default VideoList;

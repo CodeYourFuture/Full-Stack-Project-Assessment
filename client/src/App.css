@@ -21,8 +21,11 @@ ul {
   font-size: 1.5rem;
 }
 
-
 .like-button-container {
   display: flex;
   justify-content: space-evenly;
+}
+
+.like-dislike {
+  
 }
