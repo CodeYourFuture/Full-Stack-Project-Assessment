@@ -22,6 +22,10 @@ function App() {
       return video.id !== parseInt(e.target.id);
     });
     setData(newState);
+    const newFilteredState = filteredList.filter((video) => {
+      return video.id !== parseInt(e.target.id);
+    });
+    setFilteredList(newFilteredState);
   };
 
   // a function to handle the search input

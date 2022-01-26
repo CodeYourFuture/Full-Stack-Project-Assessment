@@ -26,10 +26,10 @@ const Add = (props) => {
               onChange={(e) => setUrl(e.target.value)}
             ></input>
             <div className="field-button-container">
-              <button type="button" onClick={props.cancel}>
+              <button type="button" className="red" onClick={props.cancel}>
                 Cancel
               </button>
-              <button type="submit">Add</button>
+              <button type="submit" className="green">Add</button>
             </div>
           </fieldset>
         </form>
