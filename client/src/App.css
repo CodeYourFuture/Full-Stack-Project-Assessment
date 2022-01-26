@@ -1,3 +1,57 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap");
+
+/* ----- RESET STYLE ----- */
+:root {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
+
+/* ----- MAIN STYLE (320px and less) ----- */
+body {
+  /* font */
+  --highlight-font: "Bebas Neue", Arial;
+  --normal-font: "Roboto", Arial;
+  /* font: spacing */
+  --medium-text: 2rem;
+  /* color */
+  --bright-orange: hsl(40, 97%, 64%);
+  --dark-grey: hsl(201, 20%, 24%);
+  /* spacing */
+  --small-space: 1em;
+
+  font-family: var(--normal-font);
+  background-color: var(--dark-grey);
   text-align: center;
+}
+
+.orange-text {
+  color: var(--bright-orange);
+}
+
+.page-header {
+  height: 100px; /* absolute */
+  padding-top: 10px; /* 1/4 of height */
+  background: var(--bright-orange);
+}
+
+.first-heading {
+  font-size: 3rem;
+}
+.card {
+  margin: 30px 8px;
+  padding-bottom: 100px;
+  border: 2px solid white;
+}
+
+.card iframe {
+  width: 290px;
+  aspect-ratio: 3/1.7;
 }

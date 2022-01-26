@@ -1,13 +1,19 @@
-import "./App.css";
+import "./App.css"; // import master CSS file
+import VideoCards from "./VideoCards";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
+    <div id="whole-page" className="App">
+      <header id="page-header" className="page-header">
+        <h1 id="first-heading" className="first-heading">
+          Videos!
+        </h1>
       </header>
+      <main id="main-content">
+        <VideoCards />
+      </main>
     </div>
   );
-}
+};
 
 export default App;
