@@ -14,8 +14,8 @@ const Video = (props) => {
         </div>
       </div>
       <iframe
-        width="560"
-        height="315"
+        width="320"
+        height="240"
         src={props.url}
         title={props.title}
         frameborder="0"
