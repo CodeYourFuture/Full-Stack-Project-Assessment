@@ -36,6 +36,10 @@ body {
   color: var(--bright-orange);
 }
 
+.white-text {
+  color: white;
+}
+
 .page-header {
   height: 100px; /* absolute */
   padding-top: 10px; /* 1/4 of height */
@@ -47,11 +51,18 @@ body {
 }
 .card {
   margin: 30px 8px;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   border: 2px solid white;
 }
 
-.card iframe {
+.card > iframe {
   width: 290px;
   aspect-ratio: 3/1.7;
+}
+
+.button-container > p {
+  cursor: pointer;
+  display: inline;
+  margin: 0 15px;
+  font-size: 3rem;
 }

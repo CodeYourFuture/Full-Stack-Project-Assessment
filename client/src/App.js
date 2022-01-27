@@ -1,5 +1,5 @@
-import "./App.css"; // import master CSS file
-import VideoCards from "./VideoCards";
+import "./style/App.css"; // import master CSS file
+import VideoCards from "./components/VideoCards";
 
 const App = () => {
   return (
