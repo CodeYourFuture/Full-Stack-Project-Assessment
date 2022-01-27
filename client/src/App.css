@@ -1,3 +1,42 @@
 .App {
   text-align: center;
 }
+.thumb{
+  color: rgb(133, 4, 4);
+}
+  .vote{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .vote h2{
+    margin: 0 3rem 0 3rem;
+  }
+  .delete{
+    align-items: center;
+  }
+  .non-visible{
+    display:none;
+    
+  }
+  .visible{
+    margin-top: 3rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10rem;
+  }
+  
+  .form-video{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+  }
+  form{
+    display: inline-block;
+  }
+  .video-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
