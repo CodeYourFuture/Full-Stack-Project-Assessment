@@ -1,3 +1,8 @@
 .App {
   text-align: center;
 }
+.fas {
+  font-size: 30px;
+  color: red;
+  margin: 1rem;
+}
