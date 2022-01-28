@@ -1,3 +1,16 @@
 .App {
   text-align: center;
+  background-color: rgb(192, 184, 73);
 }
+
+.video-list {
+  background-color: rgb(110, 106, 52);
+  display: flex-wrap;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+ 
+.video-card {
+border-radius: 2px;
+border-style: dashed;}
