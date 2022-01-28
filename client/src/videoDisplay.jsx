@@ -17,7 +17,10 @@
 // ]
 //recommend the use of a copy of the original data
 //due to the destructive nature of the remove function.
+
+import { useState } from "react";
 const VideoDisplay = (props) => {
+  let [vote, setVote] = useState(0);
   return (
     <ul className="video-list">
       {props.database.map((video, index) => {
@@ -40,7 +43,24 @@ const VideoDisplay = (props) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <p>Votes: 0 [TEMP]</p>
+            <p>Votes: {vote}</p>
+            <button
+              className="vote-button"
+              onClick={() => {
+                setVote((vote += 1));
+              }}
+            >
+              Vote +
+            </button>
+            <button
+              className="vote-button"
+              onClick={() => {
+                setVote((vote -= 1));
+              }}
+            >
+              Vote -
+            </button>
+            <button>Remove Listing</button>
           </li>
         );
       })}
