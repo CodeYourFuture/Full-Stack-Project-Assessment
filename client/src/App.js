@@ -1,3 +1,15 @@
+//to-do:
+/*
+  level 100:
+  4. On the page there must be another React component that will add a Video.
+   - It should include fields to add a
+     - Title
+     - Url
+   - When a button is clicked the video should be added to the list
+  5. Your website must follow accessibility guidelines (see below for more details)
+
+*/
+
 import "./App.css";
 import "./VideoDisplay.jsx";
 import { useState } from "react";
