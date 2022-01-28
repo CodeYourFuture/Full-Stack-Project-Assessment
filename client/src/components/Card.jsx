@@ -47,6 +47,9 @@ const Card = ({ video, clickEvent }) => {
           👎
         </p>
       </span>
+      <p className="orange-text">
+        Upload date: {video.dateAdded ? video.dateAdded : "Unknown"}
+      </p>
     </div>
   );
 };

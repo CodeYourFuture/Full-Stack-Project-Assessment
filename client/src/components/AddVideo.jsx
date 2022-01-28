@@ -24,6 +24,11 @@ const AddVideo = ({ data, setData }) => {
       return;
     }
 
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // January is 0 without the + 1?
+    const year = date.getFullYear();
+
     setData((data) => [
       ...data,
       {
@@ -31,6 +36,7 @@ const AddVideo = ({ data, setData }) => {
         title: titleValue,
         url: linkValue,
         rating: 0,
+        dateAdded: `${day}/${month}/${year}`,
       },
     ]);
   };

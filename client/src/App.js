@@ -7,6 +7,8 @@ import AddVideo from "./components/AddVideo";
 const data = require("./data/exampleresponse.json");
 
 const App = () => {
+  // sort the data based on their rating, highest first
+  data.sort((first, second) => (first.rating < second.rating ? 1 : 0));
   const [dataCopy, setDataCopy] = useState(data);
 
   return (
