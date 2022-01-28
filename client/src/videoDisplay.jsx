@@ -60,7 +60,9 @@ const VideoDisplay = (props) => {
             >
               Vote -
             </button>
-            <button>Remove Listing</button>
+            <button onClick={() => {
+              props.remove(video.id);
+            }}>Remove Listing</button>
           </li>
         );
       })}
