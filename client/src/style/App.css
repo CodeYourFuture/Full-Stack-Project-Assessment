@@ -40,19 +40,40 @@ body {
   color: white;
 }
 
+.white-border {
+  border: 2px solid white;
+  margin: 0 8px;
+}
+
 .page-header {
   height: 100px; /* absolute */
-  padding-top: 10px; /* 1/4 of height */
+  padding-top: 50px;
   background: var(--bright-orange);
+}
+
+.add-video-form * {
+  display: block;
+  margin: 5px auto 5px auto;
+  padding: 10px;
+}
+
+.add-video-form input[type="text"] {
+  width: 80%;
+}
+
+.add-video-form input[type="submit"] {
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .first-heading {
   font-size: 3rem;
+  margin: 0;
 }
+
 .card {
-  margin: 30px 8px;
+  margin: 30px 0px;
   padding-bottom: 50px;
-  border: 2px solid white;
 }
 
 .card > iframe {

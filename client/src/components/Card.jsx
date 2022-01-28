@@ -13,7 +13,7 @@ const Card = ({ video, clickEvent }) => {
       : setRating((rating) => (rating -= 1));
 
   return (
-    <div id={videoID + "-card"} className="card">
+    <div id={videoID + "-card"} className="card white-border">
       <a
         href={video.url}
         id={videoID + "-title"}
@@ -30,9 +30,9 @@ const Card = ({ video, clickEvent }) => {
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
         allowFullScreen
       ></iframe>
-      <h2 id={videoID + "-rating"} className="orange-text">
+      <h3 id={videoID + "-rating"} className="orange-text">
         {rating}
-      </h2>
+      </h3>
       <span id={videoID + "-buttons-container"} className="button-container">
         <p id={videoID + "-like-button"} onClick={() => increaseRating(true)}>
           👍

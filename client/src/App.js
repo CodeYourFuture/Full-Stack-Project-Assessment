@@ -1,7 +1,14 @@
+import { useState } from "react";
+
 import "./style/App.css"; // import master CSS file
 import VideoCards from "./components/VideoCards";
+import AddVideo from "./components/AddVideo";
+
+const data = require("./data/exampleresponse.json");
 
 const App = () => {
+  const [dataCopy, setDataCopy] = useState(data);
+
   return (
     <div id="whole-page" className="App">
       <header id="page-header" className="page-header">
@@ -10,7 +17,8 @@ const App = () => {
         </h1>
       </header>
       <main id="main-content">
-        <VideoCards />
+        <AddVideo data={dataCopy} setData={setDataCopy} />
+        <VideoCards data={dataCopy} setData={setDataCopy} />
       </main>
     </div>
   );
