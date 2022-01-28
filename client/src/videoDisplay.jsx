@@ -17,31 +17,34 @@
 // ]
 //recommend the use of a copy of the original data
 //due to the destructive nature of the remove function.
-
-const videoDisplay = (props) => {
+const VideoDisplay = (props) => {
   return (
-    <div>
+    <ul className="video-list">
       {props.database.map((video, index) => {
         return (
-          <>
+          <li
+            className="video-list-item"
+            id={`video-list-item-${index}`}
+            key={`video-${index}-key`}
+          >
             <h3>{video.title}</h3>
             <iframe
               width="560"
               height="315"
+              // the commented out version allows the videos to run but youtube gets upset when
+              // you ask for so much :P
+              // src={video.url.replace("watch", "embed")}
               src={video.url}
-              title="YouTube video player"
-              frameborder="0"
+              title={video.title}
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
-            <p>Votes: {video.rating}</p>
-            <button type="button" onClick={props.database.splice(index, 1)}>
-              Remove Entry
-            </button>
-          </>
+            <p>Votes: 0 [TEMP]</p>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
-export default videoDisplay;
+export default VideoDisplay;
