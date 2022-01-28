@@ -1,0 +1,99 @@
+.VideoCard {
+    background-color:rgb(65, 120, 150);
+    box-shadow: 10px 10px 20px rgb(5, 58, 87);
+    border: 1px solid rgb(15, 79, 114);
+    width: 40%;
+    padding: 20px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.Title{
+    color: rgb(0, 21, 32);
+    margin-bottom: 30px;
+}
+
+iframe {
+    width: 80%;
+    margin: auto;
+}
+
+.LikeSection {
+    width:80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Like img, .Dislike img{
+    width: 30px;
+}
+
+
+.Like, .Dislike{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.Like{
+    width:48%;
+    background-color: rgba(96, 238, 96, 0.8);
+    border: 1px solid rgb(5, 73, 5);
+}
+
+.Like img{
+    margin-right: 5px;
+}
+
+.Dislike{
+    width:48%;
+    background-color: rgba(243, 74, 74, 0.8);
+    border: 1px solid rgb(136, 38, 38);
+}
+
+.Votes{
+    margin: 0;
+}
+
+.Like:hover{
+    background-color: rgb(0,201,0);
+    border: 1px solid rgb(5, 73, 5);
+}
+
+.Dislike:hover{
+    background-color: rgb(237,48,34);
+    border: 1px solid rgb(136, 38, 38);
+}
+
+.DeleteBtn{
+    color: rgb(255, 255, 255);
+    background-color: black;
+    border: 1px solid black;
+    margin: 20px auto;
+    padding: 10px 20px;
+}
+
+.DeleteBtn:hover {
+    cursor: pointer;
+    background-color: white; 
+    color: black;
+    border: 1px solid black;
+}
+
+/* Media queries */
+@media only screen and (max-width: 950px) {
+  .VideoCard {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .VideoCard {
+    width: 300px;
+}
+}

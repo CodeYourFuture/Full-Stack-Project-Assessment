@@ -1,0 +1,39 @@
+.Heading {
+  color: black;
+}
+
+label {
+  color: black;
+  width: 30px;
+  margin-right: 15px;
+  margin-bottom: 0;
+}
+
+.AddVideoContainer {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.InputContainer{
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit {
+  margin: auto;
+  background-color: #fff;
+  padding: 5px 10px;
+}
+
+#submit:hover {
+  cursor: pointer;
+  background-color: black; 
+  color: white;
+}
+
+
