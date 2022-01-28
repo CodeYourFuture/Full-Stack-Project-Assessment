@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import AddVideo from "../src/AddVideo";
+import SearchInput from "./SearchInput";
 import ExampleResponse from "./data/exampleresponse.json";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <main>
+        <SearchInput />
         <AddVideo videoData={ExampleResponse} />
       </main>
     </div>

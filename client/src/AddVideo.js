@@ -6,7 +6,7 @@ const AddVideo = (props) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [hideOnCancel, setCancel] = useState([]);
-  const [showOnAdd,setShow] = useState([]);
+
 
 
   const addVideo = () => {
@@ -30,10 +30,16 @@ const AddVideo = (props) => {
     setCancel(hideOnCancel.concat("hideOnCancel"))
   }
 
+  const addVideoFields = () => {
+    setCancel("");
+  }
+
   return (
     <div>
-      <h4 class = {showOnAdd}>Add video</h4>
-      <div class = {hideOnCancel}>
+      <ul>
+        <li onClick={addVideoFields}>Add video</li>
+      </ul>
+      <div id="addFormStyle" class={hideOnCancel}>
         <label htmlFor="addTitle">
           {' '}
           Title
@@ -51,8 +57,8 @@ const AddVideo = (props) => {
           <input type="url" onChange={handleUrlInput} value={url} required />
         </label>
         <br />
-        <button onClick={addVideo}>Add</button>
-        <button onClick={cancelInputFields}>Cancel</button>
+        <button className = "addBtn bg-success text-white" onClick={addVideo}>Add</button>
+        <button className = "cancelBtn bg-warning text-white" onClick={cancelInputFields}>Cancel</button>
       </div>
       <Video videoData={updatedVideoData} />
     </div>

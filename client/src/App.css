@@ -1,7 +1,98 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: poppins;
+  font-size: 1.2rem;
 }
 
+h1 {
+   text-align: center;
+   margin-bottom: 4rem;
+}
 .hideOnCancel {
+  visibility: hidden;
+}
+
+.hideOnDelete {
   display: none;
+}
+
+#addFormStyle {
+  margin: 1rem 0 2rem 1rem;
+}
+
+li {
+  list-style: none; 
+  margin-left: 13rem;
+  color: blue;
+}
+
+li:hover,
+li:active {
+  color: aqua;
+}
+
+.videosContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+ 
+}
+
+.video {
+  display: flex;
+  flex-direction: column;
+}
+
+.deleteBtn {
+  display: inline-block;
+  width: 30%;
+  margin: 0.7rem auto 2rem auto;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+
+}
+
+.addBtn,
+.cancelBtn {
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+.addBtn {
+  margin-left: 9rem;
+}
+
+.cancelBtn{
+  margin-left: 1rem;
+}
+input {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+  border: 1px solid black;
+}
+
+.topBtnDisplay {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+}
+
+.ratingBtn {
+  margin: 0 1rem;
+  color:brown;
+  background-color: white;
+}
+
+.ratingBtn,
+.upBtn,
+.downBtn {
+  padding: 0.2rem;
+  border: none;
+  border-radius: 4px;
 }
