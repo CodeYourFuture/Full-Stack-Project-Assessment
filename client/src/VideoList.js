@@ -4,7 +4,7 @@ import Video from "./Video";
 const VideoList = (props) => {
 
   return (
-    <div>
+    <div className="video-container">
       <ul>
         {props.data.map((example) => {
           return (

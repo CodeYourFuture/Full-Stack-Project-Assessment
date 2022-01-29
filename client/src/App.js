@@ -10,6 +10,7 @@ function App() {
   const [data, setData] = useState(videos);
   const [addBtn, setAddBtn] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
+  const [listType, setListType] = useState(true);
 
   // a function to show or hide the form inputs
   const addToggle = () => {
@@ -35,9 +36,12 @@ function App() {
     let filtered = videoData.filter((video) =>
       video.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    e.target.value.length === 0
-      ? setFilteredList([])
-      : setFilteredList(filtered);
+    if (e.target.value.length === 0) {
+      setListType(true);
+    } else {
+      setListType(false);
+      setFilteredList(filtered);
+    }
   };
 
   // a function to get the form data and construct a 'video' object
@@ -63,7 +67,9 @@ function App() {
 
       <div className="form-search-container">
         <div className="add">
-          <button className="add-button" onClick={addToggle}>Add Video</button>
+          <button className="add-button" onClick={addToggle}>
+            Add Video
+          </button>
           {addBtn ? <Add cancel={addToggle} handleForm={handleForm} /> : null}
         </div>
         <div className="search">
@@ -71,7 +77,7 @@ function App() {
         </div>
       </div>
 
-      {filteredList.length > 0 ? (
+      {listType === false > 0 ? (
         <VideoList delete={deleteHandler} data={filteredList} />
       ) : (
         <VideoList delete={deleteHandler} data={data} />

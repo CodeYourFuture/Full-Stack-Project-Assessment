@@ -29,7 +29,9 @@ const Add = (props) => {
               <button type="button" className="red" onClick={props.cancel}>
                 Cancel
               </button>
-              <button type="submit" className="green">Add</button>
+              <button type="submit" className="green">
+                Add
+              </button>
             </div>
           </fieldset>
         </form>
