@@ -1,13 +1,15 @@
 import React from "react";
-import AddButton from "../../components/AddButton";
+import AddModal from "../../components/AddModal";
 import VideoCards from "../../containers/VideoCards";
 
 
 function Home() {
-
+    const handleSaveNewVideo = (video) => {
+        console.log(video)
+    }
     return (
         <main className="home">
-            <AddButton />
+            <AddModal onSave={handleSaveNewVideo} />
             <VideoCards />
         </main>
     )
