@@ -2,11 +2,25 @@
   text-align: center;
   background-color: rgb(192, 184, 73);
 }
+ /* .jumbotron {
+    background-image: url('./images/background-music.jpg');
+    background-size: auto;
+ } */
+
+
+
+/* addvideo section */
+
+
+
+
+
+/* video list section */
 
 .video-list {
   background-color: rgb(110, 106, 52);
   display: flex-wrap;
-  width: 80%;
+  width: 30%;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -14,3 +28,15 @@
 .video-card {
 border-radius: 2px;
 border-style: dashed;}
+
+
+.card-title{
+  background-color: white;
+  border-style: double;
+}
+
+.votes-section {
+  display: flex;
+  justify-content: center;
+}
+
