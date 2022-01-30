@@ -1,0 +1,6 @@
+.video-cards{
+    display: flex;
+    flex-direction: column;
+    gap: 10px 20px;
+    justify-content: space-between;
+  }

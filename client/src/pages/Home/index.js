@@ -1,10 +1,12 @@
 import React from "react";
+import VideoCards from "../../containers/VideoCards";
 
 function Home() {
+
     return (
-        <div>
-            salam
-        </div>
+        <main className="home">
+            <VideoCards />
+        </main>
     )
 }
 

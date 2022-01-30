@@ -1,0 +1,11 @@
+
+.video-card__video {
+    width : 100%;
+    height : 250px;
+}
+.video-card__footer{
+   display: flex;
+   justify-content: space-between;
+   padding :  0 10px;
+}
+
