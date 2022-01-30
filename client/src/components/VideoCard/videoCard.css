@@ -19,6 +19,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width:120px;
+    max-width:130px;
 }
 
+.footer__delete{
+    color:#fff;
+    background-color: #FF0000;
+    border:none;
+    
+}
+
+.footer__actions i {
+    padding-right: 5px;
+}
