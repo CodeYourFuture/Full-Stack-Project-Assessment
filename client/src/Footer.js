@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="footer">
-      Fully Stacked Application created by Peter Ahern
+      <h4>Fully Stacked Application created by Peter Ahern</h4>
     </div>
   );
 }

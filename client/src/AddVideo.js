@@ -24,14 +24,13 @@ function AddVideo(props) {
     props.stateUpdate(updatedVideos);
     setAddVideo({ title: "", url: "" });
     //reset the form, clears the input
-    // document.forms['addVideo'].reset();
     let inputs = document.querySelectorAll("input");
     inputs.forEach((input) => (input.value = ""));
   };
 
   return (
     <div>
-      <h1>Add Your Own Soul Video</h1>
+      <h1 className="add-video-title">Add Your Own Soul Video</h1>
       <form onSubmit={handleSubmit} name="addVideo">
         <div>
           <input
@@ -40,6 +39,7 @@ function AddVideo(props) {
             placeholder="Video Title"
             name="name"
             onChange={addVideoInput}
+            required
           />
         </div>
         <div>
@@ -48,9 +48,10 @@ function AddVideo(props) {
             id="url"
             placeholder="YouTube URL"
             onChange={addVideoInput}
+            required
           />
         </div>
-        <div>
+        <div className="add-button">
           <button>Add Video to list</button>
         </div>
       </form>

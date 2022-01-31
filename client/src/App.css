@@ -1,38 +1,54 @@
 .App {
   text-align: center;
-  background-color: rgb(192, 184, 73);
+  background-color: rgb(31, 30, 27);
+  overflow: visible;
 }
- /* .jumbotron {
-    background-image: url('./images/background-music.jpg');
-    background-size: auto;
- } */
-
-
+.jumbotron {
+  background-color: #bd8e29;
+}
 
 /* addvideo section */
+.add-video-title {
+  color: #bd8e29;
+}
 
-
-
-
+.add-button {
+  padding-top: 1 rem;
+}
 
 /* video list section */
 
 .video-list {
-  background-color: rgb(110, 106, 52);
-  display: flex-wrap;
-  width: 30%;
-  margin: 0 auto;
-  margin-top: 50px;
+  background-color: rgb(31, 30, 27);
+  display: grid;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  grid-template-columns: [start] 1fr 1fr 1fr [end];
+  column-gap: 3rem;
+  row-gap: 2rem;
+  /* grid-template-rows: minmax(min-content, max-content) minmax(
+      100px,
+      min-content
+    ); */
 }
- 
+
 .video-card {
-border-radius: 2px;
-border-style: dashed;}
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background-color: #bd8e29;
+  display: block;
+  border-radius: 2%;
+  
+}
 
+.video-card iframe {
+  max-width: 100%;
+}
 
-.card-title{
+.card-title {
   background-color: white;
-  border-style: double;
+  border-radius: 20%;
+
 }
 
 .votes-section {
@@ -40,3 +56,9 @@ border-style: dashed;}
   justify-content: center;
 }
 
+/* footer section */
+
+.footer {
+  color: #bd8e29;
+  background-color: rgb(31, 30, 27);
+}

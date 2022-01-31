@@ -9,18 +9,6 @@ import StartingVideos from "./component/data/soulsongs.json";
 
 function App() {
   const [videos, setVideos] = useState(StartingVideos);
-  const [votes, setVotes] = useState(StartingVideos.rating);
-
-  //upVote function
-  const addVote = (id, rating) => {
-    // let voteCounted = StartingVideos.map((video) => {
-    // });
-    // setVotes(voteCounted);
-  };
-
-  //downVote function
-
-  const subtractVote = (id) => {};
 
   //remove video function using unique video id
   const removeVideo = (id) => {
@@ -34,15 +22,7 @@ function App() {
       <AddVideo state={videos} stateUpdate={setVideos} />
       <div className="video-list">
         {videos.map((video, index) => {
-          return (
-            <VideoCard
-              key={index}
-              video={video}
-              remover={removeVideo}
-              addVote={addVote}
-              downVote={subtractVote}
-            />
-          );
+          return <VideoCard key={index} video={video} remover={removeVideo} />;
         })}
       </div>
 

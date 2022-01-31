@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 function VideoCard(props) {
+  //states for number of upvotes/downvotes - decided to keep the scores separate rather than overall score
+  const [upVote, setUpVote] = useState(0);
+  const [downVote, setDownVote] = useState(0);
+  const [totalVotes, setTotalVotes] = useState(0);
+
+  //function to increase upVotes counter
+  const upVoter = () => {
+    console.log(upVote);
+    setUpVote((upVote) => upVote + 1);
+    setTotalVotes((totalVotes) => totalVotes + 1);
+  };
+
+  //function to decrease downVotes counter
+  const downVoter = () => {
+    setDownVote((downVote) => downVote - 1);
+    setTotalVotes((totalVotes) => totalVotes + 1);
+  };
+
+  //add aggregate vote function & calculator to display
+
   const handleRemoveVideo = (e) => {
     props.remover(props.video.id);
-  };
-
-  const handleUpVote = (e) => {
-    props.addVote(props.video.id, props.video.rating);
-  };
-
-  const handleDownVote = (e) => {
-    // props.remover(props.video.id);
   };
 
   return (
@@ -18,18 +30,21 @@ function VideoCard(props) {
       <div className="card-body">
         <div className="votes-section">
           <div className="up-votes">
-            <button className="vote-buttons" onClick={handleUpVote}>
+            <button className="vote-buttons" onClick={upVoter}>
               Vote Up:
             </button>
-            <div className="vote-counter">{props.video.rating}</div>
+            <div className="vote-counter">{upVote}</div>
           </div>
           <div className="down-votes">
-            <button className="vote-buttons" onClick={handleDownVote}>
+            <button className="vote-buttons" onClick={downVoter}>
               Vote Down:
             </button>
-            <div className="vote-counter">{props.video.rating}</div>
+            <div className="vote-counter">{downVote}</div>
           </div>
-          <button onClick={handleRemoveVideo}>Remove Video</button>
+          <div className="down-votes">
+            <button className="vote-buttons">Total Votes:</button>
+            <div className="vote-counter">{totalVotes}</div>
+          </div>
         </div>
       </div>
       <iframe
@@ -43,6 +58,7 @@ function VideoCard(props) {
         height="315"
         frameBorder="0"
       ></iframe>
+      <button onClick={handleRemoveVideo}>Remove Video</button>
       <h3 className="card-title">{props.video.title}</h3>
     </div>
   );
