@@ -1,12 +1,25 @@
 // Style
 import classes from "./VideoComponent.module.css";
 
-import videoData from "../../exampleresponse.json";
-
-const VideoComponent = () => {
+const VideoComponent = ({ videoId, videoTitle, videoRating }) => {
   return (
     <div className={classes.wrapper}>
-      Placeholder, check console :p{console.log(videoData)}
+      <section>
+        <h2 className={classes.details}>{videoTitle}</h2>
+        <iframe
+          className={classes.video}
+          width='560'
+          height='315'
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+        ></iframe>
+      </section>
+      <section className={classes.details}>
+        Rating <br /> {videoRating}
+      </section>
     </div>
   );
 };
