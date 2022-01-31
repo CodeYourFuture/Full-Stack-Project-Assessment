@@ -1,8 +1,86 @@
-.App {
+html,
+body {
+  height: 100%;
+  /* margin: 0%;
+  padding: 0%; */
+  /* text-align: center; */
+}
+h1 {
   text-align: center;
+}
+.search-bar {
+  text-align: center;
+}
+
+.add-component {
+  margin: 2rem;
+  /* position: relative;
+  right: 20%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.form-label {
+  margin: 0.5rem;
+  font-size: 1.5rem;
+}
+.buttons {
+  padding-left: 4rem;
+}
+.btn {
+  margin: 0.25rem;
+}
+.votes {
+  line-height: 3em;
+}
+.video-info {
+  text-align: center;
+}
+
+.thumbs {
+  display: inline-flex;
 }
 .fas {
   font-size: 30px;
   color: red;
   margin: 1rem;
+}
+.video-del-btn {
+  max-width: fit-content;
+  margin-left: 40%;
+}
+iframe {
+  margin-right: 0%;
+  padding-right: 0%;
+}
+.video {
+  border: 2px solid red;
+  margin: 2rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.video-cards {
+  border: 5px solid green;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.footer {
+  margin-top: 2rem;
+  height: 100px;
+  color: silver;
+  background: black;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
 }

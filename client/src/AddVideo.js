@@ -4,10 +4,13 @@ export default function AddVideo(props) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const submitHandler = () => {
-    props.addVideo(title, url);
-    setTitle("");
-    setUrl("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (title.trim() && url.trim()) {
+      props.addVideo(title, url);
+      setTitle("");
+      setUrl("");
+    }
   };
 
   const cancelHandler = (e) => {
@@ -23,11 +26,13 @@ export default function AddVideo(props) {
   };
 
   return (
-    <div>
-      <h3>Add Video</h3>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="title">
-          Title
+    <div className="add-component">
+      <h3 className="form-heading">Add Video</h3>
+      <form className="form" onSubmit={submitHandler}>
+        <div className="form-group">
+          <label className="form-label" htmlFor="title">
+            Title
+          </label>
           <input
             type="text"
             name="title"
@@ -35,10 +40,12 @@ export default function AddVideo(props) {
             value={title}
             onChange={titleHandler}
           ></input>
-        </label>
-        <br />
-        <label htmlFor="URL">
-          URL
+        </div>
+        {/* <br /> */}
+        <div className="form-group">
+          <label className="form-label" htmlFor="URL">
+            URL
+          </label>
           <input
             type="url"
             name="url"
@@ -46,11 +53,24 @@ export default function AddVideo(props) {
             value={url}
             onChange={urlHandler}
           ></input>
-        </label>
+        </div>
+        <div className="buttons">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={submitHandler}
+          >
+            Add Video
+          </button>
+          <button
+            type="button"
+            className="btn btn-warning"
+            onClick={cancelHandler}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
-      <br />
-      <button onClick={submitHandler}>Add Video</button>
-      <button onClick={cancelHandler}>Cancel</button>
     </div>
   );
 }

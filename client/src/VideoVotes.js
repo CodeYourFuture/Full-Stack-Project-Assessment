@@ -15,7 +15,7 @@ export default function VideoVotes() {
     <div className="thumbs">
       {/* Like Thumb */}
       <i className="fas fa-thumbs-up" onClick={likeHandler}></i>
-      <h5>{vote}</h5>
+      <h5 className="votes">{vote}</h5>
       {/* Dislike Thumb */}
       <i className="fas fa-thumbs-down" onClick={disLikeHandler}></i>
     </div>

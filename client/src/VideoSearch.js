@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function VideoSearch() {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearch = (e) => {
-    setSearchValue(e.target.value);
-  };
+export default function VideoSearch(props) {
   return (
-    <input
-      className="searchBar"
-      type="text"
-      placeholder="Search"
-      name="search"
-      value={searchValue}
-      onChange={handleSearch}
-    ></input>
+    <div className="search-bar">
+      <input
+        type="search"
+        placeholder="Search..."
+        name="search"
+        // value={searchValue}
+        onKeyUp={props.search}
+      />
+    </div>
   );
 }
