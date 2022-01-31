@@ -3,10 +3,12 @@
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
+
 }
 
 .pageHeading {
   margin: 2rem;
   max-width: 100%;
+  
   
 }

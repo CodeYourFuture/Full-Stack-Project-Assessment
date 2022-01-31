@@ -5,8 +5,8 @@
   width: 300px;
   height: 400px;
   justify-content: center;
-
   align-items: center;
+  margin: 2rem;
 }
 
 .video {
@@ -15,7 +15,11 @@
 }
 
 .details {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 700;
   color: rgba(20, 120, 160, 0.7);
+}
+
+.delWrapper {
+  display: none;
 }

@@ -7,13 +7,18 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1 className= 'pageHeading'>Video Recommendation</h1>
+        <h1 className='pageHeading'>Video Recommendation</h1>
       </header>
-      <VideoComponent
-        videoId={videoData[0].url.split("v=")[1].substring(0, 11)}
-        videoTitle={videoData[0].title}
-        videoRating={videoData[0].rating}
-      />
+      <div>
+        {videoData.map((video, index) => (
+          <VideoComponent
+            key={index}
+            videoId={video.url.split("v=")[1].substring(0, 11)}
+            videoTitle={video.title}
+            videoRating={video.rating}
+          />
+        ))}
+      </div>
     </div>
   );
 }
