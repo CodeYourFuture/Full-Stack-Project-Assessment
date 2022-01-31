@@ -11,14 +11,14 @@
 */
 
 import "./App.css";
-import "./VideoDisplay.jsx";
 import { useState } from "react";
+import VideoDisplay from "./VideoDisplay.jsx";
+import VideoSubmissionForm from "./VideoSubmissionForm.jsx";
 
 // placeholder data:
 // import "../../exampleresponse.json"; <-- This causes problems so I moved the .json
 // to this directory:
 import originalData from "./exampleresponse.json";
-import VideoDisplay from "./VideoDisplay.jsx";
 // ready for real data:
 // import { useEffect } from "react";
 
@@ -41,9 +41,30 @@ function App() {
   //       console.log(`ERROR: ${error}`);
   //     })
   //   }, [])
+
   const removeIndex = (id) => {
-    setDataClone(dataClone.filter(currentVid => currentVid.id !== id));
-  }
+    setDataClone(dataClone.filter((currentVid) => currentVid.id !== id));
+  };
+  // {
+  //       id: videoId,
+  //       title: userInput.title,
+  //       url: userInput.url,
+  //       rating: 0,
+  // }
+  const addVideoFromInput = (userInput) => {
+    const videoId = userInput.url.split("=")[1];
+    setDataClone((oldData) => [
+      ...oldData,
+      {
+        id: videoId,
+        title: userInput.title,
+        url: userInput.url,
+        rating: 0,
+      },
+    ]);
+
+    console.log(dataClone.length);
+  };
 
   return (
     <div className="App">
@@ -52,10 +73,8 @@ function App() {
       </header>
 
       <div className="content">
-        <VideoDisplay
-          database={dataClone}
-          remove={removeIndex}
-        />
+        <VideoSubmissionForm addVidFunc={addVideoFromInput} />
+        <VideoDisplay database={dataClone} remove={removeIndex} />
       </div>
     </div>
   );

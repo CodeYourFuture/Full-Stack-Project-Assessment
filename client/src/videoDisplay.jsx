@@ -22,51 +22,57 @@ import { useState } from "react";
 const VideoDisplay = (props) => {
   let [vote, setVote] = useState(0);
   return (
-    <ul className="video-list">
-      {props.database.map((video, index) => {
-        return (
-          <li
-            className="video-list-item"
-            id={`video-list-item-${index}`}
-            key={`video-${index}-key`}
-          >
-            <h3>{video.title}</h3>
-            <iframe
-              width="560"
-              height="315"
-              // the commented out version allows the videos to run but youtube gets upset when
-              // you ask for so much :P
-              // src={video.url.replace("watch", "embed")}
-              src={video.url}
-              title={video.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-            <p>Votes: {vote}</p>
-            <button
-              className="vote-button"
-              onClick={() => {
-                setVote((vote += 1));
-              }}
+    <section className="video-section">
+      <ul className="video-list">
+        {props.database.map((video, index) => {
+          return (
+            <li
+              className="video-list-item"
+              id={`video-list-item-${index}`}
+              key={`video-${index}-key`}
             >
-              Vote +
-            </button>
-            <button
-              className="vote-button"
-              onClick={() => {
-                setVote((vote -= 1));
-              }}
-            >
-              Vote -
-            </button>
-            <button onClick={() => {
-              props.remove(video.id);
-            }}>Remove Listing</button>
-          </li>
-        );
-      })}
-    </ul>
+              <h3>{video.title}</h3>
+              <iframe
+                width="560"
+                height="315"
+                // the commented out version allows the videos to run but youtube gets upset when
+                // you ask for so much :P
+                src={video.url.replace("watch?v=", "embed/")}
+                // src={video.url}
+                title={video.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+              <p>Votes: {vote}</p>
+              <button
+                className="vote-button"
+                onClick={() => {
+                  setVote((vote += 1));
+                }}
+              >
+                Vote +
+              </button>
+              <button
+                className="vote-button"
+                onClick={() => {
+                  setVote((vote -= 1));
+                }}
+              >
+                Vote -
+              </button>
+              <button
+                onClick={() => {
+                  props.remove(video.id);
+                }}
+              >
+                Remove Listing
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 };
 export default VideoDisplay;
