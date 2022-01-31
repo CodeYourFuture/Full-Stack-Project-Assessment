@@ -1,4 +1,5 @@
 import "./App.css";
+import VideoComponent from "./components/VideoComponent/VideoComponent";
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <VideoComponent />
     </div>
   );
 }
