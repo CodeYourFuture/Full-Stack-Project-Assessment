@@ -12,7 +12,7 @@
 
 import "./App.css";
 import { useState } from "react";
-import VideoDisplay from "./VideoDisplay.jsx";
+import VideoListDisplay from "./VideoListDisplay.jsx";
 import VideoSubmissionForm from "./VideoSubmissionForm.jsx";
 
 // placeholder data:
@@ -67,7 +67,7 @@ function App() {
 
       <div className="content">
         <VideoSubmissionForm addVidFunc={addVideoFromInput} />
-        <VideoDisplay database={dataClone} remove={removeIndex} />
+        <VideoListDisplay database={dataClone} remove={removeIndex} />
       </div>
     </div>
   );
