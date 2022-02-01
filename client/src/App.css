@@ -1,3 +1,22 @@
 .App {
   text-align: center;
 }
+.App-header {
+  background-color: rgb(24, 60, 126);
+  color: rgb(219, 217, 213);
+}
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+}
+.icons {
+  display: flex;
+  justify-content:center;
+ 
+}
+.vote {
+  padding-left: 2em;
+  padding-right: 1.5em;
+}
