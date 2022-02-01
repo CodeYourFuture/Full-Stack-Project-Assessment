@@ -45,12 +45,7 @@ function App() {
   const removeIndex = (id) => {
     setDataClone(dataClone.filter((currentVid) => currentVid.id !== id));
   };
-  // {
-  //       id: videoId,
-  //       title: userInput.title,
-  //       url: userInput.url,
-  //       rating: 0,
-  // }
+  
   const addVideoFromInput = (userInput) => {
     const videoId = userInput.url.split("=")[1];
     setDataClone((oldData) => [
@@ -62,8 +57,6 @@ function App() {
         rating: 0,
       },
     ]);
-
-    console.log(dataClone.length);
   };
 
   return (
