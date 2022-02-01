@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Video from "./Video";
 const Form =(props)=>{
-  let firstVideo = {url:"https://www.youtube.com/embed/qw--VYLpxG4",title:"learn postgres"};
- const [video,setVideo] = useState([firstVideo]);
+  // let firstVideo = {url:"https://www.youtube.com/embed/qw--VYLpxG4",title:"learn postgres"};
+ const [video,setVideo] = useState([]);
  const [addData, setAddData] = useState({
    url: "",
    title: ""

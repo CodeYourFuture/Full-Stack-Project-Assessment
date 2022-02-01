@@ -1,37 +1,32 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { BsFillHandThumbsUpFill } from "react-icons/bs";
 import { BsFillHandThumbsDownFill } from "react-icons/bs";
 import "./App.css";
 
 const Video = (props) => {
- const [like,setLike] =useState(0);
- const [disLike,setDisLike] =useState(0);
- const clickLike =()=>{
-  
-  setLike(like=>like+1);
-  
- }
- const clickDisLike =()=>{
-  setDisLike(disLike=>disLike+1);
-
- }
- const [clicked,setClicked] = useState(false);
- const deleteHandler = ()=>{
-   setClicked(true);
-   
- 
- }
+  const [like, setLike] = useState(0);
+  const [disLike, setDisLike] = useState(0);
+  const clickLike = () => {
+    setLike((like) => like + 1);
+  };
+  const clickDisLike = () => {
+    setDisLike((disLike) => disLike + 1);
+  };
+  const [clicked, setClicked] = useState(false);
+  const deleteHandler = () => {
+    setClicked(true);
+  };
   return (
     <div className={clicked ? "non-visible" : "visible"}>
       <div className="vote">
         <BsFillHandThumbsUpFill onClick={clickLike} className="thumb" />
         <span>{like}</span>
-        <h2>Vote</h2>
+        <h5>Vote</h5>
 
         <BsFillHandThumbsDownFill onClick={clickDisLike} className="thumb" />
         <span>{disLike}</span>
       </div>
-      <h3>{props.Title}</h3>
+      <p>{props.Title}</p>
       <iframe
         width="300"
         height="300"
