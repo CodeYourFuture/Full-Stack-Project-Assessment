@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsFillHandThumbsUpFill } from "react-icons/bs";
 import { BsFillHandThumbsDownFill } from "react-icons/bs";
 import "./App.css";
-import example from "./exampleresponse.json";
+// import example from "./exampleresponse.json";
 
 const ListOfVideos = (props) => {
   const [like, setLike] = useState(0);
   const [disLike, setDisLike] = useState(0);
-  const [oneVideo, setOneVideo] = useState(example);
+  const [oneVideo, setOneVideo] = useState([]);
 
   const clickLike = () => {
     setLike((like) => like + 1);
@@ -19,6 +19,27 @@ const ListOfVideos = (props) => {
   const deleteHandler = (Id) => {
     setOneVideo(oneVideo.filter((item) => item.id !== Id));
   };
+  const videosData = () => {
+    fetch("http://127.0.0.1:5050/")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        //  throw Error("Can not load the data");
+      })
+      .then((data) => {
+        console.log(data);
+        setOneVideo(data);
+      });
+    //  .catch((err)=>{
+    //   console.log(err.message);
+    //   setErr(true);
+    // });
+  };
+  useEffect(() => {
+    videosData();
+  }, []);
+  console.log(oneVideo);
   return (
     <div className="video-container">
       {oneVideo.map((item, index) => {
