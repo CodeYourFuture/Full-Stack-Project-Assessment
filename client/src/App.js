@@ -7,9 +7,12 @@ import VideoCard from "./VideoCard";
 import ExampleResponse from "./exampleresponse.json";
 import Footer from "./Footer";
 
+//Ordering the results
+const OrderedData = ExampleResponse.sort((video1, video2) => video2.rating - video1.rating)
+
 function App() {
   const [id, setId] = useState(0);
-  const [allVideos, setAllVideos] = useState(ExampleResponse);
+  const [allVideos, setAllVideos] = useState(OrderedData);
 
   const decreaseRating = (id) => {
     const updatedVideos = allVideos.map((video) => {
@@ -44,9 +47,20 @@ function App() {
       title: title,
       url: url,
       rating: 0,
+      date: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
     };
-    setId(id + 1);
-    allVideos.push(newVideo);
+
+    //URL validation
+    const isValidUrl = newVideo.url.match(/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/);
+
+    if (!isValidUrl) { 
+      alert("PLease enter a valid YouTube URL");
+    } else if (!newVideo.title) {
+      alert("Please enter a title");
+    } else{
+      setId(id + 1);
+      allVideos.push(newVideo);
+    }
   };
 
   return (

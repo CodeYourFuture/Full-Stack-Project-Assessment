@@ -6,6 +6,8 @@ const VideoCard = (props) => {
     const idLength = 11;
     const videoId = props.video.url.split("").splice(-idLength).join("");
 
+    const uploadedDate = props.video.date ? props.video.date : "unknown date";
+
     const handleLike = () => {
         props.addVote(props.video.id);
     }
@@ -30,6 +32,7 @@ const VideoCard = (props) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
+        <p>Video uploaded on {uploadedDate}</p>
         <div className="LikeSection">
           <div className="Like" onClick={handleLike}>
             <img
