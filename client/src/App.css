@@ -58,7 +58,8 @@
   width: 100%;
 }
 
-.search input, label {
+.search input,
+label {
   display: flex;
   flex-direction: column;
 }
@@ -80,7 +81,6 @@ label {
   display: flex;
   justify-content: center;
   gap: 10px;
-  
 }
 
 .field-button-container .red {
@@ -95,10 +95,8 @@ label {
   border: none;
 }
 
-
-
 .video-container {
-  margin-top: 1rem;
+  margin: 1rem auto;
 }
 
 ul {
@@ -108,7 +106,6 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
 }
 
 .list-item {
@@ -118,6 +115,8 @@ ul {
   justify-content: space-around;
   gap: 10px;
   max-width: 320px;
+  border: 1px solid #15616d;
+  border-radius: 10px;
 }
 
 .like-title-container {
@@ -157,9 +156,56 @@ i {
 }
 
 i.fas.fa-thumbs-down {
-  color:#c00021;
+  color: #c00021;
 }
 
 i.fas.fa-thumbs-up {
   color: green;
+}
+
+@media only screen and (min-width: 700px) {
+  .title-container {
+    margin: 2rem auto 0rem auto;
+  }
+
+  .title-container h1 {
+    font-size: 60px;
+  }
+
+  .add-search-container {
+    display: flex;
+    flex-direction: row;
+    height: 6rem;
+  }
+
+  .add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .fieldset-container {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .fieldset-container label {
+    font-size: 1rem;
+    margin: 0;
+  }
+  .search {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .search input,
+  label {
+    display: flex;
+    flex-direction: row;
+    margin-left: 25%;
+  }
+
+  .search input {
+    margin-left: 10px;
+  }
 }

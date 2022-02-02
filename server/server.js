@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -73,16 +72,14 @@ let videos = [
 // GET "/"
 app.get("/", (req, res) => {
   const data = videos;
-  res.send(data);
+  res.json(data);
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
   const title = req.body.title;
-
   const url = req.body.url;
   const newVideo = {
-    "id": 5000,
+    "id": Math.floor(Math.random()*1000000),
     "title": title,
     "url": url,
     "rating": 99999,
@@ -99,8 +96,27 @@ app.post("/", (req, res) => {
 });
 
 app.get("/:id", (req, res) => {
-  const id = req.params.id;
-  res.status(200).json({ message: `This is the id you wanted: ${id}` });
+  const id = parseInt(req.params.id);
+  const found = videos.find((video) => video.id === id);
+  if (found) {
+    res.status(200).json(found);
+  } else {
+    res.status(404).json({ message: "video could not be found" });
+  }
 });
 
-app.delete()
+app.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = videos.findIndex((video) => video.id === id);
+  console.log(index);
+  if (index!==-1) {
+    videos.splice(index, 1);
+    res.status(200).json({ message: "video deleted"})
+  } else {
+    res
+      .status(404)
+      .json({ result: "failure", message: "Video could not be deleted" });
+  }
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

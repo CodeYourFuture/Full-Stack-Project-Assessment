@@ -1,9 +1,11 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VideoList from "./VideoList";
 import videos from "./exampleresponse.json";
 import Add from "./Add";
 import Search from "./Search";
+
+// const API_ENDPOINT = "http://127.0.0.1/5000"
 
 function App() {
   // set some state for the data, "add video" button and filtered list
@@ -11,6 +13,12 @@ function App() {
   const [addBtn, setAddBtn] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [listType, setListType] = useState(true);
+
+
+  useEffect((
+    fetch()
+  ),[])
+
 
   // a function to show or hide the form inputs
   const addToggle = () => {
@@ -90,22 +98,6 @@ function App() {
           <VideoList delete={deleteHandler} data={data} />
         )}
 
-      <div>
-        {" "}
-        Icons made by{" "}
-        <a
-          href="https://www.flaticon.com/authors/gregor-cresnar"
-          title="Gregor Cresnar"
-        >
-          {" "}
-          Gregor Cresnar{" "}
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          {" "}
-          www.flaticon.com'{" "}
-        </a>
-      </div>
     </div>
   );
 }
