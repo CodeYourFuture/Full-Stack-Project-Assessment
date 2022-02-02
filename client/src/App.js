@@ -14,6 +14,7 @@ function App() {
 
   // a function to show or hide the form inputs
   const addToggle = () => {
+    console.log(addBtn);
     setAddBtn(!addBtn);
   };
 
@@ -61,27 +62,34 @@ function App() {
 
   return (
     <div className="App">
+      {/* header */}
       <header className="title-container">
         <h1>Video Recommendation</h1>
       </header>
-
-      <div className="form-search-container">
-        <div className="add">
-          <button className="add-button" onClick={addToggle}>
-            Add Video
-          </button>
-          {addBtn ? <Add cancel={addToggle} handleForm={handleForm} /> : null}
+      
+        <div className="add-search-container">
+          <div className="add">
+            <button className="add-button" onClick={addToggle}>
+              Add Video
+            </button>
+            <div style={{ display: addBtn ? "flex" : "none" }}>
+              <Add
+                cancel={addToggle}
+                handleForm={handleForm}
+              />
+            </div>
+          </div>
+          <div className="search">
+            <Search searchHandler={searchHandler} />
+          </div>
         </div>
-        <div className="search">
-          <Search searchHandler={searchHandler} />
-        </div>
-      </div>
 
-      {listType === false > 0 ? (
-        <VideoList delete={deleteHandler} data={filteredList} />
-      ) : (
-        <VideoList delete={deleteHandler} data={data} />
-      )}
+        {listType === false ? (
+          <VideoList delete={deleteHandler} data={filteredList} />
+        ) : (
+          <VideoList delete={deleteHandler} data={data} />
+        )}
+
       <div>
         {" "}
         Icons made by{" "}
