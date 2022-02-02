@@ -1,9 +1,24 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+const generateRandomNumber = () => Math.floor(Math.random() * 10000000);
 
 const videos = [];
 
@@ -25,8 +40,6 @@ app.get("/:id", (req, res) => {
     : res.json(filteredVideos);
 });
 
-const generateRandomNumber = () => Math.floor(Math.random() * 10000000);
-
 // POST "/" : add a video
 app.post("/", (req, res) => {
   const { title, url } = req.body; // deconstruct the body so we only get the keys we want
@@ -43,13 +56,27 @@ app.post("/", (req, res) => {
     /^(?:https?:\/\/)?(?:(?:www\.)?youtube.com\/watch\?v=|youtu.be\/)(\w+)$/
   );
 
-  if (linkValid === null || !title.trim())
+  const linkExists = videos.every((video) => video.url !== url);
+
+  if (linkValid === null || !title.trim() || !linkExists)
     return res.status(500).json({
       result: "failure",
       message: "Video could not be saved",
     });
 
-  videos.push({ title, url, id, rating: 0 });
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // January is 0 without the + 1?
+  const year = date.getFullYear();
+
+  videos.push({
+    title,
+    url,
+    id,
+    rating: 0,
+    dateAdded: `${day}/${month}/${year}`,
+  });
+
   res.json({ id: id });
 });
 
