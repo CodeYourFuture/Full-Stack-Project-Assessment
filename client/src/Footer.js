@@ -6,7 +6,13 @@ export default function Footer() {
       <footer className="footer">
         <p className="Copyright">Video Recommendations app by Uzma.</p>
         <p>
-          Source Code is <a href="url">link text</a>
+          <a
+            href="https://github.com/CodeYourFuture/Full-Stack-Project-Assessment/pull/84"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source Code
+          </a>
         </p>
         <p>
           All Rights reserved.<span>&copy;</span>

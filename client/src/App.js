@@ -4,6 +4,7 @@ import SuppliedData from "./exampleresponse.json";
 import VideoList from "./VideoList";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
+import Footer from "./Footer";
 
 function App() {
   const [VideosData, setVideosData] = useState(SuppliedData);
@@ -60,6 +61,7 @@ function App() {
           <VideoList data={VideosData} delete={removeVideo} />
         )}
       </div>
+      <Footer />
     </div>
   );
 }

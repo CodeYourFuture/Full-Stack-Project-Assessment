@@ -22,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
-  border: 2px green solid;
+  border: 2px black solid;
 }
 .All-Videos-List {
   padding-left: 0%;
@@ -30,5 +30,5 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 2rem;
-  border: 3px rgb(238, 118, 154) dashed;
+  /* border: 3px rgb(238, 118, 154) dashed; */
 }
