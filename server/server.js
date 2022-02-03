@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
+app.use(cors());
 app.use(express.json());
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -72,14 +75,14 @@ let videos = [
 // GET "/"
 app.get("/", (req, res) => {
   const data = videos;
-  res.json(data);
+  res.send(data);
 });
 
 app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;
   const newVideo = {
-    "id": Math.floor(Math.random()*1000000),
+    "id": Math.floor(Math.random() * 1000000),
     "title": title,
     "url": url,
     "rating": 99999,
@@ -109,14 +112,12 @@ app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = videos.findIndex((video) => video.id === id);
   console.log(index);
-  if (index!==-1) {
+  if (index !== -1) {
     videos.splice(index, 1);
-    res.status(200).json({ message: "video deleted"})
+    res.status(200).json({ message: "video deleted" });
   } else {
     res
       .status(404)
       .json({ result: "failure", message: "Video could not be deleted" });
   }
 });
-
-app.listen(port, () => console.log(`Listening on port ${port}`));

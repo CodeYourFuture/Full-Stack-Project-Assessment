@@ -1,24 +1,26 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import VideoList from "./VideoList";
-import videos from "./exampleresponse.json";
+// import videos from "./exampleresponse.json";
 import Add from "./Add";
 import Search from "./Search";
 
-// const API_ENDPOINT = "http://127.0.0.1/5000"
-
 function App() {
   // set some state for the data, "add video" button and filtered list
-  const [data, setData] = useState(videos);
+  const [data, setData] = useState([]);
   const [addBtn, setAddBtn] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [listType, setListType] = useState(true);
 
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  useEffect((
-    fetch()
-  ),[])
-
+  const loadData = async () => {
+    const response = await fetch("http://localhost:5000/");
+    const data = await response.json();
+    setData(data);
+  };
 
   // a function to show or hide the form inputs
   const addToggle = () => {
@@ -74,30 +76,26 @@ function App() {
       <header className="title-container">
         <h1>Video Recommendation</h1>
       </header>
-      
-        <div className="add-search-container">
-          <div className="add">
-            <button className="add-button" onClick={addToggle}>
-              Add Video
-            </button>
-            <div style={{ display: addBtn ? "flex" : "none" }}>
-              <Add
-                cancel={addToggle}
-                handleForm={handleForm}
-              />
-            </div>
-          </div>
-          <div className="search">
-            <Search searchHandler={searchHandler} />
+
+      <div className="add-search-container">
+        <div className="add">
+          <button className="add-button" onClick={addToggle}>
+            Add Video
+          </button>
+          <div style={{ display: addBtn ? "flex" : "none" }}>
+            <Add cancel={addToggle} handleForm={handleForm} />
           </div>
         </div>
+        <div className="search">
+          <Search searchHandler={searchHandler} />
+        </div>
+      </div>
 
-        {listType === false ? (
-          <VideoList delete={deleteHandler} data={filteredList} />
-        ) : (
-          <VideoList delete={deleteHandler} data={data} />
-        )}
-
+      {listType === false ? (
+        <VideoList delete={deleteHandler} data={filteredList} />
+      ) : (
+        <VideoList delete={deleteHandler} data={data} />
+      )}
     </div>
   );
 }
