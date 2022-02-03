@@ -8,7 +8,6 @@ import AllVideos from "./AllVideos";
 import Footer from "./Footer";
 
 function App() {
-  const [id, setId] = useState(0);
   const [data, setData] = useState(ExampleResponse);
   const [filteredVideos, setFilteredVideos] = useState([]);
   console.log(data);
@@ -27,23 +26,25 @@ function App() {
   //Prop Function to add video into data
   const addVideo = (title, url) => {
     let newVideo = {
-      id: id,
+      id: Math.floor(Math.random() * 100000),
       title: title,
       url: url,
-      rating: 0,
+      rating: Math.floor(Math.random() * 10000),
     };
-    setId((id) => id + 1);
-    data.push(newVideo);
+
+    let updatedData = data.concat(newVideo);
+    console.log(`Added video :${newVideo.title}`);
+    setData(updatedData);
   };
 
   // Prop Function to remove a video
   const removeVideo = (id) => {
     const dataCopy = [...data];
-    console.log(`removed video with id:${id}`);
     const index = dataCopy.findIndex((video) => {
       return video.id === id;
     });
     dataCopy.splice(index, 1);
+    console.log(`removed video with id:${id}`);
     setData(dataCopy);
   };
 
@@ -55,13 +56,15 @@ function App() {
       </header>
       <main>
         <AddVideo addVideo={addVideo} />
-        <div className="video-cards">
+
+        <div>
           {filteredVideos.length > 0 ? (
             <AllVideos delete={removeVideo} data={filteredVideos} />
           ) : (
             <AllVideos delete={removeVideo} data={data} />
           )}
         </div>
+
         <Footer />
       </main>
     </div>

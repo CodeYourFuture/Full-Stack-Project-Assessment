@@ -1,8 +1,7 @@
 html,
 body {
-  height: 100%;
-  /* margin: 0%;
-  padding: 0%; */
+  /* height: 100%; */
+
   /* text-align: center; */
 }
 h1 {
@@ -14,12 +13,9 @@ h1 {
 
 .add-component {
   margin: 2rem;
-  /* position: relative;
-  right: 20%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .form-label {
@@ -47,26 +43,30 @@ h1 {
   color: red;
   margin: 1rem;
 }
-.video-del-btn {
-  max-width: fit-content;
-  margin-left: 40%;
-}
-iframe {
-  margin-right: 0%;
-  padding-right: 0%;
-}
+
 .video {
-  border: 2px solid red;
-  margin: 2rem;
+  padding-left: 0%;
+  text-align: center;
+  list-style: none;
+  /* border: 2px solid red; */
+  border-radius: 1rem;
+  background-color: silver;
+  margin: 1.25rem;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+}
+iframe {
+  border-radius: 1rem;
 }
 
 .video-cards {
-  border: 5px solid green;
+  padding-left: 0%;
+  list-style: none;
+  /* border: 5px solid green; */
+  border-radius: 1rem;
+  /* background-color: grey; */
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
