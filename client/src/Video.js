@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
-//deleteVideo.concat('hideOnDelete')
 const Video = (props) => {
-  const [deleteVideo, setDeleteVideo ] = useState("");
+  const [deleteVideo, setDeleteVideo ] = useState(props.videoData);
   let [upVote, setUpVote] = useState(0);
   let [DownVote, setDownVote] = useState(0);
 
   const handleDeleteVideo = (id) => {
-      setDeleteVideo(props.videoData.filter(v => v === id));
+      setDeleteVideo(deleteVideo.filter(video => video.id !== id));
   }
 
   const handleUpVote = () => {
@@ -20,8 +19,8 @@ const Video = (props) => {
     
     return (
       <div class="videosContainer">
-        {props.videoData.map((video, index) => (
-          <div class={deleteVideo ? 'hideOnDelete' : 'video'}>
+        {deleteVideo.map((video, index) => (
+          <div class= "video">
             <div class="topBtnDisplay">
               <button class = "upBtn" onClick={handleUpVote}>Up Vote</button>
               <button class = "ratingBtn">{video.rating + upVote + DownVote}</button>
@@ -38,7 +37,9 @@ const Video = (props) => {
             ></iframe>
             <button
               className="deleteBtn bg-danger text-white"
-              onClick={() => handleDeleteVideo(video.id)}
+            onClick={() => {
+              handleDeleteVideo(video.id);
+            }}
             >
               Delete
             </button>
