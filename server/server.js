@@ -10,7 +10,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
-
 // GET "/"
 app.get("/", (req, res) => {
   res.json(videos);
@@ -20,15 +19,12 @@ app.post("/videos", function (req, res) {
   const video = {
     id: 0,
     title: req.body.title,
-    url: req.body.url
+    url: req.body.url,
   };
 
   console.log(req.body);
 
-  if (
-    !video.title ||
-    !video.url 
-  ) {
+  if (!video.title || !video.url) {
     return res.status(400).json({
       msg: "Please include a title, and a url",
     });
@@ -58,8 +54,7 @@ app.delete("/:id", (req, res) => {
   const found = videos.some(idFilter(req));
 
   if (found) {
-    res.json({
-    });
+    res.json({});
   } else {
     res.json({
       result: "failure",

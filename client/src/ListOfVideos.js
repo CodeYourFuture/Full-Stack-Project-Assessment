@@ -20,7 +20,7 @@ const ListOfVideos = (props) => {
     setOneVideo(oneVideo.filter((item) => item.id !== Id));
   };
   const videosData = () => {
-    fetch("http://127.0.0.1:5050/")
+    fetch("http://127.0.0.1/5050") //try https://video-rec.herokuapp.com
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -61,7 +61,8 @@ const ListOfVideos = (props) => {
             <iframe
               width="300"
               height="300"
-              src={item.url.replace("watch?v=", "embed/")}
+              src={item.vurl.replace("watch?v=", "embed/")}
+              // src={item.vurl.replace("watch?v=", "embed/")} when try:https://video-rec.herokuapp.com
               title={item.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -77,7 +78,6 @@ const ListOfVideos = (props) => {
           </div>
         );
       })}
-      ;
     </div>
   );
 };

@@ -15,9 +15,8 @@ function App() {
       </header>
 
       <Form />
-     
-        <ListOfVideos  />
 
+      <ListOfVideos />
     </div>
   );
 }

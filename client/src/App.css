@@ -40,4 +40,11 @@
     display: flex;
     flex-wrap: wrap;
   }
+  .addButton{
+    border-style: none;
+    background-color: white;
+    margin-left:5rem;
+    margin-bottom: 2rem;
+    
+  }
   

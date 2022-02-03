@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import ListOfVideos from "./ListOfVideos";
 
-
 const Search = (props) => {
-  const [searchInput, setSearchInput] = useState ("");
-  const handleSearchInput =(e)=>{
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
-  const clickHandler=(e)=>{
-     e.preventDefault();
-     props.search(searchInput);
-  }
+  const clickHandler = (e) => {
+    e.preventDefault();
+    props.search(searchInput);
+  };
   return (
     <div className="search">
-      <div className="page-header">
-      </div>
+      <div className="page-header"></div>
       <div className="row search-wrapper">
         <div className="col">
           <div className="search-row">
@@ -26,7 +24,7 @@ const Search = (props) => {
               value={searchInput}
               onChange={handleSearchInput}
             />
-            <button onClick= { clickHandler }>Search</button>
+            <button onClick={clickHandler}>Search</button>
           </div>
           {/* </form> */}
         </div>
@@ -34,7 +32,5 @@ const Search = (props) => {
     </div>
   );
 };
-
-
 
 export default Search;
