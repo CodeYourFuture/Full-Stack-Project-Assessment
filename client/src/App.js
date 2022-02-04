@@ -26,6 +26,9 @@ setVideos(videos.filter((item) => item.id !== ID));
           {
            videos.map((video)=> {
               return (
+                <>
+                <AddVideo/>
+
                 <div key={video.id}>
                   <div>
                     <BsFillHandThumbsUpFill
@@ -53,7 +56,9 @@ setVideos(videos.filter((item) => item.id !== ID));
                   ></iframe>
                   <p>{video.rating}</p>
                   <button onClick={() => clickHandler(video.id)}>Delete</button>
+
                 </div>
+                </>
               );
            }
            )  
@@ -61,6 +66,19 @@ setVideos(videos.filter((item) => item.id !== ID));
         </div>
 
       </header>
+    </div>
+  );
+}
+
+const AddVideo = () => {
+  return (
+    <div>
+      <h2>Add Video</h2>
+      <span>Title </span>
+      <input type="text" />
+      <span>Add Url </span>
+      <input type="text" />
+      <button>Cancel</button> <button>Add</button>
     </div>
   );
 }
