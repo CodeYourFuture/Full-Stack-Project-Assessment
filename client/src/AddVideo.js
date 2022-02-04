@@ -6,11 +6,14 @@ const AddVideo = (props) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [hideOnCancel, setCancel] = useState([]);
+  const [recordDate, setDate] = useState(new Date().toLocaleDateString('en-GB'));
+ 
 
 
-
+  
   const addVideo = () => {
     setUpdatedVideoData(updatedVideoData.concat({title, url}));
+    setDate();
     setTitle("");
     setUrl("");
   }
@@ -39,7 +42,7 @@ const AddVideo = (props) => {
       <ul>
         <li onClick={addVideoFields}>Add video</li>
       </ul>
-      <div id="addFormStyle" class={hideOnCancel}>
+      <div id="addFormStyle" className={hideOnCancel}>
         <label htmlFor="addTitle">
           {' '}
           Title
@@ -57,10 +60,17 @@ const AddVideo = (props) => {
           <input type="url" onChange={handleUrlInput} value={url} required />
         </label>
         <br />
-        <button className = "addBtn bg-success text-white" onClick={addVideo}>Add</button>
-        <button className = "cancelBtn bg-warning text-white" onClick={cancelInputFields}>Cancel</button>
+        <button className="addBtn bg-success text-white" onClick={addVideo}>
+          Add
+        </button>
+        <button
+          className="cancelBtn bg-warning text-white"
+          onClick={cancelInputFields}
+        >
+          Cancel
+        </button>
       </div>
-      <Video videoData={updatedVideoData} />
+      <Video videoData={updatedVideoData} date = {recordDate}/>
     </div>
   );
 };

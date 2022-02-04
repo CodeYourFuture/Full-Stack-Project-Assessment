@@ -1,32 +1,57 @@
 import React, { useState } from "react";
 
 const Video = (props) => {
-  const [deleteVideo, setDeleteVideo ] = useState(props.videoData);
-  let [upVote, setUpVote] = useState(0);
-  let [DownVote, setDownVote] = useState(0);
+  const [deleteVideo, setDeleteVideo ] = useState(props.videoData.sort((a,b) => b.rating - a.rating, 0));
+  const [upVote, setUpVote] = useState(0);
+  const [downVote, setDownVote] = useState(0);
+  const [selectedId, setSelectedId] = useState(false);
 
   const handleDeleteVideo = (id) => {
       setDeleteVideo(deleteVideo.filter(video => video.id !== id));
   }
 
-  const handleUpVote = () => {
-    setUpVote(upVote++);
+  const handleUpVote = (id) => {
+    setSelectedId(true);
+    setUpVote(upVote + 1);
+    
   }
 
-  const handleDownVote = () => {
-    setDownVote(DownVote--);
+  const handleDownVote = (id) => {
+    setDownVote(downVote - 1);
   }
     
     return (
-      <div class="videosContainer">
+      <div className="videosContainer">
         {deleteVideo.map((video, index) => (
-          <div class= "video">
-            <div class="topBtnDisplay">
-              <button class = "upBtn" onClick={handleUpVote}>Up Vote</button>
-              <button class = "ratingBtn">{video.rating + upVote + DownVote}</button>
-              <button class = "downBtn" onClick={handleDownVote}>Down Vote</button>
+          <div className="video">
+            <p className="hideDate">This video was uploaded on {props.date}</p>
+            <div className="topBtnDisplay">
+              <button
+                key={index + 1}
+                className="upBtn"
+                onClick={() => handleUpVote(video.id)}
+              >
+                Up Vote
+              </button>
+              {selectedId ? (
+                <button key={index + 2} className="ratingBtn">
+                  {video.rating + upVote + downVote}
+                </button>
+              ) : (
+                <button key={index + 2} className="ratingBtn">
+                  {video.rating}
+                </button>
+              )}
+              <button
+                key={index + 3}
+                className="downBtn"
+                onClick={() => handleDownVote(video.id)}
+              >
+                Down Vote
+              </button>
             </div>
             <iframe
+              key={index + 4}
               width="560"
               height="315"
               src={`https://www.youtube.com/embed/${video.url.split('=')[1]}`}
@@ -36,10 +61,11 @@ const Video = (props) => {
               allowFullScreen
             ></iframe>
             <button
+              key={index + 5}
               className="deleteBtn bg-danger text-white"
-            onClick={() => {
-              handleDeleteVideo(video.id);
-            }}
+              onClick={() => {
+                handleDeleteVideo(video.id);
+              }}
             >
               Delete
             </button>

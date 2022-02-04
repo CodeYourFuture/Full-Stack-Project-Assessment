@@ -14,8 +14,12 @@ h1 {
   visibility: hidden;
 }
 
-.hideOnDelete {
+.hideDate {
   display: none;
+}
+
+.showDate {
+  display: block;
 }
 
 #addFormStyle {
@@ -96,3 +100,11 @@ input {
   border: none;
   border-radius: 4px;
 }
+
+p {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  color:darkSlategrey;
+}
+
