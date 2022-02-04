@@ -87,12 +87,14 @@ label {
   background-color: #c00021;
   color: white;
   border: none;
+  width: 4rem;
 }
 
 .field-button-container .green {
   background-color: green;
   color: white;
   border: none;
+  width: 4rem;
 }
 
 .video-container {
@@ -174,7 +176,7 @@ i.fas.fa-thumbs-up {
 
   .add-search-container {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     height: 6rem;
   }
 
@@ -202,10 +204,14 @@ i.fas.fa-thumbs-up {
   label {
     display: flex;
     flex-direction: row;
-    margin-left: 25%;
   }
 
   .search input {
     margin-left: 10px;
+  }
+
+  .field-button-container {
+    display: flex;
+    flex-direction: column;
   }
 }
