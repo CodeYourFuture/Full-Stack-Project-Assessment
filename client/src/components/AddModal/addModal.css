@@ -1,5 +1,6 @@
 .add-modal{
     position: fixed;
+    z-index: 2;
     width : 100%;
     background-color: #fff;
     border-top-right-radius: 5px ;

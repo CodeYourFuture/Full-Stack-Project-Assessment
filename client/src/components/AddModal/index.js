@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./addModal.css";
 
 function AddModal(props) {
-    const { onSave } = props;
+    const { onSave, refresh } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
+
+    useEffect(() => {
+        setIsOpen(false);
+        setUrl("");
+        setTitle("");
+    }, [refresh])
 
     return (
         <div className={`add-modal ${isOpen ? "add-modal--open" : "add-modal--close"}`}>
