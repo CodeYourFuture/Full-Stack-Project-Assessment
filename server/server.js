@@ -1,11 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const { v4 } = require("uuid");
 require('dotenv').config()
 const mockData = require("./exampleresponse.json");
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -56,9 +57,31 @@ app.post('/', (req, res) => {
   })
 })
 
+// like and dislike 
+app.put("/:id", (req, res) => {
+  const { type } = req.body
+  let { id } = req.params
+
+  if (!isNaN(id)) {
+    id = Number(id)
+  }
+
+  videos = videos.map(video => {
+    if (video.id === id) {
+      video.rating += (type == "like") ? 1 : -1
+    }
+    return video
+  })
+  res.send({
+    result: "successful",
+    message: "rating successfully updated"
+  })
+
+})
+
 // delete a video
 app.delete('/:id', (req, res) => {
-  const { id } = req.params;
+  let { id } = req.params;
   if (!isNaN(id)) {
     id = Number(id)
   }
