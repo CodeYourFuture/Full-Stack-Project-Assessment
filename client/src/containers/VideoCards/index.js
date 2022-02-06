@@ -1,15 +1,54 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import VideoCard from "../../components/VideoCard"
-import mockData from "../../exampleresponse.json"
+// import mockData from "../../exampleresponse.json"
 import "./videoCards.css"
 
-function VideoCards() {
-    const handleLike = id => { console.log(id) }
-    const handleDislike = id => { console.log(id) }
-    const handleDelete = id => { console.log(id) }
+function VideoCards({ videos, onVideoUpdate }) {
+
+    const handleLike = id => {
+        fetch(`http://127.0.0.1:5000/${id}`,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "put",
+                body: JSON.stringify({ type: "like" })
+            })
+            .then(() => {
+                onVideoUpdate()
+            })
+    }
+
+    const handleDislike = id => {
+        fetch(`http://127.0.0.1:5000/${id}`,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "put",
+                body: JSON.stringify({ type: "dislike" })
+            })
+            .then(() => {
+                onVideoUpdate()
+            })
+    }
+
+    const handleDelete = id => {
+        fetch(`http://127.0.0.1:5000/${id}`,
+            {
+                method: "delete",
+            })
+            .then(() => {
+                onVideoUpdate()
+            })
+    }
+
+
     return (
         <div className="video-cards">
-            {mockData.map((data) => {
+            {videos.map((data) => {
                 return <VideoCard
                     key={data.id}
                     id={data.id}
