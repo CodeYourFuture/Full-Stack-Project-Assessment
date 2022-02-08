@@ -1,30 +1,30 @@
 import React, { useState } from "react";
-import Search from "./Search";
+
 
 function Form(prop) {
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
-    //const [list, setList] = useState(prop.videos);
     const submitHandler = (e) => {
         e.preventDefault();
-        prop.videos.unshift({ title: title, url: url });
-       // setList(list.unshift({title: title, url: url}));
+        prop.addVideos(title, url)
+        setTitle("");
+        setUrl("");
     };
     return (
     <div>
-          <form onSubmit={submitHandler} > 
+        <form> 
             <div>
                 <h2>Add videos</h2>
                 <div className="form-group row">        
                     <label htmlFor="title" className="col-sm-2 col-form-label">Title:</label>
                     <div className="col-sm-2">
-                        <input onChange={(e) => setTitle(e.target.value)} id="title" type="text" name="title"/>
+                        <input onChange={(e) => setTitle(e.target.value)} id="title" type="text" name="title" value={title} />
                     </div>
                 </div>
                 <div className="form-group row">
                     <label htmlFor="url" className="col-sm-2 col-form-label">URL:</label>
                     <div className="col-sm-2">
-                        <input onChange={(e) => setUrl(e.target.value)} id="url" type="text" name="url"/>
+                        <input onChange={(e) => setUrl(e.target.value)} id="url" type="text" name="url" value={url}/>
                     </div>
                 </div>
                 <div className="row">
@@ -32,13 +32,11 @@ function Form(prop) {
                         <button className="btn-danger btn mb-4" >Cancel</button>
                     </div>
                     <div className="col-sm-4">
-                        <input type="submit" className="btn-primary btn mb-4" value="Add"/>
+                        <button onClick={submitHandler} className="btn-primary btn mb-4">Add</button>
                     </div>
                 </div>
             </div>
-        <Search/>
         </form>
-        
     </div>
     )
 }
