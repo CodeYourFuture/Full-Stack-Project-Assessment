@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const dotenv = require("dotenv");
+const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
@@ -72,12 +74,24 @@ let videos = [
   },
 ];
 
-// GET "/"
+const pool = new Pool(
+
+})
+
+
+
+
+
+// GET all videos
 app.get("/", (req, res) => {
   const data = videos;
   res.send(data);
 });
 
+
+
+
+// POST(add) a video
 app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;
@@ -97,7 +111,7 @@ app.post("/", (req, res) => {
     res.status(200).json([{ message: "success" }, newVideo]);
   }
 });
-
+// GET video by id
 app.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const found = videos.find((video) => video.id === id);
@@ -107,7 +121,7 @@ app.get("/:id", (req, res) => {
     res.status(404).json({ message: "video could not be found" });
   }
 });
-
+// DELETE video by id
 app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = videos.findIndex((video) => video.id === id);
