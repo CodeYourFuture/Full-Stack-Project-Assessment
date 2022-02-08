@@ -18,7 +18,11 @@ function App() {
     setVid([...vid]);
     console.log(vid);
     console.log(newVideo);
-    
+  }
+
+  const removeItem = (item) => {
+    const filteredVid = vid.filter(video => video.title !== item.title);
+    setVid([...filteredVid]);
   }
   return (
     <div className="App">
@@ -26,7 +30,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <Form addVideos={addData}/>
-      <Videos videos={vid} />
+      <Videos videos={vid} delete={removeItem} />
     </div>
   );
 }
