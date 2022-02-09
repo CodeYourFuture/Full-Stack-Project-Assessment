@@ -1,19 +1,42 @@
-const express = require("express");
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-const port = process.env.PORT || 5050;
+var express = require("express");
+var cors = require("cors");
+var app = express();
+app.use(cors());
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+
+
+const port = process.env.PORT || 5000;
 let videos = require("../exampleresponse.json");
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
-// GET "/"
+
+// this Get rout should be commented out if we need to use the rout / for query 
+// app.get("/", (req, res) => {
+//   res.json(videos);
+// });
+
+
+//Order videos descending/descending , if no query order descending 
+
 app.get("/", (req, res) => {
-  res.json(videos);
+  // const sorted_desc = videos.sort((a, b) => b.rating - a.rating);
+  // const sorted_asc = videos.sort((a, b) => a.rating - b.rating);  
+  
+  if (
+    req.query.order === 'desc' || (Object.keys(req.query).length === 0)
+  ) {
+    res.json(videos.sort((item1, item2) => item2.rating - item1.rating));
+  } 
+  if (req.query.order === 'asc') {
+    res.json(videos.sort((item1, item2) => item1.rating -item2.rating));
+  }
 });
+
+
 //post
 app.post("/videos", function (req, res) {
   const video = {
@@ -62,3 +85,6 @@ app.delete("/:id", (req, res) => {
     });
   }
 });
+
+
+
