@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { BsFillHandThumbsUpFill } from "react-icons/bs";
-import { BsFillHandThumbsDownFill } from "react-icons/bs";
 import "./App.css";
 import OrderButton from "./OrderButton";
+import ThumbUp from "./ThumbUp";
+import ThumbDown from "./ThumbDown";
 
 const ListOfVideos = (props) => {
-  const [like, setLike] = useState(0);
-  const [disLike, setDisLike] = useState(0);
   const [oneVideo, setOneVideo] = useState([]);
   const [order, setOrder] = useState([]);
   const [descOrder, setDescOrder] = useState([]);
   const [clicked, setClicked] = useState(true);
-  const clickLike = () => {
-    setLike((like) => like + 1);
-  };
-  const clickDisLike = () => {
-    setDisLike((disLike) => disLike + 1);
-  };
-
   const deleteHandler = (Id) => {
     setOneVideo(oneVideo.filter((item) => item.id !== Id));
   };
@@ -65,7 +56,6 @@ const ListOfVideos = (props) => {
       setClicked(true);
     }
   };
-
   return (
     <div>
       <OrderButton order={orderHandler} />
@@ -74,17 +64,11 @@ const ListOfVideos = (props) => {
           return (
             <div key={index} className="visible">
               <div className="vote">
-                <BsFillHandThumbsUpFill onClick={clickLike} className="thumb" />
-                <span>{like}</span>
+                <ThumbUp />
                 <h5>Vote</h5>
-                <BsFillHandThumbsDownFill
-                  onClick={clickDisLike}
-                  className="thumb"
-                />
-                <span>{disLike}</span>
+                <ThumbDown/>
               </div>
               <h4>Rating:{item.rating}</h4>
-
               <p>{item.title}</p>
               <iframe
                 width="300"
