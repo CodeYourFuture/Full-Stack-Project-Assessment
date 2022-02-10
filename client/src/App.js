@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import AddVideo from "./AddVideo";
 // import Video from "./Video";
 import VideoSearch from "./VideoSearch";
-import ExampleResponse from "./exampleresponse.json";
+// import ExampleResponse from "./exampleresponse.json";
 import AllVideos from "./AllVideos";
 import Footer from "./Footer";
 
 function App() {
-  const [data, setData] = useState(ExampleResponse);
+  const [data, setData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   console.log(data);
 
@@ -47,7 +47,20 @@ function App() {
     console.log(`removed video with id:${id}`);
     setData(dataCopy);
   };
-
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div className="App">
       <header className="App-header">

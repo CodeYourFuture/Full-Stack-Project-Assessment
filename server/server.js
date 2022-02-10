@@ -47,10 +47,10 @@ app.get("/:id", (req, res) => {
   const Id = parseInt(req.params.id);
   const filteredVideo = videosData.find((video) => video.id === Id);
 
-  if (filteredVideo.length === 0) {
-    res.status(400).send({ msg: `Video with Id:${Id} not found !` });
+  if (filteredVideo.length > 0) {
+    return res.status(200).send(filteredVideo);
   } else {
-    res.status(200).send(filteredVideo);
+    return res.status(400).send({ msg: `Video with Id:${Id} not found !` });
   }
 });
 
