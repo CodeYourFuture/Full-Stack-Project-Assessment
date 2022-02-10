@@ -6,7 +6,6 @@ export default function Video(props) {
     // Delete handler that uses a prop function which takes prop VideoId as parameter
     props.delete(props.videoId);
   };
-
   // const youTubeId = props.Url.split("=")[1];
 
   return (

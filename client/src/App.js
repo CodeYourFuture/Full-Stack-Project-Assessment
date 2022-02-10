@@ -30,6 +30,7 @@ function App() {
       title: title,
       url: url,
       rating: Math.floor(Math.random() * 10000),
+      // date: `${new Date().toLocaleTimeString}`,
     };
 
     let updatedData = data.concat(newVideo);
