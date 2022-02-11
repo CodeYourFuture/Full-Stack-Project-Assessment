@@ -36,7 +36,6 @@ const Add = (props) => {
           </fieldset>
         </form>
       </div>
-      <div></div>
     </div>
   );
 };

@@ -11,29 +11,47 @@ function App() {
   const [addBtn, setAddBtn] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [listType, setListType] = useState(true);
+  const [update, setUpdate] = useState(true);
 
   useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    const response = await fetch("http://localhost:5000/");
-    const data = await response.json();
-    setData(data);
-  };
+    fetch("http://localhost:5000/")
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw `${response.status} ${response.statusText}`;
+      })
+      .then(function (videos) {
+        setData(videos);
+      })
+      .catch(function (error) {
+        console.log("An error occurred:", error);
+      });
+  }, [update]);
 
   // a function to show or hide the form inputs
   const addToggle = () => {
-    console.log(addBtn);
     setAddBtn(!addBtn);
   };
 
   // a function to handle the deletion of a video
   const deleteHandler = (e) => {
-    const newState = data.filter((video) => {
-      return video.id !== parseInt(e.target.id);
-    });
-    setData(newState);
+    fetch(`http://localhost:5000/${e.target.id}`, {
+      method: "delete",
+    })
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw `${response.status} ${response.statusText}`;
+      })
+      .then(() => {
+        setUpdate(!update);
+      })
+      .catch(function (error) {
+        console.log("An error occurred:", error);
+      });
+
     const newFilteredState = filteredList.filter((video) => {
       return video.id !== parseInt(e.target.id);
     });
@@ -58,16 +76,22 @@ function App() {
   // a function to get the form data and construct a 'video' object
   const handleForm = (e) => {
     e.preventDefault();
-    let newVideo = {
-      "id": Math.floor(Math.random() * 1000000),
-      "title": e.target.title.value,
-      "url": e.target.url.value,
-      "rating": Math.floor(Math.random() * 10000),
-    };
-    let newState = data.concat(newVideo);
-    // let newFilteredState = filteredList.concat(newVideo);
-    setData(newState);
-    // setFilteredList(newFilteredState);
+    fetch("http://localhost:5000/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "title": e.target.title.value,
+        "url": e.target.url.value,
+        "rating": Math.floor(Math.random() * 10000),
+        "votes": 0,
+      }),
+    })
+      .then((response) => console.log(response))
+      .then(() => {
+        setUpdate(!update);
+      });
   };
 
   return (
@@ -79,9 +103,11 @@ function App() {
 
       <div className="add-search-container">
         <div className="add">
-          <button className="add-button" onClick={addToggle}>
-            Add Video
-          </button>
+          <div className="add-button-container">
+            <button className="add-button" onClick={addToggle}>
+              Add Video
+            </button>
+          </div>
           <div style={{ display: addBtn ? "flex" : "none" }}>
             <Add cancel={addToggle} handleForm={handleForm} />
           </div>

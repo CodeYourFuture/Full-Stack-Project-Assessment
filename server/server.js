@@ -1,137 +1,86 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const { Pool } = require("pg");
-const port = process.env.PORT || 5000;
+const dbhostname = process.env.HOST;
+const database = process.env.DATABASE;
+const dbport = process.env.PORT;
+const dbpassword = process.env.PASSWORD;
+const dbuser = process.env.USER;
+const port = 5000;
+
 app.use(cors());
 app.use(express.json());
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
-  {
-    "id": 523523,
-    "title": "Never Gonna Give You Up",
-    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "rating": 23,
-  },
-  {
-    "id": 523427,
-    "title": "The Coding Train",
-    "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    "rating": 230,
-  },
-  {
-    "id": 82653,
-    "title": "Mac & Cheese | Basics with Babish",
-    "url": "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    "rating": 2111,
-  },
-  {
-    "id": 858566,
-    "title": "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    "url": "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    "rating": 11,
-  },
-  {
-    "id": 453538,
-    "title":
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    "url": "https://www.youtube.com/watch?v=4As0e4de-rI",
-    "rating": 3211,
-  },
-  {
-    "id": 283634,
-    "title": "Learn Unity - Beginner's Game Development Course",
-    "url": "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    "rating": 211,
-  },
-  {
-    "id": 562824,
-    "title": "Cracking Enigma in 2021 - Computerphile",
-    "url": "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    "rating": 111,
-  },
-  {
-    "id": 442452,
-    "title": "Coding Adventure: Chess AI",
-    "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    "rating": 671,
-  },
-  {
-    "id": 536363,
-    "title": "Coding Adventure: Ant and Slime Simulations",
-    "url": "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    "rating": 76,
-  },
-  {
-    "id": 323445,
-    "title": "Why the Tour de France is so brutal",
-    "url": "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    "rating": 73,
-  },
-];
+const dbConfig1 = {
+  host: dbhostname,
+  port: dbport,
+  user: dbuser,
+  password: dbpassword,
+  database: database,
+};
 
-const pool = new Pool(
-
-})
-
-
-
-
+const pool = new Pool(dbConfig1);
 
 // GET all videos
 app.get("/", (req, res) => {
-  const data = videos;
-  res.send(data);
+  const allVideosQuery = "SELECT * FROM videos";
+  pool
+    .query(allVideosQuery)
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
-
-
-
 
 // POST(add) a video
 app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;
-  const newVideo = {
-    "id": Math.floor(Math.random() * 1000000),
-    "title": title,
-    "url": url,
-    "rating": 99999,
-  };
-  if (!title || !url) {
-    res.status(404).json({
-      "result": "failure",
-      "message": "Video could not be saved",
-    });
-  } else {
-    videos.push(newVideo);
-    res.status(200).json([{ message: "success" }, newVideo]);
-  }
+  const rating = req.body.rating;
+  const votes = req.body.votes;
+  console.log(req.body);
+
+  const addVideoQuery = `INSERT INTO videos (title,url,rating,votes) VALUES ($1,$2,$3,$4)`;
+  const duplicateUrlQuery = `SELECT url FROM videos WHERE url=$1`;
+
+  pool.query(duplicateUrlQuery, [url]).then((result) => {
+    if (result.rows.length > 0) {
+      res.status(400).json({ message: "video already in database" });
+    } else {
+      pool
+        .query(addVideoQuery, [title, url, rating, votes])
+        .then(() => res.json({ message: "video added" }))
+        .catch((error) => res.status(500).json(error));
+    }
+  });
 });
+
 // GET video by id
-app.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const found = videos.find((video) => video.id === id);
-  if (found) {
-    res.status(200).json(found);
-  } else {
-    res.status(404).json({ message: "video could not be found" });
-  }
-});
+// app.get("/:id", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   // const found = videos.find((video) => video.id === id);
+//   const getIdQuery = `SELECT * FROM videos WHERE id = $1`;
+
+//   pool
+//     .query(getIdQuery, [id])
+//     .then((result) => res.json(result.rows[0]))
+//     .catch((error) => {
+//       res.status(500).send(error);
+//     });
+// });
+
 // DELETE video by id
 app.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = videos.findIndex((video) => video.id === id);
-  console.log(index);
-  if (index !== -1) {
-    videos.splice(index, 1);
-    res.status(200).json({ message: "video deleted" });
-  } else {
-    res
-      .status(404)
-      .json({ result: "failure", message: "Video could not be deleted" });
-  }
+  const id = req.params.id;
+
+  const delVidQuery = `DELETE FROM videos WHERE id=$1`;
+  pool
+    .query(delVidQuery, [id])
+    .then(() => res.json({ message: `video ${id} deleted` }))
+    .catch((error) => res.status(500).json(error));
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
