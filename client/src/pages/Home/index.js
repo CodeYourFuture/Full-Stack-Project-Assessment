@@ -5,7 +5,8 @@ import VideoCards from "../../containers/VideoCards";
 
 function Home() {
     const [videos, setVideos] = useState([]);
-    const [refreshModal, setRefreshModal] = useState(0)
+    const [refreshModal, setRefreshModal] = useState(0);
+    const [error, setError] = useState("")
 
     const handleSaveNewVideo = (video) => {
         fetch("http://127.0.0.1:5000",
@@ -18,9 +19,15 @@ function Home() {
                 method: "post",
                 body: JSON.stringify(video),
 
-            }).then(() => {
-                getVideos();
-                setRefreshModal(refreshModal + 1)
+            }).then((result) => result.json())
+            .then(data => {
+                if (data.msg) {
+                    setError(data.msg);
+                } else {
+                    getVideos();
+                    setError("");
+                    setRefreshModal(refreshModal + 1)
+                }
             })
     }
 
@@ -42,7 +49,7 @@ function Home() {
 
     return (
         <main className="home">
-            <AddModal onSave={handleSaveNewVideo} refresh={refreshModal} />
+            <AddModal onSave={handleSaveNewVideo} refresh={refreshModal} errorMessage={error} />
             <VideoCards videos={videos} onVideoUpdate={() => getVideos()} />
         </main>
     )

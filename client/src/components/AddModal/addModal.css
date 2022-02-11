@@ -14,7 +14,7 @@
 
 .add-modal--open{
     bottom: 0;
-    height: 200px;
+    height: 250px;
 }
 
 .add-modal__toggle{
@@ -33,4 +33,10 @@
 
 .add-modal__form{
     margin-top: 50px;
+}
+
+.add-modal__error {
+    color: red;
+    font-weight: 800;
+    text-transform: capitalize;
 }

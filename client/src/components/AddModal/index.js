@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./addModal.css";
 
 function AddModal(props) {
-    const { onSave, refresh } = props;
+    const { onSave, refresh, errorMessage } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
@@ -27,6 +27,7 @@ function AddModal(props) {
                     <label >URL:</label>
                     <input type="text" id="url" name="url" value={url} onChange={(e) => { setUrl(e.target.value) }} />
                 </div>
+                {errorMessage && <p className="add-modal__error" >{errorMessage}</p>}
                 <button type="submit" onClick={(e) => {
                     e.preventDefault()
                     onSave({ title, url })
