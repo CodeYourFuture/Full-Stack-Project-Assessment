@@ -6,6 +6,11 @@
 .jumbotron {
   background-color: #bd8e29;
 }
+.title-images {
+  display: flex;
+  background-color: #bd8e29;
+  justify-content: center;
+}
 
 /* addvideo section */
 .add-video-title {
@@ -38,7 +43,6 @@
   background-color: #bd8e29;
   display: block;
   border-radius: 2%;
-  
 }
 
 .video-card iframe {
@@ -47,8 +51,7 @@
 
 .card-title {
   background-color: white;
-  border-radius: 20%;
-
+  border-radius: 5%;
 }
 
 .votes-section {
