@@ -50,23 +50,19 @@ app.get('/:id', (req, res) => {
 // adds a video 
 app.post('/', (req, res) => {
     const { title, url } = req.body;
+
     if (!title || !url) {
-        return res.send({
-            "result": "failure",
-            "message": "Video could not be saved"
-        })
+        return res.send({ msg: "url & title are mandatory" })
     }
 
-    const data = {
-        id: v4(),
-        rating: 0,
-        title,
-        url
+    const urlRegex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$/;
+    if (!urlRegex.test(url)) {
+        return res.send({ msg: "Not a valid URL!" })
     }
-    videos.push(data);
-    res.send({
-        id: data.id
-    })
+
+    pool.query("INSERT INTO videos(title, url) VALUES($1, $2)", [title, url])
+        .then(result => res.send(result.rows))
+        .catch(error => res.send(error))
 })
 
 // like and dislike 
