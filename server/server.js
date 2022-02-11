@@ -5,7 +5,11 @@ const app = express();
 const { Pool } = require("pg");
 const { query } = require("express");
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://127.0.0.1:3000",
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,8 +36,8 @@ app.post("/", (req, res) => {
   let videoTitle = req.body.title;
   let videoURL = req.body.url;
   let videoRating = Math.floor(Math.random() * 10000);
-  let videoId = Math.floor(Math.random() * 10000);
-
+  // let videoId = Math.floor(Math.random() * 10000);
+  console.log(req.body);
   const isUrlValid = videoURL.match(
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
   );
@@ -50,20 +54,19 @@ app.post("/", (req, res) => {
       if (result.rows.length) {
         return res
           .status(400)
-          .send({ msg: `A video with title:${videoTitle} already exists` })
-          .catch((error) => {
-            console.log(error);
-            res.status(500).json(error);
-          });
+          .send({ msg: `A video with title:${videoTitle} already exists` });
       } else {
-        return pool
+        pool
           .query(
-            `INSERT INTO videos (title, url, rating, id) VALUES($1, $2, $3, $4)`,
-            [videoTitle, videoURL, videoRating, videoId]
+            `INSERT INTO videos (title, url, rating) VALUES($1, $2, $3) RETURNING *`,
+            [videoTitle, videoURL, videoRating]
           )
-          .then(() =>
-            res.send({ msg: `Video ${videoTitle} added successfully` })
-          )
+          .then((result) => {
+            console.log(result.rows[0]);
+            // console.log(videoTitle);
+            res.json(result.rows[0]);
+            // res.send({ msg: `Video ${videoTitle} added successfully` });
+          })
           .catch((error) => {
             console.log(error);
             res.status(500).json(error);

@@ -26,16 +26,30 @@ function App() {
   //Prop Function to add video into data
   const addVideo = (title, url) => {
     let newVideo = {
-      id: Math.floor(Math.random() * 100000),
       title: title,
       url: url,
       rating: Math.floor(Math.random() * 10000),
       // date: `${new Date().toLocaleTimeString}`,
     };
+    console.log(newVideo);
+    fetch("http://127.0.0.1:5000/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
 
-    let updatedData = data.concat(newVideo);
-    console.log(`Added video :${newVideo.title}`);
-    setData(updatedData);
+      body: JSON.stringify(newVideo),
+    }).then((response) => {
+      console.log(response);
+      let updatedData = data.concat(response);
+      console.log(`Added video :${response.title}`);
+      setData(updatedData);
+    });
+
+    // let updatedData = data.concat(newVideo);
+    // console.log(`Added video :${newVideo.title}`);
+    // setData(updatedData);
   };
 
   // Prop Function to remove a video
@@ -49,7 +63,7 @@ function App() {
     setData(dataCopy);
   };
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch("http://127.0.0.1:5000")
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
