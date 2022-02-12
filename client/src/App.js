@@ -2,13 +2,44 @@ import "./App.css";
 import Header from './components/Header';
 import Vids from './components/Vids';
 import ExampleResponse from './components/exampleresponse.json';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddVideo from './components/AddVideo';
 //import Vid from './components/Vid';
 
 function App() {
   const [showAddVideo, setShowAddVideo] = useState(false);
-  const [videos, setVideos] = useState(ExampleResponse)
+  //const [videos, setVideos] = useState(ExampleResponse)
+  const [videos, setVideos] = useState([]);
+
+  /*const outsideUrl = "http://127.0.0.1/5000/"
+
+  useEffect(()=> {
+    const getVideos = async () => {
+      const res = await fetch({outsideUrl});
+      const data = await res.json();
+      if(res.ok) {
+      
+      return setVideos(data);
+      } else {
+        throw new Error();
+      }
+    }
+    getVideos();
+  }, [])*/
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error(res.status);
+    })
+    .then((data) => {
+      setVideos(data);
+    })
+    .catch((error) => console.log(error));
+  }, []);
 
   /*useEffect(() => {
     const getVideos = async () => {
@@ -19,15 +50,20 @@ function App() {
   }, []);
 
   const fetchVideos = async () => {
-    const res = await fetch('exampleresponse.json');
-    /*if (res.status !== 200) {
-      res.send({message: 'something went wrong'})
-    } else {
-      const data = await res.json();
-      return data;
-    }*/
-    /*const data = await res.json();
-    return data;
+    try{
+    const res = await fetch("http://127.0.0.1/5000/");
+    if (res.status >= 200  && res.status <= 299) {
+      var data = await res.json();
+      console.log(data);
+     } else {
+      throw new Error(res.status);
+    }
+    const result = await data;
+    console.log(result);
+    return result;
+  } catch(error) {
+    console.log(error);
+  }
   };*/
 
   const addVideo = (vid) => {
