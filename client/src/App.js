@@ -71,15 +71,34 @@ setVideos(videos.filter((item) => item.id !== ID));
 }
 
 const AddVideo = () => {
+const [title, setTitle] = useState("");
+const [url, setUrl] = useState("");
+const [videos, setVideos] = useState(data);
+
+
+  const submitVideo = (e) => {
+    e.preventDefault();
+    // const title = document.getElementById("title").value;
+    // const url = document.getElementById("url").value;
+    // const rating = document.getElementById("rating").value;
+    const newVideo = {
+      title: title,
+      url: url,
+      };
+    setVideos([...videos, newVideo]);
+  }
   return (
-    <div>
+    <form >
+      <div>
       <h2>Add Video</h2>
       <span>Title </span>
-      <input type="text" />
+      <input type="text" onChange={(e) => setTitle(e)}  />
       <span>Add Url </span>
-      <input type="text" />
-      <button>Cancel</button> <button>Add</button>
+      <input type="text" onChange={(e) => setUrl(e)} />
+      <button>Cancel</button> <button onSubmit={submitVideo}>Add</button>
     </div>
+    </form>
+    
   );
 }
 
