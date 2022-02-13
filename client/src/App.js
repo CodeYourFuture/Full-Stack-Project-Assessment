@@ -22,26 +22,18 @@ setVideos(videos.filter((item) => item.id !== ID));
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
+        <AddVideo />
         <div>
-          {
-           videos.map((video)=> {
-              return (
-                <>
-                <AddVideo/>
-
+          {videos.map((video) => {
+            return (
+              <>
                 <div key={video.id}>
                   <div>
-                    <BsFillHandThumbsUpFill
-                      onClick={clickLike}
-                  
-                    />
+                    <BsFillHandThumbsUpFill onClick={clickLike} />
                     <span>{like}</span>
                     <h5>Vote</h5>
 
-                    <BsFillHandThumbsDownFill
-                      onClick={clickDisLike}
-                    
-                    />
+                    <BsFillHandThumbsDownFill onClick={clickDisLike} />
                     <span>{disLike}</span>
                   </div>
                   <h2>{video.title}</h2>
@@ -56,15 +48,11 @@ setVideos(videos.filter((item) => item.id !== ID));
                   ></iframe>
                   <p>{video.rating}</p>
                   <button onClick={() => clickHandler(video.id)}>Delete</button>
-
                 </div>
-                </>
-              );
-           }
-           )  
-          }
+              </>
+            );
+          })}
         </div>
-
       </header>
     </div>
   );
@@ -87,15 +75,17 @@ const [videos, setVideos] = useState(data);
       };
     setVideos([...videos, newVideo]);
   }
+  console.log(title);
   return (
     <form >
       <div>
       <h2>Add Video</h2>
       <span>Title </span>
-      <input type="text" onChange={(e) => setTitle(e)}  />
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}  />
       <span>Add Url </span>
-      <input type="text" onChange={(e) => setUrl(e)} />
+      <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
       <button>Cancel</button> <button onSubmit={submitVideo}>Add</button>
+      
     </div>
     </form>
     
