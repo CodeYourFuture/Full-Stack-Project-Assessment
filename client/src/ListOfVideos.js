@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import OrderButton from "./OrderButton";
-import ThumbUp from "./ThumbUp";
-import ThumbDown from "./ThumbDown";
-
+import ThumbUpDown from "./ThumbUp_Down";
 const ListOfVideos = (props) => {
   const [oneVideo, setOneVideo] = useState([]);
   const [order, setOrder] = useState([]);
@@ -14,7 +12,7 @@ const ListOfVideos = (props) => {
   };
 
   const videosData = () => {
-    fetch("https://myvideos-api.herokuapp.com/") //I deployed my api app to heroku as I was not able to connect to my local host
+    fetch("https://myvideos-api.herokuapp.com/") //http://localhost:5000/ I deployed my api app to heroku as I was not able to connect to my local host
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -31,7 +29,7 @@ const ListOfVideos = (props) => {
   }, []);
 
   const Data = () => {
-    fetch("https://myvideos-api.herokuapp.com/?order=asc") //try https://video-rec.herokuapp.com
+    fetch("https://myvideos-api.herokuapp.com/?order=asc") // http://localhost:5000/?order=asc"
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -64,11 +62,8 @@ const ListOfVideos = (props) => {
           return (
             <div key={index} className="visible">
               <div className="vote">
-                <ThumbUp />
-                <h5>Vote</h5>
-                <ThumbDown/>
+                <ThumbUpDown rating={item.rating} />
               </div>
-              <h4>Rating:{item.rating}</h4>
               <p>{item.title}</p>
               <iframe
                 width="300"
