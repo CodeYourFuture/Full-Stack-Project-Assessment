@@ -15,3 +15,14 @@ function Retrieve() {
 }
 
 export default Retrieve;
+
+// function PokemonMoves() {
+//   const [pokemonData, setPokemonData] = useState(null);
+//   useEffect(() => {
+//     fetch("https://pokeapi.co/api/v2/pokemon/1/")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data);
+//       setPokemonData(data);
+//     });
+//   }, []);

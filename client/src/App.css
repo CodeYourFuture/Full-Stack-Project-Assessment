@@ -108,3 +108,6 @@ p {
   color:darkSlategrey;
 }
 
+.voteStyle {
+  display: flex;
+}
