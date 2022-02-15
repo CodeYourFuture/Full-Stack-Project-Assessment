@@ -1,9 +1,3 @@
-html,
-body {
-  /* height: 100%; */
-
-  /* text-align: center; */
-}
 h1 {
   text-align: center;
 }
@@ -43,12 +37,13 @@ h1 {
   color: red;
   margin: 1rem;
 }
-
-.video {
+.videoTitle {
+  word-wrap: normal;
+}
+.videoCard {
   padding-left: 0%;
   text-align: center;
   list-style: none;
-  /* border: 2px solid red; */
   border-radius: 1rem;
   background-color: silver;
   margin: 1.25rem;
@@ -56,17 +51,16 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 500px;
 }
 iframe {
   border-radius: 1rem;
 }
 
-.video-cards {
+.videos-list {
   padding-left: 0%;
   list-style: none;
-  /* border: 5px solid green; */
   border-radius: 1rem;
-  /* background-color: grey; */
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;

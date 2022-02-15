@@ -5,9 +5,11 @@ const app = express();
 const { Pool } = require("pg");
 const { query } = require("express");
 const cors = require("cors");
+// app.use(cors());
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000",
+    // origin: "http://127.0.0.1:3000",
+    origin: "*",
   })
 );
 
@@ -35,6 +37,7 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   let videoTitle = req.body.title;
   let videoURL = req.body.url;
+  // let videoDate = req.body.date;
   let videoRating = Math.floor(Math.random() * 10000);
   // let videoId = Math.floor(Math.random() * 10000);
   console.log(req.body);
@@ -132,4 +135,8 @@ app.delete("/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () =>
+  console.log(
+    `Server is Listening on port ${port} and ready to accept requests.`
+  )
+);

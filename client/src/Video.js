@@ -1,46 +1,58 @@
 import React from "react";
 import VideoVotes from "./VideoVotes";
+import DeleteButton from "./DeleteButton";
 
-export default function Video(props) {
-  const deleteHandler = () => {
-    // Delete handler that uses a prop function which takes prop VideoId as parameter
-    props.delete(props.videoId);
+export default function Video({ videos, updatedList }) {
+  // Handles deletes for database
+  const deleteHandler = (id) => {
+    fetch(`http://127.0.0.1:5000/${id}`, { method: "DELETE" })
+      .then((res) => {
+        if (res.status === 200) {
+          updatedList(
+            videos.filter((video) => {
+              console.log("Deleted video:", id);
+              return video.id !== id;
+            })
+          );
+        } else console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
   };
-  // const youTubeId = props.Url.split("=")[1];
 
-  return (
-    <ul className="video">
-      <div className="video-info">
-        <li>
-          <h4>{props.title}</h4>
-        </li>
-        <li>
+  // Returning Video cards
+  return videos.map((video) => {
+    const url = video.url.replace("watch?v=", "embed/");
+    const videoTitle = video.title;
+    const videoRating = video.rating;
+    const videoId = video.id;
+    // const dateAdded = video.date ? video.date : "unKnown date";
+
+    return (
+      <li className="videoCard" key={videoId}>
+        <h3 className="videoTitle">{videoTitle}</h3>
+        <div className="videoVotes">
           <VideoVotes />
-        </li>
-      </div>
-      <li>
-        <iframe
-          width="560"
-          height="315"
-          src={props.Url}
-          title={props.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        </div>
+
+        <div>
+          <iframe
+            width="450"
+            height="315"
+            src={url}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+          <h6 className="videoRating">Rating: {videoRating}</h6>
+        </div>
+        <div className="videoDeleteBtn">
+          <DeleteButton deleteVideo={deleteHandler} videoId={videoId} />
+        </div>
       </li>
-      <li>
-        <h5>Rating: {props.rating}</h5>
-      </li>
-      <li>
-        <button
-          onClick={deleteHandler}
-          type="button"
-          className="btn btn-danger"
-        >
-          Delete Video
-        </button>
-      </li>
-    </ul>
-  );
+    );
+  });
 }
