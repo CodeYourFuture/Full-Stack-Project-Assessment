@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Form from "./Form";
-import exampleresponse from "./exampleresponse.json";
 import Videos from "./Videos";
 
 
 function App() {
-  const [vid, setVid] = useState(exampleresponse);
+  const [vid, setVid] = useState(null);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+      setVid(data)
+    })
+  },[]);
 
   const addData = (title, url) => {
     let newVideo = {
@@ -16,8 +23,6 @@ function App() {
     };
     vid.push(newVideo);
     setVid([...vid]);
-    console.log(vid);
-    console.log(newVideo);
   }
 
   const removeItem = (item) => {

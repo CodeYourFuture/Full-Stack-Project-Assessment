@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-
 function Form(prop) {
+
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
+
     const submitHandler = (e) => {
         e.preventDefault();
         prop.addVideos(title, url)
