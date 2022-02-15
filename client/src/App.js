@@ -7,32 +7,29 @@ import VideoCard from "./VideoCard";
 import Footer from "./Footer";
 
 
-
-
 function App() {
-  const [id, setId] = useState(0);
   const [allVideos, setAllVideos] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   //Ordering the results
   const orderedData = (array) =>
     array.sort((video1, video2) => video2.rating - video1.rating);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch("http://127.0.0.1:5001/", {
+      method: "get",
+    })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           return response.json();
         }
         throw `${response.status} ${response.statusText}`;
       })
       .then((data) => {
-        console.log(data);
-
         setAllVideos(orderedData(data));
       })
       .catch((error) => console.log(error));
-  }, [])
+  }, [refresh])
   
 
   const decreaseRating = (id) => {
@@ -58,32 +55,36 @@ function App() {
   };
 
   const deleteVideo = (id) => {
-    const updatedVideos = allVideos.filter((video) => video.id !== id);
-    setAllVideos(updatedVideos);
+      fetch(`http://127.0.0.1:5001/${id}`, {
+        method: "DELETE"
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          }
+          throw `${response.status} ${response.statusText}`;
+        })
+        .then((data) => {
+          alert(data.msg)
+          setRefresh(refresh + 1);
+        })
+        .catch((error) => console.log(error));
   };
 
   const addVideo = (title, url) => {
-    const newVideo = {
-      id: id,
-      title: title,
-      url: url,
-      rating: 0,
-      date: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`,
-    };
-
-    //URL validation
-    const isValidUrl = newVideo.url.match(
-      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
-    );
-
-    if (!isValidUrl) {
-      alert("PLease enter a valid YouTube URL");
-    } else if (!newVideo.title) {
-      alert("Please enter a title");
-    } else {
-      setId(id + 1);
-      allVideos.push(newVideo);
-    }
+    fetch(`http://127.0.0.1:5001/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title, url: url }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        alert(data.msg);
+        setRefresh(refresh + 1);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

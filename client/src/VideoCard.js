@@ -6,7 +6,9 @@ const VideoCard = (props) => {
     const idLength = 11;
     const videoId = props.video.url.split("").splice(-idLength).join("");
 
-    const uploadedDate = props.video.date ? props.video.date : "unknown date";
+    const uploadedDate = props.video.date
+      ? new Date(props.video.date).toLocaleDateString()
+      : "unknown date";
 
     const handleLike = () => {
         props.addVote(props.video.id);
