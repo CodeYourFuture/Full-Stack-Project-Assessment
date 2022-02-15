@@ -1,3 +1,36 @@
 .App {
   text-align: center;
 }
+*{
+  box-sizing: border-box;
+  margin: auto;
+  background-color: rgb(230, 226, 226);
+}
+
+img {
+  width: 5rem;
+  height: auto;
+  margin-right: 32%;
+}
+
+
+.App {
+  text-align: center;
+  justify-content: center;
+  margin:auto;
+  display: flex;
+  padding:30px;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  
+}
+
+
+
+button{
+  width:100px;
+  height:50px;
+  border-radius: 20px;
+  /* font-size: larger; */
+}

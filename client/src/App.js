@@ -6,6 +6,7 @@ import "./App.css";
 import UploadVideo from './components/UploadVideo';
 import SearchVideo from './components/SearchVideo';
 import VideoLayout from './components/VideoLayout';
+import { Header } from './components/Header';
 
 
 function App() {
@@ -39,11 +40,12 @@ function App() {
 
   return (
     <div className="App">
+      <Header/>
       <div className="search-container">
-      <div className="d-flex-- col-md-6">
+      <div className="d-flex-- col-md-9">
         <UploadVideo videoInfo={videoInfo} setVideoInfo={setVideoInfo}/>
         <div>
-          <h1>MeTube : Video Recommendation</h1>
+          <h1>Video Recommendation</h1>
         <SearchVideo setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
     </div>
       </div>

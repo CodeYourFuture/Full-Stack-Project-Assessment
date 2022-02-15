@@ -59,16 +59,18 @@ const UploadVideo = ({ videoInfo , setVideoInfo }) => {
                     <div>
                         <button
                         onClick={() => setUploadVideo(!uploadVideo)}
-                        className="btn btn-warning"
+                        className="btn btn-danger"
                         type="canel"
+                        style={{color:"#00005c", margin: "5%", boxShadow: "5px 5px 3px rgba(46, 46, 46, 0.62)"}}
                         >
                             Cancel
                         </button>
 
                         <button
                         onClick={handleVideoUpload}
-                        className="btn btn-success"
+                        className="btn btn-primary"
                         type="submit"
+                        style={{ color:"#00005c", margin: "5%", boxShadow: "5px 5px 3px rgba(46, 46, 46, 0.62)"}}
                         >
                             Upload
                         </button>

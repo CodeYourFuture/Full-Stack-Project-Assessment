@@ -10,13 +10,15 @@ const VideoLayout = ({ searchingInfo, videoInfo, sortButton, setVideoInfo }) => 
         <div className="video-container">
             <div className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <h1>MeTube : Video Recommendation</h1>
+                    <h1>Video Recommendation</h1>
                 </div>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center col-md-5">
                     <button
+                        variant="Dark"
                         type="button"
-                        class="btn btn-success"
                         onClick={sortButton}
+                        className="col-md-10"
+                        style={{ color:"#00005c", margin: "5%", boxShadow: "5px 5px 3px rgba(46, 46, 46, 0.62)"}}
                     >
                         Sort
                     </button>
