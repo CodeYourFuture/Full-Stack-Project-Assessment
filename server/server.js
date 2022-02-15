@@ -19,6 +19,9 @@ const dbConfig1 = {
   user: dbuser,
   password: dbpassword,
   database: database,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
 
 const pool = new Pool(dbConfig1);
@@ -41,7 +44,7 @@ app.post("/", (req, res) => {
   const url = req.body.url;
   const rating = req.body.rating;
   const votes = req.body.votes;
-  console.log(req.body);
+
 
   const addVideoQuery = `INSERT INTO videos (title,url,rating,votes) VALUES ($1,$2,$3,$4)`;
   const duplicateUrlQuery = `SELECT url FROM videos WHERE url=$1`;

@@ -73,7 +73,7 @@ function App() {
     }
   };
 
-  // a function to get the form data and construct a 'video' object
+  // a function to get the form data and construct a 'video' card
   const handleForm = (e) => {
     e.preventDefault();
     fetch("http://localhost:5000/", {
