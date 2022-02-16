@@ -7,9 +7,6 @@ const AddVideo = (props) => {
   const [url, setUrl] = useState("");
   const [hideOnCancel, setCancel] = useState([]);
   const [recordDate, setDate] = useState(new Date().toLocaleDateString('en-GB'));
- 
-
-
   
   const addVideo = () => {
     setUpdatedVideoData(updatedVideoData.concat({title, url}));

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Ratings from './ratings';
+import Ratings from './Ratings';
 
 const Vote = (props) => {
   const [upVote, setUpVote] = useState(0);

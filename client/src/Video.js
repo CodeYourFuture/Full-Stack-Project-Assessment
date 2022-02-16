@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-//import UpVote from "./upVote";
-//import DownVote from './downVote';
-import Vote from './vote';
+import Vote from './Vote';
 
 const Video = (props) => {
   const [deleteVideo, setDeleteVideo ] = useState(props.videoData.sort((a,b) => b.rating - a.rating, 0));
@@ -16,9 +14,7 @@ const Video = (props) => {
           <div className="video">
             <p className="hideDate">This video was uploaded on {props.date}</p>
             <div className="topBtnDisplay">
-              {/* <UpVote key={index + 1} video={video} /> */}
               <Vote key={index + 3} video={video} />
-              {/* <DownVote key={index + 3} video={video} /> */}
             </div>
             <iframe
               key={index + 4}
