@@ -1,14 +1,34 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewVideo from "./components/NewVideo/NewVideo";
 import VideoComponent from "./components/VideoComponent/VideoComponent";
 
-import videoData from "./exampleresponse.json";
-
 function App() {
-  const [currVideos, setCurrVideos] = useState(videoData);
+  const [currVideos, setCurrVideos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+
+        setCurrVideos(data.videos);
+      });
+  }, []);
 
   const videoSubmitHandler = (submittedVideo) => {
+    fetch("http://127.0.0.1:5000/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        videoTitle: submittedVideo.title,
+        videoUrl: submittedVideo.url,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
     setCurrVideos((prevVideos) => [submittedVideo, ...prevVideos]);
   };
 
