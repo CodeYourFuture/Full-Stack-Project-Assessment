@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Search from "./Search"
 function Form(prop) {
 
     const [title, setTitle] = useState("");
@@ -37,7 +37,9 @@ function Form(prop) {
                     </div>
                 </div>
             </div>
+            <Search />
         </form>
+        
     </div>
     )
 }
