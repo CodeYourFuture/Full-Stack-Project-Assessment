@@ -6,9 +6,15 @@
 
 }
 
-.pageHeading {
+.App-header, .videos {
   margin: 2rem;
-  max-width: 100%;
+  width: 100%;
   
   
+}
+
+.videos {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }

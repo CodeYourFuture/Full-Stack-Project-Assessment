@@ -57,22 +57,22 @@ app.get("/:id", (req, res) => {
 
 //  POST
 app.post("/", (req, res) => {
-  const { videoTitle, videoUrl } = req.body;
-  
+  const { videoTitle, videoUrl, videoId } = req.body;
 
-  if (!videoTitle || !videoUrl) {
+  if (!videoTitle || !videoUrl || !videoId) {
     return res.status(404).json({
       success: false,
       message: "Please provide video title and url...",
+      videos: videoData,
     });
   }
 
   const updatedVideos = [...videoData];
 
   updatedVideos.push({
-    id: Math.round(Math.random() * 1000000),
-    videoTitle,
-    videoUrl,
+    id: videoId,
+    title: videoTitle,
+    url: videoUrl,
   });
 
   return res.status(200).json({
