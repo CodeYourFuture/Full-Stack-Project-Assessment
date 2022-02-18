@@ -6,6 +6,7 @@ import VideoComponent from "./components/VideoComponent/VideoComponent";
 function App() {
   const [currVideos, setCurrVideos] = useState([]);
 
+  // No dependencies provided as I want it to run only once when the component is loaded
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
       .then((response) => response.json())
