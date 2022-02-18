@@ -59,7 +59,7 @@ app.get("/:id", (req, res) => {
 app.post("/", (req, res) => {
   const { videoTitle, videoUrl } = req.body;
 
-  if (!videoTitle || !videoUrl) {
+  if (!videoTitle.length || !videoUrl.length) {
     return res.status(404).json({
       success: false,
       message: "Please provide video title and url...",
