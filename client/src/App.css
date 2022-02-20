@@ -1,3 +1,62 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  background-color: rgb(36, 103, 160);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.page-heading {
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.add-button {
+  margin: 20px;
+}
+
+.input {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.search-box {
+  margin-top: 20px;
+}
+
+.vid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fa {
+  font-size: 1.5em;
+}
+
+.vote-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.vote-text {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.title-paragraph {
+  max-width: 320px;
+  min-height: 50px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.del-button {
+  margin: 30px;
+  max-width: 120px;
+}
