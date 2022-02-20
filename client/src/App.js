@@ -1,11 +1,14 @@
+import React from "react";
 import "./App.css";
+import Header from "./Header.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AllVideoCards from "./AllVideoCards";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <AllVideoCards />
     </div>
   );
 }
