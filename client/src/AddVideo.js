@@ -13,7 +13,7 @@ export default function AddVideo({ videosArr, addedVideos }) {
     };
     console.log(newVideo);
 
-    fetch("http://127.0.0.1:5000/", {
+    fetch("/api", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -23,10 +23,10 @@ export default function AddVideo({ videosArr, addedVideos }) {
       body: JSON.stringify(newVideo),
     })
       .then((response) => {
-        console.log(response);
-        let updatedData = videosArr.concat(response);
-        console.log(`Added video :${response.title}`);
-        // window.location.reload(true); // This fixes the CORS problem. But only because it refreshes the page
+        // console.log(response);
+        let updatedData = videosArr.concat(newVideo);
+        console.log(`Added video :${newVideo.title}`);
+        window.location.reload(true); // Refreshes the page.
         return addedVideos(updatedData);
       })
       .catch((error) => {

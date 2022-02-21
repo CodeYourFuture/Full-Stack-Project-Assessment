@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -22,8 +23,10 @@ const pool = new Pool({
   connectionString: process.env.PG_CONNECT,
 });
 
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
 // GET all videos
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   pool
     .query("SELECT * FROM videos")
     .then((result) => res.json(result.rows))
@@ -34,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 // ADD a video
-app.post("/", (req, res) => {
+app.post("/api", (req, res) => {
   let videoTitle = req.body.title;
   let videoURL = req.body.url;
   // let videoDate = req.body.date;
@@ -80,7 +83,7 @@ app.post("/", (req, res) => {
 
 // SEARCH video with text
 // TESTED with `http://127.0.0.1:5000/search?term=never`
-app.get("/search", (req, res) => {
+app.get("/api/search", (req, res) => {
   const searchTerm = req.query.term;
   let query = `SELECT * FROM videos WHERE LOWER(title) LIKE LOWER('%${searchTerm}%') ORDER BY title`;
   pool
@@ -100,7 +103,7 @@ app.get("/search", (req, res) => {
 });
 
 // GET a Video with ID
-app.get("/:id", (req, res) => {
+app.get("/api/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
 
   pool.query("SELECT * FROM videos WHERE id = $1", [videoId]).then((result) => {
@@ -112,7 +115,7 @@ app.get("/:id", (req, res) => {
 });
 
 // DELETE a Video with ID
-app.delete("/:id", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   pool.query("SELECT * FROM videos WHERE id = $1", [videoId]).then((result) => {
     if (result.rows.length === 0) {

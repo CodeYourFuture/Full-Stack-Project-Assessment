@@ -5,7 +5,7 @@ import DeleteButton from "./DeleteButton";
 export default function Video({ videos, updatedList }) {
   // Handles deletes for database
   const deleteHandler = (id) => {
-    fetch(`http://127.0.0.1:5000/${id}`, { method: "DELETE" })
+    fetch(`/api/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.status === 200) {
           updatedList(
