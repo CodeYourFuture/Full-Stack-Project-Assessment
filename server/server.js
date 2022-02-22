@@ -9,18 +9,13 @@ const cors = require("cors");
 // app.use(cors());
 app.use(
   cors({
-    // origin: "http://127.0.0.1:3000",
     origin: "*",
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// let videosData = require("../client/src/exampleresponse.json");
 
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-// });
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -76,7 +71,6 @@ app.post("/api", (req, res) => {
             console.log(result.rows[0]);
             // console.log(videoTitle);
             res.json(result.rows[0]);
-            // res.send({ msg: `Video ${videoTitle} added successfully` });
           })
           .catch((error) => {
             console.log(error);

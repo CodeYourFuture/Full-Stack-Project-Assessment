@@ -8,6 +8,16 @@ export default function Footer() {
         <p>
           All Rights reserved.<span>&copy;</span>
         </p>
+        <p>
+          Source Code available
+          <a
+            href="https://github.com/Haseeb3927/Full-Stack-Project-Assessment"
+            target="_blank"
+          >
+            Here
+          </a>
+          .
+        </p>
       </footer>
     </div>
   );
