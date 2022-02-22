@@ -17,7 +17,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // let videosData = require("../client/src/exampleresponse.json");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 const pool = new Pool({
   connectionString: process.env.PG_CONNECT,
