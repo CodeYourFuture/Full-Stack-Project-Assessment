@@ -17,10 +17,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // let videosData = require("../client/src/exampleresponse.json");
-const port = process.env.PORT;
 
 const pool = new Pool({
-  connectionString: process.env.PG_CONNECT,
+  connectionString: process.env.DATABASE_URL,
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
@@ -138,8 +137,10 @@ app.delete("/api/:id", (req, res) => {
   });
 });
 
-app.listen(port, () =>
+let PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () =>
   console.log(
-    `Server is Listening on port ${port} and ready to accept requests.`
+    `Server is Listening on port ${PORT} and ready to accept requests.`
   )
 );
