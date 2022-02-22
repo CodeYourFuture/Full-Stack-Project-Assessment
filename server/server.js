@@ -18,8 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // let videosData = require("../client/src/exampleresponse.json");
 
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+// });
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
