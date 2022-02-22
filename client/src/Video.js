@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import Vote from './Vote';
 
 const Video = (props) => {
-  const [deleteVideo, setDeleteVideo ] = useState(props.videoData.sort((a,b) => b.rating - a.rating, 0));
+  // const [deleteVideo, setDeleteVideo ] = useState(props.videoData);
 
-  const handleDeleteVideo = (id) => {
-      setDeleteVideo(deleteVideo.filter(video => video.id !== id));
-  }
+  // const handleDeleteVideo = (id) => {
+  //     setDeleteVideo(deleteVideo.filter(video => video.id !== id));
+  // }
+
+  
     
     return (
       <div className="videosContainer">
-        {deleteVideo.map((video, index) => (
+        {props.videoData.map((video, index) => (
           <div className="video">
             <p className="hideDate">This video was uploaded on {props.date}</p>
             <div className="topBtnDisplay">
@@ -29,9 +31,9 @@ const Video = (props) => {
             <button
               key={index + 5}
               className="deleteBtn bg-danger text-white"
-              onClick={() => {
-                handleDeleteVideo(video.id);
-              }}
+              // onClick={() => {
+              //   handleDeleteVideo(video.id);
+              // }}
             >
               Delete
             </button>

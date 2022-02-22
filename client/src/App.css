@@ -8,7 +8,7 @@
 
 h1 {
    text-align: center;
-   margin-bottom: 4rem;
+   margin-bottom: 2rem 0;
 }
 .hideOnCancel {
   visibility: hidden;
@@ -29,6 +29,7 @@ h1 {
 li {
   list-style: none; 
   margin-left: 13rem;
+  margin-top: 6rem;
   color: blue;
 }
 
@@ -110,4 +111,21 @@ p {
 
 .voteStyle {
   display: flex;
+}
+
+.AscDescBtn {
+  display: block;
+  margin: 1.2rem auto;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid goldenrod;
+}
+
+.searchInputLabel {
+  float: right;
+}
+
+.searchInput {
+  width: 50%;
+  padding: 0.5rem;
 }

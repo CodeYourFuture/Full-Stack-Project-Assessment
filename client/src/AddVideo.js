@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+
+import AscDescBtn from './AscDescBtn';
 import Video from '../src/Video';
 
 const AddVideo = (props) => {
-  const [updatedVideoData, setUpdatedVideoData] = useState(props.videoData);
+ const [updatedVideoData, setUpdatedVideoData] = useState(props.videoData);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [hideOnCancel, setCancel] = useState([]);
-  const [recordDate, setDate] = useState(new Date().toLocaleDateString('en-GB'));
+ // const [recordDate, setDate] = useState(new Date().toLocaleDateString('en-GB'));
+ 
+  
   
   const addVideo = () => {
-    setUpdatedVideoData(updatedVideoData.concat({title, url}));
-    setDate();
+    //setUpdatedVideoData(updatedVideoData.concat({title, url}));
+    // setDate();
+  
+   const postBody = {
+     title: title,
+     url: url
+   };
+   fetch('http://127.0.0.1:5002/post', {
+     method: 'post',
+     body: JSON.stringify(postBody),
+     headers: { 'Content-Type': 'application/json' },
+   })
+     .then((res) => {
+       if (res.ok) {
+         return res.json();
+       }
+     })
+     .then((data) => setUpdatedVideoData(data));
+ 
     setTitle("");
     setUrl("");
   }
@@ -67,7 +88,8 @@ const AddVideo = (props) => {
           Cancel
         </button>
       </div>
-      <Video videoData={updatedVideoData} date = {recordDate}/>
+      <AscDescBtn videoData={updatedVideoData} />
+      <Video videoData={updatedVideoData} />
     </div>
   );
 };
