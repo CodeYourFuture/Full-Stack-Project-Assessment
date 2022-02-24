@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const { v4 } = require("uuid");
@@ -14,10 +15,13 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    ssl: {
-        rejectUnauthorized: false,
-    },
+    // ssl: {
+    //     rejectUnauthorized: false,
+    // },
 })
+
+// loading front end application
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 // GET "/" , returns all videos 
 app.get("/", (req, res) => {
@@ -30,6 +34,7 @@ app.get("/", (req, res) => {
     }
     if (sort === "desc") {
         query += " ORDER BY id desc"
+
     } else {
         query += " ORDER BY id asc"
     }
