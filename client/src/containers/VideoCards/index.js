@@ -6,7 +6,7 @@ import "./videoCards.css"
 function VideoCards({ videos, onVideoUpdate }) {
 
     const handleLike = id => {
-        fetch(`/${id}`,
+        fetch(`/api/${id}`,
             {
                 headers: {
                     'Accept': 'application/json',
@@ -21,7 +21,7 @@ function VideoCards({ videos, onVideoUpdate }) {
     }
 
     const handleDislike = id => {
-        fetch(`/${id}`,
+        fetch(`/api/${id}`,
             {
                 headers: {
                     'Accept': 'application/json',
@@ -36,7 +36,7 @@ function VideoCards({ videos, onVideoUpdate }) {
     }
 
     const handleDelete = id => {
-        fetch(`/${id}`,
+        fetch(`/api/${id}`,
             {
                 method: "delete",
             })
