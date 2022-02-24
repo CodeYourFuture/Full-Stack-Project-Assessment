@@ -8,10 +8,8 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start-server": "node server/server-db.js",
-    "start-client": "cd client && npm start && cd ..",
-    "start": "npm-run-all start-server start-client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "node server/server-db.js"
   },
   "repository": {
     "type": "git",
