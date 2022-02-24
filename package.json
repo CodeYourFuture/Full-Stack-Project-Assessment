@@ -1,5 +1,26 @@
 {
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats) # Video Recommendation App",
+  "main": "index.js",
   "dependencies": {
     "uuid": "^8.3.2"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start-server": "node server/server-db.js",
+    "start-client": "cd client && npm start && cd ..",
+    "start": "start-server && start-client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smkamaldar/Full-Stack-Project-Assessment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smkamaldar/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/smkamaldar/Full-Stack-Project-Assessment#readme"
 }
