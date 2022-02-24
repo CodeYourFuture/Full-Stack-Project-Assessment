@@ -18,15 +18,20 @@ const pool = new Pool({
 
 // GET "/" , returns all videos 
 app.get("/", (req, res) => {
-    const { sort } = req.query;
+    const { sort, search } = req.query;
+    let value = [];
     let query = 'SELECT * FROM videos'
+    if (search) {
+        query += ` WHERE title ILIKE $1`
+        value.push(`%${search}%`)
+    }
     if (sort === "desc") {
         query += " ORDER BY id desc"
     } else {
         query += " ORDER BY id asc"
     }
 
-    pool.query(query)
+    pool.query(query, value)
         .then(result => res.send(result.rows))
         .catch(error => {
             console.log(error);
@@ -37,7 +42,6 @@ app.get("/", (req, res) => {
 // returns a single video
 app.get('/:id', (req, res) => {
     let { id } = req.params;
-    console.log("id", id)
     pool.query(`SELECT * FROM videos WHERE id = $1`, [id])
         .then(result => res.send(result.rows))
         .catch(error => {
