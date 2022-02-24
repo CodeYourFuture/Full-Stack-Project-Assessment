@@ -9,7 +9,7 @@ function Home() {
     const [error, setError] = useState("")
 
     const handleSaveNewVideo = (video) => {
-        fetch("http://127.0.0.1:5000",
+        fetch("/",
 
             {
                 headers: {
@@ -37,7 +37,7 @@ function Home() {
 
     const getVideos = (query) => {
 
-        let url = "http://127.0.0.1:5000/"
+        let url = "/"
 
         if (query?.sort) {
             url += `?sort=${query.sort}`
