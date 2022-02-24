@@ -24,7 +24,7 @@ const pool = new Pool({
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 // GET "/" , returns all videos 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     const { sort, search } = req.query;
     let value = [];
     let query = 'SELECT * FROM videos'
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 });
 
 // returns a single video
-app.get('/:id', (req, res) => {
+app.get('/api/:id', (req, res) => {
     let { id } = req.params;
     pool.query(`SELECT * FROM videos WHERE id = $1`, [id])
         .then(result => res.send(result.rows))
@@ -60,7 +60,7 @@ app.get('/:id', (req, res) => {
 })
 
 // adds a video 
-app.post('/', (req, res) => {
+app.post('/api/', (req, res) => {
     const { title, url } = req.body;
 
     if (!title || !url) {
@@ -78,7 +78,7 @@ app.post('/', (req, res) => {
 })
 
 // like and dislike 
-app.put("/:id", (req, res) => {
+app.put("/api/:id", (req, res) => {
     const { type } = req.body
     let { id } = req.params
     const queryUpdate = `Update videos SET rating = $1 WHERE id = $2`
@@ -103,7 +103,7 @@ app.put("/:id", (req, res) => {
 })
 
 // delete a video
-app.delete('/:id', (req, res) => {
+app.delete('/api/:id', (req, res) => {
     let { id } = req.params;
     pool.query(`SELECT * FROM videos WHERE id =$1`, [id])
         .then(result => {

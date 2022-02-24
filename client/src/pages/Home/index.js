@@ -9,7 +9,7 @@ function Home() {
     const [error, setError] = useState("")
 
     const handleSaveNewVideo = (video) => {
-        fetch("/",
+        fetch("/api",
 
             {
                 headers: {
@@ -37,7 +37,7 @@ function Home() {
 
     const getVideos = (query) => {
 
-        let url = "/"
+        let url = "/api/"
 
         if (query?.sort) {
             url += `?sort=${query.sort}`
