@@ -11,10 +11,21 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Store and retrieve your videos from here
 let videos = require("../client/src/component/data/soulsongs.json");
 
-// GET "/"
+// GET all videos   "/"
 app.get("/", (req, res) => {
-  res.send(videos);
-});
+  if(req.query.order === "asc"){
+    let sortedVideos = videos.sort((a,b)=> {
+    return b.rating - a.rating;
+  })
+  res.send(sortedVideos);
+}
+  if (req.query.order === "desc" || Object.keys(req.query).length === 0) {
+  let sortedVideos = videos.sort((a,b)=> {
+    return a.rating - b.rating;
+  })
+  res.send(sortedVideos);
+}}
+);
 
 //GET for specific ID
 

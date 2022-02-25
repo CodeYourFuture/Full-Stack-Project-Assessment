@@ -8,7 +8,6 @@ import Footer from "./Footer";
 // import StartingVideos from "./component/data/soulsongs.json";
 
 function App() {
-  // const [videos, setVideos] = useState(StartingVideos);
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
