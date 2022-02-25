@@ -3,7 +3,7 @@ import { FaHeartbeat } from "react-icons/fa";
 import { MdMusicOff } from "react-icons/md";
 import { BsCalculator } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
-;
+
 
 function VideoCard(props) {
   //states for number of upvotes/downvotes - decided to keep the scores separate rather than overall score

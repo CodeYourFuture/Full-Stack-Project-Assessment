@@ -3,6 +3,7 @@ import "./App.css";
 import AddVideo from "./AddVideo";
 import Jumbotron from "./Jumbotron";
 import VideoCard from "./VideoCard";
+import OrderButton from "./OrderButton";
 import Footer from "./Footer";
 // import StartingVideos from "./component/data/soulsongs.json";
 
@@ -27,6 +28,7 @@ function App() {
     <div className="App">
       <Jumbotron />
       <AddVideo state={videos} stateUpdate={setVideos} />
+      <OrderButton/>
       <div className="video-list">
         {videos.map((video, index) => {
           return <VideoCard key={index} video={video} remover={removeVideo} />;
