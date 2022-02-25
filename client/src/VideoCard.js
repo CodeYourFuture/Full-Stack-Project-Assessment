@@ -16,6 +16,7 @@ function VideoCard(props) {
   const upVoter = () => {
     console.log(upVote);
     setUpVote((upVote) => upVote + 1);
+    //also increases total votes & aggregate score
     setTotalVotes((totalVotes) => totalVotes + 1);
     setBalanceVotes((balanceVotes) => balanceVotes + 1);
   };
@@ -23,11 +24,10 @@ function VideoCard(props) {
   //function to decrease downVotes counter
   const downVoter = () => {
     setDownVote((downVote) => downVote - 1);
+    //also updates total votes & aggregate score
     setTotalVotes((totalVotes) => totalVotes + 1);
     setBalanceVotes((balanceVotes) => balanceVotes - 1);
   };
-
-  //add aggregate vote function & calculator to display
 
   const handleRemoveVideo = (e) => {
     props.remover(props.video.id);

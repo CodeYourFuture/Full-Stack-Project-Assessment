@@ -12,7 +12,7 @@ function AddVideo(props) {
     setAddVideo(newVideo);
   };
 
-  //handle the form submission, for new video data
+  //handles the form submission, for new video data
   const handleSubmit = (e) => {
     e.preventDefault();
     const newVideo = {
@@ -23,7 +23,7 @@ function AddVideo(props) {
     let updatedVideos = [...props.state, newVideo];
     props.stateUpdate(updatedVideos);
     setAddVideo({ title: "", url: "" });
-    //reset the form, clears the input
+    //resets the form, clears the input
     let inputs = document.querySelectorAll("input");
     inputs.forEach((input) => (input.value = ""));
   };

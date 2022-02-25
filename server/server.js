@@ -1,7 +1,9 @@
+const cors = require("cors");
 const express = require("express");
-const app = express();
 const port = process.env.PORT || 5000;
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); //for unique ids
+const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -37,7 +39,7 @@ app.post("/", (req, res) => {
       .status(404)
       .send({
         result: "Failed",
-        message: "Video could not be saved. Provide both video title and URL",
+        message: "Video could not be saved. Please provide both video title and URL",
       });
   }
 
