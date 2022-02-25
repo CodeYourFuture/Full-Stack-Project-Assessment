@@ -1,11 +1,11 @@
 {
   "name": "to-do-server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "server": "node server.js"
+    "server": "node server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "description": ""
 }

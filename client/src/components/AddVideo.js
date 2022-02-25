@@ -15,21 +15,22 @@ const AddVideo = ({ onAdd }) => {
         alert('Add video url')
       } else if ((url.split("=").pop().length !== 11)) {
         alert('Add valid tube url')
-      }
+      } else {
       onAdd({ title, url })
 
       setTitle('');
       setUrl('');
+      }
     }
 
   return (
     <form className='mb-3 form' onSubmit={onSubmit}>
         <div className='formDiv'>
-            <label for='title' className="formLabel">Title</label>
+            <label htmlFor='title' className="formLabel">Title</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}id='title' placeholder='Add title' className="formInput"/>
         </div>
         <div className='formDiv mt-3'>
-            <label for='url' className="formLabel">Video url</label>
+            <label htmlFor='url' className="formLabel">Video url</label>
             <input type="url" value={url} onChange={(e) => setUrl(e.target.value)} id='url' placeholder='Add video url' className="formInput"/>
         </div>
     <input type="submit" value='Submit' className="btn btn-primary mt-3"/>

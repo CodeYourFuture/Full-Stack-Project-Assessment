@@ -112,6 +112,20 @@ app.get("/:id", (req, res) => {
   }
 });
 
+app.put('/:id', (req, res) => {
+  const videoId = videos.findIndex(item => item.id === parseInt(req.params.id));
+  const newRating = req.body.rating;
+  //console.log(req.body)
+  //console.log(newRating);
+  if (videoId < 0) {q
+    res.status(400).json({message: `id: ${req.params.id} not found`})
+  } else {
+    videos[videoId].rating = newRating;
+    //console.log(videoId);
+    res.status(200).json(videoId)
+  }
+});
+
 
 // DELETE "/"
 app.delete('/:id', (req, res) => {

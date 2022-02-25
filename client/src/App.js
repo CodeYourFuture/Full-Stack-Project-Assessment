@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from './components/Header';
 import Vids from './components/Vids';
-import ExampleResponse from './components/exampleresponse.json';
+//import ExampleResponse from './components/exampleresponse.json';
 import { useEffect, useState } from 'react';
 import AddVideo from './components/AddVideo';
 //import Vid from './components/Vid';
@@ -28,6 +28,51 @@ function App() {
   }, [])*/
 
   useEffect(() => {
+    const getVideos = async () => {
+      const videosFromServer = await fetchVideos()
+      setVideos(videosFromServer)
+    }
+
+    getVideos()
+  }, [])
+
+    const fetchVideos = async () => {
+      const res = await fetch("http://127.0.0.1:5000/")
+      if (res.ok) {
+        var data = await res.json()
+      } else {
+        throw new Error(res.status);
+      }
+      
+      return data
+    }
+    
+
+    /*const fetchVideos = async () => {
+      const res = await fetch("http://127.0.0.1:5000/", {
+        method: 'GET'
+      })
+      if (res.ok) {
+        var data = await res.json()
+      } else {
+        throw new Error(res.status);
+      }
+      
+      return data;
+    }*/
+
+    /*const fetchVideo = async (id) => {
+      const res = await fetch(`http://127.0.0.1:5000/${id}`)
+      if (res.ok) {
+        var data = await res.json()
+      } else {
+        throw new Error(res.status);
+      }
+      
+      return data
+    }*/
+
+  /*useEffect(() => {
     fetch("http://127.0.0.1:5000/")
     .then((res) => {
       if (res.ok) {
@@ -39,34 +84,10 @@ function App() {
       setVideos(data);
     })
     .catch((error) => console.log(error));
-  }, []);
+  }, [some]);*/
 
-  /*useEffect(() => {
-    const getVideos = async () => {
-      const videosFromServer = await fetchVideos();
-      setVideos(videosFromServer);
-    }
-    getVideos();
-  }, []);
 
-  const fetchVideos = async () => {
-    try{
-    const res = await fetch("http://127.0.0.1/5000/");
-    if (res.status >= 200  && res.status <= 299) {
-      var data = await res.json();
-      console.log(data);
-     } else {
-      throw new Error(res.status);
-    }
-    const result = await data;
-    console.log(result);
-    return result;
-  } catch(error) {
-    console.log(error);
-  }
-  };*/
-
-  const addVideo = (vid) => {
+  /*const addVideo = (vid) => {
     if (videos.some(item => item.url === vid.url)) {
       alert('Video already exist, add another video')
       return
@@ -75,9 +96,49 @@ function App() {
     const rating = 0;
     const newVideo = { id, rating, ...vid }
     setVideos([...videos, newVideo])
+  }*/
+
+  const addVideo = async (vid) => {
+   if (videos.some(item => item.url === vid.url)) {
+      alert('Video already exist, add another video')
+      return
+    } else {
+    const res = await fetch(`http://127.0.0.1:5000/`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(vid),
+    })
+
+    const data = await res.json()
+      setVideos([ ...videos, {...vid, id: data.id, rating: 0}]);
+      //window.location.reload(false);
+    }
   }
 
-  const deleteVideo = (id) => {
+  /*const deleteVideo = (id) => {
+    const deletedVideo = videos.filter(item => item.id !== id);
+    setVideos(deletedVideo);
+  }*/
+  const updateRating = async (id, newRating) => {
+    await fetch(`http://127.0.0.1:5000/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({rating: newRating})
+    })
+    setVideos(videos.map(item =>
+      item.id === id ? {...item, rating: newRating} : item
+      ));
+  }
+
+  const deleteVideo = async (id) => {
+    await fetch(`http://127.0.0.1:5000/${id}`, {
+      method: 'DELETE'
+    })
+
     const deletedVideo = videos.filter(item => item.id !== id);
     setVideos(deletedVideo);
   }
@@ -87,7 +148,7 @@ function App() {
       <Header className='App' onAdd={() => setShowAddVideo(!showAddVideo)} showAdd={showAddVideo} />
       {showAddVideo && <AddVideo onAdd={addVideo}/>}
       {videos.length > 0 ? (
-      <Vids videos={videos} deleteVideo={deleteVideo}/>) : (<h1>No videos in the list</h1>)
+      <Vids videos={videos} deleteVideo={deleteVideo} updateRating={updateRating}/>) : (<h1>No videos in the list</h1>)
       }
       </div>
   );
