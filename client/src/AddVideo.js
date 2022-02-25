@@ -1,30 +1,23 @@
 import React, { useState } from "react";
-
-import Video from "./Video";
-const Form = (props) => {
-  // let firstVideo = {url:"https://www.youtube.com/embed/qw--VYLpxG4",title:"learn postgres"};
+const AddVideo = (props) => {
   const [clicked, setClicked] = useState(false);
-  const [video, setVideo] = useState([]);
   const [addData, setAddData] = useState({
+    id:  0,
     url: "",
     title: "",
+    rating: 0,
   });
   const ChangeHandler = (event) => {
-    const inputName = event.target.getAttribute("name");
+    const inputName = event.target.name;
     const inputValue = event.target.value;
-    const addedVideo = { ...addData };
-    addedVideo[inputName] = inputValue;
-    setAddData(addedVideo);
+    const id = Math.floor(Math.random() * 50000) + 100;
+    setAddData({ ...addData, [inputName]: inputValue,id });
   };
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(addData);
-    const newVideo = {
-      url: addData.url,
-      title: addData.title,
-    };
-    let videos = [...video, newVideo];
-    setVideo(videos);
+    
+    props.onAddVideo(addData);
     setAddData({
       url: "",
       title: "",
@@ -66,15 +59,10 @@ const Form = (props) => {
               placeholder="YouTube embed URL"
             ></input>
           </div>
-          <button className="btn btn-primary ml-2">Add</button>
+          <button className="btn btn-primary ml-2" >Add</button>
         </form>
-      </div>
-      <div className="video-container">
-        {video.map((element, index) => {
-          return <Video key={index} URL={element.url} Title={element.title} />;
-        })}
       </div>
     </div>
   );
 };
-export default Form;
+export default AddVideo;
