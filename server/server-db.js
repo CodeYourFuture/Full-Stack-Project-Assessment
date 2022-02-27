@@ -21,7 +21,7 @@ const pool = new Pool({
 })
 
 // loading front end application
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.resolve(__dirname, "../client/build/index2.html")));
 
 // GET "/" , returns all videos 
 app.get("/api", (req, res) => {
