@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -70,7 +71,50 @@ let videos = [
   },
 ];
 
+// retrieve a video matching the provided ID
+app.get("/:videoId", (req, res) => {
+  const id = parseInt(req.params.videoId);
+  const video = videos.find((video) => video.id === id)
+  if(video){
+    res.send(video)
+  }else{
+    res.status(400).send("ID not found.")
+  }
+})
+
 // retrieve all videos
 app.get("/", (req, res) => {
   res.send(videos);
 });
+
+// add a video providing a title and URL
+app.post("/", (req, res) => {
+  const body = req.body;
+  const bKeys = Object.keys(body);
+  if(bKeys.includes("title") && bKeys.includes("url")){
+    //template video
+    const thisVid = { id:0, title:"", url:"" };
+    let id = videos.length;
+    const checkId = () => {
+      //if id exists
+      if (
+        videos.find((video) => {
+          video.id = id;
+        }) !== undefined
+      ) {
+        id++;
+        //check again
+        checkId();
+      }
+    };
+    //create the video and push to data bank
+    thisVid.id = id;
+    thisVid.title = body.title;
+    thisVid.url = body.url;
+    videos.push(thisVid);
+    res.send(`Successfully added your video with ID: ${id}`);
+  }
+  else{
+    res.status(400).send("Unsuccessful request");
+  }
+})
