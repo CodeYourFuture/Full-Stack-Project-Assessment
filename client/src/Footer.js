@@ -9,7 +9,7 @@ export default function Footer() {
           All Rights reserved.<span>&copy;</span>
         </p>
         <p>
-          Source Code available
+          Source Code available{" "}
           <a
             href="https://github.com/Haseeb3927/Full-Stack-Project-Assessment"
             target="_blank"
