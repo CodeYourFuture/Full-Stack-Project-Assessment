@@ -1,0 +1,13 @@
+.searchbar{
+    display: flex;
+    background-color: red;
+    padding: 5px
+}
+
+.searchbar__search{
+    float: 1;
+}
+
+.searchbar__sort{
+    flex: 1;
+}

@@ -1,0 +1,10 @@
+.header {
+    background-color: #000;
+    
+}
+
+.header__title {
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+}

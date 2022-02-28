@@ -1,0 +1,34 @@
+.video-card{
+    margin: 10px 0;
+    border: 1px solid grey;
+}
+
+.video-card__video {
+    width : 100%;
+    height : 250px;
+}
+
+.video-card__footer{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding :10px;
+}
+
+.footer__actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width:130px;
+}
+
+.footer__delete{
+    color:#fff;
+    background-color: #FF0000;
+    border:none;
+    
+}
+
+.footer__actions i {
+    padding-right: 5px;
+}
