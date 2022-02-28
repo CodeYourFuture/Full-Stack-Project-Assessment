@@ -1,5 +1,6 @@
 {
   "name": "video-recommendation",
+  "NODE_VERSION": "v14.17.1",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
