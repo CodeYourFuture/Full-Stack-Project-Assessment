@@ -118,3 +118,20 @@ app.post("/", (req, res) => {
     res.status(400).send("Unsuccessful request");
   }
 })
+
+app.delete("/:videoId", (req, res) => {
+  const id = parseInt(req.params.videoId);
+  const video = videos.find((vid) => vid.id === id);
+  const index = videos.findIndex((vid) => vid.id === id);
+  console.log(`\
+              id: ${id}
+              video: ${video}
+              index: ${index}`
+            );
+  if (video) {
+    videos.splice(index,1);
+    res.send(`Deleted video with ID: ${id}, title: ${video.title}`);
+  } else {
+    res.status(400).send("ID not found.");
+  }
+})
