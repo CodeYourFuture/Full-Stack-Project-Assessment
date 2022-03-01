@@ -4,11 +4,13 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
+// const pool = require("./Pool");
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const videoData = require("./exampleresponse.json");
 
@@ -84,6 +86,7 @@ app.post("/", (req, res) => {
 
 // GET "/"
 app.get("/", (req, res) => {
+  // pool.query("CREATE TABLE videos(id BIGSERIAL PRIMARY KEY NOT NULL, title CHAR(100) NOT NULL, url CHAR(100) NOT NULL, rating INTEGER)")
   res.status(200).send({ success: true, videos: videoData });
 });
 
