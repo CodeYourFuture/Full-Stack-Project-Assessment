@@ -5,6 +5,7 @@ import VideoSubmissionForm from "./VideoSubmissionForm.jsx";
 
 function App() {
   let [dataClone, setDataClone] = useState([]);
+  //fetch data
   useEffect(() => {
     fetch("http://localhost:5000/")
       .then((res) => {
