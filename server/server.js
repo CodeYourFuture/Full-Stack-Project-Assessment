@@ -1,12 +1,11 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
+app.use(cors());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+//hard coded data
 let videos = [
   {
     id: 523523,
@@ -135,3 +134,5 @@ app.delete("/:videoId", (req, res) => {
     res.status(400).send("ID not found.");
   }
 })
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

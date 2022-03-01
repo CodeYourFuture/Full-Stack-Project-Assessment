@@ -24,7 +24,11 @@ const VideoListDisplay = (props) => {
     <section className="video-section">
       <ul className="video-list">
         {props.database.map((vid, i) => {
-          return <VideoComponent video={vid} index={i}/>
+          return (
+            <div key={`video-${i}`}>
+              <VideoComponent video={vid} index={i} />
+            </div>
+          );
         })}
       </ul>
     </section>
