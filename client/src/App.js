@@ -8,7 +8,7 @@ function App() {
 
   // No dependencies provided as I want it to run only once when the component is loaded
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch("/")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
@@ -30,8 +30,9 @@ function App() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => setCurrVideos(data.videos));
-    // setCurrVideos((prevVideos) => [...prevVideos, submittedVideo]);
+      .then((data) =>
+        setCurrVideos((prevVideos) => [...prevVideos, submittedVideo])
+      );
   };
 
   return (
@@ -40,7 +41,7 @@ function App() {
         <h1 className='pageHeading'>Video Recommendation</h1>
       </header>
       <NewVideo videoSubmitHandler={videoSubmitHandler} />
-      <div className="videos">
+      <div className='videos'>
         {currVideos.map((video, index) => (
           <VideoComponent
             key={index}

@@ -5,15 +5,23 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // const pool = require("./Pool");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
+console.log(__dirname);
+console.log(path.join(__dirname, "client/build"));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const videoData = require("./exampleresponse.json");
-const pool = require("./Pool");
 
 // DELETE "/{id}"
 app.delete("/:id", (req, res) => {
@@ -86,27 +94,15 @@ app.post("/", (req, res) => {
 });
 
 // GET "/"
-app.get("/", async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query("SELECT * FROM videos");
-    const results = { results: result ? result.rows : null };
-
-    res.send(JSON.stringify(results));
-    client.release();
-  } catch (err) {
-    console.log(err);
-    res.send("Error " + err);
-  }
+app.get("/", (req, res) => {
+  // pool.query("SELECT * FROM videos", (error, result) => {
+  //   res.json(result.rows);
+  // });
+  res.status(200).send({ success: true, videos: videoData });
 });
 
 app.get("/*", (req, res) => {
-  res.status(400).json({
-    success: false,
-    msg: "Not within my API s reach...",
-  });
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
