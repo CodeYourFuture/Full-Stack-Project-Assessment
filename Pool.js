@@ -1,6 +1,6 @@
-const { Pool } = require("pg");
-
 require("dotenv").config();
+
+const { Pool } = require("pg");
 
 const devConfig = {
   user: `${process.env.USER}`,
@@ -11,7 +11,16 @@ const devConfig = {
 };
 
 const proConfig = {
+  client: "pg",
   connectionString: process.env.DATABASE_URL,
+  pool: {
+    min: 2,
+    max: 10,
+  },
+  migrations: {
+    tablename: "videos",
+    directoty: "./migrations",
+  },
 };
 
 const pool = new Pool(
