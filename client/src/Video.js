@@ -12,10 +12,25 @@ const Video = (props) => {
   };
 
   return (
-    <li key={props.key} className="list-item">
-      <div className="like-title-container">
-        <h2>{props.title}</h2>
-        <div className="like-button-container">
+    <li key={props.key}>
+      <div className="card">
+        <div className="iframe-container">
+          <iframe
+            class="embed-responsive-item"
+            width="320"
+            height="240"
+            src={props.url}
+            title={props.title}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div className="card-body">
+          <h5 className="card-title">{props.title}</h5>
+        </div>
+        <div className="card-footer">
           <LikeBtn
             class="fas fa-thumbs-down fa-lg"
             vote={"dislike"}
@@ -30,19 +45,8 @@ const Video = (props) => {
             votehandler={voteHandler}
           />
         </div>
+        <Delete delete={props.delete} id={props.id} />
       </div>
-      <div className="iframe-container">
-        <iframe
-          width="320"
-          height="240"
-          src={props.url}
-          title={props.title}
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <Delete delete={props.delete} id={props.id} />
     </li>
   );
 };

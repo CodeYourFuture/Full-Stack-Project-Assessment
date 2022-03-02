@@ -7,8 +7,7 @@ const Add = (props) => {
   return (
     <div>
       <div>
-        <form onSubmit={props.handleForm} action="" method="">
-          <fieldset className="fieldset-container">
+        <form className="form-container" onSubmit={props.handleForm} action="" method="">
             <label>Title </label>
             <input
               name="title"
@@ -33,7 +32,6 @@ const Add = (props) => {
                 Add
               </button>
             </div>
-          </fieldset>
         </form>
       </div>
     </div>

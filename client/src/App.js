@@ -75,7 +75,7 @@ function App() {
 
   // a function to get the form data and construct a 'video' card
   const handleForm = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     fetch("http://localhost:5000/", {
       method: "post",
       headers: {
