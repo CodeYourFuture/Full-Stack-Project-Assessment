@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
-// const pool = require("./Pool");
+const pool = require("./Pool");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 
@@ -95,10 +95,9 @@ app.post("/", (req, res) => {
 
 // GET "/"
 app.get("/", (req, res) => {
-  // pool.query("SELECT * FROM videos", (error, result) => {
-  //   res.json(result.rows);
-  // });
-  res.status(200).send({ success: true, videos: videoData });
+  pool.query("SELECT * FROM videos", (error, result) => {
+    res.json(result.rows);
+  });
 });
 
 app.get("/*", (req, res) => {
