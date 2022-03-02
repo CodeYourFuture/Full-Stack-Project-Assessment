@@ -21,13 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const videoData = require("./exampleresponse.json");
 
-// GET "/"
-app.get("/allVideos", (req, res) => {
-  pool.query("SELECT * FROM videos", (error, result) => {
-    return res.json(result.rows);
-  });
-});
-
 // DELETE "/{id}"
 app.delete("/:id", (req, res) => {
   const { id } = req.params;
@@ -95,6 +88,13 @@ app.post("/", (req, res) => {
     success: true,
     addedID: updatedVideos[updatedVideos.length - 1].id,
     videos: updatedVideos,
+  });
+});
+
+// GET "/"
+app.get("/", (req, res) => {
+  pool.query("SELECT * FROM videos", (error, result) => {
+    return res.json(result.rows);
   });
 });
 
