@@ -8,6 +8,7 @@ const pool = new Pool({
   user: `${process.env.USER}`,
   password: `${process.env.PASSWORD}`,
   database: `${process.env.DATABASE}`,
+  url: `${process.env.URI}`,
 });
 
 module.exports = pool;

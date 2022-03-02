@@ -13,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const videoData = require("./exampleresponse.json");
+const pool = require("./Pool");
 
 // DELETE "/{id}"
 app.delete("/:id", (req, res) => {
@@ -85,9 +86,18 @@ app.post("/", (req, res) => {
 });
 
 // GET "/"
-app.get("/", (req, res) => {
-  // pool.query("CREATE TABLE videos(id BIGSERIAL PRIMARY KEY NOT NULL, title CHAR(100) NOT NULL, url CHAR(100) NOT NULL, rating INTEGER)")
-  res.status(200).send({ success: true, videos: videoData });
+app.get("/", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query("SELECT * FROM videos");
+    const results = { results: result ? result.rows : null };
+
+    res.send(JSON.stringify(results));
+    client.release();
+  } catch (err) {
+    console.log(err);
+    res.send("Error " + err);
+  }
 });
 
 app.get("/*", (req, res) => {
