@@ -94,7 +94,7 @@ app.post("/", (req, res) => {
 });
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/allVideos", (req, res) => {
   pool.query("SELECT * FROM videos", (error, result) => {
     res.json(result.rows);
   });

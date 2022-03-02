@@ -8,10 +8,10 @@ function App() {
 
   // No dependencies provided as I want it to run only once when the component is loaded
   useEffect(() => {
-    fetch("/")
+    fetch("http://127.0.0.1:5000/allVideos")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
 
         setCurrVideos(data.videos);
       });
