@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 const pool = require("./Pool");
 const path = require("path");
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 const app = express();
 

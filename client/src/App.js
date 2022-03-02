@@ -8,7 +8,7 @@ function App() {
 
   // No dependencies provided as I want it to run only once when the component is loaded
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/allVideos")
+    fetch("/")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   const videoSubmitHandler = (submittedVideo) => {
-    fetch("http://127.0.0.1:5000/", {
+    fetch("/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
