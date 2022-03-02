@@ -17,6 +17,10 @@ const proConfig = {
     min: 2,
     max: 10,
   },
+  migrations: {
+    tablename: "videos",
+    directoty: "./migrations",
+  },
 };
 
 const pool = new Pool(

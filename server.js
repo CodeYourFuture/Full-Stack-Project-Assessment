@@ -1,5 +1,22 @@
 const express = require("express");
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+client.connect();
+const proConfig = {
+  client: "pg",
+  connectionString: process.env.DATABASE_URL,
+  pool: {
+    min: 2,
+    max: 10,
+  },
+};
+
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
@@ -93,8 +110,9 @@ app.post("/", (req, res) => {
 
 // GET "/"
 app.get("/", (req, res) => {
-  pool.query("SELECT * FROM videos", (error, result) => {
-    return res.json(result.rows);
+  client.query("SELECT * FROM videos", (error, result) => {
+    res.json(result.rows);
+    client.end();
   });
 });
 
