@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import IFrame from "../IFrame/IFrame";
 import CardActions from "@mui/material/CardActions";
@@ -15,20 +15,16 @@ const VideoCard = ({ video, deleteVideoHandler }) => {
   const { id, rating, title, uploaded } = video;
   const [votes, setVotes] = useState(rating);
 
-  const voteHandler = (voteOperator, id) => {
-    let updatedVote = rating;
-
-    voteOperator === "+" ? updatedVote++ : updatedVote--;
-
+  useEffect(() => {
     fetch(`/api/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ rating: updatedVote }),
-    }).then((res) => {
-      res.status === 200 && voteOperator === "+"
-        ? setVotes((pV) => pV + 1)
-        : setVotes((pV) => pV - 1);
+      body: JSON.stringify({ rating: votes }),
     });
+  }, [votes]);
+
+  const voteHandler = (voteOperator) => {
+    voteOperator === "+" ? setVotes((pV) => pV + 1) : setVotes((pV) => pV - 1);
   };
 
   return (
