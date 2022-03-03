@@ -17,10 +17,10 @@ app.use(cors());
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
+  user: process.env.user,
+  password: process.env.password,
+  host: process.env.host,
+  database: process.env.database,
   port: 5432,
   ssl: { rejectUnauthorized: false },
 });
@@ -105,9 +105,13 @@ app.post("/", (req, res) => {
 
 // GET "/"
 app.get("/", (req, res) => {
-  pool.query("SELECT * FROM videos", (error, result) => {
-    res.json(result.rows);
-  });
+  pool
+    .query("SELECT * FROM videos")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.get("/*", (req, res) => {
