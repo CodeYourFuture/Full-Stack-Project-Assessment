@@ -1,38 +1,21 @@
 const express = require("express");
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-client.connect();
-const proConfig = {
-  client: "pg",
-  connectionString: process.env.DATABASE_URL,
-  pool: {
-    min: 2,
-    max: 10,
-  },
-};
-
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
 const pool = require("./Pool");
 const path = require("path");
-const port = 5000;
+const port = 5000 || process.env.PORT;
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-if (process.env.NODE_ENV === "production") {
-  // app.use(express.static(path.join(__dirname, "client/build")));
-}
+// if (process.env.NODE_ENV === "production") {
+//   // app.use(express.static(path.join(__dirname, "client/build")));
+// }
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -110,9 +93,8 @@ app.post("/", (req, res) => {
 
 // GET "/"
 app.get("/", (req, res) => {
-  client.query("SELECT * FROM videos", (error, result) => {
+  pool.query("SELECT * FROM videos", (error, result) => {
     res.json(result.rows);
-    client.end();
   });
 });
 
