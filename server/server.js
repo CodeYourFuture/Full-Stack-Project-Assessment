@@ -145,4 +145,8 @@ app.put("/api/:id", (req, res) => {
     .catch((e) => res.status(400).send(e));
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
