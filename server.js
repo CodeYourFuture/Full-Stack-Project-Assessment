@@ -1,10 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
-const pool = require("./Pool");
 const path = require("path");
 const port = 5000 || process.env.PORT;
 
@@ -12,6 +13,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: 5432,
+  ssl: { rejectUnauthorized: false },
+});
 
 // if (process.env.NODE_ENV === "production") {
 //   // app.use(express.static(path.join(__dirname, "client/build")));
