@@ -31,76 +31,89 @@ const pool = new Pool({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const videoData = require("./exampleresponse.json");
-
 // DELETE "/{id}"
 app.delete("/:id", (req, res) => {
   const { id } = req.params;
-
-  const remainingVideos = videoData.filter(
-    (video) => video.id !== parseInt(id)
-  );
-
-  const deletedVideo = videoData.find((video) => video.id == parseInt(id));
-
-  if (remainingVideos.length == videoData.length) {
-    return res.status(400).json({
-      success: false,
-      message:
-        "It appears that nothing was deleted, make sure the selected id exists...",
-    });
+  if (!parseInt(id) || parseInt(id) < 0 || isNaN(id)) {
+    return res
+      .status(400)
+      .send({ success: false, message: "please provide a valid Id" });
   }
 
-  return res.status(200).json({
-    success: true,
-    remainingVideos,
-    deletedVideo,
-  });
+  pool
+    .query("SELECT id FROM videos WHERE id = $1", [id])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        return res.status(400).send({
+          success: false,
+          message:
+            "The video you are trying to delete doesn't exist in the database,make sure you have an existing id",
+        });
+      } else {
+        pool
+          .query("DELETE FROM videos WHERE id = $1", [id])
+          .then(() => res.send("video successfully deleted..."));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json(error);
+    });
 });
 
 // GET "/{id}"
 app.get("/:id", (req, res) => {
   const { id } = req.params;
-  const chosenVideo = videoData.filter((video) => video.id == parseInt(id));
 
-  if (chosenVideo.length == 0) {
-    return res.status(400).json({
-      success: false,
-      message: "It appears no video id match your search...",
-    });
+  if (!parseInt(id) || parseInt(id) < 0 || isNaN(id)) {
+    return res
+      .status(400)
+      .send({ success: false, message: "please provide a valid Id" });
   }
 
-  return res.status(200).json({
-    success: true,
-    chosenVideo,
-  });
+  pool
+    .query("SELECT id FROM videos WHERE id = $1", [id])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        return res.status(400).send({
+          success: false,
+          message:
+            "The video you are trying to view doesn't exist in the database,make sure you have an existing id",
+        });
+      } else {
+        return res.status(200).send({
+          success: true,
+          result: result.rows,
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json(error);
+    });
 });
 
 //  POST
 app.post("/", (req, res) => {
-  const { videoTitle, videoUrl, videoId } = req.body;
+  const { videoTitle, videoUrl } = req.body;
 
-  if (!videoTitle || !videoUrl || !videoId) {
+  if (!videoTitle || !videoUrl) {
     return res.status(404).json({
       success: false,
       message: "Please provide video title and url...",
-      videos: videoData,
     });
   }
 
-  const updatedVideos = [...videoData];
-
-  updatedVideos.push({
-    id: videoId,
-    title: videoTitle,
-    url: videoUrl,
-  });
-
-  return res.status(200).json({
-    success: true,
-    addedID: updatedVideos[updatedVideos.length - 1].id,
-    videos: updatedVideos,
-  });
+  pool
+    .query("INSERT INTO videos (title,url) VALUES ($1,$2)", [
+      videoTitle,
+      videoUrl,
+    ])
+    .then(() => res.status(200).send({ message: "video added successfully" }))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 // GET "/"

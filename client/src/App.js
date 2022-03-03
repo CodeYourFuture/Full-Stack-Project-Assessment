@@ -13,7 +13,7 @@ function App() {
       .then((data) => {
         console.log(data);
 
-        setCurrVideos(data.videos);
+        setCurrVideos(data);
       });
   }, []);
 
@@ -24,13 +24,12 @@ function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        videoId: submittedVideo.url.split("v=")[1].substring(0, 11),
         videoTitle: submittedVideo.title,
         videoUrl: submittedVideo.url,
       }),
     })
       .then((response) => response.json())
-      .then((data) =>
+      .then(() =>
         setCurrVideos((prevVideos) => [...prevVideos, submittedVideo])
       );
   };
@@ -45,7 +44,6 @@ function App() {
         {currVideos.map((video, index) => (
           <VideoComponent
             key={index}
-            videoId={video.url.split("v=")[1].substring(0, 11)}
             videoTitle={video.title}
             videoRating={video.rating ? video.rating : 0}
           />

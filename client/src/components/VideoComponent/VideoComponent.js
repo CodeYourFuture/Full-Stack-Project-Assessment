@@ -14,6 +14,12 @@ const VideoComponent = ({ videoId, videoTitle, videoRating }) => {
 
   const removeButtonClickHandler = () => {
     setRemoveVideo(true);
+    fetch(`http://127.0.0.1:5000/${videoId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.json());
   };
 
   const likeButtonClickHandler = () =>
