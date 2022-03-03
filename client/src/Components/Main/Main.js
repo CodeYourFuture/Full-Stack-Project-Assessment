@@ -24,6 +24,7 @@ const Main = ({ videos, setVideos, videoSortOrder, setVideoSortOrder }) => {
         <SearchBox setSearchTerm={setSearchTerm} />
         <NumberOfVideos videos={videos} />
       </Container>
+
       <AddVideoDrawer videos={videos} setVideos={setVideos} />
       <VideoList
         videos={videos}
