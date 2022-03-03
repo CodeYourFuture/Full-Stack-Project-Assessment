@@ -1,11 +1,3 @@
-/*
-  notes for help:
-  -Only the first endpoint has been written for live data
-  -I believe my issue is very much related to how I'm using my pool and
-  .env, I've tried a fe different ones and now this way is making my local
-  server use the heroku port.
-*/
-
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -17,11 +9,14 @@ app.use(express.json());
 app.use(cors());
 
 const pool = new postgres.Pool({
-  user: process.env.User,
-  host: process.env.Host,
-  database: process.env.Database,
-  password: process.env.Password,
-  port: process.env.Port,
+  user: process.env.PG_User,
+  host: process.env.PG_Host,
+  database: process.env.PG_Database,
+  password: process.env.PG_Password,
+  port: process.env.PG_Port,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 // retrieve a video matching the provided ID
@@ -30,7 +25,7 @@ app.get("/:videoId", (req, res) => {
     const id = parseInt(req.params.videoId);
     return client
       .query(
-        `SELECT * FROM videos WHERE ID=$1`,
+        `SELECT * FROM videos WHERE ID=$1;`,
         [id]
       )
       .then((result) => {
@@ -47,7 +42,12 @@ app.get("/:videoId", (req, res) => {
 
 // retrieve all videos
 app.get("/", (req, res) => {
-  res.send(videos);
+  pool.connect().then((client) => {
+    return client
+      .query(
+        `SELECT * FROM videos;`
+      )
+  })
 });
 
 // add a video providing a title and URL
