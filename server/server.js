@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
+const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -17,6 +18,9 @@ app.use(cors());
 // Enable POST's from a form in app
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Server static files from client build folder
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 //GET endpoint `/` to retrieve the complete and sorted video list
 app.get("/api", (req, res) => {
@@ -40,7 +44,7 @@ app.get("/api", (req, res) => {
     .catch((e) => res.status(400).send(e));
 });
 
-// GET endpoint `/:id`
+// GET endpoint `/api/:id`
 app.get("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
 
@@ -64,7 +68,7 @@ app.get("/api/:id", (req, res) => {
     .catch((e) => res.status(400).send(e));
 });
 
-// POST endpoint `/` to add new video content with valid field / error check
+// POST endpoint `/api` to add new video content with valid field / error check
 app.post("/api", (req, res) => {
   const { title, url, uploaded } = req.body;
   const rating = 0;
@@ -96,7 +100,7 @@ app.post("/api", (req, res) => {
     .catch((e) => res.status(400).send(e));
 });
 
-// DELETE endpoint `/:id`
+// DELETE endpoint `/api/:id`
 app.delete("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
 
@@ -115,7 +119,7 @@ app.delete("/api/:id", (req, res) => {
     .catch((e) => res.status(500).send(e));
 });
 
-// PUT endpoint `/:id` to update `youtube-video-db.rating`
+// PUT endpoint `/api/:id` to update `youtube-video-db.rating`
 app.put("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
   const videoRating = req.body.rating;
