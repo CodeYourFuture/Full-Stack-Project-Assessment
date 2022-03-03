@@ -1,0 +1,25 @@
+{
+  "name": "Full-Stack-Project-Assessment",
+  "version": "1.0.0",
+  "description": "The final assessment during CYF coding Bootcamp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd api && npm install && npm start",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "14.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andy-Robertson/Full-Stack-Project-Assessment.git"
+  },
+  "keywords": [],
+  "author": "Andy Robertson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andy-Robertson/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/Andy-Robertson/Full-Stack-Project-Assessment#readme"
+}
