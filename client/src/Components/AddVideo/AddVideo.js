@@ -26,7 +26,7 @@ const AddVideo = ({ setDrawerToggle, videos, setVideos }) => {
         uploaded: uploadDateAndTime,
       };
 
-      fetch("http://localhost:5000", {
+      fetch("/api", {
         method: "post",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

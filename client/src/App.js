@@ -13,7 +13,7 @@ const App = () => {
   const [videoSortOrder, setVideoSortOrder] = useState("asc");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/?order=${videoSortOrder}`)
+    fetch(`/api/?order=${videoSortOrder}`)
       .then((res) => {
         if (res.status <= 200) {
           return res.json();

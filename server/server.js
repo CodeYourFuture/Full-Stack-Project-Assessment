@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //GET endpoint `/` to retrieve the complete and sorted video list
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   const sortOrder = req.query.order;
 
   const allVideosSortedQuery =
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 // GET endpoint `/:id`
-app.get("/:id", (req, res) => {
+app.get("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
 
   if (!Number.isInteger(videoId)) {
@@ -65,7 +65,7 @@ app.get("/:id", (req, res) => {
 });
 
 // POST endpoint `/` to add new video content with valid field / error check
-app.post("/", (req, res) => {
+app.post("/api", (req, res) => {
   const { title, url, uploaded } = req.body;
   const rating = 0;
 
@@ -97,7 +97,7 @@ app.post("/", (req, res) => {
 });
 
 // DELETE endpoint `/:id`
-app.delete("/:id", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
 
   if (!Number.isInteger(videoId)) {
@@ -116,7 +116,7 @@ app.delete("/:id", (req, res) => {
 });
 
 // PUT endpoint `/:id` to update `youtube-video-db.rating`
-app.put("/:id", (req, res) => {
+app.put("/api/:id", (req, res) => {
   const videoId = Number(req.params.id);
   const videoRating = req.body.rating;
 

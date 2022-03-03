@@ -20,7 +20,7 @@ const VideoCard = ({ video, deleteVideoHandler }) => {
 
     voteOperator === "+" ? updatedVote++ : updatedVote--;
 
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`/api/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rating: updatedVote }),
