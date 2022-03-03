@@ -1,11 +1,54 @@
 import "./App.css";
+import { useState, useEffect } from "react";
+import NewVideo from "./components/NewVideo/NewVideo";
+import VideoComponent from "./components/VideoComponent/VideoComponent";
 
 function App() {
+  const [currVideos, setCurrVideos] = useState([]);
+
+  // No dependencies provided as I want it to run only once when the component is loaded
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        setCurrVideos(data);
+      });
+  }, []);
+
+  const videoSubmitHandler = (submittedVideo) => {
+    fetch("http://127.0.0.1:5000/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        videoTitle: submittedVideo.title,
+        videoUrl: submittedVideo.url,
+      }),
+    })
+      .then((response) => response.json())
+      .then(() =>
+        setCurrVideos((prevVideos) => [...prevVideos, submittedVideo])
+      );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
+    <div className='App'>
+      <header className='App-header'>
+        <h1 className='pageHeading'>Video Recommendation</h1>
       </header>
+      <NewVideo videoSubmitHandler={videoSubmitHandler} />
+      <div className='videos'>
+        {currVideos.map((video, index) => (
+          <VideoComponent
+            key={index}
+            videoTitle={video.title}
+            videoRating={video.rating ? video.rating : 0}
+          />
+        ))}
+      </div>
     </div>
   );
 }
