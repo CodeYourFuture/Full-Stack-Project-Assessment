@@ -1,84 +1,48 @@
+/*
+  notes for help:
+  -Only the first endpoint has been written for live data
+  -I believe my issue is very much related to how I'm using my pool and
+  .env, I've tried a fe different ones and now this way is making my local
+  server use the heroku port.
+*/
+
 const express = require("express");
-const cors = require("cors")
+const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+const postgres = require("pg");
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-//hard coded data
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+const pool = new postgres.Pool({
+  user: process.env.User,
+  host: process.env.Host,
+  database: process.env.Database,
+  password: process.env.Password,
+  port: process.env.Port,
+});
 
 // retrieve a video matching the provided ID
 app.get("/:videoId", (req, res) => {
-  const id = parseInt(req.params.videoId);
-  const video = videos.find((video) => video.id === id)
-  if(video){
-    res.send(video)
-  }else{
-    res.status(400).send("ID not found.")
-  }
+  pool.connect().then((client) => {
+    const id = parseInt(req.params.videoId);
+    return client
+      .query(
+        `SELECT * FROM videos WHERE ID=$1`,
+        [id]
+      )
+      .then((result) => {
+        client.release();
+        res.send(result.rows);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(error.status).send(error)
+      })
+  })
+  
 })
 
 // retrieve all videos
