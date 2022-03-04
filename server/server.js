@@ -25,17 +25,30 @@ app.get("/:videoId", (req, res) => {
     const id = parseInt(req.params.videoId);
     return client
       .query(
-        `SELECT * FROM videos WHERE ID=$1;`,
+        `SELECT * FROM videos WHERE id=$1`,
         [id]
       )
       .then((result) => {
-        client.release();
-        res.send(result.rows);
+        if(result.rowCount === 0){
+          client.release();
+          res.status(400).send(`Video with ID: ${id} does not exist.`)
+        }else{
+          client.query(
+              `SELECT * FROM videos WHERE ID=$1;`,
+              [id]
+            )
+            .then((result) => {
+              client.release();
+              res.send(result.rows);
+            })
+            .catch((error) => {
+              client.release();
+              console.error(error);
+              res.status(error.status).send(error)
+            })
+        }
       })
-      .catch((error) => {
-        console.error(error);
-        res.status(error.status).send(error)
-      })
+      
   })
   
 })
@@ -47,56 +60,76 @@ app.get("/", (req, res) => {
       .query(
         `SELECT * FROM videos;`
       )
+      .then((result) => {
+        client.release();
+        res.send(result.rows);
+      })
+      .catch((error) => {
+        client.release();
+        console.error(error);
+        res.status(error.status).send(error);
+      })
   })
 });
 
 // add a video providing a title and URL
 app.post("/", (req, res) => {
   const body = req.body;
-  const bKeys = Object.keys(body);
-  if(bKeys.includes("title") && bKeys.includes("url")){
-    //template video
-    const thisVid = { id:0, title:"", url:"" };
-    let id = videos.length;
-    const checkId = () => {
-      //if id exists
-      if (
-        videos.find((video) => {
-          video.id = id;
-        }) !== undefined
-      ) {
-        id++;
-        //check again
-        checkId();
-      }
-    };
-    //create the video and push to data bank
-    thisVid.id = id;
-    thisVid.title = body.title;
-    thisVid.url = body.url;
-    videos.push(thisVid);
-    res.send(`Successfully added your video with ID: ${id}`);
-  }
-  else{
-    res.status(400).send("Unsuccessful request");
-  }
+  pool.connect().then((client) => {
+    return client
+      .query(
+        `
+        INSERT INTO videos (title, url)
+        VALUES ($1, $2);
+        `,
+        [body.title, body.url]
+      )
+      .then(() => {
+        client.release();
+        res.send(`Successfully added your video.`);
+      })
+      .catch((error) => {
+        client.release();
+        console.error(error);
+        res.status(error.status).send(error);
+      })
+  })
 })
 
+//delete a video with the provided ID
 app.delete("/:videoId", (req, res) => {
-  const id = parseInt(req.params.videoId);
-  const video = videos.find((vid) => vid.id === id);
-  const index = videos.findIndex((vid) => vid.id === id);
-  console.log(`\
-              id: ${id}
-              video: ${video}
-              index: ${index}`
-            );
-  if (video) {
-    videos.splice(index,1);
-    res.send(`Deleted video with ID: ${id}, title: ${video.title}`);
-  } else {
-    res.status(400).send("ID not found.");
-  }
+  const id = req.params.videoId;
+  pool.connect().then((client) => {
+    return client
+      .query(
+        `SELECT * FROM videos WHERE id = $1`,
+        [id]
+      )
+      .then((result) => {
+        if(result.rowCount === 0){
+          client.release();
+          res.status(400).send(`Video with ID: ${id} does not exist.`)
+        }else{
+          client
+            .query(
+              `
+                DELETE FROM videos WHERE id=$1
+              `,
+              [id]
+            )
+            .then(() => {
+              client.release();
+              res.send(`Successfully deleted video with ID: ${id}`);
+            })
+            .catch((error) => {
+              client.release();
+              console.error(error);
+              res.status(error.status).send(error);
+            });
+        }
+      })
+      
+  })
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
