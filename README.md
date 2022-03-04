@@ -2,7 +2,7 @@
 
 ## Description
 
-TV Show utilises the TV Maze [REST API](https://www.tvmaze.com) to organize, sort and search TV shows and episodes making it easy to find information about specific shows or episodes.
+TV Show utilises the TV Maze [REST API](https://www.tvmaze.com) to organize, sort and search TV shows and episodes making it easy to find information about specific shows or episodes. Completed as part of the CodeYourFutures Full-Stack Web Development Bootcamp.
 
 ## Feature List
 - Dynamic show/episode search & drop-down selector
