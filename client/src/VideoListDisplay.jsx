@@ -26,7 +26,7 @@ const VideoListDisplay = (props) => {
         {props.database.map((vid, i) => {
           return (
             <div key={`video-${i}`}>
-              <VideoComponent video={vid} index={i} />
+              <VideoComponent video={vid} index={i} remove={props.remove}/>
             </div>
           );
         })}

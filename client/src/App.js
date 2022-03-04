@@ -7,7 +7,7 @@ function App() {
   let [dataClone, setDataClone] = useState([]);
   //fetch data
   useEffect(() => {
-    fetch("http://localhost:5000/")
+    fetch(`http://localhost:5000/`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -20,23 +20,32 @@ function App() {
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }, [])
+  }, [dataClone]);
 
   const removeIndex = (id) => {
+    fetch(`http://localhost:5000/${id}`, {method:"delete"})
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+    //update data clone
     setDataClone(dataClone.filter((currentVid) => currentVid.id !== id));
   };
   
   const addVideoFromInput = (userInput) => {
-    const videoId = userInput.url.split("=")[1];
-    setDataClone((oldData) => [
-      ...oldData,
-      {
-        id: videoId,
-        title: userInput.title,
-        url: userInput.url,
-        rating: 0,
-      },
-    ]);
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({ title: userInput.title, url: userInput.url })
+    };
+    fetch(`http://localhost:5000/`, requestOptions)
+    .then(() => {
+      //update the dataClone causing a recall of new data
+      setDataClone(dataClone.push("loading"))
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
   };
 
   return (
