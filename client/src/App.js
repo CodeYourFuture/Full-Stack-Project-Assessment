@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import VideoList from "./VideoList";
-// import videos from "./exampleresponse.json";
 import Add from "./Add";
 import Search from "./Search";
 
@@ -105,7 +104,7 @@ function App() {
         <div className="add">
           <div className="add-button-container">
             <button className="add-button" onClick={addToggle}>
-              Add Video
+              {addBtn===false ? "Add Button" : "Close"}
             </button>
           </div>
           <div style={{ display: addBtn ? "flex" : "none" }}>

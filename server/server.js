@@ -61,20 +61,6 @@ app.post("/", (req, res) => {
   });
 });
 
-// GET video by id
-// app.get("/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   // const found = videos.find((video) => video.id === id);
-//   const getIdQuery = `SELECT * FROM videos WHERE id = $1`;
-
-//   pool
-//     .query(getIdQuery, [id])
-//     .then((result) => res.json(result.rows[0]))
-//     .catch((error) => {
-//       res.status(500).send(error);
-//     });
-// });
-
 // DELETE video by id
 app.delete("/:id", (req, res) => {
   const id = req.params.id;

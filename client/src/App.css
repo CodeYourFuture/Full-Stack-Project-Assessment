@@ -178,6 +178,8 @@ i.fas.fa-thumbs-up {
 
   .add-button-container {
     width: 20%;
+    display: flex;
+    padding-left: 30px;
   }
   
   .form-container {
@@ -189,6 +191,7 @@ i.fas.fa-thumbs-up {
   .search {
     display: flex;
     justify-content: flex-start;
+    padding-left: 30px;
   }
 
   .search input,
