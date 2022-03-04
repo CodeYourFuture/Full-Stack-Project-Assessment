@@ -1,75 +1,41 @@
-# Video Recommendation App
+# TV Show REST API App
 
-## Background
+## Description
 
-Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
+TV Show utilises the TV Maze [REST API](https://www.tvmaze.com) to organize, sort and search TV shows and episodes making it easy to find information about specific shows or episodes.
 
-This means that we need to be sure that you can create a Full Stack App.
+## Feature List
+- Dynamic show/episode search & drop-down selector
+- Display total number of shows/episodes
+- Select favourite shows (local storage)
+- Direct link to show/episode on TVMaze
+- Sticky navigation bar when scrolling
+- Fully Responsive
 
-## Challenge
+## How to run in VSCode
 
-In this project you will be building a project that fulfills the following User Stories
+1. Clone files using `git clone git@github.com:Andy-Robertson/Full-Stack-Project-Assessment.git`.
+2. Go Live inside VSCode using the [Live Server] (https://github.com/ritwickdey/vscode-live-server-plus-plus).
 
-- As a user, I want to be able to view a list of all YouTube videos posted on the site
-- As a user, I want to be able to post videos that I like from YouTube to my website.
-- As a user, I want to be able to delete videos from the website that I no longer like.
-- As a user, I want to be able to watch the videos embedded in the website.
-- As a user, I want to be able to "Up Vote" a video if I like it.
-- As a user, I want to be able to "Down Vote" a video if I dislike.
+## Technologies
 
-You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+- HTML
+- CSS
+- JavaScript
 
-## Levels
+## Future Development
 
-This project is split into several levels that you should complete each week of the three week project.
+1. Add episode note functionality
+2. Refactor code
+3. Add tests
 
-You can find each of the levels split into separate files, linked below.
+## Deployment
 
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+[The TV Show app is deployed on Netlify](https://cyf-andy-robertson-tv.netlify.app/)
 
-### Week 1 - Front End
+## Preview
 
-- [Level 100](./100.md)
-  - A core version of the React front end of the app
-- [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+Episode Listing Page
+![SpaceX-API-React-App](https://andy-robertson.dev/static/media/tvshow.5958eda5.png)
 
-### Week 2 - Back End (without Database)
 
-- [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
-- [Level 250](./250.md)
-  - Connect your Front End and Back End together
-- [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
-
-### Week 3 - Back End (with Database)
-
-- [Level 300](./300.md)
-  - Integrate the back end with a database
-- [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
-- [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
-
-## Sample Solution
-
-Here is an example solution of the Front End:
-
-https://vid-rec2.netlify.app/
-
-**Note:** You can design the website to look however you like.
-
-Here is an example solution for the Back End:
-
-https://video-rec.herokuapp.com
-
-## Design
-
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
-
-## Getting Started
-
-Fork this repository and then clone it to your computer.
-
-Progress to Level 100 when you are ready.
