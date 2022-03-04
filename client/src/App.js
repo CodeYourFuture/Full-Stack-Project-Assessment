@@ -90,6 +90,9 @@ function App() {
       .then((response) => console.log(response))
       .then(() => {
         setUpdate(!update);
+      })
+      .catch(function (error) {
+        console.log("An error occurred:", error);
       });
   };
 
