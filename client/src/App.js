@@ -33,14 +33,24 @@ function App() {
   };
   
   const addVideoFromInput = (userInput) => {
+    console.log(userInput);
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ title: userInput.title, url: userInput.url })
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ "title": userInput.title, "url": userInput.url }),
     };
     fetch(`http://localhost:5000/`, requestOptions)
     .then(() => {
       //update the dataClone causing a recall of new data
-      setDataClone(dataClone.push("loading"))
+      setDataClone((oldData) => [
+        ...oldData,
+        {
+          title: userInput.title,
+          url: userInput.url,
+        },
+      ]);
     })
     .catch((error) => {
       console.error(error);

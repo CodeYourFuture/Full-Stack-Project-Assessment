@@ -1,8 +1,10 @@
+import { useState } from "react";
 const VideoSubmissionForm = (props) => {
   // give your video a title
   // enter the the URL
   //submit button adds the video to the data clone
-  let subObj = {};
+  const [currentTitle, setCurrentTitle] = useState("");
+  const [currentUrl, setCurrentUrl] = useState("");
   return (
     <form id="add-video-form">
       <label htmlFor="title-input">Title:</label>
@@ -11,7 +13,7 @@ const VideoSubmissionForm = (props) => {
         id="title-input"
         placeholder="Title"
         onChange={(e) => {
-          subObj.title = e.target.value;
+          setCurrentTitle(e.target.value);
         }}
       />
 
@@ -21,12 +23,12 @@ const VideoSubmissionForm = (props) => {
         id="url-input"
         placeholder="URL"
         onChange={(e) => {
-          subObj.url = e.target.value;
+          setCurrentUrl(e.target.value);
         }}
       />
 
       <button type="button" id="add-video-button" onClick={() => {
-        props.addVidFunc(subObj);
+        props.addVidFunc({title: currentTitle, url: currentUrl});
       }}>
         Add
       </button>

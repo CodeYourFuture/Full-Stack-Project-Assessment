@@ -44,7 +44,7 @@ app.get("/:videoId", (req, res) => {
             .catch((error) => {
               client.release();
               console.error(error);
-              res.status(error.status).send(error)
+              // res.status(error.status).send(error)
             })
         }
       })
@@ -67,7 +67,7 @@ app.get("/", (req, res) => {
       .catch((error) => {
         client.release();
         console.error(error);
-        res.status(error.status).send(error);
+        // res.status(error.status).send(error);
       })
   })
 });
@@ -91,7 +91,7 @@ app.post("/", (req, res) => {
       .catch((error) => {
         client.release();
         console.error(error);
-        res.status(error.status).send(error);
+        // res.status(error.status).send(error);
       })
   })
 })
@@ -124,7 +124,7 @@ app.delete("/:videoId", (req, res) => {
             .catch((error) => {
               client.release();
               console.error(error);
-              res.status(error.status).send(error);
+              // res.status(error.status).send(error);
             });
         }
       })
