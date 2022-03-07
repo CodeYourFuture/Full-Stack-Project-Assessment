@@ -128,8 +128,8 @@ app.delete("/:id", function (request, response) {
   });
 });
 
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client/build/index.html"));
-});
+// app.get("*", (request, response) => {
+//   response.sendFile(path.join(__dirname, "client/build/index.html"));
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

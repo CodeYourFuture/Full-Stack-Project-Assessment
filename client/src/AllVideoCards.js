@@ -7,15 +7,7 @@ function AllVideoCards() {
   const url = "https://humailkhan-assessment-project.herokuapp.com/";
 
   function fetchData() {
-    fetch(url, {
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      },
-    })
+    fetch(url)
       .then((response) => response.json())
       .then((data) => setVideos(data));
   }
