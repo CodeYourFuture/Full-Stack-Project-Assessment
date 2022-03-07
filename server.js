@@ -29,14 +29,6 @@ const devConfig = {
   },
 };
 
-// const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
-
-//   user: process.env.PG_USER,
-//   host: process.env.PG_HOST,
-//   database: process.env.PG_DATABASE,
-//   password: process.env.PG_PASSWORD,
-//   port: process.env.PG_PORT
-
 const proConfig = { connectionString: process.env.DATABASE_URL };
 
 const pool = new Pool(
@@ -44,8 +36,6 @@ const pool = new Pool(
 );
 
 pool.connect();
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET all videos:
 
