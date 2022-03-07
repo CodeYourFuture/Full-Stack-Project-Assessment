@@ -29,12 +29,13 @@ const AddVideo = ({ setClicked, videos, setVideos }) => {
     } else {
       alert("This video is already in the videos list.");
     }
-    fetch("https://humailkhan-assessment-project.herokuapp.com/", {
+    fetch("/videos", {
       method: "POST",
       mode: "cors",
       body: JSON.stringify(newVideo),
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     }).then((response) => console.log(response.json()));
   }

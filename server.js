@@ -6,8 +6,9 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, "client/build")));
+
 if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
 }
 
 // app.use((req, res, next) => {
@@ -59,7 +60,7 @@ app.get("/videos", (request, response) => {
   });
 });
 
-app.post("/", function (request, response) {
+app.post("/videos", function (request, response) {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -94,7 +95,7 @@ app.post("/", function (request, response) {
   });
 });
 
-app.get("/:videoId", (request, response) => {
+app.get("/videos/:videoId", (request, response) => {
   const videoId = request.params.videoId;
   const query = `SELECT * FROM videos WHERE id =$1`;
   pool.query(query, [videoId]).then((result, error) => {
@@ -110,7 +111,7 @@ app.get("/:videoId", (request, response) => {
   });
 });
 
-app.delete("/:id", function (request, response) {
+app.delete("/videos/:id", function (request, response) {
   const id = request.params.id;
   const query = `SELECT * FROM videos WHERE id=$1`;
   pool.query(query, [id]).then((result) => {
@@ -127,8 +128,8 @@ app.delete("/:id", function (request, response) {
   });
 });
 
-// app.get("*", (request, response) => {
-//   response.sendFile(path.join(__dirname, "client/build/index.html"));
-// });
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
