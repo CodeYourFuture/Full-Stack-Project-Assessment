@@ -7,9 +7,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "client/build")));
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -17,18 +17,31 @@ app.use((req, res, next) => {
 });
 
 const { Pool } = require("pg");
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  user: "gzpeczgerzmfze",
-  host: "ec2-34-241-164-42.eu-west-1.compute.amazonaws.com",
-  database: "de6m2d2609uf5r",
-  password: "5a1e59a11cefc89eb997dd206d6740d4328ba4b50f44a82dbbfb65a20520c0f1",
-  port: 5432,
+require("dotenv").config();
+const devConfig = {
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
   ssl: {
     rejectUnauthorized: false,
   },
-});
+};
+
+// const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
+
+//   user: process.env.PG_USER,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   password: process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT
+
+const proConfig = { connectionString: process.env.DATABASE_URL };
+
+const pool = new Pool(
+  process.env.NODE_ENV === "production" ? proConfig : devConfig
+);
 
 pool.connect();
 // Store and retrieve your videos from here
@@ -123,6 +136,10 @@ app.delete("/:id", function (request, response) {
       });
     }
   });
+});
+
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
