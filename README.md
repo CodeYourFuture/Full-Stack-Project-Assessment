@@ -17,8 +17,9 @@ Youtube Saver is a Full-stack PERN application that enables Youtube videos to be
 ## How to run in VSCode
 
 1. Clone files using `git clone git@github.com:Andy-Robertson/Full-Stack-Project-Assessment.git`.
-2. From the root folder `cd..` into the client folder and run `npm start` to run the front end.
-3. From the root folder `cd..` into the server folder and run `node server.js` to run the backend API.
+2. Setup a local postgres database using the ```table.sql``` file found in the server folder.
+3. From the root folder `cd..` into the client folder and run `npm start` to run the front end.
+4. From the root folder `cd..` into the server folder and run `node server.js` to run the backend API.
 
 ## Technologies
 
