@@ -39,7 +39,7 @@ pool.connect();
 
 // GET all videos:
 
-app.get("/videos", (request, response) => {
+app.get("/", (request, response) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -60,7 +60,7 @@ app.get("/videos", (request, response) => {
   });
 });
 
-app.post("/videos", function (request, response) {
+app.post("/", function (request, response) {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -95,7 +95,7 @@ app.post("/videos", function (request, response) {
   });
 });
 
-app.get("/videos/:videoId", (request, response) => {
+app.get("/:videoId", (request, response) => {
   const videoId = request.params.videoId;
   const query = `SELECT * FROM videos WHERE id =$1`;
   pool.query(query, [videoId]).then((result, error) => {
@@ -111,7 +111,7 @@ app.get("/videos/:videoId", (request, response) => {
   });
 });
 
-app.delete("/videos/:id", function (request, response) {
+app.delete("/:id", function (request, response) {
   const id = request.params.id;
   const query = `SELECT * FROM videos WHERE id=$1`;
   pool.query(query, [id]).then((result) => {
