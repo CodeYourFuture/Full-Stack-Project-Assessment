@@ -5,7 +5,7 @@ import AllVideos from "./AllVideos";
 function AllVideoCards() {
   const [videos, setVideos] = useState([]);
   const fetchData = async () => {
-    const url = "https://humailkhan-assessment-project.herokuapp.com/";
+    const url = "https://humailkhan-assessment-project.herokuapp.com/videos";
 
     try {
       const response = await fetch(url, {
