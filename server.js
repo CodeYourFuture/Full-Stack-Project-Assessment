@@ -6,15 +6,14 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "client/build")));
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
 }
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 
 const { Pool } = require("pg");
 require("dotenv").config();
@@ -39,7 +38,7 @@ pool.connect();
 
 // GET all videos:
 
-app.get("/", (request, response) => {
+app.get("/videos", (request, response) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
