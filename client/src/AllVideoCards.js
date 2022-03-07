@@ -4,10 +4,14 @@ import AllVideos from "./AllVideos";
 
 function AllVideoCards() {
   const [videos, setVideos] = useState([]);
-  const url = "https://humailkhan-assessment-project.herokuapp.com/";
 
   function fetchData() {
-    fetch(url)
+    fetch("https://humailkhan-assessment-project.herokuapp.com/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setVideos(data));
   }
