@@ -13,7 +13,7 @@ function AllVideoCards() {
       },
     })
       .then((response) => response.json())
-      .then((data) => setVideos(data));
+      .then((data) => console.log(data));
   }
   useEffect(() => {
     fetchData();
