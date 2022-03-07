@@ -6,7 +6,7 @@ function AllVideoCards() {
   const [videos, setVideos] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await fetch(`/videos`, {
+      const response = await fetch("/videos", {
         mode: "cors",
         headers: {
           "Access-Control-Allow-Origin": "*",
