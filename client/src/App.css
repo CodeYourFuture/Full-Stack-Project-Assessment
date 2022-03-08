@@ -1,3 +1,16 @@
+/* this css is very much unfinished */
 .App {
   text-align: center;
+}
+
+.video-list {
+  margin: 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.video-list-item {
+  margin: 10px;
 }
