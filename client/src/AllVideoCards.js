@@ -5,16 +5,16 @@ import AllVideos from "./AllVideos";
 function AllVideoCards() {
   const [videos, setVideos] = useState([]);
   const fetchData = async () => {
+    const url = "https://humailkhan-assessment-project.herokuapp.com/";
+
     try {
-      const response = await fetch("/videos", {
+      const response = await fetch(url, {
         mode: "cors",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods":
             "GET, POST, PATCH, PUT, DELETE, OPTIONS",
           "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-          "Content-Type": "application/json",
-          Accept: "application/json",
         },
       });
       if (response.status === 200) {
