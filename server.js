@@ -7,9 +7,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "client/build")));
-
 if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
 }
 
 app.use((req, res, next) => {
@@ -18,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 const { Pool } = require("pg");
+const res = require("express/lib/response");
 require("dotenv").config();
 const devConfig = {
   user: process.env.PG_USER,
@@ -40,7 +40,7 @@ pool.connect();
 
 // GET all videos:
 
-app.get("/", (request, response) => {
+app.get("/videos", async (request, response) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -51,17 +51,15 @@ app.get("/", (request, response) => {
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
   );
-  const query = `SELECT * FROM videos`;
-  pool.query(query, (error, result) => {
-    if (error) {
-      console.log(error);
-      return response.status(400).send(`msg: ${error}`);
-    }
-    response.send(result.rows);
-  });
+  try {
+    const allVideos = await pool.query(`SELECT * FROM videos`);
+    response.json(allVideos.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
-app.post("/", function (request, response) {
+app.post("/videos", function (request, response) {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -96,7 +94,7 @@ app.post("/", function (request, response) {
   });
 });
 
-app.get("/:videoId", (request, response) => {
+app.get("/videos/:videoId", (request, response) => {
   const videoId = request.params.videoId;
   const query = `SELECT * FROM videos WHERE id =$1`;
   pool.query(query, [videoId]).then((result, error) => {
@@ -112,7 +110,7 @@ app.get("/:videoId", (request, response) => {
   });
 });
 
-app.delete("/:id", function (request, response) {
+app.delete("/videos/:id", function (request, response) {
   const id = request.params.id;
   const query = `SELECT * FROM videos WHERE id=$1`;
   pool.query(query, [id]).then((result) => {
