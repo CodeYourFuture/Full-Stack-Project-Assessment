@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from "react";
 import VideoOptions from "./VideoOptions";
 import AllVideos from "./AllVideos";
-import { get } from "express/lib/response";
 
 function AllVideoCards() {
   const [videos, setVideos] = useState([]);
   const fetchData = async () => {
-    const url = "https://humailkhan-assessment-project.herokuapp.com/videos";
+    const url =
+      "https://humailkhan-assessment-project.herokuapp.com/api/videos/";
 
     try {
       const response = await fetch(url, {
-        method: "GET",
         mode: "cors",
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
         },
       });
       if (response.status === 200) {
-        const result = await response.json();
-        setVideos(result);
-        window.location = "/";
+        const json = await response.json();
+        console.log(json);
+        setVideos(json);
       } else {
-        const result = response.json();
-        alert(result.msg);
+        const json = response.json();
+        alert(json.msg);
       }
     } catch (error) {
-      console.error(error.message);
+      console.log("error", error);
     }
   };
   useEffect(() => {

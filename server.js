@@ -7,8 +7,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, "client", "build")));
+// required to serve SPA on heroku production without routing problems; it will skip only 'api' calls
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get(/^((?!(api)).)*$/, (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
 }
 
 app.use((req, res, next) => {
@@ -17,30 +21,26 @@ app.use((req, res, next) => {
 });
 
 const { Pool } = require("pg");
-const res = require("express/lib/response");
-require("dotenv").config();
-const devConfig = {
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  user: "gzpeczgerzmfze",
+  host: "ec2-34-241-164-42.eu-west-1.compute.amazonaws.com",
+  database: "de6m2d2609uf5r",
+  password: "5a1e59a11cefc89eb997dd206d6740d4328ba4b50f44a82dbbfb65a20520c0f1",
+  port: 5432,
   ssl: {
     rejectUnauthorized: false,
   },
-};
-
-const proConfig = { connectionString: process.env.DATABASE_URL };
-
-const pool = new Pool(
-  process.env.NODE_ENV === "production" ? proConfig : devConfig
-);
+});
 
 pool.connect();
+// Store and retrieve your videos from here
+// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET all videos:
 
-app.get("/videos", async (request, response) => {
+app.get("/api/videos", (request, response) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -51,15 +51,17 @@ app.get("/videos", async (request, response) => {
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
   );
-  try {
-    const allVideos = await pool.query(`SELECT * FROM videos`);
-    response.json(allVideos.rows);
-  } catch (error) {
-    console.error(error.message);
-  }
+  const query = `SELECT * FROM videos`;
+  pool.query(query, (error, result) => {
+    if (error) {
+      console.log(error);
+      return response.status(400).send(`msg: ${error}`);
+    }
+    response.send(result.rows);
+  });
 });
 
-app.post("/videos", function (request, response) {
+app.post("/api/videos", function (request, response) {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Credentials", true);
   response.header(
@@ -94,7 +96,7 @@ app.post("/videos", function (request, response) {
   });
 });
 
-app.get("/videos/:videoId", (request, response) => {
+app.get("/api/videos/:videoId", (request, response) => {
   const videoId = request.params.videoId;
   const query = `SELECT * FROM videos WHERE id =$1`;
   pool.query(query, [videoId]).then((result, error) => {
@@ -110,7 +112,7 @@ app.get("/videos/:videoId", (request, response) => {
   });
 });
 
-app.delete("/videos/:id", function (request, response) {
+app.delete("/api/videos/:id", function (request, response) {
   const id = request.params.id;
   const query = `SELECT * FROM videos WHERE id=$1`;
   pool.query(query, [id]).then((result) => {
@@ -127,8 +129,8 @@ app.delete("/videos/:id", function (request, response) {
   });
 });
 
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client/build/index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

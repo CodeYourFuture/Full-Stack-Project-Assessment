@@ -7,17 +7,20 @@ function DeleteButton({ id, videos, setVideos }) {
     console.log(filteredVideos);
     setVideos(filteredVideos);
 
-    fetch(`https://humailkhan-assessment-project.herokuapp.com/videos/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then((response) => console.log(response.json()));
+    fetch(
+      `https://humailkhan-assessment-project.herokuapp.com/api/videos/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    ).then((response) => console.log(response.json()));
   }
 
   return (
-    <Button className="del-button" variant="danger" onClick={handleDelete}>
+    <Button variant="danger" onClick={handleDelete}>
       Delete Video
     </Button>
   );
