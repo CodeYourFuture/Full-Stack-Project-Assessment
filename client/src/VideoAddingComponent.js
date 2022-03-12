@@ -9,7 +9,7 @@ const VideoAddingComponent = ({ videos, setVideos }) => {
   };
   return (
     <div>
-      <button className="btn btn-primary" onClick={handleClick}>
+      <button className="btn btn-primary mt-5" onClick={handleClick}>
         Add Video
       </button>
       {clicked ? (

@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="App">
+    <div className="App shadow">
       <header className="App-header">
         <h1 className="page-heading">Video Recommendations</h1>
       </header>
