@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import {
+  BsFillHandThumbsDownFill,
+  BsFillHandThumbsUpFill,
+} from "react-icons/bs";
 
 function VideoLikes() {
   const [votes, setVotes] = useState(0);
+
   function increaseVotes() {
     setVotes(votes + 1);
   }
@@ -11,9 +16,17 @@ function VideoLikes() {
 
   return (
     <div className="vote-icons">
-      <i className="fa fa-thumbs-up" onClick={increaseVotes}></i>
-      <p className="vote-text"> {votes} Likes </p>
-      <i className="fa fa-thumbs-down" onClick={decreaseVotes}></i>
+      <BsFillHandThumbsUpFill
+        className="text-light"
+        onClick={increaseVotes}
+        size={25}
+      />
+      <p className="vote-text text-light"> {votes} Likes </p>
+      <BsFillHandThumbsDownFill
+        onClick={decreaseVotes}
+        size={25}
+        className="text-light"
+      />
     </div>
   );
 }

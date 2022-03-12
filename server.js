@@ -24,19 +24,19 @@ const { Pool } = require("pg");
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  user: "gzpeczgerzmfze",
-  host: "ec2-34-241-164-42.eu-west-1.compute.amazonaws.com",
-  database: "de6m2d2609uf5r",
-  password: "5a1e59a11cefc89eb997dd206d6740d4328ba4b50f44a82dbbfb65a20520c0f1",
-  port: 5432,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
 pool.connect();
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+
+//ROUTES
 
 // GET all videos:
 

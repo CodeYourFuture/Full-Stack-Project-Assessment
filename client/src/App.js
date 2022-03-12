@@ -6,7 +6,7 @@ import AllVideoCards from "./AllVideoCards";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-dark bg-gradient">
       <Header />
       <AllVideoCards />
     </div>

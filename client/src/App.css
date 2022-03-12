@@ -1,9 +1,14 @@
 .App {
   text-align: center;
+  padding: 2px;
 }
 
 .App-header {
-  background-color: rgb(36, 103, 160);
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgba(255, 0, 0, 1)
+  );
   padding: 30px;
   margin-bottom: 20px;
 }
@@ -21,6 +26,14 @@
 .input {
   margin-top: 20px;
   margin-left: 10px;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: rgb(252, 252, 252) !important;
+}
+
+.input::-webkit-input-placeholder {
+  color: rgb(252, 252, 252) !important;
 }
 
 .search-box {

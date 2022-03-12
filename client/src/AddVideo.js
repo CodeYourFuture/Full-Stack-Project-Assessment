@@ -44,7 +44,7 @@ const AddVideo = ({ setClicked, videos, setVideos }) => {
       <div>
         <label htmlFor="inputTitle">Title</label>
         <input
-          className="input ml-3"
+          className="input ml-3 bg-dark bg-gradient text-white border-4 border-dark rounded"
           name="title"
           type="text"
           required=""
@@ -57,7 +57,7 @@ const AddVideo = ({ setClicked, videos, setVideos }) => {
       <div>
         <label htmlFor="inputUrl">URL</label>
         <input
-          className="input ml-3"
+          className="input ml-3 bg-dark bg-gradient text-white border-4 border-dark rounded"
           name="url"
           type="text"
           required
