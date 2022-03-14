@@ -1,6 +1,6 @@
-import "./App.css";
-import "./hoverbuttons.css"
-import "./tornEffect.css"
+import "./styling/App.css";
+import "./styling/hoverbuttons.css"
+import "./styling/tornEffect.css"
 import React, { useState , useEvent , useEffect } from "react";
 import DisplayVideos from "./DisplayVideos";
 import AddVideo from "./AddVideo";
@@ -10,9 +10,6 @@ function App() {
   return (
     <div className="App">
       <header>
-        
-        
-        
       </header>
       <body>
         <DisplayVideos/>
