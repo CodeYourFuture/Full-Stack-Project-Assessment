@@ -1,8 +1,8 @@
 import React, { useState , useEvent , useEffect } from "react";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
-import button from './button-bg.png';
-import cityBackground from './cityBackgroundEdited.jpg';
+import button from './resources/button-bg.png';
+import cityBackground from './resources/cityBackgroundEdited.jpg';
 import SearchTornAnimation from "./SearchTornAnimation";
 import AddVideoTornAnimation from "./AddVideoTornAnimation";
 import VideoOrderTornAnimation from "./VideoOrderTornAnimation";
@@ -138,13 +138,12 @@ export default function DisplayVideos(){
                 <div className="innerVideoContainer">
                     <div className="currentVideoContainer">
                         <h2>{currentVideo.title}</h2>
-                        <iframe  id="currentVideoFrame" width="560" height="315" src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-
+                        <iframe  id="currentVideoFrame"  src={`https://www.youtube.com/embed/${currentVideo.thumbnail}?modestbranding=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        <div className="alternativeApprovalBanner">
+                             <ApprovalCounterFunction passedRating={currentVideo.rating} passedId={currentVideo.id}/>
+                            <button href="#" class="hbtn hb-border-top-br3 removeButton" type="button" onClick={()=>{deleteVideo(currentVideo.id)}}><span className="removeIcon"><ion-icon name="close"></ion-icon></span><span className="removeText">DELETE</span></button>
+                        </div>
                        
-                            <ApprovalCounterFunction passedRating={currentVideo.rating} passedId={currentVideo.id}/>
-                      
-
-                        <button href="#" class="hbtn hb-border-top-br3 removeButton" type="button" onClick={()=>{deleteVideo(currentVideo.id)}}><span className="removeIcon"><ion-icon name="close"></ion-icon></span><span className="removeText">DELETE</span></button>
                     </div> 
                 </div>
 
