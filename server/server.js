@@ -1,102 +1,108 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
 
+const { Pool } = require("pg");
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-const videos = require("../exampleresponse.json");
+
 const pool = new Pool({
-  connectionString:
-"postgres://ldrpixfmeztwlo:9b4bcd97ab74ad228f1d136f9b733c627650b25c6c26deb1d755da98f9cb5db1@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/d81o2tq6p6a4ir",  ssl: {
+  connectionString: "postgres://fmuuxodppmzogp:946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2@ec2-34-250-92-138.eu-west-1.compute.amazonaws.com:5432/dfosgel6olppk3",
+  ssl: {
     rejectUnauthorized: false,
   },
-  user: "ldrpixfmeztwlo",
+  user: "fmuuxodppmzogp",
   host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
-  database: "dapnscot6ihjdt",
-  password: "",
+  database: "dfosgel6olppk3",
+  password: "946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2",
   port: 5432,
+});
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
 });
 
 // GET "/"
 app.get("/", (req, res) => {
-    // const rating
-    const selectQuery = `SELECT * FROM fullstack_videos ORDER BY rating`;
-    pool.query(selectQuery, (error, result) => {
-      if (error) {
-        console.log(error)
-        return res.status(500).send(`msg: ${error}`);
-      }
-      res.send(result.rows);
-    });
+  const query = "SELECT * FROM fullstack_videos";
+  pool.query(query, (error, result) => {
+    if (error) {
+      console.log(error);
+      return res.send(error);
+    } else {
+      res.json(result.rows);
+    }
+  });
 });
 
+// POST "/"
 app.post("/", (req, res) => {
-  console.log(req.body)
-  const title = req.body.title;
-  const url = req.body.url;
-  // const date
-  // const time
-  if(!title || !url ){
-    res.json({
+  const { title, url } = req.body;
+  const newVideo = {
+    title: title,
+    url: url,
+    rating: 0,
+  };
+  if (!title || !url) {
+    return res.status(400).send({
       result: "failure",
       message: "Video could not be saved",
     });
-    return
+  } else {
+    pool
+      .query("SELECT * FROM videos WHERE title=$1 AND url=$2", [title, url])
+      .then((result) => {
+        if (result.rows.length > 0) {
+          return res
+            .status(400)
+            .send(
+              `This video with the title of ${title} and url of ${url} is already in videos.`
+            );
+        } else {
+          pool
+            .query(
+              "INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0)",
+              [title, url]
+            )
+            .then(() =>
+              res.status(202).send(`The video has been added to the videos.`)
+            );
+        }
+      });
   }
-  const newVideo = {
-    id: videos[videos.length -1].id +1,
-    title: title,
-    url: url,
-    rating: 0
-  };
-
-  videos.push(newVideo);
-  res.send( {id: newVideo.id} );
 });
 
 app.get("/:id", (req, res) => {
-  const id = +req.params.id;
-  const selectQuery =`SELECT from fullstack_videos WHERE id = ${id}`
-  pool
-    .query(selectQuery, (error, result) => {
-      if (result.rows.length === 0) {
-        return response.status(404).send({
-          msg: `Video id: ${id} doesn't exist!`,
-        
-      })
+  const id = req.params.id;
+  const query = "SELECT * FROM videos WHERE id=$1";
+  pool.query(query, [id]).then((result) => {
+    if (result.rows.length === 0) {
+      res.status(400).send(`There is no video with the id of ${id}`);
+    } else {
+      res.status(200).send(result.rows);
     }
-})
-  
-// TEST enquiry <<<<<<---------
-
-const selectQuery = `SELECT * FROM videos WHERE id = ${videoId}`;
-pool.query(selectQuery, (error, result) => {
-  if (error) {
-    return response.status(500).send({ msg: "Database ERROR" });
-  }
-  if (result.rows.length === 0) {
-    return response.status(404).send({
-      msg: `Video with id: ${videoId} does not exist !!!`,
-    });
-  }
-  response.send(result.rows);
+  });
 });
 
 app.delete("/:id", (req, res) => {
-  const id = +req.params.id;
-  const index = videos.findIndex((video) => video.id === id);
-  if (index === -1) {
-    return res.status(400).send({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  }
-  videos.splice(index, 1);
-  res.send({});
+  const videoId = req.params.id;
+  const selectVideoQuery = "SELECT * FROM videos WHERE id=$1";
+  pool.query(selectVideoQuery, [videoId]).then((result) => {
+    if (result.rows.length === 0) {
+      res
+        .status(400)
+        .send(`Could not delete! There is no video with the id of ${videoId}!`);
+    } else {
+      const deleteQuery = "DELETE FROM videos WHERE id=$1";
+      pool.query(deleteQuery, [videoId]).then(() => {
+        res.send(`The video with the id of ${videoId} has been deleted!`);
+      });
+    }
+  });
 });
 
-app.listen(port, () => console.log(`Listening on port: ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));
