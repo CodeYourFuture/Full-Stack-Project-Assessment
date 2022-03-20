@@ -2,22 +2,31 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
+const data = require("./exampleresponse.json")
 
 const { Pool } = require("pg");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+// app.use(cors());
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const pool = new Pool({
-  connectionString: "postgres://fmuuxodppmzogp:946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2@ec2-34-250-92-138.eu-west-1.compute.amazonaws.com:5432/dfosgel6olppk3",
+  connectionString:
+    "postgres://cizqaelsftryvl:86de29028efc5869e7ce285ba024d81221decb34bdfbb1ca5fcf803b114def74@ec2-34-242-89-204.eu-west-1.compute.amazonaws.com:5432/d7a8bjr42ugc0s",
   ssl: {
     rejectUnauthorized: false,
   },
-  user: "fmuuxodppmzogp",
-  host: "ec2-54-228-139-34.eu-west-1.compute.amazonaws.com",
+  user: "cizqaelsftryvl",
+  host: "ec2-34-242-89-204.eu-west-1.compute.amazonaws.com",
   database: "dfosgel6olppk3",
-  password: "946021991473acb23e256c12f7374d619f280bc12740a99d8d4435a8c969a4a2",
+  password: "86de29028efc5869e7ce285ba024d81221decb34bdfbb1ca5fcf803b114def74",
   port: 5432,
 });
 
@@ -28,6 +37,13 @@ app.use((req, res, next) => {
 
 // GET "/"
 app.get("/", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+  );
   const query = "SELECT * FROM fullstack_videos";
   pool.query(query, (error, result) => {
     if (error) {
