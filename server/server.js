@@ -19,14 +19,12 @@ app.use(cors(corsOptions));
 
 const pool = new Pool({
   connectionString:
-    "postgres://cizqaelsftryvl:86de29028efc5869e7ce285ba024d81221decb34bdfbb1ca5fcf803b114def74@ec2-34-242-89-204.eu-west-1.compute.amazonaws.com:5432/d7a8bjr42ugc0s",
-  ssl: {
-    rejectUnauthorized: false,
-  },
-  user: "cizqaelsftryvl",
-  host: "ec2-34-242-89-204.eu-west-1.compute.amazonaws.com",
-  database: "dfosgel6olppk3",
-  password: "86de29028efc5869e7ce285ba024d81221decb34bdfbb1ca5fcf803b114def74",
+    "postgres://fhyfarprutccpc:035b975418095ebceecfe90f0d48368fad565731f0773fec0d9de3fb28c02ecc@ec2-54-73-167-224.eu-west-1.compute.amazonaws.com:5432/ddq7cokceoa5ah",
+  ssl: { rejectUnauthorized: false },
+  user: "fhyfarprutccpc",
+  host: "ec2-54-73-167-224.eu-west-1.compute.amazonaws.com",
+  database: "ddq7cokceoa5ah",
+  password: "035b975418095ebceecfe90f0d48368fad565731f0773fec0d9de3fb28c02ecc",
   port: 5432,
 });
 
