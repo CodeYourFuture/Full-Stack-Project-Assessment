@@ -24,50 +24,18 @@ const pool = new Pool({
 });
 
 // GET "/"
-app.get("/", (request, response) => {
-  const order = request.query.order;
-  //order the data according to the votes
-  const selectQuery = 'SELECT * FROM videos ORDER BY rating';
-  pool.query(selectQuery, (error, result) => {
-    if (error) {
-      return response
-        .status(500)
-        .send({ msg: "Database ERROR" });
-    }
-    response.send(result.rows);
-  });
+app.get("/", (req, res) => {
+	const query =
+		"SELECT * FROM videos ORDER BY rating";
+	pool.query(query)
+		.then((result) => res.send(result.rows))
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).send(err.message);
+		});
 });
 
-// app.get("/", (req, res) => {
-//   data.sort((b, a) => {
-//     return a.rating - b.rating;
-//   });
-//   res.json(data);
-// });
 
-// // POST "/"
-// app.post("/", (req, res) => {
-//   const index = data.length - 1;
-//   console.log(index);
-
-//   const newData = {
-//     id: index + 1,
-//     title: req.body.title,
-//     url: req.body.url,
-//     time: new Date(),
-//   };
-
-//   if (!newData.title || !newData.url || !validUrl.isUri(newData.url)) {
-//     return res.status(400).json({
-//       result: "failure",
-//       message: "Video could not be saved",
-//     });
-//   }
-//   data.push(newData);
-//   res.json(data);
-// });
-
-// // GET "/{id}"
 // app.get("/:id", (req, res) => {
 //   const videoId = +req.params.id;
 //   const found = data.find((el) => {
