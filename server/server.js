@@ -9,6 +9,18 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+const pool = new Pool({
+  connectionString: process.env.CONNECTIONSTRING,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: 5432,
+});
+
 // GET "/"
 app.get("/", (req, res) => {
   data.sort((b, a) => {
