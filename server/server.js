@@ -59,8 +59,8 @@ pool.query(query, [title, url])
 app.get("/:id", (req, res) => {
   const videoId = +req.params.id;
 	const query =
-		`SELECT * FROM videos WHERE id = ${videoId}`;
-	pool.query(query)
+		"SELECT * FROM videos WHERE id =$1 ";
+	pool.query(query,[videoId])
 		.then((result) => res.send(result.rows))
 		.catch((err) => {
 			console.error(err.message);
@@ -68,33 +68,27 @@ app.get("/:id", (req, res) => {
 		});
 });
 
-// app.get("/:id", (req, res) => {
-//   const videoId = +req.params.id;
-//   const found = data.find((el) => {
-//     return el.id === videoId;
-//   });
-//   if (found) {
-//     res.json(found);
-//   } else {
-//     res.status(400).send({ msg: `We cuold not find video with id ${videoId}` });
-//   }
-// });
+// DELETE "/{id}"
+app.delete("/:id", (req, res) => {
+	const  videoId  = req.params.id;
+	pool.query("DELETE FROM videos WHERE id=$1 RETURNING *", [
+		videoId,
+	])
+		.then((result) => {
+			if (result.rowCount) {
+				res.send(result.rows[0]);
+			} else {
+				res
+					.status(404)
+					.send(`couldn't find this ID: ${videoId}`);
+			}
+		})
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).send(err.message);
+		});
+});
 
 
-// // DELETE "/{id}"
-// app.delete("/:id", (req, res) => {
-//   const videoId = +req.params.id;
-//   const found = data.some((video) => video.id === videoId);
-//   if (found) {
-//     res.json({
-//       msg: `Video deleted ${req.params.id}`,
-//       message: data.filter((video) => video.id !== videoId),
-//     });
-//   } else {
-//     res
-//       .status(400)
-//       .send({ result: "failure", message: "Video could not be deleted" });
-//   }
-// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
