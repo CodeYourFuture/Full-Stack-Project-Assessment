@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const data = require("./exampleresponse.json");
+// const data = require("./exampleresponse.json");
 const validUrl = require("valid-url");
 const { Pool } = require("pg");
+require("dotenv").config();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
@@ -23,63 +24,77 @@ const pool = new Pool({
 });
 
 // GET "/"
-app.get("/", (req, res) => {
-  data.sort((b, a) => {
-    return a.rating - b.rating;
+app.get("/", (request, response) => {
+  const order = request.query.order;
+  //order the data according to the votes
+  const selectQuery = 'SELECT * FROM videos ORDER BY rating';
+  pool.query(selectQuery, (error, result) => {
+    if (error) {
+      return response
+        .status(500)
+        .send({ msg: "Database ERROR" });
+    }
+    response.send(result.rows);
   });
-  res.json(data);
 });
 
-// POST "/"
-app.post("/", (req, res) => {
-  const index = data.length - 1;
-  console.log(index);
+// app.get("/", (req, res) => {
+//   data.sort((b, a) => {
+//     return a.rating - b.rating;
+//   });
+//   res.json(data);
+// });
 
-  const newData = {
-    id: index + 1,
-    title: req.body.title,
-    url: req.body.url,
-    time: new Date(),
-  };
+// // POST "/"
+// app.post("/", (req, res) => {
+//   const index = data.length - 1;
+//   console.log(index);
 
-  if (!newData.title || !newData.url || !validUrl.isUri(newData.url)) {
-    return res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
-  }
-  data.push(newData);
-  res.json(data);
-});
+//   const newData = {
+//     id: index + 1,
+//     title: req.body.title,
+//     url: req.body.url,
+//     time: new Date(),
+//   };
 
-// GET "/{id}"
-app.get("/:id", (req, res) => {
-  const videoId = +req.params.id;
-  const found = data.find((el) => {
-    return el.id === videoId;
-  });
-  if (found) {
-    res.json(found);
-  } else {
-    res.status(400).send({ msg: `We cuold not find video with id ${videoId}` });
-  }
-});
+//   if (!newData.title || !newData.url || !validUrl.isUri(newData.url)) {
+//     return res.status(400).json({
+//       result: "failure",
+//       message: "Video could not be saved",
+//     });
+//   }
+//   data.push(newData);
+//   res.json(data);
+// });
+
+// // GET "/{id}"
+// app.get("/:id", (req, res) => {
+//   const videoId = +req.params.id;
+//   const found = data.find((el) => {
+//     return el.id === videoId;
+//   });
+//   if (found) {
+//     res.json(found);
+//   } else {
+//     res.status(400).send({ msg: `We cuold not find video with id ${videoId}` });
+//   }
+// });
 
 
-// DELETE "/{id}"
-app.delete("/:id", (req, res) => {
-  const videoId = +req.params.id;
-  const found = data.some((video) => video.id === videoId);
-  if (found) {
-    res.json({
-      msg: `Video deleted ${req.params.id}`,
-      message: data.filter((video) => video.id !== videoId),
-    });
-  } else {
-    res
-      .status(400)
-      .send({ result: "failure", message: "Video could not be deleted" });
-  }
-});
+// // DELETE "/{id}"
+// app.delete("/:id", (req, res) => {
+//   const videoId = +req.params.id;
+//   const found = data.some((video) => video.id === videoId);
+//   if (found) {
+//     res.json({
+//       msg: `Video deleted ${req.params.id}`,
+//       message: data.filter((video) => video.id !== videoId),
+//     });
+//   } else {
+//     res
+//       .status(400)
+//       .send({ result: "failure", message: "Video could not be deleted" });
+//   }
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
