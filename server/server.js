@@ -55,7 +55,18 @@ pool.query(query, [title, url])
   });
 });
 
-
+// GET "/{id}"
+app.get("/:id", (req, res) => {
+  const videoId = +req.params.id;
+	const query =
+		`SELECT * FROM videos WHERE id = ${videoId}`;
+	pool.query(query)
+		.then((result) => res.send(result.rows))
+		.catch((err) => {
+			console.error(err.message);
+			res.status(500).send(err.message);
+		});
+});
 
 // app.get("/:id", (req, res) => {
 //   const videoId = +req.params.id;
