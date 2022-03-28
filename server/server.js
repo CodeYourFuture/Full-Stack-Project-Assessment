@@ -35,6 +35,27 @@ app.get("/", (req, res) => {
 		});
 });
 
+// POST "/"
+app.post("/",  (req, res) => {
+  const title = req.body.title;
+  const url = req.body.url;
+	// input check!
+	if (!title || !url) {
+		return res.status(400).send("Please complete all fields!");
+	}
+  const query =
+ ` INSERT INTO videos ( title, url, rating ) VALUES ($1, $2 ,${0} ) RETURNING *`;
+pool.query(query, [title, url])
+  .then((result) => {
+    res.send(result.rows[0]);
+  })
+  .catch((err) => {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  });
+});
+
+
 
 // app.get("/:id", (req, res) => {
 //   const videoId = +req.params.id;
