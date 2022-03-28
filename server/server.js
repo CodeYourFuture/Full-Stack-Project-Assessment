@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const data = require("./exampleresponse.json");
 const validUrl = require("valid-url");
+const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
