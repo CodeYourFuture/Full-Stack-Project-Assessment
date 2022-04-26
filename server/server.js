@@ -5,17 +5,17 @@ const cors = require("cors");
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'cvzfmgkjyqnhgb',
-  host: 'ec2-34-255-21-191.eu-west-1.compute.amazonaws.com',
-  database: 'df9q5i3jod9a7a',
-  password: 'e948018709006b206c5041198abceb6e6d0887819331ce7b6b31c4c5bf7ebfbd',
+  user: 'xvbfrwygeytfqd',
+  host: 'ec2-54-73-167-224.eu-west-1.compute.amazonaws.com',
+  database: 'd3pi3fbor1kfac',
+  password: '440df517773c8e83f92beb4b81bf55de49f48f1dbccdc3359381db1fc637bbcf',
   port: 5432,
   ssl: {
     rejectUnauthorized: false,
   }
 
 })
-
+//psql -h ec2-54-73-167-224.eu-west-1.compute.amazonaws.com -p 5432 -U xvbfrwygeytfqd d3pi3fbor1kfac
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({
