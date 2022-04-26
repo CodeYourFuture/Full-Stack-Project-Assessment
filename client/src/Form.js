@@ -8,8 +8,23 @@ function Form(prop) {
     const submitHandler = (e) => {
         e.preventDefault();
         prop.addVideos(title, url)
-        setTitle("");
-        setUrl("");
+        const videoData = {
+            title: title,
+            url: url
+        }
+        fetch("http://127.0.0.1:5000/", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(videoData),
+        })
+        .then( async (response) => {
+            if (response.status >= 200 && response.status <= 299) {
+                return response.json();
+            } else {
+                throw new Error(await response.text());
+            }
+        })
+        .catch((error) => console.log(error));
     };
     return (
     <div>
@@ -30,7 +45,7 @@ function Form(prop) {
                 </div>
                 <div className="row">
                     <div className="col-sm-6">
-                        <button className="btn-danger btn mb-4" >Cancel</button>
+                        <button className="btn-danger btn mb-4" type="reset">Cancel</button>
                     </div>
                     <div className="col-sm-4">
                         <button onClick={submitHandler} className="btn-primary btn mb-4">Add</button>
