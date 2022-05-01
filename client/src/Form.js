@@ -24,7 +24,7 @@ function Form(prop) {
                 throw new Error(await response.text());
             }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log("Error: ", error.message));
     };
     return (
     <div>
