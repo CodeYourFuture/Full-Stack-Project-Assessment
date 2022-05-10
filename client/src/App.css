@@ -9,12 +9,10 @@ h1{
 }
 span {
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   display: grid;
-  width: 600px;
   grid-template-rows : auto, auto, auto;
-  margin-left: 20px;
 
 }
 h2{
@@ -24,14 +22,39 @@ h2{
   text-align: center;
 
 }
-#local {
+#clickButton {
   width: 480px;
-  margin-right : 100px;
+  margin-left : 0px;
 }
-button{
-  font-family: 'Times New Roman', Times, serif;
-  border-color: brown;
-  border-radius: 1rem;
-  padding-inline-start: 10px;
 
+#firstButton{
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: rem;
+  padding-inline-start: 10px;
+  margin: 8px;
+  width: 80px;
+  cursor: pointer ;
+
+}
+#button:hover {
+ color:  red;
+  
+} .the-button {
+  margin-left: 20px;
+width: 400px;
+display: grid;
+  grid-template-rows :  auto ;
+}
+.firstP {
+  margin-top: 5px;
+}
+.Asending button{
+  margin: 5px;
+}
+#h4-1{
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  margin-left: 120px;
+  margin-bottom: 9px;
 }

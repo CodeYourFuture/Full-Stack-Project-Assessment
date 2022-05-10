@@ -1,48 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Package from "../data/exampleresponse.json";
+import OrderResult from "./OrderResult";
 import ReactPlayers from "./ReactPlayers";
-//import axios from "./axios";
+import NewVideos from "./NewVideos";
 
-const TheVideos = () => {
-  //const [allVoted, setAllVoted] = useState(0);
+const TheVideos = ({ lik }) => {
+  const [allVoted, setAllVoted] = useState(0);
 
-   const [videos, setVideos] = useState([]);
-
-useEffect(() => {
-  fetch("http://localhost:5000/")
-  .then(res => res.json())
-  .then(data => 
-    console.log(data)
-  )
-  .catch((error) => {
-    console.log("this is rerror" + error);
-  })
-},[]) 
-const handlClick = () => {
-  setVideos(videos + 1);
-}
+  const [videos, setVideos] = useState("");
+  
+  const handleVote = () => {
+    console.log(setAllVoted);
+    setAllVoted(allVoted + 1);
+  };
 
   return (
-    <span>
-      {Package.map((lik, i) => {
+    <div className="div2">
+      <OrderResult/>
+      <label id="search">
+        <input
+          id="search"
+          name="search"
+          value={videos}
+          placeholder="search you video"
+          onChange={(e) => setVideos(e.target.value)}
+        />
+      </label>
+      {Package.filter((val) => {
+        if (allVoted === "") {
+          return val;
+        } else if (val.title.toLowerCase().indexOf(videos) > -1) {
+          return val;
+        }else{
+          return null;
+        }
+        }).map((lik, i) => {
         return (
           <div className="allVideos" key={i}>
             <h2>{lik.title}</h2>
-            <p>{lik.id}    "      {lik.rating}</p>
-            
-              <button id="local"
-                onClick={handlClick}
-                type="button"
-                class="btn btn-primary"
-              >            like{" "}  : {videos}
-              </button>
-            
-            <ReactPlayers url={lik.url} />
-          </div>
-        );
-      })}
-    </span>
-  );
-};
+            <p>
+              {" "}
+              {lik.id} " {lik.rating}
+            </p>
+            <button
+              id="clickButton"
+              onClick={handleVote}
+              type="button"
+              className="btn btn-primary"
+            >
+              {" "}
+              like{""}:{allVoted}
+            </button>    
+            <ReactPlayers   orl={lik.url} />
+          
+            <div className="firstP">  {<NewVideos />} </div>
+               </div>
+               
+           );
+         })}  
+         
+      </div>
+  );};
 
 export default TheVideos;

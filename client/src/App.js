@@ -1,7 +1,9 @@
 import "./App.css";
 import TheVideos from"./components/TheVideos.js";
 import EmbedVideos from "./components/EmbedVideos.js";
-import OrderResult from "./components/OrderResult";
+//import NewVideos from "./components/NewVideos";      
+import React from "react";
+import Asending from "./components/Asending";
 function App() {
   return (
     <div className="App">
@@ -9,8 +11,9 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <hr/>
-      <OrderResult/>
-      <TheVideos />
+      <Asending />
+      <TheVideos/>
+      
      <EmbedVideos/> 
     </div>
   );
