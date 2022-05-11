@@ -10,9 +10,9 @@ app.use(express.urlencoded({ extended: false }));
 const bodyParser = require("body-parser");
 const datas = require("./exampleresponse.json");
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 const client = new Client({
   host: "localhost",
@@ -86,5 +86,5 @@ app.delete("/datas/:id", (req, res) => {
 // app.use("/datas", datasRouter);
 
 app.listen(4000, function () {
-  console.log("the listener will be listen to the port in 4000,");
+  console.log(`the listener will be listen to the port  in 4000,`);
 });
