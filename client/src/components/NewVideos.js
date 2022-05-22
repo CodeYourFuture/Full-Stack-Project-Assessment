@@ -11,7 +11,7 @@ function NewVideos() {
     }
   return (
     <div>
-      <button  onClick={RemoveId} className="btn btn-primary">delete</button>
+      <button  onClick={RemoveId} className="btn btn-primary"><i class="fas fa-trash"></i>delete</button>
     </div>
   )
 }

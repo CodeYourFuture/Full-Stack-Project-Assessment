@@ -4,7 +4,7 @@ import EmbedVideos from "./components/EmbedVideos.js";
 //import NewVideos from "./components/NewVideos";      
 import React from "react";
 import Asending from "./components/Asending";
-function App() {
+function App({ lik }) {
   return (
     <div className="App">
       <header className="App-header">
@@ -12,9 +12,8 @@ function App() {
       </header>
       <hr/>
       <Asending />
-      <TheVideos/>
-      
-     <EmbedVideos/> 
+      <TheVideos/> 
+     <EmbedVideos /> 
     </div>
   );
 }

@@ -36,6 +36,15 @@ h2{
   cursor: pointer ;
 
 }
+#secondButton{
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: rem;
+  padding-inline-start: 10px;
+  margin: 8px;
+  width: 80px;
+  cursor: pointer ;
+
+}
 #button:hover {
  color:  red;
   

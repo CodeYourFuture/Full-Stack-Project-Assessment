@@ -4,7 +4,7 @@ import OrderResult from "./OrderResult";
 import ReactPlayers from "./ReactPlayers";
 import NewVideos from "./NewVideos";
 
-const TheVideos = ({ lik }) => {
+const TheVideos = ({ lik}) => {
   const [allVoted, setAllVoted] = useState(0);
 
   const [videos, setVideos] = useState("");
@@ -13,7 +13,39 @@ const TheVideos = ({ lik }) => {
     console.log(setAllVoted);
     setAllVoted(allVoted + 1);
   };
+  function addButton(){
 
+   let addtoButton = document.querySelector("#firstButton");
+   if(addtoButton){
+
+     addtoButton.addEventListener("click", () => {
+       alert("hello");
+      return  document.body.style.backgroundColor = "blue";
+      });
+    }
+  }
+  addButton();
+  function deletButton(){
+
+    let deltButton = document.querySelector("#secondButton");
+    let classContainer = document.querySelector(".allVideos");
+
+    let idsearch = document.querySelector("#search");
+
+    if(deltButton){
+ 
+      deltButton.addEventListener("click", () => {
+        let pragraph = document.createElement("p");
+        pragraph.classList.add(pragraph.styling);
+        pragraph.innerText = idsearch.value;
+        classContainer.appendChild(pragraph);
+        idsearch.value = "";
+        console.log(pragraph);
+       return  document.body.style.backgroundColor = "blue";
+       });
+     }
+   }
+   deletButton();
   return (
     <div className="div2">
       <OrderResult/>
@@ -36,7 +68,7 @@ const TheVideos = ({ lik }) => {
         }
         }).map((lik, i) => {
         return (
-          <div className="allVideos" key={i}>
+          <div className="allVideos"  key={i}>
             <h2>{lik.title}</h2>
             <p>
               {" "}
@@ -49,10 +81,10 @@ const TheVideos = ({ lik }) => {
               className="btn btn-primary"
             >
               {" "}
-              like{""}:{allVoted}
-            </button>    
-            <ReactPlayers   orl={lik.url} />
-          
+              like {<i class="fas fa-thumbs-up"></i>} :{allVoted}
+            </button>   
+            {<ReactPlayers   orl={lik.url} />}
+
             <div className="firstP">  {<NewVideos />} </div>
                </div>
                

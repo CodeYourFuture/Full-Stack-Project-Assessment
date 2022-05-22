@@ -82,7 +82,7 @@ if(newClick === 1){
         <button  type="submit" id="firstButton" className="btn btn-primary" >
           Cancel
         </button>
-        <button type="submit" id="firstButton" className="btn btn-primary" >
+        <button type="submit" id="secondButton" className="btn btn-primary" >
           Add
         </button>
         </form>
