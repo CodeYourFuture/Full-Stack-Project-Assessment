@@ -27,9 +27,10 @@ const EmbedVideos = ( { ilk }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         ></iframe><br/>
-        <button onClick={buttonDislike}   id="clickButton"  className="btn btn-primary">dislike  {<i class="fas fa-thumbs-up"></i>} : {allVoteDislike}</button><br/>
-       <br/>
-         {<NewVideos />}
+        <button onClick={buttonDislike}   id="clickButton"  className="btn btn-danger">dislike  {<i class="fas fa-thumbs-up"></i>} : {allVoteDislike}</button><br/><br/>
+         <div>
+           <NewVideos />
+           </div>
 
     </div>
   );

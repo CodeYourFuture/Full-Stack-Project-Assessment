@@ -12,7 +12,7 @@ const ReactPlayers = ({ orl }) => {
     <span className="spanCard">
       <ReactPlayer controls url={orl} width="480px" height="240px" />
 
-      <button onClick={buttonClick} type="button" className="btn btn-primary">
+      <button onClick={buttonClick} type="button" className="btn btn-danger">
         Dislike {<i class="fas fa-thumbs-up"></i>} : {addVoted}
 
       </button>
