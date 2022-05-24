@@ -1,3 +1,56 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  margin: 40px;
+}
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  width: 30%;
+  align-items: center;
+}
+
+.id {
+  margin: 0;
+  width: 100%;
+  background-color: red;
+}
+
+h3 {
+  word-wrap: normal;
+}
+
+.bottom-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 4px;
+}
+
+.bottom-panel button {
+  color: white;
+  background-color: red;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.like {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+}
+.title {
+  min-height: 90px;
+}
