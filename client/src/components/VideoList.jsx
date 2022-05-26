@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import VideoCard from './VideoCard';
-import data from './data/exampleresponse.json'
+import data from '../data/exampleresponse.json'
 
 const VideoList = () => {
   const [videos, setVideos] = useState(data)

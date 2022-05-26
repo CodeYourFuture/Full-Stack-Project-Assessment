@@ -1,6 +1,7 @@
 import React from 'react'
 import VideoList from './components/VideoList';
 import './App.css'
+import AddVideo from './components/AddVideo';
 
 function App() {
    
@@ -10,6 +11,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="root">
+        <AddVideo />
         <VideoList />
       </div>
     </div>
