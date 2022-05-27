@@ -1,23 +1,30 @@
 .App {
-  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-header {
   margin: 40px;
 }
+
 .root {
   display: flex;
+  width: 96%;
   flex-wrap: wrap;
-  column-gap: 20px;
+  /* column-gap: 20px; */
   row-gap: 40px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .card {
   display: flex;
   width: 30%;
   align-items: center;
+  text-align: center;
 }
 
 .id {
@@ -51,6 +58,29 @@ h3 {
   justify-content: space-between;
   width: 100px;
 }
+
 .title {
   min-height: 90px;
+}
+
+.add-video {
+  display: flex;
+  margin: 30px;
+  text-align: left;
+  align-self: flex-start;
+}
+
+iframe {
+  width: 100%;
+}
+
+@media screen and (max-width:1240px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 96%;
+  }
+
 }

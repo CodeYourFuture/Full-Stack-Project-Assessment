@@ -10,8 +10,8 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <div className="root">
         <AddVideo />
+      <div className="root">
         <VideoList />
       </div>
     </div>
