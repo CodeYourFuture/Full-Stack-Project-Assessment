@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.video-container {
+  border: 1px solid green;
+}
