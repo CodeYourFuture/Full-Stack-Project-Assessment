@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:wght@300;600;800&display=swap');
-
+/* 
 .App {
   text-align: center;
-}
+} */
 
 /* Header */
 
@@ -14,7 +14,7 @@ header {
 
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  /* height: 100px; */
+
 }
 
 h1{
@@ -23,6 +23,42 @@ h1{
         font-family: 'Nunito Sans', sans-serif;
         font-weight: 700;
         font-style: italic;
+        text-align: center;
+}
+
+.form {
+  max-width: 400px;
+
+}
+
+input, label {
+  display: block;
+  padding: 10px;
+  
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.input,
+.buttons {
+
+  display: flex;
+  align-content: space-between;
+  justify-content: center;
+  gap: 15px;
+
+}
+
+button {
+  max-width: 80px;
+  padding: 10px;
+ 
 }
 .video-container {
   border: 1px solid green;
