@@ -1,0 +1,27 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./cl",
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erin-switchstitch/Full-Stack-Project-Assessment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erin-switchstitch/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/erin-switchstitch/Full-Stack-Project-Assessment#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "react-scripts": "^5.0.0"
+  }
+}
