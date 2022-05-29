@@ -5,3 +5,7 @@
 .video-container {
   border: 1px solid green;
 }
+
+.add-video-container {
+  border: 1px solid blue;
+}
