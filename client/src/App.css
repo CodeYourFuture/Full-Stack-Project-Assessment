@@ -25,6 +25,7 @@ body {
   /* font-family: 'Nunito Sans', sans-serif; */
   background: rgb(233, 231, 221);
   background: linear-gradient(16deg, rgba(233, 231, 221, 1) 2%, rgba(255, 255, 255, 0.6740896187576593) 87%);
+
   
 }
 
@@ -151,6 +152,26 @@ background: rgba(239, 131, 84, 1);
       align-items:baseline;
       gap: 15px;
 }
+
+#remove {
+  margin: 0 auto 50px;
+}
+
+iframe {
+  max-width: 100%;
+  margin: 50px 0;
+
+  box-shadow: rgba(0, 0, 0, 0.9) 0px 25px 20px -20px;
+
+  /* box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px; */
+}
+
+hr {
+      height: 10px;
+      border: 0;
+      box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    
+}
 @media only screen and (min-width: 600px) {
 
   /* Header */
@@ -158,11 +179,3 @@ background: rgba(239, 131, 84, 1);
     font-size: 30px;
   }
 }
-
-/* @media only screen and (min-width: 900px) {
-.flex{
-  display: flex;
-
-}
-
-} */
