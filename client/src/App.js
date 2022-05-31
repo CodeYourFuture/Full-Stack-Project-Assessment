@@ -1,9 +1,6 @@
 import "./App.css";
-// import exampleresponse from "./exampleresponse.json";
-// import data from "./data";
 import Header from "./components/Header";
 import Main from "./components/Main";
-// import Videos from "./components/Videos";
 
 // function Video() {
 //   const videoIdArray = [
@@ -57,7 +54,6 @@ function App() {
     <div className="App">
       <Header />
       <Main />
-      {/* <Videos /> */}
     </div>
   );
 }

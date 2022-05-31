@@ -4,7 +4,7 @@ import AddVideo from "./AddVideo";
 
 function Main() {
   return (
-    <main className="inputs-container">
+    <main>
       <Search />
       <AddVideo />
     </main>
