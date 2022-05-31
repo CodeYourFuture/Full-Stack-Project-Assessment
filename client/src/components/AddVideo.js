@@ -1,11 +1,15 @@
 import React from "react";
+import Videos from "./Videos";
 
 function AddVideo() {
+  //   function handleClick() {
+  //     console.log("button clicked");
+  //   }
   return (
-    <main>
+    <div>
       <div className="add-video-container">
-        <form className="form">
-          <div className="inputs">
+        <div className="form">
+          <div className="add-video-inputs">
             <div className="input">
               <label>title</label>
               <input type="text" placeholder="type title" />
@@ -20,9 +24,10 @@ function AddVideo() {
             <button>cancel</button>
             <button>add</button>
           </div>
-        </form>
+        </div>
       </div>
-    </main>
+      <Videos />
+    </div>
   );
 }
 

@@ -1,87 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:wght@300;600;800&display=swap');
+
+/* --space-cadet: #2D3142;
+silver: #BFC0C0;
+mandarin: #EF8354;
+black-coral: #4F5D75; */
+
+
 /* 
 .App {
   text-align: center;
 } */
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+}
+
+body {
+  width: 100%;
+  font-family: 'B612', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 /* Header */
-
 header {
- background: rgb(29, 10, 10);
-    background: radial-gradient(circle, rgba(29, 10, 10, 1) 36%, rgba(81, 41, 144, 1) 58%, rgba(70, 35, 117, 1) 78%, rgba(9, 144, 164, 0.9373949408865109) 91%);
   color: beige; 
-  padding: 80px 0;
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-
+  padding: 70px 15px;  
+  background: rgb(191, 192, 192);
+  background: linear-gradient(356deg, rgba(191, 192, 192, 1) 36%, rgba(239, 131, 84, 1) 91%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(191, 192, 192, 0.4) 0px 5px, rgba(191, 192, 192, 0.3) 0px 10px, rgba(191, 192, 192, 0.2) 0px 15px, rgba(191, 192, 192, 0.1) 0px 20px, rgba(191, 192, 192, 0.05) 0px 25px;
 }
 
 h1{
-  font-size: 20px;
-      font-family: 'B612', sans-serif;      
-        font-family: 'Nunito Sans', sans-serif;
-        font-weight: 700;
-        font-style: italic;
-        text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
 }
 
-.form {
-  max-width: 400px;
 
+@media only screen and (min-width: 600px) {
+
+  /* Header */
+  h1 {
+    font-size: 30px;
+  }
 }
+/* Inputs-container */
 
-input, label {
-  display: block;
-  padding: 10px;
-  
+.inputs-container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  width: 70%;
+display: flex;
+flex-direction: row;
+margin: auto;
 }
 
-.input,
-.buttons {
-
-  display: flex;
-  align-content: space-between;
-  justify-content: center;
-  gap: 15px;
-
+input,
+label {
+  padding: 10px;
 }
+
+ .input,
+ .buttons {
+   display: flex;
+   align-content: space-between;
+   justify-content: flex-end;
+   margin: 20px 0;
+   gap: 15px;
+   border: none;
+   font-family: 'Nunito Sans', sans-serif;
+ }
 
 button {
   max-width: 80px;
   padding: 10px;
- 
-}
-.video-container {
-  border: 1px solid green;
-}
-
-.add-video-container {
-  border: 1px solid blue;
-}
-
-
-.video-container{
-  /* max-width: 400px; */
-    height: auto;
-}
-iframe{
-max-width:fit-content
-} 
-
-@media screen and (min-width: 680px){
-  .videos-container{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+  cursor: pointer;
+  border: none;
+  background: rgb(45, 17, 122);
+  color: azure;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-top: 20px;
 }
