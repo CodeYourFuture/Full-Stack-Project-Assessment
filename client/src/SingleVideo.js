@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import './App.css'
 
-const SingleVideo = ({ index, video, videos, setVideos }) => {
+const SingleVideo = ({ index, video, videos, setVideos}) => {
   const videoId = video.url.slice(-11);
   const startingScore = video.rating;
   const [score, setScore] = useState(startingScore);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
+  console.log(video)
   const deleteVideo = () => {
     setVideos(videos.filter((video) => video.id !== videos[index].id));
     
   };
   return (
     <div>
-      <p>{video.title}</p>
+      <p className="video-title">{video.title}</p>
       <iframe
         width="560"
         height="315"
@@ -23,7 +24,7 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      {}
+      {video.dateAdded && <p>This video was uploaded on {video.dateAdded}</p>}
       <p>Votes: {score}</p>
       <button
         className={liked ? "liked" : "button"}

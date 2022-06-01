@@ -1,6 +1,31 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300;400&family=Tiro+Devanagari+Marathi&display=swap');
+
+/* font-family: 'Lobster', cursive;
+font-family: 'Raleway', sans-serif;
+font-family: 'Tiro Devanagari Marathi', serif; */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
 }
+
+.App {
+}
+
+/* FONTS */
+.page-title {
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  font-size: 5rem;
+}
+
+.video-title {
+  font-family: 'Tiro Devanagari Marathi', serif;
+  font-size: 2.5rem;
+}
+
+/* DISPLAY */
 
 .liked {
   background: greenyellow;
