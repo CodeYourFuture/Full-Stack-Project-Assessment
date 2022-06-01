@@ -1,11 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:wght@300;600;800&display=swap');
+
+/* --space-cadet: #2D3142;
+silver: #BFC0C0;
+mandarin: #EF8354;
+black-coral: #4F5D75; */
+
+/* General Styles */
+
+
 .App {
   text-align: center;
 }
 
-.video-container {
-  border: 1px solid green;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
 }
 
-.add-video-container {
-  border: 1px solid blue;
+body {
+  width: 100%;
+  font-family: 'B612', sans-serif;
+  /* font-family: 'Nunito Sans', sans-serif; */
+  background: rgb(233, 231, 221);
+  background: linear-gradient(16deg, rgba(233, 231, 221, 1) 2%, rgba(255, 255, 255, 0.6740896187576593) 87%);
+
+  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Header */
+header {
+  color: beige; 
+  padding: 100px 15px;  
+  background: rgb(191, 192, 192);
+  background: linear-gradient(356deg, rgba(191, 192, 192, 1) 36%, rgba(239, 131, 84, 1) 91%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(191, 192, 192, 0.4) 0px 5px, rgba(191, 192, 192, 0.3) 0px 10px, rgba(191, 192, 192, 0.2) 0px 15px, rgba(191, 192, 192, 0.1) 0px 20px, rgba(191, 192, 192, 0.05) 0px 25px;
+  background-image: url("./youtube-red.jpg");
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+h1{
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Search */
+.search {
+  width: 90%;
+  padding: 60px 0;
+  margin: 0 auto;
+}
+
+.search-input {
+  background: rgba(191, 192, 192, 0.3);
+  box-shadow: rgba(191, 192, 192, 0.4) 5px 5px, rgba(191, 192, 192, 0.3) 10px 10px, rgba(191, 192, 192, 0.2) 15px 15px, rgba(191, 192, 192, 0.1) 20px 20px, rgba(191, 192, 192, 0.05) 25px 25px;
+}
+
+
+.form {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 6px;
+  background: rgba(191, 192, 192, 0.3);
+  box-shadow: rgba(191, 192, 192, 0.4) 5px 5px, rgba(191, 192, 192, 0.3) 10px 10px, rgba(191, 192, 192, 0.2) 15px 15px, rgba(191, 192, 192, 0.1) 20px 20px, rgba(191, 192, 192, 0.05) 25px 25px;
+}
+
+.form-input {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  }
+
+  label {
+    width: 15%;
+   align-self: flex-end;  
+  }
+
+/* Main */
+
+main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.add-video-container > p {
+ text-align: center;
+}
+
+#btn-add-video {
+  margin: 0 auto;
+  width: 70px;
+  /* border-radius: 50%; */
+}
+.buttons {
+   display: flex;
+   align-content: space-between;
+   justify-content: flex-end;
+   gap: 15px;
+   border: none;
+   font-family: 'Nunito Sans', sans-serif;
+ }
+
+button {
+  display: block;
+  width: 80px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: rgba(239, 131, 84, 1);
+  color: azure;
+  /* font-family: ; */
+  border-radius: 4px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+
+
+.add {
+  background: rgba(79, 93, 117, 1);
+}
+
+.add:hover {
+  background: rgba(79, 93, 117, 0.7);
+    ;
+}
+.cancel {
+background: rgba(239, 131, 84, 1);
+}
+
+.cancel:hover {
+  background: rgba(239, 131, 84, 0.7);
+}
+
+.video {
+  width: 90%;
+  margin: 50px auto;
+}
+
+.votes {
+  margin: 0;
+  padding:0;
+  display: flex;
+    justify-content: center;
+      align-items:baseline;
+      gap: 15px;
+}
+
+#remove {
+  margin: 0 auto 50px;
+}
+
+iframe {
+  max-width: 100%;
+  margin: 50px 0;
+
+  box-shadow: rgba(0, 0, 0, 0.9) 0px 25px 20px -20px;
+
+  /* box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px; */
+}
+
+hr {
+      height: 10px;
+      border: 0;
+      box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    
+}
+@media only screen and (min-width: 600px) {
+
+  /* Header */
+  h1 {
+    font-size: 30px;
+  }
 }
