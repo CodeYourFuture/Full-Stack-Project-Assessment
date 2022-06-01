@@ -9,7 +9,7 @@ function AddVideo() {
   return (
     <div>
       <div className="add-video-container">
-        <p>Add video</p>
+        <button id="btn-add-video">Add video</button>
         <Form />
       </div>
       <Videos />

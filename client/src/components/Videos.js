@@ -11,6 +11,7 @@ function Videos() {
 function Video(props) {
   return (
     <div className="video">
+      <hr />
       <h2>{props.item.title}</h2>
       <div className="votes">
         <button>up</button>
@@ -31,8 +32,6 @@ function Video(props) {
       </div>
 
       <button id="remove">remove</button>
-
-      <hr />
     </div>
   );
 }

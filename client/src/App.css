@@ -40,11 +40,15 @@ input {
 /* Header */
 header {
   color: beige; 
-  padding: 70px 15px;  
+  padding: 100px 15px;  
   background: rgb(191, 192, 192);
   background: linear-gradient(356deg, rgba(191, 192, 192, 1) 36%, rgba(239, 131, 84, 1) 91%);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   box-shadow: rgba(191, 192, 192, 0.4) 0px 5px, rgba(191, 192, 192, 0.3) 0px 10px, rgba(191, 192, 192, 0.2) 0px 15px, rgba(191, 192, 192, 0.1) 0px 20px, rgba(191, 192, 192, 0.05) 0px 25px;
+  background-image: url("./youtube-red.jpg");
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1{
@@ -98,6 +102,11 @@ main {
  text-align: center;
 }
 
+#btn-add-video {
+  margin: 0 auto;
+  width: 70px;
+  /* border-radius: 50%; */
+}
 .buttons {
    display: flex;
    align-content: space-between;
