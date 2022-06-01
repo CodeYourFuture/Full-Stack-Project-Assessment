@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './App.css'
 
 const SingleVideo = ({ index, video, videos, setVideos }) => {
   const videoId = video.url.slice(-11);
   const startingScore = video.rating;
   const [score, setScore] = useState(startingScore);
-  // let score = video.rating
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const deleteVideo = () => {
     setVideos(videos.filter((video) => video.id !== videos[index].id));
+    
   };
   return (
     <div>
@@ -28,7 +28,7 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
       <button
         className={liked ? "liked" : "button"}
         onClick={
-          () => /* setScore((score) => */ {
+          () => {
             if (score < startingScore) {
               setScore((score) => score);
             } else if (score === startingScore) {
@@ -38,7 +38,7 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
               setLiked(false);
               setScore((score) => (score -= 1));
             }
-          } /* ) */
+          }
         }
       >
         Up vote
@@ -46,7 +46,7 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
       <button
         className={disliked ? "disliked" : "button"}
         onClick={
-          () => /* setScore((score) => */ {
+          () => {
             if (score > startingScore) {
               setScore((score) => score);
             } else if (score === startingScore) {
@@ -56,7 +56,7 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
               setDisliked(false);
               setScore((score) => (score += 1));
             }
-          } /* ) */
+          } 
         }
       >
         Down vote
