@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import VideoCard from './VideoCard'
+import AddVideo from './AddVideo'
 import data from '../data/exampleresponse.json'
 
 const VideoList = () => {
@@ -9,9 +10,13 @@ const VideoList = () => {
   }
   return (
     <>
-      {videos.map((video) => (
-        <VideoCard videoData={video} removeHandler={removeHandler} />
-      ))}
+      <AddVideo setVideos={setVideos} videos={videos}/>
+      <div className="root">
+        {videos.map((video, index) => (
+          <VideoCard videoData={video} removeHandler={removeHandler} key={index}/>
+        ))}
+
+      </div>
     </>
   )
 }

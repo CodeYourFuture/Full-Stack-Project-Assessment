@@ -30,7 +30,8 @@
 .id {
   margin: 0;
   width: 100%;
-  background-color: red;
+  background-color: #860f02;
+  color: #ffff;
 }
 
 h3 {
@@ -46,8 +47,8 @@ h3 {
 }
 
 .bottom-panel button {
-  color: white;
-  background-color: red;
+  color: #ffff;
+  background-color: rgb(108, 0, 0);
   border: 0;
   border-radius: 5px;
   padding: 5px 10px;
@@ -61,6 +62,8 @@ h3 {
 
 .title {
   min-height: 90px;
+  background-color: #e2bfbf;
+  width: 100%;
 }
 
 .add-video {
@@ -83,4 +86,9 @@ iframe {
     width: 96%;
   }
 
+}
+
+.btn-success {
+  background-color: #00620a;
+  color: #fff;
 }

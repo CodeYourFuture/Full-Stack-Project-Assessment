@@ -1,11 +1,29 @@
 import React, { useState } from 'react'
 
-const AddVideo = ({ handleSubmitEvent }) => {
-  const [showNew, setShowNew] = useState(false)
-  const showAddNew = () => {
-    setShowNew(!showNew)
+const AddVideo = ({ setVideos, videos }) => {
+  function useFormState(initial) {
+    const [value, setValue] = useState(initial)
+    function setEventValue(event) {
+      setValue(event.target.value)
+    }
+    return [value, setEventValue]
   }
+  const [title, setTitle] = useFormState('')
+  const [url, setUrl] = useFormState('')
 
+  const handleSubmitEvent = (submitEvent) => {
+    submitEvent.preventDefault()
+    const id = Math.max(...videos.map((v) => v.id)) + 1
+    console.log(videos)
+    const newVideo = {
+      id: id,
+      title: title,
+      url: url,
+      rating: 0,
+    }
+    console.log(newVideo)
+    setVideos((previous) => previous.concat(newVideo))
+  }
   return (
     <>
       <div className="add-video">
@@ -30,6 +48,7 @@ const AddVideo = ({ handleSubmitEvent }) => {
                   name="title"
                   id="title"
                   className="form-control"
+                  onChange={setTitle}
                 />
               </div>
               <div className="col">
@@ -39,6 +58,7 @@ const AddVideo = ({ handleSubmitEvent }) => {
                   name="url"
                   id="url"
                   className="form-control"
+                  onChange={setUrl}
                 />
               </div>
               <button type="submit" className="btn btn-primary d-block">
@@ -47,38 +67,6 @@ const AddVideo = ({ handleSubmitEvent }) => {
             </div>
           </form>
         </div>
-      </div>
-      <div className="add-video">
-        <button className="btn btn-success mr-4" onClick={showAddNew}>
-          Add Video
-        </button>
-        {showNew && (
-            <form onSubmit={handleSubmitEvent}>
-              <div className="row align-items-end">
-                <div className="col">
-                  <label htmlFor="title">Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    className="form-control"
-                  />
-                </div>
-                <div className="col">
-                  <label htmlFor="url">Url</label>
-                  <input
-                    type="text"
-                    name="url"
-                    id="url"
-                    className="form-control"
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary d-block">
-                  Save
-                </button>
-              </div>
-            </form>
-        )}
       </div>
     </>
   )
