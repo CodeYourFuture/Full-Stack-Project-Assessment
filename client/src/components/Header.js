@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <header>
-      <h1>Video Recommendation</h1>
+      <h1>Your YouTube Videos</h1>
     </header>
   );
 }
