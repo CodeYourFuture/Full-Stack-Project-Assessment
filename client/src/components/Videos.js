@@ -11,16 +11,34 @@ function Videos() {
 }
 
 function Video(props) {
+  const [count, setCount] = React.useState(props.item.rating);
+
+  function add() {
+    setCount(count + 1);
+  }
+
+  function subtract() {
+    setCount(count - 1);
+  }
   return (
     <div className="video">
       <hr />
       <h2>{props.item.title}</h2>
       <div className="votes">
-        <img src={smileyFace} alt="up vote" id="smiley-face" />
-        <button id="upvote">up vote</button>
-        <p>{props.item.rating}</p>
-        <button id="downvote">down vote</button>
-        <img src={downVoteFace} alt="down vote" id="down-vote-face" />
+        <div className="vote">
+          <img src={smileyFace} alt="up vote" id="smiley-face" />
+          <button id="upvote" onClick={add}>
+            up vote
+          </button>
+        </div>
+
+        <p className="rating">{count}</p>
+        <div className="vote">
+          <img src={downVoteFace} alt="down vote" id="down-vote-face" />
+          <button id="downvote" onClick={subtract}>
+            down vote
+          </button>
+        </div>
       </div>
 
       <div>
