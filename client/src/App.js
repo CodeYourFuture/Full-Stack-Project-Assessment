@@ -6,28 +6,41 @@ import data from "./exampleresponse.json";
 
 
 function App() {
+ 
   const [allVideos, setAllVideos] = useState(data);
+  const [visible, setVisible] = useState(false);
 
   // A function to delete a video
   const deleteVideos = (arrVideo) => {
-    setAllVideos(
-      allVideos.filter((v) => {
-        return v !== arrVideo;
-      })
-    );
+    setAllVideos((videos) => {
+      return videos.filter((v) => {
+        return v.id !== arrVideo.id;
+      });
+    });
   };
- 
+  
 
   return (
     <div className="App">
-
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <NewVideos myAllVideos={myAllVideos}/>
-      
-      {allVideos.map((video, i) => (
-        <RenderVideos key={i} video={video} deleteVideos={deleteVideos} />
+      <h2 className="add-video-title" onClick={()=>setVisible(true)}>
+        Add Video
+      </h2>
+
+      { visible && <NewVideos
+        myAllVideos={allVideos}
+        setAllVideos={setAllVideos}
+        setVisible={setVisible}
+      />}
+
+      {allVideos.map((video) => (
+        <RenderVideos
+          key={video.id}
+          video={video}
+          deleteVideos={deleteVideos}
+        />
       ))}
     </div>
   );
