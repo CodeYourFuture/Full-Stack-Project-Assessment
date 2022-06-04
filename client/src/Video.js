@@ -3,15 +3,20 @@ import videos from "./exampleresponse.json";
 import Votes from "./Votes";
 
 function Video() {
+  const defaultList = videos;
+  const [videoList, setVideoList] = useState(defaultList);
+
   let videoId = "";
 
-  function removeVideo() {
-    console.log("Video remove button clicked");
+  function removeVideo(e) {
+    const selectedVideo = e.target.selected;
+
+    setVideoList(videoList.filter((video) => video.id !== selectedVideo));
   }
 
   return (
     <div>
-      {videos.map((video, index) => {
+      {videoList.map((video, index) => {
         videoId = video.url.slice(-11);
 
         return (
@@ -24,9 +29,11 @@ function Video() {
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
+              allowFullscreen
             ></iframe>
-            <button>Remove me</button>
+            <button selected={video.id} onClick={removeVideo}>
+              Remove me
+            </button>
             <Votes data={video.rating} />
           </div>
         );
