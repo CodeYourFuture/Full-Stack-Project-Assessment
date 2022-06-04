@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Search from "./Search";
+import AddVideo from "./AddVideo";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         </header>
         <main>
           <div>
+            <AddVideo/>
            <Search/> 
           </div>
           
