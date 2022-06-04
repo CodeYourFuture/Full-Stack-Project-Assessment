@@ -1,3 +1,60 @@
 .App {
   text-align: center;
 }
+
+.formDiv {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form {
+  margin: auto;
+}
+
+.formInput {
+  min-width: 380px;
+  size: 100;
+}
+
+.formLabel {
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  margin: auto;
+}
+
+.vidSize {
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 560px;
+  min-width: 28%;
+  background-color: lightgrey;
+}
+
+p {
+  font-size: 20px;
+}
+
+.thumbs {
+  font-size: 30px;
+}
+
+.button {
+  border: solid 2px black;
+  border-radius: 4px;
+  background-color: lightblue;
+  color: black;
+  width: 75px;
+  height: 50px;
+}
+
+.button:hover {
+  background-color: skyblue;
+  border: solid 1px black;
+  color: red;
+}
+
+.h1 {
+  font-size: 25px;
+}
