@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
+import VideoList from "./VideoList";
 
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
             <AddVideo/>
            <Search/> 
           </div>
-          
+          <div>
+            <VideoList/>
+          </div>
         </main>
       </div>
       
