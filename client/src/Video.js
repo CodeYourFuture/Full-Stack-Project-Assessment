@@ -17,7 +17,7 @@ function Video(props) {
 
     return (
       <div>
-        <h4>{video.title}</h4>
+        <h5>{video.title}</h5>
         <iframe
           width="{560/1.5}"
           height="{315/1.5}"
