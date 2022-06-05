@@ -70,10 +70,8 @@ export default function App(props) {
                 </div>
               </div>
 
-              {/*  value={props.searchTerm}(search component)= searchTerm(state  variable ) */}
-
               <div className="col-md mt-3 ">
-                {videos.length > 0 && //if it exists , empty array is still true
+                {videos.length > 0 &&
                   videos
                     .sort((a, b) => b.rating - a.rating)
                     .filter(({ title }) =>
@@ -121,7 +119,3 @@ export default function App(props) {
     </IconContext.Provider>
   );
 }
-
-/*
-    <Search searchTerm={searchTerm} handleSearch={handleSearch} />{" "}
-      value={props.searchTerm}(search component)= searchTerm(state  variable ) */

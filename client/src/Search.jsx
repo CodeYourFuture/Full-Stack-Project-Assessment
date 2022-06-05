@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-//import data from "./data.json";
-import { FaThumbsUp, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 export default function Search(props) {
   return (
     <div className="col-md mt-3">
       <div className="search">
-        
         <div className="search-row mb-3 search-input">
           <input
             className="form-control"

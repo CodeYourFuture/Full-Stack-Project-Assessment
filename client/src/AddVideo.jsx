@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-//import data from "./data.json";
 import ButtonAddVideo from "./ButtonAddVideo";
 
 export default function AddVideo(props) {
@@ -22,8 +21,8 @@ export default function AddVideo(props) {
               title: addTitle,
               url: addUrl,
             });
-            setAddTitle(""); //clear input after sending data
-            setAddUrl(""); //clear input after sending data
+            setAddTitle(""); 
+            setAddUrl(""); 
           }}
         >
           <label htmlFor="addTitle">Title</label>
