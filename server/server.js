@@ -81,6 +81,8 @@ app.get("/videos", (req, res) => {
 
 app.delete("/deletedvideo/:id", (req, res) => {
   const { id } = req.params;
-  const remainedVideos = videos.filter((video) => video.id !== id);
-  res.status(204).json(remainedVideos);
+
+  videos = videos.filter((video) => video.id != id);
+
+  res.json(videos);
 });

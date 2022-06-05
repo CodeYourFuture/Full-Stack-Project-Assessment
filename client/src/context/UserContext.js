@@ -4,6 +4,8 @@ const UserContext = createContext({
   videoData: [],
   setVideoData: () => {},
   deleteHandler: () => {},
+  newVideo: false,
+  setNewVideo: () => {},
 });
 
 export default UserContext;
