@@ -13,7 +13,6 @@ code {
 }
 
 .container {
-  /* border: 2px black solid; */
   margin-top: 30px;
 }
 
@@ -24,6 +23,13 @@ code {
 }
 
 .form-field {
-  margin: 10px 0px;
   padding: 0px 5px 0px 5px;
+}
+
+.votes {
+  /* border: 2px black solid; */
+}
+
+.removeButton {
+  /* border: 2px black solid; */
 }

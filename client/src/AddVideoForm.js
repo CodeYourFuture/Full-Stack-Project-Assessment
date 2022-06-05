@@ -22,6 +22,7 @@ function AddVideoForm() {
         <div class="col-3 form">
           <form>
             <div class="row">
+              <label>Title:</label>
               <input
                 class="form-field"
                 id="form-title"
@@ -32,6 +33,8 @@ function AddVideoForm() {
               />
             </div>
             <div class="row">
+              <label>URL:</label>
+
               <input
                 class="form-field"
                 id="form-url"

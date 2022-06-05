@@ -11,11 +11,11 @@ function Votes({ data }) {
     setVote((vote) => vote - 1);
   }
   return (
-    <div>
-      <p>Votes: {vote} </p>
+    <div class="votes">
       <button class="btn btn-outline-secondary" onClick={voteUp}>
         Up Vote
       </button>
+      <p>Votes: {vote} </p>
       <button class="btn btn-outline-secondary" onClick={voteDown}>
         Down Vote
       </button>
