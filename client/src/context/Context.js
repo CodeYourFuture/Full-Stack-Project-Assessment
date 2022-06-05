@@ -7,20 +7,42 @@ const Context = ({ children }) => {
   useEffect(() => {
     const getVideosData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/videos");
+        const response = await fetch("http://localhost:5000/videos", {
+          method: "GET",
+          credentials: "omit",
+        });
         const myData = await response.json();
         setVideoData(myData);
-        console.log("done");
       } catch (error) {
         console.log(error);
       }
     };
-    // videoData.length === 0 && getVideosData();
+
     getVideosData();
   }, [setVideoData]);
 
+  const deleteHandler = async (id) => {
+    const deleteOpt = {
+      method: "DELETE",
+      body: "",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await fetch(
+        `http://localhost:5000/deletedvideo/${id}`,
+        deleteOpt
+      );
+      const remainedData = await response.json();
+      setVideoData(remainedData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ videoData, setVideoData }}>
+    <UserContext.Provider value={{ videoData, setVideoData, deleteHandler }}>
       {children}
     </UserContext.Provider>
   );

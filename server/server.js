@@ -14,62 +14,62 @@ let videos = [
   {
     id: 523523,
     title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    url: "http://www.youtube.com/embed/dQw4w9WgXcQ",
     rating: 23,
   },
   {
     id: 523427,
     title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
+    url: "http://www.youtube.com/embed/HerCR8bw_GE",
     rating: 230,
   },
   {
     id: 82653,
     title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
+    url: "http://www.youtube.com/embed/FUeyrEN14Rk",
     rating: 2111,
   },
   {
     id: 858566,
     title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
+    url: "http://www.youtube.com/embed/xbs7FT7dXYc",
     rating: 11,
   },
   {
     id: 453538,
     title:
       "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
+    url: "http://www.youtube.com/embed/4As0e4de-rI",
     rating: 3211,
   },
   {
     id: 283634,
     title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
+    url: "http://www.youtube.com/embed/gB1F9G0JXOo",
     rating: 211,
   },
   {
     id: 562824,
     title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
+    url: "http://www.youtube.com/embed/RzWB5jL5RX0",
     rating: 111,
   },
   {
     id: 442452,
     title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
+    url: "http://www.youtube.com/embed/U4ogK0MIzqk",
     rating: 671,
   },
   {
     id: 536363,
     title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
+    url: "http://www.youtube.com/embed/X-iSQQgOd1A",
     rating: 76,
   },
   {
     id: 323445,
     title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
+    url: "http://www.youtube.com/embed/ZacOS8NBK6U",
     rating: 73,
   },
 ];
@@ -77,4 +77,10 @@ let videos = [
 app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.json(videos);
+});
+
+app.delete("/deletedvideo/:id", (req, res) => {
+  const { id } = req.params;
+  const remainedVideos = videos.filter((video) => video.id !== id);
+  res.status(204).json(remainedVideos);
 });
