@@ -17,27 +17,38 @@ function AddVideoForm() {
   }
 
   return (
-    <div>
-      <form>
-        <input
-          id="form-title"
-          className="form-field"
-          type="text"
-          placeholder="Video title"
-          name="videoTitle"
-        />
-        <input
-          id="form-url"
-          className="form-field"
-          type="text"
-          placeholder="Video URL"
-          name="videoUrl"
-        />
-        <button type="button" onClick={addVideo}>
-          Submit video
-        </button>
-      </form>
-      <Video data={videoList} setter={setVideoList} />;
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <form>
+            <input
+              id="form-title"
+              className="form-field"
+              type="text"
+              placeholder="Video title"
+              name="videoTitle"
+            />
+            <input
+              id="form-url"
+              className="form-field"
+              type="text"
+              placeholder="Video URL"
+              name="videoUrl"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onClick={addVideo}
+            >
+              Submit video
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col">
+        <Video data={videoList} setter={setVideoList} />;
+      </div>
     </div>
   );
 }

@@ -13,8 +13,12 @@ function Votes({ data }) {
   return (
     <div>
       <p>Votes: {vote} </p>
-      <button onClick={voteUp}>Up Vote</button>
-      <button onClick={voteDown}>Down Vote</button>
+      <button class="btn btn-outline-secondary" onClick={voteUp}>
+        Up Vote
+      </button>
+      <button class="btn btn-outline-secondary" onClick={voteDown}>
+        Down Vote
+      </button>
     </div>
   );
 }
