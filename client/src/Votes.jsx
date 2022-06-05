@@ -12,11 +12,11 @@ function Votes({ data }) {
   }
   return (
     <div class="votes">
-      <button class="btn btn-outline-secondary" onClick={voteUp}>
+      <button class="btn btn-outline-secondary vote-buttons" onClick={voteUp}>
         Up Vote
       </button>
       <p>Votes: {vote} </p>
-      <button class="btn btn-outline-secondary" onClick={voteDown}>
+      <button class="btn btn-outline-secondary vote-buttons" onClick={voteDown}>
         Down Vote
       </button>
     </div>

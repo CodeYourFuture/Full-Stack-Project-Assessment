@@ -16,28 +16,28 @@ function Video(props) {
     videoId = video.url.slice(-11);
 
     return (
-      <div>
-        <h5>{video.title}</h5>
-        <iframe
-          width="560"
-          height="315"
-          src={"https://www.youtube.com/embed/" + videoId}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+      <div class="content">
+        <h5 class="title">{video.title}</h5>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src={"https://www.youtube.com/embed/" + videoId}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <Votes data={video.rating} />
         <div class="removeButton">
-          <div class="col">
-            <button
-              class="btn btn-outline-danger"
-              selected={video.id}
-              onClick={removeVideo}
-            >
-              Remove video
-            </button>
-            <Votes data={video.rating} />
-          </div>
+          <button
+            class="btn btn-outline-danger"
+            selected={video.id}
+            onClick={removeVideo}
+          >
+            Remove video
+          </button>
         </div>
       </div>
     );

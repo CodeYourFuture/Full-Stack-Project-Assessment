@@ -27,9 +27,36 @@ code {
 }
 
 .votes {
-  /* border: 2px black solid; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 10px;
 }
 
 .removeButton {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: center;
+  padding-bottom: 60px;
+
   /* border: 2px black solid; */
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+}
+
+.vote-buttons {
+  margin: 0px 10px;
+}
+
+.votes p {
+  font-size: 20px;
 }
