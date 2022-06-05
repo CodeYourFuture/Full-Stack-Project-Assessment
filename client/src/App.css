@@ -1,3 +1,12 @@
-.App {
+h1 {
   text-align: center;
+}
+button {
+  border: none;
+  background-color: white;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
 }

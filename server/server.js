@@ -1,15 +1,58 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const cors = require("cors");
+let videos = require("./exampleresponse.json");
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
-
+app.use(express.json());
+app.use(cors());
 // GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+app.get("/api/", (req, res) => {
+  res.json(videos);
 });
+
+app.delete("/api/:id", (req, res) => {
+  const requestedID = Number(req.params.id);
+  const found = videos.some((video) => video.id === requestedID);
+  if (found) {
+    const deletedVideoTitle = videos.filter(
+      (video) => video.id === requestedID
+    )[0].title;
+    videos = videos.filter((video) => video.id !== requestedID);
+    res.json({
+      msg: `Video with title: ${deletedVideoTitle} has been deleted`,
+    });
+  } else {
+    res
+      .status(404)
+      .json({ msg: `Video with title: ${deletedVideoTitle} not found` });
+  }
+});
+
+app.post("/api/", (req, res) => {
+  const { title, url } = req.body;
+  const newVideo = {
+    id: videos.length + 1,
+    title: title.charAt(0).toUpperCase() + title.slice(1),
+    url: url,
+    rating: 0,
+  };
+  const isEmptyKey = Object.values(newVideo).some(
+    (x) => x === null || x === ""
+  );
+  const errorMessage = {};
+  if (isEmptyKey) {
+    errorMessage.msgMissingKey = "Some information is missing";
+    res.status(400).json(errorMessage);
+  } else {
+    {
+      videos.push(newVideo);
+      return res.json({
+        msg: `You have submitted new video with title: ${newVideo.title}.`,
+        videos,
+      });
+    }
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
