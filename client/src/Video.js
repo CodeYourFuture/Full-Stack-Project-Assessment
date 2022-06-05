@@ -1,22 +1,20 @@
-import React, { useState } from "react";
-import videos from "./exampleresponse.json";
+import React from "react";
 import Votes from "./Votes";
 
-function Video() {
-  const defaultList = videos;
-  const [videoList, setVideoList] = useState(defaultList);
+function Video(props) {
+  console.log(props.data);
 
   let videoId = "";
 
   function removeVideo(e) {
     const selectedVideo = e.target.selected;
 
-    setVideoList(videoList.filter((video) => video.id !== selectedVideo));
+    props.setter(props.data.filter((video) => video.id !== selectedVideo));
   }
 
   return (
     <div>
-      {videoList.map((video, index) => {
+      {props.data.map((video, index) => {
         videoId = video.url.slice(-11);
 
         return (
@@ -29,10 +27,10 @@ function Video() {
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullscreen
+              allowFullScreen
             ></iframe>
             <button selected={video.id} onClick={removeVideo}>
-              Remove me
+              Remove video
             </button>
             <Votes data={video.rating} />
           </div>
