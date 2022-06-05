@@ -1,32 +1,33 @@
-import React from "react";
-import data from "../exampleresponse.json";
 import Votes from "./Votes";
+import DeleteButton from "./DeleteButton";
 
-const Video = () => {
-  const videoData = data;
-  console.log(videoData);
+const VideoCard = (props) => {
+  const { data, setData } = props;
+  console.log(data);
 
   return (
-    <div>
-      {videoData.map((item) => {
+    <div className="video-container">
+      {data.map((item, index) => {
         return (
-          <div>
+          <div className="video-card">
             <h3>{item.title}</h3>
-
             <iframe
-              width="560"
-              height="315"
+              width="440"
+              height="260"
               src={`https://www.youtube.com/embed/${item.url.slice(-11)}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <Votes />
+            <div className="buttons-div">
+              <Votes />
+              <DeleteButton index={index} data={data} setData={setData} />
+            </div>
           </div>
         );
       })}
     </div>
   );
 };
-export default Video;
+export default VideoCard;

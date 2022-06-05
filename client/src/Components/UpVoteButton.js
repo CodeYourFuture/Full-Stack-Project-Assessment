@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 const UpVoteButton = (props) => {
   const { counter, setCounter } = props;
   const onClickHandler = () => {
@@ -6,9 +9,9 @@ const UpVoteButton = (props) => {
     });
   };
   return (
-    <div>
-      <button onClick={onClickHandler}>Like</button>
-    </div>
+    <button className="vote-button" onClick={onClickHandler}>
+      <FontAwesomeIcon icon={faHeart} />
+    </button>
   );
 };
 export default UpVoteButton;

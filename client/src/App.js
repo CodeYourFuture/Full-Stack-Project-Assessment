@@ -1,13 +1,26 @@
 import "./App.css";
-import Video from "./Components/Video.js";
+import VideoCard from "./Components/VideoCard";
+import Header from "./Components/Header";
+import AddVideo from "./Components/AddVideo";
+import Data from "./exampleresponse.json";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [data, setData] = useState(Data);
+  console.log(data);
+  useEffect(() => {
+    setData(data);
+  }, [data]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <Video />
+      <Header />
+      <img
+        alt="cow"
+        src="https://www.redefinemeat.com/uk/wp-content/uploads/2022/04/APNG-3.png"
+      ></img>
+      <AddVideo data={data} setData={setData} />
+      <VideoCard data={data} setData={setData} />
     </div>
   );
 }

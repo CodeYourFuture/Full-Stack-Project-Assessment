@@ -1,3 +1,51 @@
+:root {
+  --background: rgb(255, 255, 255);
+}
 .App {
+  font-family: "Montserrat", sans-serif;
   text-align: center;
+  background-color: var(--background);
+  font-weight: 600;
+}
+iframe {
+  border-radius: 15px;
+}
+h1 {
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 700;
+  font-size: 3.5rem;
+  padding: 2rem 0 2rem 0;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+p {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.video-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.video-card {
+  width: 50%;
+  padding: 1rem;
+}
+
+.votes-div {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}
+.buttons-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.vote-button {
 }

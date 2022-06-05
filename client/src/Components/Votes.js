@@ -6,10 +6,10 @@ const Votes = () => {
   const [counter, setCounter] = useState(0);
 
   return (
-    <div>
+    <div className="votes-div">
       <p>{counter}</p>
-      <DownVoteButton counter={counter} setCounter={setCounter} />
       <UpVoteButton counter={counter} setCounter={setCounter} />
+      <DownVoteButton counter={counter} setCounter={setCounter} />
     </div>
   );
 };
