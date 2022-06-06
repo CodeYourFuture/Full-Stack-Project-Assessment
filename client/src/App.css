@@ -1,3 +1,51 @@
 .App {
   text-align: center;
 }
+
+.form-container {
+  max-width: 600px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 10px 0;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  margin: 40px auto;
+  max-width: 450px;
+  padding: 5px 0;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.wrapper:hover {
+  background-color: rgba(216, 191, 245, 0.466);
+}
+
+button {
+  margin: 4px;
+  padding: 8px 15px;
+  border: 1px solid rgb(58, 58, 58);
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+}
+/* 
+@media only screen and (min-width: 800px){
+.container{
+  display:flex;
+  flex-direction: row;
+}
+
+.wrapper{
+  margin: 10px;
+}
+} */
