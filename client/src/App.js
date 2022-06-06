@@ -1,13 +1,17 @@
+import React from "react";
+
+import Header from "./Components/Header";
+import Videos from "./Components/Videos";
+
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <Videos />
     </div>
   );
-}
+};
 
 export default App;
