@@ -5,18 +5,6 @@ import axios from "axios";
 
 function VideosContainer() {
   const [videos, setVideos] = useState([]);
-  function handleRemoveItem(clickedId) {
-    axios.delete(`/api/${clickedId}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
-      axios({
-        method: "get",
-        url: "/api",
-      }).then((response) => {
-        setVideos(response.data);
-      });
-    });
-  }
 
   useEffect(() => {
     axios({
@@ -35,7 +23,6 @@ function VideosContainer() {
             <Video
               key={video.id}
               video={video}
-              handleClick={handleRemoveItem}
             ></Video>
           );
         })}

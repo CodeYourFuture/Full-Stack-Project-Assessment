@@ -4,9 +4,29 @@ import {
   BsFillHandThumbsUpFill,
   BsFillHandThumbsDownFill,
 } from "react-icons/bs";
+import axios from "axios";
 
-function Video({ video, handleClick }) {
-  const [rating, setRating] = useState(video.rating);
+function Video({ video }) {
+  let [newRating, setNewRating] = useState(video.rating);
+
+  function handleRemoveItem(clickedId) {
+    axios
+      .delete(`/api/${clickedId}`)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function updateRating(id, vote) {
+    const updatedVotes = newRating + vote;
+    setNewRating(updatedVotes);
+    axios
+      .put(`/api/${id}/`, { rating: updatedVotes })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <li className="col-sm-6">
@@ -25,29 +45,23 @@ function Video({ video, handleClick }) {
         ></iframe>
         <div className="d-flex justify-content-center">
           <button>
-            <BsFillHandThumbsUpFill
-              onClick={() => {
-                setRating(rating + 1);
-              }}
-            />
+            <BsFillHandThumbsUpFill onClick={() => updateRating(video.id, 1)} />
             <span className="sr-only">Vote Up</span>
           </button>
           <p style={{ marginBottom: 0 }} className="card-text">
-            Rating: {rating}
+            Rating: {video.rating}
           </p>
           <button>
             <BsFillHandThumbsDownFill
-              onClick={() => {
-                setRating(rating - 1);
-              }}
+              onClick={() => updateRating(video.id, -1)}
             />
             <span className="sr-only">Vote Down</span>
           </button>
         </div>
         <button
           className="btn btn-primary"
-          onClick={(e) => {
-            handleClick(video.id);
+          onClick={() => {
+            handleRemoveItem(video.id);
           }}
         >
           Delete

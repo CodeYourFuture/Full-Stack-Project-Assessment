@@ -8,21 +8,34 @@ function NewVideoForm() {
     url: "",
   });
 
+  function matchYoutubeUrl(url) {
+    var p =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+      return url.match(p)[1];
+    }
+    return false;
+  }
+
   function postVideo(data) {
-    axios({
-      method: "post",
-      url: "/api",
-      data,
-    })
-      .then((res) => {
-        setForm({
-          title: "",
-          url: "",
-        });
+    if (matchYoutubeUrl(data.url) === false) alert("wrong URL");
+    else {
+      data.url = `https://www.youtube.com/embed/${matchYoutubeUrl(data.url)}`;
+      axios({
+        method: "post",
+        url: "/api",
+        data,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then(() => {
+          setForm({
+            title: "",
+            url: "",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   function handleOnChange(key, value) {
@@ -32,7 +45,7 @@ function NewVideoForm() {
   return (
     <form className="form-inline d-flex justify-content-center">
       <div className="form-group mb-2">
-        <label forHtml="videoTitle" className="sr-only">
+        <label forhtml="videoTitle" className="sr-only">
           Title
         </label>
         <input
@@ -45,7 +58,7 @@ function NewVideoForm() {
         />
       </div>
       <div className="form-group mb-2">
-        <label forHtml="videoUrl" className="sr-only">
+        <label forhtml="videoUrl" className="sr-only">
           URL
         </label>
         <input

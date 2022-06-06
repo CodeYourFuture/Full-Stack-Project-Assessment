@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(cors());
 // GET "/"
 app.get("/api/", (req, res) => {
+  const sortedVideos = videos.sort((a, b) => b.rating - a.rating);
   res.json(videos);
 });
 
@@ -51,6 +52,23 @@ app.post("/api/", (req, res) => {
         videos,
       });
     }
+  }
+});
+
+app.put("/api/:id", (req, res) => {
+  const found = videos.some((video) => video.id === Number(req.params.id));
+  if (found) {
+    const { rating } = req.body;
+    videos.forEach((video) => {
+      if (video.id === Number(req.params.id)) {
+        video.rating = rating;
+        res.json({ msg: "Rating was updated", video });
+      }
+    });
+  } else {
+    res
+      .status(400)
+      .json({ msg: `Member with id of ${req.params.id} not found` });
   }
 });
 
