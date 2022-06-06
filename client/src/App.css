@@ -1,5 +1,12 @@
 :root {
   --background: rgb(255, 255, 255);
+  --border: rgb(242, 252, 111);
+  --button: rgb(255, 255, 255);
+  --black: rgb(32, 32, 32);
+  --brown: rgb(102, 83, 67);
+  --border1: rgb(224, 231, 116);
+  --border2: rgb(196, 196, 196);
+  --thin-border: 2px;
 }
 .App {
   font-family: "Montserrat", sans-serif;
@@ -8,7 +15,7 @@
   font-weight: 600;
 }
 iframe {
-  border-radius: 15px;
+  margin-top: 2rem;
 }
 h1 {
   font-family: "Montserrat Subrayada", sans-serif;
@@ -17,12 +24,13 @@ h1 {
   padding: 2rem 0 2rem 0;
 }
 h3 {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-p {
   font-size: 2rem;
   font-weight: 700;
+  text-align: left;
+}
+p {
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .video-container {
@@ -30,22 +38,99 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  margin-top: 2rem;
 }
 .video-card {
   width: 50%;
-  padding: 1rem;
+  padding: 1rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 7px solid var(--black);
+  border-bottom: none;
+  border-top: none;
+  border-top: var(--thin-border) solid var(--black);
+
+  justify-content: flex-end;
+}
+.video-votes-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .votes-div {
   display: flex;
-  flex-direction: row;
-  margin: 1rem;
+  flex-direction: column;
 }
-.buttons-div {
+/* .buttons-div {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
+} */
 .vote-button {
+  background-color: var(--background);
+}
+.gradient-button {
+  margin: 2rem 0;
+  background: linear-gradient(
+    var(--brown) 40%,
+    var(--border2) 90%,
+    var(--border1)
+  );
+  border-width: 7px;
+  border-style: solid;
+  border-image: linear-gradient(
+      to bottom,
+      var(--brown) 40%,
+      var(--border2) 90%,
+      var(--border1)
+    )
+    1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0.3rem 0;
+}
+.gradient-add-button {
+  margin: 2rem 0;
+  background: linear-gradient(
+    var(--brown) 40%,
+    var(--border2) 90%,
+    var(--border1)
+  );
+  border-width: 7px;
+  border-style: solid;
+  border-image: linear-gradient(
+      to bottom,
+      var(--brown) 40%,
+      var(--border2) 90%,
+      var(--border1)
+    )
+    1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0.3rem 0;
+}
+/* .black-border-style-div {
+  width: 7px;
+  height: 52px;
+  background-color: var(--black);
+  position: absolute;
+  right: 365px;
+  top: 673px;
+} */
+input {
+  padding: 0.3rem 0 0.6125rem 0;
+  border: none;
+  border-top: 7px solid var(--brown);
+  border-bottom: var(--thin-border) solid var(--border1);
+  border-left: 7px solid var(--black);
+  font-size: 1.5rem;
 }

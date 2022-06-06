@@ -7,7 +7,7 @@ const Votes = () => {
 
   return (
     <div className="votes-div">
-      <p>{counter}</p>
+      <p>{counter} likes</p>
       <UpVoteButton counter={counter} setCounter={setCounter} />
       <DownVoteButton counter={counter} setCounter={setCounter} />
     </div>

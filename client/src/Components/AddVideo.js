@@ -13,12 +13,11 @@ const AddVideo = (props) => {
       url: newVideoUrl,
       rating: 0,
     };
-    console.log("hi");
-    // data.concat(addVideo);
-
-    console.log(data);
-    // data.push(addVideo);
-    return setData(data.concat(addVideo));
+    if (addVideo.title === "" || addVideo.url === "") {
+      return setData(data);
+    } else {
+      return setData(data.concat(addVideo));
+    }
   };
 
   return (
@@ -40,7 +39,8 @@ const AddVideo = (props) => {
         type="text"
         placeholder="Add url here"
       ></input>
-      <button id="submit" onClick={handleClick}>
+      {/* <div className="black-border-style-div"></div> */}
+      <button className="gradient-button" id="submit" onClick={handleClick}>
         Add video
       </button>
     </div>

@@ -5,6 +5,10 @@ const DeleteButton = (props) => {
     const filteredData = data.filter((item, i) => i !== index);
     setData(filteredData);
   };
-  return <button onClick={handleClick}>Remove Video</button>;
+  return (
+    <button className="gradient-button" onClick={handleClick}>
+      Remove Video
+    </button>
+  );
 };
 export default DeleteButton;
