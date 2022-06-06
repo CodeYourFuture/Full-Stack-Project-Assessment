@@ -6,13 +6,15 @@ import {
 } from "react-icons/bs";
 import axios from "axios";
 
-function Video({ video }) {
+function Video({ video, loadVideos }) {
   let [newRating, setNewRating] = useState(video.rating);
 
   function handleRemoveItem(clickedId) {
     axios
       .delete(`/api/${clickedId}`)
-      .then((res) => {})
+      .then((res) => {
+        console.log(res);
+        loadVideos()})
       .catch((err) => {
         console.log(err);
       });
@@ -22,7 +24,10 @@ function Video({ video }) {
     setNewRating(updatedVotes);
     axios
       .put(`/api/${id}/`, { rating: updatedVotes })
-      .then((res) => {})
+      .then((res) => {
+        console.log(res);
+        loadVideos();
+      })
       .catch((err) => {
         console.log(err);
       });

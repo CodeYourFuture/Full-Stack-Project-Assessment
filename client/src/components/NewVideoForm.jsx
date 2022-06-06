@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
 
-function NewVideoForm() {
+function NewVideoForm({loadVideos}) {
   const [form, setForm] = useState({
     title: "",
     url: "",
@@ -26,7 +26,9 @@ function NewVideoForm() {
         url: "/api",
         data,
       })
-        .then(() => {
+        .then((res) => {
+          console.log(res)
+          loadVideos();
           setForm({
             title: "",
             url: "",

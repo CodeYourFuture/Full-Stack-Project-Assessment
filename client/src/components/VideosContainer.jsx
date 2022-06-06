@@ -1,29 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "../App.css";
+import React from "react";
+import "../App.css"
 import Video from "./Video";
-import axios from "axios";
 
-function VideosContainer() {
-  const [videos, setVideos] = useState([]);
-
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api",
-    }).then((response) => {
-      setVideos(response.data);
-    });
-  }, [videos]);
+function VideosContainer({videos, loadVideos}) {
 
   return (
     <div className="container">
       <ul className="row">
         {videos.map((video) => {
           return (
-            <Video
-              key={video.id}
-              video={video}
-            ></Video>
+            <Video loadVideos={loadVideos} key={video.id} video={video}></Video>
           );
         })}
       </ul>
