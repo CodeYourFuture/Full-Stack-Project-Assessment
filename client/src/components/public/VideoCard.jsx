@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import Vote from "./Vote";
+import "../../styles/videocard.css";
 
 const VideoCard = ({ video }) => {
   const { deleteHandler } = useContext(UserContext);

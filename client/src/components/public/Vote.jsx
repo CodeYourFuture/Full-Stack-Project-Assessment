@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
-import { IoThumbsUp, IoThumbsDown } from "react";
+import { IoThumbsUp, IoThumbsDown } from "react-icons/io5";
+import "../../styles/vote.css";
 
 const Vote = () => {
   const { vote, setVote } = useContext(UserContext);

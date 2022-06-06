@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import VideoCard from "./VideoCard";
 import NewVideo from "./NewVideo";
+import "../../styles/videocards.css";
 
 const VideoCards = () => {
   const { videoData, setNewVideo, newVideo } = useContext(UserContext);
