@@ -6,6 +6,8 @@ const UserContext = createContext({
   deleteHandler: () => {},
   newVideo: false,
   setNewVideo: () => {},
+  vote: 0,
+  setVote: () => {},
 });
 
 export default UserContext;

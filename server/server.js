@@ -81,8 +81,14 @@ app.get("/videos", (req, res) => {
 
 app.delete("/deletedvideo/:id", (req, res) => {
   const { id } = req.params;
-
-  videos = videos.filter((video) => video.id != id);
-
-  res.json(videos);
+  const deletedVideo = videos.findIndex((video) => video.id == id);
+  if (deletedVideo !== -1) {
+    videos.splice(deletedVideo, 1);
+    res.status(200).send(`video with the id, ${id} is deleted`);
+  } else {
+    res.status(404).json({
+      result: "failure",
+      msg: "impossible to delete this video",
+    });
+  }
 });

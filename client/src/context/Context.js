@@ -4,6 +4,7 @@ import UserContext from "./UserContext";
 const Context = ({ children }) => {
   const [videoData, setVideoData] = useState([]);
   const [newVideo, setNewVideo] = useState(false);
+  const [vote, setVote] = useState(0);
 
   useEffect(() => {
     const getVideosData = async () => {
@@ -41,7 +42,15 @@ const Context = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ videoData, setVideoData, deleteHandler, newVideo, setNewVideo }}
+      value={{
+        videoData,
+        setVideoData,
+        deleteHandler,
+        newVideo,
+        setNewVideo,
+        vote,
+        setVote,
+      }}
     >
       {children}
     </UserContext.Provider>

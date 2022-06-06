@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
+import Vote from "./Vote";
 
 const VideoCard = ({ video }) => {
   const { deleteHandler } = useContext(UserContext);
@@ -26,6 +27,7 @@ const VideoCard = ({ video }) => {
         >
           Delete
         </button>
+        <Vote />
       </section>
     </>
   );
