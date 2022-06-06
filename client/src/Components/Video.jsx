@@ -4,7 +4,7 @@ import Rating from "./Rating";
 
 import Button from "./Button";
 
-const Video = ({ data }) => {
+const Video = ({ data, handleDelete }) => {
   return (
     <div>
       <h2>{data.title}</h2>
@@ -15,7 +15,7 @@ const Video = ({ data }) => {
         src={data.url}
       ></iframe>
       <Rating rating={data.rating} />
-      <Button name="Delete" />
+      <Button name="Delete" method={() => handleDelete(data)} />
     </div>
   );
 };
