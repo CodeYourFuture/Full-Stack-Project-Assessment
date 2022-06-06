@@ -1,11 +1,13 @@
 import React from "react";
+import App from "./App";
 import { useState } from "react";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
-function handleSearchInput(event) {
-  setSearchInput(event.target.value);
-}
+  function handleSearchInput(event) {
+    setSearchInput(event.target.value);
+    
+  }
   return (
     <>
       <input
@@ -15,7 +17,7 @@ function handleSearchInput(event) {
         value={searchInput}
         onChange={handleSearchInput}
       />
-      <button>Click me</button>
+      <button> Click me </button>
     </>
   );
 };

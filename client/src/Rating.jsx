@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import app from "./"
+import exampleresponse from "./exampleresponse.json";
 
 const Rating = props => {
   const [rate,setRate] =useState(props.rating)
     return <>
     <div>
             <button
-              onClick={e=>
-                  setRate(rate+1)
+              onClick={e=>{
+                  setRate(rate+1);
+                  props.rating = rate;
+            }
               }
             >
               up
@@ -15,8 +17,10 @@ const Rating = props => {
             <p>{rate}</p>
             <button
               onClick={(e) =>
-                
-                  setRate(rate-1)
+                {
+                  setRate(rate - 1);
+                  exampleresponse[props.rating] = rate;
+                }
                 
               }
             >

@@ -1,26 +1,36 @@
 import React, { useState } from "react";
 import "./App.css";
+import exampleresponse from "./exampleresponse.json"
 const AddVideo = () => {
-  let className = "addingOptionVisible"
-     const [clicked, setClicked] = useState(false);
+  
+  const [visibility, setVisibility] = useState("addingOptionHidden");
+     const [clicked, setClicked] = useState(true);
+     const [urlValue, setUrlValue] = useState("");
+     const [title, setTitle] = useState("");
      const eventHandler = () => {
        setClicked(!clicked);
          !clicked
-           ? (className = "addingOptionHidden")
-           : (className = "addingOptionVisible");
+           ? (setVisibility  ("addingOptionHidden"))
+           : (setVisibility  ("addingOptionVisible"));
+           setTitle("");
+           setUrlValue("")
      };
+     const addingVideo = (url,title) => {
+     }
   return (
     <div>
-      <button onClick={eventHandler} href="#">
-        Add Video
-      </button>
-      <div className={className}>
+      <button onClick={eventHandler}>Add Video</button>
+      <div className={visibility}>
         <text>Title</text>
-        <input></input>
+        <input value={title} onChange={(e) => setTitle(e.value)}></input>
         <text>URL</text>
-        <input></input>
-        <button>Cancel</button>
-        <button>Add</button>
+        <input
+          type="text"
+          value={urlValue}
+          onChange={(e) => setUrlValue(e.value)}
+        ></input>
+        <button onClick={eventHandler}>Cancel</button>
+        <button onClick={addingVideo(urlValue,title)}>Add</button>
       </div>
     </div>
   );
