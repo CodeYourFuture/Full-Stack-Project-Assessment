@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Video from "./Video";
-import videos from "./exampleresponse.json";
+import Videos from "./Videos";
+import data from "../exampleresponse.json";
 
 function AddVideoForm() {
-  const defaultList = videos;
+  const defaultList = data;
   const [videoList, setVideoList] = useState(defaultList);
 
   function addVideo(event) {
@@ -11,20 +11,25 @@ function AddVideoForm() {
     let url = document.getElementById("form-url").value;
 
     setVideoList((video) => {
-      videoList.unshift({ id: videoList.length, title, url, rating: 0 });
+      videoList.unshift({
+        id: videoList.length,
+        title,
+        url,
+        rating: video.rating ? video.rating : 0,
+      });
       return videoList;
     });
   }
 
   return (
-    <div class="container">
-      <div class="row">
-        <div class="col-3 form">
+    <div className="container">
+      <div className="row">
+        <div className="col-3 form">
           <form>
-            <div class="row">
+            <div className="row">
               <label>Title:</label>
               <input
-                class="form-field"
+                className="form-field"
                 id="form-title"
                 className="form-field"
                 type="text"
@@ -32,11 +37,11 @@ function AddVideoForm() {
                 name="videoTitle"
               />
             </div>
-            <div class="row">
+            <div className="row">
               <label>URL:</label>
 
               <input
-                class="form-field"
+                className="form-field"
                 id="form-url"
                 className="form-field"
                 type="text"
@@ -44,10 +49,10 @@ function AddVideoForm() {
                 name="videoUrl"
               />
             </div>
-            <div class="row">
+            <div className="row">
               <button
                 type="button"
-                class="btn btn-outline-primary"
+                className="btn btn-outline-primary"
                 onClick={addVideo}
               >
                 Submit video
@@ -56,8 +61,8 @@ function AddVideoForm() {
           </form>
         </div>
 
-        <div class="col-9">
-          <Video data={videoList} setter={setVideoList} />
+        <div className="col-9">
+          <Videos data={videoList} setter={setVideoList} />
         </div>
       </div>
     </div>
