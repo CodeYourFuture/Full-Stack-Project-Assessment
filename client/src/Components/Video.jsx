@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import Rating from "./Rating";
 
-import Button from "./Button";
+import Context from "../Context/Context";
 
-const Video = ({ data, handleDelete }) => {
+const Video = ({ data }) => {
+  const ctx = useContext(Context);
+
   return (
     <div>
       <h2>{data.title}</h2>
@@ -15,7 +20,14 @@ const Video = ({ data, handleDelete }) => {
         src={data.url}
       ></iframe>
       <Rating rating={data.rating} />
-      <Button name="Delete" method={() => handleDelete(data)} />
+      <Button
+        variant="contained"
+        color="error"
+        startIcon={<DeleteIcon />}
+        onClick={() => ctx.deleteVideo(data)}
+      >
+        Delete
+      </Button>
     </div>
   );
 };
