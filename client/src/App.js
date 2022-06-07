@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { v4 as uuid4 } from "uuid";
 
 import Header from "./Components/Header";
+import AddVideo from "./Components/AddVideo";
 import Videos from "./Components/Videos";
 
 import Context from "./Context/Context";
@@ -12,6 +14,19 @@ import "./App.css";
 const App = () => {
   const [videos, setVideos] = useState(data);
 
+  const addVideo = (title, url) => {
+    const copyOfVideos = [...videos];
+    const fixedUrl = url.replace("watch?v=", "embed/");
+    const newVideo = {
+      id: uuid4(),
+      title: title,
+      url: fixedUrl,
+      rating: 0,
+    };
+    copyOfVideos.push(newVideo);
+    setVideos(copyOfVideos);
+  };
+
   const deleteVideo = (video) => {
     const copyOfVideos = [...videos];
     const index = copyOfVideos.indexOf(video);
@@ -19,20 +34,21 @@ const App = () => {
     setVideos(copyOfVideos);
   };
 
-  const vote = (video, type) => {
+  const vote = (video, voteType) => {
     const copyOfVideos = [...videos];
     const index = copyOfVideos.indexOf(video);
     copyOfVideos[index].rating =
-      type === "up"
+      voteType === "up"
         ? copyOfVideos[index].rating + 1
         : copyOfVideos[index].rating - 1;
     setVideos(copyOfVideos);
   };
 
   return (
-    <Context.Provider value={{ deleteVideo, vote }}>
+    <Context.Provider value={{ addVideo, deleteVideo, vote }}>
       <div className="App">
         <Header />
+        <AddVideo />
         <Videos videos={videos} handleDelete={deleteVideo} />
       </div>
     </Context.Provider>
