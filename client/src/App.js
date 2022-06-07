@@ -19,8 +19,18 @@ const App = () => {
     setVideos(copyOfVideos);
   };
 
+  const vote = (video, type) => {
+    const copyOfVideos = [...videos];
+    const index = copyOfVideos.indexOf(video);
+    copyOfVideos[index].rating =
+      type === "up"
+        ? copyOfVideos[index].rating + 1
+        : copyOfVideos[index].rating - 1;
+    setVideos(copyOfVideos);
+  };
+
   return (
-    <Context.Provider value={{ deleteVideo }}>
+    <Context.Provider value={{ deleteVideo, vote }}>
       <div className="App">
         <Header />
         <Videos videos={videos} handleDelete={deleteVideo} />

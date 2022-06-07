@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
-const Rating = ({ rating }) => {
+import Context from "../Context/Context";
+
+const Rating = ({ rating, video }) => {
+  const ctx = useContext(Context);
+
   return (
     <div className="Rating">
-      <ThumbUpIcon />
+      <ThumbUpIcon onClick={() => ctx.vote(video, "up")} />
       <p>{rating}</p>
-      <ThumbDownIcon />
+      <ThumbDownIcon onClick={() => ctx.vote(video, "down")} />
     </div>
   );
 };

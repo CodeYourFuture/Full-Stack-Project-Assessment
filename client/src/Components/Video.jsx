@@ -19,7 +19,7 @@ const Video = ({ data }) => {
         height="315"
         src={data.url}
       ></iframe>
-      <Rating rating={data.rating} />
+      <Rating rating={data.rating} video={data} />
       <Button
         variant="contained"
         color="error"
