@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
 import Vote from "./Vote";
 import "../../styles/videocard.css";
 
 const VideoCard = ({ video }) => {
+  const [vote, setVote] = useState(0);
   const { deleteHandler } = useContext(UserContext);
   return (
     <>
@@ -28,7 +29,7 @@ const VideoCard = ({ video }) => {
         >
           Delete
         </button>
-        <Vote />
+        <Vote vote={vote} setVote={setVote} />
       </section>
     </>
   );
