@@ -32,9 +32,22 @@ function App() {
       url: addFormData.url,
     };
 
-    const newVideos = [...videos, newVideo];
-    console.log(newVideos);
-    setVideos(newVideos);
+    const validateUrl = (url) => {
+      const urlType =
+        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      if (url.match(urlType)) {
+        return url.match(urlType)[1];
+      }
+      return false;
+    };
+
+    if (validateUrl(newVideo.url)) {
+      const newVideos = [...videos, newVideo];
+      //console.log(newVideos);
+      setVideos(newVideos);
+    } else {
+      alert("invalid Youtube url")
+    }
   };
 
   const handleDeleteClick = (videoId) => {
