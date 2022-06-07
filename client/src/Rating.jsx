@@ -8,6 +8,7 @@ const Rating = props => {
             <button
               onClick={e=>{
                   setRate(rate+1);
+                  exampleresponse.filter((I)=>I.id === props.ratingId).id =+1
                   props.rating = rate;
             }
               }

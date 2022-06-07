@@ -24,7 +24,7 @@ const VideoList = () => {
         <div>
           <p>{a.title} </p>
           <div>
-            <Rating  rating={a.rating}/>
+            <Rating  rating={a.rating} ratingId={a.id} />
           </div>
           <YouTube
             videoId={a.url.split("watch?v=")[1]}
