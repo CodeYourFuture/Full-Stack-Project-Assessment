@@ -2,8 +2,8 @@ import { useState } from "react";
 import UpVoteButton from "./UpVoteButton";
 import DownVoteButton from "./DownVoteButton";
 
-const Votes = () => {
-  const [counter, setCounter] = useState(0);
+const Votes = (props) => {
+  const [counter, setCounter] = useState(props.rating);
 
   return (
     <div className="votes-div">

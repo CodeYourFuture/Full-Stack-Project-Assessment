@@ -39,7 +39,6 @@ const AddVideo = (props) => {
         type="text"
         placeholder="Add url here"
       ></input>
-      {/* <div className="black-border-style-div"></div> */}
       <button className="gradient-button" id="submit" onClick={handleClick}>
         Add video
       </button>

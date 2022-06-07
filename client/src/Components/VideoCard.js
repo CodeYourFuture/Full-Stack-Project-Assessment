@@ -22,7 +22,7 @@ const VideoCard = (props) => {
                 allowFullScreen
               ></iframe>
               {/* <div className="buttons-div"> */}
-              <Votes />
+              <Votes rating={item.rating} />
             </div>
             <DeleteButton index={index} data={data} setData={setData} />
             {/* </div> */}
