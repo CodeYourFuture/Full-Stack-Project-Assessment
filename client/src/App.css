@@ -1,12 +1,37 @@
-.App {
+.app {
   text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.app-header {
+  background-color: rgb(57, 144, 173);
+  height: 110px;
+  color: white;
+}
+
+h1 {
+  padding: 20px;
 }
 
 .form-container {
-  max-width: 600px;
-  height: 150px;
-  margin: 0 auto;
-  margin-top: 30px;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-gap: 30px;
+  margin: auto 20px;
+}
+
+form {
+  margin: 10px;
+}
+
+h4 {
+  text-align: left;
+  margin: 0 50px;
+}
+
+.search-wrapper {
+  margin: auto;
 }
 
 input {

@@ -3,13 +3,20 @@ import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import Video from "./components/Video";
 import data from "./exampleresponse.json";
+import Form from "./components/Form";
 
 function App() {
+  const [displayForm, setDisplayForm] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const [videos, setVideos] = useState(data);
   const [addFormData, setAddFormData] = useState({
     title: "",
     url: "",
   });
+
+  // const isVideoSearch = videos.map((video) => {
+  //   return video.title.includes(searchInput);
+  // });
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -46,7 +53,7 @@ function App() {
       //console.log(newVideos);
       setVideos(newVideos);
     } else {
-      alert("invalid Youtube url")
+      alert("invalid Youtube url");
     }
   };
 
@@ -59,42 +66,50 @@ function App() {
     setVideos(newVideos);
   };
 
+  function handleSearchInput(event) {
+    setSearchInput(event.target.value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="app">
+      <header className="app-header">
         <h1>Video Recommendation</h1>
-
-        <div className="form-container">
-          <h2>Add Video</h2>
-          <form onSubmit={handleAddFormSubmit}>
-            <label>
-              Title
-              <input
-                type="text"
-                name="title"
-                placeholder="Enter title..."
-                onChange={handleAddFormChange}
-                required
-              />
-            </label>
-
-            <label>
-              Url
-              <input
-                type="url"
-                name="url"
-                placeholder="Enter url..."
-                onChange={handleAddFormChange}
-                required
-              />
-            </label>
-            <button type="submit">Add</button>
-          </form>
-        </div>
-        <div className="container">
-          <Video videos={videos} handleDeleteClick={handleDeleteClick} />
-        </div>
       </header>
+      <div className="form-container">
+        <div>
+          <h4
+            onClick={() => setDisplayForm(true)}
+            style={{ color: "rgb(53, 102, 251)", padding: "10px" }}
+          >
+            Add Video
+          </h4>
+          {displayForm ? (
+            <Form
+              handleAddFormSubmit={handleAddFormSubmit}
+              handleAddFormChange={handleAddFormChange}
+              setDisplayForm={setDisplayForm}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+
+        <div className="search-wrapper">
+          <label>
+            Search
+            <input
+              value={searchInput}
+              onChange={handleSearchInput}
+              name="search"
+              type="text"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div className="form-container">
+        <Video videos={videos} handleDeleteClick={handleDeleteClick} />
+      </div>
     </div>
   );
 }
