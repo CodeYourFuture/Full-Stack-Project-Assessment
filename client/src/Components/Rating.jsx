@@ -1,5 +1,16 @@
 import React from "react";
 
-const Rating = ({ rating }) => <p>{rating}</p>;
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+
+const Rating = ({ rating }) => {
+  return (
+    <div className="Rating">
+      <ThumbUpIcon />
+      <p>{rating}</p>
+      <ThumbDownIcon />
+    </div>
+  );
+};
 
 export default Rating;
