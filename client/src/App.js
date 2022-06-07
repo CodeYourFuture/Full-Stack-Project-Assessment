@@ -5,11 +5,13 @@ import exampleresponse from "./exampleresponse.json";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [displayVideo, setDisplayVideo] = useState();
+
   return (
     <div>
       <div className="App">
         <header className="App-header">
-          <h1>Video Recommendation Mandeep</h1>
+          <h1>Video Recommendation by Mandeep</h1>
         </header>
       </div>
       <div>Add video</div>
@@ -22,7 +24,21 @@ function App() {
         />{" "}
         Search
       </div>
-      <div>{exampleresponse.map(x => x.title)}</div>
+      <div>
+        <ul className="card-container">
+          {exampleresponse.map((card) => (
+            <li className="card">
+              <h2>{card.title}</h2>
+              <p>THE VIDEO</p>
+              <p>Votes</p>
+              <div className="button-container">
+                <button>Up Vote</button>
+                <button>Down Vote</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,27 @@
 .App {
   text-align: center;
 }
+
+ul {
+  margin: 0 auto;
+  text-align: center;
+}
+
+li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+}
+
+.card {
+  border: 4px solid #0bd3da;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
