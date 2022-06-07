@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
+import Input from "./atoms/Input";
 
-function NewVideoForm({loadVideos}) {
-  const [form, setForm] = useState({
-    title: "",
-    url: "",
-  });
+function NewVideoForm({ loadVideos }) {
+
+  const defaultForm = { title: "", url: "" };
+  const [form, setForm] = useState(defaultForm);
 
   function matchYoutubeUrl(url) {
-    var p =
+    const p =
       /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     if (url.match(p)) {
       return url.match(p)[1];
     }
     return false;
+  }
+
+  function handleOnChange(key, value) {
+    return setForm({ ...form, [key]: value });
   }
 
   function postVideo(data) {
@@ -26,52 +30,32 @@ function NewVideoForm({loadVideos}) {
         url: "/api",
         data,
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           loadVideos();
-          setForm({
-            title: "",
-            url: "",
-          });
+          setForm(defaultForm);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }
-
-  function handleOnChange(key, value) {
-    return setForm({ ...form, [key]: value });
-  }
-
+  
   return (
     <form className="form-inline d-flex justify-content-center">
-      <div className="form-group mb-2">
-        <label forhtml="videoTitle" className="sr-only">
-          Title
-        </label>
-        <input
-          value={form.title}
-          type="text"
-          className="form-control"
-          id="videoTitle"
-          onChange={(event) => handleOnChange("title", event.target.value)}
-          placeholder="Title"
-        />
-      </div>
-      <div className="form-group mb-2">
-        <label forhtml="videoUrl" className="sr-only">
-          URL
-        </label>
-        <input
-          value={form.url}
-          type="text"
-          className="form-control"
-          id="videoUrl"
-          onChange={(event) => handleOnChange("url", event.target.value)}
-          placeholder="URL"
-        />
-      </div>
+      <Input
+        setForm={setForm}
+        label="Title"
+        placeholderText="Title"
+        value={form.title}
+        onChange={(event) => handleOnChange("title", event.target.value)}
+      />
+      <Input
+        setForm={setForm}
+        label="URL"
+        value={form.url}
+        placeholderText="YouTube URL"
+        onChange={(event) => handleOnChange("url", event.target.value)}
+      />
       <button
         type="submit"
         className="btn btn-primary mb-2"
@@ -79,6 +63,7 @@ function NewVideoForm({loadVideos}) {
           e.preventDefault();
           postVideo(form);
         }}
+        disabled={form.title === "" || form.url === ""}
       >
         Post Video
       </button>

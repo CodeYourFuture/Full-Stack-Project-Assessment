@@ -1,37 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
-import {
-  BsFillHandThumbsUpFill,
-  BsFillHandThumbsDownFill,
-} from "react-icons/bs";
-import axios from "axios";
+import DeleteButton from "./atoms/DeleteButton";
+import Rating from "./atoms/RatingFields";
 
 function Video({ video, loadVideos }) {
-  let [newRating, setNewRating] = useState(video.rating);
-
-  function handleRemoveItem(clickedId) {
-    axios
-      .delete(`/api/${clickedId}`)
-      .then((res) => {
-        console.log(res);
-        loadVideos()})
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function updateRating(id, vote) {
-    const updatedVotes = newRating + vote;
-    setNewRating(updatedVotes);
-    axios
-      .put(`/api/${id}/`, { rating: updatedVotes })
-      .then((res) => {
-        console.log(res);
-        loadVideos();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   return (
     <li className="col-sm-6">
@@ -48,29 +20,8 @@ function Video({ video, loadVideos }) {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <div className="d-flex justify-content-center">
-          <button>
-            <BsFillHandThumbsUpFill onClick={() => updateRating(video.id, 1)} />
-            <span className="sr-only">Vote Up</span>
-          </button>
-          <p style={{ marginBottom: 0 }} className="card-text">
-            Rating: {video.rating}
-          </p>
-          <button>
-            <BsFillHandThumbsDownFill
-              onClick={() => updateRating(video.id, -1)}
-            />
-            <span className="sr-only">Vote Down</span>
-          </button>
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            handleRemoveItem(video.id);
-          }}
-        >
-          Delete
-        </button>
+        <Rating video={video}/>
+        <DeleteButton id={video.id} load={loadVideos} />
       </div>
     </li>
   );

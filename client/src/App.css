@@ -1,12 +1,31 @@
 h1 {
   text-align: center;
 }
-button {
-  border: none;
-  background-color: white;
-}
 
 ul {
   padding-left: 0;
   list-style: none;
+}
+
+.iconButton {
+  border: none;
+  background-color: white;
+}
+
+.iconButton:focus {
+  outline: none;
+}
+.iconButton > svg:hover {
+  fill: #007bff;
+}
+
+.iconSize {
+  height: 25px;
+  width: 100%;
+}
+
+.margin {
+  display: flex;
+  margin-left: auto; 
+  margin-right: auto
 }
