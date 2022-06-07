@@ -1,14 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import Context from "../Context/Context";
-
-const AddVideo = () => {
-  const ctx = useContext(Context);
-
+const AddVideo = ({ addVideo, urlError }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+
+  const handleForm = (title, url) => {
+    setTitle("");
+    setUrl("");
+    addVideo(title, url);
+  };
 
   return (
     <div className="AddVideo">
@@ -24,9 +26,10 @@ const AddVideo = () => {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
-      <Button variant="contained" onClick={() => ctx.addVideo(title, url)}>
+      <Button variant="contained" onClick={handleForm}>
         Add
       </Button>
+      {urlError ? <p>Please enter a YouTube URL</p> : ""}
     </div>
   );
 };

@@ -13,18 +13,24 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(data);
+  const [urlError, setUrlError] = useState(false);
 
   const addVideo = (title, url) => {
-    const copyOfVideos = [...videos];
-    const fixedUrl = url.replace("watch?v=", "embed/");
-    const newVideo = {
-      id: uuid4(),
-      title: title,
-      url: fixedUrl,
-      rating: 0,
-    };
-    copyOfVideos.push(newVideo);
-    setVideos(copyOfVideos);
+    if (!url || !url.includes("youtube")) {
+      setUrlError(true);
+    } else {
+      setUrlError(false);
+      const copyOfVideos = [...videos];
+      const fixedUrl = url.replace("watch?v=", "embed/");
+      const newVideo = {
+        id: uuid4(),
+        title: title,
+        url: fixedUrl,
+        rating: 0,
+      };
+      copyOfVideos.push(newVideo);
+      setVideos(copyOfVideos);
+    }
   };
 
   const deleteVideo = (video) => {
@@ -45,10 +51,10 @@ const App = () => {
   };
 
   return (
-    <Context.Provider value={{ addVideo, deleteVideo, vote }}>
+    <Context.Provider value={{ deleteVideo, vote }}>
       <div className="App">
         <Header />
-        <AddVideo />
+        <AddVideo addVideo={addVideo} urlError={urlError} />
         <Videos videos={videos} handleDelete={deleteVideo} />
       </div>
     </Context.Provider>
