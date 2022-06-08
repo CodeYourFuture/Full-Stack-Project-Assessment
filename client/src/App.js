@@ -3,6 +3,8 @@ import "./App.css";
 import data from "./data";
 import Header from "./components/Header";
 // import Main from "./components/Main";
+import Search from "./components/Search";
+import Form from "./components/Form";
 import smileyFace from "./smiley-face.png";
 import downVoteFace from "./downvote-face.png";
 
@@ -28,6 +30,8 @@ const App = () => {
     <div>
       <Header />
       {/* <Main /> */}
+      <Search />
+      <Form />
       <List list={list} onRemove={handleRemove} />;
     </div>
   );

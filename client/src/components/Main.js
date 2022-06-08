@@ -1,14 +1,14 @@
-import React from "react";
-import Search from "./Search";
-import AddVideo from "./AddVideo";
+// import React from "react";
+// import Search from "./Search";
+// import AddVideo from "./AddVideo";
 
-function Main() {
-  return (
-    <main>
-      <Search />
-      <AddVideo />
-    </main>
-  );
-}
+// function Main() {
+//   return (
+//     <main>
+//       <Search />
+//       <AddVideo />
+//     </main>
+//   );
+// }
 
-export default Main;
+// export default Main;
