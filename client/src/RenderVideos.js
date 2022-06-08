@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import thumbsUp from "../src/images/thumbsUp.png";
 import thumbsDown from "../src/images/thumbsDown.png";
 
+
 const RenderVideos = ({ video, deleteVideos }) => {
   const [count, setCount] = useState(0);
   //create count function to  increase the votes
@@ -14,9 +15,10 @@ const RenderVideos = ({ video, deleteVideos }) => {
     setCount(count - 1);
   };
   return (
-    <div>
+    <section>
       {video.title}
-      <iframe
+      
+      <iframe 
         width="560"
         height="315"
         src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
@@ -31,7 +33,7 @@ const RenderVideos = ({ video, deleteVideos }) => {
       {count}
 
       <img src={thumbsDown} onClick={numberDVotes} alt="" width="100px" />
-    </div>
+    </section>
   );
 };
 export default RenderVideos;

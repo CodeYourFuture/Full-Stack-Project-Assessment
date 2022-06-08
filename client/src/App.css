@@ -1,6 +1,17 @@
-.App {
+
+.App{
+  margin:18px;
+}
+
+.App-header {
   text-align: center;
+  color:green;
+  font-family: fantasy;
+  font-weight: bold;
+  
 }
 .add-video-title{
   color:rgb(55, 133, 193);
+   font-family:'Times New Roman', Times, serif
 }
+
