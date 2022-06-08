@@ -17,19 +17,36 @@ function FormInputs() {
 }
 
 function Buttons() {
+  const thingsArray = ["thing 1", "thing 2"];
+
+  const thingsElements = thingsArray.map((thing) => <p key={thing}>{thing}</p>);
+  function addVideo() {
+    console.log("add video");
+  }
+
+  function addItem() {
+    const newThingText = `Thing ${thingsArray.length + 1}`;
+    thingsArray.push(newThingText);
+    console.log(thingsArray);
+  }
+
   return (
     <div className="buttons">
       <button className="cancel">cancel</button>
-      <button className="add">add</button>
+      <button className="add" onClick={addVideo}>
+        add
+      </button>
+      <button onClick={addItem}>Add Element</button>
     </div>
   );
 }
 
-function Form() {
+function Form(props) {
   return (
     <div className="form">
       <FormInputs />
       <Buttons />
+      {props.thingsArray}
     </div>
   );
 }
