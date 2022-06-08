@@ -6,7 +6,7 @@ import "../../styles/videocards.css";
 
 const VideoCards = () => {
   const { videoData, setNewVideo, newVideo } = useContext(UserContext);
-  console.log(newVideo);
+
   return (
     <article>
       {videoData.map((video) => {

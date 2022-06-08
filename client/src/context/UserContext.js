@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 const UserContext = createContext({
   videoData: [],
@@ -6,8 +6,10 @@ const UserContext = createContext({
   deleteHandler: () => {},
   newVideo: false,
   setNewVideo: () => {},
-  vote: 0,
-  setVote: () => {},
+  videoInfo: "",
+  setVideoInfo: () => {},
+  handleChange: () => {},
+  handleSubmit: () => {},
 });
 
 export default UserContext;

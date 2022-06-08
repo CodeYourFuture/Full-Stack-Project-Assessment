@@ -1,14 +1,9 @@
 import React from "react";
 import "../../styles/App.css";
-import Context from "../../context/Context";
-import VideoCards from "../public/VideoCards";
+import Home from "./Home.jsx";
 
 function App() {
-  return (
-    <Context>
-      <VideoCards />
-    </Context>
-  );
+  return <Home />;
 }
 
 export default App;

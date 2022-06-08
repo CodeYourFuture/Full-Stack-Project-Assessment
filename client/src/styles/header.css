@@ -1,0 +1,11 @@
+.header {
+  background-color: #fa8bff;
+  width: 100%;
+}
+
+.cyf_title {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem 0;
+}

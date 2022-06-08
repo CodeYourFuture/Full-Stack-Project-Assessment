@@ -4,6 +4,20 @@ import UserContext from "./UserContext";
 const Context = ({ children }) => {
   const [videoData, setVideoData] = useState([]);
   const [newVideo, setNewVideo] = useState(false);
+  const [videoInfo, setVideoInfo] = useState({
+    link: "",
+    name: "",
+  });
+
+  const handleChange = (key, value) => {
+    setVideoInfo({ ...videoInfo, [key]: value });
+  };
+
+  const handleSubmit = (event) => {
+    // prevents the submit button from refreshing the page
+    event.preventDefault();
+    setVideoInfo({ URL: "", name: "" });
+  };
 
   useEffect(() => {
     const getVideosData = async () => {
@@ -47,6 +61,10 @@ const Context = ({ children }) => {
         deleteHandler,
         newVideo,
         setNewVideo,
+        videoInfo,
+        setVideoInfo,
+        handleChange,
+        handleSubmit,
       }}
     >
       {children}
