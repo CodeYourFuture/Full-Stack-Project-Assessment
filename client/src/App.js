@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import data from "./data";
-// import Header from "./components/Header";
+import Header from "./components/Header";
 // import Main from "./components/Main";
 import smileyFace from "./smiley-face.png";
 import downVoteFace from "./downvote-face.png";
@@ -26,8 +26,8 @@ const App = () => {
 
   return (
     <div>
-      {/* <Header />
-      <Main /> */}
+      <Header />
+      {/* <Main /> */}
       <List list={list} onRemove={handleRemove} />;
     </div>
   );
@@ -53,8 +53,7 @@ function Item({ item, onRemove }) {
   }
   return (
     <div>
-      <span>{item.title}</span>
-      <div>
+      <main>
         <div className="video">
           <hr />
           <h2>{item.title}</h2>
@@ -88,7 +87,7 @@ function Item({ item, onRemove }) {
         <button type="button" onClick={() => onRemove(item.id)}>
           Remove
         </button>
-      </div>
+      </main>
     </div>
   );
 }
