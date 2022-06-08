@@ -3,10 +3,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 const AddVideo = ({ addVideo, urlError }) => {
+  // Form controls
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleForm = (title, url) => {
+  const handleForm = () => {
     setTitle("");
     setUrl("");
     addVideo(title, url);

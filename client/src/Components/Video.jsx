@@ -11,11 +11,11 @@ const Video = ({ data }) => {
   const ctx = useContext(Context);
 
   return (
-    <div>
+    <div className="Video">
       <h2>{data.title}</h2>
       <iframe
         title={data.title}
-        width="420"
+        width="520"
         height="315"
         src={data.url}
       ></iframe>

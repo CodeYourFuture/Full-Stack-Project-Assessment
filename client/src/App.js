@@ -12,16 +12,18 @@ import data from "./data/exampleresponse.json";
 import "./App.css";
 
 const App = () => {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState(data); // The videos to be displayed
   const [urlError, setUrlError] = useState(false);
 
+  // Adds a video
   const addVideo = (title, url) => {
     if (!url || !url.includes("youtube")) {
+      // If the url doesn't or the url is not from youtube
       setUrlError(true);
     } else {
       setUrlError(false);
       const copyOfVideos = [...videos];
-      const fixedUrl = url.replace("watch?v=", "embed/");
+      const fixedUrl = url.replace("watch?v=", "embed/"); // Changes the url to fix the iframe error
       const newVideo = {
         id: uuid4(),
         title: title,
@@ -33,6 +35,7 @@ const App = () => {
     }
   };
 
+  // Deletes a video
   const deleteVideo = (video) => {
     const copyOfVideos = [...videos];
     const index = copyOfVideos.indexOf(video);
@@ -40,6 +43,7 @@ const App = () => {
     setVideos(copyOfVideos);
   };
 
+  // Handles the video rating
   const vote = (video, voteType) => {
     const copyOfVideos = [...videos];
     const index = copyOfVideos.indexOf(video);
