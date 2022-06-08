@@ -37,16 +37,16 @@ function App() {
           setVisible={setVisible}
         />
       )}
-      <div class="container">
+      <div className="container">
         <div class="row">
           {allVideos.map((video) => (
-            <div class="col-sm">
+           <div class="col-sm-4">
             <RenderVideos
               key={video.id}
               video={video}
               deleteVideos={deleteVideos}
             />
-            </div>
+           </div>
           ))}
         </div>
       </div>
