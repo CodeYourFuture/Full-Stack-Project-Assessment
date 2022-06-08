@@ -14,14 +14,20 @@ const AddVideo = ({ addVideo, urlError }) => {
   };
 
   return (
-    <div className="AddVideo">
+    <div className="Add-video">
       <TextField
+        sx={{
+          mb: 2,
+        }}
         variant="standard"
         label="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <TextField
+        sx={{
+          mb: 5,
+        }}
         variant="standard"
         label="URL"
         value={url}

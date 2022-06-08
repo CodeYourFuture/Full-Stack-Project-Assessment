@@ -15,8 +15,8 @@ const Video = ({ data }) => {
       <h2>{data.title}</h2>
       <iframe
         title={data.title}
-        width="520"
-        height="315"
+        width="350vw"
+        height="250vh"
         src={data.url}
       ></iframe>
       <Rating rating={data.rating} video={data} />

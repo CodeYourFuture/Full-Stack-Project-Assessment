@@ -1,3 +1,38 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
+}
+
+.Header {
+  margin-bottom: 3em;
+}
+
+.Add-video {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3em;
+  margin-bottom: 3em;
+}
+
+.Video {
+  width: 100%;
+  margin-bottom: 5em;
+}
+
+.Rating {
+  display: flex;
+  justify-content: space-around;
 }
