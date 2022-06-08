@@ -1,5 +1,5 @@
 import React from "react";
-import Videos from "./Videos";
+// import Videos from "./Videos";
 import Form from "./Form";
 // import Video1 from "../Video1";
 
@@ -9,7 +9,9 @@ function AddVideo() {
   console.log(addVideo);
   function handleAddVideo() {
     console.log("button clicked");
-    setAddVideo(addVideo);
+    const form = Form;
+    console.log(form);
+    setAddVideo(form);
   }
 
   return (
@@ -18,10 +20,10 @@ function AddVideo() {
         <button id="btn-add-video" onClick={handleAddVideo}>
           Add video
         </button>
-        <Form />
+        {/* <Form /> */}
       </div>
       <div>{addVideo}</div>
-      <Videos />
+      {/* <Videos /> */}
       {/* <Video1 /> */}
     </div>
   );

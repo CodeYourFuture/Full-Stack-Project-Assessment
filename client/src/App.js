@@ -4,6 +4,7 @@ import data from "./data";
 import Header from "./components/Header";
 // import Main from "./components/Main";
 import Search from "./components/Search";
+import AddVideo from "./components/AddVideo";
 import Form from "./components/Form";
 import smileyFace from "./smiley-face.png";
 import downVoteFace from "./downvote-face.png";
@@ -31,6 +32,7 @@ const App = () => {
       <Header />
       {/* <Main /> */}
       <Search />
+      <AddVideo />
       <Form />
       <List list={list} onRemove={handleRemove} />;
     </div>
