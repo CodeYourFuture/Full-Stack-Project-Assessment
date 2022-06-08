@@ -1,57 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import videosData from "./exampleresponse.json";
+import Video from "./Videos";
+import VoteButtons from "./VoteButtons";
 
 function VideoCards() {
-     
-    return(
-        <div className="videocards">
-            {videosData.map((videoObj, index) => {
-                const videoUrl = videoObj.url.replace('watch?v=', 'embed/');
-                return (
-                  /* video contents */
-                  <div key={index} className="card-container">
-                    {/* video title */}
-                    <div className="card-title">
-                      <h3>{videoObj.title}</h3>
-                    </div>
+  const [videoList, setVideoList] = useState(videosData);
+  
+  /* remove any video by id */
+  function removeVideo(id) {
+    const updatedVideoList = videoList.filter((video) => video.id !== id);
+    setVideoList(updatedVideoList);
+  }
 
-                    {/* embedded video */}
-                    <div className="video-container">
-                      <iframe
-                        width="853"
-                        height="480"
-                        src={videoUrl}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title="Embedded youtube"
-                      />
-                    </div>
+  return (
+    <div className="video-cards">
+      {videoList.map((videoObj, index) => {
+        return (
+          /* video contents */
+          <div key={index} className="card-container">
+            {/* video title */}
+            <div className="card-title">
+              <h3>{videoObj.title}</h3>
+            </div>
 
-                    {/* no of votes */}
-                    <div className="no-of-votes-for-video">
-                      <p>0 votes</p>
-                    </div>
+            <Video
+              /* embedded video */
+              videoObj={videoObj}
+              /* delete button */
+              removeVideo={() => {
+                removeVideo(videoObj.id);
+              }}
+            />
 
-                    {/* delete button */}
-                    <div className="delete-button-container">
-                      <button className="delete-button">Remove</button>
-                    </div>
-
-                    {/* up vote button */}
-                    <div className="upvote-button-container">
-                      <button className="upvote-button">upvote</button>
-                    </div>
-
-                    {/* down vote button */}
-                    <div className="downvote-button-container">
-                      <button className="downvote-button">downvote</button>
-                    </div>
-                  </div>
-                );
-            })}
-        </div>
-    );
+            {/* no of votes, up vote button, down vote button */}
+            <VoteButtons />
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default VideoCards;
