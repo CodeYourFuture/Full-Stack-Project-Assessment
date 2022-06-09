@@ -1,25 +1,53 @@
 import React from "react";
-import App from "./App";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import VideoList from "./VideoList";
 
 const Search = () => {
+  const [allData, setAllData] = useState([]);
+ const [filterData, setFilterData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+        console.log(filterData);
+     } );
+  }, [filterData]);
   const [searchInput, setSearchInput] = useState("");
+  
+
   function handleSearchInput(event) {
-    setSearchInput(event.target.value);
+    const query = event.target.value.toLowerCase();
+    setSearchInput(query);
     
+    if (query === "") {
+      setFilterData(allData);
+    } else {
+      const filterArray = allData.filter((video) =>
+        video.title.toLowerCase().includes(query)
+      );
+      setFilterData(filterArray);
+    }
   }
-  return (
-    <>
-      <input
-        id="customerName"
-        className="form-control"
-        placeholder="Customer name"
-        value={searchInput}
-        onChange={handleSearchInput}
-      />
-      <button> Click me </button>
-    </>
-  );
-};
+  
+    return (
+      <>
+        <div>
+          <input
+            id="SearchBar"
+            className=""
+            placeholder="Search Video"
+            value={searchInput}
+            onChange={e=>handleSearchInput(e)}
+          />
+          <button> Click me </button>
+        </div>
+        <div >
+          <VideoList filterData={filterData} />
+        </div>
+      </>
+    );
+  }
 
 export default Search;
