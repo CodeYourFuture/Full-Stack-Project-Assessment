@@ -10,15 +10,17 @@ import Context from "../Context/Context";
 const Video = ({ data }) => {
   const ctx = useContext(Context);
 
+  let shortTitle = "";
+  for (let i = 0; i < 20; i++) {
+    shortTitle += data.title[i];
+  }
+  shortTitle = shortTitle.concat("...");
+  console.log(shortTitle);
+
   return (
     <div className="Video">
-      <h2>{data.title}</h2>
-      <iframe
-        title={data.title}
-        width="350vw"
-        height="250vh"
-        src={data.url}
-      ></iframe>
+      <h2 className="video-title">{shortTitle}</h2>
+      <iframe className="frame" title={data.title} src={data.url}></iframe>
       <Rating rating={data.rating} video={data} />
       <Button
         variant="contained"

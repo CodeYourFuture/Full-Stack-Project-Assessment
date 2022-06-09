@@ -18,6 +18,19 @@ code {
 
 .Header {
   margin-bottom: 3em;
+  text-align: left;
+  display: flex;
+}
+
+.hamburger {
+  margin: 1% 1em;
+}
+
+.ham {
+  background-color: #000;
+  width: 2em;
+  height: 3px;
+  margin-bottom: 15%;
 }
 
 .Add-video {
@@ -32,7 +45,25 @@ code {
   margin-bottom: 5em;
 }
 
+.video-title,
+.frame,
+.Rating {
+  margin-bottom: 1em;
+}
+
+.frame {
+  width: 95%;
+  height: 40vh;
+}
+
 .Rating {
   display: flex;
   justify-content: space-around;
+}
+
+@media screen and (min-width: 900px) {
+  .Videos {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+  }
 }
