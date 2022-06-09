@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import exampleresponse from "./exampleresponse.json"
 const AddVideo = () => {
   
   const [visibility, setVisibility] = useState("addingOptionHidden");
