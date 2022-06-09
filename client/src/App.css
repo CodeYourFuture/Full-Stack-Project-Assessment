@@ -41,6 +41,11 @@ code {
   margin-bottom: 3em;
 }
 
+.form-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
 /* Video.js */
 .Video {
   width: 100%;

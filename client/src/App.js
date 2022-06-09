@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuid4 } from "uuid";
 
+import Button from "@mui/material/Button";
+
 import Header from "./Components/Header";
 import AddVideo from "./Components/AddVideo";
 import Videos from "./Components/Videos";
@@ -13,10 +15,9 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(data); // The videos to be displayed
+  const [showForm, setShowForm] = useState(false);
   const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
-
-  console.log(videos);
 
   // Adds a video
   const addVideo = (title, url) => {
@@ -71,11 +72,23 @@ const App = () => {
     <Context.Provider value={{ deleteVideo, vote }}>
       <div className="App">
         <Header />
-        <AddVideo
-          addVideo={addVideo}
-          titleError={titleError}
-          urlError={urlError}
-        />
+        <Button
+          sx={{
+            mb: 5,
+          }}
+          variant="contained"
+          onClick={() => setShowForm(true)}
+        >
+          Add Video
+        </Button>
+        {showForm && (
+          <AddVideo
+            addVideo={addVideo}
+            titleError={titleError}
+            urlError={urlError}
+            closeForm={() => setShowForm(false)}
+          />
+        )}
         <Videos videos={videos} handleDelete={deleteVideo} />
       </div>
     </Context.Provider>
