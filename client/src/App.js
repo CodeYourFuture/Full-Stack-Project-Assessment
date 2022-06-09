@@ -18,7 +18,9 @@ import List from "./components/List";
 // }
 
 const App = () => {
-  const [list, setList] = React.useState(data);
+  const [list, setList] = useState(data);
+
+  const [filteredList, setFilteredList] = useState(data);
 
   function handleRemove(id) {
     const newList = list.filter((item) => item.id !== id);
@@ -26,14 +28,21 @@ const App = () => {
     setList(newList);
   }
 
+  function handleSearch(searchTerm) {
+    const newList = list.filter((item) => item.title.includes(searchTerm));
+    console.log("setting filtered list", newList);
+    console.log(`search term is ${searchTerm}`);
+    setFilteredList(newList);
+  }
+
   return (
     <div>
       <Header />
       {/* <Main /> */}
-      <Search />
+      <Search handleSearch={handleSearch} />
       <AddVideo />
       <Form />
-      <List list={list} onRemove={handleRemove} />;
+      <List list={filteredList} onRemove={handleRemove} />;
     </div>
   );
 };

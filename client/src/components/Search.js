@@ -1,6 +1,6 @@
 import React from "react";
 
-function Search() {
+function Search({ handleSearch }) {
   return (
     <div className="search">
       {/* <label></label> */}
@@ -8,6 +8,9 @@ function Search() {
         className="search-input"
         type="text"
         placeholder="search videos..."
+        onKeyUp={(e) => {
+          handleSearch(e.target.value);
+        }}
       />
     </div>
   );
