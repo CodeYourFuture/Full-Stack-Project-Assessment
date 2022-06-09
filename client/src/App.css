@@ -1,3 +1,212 @@
 .App {
   text-align: center;
+  max-width: 1244px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+}
+
+.title-container {
+  margin: 2rem auto;
+  width: 90%;
+  font-family: "Neonderthaw", cursive;
+  background-color: #15616d;
+}
+
+.title-container h1 {
+  font-size: 40px;
+  color: #ffecd1;
+  margin: 8px 0 8px 0;
+}
+
+.add-search-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: auto;
+  align-items: center;
+}
+
+.add-search-container button {
+  font-size: 0.9rem;
+  width: 6rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: #15616d;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  margin: 0;
+}
+.add-button {
+  width: 20%;
+}
+
+.add {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.search {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.search input,
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.field-button-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.field-button-container button {
+  color: white;
+  border: none;
+  width: 4rem;
+}
+
+.field-button-container .red {
+  background-color: #c00021;
+}
+
+.field-button-container .green {
+  background-color: green;
+}
+
+.video-container {
+  margin: 1rem auto;
+}
+
+ul {
+  gap: 2rem;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  border: 1px solid #15616d;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 1rem;
+  height: 30%;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card-footer h3 {
+  font-size: 20px;
+}
+
+.delete {
+  font-size: 15px;
+  color: white;
+  background-color: #c00021;
+  border-radius: 5px;
+  border: none;
+  width: 4rem;
+  margin: 5px 0 5px 0;
+}
+
+i {
+  cursor: pointer;
+}
+
+i.fas.fa-thumbs-down {
+  color: #c00021;
+}
+
+i.fas.fa-thumbs-up {
+  color: green;
+}
+
+@media only screen and (min-width: 750px) {
+  .title-container {
+    margin: 2rem auto 0rem auto;
+  }
+
+  .title-container h1 {
+    font-size: 60px;
+  }
+
+  .add-search-container {
+    display: flex;
+    /* justify-content: center; */
+    height: 6rem;
+  }
+
+  .add {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50%;
+  }
+
+  .add-button-container {
+    width: 20%;
+    display: flex;
+    padding-left: 30px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+  .search {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 30px;
+  }
+
+  .search input,
+  label {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .search input {
+    margin-left: 10px;
+  }
+
+  .field-button-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+  }
 }
