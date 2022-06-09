@@ -20,6 +20,7 @@
     "react-player": "^2.9.0",
     "react-scripts": "4.0.3",
     "react-video-js-player": "^1.1.1",
+    "react-youtube": "^9.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

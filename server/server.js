@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const Client3 = require("nedb");
 app.use(cors());
 const { Client } = require("pg");
 app.use(express.json()); // before our routes definition
@@ -14,12 +15,20 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-const client = new Client({
+const client = new Client( {
   host: "localhost",
   user: "postgres",
   database: "videos",
   port: 5432,
 });
+// client.loadDatabase();
+// client.insert({id: 1,  tite: "the best ", rting: 79, url: "$https://youtu.be/xVYa20DCUv0$"});
+
+const client2 = new Client3('Database.db');
+
+client2.loadDatabase();
+client2.insert({id: 1,  title: "the best ", rating: 7, url: "$https://youtu.be/xVYa20DCUv0$"});
+
 app.get("/thevideos", (req, res) => {
 
   client
@@ -37,7 +46,6 @@ app.post("/thevideos", (req, res) => {
   let ratingOne = req.body.rating;
 
   const query =
-    "INSERT INTO videos(id, title, url, rating)VALUES($7, $the best movies, $https://youtu.be/xVYa20DCUv0$, $34993)";
   client
     .query(query, [idOne, titleOne, urlOne, ratingOne])
     .then(() => res.send("result.rows"))
@@ -64,7 +72,7 @@ app.post("/datas", (req, res) => {
 app.get("/datas/:id", (req, res) => {
   console.log(req.params.id);
   let myId = req.params.id;
-  res.send('hi get id with ${myId}');
+  res.send('das', {myId},'hi get id with ${myId}');
 });
 
 //delete data spicifice id
@@ -79,6 +87,12 @@ app.delete("/datas/:id", (req, res) => {
     res.status(404).json({ message: "video  be deleted", result: "fauilur" });
   }
 });
+app.get("/datas", (req, res) => {
+  let lat = req.query;
+  console.log(lat.rating);
+  res.send(`You searched for Lat: ${lat} and Lng: `);
+});
+
 // function  routre(){
 //   console.log("hello world");
 // }

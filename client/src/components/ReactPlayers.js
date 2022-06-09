@@ -6,17 +6,19 @@ const ReactPlayers = ({ orl }) => {
   const [addVoted, setAddVoted] = useState(0);
 
   const buttonClick = () => {
-    setAddVoted(addVoted + 1);
+    setAddVoted(substract => substract - 1);
   };
-  return (
+  return (<div>
+   
     <span className="spanCard">
-      <ReactPlayer controls url={orl} width="480px" height="240px" />
+      <ReactPlayer controls   url={orl} width="480px" height="240px" />
+      
 
       <button onClick={buttonClick} type="button" className="btn btn-danger">
-        Dislike {<i class="fas fa-thumbs-up"></i>} : {addVoted}
+        Dislike {<i className="fas fa-thumbs-up"></i>} : {addVoted}
 
       </button>
-    </span>
+    </span></div>
   );
 };
 export default ReactPlayers;

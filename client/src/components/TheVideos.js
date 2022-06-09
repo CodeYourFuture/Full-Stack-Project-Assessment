@@ -3,6 +3,7 @@ import Package from "../data/exampleresponse.json";
 import OrderResult from "./OrderResult";
 import ReactPlayers from "./ReactPlayers";
 import NewVideos from "./NewVideos";
+import Asending from "./Asending";
 
 const TheVideos = ({ lik}) => {
   const [allVoted, setAllVoted] = useState(0);
@@ -13,41 +14,11 @@ const TheVideos = ({ lik}) => {
     console.log(setAllVoted);
     setAllVoted(allVoted + 1);
   };
-  function addButton(){
-
-   let addtoButton = document.querySelector("#firstButton");
-   if(addtoButton){
-
-     addtoButton.addEventListener("click", () => {
-       alert("hello");
-      return  document.body.style.backgroundColor = "blue";
-      });
-    }
-  }
-  addButton();
-  function deletButton(){
-
-    let deltButton = document.querySelector("#secondButton");
-    let classContainer = document.querySelector(".allVideos");
-
-    let idsearch = document.querySelector("#search");
-
-    if(deltButton){
- 
-      deltButton.addEventListener("click", () => {
-        let pragraph = document.createElement("p");
-        pragraph.classList.add(pragraph.styling);
-        pragraph.innerText = idsearch.value;
-        classContainer.appendChild(pragraph);
-        idsearch.value = "";
-        console.log(pragraph);
-       return  document.body.style.backgroundColor = "blue";
-       });
-     }
-   }
-   deletButton();
+  
+  
   return (
     <div className="div2">
+      
       <OrderResult/>
       <label id="search">
         <input
@@ -66,10 +37,12 @@ const TheVideos = ({ lik}) => {
         }else{
           return null;
         }
-        }).map((lik, i) => {
-        return (
-          <div className="allVideos"  key={i}>
-            <h2>{lik.title}</h2>
+        })
+        .map((lik, i) => {
+          <Asending titl={lik.title} rat={lik.rating}/>
+          return (
+            <div className="allVideos"  key={i}>
+            <h2> {lik.title}</h2>
             <p>
               {" "}
               {lik.id} " {lik.rating}
@@ -81,9 +54,10 @@ const TheVideos = ({ lik}) => {
               className="btn btn-primary"
             >
               {" "}
-              like {<i class="fas fa-thumbs-up"></i>} :{allVoted}
+              like {<i className="fas fa-thumbs-up"></i>} :{allVoted}
             </button>   
-            {<ReactPlayers   orl={lik.url} />}
+
+            {<ReactPlayers   orl={lik.url}  />}
 
             <div className="firstP">  {<NewVideos />} </div>
                </div>

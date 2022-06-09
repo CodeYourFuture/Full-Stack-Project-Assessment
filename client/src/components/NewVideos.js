@@ -2,7 +2,7 @@ import React from 'react';
 function NewVideos() {
     //const [user, setUser] = useState("");
 
-    function RemoveId(data) {
+    function RemoveId() {
       //alert("hello")
       //const newTodo =  document.createElement("li");
       
