@@ -1,3 +1,58 @@
+@font-face {
+    font-family: 'Mechanismo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Mechanismo Regular'), url('Mechanismo.woff') format('woff');
+    }
+
 .App {
-  text-align: center;
+  
+  color: #85daed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
 }
+h1 {
+  letter-spacing: 1rem;
+  font-size: 5.5vw;
+  font-family: 'Mechanismo Regular';
+  display: inline;
+  
+  background: linear-gradient(to right, rgb(0, 157, 255), rgb(190, 96, 227));
+  background-clip:text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+.particles {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  /* opacity: 0.5; */
+  height: 1000px;
+  /* background-color: #7f5a83;
+  background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);  */
+}
+header {
+  height: 250px;
+  /* background: rgba(77,35,17, 0.5); */
+  width: 100vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* align-items: space-between; */
+}
+main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: space-between;
+}
+

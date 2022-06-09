@@ -1,0 +1,25 @@
+form {
+    
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+input {
+    height: 50%;
+    width: 38%;
+    background-color: #85daed;
+    border: none;
+    border-radius: 25px;
+}
+button {
+    background: rgb(196, 122, 225);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -1,0 +1,11 @@
+.like-dislike {
+    
+    display: flex;
+    flex-flow: row wrap;
+    width: 50%;
+    justify-content: space-around;
+}
+.icon {
+    font-size: 35px;
+    cursor: pointer;
+}
