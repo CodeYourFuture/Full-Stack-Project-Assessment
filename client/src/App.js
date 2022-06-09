@@ -13,14 +13,23 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(data); // The videos to be displayed
+  const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
+
+  console.log(videos);
 
   // Adds a video
   const addVideo = (title, url) => {
-    if (!url || !url.includes("youtube")) {
-      // If the url doesn't or the url is not from youtube
+    if (!title) {
+      // If the title is not provided
+      setTitleError(true);
+    } else if (!url || !url.includes("youtube")) {
+      // If the url is not provided or the url is not from youtube
+      setTitleError(false);
       setUrlError(true);
     } else {
+      // Resets the previous errors if any
+      setTitleError(false);
       setUrlError(false);
       const copyOfVideos = [...videos];
       const fixedUrl = url.replace("watch?v=", "embed/"); // Changes the url to fix the iframe error
@@ -29,6 +38,7 @@ const App = () => {
         title: title,
         url: fixedUrl,
         rating: 0,
+        posted: new Date().toLocaleString(), // Gets the time when the video was posted
       };
       copyOfVideos.push(newVideo);
       setVideos(copyOfVideos);
@@ -36,17 +46,20 @@ const App = () => {
   };
 
   // Deletes a video
-  const deleteVideo = (video) => {
+  const deleteVideo = (id) => {
     const copyOfVideos = [...videos];
+    const video = copyOfVideos.find((video) => video.id === id);
     const index = copyOfVideos.indexOf(video);
     copyOfVideos.splice(index, 1);
     setVideos(copyOfVideos);
   };
 
   // Handles the video rating
-  const vote = (video, voteType) => {
+  const vote = (id, voteType) => {
     const copyOfVideos = [...videos];
+    const video = copyOfVideos.find((video) => video.id === id);
     const index = copyOfVideos.indexOf(video);
+    // Checks if the video is liked or disliked
     copyOfVideos[index].rating =
       voteType === "up"
         ? copyOfVideos[index].rating + 1
@@ -58,7 +71,11 @@ const App = () => {
     <Context.Provider value={{ deleteVideo, vote }}>
       <div className="App">
         <Header />
-        <AddVideo addVideo={addVideo} urlError={urlError} />
+        <AddVideo
+          addVideo={addVideo}
+          titleError={titleError}
+          urlError={urlError}
+        />
         <Videos videos={videos} handleDelete={deleteVideo} />
       </div>
     </Context.Provider>

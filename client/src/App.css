@@ -33,6 +33,7 @@ code {
   margin-bottom: 15%;
 }
 
+/* AddVideo.js */
 .Add-video {
   display: flex;
   flex-direction: column;
@@ -40,6 +41,7 @@ code {
   margin-bottom: 3em;
 }
 
+/* Video.js */
 .Video {
   width: 100%;
   margin-bottom: 5em;
@@ -56,12 +58,14 @@ code {
   height: 40vh;
 }
 
+/* Rating.js */
 .Rating {
   display: flex;
   justify-content: space-around;
 }
 
 @media screen and (min-width: 900px) {
+  /* Videos.js */
   .Videos {
     display: grid;
     grid-template-columns: repeat(4, auto);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const AddVideo = ({ addVideo, urlError }) => {
+const AddVideo = ({ addVideo, titleError, urlError }) => {
   // Form controls
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -36,7 +36,14 @@ const AddVideo = ({ addVideo, urlError }) => {
       <Button variant="contained" onClick={handleForm}>
         Add
       </Button>
-      {urlError ? <p>Please enter a YouTube URL</p> : ""}
+      {/* Displays the form error type */}
+      {titleError ? (
+        <p>Please enter a title</p>
+      ) : urlError ? (
+        <p>Please enter a YouTube URL</p>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

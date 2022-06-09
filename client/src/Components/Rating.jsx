@@ -5,14 +5,14 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 import Context from "../Context/Context";
 
-const Rating = ({ rating, video }) => {
+const Rating = ({ rating, videoId }) => {
   const ctx = useContext(Context);
 
   return (
     <div className="Rating">
-      <ThumbUpIcon onClick={() => ctx.vote(video, "up")} />
+      <ThumbUpIcon onClick={() => ctx.vote(videoId, "up")} />
       <p>{rating}</p>
-      <ThumbDownIcon onClick={() => ctx.vote(video, "down")} />
+      <ThumbDownIcon onClick={() => ctx.vote(videoId, "down")} />
     </div>
   );
 };

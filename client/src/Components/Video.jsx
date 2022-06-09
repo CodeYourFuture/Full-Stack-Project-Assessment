@@ -7,26 +7,32 @@ import Rating from "./Rating";
 
 import Context from "../Context/Context";
 
-const Video = ({ data }) => {
+const Video = ({ id, title, url, rating, posted }) => {
   const ctx = useContext(Context);
 
-  let shortTitle = "";
+  // Trims the title if it's too long
+  let trimmedTitle = "";
   for (let i = 0; i < 20; i++) {
-    shortTitle += data.title[i];
+    trimmedTitle += title[i];
   }
-  shortTitle = shortTitle.concat("...");
-  console.log(shortTitle);
+  trimmedTitle = trimmedTitle.concat("...");
 
   return (
     <div className="Video">
-      <h2 className="video-title">{shortTitle}</h2>
-      <iframe className="frame" title={data.title} src={data.url}></iframe>
-      <Rating rating={data.rating} video={data} />
+      <h2 className="video-title">
+        {/* Shows the smaller title */}
+        {title.length < 20 ? title : trimmedTitle}
+      </h2>
+      <iframe className="frame" title={title} src={url}></iframe>
+      <Rating videoId={id} rating={rating} />
+      <p>Posted: {posted ? posted : "N/A"}</p>
+      {/* Alternate text if the video
+      does not have a posted date */}
       <Button
         variant="contained"
         color="error"
         startIcon={<DeleteIcon />}
-        onClick={() => ctx.deleteVideo(data)}
+        onClick={() => ctx.deleteVideo(id)}
       >
         Delete
       </Button>
