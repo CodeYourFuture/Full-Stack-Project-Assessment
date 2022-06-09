@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
-import exampleresponse from "./exampleresponse.json";
+import React, { useState } from "react";
 
-const Rating = props => {
-  const [rate,setRate] =useState(props.rating)
-    return <>
-    <div>
-            <button
-              onClick={e=>{
-                  setRate(rate+1);
-                  exampleresponse.filter((I)=>I.id === props.ratingId).id =+1
-                  props.rating = rate;
-            }
-              }
-            >
-              up
-            </button>
-            <p>{rate}</p>
-            <button
-              onClick={(e) =>
-                {
-                  setRate(rate - 1);
-                  exampleresponse[props.rating] = rate;
-                }
-                
-              }
-            >
-              down
-            </button>
-            </div>
-            </>;
-}
- 
+const Rating = (props) => {
+  const [rate, setRate] = useState(props.rating);
+  const increase = () => {
+    setRate((rate) => rate + 1);
+  };
+  const decrease = () => {
+    setRate((rate) => rate - 1);
+  };
+
+  return (
+    <>
+      <div>
+        <button onClick={(e) => increase()}>up</button>
+        <p>{rate}</p>
+
+        <button onClick={(e) => decrease()}>down</button>
+      </div>
+    </>
+  );
+};
+
 export default Rating;

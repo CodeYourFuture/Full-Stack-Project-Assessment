@@ -1,9 +1,19 @@
 .App {
   text-align: center;
+  background-color:#0ff082;
 }
 .addingOptionHidden{
   display : none;
 }
 .addingOptionVisible{
   display: contents;
+}
+
+
+@media (max-width: 600px) {
+  .App {
+    display: flex;
+    justify-content: space-between;
+    background-color:#dbf7fa;
+  }
 }
