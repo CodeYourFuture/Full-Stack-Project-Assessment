@@ -41,7 +41,7 @@ const Search = () => {
             value={searchInput}
             onChange={e=>handleSearchInput(e)}
           />
-          <button> Click me </button>
+          {/* <button> Click me </button> */}
         </div>
         <div >
           <VideoList filterData={filterData} />

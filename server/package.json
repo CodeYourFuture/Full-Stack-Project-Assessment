@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "server": "node server.js"
+    "server": "node server.js",
+    "start" :"/.node_modules/.bin/netlify-lambda server src",
+        "build": "/.node_modules/.bin/netlify-lambda build src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "netlify-lambda": "^2.0.15",
+    "serverless-http": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
