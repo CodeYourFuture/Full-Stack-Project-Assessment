@@ -1,5 +1,5 @@
 .single-vid {
-    background: rgba(0, 157, 255, 0.7);
+    background: rgba(190, 96, 227, 0.5);
     margin: 20px;
     width: 25vw;
     display: flex;
@@ -7,15 +7,17 @@
     justify-content: space-around;
     align-items: center;
     height: auto;
+    border-radius: 20px;
     
 }
 
 iframe {
-    width: 100%;
+    width: 90%;
     height: 100%;
 }
 p {
     font-size: 1.5rem;
     margin: 10px;
+    text-transform: capitalize;
 }
 

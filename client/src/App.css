@@ -5,6 +5,10 @@
     src: local('Mechanismo Regular'), url('Mechanismo.woff') format('woff');
     }
 
+  /* html {
+    background: black;
+  } */
+
 .App {
   
   color: #85daed;
