@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import exampleresponse from "./exampleresponse.json";
+import React from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 import Rating from "./Rating";
-const VideoList = () => {
+const VideoList = (props) => {
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
@@ -19,12 +18,12 @@ const VideoList = () => {
  
   
   return (
-    <div>
-      {exampleresponse.map((a) => (
+    <div className="video-container">
+      {props.filterData.map((a) => (
         <div>
           <p>{a.title} </p>
           <div>
-            <Rating  rating={a.rating} ratingId={a.id} />
+            <Rating rating={a.rating} ratingId={a.id} />
           </div>
           <YouTube
             videoId={a.url.split("watch?v=")[1]}
