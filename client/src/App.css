@@ -1,3 +1,14 @@
+:root {
+  --blue-sky: rgb(235, 235, 241);
+  --blue-light: rgb(219, 219, 241);
+  --blue-mid: #183153;
+  --red-dark: darkred;
+}
+
+*:focus {
+  outline: none;
+}
+
 .App {
   text-align: center;
 }
