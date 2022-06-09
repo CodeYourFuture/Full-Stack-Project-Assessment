@@ -11,7 +11,7 @@ const Header = () => {
         <div className="ham"></div>
         <div className="ham"></div>
       </div>
-      <h1>Craig Tube</h1>
+      <h1>Tube</h1>
     </header>
   );
 };

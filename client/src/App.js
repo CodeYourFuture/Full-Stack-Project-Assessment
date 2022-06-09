@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Header from "./Components/Header";
 import AddVideo from "./Components/AddVideo";
 import Videos from "./Components/Videos";
+import DeleteModal from "./Components/DeleteModal";
 
 import Context from "./Context/Context";
 
@@ -15,9 +16,11 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(data); // The videos to be displayed
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false); // Toggles the form to add video
   const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [toDelete, setToDelete] = useState();
 
   // Adds a video
   const addVideo = (title, url) => {
@@ -46,6 +49,11 @@ const App = () => {
     }
   };
 
+  const deleteConfirm = (id) => {
+    setModal(true);
+    setToDelete(id);
+  };
+
   // Deletes a video
   const deleteVideo = (id) => {
     const copyOfVideos = [...videos];
@@ -69,19 +77,20 @@ const App = () => {
   };
 
   return (
-    <Context.Provider value={{ deleteVideo, vote }}>
+    <Context.Provider value={{ deleteConfirm, vote }}>
       <div className="App">
         <Header />
-        <Button
-          sx={{
-            mb: 5,
-          }}
-          variant="contained"
-          onClick={() => setShowForm(true)}
-        >
-          Add Video
-        </Button>
-        {showForm && (
+        {!showForm ? (
+          <Button
+            sx={{
+              mb: 5,
+            }}
+            variant="contained"
+            onClick={() => setShowForm(true)}
+          >
+            Add Video
+          </Button>
+        ) : (
           <AddVideo
             addVideo={addVideo}
             titleError={titleError}
@@ -89,7 +98,14 @@ const App = () => {
             closeForm={() => setShowForm(false)}
           />
         )}
-        <Videos videos={videos} handleDelete={deleteVideo} />
+        <Videos videos={videos} />
+        {modal && (
+          <DeleteModal
+            id={toDelete}
+            handleDelete={deleteVideo}
+            closeModal={setModal}
+          />
+        )}
       </div>
     </Context.Provider>
   );

@@ -32,7 +32,7 @@ const Video = ({ id, title, url, rating, posted }) => {
         variant="contained"
         color="error"
         startIcon={<DeleteIcon />}
-        onClick={() => ctx.deleteVideo(id)}
+        onClick={() => ctx.deleteConfirm(id)}
       >
         Delete
       </Button>
