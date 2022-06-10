@@ -16,6 +16,19 @@ const VideoPanel = ({key, video, updateRating}) => {
 
           }
 
+          const uploadedTime = () => {
+                let date = new Date();
+                var options = {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  second: "numeric",
+                };
+                return date.toLocaleDateString("en-UK", options);
+          }
+
           
           return (
             <div key={key}>
@@ -37,10 +50,21 @@ const VideoPanel = ({key, video, updateRating}) => {
                 ></iframe>
               </div>
               <div>
-                <img alt="dislike" onClick={dislikeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-dislike-feedback-kmg-design-detailed-outline-kmg-design.png" />
+                <img
+                  alt="dislike"
+                  onClick={dislikeClick}
+                  src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-dislike-feedback-kmg-design-detailed-outline-kmg-design.png"
+                />
                 {rate}
-                <img alt="like" onClick={likeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-like-feedback-kmg-design-detailed-outline-kmg-design.png" />
+                <img
+                  alt="like"
+                  onClick={likeClick}
+                  src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-like-feedback-kmg-design-detailed-outline-kmg-design.png"
+                />
               </div>
+              <div>Posted on: {video.date}</div>
+              <div>Uploaded at: {uploadedTime()}</div>
+              {/* <div>{video.date}</div> */}
             </div>
           );
     
