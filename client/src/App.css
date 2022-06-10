@@ -1,28 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300;400&family=Tiro+Devanagari+Marathi&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300;400&family=Tiro+Devanagari+Marathi&display=swap");
 
-/* font-family: 'Lobster', cursive;
-font-family: 'Raleway', sans-serif;
-font-family: 'Tiro Devanagari Marathi', serif; */
 
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-.App {
+
+iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
 
+.MuiCard-root {
+  margin-bottom: 1.5em;
+  height: calc(100% - 1.5em);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.video-title-container {
+  align-self: center;
+  height: 100%;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+.MuiButtonGroup-root {
+  text-align: center;
+}
 /* FONTS */
 .page-title {
   text-align: center;
-  font-family: 'Lobster', cursive;
-  font-size: 5rem;
-}
-
-.video-title {
-  font-family: 'Tiro Devanagari Marathi', serif;
-  font-size: 2.5rem;
+  font-family: "Lobster", cursive;
+  font-size: 3.5rem;
 }
 
 /* DISPLAY */

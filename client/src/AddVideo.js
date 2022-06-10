@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SingleVideo from "./SingleVideo";
+import {Container, Row, Col} from 'react-bootstrap'
 import moment from "moment"
 
 const AddVideo = ({ setVideos, videos }) => {
@@ -7,7 +8,6 @@ const AddVideo = ({ setVideos, videos }) => {
   const [addUrl, setAddUrl] = useState("");
   const [validInput, setValidInput] = useState("");
   const [showAddVideo, setShowAddVideo] = useState(false);
-  // const [dateAdded, setDateAdded] = useState("");
 
   
 
@@ -66,11 +66,17 @@ const AddVideo = ({ setVideos, videos }) => {
       <button onClick={() => setShowAddVideo(true)}>Add Video</button>
       {showAddVideo && showAddVideoInput}
       <section className="show-videos">
-        {videos
-          .sort((a, b) => b.rating - a.rating)
-          .map((video, index) => (
-            <SingleVideo video={video} key={video.id} index={index} videos={videos} setVideos={setVideos} />
-          ))}
+        <Container fluid>
+          <Row>
+            {videos
+              .sort((a, b) => b.rating - a.rating)
+              .map((video, index) => (
+                <Col xs={12} sm={6} lg={4} xl={3} key={video.id}>
+                  <SingleVideo video={video} index={index} videos={videos} setVideos={setVideos} />
+                </Col>
+              ))}
+          </Row>
+        </Container>
       </section>
     </>
   );
