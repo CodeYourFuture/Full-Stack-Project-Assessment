@@ -1,8 +1,9 @@
 import React from 'react'
-import VideoList from './components/VideoList';
-import './App.css'
+import VideoList from '../details/VideoList';
+import '../../App.css'
 
 function App() {
+  // const [searchTest, setSearchText] = useState('');
   return (
     <div className="App">
       <header className="App-header">

@@ -68,7 +68,6 @@ h3 {
 
 .add-video {
   display: flex;
-  margin: 30px;
   text-align: left;
   align-self: flex-start;
 }
@@ -91,4 +90,27 @@ iframe {
 .btn-success {
   background-color: #00620a;
   color: #fff;
+}
+
+img:hover{
+  cursor: pointer;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.search {
+  margin-bottom: 20px
+}
+nav {
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -19,6 +19,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // GET "/"
 app.get("/videos", (req, res) => {
   const videos = JSON.parse(readFileSync("./data/exampleresponse.json", "utf8"))
+  
   res.json(videos)
 });
 
