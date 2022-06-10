@@ -1,11 +1,10 @@
 import "./App.css";
+import Homepage from './components/Homepage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+     <Homepage/>
     </div>
   );
 }
