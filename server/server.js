@@ -1,12 +1,15 @@
 const express = require("express");
-
 const app = express();
+
 const port = process.env.PORT || 5000;
 
 var cors = require("cors");
+const bodyParser = require("body-parser");
 
 app.use(cors());
+app.use(bodyParser.json());
 
+const { v4: uuidv4 } = require("uuid");
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -85,11 +88,26 @@ app.delete("/deletedvideo/:id", (req, res) => {
   const deletedVideo = videos.findIndex((video) => video.id == id);
   if (deletedVideo !== -1) {
     videos.splice(deletedVideo, 1);
-    res.status(200).send(`video with the id, ${id} is deleted`);
+    res.status(200).json(videos);
   } else {
     res.status(404).json({
       result: "failure",
       msg: "impossible to delete this video",
     });
   }
+});
+
+app.post("/api/addnewvideo", (req, res) => {
+  const newAddedVideo = req.body;
+  console.log(req.body);
+  newAddedVideo.id = uuidv4();
+  if (
+    newAddedVideo.title.length === 0 ||
+    newAddedVideo.url.length === 0 ||
+    newAddedVideo.rating.length === 0
+  ) {
+    return res.status(400).json({ msg: "please include all the fields" });
+  }
+  videos.push(newAddedVideo);
+  res.json(videos);
 });

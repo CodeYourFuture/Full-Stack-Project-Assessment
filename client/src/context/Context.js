@@ -5,19 +5,21 @@ const Context = ({ children }) => {
   const [videoData, setVideoData] = useState([]);
   const [newVideo, setNewVideo] = useState(false);
   const [videoInfo, setVideoInfo] = useState({
-    link: "",
-    name: "",
+    title: "",
+    url: "",
+    rating: "",
   });
 
   const handleChange = (key, value) => {
+    console.log(key, value);
     setVideoInfo({ ...videoInfo, [key]: value });
   };
 
-  const handleSubmit = (event) => {
-    // prevents the submit button from refreshing the page
-    event.preventDefault();
-    setVideoInfo({ URL: "", name: "" });
-  };
+  // const handleSubmit = (event) => {
+  //   // prevents the submit button from refreshing the page
+  //   event.preventDefault();
+  //   setVideoInfo({ link: "", name: "" });
+  // };
 
   useEffect(() => {
     const getVideosData = async () => {
@@ -47,12 +49,32 @@ const Context = ({ children }) => {
       );
       const remainedData = await response.json();
       setVideoData(remainedData);
-      console.log(remainedData);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const addNewVideoHandler = async () => {
+    const newAddedVideo = videoInfo;
+    console.log(newAddedVideo);
+    const postOpt = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newAddedVideo),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/addnewvideo",
+        postOpt
+      );
+      const newVideoData = await response.json();
+      setVideoData(newVideoData);
+      setNewVideo(false);
+    } catch (error) {
+      console.log(error);
+      setVideoData([]);
+    }
+  };
   return (
     <UserContext.Provider
       value={{
@@ -64,7 +86,7 @@ const Context = ({ children }) => {
         videoInfo,
         setVideoInfo,
         handleChange,
-        handleSubmit,
+        addNewVideoHandler,
       }}
     >
       {children}

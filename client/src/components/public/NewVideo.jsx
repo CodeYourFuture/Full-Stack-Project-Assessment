@@ -3,32 +3,46 @@ import "../../styles/newvideo.css";
 import UserContext from "../../context/UserContext";
 
 const NewVideo = () => {
-  const { setNewVideo, videoInfo, handleChange, handleSubmit } =
+  const { setNewVideo, videoInfo, handleChange, addNewVideoHandler } =
     useContext(UserContext);
+
   return (
     <article className="newvideo_container">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          addNewVideoHandler();
+        }}
+      >
         <div>
           <h2>Add a New Video:</h2>
         </div>
         <div>
           <input
-            value={videoInfo.link}
+            value={videoInfo.url}
             type="text"
-            placeholder="enter URL"
-            onChange={(e) => handleChange("link", e.target.value)}
+            placeholder="URL..."
+            onChange={(e) => handleChange("url", e.target.value)}
           />
         </div>
         <div>
           <input
-            value={videoInfo.name}
+            value={videoInfo.title}
             type="text"
-            placeholder="Add Video Title"
-            onChange={(e) => handleChange("name", e.target.value)}
+            placeholder="Title..."
+            onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
         <div>
-          <button onSubmit={handleSubmit}>Add</button>
+          <input
+            value={videoInfo.rating}
+            type="text"
+            placeholder="Rating..."
+            onChange={(e) => handleChange("rating", e.target.value)}
+          />
+        </div>
+        <div>
+          <button type="submit">Add</button>
         </div>
         <div>
           <button
