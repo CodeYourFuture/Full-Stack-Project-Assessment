@@ -11,9 +11,9 @@ const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
-        console.log(filterData);
+        setFilterData(data)
       });
-  }, [filterData]);
+  }, []);
   const [searchInput, setSearchInput] = useState("");
   
 
