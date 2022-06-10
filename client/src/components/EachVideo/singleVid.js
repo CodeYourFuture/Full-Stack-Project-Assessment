@@ -19,7 +19,7 @@ function SingleVid({id, title, url, ratingFromData, removeVideo}) {
         <div key={id} className="single-vid">
             <p>{title}</p>
             <LikeDislike handleIncrement={handleIncrement} handleDecrement={handleDecrement} rating={rating}/>
-            <iframe width="560" height="315" src={url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <iframe width="560" height="315" src={url} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             <button onClick={() => removeVideo(id)}>Delete</button>
         </div>
             

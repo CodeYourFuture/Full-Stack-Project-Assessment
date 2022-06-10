@@ -16,6 +16,9 @@ input {
     border: none;
     border-radius: 25px;
 }
+input:focus {
+    background-color: rgb(193, 242, 193);
+}
 button {
     background: rgb(196, 122, 225);
     border: none;

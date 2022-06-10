@@ -1,7 +1,7 @@
 .single-vid {
-    background: rgba(190, 96, 227, 0.5);
+    background: #300052;
     margin: 20px;
-    width: 25vw;
+    min-width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -19,5 +19,6 @@ p {
     font-size: 1.5rem;
     margin: 10px;
     text-transform: capitalize;
+    color: #75d9eb;
 }
 
