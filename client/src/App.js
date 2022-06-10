@@ -9,6 +9,17 @@ function App() {
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
 
+  const insertNewVideo = (url, title) => {
+    const amendedUrl = url.replace("watch?v=", "embed/");
+    const addVideo = {
+      id: displayVideo.length + 1,
+      rating: 0,
+      title: title,
+      url: amendedUrl,
+    };
+    setDisplayVideo([...displayVideo].push(addVideo));
+  };
+
   const videoCountPlus = (id) => {
     const newCounterVideo = displayVideo.map((card) =>
       card.id === id ? { ...card, rating: card.rating + 1 } : card
@@ -50,7 +61,15 @@ function App() {
         <div>Add video</div>
       </div>
       <div>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            displayVideo.push({
+              title: newVidTitle,
+              url: newVidUrl,
+            });
+          }}
+        >
           <input
             className="inputBar"
             type="text"
@@ -69,16 +88,12 @@ function App() {
       </div>
       <button
         onClick={(e) => {
-          e.preventDefault();
-          setDisplayVideo({
-            title: newVidTitle,
-            url: newVidUrl,
-          });
+          displayVideo.insertNewVideo(e);
           setNewVidTitle("");
           setNewVidUrl("");
         }}
       >
-        Add a new Video
+        Add a new Video here!
       </button>
       <div>
         <ul className="card-container">
