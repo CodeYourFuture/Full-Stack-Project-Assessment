@@ -60,7 +60,7 @@ export default function App(props) {
     setVideos(newDelete);
   };
 
-function App() {
+/* function App() { */
   return (
     <IconContext.Provider value={{ style: { fontSize: "35px" } }}>
       <div className="App">
@@ -112,12 +112,12 @@ function App() {
                               <p className="rating-title">
                                 Vote: {video.rating}
                               </p>
-                              <button
-                                disabled={videos.rating <= 0}
+                              <span
+                                /* disabled={videos.rating <= 0} */
                                 onClick={() => downVote(video.id)}
                               >
                                 <FaThumbsDown className="rating-icon-down" />
-                              </button>
+                              </span>
                             </div>
                             <div onClick={() => deleteVideo(video.id)}>
                               <FaTrashAlt className="delete-icon" />
@@ -133,6 +133,4 @@ function App() {
       </div>
     </IconContext.Provider>
   );
-}
-
-export default App;
+}    

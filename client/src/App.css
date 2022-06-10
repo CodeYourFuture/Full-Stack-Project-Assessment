@@ -12,3 +12,102 @@
 .App {
   text-align: center;
 }
+
+.header-wrapper {
+  text-align: center;
+  background-color: var(--blue-light);
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  font-weight: 300;
+  letter-spacing: 0.8px;
+}
+
+.content-wrapper {
+  background-color: var(--blue-light);
+  justify-items: center;
+}
+
+.search-title {
+  font-weight: 300;
+  margin-block: 10px 30px;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.search-input {
+  width: 91%;
+}
+
+.search-icon {
+  padding-left: 7px;
+  color: var(--blue-mid);
+}
+
+.add-video-title {
+  font-weight: 300;
+  margin-top: 35px;
+}
+.add-video-btn {
+  background-color: var(--blue-mid);
+  color: white;
+}
+
+.card {
+  background: var(--blue-sky);
+  border: 0;
+}
+
+.video-wrapper {
+  border: 0;
+}
+.video-title {
+  font-weight: 300;
+}
+
+.icon-panel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.rating-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin-left: 18px;
+}
+.rating-icon-up {
+  color: var(--blue-mid);
+  padding-top: 3px;
+}
+
+.rating-icon-down {
+  margin-top: 8px;
+  color: var(--blue-mid);
+  padding-bottom: 3px;
+}
+
+.rating-title {
+  font-size: 1.4em;
+  font-weight: 300;
+  padding: 3px 15px;
+}
+
+.btn-video-delete {
+  padding: 0 3px;
+}
+
+.delete-icon {
+  color: var(--red-dark);
+  margin-right: 18px;
+  padding: 3px;
+}
