@@ -1,3 +1,8 @@
-.App {
-  text-align: center;
+.vote-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vote-icon {
+  font-size: 25px;;
 }
