@@ -1,3 +1,10 @@
 .App {
   text-align: center;
 }
+
+.display-none{
+  display:none;
+}
+.display-block{
+  display:block;
+}

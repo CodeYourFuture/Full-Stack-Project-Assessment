@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 
-const VideoPanel = ({video}) => {
+const VideoPanel = ({key, video, updateRating}) => {
         let codeRequired = video.url.split("=")[1];
           let srcLink =`https://www.youtube.com/embed/${codeRequired}`;
           // let srcLink = video.url.replace("watch?v=", "embed/")
           const [rate, setRate] = useState(video.rating);
+
           const likeClick =()=>{
+            updateRating(video.id, rate+1)
            setRate(rate+1)
           }
             const dislikeClick =()=>{
+              updateRating(video.id, rate-1);
            setRate(rate-1)
+
           }
 
           
           return (
-            <div>
+            <div key={key}>
               <div>
                 <h3>{video.title}</h3>
               </div>
@@ -33,9 +37,9 @@ const VideoPanel = ({video}) => {
                 ></iframe>
               </div>
               <div>
-                <img onClick={dislikeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-dislike-feedback-kmg-design-detailed-outline-kmg-design.png" />
+                <img alt="dislike" onClick={dislikeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-dislike-feedback-kmg-design-detailed-outline-kmg-design.png" />
                 {rate}
-                <img onClick={likeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-like-feedback-kmg-design-detailed-outline-kmg-design.png" />
+                <img alt="like" onClick={likeClick} src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-like-feedback-kmg-design-detailed-outline-kmg-design.png" />
               </div>
             </div>
           );
