@@ -9,8 +9,22 @@ function App() {
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
 
+  const videoCountPlus = (id) => {
+    const newCounterVideo = displayVideo.map((card) =>
+      card.id === id ? { ...card, rating: card.rating + 1 } : card
+    );
+    setDisplayVideo(newCounterVideo);
+  };
+
+  const videoCountMinus = (id) => {
+    const newCounterVideo = displayVideo.map((card) =>
+      card.id === id ? { ...card, rating: card.rating - 1 } : card
+    );
+    setDisplayVideo(newCounterVideo);
+  };
+
   const handleRemoveItem = (id) => {
-    const filteredVideos = exampleresponse.filter((card) => card.id !== id);
+    const filteredVideos = displayVideo.filter((card) => card.id !== id);
     setDisplayVideo(filteredVideos);
   };
 
@@ -61,10 +75,12 @@ function App() {
                   ></iframe>
                 }
               </p>
-              <p>Votes Counter</p>
+              <p>{card.rating}</p>
               <div className="button-container">
-                <button>Up Vote</button>
-                <button>Down Vote</button>
+                <button onClick={() => videoCountPlus(card.id)}>Up Vote</button>
+                <button onClick={() => videoCountMinus(card.id)}>
+                  Down Vote
+                </button>
               </div>
               <div>
                 <button onClick={() => handleRemoveItem(card.id)}>
