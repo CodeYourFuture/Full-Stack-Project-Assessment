@@ -14,9 +14,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
+    <div className="card text-center">
+      <header>
+        <h2 className="card-header">Video Recommendation</h2>
       </header>
       <button
         onClick={() => setAddVideo(true)}

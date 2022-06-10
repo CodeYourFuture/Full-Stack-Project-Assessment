@@ -16,9 +16,9 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
     setCount(count - 1);
   };
   return (
-    <section className="video-section">
-      <div className="video-container">
-        <h5> {video.title} </h5>
+    <section className="card">
+      <div className="card-body">
+        <h5 className="card-title"> {video.title} </h5>
         <img
           className="img-fluid"
           src={ThumbsImage}
@@ -42,13 +42,14 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
+        <div className ="col text-center">
         <button
           onClick={() => handleDeletedVideo(video.id)}
           type="button"
-          className="btn btn-danger"
-        >
+          className="btn btn-danger">
           Delete
         </button>
+        </div>
       </div>
     </section>
   );
