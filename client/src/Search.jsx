@@ -1,19 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import VideoList from "./VideoList";
 
-const Search = () => {
-  const [allData, setAllData] = useState([]);
- const [filterData, setFilterData] = useState([]);
-
-  useEffect(() => {
-    fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllData(data);
-        setFilterData(data)
-      });
-  }, []);
+const Search = (props) => {
+  
   const [searchInput, setSearchInput] = useState("");
   
 
@@ -22,12 +12,12 @@ const Search = () => {
     setSearchInput(query);
     
     if (query === "") {
-      setFilterData(allData);
+      props.setFilterData(props.allData);
     } else {
-      const filterArray = allData.filter((video) =>
+      const filterArray = props.allData.filter((video) =>
         video.title.toLowerCase().includes(query)
       );
-      setFilterData(filterArray);
+      props.setFilterData(filterArray);
     }
   }
   
@@ -39,12 +29,12 @@ const Search = () => {
             className=""
             placeholder="Search Video"
             value={searchInput}
-            onChange={e=>handleSearchInput(e)}
+            onChange={(e) => handleSearchInput(e)}
           />
           {/* <button> Click me </button> */}
         </div>
-        <div >
-          <VideoList filterData={filterData} />
+        <div>
+          <VideoList filterData={props.filterData} />
         </div>
       </>
     );

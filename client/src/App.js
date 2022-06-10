@@ -1,11 +1,21 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "./App.css";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
 
 
 function App() {
-  
+  const [allData, setAllData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+        setFilterData(data);
+      });
+  }, []);
   return (
     <>
       <div className="App">
@@ -14,13 +24,16 @@ function App() {
         </header>
         <main>
           <div>
-            <AddVideo/>
-             <Search/> 
+            <AddVideo />
+            <Search
+              allData={allData}
+              filterData={filterData}
+              setAllData={setAllData}
+              setFilterData={setFilterData}
+            />
           </div>
-          
         </main>
       </div>
-      
     </>
   );
 }
