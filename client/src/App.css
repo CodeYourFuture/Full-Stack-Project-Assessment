@@ -25,3 +25,8 @@ li {
   padding: 0.5rem;
 }
 
+.button-container {
+  background-color: #0bd3da;
+  display: flex;
+  justify-content: space-evenly;
+}
