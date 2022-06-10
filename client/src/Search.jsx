@@ -7,12 +7,12 @@ const Search = () => {
  const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/videos")
+    fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
         console.log(filterData);
-     } );
+      });
   }, [filterData]);
   const [searchInput, setSearchInput] = useState("");
   
