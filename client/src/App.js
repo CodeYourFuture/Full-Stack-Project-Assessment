@@ -1,16 +1,16 @@
 import React, {useState} from "react";
+import AddNewVideo from "./AddNewVideo";
 import "./App.css";
 import videoData from "./exampleresponse.json";
 import RenderVideo from "./RenderVideo";
 
 function App() {
   const [allVideos, setAllVideos] = useState(videoData);
+  const [addVideo, setAddVideo] = useState(false);
 
   //This deletes one video
-  const deleteVideos = (deletedVideoId) => {
-    setAllVideos(allVideos.filter((video) => {
-      return video.id !== deletedVideoId;
-    }))
+  const deleteVideos = (id) => {
+    setAllVideos((allVideos)=>allVideos.filter((video)=> video.id !== id))
   }
 
   return (
@@ -18,9 +18,31 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      {allVideos.map((video, index) =>
-        <RenderVideo video={video} handleDeletedVideo={deleteVideos} key={index} />
+      <button
+        onClick={() => setAddVideo(true)}
+        type="button"
+        className="btn btn-link"
+      >
+        Add Video
+      </button>
+      {addVideo && (
+        <AddNewVideo
+          newVideo={allVideos}
+          setAllVideos={setAllVideos}
+          setAddVideo={setAddVideo}
+        />
       )}
+      <div className="container">
+        <div className="row">
+          {allVideos
+            .sort((a, b) => b.rating - a.rating)
+            .map((video) => (
+              <div className="col-sm-4" key={video.id}>
+                <RenderVideo video={video} handleDeletedVideo={deleteVideos} />
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }
