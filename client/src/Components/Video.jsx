@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 
-import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import Rating from "./Rating";
@@ -25,17 +24,16 @@ const Video = ({ id, title, url, rating, posted }) => {
       </h2>
       <iframe className="frame" title={title} src={url}></iframe>
       <Rating videoId={id} rating={rating} />
-      <p>Posted: {posted ? posted : "N/A"}</p>
-      {/* Alternate text if the video
-      does not have a posted date */}
-      <Button
+      <DeleteIcon
         variant="contained"
         color="error"
-        startIcon={<DeleteIcon />}
         onClick={() => ctx.deleteConfirm(id)}
       >
         Delete
-      </Button>
+      </DeleteIcon>
+      {/* Alternate text if the video
+      does not have a posted date */}
+      <p>Posted: {posted || "N/A"}</p>
     </div>
   );
 };

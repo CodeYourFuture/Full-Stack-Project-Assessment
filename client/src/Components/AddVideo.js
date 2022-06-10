@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const AddVideo = ({ addVideo, titleError, urlError, closeForm }) => {
+const AddVideo = ({ addVideo, titleError, urlError, hideForm }) => {
   // Form controls
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -13,6 +13,12 @@ const AddVideo = ({ addVideo, titleError, urlError, closeForm }) => {
     addVideo(title, url);
   };
 
+  const closeForm = () => {
+    setTitle("");
+    setUrl("");
+    hideForm(false);
+  };
+
   return (
     <div className="Add-video">
       <TextField
@@ -20,6 +26,7 @@ const AddVideo = ({ addVideo, titleError, urlError, closeForm }) => {
           mb: 2,
         }}
         variant="standard"
+        error={titleError}
         label="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -29,19 +36,16 @@ const AddVideo = ({ addVideo, titleError, urlError, closeForm }) => {
           mb: 5,
         }}
         variant="standard"
+        error={urlError}
         label="URL"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
       <div className="form-buttons">
-        <Button variant="contained" onClick={submitForm}>
+        <Button variant="contained" color="success" onClick={submitForm}>
           Add
         </Button>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => closeForm(false)}
-        >
+        <Button variant="contained" color="error" onClick={closeForm}>
           Cancel
         </Button>
       </div>

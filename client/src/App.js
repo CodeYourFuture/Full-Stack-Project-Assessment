@@ -16,7 +16,7 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(data); // The videos to be displayed
-  const [showForm, setShowForm] = useState(false); // Toggles the form to add video
+  const [hideForm, setHideForm] = useState(false); // Toggles the form to add video
   const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
   const [modal, setModal] = useState(false);
@@ -35,7 +35,7 @@ const App = () => {
       // Resets the previous errors if any
       setTitleError(false);
       setUrlError(false);
-      const copyOfVideos = [...videos];
+      // const copyOfVideos = [...videos];
       const fixedUrl = url.replace("watch?v=", "embed/"); // Changes the url to fix the iframe error
       const newVideo = {
         id: uuid4(),
@@ -44,11 +44,13 @@ const App = () => {
         rating: 0,
         posted: new Date().toLocaleString(), // Gets the time when the video was posted
       };
-      copyOfVideos.push(newVideo);
-      setVideos(copyOfVideos);
+      // copyOfVideos.push(newVideo);
+      // setVideos(copyOfVideos);
+      setVideos([...videos, newVideo]);
     }
   };
 
+  // Modal
   const deleteConfirm = (id) => {
     setModal(true);
     setToDelete(id);
@@ -56,11 +58,12 @@ const App = () => {
 
   // Deletes a video
   const deleteVideo = (id) => {
-    const copyOfVideos = [...videos];
-    const video = copyOfVideos.find((video) => video.id === id);
-    const index = copyOfVideos.indexOf(video);
-    copyOfVideos.splice(index, 1);
-    setVideos(copyOfVideos);
+    // const copyOfVideos = [...videos];
+    // const video = copyOfVideos.find((video) => video.id === id);
+    // const index = copyOfVideos.indexOf(video);
+    // copyOfVideos.splice(index, 1);
+    // setVideos(copyOfVideos);
+    setVideos(videos.filter((video) => video.id !== id));
   };
 
   // Handles the video rating
@@ -80,13 +83,13 @@ const App = () => {
     <Context.Provider value={{ deleteConfirm, vote }}>
       <div className="App">
         <Header />
-        {!showForm ? (
+        {!hideForm ? (
           <Button
             sx={{
               mb: 5,
             }}
             variant="contained"
-            onClick={() => setShowForm(true)}
+            onClick={() => setHideForm(true)}
           >
             Add Video
           </Button>
@@ -95,7 +98,7 @@ const App = () => {
             addVideo={addVideo}
             titleError={titleError}
             urlError={urlError}
-            closeForm={() => setShowForm(false)}
+            hideForm={() => setHideForm()}
           />
         )}
         <Videos videos={videos} />
