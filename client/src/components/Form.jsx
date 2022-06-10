@@ -1,4 +1,3 @@
-
 const Form = ({ handleAddFormSubmit, handleAddFormChange, setDisplayForm }) => {
   return (
     <form onSubmit={handleAddFormSubmit}>
@@ -24,8 +23,12 @@ const Form = ({ handleAddFormSubmit, handleAddFormChange, setDisplayForm }) => {
         />
       </label>
       <br />
-      <button onClick={() => setDisplayForm(false)}>Cancel</button>
-      <button type="submit">ADD</button>
+      <button className="button" onClick={() => setDisplayForm(false)}>
+        Cancel
+      </button>
+      <button className="button" type="submit">
+        ADD
+      </button>
     </form>
   );
 };

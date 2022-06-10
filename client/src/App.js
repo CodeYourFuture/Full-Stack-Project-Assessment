@@ -7,12 +7,16 @@ import Form from "./components/Form";
 
 function App() {
   const [displayForm, setDisplayForm] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
+  // const [searchInput, setSearchInput] = useState("");
   const [videos, setVideos] = useState(data);
   const [addFormData, setAddFormData] = useState({
     title: "",
     url: "",
   });
+
+  // function handleSearchInput(event) {
+  //   setSearchInput(event.target.value);
+  // }
 
   // const isVideoSearch = videos.map((video) => {
   //   return video.title.includes(searchInput);
@@ -66,10 +70,6 @@ function App() {
     setVideos(newVideos);
   };
 
-  function handleSearchInput(event) {
-    setSearchInput(event.target.value);
-  }
-
   return (
     <div className="app">
       <header className="app-header">
@@ -94,7 +94,7 @@ function App() {
           )}
         </div>
 
-        <div className="search-wrapper">
+        {/* <div className="search-wrapper">
           <label>
             Search
             <input
@@ -104,7 +104,7 @@ function App() {
               type="text"
             />
           </label>
-        </div>
+        </div> */}
       </div>
 
       <div className="form-container">

@@ -3,16 +3,37 @@ import React, { useState } from "react";
 const Video = ({ videos, handleDeleteClick }) => {
   const [count, setCount] = useState(25);
 
-  
-  return videos.map((video) => {
+  // function handleVoteAdd(videoId) {
+  //   let index = videos.forEach((video) => video.id === videoId);
+  //   if (index) setCount(count + 1);
+  // }
+
+  // function handleVoteSubtract(videoId) {
+  //   let index = videos.forEach((video) => video.id === videoId);
+  //   if (index) setCount(count - 1);
+  // }
+
+  return videos.map((video, index) => {
     const { id, title, url } = video;
     const base_url = "https://www.youtube.com/embed/";
     return (
       <div className="wrapper" key={id}>
         <h2>{title}</h2>
         <div>
-          <button onClick={() => setCount(count + 1)}>Up Vote</button> {count}
-          <button onClick={() => setCount(count - 1)}>Down Vote</button>
+          {/* onClick={handleVoteAdd(video.id)  onClick={handleVoteSubtract(video.id) */}
+          <button
+            className="vote-button"
+            onClick={() => setCount((count) => count + 1)}
+          >
+            👍
+          </button>{" "}
+          {count}
+          <button
+            className="vote-button"
+            onClick={() => setCount((count) => count - 1)}
+          >
+            👎
+          </button>
         </div>
         <iframe
           width="350"
@@ -24,7 +45,11 @@ const Video = ({ videos, handleDeleteClick }) => {
           allowFullScreen
         ></iframe>
         <div>
-          <button type="button" onClick={() => handleDeleteClick(video.id)}>
+          <button
+            className="button"
+            type="button"
+            onClick={() => handleDeleteClick(video.id)}
+          >
             delete
           </button>
         </div>

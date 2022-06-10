@@ -29,10 +29,10 @@ h4 {
   text-align: left;
   margin: 0 50px;
 }
-
+/* 
 .search-wrapper {
   margin: auto;
-}
+} */
 
 input {
   width: 100%;
@@ -55,7 +55,14 @@ input {
   background-color: rgba(216, 191, 245, 0.466);
 }
 
-button {
+.vote-button {
+  border: none;
+  background-color: rgba(40, 133, 133, 0.293);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.button {
   margin: 4px;
   padding: 8px 15px;
   border: 1px solid rgb(58, 58, 58);
@@ -63,14 +70,3 @@ button {
   cursor: pointer;
   color: black;
 }
-/* 
-@media only screen and (min-width: 800px){
-.container{
-  display:flex;
-  flex-direction: row;
-}
-
-.wrapper{
-  margin: 10px;
-}
-} */
