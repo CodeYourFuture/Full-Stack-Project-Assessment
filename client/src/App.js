@@ -7,7 +7,7 @@ import Form from "./components/Form";
 
 function App() {
   const [displayForm, setDisplayForm] = useState(false);
-  // const [searchInput, setSearchInput] = useState("");
+ // const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState(data);
   const [addFormData, setAddFormData] = useState({
     title: "",
@@ -15,12 +15,9 @@ function App() {
   });
 
   // function handleSearchInput(event) {
-  //   setSearchInput(event.target.value);
+  //   setSearchTerm(event.target.value);
   // }
 
-  // const isVideoSearch = videos.map((video) => {
-  //   return video.title.includes(searchInput);
-  // });
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -76,6 +73,17 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="form-container">
+        {/* <div className="search-wrapper">
+          <label>
+            Search
+            <input
+              value={searchTerm}
+              onChange={handleSearchInput}
+              name="search"
+              type="text"
+            />
+          </label>
+        </div> */}
         <div>
           <h4
             onClick={() => setDisplayForm(true)}
@@ -83,6 +91,7 @@ function App() {
           >
             Add Video
           </h4>
+
           {displayForm ? (
             <Form
               handleAddFormSubmit={handleAddFormSubmit}
@@ -93,22 +102,14 @@ function App() {
             ""
           )}
         </div>
-
-        {/* <div className="search-wrapper">
-          <label>
-            Search
-            <input
-              value={searchInput}
-              onChange={handleSearchInput}
-              name="search"
-              type="text"
-            />
-          </label>
-        </div> */}
       </div>
 
       <div className="form-container">
-        <Video videos={videos} handleDeleteClick={handleDeleteClick} />
+        <Video
+          //searchTerm={searchTerm}
+          videos={videos}
+          handleDeleteClick={handleDeleteClick}
+        />
       </div>
     </div>
   );
