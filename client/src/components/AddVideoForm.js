@@ -3,7 +3,7 @@ import React from "react";
 import Form from "./Form";
 // import Video1 from "../Video1";
 
-function AddVideo() {
+function AddVideoForm() {
   const [addVideo, setAddVideo] = React.useState("");
 
   console.log(addVideo);
@@ -30,4 +30,4 @@ function AddVideo() {
   );
 }
 
-export default AddVideo;
+export default AddVideoForm;

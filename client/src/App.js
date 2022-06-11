@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import "./App.css";
 import data from "./data";
 import Header from "./components/Header";
-// import Main from "./components/Main";
-import Search from "./components/Search";
-import AddVideo from "./components/AddVideo";
+import SearchBar from "./components/SearchBar";
+import AddVideoForm from "./components/AddVideoForm";
+import Videos from "./components/Videos";
 import Form from "./components/Form";
 import List from "./components/List";
 
 // function App() {
 //   return (
-//     <div className="App">
+//     <div>
 //       <Header />
-//       <Main />
+//       <SearchBar />
+//       <AddVideoForm />
+//       <Videos />
 //     </div>
 //   );
 // }
@@ -24,8 +26,10 @@ const App = () => {
 
   function handleRemove(id) {
     const newList = list.filter((item) => item.id !== id);
-
+    console.log(newList);
     setList(newList);
+    const newFilteredList = filteredList.filter((item) => item.id !== id);
+    setFilteredList(newFilteredList);
   }
 
   function handleSearch(searchTerm) {
@@ -38,9 +42,8 @@ const App = () => {
   return (
     <div>
       <Header />
-      {/* <Main /> */}
-      <Search handleSearch={handleSearch} />
-      <AddVideo />
+      <SearchBar handleSearch={handleSearch} />
+      <AddVideoForm />
       <Form />
       <List list={filteredList} onRemove={handleRemove} />;
     </div>
