@@ -19,7 +19,7 @@ const AddVideo = ({ allData, handleSet }) => {
   const validationCheck = () => {
     setErrorMessage('')
     let result = true
-    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+    const regExp = '/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/';
     let match = url.match(regExp)
     if (title.length === 0 && (url === undefined || url === '' || !match)) {
       setErrorMessage('Please make sure you have entered both title and URL')
