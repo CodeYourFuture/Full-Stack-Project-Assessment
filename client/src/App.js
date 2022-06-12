@@ -7,7 +7,7 @@ import Form from "./components/Form";
 
 function App() {
   const [displayForm, setDisplayForm] = useState(false);
- // const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState(data);
   const [addFormData, setAddFormData] = useState({
     title: "",
@@ -17,7 +17,6 @@ function App() {
   // function handleSearchInput(event) {
   //   setSearchTerm(event.target.value);
   // }
-
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -84,13 +83,8 @@ function App() {
             />
           </label>
         </div> */}
-        <div>
-          <h4
-            onClick={() => setDisplayForm(true)}
-            style={{ color: "rgb(53, 102, 251)", padding: "10px" }}
-          >
-            Add Video
-          </h4>
+        <div className="form-wrapper">
+          <h4 onClick={() => setDisplayForm(true)}>Add Video</h4>
 
           {displayForm ? (
             <Form
@@ -103,13 +97,14 @@ function App() {
           )}
         </div>
       </div>
-
-      <div className="form-container">
-        <Video
-          //searchTerm={searchTerm}
-          videos={videos}
-          handleDeleteClick={handleDeleteClick}
-        />
+      <div className="video-container">
+        <div className="sub-container">
+          <Video
+            //searchTerm={searchTerm}
+            videos={videos}
+            handleDeleteClick={handleDeleteClick}
+          />
+        </div>
       </div>
     </div>
   );

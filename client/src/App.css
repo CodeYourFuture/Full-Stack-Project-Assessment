@@ -1,72 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Taviraj:wght@700;900&display=swap");
 .app {
+  padding: 3rem;
   text-align: center;
-  background-color: rgb(255, 255, 255);
+  font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
 }
-
 .app-header {
-  background-color: rgb(57, 144, 173);
-  height: 110px;
-  color: white;
+  color: rgb(64, 64, 66);
 }
-
-h1 {
-  padding: 20px;
+.form-wrapper {
+  margin: 2rem;
 }
-
-.form-container {
-  justify-items: center;
+.sub-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  grid-gap: 30px;
-  margin: auto 20px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 20px;
 }
-
 form {
   margin: 10px;
 }
-
 h4 {
   text-align: left;
   margin: 0 50px;
+  font-weight: 800;
+  color: #f4e73b;
+  text-align: center;
 }
-/* 
-.search-wrapper {
-  margin: auto;
-} */
-
+h5 {
+  color: #333535;
+}
 input {
   width: 100%;
   padding: 12px 10px;
   margin: 10px 0;
-  border: 1px solid rgb(184, 184, 184);
+  border: 1px solid #b8b8b8;
   border-radius: 8px;
   box-sizing: border-box;
 }
-
+.video-header {
+  height: 5%;
+}
 .wrapper {
+  background-color: #ffffff5c;
   margin: 40px auto;
-  max-width: 450px;
-  padding: 5px 0;
-  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  padding: 3rem 0 1rem;
   border-radius: 5px;
+  text-align: center;
 }
-
 .wrapper:hover {
-  background-color: rgba(216, 191, 245, 0.466);
+  background-color: #d8bff577;
 }
-
-.vote-button {
-  border: none;
-  background-color: rgba(40, 133, 133, 0.293);
-  margin: 5px;
-  border-radius: 5px;
+.frame {
+  width: 100%;
 }
-
 .button {
   margin: 4px;
   padding: 8px 15px;
-  border: 1px solid rgb(58, 58, 58);
+  border: none;
+  background-color: #00dade4d;
+  background-image: linear-gradient(90deg, #00dade4a 0%, #fb00ff4f 100%);
   border-radius: 8px;
   cursor: pointer;
-  color: black;
+  color: #c20909;
+}
+.button:hover {
+  color: #821b35aa;
+}
+.vote-button {
+  margin: 0 3rem;
+  background-color: #fbac7ea9;
+  background-image: linear-gradient(62deg, #fbac7e7e 0%, #f7cf686f 100%);
 }

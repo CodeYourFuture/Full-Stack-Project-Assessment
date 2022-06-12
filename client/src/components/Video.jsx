@@ -6,26 +6,31 @@ const Video = ({ videos, handleDeleteClick }) => {
     const { id, title, url } = video;
     const base_url = "https://www.youtube.com/embed/";
     return (
-      <div className="wrapper" key={id}>
-        <h2>{title}</h2>
-        <VoteButton />
-        <iframe
-          width="350"
-          height="315"
-          src={base_url + url.slice(-11)}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-        <div>
-          <button
-            className="button"
-            type="button"
-            onClick={() => handleDeleteClick(video.id)}
-          >
-            delete
-          </button>
+      <div key={id}>
+        <h5 className="video-header">
+          <span>{title}</span>
+        </h5>
+
+        <div className="wrapper">
+          <div className="frame">
+            <iframe
+              src={base_url + url.slice(-11)}
+              title="YouTube video player"
+            ></iframe>
+          </div>
+          <div>
+            <VoteButton />
+          </div>
+
+          <div style={{ margin: "30px 0 0" }}>
+            <button
+              className="button"
+              type="button"
+              onClick={() => handleDeleteClick(video.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     );
