@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./RenderVideos.css";
 import RenderVideos from "./RenderVideos";
 import NewVideos from "./NewVideos";
-import data from "./exampleresponse.json";
+
+import axios from "axios";
 
 
 function App() {
  
-  const [allVideos, setAllVideos] = useState(data);
+  const [allVideos, setAllVideos] = useState([]);
   const [visible, setVisible] = useState(false);
 
   // A function to delete a video
@@ -19,6 +20,13 @@ function App() {
       });
     });
   };
+
+useEffect(()=>{
+axios.get("http://localhost:4000/")
+  .then((res) => {
+   setAllVideos(res.data);
+  });
+},[])
   
 
   return (
@@ -38,15 +46,15 @@ function App() {
         />
       )}
       <div className="container">
-        <div class="row">
+        <div className="row">
           {allVideos.map((video) => (
-           <div class="col-sm-4">
-            <RenderVideos
-              key={video.id}
-              video={video}
-              deleteVideos={deleteVideos}
-            />
-           </div>
+            <div key={video.id} className="col-sm-4">
+              <RenderVideos
+                
+                video={video}
+                deleteVideos={deleteVideos}
+              />
+            </div>
           ))}
         </div>
       </div>
