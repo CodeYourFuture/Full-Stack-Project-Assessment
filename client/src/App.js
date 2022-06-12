@@ -9,15 +9,17 @@ function App() {
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
 
-  const insertNewVideo = (url, title) => {
-    const amendedUrl = url.replace("watch?v=", "embed/");
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const addVideo = {
-      id: displayVideo.length + 1,
       rating: 0,
-      title: title,
-      url: amendedUrl,
+      title: newVidTitle,
+      url: newVidUrl,
     };
-    setDisplayVideo([...displayVideo].push(addVideo));
+    setNewVidTitle("");
+    setNewVidUrl("");
+
+    setDisplayVideo(displayVideo.concat(addVideo));
   };
 
   const videoCountPlus = (id) => {
@@ -43,12 +45,12 @@ function App() {
     <div>
       <div className="App">
         <header className="App-header">
-          <h1>Video Recommendation by Mandeep</h1>
+          <h1>Video Recommendation</h1>
         </header>
       </div>
       <div>
         <div>
-          Search Bar
+          Hi i'm a Search Bar
           <input
             className="searchbar"
             type="text"
@@ -61,18 +63,11 @@ function App() {
         <div>Add video</div>
       </div>
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            displayVideo.push({
-              title: newVidTitle,
-              url: newVidUrl,
-            });
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <input
             className="inputBar"
             type="text"
+            name="title"
             value={newVidTitle}
             onChange={(e) => setNewVidTitle(e.target.value)}
           />{" "}
@@ -80,30 +75,27 @@ function App() {
           <input
             className="inputBar"
             type="text"
+            name="url"
             value={newVidUrl}
             onChange={(e) => setNewVidUrl(e.target.value)}
           />{" "}
           URL
+          <button type="submit">Submit Form</button>
+          <p></p>
         </form>
       </div>
-      <button
-        onClick={(e) => {
-          displayVideo.insertNewVideo(e);
-          setNewVidTitle("");
-          setNewVidUrl("");
-        }}
-      >
-        Add a new Video here!
-      </button>
+
       <div>
         <ul className="card-container">
           {displayVideo
             .filter((card) => {
               const { title, id } = card;
-              const searchTermMatches = title
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-              return searchTermMatches;
+              if (title) {
+                const searchTermMatches = title
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase());
+                return searchTermMatches;
+              }
             })
 
             .map((card) => (
@@ -117,6 +109,7 @@ function App() {
                         card.url.split("v=")[1]
                       }`}
                       title="YouTube video player"
+                      frameborder="0"
                     ></iframe>
                   }
                 </p>
