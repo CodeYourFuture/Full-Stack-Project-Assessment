@@ -1,5 +1,4 @@
 import React from "react";
-// import Buttons from "./Buttons";
 
 function FormInputs() {
   return (
@@ -16,7 +15,7 @@ function FormInputs() {
   );
 }
 
-function Buttons() {
+function Buttons(props) {
   const thingsArray = ["thing 1", "thing 2"];
 
   const thingsElements = thingsArray.map((thing) => <p key={thing}>{thing}</p>);
@@ -33,7 +32,7 @@ function Buttons() {
   return (
     <div className="buttons">
       <button className="cancel">cancel</button>
-      <button className="add" onClick={addVideo}>
+      <button className="add" onClick={props.handleAddTitleAndUrl}>
         add
       </button>
       <button onClick={addItem}>Add Element</button>
@@ -45,7 +44,7 @@ function Form(props) {
   return (
     <div className="form">
       <FormInputs />
-      <Buttons />
+      <Buttons handleAddTitleAndUrl={props.handleAddTitleAndUrl} />
       {props.thingsArray}
     </div>
   );

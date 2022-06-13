@@ -14,18 +14,6 @@ function Video(props) {
     setCount((prevCount) => prevCount - 1);
   }
 
-  //   const [removeVideo, setRemoveVideo] = useState(data);
-
-  //   function handleRemove(e) {
-  //     // remove item
-  //     console.log(e);
-  //     console.log("You clicked");
-  //     const removeItem = removeVideo.filter((item) => {
-  //       return item.e !== e;
-  //     });
-  //     setRemoveVideo(removeItem);
-  //   }
-
   const [list, updateList] = useState(data);
 
   const handleRemoveItem = (e) => {
@@ -58,7 +46,6 @@ function Video(props) {
         <iframe
           width="560"
           height="315"
-          // src="https://www.youtube.com/embed/dQw4w9WgXcQ"
           src={"https://www.youtube.com/embed/" + props.item.url}
           title="YouTube video player"
           frameBorder="0"
@@ -66,7 +53,6 @@ function Video(props) {
           allowFullScreen
         ></iframe>
       </div>
-      {/* <button>{clickToRemoveVideo}</button> */}
 
       <button
         id="remove"
@@ -75,10 +61,6 @@ function Video(props) {
       >
         remove
       </button>
-
-      {/* <button type="button" onClick={handleRemoveItem}>
-        remove
-      </button> */}
     </div>
   );
 }

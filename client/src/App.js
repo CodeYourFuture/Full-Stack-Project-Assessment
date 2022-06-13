@@ -4,26 +4,13 @@ import data from "./data";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import AddVideoForm from "./components/AddVideoForm";
-import Videos from "./components/Videos";
-import Form from "./components/Form";
 import List from "./components/List";
 
-// function App() {
-//   return (
-//     <div>
-//       <Header />
-//       <SearchBar />
-//       <AddVideoForm />
-//       <Videos />
-//     </div>
-//   );
-// }
-
-const App = () => {
+function App() {
   const [list, setList] = useState(data);
-
   const [filteredList, setFilteredList] = useState(data);
 
+  //remove video button
   function handleRemove(id) {
     const newList = list.filter((item) => item.id !== id);
     console.log(newList);
@@ -34,20 +21,23 @@ const App = () => {
 
   function handleSearch(searchTerm) {
     const newList = list.filter((item) => item.title.includes(searchTerm));
-    console.log("setting filtered list", newList);
-    console.log(`search term is ${searchTerm}`);
+    // console.log("setting filtered list", newList);
+    // console.log(`search term is ${searchTerm}`);
     setFilteredList(newList);
+  }
+
+  function handleAddTitleAndUrl() {
+    console.log("hi");
   }
 
   return (
     <div>
       <Header />
       <SearchBar handleSearch={handleSearch} />
-      <AddVideoForm />
-      <Form />
+      <AddVideoForm handleAddTitleAndUrl={handleAddTitleAndUrl} />
       <List list={filteredList} onRemove={handleRemove} />;
     </div>
   );
-};
+}
 
 export default App;

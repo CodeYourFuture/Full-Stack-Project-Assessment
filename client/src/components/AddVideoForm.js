@@ -1,16 +1,14 @@
 import React from "react";
-// import Videos from "./Videos";
 import Form from "./Form";
-// import Video1 from "../Video1";
 
-function AddVideoForm() {
+function AddVideoForm(props) {
   const [addVideo, setAddVideo] = React.useState("");
 
   console.log(addVideo);
 
   function handleAddVideo() {
     console.log("button clicked");
-    const form = Form;
+    const form = <Form handleAddTitleAndUrl={props.handleAddTitleAndUrl} />;
     console.log(form);
     setAddVideo(form);
   }
@@ -21,11 +19,8 @@ function AddVideoForm() {
         <button id="btn-add-video" onClick={handleAddVideo}>
           Add video
         </button>
-        {/* <Form /> */}
       </div>
       <div>{addVideo}</div>
-      {/* <Videos /> */}
-      {/* <Video1 /> */}
     </div>
   );
 }
