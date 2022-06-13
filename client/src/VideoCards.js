@@ -2,22 +2,29 @@ import React, { useState } from "react";
 import videosData from "./exampleresponse.json";
 import Video from "./Videos";
 import VoteButtons from "./VoteButtons";
+import AddVideo from "./AddVideo";
 
 function VideoCards() {
   const [videoList, setVideoList] = useState(videosData);
-  
+
   /* remove any video by id */
   function removeVideo(id) {
     const updatedVideoList = videoList.filter((video) => video.id !== id);
     setVideoList(updatedVideoList);
   }
 
+  /* add any video to list */
+  function addVideo(videoObj) {
+    setVideoList(videoList.concat(videoObj));
+  }
+
   return (
     <div className="video-cards">
+      <AddVideo AddVideo={addVideo} />
       {videoList.map((videoObj, index) => {
         return (
           /* video contents */
-          <div key={index} className="card-container">
+          <div className="card-container" key={index}>
             {/* video title */}
             <div className="card-title">
               <h3>{videoObj.title}</h3>
@@ -40,5 +47,4 @@ function VideoCards() {
     </div>
   );
 }
-
 export default VideoCards;
