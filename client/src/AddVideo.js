@@ -19,6 +19,15 @@ function AddVideo(props) {
       setVideoUrlInput("");
     }
 
+    function handleReset() {
+      Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+      this.setState({
+        itemvalues: [{}],
+      });
+    };
+
     return (
       <div className="add-video-container">
         <div className="add-video-title">
@@ -50,7 +59,7 @@ function AddVideo(props) {
           </div>
 
           <div className="cancel-button">
-            <button>CANCEL</button>
+            <button onClick={handleReset}>RESET</button>
           </div>
         </div>
       </div>

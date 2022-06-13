@@ -1,5 +1,4 @@
 import React from "react";
-// import videosData from "./exampleresponse.json";
 
 function Video(props) {
     const videoUrl = props.videoObj.url.replace("watch?v=", "embed/");
