@@ -97,7 +97,9 @@ function App() {
                 return searchTermMatches;
               }
             })
-
+            .sort((a, b) =>
+              b.rating > a.rating ? 1 : a.rating > b.rating ? -1 : 0
+            )
             .map((card) => (
               <li className="card">
                 <h2>{card.title}</h2>
@@ -106,10 +108,10 @@ function App() {
                   {
                     <iframe
                       src={`https://www.youtube.com/embed/${
-                        card.url.split("v=")[1]
+                        card.url.split("v=").pop().split("&")[0]
                       }`}
                       title="YouTube video player"
-                      frameborder="0"
+                      frameBorder="0"
                     ></iframe>
                   }
                 </p>
