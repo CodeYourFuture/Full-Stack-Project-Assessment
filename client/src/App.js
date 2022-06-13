@@ -33,9 +33,11 @@ function App() {
   return (
     <div>
       <Header />
-      <SearchBar handleSearch={handleSearch} />
-      <AddVideoForm handleAddTitleAndUrl={handleAddTitleAndUrl} />
-      <List list={filteredList} onRemove={handleRemove} />;
+      <main>
+        <SearchBar handleSearch={handleSearch} />
+        <AddVideoForm handleAddTitleAndUrl={handleAddTitleAndUrl} />
+        <List list={filteredList} onRemove={handleRemove} />
+      </main>
     </div>
   );
 }

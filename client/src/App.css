@@ -225,7 +225,6 @@ iframe {
 
   box-shadow: rgba(0, 0, 0, 0.9) 0px 25px 20px -20px;
 
-  /* box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px; */
 }
 
 
@@ -246,10 +245,3 @@ hr {
   }
 }
 
-/* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-box-shadow: rgba(191, 192, 192, 0.4) 0px 5px,
-rgba(191, 192, 192, 0.3) 0px 10px,
-rgba(191, 192, 192, 0.2) 0px 15px,
-rgba(191, 192, 192, 0.1) 0px 20px,
-rgba(191, 192, 192, 0.05) 0px 25px; */
