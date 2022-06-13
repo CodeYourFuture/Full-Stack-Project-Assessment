@@ -8,7 +8,12 @@ function AddVideoForm(props) {
 
   function handleAddVideo() {
     console.log("button clicked");
-    const form = <Form handleAddTitleAndUrl={props.handleAddTitleAndUrl} />;
+    const form = (
+      <Form
+        handleAddTitleAndUrl={props.handleAddTitleAndUrl}
+        handleAddNewVideo={props.handleAddNewVideo}
+      />
+    );
     console.log(form);
     setAddVideo(form);
   }

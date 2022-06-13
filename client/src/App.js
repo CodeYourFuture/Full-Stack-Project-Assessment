@@ -19,6 +19,17 @@ function App() {
     setFilteredList(newFilteredList);
   }
 
+  function handleAddNewVideo(title, url) {
+    const newItem = {
+      //add random unique id
+      // id,
+      title,
+      url,
+      rating: 0,
+    };
+    //update list to append item (opposite of handleRemove)
+  }
+
   function handleSearch(searchTerm) {
     const newList = list.filter((item) => item.title.includes(searchTerm));
     // console.log("setting filtered list", newList);
@@ -35,7 +46,10 @@ function App() {
       <Header />
       <main>
         <SearchBar handleSearch={handleSearch} />
-        <AddVideoForm handleAddTitleAndUrl={handleAddTitleAndUrl} />
+        <AddVideoForm
+          handleAddTitleAndUrl={handleAddTitleAndUrl}
+          handleAddNewVideo={handleAddNewVideo}
+        />
         <List list={filteredList} onRemove={handleRemove} />
       </main>
     </div>
