@@ -27,7 +27,7 @@ function VideoCards() {
           <div className="card-container" key={index}>
             {/* video title */}
             <div className="card-title">
-              <h3>{videoObj.title}</h3>
+              <h2>{videoObj.title}</h2>
             </div>
 
             <Video

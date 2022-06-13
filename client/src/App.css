@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+:focus {
+  background: pink;
+}

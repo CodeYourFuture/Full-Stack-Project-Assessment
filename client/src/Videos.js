@@ -9,13 +9,13 @@ function Video(props) {
         {/* embedded video */}
         <div className="video">
           <iframe
-            width="853"
-            height="480"
+            width="450"
+            height="300"
             src={videoUrl}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title="Embedded youtube"
+            title={props.videoObj.title}
           />
         </div>
 

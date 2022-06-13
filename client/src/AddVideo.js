@@ -22,22 +22,26 @@ function AddVideo(props) {
     return (
       <div className="add-video-container">
         <div className="add-video-title">
-          <p>Title</p>
-          <input
-            type="text"
-            value={videoTitleInput}
-            onChange={handleTitleChange}
-          />
+          <label>
+            Title
+            <input
+              type="text"
+              value={videoTitleInput}
+              onChange={handleTitleChange}
+            />
+          </label>
         </div>
 
         <div className="add-url">
-          <p>URL</p>
-          <input
-            type="url"
-            placeholder="https://example.com"
-            value={videoUrlInput}
-            onChange={handleUrlChange}
-          />
+          <label>
+            URL
+            <input
+              type="url"
+              placeholder="https://example.com"
+              value={videoUrlInput}
+              onChange={handleUrlChange}
+            />
+          </label>
         </div>
 
         <div className="add-cancel-buttons-container">
