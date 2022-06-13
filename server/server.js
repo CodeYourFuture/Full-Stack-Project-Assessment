@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 const bodyparser = require("body-parser");
 
 //when you write post endpoints don't forget body parser
@@ -17,29 +17,23 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = [
   {
     id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/embed/=dQw4w9WgXcQ",
+    title: "Get Your Blessings",
+    url: "https://www.youtube.com/watch?v=n3SeaKTbrmc",
     rating: 23,
   },
   {
     id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/embed/=HerCR8bw_GE",
-    rating: 230,
+    title: "This Is Season To Shine",
+    url: "https://www.youtube.com/watch?v=GgHvx6fwGhk",
+    rating: 1270,
   },
   {
     id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
+    title: "Looking For You",
+    url: "https://www.youtube.com/watch?v=q1XW5ticeMw",
     rating: 2111,
   },
 ];
-
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
 
 //returns all videos
 app.get("/", (req, res) => {

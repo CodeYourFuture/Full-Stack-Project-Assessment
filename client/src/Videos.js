@@ -1,54 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import videoData from "./exampleresponse.json";
 import Button from "./Buttons";
+import axios from "axios";
+
+const baseURL = "http://localhost:5000";
 
 const Videos = () => {
   const [videos, setVideos] = useState(videoData);
 
+  //added use effect, now videos coming from the server
+  useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setVideos(response.data);
+    });
+  }, []);
+
+  if (!videos) return null;
+
+  //deletes post from the server
   const deleteVideo = (id) => (e) => {
     e.preventDefault();
-    console.log(e.target.id);
-    const output = videos.filter((video) => video.id !== parseInt(e.target.id));
-    setVideos(output);
+    axios.delete(`${baseURL}/id`).then(() => {
+      const output = videos.filter(
+        (video) => video.id !== parseInt(e.target.id)
+      );
+      alert(`are sure you want to deleted this video?`);
+      setVideos(output);
+    });
   };
 
-
   return (
-   <div className="container">
-      {videos.map((video, index) => {
-       const after_ = video.url.substring(video.url.indexOf("=") + 1) 
-       console.log(after_)
-        return (
+    <>
+      <div className="container">
+        {videos.map((video, index) => {
+          const after_ = video.url.substring(video.url.indexOf("=") + 1);
 
-          <>
-            <div className="card">
-              <Button />
-              <h2 className="title">{video.title}</h2>
-
-              <iframe
-                width="320"
-                height="320"
-                src={`https://www.youtube.com/embed/${after_}`}
-                title={video.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <span>Ratings: {video.rating}</span>
-              <div className="delete--button">
-                <button
-                  className="button is-rounded dlt"
-                  id={video.id}
-                  onClick={deleteVideo(videos.id)}
-                >
-                  Delete
-                </button>
+          return (
+            <>
+              <div className="card">
+                <h2 className="title">{video.title}</h2>
+                <Button />
+                <div className="iframe">
+                  <iframe
+                    width="250"
+                    height="250"
+                    src={`https://www.youtube.com/embed/${after_}`}
+                    title={video.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <span>Ratings: {video.rating}</span>
+                <div className="delete--button">
+                  <button
+                    className="button is-rounded dlt"
+                    id={video.id}
+                    onClick={deleteVideo(videos.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          </>
-        );
-      })}
-    </div>
+            </>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
