@@ -1,3 +1,21 @@
 .App {
   text-align: center;
+  padding: 3px;
+  background-color: rgb(188, 229, 178);
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 3rem;
+  margin-right: 3rem;
+  gap: 1rem;
+  margin-top: 5rem;
+  max-width: 1440px;
+}
+.container{
+  display: flex;
+}
+.add-video-title{
+  color:rgb(55, 133, 193);
+  font-size: medium;
+}
+.videoFrame{
+  border-radius: 20%;
 }
