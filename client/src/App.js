@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuid4 } from "uuid";
 
 import Button from "@mui/material/Button";
 
@@ -19,13 +18,19 @@ const App = () => {
   const [urlError, setUrlError] = useState(false);
   const [modal, setModal] = useState(false);
   const [toDelete, setToDelete] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const serverURL = "192.168.0.2";
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch(`http://${serverURL}:5000`)
       .then((res) => res.json())
-      .then((data) => setVideos(data))
+      .then((data) => {
+        setVideos(data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
-  }, []);
+  }, [loading]);
 
   // Adds a video
   const addVideo = (title, url) => {
@@ -40,18 +45,23 @@ const App = () => {
       // Resets the previous errors if any
       setTitleError(false);
       setUrlError(false);
-      // const copyOfVideos = [...videos];
+      setLoading(true);
       const fixedUrl = url.replace("watch?v=", "embed/"); // Changes the url to fix the iframe error
       const newVideo = {
-        id: uuid4(),
         title: title,
         url: fixedUrl,
-        rating: 0,
-        posted: new Date().toLocaleString(), // Gets the time when the video was posted
       };
-      // copyOfVideos.push(newVideo);
-      // setVideos(copyOfVideos);
-      setVideos([...videos, newVideo]);
+      fetch(`http://${serverURL}:5000`, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newVideo),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(data && false);
+        })
+        .catch((error) => console.log(error));
     }
   };
 
@@ -62,14 +72,8 @@ const App = () => {
   };
 
   // Deletes a video
-  const deleteVideo = (id) => {
-    // const copyOfVideos = [...videos];
-    // const video = copyOfVideos.find((video) => video.id === id);
-    // const index = copyOfVideos.indexOf(video);
-    // copyOfVideos.splice(index, 1);
-    // setVideos(copyOfVideos);
+  const deleteVideo = (id) =>
     setVideos(videos.filter((video) => video.id !== id));
-  };
 
   // Handles the video rating
   const vote = (id, voteType) => {
@@ -106,7 +110,11 @@ const App = () => {
             hideForm={() => setHideForm()}
           />
         )}
-        <Videos videos={videos} />
+        {!loading && videos.length > 0 ? (
+          <Videos unorderedVideos={videos} />
+        ) : (
+          <p>Loading...</p>
+        )}
         {modal && (
           <DeleteModal
             id={toDelete}
