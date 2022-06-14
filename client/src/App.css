@@ -1,14 +1,14 @@
 .App {
   text-align: center;
-  background-color:#0ff082;
+  background-color: #0ff082;
 }
-.addingOptionHidden{
-  display : none;
+.addingOptionHidden {
+  display: none;
 }
-.addingOptionVisible{
+.addingOptionVisible {
   display: contents;
 }
-.video-container{
+.video-container {
   display: flex;
   flex-wrap: wrap;
   margin: 10%;
@@ -18,9 +18,30 @@
   .App {
     display: flex;
     justify-content: space-between;
-    background-color:#dbf7fa;
+    background-color: #dbf7fa;
   }
 }
 /* Mobile version  - First break px */
+media (max-width: 400px) {
+  .App {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dbf7fa;
+  }
+}
 /* Mobile version  -  Second break   */
-/* Pc version */
+media (max-width: 720px) {
+  .App {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dbf7fa;
+  }
+}
+/* Pc */
+media (max-width: 900px) {
+  .App {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dbf7fa;
+  }
+}
