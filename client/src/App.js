@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid4 } from "uuid";
 
 import Button from "@mui/material/Button";
@@ -10,17 +10,22 @@ import DeleteModal from "./Components/DeleteModal";
 
 import Context from "./Context/Context";
 
-import data from "./data/exampleresponse.json";
-
 import "./App.css";
 
 const App = () => {
-  const [videos, setVideos] = useState(data); // The videos to be displayed
+  const [videos, setVideos] = useState([]); // The videos to be displayed
   const [hideForm, setHideForm] = useState(false); // Toggles the form to add video
   const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
   const [modal, setModal] = useState(false);
   const [toDelete, setToDelete] = useState();
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((res) => res.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.log(error));
+  }, []);
 
   // Adds a video
   const addVideo = (title, url) => {
