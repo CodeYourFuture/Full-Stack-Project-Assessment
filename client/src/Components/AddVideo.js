@@ -1,23 +1,31 @@
 import { useState } from "react";
 
 const AddVideo = (props) => {
-  const { data, setData } = props;
+  const { setData } = props;
   const [newVideoUrl, setNewVideoUrl] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
-  console.log(data);
 
-  const handleClick = () => {
-    let addVideo = {
-      id: 1,
+  const postFunction = async () => {
+    const addVideo = {
       title: newVideoTitle,
       url: newVideoUrl,
-      rating: 0,
     };
-    if (addVideo.title === "" || addVideo.url === "") {
-      return setData(data);
-    } else {
-      return setData(data.concat(addVideo));
-    }
+    console.log(addVideo);
+    const response = await fetch("http://127.0.0.1:5000", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addVideo),
+    });
+    const data = await response.json();
+    console.log(data);
+    setData(data);
+    // return setData(data.concat(addVideo));
+  };
+  const handleClick = async () => {
+    await postFunction();
   };
 
   return (

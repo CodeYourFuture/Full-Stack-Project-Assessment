@@ -8,24 +8,30 @@
   --border2: rgb(196, 196, 196);
   --thin-border: 2px;
 }
+
 .App {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   background-color: var(--background);
   font-weight: 600;
 }
+.farting-cow-img {
+  width: 400px;
+}
 iframe {
-  margin-top: 2rem;
-  margin-bottom: 10rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 300;
+  height: 190px;
 }
 h1 {
   font-family: "Montserrat Subrayada", sans-serif;
   font-weight: 700;
-  font-size: 3.5rem;
+  font-size: 1.5rem;
   padding: 2rem 0 2rem 0;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: left;
 }
@@ -42,10 +48,11 @@ p {
   margin-top: 2rem;
 }
 .video-card {
-  width: 50%;
   padding: 5rem 2rem 1rem 2rem;
   display: flex;
+  /* max-width: 745px; */
   flex-direction: column;
+  flex: 1 1 50%;
   border: var(--thin-border) solid var(--black);
   border-bottom: none;
   border-top: none;
@@ -54,20 +61,19 @@ p {
 }
 .video-votes-div {
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
 }
 .votes-div {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10rem;
+  align-items: center;
+  padding: 0.5rem;
 }
 .vote-button {
-  background-color: var(--background);
-  margin-top: 2rem;
-  width: 100px;
-  height: 100px;
+  margin-top: 0.4rem;
+  width: 80px;
+  height: 80px;
   border: 7px solid var(--black);
   transition: background-color 1s, color 1s;
 }
@@ -78,6 +84,14 @@ p {
   transform: translateY(-1px); */
   cursor: pointer;
 }
+/*trying cow patterend background */
+/* .gradient-button {
+  background-image: url(./cowpattern.png);
+  color: var(--border1);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 70px;
+  font-weight: 700;
+} */
 
 .gradient-button {
   margin-bottom: 1rem;
@@ -95,7 +109,7 @@ p {
       var(--border1)
     )
     1;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   background-clip: border-box;
   -webkit-background-clip: text;
@@ -120,10 +134,54 @@ p {
   top: 673px;
 } */
 input {
-  padding: 0.3rem 0 0.6125rem 0;
+  padding: 0.5rem 0;
   border: none;
   border-top: 7px solid var(--brown);
   border-bottom: var(--thin-border) solid var(--border1);
   border-left: 7px solid var(--black);
-  font-size: 1.5rem;
+  font-size: 0.8rem;
+}
+@media (min-width: 612px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  iframe {
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    width: 440px;
+    height: 260px;
+  }
+  .video-votes-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .votes-div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10rem;
+  }
+  .vote-button {
+    margin-top: 2rem;
+    width: 100px;
+    height: 100px;
+  }
+  .farting-cow-img {
+    width: 650px;
+  }
+  input {
+    padding: 0.3rem 0 0.6125rem 0;
+    border: none;
+    border-top: 7px solid var(--brown);
+    border-bottom: var(--thin-border) solid var(--border1);
+    border-left: 7px solid var(--black);
+    font-size: 1.5rem;
+  }
+  .gradient-button {
+    font-size: 1.5rem;
+  }
 }

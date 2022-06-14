@@ -10,7 +10,7 @@ const DownVoteButton = (props) => {
   };
   return (
     <button className="vote-button" onClick={handleClick}>
-      <FontAwesomeIcon icon={faHeartBroken} size="2x" />
+      <FontAwesomeIcon icon={faHeartBroken} size="2x" alt="dislike video" />
     </button>
   );
 };

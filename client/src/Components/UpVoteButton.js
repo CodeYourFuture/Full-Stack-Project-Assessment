@@ -10,7 +10,12 @@ const UpVoteButton = (props) => {
   };
   return (
     <button className="vote-button" onClick={onClickHandler}>
-      <FontAwesomeIcon className="icon" icon={faHeart} size="2x" />
+      <FontAwesomeIcon
+        className="icon"
+        icon={faHeart}
+        size="2x"
+        alt="like video"
+      />
     </button>
   );
 };
