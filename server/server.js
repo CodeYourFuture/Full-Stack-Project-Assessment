@@ -41,21 +41,22 @@ app.post("/", (req, res) => {
   res.json(newVideo.id);
 });
 
+const videoFound = (id) => videos.find((video) => video.id === Number(id));
+
 app.get("/:id", (req, res) => {
-  const videoFound = videos.find((video) => video.id === Number(req.params.id));
-  res.json(videoFound);
+  res.json(videoFound(req.params.id));
 });
 
 app.delete("/:id", (req, res) => {
-  const index = videos.findIndex((video) => video.id === Number(req.params.id));
-
-  if (index < 0) {
+  console.log(videoFound(req.params.id));
+  if (!videoFound(req.params.id)) {
     return res.status(400).json({
       result: "failure",
       message: "Video could not be deleted",
     });
   }
 
-  videos.splice(index, 1);
+  videos = videos.filter((video) => video.id !== Number(req.params.id));
+
   res.json({});
 });

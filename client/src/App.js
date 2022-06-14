@@ -20,10 +20,8 @@ const App = () => {
   const [toDelete, setToDelete] = useState();
   const [loading, setLoading] = useState(true);
 
-  const serverURL = "192.168.0.2";
-
   useEffect(() => {
-    fetch(`http://${serverURL}:5000`)
+    fetch("http://localhost:5000")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -51,7 +49,7 @@ const App = () => {
         title: title,
         url: fixedUrl,
       };
-      fetch(`http://${serverURL}:5000`, {
+      fetch("http://localhost:5000", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -72,8 +70,16 @@ const App = () => {
   };
 
   // Deletes a video
-  const deleteVideo = (id) =>
-    setVideos(videos.filter((video) => video.id !== id));
+  const deleteVideo = (id) => {
+    setLoading(true);
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => setLoading(data && false))
+      .catch((error) => console.log(error));
+  };
 
   // Handles the video rating
   const vote = (id, voteType) => {
