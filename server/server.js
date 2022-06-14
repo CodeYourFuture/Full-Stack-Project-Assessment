@@ -48,7 +48,6 @@ app.get("/:id", (req, res) => {
 });
 
 app.delete("/:id", (req, res) => {
-  console.log(videoFound(req.params.id));
   if (!videoFound(req.params.id)) {
     return res.status(400).json({
       result: "failure",
