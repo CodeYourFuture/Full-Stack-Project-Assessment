@@ -3,13 +3,12 @@ import DeleteButton from "./DeleteButton";
 
 const VideoCard = (props) => {
   const { data, setData } = props;
-  console.log(data.map((item)=> item))
   return (
     <div className="video-container">
       {data.map((item, index) => {
         return (
           <div key={index} className="video-card">
-            <h3>{item.title}</h3>
+            <h2>{item.title}</h2>
             <div className="video-votes-div">
               <iframe
                 src={`https://www.youtube.com/embed/${item.url.slice(
@@ -23,7 +22,7 @@ const VideoCard = (props) => {
               {/* <div className="buttons-div"> */}
               <Votes rating={item.rating} />
             </div>
-            <DeleteButton index={index} data={data} setData={setData} />
+            <DeleteButton videoId={item.id} setData={setData} />
             {/* </div> */}
           </div>
         );

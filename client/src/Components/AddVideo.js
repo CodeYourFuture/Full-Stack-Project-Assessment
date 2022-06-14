@@ -4,13 +4,13 @@ const AddVideo = (props) => {
   const { setData } = props;
   const [newVideoUrl, setNewVideoUrl] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const postFunction = async () => {
     const addVideo = {
       title: newVideoTitle,
       url: newVideoUrl,
     };
-    console.log(addVideo);
     const response = await fetch("http://127.0.0.1:5000", {
       method: "POST",
       mode: "cors",
@@ -20,8 +20,13 @@ const AddVideo = (props) => {
       body: JSON.stringify(addVideo),
     });
     const data = await response.json();
-    console.log(data);
-    setData(data);
+    if (data.result === "error") {
+      setData(data.videos);
+      setErrorMessage(data.message);
+    } else {
+      setData(data);
+      setErrorMessage("");
+    }
     // return setData(data.concat(addVideo));
   };
   const handleClick = async () => {
@@ -50,6 +55,7 @@ const AddVideo = (props) => {
       <button className="gradient-button" id="submit" onClick={handleClick}>
         Add video
       </button>
+      <p className="error-message">{errorMessage}</p>
     </div>
   );
 };

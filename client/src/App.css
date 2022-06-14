@@ -30,7 +30,7 @@ h1 {
   font-size: 1.5rem;
   padding: 2rem 0 2rem 0;
 }
-h3 {
+h2 {
   font-size: 1.5rem;
   font-weight: 700;
   text-align: left;
@@ -39,7 +39,9 @@ p {
   font-size: 1.5rem;
   font-weight: 500;
 }
-
+.error-message:empty {
+  display: none;
+}
 .video-container {
   display: flex;
   flex-direction: row;
@@ -145,7 +147,7 @@ input {
   h1 {
     font-size: 3.5rem;
   }
-  h3 {
+  h2 {
     font-size: 2rem;
   }
   iframe {

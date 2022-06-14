@@ -1,9 +1,16 @@
 const DeleteButton = (props) => {
-  const { data, index, setData } = props;
+  const { videoId, setData } = props;
+  const deleteRequest = async () => {
+    const response = await fetch(`http://127.0.0.1:5000/${videoId}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    console.log(data);
+    setData(data);
+  };
 
-  const handleClick = () => {
-    const filteredData = data.filter((item, i) => i !== index);
-    setData(filteredData);
+  const handleClick = async () => {
+    await deleteRequest();
   };
   return (
     <button className="gradient-button" onClick={handleClick}>
