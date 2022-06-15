@@ -1,20 +1,24 @@
 import "./App.css";
 import React, { useState } from "react";
 import exampleresponse from "./exampleresponse.json";
+import Moment from "moment";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [displayVideo, setDisplayVideo] = useState(exampleresponse);
-
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
+  // const [date, setDate] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const addVideo = {
       rating: 0,
       title: newVidTitle,
       url: newVidUrl,
+      date: Date(),
+      id: displayVideo.length,
     };
     setNewVidTitle("");
     setNewVidUrl("");
@@ -129,6 +133,7 @@ function App() {
                     Delete this video
                   </button>
                 </div>
+                <div>{card.date ? card.date : ""}</div>
               </li>
             ))}
         </ul>
