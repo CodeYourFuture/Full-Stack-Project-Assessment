@@ -1,7 +1,11 @@
 const express = require("express");
-//const uuid = require("uuid");
+const uuid = require("uuid");
+const fs = require("fs");
 
-const videoData = require("../../client/src/exampleresponse.json");
+const data = fs.readFileSync("exampleresponse.json");
+const videoData = JSON.parse(data);
+console.log(videoData);
+//const videoData = require("../exampleresponse.json");
 
 const router = express.Router();
 
@@ -19,9 +23,14 @@ router.post("/", (req, res) => {
   if (!title || !url) {
     res.status(404).json({ error: "please enter all field" });
   }
-  const newVideo = { id: uuid, title, url, rating };
-  videoData.push(newVideo);
-  res.send(videoData);
+
+  const newVideo = { id: uuid.v4(), title, url, rating };
+  const data = JSON.stringify([...videoData, newVideo], null, 2);
+  fs.writeFile("exampleresponse.json", data, finished);
+  function finished() {
+    const reply = { msg: "new video added" };
+    res.send(reply);
+  }
 });
 
 router.delete("/:id", (req, res) => {

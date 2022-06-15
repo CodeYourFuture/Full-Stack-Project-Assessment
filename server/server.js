@@ -9,8 +9,8 @@ app.use(express.json());
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [];
 
-app.use("/videos", require("./routers/video"));
+app.use("/api/videos", require("./routers/video"));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
