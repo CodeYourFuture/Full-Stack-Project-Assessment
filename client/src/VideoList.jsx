@@ -16,8 +16,13 @@ const VideoList = (props) => {
     },
   };
  
-  
+  if (props.loading)
+  {
+    return (<h3>Loading...</h3>)
+  }else{
   return (
+
+    
     <div className="video-container">
       {props.filterData.map((a) => (
         <div>
@@ -34,7 +39,7 @@ const VideoList = (props) => {
         </div>
       ))}
     </div>
-  );
+  )}
 };
 
 export default VideoList;

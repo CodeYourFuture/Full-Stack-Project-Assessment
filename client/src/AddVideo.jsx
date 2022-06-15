@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import "./App.css";
 const AddVideo = () => {
-  
   const [visibility, setVisibility] = useState("addingOptionHidden");
-     const [clicked, setClicked] = useState(true);
-     const [urlValue, setUrlValue] = useState("");
-     const [title, setTitle] = useState("");
-     const eventHandler = () => {
-       setClicked(!clicked);
-         !clicked
-           ? (setVisibility  ("addingOptionHidden"))
-           : (setVisibility  ("addingOptionVisible"));
-           setTitle("");
-           setUrlValue("")
-     };
-     const addingVideo = (url,title) => {
-       
-     }
+  const [clicked, setClicked] = useState(true);
+  const [urlValue, setUrlValue] = useState("");
+  const [title, setTitle] = useState("");
+  const eventHandler = () => {
+    setClicked(!clicked);
+    !clicked
+      ? setVisibility("addingOptionHidden")
+      : setVisibility("addingOptionVisible");
+    setTitle("");
+    setUrlValue("");
+  };
+  const addingVideo = () => {
+    if (title === "") {
+      alert("Title is empty!!");
+    } else if (!urlValue.includes("youtube") || !urlValue.includes("watch")) {
+      alert("Url is not valid!!");
+    } else {
+      alert("Video added");
+      setUrlValue("");
+      setTitle("")
+    }
+  };
   return (
     <div>
       <button onClick={eventHandler}>Add Video</button>
@@ -30,7 +37,15 @@ const AddVideo = () => {
           onChange={(e) => setUrlValue(e.value)}
         ></input>
         <button onClick={eventHandler}>Cancel</button>
-        <button onClick={addingVideo(urlValue,title)}>Add</button>
+        <button
+          onClick={() => {
+            addingVideo();
+            console.log(urlValue);
+            console.log(title);
+          }}
+        >
+          Add
+        </button>
       </div>
     </div>
   );

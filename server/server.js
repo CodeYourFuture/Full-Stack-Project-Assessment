@@ -72,11 +72,21 @@ let videos = [
 ];
 
 // GET "/"
+app.get("/", (req, res) => {
+  // Delete this line after you've confirmed your server is running
+  res.send("this is home page");
+});
 app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
 });
-app.delete("/videos/id", (req, res) => {
+app.post("/videos", (req, res) => {
+  // Delete this line after you've confirmed your server is running
+ videos.push(req.body);
+  res.send(videos)
+});
+
+app.delete("/sql", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
 });

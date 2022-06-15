@@ -1,21 +1,23 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
 
-
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
+  const [loading , setLoading] = useState(true)
 
-  useEffect(() => {
+  
     fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
         setFilterData(data);
-      });
-  }, []);
+        setLoading(false)
+      })
+      .catch((error) => console.log(error));
+  
   return (
     <>
       <div className="App">
@@ -30,6 +32,7 @@ function App() {
               filterData={filterData}
               setAllData={setAllData}
               setFilterData={setFilterData}
+              loading={loading}
             />
           </div>
         </main>
