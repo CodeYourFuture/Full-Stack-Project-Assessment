@@ -4,25 +4,23 @@ function Video(props) {
     const videoUrl = props.videoObj.url.replace("watch?v=", "embed/");
 
     return (
-      <div className="video-container">
+      <div className="videos">
+        {/* delete button */}
+        <div className="remove-button-container">
+          <button onClick={props.removeVideo} className="btn remove-button">
+            Remove
+          </button>
+        </div>
+
         {/* embedded video */}
-        <div className="video">
+        <div className="embed-responsive embed-responsive-16by9 embed-responsive-item">
           <iframe
-            width="450"
-            height="300"
             src={videoUrl}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title={props.videoObj.title}
           />
-        </div>
-
-        {/* delete button */}
-        <div className="delete-button-container">
-          <button onClick={props.removeVideo} className="delete-button">
-            Remove
-          </button>
         </div>
       </div>
     );

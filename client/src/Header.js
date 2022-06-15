@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
     return (
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>VIDEO RECOMMENDATION</h1>
       </header>
     );
 }

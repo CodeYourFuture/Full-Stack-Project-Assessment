@@ -5,3 +5,141 @@
 :focus {
   background: pink;
 }
+
+/*Small devices (landscape phones, 375px and up)*/
+@media (min-width: 375px) { 
+  h1 {
+    padding: 44px 0 30px 0;
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin: 0;
+    padding-bottom: 0.1em;
+  }
+
+  .add-video-container {
+    padding: 50px 0 50px 0 ;
+    background-color: #e4e4e4;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+  }
+
+  .add-btn:hover{
+    background: rgb(21, 255, 177);
+  }
+
+  .reset-btn:hover{
+    background: rgb(228, 25, 255);
+  }
+
+  .add-button {
+    padding-right: 18px;
+  }
+
+  .card-container {
+    margin: 49px 12px;
+  }
+
+  .borderline {
+    border-top: 1px solid red;
+  }
+
+  label {
+    font-size: 1.3em;
+  }
+
+  .vote-buttons {
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+    flex-direction: row;
+  }
+
+  .votes {
+    font-size: x-large;
+    color: white;
+  }
+
+  .remove-button-container {
+    padding-bottom: 1em;
+  }
+
+  .remove-button:hover {
+     background: #fb1703;
+  }
+
+  .btn {
+    padding: 0.3em 1em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .vote-btn:before {
+    content: "";
+    background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  @keyframes glowing-button-85 {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  .vote-btn:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+}

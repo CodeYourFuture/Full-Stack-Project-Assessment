@@ -12,24 +12,32 @@ function VoteButtons() {
     }
 
     return (
-      <div className="vote-buttons">
-        {/* no of votes */}
-        <div className="no-of-votes-for-video">
-          <p>{vote}</p>
-        </div>
+      <div>
+        <div className="vote-buttons">
+          {/* up vote button */}
+          <div className="upvote-button-container">
+            <button
+              onClick={incrementCount}
+              className="btn vote-btn upvote-button"
+            >
+              Up Vote
+            </button>
+          </div>
 
-        {/* up vote button */}
-        <div className="upvote-button-container">
-          <button onClick={incrementCount} className="upvote-button">
-            Up Vote
-          </button>
-        </div>
+          {/* no of votes */}
+          <div className="no-of-votes-for-video">
+            <p className="votes">{vote}</p>
+          </div>
 
-        {/* down vote button */}
-        <div className="downvote-button-container">
-          <button onClick={decrementCount} className="downvote-button">
-            Down Vote
-          </button>
+          {/* down vote button */}
+          <div className="downvote-button-container">
+            <button
+              onClick={decrementCount}
+              className="btn vote-btn downvote-button"
+            >
+              Down Vote
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -30,10 +30,11 @@ function AddVideo(props) {
 
     return (
       <div className="add-video-container">
-        <div className="add-video-title">
+        <div class="form-group">
           <label>
-            Title
+            TITLE
             <input
+              class="form-control"
               type="text"
               value={videoTitleInput}
               onChange={handleTitleChange}
@@ -45,6 +46,7 @@ function AddVideo(props) {
           <label>
             URL
             <input
+              class="form-control"
               type="url"
               placeholder="https://example.com"
               value={videoUrlInput}
@@ -53,13 +55,25 @@ function AddVideo(props) {
           </label>
         </div>
 
-        <div className="add-cancel-buttons-container">
+        <div className="buttons-container">
           <div className="add-button">
-            <button onClick={addVideoObj}>ADD</button>
+            <button
+              type="button"
+              className=" btn add-video-buttons add-btn"
+              onClick={addVideoObj}
+            >
+              Add
+            </button>
           </div>
 
           <div className="cancel-button">
-            <button onClick={handleReset}>RESET</button>
+            <button
+              type="button"
+              className="btn add-video-buttons reset-btn"
+              onClick={handleReset}
+            >
+              Reset
+            </button>
           </div>
         </div>
       </div>
