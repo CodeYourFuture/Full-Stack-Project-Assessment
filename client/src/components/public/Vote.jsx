@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoThumbsUp, IoThumbsDown } from "react-icons/io5";
 import "../../styles/vote.css";
+import UserContext from "../../context/UserContext";
 
-const Vote = ({ vote, setVote }) => {
+const Vote = () => {
+  const { vote, setVote } = useContext(UserContext);
   return (
     <div>
       <button
