@@ -10,6 +10,9 @@ const UserContext = createContext({
   setVideoInfo: () => {},
   handleChange: () => {},
   addNewVideoHandler: () => {},
+  searchHandler: () => {},
+  searchString: "",
+  setSearchString: () => {},
 });
 
 export default UserContext;

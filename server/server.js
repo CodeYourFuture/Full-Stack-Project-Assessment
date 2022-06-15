@@ -99,7 +99,6 @@ app.delete("/deletedvideo/:id", (req, res) => {
 
 app.post("/api/addnewvideo", (req, res) => {
   const newAddedVideo = req.body;
-  console.log(req.body);
   newAddedVideo.id = uuidv4();
   if (
     newAddedVideo.title.length === 0 ||
@@ -110,4 +109,16 @@ app.post("/api/addnewvideo", (req, res) => {
   }
   videos.push(newAddedVideo);
   res.json(videos);
+});
+
+app.get("/api/searchvideos", (req, res) => {
+  const { search } = req.query;
+  const foundVideos = videos.filter((video) =>
+    video.title.toLowerCase().includes(search.toLowerCase())
+  );
+  if (foundVideos.length !== 0) {
+    res.json(foundVideos);
+  } else {
+    res.status(400).json({ msg: "no video found" });
+  }
 });

@@ -9,6 +9,7 @@ const Context = ({ children }) => {
     url: "",
     rating: "",
   });
+  const [searchString, setSearchString] = useState("");
 
   const handleChange = (key, value) => {
     console.log(key, value);
@@ -75,6 +76,19 @@ const Context = ({ children }) => {
       setVideoData([]);
     }
   };
+
+  const searchHandler = async (searchWord) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/searchvideos?search=${searchWord}`
+      );
+      const searchData = await response.json();
+      setVideoData(searchData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -87,6 +101,9 @@ const Context = ({ children }) => {
         setVideoInfo,
         handleChange,
         addNewVideoHandler,
+        searchHandler,
+        searchString,
+        setSearchString,
       }}
     >
       {children}
