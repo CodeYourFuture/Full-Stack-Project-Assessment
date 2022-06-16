@@ -1,3 +1,11 @@
+:root {
+  --logo-blue: rgb(122, 211, 252);
+  --logo-pink: rgb(240, 121, 234);
+  --light-grey: #eeeeee;
+  --button-color: #000000;
+  --button-text: #ffffff;
+}
+
 .App {
   text-align: center;
 }
@@ -6,12 +14,30 @@
   background: pink;
 }
 
-/*Small devices (landscape phones, 375px and up)*/
-@media (min-width: 375px) { 
+.App-header {
+  background: linear-gradient(90deg, rgba(7,5,46,1) 9%, rgba(6,22,108,1) 33%, rgba(30,32,134,1) 61%, rgba(82,32,125,1) 83%);
+}
+
+.media-hut-logo {
+  width: 100%;
+  max-width: 64px;
+  height: auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+
+/*Small devices (landscape phones, 300px and up)*/
+@media (min-width: 300px) { 
   h1 {
-    padding: 44px 0 30px 0;
-    font-size: 1.5em;
+    padding: 15px 0 0 5px;
+    font-size: 2em;
     margin: 0;
+    color: var(--logo-blue);
   }
 
   h2 {
@@ -22,7 +48,7 @@
 
   .add-video-container {
     padding: 50px 0 50px 0 ;
-    background-color: #e4e4e4;
+    background-color: var(--light-grey);
   }
 
   .buttons-container {
@@ -32,11 +58,11 @@
   }
 
   .add-btn:hover{
-    background: rgb(21, 255, 177);
+    background: var(--logo-blue);
   }
 
   .reset-btn:hover{
-    background: rgb(228, 25, 255);
+    background: var(--logo-pink);
   }
 
   .add-button {
@@ -47,10 +73,6 @@
     margin: 49px 12px;
   }
 
-  .borderline {
-    border-top: 1px solid red;
-  }
-
   label {
     font-size: 1.3em;
   }
@@ -59,13 +81,13 @@
     padding-top: 25px;
     display: flex;
     justify-content: space-around;
-    background-color: black;
+    background-color: var(--button-color);
     flex-direction: row;
   }
 
   .votes {
     font-size: x-large;
-    color: white;
+    color: var(--button-text);
   }
 
   .remove-button-container {
@@ -73,15 +95,15 @@
   }
 
   .remove-button:hover {
-     background: #fb1703;
+    background: #640bac;
   }
 
   .btn {
-    padding: 0.3em 1em;
+    padding: 0.2em 1em;
     border: none;
     outline: none;
-    color: rgb(255, 255, 255);
-    background: #111;
+    color: var(--button-text);
+    background: var(--button-color);
     cursor: pointer;
     position: relative;
     z-index: 0;
@@ -137,9 +159,58 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #222;
+    background: var(--button-color);
     left: 0;
     top: 0;
     border-radius: 10px;
+  }
+
+  .vote-btn {
+    padding: 0.1em 0.5em;
+  }
+}
+
+/*Large devices (desktops, 768px and up)*/
+@media (min-width: 768px) { 
+  .cards{
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: end;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin: 0;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-container {
+    margin: 35px 12px;
+  }
+
+  .vote-buttons {
+    justify-content: space-evenly;
+  }  
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) { 
+  .cards{
+    display: grid;
+    grid-template-columns:  repeat(auto-fill, minmax(400px, 1fr));
+    align-items: end;
+  }
+
+  .card-container {
+    margin: 0;
+    padding: 63px 10px 0 10px;
+  }
+  .vote-btn {
+    padding: 5px 6px;
   }
 }

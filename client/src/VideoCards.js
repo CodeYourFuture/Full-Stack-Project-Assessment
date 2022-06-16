@@ -21,29 +21,31 @@ function VideoCards() {
   return (
     <div className="video-cards">
       <AddVideo AddVideo={addVideo} />
-      {videoList.map((videoObj, index) => {
-        return (
-          /* video contents */
-          <div className="card-container" key={index}>
-            {/* video title */}
-            <div className="card-title">
-              <h2>{videoObj.title}</h2>
+      <div className="cards">
+        {videoList.map((videoObj, index) => {
+          return (
+            /* video contents */
+            <div className="card-container" key={index}>
+              {/* video title */}
+              <div className="card-title">
+                <h2>{videoObj.title}</h2>
+              </div>
+
+              <Video
+                /* embedded video */
+                videoObj={videoObj}
+                /* delete button */
+                removeVideo={() => {
+                  removeVideo(videoObj.id);
+                }}
+              />
+
+              {/* no of votes, up vote button, down vote button */}
+              <VoteButtons />
             </div>
-
-            <Video
-              /* embedded video */
-              videoObj={videoObj}
-              /* delete button */
-              removeVideo={() => {
-                removeVideo(videoObj.id);
-              }}
-            />
-
-            {/* no of votes, up vote button, down vote button */}
-            <VoteButtons />
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
