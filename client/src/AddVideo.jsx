@@ -21,11 +21,12 @@ const AddVideo = () => {
     } else {
       alert("Video added");
       setUrlValue("");
-      setTitle("")
+      setTitle("");
     }
   };
+
   return (
-    <div>
+    <div className="Add_Video">
       <button onClick={eventHandler}>Add Video</button>
       <div className={visibility}>
         <text>Title</text>
@@ -37,15 +38,7 @@ const AddVideo = () => {
           onChange={(e) => setUrlValue(e.value)}
         ></input>
         <button onClick={eventHandler}>Cancel</button>
-        <button
-          onClick={() => {
-            addingVideo();
-            console.log(urlValue);
-            console.log(title);
-          }}
-        >
-          Add
-        </button>
+        <button onClick={addingVideo}>Add</button>
       </div>
     </div>
   );

@@ -80,10 +80,18 @@ app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
 });
+// app.post("/videos", (req, res) => {
+//   // Delete this line after you've confirmed your server is running
+//  videos.push(req.body);
+//   res.send(videos)
+// });
 app.post("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
- videos.push(req.body);
-  res.send(videos)
+  // videos.finter((vid)=> vid.id === req.body.id).rating =req.body.rating;
+  const vidId = req.body.id;
+  const vidRate = req.body.rating;
+  videos.filter((vid) => vid.id === vidId).map((vid) => (vid.rating = vidRate));
+  res.send(videos);
 });
 
 app.delete("/sql", (req, res) => {
