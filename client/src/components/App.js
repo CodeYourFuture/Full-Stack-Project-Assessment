@@ -1,13 +1,14 @@
 import React, { useState , useEffect} from "react";
 import "../App.css";
-import data from "../exampleresponse.json";
+// import data from "../exampleresponse.json";
 import VideoPanel from "./VideoPanel";
 import Search from "./Search";
-import Add from "./Add"
+import Add from "./Add";
+import axios from "axios";
 // import Delete from "./Delete";
 
 function App() {
-  const [allData, setAllData] = useState(data);
+  const [allData, setAllData] = useState([]);
   const [videos, setVideos] = useState(allData);
   const searchHandler = (searchText) => {
     let filteredVid = allData.filter((video) =>
@@ -15,6 +16,13 @@ function App() {
     );
     setVideos(filteredVid);
   };
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/")
+    .then(res=> setVideos(res.data));
+  },[]);
+  
+
   const deleteHandler = (id) => {
     let filteredVid = allData.filter((video) => video.id !== id);
     // setVideos(filteredVid);
