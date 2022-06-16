@@ -13,22 +13,23 @@ import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState([]); // The videos to be displayed
+  const [order, setOrder] = useState("desc");
   const [hideForm, setHideForm] = useState(false); // Toggles the form to add video
   const [titleError, setTitleError] = useState(false);
   const [urlError, setUrlError] = useState(false);
-  const [modal, setModal] = useState(false);
   const [toDelete, setToDelete] = useState();
+  const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000")
+    fetch(`http://127.0.0.1:5000/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
         setLoading(false);
       })
       .catch((error) => console.log(error));
-  }, [loading]);
+  }, [order, loading]);
 
   // Adds a video
   const addVideo = (title, url) => {
@@ -102,6 +103,7 @@ const App = () => {
           <Button
             sx={{
               mb: 5,
+              mr: 2,
             }}
             variant="contained"
             onClick={() => setHideForm(true)}
@@ -116,6 +118,13 @@ const App = () => {
             hideForm={() => setHideForm()}
           />
         )}
+        <Button
+          sx={{ mb: 5 }}
+          variant="contained"
+          onClick={() => setOrder(order === "desc" ? "asc" : "desc")}
+        >
+          Sort
+        </Button>
         {!loading && videos.length > 0 ? (
           <Videos videos={videos} />
         ) : (
