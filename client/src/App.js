@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
-
+import Footer from "./Footer";
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
-  const [loading , setLoading] = useState(true)
+  const [loading , setLoading] = useState(true);
 
-  
-    fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
+  useEffect(()=>{fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
         setFilterData(data);
         setLoading(false)
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error);
+      setLoading(true)})},[])
+    
   
   return (
     <>
@@ -26,7 +27,7 @@ function App() {
         </header>
         <main>
           <div>
-            <AddVideo />
+            <AddVideo  />
             <Search
               allData={allData}
               filterData={filterData}
@@ -36,6 +37,9 @@ function App() {
             />
           </div>
         </main>
+        <footer className="Footer_style">
+          <Footer  />
+        </footer>
       </div>
     </>
   );

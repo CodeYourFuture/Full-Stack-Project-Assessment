@@ -1,6 +1,38 @@
-.App {
-  text-align: center;
-  background-color: #0ff082;
+ .App {
+    display: grid;
+    grid-template-areas: "head  head  head  head "
+                "Av Av Av Av"
+                "search search search search"
+                "B B B B"
+                "Footer Footer Footer Footer";
+    grid-template-rows: 150px 150px 150px 1fr 30px;
+    background-color: green;
+  }
+  .App-header{
+    grid-area:head;
+  }
+  .Add_Video{
+    grid-area:Av;
+     
+  }
+  .Add_Video{
+     background-color: green;
+  }
+  .Video-Search{
+    grid-area:search;
+  }
+  .addingOptionHidden {
+  display: none;
+}
+.addingOptionVisible {
+  display: contents;
+}
+.video-container {
+  grid-area:B;
+  margin: 10%;
+}
+.Footer_style{
+  grid-area:Footer;
 }
 .addingOptionHidden {
   display: none;
@@ -14,34 +46,100 @@
   margin: 10%;
 }
 
-@media (max-width: 600px) {
-  .App {
-    display: flex;
-    justify-content: space-between;
-    background-color: #dbf7fa;
+
+
+
+
+
+/* Mobile version  -  Second break   */
+@media (max-width: 768px) {
+   .App {
+    display: grid;
+    grid-template-areas: "head  head  head  head "
+                "Av Av Av Av"
+                "search search search search"
+                "B B B B"
+                "Footer Footer Footer Footer";
+    grid-template-rows: 150px 150px 150px 1fr 30px;
+    background-color: green;
   }
+  .App-header{
+    grid-area:head;
+  }
+  .Add_Video{
+    grid-area:Av;
+     
+  }
+  .Add_Video{
+     background-color: green;
+  }
+  .Video-Search{
+    grid-area:search;
+  }
+  .addingOptionHidden {
+  display: none;
+}
+.addingOptionVisible {
+  display: contents;
+}
+.video-container {
+  grid-area:B;
+  margin: 10%;
+}
+.Footer_style{
+  grid-area:Footer;
+}
 }
 /* Mobile version  - First break px */
-media (max-width: 400px) {
+@media (max-width: 480px) {
+ 
+
   .App {
-    display: flex;
-    justify-content: space-between;
-    background-color: #dbf7fa;
+    display: grid;
+    grid-template-areas: "head  head  head  head "
+                "Av Av Av Av"
+                "search search search search"
+                "B B B B"
+                "Footer Footer Footer Footer";
+    grid-template-rows: 50px 150px 150px 1fr 30px;
+    background-color: green;
   }
+  .App-header{
+    grid-area:head;
+   
+  }
+  .App-header > h1 {
+ font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-top: 10%;
+  }
+  .Add_Video{
+    grid-area:Av;
+     
+  }
+  .Add_Video > button{
+    margin: 10px;
+    border-radius: 10px;
+    background-color: azure;
+  }
+  .Add_Video{
+     background-color: green;
+  }
+  .Video-Search{
+    grid-area:search;
+  }
+  .addingOptionHidden {
+  display: none;
 }
-/* Mobile version  -  Second break   */
-media (max-width: 720px) {
-  .App {
-    display: flex;
-    justify-content: space-between;
-    background-color: #dbf7fa;
-  }
+.addingOptionVisible {
+  display: contents;
 }
-/* Pc */
-media (max-width: 900px) {
-  .App {
-    display: flex;
-    justify-content: space-between;
-    background-color: #dbf7fa;
-  }
+.video-container {
+  grid-area:B;
+  margin: 10%;
+}
+.Footer_style{
+  grid-area:Footer;
+}
 }

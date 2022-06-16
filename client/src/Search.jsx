@@ -23,7 +23,7 @@ const Search = (props) => {
   
     return (
       <>
-        <div>
+        <div className="Video-Search">
           <input
             id="SearchBar"
             className=""
@@ -31,10 +31,10 @@ const Search = (props) => {
             value={searchInput}
             onChange={(e) => handleSearchInput(e)}
           />
-          {/* <button> Click me </button> */}
+          
         </div>
         <div>
-          <VideoList filterData={props.filterData} />
+          <VideoList filterData={props.filterData} loading={props.loading} />
         </div>
       </>
     );
