@@ -1,10 +1,11 @@
 import React from "react";
 import Votes from "./Votes";
-import YoutubeEmbed from "./YoutubeEmbed";
+import Video from "./Video"
 
 import "../App.css";
 
 function Content({ data, wordEntered, handleDelete }) {
+
   return (
     <div className="videos row">
       {data
@@ -24,9 +25,15 @@ function Content({ data, wordEntered, handleDelete }) {
               <h5>{item.title}</h5>
               <Votes data={item.rating} />
               <div className="video">
-                <YoutubeEmbed embedId={item.url}/>
+                <Video embedId={item.url}/>
               </div>
-              <button type="button" className="removeVideo btn btn-danger" onClick={() => handleDelete(item.id)}>Remove</button>
+              <button
+                type="button"
+                className="removeVideo btn btn-danger"
+                onClick={() => handleDelete(item.id)}
+              >
+                Remove
+              </button>
             </div>
           );
         })}

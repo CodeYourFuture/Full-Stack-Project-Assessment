@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import Votes from "./Votes";
+import { v4 as uuidv4 } from 'uuid';
 
 import SearchBar from "./SearchBar";
 import Content from "./Content";
@@ -18,7 +18,7 @@ function Main({ data }) {
     e.preventDefault();
 
     const newData = {
-      id: Math.floor(Math.random() * 1000),
+      id: uuidv4(),
       title,
       url,
     };
@@ -38,8 +38,8 @@ function Main({ data }) {
     setUrl("");
 
     // console.log(title);
-    // console.log("Enviou")
-    // console.log(newData);
+    console.log("Enviou")
+    console.log(newData);
   };
 
   const handleDelete = async (id) => {
