@@ -7,11 +7,11 @@ const Video = ({ videos, handleDeleteClick }) => {
     const base_url = "https://www.youtube.com/embed/";
     return (
       <div key={id}>
-        <div className="wrapper">
-          <h3 className="video-header">
-            <span>{title}</span>
-          </h3>
+        <h3 className="video-header">
+          <span>{title}</span>
+        </h3>
 
+        <div className="wrapper">
           <div className="frame">
             <iframe
               src={base_url + url.slice(-11)}
