@@ -9,7 +9,7 @@ function Votes({ data }) {
   };
 
   const decrementCount = () => {
-    setCount((prevState) => prevState - 1);
+    setCount((prevState) => prevState === 0 ? 0 : prevState - 1);
   };
 
   return (
