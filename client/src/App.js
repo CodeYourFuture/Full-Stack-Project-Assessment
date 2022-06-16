@@ -21,7 +21,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("http://127.0.0.1:5000")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -49,7 +49,7 @@ const App = () => {
         title: title,
         url: fixedUrl,
       };
-      fetch("http://localhost:5000", {
+      fetch("http://127.0.0.1:5000", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -72,7 +72,7 @@ const App = () => {
   // Deletes a video
   const deleteVideo = (id) => {
     setLoading(true);
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`http://127.0.0.1:5000/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
@@ -117,7 +117,7 @@ const App = () => {
           />
         )}
         {!loading && videos.length > 0 ? (
-          <Videos unorderedVideos={videos} />
+          <Videos videos={videos} />
         ) : (
           <p>Loading...</p>
         )}

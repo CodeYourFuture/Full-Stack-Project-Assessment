@@ -18,6 +18,11 @@ let videos = data;
 
 // Gets all the videos
 app.get("/", (req, res) => {
+  const order = req.query.order;
+  videos =
+    order === "asc"
+      ? videos.sort((a, b) => a.rating - b.rating)
+      : videos.sort((a, b) => b.rating - a.rating);
   res.json(videos);
 });
 

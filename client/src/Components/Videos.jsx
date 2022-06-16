@@ -2,11 +2,7 @@ import React from "react";
 
 import Video from "./Video";
 
-const Videos = ({ unorderedVideos }) => {
-  // Sorts the videos in descending of it's rating
-  const videos = [...unorderedVideos];
-  videos.sort((a, b) => b.rating - a.rating);
-
+const Videos = ({ videos }) => {
   return (
     <div className="Videos">
       {videos.map((video) => {
