@@ -14,14 +14,14 @@ function Votes({ data }) {
   return (
     <div className="votes">
       <button
-        className="btn btn-outline-secondary vote-buttons"
+        className="btn btn-outline-secondary btn-sm vote-buttons"
         onClick={voteUp}
       >
         Up Vote
       </button>
       <p>{vote ? vote : 0} votes</p>
       <button
-        className="btn btn-outline-secondary vote-buttons"
+        className="btn btn-outline-secondary btn-sm vote-buttons"
         onClick={voteDown}
       >
         Down Vote

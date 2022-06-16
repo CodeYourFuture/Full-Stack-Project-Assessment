@@ -11,11 +11,11 @@ function AddVideoForm() {
     let url = document.getElementById("form-url").value;
 
     setVideoList((video) => {
-      videoList.unshift({
+      videoList.push({
         id: videoList.length,
         title,
         url,
-        rating: video.rating ? video.rating : 0,
+        rating: 0,
       });
       return videoList;
     });
@@ -31,7 +31,6 @@ function AddVideoForm() {
               <input
                 className="form-field"
                 id="form-title"
-                className="form-field"
                 type="text"
                 placeholder="Video title"
                 name="videoTitle"
@@ -43,7 +42,6 @@ function AddVideoForm() {
               <input
                 className="form-field"
                 id="form-url"
-                className="form-field"
                 type="text"
                 placeholder="Video URL"
                 name="videoUrl"

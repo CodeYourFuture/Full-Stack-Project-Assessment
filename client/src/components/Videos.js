@@ -3,6 +3,7 @@ import Votes from "./Votes";
 
 function Videos(props) {
   let videoId = "";
+  let youtubeId = [];
 
   function removeVideo(e) {
     const selectedVideo = e.target.selected;
@@ -11,7 +12,8 @@ function Videos(props) {
   }
 
   return props.data.map((video) => {
-    videoId = video.url.slice(-11);
+    youtubeId = video.url.split("=");
+    videoId = youtubeId[1];
     return (
       <>
         <div className="content">
@@ -29,7 +31,7 @@ function Videos(props) {
           </div>
           <div className="removeButton">
             <button
-              className="btn btn-outline-danger"
+              className="btn btn-outline-danger btn-sm"
               selected={video.id}
               onClick={removeVideo}
             >
