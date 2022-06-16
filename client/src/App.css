@@ -1,17 +1,76 @@
 
 .App{
-  margin:18px;
+  margin:8px 10px;
+  background-color: #83c5be;
   
 }
 
 .App-header {
+  padding-top:1rem;
   text-align: center;
-  color:green;
-  font-family: fantasy;
-  font-weight: bold;
+  color:rgb(21, 8, 27);
+  font-family: 'Playfair Display', serif;
+  border:5px inset #f6c5b4;
+  border-radius: 20px;
+  font-size: 10px;
+ 
+}
+h1{
+   font-size: 25px;
+}
+.App-header:before{
+    content: "Rahwit's video library";
+    font-size: 600%;
+    animation-name: heading;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+   
+}
+@keyframes heading{
+  0%   {color: rgb(244, 111, 111);}
+  25%  {color: rgb(103, 16, 87);}
+  50%  {color: rgb(15, 9, 32);}
+  100% {color: rgb(133, 3, 27);}
+  
   
 }
+
 .add-video-title{
-  color:rgb(55, 133, 193);
-   font-family:'Times New Roman', Times, serif
+  margin: 10px 8px;
+  color:rgb(21, 8, 27);
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+ font-size: 20px;
+
+}
+
+input{
+  padding: 5px;
+  font-size: 16px;
+  border-width: 1px;
+  border-color: #CCCCCC;
+  border-style: none;
+  color: #000000;
+  border-style: solid;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  margin-right: 5px;
+}
+
+button{
+  font-size:15px;
+  font-family:Arial;
+  width:90px;
+  height:40px;
+  border-width:1px;
+  color:33, 10, 41;
+  border-color:#d6bcd6;
+  font-weight:bold;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
+  box-shadow: 3px 4px 0px 0px #899599;
+  text-shadow: 0px 1px 0px #e1e2ed;
+  background:linear-gradient(#ededed, #bab1ba)
 }

@@ -45,20 +45,16 @@ axios.get("http://localhost:4000/")
           setVisible={setVisible}
         />
       )}
-      <div className="container">
-        <div className="row">
+    
+        <div className="wrapper">
           {allVideos.map((video) => (
-            <div key={video.id} className="col-sm-4">
-              <RenderVideos
-                
-                video={video}
-                deleteVideos={deleteVideos}
-              />
+            <div className="video-card" key={video.id}>
+              <RenderVideos video={video} deleteVideos={deleteVideos} />
             </div>
           ))}
         </div>
       </div>
-    </div>
+  
   );
 }
 

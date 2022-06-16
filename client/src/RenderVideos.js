@@ -17,7 +17,7 @@ const RenderVideos = ({ video, deleteVideos }) => {
   return (
     <section>
       {video.title}
-      <div>
+      <div className="video">
         <iframe
          
           src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
