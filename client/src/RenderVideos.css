@@ -27,7 +27,7 @@
   display:grid;
   width:100%; 
   border-radius: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
   gap: 1rem;
   background-color: #83c5be;
 
