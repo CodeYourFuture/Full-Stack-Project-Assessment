@@ -1,18 +1,33 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import Video from "./components/Video";
-import data from "./exampleresponse.json";
+//import data from "./exampleresponse.json";
 import Form from "./components/Form";
+import axios from "axios";
 
 function App() {
   const [displayForm, setDisplayForm] = useState(false);
   // const [searchTerm, setSearchTerm] = useState("");
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
   const [addFormData, setAddFormData] = useState({
     title: "",
     url: "",
   });
+
+  const getData = () => {
+    axios.get("http://localhost:4000/").then((res) => {
+      //console.log(res);
+      setVideos(res.data);
+    });
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/").then((res) => {
+      //console.log(res);
+      setVideos(res.data);
+    });
+  }, []);
 
   // function handleSearchInput(event) {
   //   setSearchTerm(event.target.value);
@@ -39,6 +54,10 @@ function App() {
       url: addFormData.url,
     };
 
+    axios.post(`http://localhost:4000/`, newVideo).then((res) => {
+      if (res.status === 201) getData();
+    });
+
     const validateUrl = (url) => {
       const urlType =
         /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -58,12 +77,13 @@ function App() {
   };
 
   const handleDeleteClick = (videoId) => {
-    const newVideos = [...videos];
-
-    const index = videos.findIndex((video) => video.id === videoId);
-
-    newVideos.splice(index, 1);
-    setVideos(newVideos);
+    axios.delete(`http://localhost:4000/${videoId}`).then((res) => {
+      if (res.status === 200) getData();
+    });
+    //const newVideos = [...videos];
+    //const index = videos.findIndex((video) => video.id === videoId);
+    //newVideos.splice(index, 1);
+    //setVideos(newVideos);
   };
 
   return (
@@ -84,7 +104,7 @@ function App() {
           </label>
         </div> */}
         <div className="form-wrapper">
-          <h4 onClick={() => setDisplayForm(true)}>Add Video</h4>
+          <h2 onClick={() => setDisplayForm(true)}>Add Video</h2>
 
           {displayForm ? (
             <Form

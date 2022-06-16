@@ -25,14 +25,14 @@
 form {
   margin: 10px;
 }
-h4 {
+h2 {
   text-align: left;
   margin: 0 50px;
   font-weight: 800;
   color: #f4e73b;
   text-align: center;
 }
-h5 {
+h3 {
   color: #333535;
 }
 input {
@@ -44,7 +44,7 @@ input {
   box-sizing: border-box;
 }
 .video-header {
-  height: 5%;
+  height: 10%;
 }
 .wrapper {
   background-color: #ffffff5c;

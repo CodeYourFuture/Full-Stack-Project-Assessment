@@ -3,21 +3,22 @@ import VoteButton from "./VoteButton";
 
 const Video = ({ videos, handleDeleteClick }) => {
   return videos.map((video) => {
-    const { id, title, url } = video;
+    const { id, title, url, rating } = video;
     const base_url = "https://www.youtube.com/embed/";
     return (
       <div key={id}>
-        <h5 className="video-header">
-          <span>{title}</span>
-        </h5>
-
         <div className="wrapper">
+          <h3 className="video-header">
+            <span>{title}</span>
+          </h3>
+
           <div className="frame">
             <iframe
               src={base_url + url.slice(-11)}
               title="YouTube video player"
             ></iframe>
           </div>
+          {rating ? <p>Rating: {rating}</p> : ""}
           <div>
             <VoteButton />
           </div>
