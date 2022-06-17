@@ -15,6 +15,23 @@ const VideoList = (props) => {
       autoplay: 1,
     },
   };
+  const deleteHandler =(a)=>
+  {
+     fetch("https://flannel-hickory-parallelogram.glitch.me/videos/delete", {
+       method: "DELETE",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(a),
+     })
+       .then((response) => response.json())
+       .then((data1) => {
+         console.log("Success:", data1);
+       })
+       .catch((error) => {
+         console.log(error);
+       });
+  }
  
 
   if (props.loading)
@@ -36,7 +53,7 @@ const VideoList = (props) => {
             opts={opts}
             onReady={onPlayerReady}
           />
-          <button>Delete</button>
+          <button onClick={deleteHandler(a)}>Delete</button>
         </div>
       ))}
     </div>
