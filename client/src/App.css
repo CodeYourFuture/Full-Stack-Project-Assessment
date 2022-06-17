@@ -1,3 +1,78 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
+}
+
+.Header {
+  margin-bottom: 3em;
+  text-align: left;
+  display: flex;
+}
+
+.hamburger {
+  margin: 2.5vh 1em;
+}
+
+.ham {
+  background-color: #000;
+  width: 2em;
+  height: 15%;
+  margin-bottom: 15%;
+}
+
+/* AddVideo.js */
+.Add-video {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3em;
+  margin-bottom: 3em;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Video.js */
+.Video {
+  width: 100%;
+  margin-bottom: 5em;
+}
+
+.video-title,
+.frame,
+.Rating {
+  margin-bottom: 1em;
+}
+
+.frame {
+  width: 95%;
+  height: 40vh;
+}
+
+/* Rating.js */
+.Rating {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (min-width: 900px) {
+  /* Videos.js */
+  .Videos {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+  }
 }
