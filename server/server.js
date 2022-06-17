@@ -36,4 +36,11 @@ app.post("/", function (req, res) {
   }
 });
 
+app.get("/:id", function (req, res) {
+  let id = req.params.id;
+  let foundVideo = videos.filter((i) => i.id == id);
+
+  res.json(foundVideo);
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
