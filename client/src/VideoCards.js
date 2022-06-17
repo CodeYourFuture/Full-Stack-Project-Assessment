@@ -15,7 +15,7 @@ function VideoCards() {
 
   /* add any video to list */
   function addVideo(videoObj) {
-    setVideoList(videoList.concat(videoObj));
+    setVideoList([videoObj, ...videoList]);
   }
 
   return (

@@ -23,9 +23,8 @@ function AddVideo(props) {
       Array.from(document.querySelectorAll("input")).forEach(
         (input) => (input.value = "")
       );
-      this.setState({
-        itemvalues: [{}],
-      });
+      setVideoTitleInput("");
+      setVideoUrlInput("");
     };
 
     return (
