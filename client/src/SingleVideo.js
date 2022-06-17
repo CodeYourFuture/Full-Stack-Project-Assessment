@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import { Card, CardMedia, CardContent, Typography, CardActions, Button, ButtonGroup } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, CardActions, Button, ButtonGroup, IconButton } from "@mui/material";
+import {Favorite, HeartBroken, DeleteForever} from "@mui/icons-material";
 
 import "./App.css";
 
-const SingleVideo = ({ index, video, videos, setVideos }) => {
+const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
   const videoId = video.url.slice(-11);
   const startingScore = video.rating;
   const [score, setScore] = useState(startingScore);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const deleteVideo = () => {
-    setVideos(videos.filter((video) => video.id !== videos[index].id));
+  const deleteVideo = async e => {
+    const videoId = video.id;
+    const res = await fetch(`${urlToFetch}${videoId}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    console.log(data.msg)
+    // setValidInput(data.msg);
+    getVideos();
   };
   return (
     <Card sx={{ maxWidth: 450 }}>
@@ -42,50 +50,44 @@ const SingleVideo = ({ index, video, videos, setVideos }) => {
             <br />
           </>
         )}
-        <Typography variant="body2">Votes: {score}</Typography>
       </CardContent>
       <CardActions>
-        <ButtonGroup size="small">
-          <Button
-            size="small"
-            variant={liked ? "contained" : "outlined"}
-            color={liked ? "success" : "primary"}
-            onClick={() => {
-              if (score < startingScore) {
-                setScore((score) => score);
-              } else if (score === startingScore) {
-                setLiked(true);
-                setScore((score) => (score += 1));
-              } else {
-                setLiked(false);
-                setScore((score) => (score -= 1));
-              }
-            }}
-          >
-            Up Vote
-          </Button>
-          <Button
-            size="small"
-            variant={disliked ? "contained" : "outlined"}
-            color={disliked ? "error" : "primary"}
-            onClick={() => {
-              if (score > startingScore) {
-                setScore((score) => score);
-              } else if (score === startingScore) {
-                setDisliked(true);
-                setScore((score) => (score -= 1));
-              } else {
-                setDisliked(false);
-                setScore((score) => (score += 1));
-              }
-            }}
-          >
-            Down Vote
-          </Button>
-          <Button size="small" id={video.id} onClick={deleteVideo}>
-            Remove Video
-          </Button>
-        </ButtonGroup>
+        <IconButton
+          aria-label="upvote video"
+          onClick={() => {
+            if (score < startingScore) {
+              setScore((score) => score);
+            } else if (score === startingScore) {
+              setLiked(true);
+              setScore((score) => (score += 1));
+            } else {
+              setLiked(false);
+              setScore((score) => (score -= 1));
+            }
+          }}
+        >
+          <Favorite  color={liked ? "success" : "primary"} />
+        </IconButton>
+        <Typography variant="body2">{score}</Typography>
+        <IconButton
+          aria-label="downvote video"
+          onClick={() => {
+            if (score > startingScore) {
+              setScore((score) => score);
+            } else if (score === startingScore) {
+              setDisliked(true);
+              setScore((score) => (score -= 1));
+            } else {
+              setDisliked(false);
+              setScore((score) => (score += 1));
+            }
+          }}
+        >
+          <HeartBroken color={disliked ? "error" : "primary"} />
+        </IconButton>
+        <IconButton aria-label="delete video" onClick={deleteVideo}>
+          <DeleteForever color="primary" />
+        </IconButton>
       </CardActions>
     </Card>
   );

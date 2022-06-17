@@ -1,70 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SingleVideo from "./SingleVideo";
-import {Container, Row, Col} from 'react-bootstrap'
-import moment from "moment"
+import { Container, Row, Col } from "react-bootstrap";
 
-const AddVideo = ({ setVideos, videos }) => {
+const AddVideo = ({ getVideos, setVideos, videos, urlToFetch }) => {
   const [addTitle, setAddTitle] = useState("");
   const [addUrl, setAddUrl] = useState("");
   const [validInput, setValidInput] = useState("");
   const [showAddVideo, setShowAddVideo] = useState(false);
-
+  const [showFindVideo, setShowFindVideo] = useState(false);
+useEffect(() => {
+  getVideos();
+}, []);
   
-
-  const validYoutubeUrlPattern = new RegExp(
-    /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/
-  );
-  const addVideoToVideos = (e) => {
+  const addVideoToVideos = async e => {
     e.preventDefault();
-    if (addTitle === "" || !addUrl.match(validYoutubeUrlPattern)) {
-      return addTitle === ""
-        ? setValidInput("Please add the video title")
-        : addUrl === ""
-        ? setValidInput("Please enter a Youtube Url")
-        : setValidInput("Please enter a valid YouTube Url");
-    } else {
-      setVideos(
-        videos.concat({
-          id: generateRandomId(videos),
-          title: addTitle,
-          url: addUrl,
-          rating: 0,
-          dateAdded: moment().format("MMMM Do YYYY, h:mm:ss a"),
-        })
-      );
-      console.log(videos);
-      setValidInput("Your video has been added");
-      setAddTitle("");
-      setAddUrl("");
+    const formElements = e.target.elements;
+    const newVideoElements = {};
+    for (let video of formElements) {
+      console.log(video)
+      const videoName = video.name;
+      const videoValue = video.value;
+      newVideoElements[videoName] = videoValue;
     }
+    const res = await fetch(`${urlToFetch}`, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newVideoElements)
+    });
+    const data = await res.json();
+    setValidInput(data.msg);
+    setAddTitle("");
+    setAddUrl("");
+    getVideos();
   };
-  const generateRandomId = (arr) => {
-    const randomId = Math.floor(100000 + Math.random() * 900000);
-    const alreadyHasId = arr.some((video) => video.id === randomId);
-    if (alreadyHasId) {
-      generateRandomId(arr);
-    } else {
-      return randomId;
-    }
-  };
-  const showAddVideoInput =  <><form onSubmit={addVideoToVideos}>
-          <p>{validInput}</p>
-          <label>
-            Title
-            <input type="text" id="title" name="title" value={addTitle} onChange={(e) => setAddTitle(e.target.value)} />
-          </label>
-          <label>
-            Url
-            <input type="text" id="url" name="url" value={addUrl} onChange={(e) => setAddUrl(e.target.value)} />
-          </label>
-          <button>Add</button>
-        </form>
-      <button onClick={() => setShowAddVideo(false)}>Cancel</button></>
-  
+
+  const findVideo = (e) => {
+    e.preventDefault()
+    const videoId = e.target[0].value;
+    fetch(`${urlToFetch}${videoId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos([data]);
+      });
+  }
+  const showAddVideoInput = (
+    <>
+      <form onSubmit={addVideoToVideos}>
+        <p>{validInput}</p>
+        <label>
+          Title
+          <input type="text" id="title" name="title" value={addTitle} onChange={(e) => setAddTitle(e.target.value)} />
+        </label>
+        <label>
+          Url
+          <input type="text" id="url" name="url" value={addUrl} onChange={(e) => setAddUrl(e.target.value)} />
+        </label>
+        <button>Add</button>
+      </form>
+      <button onClick={() => setShowAddVideo(false)}>Cancel</button>
+    </>
+  );
+
+  const showFindVideoInput = (
+    <>
+      <form onSubmit={findVideo}>
+        <p>{validInput}</p>
+        <label>
+          Video Id
+          <input type="number" id="videoId" name="videoId" value={showFindVideo} onChange={(e) => setShowFindVideo(e.target.value)} />
+        </label>
+        <button>Find</button>
+      </form>
+      <button onClick={() => { setShowFindVideo(false); getVideos()}}>Cancel</button>
+    </>
+  );
+
   return (
     <>
       <button onClick={() => setShowAddVideo(true)}>Add Video</button>
       {showAddVideo && showAddVideoInput}
+      <button onClick={() => setShowFindVideo(true)}>Find Video</button>
+      {showFindVideo && showFindVideoInput}
+      {/* {showFindVideo && <button onClick={getVideos}>Show All</button>} */}
       <section className="show-videos">
         <Container fluid>
           <Row>
@@ -72,7 +90,7 @@ const AddVideo = ({ setVideos, videos }) => {
               .sort((a, b) => b.rating - a.rating)
               .map((video, index) => (
                 <Col xs={12} sm={6} lg={4} xl={3} key={video.id}>
-                  <SingleVideo video={video} index={index} videos={videos} setVideos={setVideos} />
+                  <SingleVideo video={video} urlToFetch={urlToFetch} getVideos={getVideos} />
                 </Col>
               ))}
           </Row>

@@ -1,18 +1,30 @@
 import React, { useState } from "react";
-import example from "./exampleresponse.json";
 import "./App.css";
 import AddVideo from "./AddVideo";
 
 function App() {
-  const [videos, setVideos] = useState(example);
+  const [videos, setVideos] = useState([]);
+  const urlToFetch = "http://localhost:5000/";
 
+  const getVideos = (id="") => {
+    fetch(`${urlToFetch}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          // setStatus("failed");
+        } else {
+          setVideos(data);
+          // setStatus("success");
+        }
+      });
+  };
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="page-title">Video Recommendation</h1>
       </header>
       <main>
-        <AddVideo setVideos={setVideos} videos={videos} />
+        <AddVideo urlToFetch={urlToFetch} setVideos={setVideos} videos={videos} getVideos={getVideos} />
       </main>
     </div>
   );
