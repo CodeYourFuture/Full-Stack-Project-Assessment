@@ -1,0 +1,90 @@
+@import './elements/variables.scss';  
+  
+
+.side-bar{
+    display:flex;
+    flex-direction:column;
+    justify-content:baseline;
+    position: fixed;     /* Fixed Sidebar (stay in place on scroll and position relative to viewport) */
+    width: 100%;     /* Set the width of the sidebar */
+    /* z-index: 1; */     /* Stay on top of everything */
+    background-color: #1B1A17; /* Black */
+    overflow-x: hidden;     /* Disable horizontal scroll */
+    padding-top: 10px;
+
+        @media (min-width: 950px) {
+            top: 3.4em;      /* Stay at the top */
+            height: 100%;
+            width: 300px;  
+        }
+
+    .toggle-button{
+        background-color: #7FC8A9;
+        color: #FFFFFF;
+        z-index:10;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        margin: 0 1rem 1rem 1rem;
+            @media (min-width: 750px) {
+            font-size: 1.2rem;
+        
+        }
+            @media (min-width: 950px) {
+            display: none;
+            }
+    }
+
+    h4{
+        color:#FFFFFF;
+        font-size:1.3rem;
+        display: none;
+        align-items: center;
+    
+        span{
+            margin-left: 10px;
+
+        }
+        @media (min-width: 950px) {
+            margin-top: 2rem;
+            padding: 0 3rem;
+            display: block;
+            }
+    }
+  
+    
+    .nav-menu{
+        padding: 1rem 2rem;
+        display: none;
+        text-align: left;
+       
+        @media (min-width: 950px) {
+            display: flex;
+            flex-direction: column;
+            }
+       a{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1rem;
+        border: none;
+        border-radius: 20px;
+        color: #FFFFFF;
+        span{
+            margin-top: 2px;
+            margin-left: 10px;
+        }
+       
+        } :hover{
+            background-color: #7FC8A9;
+        }
+        .active {
+            background-color: #7FC8A9;
+            color: #132C33;
+        }
+    } 
+    .show-menu{
+        display: block;
+        z-index: 10;
+    }
+}

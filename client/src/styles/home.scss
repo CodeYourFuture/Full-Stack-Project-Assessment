@@ -1,0 +1,9 @@
+#home{
+  background-color: #27241d;
+ padding-top: 4rem;
+  @media (min-width: 950px) {
+  padding-top: 1em;
+  padding-left: 20em;
+  padding-right: 1em;
+  }
+}

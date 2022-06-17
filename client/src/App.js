@@ -1,11 +1,15 @@
-import "./App.css";
+import React from "react";
+import Header from "./components/Header";
+import SideBar from './components/SideBar'
+import Home from './components/Home'
+import './styles/global.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+    <div className="app-container">
+      <Header/>
+      <SideBar/>
+      <Home/>
     </div>
   );
 }

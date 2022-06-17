@@ -1,0 +1,52 @@
+
+    .card-container{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .country-card {
+        background-color: #ffffff;
+        padding-bottom: 1.5rem;
+        border-radius: 4%;
+        width: 500px;
+        cursor: pointer;
+        margin: 1rem;
+        color: green;
+        box-shadow: green;
+        @media (min-width: 950px) {
+          margin: 1.5rem 1rem;
+          width: 600px;
+          height: 480px;
+        }
+        @media (min-width: 1150px) {
+          margin: 2rem 1.5rem;
+          width: 650px;
+        }
+
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+        .card-img {
+          min-height: 300px;
+          width: fit-content;
+          border-radius: 4% 4% 0 0;
+         
+        }
+
+        .card-body {
+          margin-top: 1rem 1.5rem;
+          padding: 1rem;
+        }
+
+        .card-body p {
+          font-size: 1.2rem;
+          margin-top: 0.5rem;
+        }
+        .card-body span {
+          font-weight: lighter;
+          margin-left: 0.5rem;
+        }
+       
+      }
+    }
