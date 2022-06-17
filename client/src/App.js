@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Header />
       <AddVideo data={data} setData={setData} />
-      <ToggleOrder data={data} setData={setData} />
+      <ToggleOrder setData={setData} />
       <VideoCard data={data} setData={setData} />
     </div>
   );
