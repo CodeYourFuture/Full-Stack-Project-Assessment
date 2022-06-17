@@ -1,12 +1,12 @@
 import DescButton from "./Components/DescButton";
 import AscButton from "./AscButton";
 const ToggleOrder = (props) => {
-  const { setData } = props;
+  const { data, setData } = props;
   return (
-    <>
-      <DescButton setData={setData} />
-      <AscButton setData={setData} />
-    </>
+    <div>
+      <DescButton data={data} setData={setData} />
+      <AscButton data={data} setData={setData} />
+    </div>
   );
 };
 export default ToggleOrder;

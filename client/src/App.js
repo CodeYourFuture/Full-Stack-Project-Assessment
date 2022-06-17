@@ -13,12 +13,11 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-
   return (
     <div className="App">
       <Header />
       <AddVideo data={data} setData={setData} />
-      <ToggleOrder setData={setData} />
+      <ToggleOrder data={data} setData={setData} />
       <VideoCard data={data} setData={setData} />
     </div>
   );

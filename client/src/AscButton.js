@@ -1,14 +1,15 @@
 const AscButton = (props) => {
-  const { setData } = props;
+  const { data, setData } = props;
+  console.log(data);
 
-  const changeOrder = async () => {
-    const response = await fetch("http://127.0.0.1:5000/?order=asc");
-    const data = await response.json();
-    setData(data);
+  const onClickHandle = () => {
+    setData(
+      data.sort((a, b) =>
+        a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
+      )
+    );
+    console.log(data);
   };
-  const onClickHandler = async () => {
-    await changeOrder();
-  };
-  return <button onClick={onClickHandler}>order by least liked</button>;
+  return <button onClick={onClickHandle}>order by least liked</button>;
 };
 export default AscButton;

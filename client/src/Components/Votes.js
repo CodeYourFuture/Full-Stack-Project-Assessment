@@ -3,12 +3,11 @@ import UpVoteButton from "./UpVoteButton";
 import DownVoteButton from "./DownVoteButton";
 
 const Votes = (props) => {
-  const { rating } = props;
-  const [counter, setCounter] = useState(rating);
+  const [counter, setCounter] = useState(props.rating);
 
   return (
     <div className="votes-div">
-      <p>{rating} likes</p>
+      <p>{counter} likes</p>
       {/* <span className="like-dislike-buttons"> */}
       <UpVoteButton counter={counter} setCounter={setCounter} />
       <DownVoteButton counter={counter} setCounter={setCounter} />
