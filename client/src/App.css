@@ -13,10 +13,19 @@
 }
 
 .col-sm-4{
-   margin-top: 2rem;
-  /*box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  margin-top: 2rem;
 }
 
+.card {
+  margin-bottom: 1.5em;
+  height: calc(100% - 1.5em);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+/* .card-body {
+  align-items: end;
+} */
 form{
     display: flex;
     flex-direction: column;

@@ -19,6 +19,8 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
     <section className="card">
       <div className="card-body">
         <h5 className="card-title"> {video.title} </h5>
+      </div>
+      <div className="card-body">
         <img
           className="img-fluid"
           src={ThumbsImage}
@@ -33,7 +35,8 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
           onClick={decrementCount}
           alt="thumbs-down"
           width="80px"
-        />
+        /></div>
+      <div className="card-body">
         <iframe
           className="embed-responsive-item"
           src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
@@ -42,7 +45,9 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <div className ="col text-center">
+        </div>
+        {/* <div className ="col text-center"> */}
+        <div className="card-body">
         <button
           onClick={() => handleDeletedVideo(video.id)}
           type="button"
@@ -50,7 +55,6 @@ const RenderVideo = ({ video, handleDeletedVideo }) => {
           Delete
         </button>
         </div>
-      </div>
     </section>
   );
 };

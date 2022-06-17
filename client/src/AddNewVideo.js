@@ -1,27 +1,50 @@
 import React, { useState } from "react";
 
-const AddNewVideo = (props) => {
+const AddNewVideo = ({setAllVideos, setAddVideo, urlToFetch, generateVideo}) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-   const handleSubmit = (event) => {
-     event.preventDefault();
-     //This functions increments each video id 
-     const getId = (id) => {
-    return id++
-  }
-      const addVideo = {
-        title,
-        url,
-        id: {getId},
-        rating: 5,
-      };
 
-      props.setAllVideos((allVideos) => {
-        return allVideos.concat(addVideo);
-      });
+  /* 
+  const generateRandomId = (arr) => {
+  const randomId = Math.floor(100000 + Math.random() * 900000);
+  const alreadyHasId = arr.some((video) => video.id === randomId);
+  if (alreadyHasId) {
+    generateRandomId(arr);
+  } else {
+    return randomId;
+  }
+}; */
+  
+   const handleSubmit = async event => {
+     event.preventDefault();
+     const res = await fetch(`${urlToFetch}`, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({title, url})
+    });
+    const data = await res.text();
+    console.log(data)
      setTitle("");
      setUrl("");
+    generateVideo();
+     //This functions increments each video id 
+  //   const getId = (id) => {
+  //   return id++
+  // }
+  //     const addVideo = {
+  //       title,
+  //       url,
+  //       id: {getId},
+  //       rating: 5,
+  //     };
+
+  //     setAllVideos((allVideos) => {
+  //       return allVideos.concat(addVideo);
+  //     });
+  //    setTitle("");
+  //    setUrl("");
    };
   
   return (
@@ -47,7 +70,7 @@ const AddNewVideo = (props) => {
         <div className="btn-form">
           <div className = "button1">
         <button
-          onClick={() => props.setAddVideo(false)}
+          onClick={() => setAddVideo(false)}
           type="cancel"
           className="btn btn-warning"
         >
