@@ -3,6 +3,8 @@ import DeleteButton from "./DeleteButton";
 
 const VideoCard = (props) => {
   const { data, setData } = props;
+  console.log(data);
+
   return (
     <div className="video-container">
       {data.map((item, index) => {
@@ -19,11 +21,9 @@ const VideoCard = (props) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-              {/* <div className="buttons-div"> */}
               <Votes rating={item.rating} />
             </div>
             <DeleteButton videoId={item.id} setData={setData} />
-            {/* </div> */}
           </div>
         );
       })}
