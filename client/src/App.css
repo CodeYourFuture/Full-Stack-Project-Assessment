@@ -1,3 +1,95 @@
 .App {
   text-align: center;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+.App-header{
+  padding: 2em;
+  background: linear-gradient(180deg, rgba(199, 33, 62, 1) 0%, rgba(200, 18, 18, 1) 21%, rgba(255, 0, 0, 1) 88%, rgba(210, 16, 49, 1) 100%);
+}
+h1{
+  font-weight: bolder;
+}
+/* search bar and add video  */
+.searchAndAddvideo{
+  display: grid ;
+  grid-template-columns:  2fr 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+  padding: 2%;
+}
+.setLabels {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+}
+.search-input {
+  background-color: rgb(223, 229, 250);
+  /* search icon added */
+  background-image: url("../public/search-interface-symbol.png");
+  background-position-x: 95%;
+  background-position-y: center;
+  background-size: 1.1em;
+  background-repeat: no-repeat;
+  /* search icon added above*/
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 1em;
+  padding: 1%;
+  width: 50vw;
+  border: .5px solid rgb(159, 133, 231);
+}
+
+.search-input:hover {
+  background-color: rgb(253, 194, 141);
+  transition: .75s ease-out;
+  font-weight: 600;
+}
+/* main div */
+.iframeAndDeletebutton-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1.5em;
+}
+.map-div{
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: auto;
+  justify-content:center;
+  align-items: center;
+}
+.main{
+ background-color: rgb(245, 242, 245);
+}
+.likesDiv{
+  margin-top: 6%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+@media only screen and (max-width: 980px) {
+  h1{
+    font-size: 1.75em;
+  }
+  .map-div {
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+    gap:1em
+  }
+    /* search bar and add video  */
+    .searchAndAddvideo {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  
+  
+  .search-input {
+    padding: 2%;
+    width: 95%;
+    border: 2px solid grey;
+  }
 }
