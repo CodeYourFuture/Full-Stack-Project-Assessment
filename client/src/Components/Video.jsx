@@ -15,13 +15,11 @@ const Video = ({ id, title, url, rating, posted }) => {
     trimmedTitle += title[i];
   }
   trimmedTitle = trimmedTitle.concat("...");
+  const displayTitle = title.length < 20 ? title : trimmedTitle;
 
   return (
     <div className="Video">
-      <h2 className="video-title">
-        {/* Shows the smaller title */}
-        {title.length < 20 ? title : trimmedTitle}
-      </h2>
+      <h2 className="video-title">{displayTitle}</h2>
       <iframe className="frame" title={title} src={url}></iframe>
       <Rating videoId={id} rating={rating} />
       <DeleteIcon

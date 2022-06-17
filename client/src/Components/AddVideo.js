@@ -11,6 +11,7 @@ const AddVideo = ({ addVideo, titleError, urlError, hideForm }) => {
     setTitle("");
     setUrl("");
     addVideo(title, url);
+    hideForm(false);
   };
 
   const closeForm = () => {

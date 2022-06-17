@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 
 const DeleteModal = ({ id, handleDelete, closeModal }) => {
-  const yes = () => {
+  const confirm = () => {
     handleDelete(id);
     closeModal(false);
   };
@@ -20,7 +20,7 @@ const DeleteModal = ({ id, handleDelete, closeModal }) => {
         <DialogContentText>The video will be lost forever</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={yes}>
+        <Button variant="contained" onClick={confirm}>
           Yes
         </Button>
         <Button

@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
   res.json(videos);
 });
 
+// Posts a video from the client
 app.post("/", (req, res) => {
   const newVideo = {
     id: uuidv4(),
@@ -46,12 +47,15 @@ app.post("/", (req, res) => {
   res.json(newVideo.id);
 });
 
+// Check if the video exist
 const videoFound = (id) => videos.find((video) => video.id === Number(id));
 
+// Gets info about an individual video
 app.get("/:id", (req, res) => {
   res.json(videoFound(req.params.id));
 });
 
+// Deletes a video
 app.delete("/:id", (req, res) => {
   if (!videoFound(req.params.id)) {
     return res.status(400).json({
@@ -63,4 +67,17 @@ app.delete("/:id", (req, res) => {
   videos = videos.filter((video) => video.id !== Number(req.params.id));
 
   res.json({});
+});
+
+// Manipulates the video rating
+app.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { vote } = req.query;
+  const video = videoFound(id);
+  if (vote === "up") {
+    video.rating += 1;
+  } else if (vote === "down") {
+    video.rating -= 1;
+  }
+  res.send({});
 });

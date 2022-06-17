@@ -29,7 +29,7 @@ const App = () => {
         setLoading(false);
       })
       .catch((error) => console.log(error));
-  }, [order, loading]);
+  }, [order]);
 
   // Adds a video
   const addVideo = (title, url) => {
@@ -57,10 +57,9 @@ const App = () => {
         body: JSON.stringify(newVideo),
       })
         .then((res) => res.json())
-        .then((data) => {
-          setLoading(data && false);
-        })
         .catch((error) => console.log(error));
+      newVideo.id = newVideo.id ? newVideo.id + 1 : 0; // This id is only for the client array and is not sent to the server
+      setVideos([...videos, newVideo]);
     }
   };
 
@@ -84,15 +83,22 @@ const App = () => {
 
   // Handles the video rating
   const vote = (id, voteType) => {
-    const copyOfVideos = [...videos];
-    const video = copyOfVideos.find((video) => video.id === id);
-    const index = copyOfVideos.indexOf(video);
-    // Checks if the video is liked or disliked
-    copyOfVideos[index].rating =
-      voteType === "up"
-        ? copyOfVideos[index].rating + 1
-        : copyOfVideos[index].rating - 1;
-    setVideos(copyOfVideos);
+    setVideos(
+      videos.map((video) => {
+        if (video.id !== id) return video;
+        return {
+          ...video,
+          rating: (video.rating += voteType === "up" ? 1 : -1),
+        };
+      })
+    );
+    fetch(`http://127.0.0.1:5000/${id}/?vote=${voteType}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -123,7 +129,7 @@ const App = () => {
           variant="contained"
           onClick={() => setOrder(order === "desc" ? "asc" : "desc")}
         >
-          Sort
+          {order === "asc" ? "descending" : "ascending"}
         </Button>
         {!loading && videos.length > 0 ? (
           <Videos videos={videos} />
