@@ -48,7 +48,7 @@ app.post("/", (req, res) => {
 });
 
 // Check if the video exist
-const videoFound = (id) => videos.find((video) => video.id === Number(id));
+const videoFound = (id) => videos.find((video) => video.id === id);
 
 // Gets info about an individual video
 app.get("/:id", (req, res) => {
@@ -64,7 +64,7 @@ app.delete("/:id", (req, res) => {
     });
   }
 
-  videos = videos.filter((video) => video.id !== Number(req.params.id));
+  videos = videos.filter((video) => video.id !== req.params.id);
 
   res.json({});
 });

@@ -17,16 +17,18 @@ const Video = ({ id, title, url, rating, posted }) => {
   trimmedTitle = trimmedTitle.concat("...");
   const displayTitle = title.length < 20 ? title : trimmedTitle;
 
+  // Modal
+  const deleteConfirm = () => {
+    ctx.setModal(true);
+    ctx.setToDelete(id);
+  };
+
   return (
     <div className="Video">
       <h2 className="video-title">{displayTitle}</h2>
       <iframe className="frame" title={title} src={url}></iframe>
       <Rating videoId={id} rating={rating} />
-      <DeleteIcon
-        variant="contained"
-        color="error"
-        onClick={() => ctx.deleteConfirm(id)}
-      >
+      <DeleteIcon variant="contained" color="error" onClick={deleteConfirm}>
         Delete
       </DeleteIcon>
       {/* Alternate text if the video
