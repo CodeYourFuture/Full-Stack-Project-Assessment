@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Rating = (props) => {
   const [rate, setRate] = useState(props.rating);
 
   const increase = () => {
     setRate((rate) => rate + 1);
+    ratingChange();
   };
   const decrease = () => {
     setRate((rate) => rate - 1);
     console.log("react console.log", props.ratingId);
+    ratingChange();
   };
-const data = {rating:rate, id:props.ratingId };
-  useEffect(() => {
-    // const data = { rating:  rate , id: props.ratingId };
+  const data = { rating: rate, id: props.ratingId };
+  const ratingChange = () => {
     fetch("https://flannel-hickory-parallelogram.glitch.me/videos", {
       method: "POST",
       headers: {
@@ -27,7 +28,7 @@ const data = {rating:rate, id:props.ratingId };
       .catch((error) => {
         console.log(error);
       });
-  }, [rate]);
+  };
   return (
     <>
       <div>
