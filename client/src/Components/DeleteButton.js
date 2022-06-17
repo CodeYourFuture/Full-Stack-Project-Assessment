@@ -5,7 +5,6 @@ const DeleteButton = (props) => {
       method: "DELETE",
     });
     const data = await response.json();
-    console.log(data);
     setData(data);
   };
 
