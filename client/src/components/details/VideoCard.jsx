@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
-// const VideoCard = ({ videoData, removeHandler }) => {
-const VideoCard = ({ key, videoData, updateRating, deleteHandler }) => {
+const path = 'http://localhost:5000/'
+
+const VideoCard = ({ key, videoData, deleteHandler }) => {
   const [rate, setRate] = useState(videoData.rating)
-  console.log(videoData)
   let codeRequired = videoData.url.split('=')[1]
   let srcLink = `https://www.youtube.com/embed/${codeRequired}`
-  
+
+  const updateRating = (upDownRate) => {
+    axios
+      .put(path + 'rating', { id: videoData.id, rating: rate + upDownRate })
+      .then((res) => setRate(res.data[0]))
+  }
+
   const likeClick = () => {
-    updateRating(videoData.id, rate + 1)
-    setRate(rate + 1)
+    updateRating(1)
   }
   const dislikeClick = () => {
-    updateRating(videoData.id, rate - 1)
-    setRate(rate - 1)
+    updateRating(-1)
   }
   return (
     <div key={key} className="card">

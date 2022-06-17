@@ -114,3 +114,7 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
+
+.error {
+  color : #ff0000;
+}

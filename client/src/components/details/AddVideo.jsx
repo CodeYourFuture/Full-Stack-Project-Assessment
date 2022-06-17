@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import axios from 'axios';
+const path = 'http://localhost:5000/';
 
-const AddVideo = ({ allData, handleSet }) => {
+const AddVideo = ({ allData, handleSet, loadData }) => {
   const [toggle, setToggle] = useState(false)
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
@@ -16,11 +18,15 @@ const AddVideo = ({ allData, handleSet }) => {
     setUrl('')
   }
 
+  const matchYoutubeUrl = (url) => {
+    var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
+    if (url.match(p)) return true
+    return false
+  }
   const validationCheck = () => {
     setErrorMessage('')
     let result = true
-    const regExp = '/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/';
-    let match = url.match(regExp)
+    let match = matchYoutubeUrl(url)
     if (title.length === 0 && (url === undefined || url === '' || !match)) {
       setErrorMessage('Please make sure you have entered both title and URL')
       result = false
@@ -44,7 +50,7 @@ const AddVideo = ({ allData, handleSet }) => {
         url: url,
         rating: 0,
       }
-      handleSet(newVideo)
+      axios.post(path, newVideo).then(()=> loadData())
       resetAddForm()
     }
   }

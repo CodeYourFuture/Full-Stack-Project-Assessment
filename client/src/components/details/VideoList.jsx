@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import VideoCard from './VideoCard'
 import AddVideo from './AddVideo'
 import Search from '../details/Search'
-
-import data from '../../data/exampleresponse.json'
+import axios from 'axios'
+const path = 'http://localhost:5000/'
 
 const VideoList = (searchText) => {
-  const [allData, setAllData] = useState(data)
+  const [allData, setAllData] = useState([])
   const [videos, setVideos] = useState(allData)
   const searchHandler = (searchText) => {
     let filteredVid = allData.filter((video) =>
@@ -15,37 +15,42 @@ const VideoList = (searchText) => {
     setVideos(filteredVid)
   }
   const deleteHandler = (id) => {
-    let filteredVid = allData.filter((video) => video.id !== id)
-    setAllData(filteredVid)
+    axios.delete(path + id).then((res) => {
+      loadData()
+    })
   }
-  const updateRating = (id, rate) => {
-    const foundVideo = allData.find((video) => video.id === id)
-    foundVideo.rating = rate
-    console.log(rate)
+
+  const loadData = () => {
+    axios.get(path).then((res) => {
+      console.log(res.data)
+      setAllData(res.data)
+    })
   }
-  const handleSet = (newVideo) => {
-    setAllData((previous) => previous.concat(newVideo))
-  }
+
   useEffect(() => {
+    loadData()
+  }, [])
+
+  useEffect(() => {
+    console.log(allData)
     setVideos(allData)
   }, [allData])
 
   return (
     <>
       <nav>
-      <AddVideo allData={allData} handleSet={handleSet} />
-      <Search searchHandler={searchHandler} />
+        <AddVideo allData={allData} loadData={loadData} />
+        <Search searchHandler={searchHandler} />
       </nav>
       <div className="root">
         {videos
           .sort((a, b) => b.rating - a.rating)
           .map((video, index) => (
-              <VideoCard
-                key={video.id}
-                videoData={video}
-                updateRating={updateRating}
-                deleteHandler={deleteHandler}
-              />
+            <VideoCard
+              key={video.id}
+              videoData={video}
+              deleteHandler={deleteHandler}
+            />
           ))}
       </div>
     </>
