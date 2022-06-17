@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+
 const AscButton = (props) => {
   const { setData } = props;
 
@@ -9,6 +12,10 @@ const AscButton = (props) => {
   const onClickHandler = async () => {
     await changeOrder();
   };
-  return <button onClick={onClickHandler}>order by least liked</button>;
+  return (
+    <button className="toggle-order-button" onClick={onClickHandler}>
+      likes <FontAwesomeIcon icon={faArrowUp} />
+    </button>
+  );
 };
 export default AscButton;

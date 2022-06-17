@@ -52,7 +52,6 @@ p {
 .video-card {
   padding: 5rem 2rem 1rem 2rem;
   display: flex;
-  /* max-width: 745px; */
   flex-direction: column;
   flex: 1 1 50%;
   border: var(--thin-border) solid var(--black);
@@ -117,24 +116,35 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   padding: 0.3rem 0;
-  transition: background 0.5s, border 0.5s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .gradient-button:hover {
   cursor: pointer;
-  background: var(--black);
+  background: var(--border1);
   border: 7px solid var(--black);
   padding: 0.3rem 0;
-  -webkit-text-fill-color: #fff;
+  -webkit-text-fill-color: #000;
 }
-/* .black-border-style-div {
-  width: 7px;
-  height: 52px;
-  background-color: var(--black);
-  position: absolute;
-  right: 365px;
-  top: 673px;
-} */
+.toggle-order-button {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(68, 68, 68, 0.5),
+      rgba(0, 0, 0, 0.822)
+    ),
+    url("./browncow.png");
+  background-size: 220px 200px;
+  color: var(--border1);
+  font-weight: 700;
+  font-size: 2rem;
+  border: 7px solid var(--border1);
+  margin-top: 0.4rem;
+  width: 200px;
+  height: 80px;
+  cursor: pointer;
+  /* text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black; */
+}
+
 input {
   padding: 0.5rem 0;
   border: none;

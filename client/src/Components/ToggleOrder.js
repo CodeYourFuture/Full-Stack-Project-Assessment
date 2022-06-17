@@ -1,4 +1,4 @@
-import DescButton from "./Components/DescButton";
+import DescButton from "./DescButton";
 import AscButton from "./AscButton";
 const ToggleOrder = (props) => {
   const { setData } = props;
