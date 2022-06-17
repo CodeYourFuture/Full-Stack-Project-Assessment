@@ -3,8 +3,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const data = require("../client/src/exampleresponse.json");
 
-// const cors = require("cors");
-// app.use(cors());
+const cors = require("cors");
+app.use(cors());
 
 app.use(express.json());
 
@@ -37,10 +37,26 @@ app.post("/", function (req, res) {
 });
 
 app.get("/:id", function (req, res) {
-  let id = req.params.id;
+  let id = parseInt(req.params.id);
   let foundVideo = videos.filter((i) => i.id == id);
 
-  res.json(foundVideo);
+  if (foundVideo) {
+    res.status(200).json(foundVideo);
+  }
+});
+
+app.delete("/:id", function (req, res) {
+  let id = parseInt(req.params.id);
+  let foundVideo = videos.filter((i) => i.id == id);
+
+  if (foundVideo) {
+    return res.status(200).json({});
+  } else {
+    return res.status(400).json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
