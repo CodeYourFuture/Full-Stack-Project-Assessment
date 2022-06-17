@@ -4,6 +4,14 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const exampleresponse = require("./exampleresponse.json");
 const bodyParser = require("body-parser");
+const path = require("path");
+
+//Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+app.get("/api", (req, res) => {
+  res.json(exampleresponse);
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -15,14 +23,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let videos = exampleresponse;
 
 // GET "/"
+
 app.get("/", (req, res) => {
-  console.log(videos);
-  res.json(videos[0]);
+  res.json(videos);
 });
 
-// GET "/videoId"
+// GET "/video/Id"
+app.get("/videos/:Id", (req, res) => {
+  const findId = videos.find((video) => video.id == req.params.Id);
+  res.json(findId);
+});
 
-// POST"/"
+// POST "/"
 app.post("/videos", (req, res) => {
   newVideoId = videos.length + 1;
 
@@ -35,11 +47,6 @@ app.post("/videos", (req, res) => {
 
   videos.push(addNewVideo);
   res.send(videos);
-});
-
-app.get("/videos/:Id", (req, res) => {
-  const findId = videos.find((video) => video.id == req.params.Id);
-  res.json(findId);
 });
 
 // DELETE "/"

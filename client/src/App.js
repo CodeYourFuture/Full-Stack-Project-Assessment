@@ -1,14 +1,20 @@
 import "./App.css";
-import React, { useState } from "react";
-import exampleresponse from "./exampleresponse.json";
+import React, { useState, useEffect } from "react";
 import Moment from "moment";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [displayVideo, setDisplayVideo] = useState(exampleresponse);
+  const [displayVideo, setDisplayVideo] = useState([]);
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
   // const [date, setDate] = useState("");
+  const [data, SetData] = useState();
+
+  useEffect(() => {
+    fetch("/api")
+      .then((response) => response.json())
+      .then((data) => setDisplayVideo(data));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
