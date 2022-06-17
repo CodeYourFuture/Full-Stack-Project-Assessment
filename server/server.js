@@ -93,7 +93,10 @@ app.post("/videos", (req, res) => {
   videos.filter((vid) => vid.id === vidId).map((vid) => (vid.rating = vidRate));
   res.send(videos);
 });
-
+app.post("/videos/add", (req, res) => {
+  videos.push(req.body);
+  res.send(videos);
+});
 app.delete("/sql", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
