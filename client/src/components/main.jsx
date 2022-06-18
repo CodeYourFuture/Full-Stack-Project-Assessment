@@ -15,7 +15,7 @@ function Main({data, searchInput, updateRating, deleteVideo}){
                 return(
                     <div className="map-div p-2 border shadow">
                     <div className="iframeAndDeletebutton-div">
-                        <iframe width="340" height="195" src={`https://www.youtube.com/embed/${videoId}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                       {(e.url === 'blocked' ? 'Link is broken, Please watch another video' : <iframe className="embed-responsive-item p-2"  src={`https://www.youtube.com/embed/${videoId}`} title="YouTube video player" allowfullscreen></iframe>)} 
                         <button type="button" class="btn btn-warning col-3" onClick={(event)=> deleteVideo(event, e.id)}>Delete</button>
                     </div>
                     <div>
