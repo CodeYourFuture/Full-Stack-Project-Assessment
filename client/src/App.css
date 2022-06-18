@@ -30,10 +30,10 @@ h1{
   background-size: 1.1em;
   background-repeat: no-repeat;
   /* search icon added above*/
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   margin: 1em;
-  padding: 1%;
+  padding: 1.5%;
   width: 50vw;
   border: .5px solid rgb(159, 133, 231);
 }
@@ -48,17 +48,17 @@ h1{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap:1.5em;
+  gap:1.3em;
 }
 .map-div{
   display: grid;
   grid-template-columns: 400px 1fr;
-  grid-template-rows: auto;
+  grid-template-rows:auto;
   justify-content:center;
   align-items: center;
 }
 .main{
- background-color: rgb(245, 242, 245);
+ background-color: rgb(255, 255, 255);
 }
 .likesDiv{
   margin-top: 6%;
@@ -85,11 +85,11 @@ h1{
       display: grid;
       grid-template-columns: 1fr;
     }
-  
-  
+
   .search-input {
-    padding: 2%;
-    width: 95%;
+    margin-left: 0;
+    padding: 1%;
+    width: 100%;
     border: 2px solid grey;
   }
 }

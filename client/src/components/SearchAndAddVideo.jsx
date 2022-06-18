@@ -4,7 +4,6 @@ const Search = ({ searchInput, setSearchInput,newVideoData, handleAddVideo, hand
 
   return (
     <div className="searchAndAddvideo">
-        {/* ask gladwin about form post and what else should i put if I need to search when hit enter */}
       <form > 
         <input
           type="search"

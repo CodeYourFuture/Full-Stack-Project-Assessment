@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Header from "./components/Header";
 import Main from "./components/main";
 import SearchAndAddVideo from "./components/SearchAndAddVideo";
-
+import Footer from "./components/Footer";
 import "./App.css";
 
 const data = require('./exampleresponse.json')
 
-  
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState(data)
@@ -56,6 +55,7 @@ function App() {
         updateRating={updateRating}
         deleteVideo={deleteVideo}
       />
+      <Footer />
     </div>
   );
 }

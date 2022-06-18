@@ -4,6 +4,9 @@ import LikeButtons from "./LikeButtons";
 function Main({data, searchInput, updateRating, deleteVideo}){
     const dataManipulation = data
     .filter((e) => e.title && e.title.toLowerCase().includes(searchInput.toLowerCase()))
+    .sort((a,b) => {
+      return  a.rating > b.rating ? -1 : b.rating > a.rating ? 1 : 0
+    })
     return(
        <main className="main">
             {dataManipulation.map((e) =>{
@@ -12,7 +15,7 @@ function Main({data, searchInput, updateRating, deleteVideo}){
                 return(
                     <div className="map-div p-2 border shadow">
                     <div className="iframeAndDeletebutton-div">
-                        <iframe className="embed-responsive-item"  src={`https://www.youtube.com/embed/${videoId}`} title="YouTube video player" allowfullscreen></iframe>
+                        <iframe width="340" height="195" src={`https://www.youtube.com/embed/${videoId}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         <button type="button" class="btn btn-warning col-3" onClick={(event)=> deleteVideo(event, e.id)}>Delete</button>
                     </div>
                     <div>
@@ -22,7 +25,6 @@ function Main({data, searchInput, updateRating, deleteVideo}){
                     </div>
                 )
             })}
-            
        </main>
     );
 }
