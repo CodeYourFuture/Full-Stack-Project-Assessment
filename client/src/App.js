@@ -16,7 +16,7 @@ function App() {
     });
   }, []);
 
-  // A function to delete a video
+  // A function to delete video
   const deleteVideos = (arrVideo) => {
      setAllVideos((videos) => {
        return videos.filter((v) => {
