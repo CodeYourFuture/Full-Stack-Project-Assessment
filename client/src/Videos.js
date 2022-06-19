@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import videoData from "./exampleresponse.json";
-import Button from "./Buttons";
+import Likes from "./Likes";
 import axios from "axios";
+import Search from "./Search";
 
 const baseURL = "http://localhost:5000";
 
@@ -31,6 +32,7 @@ const Videos = () => {
 
   return (
     <>
+    <Search video={videoData} setVideos={setVideos}/>
       <div className="container">
         {videos.map((video, index) => {
           const after_ = video.url.substring(video.url.indexOf("=") + 1);
@@ -39,7 +41,7 @@ const Videos = () => {
             <>
               <div className="card">
                 <h2 className="title">{video.title}</h2>
-                <Button />
+                <Likes />
                 <div className="iframe">
                   <iframe
                     width="250"
