@@ -1,3 +1,411 @@
+:root {
+  --FBBlue: #4267b2;
+  --tomatoe: #ff6347;
+  --goldenrod: #daa520;
+  --bt32-yellow: ##ffc107;
+  --bt32-backgd: #f4e603;
+  --snackbar-top: 2.813rem; /* 45px */
+}
+
+h1 {
+  margin-bottom: 3rem;
+}
+
 .App {
   text-align: center;
+}
+
+.asTextButton {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.asTextButton:hover {
+  background-color: var(--tomatoe);
+}
+
+.showhr {
+  border: 1px solid var(--FBBlue);
+}
+
+.addVideoDisplay {
+  display: flex;
+  flex-direction: column;
+}
+
+.addVideoBars {
+  font-size: 1.25rem; /* 20px; */
+  border: 0.125rem solid black;
+  padding-left: 0.1rem;
+  width: 50%;
+  flex: 0 auto;
+}
+
+.addVideoDisplay2 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
+}
+
+.addButtonsDisplay {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-left: 7.5rem;
+}
+
+/* Based on button-32 from https://getcssscan.com/css-buttons-examples */
+.button-32 {
+  background-color: var(--bt32-backgd);
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+  outline: 0;
+  background: var(--bt32-backgd);
+  box-shadow: 0 0 0 4px var(--FBBlue), 0 4px 8px 0 var(--FBBlue);
+}
+
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.addVideoButton {
+  color: #fff;
+  background-color: var(--tomatoe);
+}
+
+.addVideoButton:not(:disabled):hover,
+.addVideoButton:not(:disabled):focus {
+  background: #dc3545;
+}
+
+.searchbar {
+  margin: 0.2rem;
+  font-size: 1.25rem; /* 20px; */
+  border: 0.125rem solid black;
+  padding-left: 0.1rem;
+}
+
+input:active,
+input:focus {
+  outline-color: var(--goldenrod);
+}
+
+.close-x {
+  display: inline-block;
+  font-size: 1.6rem;
+  padding-left: 2.6rem;
+  cursor: pointer;
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-item {
+  flex: 1 1 33%;
+  margin: 6px;
+  padding: 6px;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.25rem; /* 20px; */
+  margin: 1.2rem;
+  gap: 2em;
+}
+
+/* Flex items to display video content */
+.vid-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -2rem;
+}
+
+.vid-list-item {
+  display: flex;
+  padding: 0.5em;
+  width: 100%;
+}
+
+@media all and (min-width: 40em) {
+  .vid-list-item {
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 60em) {
+  .vid-list-item {
+    width: 33.33%;
+  }
+}
+
+.vid-list-content {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  width: 100%;
+}
+
+.vid-list-content p {
+  flex: 1 0 auto;
+}
+
+.displayTitle p {
+  white-space: pre-wrap; /* collapse WhiteSpace, preserve LineBreak */
+}
+
+/* Based on button-5 from https://getcssscan.com/css-buttons-examples */
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+/* Based on button-24 from https://getcssscan.com/css-buttons-examples */
+.remove-button {
+  /*
+  Changed to pass Lighthouse Accessibility test
+  background: #ff4742;
+  border: 1px solid #ff4742;
+  */
+
+  background: #4f42ff;
+  border: 1px solid #4f42ff;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 30%;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.remove-button:hover,
+.remove-button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.remove-button:active {
+  opacity: 0.5;
+}
+
+.votes {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.vote {
+  color: var(--FBBlue);
+  font-size: 2rem;
+  margin: 0 2rem;
+  cursor: pointer;
+}
+
+/* Remove inherited flex-grow to align horizontally align thumbs properly */
+.votes p {
+  flex: 0;
+}
+
+.showratings {
+  font-size: 1.4rem;
+  line-height: 2;
+}
+
+/* The snackbar - position it at the top of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. */
+  min-width: 250px; /* Set a default minimum width */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  margin-left: 40px;
+  position: fixed; /* Sit on top of the screen */
+  top: var(--snackbar-top); /* 45px from the top */
+  z-index: 1; /* Add a z-index if needed */
+}
+
+/* (class added with JavaScript) */
+.show {
+  visibility: visible; /* Show the snackbar */
+
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 4.8 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.8s;
+  animation: fadein 0.5s, fadeout 0.5s 4.8s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: var(--snackbar-top);
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: var(--snackbar-top);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: var(--snackbar-top);
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: var(--snackbar-top);
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+/* Based on button-24 from https://getcssscan.com/css-buttons-examples */
+.sort-button {
+  background: #4f42ff;
+  border: 1px solid #4f42ff;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100%;
+  align-self: center;
+  margin-right: 4rem;
+}
+
+.sort-button:hover,
+.sort-button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.sort-button:active {
+  opacity: 0.5;
+}
+
+.right-spacing {
+  margin-right: -12px;
 }
