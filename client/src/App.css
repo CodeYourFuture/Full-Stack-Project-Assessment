@@ -305,7 +305,7 @@ input:focus {
   text-align: center; /* Centered text */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
-  margin-left:40px;
+  margin-left: 40px;
   position: fixed; /* Sit on top of the screen */
   top: var(--snackbar-top); /* 45px from the top */
   z-index: 1; /* Add a z-index if needed */
@@ -366,7 +366,6 @@ However, delay the fade out process for 4.8 seconds */
   }
 }
 
-
 /* Based on button-24 from https://getcssscan.com/css-buttons-examples */
 .sort-button {
   background: #4f42ff;
@@ -393,7 +392,7 @@ However, delay the fade out process for 4.8 seconds */
   vertical-align: middle;
   width: 100%;
   align-self: center;
-  margin-right:4rem;
+  margin-right: 4rem;
 }
 
 .sort-button:hover,
@@ -408,5 +407,5 @@ However, delay the fade out process for 4.8 seconds */
 }
 
 .right-spacing {
-  margin-right:-12px;
+  margin-right: -12px;
 }
