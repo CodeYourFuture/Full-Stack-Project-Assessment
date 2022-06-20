@@ -3,13 +3,15 @@ import { UserContext } from "./UserContext";
 import ValidateURL from "./ValidateURL.js";
 
 const HandleAddVideoDisplay = () => {
+    
   const ValidateTheVideo = (event) => {
+
     let title = document.forms["addvideoform"]["entered-title"].value;
     if (title === "") {
       return false;
     }
 
-    let url = document.forms["addvideoform"]["entered-URL"].value.trim();
+    let url = document.forms["addvideoform"]["entered-URL"].value;
     if (url === "") {
       return false;
     }
@@ -17,6 +19,7 @@ const HandleAddVideoDisplay = () => {
     event.preventDefault(); // After ensuring both fields are nonnull, Prevent Form Submission
 
     let result = ValidateURL(title, url, setUpdateFunction);
+    // If there is a return from this function then it is a failed URL
 
     // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
     setUpdateFunction({ messageID: Date.now(), message: result[1] });
@@ -24,11 +27,11 @@ const HandleAddVideoDisplay = () => {
   };
 
   /* USECONTEXT to pass down the 'setter' functions and other relevant parameters */
-  const {
-    setAnUpdate: setUpdateFunction,
-    addingVideoFlag,
-    addFunction: setAddFunction,
-  } = useContext(UserContext);
+    const {
+      setAnUpdate: setUpdateFunction,
+      addingVideoFlag,
+      addFunction: setAddFunction,
+    } = useContext(UserContext);
 
   if (!addingVideoFlag) {
     return null;

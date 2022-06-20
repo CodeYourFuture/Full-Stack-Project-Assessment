@@ -101,7 +101,7 @@ function App() {
   if (firstTime) {
     firstTime = false;
 
-  /* 
+    /* 
     Initialise videosList with
     10 videos
     e.g. [ {id: 523523, title: 'Never Gonna Give You Up', 
@@ -124,6 +124,8 @@ function App() {
   const [stateObject, setStateObject] = useState({ ...tempObject }); // shallow copy
   const [anUpdate, setAnUpdate] = useState(null);
   const [addAVideoFlag, setADDAVideoFlag] = useState(false);
+
+
 
   useEffect(() => {
     let anyUpdates = anUpdate; // EG {"title":"A Title","url":"https://youtu.be/ZacOS8NBK6U"}
@@ -247,7 +249,7 @@ function App() {
       // Could someone solve and explain this issue to me. Thank You
 
       // After 5 seconds, remove the show class from DIV
-      setTimeout(function () {
+      setTimeout(function() {
         theMessage.className = theMessage.className.replace("show", "");
         theMessage.style.visibility = "hidden"; // I don't know why I have to do this!!!! See above.
       }, 5000);
@@ -289,7 +291,7 @@ function App() {
       });
     }
   }
-
+ 
   function applyFilter(
     titlesIndices,
     videosList = stateObject.videosList,

@@ -4,11 +4,6 @@
   --goldenrod: #daa520;
   --bt32-yellow: ##ffc107;
   --bt32-backgd: #f4e603;
-  --snackbar-top: 2.813rem; /* 45px */
-}
-
-h1 {
-  margin-bottom: 3rem;
 }
 
 .App {
@@ -178,7 +173,7 @@ input:focus {
   white-space: pre-wrap; /* collapse WhiteSpace, preserve LineBreak */
 }
 
-/* Based on button-5 from https://getcssscan.com/css-buttons-examples */
+/* Based on button-32 from https://getcssscan.com/css-buttons-examples */
 .button-5 {
   align-items: center;
   background-clip: padding-box;
@@ -305,9 +300,8 @@ input:focus {
   text-align: center; /* Centered text */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
-  margin-left: 40px;
   position: fixed; /* Sit on top of the screen */
-  top: var(--snackbar-top); /* 45px from the top */
+  top: 30px; /* 30px from the top */
   z-index: 1; /* Add a z-index if needed */
 }
 
@@ -316,9 +310,9 @@ input:focus {
   visibility: visible; /* Show the snackbar */
 
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-However, delay the fade out process for 4.8 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.8s;
-  animation: fadein 0.5s, fadeout 0.5s 4.8s;
+However, delay the fade out process for 4.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
 }
 
 /* Animations to fade the snackbar in and out */
@@ -328,7 +322,7 @@ However, delay the fade out process for 4.8 seconds */
     opacity: 0;
   }
   to {
-    top: var(--snackbar-top);
+    top: 30px;
     opacity: 1;
   }
 }
@@ -339,14 +333,14 @@ However, delay the fade out process for 4.8 seconds */
     opacity: 0;
   }
   to {
-    top: var(--snackbar-top);
+    top: 30px;
     opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    top: var(--snackbar-top);
+    top: 30px;
     opacity: 1;
   }
   to {
@@ -357,55 +351,11 @@ However, delay the fade out process for 4.8 seconds */
 
 @keyframes fadeout {
   from {
-    top: var(--snackbar-top);
+    top: 30px;
     opacity: 1;
   }
   to {
     top: 0;
     opacity: 0;
   }
-}
-
-/* Based on button-24 from https://getcssscan.com/css-buttons-examples */
-.sort-button {
-  background: #4f42ff;
-  border: 1px solid #4f42ff;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
-  outline: 0;
-  padding: 12px 14px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  width: 100%;
-  align-self: center;
-  margin-right: 4rem;
-}
-
-.sort-button:hover,
-.sort-button:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #ff4742;
-}
-
-.sort-button:active {
-  opacity: 0.5;
-}
-
-.right-spacing {
-  margin-right: -12px;
 }
