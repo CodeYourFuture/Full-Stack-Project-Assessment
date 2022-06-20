@@ -24,7 +24,7 @@ const Search = ({ searchInput, setSearchInput,newVideoData, handleAddVideo, hand
     <label for="url">Url</label>
     <input type="url" class="form-control" name="url" placeholder="Add Url''" value={newVideoData.url} onChange={handleNewVideoChange}/>
   </div>
-  <button type="submit" class="btn btn-default" onClick={(e)=>handleAddVideo(e)}>Add Video</button>
+  <button type="submit" class="btn btn-default ml-auto p-1" onClick={(e)=>handleAddVideo(e)}>Add Video</button>
 </form>
     </div> 
   );

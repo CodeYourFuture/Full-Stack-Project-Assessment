@@ -3,11 +3,19 @@
   font-family: 'Kdam Thmor Pro', sans-serif;
 }
 .App-header{
-  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:20px;
+  padding: 1.5em;
   background: linear-gradient(180deg, rgba(199, 33, 62, 1) 0%, rgba(200, 18, 18, 1) 21%, rgba(255, 0, 0, 1) 88%, rgba(210, 16, 49, 1) 100%);
 }
 h1{
   font-weight: bolder;
+}
+.fontawe{
+  color:rgb(108, 63, 63);
+  margin-left: 1em;
 }
 /* search bar and add video  */
 .searchAndAddvideo{
@@ -20,6 +28,7 @@ h1{
 .setLabels {
   display: grid;
   grid-template-columns: 1fr 2.5fr;
+  align-items: flex-end;
 }
 .search-input {
   background-color: rgb(223, 229, 250);
@@ -30,18 +39,18 @@ h1{
   background-size: 1.1em;
   background-repeat: no-repeat;
   /* search icon added above*/
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   margin: 1em;
   padding: 1.5%;
-  width: 50vw;
-  border: .5px solid rgb(159, 133, 231);
+  /* width: 50vw; */
+  width: 90%;
+  border: .5px solid rgb(177, 154, 240);
 }
 
 .search-input:hover {
   background-color: rgb(253, 194, 141);
-  transition: .75s ease-out;
-  font-weight: 600;
+  transition: .65s ease-in;
 }
 /* main div */
 .iframeAndDeletebutton-div{
@@ -66,7 +75,25 @@ h1{
   justify-content: space-evenly;
   align-items: flex-end;
 }
+.footer {
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .75em;
+}
 
+.fontawe {
+  font-size: 1.6em;
+}
+
+.footer-icon {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  color: blue;
+}
 @media only screen and (max-width: 980px) {
   h1{
     font-size: 1.76em;
