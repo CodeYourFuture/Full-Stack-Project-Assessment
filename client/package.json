@@ -1,6 +1,6 @@
 {
-  "name": "front-end",
-  "version": "0.1.0",
+  "name": "video-recommendation",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
