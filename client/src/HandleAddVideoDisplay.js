@@ -3,9 +3,7 @@ import { UserContext } from "./UserContext";
 import ValidateURL from "./ValidateURL.js";
 
 const HandleAddVideoDisplay = () => {
-    
   const ValidateTheVideo = (event) => {
-
     let title = document.forms["addvideoform"]["entered-title"].value;
     if (title === "") {
       return false;
@@ -24,33 +22,14 @@ const HandleAddVideoDisplay = () => {
     // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
     setUpdateFunction({ messageID: Date.now(), message: result[1] });
     return;
-
-    /*
-    if (!result[0]) {
-      // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
-      setUpdateFunction({ messageID: Date.now(), message: result[1] });
-      return
-    }
-
-   /* 
-    if (result) {
-      document.getElementById("enteredTitle").value = "";
-      document.getElementById("enteredURL").value = "";
-      setUpdateFunction({
-        title: title,
-        url: url,
-        youtube_id: youtube_id,
-      });
-    }
-    */
   };
 
   /* USECONTEXT to pass down the 'setter' functions and other relevant parameters */
-    const {
-      setAnUpdate: setUpdateFunction,
-      addingVideoFlag,
-      addFunction: setAddFunction,
-    } = useContext(UserContext);
+  const {
+    setAnUpdate: setUpdateFunction,
+    addingVideoFlag,
+    addFunction: setAddFunction,
+  } = useContext(UserContext);
 
   if (!addingVideoFlag) {
     return null;

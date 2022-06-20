@@ -132,7 +132,7 @@ input:focus {
   gap: 2em;
 }
 
-/*Flex items to display video content*/
+/* Flex items to display video content */
 .vid-list {
   display: flex;
   flex-wrap: wrap;
@@ -170,10 +170,10 @@ input:focus {
 }
 
 .displayTitle p {
-  white-space: pre-wrap; /* collapse WS, preserve LB */
+  white-space: pre-wrap; /* collapse WhiteSpace, preserve LineBreak */
 }
 
-/* CSS */
+/* Based on button-5 from https://getcssscan.com/css-buttons-examples */
 .button-5 {
   align-items: center;
   background-clip: padding-box;
