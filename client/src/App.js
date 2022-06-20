@@ -410,6 +410,18 @@ function App() {
             <div></div>
             <div id="snackbar"></div>
           </div>
+          <div>
+            <div className="top-item">
+              <button
+                className="sort-button"
+                title="click to change sort order"
+              >
+                Most to Least Ratings&nbsp;&nbsp;
+                <i class="fas fa-arrow-circle-down"></i>
+              </button>
+              <div className="right-spacing"></div>
+            </div>
+          </div>
         </div>
 
         <div></div>
