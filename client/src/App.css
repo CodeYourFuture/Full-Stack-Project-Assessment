@@ -178,7 +178,7 @@ input:focus {
   white-space: pre-wrap; /* collapse WhiteSpace, preserve LineBreak */
 }
 
-/* SOURCE: https://getcssscan.com/css-buttons-examples */
+/* Based on button-5 from https://getcssscan.com/css-buttons-examples */
 .button-5 {
   align-items: center;
   background-clip: padding-box;

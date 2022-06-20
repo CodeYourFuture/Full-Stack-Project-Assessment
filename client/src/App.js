@@ -201,9 +201,27 @@ function App() {
     return videoInfo;
   }
 
-  // Fetch all the videos via the API
-  if (firstTime && !stateObject) {
-    fetchVideoList();
+  if (firstTime) {
+    firstTime = false;
+
+  /* 
+    Initialise videosList with
+    10 videos
+    e.g. [ {id: 523523, title: 'Never Gonna Give You Up', 
+            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', rating: 23} ...]
+  */
+
+    videosList = Videos;
+    sortedIndices = Array.from(Array(videosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
+    // Descending Ratings Order
+    sortedIndices.sort((a, z) => videosList[z].rating - videosList[a].rating);
+    videoInfo = produce_videoInfo(videosList);
+    tempObject = {
+      videosList: videosList,
+      titlesIndices: sortedIndices,
+      displayedIndices: sortedIndices,
+      textEntered: "",
+    };
   }
 
   // Initialisation wih Fetched Videos

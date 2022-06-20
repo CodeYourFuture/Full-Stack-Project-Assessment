@@ -4,7 +4,7 @@ import ValidateURL from "./ValidateURL.js";
 
 const HandleAddVideoDisplay = () => {
   const ValidateTheVideo = (event) => {
-    let title = document.forms["addvideoform"]["entered-title"].value.trim();
+    let title = document.forms["addvideoform"]["entered-title"].value;
     if (title === "") {
       return false;
     }
@@ -18,11 +18,8 @@ const HandleAddVideoDisplay = () => {
 
     let result = ValidateURL(title, url, setUpdateFunction);
 
-    // If there is a return from this function then it is a failed URL
-    if (result) {
-      // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
-      setUpdateFunction({ messageID: Date.now(), message: result[1] });
-    }
+    // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
+    setUpdateFunction({ messageID: Date.now(), message: result[1] });
     return;
   };
 
