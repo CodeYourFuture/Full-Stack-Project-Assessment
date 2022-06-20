@@ -64,8 +64,7 @@ export function youtube_regex(text) {
 
   let result = text.match(rx);
   //  null if no matches are found.
-  if (!result)
-        return null;
-        
+  if (!result) return null;
+
   return result[7]; // ID will always be in match group 7.
 }

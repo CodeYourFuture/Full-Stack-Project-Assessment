@@ -1,10 +1,55 @@
 import { youtube_regex } from "./youtube_regex.js";
 
+const THEPORT = 3002;
+const THEPATH = `http://localhost:${THEPORT}/`; // "http://localhost:3002/";
+
 const message1 = "This is an Invalid Youtube URL";
 const message2 = "Either this video is unavailable or it is a private video";
 
-function ValidateURL(title, url, setUpdateFunction) {
+async function postVideo(youtube_id, title, url, setUpdateFunction) {
+  await fetch(THEPATH, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: title,
+      url: url,
+    }),
+  })
+    .then((response) => response.json(response)) //
+    .then((response) => {
+      if ("id" in response) {
+        // Success
+        // Update state with video details
 
+        setUpdateFunction({
+          uniqueID: response.id,
+          title: title,
+          url: url,
+          youtube_id: youtube_id,
+        });
+        return;
+      }
+
+      /* Failure i.e.
+         {
+           "result": "failure",
+           "message": "Video could not be saved"
+         }
+      */
+
+      // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
+      setUpdateFunction({ messageID: Date.now(), message: response.message });
+    })
+
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+}
+
+function ValidateURL(title, url, setUpdateFunction) {
   /*
    For example, If it is an invalid URL, 
    the function 'youtube_regex()' will return null
@@ -42,19 +87,13 @@ function ValidateURL(title, url, setUpdateFunction) {
 
     // img is ready to use
     return img.width !== 120; // if the WIDTH is NOT 120 then the URL/Video is valid
-
   })().then((isOK) => {
-
     if (isOK) {
       // clear fields
       document.getElementById("enteredTitle").value = "";
       document.getElementById("enteredURL").value = "";
-      // Update state with video details
-      setUpdateFunction({
-        title: title,
-        url: url,
-        youtube_id: ID,
-      });
+      postVideo(ID, title, url, setUpdateFunction);
+      return null;
     } else {
       // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
       setUpdateFunction({ messageID: Date.now(), message: message2 });

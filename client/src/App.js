@@ -1,15 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./App.css";
-import Videos from "././data/exampleresponse.json";
+// import Videos from "././data/exampleresponse.json";
 import FetchVideos from "./FetchVideos.js";
 import HandleAddVideoDisplay from "./HandleAddVideoDisplay.js";
 import { UserContext } from "./UserContext.js";
 import { youtube_regex } from "./youtube_regex.js";
 
+const THEPORT = 3002;
+const THEPATH = `http://localhost:${THEPORT}/` // "http://localhost:3002/";
+
 const titleSizeLimit = 80;
 const titleHalfLimit = 40;
-let uniqueCounter = 1000000;
 
 let firstTime = true;
 let videosList,
@@ -67,6 +69,98 @@ const handleVideoInfo = (element, youtube_id = "") => {
 };
 
 function App() {
+  const [stateObject, setStateObject] = useState(null); // shallow copy
+  const [anUpdate, setAnUpdate] = useState(null);
+  const [addAVideoFlag, setADDAVideoFlag] = useState(false);
+
+  async function fetchVideoList() {
+    const response = await fetch(THEPATH).catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+
+    const data = await response.json();
+    videosList = data;
+    /* 
+   Initialise videosList with fetched videos 
+    The format is a list
+    [ {"id":"00523523","title":"Never Gonna Give You Up","url":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","rating":23,
+       "timestamp":1655481349579}, ...]
+  */
+
+    sortedIndices = Array.from(Array(videosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
+    // Descending Ratings Order
+    sortedIndices.sort((a, z) => videosList[z].rating - videosList[a].rating);
+    videoInfo = produce_videoInfo(videosList);
+    tempObject = {
+      videosList: videosList,
+      titlesIndices: sortedIndices,
+      displayedIndices: sortedIndices,
+      textEntered: "",
+    };
+
+    setStateObject({ ...tempObject }); // shallow copy
+  }
+
+  async function deleteVideo(id, videoIndex, setUpdateFunction) {
+    await fetch(THEPATH + id, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        /* Failure i.e.
+                {
+                  "result": "failure",
+                  "message": "Video could not be deleted"
+                }
+                */
+
+        if ("message" in response) {
+          // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
+          setUpdateFunction({
+            messageID: Date.now(),
+            message: response.message,
+          });
+        }
+
+        return;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
+
+    let newVideosList = stateObject.videosList
+      .slice(0, videoIndex)
+      .concat(
+        stateObject.videosList.slice(
+          videoIndex + 1,
+          stateObject.videosList.length
+        )
+      );
+
+    let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
+    sortedIndices.sort(
+      (a, z) => newVideosList[z].rating - newVideosList[a].rating
+    );
+
+    // Update the Video Info List
+    videoInfo = videoInfo
+      .slice(0, videoIndex)
+      .concat(videoInfo.slice(videoIndex + 1, videoInfo.length));
+
+    let filteredIndices = applyFilter(sortedIndices, newVideosList);
+
+    // Update the State with the modified lists
+    setStateObject({
+      ...stateObject,
+      videosList: newVideosList,
+      titlesIndices: sortedIndices,
+      displayedIndices: filteredIndices,
+    });
+    return;
+  }
+
   function produce_videoInfo(videosList) {
     videoInfo = [];
     videosList.forEach((element, index) => {
@@ -98,34 +192,15 @@ function App() {
     return videoInfo;
   }
 
-  if (firstTime) {
-    firstTime = false;
-
-    /* 
-    Initialise videosList with
-    10 videos
-    e.g. [ {id: 523523, title: 'Never Gonna Give You Up', 
-            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', rating: 23} ...]
-  */
-
-    videosList = Videos;
-    sortedIndices = Array.from(Array(videosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-    // Descending Ratings Order
-    sortedIndices.sort((a, z) => videosList[z].rating - videosList[a].rating);
-    videoInfo = produce_videoInfo(videosList);
-    tempObject = {
-      videosList: videosList,
-      titlesIndices: sortedIndices,
-      displayedIndices: sortedIndices,
-      textEntered: "",
-    };
+  // Fetch all the videos via the API
+  if (firstTime && !stateObject) {
+    fetchVideoList();
   }
 
-  const [stateObject, setStateObject] = useState({ ...tempObject }); // shallow copy
-  const [anUpdate, setAnUpdate] = useState(null);
-  const [addAVideoFlag, setADDAVideoFlag] = useState(false);
-
-
+  // Initialisation wih Fetch Videos
+  if (firstTime && stateObject) {
+    firstTime = false;
+  }
 
   useEffect(() => {
     let anyUpdates = anUpdate; // EG {"title":"A Title","url":"https://youtu.be/ZacOS8NBK6U"}
@@ -135,34 +210,11 @@ function App() {
       // Remove video and update states/display accordingly
       let videoIndex = anyUpdates.removed;
 
-      let newVideosList = stateObject.videosList
-        .slice(0, videoIndex)
-        .concat(
-          stateObject.videosList.slice(
-            videoIndex + 1,
-            stateObject.videosList.length
-          )
-        );
-
-      let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-      sortedIndices.sort(
-        (a, z) => newVideosList[z].rating - newVideosList[a].rating
+      deleteVideo(
+        stateObject.videosList[videoIndex].id,
+        videoIndex,
+        setAnUpdate
       );
-
-      // Update the Video Info List
-      videoInfo = videoInfo
-        .slice(0, videoIndex)
-        .concat(videoInfo.slice(videoIndex + 1, videoInfo.length));
-
-      let filteredIndices = applyFilter(sortedIndices, newVideosList);
-
-      // Update the State with the modified lists
-      setStateObject({
-        ...stateObject,
-        videosList: newVideosList,
-        titlesIndices: sortedIndices,
-        displayedIndices: filteredIndices,
-      });
       return;
     }
 
@@ -199,16 +251,13 @@ function App() {
       // EG {"title":"A Title","url":"https://youtu.be/ZacOS8NBK6U"}
       // Add video and update states/display accordingly
 
-      const { title, url, youtube_id } = anyUpdates;
-
+      const { uniqueID, title, url, youtube_id } = anyUpdates;
       let newVideosList = stateObject.videosList.concat({
-        id: uniqueCounter++,
+        id: uniqueID,
         title: title,
         url: url,
         rating: 0,
-        timestamp: Date.now(),
       });
-
       let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
       // Descending Ratings Order
       sortedIndices.sort(
@@ -241,7 +290,6 @@ function App() {
       let theMessage = document.getElementById("snackbar");
 
       theMessage.innerHTML = anyUpdates.message;
-      console.log(anyUpdates.message);
 
       // Add the "show" class to DIV
       theMessage.className = "show";
@@ -249,7 +297,7 @@ function App() {
       // Could someone solve and explain this issue to me. Thank You
 
       // After 5 seconds, remove the show class from DIV
-      setTimeout(function() {
+      setTimeout(function () {
         theMessage.className = theMessage.className.replace("show", "");
         theMessage.style.visibility = "hidden"; // I don't know why I have to do this!!!! See above.
       }, 5000);
@@ -276,7 +324,9 @@ function App() {
   }
 
   function handleAddVideoButtonClick(event) {
-    if (addAVideoFlag) return;
+    if (addAVideoFlag) {
+      return;
+    }
 
     setADDAVideoFlag(true);
   }
@@ -291,7 +341,7 @@ function App() {
       });
     }
   }
- 
+
   function applyFilter(
     titlesIndices,
     videosList = stateObject.videosList,
@@ -302,6 +352,11 @@ function App() {
         .toLowerCase()
         .includes(enteredString.toLowerCase())
     );
+  }
+
+  //Delay rendering until 'stateObject' is setup
+  if (firstTime) {
+    return null;
   }
 
   return (

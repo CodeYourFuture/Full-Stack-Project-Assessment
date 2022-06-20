@@ -3,15 +3,13 @@ import { UserContext } from "./UserContext";
 import ValidateURL from "./ValidateURL.js";
 
 const HandleAddVideoDisplay = () => {
-    
   const ValidateTheVideo = (event) => {
-
-    let title = document.forms["addvideoform"]["entered-title"].value;
+    let title = document.forms["addvideoform"]["entered-title"].value.trim();
     if (title === "") {
       return false;
     }
 
-    let url = document.forms["addvideoform"]["entered-URL"].value;
+    let url = document.forms["addvideoform"]["entered-URL"].value.trim();
     if (url === "") {
       return false;
     }
@@ -19,38 +17,21 @@ const HandleAddVideoDisplay = () => {
     event.preventDefault(); // After ensuring both fields are nonnull, Prevent Form Submission
 
     let result = ValidateURL(title, url, setUpdateFunction);
+
     // If there is a return from this function then it is a failed URL
-
-    // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
-    setUpdateFunction({ messageID: Date.now(), message: result[1] });
-    return;
-
-    /*
-    if (!result[0]) {
+    if (result) {
       // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
       setUpdateFunction({ messageID: Date.now(), message: result[1] });
-      return
     }
-
-   /* 
-    if (result) {
-      document.getElementById("enteredTitle").value = "";
-      document.getElementById("enteredURL").value = "";
-      setUpdateFunction({
-        title: title,
-        url: url,
-        youtube_id: youtube_id,
-      });
-    }
-    */
+    return;
   };
 
   /* USECONTEXT to pass down the 'setter' functions and other relevant parameters */
-    const {
-      setAnUpdate: setUpdateFunction,
-      addingVideoFlag,
-      addFunction: setAddFunction,
-    } = useContext(UserContext);
+  const {
+    setAnUpdate: setUpdateFunction,
+    addingVideoFlag,
+    addFunction: setAddFunction,
+  } = useContext(UserContext);
 
   if (!addingVideoFlag) {
     return null;
