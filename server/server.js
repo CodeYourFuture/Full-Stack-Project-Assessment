@@ -79,16 +79,29 @@ app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(data);
 });
-// app.post("/videos",(req,res)=>{
-//   // if (req.body.title || req.body.url === "") {
-//   //   res.send("The body or url must be f")
-//   // }
-// })
-
 app.post("/videos",(req,res)=>{
+  // if (req.body.title || req.body.url === "") {
+  //   res.send("The body or url must be filled")
+  // }
+})
+
+app.put("/videos",(req,res)=>{
   const videoId = req.body.id;
   const newRating = req.body.rating;
-  data.filter((video)=> video.id === videoId).map(video => video.rating = newRating)
+  data.filter((video)=> video.id === videoId).map(video => video.rating = newRating )
   res.send("video added")
+
+})
+
+app.delete("/videos",(req,res)=>{
+  const videoId = req.body.id;
+  let indexOfVideo = data.findIndex(video => video.id === videoId)
+  if (indexOfVideo < 0) {
+    response.status(404).send(`No video was found with id ${videoId}`)
+  }
+  else {
+    data.splice(indexOfVideo, 1)
+    res.send(data);
+  }
 
 })

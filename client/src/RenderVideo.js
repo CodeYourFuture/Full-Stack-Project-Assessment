@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteButton from "./Delete";
 import Rating from "./Rating";
 
 const RenderVideos = (props) => {
@@ -20,6 +21,7 @@ const RenderVideos = (props) => {
                                 allowFullScreen
                                 title="Embedded youtube"
                             />
+                            <DeleteButton id={video.id}/>
                         </div>
                     </div>
                 )

@@ -23,7 +23,7 @@ function App() {
     .catch((error) => {
       console.log(error);
     })
-  }, [])
+  }, [filterVideo])
  
   return (
     <div className="App">
