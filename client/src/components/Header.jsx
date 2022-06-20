@@ -1,5 +1,5 @@
 import React from "react";
-import { faVideo, faVideoCamera, faVideoSlash } from "@fortawesome/free-solid-svg-icons";
+import {  faVideoCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
