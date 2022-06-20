@@ -131,7 +131,7 @@ app.delete("/:id", (request, response) => {
   if (reqId.length !== 8) {
     return response.status(400).json({
       result: "failure",
-      message: `'${request.params.id}' must be 8 characters long`,
+      message: `'${reqId}' must be 8 characters long`,
     });
   }
 
@@ -139,7 +139,8 @@ app.delete("/:id", (request, response) => {
   if (theVideoIndex < 0) {
     return response.status(400).json({
       result: "failure",
-      message: "Video could not be deleted",
+      message:
+        "Video could not be deleted because no video with the ID '${reqId}' exists`",
     });
   }
 

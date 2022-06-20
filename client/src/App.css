@@ -4,6 +4,11 @@
   --goldenrod: #daa520;
   --bt32-yellow: ##ffc107;
   --bt32-backgd: #f4e603;
+  --snackbar-top: 2.813rem; /* 45px */
+}
+
+h1 {
+  margin-bottom: 3rem;
 }
 
 .App {
@@ -132,7 +137,7 @@ input:focus {
   gap: 2em;
 }
 
-/*Flex items to display video content*/
+/* Flex items to display video content */
 .vid-list {
   display: flex;
   flex-wrap: wrap;
@@ -170,7 +175,7 @@ input:focus {
 }
 
 .displayTitle p {
-  white-space: pre-wrap; /* collapse WS, preserve LB */
+  white-space: pre-wrap; /* collapse WhiteSpace, preserve LineBreak */
 }
 
 /* SOURCE: https://getcssscan.com/css-buttons-examples */
@@ -302,7 +307,7 @@ input:focus {
   padding: 16px; /* Padding */
   margin-left:40px;
   position: fixed; /* Sit on top of the screen */
-  top: 30px; /* 30px from the top */
+  top: var(--snackbar-top); /* 45px from the top */
   z-index: 1; /* Add a z-index if needed */
 }
 
@@ -323,7 +328,7 @@ However, delay the fade out process for 4.8 seconds */
     opacity: 0;
   }
   to {
-    top: 30px;
+    top: var(--snackbar-top);
     opacity: 1;
   }
 }
@@ -334,14 +339,14 @@ However, delay the fade out process for 4.8 seconds */
     opacity: 0;
   }
   to {
-    top: 30px;
+    top: var(--snackbar-top);
     opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    top: 30px;
+    top: var(--snackbar-top);
     opacity: 1;
   }
   to {
@@ -352,7 +357,7 @@ However, delay the fade out process for 4.8 seconds */
 
 @keyframes fadeout {
   from {
-    top: 30px;
+    top: var(--snackbar-top);
     opacity: 1;
   }
   to {
@@ -388,10 +393,7 @@ However, delay the fade out process for 4.8 seconds */
   vertical-align: middle;
   width: 100%;
   align-self: center;
-
   margin-right:4rem;
-
-  
 }
 
 .sort-button:hover,

@@ -7,8 +7,8 @@ import HandleAddVideoDisplay from "./HandleAddVideoDisplay.js";
 import { UserContext } from "./UserContext.js";
 import { youtube_regex } from "./youtube_regex.js";
 
-const THEPORT = 3002;
-const THEPATH = `http://localhost:${THEPORT}/` // "http://localhost:3002/";
+const THEPORT = 3004;
+const THEPATH = `http://localhost:${THEPORT}/`; // "http://localhost:3004/";
 
 const titleSizeLimit = 80;
 const titleHalfLimit = 40;
@@ -72,6 +72,7 @@ function App() {
   const [stateObject, setStateObject] = useState(null); // shallow copy
   const [anUpdate, setAnUpdate] = useState(null);
   const [addAVideoFlag, setADDAVideoFlag] = useState(false);
+  const [sortDescendingOrder, setSortDescendingOrder] = useState(true);
 
   async function fetchVideoList() {
     const response = await fetch(THEPATH).catch((error) => {
@@ -81,6 +82,7 @@ function App() {
 
     const data = await response.json();
     videosList = data;
+
     /* 
    Initialise videosList with fetched videos 
     The format is a list
@@ -89,8 +91,12 @@ function App() {
   */
 
     sortedIndices = Array.from(Array(videosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-    // Descending Ratings Order
-    sortedIndices.sort((a, z) => videosList[z].rating - videosList[a].rating);
+    // Descending/Ascending Ratings Order
+    sortedIndices.sort((a, z) =>
+      sortDescendingOrder
+        ? videosList[z].rating - videosList[a].rating
+        : videosList[a].rating - videosList[z].rating
+    );
     videoInfo = produce_videoInfo(videosList);
     tempObject = {
       videosList: videosList,
@@ -113,7 +119,7 @@ function App() {
                   "result": "failure",
                   "message": "Video could not be deleted"
                 }
-                */
+        */
 
         if ("message" in response) {
           // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
@@ -140,8 +146,10 @@ function App() {
       );
 
     let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-    sortedIndices.sort(
-      (a, z) => newVideosList[z].rating - newVideosList[a].rating
+    sortedIndices.sort((a, z) =>
+      sortDescendingOrder
+        ? newVideosList[z].rating - newVideosList[a].rating
+        : newVideosList[a].rating - newVideosList[z].rating
     );
 
     // Update the Video Info List
@@ -197,7 +205,7 @@ function App() {
     fetchVideoList();
   }
 
-  // Initialisation wih Fetch Videos
+  // Initialisation wih Fetched Videos
   if (firstTime && stateObject) {
     firstTime = false;
   }
@@ -259,9 +267,11 @@ function App() {
         rating: 0,
       });
       let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-      // Descending Ratings Order
-      sortedIndices.sort(
-        (a, z) => newVideosList[z].rating - newVideosList[a].rating
+      // Descending/Ascending Ratings Order
+      sortedIndices.sort((a, z) =>
+        sortDescendingOrder
+          ? newVideosList[z].rating - newVideosList[a].rating
+          : newVideosList[a].rating - newVideosList[z].rating
       );
 
       // Update the Video Info List with the new entry
@@ -315,20 +325,34 @@ function App() {
       enteredString
     );
 
-    // update State with the text entered and the filtered result
+    // update State with the filtered result and text entered
     setStateObject({
       ...stateObject,
-      textEntered: enteredString,
       displayedIndices: filteredIndices,
+      textEntered: enteredString,
     });
   }
 
-  function handleAddVideoButtonClick(event) {
+  function handleAddVideoButtonClick() {
     if (addAVideoFlag) {
       return;
     }
 
     setADDAVideoFlag(true);
+  }
+
+  function handleSortOrder() {
+    setSortDescendingOrder(!sortDescendingOrder);
+    // Reverse the Sort Order
+    let sortedTitles = [...stateObject.titlesIndices].reverse();
+    let sortedDisplayed = [...stateObject.displayedIndices].reverse();
+
+    // Update the State with the new sort order
+    setStateObject({
+      ...stateObject,
+      titlesIndices: sortedTitles,
+      displayedIndices: sortedDisplayed,
+    });
   }
 
   function clearSearch() {
@@ -354,10 +378,13 @@ function App() {
     );
   }
 
-  //Delay rendering until 'stateObject' is setup
+  // Delay rendering until 'stateObject' is setup
   if (firstTime) {
     return null;
   }
+
+  let caption =
+    (sortDescendingOrder ? "Most to Least" : "Least to Most") + " Votes";
 
   return (
     <div className="App">
@@ -397,7 +424,6 @@ function App() {
                 autoComplete="off"
                 id="video-query"
                 name="q"
-                //         placeholder="Video Search"
                 value={stateObject.textEntered}
                 onChange={handleChange}
               />
@@ -415,11 +441,11 @@ function App() {
               <button
                 className="sort-button"
                 title="click to change sort order"
+                onClick={handleSortOrder}
               >
-                Most to Least Ratings&nbsp;&nbsp;
+                {caption}&nbsp;&nbsp;
                 <i class="fas fa-arrow-circle-down"></i>
               </button>
-              <div className="right-spacing"></div>
             </div>
           </div>
         </div>
