@@ -1,0 +1,30 @@
+.video_card {
+}
+.video_title {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 1.3rem;
+}
+.video {
+}
+.del_btn_container {
+  width: 100%;
+  text-align: center;
+}
+
+.delete_btn {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 12px;
+  color: black;
+  border: 3px solid #99c78e;
+  transition-duration: 0.4s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+}
+.rating_score {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-align: center;
+}

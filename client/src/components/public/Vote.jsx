@@ -6,7 +6,7 @@ import UserContext from "../../context/UserContext";
 const Vote = () => {
   const { vote, setVote } = useContext(UserContext);
   return (
-    <div>
+    <div className="vote_container">
       <button
         name="upVote"
         className="up_vote_btn"
@@ -14,7 +14,7 @@ const Vote = () => {
       >
         <IoThumbsDown />
       </button>
-      <span>Votes: {vote}</span>
+      <span className="vote_title">Votes</span>
       <button
         name="down_vote_btn"
         className="down_vote_btn"

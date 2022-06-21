@@ -1,11 +1,13 @@
 .header {
-  background-color: #fa8bff;
+  background-color: #1a4510;
   width: 100%;
+  color: white;
 }
 
 .cyf_title {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   padding: 2rem 0;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }

@@ -1,0 +1,28 @@
+.vote_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.up_vote_btn {
+  display: block;
+  border-radius: 12px;
+  color: black;
+  border: 3px solid #99c78e;
+  transition-duration: 0.4s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.down_vote_btn {
+  display: block;
+  border-radius: 12px;
+  color: black;
+  border: 3px solid #99c78e;
+  transition-duration: 0.4s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.vote_title {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}

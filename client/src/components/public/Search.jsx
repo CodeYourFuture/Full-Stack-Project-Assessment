@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
+import "../../styles/search.css";
 
 const Search = () => {
   const { searchString, setSearchString, searchHandler } =
@@ -8,6 +9,7 @@ const Search = () => {
   return (
     <div className="search-container">
       <input
+        className="search_bar"
         type="text"
         placeholder="Search.."
         value={searchString}
@@ -16,7 +18,7 @@ const Search = () => {
         }}
       />
       <button
-        className="btn_search"
+        className="search_btn"
         type="submit"
         onClick={() => {
           searchHandler(searchString);

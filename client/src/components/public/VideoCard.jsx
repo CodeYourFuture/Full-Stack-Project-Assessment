@@ -12,8 +12,10 @@ const VideoCard = ({ video }) => {
         <div className="video_title" key={video.id}>
           {video.title}
         </div>
+
         <div>
           <iframe
+            className="video"
             width="350"
             height="200"
             title={video.title}
@@ -21,14 +23,17 @@ const VideoCard = ({ video }) => {
             same-site="Secure"
           />
         </div>
-        <div className="video_votes">{video.rating}</div>
-        <button
-          className="delete_btn"
-          type="button"
-          onClick={() => deleteHandler(video.id)}
-        >
-          Delete
-        </button>
+        <div className="rating_score">Rating: {video.rating}</div>
+        <div className="del_btn_container">
+          <button
+            className="delete_btn"
+            type="button"
+            onClick={() => deleteHandler(video.id)}
+          >
+            Delete
+          </button>
+        </div>
+
         <Vote vote={vote} setVote={setVote} />
       </section>
     </>

@@ -15,10 +15,11 @@ const NewVideo = () => {
         }}
       >
         <div>
-          <h2>Add a New Video:</h2>
+          <h2 className="new_video_header">Add a New Video:</h2>
         </div>
         <div>
           <input
+            className="url_input"
             value={videoInfo.url}
             type="text"
             placeholder="URL..."
@@ -27,6 +28,7 @@ const NewVideo = () => {
         </div>
         <div>
           <input
+            className="title_input"
             value={videoInfo.title}
             type="text"
             placeholder="Title..."
@@ -35,6 +37,7 @@ const NewVideo = () => {
         </div>
         <div>
           <input
+            className="rating_input"
             value={videoInfo.rating}
             type="text"
             placeholder="Rating..."
@@ -42,13 +45,15 @@ const NewVideo = () => {
           />
         </div>
         <div>
-          <button type="submit">Add</button>
+          <button className="submit_btn" type="submit">
+            Add
+          </button>
         </div>
         <div>
           <button
+            className="cancel_btn"
             type="button"
             onClick={() => setNewVideo(false)}
-            className="cancel_btn"
           >
             Cancel
           </button>
