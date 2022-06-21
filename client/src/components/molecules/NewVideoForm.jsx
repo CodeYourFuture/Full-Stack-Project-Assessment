@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
 import axios from "axios";
-import Input from "./atoms/Input";
+import Input from "../../components/atoms/Input";
 
 function NewVideoForm({ loadVideos }) {
 

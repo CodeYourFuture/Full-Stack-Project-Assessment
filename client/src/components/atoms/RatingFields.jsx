@@ -14,24 +14,18 @@ function Rating({ video }) {
     setNewRating(updatedVotes);
     axios
       .put(`/api/${id}/`, { rating: updatedVotes })
-      .then(() => {})
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch((err) => {
         console.log(err);
+        alert("Your vote couldn't be added, try again");
+        setNewRating(updatedVotes-vote);
       });
   }
 
   return (
     <div className="d-flex justify-content-center">
-      <button className="iconButton">
-        <BsFillHandThumbsUpFill
-          className="iconSize"
-          onClick={() => updateRating(video.id, 1)}
-        />
-        <span className="sr-only">Vote Up</span>
-      </button>
-      <p style={{ marginBottom: 0 }} className="card-text">
-        Rating: {newRating}
-      </p>
       <button className="iconButton">
         <BsFillHandThumbsDownFill
           className="iconSize"
@@ -40,6 +34,16 @@ function Rating({ video }) {
           }}
         />
         <span className="sr-only">Vote Down</span>
+      </button>
+      <p style={{ marginBottom: 0 }} className="card-text">
+        Rating: {newRating}
+      </p>
+      <button className="iconButton">
+        <BsFillHandThumbsUpFill
+          className="iconSize"
+          onClick={() => updateRating(video.id, 1)}
+        />
+        <span className="sr-only">Vote Up</span>
       </button>
     </div>
   );

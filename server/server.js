@@ -1,15 +1,25 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-let videos = require("./exampleresponse.json");
+const videoData = require("./exampleresponse.json");
+
+let videos = videoData;
 
 app.use(express.json());
 app.use(cors());
 // GET "/"
+// app.get("/api/", (req, res) => {
+//   const sortedVideos = videos.sort((a, b) => b.rating - a.rating);
+//   res.json(videos);
+// });
+
 app.get("/api/", (req, res) => {
-  const sortedVideos = videos.sort((a, b) => b.rating - a.rating);
-  res.json(videos);
-});
+let {order} = req.query;
+let sortedVideos = [];
+if(order === 'desc') sortedVideos = videos.sort((a, b) => b.rating - a.rating);
+if(order === 'asc') sortedVideos = videos.sort((a, b) => a.rating - b.rating);
+res.json(sortedVideos);
+})
 
 app.delete("/api/:id", (req, res) => {
   const requestedID = Number(req.params.id);
@@ -62,7 +72,7 @@ app.put("/api/:id", (req, res) => {
     videos.forEach((video) => {
       if (video.id === Number(req.params.id)) {
         video.rating = rating;
-        res.json({ msg: "Rating was updated", video });
+        res.status(200).json({rating});
       }
     });
   } else {

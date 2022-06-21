@@ -1,10 +1,19 @@
 import React from "react";
-import "../App.css";
-import DeleteButton from "./atoms/DeleteButton";
-import Rating from "./atoms/RatingFields";
+import Button from "../atoms/Button";
+import Rating from "../atoms/RatingFields";
+import axios from "axios";
 
 function Video({ video, loadVideos }) {
-
+  function handleRemoveItem(clickedId) {
+    axios
+      .delete(`/api/${clickedId}`)
+      .then(() => {
+        loadVideos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <li className="col-sm-6">
       <div className="card-body text-center">
@@ -20,8 +29,8 @@ function Video({ video, loadVideos }) {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <Rating video={video}/>
-        <DeleteButton id={video.id} load={loadVideos} />
+        <Rating video={video} />
+        <Button id={video.id} handleClick={handleRemoveItem} btnName="Delete" />
       </div>
     </li>
   );
