@@ -76,7 +76,9 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos);
+
+  console.log(req.query)
+  // res.send(videos);
 });
 
 const generateRandomId = (arr) => {

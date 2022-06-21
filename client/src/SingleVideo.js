@@ -82,7 +82,7 @@ const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
               setScore((score) => (score += 1));
             }
           }}
-        >
+        > 
           <HeartBroken color={disliked ? "error" : "primary"} />
         </IconButton>
         <IconButton aria-label="delete video" onClick={deleteVideo}>

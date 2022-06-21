@@ -87,8 +87,7 @@ useEffect(() => {
         <Container fluid>
           <Row>
             {videos
-              .sort((a, b) => b.rating - a.rating)
-              .map((video, index) => (
+              .map((video) => (
                 <Col xs={12} sm={6} lg={4} xl={3} key={video.id}>
                   <SingleVideo video={video} urlToFetch={urlToFetch} getVideos={getVideos} />
                 </Col>

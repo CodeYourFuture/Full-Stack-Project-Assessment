@@ -6,8 +6,8 @@ function App() {
   const [videos, setVideos] = useState([]);
   const urlToFetch = "http://localhost:5000/";
 
-  const getVideos = (id="") => {
-    fetch(`${urlToFetch}`)
+  const getVideos = (order = "desc") => {
+    fetch(`${urlToFetch}/?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -24,6 +24,8 @@ function App() {
         <h1 className="page-title">Video Recommendation</h1>
       </header>
       <main>
+        <button onClick={() => getVideos("asc")}>Low to High</button>
+        <button onClick={getVideos()}>High to Low</button>
         <AddVideo urlToFetch={urlToFetch} setVideos={setVideos} videos={videos} getVideos={getVideos} />
       </main>
     </div>
