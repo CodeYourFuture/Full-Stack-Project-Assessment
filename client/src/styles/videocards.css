@@ -1,7 +1,6 @@
 .videoCards_container {
   display: flex;
   flex-direction: column;
-
   align-items: center;
   padding-top: 4rem;
 }
@@ -18,4 +17,15 @@
 }
 .addNewVideo_btn:hover {
   background-color: #a5ffa8; /* Green */
+}
+
+@media screen and (min-width: 700px) {
+  .videoCards_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 4rem;
+    text-align: center;
+  }
 }

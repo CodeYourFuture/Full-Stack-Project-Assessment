@@ -9,11 +9,10 @@ const VideoCard = ({ video }) => {
   return (
     <>
       <section className="video_card">
-        <div className="video_title" key={video.id}>
-          {video.title}
-        </div>
-
         <div className="video_container">
+          <h3 className="video_title" key={video.id}>
+            {video.title}
+          </h3>
           <iframe
             className="video"
             width="350"
