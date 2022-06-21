@@ -13,7 +13,7 @@ const VideoCard = ({ video }) => {
           {video.title}
         </div>
 
-        <div>
+        <div className="video_container">
           <iframe
             className="video"
             width="350"

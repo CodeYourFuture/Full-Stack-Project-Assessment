@@ -7,7 +7,12 @@
   text-align: center;
   padding-top: 1.3rem;
 }
+.video_container {
+  text-align: center;
+}
 .video {
+  display: inline-block;
+  margin: 0 auto;
 }
 .del_btn_container {
   width: 100%;
