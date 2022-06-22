@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 // import videosData from "./exampleresponse.json"
 
-function DeleteButton({data}) {
-    const [videos, setVideos] = useState(data)
-
-    function removeVideo(id) {
-       let newVideoList = videos.filter((video) => video.id !==id);
-       setVideos(newVideoList);
-    }
+function DeleteButton({data,removeVideo}) {
+    
     return (
         <div>
             <button
