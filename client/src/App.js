@@ -8,9 +8,9 @@ function App() {
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(true);
   const serverLocal = "http://localhost:5000";
-  // const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+  const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
   useEffect(() => {
-    fetch(`${serverLocal}/videos`)
+    fetch(`${serverLive}/videos`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
