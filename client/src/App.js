@@ -18,18 +18,21 @@ function App() {
 
   // A function to delete video
   const deleteVideos = (arrVideo) => {
-     setAllVideos((videos) => {
-       return videos.filter((v) => {
-         return v.id !== arrVideo.id;
+    //To delete from front end
+    //  setAllVideos((videos) => {
+    //    return videos.filter((v) => {
+    //      return v.id !== arrVideo.id;
+    //    });
+    //  });
+
+    // To delete from the server
+       axios.delete(`http://localhost:4000/${arrVideo.id}`).then((res) => {
+         if (res.status === 200) {
+           axios.get("http://localhost:4000/").then((res) => {
+             setAllVideos(res.data);
+           });
+         }
        });
-     });
-    // axios.delete(`http://localhost:4000/${arrVideo}`)
-    // .then((res) => {
-    //   if (res.status === 200)
-    //     axios.get("http://localhost:4000/").then((res) => {
-    //       setAllVideos(res.data);
-    //     });
-    // });
   };
  
 
