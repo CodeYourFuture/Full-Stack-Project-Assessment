@@ -97,6 +97,11 @@ app.post("/videos/add", (req, res) => {
   videos.push(req.body);
   res.send(videos);
 });
+app.delete("/videos/delete", (req, res) => {
+  const vidId = req.body.id;
+  videos = videos.filter((vid) => vid.id !== vidId);
+  res.send(videos);
+});
 app.delete("/sql", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);

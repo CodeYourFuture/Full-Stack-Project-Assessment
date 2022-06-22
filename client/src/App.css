@@ -1,38 +1,76 @@
- .App {
-    display: grid;
-    grid-template-areas: "head  head  head  head "
-                "Av Av Av Av"
-                "search search search search"
-                "B B B B"
-                "Footer Footer Footer Footer";
-    grid-template-rows: 150px 150px 150px 1fr 30px;
-    background-color: green;
-  }
-  .App-header{
-    grid-area:head;
-  }
-  .Add_Video{
-    grid-area:Av;
-     
-  }
-  .Add_Video{
-     background-color: green;
-  }
-  .Video-Search{
-    grid-area:search;
-  }
-  .addingOptionHidden {
-  display: none;
+.Header {
+  color: pink;
+  text-align: center;
 }
-.addingOptionVisible {
-  display: contents;
+.App {
+  display: grid;
+  grid-template-areas:
+    "header  header "
+    "main  main"
+    "footer footer ";
+  grid-template-rows: 50px 1fr 30px;
+  background-color: grey;
 }
-.video-container {
-  grid-area:B;
-  margin: 10%;
+.App-header {
+  grid-area: header;
 }
-.Footer_style{
-  grid-area:Footer;
+
+.main {
+  grid-area: main;
+}
+.footer {
+  grid-area: footer;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.video-class {
+  max-width: 90vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Video-Search {
+  margin: 20px auto 20px 20px;
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+}
+.rating > button {
+  margin: 0 20px;
+}
+.rating > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+}
+.delete-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Add_Video {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 5px;
+}
+.Add_Video_button {
+  width: 130px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: azure;
+}
+.Add_Video {
+  background-color: rgb(113, 114, 113);
+}
+.url_title {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.search-component {
+  grid-area: search;
 }
 .addingOptionHidden {
   display: none;
@@ -41,105 +79,190 @@
   display: contents;
 }
 .video-container {
-  display: flex;
-  flex-wrap: wrap;
+  grid-area: B;
   margin: 10%;
 }
-
-
-
-
-
+.Footer_style {
+  grid-area: Footer;
+}
 
 /* Mobile version  -  Second break   */
 @media (max-width: 768px) {
-   .App {
-    display: grid;
-    grid-template-areas: "head  head  head  head "
-                "Av Av Av Av"
-                "search search search search"
-                "B B B B"
-                "Footer Footer Footer Footer";
-    grid-template-rows: 150px 150px 150px 1fr 30px;
-    background-color: green;
+  .Header {
+    color: pink;
+    text-align: center;
   }
-  .App-header{
-    grid-area:head;
-  }
-  .Add_Video{
-    grid-area:Av;
-     
-  }
-  .Add_Video{
-     background-color: green;
-  }
-  .Video-Search{
-    grid-area:search;
-  }
-  .addingOptionHidden {
-  display: none;
-}
-.addingOptionVisible {
-  display: contents;
-}
-.video-container {
-  grid-area:B;
-  margin: 10%;
-}
-.Footer_style{
-  grid-area:Footer;
-}
-}
-/* Mobile version  - First break px */
-@media (max-width: 480px) {
- 
-
   .App {
     display: grid;
-    grid-template-areas: "head  head  head  head "
-                "Av Av Av Av"
-                "search search search search"
-                "B B B B"
-                "Footer Footer Footer Footer";
-    grid-template-rows: 50px 150px 150px 1fr 30px;
-    background-color: green;
+    grid-template-areas:
+      "header  header "
+      "main  main"
+      "footer footer ";
+    grid-template-rows: 50px 1fr 30px;
+    background-color: grey;
   }
-  .App-header{
-    grid-area:head;
-   
+  .App-header {
+    grid-area: header;
   }
-  .App-header > h1 {
- font-weight: bold;
-    font-size: 1.2rem;
+
+  .main {
+    grid-area: main;
+  }
+  .footer {
+    grid-area: footer;
     text-align: center;
-    padding-top: 10%;
+    padding-bottom: 10px;
   }
-  .Add_Video{
-    grid-area:Av;
-     
+  .video-class {
+    max-width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .Add_Video > button{
+  .Video-Search {
+    margin: 20px auto 20px 20px;
+  }
+  .rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+  }
+  .rating > button {
+    margin: 0 20px;
+  }
+  .rating > p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+  }
+  .delete-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Add_Video {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 5px;
+  }
+  .Add_Video_button {
+    width: 130px;
     margin: 10px;
     border-radius: 10px;
     background-color: azure;
   }
-  .Add_Video{
-     background-color: green;
+  .Add_Video {
+    background-color: rgb(113, 114, 113);
   }
-  .Video-Search{
-    grid-area:search;
+  .url_title {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  .search-component {
+    grid-area: search;
   }
   .addingOptionHidden {
-  display: none;
+    display: none;
+  }
+  .addingOptionVisible {
+    display: contents;
+  }
+  .video-container {
+    grid-area: B;
+    margin: 10%;
+  }
+  .Footer_style {
+    grid-area: Footer;
+  }
 }
-.addingOptionVisible {
-  display: contents;
-}
-.video-container {
-  grid-area:B;
-  margin: 10%;
-}
-.Footer_style{
-  grid-area:Footer;
-}
+/* Mobile version  - First break px */
+@media (max-width: 480px) {
+  .Header {
+    color: pink;
+    text-align: center;
+  }
+  .App {
+    display: grid;
+    grid-template-areas:
+      "header  header "
+      "main  main"
+      "footer footer ";
+    grid-template-rows: 50px 1fr 30px;
+    background-color: grey;
+  }
+  .App-header {
+    grid-area: header;
+  }
+
+  .main {
+    grid-area: main;
+  }
+  .footer {
+    grid-area: footer;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .video-class {
+    max-width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Video-Search {
+    margin: 20px auto 20px 20px;
+  }
+  .rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+  }
+  .rating > button {
+    margin: 0 20px;
+  }
+  .rating > p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+  }
+  .delete-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Add_Video {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 5px;
+  }
+  .Add_Video_button {
+    width: 130px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: azure;
+  }
+  .Add_Video {
+    background-color: rgb(113, 114, 113);
+  }
+  .url_title {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  .search-component {
+    grid-area: search;
+  }
+  .addingOptionHidden {
+    display: none;
+  }
+  .addingOptionVisible {
+    display: contents;
+  }
+  .video-container {
+    grid-area: B;
+    margin: 10%;
+  }
+  .Footer_style {
+    grid-area: Footer;
+  }
 }

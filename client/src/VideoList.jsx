@@ -1,28 +1,33 @@
 import React from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 import Rating from "./Rating";
+const serverLocal = "http://localhost:5000/";
+const serverLive = "https://flannel-hickory-parallelogram.glitch.me"
 const VideoList = (props) => {
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   };
-
+// for more information and setting go to 
+// https://www.npmjs.com/package/react-youtube
   const opts: YouTubeProps["opts"] = {
-    height: "390",
-    width: "640",
+    width :"100%" ,
+
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   };
-  const deleteHandler =(a)=>
+  const deleteHandler =(videoId)=>
   {
-     fetch("https://flannel-hickory-parallelogram.glitch.me/videos/delete", {
+
+    const data = {videoId: videoId}
+     fetch(`${serverLocal}/videos/delete`, {
        method: "DELETE",
        headers: {
          "Content-Type": "application/json",
        },
-       body: JSON.stringify(a),
+       body: JSON.stringify(data),
      })
        .then((response) => response.json())
        .then((data1) => {
@@ -39,25 +44,24 @@ const VideoList = (props) => {
     return (<h3>Loading...</h3>)
   }else{
   return (
-
-    
-    <div className="video-container">
-      {props.filterData.map((a) => (
-        <div>
-          <p>{a.title} </p>
+    <div className="video-class">
+      {props.filterData.map((video) => (
+        <div className="video-class">
+          <p>{video.title} </p>
           <div>
-            <Rating rating={a.rating} ratingId={a.id} />
+            <Rating rating={video.rating} ratingId={video.id} />
           </div>
           <YouTube
-            videoId={a.url.split("watch?v=")[1]}
+            className="video-class"
+            videoId={video.url.split("watch?v=")[1]}
             opts={opts}
             onReady={onPlayerReady}
           />
-          <button onClick={deleteHandler(a)}>Delete</button>
+          <button className="delete-button" onClick={(e) => deleteHandler(video.id)}>Delete</button>
         </div>
       ))}
     </div>
-  )}
+  );}
 };
 
 export default VideoList;

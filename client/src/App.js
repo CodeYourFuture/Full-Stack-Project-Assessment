@@ -6,39 +6,44 @@ import Footer from "./Footer";
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
-  const [loading , setLoading] = useState(true);
-
-  useEffect(()=>{fetch("https://flannel-hickory-parallelogram.glitch.me/videos")
+  const [loading, setLoading] = useState(true);
+  const serverLocal = "http://localhost:5000";
+  // const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+  useEffect(() => {
+    fetch(`${serverLocal}/videos`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
         setFilterData(data);
-        setLoading(false)
+        setLoading(false);
       })
-      .catch((error) => {console.log(error);
-      setLoading(true)})},[])
-    
-  
+      .catch((error) => {
+        console.log(error);
+        setLoading(true);
+      });
+  }, []);
+
   return (
     <>
       <div className="App">
         <header className="App-header">
-          <h1>Video Recommendation</h1>
+          <h3 className="Header">Video List</h3>
         </header>
-        <main>
+        <main className="main">
           <div>
-            <AddVideo  />
+            <AddVideo />
             <Search
               allData={allData}
               filterData={filterData}
               setAllData={setAllData}
               setFilterData={setFilterData}
               loading={loading}
+              
             />
           </div>
         </main>
-        <footer className="Footer_style">
-          <Footer  />
+        <footer className="footer">
+          <Footer className="Footer_style"/>
         </footer>
       </div>
     </>
