@@ -21,7 +21,23 @@ const Home = () => {
     };
     search()
   }, [searchInput, searchByCategories]);
-  // 
+   
+
+  useEffect(() => {
+    const search = () => {
+      let filteredVideos = videoDates.filter((video) => {
+        console.log(searchByCategories.toLowerCase())
+        return  video.categories.includes(searchByCategories.toLowerCase())    
+      });
+      if(searchByCategories!==''){
+        setFilteredVideos(filteredVideos);
+      }else {
+        setFilteredVideos(videoDates);
+      }
+      
+    };
+    search()
+  }, [searchByCategories]);
 
    return (
        <div className="" id="home">
