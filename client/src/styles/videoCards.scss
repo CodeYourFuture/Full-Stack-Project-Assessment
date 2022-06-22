@@ -4,49 +4,122 @@
       flex-wrap: wrap;
       justify-content: center;
 
-      .country-card {
-        background-color: #ffffff;
+      .video-card {
+        background-color: #1B1A17;
         padding-bottom: 1.5rem;
         border-radius: 4%;
-        width: 500px;
-        cursor: pointer;
-        margin: 1rem;
-        color: green;
-        box-shadow: green;
+        width: 410px;
+        height: 450px;
+        color: #FFFFFF;
+        box-shadow: #1B1A17;
+        margin: 1rem 0.4rem;
+        @media (min-width: 605px) {
+          width: 520px;
+          margin: 1rem;
+          height: 375px;
+
+          
+        }
         @media (min-width: 950px) {
           margin: 1.5rem 1rem;
-          width: 600px;
-          height: 480px;
+          width: 520px;
+          height: 380px;      
         }
         @media (min-width: 1150px) {
           margin: 2rem 1.5rem;
-          width: 650px;
+          width: 610px;
+
         }
 
         &:hover {
-          background-color: black;
-          color: white;
+          background-color: #FFFFFF;
+          color: #1B1A17;
         }
-        .card-img {
-          min-height: 300px;
-          width: fit-content;
-          border-radius: 4% 4% 0 0;
-         
+
+        .video{
+         iframe{
+          width: 410px;
+          height: 350px;
+          @media (min-width: 605px) {
+            width: 520px;
+            height: 300px;
+              
+          }
+          @media (min-width: 950px) {
+            width: 520px;
+            
+          }
+          @media (min-width: 1150px) {
+            width: 610px;
+          }
+          border-radius: 4% 4% 0  0;
+
+        }
+          
         }
 
         .card-body {
-          margin-top: 1rem 1.5rem;
-          padding: 1rem;
+          padding-bottom: 1rem;
+          padding-top:5px;
+        
+        .title{
+          font-size: 1rem;
+          font-weight: 700;
+          margin-bottom: 0;
+         
+          @media (min-width: 950px) {
+          font-size: 1.1rem;
+          }
+          
+        }
+        p{
+          margin-bottom: 0;
         }
 
-        .card-body p {
-          font-size: 1.2rem;
-          margin-top: 0.5rem;
+        .card-info{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+            .votes{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+              text-align: center;
+              margin: 0.2rem 1rem;
+              font-weight: 500;
+              font-size: 1rem;
+
+              .thumbs-icon{
+                font-size: 1.25rem;
+                margin: 3px;
+                font-weight: 600;
+
+                :hover{
+                  color:#FF1818;
+                }
+              }
+              p {
+                font-size: 1.2rem;
+                margin-bottom: 0;
+                padding: 0 10px;
+              }
+              
+              span {
+                  font-weight: lighter;
+                  margin-left: 0.5rem;
+                }
+            }
+            .delete-btn{
+              font-size: 1.5rem;
+            :hover{
+              color:#FF1818;
+            }
+
+            }
         }
-        .card-body span {
-          font-weight: lighter;
-          margin-left: 0.5rem;
-        }
+       }
        
       }
     }

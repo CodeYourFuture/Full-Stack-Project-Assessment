@@ -3,15 +3,17 @@ import '../styles/header.scss';
 import {RiVideoAddLine} from 'react-icons/ri';
 
 
-const Header = () => {
 
+const Header = ({handleClick}) => {
   
-  return (
+     return (
       <div className="header">
         <h1>VIDEO Recommendation</h1>
-        <a href="#bookNow" className="btn"><RiVideoAddLine/>
-            <span>Add video</span>
-        </a>
+        <button  onClick={handleClick} className="btn add-btn">
+          <span className="icon"><RiVideoAddLine/></span>
+          <span className="text">Add video</span>
+        </button>
+     
       </div>
   );
 };

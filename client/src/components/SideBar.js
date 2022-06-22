@@ -1,14 +1,18 @@
 import React,{useState, useEffect}  from 'react';
 import '../styles/sidebar.scss'
-import { GiFilmSpool } from 'react-icons/gi';
+import { GiFilmSpool,GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineHome , AiOutlineContacts} from 'react-icons/ai';
 import { CgWebsite } from 'react-icons/cg';
+import { MdVideoLibrary } from 'react-icons/md';
 import {RiVideoAddLine} from 'react-icons/ri';
 
-const Sidebar =()=>{
-    const [showNavMenu, setShowNavMenu]= useState(false);
 
-    const handeShowMenu=()=>{
+const Sidebar =({handleClick})=>{
+    const [showNavMenu, setShowNavMenu]= useState(false);
+    const [active, setActive]= useState('#home');
+
+ 
+    const handleShowMenu=()=>{
         setShowNavMenu(!showNavMenu);
     }
 
@@ -16,22 +20,28 @@ const Sidebar =()=>{
       }, [showNavMenu]);
 return(
     <div className='side-bar'>
-        <button onClick={handeShowMenu} className='toggle-button btn'>Menu</button>
-        <h4><GiFilmSpool/><span>Video Menu</span></h4>
-        <div className={showNavMenu?'nav-menu show-menu':'nav-menu'}>
-            <a href="#home" className="btn ">
-            <AiOutlineHome/><span>Home</span>
-            </a>
-            <a href="#favorites" className="btn ">
-            <CgWebsite/><span>Liked Videos</span>
-            </a>
-            <a href="#about" className="btn ">
-            <AiOutlineContacts/><span>Contacts</span>
-            </a>
-            <a href="#bookNow" className="btn "><RiVideoAddLine/>
-            <span>Add video</span>
-            </a>
-      </div>
+            <button onClick={handleShowMenu} className='toggle-button btn'><GiHamburgerMenu/></button>
+            <h2>
+                <span className='menu-icon'><GiFilmSpool/></span>
+                <span>Video Menu</span>
+            </h2>
+            <div className={showNavMenu?'nav-menu show-menu':'nav-menu'}>
+                    <a  href="#home" className="btn side-nav-items active">
+                        <span className='side-icons'><AiOutlineHome/></span><span>Home</span>
+                    </a>
+                    <a  href="#favorites" className="btn side-nav-items ">
+                        <span className='side-icons'><CgWebsite/></span><span>Liked Videos</span>
+                    </a>
+                    <a  href="#library" className="btn side-nav-items ">
+                        <span className='side-icons'><MdVideoLibrary/></span><span>Library</span>
+                    </a>
+                    <span className='add-video-border'></span>
+                    <a  href="#bookNow" className="btn side-nav-items" onClick={handleClick} ><span className='side-icons'><RiVideoAddLine/></span>
+                         <span>Add Video</span>
+                    </a>
+                
+            </div>
+   
     </div>
 )
 }

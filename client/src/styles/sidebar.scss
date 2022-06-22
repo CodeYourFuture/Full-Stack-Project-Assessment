@@ -8,26 +8,34 @@
     position: fixed;     /* Fixed Sidebar (stay in place on scroll and position relative to viewport) */
     width: 100%;     /* Set the width of the sidebar */
     /* z-index: 1; */     /* Stay on top of everything */
-    background-color: #1B1A17; /* Black */
+    background-color: #16140f; /* Black */
     overflow-x: hidden;     /* Disable horizontal scroll */
     padding-top: 10px;
-
-        @media (min-width: 950px) {
-            top: 3.4em;      /* Stay at the top */
-            height: 100%;
-            width: 300px;  
-        }
+    margin-top: 75px;
+    @media (min-width: 950px) {
+        top: 3.4em;      /* Stay at the top */
+        height: 100%;
+        width: 300px;  
+        margin-top: 0;
+    }
+    .side-icons{
+        font-size: 1.25rem;
+        margin-right: 3px;
+        font-weight: 600;
+    }
 
     .toggle-button{
         background-color: #7FC8A9;
         color: #FFFFFF;
         z-index:10;
-        font-size: 1rem;
+        font-size: 1.2rem;
         cursor: pointer;
+        width: 45px;
+       display: flex;
         margin-bottom: 1rem;
-        margin: 0 1rem 1rem 1rem;
+        margin: 0 1rem 1rem 2rem;
             @media (min-width: 750px) {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         
         }
             @media (min-width: 950px) {
@@ -35,13 +43,18 @@
             }
     }
 
-    h4{
+    h2{
         color:#FFFFFF;
-        font-size:1.3rem;
         display: none;
         align-items: center;
-    
+        .menu-icon{
+            color: #5ec786;
+            font-size: 1.5rem;
+            font-weight: 700;
+          }
         span{
+        font-size:1.5rem;
+
             margin-left: 10px;
 
         }
@@ -49,7 +62,7 @@
             margin-top: 2rem;
             padding: 0 3rem;
             display: block;
-            }
+        }
     }
   
     
@@ -62,7 +75,7 @@
             display: flex;
             flex-direction: column;
             }
-       a{
+        .side-nav-items{
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -71,6 +84,7 @@
         border-radius: 20px;
         color: #FFFFFF;
         span{
+            font-size: 1.1rem;
             margin-top: 2px;
             margin-left: 10px;
         }
@@ -80,8 +94,14 @@
         }
         .active {
             background-color: #7FC8A9;
-            color: #132C33;
+           
         }
+        .add-video-border{
+            border-top: 1px solid #42494b ;
+            margin: 2rem 0;
+           
+        }
+        
     } 
     .show-menu{
         display: block;

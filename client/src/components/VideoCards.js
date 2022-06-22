@@ -1,58 +1,50 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import "react-modal-video/scss/modal-video.scss";
-import ModalVideo from "react-modal-video";
+import YouTube from "react-youtube";
 import { BsHandThumbsUpFill, BsHandThumbsDownFill} from 'react-icons/bs';
-
-
-
+import { RiDeleteBin6Line} from 'react-icons/ri';
+// import Modal from 'react-modal';
 import '../styles/videoCards.scss';
 
 
 const VideoCards = ({videoDates}) => {
-  const [isOpen, setOpen] = useState(false);
-  const [clickedVideoId, setClickedVideoId] = useState(null);
-  const handleAddVideId=(id)=>setClickedVideoId(id);
-  
-  const openModal = () =>{
-    setOpen(true)
-  }
+ 
+  const opts = {
+    playerVars: {
+    
+      // https://developers.google.com/youtube/player_parameters
+      // autoplay: 1
+    }
+  };
 
    return (
        <div className="card-container">
            {videoDates?videoDates.map(
-                ({title,video_id,img_url,genres}, index) => {
+                ({title,video_id,votes}, index) => {
                   return (
-                      <div className="country-card">
-                        <img
-                          className="card-img-top card-img"
-                          src={img_url}
-                          alt="Card image cap"
-                          width={'250px'}
-                        />
-                         <ModalVideo
-                          channel="youtube"
-                          isOpen={isOpen}
-                          videoId={video_id}
-                          onClose={() => setOpen(false)}
-                        />
-                        <button o onClick={() => {
-                          openModal();
-                          handleAddVideId({video_id});
-                        }}>Open</button>
+                      <div className="video-card" key={index}>
+                        <div className="video">
+                          <YouTube
+                            videoId={video_id}
+                            containerClassName="embed embed-youtube"
+                            // onStateChange={(e) => checkElapsedTime(e)}
+                            opts={opts}
+                          />
+                        </div>
                         <div className="card-body">
-                          <h3 className="card-title">{title}</h3>
+                          <h3 className="title">{title}</h3>
                           <div className="card-info">
-                            <p>
-                              <span>{genres[0]}</span>
-                            </p>
-                            <BsHandThumbsUpFill/>
-                            <p>
-                              number of votes
-                            </p>
-                            <BsHandThumbsDownFill/>
+                            <div className="votes">
+                                <span className="thumbs-icon"><BsHandThumbsUpFill/></span>
+                                <p>
+                                  {votes}
+                                </p>
+                                <span className="thumbs-icon"><BsHandThumbsDownFill/></span>
+                            </div>
+                            <span className="delete-btn"><RiDeleteBin6Line/></span>
+                           
                           </div>
-                          <button className="btn btn-danger">Delete</button>
+                         
                         </div>
                       </div>
                   );

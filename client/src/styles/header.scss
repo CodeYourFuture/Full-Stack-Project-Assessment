@@ -1,6 +1,8 @@
 
 .header {
-    background-color: #1B1A17;
+    background-color: #16140f;
+    position: fixed;     /* Fixed Sidebar (stay in place on scroll and position relative to viewport) */
+    width: 100%;
     display: flex;
     font-family: "Karla";
     justify-content: space-between;
@@ -14,18 +16,20 @@
     }
 
     h1{
-      font-size:1.5rem;
+      font-size:1.6rem;
       grid-column: 2/5;
       
        @media (min-width: 950px) {
-        margin-left: 18rem;
+        margin-left: 19rem;
           font-size: 1.8rem;
+          font-weight: 700;
           grid-column: 2/6;
         }
     }
-    a{
-      
-      margin-left:1rem;
+    .add-btn{
+      text-decoration: none;
+
+      margin-right:0.5rem;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -33,16 +37,22 @@
       border-radius: 16px;
       background-color: #4B7BE5;
       color: #FFFFFF;
-      font-size: 0.9rem;
-      span{
-          margin-top: 2px;
+      font-size: 1rem;
+      .icon{
+         margin-top: 5px;
+      }
+      .text{
           margin-left: 10px;
           @media (min-width: 950px) {
-            font-size: 1rem;
+            font-size: 1.06rem;
            
           }
       }
-  
+      
+      @media (min-width: 950px) {
+        font-size: 1.1rem;
+       
+      }
      
     }:hover{
       cursor:pointer;
