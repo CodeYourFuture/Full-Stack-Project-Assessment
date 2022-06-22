@@ -16,11 +16,14 @@ input {
     border: none;
     border-radius: 25px;
 }
+input::placeholder {
+    text-align: center;
+}
 input:focus {
     background-color: rgb(193, 242, 193);
 }
 button {
-    background: rgb(196, 122, 225);
+    background: rgb(120, 64, 143);
     border: none;
     cursor: pointer;
     padding: 10px;

@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "pg": "^8.7.3",
     "react-scripts": "^5.0.1",
     "uuid": "^8.3.2"
   },

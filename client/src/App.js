@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import "./App.css";
-import videosFromData from "./exampleresponse.json";
+// import videosFromData from "./exampleresponse.json";
 import SingleVid from "./components/EachVideo/singleVid";
 import AddVideo from "./components/AddVideo/addVideo";
 import Particles from "react-tsparticles";
@@ -18,15 +18,14 @@ function App() {
   
 
 
-  const [videos, setVideos] = useState(videosFromData);
+  const [videos, setVideos] = useState([]);
   const [newVidUrl, setNewVidUrl] = useState('');
-  const [newVidTitle, setNewVidTitle] = useState('');
-  // const [myData, setMyData] = useState([]) 
+  const [newVidTitle, setNewVidTitle] = useState(''); 
   let [newlyAddedVideo, setNewlyAddedVideo] = useState({})
   
   function removeVideo(id) {
     const filteredVideos = videos.filter(vid => {
-      return vid.id !== id
+      return vid.video_id !== id
     })
     setVideos(filteredVideos)
 
@@ -49,8 +48,11 @@ function App() {
 
   function addVideo(e) {
     e.preventDefault();
-    newlyAddedVideo.title = newVidTitle;
-    newlyAddedVideo.url = newVidUrl
+    newlyAddedVideo.video_title = newVidTitle;
+    newlyAddedVideo.video_url = newVidUrl;
+    newlyAddedVideo.video_rating = 0
+
+
     
     let newData = videos.concat(newlyAddedVideo)
     setVideos(newData)
@@ -85,9 +87,9 @@ function App() {
       </header>
       <main>
         {videos.map(video => {
-          const embededVideo = video.url.replace('watch?v=', 'embed/');
+          console.log(video.video_id)
           return (
-            <SingleVid id={video.id} title={video.title} url={embededVideo} ratingFromData={video.rating} removeVideo={removeVideo} />
+            <SingleVid key={video.video_id} id={video.video_id} title={video.video_title} url={video.video_url.replace('watch?v=','embed/')} ratingFromData={video.video_rating} removeVideo={removeVideo} />
           )
         })}
       </main>
