@@ -5,6 +5,8 @@ import SearchAndAddVideo from "./components/SearchAndAddVideo";
 import Footer from "./components/Footer";
 import "./App.css";
 
+
+
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState([]); // changed to empty array[] from data
