@@ -38,7 +38,7 @@ function Video({ item, onRemove }) {
         <iframe
           width="560"
           height="315"
-          src={"https://www.youtube.com/embed/" + extractedUrl}
+          src={`https://www.youtube.com/embed/ + ${extractedUrl}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
