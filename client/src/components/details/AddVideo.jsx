@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import axios from 'axios';
-const path = 'http://localhost:5000/';
+import axios from 'axios'
+const path = 'http://localhost:5001/'
 
 const AddVideo = ({ allData, handleSet, loadData }) => {
   const [toggle, setToggle] = useState(false)
   const [title, setTitle] = useState('')
+  // const [search, setSearch] = useState('')
   const [url, setUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -23,6 +24,7 @@ const AddVideo = ({ allData, handleSet, loadData }) => {
     if (url.match(p)) return true
     return false
   }
+
   const validationCheck = () => {
     setErrorMessage('')
     let result = true
@@ -50,10 +52,55 @@ const AddVideo = ({ allData, handleSet, loadData }) => {
         url: url,
         rating: 0,
       }
-      axios.post(path, newVideo).then(()=> loadData())
+      axios.post(path, newVideo).then(() => loadData())
       resetAddForm()
     }
   }
+
+  //   function getOffset(el) {
+  //   const rect = el.getBoundingClientRect();
+  //   return {
+  //     left: rect.left + window.scrollX,
+  //     top: rect.top + window.scrollY
+  //   };
+  // }
+  // const searchHandler = ({search}) => {
+  //   console.log(search);
+  //   console.log(getOffset(search).left,getOffset(search).top );
+  //   setSearch(search.value);
+  //   const searchPanel = {
+  //       position: "fixed",
+  //       top: 0,
+  //       left: 0,
+  //       backgroundColor: "#45455"
+  //     }
+  //   return(
+  //     <div style={searchPanel}>
+  //      <ul>
+  //         <li>list 1</li>
+  //       </ul>
+  //     </div>
+  //   );
+  // }
+
+  // const SearchYoutube = ({ searchHandler }) => {
+  //   return(
+
+  //     <div className="col">
+  //                 <label htmlFor="searchOnYoutube">Search on Youtube</label>
+  //                  <input
+  //                   type="text"
+  //                   name="searchOnYoutube"
+  //                   id="searchOnYoutube"
+  //                   className="form-control"
+  //                   value={search}
+  //                   // onChange={(e) => e.target.value}/>}
+  //                   />
+  //               </div>
+  //                   )
+
+  // }
+
   return (
     <>
       <button className="btn btn-success mr-4" onClick={handleAdd}>
@@ -63,6 +110,7 @@ const AddVideo = ({ allData, handleSet, loadData }) => {
         <div className={toggle ? 'display-block' : 'display-none'}>
           <form onSubmit={handleSubmitEvent}>
             <div className="row align-items-end">
+              {/* <SearchYoutube searchHandler = {searchHandler}/>  */}
               <div className="col">
                 <label htmlFor="title">Title</label>
                 <input

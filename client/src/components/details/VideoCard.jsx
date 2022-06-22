@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const path = 'http://localhost:5000/'
+const path = 'http://localhost:5001/'
 
 const VideoCard = ({ key, videoData, deleteHandler }) => {
   const [rate, setRate] = useState(videoData.rating)
@@ -10,8 +10,8 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
 
   const updateRating = (upDownRate) => {
     axios
-      .put(path + 'rating', { id: videoData.id, rating: rate + upDownRate })
-      .then((res) => setRate(res.data[0]))
+      .put(`${path}${videoData.id}/rating`, {rating: rate + upDownRate})
+      .then((res) => setRate(rate + upDownRate))
   }
 
   const likeClick = () => {
@@ -29,6 +29,8 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
       <iframe
         width="560"
         height="315"
+        frameBorder="none"
+        loading="lazy"
         src={srcLink}
         title={videoData.title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

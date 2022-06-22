@@ -1,7 +1,9 @@
 const express = require('express')
 const cors = require('cors')
+const { google } = require('googleapis')
+const { Pool } = require('pg')
 
-const { readFileSync, writeFileSync } = require('fs')
+const { query } = require('express')
 
 const app = express()
 
@@ -9,68 +11,115 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const port = process.env.PORT || 5000
-
+const port = process.env.PORT || 5001
 app.listen(port, () => console.log(`Listening on port ${port}`))
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+const pool = new Pool({
+  database: 'mstpkekb',
+  user: 'mstpkekb',
+  password: 'p2pphG8NZQDtpxAnPtGUXRN_E8hhhO8_',
+  host: 'kandula.db.elephantsql.com',
+  port: 5432,
+})
 
-// GET "/"
+const service = google.youtube({
+  version: 'v3',
+  auth: 'AIzaSyB8HBTstznn4cJqpmhXc8-ALxcnGFUNa2E',
+})
+
+//Search video from youtube from youtube API
+async function searchVideo(searchText) {
+  const result = []
+  await service.search
+    .list({
+      part: 'id, snippet',
+      q: searchText,
+      order: 'date',
+      type: 'video',
+    })
+    .then((res) => {
+      res.data.items.map((d) => {
+        result.push({
+          id: d.id.videoId,
+          url: d.snippet.thumbnails.default.url,
+          title: d.snippet.title,
+        })
+      })
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  return result
+}
+
 app.get('/', (req, res) => {
-  const videos = JSON.parse(readFileSync('./data/exampleresponse.json', 'utf8'))
-  res.json(videos)
+  pool
+    .query('Select * From videos')
+    .then((result) => res.status(200).json(result.rows))
+    .catch((error) => res.status(500).json(error))
+})
+
+//search on youtube
+app.get('/search', async (req, res) => {
+  const searchText = req.query.term
+  const result = []
+  await service.search
+    .list({
+      part: 'id, snippet',
+      q: searchText,
+      order: 'date',
+      type: 'video',
+    })
+    .then((res) => {
+      res.data.items.map((d) => {
+        result.push({
+          id: d.id.videoId,
+          url: d.snippet.thumbnails.default.url,
+          title: d.snippet.title,
+        })
+        // console.log(result)
+      })
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  res.json(result)
+  console.log(searchText, result)
 })
 
 app.post('/', (req, res) => {
-  const videos = JSON.parse(readFileSync('./data/exampleresponse.json', 'utf8'))
-  const newId = Math.max(...videos.map((v) => v.id)) + 1
-  const newVideo = {
-    id: newId,
-    title: req.body.title,
-    url: req.body.url,
-    rating: 0
-  }
-  const newVideos = [
-    ...JSON.parse(readFileSync('./data/exampleresponse.json', 'utf8')),
-    newVideo,
-  ]
-  res.status(201).json(newVideo)
-  writeFileSync(
-    './data/exampleresponse.json',
-    JSON.stringify(newVideos, null, 2),
-    'utf8',
-  )
+  const { title, url } = req.body
+  const queryString = `Insert Into videos (title, url) values ($1, $2)`
+  pool
+    .query(queryString, [title, url])
+    .then((result) => res.status(200).send('Video added!'))
+    .catch((error) => res.status(500).json(error))
 })
 
-app.put('/rating', (req, res) => {
-  const videos = JSON.parse(readFileSync('./data/exampleresponse.json', 'utf8'))
-  const id = req.body.id
+app.put('/:videoId/rating', (req, res) => {
+  const id = req.params.videoId
   const rate = req.body.rating
-  const rating = videos.filter(video => video.id === id).map(video => video.rating = rate)
-  
-  writeFileSync(
-    './data/exampleresponse.json',
-    JSON.stringify(videos, null, 2),
-    'utf8',
-  )
-  res.status(202).send(rating)
+  const queryString = `Update videos Set rating = $1 Where id = $2`
+  pool
+    .query(queryString, [rate, id])
+    .then((result) => res.status(201).send('Rating has been updated!'))
+    .catch((error) => res.status(500).json(error))
 })
 
-app.delete('/:id', (req, res) => {
-  const videos = JSON.parse(readFileSync('./data/exampleresponse.json', 'utf8'))
-  const id = Number(req.params.id)
-  const found = videos.filter((video) => video.id === id)
-  console.log(found)
-  if (found) {
-    const newVideos = videos.filter((video) => video.id !== id)
-    res.sendStatus(201)
-    writeFileSync(
-      './data/exampleresponse.json',
-      JSON.stringify(newVideos, null, 2),
-      'utf8',
-    )
-  } else {
-    res.status(404).send('Video not found!')
-  }
+app.delete('/:videoId', (req, res) => {
+  const id = req.params.videoId
+  const queryCheck = `Select * From videos where id = $1`
+  const queryString = `Delete From videos where id = $1`
+  pool
+    .query(queryCheck, [id])
+    .then((result) => {
+      if (result.rows.length == 0) res.status(404).send('Video does not exist!')
+      else {
+        pool
+          .query(queryString, [id])
+          .then((result) => res.status(200).send('Video has been deleted!'))
+          .catch((error) => res.status(500).json(error))
+      }
+    })
+    .catch((error) => res.status(500).json(error))
 })

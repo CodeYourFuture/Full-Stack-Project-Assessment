@@ -43,7 +43,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 16px 4px;
+  padding: 16px 14px;
 }
 
 .bottom-panel button {
@@ -70,6 +70,7 @@ h3 {
   display: flex;
   text-align: left;
   align-self: flex-start;
+  margin-right: 30px;
 }
 
 iframe {
@@ -104,15 +105,13 @@ img:hover{
   display: block;
 }
 
-.search {
-  margin-bottom: 20px
-}
 nav {
   width: 96%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 2%;
 }
 
 .error {

@@ -3,7 +3,7 @@ import VideoCard from './VideoCard'
 import AddVideo from './AddVideo'
 import Search from '../details/Search'
 import axios from 'axios'
-const path = 'http://localhost:5000/'
+const path = 'http://localhost:5001/'
 
 const VideoList = (searchText) => {
   const [allData, setAllData] = useState([])
@@ -32,7 +32,7 @@ const VideoList = (searchText) => {
   }, [])
 
   useEffect(() => {
-    console.log(allData)
+    // console.log(allData)
     setVideos(allData)
   }, [allData])
 
