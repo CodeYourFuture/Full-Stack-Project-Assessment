@@ -31,8 +31,10 @@ const Rating = (props) => {
   };
   return (
     <>
-      <div>
-        <button onClick={(e) => increase()}>up</button>
+      <div className="rating">
+        <button onClick={(e) => increase()}>
+          up
+        </button>
         <p>{rate}</p>
 
         <button onClick={(e) => decrease()}>down</button>
