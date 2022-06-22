@@ -13,9 +13,12 @@
 h1{
   font-weight: bolder;
 }
-.fontawe{
-  color:rgb(108, 63, 63);
-  margin-left: 1em;
+.fontaweH1{
+  color:rgba(35, 44, 84, 0.75);
+  font-size: 2em;
+  border: 6px double rgba(139, 2, 2, 0.75);
+  padding: 4px 1.5rem;
+  border-radius: 10px;
 }
 /* search bar and add video  */
 .searchAndAddvideo{
@@ -69,6 +72,13 @@ h1{
 .main{
  background-color: rgb(255, 255, 255);
 }
+hr{
+  color:red;
+  width: 75%;
+  height: .2rem;
+  background:linear-gradient(90deg, rgba(200, 18, 86, 1) 1%, rgba(11, 215, 193, 1) 15%, rgba(18, 31, 200, 1) 24%, rgba(200, 18, 187, 1) 36%, rgba(251, 98, 33, 1) 51%, rgba(198, 18, 200, 1) 69%, rgba(11, 215, 193, 1) 82%, rgba(200, 18, 86, 1) 100%);
+  margin-bottom: -.85em;
+}
 .likesDiv{
   margin-top: 6%;
   display: flex;
@@ -81,19 +91,21 @@ h1{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: .75em;
+  gap: .5em;
 }
 
 .fontawe {
   font-size: 1.6em;
+  padding: .6em;
 }
 
 .footer-icon {
   display: flex;
   justify-content: space-evenly;
-  gap: 20px;
-  color: blue;
+  gap: .5rem;
 }
+
+/* responsive style */
 @media only screen and (max-width: 980px) {
   h1{
     font-size: 1.76em;
@@ -119,4 +131,8 @@ h1{
     width: 100%;
     border: 2px solid grey;
   }
+    hr {
+      width: 100%;
+      margin-bottom: 0;
+    }
 }

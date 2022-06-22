@@ -1,27 +1,17 @@
 
 import React from "react";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-
 import {
   faGithub,
   faFacebook,
-  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Footer(){
     return (
-      <footer className="footer text-center p-3 footer-div bg-dark">
+      <footer className="footer text-center p-2 footer-div bg-dark">
         <div className="footer-icon">
-          <a
-            href="mailto:mohammedalaminruben@gmail.com?subject = Feedback&body = Message"
-            target={"blank"}
-          >
-            <FontAwesomeIcon
-              className="fontawe text-danger"
-              icon={faInstagram}
-            />
-          </a>
+          
           <a href="https://github.com/Alamin-eng" target={"blank"}>
             <FontAwesomeIcon className="fontawe text-white" icon={faGithub} />
           </a>
@@ -41,7 +31,7 @@ function Footer(){
             <FontAwesomeIcon className="fontawe text-primary" icon={faFacebook} />
           </a>
         </div>
-        <p className="text-info m-3">&#9400; 2022 Made With Love  Mohammad Alamin</p>
+        <p className="text-light m-3">&#9400; 2022 Made With Love  Mohammad Alamin</p>
       </footer>
     );
 }

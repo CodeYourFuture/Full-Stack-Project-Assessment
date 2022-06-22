@@ -1,7 +1,6 @@
 import React from "react";
 
 const Search = ({ searchInput, setSearchInput,newVideoData, handleAddVideo, handleNewVideoChange}) => {
-
   return (
     <div className="searchAndAddvideo">
       <form > 

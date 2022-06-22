@@ -19,12 +19,16 @@ function Main({data, searchInput, updateRating, deleteVideo}){
                         <button type="button" class="btn btn-warning col-3" onClick={(event)=> deleteVideo(event, e.id)}>Delete</button>
                     </div>
                     <div>
-                        <p className="h3">{e.title}</p>
-                        <LikeButtons votes={e.rating} updateRating={updateRating} videoId={e.id}/>
+                        <p className="h3 p-1">{e.title}</p> 
+                        <LikeButtons votes={e.rating} updateRating={updateRating} videoId={e.id}/> <hr></hr>
                     </div>
+                    
                     </div>
+                    
                 )
+                
             })}
+            
        </main>
     );
 }
