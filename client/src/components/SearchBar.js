@@ -7,7 +7,7 @@ function SearchBar(props) {
         type="search"
         placeholder="Search a video..."
         name="search"
-        onKeyUp={props}
+        onKeyUp={props.search}
       />
     </div>
   );

@@ -12,9 +12,11 @@ function RenderVideo(props) {
         <li>
           <h4>{props.title}</h4>
         </li>
-        <li>{/* <VotesUpDown /> */}</li>
         <li>
-          <h6>Rating: </h6>
+          <VotesUpDown />
+        </li>
+        <li>
+          <h6>Rating: {props.rating}</h6>
         </li>
         <li>
           <iframe

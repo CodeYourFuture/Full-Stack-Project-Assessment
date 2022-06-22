@@ -17,16 +17,15 @@ function App() {
       url: url,
       rating: Math.floor(Math.random() * 10000),
     };
-
     let updatedList = VideosInfo.concat(newVideo);
     setVideosInfo(updatedList);
   };
 
-  // PROP function of Search ?
+  // search prop function
   const search = (e) => {
     e.preventDefault();
     let searchQuery = e.target.value;
-    // console.log("searching:", searchQuery);
+    console.log("searching:", searchQuery);
 
     const filteredResult = VideosInfo.filter((element) => {
       return element.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -34,15 +33,15 @@ function App() {
     setSearchVideos(filteredResult);
   };
 
-  // Prop Function to remove a video ?
+  // remove a video prop function
   const removeVideo = (id) => {
-    const videoCopy = [];
+    const videoCopy = [...VideosInfo];
     console.log(`removed video with id:${id}`);
     const index = videoCopy.findIndex((video) => {
       return video.id === id;
     });
-    // dataCopy.splice(index, 1);
-    // setVideosInfo(videoCopy);
+    videoCopy.splice(index, 1);
+    setVideosInfo(videoCopy);
   };
 
   return (
@@ -52,12 +51,14 @@ function App() {
       </header>
 
       <div className="body-section">
-        <SearchBar />
-        <AddVideo />
+        <SearchBar search={search} />
+        <AddVideo addVideo={addVideo} />
 
-        {searchVideos.length ? (
+        {searchVideos.length > 0 ? (
           <ListVideos data={searchVideos} delete={removeVideo} />
-        ) : null}
+        ) : (
+          <ListVideos data={VideosInfo} delete={removeVideo} />
+        )}
       </div>
     </div>
   );

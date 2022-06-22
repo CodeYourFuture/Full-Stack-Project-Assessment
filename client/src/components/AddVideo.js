@@ -13,18 +13,20 @@ function AddVideo(props) {
     }
   };
   const cancelHandler = (e) => {
-   
+    setTitle("");
+    setUrl("");
   };
   const titleHandler = (e) => {
-    
+    setTitle(e.target.value);
   };
   const urlHandler = (e) => {
-    
+    setUrl(e.target.value);
   };
+
   return (
     <div className="add-component">
       <h3 className="form-heading">Add Video</h3>
-      <form className="form" onSubmit= >
+      <form className="form" onSubmit={submitHandler}>
         <div className="form-group">
           <label className="form-label" htmlFor="title">
             Title
@@ -34,7 +36,7 @@ function AddVideo(props) {
             name="title"
             placeholder="Add video title.."
             value={title}
-            onChange=
+            onChange={titleHandler}
           ></input>
         </div>
         <div className="form-group">
@@ -46,21 +48,21 @@ function AddVideo(props) {
             name="url"
             placeholder="Add URL.."
             value={url}
-            onChange=
+            onChange={urlHandler}
           ></input>
         </div>
         <div className="buttons">
           <button
             type="submit"
             className="btn btn-success"
-            onClick=
+            onClick={submitHandler}
           >
             Add Video
           </button>
           <button
             type="button"
             className="btn btn-danger"
-            onClick=
+            onClick={cancelHandler}
           >
             Cancel
           </button>
