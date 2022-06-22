@@ -60,12 +60,12 @@ try{
   
   
   axios
-  .post(`http://localhost:5000/`, newVideo)
-  .then(() => {
-    loadData();
-    resetAddForm();
-  })
-  .catch((err) => setErrMsg(err));
+    .post(`https://videoss-db.herokuapp.com/`, newVideo)
+    .then(() => {
+      loadData();
+      resetAddForm();
+    })
+    .catch((err) => setErrMsg(err));
 }catch(error){ console.log(error)}
 }
   };

@@ -26,14 +26,16 @@ function App() {
   }, []);
 
   const loadData = () => {
-    axios.get("http://localhost:5000/").then((res) => setVideos(res.data));
+    axios
+      .get("https://videoss-db.herokuapp.com/")
+      .then((res) => setVideos(res.data));
   };
 
   const deleteHandler = (id) => {
     // let filteredVid = allData.filter((video) => video.id !== id);
     // // setVideos(filteredVid);
     // setAllData(filteredVid);
-    axios.delete(`http://localhost:5000/${id}`).then((res) => {
+    axios.delete(`https://videoss-db.herokuapp.com/${id}`).then((res) => {
       if (res.status === 200) loadData();
     });
   };

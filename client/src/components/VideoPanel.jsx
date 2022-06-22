@@ -8,13 +8,13 @@ const VideoPanel = ({ key, video }) => {
   const [rate, setRate] = useState(video.rating);
   const updateRate = (rateUpDown) => {
     axios
-      .put("http://localhost:5000/rating", {
+      .put("https://videoss-db.herokuapp.com/rating", {
         id: video.id,
         rate: rate + rateUpDown,
       })
       .then((res) => {
         console.log(res);
-        setRate(res.data[0])
+        setRate(res.data[0]);
       });
   };
   const likeClick = () => {
