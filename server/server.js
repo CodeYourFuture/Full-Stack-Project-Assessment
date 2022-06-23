@@ -148,17 +148,17 @@ app.delete("/:videoId", (req, res) => {
     .catch((error) => res.status(500).json(error));
 });
 
-app.get("/videos/:videosId", function (req, res) {
-  const videosId = req.params.hotelId;
+// app.get("/videos/:videosId", function (req, res) {
+//   const videosId = req.params.hotelId;
 
-  client
-    .query("SELECT * FROM hotels WHERE id=$1", [videosId])
-    .then((result) => res.json(result.rows))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-});
+//   client
+//     .query("SELECT * FROM hotels WHERE id=$1", [videosId])
+//     .then((result) => res.json(result.rows))
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).json(error);
+//     });
+// });
 
 
 
