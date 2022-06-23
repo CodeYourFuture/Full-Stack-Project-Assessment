@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-
+import Moment from 'react-moment';
 const path = 'https://youtube-videos-list.herokuapp.com/'
 
 const VideoCard = ({ key, videoData, deleteHandler }) => {
@@ -22,9 +22,9 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
   }
   return (
     <div key={key} className="card">
-      <p className="id">{videoData.id}</p>
+      <p className="id">VIDEO ID : {videoData.id}</p>
       <div className="title">
-        <h3>{videoData.title}</h3>
+        <p>{videoData.title}</p>
       </div>
       <iframe
         width="560"
@@ -36,7 +36,7 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
       <div className="bottom-panel">
-        <span>Rating: {rate}</span>
+        <div class='h6'>Rating: {rate}</div>
         <div className="like">
           <img
             src="https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/000000/external-dislike-feedback-kmg-design-glyph-kmg-design.png"
@@ -48,6 +48,7 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
             alt="Like"
             onClick={likeClick}
           />
+          
         </div>
         <button
           className="btn btn-danger"
@@ -58,6 +59,11 @@ const VideoCard = ({ key, videoData, deleteHandler }) => {
           DELETE
         </button>
       </div>
+    <div class='mb-3 h6'>
+    Posted <Moment date={videoData.post_date}
+                    durationFromNow
+                    /> ago
+                    </div>
     </div>
   )
 }

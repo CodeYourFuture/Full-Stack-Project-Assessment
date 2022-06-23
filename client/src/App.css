@@ -22,9 +22,10 @@
 
 .card {
   display: flex;
-  width: 30%;
+  width: 32%;
   align-items: center;
   text-align: center;
+  border: #860f02 solid;
 }
 
 .id {
@@ -64,6 +65,13 @@ h3 {
   min-height: 90px;
   background-color: #e2bfbf;
   width: 100%;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 4px;
 }
 
 .add-video {
@@ -77,23 +85,12 @@ iframe {
   width: 100%;
 }
 
-@media screen and (max-width:1240px) {
-  .root {
-    flex-direction: column;
-  }
-
-  .card {
-    width: 96%;
-  }
-
-}
-
 .btn-success {
   background-color: #00620a;
   color: #fff;
 }
 
-img:hover{
+img:hover {
   cursor: pointer;
 }
 
@@ -106,7 +103,7 @@ img:hover{
 }
 
 nav {
-  width: 96%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -115,5 +112,19 @@ nav {
 }
 
 .error {
-  color : #ff0000;
+  color: #ff0000;
+}
+
+@media screen and (max-width:1240px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 96%;
+  }
+
+  nav {
+    width: 96%;
+  }
 }
