@@ -1,13 +1,20 @@
 const express = require("express");
 const app = express();
-const data = require("./exampleresponse.json");
+const { Pool } = require("pg");
+
 const cors = require("cors");
+
+const pool = new Pool({
+  user: "tenny",
+  host: "localhost",
+  database: "cyf_youtube",
+  password: "",
+  port: 5432,
+});
 
 app.use(cors());
 
 app.use(express.json());
-let count = data.length;
-let id = 1;
 
 function matchYoutubeUrl(url) {
   const regex =
@@ -19,49 +26,57 @@ function matchYoutubeUrl(url) {
 }
 
 //get all videos
-//SELECT * FROM videos
 app.get("/", (req, res) => {
-  res.send(data);
+  return pool
+    .query("select * from videos")
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.log("an error just occurred");
+      res.status(500).send("a problem occurred");
+    });
 });
 
 // to create new video
-//"INSERT INTO videos (title, url, rating) VALUES($1, $2, $3)"
 app.post("/", (req, res) => {
   const { title, url, rating } = req.body;
-  if (title && matchYoutubeUrl(url)) {
-    data.push({ id: count++, title, url, rating });
-    return res.sendStatus(201);
-  }
-  return res.sendStatus(403).json({
-    result: "failure",
-    message: "Video could not be saved",
-  });
+  if (title && matchYoutubeUrl(url))
+    return pool
+      .query("INSERT INTO videos (title, url, rating) VALUES($1, $2, $3)", [
+        title,
+        url,
+        rating,
+      ])
+      .then(() => res.send("New video added"))
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json(error);
+      });
 });
 
 // select a video
-//SELECT * FROM videos WHERE id = $1
 app.get("/:id", (req, res) => {
-  const id = req.params.id;
-  const item = data.find((v) => v.id === Number(id));
-  if (item) return res.send(item);
-  return res.status(404).send("Id not found");
+  const videoId = req.params.id;
+
+  return pool
+    .query("SELECT * FROM videos WHERE id = $1", [videoId])
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.log("an error just occurred");
+      res.status(500).send("a problem occurred");
+    });
 });
 
 // delete a video
-//DELETE FROM videos WHERE id=$1
 app.delete("/:id", (req, res) => {
-  const id = req.params.id;
-  const indexItem = data.findIndex((v) => v.id === Number(id));
+  const videoId = req.params.id;
 
-  if (indexItem !== -1) {
-    data.splice(indexItem, 1);
-    return res.status(200).send({});
-  }
-
-  res.status(403).send({
-    result: "failure",
-    message: "Video could not be deleted",
-  });
+  return pool
+    .query("DELETE FROM videos WHERE id=$1", [videoId])
+    .then(() => res.send(`Order ${videoId} deleted`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.listen(process.env.PORT || 4000, () =>
