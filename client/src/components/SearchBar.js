@@ -30,15 +30,15 @@ const SearchBar = ({setSearchInput,setSearchByCategories}) => {
               Coding
           </button>
           <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+              Comedy
+          </button>
+          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
               Education 
           </button>
           <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
               Music
           </button>
-          
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
-              Movie
-          </button>
+        
           <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
               Recipe
           </button>

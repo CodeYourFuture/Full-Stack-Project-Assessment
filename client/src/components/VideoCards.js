@@ -8,7 +8,8 @@ import '../styles/videoCards.scss';
 
 
 const VideoCards = ({videoDates}) => {
- 
+ const [giveVote, setGiveVote]=useState(0);
+
   const opts = {
     playerVars: {
     
@@ -16,6 +17,20 @@ const VideoCards = ({videoDates}) => {
       // autoplay: 1
     }
   };
+
+
+  const handleGiveVotes =()=>{
+    if(giveVote!==1)
+    setGiveVote(giveVote+1);
+  }
+
+  const handleRemoveVotes =()=>{
+    if(giveVote!==0)
+    setGiveVote(giveVote-1);
+  }
+
+
+
 
    return (
        <div className="card-container">
@@ -35,11 +50,11 @@ const VideoCards = ({videoDates}) => {
                           <h3 className="title">{title}</h3>
                           <div className="card-info">
                             <div className="votes">
-                                <span className="thumbs-icon"><BsHandThumbsUpFill/></span>
+                                <span className="thumbs-icon" onClick={handleGiveVotes}><BsHandThumbsUpFill/></span>
                                 <p>
-                                  {votes}
+                                  {votes+giveVote}
                                 </p>
-                                <span className="thumbs-icon"><BsHandThumbsDownFill/></span>
+                                <span className="thumbs-icon" onClick={handleRemoveVotes}><BsHandThumbsDownFill/></span>
                             </div>
                             <span className="delete-btn"><RiDeleteBin6Line/></span>
                            

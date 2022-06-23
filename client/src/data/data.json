@@ -4,7 +4,7 @@
 "video_id":"etVDc-BJD5I",
 "categories": ["music"],
 "favorites":true,
-"votes": 105
+"votes": 450
 },
 {
 "id": 2,
@@ -13,7 +13,7 @@
 "video_id":"FKV2oeS4vw8",
 "categories": ["music"],
 "favorites":true,
-"votes": 156
+"votes": 656
 }
 ,
 {
@@ -41,7 +41,7 @@
    "video_id":"cnoooxHziUA",
 "categories": ["cartoon", "kid's movie"],
 "favorites":false,
-"votes": 508
+"votes": 988
 },
 {
 "id":6 ,
@@ -70,7 +70,7 @@
    "video_id":"YuDhbLQtt2k",
 "categories": ["recipe"],
 "favorites":false,
-"votes": 5
+"votes": 65
 },
 {
 "id": 9,
@@ -79,7 +79,7 @@
    "video_id":"d56mG7DezGs",
 "categories": ["coding", "education"],
 "favorites":false,
-"votes": 25
+"votes": 65
 },
 {
 "id":10 ,
@@ -88,7 +88,7 @@
    "video_id":"iBUJVy8phqw",
 "categories": ["coding", "education"],
 "favorites":false,
-"votes": 5
+"votes": 58
 },
 
 {
@@ -108,7 +108,7 @@
 "video_id":"vOXhoaDwTW0",
 "categories": ["science", "education", "astranomy"],
 "favorites":false,
-"votes": 109
+"votes": 405
 },
 {
 "id": 13,
@@ -136,7 +136,16 @@
       "video_id":"BxuY9FET9Y4",
    "categories": ["music"]
   , "favorites":true,
-  "votes": 695
+  "votes": 125
+},
+{
+   "id": 16,
+      "title": "Little Big Shots Funniest Interviews by Steve Harvey ",
+   "img_url": "",
+      "video_id":"5Mpj_TylP0w",
+   "categories": ["comedy"]
+  , "favorites":true,
+  "votes":585
 }
 
 ]

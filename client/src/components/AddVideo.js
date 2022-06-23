@@ -92,19 +92,6 @@ return(
             />
           </div>
           <div className="mb-3">
-            <label for="image_url" className="form-label">
-              Image_url
-            </label>
-            <input
-              required
-              onChange={handleInputValue}
-              type="text"
-              name="image_url"
-              className="form-control"
-              id="image_url"
-            />
-          </div>
-          <div className="mb-3">
             <label for="categories" className="form-label">
               Categories
             </label>

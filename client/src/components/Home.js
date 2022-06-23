@@ -16,7 +16,7 @@ const Home = () => {
         console.log(searchByCategories.toLowerCase())
         return ( video.title.toLowerCase().includes(searchInput.toLowerCase())||
                 video.categories.includes(searchByCategories.toLowerCase())  )       
-      });
+      }).sort((a,b)=>b.votes-a.votes);
       setFilteredVideos(filteredVideos);
     };
     search()
@@ -28,11 +28,11 @@ const Home = () => {
       let filteredVideos = videoDates.filter((video) => {
         console.log(searchByCategories.toLowerCase())
         return  video.categories.includes(searchByCategories.toLowerCase())    
-      });
+      }).sort((a,b)=>b.votes-a.votes);
       if(searchByCategories!==''){
         setFilteredVideos(filteredVideos);
       }else {
-        setFilteredVideos(videoDates);
+        setFilteredVideos(videoDates.sort((a,b)=>b.votes-a.votes));
       }
       
     };
