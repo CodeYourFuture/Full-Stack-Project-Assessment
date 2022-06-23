@@ -19,22 +19,22 @@
 }
 .sub-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
 }
 form {
   margin: 10px;
 }
+
 h2 {
   text-align: left;
   margin: 0 50px;
   font-weight: 800;
   color: #f4e73b;
   text-align: center;
+  font-size: 200;
 }
-h3 {
-  color: #333535;
-}
+
 input {
   width: 100%;
   padding: 12px 10px;
@@ -44,7 +44,8 @@ input {
   box-sizing: border-box;
 }
 .video-header {
-  height: 10%;
+  height: 18%;
+  color: #333535;
 }
 .wrapper {
   background-color: #ffffff5c;
@@ -73,7 +74,20 @@ input {
   color: #821b35aa;
 }
 .vote-button {
-  margin: 0 3rem;
   background-color: #fbac7ea9;
   background-image: linear-gradient(62deg, #fbac7e7e 0%, #f7cf686f 100%);
+}
+
+@media (min-width: 600px) {
+  .sub-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+
+  .vote-button {
+    margin: 0 3rem;
+  }
+
+  .video-header {
+    height: 10%;
+  }
 }
