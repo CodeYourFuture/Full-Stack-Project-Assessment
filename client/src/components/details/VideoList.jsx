@@ -3,7 +3,7 @@ import VideoCard from './VideoCard'
 import AddVideo from './AddVideo'
 import Search from '../details/Search'
 import axios from 'axios'
-const path = 'http://localhost:5001/'
+const path = 'https://full-stack-project.glitch.me'//'http://localhost:5001/'
 
 const VideoList = (searchText) => {
   const [allData, setAllData] = useState([])

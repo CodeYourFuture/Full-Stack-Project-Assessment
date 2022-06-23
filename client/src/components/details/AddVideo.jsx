@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-const path = 'http://localhost:5001/'
+const path = 'https://full-stack-project.glitch.me' //'http://localhost:5001/'
 
 const AddVideo = ({ allData, handleSet, loadData }) => {
   const [toggle, setToggle] = useState(false)

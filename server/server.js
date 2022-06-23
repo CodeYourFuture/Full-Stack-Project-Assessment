@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const { google } = require('googleapis')
 const { Pool } = require('pg')
 
 const { query } = require('express')
@@ -22,69 +21,11 @@ const pool = new Pool({
   port: 5432,
 })
 
-const service = google.youtube({
-  version: 'v3',
-  auth: 'AIzaSyB8HBTstznn4cJqpmhXc8-ALxcnGFUNa2E',
-})
-
-//Search video from youtube from youtube API
-async function searchVideo(searchText) {
-  const result = []
-  await service.search
-    .list({
-      part: 'id, snippet',
-      q: searchText,
-      order: 'date',
-      type: 'video',
-    })
-    .then((res) => {
-      res.data.items.map((d) => {
-        result.push({
-          id: d.id.videoId,
-          url: d.snippet.thumbnails.default.url,
-          title: d.snippet.title,
-        })
-      })
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-  return result
-}
-
 app.get('/', (req, res) => {
   pool
     .query('Select * From videos')
     .then((result) => res.status(200).json(result.rows))
     .catch((error) => res.status(500).json(error))
-})
-
-//search on youtube
-app.get('/search', async (req, res) => {
-  const searchText = req.query.term
-  const result = []
-  await service.search
-    .list({
-      part: 'id, snippet',
-      q: searchText,
-      order: 'date',
-      type: 'video',
-    })
-    .then((res) => {
-      res.data.items.map((d) => {
-        result.push({
-          id: d.id.videoId,
-          url: d.snippet.thumbnails.default.url,
-          title: d.snippet.title,
-        })
-        // console.log(result)
-      })
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-  res.json(result)
-  console.log(searchText, result)
 })
 
 app.post('/', (req, res) => {
