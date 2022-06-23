@@ -7,7 +7,7 @@ function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const serverLocal = "http://localhost:5000";
+  // const serverLocal = "http://localhost:5000";
   const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
   useEffect(() => {
     fetch(`${serverLive}/videos`)

@@ -2,7 +2,7 @@ import React from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 import Rating from "./Rating";
 const serverLocal = "http://localhost:5000/";
-const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+// const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
 const VideoList = (props) => {
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target

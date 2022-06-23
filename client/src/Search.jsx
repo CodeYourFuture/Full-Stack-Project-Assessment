@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import VideoList from "./VideoList";
-const serverLocal = "http://localhost:5000";
-const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
 const Search = (props) => {
   
   const [searchInput, setSearchInput] = useState("");
