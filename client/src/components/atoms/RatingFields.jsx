@@ -14,9 +14,6 @@ function Rating({ video }) {
     setNewRating(updatedVotes);
     axios
       .put(`/api/${id}/`, { rating: updatedVotes })
-      .then((res) => {
-        console.log(res.data);
-      })
       .catch((err) => {
         console.log(err);
         alert("Your vote couldn't be added, try again");

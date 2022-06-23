@@ -3,8 +3,7 @@ import axios from "axios";
 import Input from "../../components/atoms/Input";
 
 function NewVideoForm({ loadVideos }) {
-
-  const defaultForm = { title: "", url: "" };
+  const defaultForm = { title: "", url: "", rating: undefined };
   const [form, setForm] = useState(defaultForm);
 
   function matchYoutubeUrl(url) {
@@ -29,7 +28,8 @@ function NewVideoForm({ loadVideos }) {
         url: "/api",
         data,
       })
-        .then(() => {
+        .then((res) => {
+          alert(res.data.msg)
           loadVideos();
           setForm(defaultForm);
         })
@@ -38,7 +38,7 @@ function NewVideoForm({ loadVideos }) {
         });
     }
   }
-  
+
   return (
     <form className="form-inline d-flex justify-content-center">
       <Input
@@ -55,6 +55,13 @@ function NewVideoForm({ loadVideos }) {
         placeholderText="YouTube URL"
         onChange={(event) => handleOnChange("url", event.target.value)}
       />
+      <Input
+        setForm={setForm}
+        label="Rating"
+        value={form.rating}
+        placeholderText="Add rating"
+        onChange={(event) => handleOnChange("rating", event.target.value)}
+      />
       <button
         type="submit"
         className="btn btn-primary mb-2"
@@ -62,7 +69,7 @@ function NewVideoForm({ loadVideos }) {
           e.preventDefault();
           postVideo(form);
         }}
-        disabled={form.title === "" || form.url === ""}
+        disabled={!form.title || !form.url || !form.rating}
       >
         Post Video
       </button>
