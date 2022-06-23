@@ -7,10 +7,10 @@ function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const serverLocal = "http://localhost:5000";
-  // const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+  // const serverLocal = "http://localhost:5000";
+  const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
   useEffect(() => {
-    fetch(`${serverLocal}/videos`)
+    fetch(`${serverLive}/videos`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
