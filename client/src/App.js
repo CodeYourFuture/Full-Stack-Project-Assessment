@@ -11,9 +11,11 @@ function App() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/").then((res) => {
-      setAllVideos(res.data);
-    });
+    axios
+      .get("https://full-stack-project-assesment.herokuapp.com/")
+      .then((res) => {
+        setAllVideos(res.data);
+      });
   }, []);
 
   // A function to delete video
@@ -26,13 +28,19 @@ function App() {
     //  });
 
     // To delete from the server
-       axios.delete(`http://localhost:4000/${arrVideo.id}`).then((res) => {
-         if (res.status === 200) {
-           axios.get("http://localhost:4000/").then((res) => {
-             setAllVideos(res.data);
-           });
-         }
-       });
+       axios
+         .delete(
+           `https://full-stack-project-assesment.herokuapp.com/${arrVideo.id}`
+         )
+         .then((res) => {
+           if (res.status === 200) {
+             axios
+               .get("https://full-stack-project-assesment.herokuapp.com/")
+               .then((res) => {
+                 setAllVideos(res.data);
+               });
+           }
+         });
   };
  
 
