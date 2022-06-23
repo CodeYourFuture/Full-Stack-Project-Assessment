@@ -11,10 +11,10 @@ const pool = new Pool({
   password: "",
   port: 5432,
 });
-
 app.use(cors());
-
 app.use(express.json());
+
+const port = process.env.PORT || 4000;
 
 function matchYoutubeUrl(url) {
   const regex =
@@ -79,6 +79,6 @@ app.delete("/:id", (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 4000, () =>
-  console.log(`Listening on port 4000`)
+app.listen(port, () =>
+  console.log(`Listening on port ${port}`)
 );
