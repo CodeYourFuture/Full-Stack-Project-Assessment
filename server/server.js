@@ -1,16 +1,17 @@
 const express = require("express");
 const app = express();
-const { Pool } = require("pg");
-
+const { Client } = require("pg");
 const cors = require("cors");
 
-const pool = new Pool({
-  user: "tenny",
-  host: "localhost",
-  database: "cyf_youtube",
-  password: "",
-  port: 5432,
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+client.connect();
+
 app.use(cors());
 app.use(express.json());
 
@@ -27,7 +28,7 @@ function matchYoutubeUrl(url) {
 
 //get all videos
 app.get("/", (req, res) => {
-  return pool
+  return client
     .query("select * from videos")
     .then((result) => res.send(result.rows))
     .catch((error) => {
@@ -40,7 +41,7 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   const { title, url, rating } = req.body;
   if (title && matchYoutubeUrl(url))
-    return pool
+    return client
       .query("INSERT INTO videos (title, url, rating) VALUES($1, $2, $3)", [
         title,
         url,
@@ -57,7 +58,7 @@ app.post("/", (req, res) => {
 app.get("/:id", (req, res) => {
   const videoId = req.params.id;
 
-  return pool
+  return client
     .query("SELECT * FROM videos WHERE id = $1", [videoId])
     .then((result) => res.send(result.rows))
     .catch((error) => {
@@ -70,7 +71,7 @@ app.get("/:id", (req, res) => {
 app.delete("/:id", (req, res) => {
   const videoId = req.params.id;
 
-  return pool
+  return client
     .query("DELETE FROM videos WHERE id=$1", [videoId])
     .then(() => res.send(`Order ${videoId} deleted`))
     .catch((error) => {
@@ -79,6 +80,4 @@ app.delete("/:id", (req, res) => {
     });
 });
 
-app.listen(port, () =>
-  console.log(`Listening on port ${port}`)
-);
+app.listen(port, () => console.log(`Listening on port ${port}`));
