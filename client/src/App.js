@@ -13,6 +13,7 @@ function App() {
   const [addFormData, setAddFormData] = useState({
     title: "",
     url: "",
+    rating: 0
   });
 
   const getData = () => {
@@ -52,6 +53,7 @@ function App() {
       id: nanoid(),
       title: addFormData.title,
       url: addFormData.url,
+      rating: addFormData.rating
     };
 
     axios.post(`http://localhost:4000/`, newVideo).then((res) => {

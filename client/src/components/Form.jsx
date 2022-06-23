@@ -22,6 +22,16 @@ const Form = ({ handleAddFormSubmit, handleAddFormChange, setDisplayForm }) => {
           required
         />
       </label>
+        <label>
+        {/* Url */}
+        <input
+          type="number"
+          name="rating"
+          placeholder="Enter rating..."
+          onChange={handleAddFormChange}
+          required
+        />
+      </label>
       <br />
       <button className="button" onClick={() => setDisplayForm(false)}>
         Cancel
