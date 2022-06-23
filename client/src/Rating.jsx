@@ -2,24 +2,21 @@ import React, { useState } from "react";
 
 const Rating = (props) => {
   const [rate, setRate] = useState(props.rating);
-
   const increase = () => {
     setRate((rate) => rate + 1);
-    ratingChange();
+    ratingChange(rate+1);
   };
   const decrease = () => {
     setRate((rate) => rate - 1);
-    console.log("react console.log", props.ratingId);
-    ratingChange();
+    ratingChange(rate-1);
   };
-  const data = { rating: rate, id: props.ratingId };
-  const ratingChange = () => {
+  const ratingChange = (rate) => {
     fetch("https://flannel-hickory-parallelogram.glitch.me/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ rating: rate, id: props.ratingId }),
     })
       .then((response) => response.json())
       .then((data1) => {
@@ -32,9 +29,7 @@ const Rating = (props) => {
   return (
     <>
       <div className="rating">
-        <button onClick={(e) => increase()}>
-          up
-        </button>
+        <button onClick={(e) => increase()}>up</button>
         <p>{rate}</p>
 
         <button onClick={(e) => decrease()}>down</button>
