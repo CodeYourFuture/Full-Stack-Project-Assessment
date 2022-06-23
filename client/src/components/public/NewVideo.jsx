@@ -22,7 +22,7 @@ const NewVideo = () => {
             className="url_input"
             value={videoInfo.url}
             type="text"
-            placeholder="URL..."
+            placeholder="embeded YouTube URL..."
             onChange={(e) => handleChange("url", e.target.value)}
           />
         </div>

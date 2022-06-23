@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { IoThumbsUp, IoThumbsDown } from "react-icons/io5";
 import "../../styles/vote.css";
 import UserContext from "../../context/UserContext";
 
 const Vote = () => {
-  const { vote, setVote } = useContext(UserContext);
+  const [vote, setVote] = useState(0);
   return (
     <div className="vote_container">
       <button
@@ -14,7 +14,7 @@ const Vote = () => {
       >
         <IoThumbsDown />
       </button>
-      <span className="vote_title">Votes</span>
+      <span className="vote_title">Votes:{vote}</span>
       <button
         name="down_vote_btn"
         className="down_vote_btn"

@@ -43,13 +43,15 @@ const Context = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
+
     try {
-      const response = await fetch(
+      const response = fetch(
         `http://localhost:5000/deletedvideo/${id}`,
         deleteOpt
       );
-      const remainedData = await response.json();
-      setVideoData(remainedData);
+      // const remainedData = await response.json();
+      setVideoData(response);
+      window.location.reload(false);
     } catch (error) {
       console.log(error);
     }
@@ -57,20 +59,18 @@ const Context = ({ children }) => {
 
   const addNewVideoHandler = async () => {
     const newAddedVideo = videoInfo;
-    console.log(newAddedVideo);
     const postOpt = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newAddedVideo),
     };
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/addnewvideo",
-        postOpt
-      );
-      const newVideoData = await response.json();
-      setVideoData(newVideoData);
+      fetch("http://localhost:5000/api/addnewvideo", postOpt);
+      // const newVideoData = await response.json();
+      // console.log(newVideoData);
+      // setVideoData(newVideoData);
       setNewVideo(false);
+      window.location.reload(false);
     } catch (error) {
       console.log(error);
       setVideoData([]);

@@ -10,6 +10,7 @@ const VideoCards = () => {
   return (
     <article className="videoCards_container">
       {videoData.map((video) => {
+        console.log(videoData);
         return <VideoCard key={video.id} video={video} />;
       })}
       <button
