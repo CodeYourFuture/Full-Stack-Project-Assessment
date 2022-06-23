@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AddAVideo = () => {
@@ -6,10 +7,14 @@ const AddAVideo = () => {
   const [url, setUrl] = useState(" ");
   const [rating, setRating] = useState(" ");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const video = { title, url, rating };
-    axios.post("http://localhost:5000", video);
+    axios.post("https://newfullstac.herokuapp.com/", video);
+
+    navigate("/");
   };
 
   return (

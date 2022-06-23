@@ -8,7 +8,17 @@
   grid-template-columns: auto auto auto;
   gap: 30px;
   align-items: center;
+  height: 100%;
 }
+
+.card {
+  height: 100%;
+}
+
+.content {
+  padding: 30px;
+}
+
 
 .counter {
   display : flex;
@@ -34,17 +44,17 @@ nav {
   
 }
 
-
 .iframe {
   padding: 10px;
   width: 100%;
-
 }
 
 
 .dlt {
-  background-color: #ff69b4;
-  color: whitesmoke;
+  background-color: #6b0f1a;
+  background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
+
+  color: white;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -68,3 +78,12 @@ body {
 background-image: linear-gradient(315deg, #4834d4 0%, #0c0c0c 74%);
 }
 
+@media screen and (max-width: 750px) {
+  .container {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 30px;
+    align-items: center;
+  }
+
+}

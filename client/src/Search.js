@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+const Search = ({searchInput, setSearchInput}) => {
 
-
-const Search = (props) => {
-  console.log(props)
-  const [searchInput, setSearchInput] = useState([]);
-
-  function handleSearch(e) {
-    console.log(e.target.value);
-    const newVideos = props.video.filter(v=> v.title.includes(e.target.value))
-    props.setVideos(newVideos)
-    setSearchInput(e.target.value);
-   }
+  function onChangeSearch(event) {
+   setSearchInput(event.target.value);
+  }
 
   return (
-    <>
-      <input
+    <div>
+      <input className="input is-primary" 
         type="text"
         placeholder="search"
         value={searchInput}
-        onChange={handleSearch}
+        onChange={onChangeSearch}
       />
-    {}
-    </>
+    </div>
   );
 };
 

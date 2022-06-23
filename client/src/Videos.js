@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import videoData from "./exampleresponse.json";
 import Likes from "./Likes";
 import axios from "axios";
-import Search from "./Search";
 
-const baseURL = "http://localhost:5000";
+const baseURL = "https://newfullstac.herokuapp.com/";
 
-const Videos = () => {
+const Videos = ({ searchInput }) => {
   const [videos, setVideos] = useState(videoData);
 
   //added use effect, now videos coming from the server
@@ -32,41 +31,44 @@ const Videos = () => {
 
   return (
     <>
-    <Search video={videoData} setVideos={setVideos}/>
       <div className="container">
-        {videos.map((video, index) => {
-          const after_ = video.url.substring(video.url.indexOf("=") + 1);
+        {videos
+          .filter((element) =>
+            element.title.toLowerCase().includes(searchInput.toLowerCase())
+          )
+          .map((video, index) => {
+            const after_ = video.url.substring(video.url.indexOf("=") + 1);
 
-          return (
-            <>
-              <div className="card">
-                <h2 className="title">{video.title}</h2>
-                <Likes />
-                <div className="iframe">
-                  <iframe
-                    width="250"
-                    height="250"
-                    src={`https://www.youtube.com/embed/${after_}`}
-                    title={video.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+            return (
+              <>
+                <div className="card">
+                  <h2 className="title">{video.title}</h2>
+                  <Likes />
+                  <div className="iframe">
+                    <iframe
+                      width="300"
+                      height="200"
+                      src={`https://www.youtube.com/embed/${after_}`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <span>Ratings: {video.rating}</span>
+                  <div className="delete--button">
+                    <button
+                      className="button is-rounded dlt"
+                      id={video.id}
+                      onClick={deleteVideo(videos.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <span>Ratings: {video.rating}</span>
-                <div className="delete--button">
-                  <button
-                    className="button is-rounded dlt"
-                    id={video.id}
-                    onClick={deleteVideo(videos.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </>
-          );
-        })}
+              </>
+            );
+          })}
       </div>
     </>
   );
