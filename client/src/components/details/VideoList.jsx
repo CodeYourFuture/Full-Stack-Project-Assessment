@@ -3,7 +3,7 @@ import VideoCard from './VideoCard'
 import AddVideo from './AddVideo'
 import Search from '../details/Search'
 import axios from 'axios'
-const path = 'https://full-stack-project.glitch.me'//'http://localhost:5001/'
+const path = 'https://youtube-videos-list.herokuapp.com/'
 
 const VideoList = (searchText) => {
   const [allData, setAllData] = useState([])
@@ -35,6 +35,7 @@ const VideoList = (searchText) => {
     // console.log(allData)
     setVideos(allData)
   }, [allData])
+  console.log(path)
 
   return (
     <>

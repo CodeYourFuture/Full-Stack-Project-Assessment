@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const path = 'https://full-stack-project.glitch.me'//'http://localhost:5001/'
+const path = 'https://youtube-videos-list.herokuapp.com/'
 
 const VideoCard = ({ key, videoData, deleteHandler }) => {
   const [rate, setRate] = useState(videoData.rating)
