@@ -28,7 +28,9 @@ function App() {
   const loadData = () => {
     axios
       .get("https://videoss-db.herokuapp.com/")
-      .then((res) => setVideos(res.data));
+      .then((res) => {
+        console.log(res);
+        setVideos(res.data)});
   };
 
   const deleteHandler = (id) => {
@@ -58,7 +60,7 @@ function App() {
       </header>
       <Add allData={allData} handleSet={handleSet} loadData={loadData}/>
       <Search searchHandler={searchHandler} />
-      <main>
+      <main >
         {videos
           .sort((a, b) => b.rating - a.rating)
           .map((video) => (

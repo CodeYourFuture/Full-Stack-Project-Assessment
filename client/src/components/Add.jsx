@@ -10,12 +10,12 @@ const Add = ({ allData, handleSet, loadData }) => {
     setToggle(!toggle);
   };
 
-function matchYoutubeUrl(url) {
-  var p =
-    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-  if (url.match(p)) return true;
-  return false;
-}
+  function matchYoutubeUrl(url) {
+    var p =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) return true;
+    return false;
+  }
 
   const validationCheck = () => {
     setErrMsg("");
@@ -55,19 +55,18 @@ function matchYoutubeUrl(url) {
         url: url,
         date: date.toLocaleDateString("en-UK", options),
       };
-try{
-  
-  
-  
-  axios
-    .post(`https://videoss-db.herokuapp.com/`, newVideo)
-    .then(() => {
-      loadData();
-      resetAddForm();
-    })
-    .catch((err) => setErrMsg(err));
-}catch(error){ console.log(error)}
-}
+      try {
+        axios
+          .post(`https://videoss-db.herokuapp.com/`, newVideo)
+          .then(() => {
+            loadData();
+            resetAddForm();
+          })
+          .catch((err) => setErrMsg(err));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const resetAddForm = () => {

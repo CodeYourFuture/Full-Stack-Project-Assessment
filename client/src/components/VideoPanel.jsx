@@ -40,7 +40,7 @@ const VideoPanel = ({ key, video }) => {
   };
 
   return (
-    <div key={key}>
+    <div key={key} className="videoPanel">
       <div>
         <h3>{video.title}</h3>
       </div>
