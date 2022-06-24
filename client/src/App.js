@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-//import data from "./data.json";
 import AddVideo from "./AddVideo";
 import Search from "./Search";
 import { FaThumbsUp, FaThumbsDown, FaTrashAlt } from "react-icons/fa";
@@ -11,7 +10,7 @@ export default function App(props) {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/", {
+    fetch("http://localhost:5432/", {
       mode: "cors",
     })
       .then((response) => response.json())
@@ -41,26 +40,45 @@ export default function App(props) {
   }
 
   //______________________add new video____________________
+
   const addNew = ({ id, title, url, rating }) => {
-    setVideos((values) => [
-      {
-        id: values.length + 1,
-        title,
-        url,
-        rating: 0,
-      },
-      ...values,
-    ]);
+    fetch("http://localhost:5432/videos/", {
+      method: "post",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title, url: url }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        setVideos([
+          ...videos,
+          {
+            id: data.id,
+            title: data.title,
+            url: data.url,
+            rating: 0,
+          },
+        ]);
+      });
   };
 
   //______________________delete video_______________________
 
   const deleteVideo = (id) => {
-    let newDelete = videos.filter((video) => video.id !== id);
-    setVideos(newDelete);
+    fetch(`http://localhost:5432/videos/${id}`, {
+      method: "delete",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+    }).then((response) => {
+      if (response.status === 200) {
+        let updatedVideos = videos.filter((video) => video.id !== id);
+        setVideos(updatedVideos);
+      }
+    });
   };
 
-/* function App() { */
   return (
     <IconContext.Provider value={{ style: { fontSize: "35px" } }}>
       <div className="App">
@@ -77,7 +95,6 @@ export default function App(props) {
                   <Search searchTerm={searchTerm} handleSearch={handleSearch} />
                 </div>
                 <div className="col-md-12">
-
                   <AddVideo addNew={addNew} />
                 </div>
               </div>
@@ -112,12 +129,13 @@ export default function App(props) {
                               <p className="rating-title">
                                 Vote: {video.rating}
                               </p>
-                              <span
-                                /* disabled={videos.rating <= 0} */
+                              <button
+                                className="btn"
+                                disabled={video.rating <= 0}
                                 onClick={() => downVote(video.id)}
                               >
                                 <FaThumbsDown className="rating-icon-down" />
-                              </span>
+                              </button>
                             </div>
                             <div onClick={() => deleteVideo(video.id)}>
                               <FaTrashAlt className="delete-icon" />
@@ -133,4 +151,4 @@ export default function App(props) {
       </div>
     </IconContext.Provider>
   );
-}    
+}
