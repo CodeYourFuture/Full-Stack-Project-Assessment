@@ -93,7 +93,7 @@ app.post("/videos/add", (req, res) => {
 app.delete("/videos/delete/:id", (req, res) => {
   const videoId  = Number(req.params.id);
   videos = videos.filter((vid) => vid.id !== videoId);
-  res.status(200).send(videos);
+  res.status(200).send(videos.sort((a, b) => b.rating - a.rating));
 });
 
  
