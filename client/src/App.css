@@ -2,6 +2,28 @@ header {
   text-align: center;
 }
 
+.addVids {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.searchBars {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBar {
+  margin-top: 25px;
+  margin-right: 10px;
+  height: 3em;
+}
+
+input:focus {
+  background-color: rgb(243, 255, 241);
+}
+
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -26,8 +48,8 @@ header {
   margin-right: 20px;
   border: none;
   border-radius: 7%;
-  height: 2em;
-  width: 5em;
+  height: 3em;
+  width: 6em;
   background-color: darkslategrey;
   color: antiquewhite;
   font-size: large;
