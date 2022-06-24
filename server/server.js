@@ -1,16 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-const { Pool } = require("pg");
+const { Client } = require("pg");
+require("dotenv").config();
 
 const app = express();
 
-const pool = new Pool({
-  user: "craig",
-  database: "cyf_videos",
-  host: "localhost",
-  password: "2509",
-  port: 5432,
+const client = new Client({
+  user: process.env.DB_USER,
+  database: process.env.DATABASE,
+  host: process.env.HOST,
+  password: process.env.PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+client.connect();
 
 app.use(cors());
 app.use(express.json());
@@ -24,8 +30,8 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.get("/", (req, res) => {
   const order = req.query.order;
 
-  pool
-    .query(`SELECT * FROM videos ORDER BY rating ${order.toUpperCase()}`)
+  client
+    .query(`SELECT * FROM videos ORDER BY rating ${order}`)
     .then((data) => res.send(data.rows))
     .catch((e) => console.log(e));
 });
@@ -42,7 +48,7 @@ app.post("/", (req, res) => {
     });
   }
 
-  pool
+  client
     .query(
       "INSERT INTO videos (title, url, rating, posted) VALUES ($1, $2, $3, $4)",
       [title, url, 0, date]
@@ -54,7 +60,7 @@ app.post("/", (req, res) => {
 // Gets info about an individual video
 app.get("/:id", (req, res) => {
   const id = Number(req.params.id);
-  pool
+  client
     .query("SELECT * FROM videos WHERE id = $1", [id])
     .then((data) => res.send(data.rows[0]))
     .catch((e) => console.log(e));
@@ -64,7 +70,7 @@ app.get("/:id", (req, res) => {
 app.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  pool
+  client
     .query("SELECT * FROM videos WHERE id = $1", [id])
     .then((data) => {
       if (data.rows.length < 0) {
@@ -73,7 +79,7 @@ app.delete("/:id", (req, res) => {
           message: "Video could not be deleted",
         });
       } else {
-        pool
+        client
           .query("DELETE FROM videos WHERE id = $1", [id])
           .then(() => res.json({}))
           .catch((e) => console.log(e));
@@ -87,7 +93,7 @@ app.put("/:id", (req, res) => {
   const { id } = req.params;
   const { vote } = req.query;
 
-  pool.query(
+  client.query(
     `UPDATE videos SET rating = (SELECT rating FROM videos WHERE id  = $1) ${
       vote === "up" ? "+ 1" : "- 1"
     } WHERE id = $1`,

@@ -21,7 +21,7 @@ const App = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/?order=${order}`)
+    fetch(`https://cyf-videos.herokuapp.com/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
