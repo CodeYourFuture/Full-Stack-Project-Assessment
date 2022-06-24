@@ -32,7 +32,7 @@ function Homepage() {
     const newList = [newItem, ...list];
     setList(newList);
     const newFilteredList = [newItem, ...filteredList];
-    filteredList(newFilteredList);
+    setFilteredList(newFilteredList);
   }
 
   function handleSearch(searchTerm) {
@@ -42,19 +42,13 @@ function Homepage() {
     setFilteredList(newList);
   }
 
-  function handleAddTitleAndUrl() {
-    console.log("hi");
-  }
   return (
     <div>
       {" "}
       <Header />
       <main>
         <SearchBar handleSearch={handleSearch} />
-        <AddVideoForm
-          handleAddTitleAndUrl={handleAddTitleAndUrl}
-          handleAddNewVideo={handleAddNewVideo}
-        />
+        <AddVideoForm handleAddNewVideo={handleAddNewVideo} />
         <List list={filteredList} onRemove={handleRemove} />
       </main>
     </div>
