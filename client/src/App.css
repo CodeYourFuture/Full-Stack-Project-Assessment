@@ -1,3 +1,50 @@
 .App {
   text-align: center;
+  width: 100%;
+}
+
+
+.display-none{
+  display:none;
+}
+.display-block{
+  display:block;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.videoPanel{
+  margin:20px;
+  width: 30%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: grey solid 2px;
+  background-color: #aca9a9;
+  border-radius: 10px;
+}
+
+.videoPanel img{
+  margin: 20px
+}
+
+iframe{
+  width: 96%;
+}
+ 
+@media screen and (max-width: 1240px) {
+main{
+  flex-direction: column;
+}
+.videoPanel{
+  width: 96%;
+}
 }
