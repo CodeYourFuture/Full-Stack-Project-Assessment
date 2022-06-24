@@ -19,7 +19,7 @@ const Rating = ({ rating, videoId }) => {
         };
       })
     );
-    fetch(`http://127.0.0.1:5000/${id}/?vote=${voteType}`, {
+    fetch(`https://cyf-videos.herokuapp.com/?order/${id}/?vote=${voteType}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
     }).catch((error) => ctx.setError(error));
