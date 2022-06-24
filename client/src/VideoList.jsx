@@ -19,14 +19,15 @@ const VideoList = (props) => {
   };
   const sortedData = props.filterData.sort((a, b) => b.rating - a.rating);
   const deleteHandler = (videoId) => {
-    const data = { videoId: videoId };
-    fetch(`https://cyf-fullstack-alirezabg.herokuapp.com/videos/delete`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://cyf-fullstack-alirezabg.herokuapp.com/videos/delete/${videoId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data1) => {
         console.log("Success:", data1);

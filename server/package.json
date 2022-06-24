@@ -2,12 +2,11 @@
   "name": "to-do-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "server": "node server.js",
     "run": "node build"
-   
   },
   "keywords": [],
   "author": "",
