@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 import SingleVideo from "./SingleVideo";
 import { Container, Row, Col } from "react-bootstrap";
 
-const AddVideo = ({ getVideos, setVideos, videos, urlToFetch }) => {
+const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
   const [addTitle, setAddTitle] = useState("");
   const [addUrl, setAddUrl] = useState("");
   const [validInput, setValidInput] = useState("");
   const [showAddVideo, setShowAddVideo] = useState(false);
   const [showFindVideo, setShowFindVideo] = useState(false);
-useEffect(() => {
-  getVideos();
-}, []);
-  
-  const addVideoToVideos = async e => {
+  useEffect(() => {
+    getVideos(videoOrder);
+  }, []);
+
+  const addVideoToVideos = async (e) => {
     e.preventDefault();
     const formElements = e.target.elements;
     const newVideoElements = {};
     for (let video of formElements) {
-      console.log(video)
+      console.log(video);
       const videoName = video.name;
       const videoValue = video.value;
       newVideoElements[videoName] = videoValue;
@@ -26,24 +26,26 @@ useEffect(() => {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newVideoElements)
+      body: JSON.stringify(newVideoElements),
     });
     const data = await res.json();
     setValidInput(data.msg);
     setAddTitle("");
     setAddUrl("");
-    getVideos();
+    getVideos(videoOrder);
   };
 
   const findVideo = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const videoId = e.target[0].value;
+    console.log(videoId)
     fetch(`${urlToFetch}${videoId}`)
       .then((response) => response.json())
       .then((data) => {
-        setVideos([data]);
+        console.log(data);
+        setVideos(data);
       });
-  }
+  };
   const showAddVideoInput = (
     <>
       <form onSubmit={addVideoToVideos}>
@@ -72,7 +74,14 @@ useEffect(() => {
         </label>
         <button>Find</button>
       </form>
-      <button onClick={() => { setShowFindVideo(false); getVideos()}}>Cancel</button>
+      <button
+        onClick={() => {
+          setShowFindVideo(false);
+          getVideos(videoOrder);
+        }}
+      >
+        Cancel
+      </button>
     </>
   );
 
@@ -86,12 +95,11 @@ useEffect(() => {
       <section className="show-videos">
         <Container fluid>
           <Row>
-            {videos
-              .map((video) => (
-                <Col xs={12} sm={6} lg={4} xl={3} key={video.id}>
-                  <SingleVideo video={video} urlToFetch={urlToFetch} getVideos={getVideos} />
-                </Col>
-              ))}
+            {videos.map((video) => (
+              <Col xs={12} sm={6} lg={4} xl={3} key={video.id}>
+                <SingleVideo video={video} urlToFetch={urlToFetch} getVideos={getVideos} videoOrder={videoOrder} />
+              </Col>
+            ))}
           </Row>
         </Container>
       </section>

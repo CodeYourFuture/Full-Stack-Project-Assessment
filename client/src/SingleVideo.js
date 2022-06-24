@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { Card, CardMedia, CardContent, Typography, CardActions, Button, ButtonGroup, IconButton } from "@mui/material";
-import {Favorite, HeartBroken, DeleteForever} from "@mui/icons-material";
+import { Favorite, HeartBroken, DeleteForever } from "@mui/icons-material";
+import moment from "moment"
 
 import "./App.css";
 
-const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
+const SingleVideo = ({ index, video, videoOrder, getVideos, urlToFetch }) => {
   const videoId = video.url.slice(-11);
+  const formattedDate = moment(video.timestamp).format("MMMM Do YYYY, h:mm:ss a");
   const startingScore = video.rating;
   const [score, setScore] = useState(startingScore);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const deleteVideo = async e => {
+  const deleteVideo = async (e) => {
     const videoId = video.id;
     const res = await fetch(`${urlToFetch}${videoId}`, {
       method: "DELETE",
     });
     const data = await res.json();
-    console.log(data.msg)
+    console.log(data);
     // setValidInput(data.msg);
-    getVideos();
+    getVideos(videoOrder);
   };
   return (
     <Card sx={{ maxWidth: 450 }}>
@@ -44,12 +46,7 @@ const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
         />
       </div>
       <CardContent>
-        {video.dateAdded && (
-          <>
-            <Typography variant="body2">This video was uploaded on {video.dateAdded}</Typography>
-            <br />
-          </>
-        )}
+        <Typography variant="body2">Upload Date: {formattedDate}</Typography>
       </CardContent>
       <CardActions>
         <IconButton
@@ -66,7 +63,7 @@ const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
             }
           }}
         >
-          <Favorite  color={liked ? "success" : "primary"} />
+          <Favorite color={liked ? "success" : "primary"} />
         </IconButton>
         <Typography variant="body2">{score}</Typography>
         <IconButton
@@ -82,7 +79,7 @@ const SingleVideo = ({ index, video, videos, getVideos, urlToFetch }) => {
               setScore((score) => (score += 1));
             }
           }}
-        > 
+        >
           <HeartBroken color={disliked ? "error" : "primary"} />
         </IconButton>
         <IconButton aria-label="delete video" onClick={deleteVideo}>
