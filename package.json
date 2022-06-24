@@ -1,0 +1,11 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "npm install --prefix ./server"
+  }
+}
