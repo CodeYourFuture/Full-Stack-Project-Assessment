@@ -90,7 +90,7 @@ app.post("/videos/add", (req, res) => {
   videos.push(req.body);
   res.send(videos);
 });
-app.delete("/videos/delete/:id", (req, res) => {
+app.delete("/videos/delete", (req, res) => {
   const videoId  = Number(req.params.id);
   videos = videos.filter((vid) => vid.id !== videoId);
   res.status(200).send(videos);

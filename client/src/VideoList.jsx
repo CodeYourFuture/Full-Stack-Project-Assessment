@@ -23,9 +23,7 @@ const VideoList = (props) => {
       `https://cyf-fullstack-alirezabg.herokuapp.com/videos/delete/${videoId}`,
       {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       }
     )
       .then((response) => response.json())
@@ -33,7 +31,7 @@ const VideoList = (props) => {
         console.log("Success:", data1);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Error:", error);
       });
   };
 
