@@ -1,10 +1,16 @@
 const express = require("express");
 const cors = require("cors");
+const { Pool } = require("pg");
+
 const app = express();
 
-const { v4: uuidv4 } = require("uuid");
-
-const data = require("./exampleresponse.json");
+const pool = new Pool({
+  user: "craig",
+  database: "cyf_videos",
+  host: "localhost",
+  password: "2509",
+  port: 5432,
+});
 
 app.use(cors());
 app.use(express.json());
@@ -14,70 +20,79 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-let videos = data;
-
 // Gets all the videos
 app.get("/", (req, res) => {
   const order = req.query.order;
-  videos =
-    order === "asc"
-      ? videos.sort((a, b) => a.rating - b.rating)
-      : videos.sort((a, b) => b.rating - a.rating);
-  res.json(videos);
+
+  pool
+    .query(`SELECT * FROM videos ORDER BY rating ${order.toUpperCase()}`)
+    .then((data) => res.send(data.rows))
+    .catch((e) => console.log(e));
 });
 
 // Posts a video from the client
 app.post("/", (req, res) => {
-  const newVideo = {
-    id: uuidv4(),
-    title: req.body.title,
-    url: req.body.url,
-    rating: 0,
-    posted: new Date().toLocaleString(), // Gets the time when the video was posted,
-  };
+  const { title, url } = req.body;
+  const date = new Date();
 
-  if (!newVideo.title || !newVideo.url) {
+  if (!title || !url) {
     return res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
     });
   }
 
-  videos.push(newVideo);
-  res.json(newVideo.id);
+  pool
+    .query(
+      "INSERT INTO videos (title, url, rating, posted) VALUES ($1, $2, $3, $4)",
+      [title, url, 0, date]
+    )
+    .then(() => res.json("Successful"))
+    .catch((e) => console.log(e));
 });
-
-// Check if the video exist
-const videoFound = (id) => videos.find((video) => video.id === id);
 
 // Gets info about an individual video
 app.get("/:id", (req, res) => {
-  res.json(videoFound(req.params.id));
+  const id = Number(req.params.id);
+  pool
+    .query("SELECT * FROM videos WHERE id = $1", [id])
+    .then((data) => res.send(data.rows[0]))
+    .catch((e) => console.log(e));
 });
 
 // Deletes a video
 app.delete("/:id", (req, res) => {
-  if (!videoFound(req.params.id)) {
-    return res.status(400).json({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  }
+  const id = Number(req.params.id);
 
-  videos = videos.filter((video) => video.id !== req.params.id);
-
-  res.json({});
+  pool
+    .query("SELECT * FROM videos WHERE id = $1", [id])
+    .then((data) => {
+      if (data.rows.length < 0) {
+        res.status(400).json({
+          result: "failure",
+          message: "Video could not be deleted",
+        });
+      } else {
+        pool
+          .query("DELETE FROM videos WHERE id = $1", [id])
+          .then(() => res.json({}))
+          .catch((e) => console.log(e));
+      }
+    })
+    .catch((e) => console.log(e));
 });
 
 // Manipulates the video rating
 app.put("/:id", (req, res) => {
   const { id } = req.params;
   const { vote } = req.query;
-  const video = videoFound(id);
-  if (vote === "up") {
-    video.rating += 1;
-  } else if (vote === "down") {
-    video.rating -= 1;
-  }
+
+  pool.query(
+    `UPDATE videos SET rating = (SELECT rating FROM videos WHERE id  = $1) ${
+      vote === "up" ? "+ 1" : "- 1"
+    } WHERE id = $1`,
+    [id]
+  );
+
   res.send({});
 });
