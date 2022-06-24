@@ -15,7 +15,7 @@ const DeleteModal = ({ id, closeModal }) => {
   // Deletes a video
   const deleteVideo = () => {
     closeModal(false);
-    fetch(`https://cyf-videos.herokuapp.com/?order/${id}`, {
+    fetch(`https://cyf-videos.herokuapp.com/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     }).catch((error) => ctx.setError(error));

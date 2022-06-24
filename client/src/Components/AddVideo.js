@@ -35,7 +35,7 @@ const AddVideo = ({
         title: title,
         url: fixedUrl,
       };
-      fetch("https://cyf-videos.herokuapp.com/?order", {
+      fetch("https://cyf-videos.herokuapp.com", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
