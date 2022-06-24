@@ -1,20 +1,33 @@
 import React from "react";
 
 function FormInputs(props) {
+  const [title, setTitle] = React.useState("");
+  const [url, setUrl] = React.useState("");
+
+  function handleTitleChange(event) {
+    setTitle(event.target.value);
+  }
+  function handleUrlChange(event) {
+    setUrl(event.target.value);
+  }
+
   return (
     <div className="form-inputs">
       <div className="form-input">
         <label>title</label>
-        <input type="text" placeholder="type title" />
+        <input
+          type="text"
+          placeholder="type title"
+          onChange={handleTitleChange}
+        />
       </div>
       <div className="form-input">
         <label>url</label>
-        <input type="text" placeholder="type url" />
+        <input type="text" placeholder="type url" onChange={handleUrlChange} />
       </div>
       <button
         className="add"
         onClick={(e) => {
-          //extract title and url from form
           props.handleAddNewVideo(title, url);
         }}
       >

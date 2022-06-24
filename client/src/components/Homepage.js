@@ -4,8 +4,7 @@ import Header from "./Header";
 import SearchBar from "./SearchBar";
 import AddVideoForm from "./AddVideoForm";
 import List from "./List";
-
-console.log(fetch(""));
+import { v4 as uuidv4 } from "uuid";
 
 function Homepage() {
   const [list, setList] = useState(data);
@@ -20,15 +19,26 @@ function Homepage() {
     setFilteredList(newFilteredList);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  function handleAdd() {}
+
   function handleAddNewVideo(title, url) {
     const newItem = {
-      //add random unique id
-      // id,
+      id: uuidv4(),
       title,
       url,
       rating: 0,
     };
     //update list to append item (opposite of handleRemove)
+    const newList = [newItem, ...list];
+    setList(newList);
+    const newFilteredList = [newItem, ...filteredList];
+    setFilteredList(newFilteredList);
+
+    console.log(newFilteredList);
   }
 
   function handleSearch(searchTerm) {
@@ -38,19 +48,14 @@ function Homepage() {
     setFilteredList(newList);
   }
 
-  function handleAddTitleAndUrl() {
-    console.log("hi");
-  }
   return (
     <div>
       {" "}
       <Header />
       <main>
         <SearchBar handleSearch={handleSearch} />
-        <AddVideoForm
-          handleAddTitleAndUrl={handleAddTitleAndUrl}
-          handleAddNewVideo={handleAddNewVideo}
-        />
+        <div></div>
+        <AddVideoForm handleAddNewVideo={handleAddNewVideo} />
         <List list={filteredList} onRemove={handleRemove} />
       </main>
     </div>
