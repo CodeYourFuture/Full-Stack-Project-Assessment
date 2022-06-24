@@ -31,9 +31,9 @@ const Video = ({ id, title, url, rating, posted }) => {
       <DeleteIcon variant="contained" color="error" onClick={deleteConfirm}>
         Delete
       </DeleteIcon>
-      {/* Alternate text if the video
+      {/* If the date exist, the date is split to only show the date. Also, Alternate text if the video
       does not have a posted date */}
-      <p>Posted: {posted || "N/A"}</p>
+      <p>Posted: {posted ? posted.toString().split("T")[0] : "N/A"}</p>
     </div>
   );
 };
