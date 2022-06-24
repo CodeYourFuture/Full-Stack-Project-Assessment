@@ -98,7 +98,7 @@ app.post("/videos/add", (req, res) => {
   res.send(videos);
 });
 app.delete("/videos/delete", (req, res) => {
-  const vidId = req.body.id;
+  const vidId = req.body.videoId;
   videos = videos.filter((vid) => vid.id !== vidId);
   res.send(videos);
 });
