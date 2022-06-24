@@ -20,23 +20,7 @@ const AddVideo = () => {
     setUrlValue(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // const data = { rating:  rate , id: props.ratingId };
-  //   fetch("https://cyf-fullstack-alirezabg.herokuapp.com/videos", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data1) => {
-  //       console.log("Success:", data1, rate);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [rate]);
+ 
 
   const addingVideo = () => {
     if (title === "") {
