@@ -1,13 +1,11 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import Video from "./components/Video";
 import Form from "./components/Form";
 import axios from "axios";
 
 function App() {
   const [displayForm, setDisplayForm] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState([]);
   const [addFormData, setAddFormData] = useState({
     title: "",
@@ -17,21 +15,14 @@ function App() {
 
   const getData = () => {
     axios.get("http://localhost:4000/").then((res) => {
-      //console.log(res);
       setVideos(res.data);
     });
   };
+  //getData()
 
   useEffect(() => {
-    axios.get("http://localhost:4000/").then((res) => {
-      //console.log(res);
-      setVideos(res.data);
-    });
+    getData()
   }, []);
-
-  // function handleSearchInput(event) {
-  //   setSearchTerm(event.target.value);
-  // }
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -49,7 +40,6 @@ function App() {
     event.preventDefault();
 
     const newVideo = {
-      id: nanoid(),
       title: addFormData.title,
       url: addFormData.url,
       rating: addFormData.rating
