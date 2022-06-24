@@ -21,7 +21,7 @@ const App = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`https://cyf-videos.herokuapp.com/?order=${order}`)
+    fetch(`https://cyf-craig-dsilva-videos.herokuapp.com/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);

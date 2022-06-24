@@ -19,10 +19,13 @@ const Rating = ({ rating, videoId }) => {
         };
       })
     );
-    fetch(`https://cyf-videos.herokuapp.com/${id}/?vote=${voteType}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-    }).catch((error) => ctx.setError(error));
+    fetch(
+      `https://cyf-craig-dsilva-videos.herokuapp.com/${id}/?vote=${voteType}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+      }
+    ).catch((error) => ctx.setError(error));
   };
 
   return (
