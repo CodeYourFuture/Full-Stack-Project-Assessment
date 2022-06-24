@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import Video from "./components/Video";
-//import data from "./exampleresponse.json";
 import Form from "./components/Form";
 import axios from "axios";
 
@@ -82,10 +81,6 @@ function App() {
     axios.delete(`http://localhost:4000/${videoId}`).then((res) => {
       if (res.status === 200) getData();
     });
-    //const newVideos = [...videos];
-    //const index = videos.findIndex((video) => video.id === videoId);
-    //newVideos.splice(index, 1);
-    //setVideos(newVideos);
   };
 
   return (
