@@ -11,7 +11,7 @@ const Rating = (props) => {
     ratingChange(rate-1);
   };
   const ratingChange = (rate) => {
-    fetch("https://flannel-hickory-parallelogram.glitch.me/videos", {
+    fetch("https://cyf-fullstack-alirezabg.herokuapp.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

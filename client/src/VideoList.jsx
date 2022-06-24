@@ -1,8 +1,7 @@
 import React from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 import Rating from "./Rating";
-const serverLocal = "http://localhost:5000/";
-// const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+
 const VideoList = (props) => {
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
@@ -21,7 +20,7 @@ const VideoList = (props) => {
   const sortedData = props.filterData.sort((a, b) => b.rating - a.rating);
   const deleteHandler = (videoId) => {
     const data = { videoId: videoId };
-    fetch(`${serverLocal}/videos/delete`, {
+    fetch(`https://cyf-fullstack-alirezabg.herokuapp.com/videos/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
