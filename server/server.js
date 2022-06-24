@@ -90,56 +90,54 @@ app.get("/videos", async (req, res) => {
   res.json(result.rows);
 });
 
-app.delete("/deletedvideo/:id", (req, res) => {
+app.delete("/deletedvideo/:id", async (req, res) => {
   const { id } = req.params;
 
-  pool
-    .query("DELETE FROM videos WHERE id=$1", [id])
-    .then(() => res.send(`Video ${id} deleted!`))
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json(error);
-    });
+  await pool.query("DELETE FROM videos WHERE id=$1", [id]);
+  const allVideos = await pool.query("SELECT * from videos");
+  res.json(allVideos.rows);
 });
 
-app.post("/api/addnewvideo", (req, res) => {
+app.post("/api/addnewvideo", async (req, res) => {
   const { title, url, rating } = req.body;
-  const selectQuery =
-    "SELECT * FROM videos where title=$1 OR url=$2 OR rating=$3";
-  // SELECT row_to_json(row(title, url, rating)) FROM videos";
+  const selectQuery = "SELECT * FROM videos where title=$1 OR url=$2";
   const insertQuery =
     "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
 
-  pool.query(selectQuery, [title, url, rating]).then((result) => {
-    if (result.rows > 0) {
-      console.log(result.rows);
-      return res.status(400).send("This video already exists");
-    } else {
-      pool
-        .query(insertQuery, [title, url, rating])
-        .then(() => res.send("video successfully uploaded"))
-        .catch(() => {
-          const error = {
-            result: "failure",
-            msg: "video couldn't be added",
-          };
-          res.json(error);
-        });
-    }
-  });
+  // pool.query(selectQuery, [title, url]).then((result) => {
+  //   if (result.rows.length > 0) {
+  //     console.log(result.rows);
+  //     return res.status(400).send("This video already exists");
+  //   } else {
+  //   }
+  // });
+  await pool.query(insertQuery, [title, url, rating]);
+
+  const allVideos = await pool.query("SELECT * from videos");
+  res.json(allVideos.rows);
 });
 
-app.get("/api/searchvideos", (req, res) => {
-  const { search } = req.query;
-  // Select * from videos where title like
-  const foundVideos = videos.filter((video) =>
-    video.title.toLowerCase().includes(search.toLowerCase())
-  );
-  if (foundVideos.length !== 0) {
-    res.json(foundVideos);
+app.get("/api/searchvideos", async (req, res) => {
+  const search = req.query.search;
+  console.log(search);
+  const selectQuery = "SELECT * FROM videos WHERE title LIKE '%' || $1 || '%' ";
+
+  const videoSearched = await pool.query(selectQuery, [search]);
+  if (videoSearched && videoSearched.rowCount > 0) {
+    res.status(200).send(videoSearched.rows);
   } else {
-    res.status(400).json({ msg: "no video found" });
+    const all = await pool.query("SELECT * FROM videos");
+    res.status(404).send(all.rows);
   }
+
+  // const foundVideos = videos.filter((video) =>
+  //   video.title.toLowerCase().includes(search.toLowerCase())
+  // );
+  // if (foundVideos.length !== 0)
+  //   res.json(foundVideos);
+  // } else {
+  //   res.status(400).json({ msg: "no video found" });
+  // }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -45,13 +45,12 @@ const Context = ({ children }) => {
     };
 
     try {
-      const response = fetch(
+      const response = await fetch(
         `http://localhost:5000/deletedvideo/${id}`,
         deleteOpt
       );
-      // const remainedData = await response.json();
-      setVideoData(response);
-      window.location.reload(false);
+      const remainedData = await response.json();
+      setVideoData(remainedData);
     } catch (error) {
       console.log(error);
     }
@@ -65,15 +64,15 @@ const Context = ({ children }) => {
       body: JSON.stringify(newAddedVideo),
     };
     try {
-      fetch("http://localhost:5000/api/addnewvideo", postOpt);
-      // const newVideoData = await response.json();
-      // console.log(newVideoData);
-      // setVideoData(newVideoData);
+      const response = await fetch(
+        "http://localhost:5000/api/addnewvideo",
+        postOpt
+      );
+      const newVideoData = await response.json();
+      setVideoData(newVideoData);
       setNewVideo(false);
-      window.location.reload(false);
     } catch (error) {
       console.log(error);
-      setVideoData([]);
     }
   };
 
@@ -82,8 +81,14 @@ const Context = ({ children }) => {
       const response = await fetch(
         `http://localhost:5000/api/searchvideos?search=${searchWord}`
       );
-      const searchData = await response.json();
-      setVideoData(searchData);
+      // const searchData = await response.json();
+      const searchedVideos = await response.json();
+      if (response && response.status < 300) {
+        setVideoData(searchedVideos);
+      } else {
+        alert("Nothing found :((");
+        setVideoData(searchedVideos);
+      }
     } catch (error) {
       console.log(error);
     }
