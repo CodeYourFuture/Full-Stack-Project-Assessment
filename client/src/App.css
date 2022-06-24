@@ -43,6 +43,11 @@ input {
   border-radius: 8px;
   box-sizing: border-box;
 }
+
+input:focus {
+  background-color: #62f2e855;
+}
+
 .video-header {
   height: 18%;
   color: #333535;

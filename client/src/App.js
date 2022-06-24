@@ -14,8 +14,7 @@ function App() {
     axios.get("http://localhost:4000/").then((res) => {
       setVideos(res.data);
     });
-  };
-  //getData()
+  }; //getData() to display fetched data
 
   useEffect(() => {
     getData();
@@ -29,24 +28,20 @@ function App() {
 
   return (
     <div className="app">
-      <div className="form-container">
-        <MainHeader />
-        <AddVideoHeader setDisplayForm={setDisplayForm} />
-        {displayForm ? (
-          <Form
-            videos={videos}
-            SetVideos={setVideos}
-            getData={getData()}
-            setDisplayForm={setDisplayForm}
-          />
-        ) : (
-          ""
-        )}
-      </div>
-      <div className="video-container">
-        <div className="sub-container">
-          <Video videos={videos} handleDeleteClick={handleDeleteClick} />
-        </div>
+      <MainHeader />
+      <AddVideoHeader setDisplayForm={setDisplayForm} />
+      {displayForm ? (
+        <Form
+          videos={videos}
+          SetVideos={setVideos}
+          getData={getData()}
+          setDisplayForm={setDisplayForm}
+        />
+      ) : (
+        ""
+      )}
+      <div className="sub-container">
+        <Video videos={videos} handleDeleteClick={handleDeleteClick} />
       </div>
     </div>
   );
