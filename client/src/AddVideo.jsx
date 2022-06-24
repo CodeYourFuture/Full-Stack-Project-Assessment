@@ -20,23 +20,7 @@ const AddVideo = () => {
     setUrlValue(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // const data = { rating:  rate , id: props.ratingId };
-  //   fetch("https://flannel-hickory-parallelogram.glitch.me/videos", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data1) => {
-  //       console.log("Success:", data1, rate);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [rate]);
+ 
 
   const addingVideo = () => {
     if (title === "") {
@@ -45,7 +29,7 @@ const AddVideo = () => {
       alert("Url is not valid!!");
     } else {
       const data = { url: urlValue, title: title, rate: 0 };
-      fetch("https://flannel-hickory-parallelogram.glitch.me/videos/add", {
+      fetch("https://cyf-fullstack-alirezabg.herokuapp.com/videos/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
