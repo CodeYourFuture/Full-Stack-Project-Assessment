@@ -22,7 +22,7 @@ const AddVideo = () => {
 
   // useEffect(() => {
   //   // const data = { rating:  rate , id: props.ratingId };
-  //   fetch("https://flannel-hickory-parallelogram.glitch.me/videos", {
+  //   fetch("https://cyf-fullstack-alirezabg.herokuapp.com/videos", {
   //     method: "POST",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const AddVideo = () => {
       alert("Url is not valid!!");
     } else {
       const data = { url: urlValue, title: title, rate: 0 };
-      fetch("https://flannel-hickory-parallelogram.glitch.me/videos/add", {
+      fetch("https://cyf-fullstack-alirezabg.herokuapp.com/videos/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
