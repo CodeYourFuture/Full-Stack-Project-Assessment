@@ -30,10 +30,15 @@ const Search = (props) => {
             value={searchInput}
             onChange={(e) => handleSearchInput(e)}
           />
-          
         </div>
         <div>
-          <VideoList filterData={props.filterData} loading={props.loading} />
+          <VideoList
+            filterData={props.filterData}
+            setData={props.setData}
+            loading={props.loading}
+            setAllData={props.setAllData}
+            setFilterData={props.setFilterData}
+          />
         </div>
       </>
     );

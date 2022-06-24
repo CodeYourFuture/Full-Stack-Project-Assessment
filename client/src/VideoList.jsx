@@ -19,6 +19,7 @@ const VideoList = (props) => {
   };
   const sortedData = props.filterData.sort((a, b) => b.rating - a.rating);
   const deleteHandler = (videoId) => {
+    console.log("delete handler", videoId);
     fetch(
       `https://cyf-fullstack-alirezabg.herokuapp.com/videos/delete/${videoId}`,
       {
@@ -29,6 +30,9 @@ const VideoList = (props) => {
       .then((response) => response.json())
       .then((data1) => {
         console.log("Success:", data1);
+        props.setAllData(data1);
+        props.setFilterData(data1);
+        console.log("fetching data", props.filterData);
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -40,7 +44,7 @@ const VideoList = (props) => {
   } else {
     return (
       <div className="video-class">
-        {sortedData.map((video) => (
+        {props.filterData.map((video) => (
           <div className="video-class">
             <p>{video.title} </p>
             <div>
