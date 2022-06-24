@@ -3,12 +3,13 @@ import "./App.css";
 import Search from "./Search";
 import AddVideo from "./AddVideo";
 import Footer from "./Footer";
+import Header from "./Header";
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(true);
   // const serverLocal = "http://localhost:5000";
-  const serverLive = "https://flannel-hickory-parallelogram.glitch.me";
+  const serverLive = "https://cyf-fullstack-alirezabg.herokuapp.com";
   useEffect(() => {
     fetch(`${serverLive}/videos`)
       .then((res) => res.json())
@@ -26,9 +27,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <header className="App-header">
-          <h3 className="Header">Video List</h3>
-        </header>
+        <Header/>
         <main className="main">
           <div>
             <AddVideo />
