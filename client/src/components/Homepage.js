@@ -21,14 +21,18 @@ function Homepage() {
   }
 
   function handleAddNewVideo(title, url) {
+    const randomInt = Math.floor(Math.random * 1000000);
     const newItem = {
-      //add random unique id
-      // id,
+      id: randomInt,
       title,
       url,
       rating: 0,
     };
     //update list to append item (opposite of handleRemove)
+    const newList = [newItem, ...list];
+    setList(newList);
+    const newFilteredList = [newItem, ...filteredList];
+    filteredList(newFilteredList);
   }
 
   function handleSearch(searchTerm) {
