@@ -6,59 +6,46 @@ import Search from "./Search";
 import Add from "./Add";
 import axios from "axios";
 // import Delete from "./Delete";
+const path = "https://videoss-db.herokuapp.com/";
 
 function App() {
-  const [allData, setAllData] = useState([]);
-  const [videos, setVideos] = useState(allData);
+  const [allData, setAllData] = useState([])
+  const [videos, setVideos] = useState(allData)
   const searchHandler = (searchText) => {
     let filteredVid = allData.filter((video) =>
-      video.title.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setVideos(filteredVid);
-  };
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:5000/").then((res) => setVideos(res.data));
-  // }, []);
-
-  useEffect(() => {
-    loadData();
-  }, []);
+      video.title.toLowerCase().includes(searchText.toLowerCase()),
+    )
+    setVideos(filteredVid)
+  }
+  const deleteHandler = (id) => {
+    axios.delete(path + id).then((res) => {
+      loadData()
+    })
+  }
 
   const loadData = () => {
-    axios
-      .get("https://videoss-db.herokuapp.com/")
-      .then((res) => {
-        console.log(res);
-        setVideos(res.data)});
-  };
+    axios.get(path).then((res) => {
+      console.log(res.data)
+      setAllData(res.data)
+    })
+  }
 
-  const deleteHandler = (id) => {
-    // let filteredVid = allData.filter((video) => video.id !== id);
-    // // setVideos(filteredVid);
-    // setAllData(filteredVid);
-    axios.delete(`https://videoss-db.herokuapp.com/${id}`).then((res) => {
-      if (res.status === 200) loadData();
-    });
-  };
-  // const updateRating = (id, rate) => {
-  //   const foundVideo = allData.find((video) => video.id === id);
-  //   foundVideo.rating = rate;
-  //   console.log(rate);
-  // };
-  const handleSet = (newVideo) => {
-    setAllData((previous) => previous.concat(newVideo));
-  };
   useEffect(() => {
-    setVideos(allData);
-  }, [allData]);
+    loadData()
+  }, [])
+
+  useEffect(() => {
+    // console.log(allData)
+    setVideos(allData)
+  }, [allData])
+  console.log(path)
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="m-5">
         <h1>Video Recommendation</h1>
       </header>
-      <Add allData={allData} handleSet={handleSet} loadData={loadData}/>
+      <Add allData={allData} loadData={loadData}/>
       <Search searchHandler={searchHandler} />
       <main >
         {videos
@@ -68,16 +55,11 @@ function App() {
               <VideoPanel
                 key={video.id}
                 video={video}
+                deleteHandler = {deleteHandler}
                 // updateRating={updateRating}
               />
               {/* <Delete videoId={video.id} deleteHandler={deleteHandler} /> */}
-              <button
-                onClick={() => {
-                  deleteHandler(video.id);
-                }}
-              >
-                DELETE
-              </button>
+
             </>
           ))}
       </main>

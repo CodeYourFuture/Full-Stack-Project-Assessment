@@ -31,24 +31,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", function (req, res) {
-  const { title, url } = req.body;
-  const queryString = `Insert Into videos (title, url) values ($1, $2)`;
+  const { title, url} = req.body;
+  const queryString = `Insert Into videos (title, url) values ($1, $2 , $3)`;
   client
     .query(queryString, [title, url])
-    .then((result) => res.status(200).send("Video added!"))
+    .then(() => res.status(200).send("Video added!"))
     .catch((error) => res.status(500).json(error));
 });
 
 app.put("/:videoId/rating", (req, res) => {
   const id = req.params.videoId;
   const rate = req.body.rating;
-  const rating = videos;
+
 
 
   const queryString = `Update videos Set rating = $1 Where id = $2`;
   client
     .query(queryString, [rate, id])
-    .then((result) => res.status(201).send("Rating has been updated!"))
+    .then(() => res.status(201).send("Rating has been updated!"))
     .catch((error) => res.status(500).json(error));
 });
 
@@ -63,7 +63,7 @@ app.delete("/:videoId", (req, res) => {
       if (result.rows.length == 0)
         res.status(404).send("Video does not exist!");
       else {
-        pool
+        client
           .query(queryString, [id])
           .then((result) => res.status(200).send("Video has been deleted!"))
           .catch((error) => res.status(500).json(error));

@@ -34,26 +34,14 @@ const Add = ({ allData, handleSet, loadData }) => {
     return result;
   };
   const handleSubmit = (submitEvent) => {
-    let date = new Date();
-    var options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    };
-
     submitEvent.preventDefault();
 
     if (validationCheck()) {
       //const newId = Math.max(...allData.map((video) => video.id)) + 1;
 
       const newVideo = {
-        // id: newId,
         title: title,
         url: url,
-        date: date.toLocaleDateString("en-UK", options),
       };
       try {
         axios
@@ -76,24 +64,36 @@ const Add = ({ allData, handleSet, loadData }) => {
   };
   return (
     <div>
-      <button onClick={handleAdd}>Add a new video</button>
+      <button className="btn btn-success m-2" onClick={handleAdd}>
+        Add a new video
+      </button>
       <div className={toggle ? "display-block" : "display-none"}>
-        <form onSubmit={handleSubmit} action="">
-          <label htmlFor="title">Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            type="text"
-            id="title"
-          />
-          <label htmlFor="url">URL</label>
-          <input
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            type="text"
-            id="url"
-          />
-          <button type="submit">Save</button>
+        <form className="d-flex justify-content-center" onSubmit={handleSubmit} action="">
+          <div className="w-25 ">
+            <div className="col">
+              <label htmlFor="title">Title</label>
+              <input
+                className="form-control"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                id="title"
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="url">URL</label>
+              <input
+                className="form-control"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                type="text"
+                id="url"
+              />
+            </div>
+            <button className="btn btn-primary m-2" type="submit">
+              Save
+            </button>
+          </div>
         </form>
         <p>{errMsg}</p>
       </div>

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const VideoPanel = ({ key, video }) => {
+const VideoPanel = ({ key, video, deleteHandler}) => {
   let codeRequired = video.url.split("=")[1];
   let srcLink = `https://www.youtube.com/embed/${codeRequired}`;
   // let srcLink = video.url.replace("watch?v=", "embed/")
   const [rate, setRate] = useState(video.rating);
   const updateRate = (rateUpDown) => {
     axios
-      .put("https://videoss-db.herokuapp.com/rating", {
-        id: video.id,
-        rate: rate + rateUpDown,
+      .put(`https://videoss-db.herokuapp.com/${video.id}/rating`, {
+      
+        rating: rate + rateUpDown,
       })
       .then((res) => {
         console.log(res);
-        setRate(res.data[0]);
+        setRate(rate + rateUpDown);
       });
   };
   const likeClick = () => {
@@ -36,8 +36,12 @@ const VideoPanel = ({ key, video }) => {
       minute: "numeric",
       second: "numeric",
     };
+
+    
     return date.toLocaleDateString("en-UK", options);
   };
+
+  
 
   return (
     <div key={key} className="videoPanel">
@@ -45,7 +49,7 @@ const VideoPanel = ({ key, video }) => {
         <h3>{video.title}</h3>
       </div>
       <div>
-        <h5>{video.id}</h5>
+        <h5>Video ID: {video.id}</h5>
       </div>
       <div>
         <iframe
@@ -64,7 +68,7 @@ const VideoPanel = ({ key, video }) => {
           onClick={dislikeClick}
           src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/undefined/external-dislike-feedback-kmg-design-detailed-outline-kmg-design.png"
         />
-        {rate}
+        Rate: {rate}
         <img
           alt="like"
           onClick={likeClick}
@@ -73,7 +77,13 @@ const VideoPanel = ({ key, video }) => {
       </div>
       <div>Posted on: {video.date}</div>
       <div>Uploaded at: {uploadedTime()}</div>
-      {/* <div>{video.date}</div> */}
+      <button className="btn btn-danger w-25 align-self-center"
+        onClick={() => {
+          deleteHandler(video.id);
+        }}
+      >
+        DELETE
+      </button>
     </div>
   );
 };
