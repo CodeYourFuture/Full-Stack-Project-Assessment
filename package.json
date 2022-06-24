@@ -4,5 +4,8 @@
   "description": "",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "npm install --prefix ./server"
+  }
 }
