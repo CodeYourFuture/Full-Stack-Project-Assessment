@@ -8,6 +8,7 @@ const app = express();
 const client = new Client({
   user: process.env.DB_USER,
   database: process.env.DATABASE,
+  connectionString: process.env.DATABASE_URL,
   host: process.env.HOST,
   password: process.env.PASSWORD,
   port: process.env.DB_PORT,
