@@ -22,7 +22,9 @@ const HandleAddVideoDisplay = () => {
     // If there is a return from this function then it is a failed URL
 
     // The timestamp Date.now() is used to ensure that 'useEffect' in App.js triggers when there is a new message
-    setUpdateFunction({ messageID: Date.now(), message: result[1] });
+    if (result) {
+          setUpdateFunction({ messageID: Date.now(), message: result[1] });
+    }
     return;
   };
 

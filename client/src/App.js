@@ -7,8 +7,16 @@ import HandleAddVideoDisplay from "./HandleAddVideoDisplay.js";
 import { UserContext } from "./UserContext.js";
 import { youtube_regex } from "./youtube_regex.js";
 
+/*
+CONNECT TO HEROKU APP INSTEAD
+
 const THEPORT = 3004;
 const THEPATH = `http://localhost:${THEPORT}/`; // "http://localhost:3004/";
+
+Also validateURL.js will need to be modified in like manner
+*/
+
+const THEPATH = `https://full-stack-project-assignment.herokuapp.com/`;
 
 const titleSizeLimit = 80;
 const titleHalfLimit = 40;
