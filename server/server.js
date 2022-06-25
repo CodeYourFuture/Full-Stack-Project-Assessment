@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const body-parser = require("body-parser");
+const bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
 
 
@@ -11,20 +11,60 @@ app.use(bodyParser.json());
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = require('../client/src/exampleresponse.json');
+const videos = require('../client/src/exampleresponse.json');
+
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos)
+  res.json(videos)
 });
 
-let idsUsed = videos.map(video => video.id);
-console.log(Math.max(...idsUsed) + 1);
+app.get("/:id", (req, res) => {
+  let id = parseInt(req.params.id)
+  const videoById = videos.filter(video => video.id === id);
+  if (videoById) {
+    res.status(200).json(videoById);
+  } else {
+    res.status(400).json({
+      "request": "Unsuccessful",
+      "message": "id is not locatable - please enter valid id"
+    })
+  }
+})
 
-app.post('/', (req, res) {
+app.delete("/:id", (req, res) => {
+  let id = parseInt(req.params.id)
+  const deleteById = videos.filter(video => video.id === id);
+  if (deleteById) {
+    res.status(200).json(videos.filter(video => video.id !== id));
+  } else {
+    res.status(400).json({
+      "request": "Unsuccessful",
+      "message": "id is not locatable - video could not be deleted"
+    })
+  }
+})
+
+let idsUsed = videos.map(video => video.id);
+
+app.post('/', (req, res) => {
   let video = {
-    id: (Math.max(...idsUsed) + 1),
-    title: 
+    "id": (Math.max(...idsUsed) + 1),
+    "title": req.body.title,
+    "url": req.body.url,
+    "rating": 0
+  }
+
+  if ((req.body.title || req.body.url) === "") {
+    res.status(400).json({
+      "request": "Unsuccessful",
+      "message": "Please provide valid title/url"
+    })
+  } else {
+    console.log(video);
+    videos.push(video);
+    idsUsed.push(video.id);
+    res.send(video)
   }
 })
 
