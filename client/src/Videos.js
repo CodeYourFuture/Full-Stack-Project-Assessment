@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import CardCreator from "./CardCreator";
 import Response from "./exampleresponse.json";
 
