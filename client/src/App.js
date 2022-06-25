@@ -1,12 +1,9 @@
 import React from "react";
-
 import "./App.css";
 import Homepage from "./components/Homepage";
 import Video from "./components/Video";
 
 function App() {
-  const [contacts, setContacts] = useState(Video);
-  const [addFormVideo, setAddFormVideo] = useState([]);
   return (
     <div className="App">
       <div>
