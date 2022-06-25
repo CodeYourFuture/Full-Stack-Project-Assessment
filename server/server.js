@@ -1,5 +1,28 @@
 // Modify server.js to read SQL Table 'videos-table'
 
+/*
+
+URI is the PostgreSQL connection string
+postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DB>
+
+You can access the PostgreSQL via PSQL or
+$ psql -h <HOST> -p <PORT> -U <USERNAME> -W <DB>
+
+USERNAME        ruuekrrjxjivwu
+PASSWORD        686a1a6680d94cf48dc7fb48c0245cae10b97135e33ec05cf2202c4b8240d273
+HOST            ec2-44-197-128-108.compute-1.amazonaws.com
+PORT            5432
+DATABASE        d4ed63ub6q7ksa
+
+URI
+postgres://ruuekrrjxjivwu:686a1a6680d94cf48dc7fb48c0245cae10b97135e33ec05cf2202c4b8240d273@ec2-44-197-128-108.compute-1.amazonaws.com:5432/d4ed63ub6q7ksa
+
+Heroku CLI
+heroku pg:psql postgresql-cubed-27785 --app full-stack-project-assignment
+
+psql -h ec2-44-197-128-108.compute-1.amazonaws.com -p 5432 -U ruuekrrjxjivwu -W d4ed63ub6q7ksa
+*/
+
 const express = require("express");
 const cors = require("cors");
 
