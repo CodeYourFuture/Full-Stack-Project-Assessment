@@ -1,19 +1,24 @@
-import React from "react";
+import React, {useState } from "react";
 import Votes from "./Votes";
-import DeleteButton from "./DeleteButton";
 import videosData from "./exampleresponse.json"
 
-function VideoCard(props) {
+function VideoCard() {
+    const [videos, setVideos] = useState (videosData)
+    const removeVideo = (id) =>{
+        let newVideoList = videos.filter((video) => video.id !==id);
+        setVideos(newVideoList);
+      }
 
     return (
-
+      
         <div className="card">
-            {props.data.map((video, index) => {
+            {videos.map((video, index) => {
               return   <div className ="card-body">
               <iframe title={video.title} width="420" height="315" src={video.url}>
               </iframe>
               <Votes/>
-              <DeleteButton data={videosData} />
+              <button className="btn btn-default" onClick={() => removeVideo(video.id)}>DELETE</button>
+              
           </div> 
             })}
            
