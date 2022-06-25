@@ -1,0 +1,30 @@
+query userLikes($userId: String!) {
+    userLikes(userId: $userId) {
+        video_id
+        vote
+    }
+}
+
+mutation addLike($userId: String!, $videoId: String!) {
+    vote(userId: $userId, videoId: $videoId, vote: 1) {
+        user_id
+        video_id
+        vote
+    }
+}
+
+mutation addDislike($userId: String!, $videoId: String!) {
+    vote(userId: $userId, videoId: $videoId, vote: -1) {
+        user_id
+        video_id
+        vote
+    }
+}
+
+mutation removeVote($userId: String!, $videoId: String!) {
+    vote(userId: $userId, videoId: $videoId, vote: 0) {
+        user_id
+        video_id
+        vote
+    }
+}

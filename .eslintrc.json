@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "sznm/react",
+    "plugin:react/jsx-runtime",
+    "plugin:@next/next/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": 0
+  }
+}

@@ -1,0 +1,25 @@
+type VideoInput {
+    url: String,
+    title: String,
+    created_by_id: String
+}
+
+mutation addVideo($video: VideoInput!) {
+    addVideo(video: $video) {
+        id
+        url
+        title
+        created_by_id
+        rating
+    }
+}
+
+query videos{
+    videos {
+        id
+        url
+        title
+        created_by_id
+        rating
+    }
+}
