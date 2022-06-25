@@ -10,6 +10,7 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
   const [showFindVideo, setShowFindVideo] = useState(false);
   useEffect(() => {
     getVideos(videoOrder);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addVideoToVideos = async (e) => {

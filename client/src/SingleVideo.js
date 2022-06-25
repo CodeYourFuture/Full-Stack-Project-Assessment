@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Card, CardMedia, CardContent, Typography, CardActions, Button, ButtonGroup, IconButton } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, CardActions, IconButton } from "@mui/material";
 import { Favorite, HeartBroken, DeleteForever } from "@mui/icons-material";
 import moment from "moment"
 
 import "./App.css";
 
-const SingleVideo = ({ index, video, videoOrder, getVideos, urlToFetch }) => {
+const SingleVideo = ({ video, videoOrder, getVideos, urlToFetch }) => {
   const videoId = video.url.slice(-11);
   const formattedDate = moment(video.timestamp).format("MMMM Do YYYY, h:mm:ss a");
   const startingScore = video.rating;
