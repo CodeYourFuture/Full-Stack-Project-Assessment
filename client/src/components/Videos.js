@@ -2,6 +2,8 @@ import React from "react";
 import Votes from "./Votes";
 
 function Videos(props) {
+  console.log(props);
+
   let videoId = "";
   let youtubeId = [];
 

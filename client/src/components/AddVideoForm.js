@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Videos from "./Videos";
-import data from "../exampleresponse.json";
+
+const BASE_URL = "http://localhost:5000/";
 
 function AddVideoForm() {
-  const defaultList = data;
-  const [videoList, setVideoList] = useState(defaultList);
+  const [videoList, setVideoList] = useState("");
+
+  const getAllVideos = async () => {
+    try {
+      const response = await fetch(BASE_URL);
+      const jsonData = await response.json();
+      console.log(jsonData);
+      setVideoList(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);
+
+  // fetch(BASE_URL)
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     setVideoList(data);
+  //   });
 
   function addVideo(event) {
     let title = document.getElementById("form-title").value;
@@ -60,7 +81,11 @@ function AddVideoForm() {
         </div>
 
         <div className="col-9">
-          <Videos data={videoList} setter={setVideoList} />
+          {videoList === "" ? (
+            "Waiting for data"
+          ) : (
+            <Videos data={videoList} setter={setVideoList} />
+          )}
         </div>
       </div>
     </div>
