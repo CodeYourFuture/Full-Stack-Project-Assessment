@@ -1,5 +1,5 @@
 import React from "react";
-import logoIcon from "./images/music.png";
+import logoIcon from "../images/music.png";
 
 function Header() {
     return (

@@ -14,7 +14,7 @@ function AddVideo(props) {
 
     function addVideoObj() {
       const videoObj = {title: videoTitleInput, url: videoUrlInput};
-      props.AddVideo(videoObj);
+      props.createVideo(videoObj);
       setVideoTitleInput("");
       setVideoUrlInput("");
     }

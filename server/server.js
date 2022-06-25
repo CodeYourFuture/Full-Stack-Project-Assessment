@@ -1,7 +1,13 @@
+
+
 const express = require("express");
 const app = express();
-app.use(express.json());
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const port = process.env.PORT || 5000;
+
+app.use(express.json());
+app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -73,10 +79,13 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  res.set("Access-Control-Allow-Origin", "*");
+  res.send(JSON.stringify(videos));
 });
 
+//POST "/"
 app.post("/", (req, res) => {
+  console.log(req.body)
   if (req.body.title && req.body.url) {
     const id = new Date().getTime();
 
@@ -84,7 +93,7 @@ app.post("/", (req, res) => {
       id,
       ...req.body,
     };
-    videos.push(addVid);
+    videos.unshift(addVid);
     return res.json({ id });
   } else {
     return res.json({
@@ -94,10 +103,12 @@ app.post("/", (req, res) => {
   }
 });
 
+//GET "/{id}"
 app.get("/:id", (req, res) => {
   return res.json(videos.find((video) => video.id === Number(req.params.id)));
 });
 
+//DELETE "/{id}"
 app.delete("/:id", (req, res) => {
   const videoObjIndex = videos.findIndex(
     (video) => video.id === Number(req.params.id)

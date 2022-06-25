@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "./Header";
-import VideoCards from "./VideoCards";
+import Header from "./components/Header";
+import VideoCards from "./components/VideoCards";
 
 function App() {
   return (
