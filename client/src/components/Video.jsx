@@ -1,40 +1,19 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import Buttons from "./Buttons";
+import React from "react";
 
-function Video({ embedId }) {
-  const [videoId, setVideoId] = useState(embedId);
-
-  useEffect(() => {
-    if (videoId.match("http://(www.)?youtube|youtu.be")) {
-      let vID = videoId.split("embed/")[1].split(/[?&]/)[0];
-      setVideoId(vID);
-    }
-  }, [<Buttons />]);
-
-  // http://www.youtube.com/watch?v=JcjoGn6FLwI&asdasd
-  // https://www.youtube.com/embed/o1-Iddifryw
-  // o1-Iddifryw
-
+function Video({ urlVideo }) {
   return (
-    <div>
-      <div className="video-responsive">
-        <iframe
-          width="360"
-          height="315"
-          src={videoId}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Embedded youtube"
-        />
-      </div>
+    <div className="video-responsive">
+      <iframe
+        width="360"
+        height="315"
+        src={`https://www.youtube.com/embed/${urlVideo}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title="Embedded youtube"
+      />
     </div>
   );
 }
-
-Video.propTypes = {
-  embedId: PropTypes.string.isRequired,
-};
 
 export default Video;

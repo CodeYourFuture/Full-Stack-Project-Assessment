@@ -2,17 +2,17 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-const pool = require("./config/db");
+const pool = require("./config/db.js");
 
-const port = 5000;
-
-// header('Content-Type: application/json')
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 // parse requests of content-type -application/x-www.form-urlencoded(form data from client side)
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-// parse requests of content-type- application/json
+app.use(cors({
+  credentials: true,
+}));
+
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {

@@ -1,56 +1,86 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import React, { Fragment, useState, useEffect } from "react";
+
 
 import SearchBar from "./SearchBar";
-import Content from "./Content";
 import Buttons from "./Buttons";
+import Votes from "./Votes";
+import Video from "./Video";
 
 import "../App.css";
 
-function Main({ data }) {
+
+function Main() {
   const [wordEntered, setWordEntered] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [allData, setAllData] = useState(data);
+  const [rating, setRating] = useState("");
   const [showForm, setShowForm] = useState(false);
+
+  const [response, setResponse] = useState([]); // all videos
+
+  const getAllVideos = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/videos");
+      const jsonData = await response.json();
+      console.log(jsonData);
+      setResponse(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newData = {
-      id: uuidv4(),
-      title,
-      url,
-    };
+    try {
+      const newData = {
+        title,
+        url,
+        rating: rating ? rating : 0,
+      };
 
-    await fetch(data, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(newData),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+      const response = await fetch("http://localhost:5000/videos", {
+        method: "POST",
+        // mode: "cors",
+        body: JSON.stringify(newData),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
 
-    setAllData((prevState) => [...prevState, newData]);
+      setTitle("");
+      setUrl("");
+      setRating("");
 
-    setTitle("");
-    setUrl("");
+      window.location = "/";
 
-    // console.log(title);
-    console.log("Enviou")
-    console.log(newData);
+      console.log(response);
+      console.log("Enviou");
+      console.log(newData);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const handleDelete = async (id) => {
-    await fetch(data + id, {
-      method: "DELETE",
-    });
-    setAllData((prevState) => prevState.filter((video) => video.id !== id));
+    try {
+      const deleteVideo = await fetch(`http://localhost:5000/videos/${id}`, {
+        method: "DELETE",
+      });
+
+      setResponse(response.filter((video) => video.id !== id));
+      console.log(deleteVideo);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <main>
+    <Fragment>
       <div className="add-video-and-search">
         <div className="add-video">
           <a
@@ -84,18 +114,54 @@ function Main({ data }) {
                   required
                 />
               </label>
+              <label>
+                Rating
+                <input
+                  className="input"
+                  name="rating"
+                  type="number"
+                  onChange={(e) => setRating(e.target.value)}
+                  value={rating}
+                />
+              </label>
               <Buttons setTitle={setTitle} setUrl={setUrl} />
             </form>
           )}
         </div>
         <SearchBar wordEntered={wordEntered} setWordEntered={setWordEntered} />
       </div>
-      <Content
-        handleDelete={handleDelete}
-        data={allData}
-        wordEntered={wordEntered}
-      />
-    </main>
+      <div className="videos row">
+        {response
+          .filter((val) => {
+            if (wordEntered === "") {
+              return val;
+            } else if (
+              val.title.toLowerCase().includes(wordEntered.toLowerCase())
+            ) {
+              return val;
+            }
+            return null;
+          })
+          .map((item, key) => {
+            return (
+              <div className="col-md-4 pb-2 mb-5" key={item.id}>
+                <h5>{item.title}</h5>
+                <Votes rating={item.rating} />
+                <div className="video">
+                <Video urlVideo={item.url}/>
+                  <button
+                    type="button"
+                    className="removeVideo btn btn-danger"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </Fragment>
   );
 }
 

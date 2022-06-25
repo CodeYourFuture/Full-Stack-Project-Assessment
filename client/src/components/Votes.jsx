@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-function Votes({ data }) {
-//   console.log(data);
-  const [count, setCount] = useState(data ? data : 0);
+function Votes({ rating }) {
+  // console.log(rating);
+  const [count, setCount] = useState(rating ? rating : 0);
 
   const incrementCount = () => {
     setCount((prevState) => prevState + 1);
