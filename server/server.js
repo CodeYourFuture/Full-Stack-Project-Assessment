@@ -1,39 +1,54 @@
+// Modify server.js to read SQL Table 'videos-table'
+
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
-let fs = require("fs"); // Used to update the database locally
 
 app.use(cors());
 
 // Body Parser Middleware
 app.use(express.json());
 
-// This library is used to Generate unique IDs
-// Node.js require
-const ShortUniqueId = require("short-unique-id");
-// Instantiate for 8 character UUIDs
+const { Client } = require("pg");
 
-const uid = new ShortUniqueId({ length: 8 });
-uid.setDictionary("alphanum_lower");
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+// console.log(process.env.DATABASE_URL);
+
+client.connect();
+
+app.use(cors());
 
 const port = process.env.PORT || 3004;
-
-const path = require("path");
-
-// LOAD THE DATABASE
-const filename = path.resolve(__dirname, "../client/data/database.json");
-
-//This array is the "data store".
-videoDatabase = JSON.parse(fs.readFileSync(filename));
-
-let newId;
 
 // GET - This endpoint is used to return all of the videos
 
 app.get("/", function (request, response) {
-  response.send(videoDatabase);
+  let query = "SELECT * FROM videos_table";
+
+  client
+    .query(query)
+    .then((result) => {
+      let reply = result.rows;
+      if (reply.length === 0) {
+        return response.status(400).json({
+          result: "failure",
+          message: `SERVER ERROR: The Database is empty!`,
+        });
+      }
+
+      return response.json(reply);
+    })
+    .catch((error) => {
+      console.error(error);
+      return response.status(500).json({ result: "failure", message: error });
+    });
 });
 
 /*
@@ -41,22 +56,31 @@ app.get("/", function (request, response) {
 */
 
 app.get("/:id", (request, response) => {
-  let reqId = request.params.id;
-  if (reqId.length !== 8) {
+  const reqID = Number(request.params.id);
+  if (Number.isNaN(reqID) || !Number.isSafeInteger(reqID) || reqID <= 0) {
     return response.status(400).json({
       result: "failure",
-      message: `'${request.params.id}' must be 8 characters long`,
+      message: `'${request.params.id}' has been rejected because an ID must be a positive, nonzero integer.`,
     });
   }
 
-  let theVideoIndex = videoDatabase.findIndex(({ id }) => id === reqId);
-  if (theVideoIndex < 0) {
-    return response.status(400).json({
-      result: "failure",
-      message: `No video with the ID '${request.params.id}' exists`,
+  let query = "SELECT * FROM videos_table WHERE id = $1";
+
+  client
+    .query(query, [reqID])
+    .then((result) => {
+      let reply = result.rows;
+      if (reply.length === 0) {
+        return response.status(400).json({
+          result: "failure",
+          message: `No video with the ID '${request.params.id}' exists.`,
+        });
+      }
+      return response.json(reply);
+    })
+    .catch((error) => {
+      return response.status(500).json({ result: "failure", message: error });
     });
-  }
-  response.json(videoDatabase[theVideoIndex]); // Return selected video
 });
 
 /*
@@ -64,24 +88,25 @@ POST - This endpoint is used to add a video to the API.
 
 FORMAT EXPECTED
 {
-  "title": "",
-  "url": ""
+  "title": "string",
+  "url": "string"
+  "rating": number;
 }
 
 #### Example Response
 
-If successful:
+If successful returns the new ID number:
 
 {
-  "id": 8 CHARACTERS
+  "id": a number > 0
 }
 
 
 If not successful
 
 {
-  "result": "failure",
-  "message": "Video could not be saved"
+  {result: "failure",
+  message: 'Error message'
 }
 
 Tested with Postman
@@ -93,32 +118,22 @@ app.post("/", (request, response) => {
   if (!title || !url) {
     return response.status(400).json({
       result: failure,
-      message: `Error: ensure that both the 'title' and 'url' fields are not blank`,
+      message: `Error: ensure that both the 'title' and 'url' fields are not blank.`,
     });
   } else {
-    // Ensure 'id' is unique
-
-    while (true) {
-      newId = uid(); // Generate a unique ID
-      if (!videoDatabase.some((element) => element.id === newId)) break;
-    }
-
-    videoDatabase.push({
-      id: newId,
-      title: title,
-      url: url,
-      timestamp: Date.now(),
-      rating: 0,
-    });
-
-    response.json({ id: newId }); // Return the id of the new entry
-
-    // Update locally
-    fs.writeFileSync(filename, JSON.stringify(videoDatabase), function (err) {
-      if (err) throw err;
-    });
-    // console.log("The file was saved!");
+    // Insert New Record into the SQL Database
+    let timestamp = Date.now();
+    const query = `INSERT INTO videos_table (title, url, rating, timestamp) VALUES ($1, $2, $3, $4)
+                     RETURNING id`;
+    client
+      .query(query, [title, url, 0, timestamp])
+      .then((result) => response.json({ id: result.rows[0].id })) // Return the id of the new entry
+      .catch((error) => {
+        console.error(error);
+        return response.status(500).json({ result: "failure", message: error });
+      });
   }
+  return;
 });
 
 /*
@@ -127,37 +142,37 @@ Tested with Postman
 */
 
 app.delete("/:id", (request, response) => {
-  let reqId = request.params.id;
-  if (reqId.length !== 8) {
+  const reqID = Number(request.params.id);
+  if (Number.isNaN(reqID) || !Number.isSafeInteger(reqID) || reqID <= 0) {
     return response.status(400).json({
       result: "failure",
-      message: `'${reqId}' must be 8 characters long`,
+      message: `'${request.params.id}' has been rejected because an ID must be a positive, nonzero integer.`,
     });
   }
 
-  let theVideoIndex = videoDatabase.findIndex(({ id }) => id === reqId);
-  if (theVideoIndex < 0) {
-    return response.status(400).json({
-      result: "failure",
-      message:
-        "Video could not be deleted because no video with the ID '${reqId}' exists`",
+  client
+    .query("SELECT * FROM videos_table WHERE id=$1", [reqID])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        return response.status(400).json({
+          result: "failure",
+          message: `Video could not be deleted because no video with the ID '${reqID}' exists.`,
+        });
+      } else {
+        client
+          .query("DELETE FROM videos_table WHERE id=$1", [reqID])
+          .then(() => response.json({})) // Denotes success)
+          .catch((error) => {
+            console.error(error);
+            response.status(500).json({ result: "failure", message: error });
+          });
+      }
     });
-  }
-
-  videoDatabase.splice(theVideoIndex, 1); // The Video has been removed IN PLACE!
-
-  response.json({}); // Denotes success
-
-  // Update locally
-  fs.writeFile(filename, JSON.stringify(videoDatabase), function (err) {
-    if (err) throw err;
-    // console.log("Successful deletion");
-  });
+  return;
 });
 
 // app.listen(process.env.PORT);
 
 app.listen(port, () =>
-  // console.log(`Listening on port ${port}`)
-  console.log("Your Backend Service is Running")
+  console.log(`Your Backend Service is Running; listening on port ${port}`)
 );

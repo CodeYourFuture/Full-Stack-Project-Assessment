@@ -18,7 +18,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "node ../server/server.js & react-scripts start",
+    "start": "DATABASE_URL=postgres://jvctyphetsoqjp:361ec714b44c73f2c45a078cff499adce4cbbaa26e5ebf1abf56459c14f68246@ec2-52-22-136-117.compute-1.amazonaws.com:5432/dckr3cetmr3i0t node ../server/server.js & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

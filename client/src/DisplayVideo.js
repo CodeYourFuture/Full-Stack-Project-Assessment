@@ -1,15 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-function DisplayVideo({
-  videoIndex,
-  videoId,
-  videoUrl,
-  videoRating,
-  videoInfo,
-}) {
-
-
+function DisplayVideo({ videoIndex, videoUrl, videoRating, videoInfo }) {
   const incrementVote = () => {
     setAnUpdate({ increment: videoIndex });
   };

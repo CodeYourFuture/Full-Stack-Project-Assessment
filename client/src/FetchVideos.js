@@ -15,7 +15,6 @@ const FetchVideos = (props) => {
           <DisplayVideo
             key={index}
             videoIndex={element}
-            videoId={video.id}
             videoUrl={video.url}
             videoRating={video.rating}
             videoInfo={props.videoInfo}
