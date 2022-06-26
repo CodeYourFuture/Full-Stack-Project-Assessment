@@ -1,0 +1,4 @@
+{"scripts": {
+   "start": "node <sub-directory>/server.js",
+   "dev": "nodemon <sub-directory>/server.js"
+ }}
