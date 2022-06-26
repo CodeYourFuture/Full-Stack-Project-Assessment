@@ -176,6 +176,7 @@
     display: grid;
     grid-template-columns: auto auto;
     align-items: end;
+    padding-bottom: 3em;
   }
 
   h2 {

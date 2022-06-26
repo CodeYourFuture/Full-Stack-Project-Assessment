@@ -29,6 +29,3 @@ export function insertVideo(videoObj) {
   })
   .catch(error => console.log(error));
 }
-
-
-  
