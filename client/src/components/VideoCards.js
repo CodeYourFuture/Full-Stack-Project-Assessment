@@ -15,17 +15,10 @@ function VideoCards() {
 
   function removeVideo(id) {
     deleteVideo(id);
-     getVideoData().then((videos) => {
-       setVideoList(videos);
-     });
   }
 
  async function createVideo(videoObj) {
      await insertVideo(videoObj)
-
-    getVideoData().then((videos) => {
-       setVideoList(videos);
-     });
   }
 
   if(videoList) {

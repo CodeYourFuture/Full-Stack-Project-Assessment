@@ -25,19 +25,19 @@ async function addVideo(videoObj) {
     });
 }
 
- function deleteVideo(id) {
+function deleteVideo(id) {
   return Videos.find({id})
-                .then(result => {
-                    if(result.length) {
-                        console.log(JSON.stringify(result))
-                        return Videos.deleteOne({id: id});
-                    } else {
-                        return {
-                            result: "failure",
-                            message: "Video could not be deleted because it does not exist",
-                        };  
-                    }
-                });
+    .then(result => {
+        if(result.length) {
+            console.log(JSON.stringify(result))
+            return Videos.deleteOne({id: id});
+        } else {
+            return {
+                result: "failure",
+                message: "Video could not be deleted because it does not exist",
+            };  
+        }
+    });
 }
 
 module.exports = { getVideos, addVideo, deleteVideo };

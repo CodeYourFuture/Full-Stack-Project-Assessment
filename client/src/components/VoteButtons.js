@@ -14,7 +14,6 @@ function VoteButtons() {
     return (
       <div>
         <div className="vote-buttons">
-          {/* up vote button */}
           <div className="upvote-button-container">
             <button
               onClick={incrementCount}
@@ -24,12 +23,10 @@ function VoteButtons() {
             </button>
           </div>
 
-          {/* no of votes */}
           <div className="no-of-votes-for-video">
             <p className="votes">{vote}</p>
           </div>
 
-          {/* down vote button */}
           <div className="downvote-button-container">
             <button
               onClick={decrementCount}

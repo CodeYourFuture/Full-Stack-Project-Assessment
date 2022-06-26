@@ -1,5 +1,7 @@
 export function getVideoData() {
-    return fetch("http://localhost:5000/")
+    return fetch("http://localhost:5000/", {
+      method: "GET"
+    })
       .then((response) => response.json());
 }
 
@@ -18,10 +20,6 @@ export function deleteVideo(videoId) {
   .then((res) => res.json())
   .then((data) => console.log(data))
   .catch((error) => console.log(error));
-  // .then((res) => res.json())
-  // .catch(error => {
-  //   console.log(error)
-  // });
 }
 
 export function insertVideo(videoObj) {
@@ -39,7 +37,6 @@ export function insertVideo(videoObj) {
 })
   .then(res => res.json())
   .catch(error => console.log(error));
-
 }
 
 
