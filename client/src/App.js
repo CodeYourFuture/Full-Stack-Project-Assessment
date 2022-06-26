@@ -33,7 +33,7 @@ function App() {
       {displayForm ? (
         <Form
           videos={videos}
-          SetVideos={setVideos}
+          setVideos={setVideos}
           getData={getData()}
           setDisplayForm={setDisplayForm}
         />
