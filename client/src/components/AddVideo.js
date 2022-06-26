@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import SimpleReactValidator from "simple-react-validator";
+
+function useForceUpdate() {
+  const [value, setValue] = useState(0);
+  return () => setValue((value) => value + 1);
+}
 
 function AddVideo(props) {
+    const forceUpdate = useForceUpdate();
+    const simpleValidator = useRef(new SimpleReactValidator());
     const [videoTitleInput, setVideoTitleInput] = useState("");
     const [videoUrlInput, setVideoUrlInput] = useState("");
-
     function handleTitleChange(event) {
       setVideoTitleInput(event.target.value);
     }
@@ -14,9 +21,16 @@ function AddVideo(props) {
 
     function addVideoObj() {
       const videoObj = {title: videoTitleInput, url: videoUrlInput};
-      props.createVideo(videoObj);
-      setVideoTitleInput("");
-      setVideoUrlInput("");
+
+      const videoObjValid = simpleValidator.current.allValid();
+      if (videoObjValid) {
+        props.createVideo(videoObj);
+        setVideoTitleInput("");
+        setVideoUrlInput("");
+      } else{
+        simpleValidator.current.showMessages();
+        forceUpdate();
+      }
     }
 
     function handleReset() {
@@ -33,18 +47,26 @@ function AddVideo(props) {
           <label>
             TITLE
             <input
+              name="videoTitle"
               className="form-control"
               type="text"
               value={videoTitleInput}
               onChange={handleTitleChange}
             />
           </label>
+
+          {simpleValidator.current.message(
+            "videoTitle",
+            videoTitleInput,
+            "required"
+          )}
         </div>
 
         <div className="add-url">
           <label>
             URL
             <input
+              name="videoUrl"
               className="form-control"
               type="url"
               placeholder="https://example.com"
@@ -52,6 +74,11 @@ function AddVideo(props) {
               onChange={handleUrlChange}
             />
           </label>
+          {simpleValidator.current.message(
+            "videoUrl",
+            videoUrlInput,
+            "required|url"
+          )}
         </div>
 
         <div className="buttons-container">
