@@ -21,7 +21,7 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [newVidUrl, setNewVidUrl] = useState('');
   const [newVidTitle, setNewVidTitle] = useState(''); 
-  const [newVidId, setNewVidId] = useState(0); 
+  const [newVidId, setNewVidId] = useState(''); 
   
   
   useEffect(() =>{
@@ -63,7 +63,7 @@ function App() {
     newlyAddedVideo.video_rating = 0
 
     
-    let newData = [newlyAddedVideo, ...videos, ]
+    let newData = [...videos, newlyAddedVideo]
     setVideos(newData)
     
     
