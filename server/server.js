@@ -4,12 +4,12 @@ const { Pool } = require("pg");
 const cors = require("cors");
 
 const pool = new Pool({
-  user: "tenny",
-  host: "localhost",
-  database: "cyf_youtube",
-  password: "",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
 
 app.use(cors());
 app.use(express.json());

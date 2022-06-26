@@ -43,7 +43,6 @@ export default function Main() {
     event.preventDefault();
 
     const newVideo = {
-      id: videos.length,
       title: addFormData.title,
       url: addFormData.url,
       rating: addFormData.rating,
