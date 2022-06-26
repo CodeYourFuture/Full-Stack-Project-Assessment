@@ -82,30 +82,54 @@ function App() {
   const [addAVideoFlag, setADDAVideoFlag] = useState(false);
   const [sortDescendingOrder, setSortDescendingOrder] = useState(true);
 
+  function doNewSort() {
+    // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
+    sortedIndices = Array.from(Array(videosList.length).keys());
+
+    // Descending/Ascending Ratings Order
+
+    /*   
+    sortedIndices.sort((a, z) =>
+      sortDescendingOrder
+        ? videosList[z].rating - videosList[a].rating
+        : videosList[a].rating - videosList[z].rating
+    );
+    */
+
+    if (sortDescendingOrder) {
+      sortedIndices.sort(
+        (a, z) =>
+          videosList[z].rating - videosList[a].rating ||
+          videosList[z].title.localeCompare(videosList[a].title)
+      );
+    } else {
+      sortedIndices.sort(
+        (a, z) =>
+          videosList[a].rating - videosList[z].rating ||
+          videosList[a].title.localeCompare(videosList[z].title)
+      );
+    }
+
+    videoInfo = produce_videoInfo(videosList);
+  }
+
+  // Fetch the entire list of videos from the database
   async function fetchVideoList() {
     const response = await fetch(THEPATH).catch((error) => {
       console.error("Error:", error);
       throw error;
     });
 
-    const data = await response.json();
-    videosList = data;
-
+    const data = await response.json(); // Convert List to JSON format
     /* 
    Initialise videosList with fetched videos 
     The format is a list
     [ {"id":"00523523","title":"Never Gonna Give You Up","url":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","rating":23,
        "timestamp":1655481349579}, ...]
-  */
+    */
+    videosList = data;
 
-    sortedIndices = Array.from(Array(videosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
-    // Descending/Ascending Ratings Order
-    sortedIndices.sort((a, z) =>
-      sortDescendingOrder
-        ? videosList[z].rating - videosList[a].rating
-        : videosList[a].rating - videosList[z].rating
-    );
-    videoInfo = produce_videoInfo(videosList);
+    doNewSort(); // Sort in Descending/Ascending Ratings Order
     tempObject = {
       videosList: videosList,
       titlesIndices: sortedIndices,
@@ -154,11 +178,28 @@ function App() {
       );
 
     let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
+
+    /*   
     sortedIndices.sort((a, z) =>
       sortDescendingOrder
         ? newVideosList[z].rating - newVideosList[a].rating
         : newVideosList[a].rating - newVideosList[z].rating
     );
+ */
+
+    if (sortDescendingOrder) {
+      sortedIndices.sort(
+        (a, z) =>
+          videosList[z].rating - videosList[a].rating ||
+          videosList[z].title.localeCompare(videosList[a].title)
+      );
+    } else {
+      sortedIndices.sort(
+        (a, z) =>
+          videosList[a].rating - videosList[z].rating ||
+          videosList[a].title.localeCompare(videosList[z].title)
+      );
+    }
 
     // Update the Video Info List
     videoInfo = videoInfo
@@ -208,6 +249,8 @@ function App() {
     return videoInfo;
   }
 
+  /*** END OF FUNCTION DEFINITIONS ***/
+
   // Fetch all the videos via the API
   if (firstTime && !stateObject) {
     fetchVideoList();
@@ -240,11 +283,16 @@ function App() {
       let videoIndex = anyUpdates.increment;
       let newList = [...stateObject.videosList];
       ++newList[videoIndex].rating;
+
+      /*
+        Is the incremented ratings now larger than its adjacent video?
+        If yes then reSort display
+        otherwise update display with incremented value
+      */
+
       setStateObject({
         ...stateObject,
         videosList: newList,
-
-        anyUpdates: null,
       });
       return;
     }
@@ -276,11 +324,28 @@ function App() {
       });
       let sortedIndices = Array.from(Array(newVideosList.length).keys()); // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
       // Descending/Ascending Ratings Order
+
+      /*     
       sortedIndices.sort((a, z) =>
         sortDescendingOrder
           ? newVideosList[z].rating - newVideosList[a].rating
           : newVideosList[a].rating - newVideosList[z].rating
       );
+     */
+
+      if (sortDescendingOrder) {
+        sortedIndices.sort(
+          (a, z) =>
+            newVideosList[z].rating - newVideosList[a].rating ||
+            newVideosList[z].title.localeCompare(newVideosList[a].title)
+        );
+      } else {
+        sortedIndices.sort(
+          (a, z) =>
+            newVideosList[a].rating - newVideosList[z].rating ||
+            newVideosList[a].title.localeCompare(newVideosList[z].title)
+        );
+      }
 
       // Update the Video Info List with the new entry
       let theObject = handleVideoInfo(
@@ -351,6 +416,7 @@ function App() {
 
   function handleSortOrder() {
     setSortDescendingOrder(!sortDescendingOrder);
+
     // Reverse the Sort Order
     let sortedTitles = [...stateObject.titlesIndices].reverse();
     let sortedDisplayed = [...stateObject.displayedIndices].reverse();
@@ -379,11 +445,15 @@ function App() {
     videosList = stateObject.videosList,
     enteredString = stateObject.textEntered
   ) {
-    return titlesIndices.filter((element) =>
-      videosList[element].title
-        .toLowerCase()
-        .includes(enteredString.toLowerCase())
-    );
+    if (enteredString === "") {
+      return [...titlesIndices]; // Shallow Copy
+    } else {
+      return titlesIndices.filter((element) =>
+        videosList[element].title
+          .toLowerCase()
+          .includes(enteredString.toLowerCase())
+      );
+    }
   }
 
   // Delay rendering until 'stateObject' is setup
