@@ -1,6 +1,7 @@
-// Modify server.js to read SQL Table 'videos-table'
+/* Modified server.js to read SQL Table 'videos-table'
+   That is, The Front End now connects to the SQL Database hosted at
+https://full-stack-project-assignment.herokuapp.com/ 
 
-/*
 
 URI is the PostgreSQL connection string
 postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DB>

@@ -8,6 +8,10 @@ import { UserContext } from "./UserContext.js";
 import { youtube_regex } from "./youtube_regex.js";
 
 /*
+
+The Front End now connects to the SQL Database hosted at
+https://full-stack-project-assignment.herokuapp.com/ 
+
 CONNECT TO HEROKU APP INSTEAD
 
 const THEPORT = 3004;
@@ -82,7 +86,7 @@ function App() {
   const [addAVideoFlag, setADDAVideoFlag] = useState(false);
   const [sortDescendingOrder, setSortDescendingOrder] = useState(true);
 
-  function doNewSort() {
+  function doNewSort(videosList) {
     // 0 to N-1 {0,1,2,...N-1} - N being the length of the videos inputted
     sortedIndices = Array.from(Array(videosList.length).keys());
 
@@ -124,12 +128,12 @@ function App() {
     /* 
    Initialise videosList with fetched videos 
     The format is a list
-    [ {"id":"00523523","title":"Never Gonna Give You Up","url":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","rating":23,
+    [ {"id":"523523","title":"Never Gonna Give You Up","url":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","rating":23,
        "timestamp":1655481349579}, ...]
     */
     videosList = data;
 
-    doNewSort(); // Sort in Descending/Ascending Ratings Order
+    doNewSort(videosList); // Sort in Descending/Ascending Ratings Order
     tempObject = {
       videosList: videosList,
       titlesIndices: sortedIndices,
@@ -249,6 +253,68 @@ function App() {
     return videoInfo;
   }
 
+  /*
+        Now that the ratings have been incremented/decremented 
+        Is the new ratings value larger or smaller than its adjacent video's rating,
+        depending on the type of sort?
+        If Yes, then perform a New Sort before displaying
+        otherwise update display with new ratings value
+  */
+
+  function sortAndRedisplay(newList, videoIndex) {
+  let sortFlag = false;
+  // Determine the video's position in the Sorted List
+  let posOfVideo = stateObject.titlesIndices.findIndex((element) => element === videoIndex);
+
+  // DESCENDING ORDER 9 8 7 6 5 ...
+  if (sortDescendingOrder) {
+      // If in DESCENDING ORDER and the new value is now larger than the one on the left, then perform a new Sort
+      if (posOfVideo !== 0 &&
+          newList[videoIndex].rating >
+            newList[stateObject.titlesIndices[posOfVideo - 1]].rating) {
+                   sortFlag = true;
+      }
+      // If in DESCENDING ORDER and the new value is now smaller than the one on the right, then perform a new Sort
+      if (!sortFlag && posOfVideo + 1 !== newList.length &&
+          newList[videoIndex].rating <
+            newList[stateObject.titlesIndices[posOfVideo + 1]].rating) {
+                   sortFlag = true;
+      }
+  }
+  
+  // ASCENDING ORDER 1 2 3 4 5 ...
+  if (!sortFlag && !sortDescendingOrder) {
+      // If in ASCENDING ORDER and the new value is now larger than the one on the right, then perform a new Sort
+      if (posOfVideo + 1 !== newList.length &&
+          newList[videoIndex].rating >
+            newList[stateObject.titlesIndices[posOfVideo + 1]].rating) {
+                   sortFlag = true;
+      }
+      // If in ASCENDING ORDER and the new value is now smaller than the one on the left, then perform a new Sort
+      if (!sortFlag && posOfVideo !== 0 &&
+          newList[videoIndex].rating <
+            newList[stateObject.titlesIndices[posOfVideo - 1]].rating) {
+                   sortFlag = true;
+      }
+  }
+  
+  if (sortFlag) { // Perform a new sort
+                    doNewSort(newList); // ReSort in Descending/Ascending Ratings Order
+                    setStateObject({
+                                      ...stateObject,
+                                      videosList: newList,
+                                      titlesIndices: sortedIndices,
+                                      displayedIndices: sortedIndices,
+                    });
+                } else {
+                         // otherwise update the display with the new rating value
+                         setStateObject({
+                            ...stateObject,
+                            videosList: newList,
+                          });
+                        }
+}
+
   /*** END OF FUNCTION DEFINITIONS ***/
 
   // Fetch all the videos via the API
@@ -283,17 +349,7 @@ function App() {
       let videoIndex = anyUpdates.increment;
       let newList = [...stateObject.videosList];
       ++newList[videoIndex].rating;
-
-      /*
-        Is the incremented ratings now larger than its adjacent video?
-        If yes then reSort display
-        otherwise update display with incremented value
-      */
-
-      setStateObject({
-        ...stateObject,
-        videosList: newList,
-      });
+      sortAndRedisplay(newList,videoIndex)
       return;
     }
 
@@ -303,10 +359,7 @@ function App() {
       let videoIndex = anyUpdates.decrement;
       let newList = [...stateObject.videosList];
       --newList[videoIndex].rating;
-      setStateObject({
-        ...stateObject,
-        videosList: newList,
-      });
+      sortAndRedisplay(newList, videoIndex);
       return;
     }
 

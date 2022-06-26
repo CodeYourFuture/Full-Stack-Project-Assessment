@@ -1,6 +1,10 @@
 import { youtube_regex } from "./youtube_regex.js";
 
 /*
+The Front End now connects to the SQL Database hosted at
+https://full-stack-project-assignment.herokuapp.com/ 
+
+
 CONNECT TO HEROKU APP INSTEAD
 
 const THEPORT = 3004;

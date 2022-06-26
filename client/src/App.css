@@ -13,7 +13,7 @@ h1 {
 
 .App {
   text-align: center;
-  background-color: antiquewhite; 
+  background-color: antiquewhite; /* #faebd7 */
 }
 
 .asTextButton {
@@ -126,8 +126,8 @@ input:focus {
 
 .top-item {
   flex: 1 1 33%;
-  margin: 6px;
-  padding: 6px;
+  margin: 0.375rem; /* 6px; */
+  padding: 0.375rem; /* 6px; */
 }
 
 .flex-container {
@@ -300,13 +300,13 @@ input:focus {
 /* The snackbar - position it at the top of the screen */
 #snackbar {
   visibility: hidden; /* Hidden by default. */
-  min-width: 250px; /* Set a default minimum width */
+  min-width: 15.625rem; /* Set a default minimum width 250px */
   background-color: #333; /* Black background color */
   color: #fff; /* White text color */
   text-align: center; /* Centered text */
-  border-radius: 2px; /* Rounded borders */
-  padding: 16px; /* Padding */
-  margin-left: 40px;
+  border-radius: 0.125rem; /* Rounded borders 2px */
+  padding: 1rem; /* Padding 16px */
+  margin-left: 2.5rem; /* 40px */
   position: fixed; /* Sit on top of the screen */
   top: var(--snackbar-top); /* 45px from the top */
   z-index: 1; /* Add a z-index if needed */
@@ -408,5 +408,5 @@ However, delay the fade out process for 4.8 seconds */
 }
 
 .right-spacing {
-  margin-right: -12px;
+  margin-right: -0.75rem; /* -12px */
 }
