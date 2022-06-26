@@ -2,24 +2,15 @@ export function getVideoData() {
     return fetch("http://localhost:5000/", {
       method: "GET"
     })
-      .then((response) => response.json());
+    .then((response) => response.json());
 }
 
-export function deleteVideo(videoId) {
-  fetch(`http://localhost:5000/${videoId}`, {
+export async function deleteVideo(videoId) {
+  await fetch(`http://localhost:5000/${videoId}`, {
     method: "DELETE",
-  })
-  .then((res) => {
-    if (res.ok) {
-      console.log("HTTP request successful");
-    } else {
-      console.log("HTTP request unsuccessful");
-    }
-    return res;
-  })
-  .then((res) => res.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.log(error));
+  }).catch(error => {
+    console.log('error: ', error);
+  });
 }
 
 export function insertVideo(videoObj) {
@@ -31,11 +22,11 @@ export function insertVideo(videoObj) {
     body: JSON.stringify(videoObj)
   })
   .then(res => {
-    if (res.ok) { console.log("HTTP request successful") }
-    else { console.log("HTTP request unsuccessful") }
+    if (!res.ok) {
+      console.log("HTTP request unsuccessful"); 
+    }
     return res
-})
-  .then(res => res.json())
+  })
   .catch(error => console.log(error));
 }
 

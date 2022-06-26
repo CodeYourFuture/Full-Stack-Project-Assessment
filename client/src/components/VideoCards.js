@@ -13,12 +13,21 @@ function VideoCards() {
     });
   }, []);
 
-  function removeVideo(id) {
-    deleteVideo(id);
+  async function removeVideo(id) { 
+    await deleteVideo(id)
+    
+    getVideoData().then(videos => {
+      setVideoList(videos);
+    })
   }
 
- async function createVideo(videoObj) {
-     await insertVideo(videoObj)
+  async function createVideo(videoObj) {
+    await insertVideo(videoObj);
+    getVideoData()
+    .then((videos) => {
+       setVideoList(videos);
+    })
+    .catch((error) => console.log(error));
   }
 
   if(videoList) {
