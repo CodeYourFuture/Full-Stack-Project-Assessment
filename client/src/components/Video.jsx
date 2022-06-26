@@ -11,7 +11,7 @@ const Video = () => {
         <span>
             <h3>My Video</h3>   
              
-            /* put add  search component */
+         {/* /* put add  search component */}
             {mydata.map( (movie)=>
             <VideoDetails movie={movie}/>
           )}
