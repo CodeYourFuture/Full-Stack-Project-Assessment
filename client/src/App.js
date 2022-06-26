@@ -63,10 +63,10 @@ function App() {
     newlyAddedVideo.video_rating = 0
 
     
-    let newData = [...videos, newlyAddedVideo]
+    let newData = [newlyAddedVideo, ...videos, ]
     setVideos(newData)
-    console.log(videos)
-    // alert('Your video has been added to the end of list')
+    
+    
     
   }
   
