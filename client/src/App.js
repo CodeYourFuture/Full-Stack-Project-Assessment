@@ -21,9 +21,16 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [newVidUrl, setNewVidUrl] = useState('');
   const [newVidTitle, setNewVidTitle] = useState(''); 
-  let [newlyAddedVideo, setNewlyAddedVideo] = useState({})
+  const [newVidId, setNewVidId] = useState(0); 
   
-  function removeVideo(id) {
+  
+  useEffect(() =>{
+    fetch('http://localhost:8000/')
+    .then(resp => resp.json())
+    .then(data => setVideos(data))
+  }, [])
+    
+   function removeVideo(id) {
     const filteredVideos = videos.filter(vid => {
       return vid.video_id !== id
     })
@@ -48,26 +55,21 @@ function App() {
 
   function addVideo(e) {
     e.preventDefault();
+    const newlyAddedVideo = {}
+    setNewVidId(videos.length+1)
+    newlyAddedVideo.video_id = newVidId;
     newlyAddedVideo.video_title = newVidTitle;
     newlyAddedVideo.video_url = newVidUrl;
     newlyAddedVideo.video_rating = 0
 
-
     
-    let newData = videos.concat(newlyAddedVideo)
+    let newData = [...videos, newlyAddedVideo]
     setVideos(newData)
-    alert('Your video has been added to the end of list')
+    console.log(videos)
+    // alert('Your video has been added to the end of list')
     
   }
   
-  useEffect(() =>{
-    fetch('http://localhost:8000/')
-    .then(resp => resp.json())
-    .then(data => setVideos(data))
-  }, [])
-    
-  
-  console.log(videos)
   const particlesInit = async (main) => {
     console.log(main);
 

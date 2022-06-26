@@ -8,7 +8,7 @@ const {Pool} = require('pg')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5500;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -33,6 +33,14 @@ app.get("/", (req, res) => {
       res.status(500).json(error);
     });
 });
+// app.post("/", (req, res) => {
+//   const id = uuid.v4()
+//   const title = req.body.title;
+//   const url = req.body.url;
+  
+//   pool.query("INSERT INTO videos(video_id, video_title, video_url) VALUES($1, $2, $3)", [id, title, url])
+//   .then(result => res.send(result))
+// });
 
 
 // add videos 
