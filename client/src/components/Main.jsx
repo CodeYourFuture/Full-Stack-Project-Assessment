@@ -14,6 +14,19 @@ export default function Main() {
     rating: 0,
   });
 
+  const getData = () => {
+    axios.get("http://localhost:4000/").then((res) => {
+      setVideos(res.data);
+    });
+  }; //getData() to display fetched data
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/").then((res) => {
+      //console.log(res);
+      setVideos(res.data);
+    });
+  }, []);
+
   const handleAddFormChange = (event) => {
     event.preventDefault();
 
@@ -30,6 +43,7 @@ export default function Main() {
     event.preventDefault();
 
     const newVideo = {
+      id: videos.length,
       title: addFormData.title,
       url: addFormData.url,
       rating: addFormData.rating,
@@ -59,16 +73,6 @@ export default function Main() {
       alert("invalid Youtube url");
     }
   };
-
-  const getData = () => {
-    axios.get("http://localhost:4000/").then((res) => {
-      setVideos(res.data);
-    });
-  }; //getData() to display fetched data
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const handleDeleteClick = (videoId) => {
     axios

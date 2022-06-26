@@ -2,7 +2,7 @@ import React from "react";
 
 const Form = ({ setDisplayForm, handleAddFormSubmit, handleAddFormChange }) => {
   return (
-    <form onSubmit={handleAddFormSubmit} autocomplete="off">
+    <form onSubmit={handleAddFormSubmit} autoComplete="off">
       <label>
         <input
           type="text"
