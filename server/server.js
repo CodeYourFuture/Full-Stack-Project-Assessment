@@ -37,34 +37,38 @@ app.get("/:id", (req, res) => {
   if (videoId) {
     pool.query(`SELECT * FROM videos WHERE id = ${videoId}`)
       .then((results) => res.json(results.rows))
-    res.send()
-    res.status(200).json(videoId);
-  } else {
-    res.status(400).json({
-      "request": "Unsuccessful",
-      "message": "id is not locatable - please enter valid id"
-      // const videoById = videos.filter(video => video.id === id);
-    })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send(error);
+      })
+    // res.send()
+    // res.status(200).json(videoId);
+    // } else {
+    //   res.status(400).json({
+    //     "request": "Unsuccessful",
+    //     "message": "id is not locatable - please enter valid id"
+    // const videoById = videos.filter(video => video.id === id);
   }
 })
 
 app.delete("/:id", (req, res) => {
   const videoId = parseInt(req.params.id)
   if (videoId) {
-    pool.query(`DELETE * FROM videos WHERE id = ${videoId}`)
-      .then((results) => res.json(results.rows))
-    res.status(200).json(videos.filter(video => video.id !== id));
-  } else {
-    res.status(400).json({
-      "request": "Unsuccessful",
-      "message": "id is not locatable - video could not be deleted"
-      // const deleteById = videos.filter(video => video.id === id);
-    })
+    pool.query(`DELETE FROM videos WHERE id = ${videoId}`)
+      .then(() => res.send("Video deleted successfully;"))
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send(error);
+      })
+    // } else {
+    //   res.status(400).json({
+    //     "request": "Unsuccessful",
+    //     "message": "id is not locatable - video could not be deleted"
+    // const deleteById = videos.filter(video => video.id === id);
+
+    // let idsUsed = videos.map(video => video.id);
   }
 })
-
-// let idsUsed = videos.map(video => video.id);
-
 app.post('/', (req, res) => {
   const newTitle = req.body.title;
   const newUrl = req.body.title;
