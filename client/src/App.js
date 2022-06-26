@@ -5,7 +5,7 @@ import AddVideo from "./AddVideo";
 function App() {
   const [videos, setVideos] = useState([]);
   const [videoOrder, setVideoOrder] = useState("DESC")
-  const urlToFetch = "http://localhost:5000/";
+  const urlToFetch = "https://full-stack-matilda-ako.herokuapp.com/";
 
   const getVideos = (videoOrder) => {
     fetch(`${urlToFetch}?order=${videoOrder}`)
