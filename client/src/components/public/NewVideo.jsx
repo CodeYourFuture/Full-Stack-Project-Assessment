@@ -3,8 +3,13 @@ import "../../styles/newvideo.css";
 import UserContext from "../../context/UserContext";
 
 const NewVideo = () => {
-  const { setNewVideo, videoInfo, handleChange, addNewVideoHandler } =
-    useContext(UserContext);
+  const {
+    setNewVideo,
+    videoInfo,
+    handleChange,
+    addNewVideoHandler,
+    setVideoInfo,
+  } = useContext(UserContext);
 
   return (
     <article className="newvideo_container">
@@ -12,6 +17,7 @@ const NewVideo = () => {
         onSubmit={(e) => {
           e.preventDefault();
           addNewVideoHandler();
+          setVideoInfo("");
         }}
       >
         <div>
