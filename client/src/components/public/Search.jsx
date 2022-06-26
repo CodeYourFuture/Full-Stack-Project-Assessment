@@ -1,13 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
 import "../../styles/search.css";
 
 const Search = () => {
-  const { searchString, setSearchString, searchHandler } =
-    useContext(UserContext);
+  const {
+    searchString,
+    setSearchString,
+    searchHandler,
+    showAllVideosHandler,
+    isActive,
+    setIsActive,
+  } = useContext(UserContext);
 
   return (
     <div className="search-container">
+      {isActive === true && (
+        <button
+          className="all_Videos_btn"
+          type="submit"
+          onClick={() => {
+            showAllVideosHandler();
+            setIsActive(false);
+          }}
+        >
+          All Videos
+        </button>
+      )}
       <input
         className="search_bar"
         type="text"
@@ -17,15 +35,18 @@ const Search = () => {
           setSearchString(e.target.value);
         }}
       />
-      <button
-        className="search_btn"
-        type="submit"
-        onClick={() => {
-          searchHandler(searchString);
-        }}
-      >
-        Search
-      </button>
+      {isActive === false && (
+        <button
+          className="search_btn"
+          type="submit"
+          onClick={() => {
+            searchHandler(searchString);
+            searchString.length > 0 && setIsActive(true);
+          }}
+        >
+          Search
+        </button>
+      )}
     </div>
   );
 };

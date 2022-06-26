@@ -5,7 +5,7 @@ import "../../styles/header.css";
 const Header = () => {
   return (
     <header className="header">
-      <h2 className="cyf_title">Video Recommendation</h2>
+      <h1 className="cyf_title">Video Recommendation</h1>
       {/* <Search /> */}
     </header>
   );

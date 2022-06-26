@@ -13,6 +13,7 @@ const UserContext = createContext({
   searchHandler: () => {},
   searchString: "",
   setSearchString: () => {},
+  showAllVideosHandler: () => {},
 });
 
 export default UserContext;

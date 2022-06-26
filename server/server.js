@@ -119,8 +119,8 @@ app.post("/api/addnewvideo", async (req, res) => {
 
 app.get("/api/searchvideos", async (req, res) => {
   const search = req.query.search;
-  console.log(search);
-  const selectQuery = "SELECT * FROM videos WHERE title LIKE '%' || $1 || '%' ";
+  const selectQuery =
+    "SELECT * FROM videos WHERE title ILIKE '%' || $1 || '%' ";
 
   const videoSearched = await pool.query(selectQuery, [search]);
   if (videoSearched && videoSearched.rowCount > 0) {

@@ -17,3 +17,14 @@
   border: 3px solid #39af1b;
   border-radius: 12px;
 }
+.all_Videos_btn {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: #39af1b;
+  color: black;
+  border: 3px solid white;
+  transition-duration: 0.4s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+}

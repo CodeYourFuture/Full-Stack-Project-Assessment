@@ -10,6 +10,7 @@ const Context = ({ children }) => {
     rating: "",
   });
   const [searchString, setSearchString] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   const handleChange = (key, value) => {
     console.log(key, value);
@@ -88,7 +89,18 @@ const Context = ({ children }) => {
       } else {
         alert("Nothing found :((");
         setVideoData(searchedVideos);
+        setIsActive(true);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const showAllVideosHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/videos");
+      const myData = await response.json();
+      setVideoData(myData);
     } catch (error) {
       console.log(error);
     }
@@ -109,6 +121,9 @@ const Context = ({ children }) => {
         searchHandler,
         searchString,
         setSearchString,
+        showAllVideosHandler,
+        setIsActive,
+        isActive,
       }}
     >
       {children}
