@@ -21,8 +21,8 @@ function App() {
       rating: 0,
       title: newVidTitle,
       url: newVidUrl,
-      // date: Date(),
-      // id: displayVideo.length,
+      date: Date(),
+      id: displayVideo.length,
     };
     fetch("http://localhost:5000/", {
       method: "POST",
@@ -51,8 +51,19 @@ function App() {
   };
 
   const handleRemoveItem = (id) => {
-    const filteredVideos = displayVideo.filter((card) => card.id !== id);
-    setDisplayVideo(filteredVideos);
+    fetch(`http://localhost:5000/videos/${id}`, {
+      method: "DELETE",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+    }).then((response) => {
+      if (response.status === 200) {
+        let filteredVideos = displayVideo.filter((video) => video.id !== id);
+        setDisplayVideo(filteredVideos);
+      }
+    });
+
+    // const filteredVideos = displayVideo.filter((card) => card.id !== id);
+    //setDisplayVideo(filteredVideos);
   };
 
   return (
