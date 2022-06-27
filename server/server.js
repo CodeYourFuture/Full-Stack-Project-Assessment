@@ -63,14 +63,23 @@ app.post("/", (req, res) => {
 });
 
 app.get("/:id", (req, res) => {
-  const id = req.params.id;
-  client
-    .query("SELECT * FROM videos WHERE id = $1", [id])
-    .then((result) => res.json(result.rows))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
+  const id = Number(req.params.id);
+  if (!id || id < 600000) {
+    return res.status(400).json({ msg: `${id === "" ? "Id cannot be empty" : "Please add a valid id"}` });
+  } else
+    client
+      .query("SELECT * FROM videos WHERE id = $1", [id])
+      .then((result) => {
+        if (result.rows.length === 0) {
+          return res.json({ msg: "The requested video cannot be found" });
+        } else {
+          res.json({ videos: result.rows });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error });
+      });
 });
 
 app.delete("/:id", (req, res) => {
