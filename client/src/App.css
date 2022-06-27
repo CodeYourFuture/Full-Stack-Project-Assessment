@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300;400&family=Tiro+Devanagari+Marathi&display=swap");
 
-
 * {
   margin: 0;
   padding: 0;
   font-family: "Raleway", sans-serif;
 }
 
+.App {
+  background-color: #b8b8ff;
+}
 
 .video-container {
   position: relative;
@@ -29,6 +31,7 @@ iframe {
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .video-title-container {
   align-self: center;
   height: 100%;

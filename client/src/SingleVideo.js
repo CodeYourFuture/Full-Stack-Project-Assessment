@@ -23,7 +23,7 @@ const SingleVideo = ({ video, videoOrder, getVideos, urlToFetch }) => {
     getVideos(videoOrder);
   };
   return (
-    <Card sx={{ maxWidth: 450 }}>
+    <Card sx={{ maxWidth: 450 }} style={{ backgroundColor: "#eeebff" }}>
       <CardContent className="video-title-container">
         <Typography
           variant="h4"
