@@ -1,0 +1,31 @@
+form {
+    
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+input {
+    height: 50%;
+    width: 38%;
+    background-color: #85daed;
+    border: none;
+    border-radius: 25px;
+}
+input::placeholder {
+    text-align: center;
+}
+input:focus {
+    background-color: rgb(193, 242, 193);
+}
+button {
+    background: rgb(120, 64, 143);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+}

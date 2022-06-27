@@ -1,0 +1,16 @@
+export declare const generatedAttribute = "generated";
+export declare const randomColorValue = "random";
+export declare const midColorValue = "mid";
+export declare const touchEndEvent = "touchend";
+export declare const mouseDownEvent = "mousedown";
+export declare const mouseUpEvent = "mouseup";
+export declare const mouseMoveEvent = "mousemove";
+export declare const touchStartEvent = "touchstart";
+export declare const touchMoveEvent = "touchmove";
+export declare const mouseLeaveEvent = "mouseleave";
+export declare const mouseOutEvent = "mouseout";
+export declare const touchCancelEvent = "touchcancel";
+export declare const resizeEvent = "resize";
+export declare const visibilityChangeEvent = "visibilitychange";
+export declare const noPolygonDataLoaded = "No polygon data loaded.";
+export declare const noPolygonFound = "No polygon found, you need to specify SVG url in config.";

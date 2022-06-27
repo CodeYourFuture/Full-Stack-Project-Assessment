@@ -1,0 +1,50 @@
+import { DivEvent } from "../Options/Classes/Interactivity/Events/DivEvent";
+import { DivMode } from "../Enums/Modes/DivMode";
+import type { Engine } from "../engine";
+import type { IBounds } from "../Core/Interfaces/IBounds";
+import type { ICircleBouncer } from "../Core/Interfaces/ICircleBouncer";
+import type { ICoordinates } from "../Core/Interfaces/ICoordinates";
+import type { IDimension } from "../Core/Interfaces/IDimension";
+import type { IModeDiv } from "../Options/Interfaces/Interactivity/Modes/IModeDiv";
+import type { IOptions } from "../Options/Interfaces/IOptions";
+import type { IParticle } from "../Core/Interfaces/IParticle";
+import type { IParticlesOptions } from "../Options/Interfaces/Particles/IParticlesOptions";
+import { Options } from "../Options/Classes/Options";
+import { OutModeDirection } from "../Enums/Directions/OutModeDirection";
+import { ParticlesOptions } from "../Options/Classes/Particles/ParticlesOptions";
+import type { RecursivePartial } from "../Types/RecursivePartial";
+import type { SingleOrMultiple } from "../Types/SingleOrMultiple";
+declare global {
+    interface Window {
+        customRequestAnimationFrame: (callback: FrameRequestCallback) => number;
+        mozRequestAnimationFrame: (callback: FrameRequestCallback) => number;
+        oRequestAnimationFrame: (callback: FrameRequestCallback) => number;
+        msRequestAnimationFrame: (callback: FrameRequestCallback) => number;
+        webkitRequestAnimationFrame: (callback: FrameRequestCallback) => number;
+        customCancelRequestAnimationFrame: (handle: number) => void;
+        webkitCancelRequestAnimationFrame: (handle: number) => void;
+        mozCancelRequestAnimationFrame: (handle: number) => void;
+        oCancelRequestAnimationFrame: (handle: number) => void;
+        msCancelRequestAnimationFrame: (handle: number) => void;
+    }
+}
+export declare function isSsr(): boolean;
+export declare function animate(): (callback: FrameRequestCallback) => number;
+export declare function cancelAnimation(): (handle: number) => void;
+export declare function isInArray<T>(value: T, array: SingleOrMultiple<T>): boolean;
+export declare function loadFont(font?: string, weight?: string): Promise<void>;
+export declare function arrayRandomIndex<T>(array: T[]): number;
+export declare function itemFromArray<T>(array: T[], index?: number, useIndex?: boolean): T;
+export declare function isPointInside(point: ICoordinates, size: IDimension, offset: ICoordinates, radius?: number, direction?: OutModeDirection): boolean;
+export declare function areBoundsInside(bounds: IBounds, size: IDimension, offset: ICoordinates, direction?: OutModeDirection): boolean;
+export declare function calculateBounds(point: ICoordinates, radius: number): IBounds;
+export declare function deepExtend(destination: unknown, ...sources: unknown[]): unknown;
+export declare function isDivModeEnabled(mode: DivMode, divs: SingleOrMultiple<DivEvent>): boolean;
+export declare function divModeExecute(mode: DivMode, divs: SingleOrMultiple<DivEvent>, callback: (id: string, div: DivEvent) => void): void;
+export declare function singleDivModeExecute(div: DivEvent, callback: (selector: string, div: DivEvent) => void): void;
+export declare function divMode<T extends IModeDiv>(divs?: SingleOrMultiple<T>, element?: HTMLElement): T | undefined;
+export declare function circleBounceDataFromParticle(p: IParticle): ICircleBouncer;
+export declare function circleBounce(p1: ICircleBouncer, p2: ICircleBouncer): void;
+export declare function rectBounce(particle: IParticle, divBounds: IBounds): void;
+export declare function loadContainerOptions(engine: Engine, ...sourceOptionsArr: RecursivePartial<IOptions | undefined>[]): Options;
+export declare function loadParticlesOptions(...sourceOptionsArr: RecursivePartial<IParticlesOptions | undefined>[]): ParticlesOptions;
