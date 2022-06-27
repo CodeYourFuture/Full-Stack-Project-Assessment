@@ -61,8 +61,8 @@ app.post("/", (req, res) => {
       .then(() => {
         res.sendStatus(201);
       })
-      .catch(() => {
-        res.sendStatus(500);
+      .catch((error) => {
+        res.status(500).json(error);
       });
     // data.push({ title, url, id: id++ });
   }

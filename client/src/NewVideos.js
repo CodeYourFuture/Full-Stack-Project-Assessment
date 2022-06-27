@@ -43,7 +43,7 @@ if (matchYoutubeUrl(url)) props.setAllVideos((allVideos) => {
     .post("https://full-stack-project-assesment.herokuapp.com/", newVideo)
     .then((res) => {
       
-      if (res.status === 200) {
+      if (res.status === 201) {
         axios
           .get("https://full-stack-project-assesment.herokuapp.com/")
           .then((res) => {
