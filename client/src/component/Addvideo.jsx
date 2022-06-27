@@ -1,42 +1,22 @@
 import React, { useState } from "react";
 
-function AddVideo({ videoData }) {
+function AddVideo({ onAdd }) {
   const [showForm, SetShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [allData, setAllData] = useState(videoData);
 
   const handleShowForm = () => {
     SetShowForm(!showForm);
   };
-  const handleAddVideo = (event) => {
-    event.preventDefault();
 
-    const newVideoData = {
-      id: Math.floor(Math.random() * 1000),
-      title,
-      url,
-    };
-
-    fetch(videoData, {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(newVideoData),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-
-    setAllData((prevData) => [...prevData, newVideoData]);
-    handleShowForm();
+  const emptyForm = () => {
     setTitle("");
     setUrl("");
   };
-
   return (
     <div>
       {showForm ? (
-        <form onSubmit={handleAddVideo}>
+        <form onSubmit={(e) => onAdd(e, title, url)}>
           <div>
             <label htmlFor="title">Tile:</label>
             <input
@@ -62,7 +42,7 @@ function AddVideo({ videoData }) {
             <button type="button" onClick={handleShowForm}>
               Cancel
             </button>
-            <button>Add</button>
+            <button onClick={emptyForm}>Add</button>
           </div>
         </form>
       ) : (

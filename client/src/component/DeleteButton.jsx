@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Delete({ videoId }) {
-  const [removedId, setRemovedId] = useState([]);
-
-  function handleClick() {
-    setRemovedId([...removedId, videoId]);
-  }
-
+function Delete({ handleClick }) {
   return (
     <div>
       <button onClick={handleClick}>Remove</button>

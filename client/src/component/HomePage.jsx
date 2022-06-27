@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Video from "./component/Video";
-import Header from "./component/Header";
-import AddVideo from "./component/AddVideo";
+import VideoCell from "./VideoCell";
+import Header from "./Header";
+import AddVideo from "./AddVideo";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
@@ -9,6 +9,7 @@ function HomePage() {
   const getData = async () => {
     const res = await fetch("http://localhost:4000/api/videos");
     const data = await res.json();
+
     setVideos(data);
   };
 
@@ -16,11 +17,53 @@ function HomePage() {
     getData();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:4000/api/videos/${id}`, {
+        method: "DELETE",
+      });
+      setVideos(videos.filter((video) => video.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async (event, title, url) => {
+    event.preventDefault();
+    try {
+      await fetch(`http://localhost:4000/api/videos/`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          url: url,
+        }),
+      });
+      getData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <Header />
-      <AddVideo videoData={videos} />
-      <Video videoData={videos} />
+      <AddVideo onAdd={handleSubmit} />
+      {videos.map((video, index) => {
+        return (
+          <VideoCell
+            key={index}
+            id={video.id}
+            title={video.title}
+            url={video.url}
+            rating={video.rating}
+            onDelete={handleDelete}
+          />
+        );
+      })}
     </div>
   );
 }

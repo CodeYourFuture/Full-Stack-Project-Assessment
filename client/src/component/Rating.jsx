@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 
-function Rating(props) {
+const Rating = (props) => {
   const [vote, setVote] = useState(props.rating);
 
-  function handleClickUpVote() {
-    setVote((previousVote) => previousVote + 1);
-  }
+  const handleVote = (upVote) => {
+    setVote(upVote ? vote + 1 : vote - 1);
+  };
 
-  function handleClickDownVote() {
-    setVote((previousVote) => previousVote - 1);
-  }
   return (
     <div>
       <div className="rating">
-        <button onClick={handleClickUpVote}>UpVote</button>
+        <button
+          onClick={() => {
+            handleVote(true);
+          }}
+        >
+          UpVote
+        </button>
         <p>{vote}</p>
-        <button onClick={handleClickDownVote}>DownVote</button>
+        <button
+          onClick={() => {
+            handleVote(false);
+          }}
+        >
+          DownVote
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Rating;
