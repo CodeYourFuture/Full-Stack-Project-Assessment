@@ -4,7 +4,7 @@ import AddVideo from './AddVideo'
 import Search from '../details/Search'
 import Sort from '../details/Sort'
 import axios from 'axios'
-import { render } from 'react-dom'
+
 const path = 'https://youtube-videos-list.herokuapp.com/'
 
 const VideoList = (searchText) => {
