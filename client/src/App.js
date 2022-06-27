@@ -56,6 +56,13 @@ function App() {
       <VideosList delete={removeVideo} data={data} />
     );
 
+  //       useEffect(() => {
+  //     ...
+  //   }, []);
+
+  //   return <img src={imgSrc} />;
+  // }
+
   useEffect(() => {
     fetch(`http://localhost:5000/`)
       .then((res) => {
@@ -69,7 +76,7 @@ function App() {
         setData(data);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
   return (
     <div className="App">
       <Header />
