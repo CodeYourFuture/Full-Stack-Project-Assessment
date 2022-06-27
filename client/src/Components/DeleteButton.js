@@ -1,9 +1,12 @@
 const DeleteButton = (props) => {
   const { videoId, setData } = props;
   const deleteRequest = async () => {
-    const response = await fetch(`http://127.0.0.1:5000/${videoId}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://full-stack-project-videos.herokuapp.com/${videoId}`,
+      {
+        method: "DELETE",
+      }
+    );
     const data = await response.json();
     setData(data);
   };

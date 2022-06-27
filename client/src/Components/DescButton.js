@@ -5,7 +5,9 @@ const DescButton = (props) => {
   const { setData } = props;
 
   const changeOrder = async () => {
-    const response = await fetch("http://127.0.0.1:5000/?order=desc");
+    const response = await fetch(
+      "https://full-stack-project-videos.herokuapp.com/?order=desc"
+    );
     const data = await response.json();
     setData(data);
   };

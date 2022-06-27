@@ -5,7 +5,9 @@ const AscButton = (props) => {
   const { setData } = props;
 
   const changeOrder = async () => {
-    const response = await fetch("http://127.0.0.1:5000/?order=asc");
+    const response = await fetch(
+      "https://full-stack-project-videos.herokuapp.com/?order=asc"
+    );
     const data = await response.json();
     setData(data);
   };
