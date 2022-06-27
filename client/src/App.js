@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import exampleData from "./exampleData.js";
+// import exampleData from "./exampleData.js";
 import Header from "./Header";
 import SearchBar from "./SearchBar";
 import AddVideoForm from "./AddVideoForm";
@@ -9,7 +9,8 @@ import Footer from "./Footer";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const [data, setData] = React.useState(exampleData);
+  const [data, setData] = useState([]);
+
   const [filteredData, setFilteredData] = React.useState([]);
   console.log(data);
 
@@ -55,6 +56,27 @@ function App() {
       <VideosList delete={removeVideo} data={data} />
     );
 
+  //       useEffect(() => {
+  //     ...
+  //   }, []);
+
+  //   return <img src={imgSrc} />;
+  // }
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="App">
       <Header />

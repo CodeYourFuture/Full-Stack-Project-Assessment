@@ -1,13 +1,18 @@
 const express = require("express");
+
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
 const app = express();
 const port = process.env.PORT || 5000;
 const data = require("../exampleresponse.json");
 const { uuid } = require("uuidv4");
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// Store and retrieve your videos from here
 let videos = [...data];
 
 app.get("/", function (req, res) {
