@@ -2,7 +2,7 @@ import React from "react";
 import smileyFace from "./smiley-face.png";
 import downVoteFace from "./downvote-face.png";
 
-function VideoVotes() {
+function Rating() {
   const [vote, setVote] = React.useState(0);
 
   const handleLike = () => {
@@ -24,7 +24,7 @@ function VideoVotes() {
         />
         <div onClick={handleDislike}>down vote</div>
       </div>
-      <h5>{vote}</h5>
+      <h3 className="rating">{vote}</h3>
       <div className="vote">
         {" "}
         <img
@@ -40,4 +40,4 @@ function VideoVotes() {
   );
 }
 
-export default VideoVotes;
+export default Rating;

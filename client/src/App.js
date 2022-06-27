@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import AddVideoForm from "./AddVideoForm";
 import VideosList from "./VideosList";
 import Footer from "./Footer";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [data, setData] = React.useState(exampleData);
@@ -25,7 +26,7 @@ function App() {
   //Add Video
   const addVideo = (title, url) => {
     let newVideo = {
-      id: Math.floor(Math.random() * 10000000000),
+      id: uuidv4(),
       title,
       url,
       rating: 0,
