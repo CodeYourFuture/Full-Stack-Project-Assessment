@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
 import AddVideo from "./AddVideo";
+import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [videoOrder, setVideoOrder] = useState("DESC")
   const urlToFetch = "https://full-stack-matilda-ako.herokuapp.com/";
+  
+
 
   const getVideos = (videoOrder) => {
     fetch(`${urlToFetch}?order=${videoOrder}`)
@@ -26,22 +30,26 @@ function App() {
         <h1 className="page-title">Video Recommendation</h1>
       </header>
       <main>
-        <button
-          onClick={() => {
-            setVideoOrder("ASC");
-            getVideos("ASC");
-          }}
-        >
-          Low to High
-        </button>
-        <button
-          onClick={() => {
-            setVideoOrder("DESC");
-            getVideos("DESC");
-          }}
-        >
-          High to Low
-        </button>
+        {/* <span>Sort:</span> */}
+        Sort:
+          <IconButton
+            aria-label="sort ascending"
+            onClick={() => {
+              setVideoOrder("ASC");
+              getVideos("ASC");
+            }}
+          >
+            <ArrowCircleUp color="primary" />
+          </IconButton>
+          <IconButton
+            aria-label="sort descending"
+            onClick={() => {
+              setVideoOrder("DESC");
+              getVideos("DESC");
+            }}
+          >
+            <ArrowCircleDown color="primary" />
+          </IconButton>
         <AddVideo urlToFetch={urlToFetch} setVideos={setVideos} videos={videos} getVideos={getVideos} videoOrder={videoOrder} />
       </main>
     </div>

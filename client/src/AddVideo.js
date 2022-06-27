@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import SingleVideo from "./SingleVideo";
 import { Container, Row, Col } from "react-bootstrap";
+import { AddCircleOutline, HighlightOff, Search, Publish } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+
 
 const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
   const [addTitle, setAddTitle] = useState("");
   const [addUrl, setAddUrl] = useState("");
   const [validInput, setValidInput] = useState("");
+  const [findVideoInput, setFindVideoInput] = useState("");
   const [showAddVideo, setShowAddVideo] = useState(false);
   const [showFindVideo, setShowFindVideo] = useState(false);
   useEffect(() => {
@@ -39,13 +43,15 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
   const findVideo = (e) => {
     e.preventDefault();
     const videoId = e.target[0].value;
-    console.log(videoId)
-    fetch(`${urlToFetch}${videoId}`)
+    if (videoId !== "") {
+      fetch(`${urlToFetch}${videoId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setVideos(data);
+        setFindVideoInput(data.msg);
+        data.videos && setVideos(data.videos);
       });
+    }
+    return
   };
   const showAddVideoInput = (
     <>
@@ -59,39 +65,55 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
           Url
           <input type="text" id="url" name="url" value={addUrl} onChange={(e) => setAddUrl(e.target.value)} />
         </label>
-        <button>Add</button>
+        <IconButton aria-label="add video" type="submit">
+          <Publish color="primary" />
+        </IconButton>
       </form>
-      <button onClick={() => setShowAddVideo(false)}>Cancel</button>
+      <IconButton
+        aria-label="close"
+        onClick={() => {
+          setShowAddVideo(false);
+        }}
+      >
+        <HighlightOff color="primary" />
+      </IconButton>
     </>
   );
 
-  const showFindVideoInput = (
-    <>
-      <form onSubmit={findVideo}>
-        <p>{validInput}</p>
-        <label>
-          Video Id
-          <input type="number" id="videoId" name="videoId" value={showFindVideo} onChange={(e) => setShowFindVideo(e.target.value)} />
-        </label>
-        <button>Find</button>
-      </form>
-      <button
-        onClick={() => {
-          setShowFindVideo(false);
-          getVideos(videoOrder);
-        }}
-      >
-        Cancel
-      </button>
-    </>
-  );
+  
 
   return (
     <>
-      <button onClick={() => setShowAddVideo(true)}>Add Video</button>
+      <form onSubmit={findVideo}>
+        <p>{findVideoInput}</p>
+        <input
+          type="number"
+          id="videoId"
+          name="videoId"
+          placeholder="Video Id"
+          value={showFindVideo}
+          onChange={(e) => setShowFindVideo(e.target.value)}
+        />
+        <IconButton aria-label="search" type="submit">
+          <Search color="primary" />
+        </IconButton>
+        {showFindVideo !== "" && 
+        <IconButton
+          aria-label="close"
+          onClick={() => {
+            setShowFindVideo("");
+            getVideos(videoOrder);
+          }}
+        >
+          <HighlightOff color="primary" />
+          </IconButton>
+        }
+      </form>
+      Add video
+      <IconButton aria-label="add video" onClick={() => setShowAddVideo(true)}>
+        <AddCircleOutline color="primary" />
+      </IconButton>
       {showAddVideo && showAddVideoInput}
-      <button onClick={() => setShowFindVideo(true)}>Find Video</button>
-      {showFindVideo && showFindVideoInput}
       {/* {showFindVideo && <button onClick={getVideos}>Show All</button>} */}
       <section className="show-videos">
         <Container fluid>
