@@ -118,7 +118,7 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   column-gap: 20px;
   padding: 2%;
 }
