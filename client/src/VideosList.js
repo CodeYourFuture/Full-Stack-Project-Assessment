@@ -19,7 +19,6 @@ function VideosList(props) {
           })}
         </li>
       </ul>
-      V
     </div>
   );
 }

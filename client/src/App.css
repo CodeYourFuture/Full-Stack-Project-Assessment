@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:wght@300;600;800&display=swap');
 
-/* --space-cadet: #2D3142;
+/* 
 silver: #BFC0C0;
 mandarin: #EF8354;
 
@@ -20,7 +20,8 @@ mandarin: #EF8354;
 
 body {
   width: 100%;
-  font-family: 'B612', sans-serif;
+  margin: auto;
+  font-family: 'Nunito Sans', sans-serif;
   background: rgb(233, 231, 221);
   background: linear-gradient(16deg, rgba(233, 231, 221, 1) 2%, rgba(255, 255, 255, 0.6740896187576593) 87%);
 }
@@ -46,6 +47,8 @@ header {
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px;
+  opacity: 0.9;
+  
 }
 
 h1{
@@ -61,6 +64,7 @@ h1{
   letter-spacing: 1.5px;
   box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px;
   background-color: rgb(212, 25, 25);
+
 }
 
 /* Main */
@@ -125,10 +129,24 @@ label {
   align-self: flex-end;
 }
 
-h2 {
+.h2 {
   text-align: center;
-  color:  #4F5D75;
+  border: 0;
+  width: 60%;
+  margin: 20px auto;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 50px;  
+    background: rgb(84, 105, 212);
+      background: radial-gradient(circle, rgba(84, 105, 212, 1) 0%, rgba(12, 6, 28, 1) 86%);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
 
+h2:hover {
+    box-shadow: rgba(0, 0, 0, 0.9) 0px 15px 15px;
 }
 
 .buttons {
@@ -139,20 +157,24 @@ h2 {
 
  button {
     width: 80px;
-    height: 70px;
+    height: 80px;
     margin: 30px 0;
     padding: 0 12px;
     cursor: pointer;
-    border: none;
-    background: rgba(239, 131, 84, 1);
+    border: 3px solid white;
+    border-radius: 50%;
     color: azure;
-    border-radius: 4px;
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 700;    
+    background: rgb(153, 55, 55);
+    background: radial-gradient(circle, rgba(153, 55, 55, 1) 5%, rgba(12, 6, 28, 1) 86%);
+      
  }
 
 button:hover, .face:hover {
     box-shadow: rgba(0, 0, 0, 0.9) 0px 5px 15px;
+    background: rgb(205, 24, 24);
+      background: radial-gradient(circle, rgba(205, 24, 24, 1) 0%, rgba(12, 6, 28, 1) 86%);
 }
 
 .add {
@@ -163,44 +185,39 @@ button:hover, .face:hover {
   background: rgba(79, 93, 117, 0.7);  
 }
 
-.cancel {
-background: rgba(239, 131, 84, 1);
-}
-
-.cancel:hover {
-  background: rgba(239, 131, 84, 0.7);
-}
-
 /* Video */
 .video {
   width: 90%;
   margin: 50px auto;
 }
 
-/* VideoVotes */
+/* Rating */
 
+h4 {
+  color: rgba(0, 0, 0, 0.925);
+  font-weight: 400;
+  padding-bottom: 30px;
+  
+}
 .votes {
   margin: 0 auto;
-  padding:0;
   display: flex;
   justify-content: space-between;
   align-items:center;
-  gap: 15px;
   max-width: 560px;
 }
 
 .face {
   width: 50px;
-  background-color: #EF8354;
   border-radius: 50%;
   border: 3px solid white;
   cursor: pointer;
-  margin: 30px 10px 10px 10px;
+
 }
 
 #like-face {
   background: rgb(238, 10, 10);
-  background: radial-gradient(circle, rgba(238, 10, 10, 1) 28%, rgba(135, 26, 26, 1) 55%);
+  background: radial-gradient(circle, rgb(189, 22, 22) 28%, rgba(135, 26, 26, 1) 55%);
 
 }
 
@@ -211,23 +228,21 @@ background: rgba(239, 131, 84, 1);
       background: radial-gradient(circle, rgba(26, 86, 135, 1) 35%, rgba(27, 8, 8, 1) 65%);
 }
 .rating {
-  border-color: #EF8354;
-  border-style: inset;
-  border-width: 5px;
+border-color: white;
+  border-style:double;
+  border-width: 8px;
   height: 60px;
   width: 180px;
-  border-radius: 6px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(222, 226, 233);
   font-weight: 700;
-  color: #4F5D75;
-  font-size: 20px;
-}
-
-#remove {
-  margin: 0 auto 50px;
+  font-size: 30px;
+  color: rgba(13, 20, 32, 0.7);
+  
+    background: rgb(245, 240, 239);
+      background: radial-gradient(circle, rgba(245, 240, 239, 1) 22%, rgb(172, 188, 209) 34%, rgb(8, 2, 1) 72%);
 }
 
 iframe {
@@ -237,12 +252,21 @@ iframe {
   box-shadow: rgba(0, 0, 0, 0.9) 0px 25px 20px -20px;
 }
 
-
 hr {
       height: 10px;
       border: 0;
       box-shadow: 0 10px 10px -10px #8c8c8c inset;
       padding-bottom: 50px;   
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  padding: 40px 0 0 0;
+  background: rgb(209, 187, 187);
+  background: radial-gradient(circle, rgb(221, 212, 212) 5%, rgb(10, 9, 12) 86%);
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 @media only screen and (min-width: 600px) {
 
@@ -250,6 +274,10 @@ hr {
   h1 {
     font-size: 40px;
       width: 500px;
+  }
+
+  h2 {
+      width: 20%;
   }
 }
 

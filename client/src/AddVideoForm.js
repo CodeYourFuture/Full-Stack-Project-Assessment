@@ -13,10 +13,11 @@ function AddVideoForm(props) {
     }
   };
 
-  const handleCancel = (e) => {
+  const handleDelete = (e) => {
     setTitle("");
     setUrl("");
   };
+
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -27,8 +28,10 @@ function AddVideoForm(props) {
 
   return (
     <div className="add-video-container">
-      <h2>Add Video</h2>
-
+      <div>
+        {" "}
+        <button className="h2">Add Video</button>
+      </div>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input
@@ -54,7 +57,7 @@ function AddVideoForm(props) {
           <button id="btn-add-video" onClick={handleSubmit}>
             Add Video
           </button>
-          <button id="btn-remove-video" onClick={handleCancel}>
+          <button id="btn-remove-video" onClick={handleDelete}>
             Cancel
           </button>
         </div>

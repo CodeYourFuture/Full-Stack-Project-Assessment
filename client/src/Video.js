@@ -1,5 +1,5 @@
 import React from "react";
-import VideoVotes from "./VideoVotes";
+import Rating from "./Rating";
 
 function Video(props) {
   const deleteHandler = () => {
@@ -9,12 +9,10 @@ function Video(props) {
   return (
     <div className="video">
       <h4>{props.title}</h4>
-      <VideoVotes />
-
+      <Rating />
       <iframe
         width="560"
         height="315"
-        // src={`https://www.youtube.com/embed/${youTubeId}`}
         src={props.url}
         title={props.title}
         frameBorder="0"
