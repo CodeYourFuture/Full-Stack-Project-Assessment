@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Homepage from "./components/Homepage";
 import Video from "./components/Video";
@@ -6,50 +6,60 @@ import Response from "./exampleresponse.json";
 
 const myVideo = Response;
 
-const  App = ()=> {
-  const[videoState , setVideoState ] = useState(myVideo);
-  const filteredVideo = id => videoState.filter(video => video.id !== id)
+const App = () => {
+  // const [videoState, setVideoState] = useState(myVideo);
+  // const filteredVideo = (id) => videoState.filter((video) => video.id !== id);
 
   const AddVideo = () => {
-    
-  const [addFormVideo , setAddFormVideo] = useState({
-    title : "" ,
-    url : ""
-  })
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
+    const [addVideo, setAddVideo] = useState(myVideo);
+    const [addFormVideo, setAddFormVideo] = useState({
+      title: "",
+      url: "",
+    });
+    const handleAddFormChange = (event) => {
+      event.preventDefault();
 
-    let fieldName = event.target.getAttribute('name');
-      let fieldValue = event.target.value;
-      let newVideoData = { ...addVideoData };
+      const fieldName = event.target.getAttribute("title");
+      const fieldValue = event.target.value;
+      const newVideoData = { ...addFormVideo };
       newVideoData[fieldName] = fieldValue;
-      setAddVideoData(newVideoData)
-    }
+      setAddFormVideo(newVideoData);
 
-    const newVideos = [...]
-  }
-}
-  return (
-    <div className="App">
-      <div>
-        <h2 className="add-video-bar">Add New Video : </h2>
-        <form>
-          <input
-            type="text"
-            name="title"
-            required="required"
-            placeholder="Enter video ..."
-          />
-        </form>
-        <button type="submit" className="add-button">
-          Add
-        </button>
-      </div>
-      
-      <Homepage />
-      <Video />
-    </div>
-  );
-}
+      const newVideos = { ...addFormVideo };
+      newVideos[fieldName] = fieldName;
 
+      setAddFormVideo(newVideos);
+
+      return (
+        <div className="App.1">
+          <div>
+            <h2 className="add-video-bar">Add New Video : </h2>
+            <form>
+              <input
+                type="text"
+                name="title"
+                required="required"
+                placeholder="Enter video Title ..."
+                onChange={handleAddFormChange}
+              />
+              <input
+                type="text"
+                name="url"
+                required="required"
+                placeholder="Enter Video Url ..."
+                onChange={handleAddFormChange}
+              />
+              <button type="submit" className="add-video-button">
+                Add Video
+              </button>
+            </form>
+          </div>
+
+          <Homepage />
+          <Video />
+        </div>
+      );
+    };
+  };
+};
 export default App;
