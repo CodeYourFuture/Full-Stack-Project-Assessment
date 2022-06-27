@@ -7,9 +7,9 @@ const Sort = ({ sortHandler }) => {
     setState(!state)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     sortHandler(selected, state)
-  },[selected, state])
+  }, [selected, sortHandler, state])
 
   return (
     <div className="sort">
@@ -24,13 +24,13 @@ const Sort = ({ sortHandler }) => {
         <option value="post_date">By Posted</option>
       </select>
 
-      <div className="asc">{state?'Ascending':'Descending'}    
-      <label class="switch">
-        <input type="checkbox" />
-        <span class="slider round" onClick={toggle}>
-        </span>
-      </label>
-       </div>
+      <div className="asc">
+        {state ? 'Ascending' : 'Descending'}
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider round" onClick={toggle}></span>
+        </label>
+      </div>
     </div>
   )
 }
