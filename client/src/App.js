@@ -1,14 +1,12 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import Moment from "moment";
+// import Moment from "moment";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [displayVideo, setDisplayVideo] = useState([]);
   const [newVidTitle, setNewVidTitle] = useState("");
   const [newVidUrl, setNewVidUrl] = useState("");
-  // const [date, setDate] = useState("");
-  const [data, SetData] = useState();
 
   useEffect(() => {
     fetch("/api")
@@ -23,13 +21,19 @@ function App() {
       rating: 0,
       title: newVidTitle,
       url: newVidUrl,
-      date: Date(),
-      id: displayVideo.length,
+      // date: Date(),
+      // id: displayVideo.length,
     };
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addVideo),
+    });
+
+    setDisplayVideo([...displayVideo, addVideo]);
     setNewVidTitle("");
     setNewVidUrl("");
-
-    setDisplayVideo(displayVideo.concat(addVideo));
   };
 
   const videoCountPlus = (id) => {
