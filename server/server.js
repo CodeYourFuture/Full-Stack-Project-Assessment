@@ -30,7 +30,7 @@ client.connect()
 
 app.get('/', (req, res) => {
   client
-    .query('Select * From videos')
+    .query('Select * From videos order by title desc')
     .then((result) => res.status(200).json(result.rows))
     .catch((error) => res.status(500).json(error))
 })

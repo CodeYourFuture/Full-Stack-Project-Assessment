@@ -103,44 +103,37 @@ const AddVideo = ({ allData, handleSet, loadData }) => {
 
   return (
     <>
-      <button className="btn btn-success mr-4" onClick={handleAdd}>
+      <button className="btn btn-success mr-auto" onClick={handleAdd}>
         Add Video
       </button>
-      <div className="add-video">
-        <div className={toggle ? 'display-block' : 'display-none'}>
-          <form onSubmit={handleSubmitEvent}>
-            <div className="row align-items-end">
-              {/* <SearchYoutube searchHandler = {searchHandler}/>  */}
-              <div className="col">
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  className="form-control"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="url">Url</label>
-                <input
-                  type="text"
-                  name="url"
-                  id="url"
-                  className="form-control"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary d-block">
-                Save
-              </button>
-            </div>
-          </form>
-          <p className="error">{errorMessage}</p>
-        </div>
-      </div>
+      <form
+        className={toggle ? 'display-flex' : 'display-none'}
+        onSubmit={handleSubmitEvent}
+      >
+          {/* <SearchYoutube searchHandler = {searchHandler}/>  */}
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            className="form-control"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label htmlFor="url">Url</label>
+          <input
+            type="text"
+            name="url"
+            id="url"
+            className="form-control"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+          <button type="submit" className="btn btn-primary d-block">
+            Save
+          </button>
+      </form>
+      <p className="error">{errorMessage}</p>
     </>
   )
 }

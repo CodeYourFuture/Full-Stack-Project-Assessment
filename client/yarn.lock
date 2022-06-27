@@ -1390,6 +1390,11 @@
     "@types/yargs" "^16.0.0"
     "chalk" "^4.0.0"
 
+"@kodingdotninja/use-toggle@^0.1.0":
+  "integrity" "sha512-+gY+SM8Yzvq/w/JDSncpRs6y5PfC2qo7gK++DGE5LSGepjYFpzQPNoYo81XPQKdm5+FQ5tEtlxMUscn1rDNVAg=="
+  "resolved" "https://registry.npmjs.org/@kodingdotninja/use-toggle/-/use-toggle-0.1.0.tgz"
+  "version" "0.1.0"
+
 "@mui/base@5.0.0-alpha.84":
   "integrity" "sha512-uDx+wGVytS+ZHiWHyzUyijY83GSIXJpzSJ0PGc/8/s+8nBzeHvaPKrAyJz15ASLr52hYRA6PQGqn0eRAsB7syQ=="
   "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.84.tgz"
@@ -7492,7 +7497,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^16.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0 || ^18.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
+"react@*", "react@^16.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0 || ^18.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
