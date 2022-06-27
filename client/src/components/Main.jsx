@@ -13,15 +13,15 @@ export default function Main() {
     url: "",
     rating: 0,
   });
-
+const path = "https://youtube-video-loader.herokuapp.com/"
   const getData = () => {
-    axios.get("http://localhost:4000/").then((res) => {
+    axios.get(path).then((res) => {
       setVideos(res.data);
     });
   }; //getData() to display fetched data
 
   useEffect(() => {
-    axios.get("http://localhost:4000/").then((res) => {
+    axios.get(path).then((res) => {
       //console.log(res);
       setVideos(res.data);
     });
@@ -49,7 +49,7 @@ export default function Main() {
     };
 
     axios
-      .post(`http://localhost:4000/`, newVideo)
+      .post(path, newVideo)
       .then((res) => {
         if (res.status === 201) getData();
       })
@@ -75,7 +75,7 @@ export default function Main() {
 
   const handleDeleteClick = (videoId) => {
     axios
-      .delete(`http://localhost:4000/${videoId}`)
+      .delete(`${path}${videoId}`)
       .then((res) => {
         console.log(res);
         if (res.status === 200) getData();
