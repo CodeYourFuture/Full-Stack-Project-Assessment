@@ -2,28 +2,20 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-//const videos = require("./exampleresponse.json");
-
+const bodyparser = require("body-parser");
 const port = process.env.PORT || 5000;
 
-const bodyparser = require("body-parser");
-
-//when you write post endpoints don't forget body parser
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
-const { Pool, Client } = require("pg");
+const { Pool } = require("pg");
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-const client = new Client({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
-
-client.connect();
 
 // const pool = new Pool({
 //   user: process.env.DB_USER,
@@ -34,7 +26,7 @@ client.connect();
 // });
 
 app.get("/", function (req, res) {
-  client
+  pool
     .query("SELECT * FROM videos ORDER BY title")
     .then((result) => res.json(result.rows))
     .catch((error) => {
@@ -44,13 +36,14 @@ app.get("/", function (req, res) {
 });
 
 //adds a video
-app.post("/", function (req, res) {
+app.post("//", function (req, res) {
   const addTitle = req.body.title;
   const addUrl = req.body.url;
   const addRating = req.body.rating;
   const lookUpString = "https://www.youtube.com/watch?";
 
-  const client = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+  const pool = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+  console.log(client);
 
   if (
     (!addUrl.includes(lookUpString) && addTitle === undefined) ||
@@ -63,38 +56,13 @@ app.post("/", function (req, res) {
     return res.status(400).send("please fill in correct url");
   }
 
-  client
+  pool
     .query(query, [addTitle, addUrl, addRating])
     .then(() => res.send("Video created!"))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
     });
-
-  // const { title, url, rating } = req.body;
-
-  // if (
-  //   title === undefined ||
-  //   title === 0 ||
-  //   url === undefined ||
-  //   url === 0 ||
-  //   rating === undefined ||
-  //   rating === 0
-  // ) {
-  //   return res
-  //     .status(400)
-  //     .send("check that you have filled the form correctly");
-  // } else {
-  //   const newVideoPosted = {
-  //     id: videos.length,
-  //     title,
-  //     url,
-  //     rating,
-  //   };
-  //   videos.push(newVideoPosted);
-  //   console.log(videos);
-  //   res.send("video added");
-  // }
 });
 
 //gets id of each video
@@ -106,7 +74,7 @@ app.get("/:id", function (req, res) {
   // } else {
   //   res.status(404).send(`id ${id} not found`);
   // }
-  client
+  pool
     .query("SELECT * FROM videos WHERE id=$1", [eachVideoId])
     .then((result) => res.json(result))
     .catch((error) => {
@@ -119,12 +87,13 @@ app.get("/:id", function (req, res) {
 app.delete("/:id", function (req, res) {
   const videoId = req.params.videoId;
   // const removeVideo = videos.findIndex((index) => index.id === id);
-  client
+  pool
     .query("DELETE FROM videos WHERE id=$1", [videoId])
-    .then(() => client.query("DELETE FROM videos WHERE id=$1", [videoId]))
-    .then(() => res.send(`Customer ${videoId} deleted!`))
+    .then(() => res.send(`Video ${videoId} deleted!`))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
     });
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

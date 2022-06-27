@@ -33,7 +33,10 @@ function App() {
                 <Link to="addvideo" className="button is-info is-light">
                   Add New
                 </Link>
-                <Search searchInput={searchInput} setSearchInput={setSearchInput}/>
+                <Search
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
               </div>
             </nav>
           </div>
@@ -41,7 +44,7 @@ function App() {
 
         <div className="content">
           <Routes>
-            <Route path="/" element={<Videos searchInput={searchInput}/>} />
+            <Route path="/" element={<Videos searchInput={searchInput} />} />
             <Route path="addvideo" element={<AddAVideo />} />
           </Routes>
         </div>

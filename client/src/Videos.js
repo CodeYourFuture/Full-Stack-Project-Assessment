@@ -20,7 +20,7 @@ const Videos = ({ searchInput }) => {
   //deletes post from the server
   const deleteVideo = (id) => (e) => {
     e.preventDefault();
-    axios.delete(`${baseURL}/id`).then(() => {
+    axios.delete(`${baseURL}id`).then(() => {
       const output = videos.filter(
         (video) => video.id !== parseInt(e.target.id)
       );

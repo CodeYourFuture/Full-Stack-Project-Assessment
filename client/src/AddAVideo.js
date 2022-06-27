@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AddAVideo = () => {
   const [title, setTitle] = useState(" ");
   const [url, setUrl] = useState(" ");
   const [rating, setRating] = useState(" ");
+  const baseURL = "https://newfullstac.herokuapp.com/";
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const video = { title, url, rating };
-    axios.post("https://newfullstac.herokuapp.com/", video);
+    axios
+      .post(baseURL, video)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
 
-    navigate("/");
+    //navigate("/");
+  };
+
+  const onClickCancelButton = (e) => {
+    e.preventDefault();
+    navigate("/addvideo");
   };
 
   return (
@@ -66,6 +75,12 @@ const AddAVideo = () => {
               onClick={handleSubmit}
             >
               submit
+            </button>
+            <button
+              className="button is-rounded is-danger"
+              onClick={onClickCancelButton}
+            >
+              cancel
             </button>
           </div>
         </form>
