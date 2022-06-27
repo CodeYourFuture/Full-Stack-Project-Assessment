@@ -42,8 +42,8 @@ function AddVideo({setVideos}) {
           </div>
       </div>
 
-      <div className="form-group">
-          <label for="exampleInputEmail1">Url</label>
+      <div className="searchInput">
+          <label for="exampleInput">Url</label>
           <input type="text" 
           placeholder="Enter url"
           value={addUrl}

@@ -1,5 +1,6 @@
 import React from "react";
 import Votes from "./Votes";
+import "./VideoCard.css";
 // import videosData from "./exampleresponse.json"
 
 function VideoCard({videos,setVideos}) {
