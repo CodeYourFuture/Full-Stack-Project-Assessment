@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const NewVideos = (props) => {
   const[validationUrl, setValidationUrl ] = useState("")
@@ -29,15 +30,28 @@ const NewVideos = (props) => {
     //prevent all pages from refreshing
     event.preventDefault();
 
-    const generateId = (e) => {
-      return e++;
-    };
-    const newVideo = { title, url, id: { generateId }, rating: 5 };
+    // const generateId = (e) => {
+    //   return e++;
+    // };
+    const newVideo = { title, url, rating: 5 };
 if (matchYoutubeUrl(url)) props.setAllVideos((allVideos) => {
   //Clear the input after submitting
   setTitle("");
   setUrl("");
-  return allVideos.concat(newVideo);
+  //  return allVideos.concat(newVideo);
+  axios
+    .post("https://full-stack-project-assesment.herokuapp.com/", newVideo)
+    .then((res) => {
+      
+      if (res.status === 200) {
+        axios
+          .get("https://full-stack-project-assesment.herokuapp.com/")
+          .then((res) => {
+            console.log(res.data)
+            props.setAllVideos(res.data);
+          });
+      }
+    });
 });
       
   };

@@ -4,7 +4,7 @@ import thumbsDown from "../src/images/thumbsDown.png";
 
 
 const RenderVideos = ({ video, deleteVideos }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(video.rating);
   //create count function to  increase the votes
 
   const numberLVotes = () => {

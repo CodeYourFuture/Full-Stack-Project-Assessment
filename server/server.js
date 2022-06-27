@@ -48,13 +48,16 @@ app.get("/", (req, res) => {
     });
 });
 
-
 //post new videos
 app.post("/", (req, res) => {
-  const { title, url } = req.body;
+  const { title, url, rating } = req.body;
   if (title && matchYoutubeUrl(url)) {
-    return client
-      .query("INSERT INTO videos(title,url) values($1,$2)", [title, url])
+    client
+      .query("INSERT INTO videos(title,url,rating) values($1,$2, $3)", [
+        title,
+        url,
+        rating
+      ])
       .then(() => {
         res.sendStatus(201);
       })
@@ -63,7 +66,6 @@ app.post("/", (req, res) => {
       });
     // data.push({ title, url, id: id++ });
   }
-  return res.sendStatus(403);
 });
 //get video using id
 app.get("/:id", (req, res) => {

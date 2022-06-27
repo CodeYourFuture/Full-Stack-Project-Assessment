@@ -62,6 +62,7 @@ function App() {
       )}
 
       <div className="wrapper">
+        {console.log("this is app", allVideos)}
         {allVideos.map((video) => (
           <div className="video-card" key={video.id}>
             <RenderVideos video={video} deleteVideos={deleteVideos} />
