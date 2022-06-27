@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const NewVideos = (props) => {
+const NewVideos = ({setAllVideos, setVisible}) => {
   const[validationUrl, setValidationUrl ] = useState("")
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -34,7 +34,7 @@ const NewVideos = (props) => {
     //   return e++;
     // };
     const newVideo = { title, url, rating: 5 };
-if (matchYoutubeUrl(url)) props.setAllVideos((allVideos) => {
+if (matchYoutubeUrl(url)) setAllVideos((allVideos) => {
   //Clear the input after submitting
   setTitle("");
   setUrl("");
@@ -48,7 +48,7 @@ if (matchYoutubeUrl(url)) props.setAllVideos((allVideos) => {
           .get("https://full-stack-project-assesment.herokuapp.com/")
           .then((res) => {
             console.log(res.data)
-            props.setAllVideos(res.data);
+            setAllVideos(res.data);
           });
       }
     });
@@ -76,7 +76,7 @@ if (matchYoutubeUrl(url)) props.setAllVideos((allVideos) => {
         <input type={"text"} name="url" value={url} onChange={updateUrl} />
 
         <button type="submit"> Add Video</button>
-        <button type="submit" onClick={() => props.setVisible(false)}>
+        <button type="submit" onClick={() => setVisible(false)}>
           {" "}
           Cancel
         </button>
