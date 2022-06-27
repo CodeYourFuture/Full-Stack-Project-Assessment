@@ -5,11 +5,10 @@ const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "fs_assessment",
-  password: "12345",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 var cors = require("cors");
