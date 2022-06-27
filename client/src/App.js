@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("https://full-stack-project-videos.herokuapp.com/")
+    fetch("https://full-stack-project-videos.herokuapp.com")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

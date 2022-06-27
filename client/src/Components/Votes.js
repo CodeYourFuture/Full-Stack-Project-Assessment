@@ -8,7 +8,7 @@ const Votes = (props) => {
 
   return (
     <div className="votes-div">
-      <p>{rating} likes</p>
+      <p>{counter} likes</p>
       {/* <span className="like-dislike-buttons"> */}
       <UpVoteButton counter={counter} setCounter={setCounter} />
       <DownVoteButton counter={counter} setCounter={setCounter} />
