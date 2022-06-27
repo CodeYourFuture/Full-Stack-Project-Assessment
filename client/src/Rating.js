@@ -26,7 +26,6 @@ function Rating() {
       </div>
       <h3 className="rating">{vote}</h3>
       <div className="vote">
-        {" "}
         <img
           onClick={handleLike}
           src={smileyFace}

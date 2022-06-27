@@ -20,6 +20,7 @@ mandarin: #EF8354;
 
 body {
   width: 100%;
+  margin: auto;
   font-family: 'Nunito Sans', sans-serif;
   background: rgb(233, 231, 221);
   background: linear-gradient(16deg, rgba(233, 231, 221, 1) 2%, rgba(255, 255, 255, 0.6740896187576593) 87%);
@@ -128,17 +129,15 @@ label {
   align-self: flex-end;
 }
 
-h2 {
+.h2 {
   text-align: center;
-
-  border: 2px solid white;
-width: 60%;
+  border: 0;
+  width: 60%;
   margin: 20px auto;
   font-size: 1.2rem;
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 50px;
-  
+  margin-bottom: 50px;  
     background: rgb(84, 105, 212);
       background: radial-gradient(circle, rgba(84, 105, 212, 1) 0%, rgba(12, 6, 28, 1) 86%);
     color: white;
@@ -197,25 +196,23 @@ button:hover, .face:hover {
 h4 {
   color: rgba(0, 0, 0, 0.925);
   font-weight: 400;
+  padding-bottom: 30px;
   
 }
 .votes {
   margin: 0 auto;
-  padding:0;
   display: flex;
   justify-content: space-between;
   align-items:center;
-  gap: 15px;
   max-width: 560px;
 }
 
 .face {
   width: 50px;
-  background-color: #EF8354;
   border-radius: 50%;
   border: 3px solid white;
   cursor: pointer;
-  margin: 30px 10px 10px 10px;
+
 }
 
 #like-face {
@@ -240,7 +237,6 @@ border-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: 700;
   font-size: 30px;
   color: rgba(13, 20, 32, 0.7);
@@ -261,6 +257,16 @@ hr {
       border: 0;
       box-shadow: 0 10px 10px -10px #8c8c8c inset;
       padding-bottom: 50px;   
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  padding: 40px 0 0 0;
+  background: rgb(209, 187, 187);
+  background: radial-gradient(circle, rgb(221, 212, 212) 5%, rgb(10, 9, 12) 86%);
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 @media only screen and (min-width: 600px) {
 

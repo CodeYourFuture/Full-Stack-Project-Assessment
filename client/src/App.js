@@ -62,8 +62,8 @@ function App() {
       <main>
         <AddVideoForm addVideo={addVideo} />
         <div>{displayFilteredData}</div>
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 }
