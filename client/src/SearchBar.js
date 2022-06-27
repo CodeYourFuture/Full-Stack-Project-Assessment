@@ -1,15 +1,14 @@
 import React from "react";
 
-function SearchBar({ handleSearch }) {
+function SearchBar(props) {
   return (
     <div className="search">
       <input
         className="search-input"
         type="text"
-        placeholder="search videos..."
-        onKeyUp={(e) => {
-          handleSearch(e.target.value);
-        }}
+        placeholder="Search"
+        name="search"
+        onKeyUp={props.handleSearch}
       />
     </div>
   );
