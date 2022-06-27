@@ -93,7 +93,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   pool
     .query("SELECT * FROM videos")
-    .then((result) => res.send(result))
+    .then((result) => res.send(result.rows))
     .catch((err) => console.error(err));
 });
 app.get("/:id", (req, res) => {
