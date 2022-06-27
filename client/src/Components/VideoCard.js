@@ -3,7 +3,6 @@ import DeleteButton from "./DeleteButton";
 
 const VideoCard = (props) => {
   const { data, setData } = props;
-  console.log(data);
 
   return (
     <div className="video-container">

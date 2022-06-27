@@ -3,15 +3,22 @@ const app = express();
 const cors = require("cors");
 const { Pool } = require("pg");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 const pool = new Pool({
-  user: "timea",
-  host: "localhost",
-  database: "videos",
-  password: "password",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+// const pool = new Pool({
+//   user: "timea",
+//   host: "localhost",
+//   database: "videos",
+//   password: "password",
+//   port: 5432,
+// });
 app.use(cors());
 app.use(express.json());
 
