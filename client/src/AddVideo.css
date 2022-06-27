@@ -1,0 +1,29 @@
+.searchInput{
+    margin-top: 40px;
+    display: flex;
+}
+
+.search input {
+    background-color: burlywood;
+    border: 0;
+    border-radius: 2px;
+    border-top-right-radius: 0 px;
+    border-bottom-right-radius: 0 px;
+    font-size: 15 px;
+    padding: 15px;
+    height: 30 px;
+    width: 300px;
+}
+
+/* .searchIcon {
+   height: 60px;
+   width: 50px;
+   background-color: burlywood;
+   display: grid;
+   place-items: center;
+} */
+
+/* .searchIcon svg {
+    font-size: 30px;
+} */
+
