@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
-    "build:client": "npm --prefix client run build"
+    "start": "node server/server.js"
   },
   "author": "Timea",
   "license": "ISC",
