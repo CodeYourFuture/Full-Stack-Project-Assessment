@@ -1,0 +1,47 @@
+.video_card {
+    max-width: 95%;
+    margin: 1em auto;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0.5em;
+  }
+  .video_title {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    height: 20%;
+  }
+  .video_container {
+    text-align: center;
+  }
+  .video {
+    margin: 0.5em auto;
+    max-width: 100%;
+  }
+  .del_btn_container {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .delete_btn {
+    display: inline-block;
+    margin: 0 auto;
+    border-radius: 12px;
+    color: black;
+    border: 3px solid #99c78e;
+    transition-duration: 0.4s;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-weight: bold;
+  }
+  .rating_score {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    text-align: center;
+  }
+  @media screen and (min-width: 700px) {
+    .video_card {
+      max-width: 45%;
+    }
+  }

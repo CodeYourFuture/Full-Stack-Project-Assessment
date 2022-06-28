@@ -8,7 +8,7 @@ import VideoDetails from './VideoDetails';
 const Video = () => {
     
     return(
-        <span>
+        <span className="video_container">
             <h3>My Video</h3>   
              
          {/* /* put add  search component */}

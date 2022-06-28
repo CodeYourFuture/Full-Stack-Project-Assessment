@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "./CSS/videocard.css";
 import Homepage from "./components/Homepage";
 import Video from "./components/Video";
 import Response from "./exampleresponse.json";
@@ -43,8 +44,21 @@ const App = () => {
     const newVideos = [...addVideo, newVideo];
     setAddVideo(newVideos);
   };
+  // function addVideoObj() {
+  //   const videoObj = { title: videoTitleInput, url: videoUrlInput };
+
+  //   const videoObjValid = simpleValidator.current.allValid();
+  //   if (videoObjValid) {
+  //     props.createVideo(videoObj);
+  //     setVideoTitleInput("");
+  //     setVideoUrlInput("");
+  //   } else {
+  //     simpleValidator.current.showMessages();
+  //     forceUpdate();
+  //   }
+  // }
   return (
-    <div className="App.1">
+    <div className="video_card">
       <div>
         <h2 className="add-video-bar">Add New Video : </h2>
         <form onSubmit={handleAddFormSubmit}>
@@ -56,7 +70,7 @@ const App = () => {
             onChange={handleAddFormChange}
           />
           <input
-            type="text"
+            type="url"
             name="url"
             required="required"
             placeholder="Enter Video Url ..."

@@ -15,7 +15,7 @@ const VideoDetails = ({movie}) => {
       };
     return (  
         <>
-        <div key={id}> {title}
+        <div key={id} className='video'> {title}
         <iframe
          width="853"
          height="480"
