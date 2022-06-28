@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideo(props) {
+const AddVideo = (props) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
@@ -70,6 +70,6 @@ function AddVideo(props) {
       </form>
     </div>
   );
-}
+};
 
 export default AddVideo;

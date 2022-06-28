@@ -1,7 +1,7 @@
 import React from "react";
 
-function VotesUpDown() {
+const VotesUpDown = () => {
   return <div>VotesUpDown</div>;
-}
+};
 
 export default VotesUpDown;

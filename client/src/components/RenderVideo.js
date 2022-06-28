@@ -1,7 +1,7 @@
 import React from "react";
 import VotesUpDown from "./VotesUpDown";
 
-function RenderVideo(props) {
+const RenderVideo = (props) => {
   const deleteHandler = () => {
     // Delete handler that uses a prop function which takes prop VideoId as parameter
     props.delete(props.videoId);
@@ -41,6 +41,6 @@ function RenderVideo(props) {
       </ul>
     </div>
   );
-}
+};
 
 export default RenderVideo;

@@ -1,7 +1,7 @@
 import React from "react";
 import RenderVideo from "./RenderVideo";
 
-function ListVideos(props) {
+const ListVideos = (props) => {
   return (
     <div>
       <ul className="All-Videos-List">
@@ -22,6 +22,6 @@ function ListVideos(props) {
       </ul>
     </div>
   );
-}
+};
 
 export default ListVideos;
