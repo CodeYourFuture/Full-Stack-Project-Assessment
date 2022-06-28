@@ -1,0 +1,13 @@
+{
+  "name": "to-do-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node test.js"
+  }
+}
