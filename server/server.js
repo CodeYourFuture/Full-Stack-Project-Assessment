@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const { Client } = require("pg");
 const port = process.env.PORT || 5000;
 
 const cors = require("cors");
@@ -10,6 +11,22 @@ app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+client.connect();
+
+// const pool = new Pool({
+//   Host: "ec2-34-242-84-130.eu-west-1.compute.amazonaws.com",
+//   Database: "d3ncm116npf1r2",
+//   User: "cgfzxgopwadqxr",
+//   Port: 5432,
+//   Password: "b0fa2df15237b13455250855053255d49f2a7999fa493fcdfa6250ba2d61fc69",
+// });
+
 function matchYoutubeUrl(url) {
   const regex =
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -18,116 +35,76 @@ function matchYoutubeUrl(url) {
   }
   return false;
 }
-generateRandomId = (arr) => {
-  const randomId = Math.floor(100000 + Math.random() * 900000);
-  const alreadyHasId = arr.some((video) => video.id === randomId);
-  if (alreadyHasId) {
-    generateRandomId(arr);
-  } else {
-    return randomId;
-  }
-}
+// generateRandomId = (arr) => {
+//   const randomId = Math.floor(100000 + Math.random() * 900000);
+//   const alreadyHasId = arr.some((video) => video.id === randomId);
+//   if (alreadyHasId) {
+//     generateRandomId(arr);
+//   } else {
+//     return randomId;
+//   }
+// };
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some videos to work with
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
-
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos);
+  client
+    .query("SELECT * FROM videos")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.post("/", (req, res) => {
   const { title, url } = req.body;
-  const id = generateRandomId(videos)
   if (title && matchYoutubeUrl(url)) {
-    videos.push({ title, url, id });
-    return res.sendStatus(201);
+    client
+      .query("INSERT INTO videos(title,url) values($1,$2)", [title, url])
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+    // data.push({ title, url, id: id++ });
   }
-  return res.sendStatus(403);
 });
+ //DATABASE_URL=postgres://cgfzxgopwadqxr:b0fa2df15237b13455250855053255d49f2a7999fa493fcdfa6250ba2d61fc69@ec2-34-242-84-130.eu-west-1.compute.amazonaws.com:5432/d3ncm116npf1r2 npm run start
 
 app.get("/:id", (req, res) => {
-  const id = req.params.id;
-  const item = videos.find((v) => v.id === Number(id));
-  if (item) return res.send(item);
-  return res.status(404).send("Id not found");
+  const videoId = req.params.id;
+  client
+    .query("SELECT * FROM videos WHERE id=$1", [videoId])
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const indexItem = videos.findIndex((v) => v.id === Number(id));
-
-  if (indexItem !== -1) {
-    videos.splice(indexItem, 1);
-    return res.status(200).send({});
-  }
-
-  res.send({
-    result: "failure",
-    message: "Video could not be deleted",
-  });
+  client
+    .query("SELECT * FROM videos WHERE id= $1", [id])
+    .then((result) => {
+      if (result.rows.length === 0) res.status(404).send("Video doesn't exist");
+      else {
+        client
+          .query("DELETE FROM videos WHERE id= $1", [id])
+          .then((result) => {
+            res.status(200).json({ message: "video deleted"});
+          })
+          .catch((error) => {
+            res.status(500).json(error);
+          });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
 });
+  
