@@ -24,7 +24,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.get("/videos", function (req, res) {
+app.get("/", function (req, res) {
   pool
     .query("SELECT * FROM videos")
     .then((result) => res.json(result.rows))
@@ -36,9 +36,9 @@ app.get("/videos", function (req, res) {
 
 let videos = [...data];
 
-app.get("/", function (req, res) {
-  res.json(videos);
-});
+// app.get("/", function (req, res) {
+//   res.json(videos);
+// });
 
 app.post("/", function (req, res) {
   const { title, url, rating } = req.body;
@@ -57,29 +57,32 @@ app.post("/", function (req, res) {
     });
   } else {
     videos.push(newVideo);
+    //use pool to write a query that will insert a row into a table videos
     res.status(200).json({ message: `Added video id: ${id}` });
   }
 });
 
 app.get("/search", (req, res) => {
   const searchTerm = req.query.term;
+  //use pool to write a query using WHERE clause to search for search term then return the results to the client
+  // const filteredData = videos.filter((video) => {
+  //   video.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-  const filteredData = videos.filter((video) => {
-    video.title.toLowerCase().includes(searchTerm.toLowerCase());
+  //   if (filteredData.length === 0) {
+  //     res
+  //       .status(400)
+  //       .json({ message: `No videos including ${searchTerm} found` });
+  //   }
 
-    if (filteredData.length === 0) {
-      res
-        .status(400)
-        .json({ message: `No videos including ${searchTerm} found` });
-    }
-    return res.json(filteredData);
-  });
+  //   return res.json(filteredData);
+  // });
 });
 
 app.get("/:id", function (req, res) {
   let id = parseInt(req.params.id);
-  let foundVideo = videos.filter((i) => i.id == id);
-
+  //use pool to write a query to filter videos by id, using WHERE clause
+  // let foundVideo = videos.filter((i) => i.id == id); //rephrase
+  //write it as then promise
   if (foundVideo) {
     res.status(200).json(foundVideo);
   } else {
@@ -89,8 +92,8 @@ app.get("/:id", function (req, res) {
 
 app.delete("/:id", function (req, res) {
   let id = parseInt(req.params.id);
-  let foundVideo = videos.filter((i) => i.id == id);
-
+  // let foundVideo = videos.filter((i) => i.id == id); //rephrase
+  //write a query that given the id deletes the video with that id
   if (foundVideo) {
     return res.status(200).json({});
   } else {
@@ -100,5 +103,8 @@ app.delete("/:id", function (req, res) {
     });
   }
 });
+
+//write post request to back end to add video to the list
+//change it to work for database as in the examples above
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
