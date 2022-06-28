@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import VideoCell from "./VideoCell";
 import Header from "./Header";
 import AddVideo from "./AddVideo";
-import axios from "axios";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
