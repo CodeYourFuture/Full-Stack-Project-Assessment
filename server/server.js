@@ -13,6 +13,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "cyf_hotels",
+  password: process.env.DB_PASSWORD,
+  port: 5432,
+});
+
+app.get("/hotels", function (req, res) {
+  pool
+    .query("SELECT * FROM hotels")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+
 let videos = [...data];
 
 app.get("/", function (req, res) {
