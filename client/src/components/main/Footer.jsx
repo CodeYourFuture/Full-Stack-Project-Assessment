@@ -3,7 +3,9 @@ import React from 'react';
 const Footer = () => {
     return ( 
         <footer>
-            Server is listening on Heroku.com || Domain on netlify.com
+            <div>
+                Server is listening on Heroku.com </div> <div> ❂ </div> <div> Domain on netlify.com
+                </div>
         </footer>
      );
 }

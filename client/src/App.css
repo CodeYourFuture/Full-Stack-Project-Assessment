@@ -1,7 +1,8 @@
 :root{
     --first-color: #860f02;
-    --second-color: #4a0801;
+    --second-color: #991e10;
     --third-color: #e2bfbf;
+    --forth-color: #f32121;
 }
 
 .App {
@@ -127,14 +128,15 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #860f02;
+  background-color: var(--first-color);
   color: #fff;
   margin-top: 40px;
   height: 50px;
+  gap: 6px;
 }
 
 .error {
-  color: #ff0000;
+  color: var(--forth-color);
 }
 
 .move-top {
@@ -150,7 +152,7 @@ footer {
 }
 
 select {
-  border: rgb(255, 0, 0) solid 1px;
+  border: var(--forth-color) solid 1px;
   padding: 6px;
   border-radius: 5px;
 
@@ -204,7 +206,7 @@ select {
 }
 
 input:checked+.slider {
-  background-color: #f32121;
+  background-color: var(--forth-color);
 }
 
 input:focus+.slider {
@@ -232,7 +234,7 @@ input:checked+.slider:before {
   align-items: center;
   min-width: 100px;
   margin-left: 14px;
-  background-color: #860f02;
+  background-color: var(--first-color);
   color: #fff;
   padding: 1px 4px 1px 10px;
   border-radius: 50px;
@@ -249,6 +251,28 @@ input:checked+.slider:before {
   }
 
   nav {
-    width: 96%;
+    width: 98%;
+    flex-direction: column;
+    row-gap: 10px;
   }
+  form {
+   flex-direction: column;
+  }
+  .display-flex {
+   align-items: flex-start;
+  }
+
+    .display-flex input{
+      margin-bottom: 16px;
+    }
+
+    footer {
+      flex-direction: column;
+      height: 100px;
+    }
+        .btn-success {
+          background-color: #045f0d;
+          color: #fff;
+          width: 100%;
+        }
 }
