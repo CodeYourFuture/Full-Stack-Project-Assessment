@@ -19,7 +19,7 @@ function App() {
 
   // use effect added
   useEffect(() => {
-    fetch(`http://localhost:5000/`)
+    fetch(`https://my-url-links.herokuapp.com/`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
