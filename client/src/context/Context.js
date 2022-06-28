@@ -26,7 +26,9 @@ const Context = ({ children }) => {
   useEffect(() => {
     const getVideosData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/videos");
+        const response = await fetch(
+          "https://full-stack-assessment-videos.herokuapp.com/videos"
+        );
         const myData = await response.json();
         setVideoData(myData);
       } catch (error) {
@@ -47,7 +49,7 @@ const Context = ({ children }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/deletedvideo/${id}`,
+        `https://full-stack-assessment-videos.herokuapp.com/deletedvideo/${id}`,
         deleteOpt
       );
       const remainedData = await response.json();
@@ -66,7 +68,7 @@ const Context = ({ children }) => {
     };
     try {
       const response = await fetch(
-        "http://localhost:5000/api/addnewvideo",
+        "https://full-stack-assessment-videos.herokuapp.com/api/addnewvideo",
         postOpt
       );
       const newVideoData = await response.json();
@@ -80,7 +82,7 @@ const Context = ({ children }) => {
   const searchHandler = async (searchWord) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/searchvideos?search=${searchWord}`
+        `https://full-stack-assessment-videos.herokuapp.com/api/searchvideos?search=${searchWord}`
       );
       // const searchData = await response.json();
       const searchedVideos = await response.json();
@@ -98,7 +100,9 @@ const Context = ({ children }) => {
 
   const showAllVideosHandler = async () => {
     try {
-      const response = await fetch("http://localhost:5000/videos");
+      const response = await fetch(
+        "https://full-stack-assessment-videos.herokuapp.com/videos"
+      );
       const myData = await response.json();
       setVideoData(myData);
     } catch (error) {
