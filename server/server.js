@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors"); 
 const { Pool } = require("pg");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 app.use(express.json());
 
 
