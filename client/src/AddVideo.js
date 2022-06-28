@@ -11,7 +11,7 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder, setVid
   const [validInput, setValidInput] = useState("");
   const [findVideoInput, setFindVideoInput] = useState("");
   const [showAddVideo, setShowAddVideo] = useState(false);
-  const [showFindVideo, setShowFindVideo] = useState(false);
+  const [showFindVideo, setShowFindVideo] = useState("");
   useEffect(() => {
     getVideos(videoOrder);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +79,6 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder, setVid
     </>
   );
 
-  
 
   return (
     <>
