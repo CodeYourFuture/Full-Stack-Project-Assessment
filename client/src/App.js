@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./App.css";
-import "./CSS/videocard.css";
+// import "./App.css";
+// import "./CSS/videocard.css";
 import Homepage from "./components/Homepage";
 import Video from "./components/Video";
 import Response from "./exampleresponse.json";
@@ -58,7 +58,7 @@ const App = () => {
   //   }
   // }
   return (
-    <div className="video_card">
+    <div className="card">
       <div>
         <h2 className="add-video-bar">Add New Video : </h2>
         <form onSubmit={handleAddFormSubmit}>
