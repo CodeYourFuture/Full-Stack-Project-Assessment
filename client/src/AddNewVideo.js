@@ -48,7 +48,7 @@ const AddNewVideo = ({setAllVideos, setAddVideo, urlToFetch, generateVideo}) => 
    };
   
   return (
-    <div className="form-container">
+    <div className="">
       <form onSubmit={handleSubmit}>
         <label>
           Title
@@ -67,16 +67,16 @@ const AddNewVideo = ({setAllVideos, setAddVideo, urlToFetch, generateVideo}) => 
             onChange={(e) => setUrl(e.target.value)}
           />
         </label>
-        <div className="btn-form">
-          <div className = "button1">
+        <div className="">
+          <div className = "">
         <button
           onClick={() => setAddVideo(false)}
           type="cancel"
-          className="btn btn-warning"
+          className=""
         >
           Cancel
         </button>
-        <button type="add" className="btn btn-danger">
+        <button type="add" className="">
           ADD
         </button>
         </div>

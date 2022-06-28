@@ -8,12 +8,11 @@ function App() {
   const [allVideos, setAllVideos] = useState([]);
   const [addVideo, setAddVideo] = useState(false);
 
-  
 
   //This deletes one video
-  const deleteVideos = (id) => {
-    setAllVideos((allVideos) => allVideos.filter((video) => video.id !== id))
-  }
+  // const deleteVideos = (id) => {
+  //   setAllVideos((allVideos) => allVideos.filter((video) => video.id !== id))
+  // }
   useEffect(() => {
     generateVideo()
   }, []);
@@ -21,16 +20,18 @@ function App() {
   const urlToFetch = "http://localhost:5000/";
 
   const generateVideo = () => {
+    console.log('This is a test')
     fetch(`${urlToFetch}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         setAllVideos(data);
       });
   }
-    return(
-      <div className="card text-center">
+    return (
+      <div className="">
         <header>
-          <h2 className="card-header">Video Recommendation</h2>
+          <h2 className="">Video Recommendation</h2>
         </header>
         <button
           onClick={() => setAddVideo(true)}
@@ -53,8 +54,17 @@ function App() {
             {allVideos
               .sort((a, b) => b.rating - a.rating)
               .map((video) => (
-                <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3" key={video.id}>
-                  <RenderVideo video={video} handleDeletedVideo={deleteVideos} />
+                <div
+                  className="col-xs-12 col-sm-6 col-lg-4 col-xl-3"
+                  key={video.id}
+                >
+                  {
+                    <RenderVideo
+                      video={video}
+                      urlToFetch={urlToFetch}
+                      generateVideo={generateVideo}
+                    />
+                  }
                 </div>
               ))}
           </div>
