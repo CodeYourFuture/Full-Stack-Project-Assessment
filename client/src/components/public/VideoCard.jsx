@@ -4,7 +4,7 @@ import Vote from "./Vote";
 import "../../styles/videocard.css";
 
 const VideoCard = ({ video }) => {
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState(video.rating);
   const { deleteHandler } = useContext(UserContext);
   return (
     <>
@@ -22,7 +22,6 @@ const VideoCard = ({ video }) => {
             same-site="Secure"
           />
         </div>
-        <div className="rating_score">Rating: {video.rating}</div>
         <div className="del_btn_container">
           <button
             className="delete_btn"

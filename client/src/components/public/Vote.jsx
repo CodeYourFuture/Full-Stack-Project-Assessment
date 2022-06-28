@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoThumbsUp, IoThumbsDown } from "react-icons/io5";
 import "../../styles/vote.css";
 
-const Vote = () => {
-  const [vote, setVote] = useState(0);
+const Vote = ({ vote, setVote }) => {
   return (
     <div className="vote_container">
       <button

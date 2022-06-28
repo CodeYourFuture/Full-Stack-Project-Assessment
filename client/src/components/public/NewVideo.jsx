@@ -21,7 +21,7 @@ const NewVideo = () => {
         }}
       >
         <div>
-          <h2 className="new_video_header">Add a New Video:</h2>
+          <h3 className="new_video_header">Add a New Video:</h3>
         </div>
         <div>
           <input
