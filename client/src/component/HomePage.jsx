@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import VideoCell from "./VideoCell";
 import Header from "./Header";
 import AddVideo from "./AddVideo";
+import axios from "axios";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
 
   const getData = async () => {
-    const res = await fetch("http://localhost:4000/api/videos");
+    const res = await fetch("https://video-laleh.herokuapp.com/api/videos");
     const data = await res.json();
-
     setVideos(data);
   };
 
