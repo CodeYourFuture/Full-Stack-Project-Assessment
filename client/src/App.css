@@ -9,7 +9,16 @@
 .App {
   background-color: #b8b8ff;
 }
-
+main {
+  display: flex;
+  flex-direction: column;
+}
+.add-video-section {
+  display: inline-flex;
+  align-items: center;
+  justify-content: right;
+  padding: 1rem 0;
+}
 .video-container {
   position: relative;
   width: 100%;
@@ -45,6 +54,7 @@ iframe {
   text-align: center;
   font-family: "Lobster", cursive;
   font-size: 3.5rem;
+  color: #141b41;
 }
 
 /* DISPLAY */

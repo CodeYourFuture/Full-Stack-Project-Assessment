@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SingleVideo from "./SingleVideo";
 import { Container, Row, Col } from "react-bootstrap";
-import { AddCircleOutline, HighlightOff, Search, Publish } from "@mui/icons-material";
+import { AddCircleOutline, HighlightOff, Search, Publish, ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
 
-const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
+const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder, setVideoOrder }) => {
   const [addTitle, setAddTitle] = useState("");
   const [addUrl, setAddUrl] = useState("");
   const [validInput, setValidInput] = useState("");
@@ -22,7 +22,6 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
     const formElements = e.target.elements;
     const newVideoElements = {};
     for (let video of formElements) {
-      console.log(video);
       const videoName = video.name;
       const videoValue = video.value;
       newVideoElements[videoName] = videoValue;
@@ -56,7 +55,7 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
   const showAddVideoInput = (
     <>
       <form onSubmit={addVideoToVideos}>
-        <p>{validInput}</p>
+        
         <label>
           Title
           <input type="text" id="title" name="title" value={addTitle} onChange={(e) => setAddTitle(e.target.value)} />
@@ -84,36 +83,61 @@ const AddVideo = ({ getVideos, setVideos, videos, urlToFetch, videoOrder }) => {
 
   return (
     <>
-      <form onSubmit={findVideo}>
-        <p>{findVideoInput}</p>
-        <input
-          type="number"
-          id="videoId"
-          name="videoId"
-          placeholder="Video Id"
-          value={showFindVideo}
-          onChange={(e) => setShowFindVideo(e.target.value)}
-        />
-        <IconButton aria-label="search" type="submit">
-          <Search color="primary" />
-        </IconButton>
-        {showFindVideo !== "" && 
+      <section className="add-video-section">
+        {/* <span>Sort:</span> */}
+        Sort:
         <IconButton
-          aria-label="close"
+          aria-label="sort ascending"
           onClick={() => {
-            setShowFindVideo("");
-            getVideos(videoOrder);
+            setVideoOrder("ASC");
+            getVideos("ASC");
           }}
         >
-          <HighlightOff color="primary" />
+          <ArrowCircleUp color="primary" />
+        </IconButton>
+        <IconButton
+          aria-label="sort descending"
+          onClick={() => {
+            setVideoOrder("DESC");
+            getVideos("DESC");
+          }}
+        >
+          <ArrowCircleDown color="primary" />
+        </IconButton>
+        <form onSubmit={findVideo}>
+          <input
+            type="number"
+            id="videoId"
+            name="videoId"
+            placeholder="Video Id"
+            value={showFindVideo}
+            onChange={(e) => setShowFindVideo(e.target.value)}
+          />
+          <IconButton aria-label="search" type="submit">
+            <Search color="primary" />
           </IconButton>
-        }
-      </form>
-      Add video
-      <IconButton aria-label="add video" onClick={() => setShowAddVideo(true)}>
-        <AddCircleOutline color="primary" />
-      </IconButton>
-      {showAddVideo && showAddVideoInput}
+          {showFindVideo !== "" && (
+            <IconButton
+              aria-label="close"
+              onClick={() => {
+                setShowFindVideo("");
+                getVideos(videoOrder);
+              }}
+            >
+              <HighlightOff color="primary" />
+            </IconButton>
+          )}
+        </form>
+        Add video
+        <IconButton aria-label="add video" onClick={() => setShowAddVideo(true)}>
+          <AddCircleOutline color="primary" />
+        </IconButton>
+        {showAddVideo && showAddVideoInput}
+        <p>
+          {findVideoInput}
+          {validInput}
+        </p>
+      </section>
       {/* {showFindVideo && <button onClick={getVideos}>Show All</button>} */}
       <section className="show-videos">
         <Container fluid>

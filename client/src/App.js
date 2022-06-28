@@ -30,27 +30,8 @@ function App() {
         <h1 className="page-title">Video Recommendation</h1>
       </header>
       <main>
-        {/* <span>Sort:</span> */}
-        Sort:
-          <IconButton
-            aria-label="sort ascending"
-            onClick={() => {
-              setVideoOrder("ASC");
-              getVideos("ASC");
-            }}
-          >
-            <ArrowCircleUp color="primary" />
-          </IconButton>
-          <IconButton
-            aria-label="sort descending"
-            onClick={() => {
-              setVideoOrder("DESC");
-              getVideos("DESC");
-            }}
-          >
-            <ArrowCircleDown color="primary" />
-          </IconButton>
-        <AddVideo urlToFetch={urlToFetch} setVideos={setVideos} videos={videos} getVideos={getVideos} videoOrder={videoOrder} />
+        
+        <AddVideo urlToFetch={urlToFetch} setVideos={setVideos} videos={videos} getVideos={getVideos} videoOrder={videoOrder} setVideoOrder={setVideoOrder} />
       </main>
     </div>
   );
