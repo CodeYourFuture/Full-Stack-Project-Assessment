@@ -43,7 +43,7 @@ const Videos = ({ searchInput }) => {
               <>
                 <div className="card">
                   <h2 className="title">{video.title}</h2>
-                  <Likes />
+                 
                   <div className="iframe">
                     <iframe
                       width="300"
@@ -56,9 +56,10 @@ const Videos = ({ searchInput }) => {
                     ></iframe>
                   </div>
                   <span>Ratings: {video.rating}</span>
+                  <Likes />
                   <div className="delete--button">
                     <button
-                      className="button is-rounded dlt"
+                      className="btn btn-success btn-sm"
                       id={video.id}
                       onClick={deleteVideo(videos.id)}
                     >

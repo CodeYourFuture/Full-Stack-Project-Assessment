@@ -19,7 +19,7 @@ const Button = () => {
         <div>
               <div className="counter">
                 <button
-                  className="button is-info is-light"
+                  className="button is-success is-light btn-sm"
                   onClick={(e) => minus(e)}
                 >
                   <FontAwesomeIcon icon="fa-solid fa-thumbs-down" />
@@ -28,7 +28,7 @@ const Button = () => {
                   <span>{addVote}</span>
                 </div>
                 <button
-                  className="button is-info is-outlined"
+                  className="button is-success is-outlined btn-sm"
                   onClick={(e) => plus(e)}
                 >
                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" />

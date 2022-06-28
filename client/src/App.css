@@ -34,13 +34,12 @@
 
 .title {
   color: whitesmoke;
-  margin: 20px;
+  padding: 30px;
 }
 
 nav {
   padding: 20px;
-  background-color: #0cbaba;
-  background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+ 
   
 }
 
@@ -55,8 +54,8 @@ nav {
   background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
 
   color: white;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 20px;
+  margin-bottom: 20px;;
 }
 
 .nav--links {
@@ -73,10 +72,11 @@ nav {
   flex-direction: column;
 }
 
-body {
- background-color: #6c9dd4;
-background-image: linear-gradient(315deg, #4834d4 0%, #0c0c0c 74%);
+.home {
+  text-decoration: none;
 }
+
+
 
 @media screen and (max-width: 750px) {
   .container {

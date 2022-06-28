@@ -1,3 +1,4 @@
+import 'bootswatch/dist/quartz/bootstrap.min.css'
 import "./App.css";
 import React, { useState } from "react";
 import Videos from "./Videos";
@@ -26,11 +27,11 @@ function App() {
             <nav>
               <h1 className="title">The Video App</h1>
               <div className="nav--links">
-                <Link to="/" className="button is-info is-outlined home">
+                <Link to="/" className="button is-success is-outlined home">
                   Home
                 </Link>
 
-                <Link to="addvideo" className="button is-info is-light">
+                <Link to="addvideo" className="button is-success is-light home">
                   Add New
                 </Link>
                 <Search
