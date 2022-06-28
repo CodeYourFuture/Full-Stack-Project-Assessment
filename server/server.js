@@ -1,11 +1,12 @@
 const express = require("express");
-
+require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 5000;
 const data = require("../exampleresponse.json");
+
 const { uuid } = require("uuidv4");
 
 app.use(cors());
@@ -18,14 +19,14 @@ const { Pool } = require("pg");
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
-  database: "cyf_hotels",
+  database: "cyf_videos",
   password: process.env.DB_PASSWORD,
   port: 5432,
 });
 
-app.get("/hotels", function (req, res) {
+app.get("/videos", function (req, res) {
   pool
-    .query("SELECT * FROM hotels")
+    .query("SELECT * FROM videos")
     .then((result) => res.json(result.rows))
     .catch((error) => {
       console.error(error);
