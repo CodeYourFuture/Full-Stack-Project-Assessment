@@ -1,3 +1,199 @@
+:root {
+  --background: rgb(255, 255, 255);
+  --border: rgb(242, 252, 111);
+  --button: rgb(255, 255, 255);
+  --black: rgb(32, 32, 32);
+  --brown: rgb(102, 83, 67);
+  --border1: rgb(224, 231, 116);
+  --border2: rgb(196, 196, 196);
+  --thin-border: 2px;
+}
+
 .App {
+  font-family: "Montserrat", sans-serif;
   text-align: center;
+  background-color: var(--background);
+  font-weight: 600;
+}
+.farting-cow-img {
+  width: 400px;
+}
+iframe {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 300;
+  height: 190px;
+}
+h1 {
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 2rem 0 2rem 0;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+}
+p {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.error-message:empty {
+  display: none;
+}
+.video-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 2rem;
+}
+.video-card {
+  padding: 5rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+  border: var(--thin-border) solid var(--black);
+  border-bottom: none;
+  border-top: none;
+  border-top: var(--thin-border) solid var(--black);
+  justify-content: flex-end;
+}
+.video-votes-div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.votes-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+}
+.vote-button {
+  margin-top: 0.4rem;
+  width: 80px;
+  height: 80px;
+  border: 7px solid var(--black);
+  transition: background-color 1s, color 1s;
+}
+.vote-button:hover {
+  background-color: var(--border1);
+
+  /* box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px); */
+  cursor: pointer;
+}
+/*trying cow patterend background */
+/* .gradient-button {
+  background-image: url(./cowpattern.png);
+  color: var(--border1);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 70px;
+  font-weight: 700;
+} */
+
+.gradient-button {
+  margin-bottom: 1rem;
+  background: linear-gradient(
+    var(--brown) 40%,
+    var(--border2) 90%,
+    var(--border1)
+  );
+  border-width: 7px;
+  border-style: solid;
+  border-image: linear-gradient(
+      to bottom,
+      var(--brown) 40%,
+      var(--border2) 90%,
+      var(--border1)
+    )
+    1;
+  font-size: 1rem;
+  font-weight: 700;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0.3rem 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.gradient-button:hover {
+  cursor: pointer;
+  background: var(--border1);
+  border: 7px solid var(--black);
+  padding: 0.3rem 0;
+  -webkit-text-fill-color: #000;
+}
+.toggle-order-button {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(68, 68, 68, 0.5),
+      rgba(0, 0, 0, 0.822)
+    ),
+    url("./browncow.png");
+  background-size: 220px 200px;
+  color: var(--border1);
+  font-weight: 700;
+  font-size: 2rem;
+  border: 7px solid var(--border1);
+  margin-top: 0.4rem;
+  width: 200px;
+  height: 80px;
+  cursor: pointer;
+  /* text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black; */
+}
+
+input {
+  padding: 0.5rem 0;
+  border: none;
+  border-top: 7px solid var(--brown);
+  border-bottom: var(--thin-border) solid var(--border1);
+  border-left: 7px solid var(--black);
+  font-size: 0.8rem;
+}
+@media (min-width: 612px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  iframe {
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    width: 440px;
+    height: 260px;
+  }
+  .video-votes-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .votes-div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10rem;
+  }
+  .vote-button {
+    margin-top: 2rem;
+    width: 100px;
+    height: 100px;
+  }
+  .farting-cow-img {
+    width: 650px;
+  }
+  input {
+    padding: 0.3rem 0 0.6125rem 0;
+    border: none;
+    border-top: 7px solid var(--brown);
+    border-bottom: var(--thin-border) solid var(--border1);
+    border-left: 7px solid var(--black);
+    font-size: 1.5rem;
+  }
+  .gradient-button {
+    font-size: 1.5rem;
+  }
 }
