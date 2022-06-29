@@ -165,6 +165,9 @@ select {
 width: 100%;
 }
 
+.search {
+width:100%;
+}
 
 /* Toggle sort start */
 .switch {
