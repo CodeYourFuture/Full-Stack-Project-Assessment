@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
 
-const cors = require ("cors")
+const cors = require("cors")
 app.use(cors())
 app.use(express.json())
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -76,24 +75,29 @@ let data = [
 
 // GET "/"
 app.get("/videos", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send(data);
 });
-app.post("/videos",(req,res)=>{
-  // if (req.body.title || req.body.url === "") {
-  //   res.send("The body or url must be filled")
-  // }
-})
 
-app.put("/videos",(req,res)=>{
+let count = 8888;
+app.post("/videos", (req, res) => {
+  data.push({
+    id: count,
+    ...req.body,
+  });
+  count += 1;
+  res.send(data);
+});
+
+
+app.put("/videos", (req, res) => {
   const videoId = req.body.id;
   const newRating = req.body.rating;
-  data.filter((video)=> video.id === videoId).map(video => video.rating = newRating )
-  res.send("video added")
+  data.filter((video) => video.id === videoId).map(video => video.rating = newRating)
+  res.send(data)
 
 })
 
-app.delete("/videos",(req,res)=>{
+app.delete("/videos", (req, res) => {
   const videoId = req.body.id;
   let indexOfVideo = data.findIndex(video => video.id === videoId)
   if (indexOfVideo < 0) {
@@ -105,3 +109,4 @@ app.delete("/videos",(req,res)=>{
   }
 
 })
+app.listen(port, () => console.log(`Listening on port ${port}`));

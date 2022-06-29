@@ -7,17 +7,7 @@ const AddVideo = () => {
     const [url, setUrl] = useState("");
 
 
-    // const [visibility, setVisibility] = useState("addingOptionHidden");
-    // const [clicked, setClicked] = useState(true);
-    // const visibilityHandler = () => {
-    //     setClicked(!clicked);
-    //     !clicked
-    //         ? (setVisibility("addingOptionHidden"))
-    //         : (setVisibility("addingOptionVisible"));
-    //     setTitle("");
-    //     setUrl("")
-    // };
-
+   
 
     function handelTille(event){
         console.log(event.target.value)
@@ -30,12 +20,40 @@ const AddVideo = () => {
         setUrl(event.target.value)
     }
     function handelAdd(){
-       return console.log("Add buton")
-    }
+        if (title === "" || url === "") {
+            alert("The title or url field should not be empty.")
+        } else if(!url.includes("youtube") || !url.includes("watch")){
+            alert("Please enter a valid Url")
+        }else {
+            const data = { url: url, title: title, rating: 0 };
+            fetch("http://localhost:5000/videos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data1) => {
+                    console.log("Success:", data1);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            alert("Video added");
+            setUrl("");
+            setTitle("");
+        }     
+    };
+
+
     function handelCancel(){
-        return console.log("Cancel button")
+        setTitle("")
+        setUrl("")
     }
     
+
+
     return ( 
          <div className="add-video-wrapper">
             <h4 >Add Video</h4>

@@ -42,11 +42,13 @@ const Rating = (props) => {
    
     return (
         <div className="rating">
-            <button className="vote-button" onClick={(event) => increase()}>
-                <FontAwesomeIcon className="icon" icon={faHeart} size="sm" /></button>
-            {rate} Votes
             <button className="vote-button" onClick={(event) => decrease()}>
                 <FontAwesomeIcon className="icon" icon={faHeartBroken} size="sm" />
+            </button>
+            {rate} Votes
+            <button className="vote-button" onClick={(event) => increase()}>
+                <FontAwesomeIcon className="icon" icon={faHeart} size="sm" />
+                
             </button>
         </div>
     );
