@@ -1,9 +1,18 @@
+// const express = require("express");
+// const cors = require('cors');
+
+// const port = process.env.PORT || 5000;
+// const data = require("../client/src/exampleresponse.json");
+// app.use(cors());
+// app.use(express.json())
+// const app = express();
+// app.listen(port, () => console.log(`Listening on port ${port}`));
 const express = require("express");
 const app = express();
+app.use(express.json());
 const port = process.env.PORT || 5000;
-// const data = require("../client/src/exampleresponse.json");
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
+app.listen(port, () => console.log(`Listening on port ${port}`));
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [
@@ -79,32 +88,45 @@ app.get("/", (req, res) => {
 //This endpoint is used to add a video to the API.
 //Both fields - title and url - must be included and be valid for this to succeed... req.body.title req.body.url
 //**Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
-app.post("/", (req,res) => {
+app.post("/videos", (req,res) => {
+  // let {title, url} = req.body;
+  let newId = videos[videos.length - 1].id + 1;
+  const newVideo = {
+    id: newId,
+    title: req.body.title,
+    url: req.body.url,
+  };
+  videos.push(newVideo);
+  res.send(videos);
 
 })
 
 // find 1 message by id
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const foundId = videos.filter((i) => i.id === req.params.id);
 
   if (foundId) {
     res.status(200).json(foundId);
+  }else{
+    res.status(400).send("Video not found for given id");
   }
 });
 
-//delete message by id
-// app.delete("/:id", (req, res) =>{
-//   const foundId = videos.filter((i) => i.id === req.params.id);
-//   if(!foundId){
-//     return res.send(404).json({
-//       "result": "failure",
-//       "message": "Video could not be deleted"
-//     })
-//   }else{
-//     res.send(200).json({
-
-//     })
-//   }
-// })
+// delete message by id
+app.delete("/videos/:id", (req, res) =>{
+  const requestedId = req.params.id;
+  const foundId = videos.find((video) => video.id === requestedId);
+  if(!foundId){
+    return res.send(404).json({
+      "result": "failure",
+      "message": "Video could not be deleted"
+    })
+  }else{
+    res.send(200).json({
+      "message": `Video id: ${requestedId} deleted `,
+      "All videos: ": videos.filter((video) => video.id !== requestedId),
+    })
+  }
+})
 
