@@ -15,8 +15,8 @@ const AddAVideo = () => {
     const video = { title, url, rating };
     axios
       .post(baseURL, video)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error.response.data));
 
     //navigate("/");
   };

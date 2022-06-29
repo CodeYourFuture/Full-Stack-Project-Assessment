@@ -17,11 +17,12 @@ const pool = new Pool({
   },
 });
 
+// console.log(process.env);
 // const pool = new Pool({
 //   user: process.env.DB_USER,
 //   host: process.env.DB_HOST,
 //   database: process.env.DB_DATABASE,
-//   password: process.env.DB_PASSWORD,
+//   pssword: process.env.DB_PASSWORD,
 //   port: process.env.DB_PORT,
 // });
 
@@ -36,7 +37,7 @@ app.get("/", function (req, res) {
 });
 
 //adds a video
-app.post("//", function (req, res) {
+app.post("/", function (req, res) {
   const addTitle = req.body.title;
   const addUrl = req.body.url;
   const addRating = req.body.rating;
@@ -60,14 +61,14 @@ app.post("//", function (req, res) {
     .query(query, [addTitle, addUrl, addRating])
     .then(() => res.send("Video created!"))
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       res.status(500).json(error);
     });
 });
 
 //gets id of each video
 app.get("/:id", function (req, res) {
-  const eachVideoId = req.params.eachVideoId;
+  const eachVideoId = req.params.id;
   // const result = videos.find((video) => video.id === id);
   // if (result) {
   //   res.send(result);
@@ -85,11 +86,16 @@ app.get("/:id", function (req, res) {
 
 //deletes a video
 app.delete("/:id", function (req, res) {
-  const videoId = req.params.videoId;
+  const videoId = req.params.id;
+  console.log(videoId);
   // const removeVideo = videos.findIndex((index) => index.id === id);
   pool
     .query("DELETE FROM videos WHERE id=$1", [videoId])
-    .then(() => res.send(`Video ${videoId} deleted!`))
+    .then(() => {
+      console.log(`Video ${videoId} deleted!`);
+      res.send(`Video ${videoId} deleted!`);
+    })
+
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);

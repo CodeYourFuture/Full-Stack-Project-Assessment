@@ -3,7 +3,7 @@ import videoData from "./exampleresponse.json";
 import Likes from "./Likes";
 import axios from "axios";
 
-const baseURL = "https://newfullstac.herokuapp.com/";
+const baseURL = "http://localhost:5000/";
 
 const Videos = ({ searchInput }) => {
   const [videos, setVideos] = useState(videoData);
@@ -20,12 +20,12 @@ const Videos = ({ searchInput }) => {
   //deletes post from the server
   const deleteVideo = (id) => (e) => {
     e.preventDefault();
-    axios.delete(`${baseURL}id`).then(() => {
-      const output = videos.filter(
-        (video) => video.id !== parseInt(e.target.id)
-      );
+    axios.delete(`${baseURL} + ${id}`).then(() => {
+      // const output = videos.filter(
+      //   (video) => video.id !== parseInt(e.target.id)
+      // );
       alert(`are sure you want to deleted this video?`);
-      setVideos(output);
+      //setVideos(output);
     });
   };
 
@@ -43,7 +43,7 @@ const Videos = ({ searchInput }) => {
               <>
                 <div className="card">
                   <h2 className="title">{video.title}</h2>
-                 
+
                   <div className="iframe">
                     <iframe
                       width="300"
@@ -61,7 +61,7 @@ const Videos = ({ searchInput }) => {
                     <button
                       className="btn btn-success btn-sm"
                       id={video.id}
-                      onClick={deleteVideo(videos.id)}
+                      onClick={deleteVideo(video.id)}
                     >
                       Delete
                     </button>
