@@ -43,8 +43,8 @@ app.post("/", function (req, res) {
   const addRating = req.body.rating;
   const lookUpString = "https://www.youtube.com/watch?";
 
-  const pool = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
-  console.log(client);
+  const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+  console.log(pool);
 
   if (
     (!addUrl.includes(lookUpString) && addTitle === undefined) ||
@@ -84,22 +84,36 @@ app.get("/:id", function (req, res) {
     });
 });
 
-//deletes a video
-app.delete("/:id", function (req, res) {
-  const videoId = req.params.id;
-  console.log(videoId);
-  // const removeVideo = videos.findIndex((index) => index.id === id);
-  pool
-    .query("DELETE FROM videos WHERE id=$1", [videoId])
-    .then(() => {
-      console.log(`Video ${videoId} deleted!`);
-      res.send(`Video ${videoId} deleted!`);
-    })
+// //deletes a video
 
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
+app.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteVideo = await pool.query(
+      "DELETE FROM videos WHERE video_id = $1",
+      [id]
+    );
+    res.json("video deleted !!");
+  } catch (error) {
+    console.error(error.message);
+  }
 });
+
+// app.delete("/:id", function (req, res) {
+//   const videoId = req.params.id;
+//   console.log(videoId);
+//   // const removeVideo = videos.findIndex((index) => index.id === id);
+//   pool
+//     .query("DELETE FROM videos WHERE id=$1", [videoId])
+//     .then(() => {
+//       console.log(`Video ${videoId} deleted!`);
+//       res.send(`Video ${videoId} deleted!`);
+//     })
+
+//     .catch((error) => {
+//       console.error(error);
+//       // res.status(500).json(error);
+//     });
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

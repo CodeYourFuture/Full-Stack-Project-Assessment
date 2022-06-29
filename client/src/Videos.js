@@ -3,7 +3,7 @@ import videoData from "./exampleresponse.json";
 import Likes from "./Likes";
 import axios from "axios";
 
-const baseURL = "http://localhost:5000/";
+const baseURL = "https://newfullstac.herokuapp.com/";
 
 const Videos = ({ searchInput }) => {
   const [videos, setVideos] = useState(videoData);
@@ -21,13 +21,29 @@ const Videos = ({ searchInput }) => {
   const deleteVideo = (id) => (e) => {
     e.preventDefault();
     axios.delete(`${baseURL} + ${id}`).then(() => {
-      // const output = videos.filter(
-      //   (video) => video.id !== parseInt(e.target.id)
-      // );
+      const output = videos.filter((video) => video.id !== id);
       alert(`are sure you want to deleted this video?`);
-      //setVideos(output);
+      setVideos(output);
     });
   };
+
+  // const deleteVideo = async (id) => {
+  //   try {
+  //     const deleteVideo = await fetch(
+  //       `http://newfullstac.herokuapp.com/${id}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: new Headers({
+  //           "Content-type": "application/json",
+  //         }),
+  //       }
+  //     );
+  //     console.log(deleteVideo);
+  //     setVideos(videos.filter((todo) => todo.todo_id !== id));
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   return (
     <>
