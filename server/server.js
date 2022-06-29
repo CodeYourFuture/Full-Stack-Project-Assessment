@@ -15,21 +15,23 @@ app.get("/", (req, res) => {
   res.send(videosData);
 });
 
-app.post("/:id", (req, res) => {
+app.post("/videos", (req, res) => {
   const addNewVideo = req.body;
+  console.log(addNewVideo);
   addNewVideo.id = Math.floor(Math.random() * 100000);
   if (!addNewVideo.title || !addNewVideo.url) {
     res.status(400).send({ msg: "Please add a Title & URL from Youtube !" });
   } else {
-    videosData.push(addNewVideo);
+    videos.push(addNewVideo);
     res.status(200).send({ msg: `Video:${addNewVideo.title} has been added.` });
   }
 });
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
+  console.log(videoId);
   const filterVideo = videosData.find((video) => video.id === videoId);
-
+  console.log(filterVideo);
   if (filterVideo.length === 0) {
     res.status(400).send({ msg: `Video with:${videoId} not found!` });
   } else {
@@ -37,12 +39,13 @@ app.get("/:id", (req, res) => {
   }
 });
 
-app.delete("/:id", (req, res) => {
-  const videoId = parseInt(req, params.id);
-  indexVideo = videosData.findIndex((video) => video.id == videoId);
-
+app.delete("/videos/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  console.log(videoId);
+  indexVideo = videos.findIndex((video) => video.id == videoId);
+  console.log(indexVideo);
   if (indexVideo >= 0) {
-    videosData.splice(indexVideo, 1);
+    videos.splice(indexVideo, 1);
     res
       .status(200)
       .send({ msg: `Video with id:${videoId} has been deleted. ` });
