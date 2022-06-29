@@ -1,3 +1,37 @@
 .App {
   text-align: center;
 }
+
+.inputBar {
+  border: #0bd3da 5px solid;
+  border-radius: 15px;
+}
+
+ul {
+  margin: 0 auto;
+  text-align: center;
+}
+
+li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+}
+
+.card {
+  border: 4px solid #0bd3da;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.button-container {
+  background-color: #0bd3da;
+  display: flex;
+  justify-content: space-evenly;
+}
