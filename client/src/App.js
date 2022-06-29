@@ -11,7 +11,7 @@ const BASE_URL = "http://localhost:8080/";
 const ENDPOINT = "task";
 const QUERY = "?n=1";
 const App = () => {
-  // const [videoState, setVideoState] = useState(myVideo);
+  const [Response, setResponse] = useState("");
   // const filteredVideo = (id) => videoState.filter((video) => video.id !== id);
 
   const [addVideo, setAddVideo] = useState(myVideo);
@@ -49,7 +49,9 @@ const App = () => {
 
   const handleclick = () => {
     console.log("handleclick running :");
-    fetch(BASE_URL + ENDPOINT + QUERY).then((res = res.json()));
+    fetch(BASE_URL + ENDPOINT + QUERY)
+      .then((res) => res.json())
+      .then((data) => setResponse(data));
   };
   return (
     <div className="card">
@@ -77,6 +79,7 @@ const App = () => {
           >
             Add Video
           </button>
+          <div>{Response ? Response : "something"}</div>
         </form>
       </div>
 

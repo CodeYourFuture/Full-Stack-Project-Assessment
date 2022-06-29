@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const { Pool } = require("pg");
 app.use(cors());
 const port = 8080;
 //evn file or dotenv file is a simple text configuration file
