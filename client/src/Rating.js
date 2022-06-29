@@ -17,9 +17,7 @@ const Rating = (props) => {
 
 
     };
-
-
-
+    
     useEffect(() => {
         let data = { rating: rate, id: props.id };
         fetch(("http://localhost:5000/videos"), {

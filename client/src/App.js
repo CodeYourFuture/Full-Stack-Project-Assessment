@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./Header";
 import AddVideo from "./AddVideo";
@@ -14,28 +14,28 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:5000/videos")
-    .then((res) => res.json())
-    .then((data) => {
-      setAllData(data);
-      setFilterVideo(data);
-     
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+        setFilterVideo(data);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }, [])
- 
+
   return (
     <div className="App">
       <Header />
       <div>
-        <AddVideo setFilterVideo={setFilterVideo}/>
-        <Search 
-             allData ={allData}
-             filterVideo ={filterVideo}
-             setAllData={setAllData}
-          setFilterVideo={setFilterVideo} 
-          />
+        <AddVideo setFilterVideo={setFilterVideo} />
+        <Search
+          allData={allData}
+          filterVideo={filterVideo}
+          setAllData={setAllData}
+          setFilterVideo={setFilterVideo}
+        />
       </div>
     </div>
   );
