@@ -6,12 +6,10 @@ import Search from "./Search";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
-  //const [empty, setEmpty] = useState(false);
 
   const getData = async () => {
     const res = await fetch("https://video-laleh.herokuapp.com/api/videos");
     const data = await res.json();
-    //console.log(data);
     setVideos(data);
   };
 
@@ -56,7 +54,6 @@ function HomePage() {
       `https://video-laleh.herokuapp.com/api/videos/?searchText=${searchText.toLowerCase()}`
     );
     const data = await res.json();
-    //console.log(data);
     setVideos(data);
   };
 
@@ -64,7 +61,7 @@ function HomePage() {
     <div>
       <Header />
       <AddVideo onAdd={handleSubmit} />
-      <Search onSearch={handleSearch} />
+      <Search onSearch={handleSearch} getAllVideo={getData} />
       <div className="videos-Container">
         {videos.map((video, index) => {
           return (

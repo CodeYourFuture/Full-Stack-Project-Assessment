@@ -8,20 +8,21 @@ function AddVideo({ onAdd }) {
   const handleShowForm = () => {
     SetShowForm(!showForm);
   };
-  // const emptyForm = () => {
-  //   setTitle("");
-  //   setUrl("");
-  // };
-
-  // if (emptyInputs) {
-  //   emptyForm();
-  //   console.log(title);
-  // }
+  const emptyForm = () => {
+    setTitle("");
+    setUrl("");
+    console.log("empty");
+  };
 
   return (
     <div>
       {showForm ? (
-        <form onSubmit={(e) => onAdd(e, title, url)}>
+        <form
+          onSubmit={(e) => {
+            onAdd(e, title, url);
+            emptyForm();
+          }}
+        >
           <div>
             <label htmlFor="title">Tile:</label>
             <input
