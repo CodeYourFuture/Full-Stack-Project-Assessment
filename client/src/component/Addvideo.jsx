@@ -8,11 +8,16 @@ function AddVideo({ onAdd }) {
   const handleShowForm = () => {
     SetShowForm(!showForm);
   };
+  // const emptyForm = () => {
+  //   setTitle("");
+  //   setUrl("");
+  // };
 
-  const emptyForm = () => {
-    setTitle("");
-    setUrl("");
-  };
+  // if (emptyInputs) {
+  //   emptyForm();
+  //   console.log(title);
+  // }
+
   return (
     <div>
       {showForm ? (
@@ -22,6 +27,7 @@ function AddVideo({ onAdd }) {
             <input
               type="text"
               id="title"
+              value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -32,6 +38,7 @@ function AddVideo({ onAdd }) {
             <input
               type="text"
               id="url"
+              value={url}
               onChange={(e) => {
                 setUrl(e.target.value);
               }}
@@ -42,7 +49,7 @@ function AddVideo({ onAdd }) {
             <button type="button" onClick={handleShowForm}>
               Cancel
             </button>
-            <button onClick={emptyForm}>Add</button>
+            <button>Add</button>
           </div>
         </form>
       ) : (

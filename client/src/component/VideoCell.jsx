@@ -5,9 +5,9 @@ import Rating from "./Rating";
 
 const VideoCell = ({ id, title, url, rating, onDelete }) => {
   return (
-    <div className="videos-Container">
-      <div key={id} className="video">
-        <div className="iframe_div">
+    <div >
+      <div key={id}>
+        <div >
           <iframe
             width="300"
             height="215"

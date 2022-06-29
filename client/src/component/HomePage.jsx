@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import VideoCell from "./VideoCell";
 import Header from "./Header";
 import AddVideo from "./AddVideo";
+import Search from "./Search";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
+  //const [empty, setEmpty] = useState(false);
 
   const getData = async () => {
     const res = await fetch("https://video-laleh.herokuapp.com/api/videos");
     const data = await res.json();
+    //console.log(data);
     setVideos(data);
   };
 
@@ -18,7 +21,7 @@ function HomePage() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:4000/api/videos/${id}`, {
+      await fetch(`https://video-laleh.herokuapp.com/api/videos/${id}`, {
         method: "DELETE",
       });
       setVideos(videos.filter((video) => video.id !== id));
@@ -30,7 +33,7 @@ function HomePage() {
   const handleSubmit = async (event, title, url) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:4000/api/videos/`, {
+      await fetch("https://video-laleh.herokuapp.com/api/videos", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -41,28 +44,41 @@ function HomePage() {
           url: url,
         }),
       });
+
       getData();
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleSearch = async (searchText) => {
+    const res = await fetch(
+      `https://video-laleh.herokuapp.com/api/videos/?searchText=${searchText.toLowerCase()}`
+    );
+    const data = await res.json();
+    //console.log(data);
+    setVideos(data);
+  };
+
   return (
     <div>
       <Header />
       <AddVideo onAdd={handleSubmit} />
-      {videos.map((video, index) => {
-        return (
-          <VideoCell
-            key={index}
-            id={video.id}
-            title={video.title}
-            url={video.url}
-            rating={video.rating}
-            onDelete={handleDelete}
-          />
-        );
-      })}
+      <Search onSearch={handleSearch} />
+      <div className="videos-Container">
+        {videos.map((video, index) => {
+          return (
+            <VideoCell
+              key={index}
+              id={video.id}
+              title={video.title}
+              url={video.url}
+              rating={video.rating}
+              onDelete={handleDelete}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

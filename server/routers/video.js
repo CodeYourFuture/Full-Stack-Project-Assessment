@@ -28,11 +28,31 @@ const pool = new Pool({
 
 //psql -h ec2-176-34-215-248.eu-west-1.compute.amazonaws.com -p 5432 -U ogspsozpkqzssl -W d838mflm23l9di
 // provide password when prompted
-router.get("/test", (req, res) => {
-  res.send("Hello");
-});
 
 router.get("/", (req, res) => {
+  const videoId = req.query.id;
+  const videoOrder = req.query.order;
+  const searchText = req.query.searchText;
+  let query;
+
+  videoId
+    ? (query = `SELECT * FROM videos WHERE id=${videoId}`)
+    : searchText
+    ? (query = `SELECT * FROM videos WHERE LOWER(title) LIKE '%${searchText}%' ORDER BY rating desc`)
+    : (query = `SELECT * FROM videos ORDER BY rating ${
+        videoOrder ? videoOrder : "desc"
+      }`);
+  pool
+    .query(query)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+router.get("/search", (req, res) => {
   const videoId = req.query.id;
   const videoOrder = req.query.order;
   let query;
