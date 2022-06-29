@@ -7,7 +7,9 @@ import Response from "./exampleresponse.json";
 import { nanoid } from "nanoid";
 
 const myVideo = Response;
-
+const BASE_URL = "http://localhost:8080/";
+const ENDPOINT = "task";
+const QUERY = "?n=1";
 const App = () => {
   // const [videoState, setVideoState] = useState(myVideo);
   // const filteredVideo = (id) => videoState.filter((video) => video.id !== id);
@@ -44,19 +46,11 @@ const App = () => {
     const newVideos = [...addVideo, newVideo];
     setAddVideo(newVideos);
   };
-  // function addVideoObj() {
-  //   const videoObj = { title: videoTitleInput, url: videoUrlInput };
 
-  //   const videoObjValid = simpleValidator.current.allValid();
-  //   if (videoObjValid) {
-  //     props.createVideo(videoObj);
-  //     setVideoTitleInput("");
-  //     setVideoUrlInput("");
-  //   } else {
-  //     simpleValidator.current.showMessages();
-  //     forceUpdate();
-  //   }
-  // }
+  const handleclick = () => {
+    console.log("handleclick running :");
+    fetch(BASE_URL + ENDPOINT + QUERY).then((res = res.json()));
+  };
   return (
     <div className="card">
       <div>
@@ -76,7 +70,11 @@ const App = () => {
             placeholder="Enter Video Url ..."
             onChange={handleAddFormChange}
           />
-          <button type="submit" className="add-video-button">
+          <button
+            type="submit"
+            className="add-video-button"
+            onClick={handleclick}
+          >
             Add Video
           </button>
         </form>
