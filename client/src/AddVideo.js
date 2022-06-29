@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 
+
+const herokuDB = "https://full-stack-project-assessment.herokuapp.com/videos"
+
 const AddVideo = (props) => {
 
     const [title, setTitle] = useState("");
@@ -19,17 +22,17 @@ const AddVideo = (props) => {
 
     function updateData(updateData) {
         props.setFilterVideo(updateData)
-        // props.setAllData(updateData)
     }
 
     function handelAdd() {
+
         if (title === "" || url === "") {
             alert("The title or url field should not be empty.")
         } else if (!url.includes("youtube") || !url.includes("watch")) {
             alert("Please enter a valid Url")
         } else {
             const data = { url: url, title: title, rating: 0 };
-            fetch("http://localhost:5000/videos", {
+            fetch(herokuDB, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

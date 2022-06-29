@@ -107,6 +107,6 @@ app.delete("/videos", (req, res) => {
     data.splice(indexOfVideo, 1)
     res.send(data);
   }
-
 })
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

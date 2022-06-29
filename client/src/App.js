@@ -9,11 +9,13 @@ import Search from "./Search";
 
 function App() {
 
+  const herokuDB = "https://full-stack-project-assessment.herokuapp.com/videos"
+
   const [allData, setAllData] = useState([]);
   const [filterVideo, setFilterVideo] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/videos")
+    fetch(herokuDB)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);

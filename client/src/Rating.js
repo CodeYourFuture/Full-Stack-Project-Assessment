@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
+const herokuDB = "https://full-stack-project-assessment.herokuapp.com/videos"
 const Rating = (props) => {
 
     const [rate, setRate] = useState(props.rating);
@@ -17,10 +18,10 @@ const Rating = (props) => {
 
 
     };
-    
+
     useEffect(() => {
         let data = { rating: rate, id: props.id };
-        fetch(("http://localhost:5000/videos"), {
+        fetch((herokuDB), {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

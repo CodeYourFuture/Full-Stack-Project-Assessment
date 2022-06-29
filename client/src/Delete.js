@@ -1,12 +1,15 @@
 import React from "react";
 
+
 const DeleteButton = (props) => {
+    const herokuDB = "https://full-stack-project-assessment.herokuapp.com/videos";
+
     function upateDateDelete(updateData) {
         props.setFilterVideo(updateData)
     }
     function handelClick() {
         let data = { id: props.id };
-        fetch(("http://localhost:5000/videos"), {
+        fetch((herokuDB), {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
