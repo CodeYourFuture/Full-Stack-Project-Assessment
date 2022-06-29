@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const NewVideos = ({setAllVideos, setVisible}) => {
-  const[validationUrl, setValidationUrl ] = useState("")
+const NewVideos = ({ setAllVideos, setVisible }) => {
+  const [validationUrl, setValidationUrl] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
@@ -10,20 +10,20 @@ const NewVideos = ({setAllVideos, setVisible}) => {
     const title = event.target.value;
     setTitle(title);
   };
-    function matchYoutubeUrl(url) {
-      let urlType =
-        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-      if (url.match(urlType)) {
-        return url.match(urlType)[1];
-      }
-      return false;
+  function matchYoutubeUrl(url) {
+    let urlType =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(urlType)) {
+      return url.match(urlType)[1];
     }
+    return false;
+  }
 
   const updateUrl = (event) => {
     const url = event.target.value;
     setUrl(url);
-  if (matchYoutubeUrl(url)) return setValidationUrl("valid Url");
-  setValidationUrl("Invalid Youtube URL");
+    if (matchYoutubeUrl(url)) return setValidationUrl("valid Url");
+    setValidationUrl("Invalid Youtube URL");
   };
 
   const addVideo = (event) => {
@@ -34,26 +34,25 @@ const NewVideos = ({setAllVideos, setVisible}) => {
     //   return e++;
     // };
     const newVideo = { title, url, rating: 5 };
-if (matchYoutubeUrl(url)) setAllVideos((allVideos) => {
-  //Clear the input after submitting
-  setTitle("");
-  setUrl("");
-  //  return allVideos.concat(newVideo);
-  axios
-    .post("https://full-stack-project-assesment.herokuapp.com/", newVideo)
-    .then((res) => {
+    if (matchYoutubeUrl(url)) {
+
+      //Clear the input after submitting
       
-      if (res.status === 201) {
-        axios
-          .get("https://full-stack-project-assesment.herokuapp.com/")
-          .then((res) => {
-            console.log(res.data)
-            setAllVideos(res.data);
-          });
-      }
-    });
-});
-      
+      setTitle("");
+      setUrl("");
+      //  return allVideos.concat(newVideo);
+      axios
+        .post("https://full-stack-project-assesment.herokuapp.com/", newVideo)
+        .then((res) => {
+          if (res.status === 201) {
+            axios
+              .get("https://full-stack-project-assesment.herokuapp.com/")
+              .then((res) => {
+                setAllVideos(res.data);
+              });
+          }
+        });
+    }
   };
 
   return (
