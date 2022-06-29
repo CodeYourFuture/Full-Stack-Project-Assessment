@@ -23,13 +23,13 @@ function App() {
     .catch((error) => {
       console.log(error);
     })
-  }, [filterVideo])
+  }, [])
  
   return (
     <div className="App">
       <Header />
       <div>
-        <AddVideo/>
+        <AddVideo setFilterVideo={setFilterVideo}/>
         <Search 
              allData ={allData}
              filterVideo ={filterVideo}

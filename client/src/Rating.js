@@ -9,17 +9,17 @@ const Rating = (props) => {
 
     function increase() {
         setRate((rate) => rate + 1);
-       
+
     };
 
     function decrease() {
         setRate((rate) => rate - 1);
-        
+
 
     };
-   
 
-   
+
+
     useEffect(() => {
         let data = { rating: rate, id: props.id };
         fetch(("http://localhost:5000/videos"), {
@@ -37,9 +37,9 @@ const Rating = (props) => {
                 console.log(error)
             });
 
-    }, [rate,props.id])
+    }, [rate, props.id])
 
-   
+
     return (
         <div className="rating">
             <button className="vote-button" onClick={(event) => decrease()}>
@@ -48,7 +48,7 @@ const Rating = (props) => {
             {rate} Votes
             <button className="vote-button" onClick={(event) => increase()}>
                 <FontAwesomeIcon className="icon" icon={faHeart} size="sm" />
-                
+
             </button>
         </div>
     );

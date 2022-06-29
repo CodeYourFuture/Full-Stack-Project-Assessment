@@ -38,7 +38,9 @@ const Search = (props) => {
                 </div>
 
             </div>
-            <RenderVideo filterVideo={props.filterVideo} />
+            <RenderVideo
+               filterVideo={props.filterVideo} 
+               setFilterVideo={props.setFilterVideo} />
             <div>
 
             </div>

@@ -1,8 +1,11 @@
 import React from "react";
 
 const DeleteButton = (props) => {
+    function upateDateDelete(updateData) {
+        props.setFilterVideo(updateData)
+    }
     function handelClick() {
-        let data = {id: props.id };
+        let data = { id: props.id };
         fetch(("http://localhost:5000/videos"), {
             method: "DELETE",
             headers: {
@@ -11,11 +14,11 @@ const DeleteButton = (props) => {
             body: JSON.stringify(data),
         })
             .then((response) => response.json())
+            .then(data => upateDateDelete(data))
             .catch((error) => {
                 console.log(error)
             });
     }
-
     return (
         <div>
             <button onClick={handelClick}>Delete</button>

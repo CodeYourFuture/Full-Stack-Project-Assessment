@@ -3,16 +3,16 @@ import DeleteButton from "./Delete";
 import Rating from "./Rating";
 
 const RenderVideos = (props) => {
-    return ( 
-        <div className = "video-card">
-            {props.filterVideo.map((video)=>{
+    return (
+        <div className="video-card">
+            {props.filterVideo.map((video) => {
                 const videoId = video.url.substring(video.url.indexOf("=") + 1);
-                return(
+                return (
                     <div key={video.id}>
-                     <p className="title">{video.title}</p>
+                        <p className="title">{video.title}</p>
                         <div>
-                            <Rating rating={video.rating} id={video.id} key={video.id}/>                            
-                      <iframe
+                            <Rating rating={video.rating} id={video.id} key={video.id} />
+                            <iframe
                                 width="360"
                                 height="315"
                                 src={`https://www.youtube.com/embed/${videoId}`}
@@ -21,13 +21,14 @@ const RenderVideos = (props) => {
                                 allowFullScreen
                                 title="Embedded youtube"
                             />
-                            <DeleteButton id={video.id}/>
+                            <DeleteButton id={video.id}
+                                setFilterVideo={props.setFilterVideo} />
                         </div>
                     </div>
                 )
             })}
         </div>
-     );
+    );
 }
- 
+
 export default RenderVideos;
