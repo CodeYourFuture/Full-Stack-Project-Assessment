@@ -61,7 +61,7 @@ function HomePage() {
   return (
     <div>
       <Header />
-      <AddVideo onAdd={handleSubmit} />
+
       <Search onSearch={handleSearch} getAllVideo={getData} />
       <div className="videos-Container">
         {videos.map((video, index) => {
