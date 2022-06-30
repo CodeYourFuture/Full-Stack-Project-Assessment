@@ -10,21 +10,22 @@ const Rating = (props) => {
   return (
     <div>
       <div className="rating">
-        <button
+        <img
+          src="https://img.icons8.com/material-sharp/452/facebook-like--v1.png"
+          alt="Like"
           onClick={() => {
             handleVote(true);
           }}
-        >
-          UpVote
-        </button>
+        />
+
         <p>{vote}</p>
-        <button
+        <img
+          src="https://img.icons8.com/material-sharp/452/thumbs-down.png"
+          alt="Dislike"
           onClick={() => {
             handleVote(false);
           }}
-        >
-          DownVote
-        </button>
+        />
       </div>
     </div>
   );

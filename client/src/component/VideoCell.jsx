@@ -5,24 +5,18 @@ import Rating from "./Rating";
 
 const VideoCell = ({ id, title, url, rating, onDelete }) => {
   return (
-    <div >
-      <div key={id}>
-        <div >
-          <iframe
-            width="300"
-            height="215"
-            src={url.replace("watch?v=", "embed/")}
-            title={title}
-          ></iframe>
-        </div>
+    <div key={id} className="video">
+      <iframe
+        width="100%"
+        height="240"
+        src={url.replace("watch?v=", "embed/")}
+        title={title}
+      ></iframe>
 
-        <div>
-          <p>Title : {title}</p>
-        </div>
+      <p>Title : {title}</p>
 
-        <Rating rating={rating} />
-        <DeleteButton handleClick={() => onDelete(id)} />
-      </div>
+      <Rating rating={rating} />
+      <DeleteButton handleClick={() => onDelete(id)} />
     </div>
   );
 };

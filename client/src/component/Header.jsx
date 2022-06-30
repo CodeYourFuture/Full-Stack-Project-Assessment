@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="App-header">
+    <header className="header">
       <h1>Video Recommendation</h1>
     </header>
   );

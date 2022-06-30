@@ -3,7 +3,9 @@ import React from "react";
 function Delete({ handleClick }) {
   return (
     <div>
-      <button onClick={handleClick}>Remove</button>
+      <button className="button" onClick={handleClick}>
+        Delete
+      </button>
     </div>
   );
 }

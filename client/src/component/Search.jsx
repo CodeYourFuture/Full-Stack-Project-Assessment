@@ -13,6 +13,7 @@ const Search = ({ onSearch, getAllVideo }) => {
     <div>
       <label htmlFor="search">Search: </label>
       <input
+        className="input"
         type="text"
         id="search"
         value={searchText}
@@ -21,6 +22,7 @@ const Search = ({ onSearch, getAllVideo }) => {
         }}
       ></input>
       <button
+        className="button"
         onClick={() => {
           onSearch(searchText);
           showAllVideoButton();
@@ -30,6 +32,7 @@ const Search = ({ onSearch, getAllVideo }) => {
       </button>
       {showAllVideos ? (
         <button
+          className="button"
           onClick={() => {
             getAllVideo();
             showAllVideoButton();

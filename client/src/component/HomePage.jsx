@@ -3,6 +3,7 @@ import VideoCell from "./VideoCell";
 import Header from "./Header";
 import AddVideo from "./AddVideo";
 import Search from "./Search";
+import Footer from "./Footer";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
@@ -75,6 +76,7 @@ function HomePage() {
             />
           );
         })}
+        <Footer />
       </div>
     </div>
   );

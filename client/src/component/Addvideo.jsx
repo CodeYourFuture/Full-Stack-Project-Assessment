@@ -15,7 +15,7 @@ function AddVideo({ onAdd }) {
   };
 
   return (
-    <div>
+    <div className="addVideo">
       {showForm ? (
         <form
           onSubmit={(e) => {
@@ -24,8 +24,9 @@ function AddVideo({ onAdd }) {
           }}
         >
           <div>
-            <label htmlFor="title">Tile:</label>
+            <label htmlFor="title">Tile: </label>
             <input
+              className="input"
               type="text"
               id="title"
               value={title}
@@ -35,8 +36,9 @@ function AddVideo({ onAdd }) {
             ></input>
           </div>
           <div>
-            <label htmlFor="url">Url:</label>
+            <label htmlFor="url">Url: </label>
             <input
+              className="input"
               type="text"
               id="url"
               value={url}
@@ -47,14 +49,14 @@ function AddVideo({ onAdd }) {
             ></input>
           </div>
           <div>
-            <button type="button" onClick={handleShowForm}>
+            <button className="button" type="button" onClick={handleShowForm}>
               Cancel
             </button>
-            <button>Add</button>
+            <button className="button">Add</button>
           </div>
         </form>
       ) : (
-        <button type="button" onClick={handleShowForm}>
+        <button className="button" type="button" onClick={handleShowForm}>
           Add Video
         </button>
       )}
