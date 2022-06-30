@@ -48,14 +48,14 @@ const AddVideo = ({ onAdd }) => {
             ></input>
           </div>
           <div>
-            <button className="button" type="button" onClick={handleShowForm}>
+            <button className="button" onClick={handleShowForm}>
               Cancel
             </button>
             <button className="button">Add</button>
           </div>
         </form>
       ) : (
-        <button className="button" type="button" onClick={handleShowForm}>
+        <button className="button" onClick={handleShowForm}>
           Add Video
         </button>
       )}
