@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VideoCell from "./VideoCell";
 import Header from "./Header";
-import AddVideo from "./AddVideo";
+//import AddVideo from "./AddVideo";
 import Search from "./Search";
 import Footer from "./Footer";
 
