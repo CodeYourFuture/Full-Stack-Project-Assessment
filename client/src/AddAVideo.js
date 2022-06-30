@@ -18,7 +18,7 @@ const AddAVideo = () => {
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error.response.data));
 
-    //navigate("/");
+    navigate("/");
   };
 
   const onClickCancelButton = (e) => {
