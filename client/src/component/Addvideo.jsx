@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const AddVideo = ({ onAdd }) => {
-  const [showForm, SetShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
   const handleShowForm = () => {
-    SetShowForm(!showForm);
+    setShowForm(!showForm);
   };
   const emptyForm = () => {
     setTitle("");
@@ -23,7 +23,7 @@ const AddVideo = ({ onAdd }) => {
           }}
         >
           <div>
-            <label htmlFor="title">Tile: </label>
+            <label htmlFor="title">Tile:</label>
             <input
               className="input"
               type="text"
@@ -35,7 +35,7 @@ const AddVideo = ({ onAdd }) => {
             ></input>
           </div>
           <div>
-            <label htmlFor="url">Url: </label>
+            <label htmlFor="url">Url:</label>
             <input
               className="input"
               type="text"
