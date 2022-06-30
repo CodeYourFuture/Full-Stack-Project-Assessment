@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VideoCell from "./VideoCell";
 import Header from "./Header";
-import AddVideo from "./AddVideo";
+import Form from "./From";
 import Search from "./Search";
 import Footer from "./Footer";
 
@@ -61,7 +61,7 @@ function HomePage() {
   return (
     <div>
       <Header />
-      <AddVideo onAdd={handleSubmit} />
+      <Form onAdd={handleSubmit} />
       <Search onSearch={handleSearch} getAllVideo={getData} />
       <div className="videos-Container">
         {videos.map((video, index) => {
