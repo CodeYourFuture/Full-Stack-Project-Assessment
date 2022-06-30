@@ -11,7 +11,6 @@ const AddVideo = ({ onAdd }) => {
   const emptyForm = () => {
     setTitle("");
     setUrl("");
-    console.log("empty");
   };
 
   return (
