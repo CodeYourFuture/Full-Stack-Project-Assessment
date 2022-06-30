@@ -1,3 +1,5 @@
+
+DROP TABLE if exists videos;
 CREATE TABLE videos (
 id        SERIAL PRIMARY KEY,
 title     VARCHAR(130) NOT NULL,       

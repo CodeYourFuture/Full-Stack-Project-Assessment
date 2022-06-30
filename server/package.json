@@ -15,10 +15,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
+    "path": "^0.12.7",
     "pg": "^8.7.3",
+    "query": "^0.2.0",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.18"
   }
 }

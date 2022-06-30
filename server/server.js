@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const data = require("../exampleresponse.json");
 
-const { uuid } = require("uuidv4");
+const { v4: uuidv4 } = require("uuid");
 
 app.use(cors());
 app.use(express.json());
@@ -24,20 +24,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.post("/", function (req, res) {
-  const newVideoTitle = req.body.title;
-  const newUrl = req.body.url;
-
-  const query = "INSERT INTO videos (title, url) VALUES ($1, $2)";
-
-  pool
-    .query(query, [newVideoTitle, newUrl])
-    .then(() => res.send("Video added"))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-});
 app.get("/", function (req, res) {
   pool
     .query("SELECT * FROM videos")
@@ -49,6 +35,23 @@ app.get("/", function (req, res) {
 });
 
 let videos = [...data];
+
+app.post("/", function (req, res) {
+  const newVideoTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = Number(req.body.rating);
+  const newId = uuidv4();
+  const query =
+    "INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)";
+
+  pool
+    .query(query, [newId, newVideoTitle, newUrl, newRating])
+    .then(() => res.send("Video added"))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
 
 // app.post("/", function (req, res) {
 //   const { title, url, rating } = req.body;
@@ -132,33 +135,33 @@ let videos = [...data];
 //     });
 // });
 
-app.get("/search", (req, res) => {
-  const searchTerm = req.query.term;
-  // use pool to write a query using WHERE clause to search for search term then return the results to the client
-  const filteredData = videos.filter((video) => {
-    video.title.toLowerCase().includes(searchTerm.toLowerCase());
+// app.get("/search", (req, res) => {
+//   const searchTerm = req.query.term;
+//   // use pool to write a query using WHERE clause to search for search term then return the results to the client
+//   const filteredData = videos.filter((video) => {
+//     video.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-    if (filteredData.length === 0) {
-      res
-        .status(400)
-        .json({ message: `No videos including ${searchTerm} found` });
-    }
+//     if (filteredData.length === 0) {
+//       res
+//         .status(400)
+//         .json({ message: `No videos including ${searchTerm} found` });
+//     }
 
-    return res.json(filteredData);
-  });
-});
+//     return res.json(filteredData);
+//   });
+// });
 
-app.get("/:id", function (req, res) {
-  let id = parseInt(req.params.id);
-  //use pool to write a query to filter videos by id, using WHERE clause
-  // let foundVideo = videos.filter((i) => i.id == id); //rephrase
-  //write it as then promise
-  if (foundVideo) {
-    res.status(200).json(foundVideo);
-  } else {
-    res.status(400).send({ message: `No video with id: ${id} found` });
-  }
-});
+// app.get("/:id", function (req, res) {
+//   let id = parseInt(req.params.id);
+//   //use pool to write a query to filter videos by id, using WHERE clause
+//   // let foundVideo = videos.filter((i) => i.id == id); //rephrase
+//   //write it as then promise
+//   if (foundVideo) {
+//     res.status(200).json(foundVideo);
+//   } else {
+//     res.status(400).send({ message: `No video with id: ${id} found` });
+//   }
+// });
 
 // app.delete("/:id", function (req, res) {
 //   let id = parseInt(req.params.id);
@@ -174,29 +177,29 @@ app.get("/:id", function (req, res) {
 //   }
 // });
 
-// DELETE a Video with ID
-app.delete("/api/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-  pool.query("SELECT * FROM videos WHERE id = $1", [videoId]).then((result) => {
-    if (result.rows.length === 0) {
-      return res
-        .status(400)
-        .send({ msg: `Video:${videoId} does not exist` })
-        .catch((error) => {
-          console.log(error);
-          res.status(500).json(error);
-        });
-    } else {
-      return pool
-        .query("DELETE FROM videos WHERE id = $1", [videoId])
-        .then(() => res.send({ msg: `Video:${videoId} Deleted!` }))
-        .catch((error) => {
-          console.log(error);
-          res.status(500).json(error);
-        });
-    }
-  });
-});
+// // DELETE a Video with ID
+// app.delete("/api/:id", (req, res) => {
+//   const videoId = parseInt(req.params.id);
+//   pool.query("SELECT * FROM videos WHERE id = $1", [videoId]).then((result) => {
+//     if (result.rows.length === 0) {
+//       return res
+//         .status(400)
+//         .send({ msg: `Video:${videoId} does not exist` })
+//         .catch((error) => {
+//           console.log(error);
+//           res.status(500).json(error);
+//         });
+//     } else {
+//       return pool
+//         .query("DELETE FROM videos WHERE id = $1", [videoId])
+//         .then(() => res.send({ msg: `Video:${videoId} Deleted!` }))
+//         .catch((error) => {
+//           console.log(error);
+//           res.status(500).json(error);
+//         });
+//     }
+//   });
+// });
 //write post request to back end to add video to the list
 //change it to work for database as in the examples above
 
