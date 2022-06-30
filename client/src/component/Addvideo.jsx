@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideo({ onAdd }) {
+const AddVideo = ({ onAdd }) => {
   const [showForm, SetShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -62,6 +62,6 @@ function AddVideo({ onAdd }) {
       )}
     </div>
   );
-}
+};
 
 export default AddVideo;
