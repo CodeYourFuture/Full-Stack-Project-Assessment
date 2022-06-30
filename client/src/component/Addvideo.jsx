@@ -8,20 +8,15 @@ const AddVideo = ({ onAdd }) => {
   const handleShowForm = () => {
     setShowForm(!showForm);
   };
-  const emptyForm = () => {
-    setTitle("");
-    setUrl("");
-  };
+  // const emptyForm = () => {
+  //   setTitle("");
+  //   setUrl("");
+  // };
 
   return (
     <div className="addVideo">
       {showForm ? (
-        <form
-          onSubmit={(e) => {
-            onAdd(e, title, url);
-            emptyForm();
-          }}
-        >
+        <form onSubmit={(e) => onAdd(e, title, url)}>
           <div>
             <label htmlFor="title">Tile:</label>
             <input
