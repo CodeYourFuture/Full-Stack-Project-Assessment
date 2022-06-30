@@ -29,26 +29,26 @@ function HomePage() {
     }
   };
 
-  const handleSubmit = async (event, title, url) => {
-    event.preventDefault();
-    try {
-      await fetch("https://video-laleh.herokuapp.com/api/videos", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title,
-          url: url,
-        }),
-      });
+  // const handleSubmit = async (event, title, url) => {
+  //   event.preventDefault();
+  //   try {
+  //     await fetch("https://video-laleh.herokuapp.com/api/videos", {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         title: title,
+  //         url: url,
+  //       }),
+  //     });
 
-      getData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     getData();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleSearch = async (searchText) => {
     const res = await fetch(
