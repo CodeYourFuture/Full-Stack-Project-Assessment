@@ -1,119 +1,93 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyparser = require("body-parser");
-const port = process.env.PORT || 5000;
 
+const port = process.env.PORT || 5000;
+const bodyparser = require("body-parser");
+
+//when you write post endpoints don't forget body parser
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
-const { Pool } = require("pg");
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+// Store and retrieve your videos from here
+// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+let videos = [
+  {
+    id: 523523,
+    title: "Get Your Blessings",
+    url: "https://www.youtube.com/watch?v=n3SeaKTbrmc",
+    rating: 23,
   },
-});
+  {
+    id: 523427,
+    title: "This Is Season To Shine",
+    url: "https://www.youtube.com/watch?v=GgHvx6fwGhk",
+    rating: 1270,
+  },
+  {
+    id: 82653,
+    title: "Looking For You",
+    url: "https://www.youtube.com/watch?v=q1XW5ticeMw",
+    rating: 2111,
+  },
+];
 
-// console.log(process.env);
-// const pool = new Pool({
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   database: process.env.DB_DATABASE,
-//   pssword: process.env.DB_PASSWORD,
-//   port: process.env.DB_PORT,
-// });
-
-app.get("/", function (req, res) {
-  pool
-    .query("SELECT * FROM videos ORDER BY title")
-    .then((result) => res.json(result.rows))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
+//returns all videos
+app.get("/", (req, res) => {
+  res.json(videos);
 });
 
 //adds a video
 app.post("/", function (req, res) {
-  const addTitle = req.body.title;
-  const addUrl = req.body.url;
-  const addRating = req.body.rating;
-  const lookUpString = "https://www.youtube.com/watch?";
-
-  const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
-  console.log(pool);
+  const { title, url, rating } = req.body;
 
   if (
-    (!addUrl.includes(lookUpString) && addTitle === undefined) ||
-    addTitle === 0 ||
-    addUrl === undefined ||
-    addUrl === 0 ||
-    addRating === undefined ||
-    addRating === 0
+    title === undefined ||
+    title === 0 ||
+    url === undefined ||
+    url === 0 ||
+    rating === undefined ||
+    rating === 0
   ) {
-    return res.status(400).send("please fill in correct url");
+    return res
+      .status(400)
+      .send("check that you have filled the form correctly");
+  } else {
+    const newVideoPosted = {
+      id: videos.length,
+      title,
+      url,
+      rating,
+    };
+    videos.push(newVideoPosted);
+    console.log(videos);
+    res.send("video added");
   }
-
-  pool
-    .query(query, [addTitle, addUrl, addRating])
-    .then(() => res.send("Video created!"))
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json(error);
-    });
 });
 
 //gets id of each video
 app.get("/:id", function (req, res) {
-  const eachVideoId = req.params.id;
-  // const result = videos.find((video) => video.id === id);
-  // if (result) {
-  //   res.send(result);
-  // } else {
-  //   res.status(404).send(`id ${id} not found`);
-  // }
-  pool
-    .query("SELECT * FROM videos WHERE id=$1", [eachVideoId])
-    .then((result) => res.json(result))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-});
-
-// //deletes a video
-
-app.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleteVideo = await pool.query(
-      "DELETE FROM videos WHERE video_id = $1",
-      [id]
-    );
-    res.json("video deleted !!");
-  } catch (error) {
-    console.error(error.message);
+  const id = Number(req.params.id);
+  const result = videos.find((video) => video.id === id);
+  if (result) {
+    res.send(result);
+  } else {
+    res.status(404).send(`id ${id} not found`);
   }
 });
 
-// app.delete("/:id", function (req, res) {
-//   const videoId = req.params.id;
-//   console.log(videoId);
-//   // const removeVideo = videos.findIndex((index) => index.id === id);
-//   pool
-//     .query("DELETE FROM videos WHERE id=$1", [videoId])
-//     .then(() => {
-//       console.log(`Video ${videoId} deleted!`);
-//       res.send(`Video ${videoId} deleted!`);
-//     })
+//deletes a video
+app.delete("/:id", function (req, res) {
+  const { id } = req.params;
+  const removeVideo = videos.findIndex((index) => index.id === id);
 
-//     .catch((error) => {
-//       console.error(error);
-//       // res.status(500).json(error);
-//     });
-// });
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+  if (removeVideo) {
+    videos.slice(removeVideo, 1);
+    res.send(`${id} id has been removed`);
+  } else {
+    res.status(404).send("not found");
+  }
+});
