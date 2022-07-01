@@ -94,10 +94,15 @@ code {
     flex-direction: column;
   }
 
+  .video {
+    width: 100%;
+  }
   .header h1 {
-    padding-top: 6rem;
+    padding-top: 3.1rem;
+    font-size: 1rem;
   }
   .footer h3 {
-    padding-top: 4.5rem;
+    padding-top: 2.3rem;
+    font-size: 0.6rem;
   }
 }
