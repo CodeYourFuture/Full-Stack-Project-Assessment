@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Rating = ({ rating, videoId, updateRating }) => {
   //const [vote, setVote] = useState(rating);

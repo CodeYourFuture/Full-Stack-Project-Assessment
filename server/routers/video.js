@@ -94,7 +94,7 @@ router.post("/", (req, res) => {
 router.put("/", (req, res) => {
   const { rating, videoId } = req.body;
 
-  const query = `UPDATE videos (rating) VALUES ($1) WHERE id=${videoId}`;
+  const query = `UPDATE videos SET rating=$1 WHERE id=${videoId}`;
   pool
     .query(query, [rating])
     .then(() => {

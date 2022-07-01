@@ -54,6 +54,7 @@ function HomePage() {
 
   const handleUpdate = async (rating, id) => {
     console.log(rating);
+    console.log(id);
     try {
       await fetch("https://video-laleh.herokuapp.com/api/videos", {
         method: "PUT",
