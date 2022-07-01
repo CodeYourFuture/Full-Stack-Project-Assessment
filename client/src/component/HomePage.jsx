@@ -7,11 +7,13 @@ import Footer from "./Footer";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(true);
 
   const getData = async () => {
     const res = await fetch("https://video-laleh.herokuapp.com/api/videos");
     const data = await res.json();
     setVideos(data);
+    setIsDataLoaded(false);
   };
 
   useEffect(() => {
@@ -50,6 +52,26 @@ function HomePage() {
     }
   };
 
+  const handleUpdate = async (rating, id) => {
+    console.log(rating);
+    try {
+      await fetch("https://video-laleh.herokuapp.com/api/videos", {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rating: rating,
+          VideoId: id,
+        }),
+      });
+      getData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSearch = async (searchText) => {
     const res = await fetch(
       `https://video-laleh.herokuapp.com/api/videos/?searchText=${searchText.toLowerCase()}`
@@ -63,21 +85,26 @@ function HomePage() {
       <Header />
       <Form onAdd={handleSubmit} />
       <Search onSearch={handleSearch} getAllVideo={getData} />
-      <div className="videos-Container">
-        {videos.map((video, index) => {
-          return (
-            <VideoCell
-              key={index}
-              id={video.id}
-              title={video.title}
-              url={video.url}
-              rating={video.rating}
-              onDelete={handleDelete}
-            />
-          );
-        })}
-        <Footer />
-      </div>
+      {!isDataLoaded ? (
+        <div className="videos-Container">
+          {videos.map((video, index) => {
+            return (
+              <VideoCell
+                key={index}
+                id={video.id}
+                title={video.title}
+                url={video.url}
+                rating={video.rating}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <p>Data is loading....-</p>
+      )}
+      <Footer />
     </div>
   );
 }

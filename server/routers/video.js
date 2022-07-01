@@ -91,6 +91,20 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/", (req, res) => {
+  const { rating, videoId } = req.body;
+
+  const query = `UPDATE videos (rating) VALUES ($1) WHERE id=${videoId}`;
+  pool
+    .query(query, [rating])
+    .then(() => {
+      res.send("rating has been updated");
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
 router.delete("/:id", (req, res) => {
   const videoId = req.params.id;
   const query = "DELETE FROM videos WHERE id=$1";
