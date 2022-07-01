@@ -1,90 +1,83 @@
 const express = require("express");
 const router = express.Router();
-let videosData = require("../data/data");
+const  {Pool}= require('pg');
+const dotenv = require('dotenv');
+dotenv.config();
+const {moment} = require('moment')
 
-router.get("/", function (request, response) {
-  response.json(videosData);
-});
 
-router.get("/:id", function (request, response) {
-  let id = parseInt(request.params.id);
-  let filteredMessage = videosData.find((el) => el.id === id);
-  if (!filteredMessage) {
-    res.status(400).send("Video not found for given id");
+const pool = new Pool({
+
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+  rejectUnauthorized: false
   }
-  response.json(filteredMessage);
+})
+
+
+router.get("/", function (req, res) {
+  pool.query('SELECT * FROM videos' )
+  .then ((result)=>res.json(result.rows))
+  .catch((error)=>{
+      console.log(error)
+      res.status(500).json(error);
+  })
 });
 
-router.post("/", function (request, response) {
-  let newVideo = {
-    id: videosData[videosData.length - 1].id + 1,
-    title: request.body.title,
-    video_id: request.body.video_id,
-    categories:request.body.categories,
-    favorites:request.body.favorites,
-    votes:request.body.votes,
-
-  };
-
-  if (!newVideo.title || !newVideo.video_id) {
-    return response.status(400).json({
-      status_code: 0,
-      error_msg: "Require Params Missing",
-    });  }
-  videosData.push(newVideo);
-  response.status(200).json({
-    status_code: 1,
-    data: newVideo,
-  });
+router.get("/:id", function (req, res) {
+  let paramId = req.params.id;
+  pool.query('SELECT * FROM videos WHERE id=$1', [paramId] )
+  .then ((result)=>res.json(result.rows))
+  .catch((error)=>{
+      console.log(error)
+      res.status(500).json(error);
+  })
 });
 
-
-router.delete("/:id", function (request, response) {
-  let id = parseInt(request.params.id);
-  let deletedVideo = videosData.find((el) => el.id === id);
-  if (deletedVideo) {
-    videosData = videosData.filter(
-      (video) => video.id !== id
-    );
-
-    response.json({
-      msg: "Video deleted",
-
-      videosData,
-    });
-  } else {
-    response.status(400).send("Message not existing given id");
+router.post("/", function (req, res) {
+  let  {title,video_id,categories,isFavorite,votes}=req.body;
+  let  newData = moment().format('YYYY-MM-DD HH:mm:ss')
+  for (let key in req.body) {
+    if (!req.body[key]) {
+      return res.status(400).send("Please fill in all the details");
+    }
   }
+  
+  pool
+    .query(
+      "INSERT INTO videos (title, video_id, categories, isFavorite, votes, created_date) VALUES ($1,$2,$3,$4,$5,$6)",
+      [ title,video_id,categories,isFavorite,votes,newData]
+    )
+    .then(() => res.send("Successful" ))
+    .catch((error) => console.log(error));
 });
 
-router.put("/:id", function (request, response) {
-  let id = parseInt(request.params.id);
-  let foundVideo = videosData.find((el) => el.id === id);
-  if (foundVideo) {
-    videosData.forEach((video) => {
-      if (video.id === parseInt(request.params.id)) {
-        foundVideo.title = request.body.title
-          ? request.body.title
-          : foundVideo.title;
-        foundVideo.video_id = request.body.video_id
-          ? request.body.video_id
-          : foundVideo.video_id;
-        foundVideo.categories = request.body.categories
-        ? request.body.categories
-        : foundVideo.categories;
-        foundVideo.favorites = request.body.favorites
-          ? request.body.favorites
-          : foundVideo.favorites;
-        foundVideo.votes = request.body.votes
-        ? request.body.votes
-        : foundVideo.votes;
+//DELETE REQUEST
+router.delete("/:id", function (req, res) {
+  let paramId = req.params.id;
+  pool.query('DELETE FROM videos WHERE id = $1', [paramId])  
+  .then (()=>res.send(`Video ${paramId} deleted`))
+  .catch((error)=>{
+      console.log(error)
+      res.status(500).json(error);
+  })
+});
 
-        response.json({ msg: "message updated", video });
-      }
-    });
-  } else {
-    response.sendStatus(400);
+//PUT REQUEST
+router.put("/:id", function (req, res) {
+  let paramId = req.params.id;
+  let  {title,video_id,categories,isFavorite,votes}=req.body;
+  pool.query('UPDATE videos SET title =$1, video_id= $2, categories=$3, isFavorite=$4, votes =$5 WHERE id = $6',
+            [title,video_id,categories,isFavorite,votes,paramId])  
+  .then (()=>{
+        res.json( `Video ${paramId} updated`)
+        console.log( `Video ${paramId} updated`)
   }
+        )
+  .catch((error)=>{
+        console.log(error)
+        res.status(500).json(error);
+})
 });
 
 module.exports = router;
