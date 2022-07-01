@@ -53,8 +53,6 @@ function HomePage() {
   };
 
   const handleUpdate = async (rating, id) => {
-    console.log(rating);
-    console.log(id);
     try {
       await fetch("https://video-laleh.herokuapp.com/api/videos", {
         method: "PUT",
@@ -63,8 +61,8 @@ function HomePage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id: id,
           rating: rating,
-          VideoId: id,
         }),
       });
       getData();

@@ -14,9 +14,8 @@ const VideoCell = ({
 }) => {
   return (
     <div key={id} className="video">
-  
       {!dataLoaded ? (
-        <div>
+        <>
           <iframe
             width="100%"
             height="240"
@@ -28,7 +27,7 @@ const VideoCell = ({
 
           <Rating rating={rating} videoId={id} updateRating={onUpdate} />
           <DeleteButton handleClick={() => onDelete(id)} />
-        </div>
+        </>
       ) : (
         <p>data is loading....</p>
       )}

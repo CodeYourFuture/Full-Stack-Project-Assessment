@@ -1,12 +1,6 @@
 import React from "react";
 
 const Rating = ({ rating, videoId, updateRating }) => {
-  //const [vote, setVote] = useState(rating);
-
-  // const handleVote = (upVote) => {
-  //   setVote(upVote ? vote + 1 : vote - 1);
-  // };
-
   return (
     <div>
       <div className="rating">
