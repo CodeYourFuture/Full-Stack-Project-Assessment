@@ -57,6 +57,13 @@ code {
 .addVideo {
   margin: 1rem 0;
 }
+
+.addVideo label {
+  margin: 1rem 0;
+
+  width: 50px;
+}
+
 .iframe_div {
   width: 100%;
 }
