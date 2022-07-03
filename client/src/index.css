@@ -11,3 +11,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.add-video-wrapper{
+  margin-left: 60px;
+}
+.video-card{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.title{
+    margin: 50px;
+    margin-bottom: 3rem;  
+ } 
+
+.rating{
+  margin: 35px;
+  
+}
+
+.add-video-wrapper{
+  width: 50%;
+  margin:20px;
+  text-align: left;
+}
+.title-flex-row,.url-flex-row{
+    display: flex;
+    gap: 20px;
+    margin: 10px;
+}
+.buttons{
+    text-align: inherit;
+    margin-left: 122px;
+    display: flex;
+    gap: 20px;
+}
