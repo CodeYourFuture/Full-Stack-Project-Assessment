@@ -53,6 +53,8 @@ function HomePage() {
   };
 
   const handleUpdate = async (rating, id) => {
+    console.log(id);
+    console.log(rating);
     try {
       await fetch("https://video-laleh.herokuapp.com/api/videos", {
         method: "PUT",
@@ -101,7 +103,7 @@ function HomePage() {
           })}
         </div>
       ) : (
-        <p>Data is loading....-</p>
+        <p className="dataLoading">Data is loading....</p>
       )}
       <Footer />
     </div>
