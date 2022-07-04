@@ -29,7 +29,7 @@ const VideoCell = ({
           <DeleteButton handleClick={() => onDelete(id)} />
         </>
       ) : (
-        <p>data is loading....</p>
+        <p className="dataLoading">Data is loading</p>
       )}
     </div>
   );

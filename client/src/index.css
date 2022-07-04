@@ -54,13 +54,15 @@ code {
   padding-bottom: 1.4rem;
 }
 
+.dataLoading {
+  font-size: 3rem;
+}
 .addVideo {
   margin: 1rem 0;
 }
 
 .addVideo label {
   margin: 1rem 0;
-
   width: 50px;
 }
 
