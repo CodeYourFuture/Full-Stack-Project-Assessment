@@ -9,7 +9,7 @@ import Sort from "./Sort";
 function HomePage() {
   const [videos, setVideos] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(true);
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("desc");
 
   const getData = async () => {
     const res = await fetch(
@@ -22,6 +22,7 @@ function HomePage() {
 
   useEffect(() => {
     getData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (id) => {
