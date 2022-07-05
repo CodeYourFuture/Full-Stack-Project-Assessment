@@ -10,7 +10,7 @@ const Search = ({ onSearch, getAllVideo }) => {
   };
 
   return (
-    <div>
+    <div className="search">
       <label htmlFor="search">Search: </label>
       <input
         className="input"
