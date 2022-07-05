@@ -9,6 +9,14 @@ const Search = ({ onSearch, getAllVideo }) => {
     setShowAllVideos(!showAllVideos);
   };
 
+  const handleSearch = (text) => {
+    if (text) {
+      onSearch(text);
+      showAllVideoButton();
+    } else {
+      alert("Please enter a word/words");
+    }
+  };
   return (
     <div className="search">
       <label htmlFor="search">Search: </label>
@@ -24,8 +32,7 @@ const Search = ({ onSearch, getAllVideo }) => {
       <button
         className="button"
         onClick={() => {
-          onSearch(searchText);
-          showAllVideoButton();
+          handleSearch(searchText);
         }}
       >
         search

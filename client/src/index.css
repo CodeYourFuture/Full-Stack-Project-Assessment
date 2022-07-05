@@ -12,6 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.search-sort {
+  display: flex;
+  justify-content: space-between;
+}
+
 .rating {
   display: flex;
   flex-direction: row;
@@ -58,6 +64,19 @@ code {
   text-align: left;
   padding-left: 2rem;
 }
+
+.sort {
+  margin-right: 4rem;
+}
+
+.sort label {
+  padding-right: 1rem;
+}
+
+.sort select {
+  width: 120px;
+}
+
 .dataLoading {
   font-size: 1.3rem;
 }

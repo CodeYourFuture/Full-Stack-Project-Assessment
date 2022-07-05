@@ -38,7 +38,9 @@ router.get("/", (req, res) => {
   videoId
     ? (query = `SELECT * FROM videos WHERE id=${videoId}`)
     : searchText
-    ? (query = `SELECT * FROM videos WHERE LOWER(title) LIKE '%${searchText}%' ORDER BY rating desc`)
+    ? (query = `SELECT * FROM videos WHERE LOWER(title) LIKE '%${searchText}%' ORDER BY rating ${
+        videoOrder ? videoOrder : "desc"
+      }`)
     : (query = `SELECT * FROM videos ORDER BY rating ${
         videoOrder ? videoOrder : "desc"
       }`);

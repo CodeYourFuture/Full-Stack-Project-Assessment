@@ -13,7 +13,7 @@ const VideoCell = ({
   dataLoaded,
 }) => {
   return (
-    <div key={id} className="video">
+    <div className="video">
       <>
         <iframe
           width="100%"

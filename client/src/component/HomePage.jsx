@@ -4,13 +4,17 @@ import Header from "./Header";
 import Form from "./From";
 import Search from "./Search";
 import Footer from "./Footer";
+import Sort from "./Sort";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(true);
+  const [order, setOrder] = useState("");
 
   const getData = async () => {
-    const res = await fetch("https://video-laleh.herokuapp.com/api/videos");
+    const res = await fetch(
+      `https://video-laleh.herokuapp.com/api/videos/?order=${order}`
+    );
     const data = await res.json();
     setVideos(data);
     setIsDataLoaded(false);
@@ -73,23 +77,38 @@ function HomePage() {
 
   const handleSearch = async (searchText) => {
     const res = await fetch(
-      `https://video-laleh.herokuapp.com/api/videos/?searchText=${searchText.toLowerCase()}`
+      `https://video-laleh.herokuapp.com/api/videos/?searchText=${searchText.toLowerCase()}&order=${order}`
     );
     const data = await res.json();
     setVideos(data);
+  };
+
+  const handleSort = (event, sortValue) => {
+    event.preventDefault();
+    let sortedVideo;
+    //.slice make a copy of video
+    sortValue === "asc"
+      ? (sortedVideo = videos.slice().sort((a, b) => a.rating - b.rating))
+      : (sortedVideo = videos.slice().sort((a, b) => b.rating - a.rating));
+    setVideos(sortedVideo);
+    setOrder(sortValue);
   };
 
   return (
     <div>
       <Header />
       <Form onAdd={handleSubmit} />
-      <Search onSearch={handleSearch} getAllVideo={getData} />
+      <div className="search-sort">
+        <Search onSearch={handleSearch} getAllVideo={getData} />
+        <Sort onChange={handleSort} />
+      </div>
+
       {!isDataLoaded ? (
         <div className="videos-Container">
           {videos.map((video, index) => {
             return (
               <VideoCell
-                key={index}
+                key={video.id}
                 id={video.id}
                 title={video.title}
                 url={video.url}
