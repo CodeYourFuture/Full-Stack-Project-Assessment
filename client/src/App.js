@@ -37,7 +37,12 @@ function App() {
   // add video handle function
   function handleNewVideoSubmit(e) {
     e.preventDefault();
+    console.table(videos)
+    console.log(newVidoeData)
+    
     setVideos([newVidoeData, ...videos]);
+
+    
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -46,7 +51,7 @@ function App() {
       fetch("https://my-url-links.herokuapp.com/", requestOptions)
         .then((response) => response.json())
         .then((data) => setVideos([...videos,newVidoeData]));
-    
+    console.log(newVidoeData);
   }
   // handle add change fucntion
   function handleNewVideoChange(e) {

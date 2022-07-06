@@ -53,7 +53,7 @@ app.post("/", (req, res) => {
     res.send({ result: "failure", message: "Video could not be saved" });
   } else {
    const query =
-     "INSERT INTO videos (title,url,rating) VALUES ($1, $2, $3)";
+     "INSERT INTO videos (title,url,rating) VALUES ($1, $2, $3) RETURNING id";
 
    pool.query(
      query,
