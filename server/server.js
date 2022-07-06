@@ -13,7 +13,7 @@ const jsonData = require("../exampleresponse.json");
 app.use(cors()); // added cors
 
 const pool = new Pool({
-  connectionString: 'postgres://asclrfmrxqizxi:a80c01766e14f9f22315dfece76f0de421229b0e60adb4eea53a59281c75a7fe@ec2-54-77-40-202.eu-west-1.compute.amazonaws.com:5432/d7i277ejcskkt3',
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -55,13 +55,18 @@ app.post("/", (req, res) => {
    const query =
      "INSERT INTO videos (title,url,rating) VALUES ($1, $2, $3)";
 
-   pool
-     .query(query, [newVideo.title, newVideo.url, 0])
-     .then(() => res.send("Video added!"))
-     .catch((error) => {
-       console.error(error);
-       res.status(500).json(error);
-     });
+   pool.query(
+     query,
+     [newVideo.title, newVideo.url,0
+  ],
+     (error, results) => {
+       if (error) {
+         throw error;
+       }
+       console.log(results.rows)
+       res.status(200).send(results.rows[0]);
+     }
+   );
   }
 });
 

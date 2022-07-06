@@ -1,3 +1,4 @@
+-- this database codes are just edited for to copy paste in Heroku's database terminal. this sql file is not liked to anything 
 CREATE TABLE videos (
   id        SERIAL PRIMARY KEY,
   title     VARCHAR(120) NOT NULL,
@@ -6,10 +7,18 @@ CREATE TABLE videos (
 );
 insert into videos
     (title,url,rating)
-    values ('The Coding Train','https://www.youtube.com/watch?v=HerCR8bw_GE',333);  
+    values ('Post Malone, Swae Lee - Sunflower','https://www.youtube.com/watch?v=ApXoWvfEYVU',633);  
 
   insert into videos
     (title, url, rating)
     values
-        ('Mac & Cheese | Basics with Babish','https://www.youtube.com/watch?v=FUeyrEN14Rk',10),
-        ('Videos for Cats to Watch - 8 Hour Bird Bonanza', 'https://www.youtube.com/watch?v=xbs7FT7dXYc',433);   
+        ('Uplifting Acoustic Background Music','https://www.youtube.com/watch?v=Ou5yoKTFjEo&list=PLSGQIRpzlifkAcn891xvnto1g88UonE1L&index=3',472),
+        ('"A glass of water" An inspirational story', 'https://www.youtube.com/watch?v=Rxjp-fkuc-U&list=PLSGQIRpzlifkAcn891xvnto1g88UonE1L',2135);   
+
+        update videos
+    set title='Maradona Goal of the Century',url = 'https://www.youtube.com/watch?v=1wVho3I0NtU'
+    where id= 5;  
+
+     update videos
+    set rating=20
+    where id= 7; 

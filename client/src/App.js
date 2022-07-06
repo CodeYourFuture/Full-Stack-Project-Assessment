@@ -24,7 +24,9 @@ function App() {
       .then((data) => {
         console.log(data);
         setVideos(data);
-      });
+      })
+      .catch(error => {
+        console.log('Data not available')})
   }, []);
 
   //Handle search
@@ -36,6 +38,15 @@ function App() {
   function handleNewVideoSubmit(e) {
     e.preventDefault();
     setVideos([newVidoeData, ...videos]);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({title:newVidoeData.title , url:newVidoeData.url}),
+      };
+      fetch("https://my-url-links.herokuapp.com/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => setVideos([...videos,newVidoeData]));
+    
   }
   // handle add change fucntion
   function handleNewVideoChange(e) {
@@ -55,7 +66,14 @@ function App() {
   function deleteVideo(e, id) {
     e.preventDefault();
     const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
+      setVideos(updatedVideos)
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      
+    };
+    fetch(`https://my-url-links.herokuapp.com/${id}`, requestOptions)
+      .then((response) => response.json())
   }
   return (
     <div className="App">
