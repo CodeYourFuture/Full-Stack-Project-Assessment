@@ -1,3 +1,138 @@
 .App {
   text-align: center;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+.App-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:20px;
+  padding: 1.5em;
+  background: linear-gradient(180deg, rgba(199, 33, 62, 1) 0%, rgba(200, 18, 18, 1) 21%, rgba(255, 0, 0, 1) 88%, rgba(210, 16, 49, 1) 100%);
+}
+h1{
+  font-weight: bolder;
+}
+.fontaweH1{
+  color:rgba(35, 44, 84, 0.75);
+  font-size: 2em;
+  border: 6px double rgba(139, 2, 2, 0.75);
+  padding: 4px 1.5rem;
+  border-radius: 10px;
+}
+/* search bar and add video  */
+.searchAndAddvideo{
+  display: grid ;
+  grid-template-columns:  2fr 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+  padding: 2%;
+}
+.setLabels {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  align-items: flex-end;
+}
+.search-input {
+  background-color: rgb(223, 229, 250);
+  /* search icon added */
+  background-image: url("../public/search-interface-symbol.png");
+  background-position-x: 95%;
+  background-position-y: center;
+  background-size: 1.1em;
+  background-repeat: no-repeat;
+  /* search icon added above*/
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 1em;
+  padding: 1.5%;
+  /* width: 50vw; */
+  width: 90%;
+  border: .5px solid rgb(177, 154, 240);
+}
+
+.search-input:hover {
+  background-color: rgb(253, 194, 141);
+  transition: .65s ease-in;
+}
+/* main div */
+.iframeAndDeletebutton-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1.3em;
+}
+.map-div{
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows:auto;
+  justify-content:center;
+  align-items: center;
+}
+.main{
+ background-color: rgb(255, 255, 255);
+}
+hr{
+  color:red;
+  width: 75%;
+  height: .2rem;
+  background:linear-gradient(90deg, rgba(200, 18, 86, 1) 1%, rgba(11, 215, 193, 1) 15%, rgba(18, 31, 200, 1) 24%, rgba(200, 18, 187, 1) 36%, rgba(251, 98, 33, 1) 51%, rgba(198, 18, 200, 1) 69%, rgba(11, 215, 193, 1) 82%, rgba(200, 18, 86, 1) 100%);
+  margin-bottom: -.85em;
+}
+.likesDiv{
+  margin-top: 6%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+.footer {
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
+}
+
+.fontawe {
+  font-size: 1.6em;
+  padding: .6em;
+}
+
+.footer-icon {
+  display: flex;
+  justify-content: space-evenly;
+  gap: .5rem;
+}
+
+/* responsive style */
+@media only screen and (max-width: 980px) {
+  h1{
+    font-size: 1.76em;
+  }
+  .map-div {
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+    gap:1em
+  }
+    /* search bar and add video  */
+    .searchAndAddvideo {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+  .search-input {
+    margin-left: 0;
+    padding: 1%;
+    width: 100%;
+    border: 2px solid grey;
+  }
+    hr {
+      width: 100%;
+      margin-bottom: 0;
+    }
 }
