@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import VideoList from "./components/VideoList";
 import Add from "./components/Add";
 import Search from "./components/Search";
+import vidIcon from "./assets/video-icon.svg"
+
 
 function App() {
   // set some state for the data, "add video" button and filtered list
@@ -100,14 +102,15 @@ function App() {
     <div className="App">
       {/* header */}
       <header className="title-container">
-        <h1>Video Recommendation</h1>
+        <img src={vidIcon} alt="movie camera icon"></img>
+        <h1>Video List</h1>
       </header>
 
       <div className="add-search-container">
         <div className="add">
           <div className="add-button-container">
             <button className="add-button" onClick={addToggle}>
-              {addBtn===false ? "Add Button" : "Close"}
+              {addBtn === false ? "Add Video" : "Close"}
             </button>
           </div>
           <div style={{ display: addBtn ? "flex" : "none" }}>

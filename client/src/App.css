@@ -9,15 +9,25 @@
 }
 
 .title-container {
+  display: flex;
+  justify-content: space-evenly;
   margin: 2rem auto;
-  width: 90%;
-  font-family: "Neonderthaw", cursive;
-  background-color: #15616d;
+  border: 3px dotted red;
+  border-radius: 50px;
+  width: 40%;
+  font-family: "Rubik Moonrocks", cursive;
+  background-color: white;
+  align-self: start;
+}
+
+.title-container img {
+  width: 60px;
+  color: skyblue
 }
 
 .title-container h1 {
   font-size: 40px;
-  color: #ffecd1;
+  color: red;
   margin: 8px 0 8px 0;
 }
 
@@ -155,7 +165,7 @@ i.fas.fa-thumbs-up {
 
 @media only screen and (min-width: 750px) {
   .title-container {
-    margin: 2rem auto 0rem auto;
+    margin: 3rem 2rem 2rem 5rem;
   }
 
   .title-container h1 {
