@@ -45,7 +45,6 @@ app.post("/", (req, res) => {
   const rating = req.body.rating;
   const votes = req.body.votes;
 
-
   const addVideoQuery = `INSERT INTO videos (title,url,rating,votes) VALUES ($1,$2,$3,$4)`;
   const duplicateUrlQuery = `SELECT url FROM videos WHERE url=$1`;
 

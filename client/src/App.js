@@ -1,8 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import VideoList from "./VideoList";
-import Add from "./Add";
-import Search from "./Search";
+import VideoList from "./components/VideoList";
+import Add from "./components/Add";
+import Search from "./components/Search";
 
 function App() {
   // set some state for the data, "add video" button and filtered list
