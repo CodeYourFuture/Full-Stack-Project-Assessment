@@ -1,0 +1,30 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "video list app",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "pg": "^8.7.3",
+    "path": "^0.12.7",
+    "helmet": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johng117/Full-Stack-Project-Assessment.git"
+  },
+  "author": "john gorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Johng117/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/Johng117/Full-Stack-Project-Assessment#readme"
+}

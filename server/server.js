@@ -1,30 +1,31 @@
 const express = require("express");
+const helmet = require("helmet");
+const path = require("path");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const { Pool } = require("pg");
-const dbhostname = process.env.HOST;
-const database = process.env.DATABASE;
-const dbport = process.env.PORT;
-const dbpassword = process.env.PASSWORD;
-const dbuser = process.env.USER;
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(express.static(path.join(__dirname, "client/build")))
+
 
 const dbConfig1 = {
-  host: dbhostname,
-  port: dbport,
-  user: dbuser,
-  password: dbpassword,
-  database: database,
+  host: process.env.HOST,
+  port: process.env.PORT,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
   ssl: {
     rejectUnauthorized: false,
   },
 };
 
 const pool = new Pool(dbConfig1);
+
 
 // GET all videos
 app.get("/", (req, res) => {
@@ -70,5 +71,11 @@ app.delete("/:id", (req, res) => {
     .then(() => res.json({ message: `video ${id} deleted` }))
     .catch((error) => res.status(500).json(error));
 });
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

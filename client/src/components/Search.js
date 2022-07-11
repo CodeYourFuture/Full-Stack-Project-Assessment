@@ -4,7 +4,7 @@ const Search = (props) => {
   return (
     <div>
       <label>
-        Search Your Favourites 
+        Search Your Videos 
         <input type="text" onChange={props.searchHandler}></input>
       </label>
     </div>
