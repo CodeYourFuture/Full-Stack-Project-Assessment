@@ -20,14 +20,6 @@ const client = new Client({
 
 client.connect()
 
-// const pool = new Pool({
-//   database: 'mstpkekb',
-//   user: 'mstpkekb',
-//   password: 'p2pphG8NZQDtpxAnPtGUXRN_E8hhhO8_',
-//   host: 'kandula.db.elephantsql.com',
-//   port: 5432,
-// })
-
 app.get('/', (req, res) => {
   client
     .query('Select * From videos order by title desc')
