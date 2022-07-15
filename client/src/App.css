@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Taviraj:wght@700;900&display=swap");
-.app {
-  padding: 3rem;
-  text-align: center;
-  font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
+
+body {
   background-color: #4158d0;
   background-image: linear-gradient(
     43deg,
@@ -10,6 +8,11 @@
     #c850c0 46%,
     #ffcc70 100%
   );
+}
+.app {
+  padding: 3rem;
+  text-align: center;
+  font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
 }
 .app-header {
   color: rgb(64, 64, 66);
