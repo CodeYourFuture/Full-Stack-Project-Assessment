@@ -7,24 +7,30 @@ import axios from "axios";
 export default function Main() {
   const [displayForm, setDisplayForm] = useState(false);
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [addFormData, setAddFormData] = useState({
     title: "",
     url: "",
     rating: 0,
   });
-const path = "https://youtube-video-loader.herokuapp.com/"
+  const path = "https://youtube-video-loader.herokuapp.com/";
+
   const getData = () => {
-    axios.get(path).then((res) => {
-      setVideos(res.data);
-    });
+    axios
+      .get(path)
+      .then((res) => {
+        setVideos(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(true);
+      });
   }; //getData() to display fetched data
 
   useEffect(() => {
-    axios.get(path).then((res) => {
-      //console.log(res);
-      setVideos(res.data);
-    });
+    getData();
+    setLoading(false);
   }, []);
 
   const handleAddFormChange = (event) => {
@@ -65,9 +71,10 @@ const path = "https://youtube-video-loader.herokuapp.com/"
     };
 
     if (validateUrl(newVideo.url)) {
-      const newVideos = [...videos, newVideo];
+      const newVideos = [newVideo, ...videos];
       //console.log(newVideos);
       setVideos(newVideos);
+      alert("new video added");
     } else {
       alert("invalid Youtube url");
     }
@@ -96,6 +103,7 @@ const path = "https://youtube-video-loader.herokuapp.com/"
         ""
       )}
       <div className="sub-container">
+        {loading && <h3>Loading...</h3>}
         <Video videos={videos} handleDeleteClick={handleDeleteClick} />
       </div>
     </div>
