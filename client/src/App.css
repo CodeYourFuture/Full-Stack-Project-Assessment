@@ -8,19 +8,23 @@ body {
     #c850c0 46%,
     #ffcc70 100%
   );
- 
 }
 .app {
   text-align: center;
   font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
-   font-family: "Edu NSW ACT Foundation", cursive;
+  font-family: "Edu NSW ACT Foundation", cursive;
 }
 .app-header {
   color: white;
   background-color: #c2090932;
   text-align: left;
-  padding: 20px;
+  padding: 20px 0 20px 50px;
 }
+
+h1 {
+  font-size: xx-large;
+}
+
 .form-wrapper {
   margin: 2rem;
 }
@@ -55,14 +59,14 @@ input {
 input:focus {
   background-color: #62f2e855;
 }
-
+.video-container {
+  margin: 20px;
+}
 .video-header {
-  height: 18%;
   color: #333535;
 }
 .wrapper {
   background-color: #ffffff5c;
-  margin: 40px auto;
   padding: 3rem 0 1rem;
   border-radius: 5px;
   text-align: center;
@@ -70,8 +74,17 @@ input:focus {
 .wrapper:hover {
   background-color: #d8bff577;
 }
-.frame {
-  width: 100%;
+
+iframe {
+  width: 400px;
+  height: 320px;
+}
+
+.iframe {
+  height: 300px;
+  width: 300px;
+  resize: both;
+  overflow: auto;
 }
 .button {
   margin: 4px;
@@ -102,7 +115,7 @@ input:focus {
   }
 
   .video-header {
-    height: 10%;
+    height: 18%;
   }
 }
 
@@ -111,4 +124,11 @@ input:focus {
   margin-top: 2rem;
   padding: 1rem;
   color: white;
+}
+
+@media (min-width: 900px) {
+  .sub-container {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    padding: 3rem;
+  }
 }

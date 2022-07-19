@@ -6,16 +6,20 @@ const Video = ({ videos, handleDeleteClick }) => {
     const { id, title, url, rating } = video;
     const base_url = "https://www.youtube.com/embed/";
     return (
-      <div key={id}>
-        <h3 className="video-header">
-          <span>{title}</span>
-        </h3>
+      <div className="video-container" key={id}>
+        <div>
+          <h3 className="video-header">
+            <span>{title}</span>
+          </h3>
+        </div>
 
         <div className="wrapper">
           <div className="frame">
             <iframe
+              frameBorder="none"
               src={base_url + url.slice(-11)}
               title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             ></iframe>
           </div>
           {rating ? <p>Rating: {rating}</p> : ""}
