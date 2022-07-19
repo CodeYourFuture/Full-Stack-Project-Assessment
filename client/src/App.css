@@ -67,7 +67,7 @@ input:focus {
 }
 .wrapper {
   background-color: #ffffff5c;
-  padding: 3rem 0 1rem;
+  padding: 3px 0 16px;
   border-radius: 5px;
   text-align: center;
 }
@@ -76,16 +76,10 @@ input:focus {
 }
 
 iframe {
-  width: 400px;
+  width: 350px;
   height: 320px;
 }
 
-.iframe {
-  height: 300px;
-  width: 300px;
-  resize: both;
-  overflow: auto;
-}
 .button {
   margin: 4px;
   padding: 8px 15px;
@@ -131,4 +125,10 @@ iframe {
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     padding: 3rem;
   }
+
+
+iframe {
+  width: 450px;
+  height: 320px;
+}
 }
