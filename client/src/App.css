@@ -10,12 +10,13 @@ body {
   );
 }
 .app {
-  padding: 3rem;
   text-align: center;
   font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
 }
 .app-header {
   color: rgb(64, 64, 66);
+  background-color: #c20909;
+  text-align:left;
 }
 .form-wrapper {
   margin: 2rem;
@@ -25,6 +26,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
 }
+
 form {
   margin: 10px;
 }
@@ -89,6 +91,7 @@ input:focus {
 @media (min-width: 600px) {
   .sub-container {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    padding: 3rem;
   }
 
   .vote-button {
@@ -98,4 +101,11 @@ input:focus {
   .video-header {
     height: 10%;
   }
+}
+
+.footer {
+  background-color: #09a0c2;
+  margin-top: 2rem;
+  padding: 1rem;
+  color: white;
 }
