@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaRegThumbsDown } from "react-icons/fa";
 
-function VoteButton() {
-  const [count, setCount] = useState(25);
+function VoteButton({ rating }) {
+  const [count, setCount] = useState(rating);
 
   function handleVoteAdd() {
     setCount((count) => count + 1);
@@ -14,11 +16,11 @@ function VoteButton() {
   return (
     <div>
       <button className="vote-button button" onClick={handleVoteAdd}>
-        👍
+        <FaRegThumbsUp style={{ color: "green" }} />
       </button>
-      {count}
+      {rating ? <span>Rating: {count}</span> : ""}
       <button className="vote-button button" onClick={handleVoteSubtract}>
-        👎
+        <FaRegThumbsDown />
       </button>
     </div>
   );

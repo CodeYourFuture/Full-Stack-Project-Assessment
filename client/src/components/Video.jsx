@@ -21,10 +21,8 @@ const Video = ({ videos, handleDeleteClick }) => {
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             ></iframe>
-          </div>
-          {rating ? <p>Rating: {rating}</p> : ""}
-          <div>
-            <VoteButton />
+
+            <VoteButton rating={rating} />
           </div>
 
           <div style={{ margin: "30px 0 0" }}>
@@ -32,6 +30,7 @@ const Video = ({ videos, handleDeleteClick }) => {
               className="button"
               type="button"
               onClick={() => handleDeleteClick(video.id)}
+              style={{ fontWeight: "bold" }}
             >
               Delete
             </button>

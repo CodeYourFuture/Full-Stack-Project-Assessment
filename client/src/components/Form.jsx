@@ -32,10 +32,18 @@ const Form = ({ setDisplayForm, handleAddFormSubmit, handleAddFormChange }) => {
         />
       </label>
       <br />
-      <button className="button" onClick={() => setDisplayForm(false)}>
+      <button
+        className="button"
+        onClick={() => setDisplayForm(false)}
+        style={{ fontWeight: "bold" }}
+      >
         Cancel
       </button>
-      <button className="button" type="submit">
+      <button
+        className="button"
+        type="submit"
+        style={{ color: "green", fontWeight: "bold" }}
+      >
         ADD
       </button>
     </form>
