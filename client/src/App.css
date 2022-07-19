@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Taviraj:wght@700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;500;600;700&display=swap");
 
 body {
   background-color: #4158d0;
@@ -8,15 +8,18 @@ body {
     #c850c0 46%,
     #ffcc70 100%
   );
+ 
 }
 .app {
   text-align: center;
   font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
+   font-family: "Edu NSW ACT Foundation", cursive;
 }
 .app-header {
-  color: rgb(64, 64, 66);
-  background-color: #c20909;
-  text-align:left;
+  color: white;
+  background-color: #c2090932;
+  text-align: left;
+  padding: 20px;
 }
 .form-wrapper {
   margin: 2rem;
