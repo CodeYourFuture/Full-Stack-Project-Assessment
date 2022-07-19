@@ -1,3 +1,282 @@
+:root{
+    --first-color: #860f02;
+    --second-color: #991e10;
+    --third-color: #e2bfbf;
+    --forth-color: #f32121;
+}
+
 .App {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.root {
+  display: flex;
+  width: 96%;
+  flex-wrap: wrap;
+  row-gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  width: 32%;
+  align-items: center;
   text-align: center;
+  border: var(--first-color) solid;
+}
+
+.id {
+  margin: 0;
+  width: 100%;
+  background-color: var(--first-color);
+  color: #ffff;
+}
+
+header {
+  width: 100%;
+  margin: 40px;
+  text-align: center;
+}
+
+header img {
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+h3 {
+  word-wrap: normal;
+}
+
+.bottom-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 14px;
+}
+
+.bottom-panel button {
+  color: #ffff;
+  background-color: var(--second-color);
+  border: 0;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.like {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.title {
+  min-height: 90px;
+  background-color: var(--third-color);
+  width: 100%;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 4px;
+}
+
+iframe {
+  width: 100%;
+}
+
+.btn-success {
+  background-color: #045f0d;
+  color: #fff;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 20px;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 20px;
+  padding: 2%;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--first-color);
+  color: #fff;
+  margin-top: 40px;
+  height: 50px;
+  gap: 6px;
+}
+
+.error {
+  color: var(--forth-color);
+}
+
+.move-top {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1;
+  box-shadow: #424242 6px 6px 8px;
+}
+
+select {
+  border: var(--forth-color) solid 1px;
+  padding: 8px;
+  border-radius: 5px;
+
+}
+
+.sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+width: 100%;
+}
+
+.search {
+width:100%;
+}
+
+/* Toggle sort start */
+.switch {
+  position: relative; 
+  display: block;
+  top: 4px; 
+  width: 58px;
+  height: 30px;
+  margin-left: 6px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(195, 184, 184);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: var(--forth-color);
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #f321aa;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.asc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 100px;
+  margin-left: 14px;
+  background-color: var(--first-color);
+  color: #fff;
+  padding: 1px 4px 1px 10px;
+  border-radius: 50px;
+}
+/* toggle sort end */
+
+@media screen and (max-width:1240px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 96%;
+  }
+
+  nav {
+    width: 98%;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  form {
+   flex-direction: column;
+  }
+  .display-flex {
+   align-items: flex-start;
+  }
+
+    .display-flex input{
+      margin-bottom: 16px;
+    }
+
+    footer {
+      flex-direction: column;
+      height: 100px;
+    }
+        .btn-success {
+          background-color: #045f0d;
+          color: #fff;
+          width: 100%;
+        }
 }
