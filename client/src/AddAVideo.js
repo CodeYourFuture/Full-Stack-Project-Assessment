@@ -23,7 +23,7 @@ const AddAVideo = () => {
 
   const onClickCancelButton = (e) => {
     e.preventDefault();
-    navigate("/addvideo");
+    navigate("/");
   };
 
   return (

@@ -6,7 +6,7 @@ import axios from "axios";
 const baseURL = "https://newfullstac.herokuapp.com/";
 
 const Videos = ({ searchInput }) => {
-  const [videos, setVideos] = useState(videoData);
+  const [videos, setVideos] = useState("Please wait loading");
 
   //added use effect, now videos coming from the server
   useEffect(() => {
@@ -58,7 +58,7 @@ const Videos = ({ searchInput }) => {
             return (
               <>
                 <div className="card">
-                  <h2 className="title">{video.title}</h2>
+                  <h2 className="card-title">{video.title}</h2>
 
                   <div className="iframe">
                     <iframe

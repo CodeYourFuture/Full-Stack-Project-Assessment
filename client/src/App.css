@@ -8,7 +8,7 @@
   grid-template-columns: auto auto auto;
   gap: 30px;
   align-items: center;
- 
+
 }
 
 .card {
@@ -22,14 +22,14 @@
 
 
 .counter {
-  display : flex;
+  display: flex;
   justify-content: center;
-  margin:20px;
+  margin: 20px;
   gap: 3px;
 }
 
 .add-a-video {
-  padding : 20px;
+  padding: 20px;
 }
 
 
@@ -40,9 +40,13 @@
 
 nav {
   padding: 20px;
- 
-  
 }
+
+.card-title {
+  padding: 30px;
+
+}
+
 
 .iframe {
   padding: 10px;
@@ -51,12 +55,10 @@ nav {
 
 
 .dlt {
-  background-color: #6b0f1a;
-  background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
-
   color: white;
-  padding: 20px;
-  margin-bottom: 20px;;
+  padding: 40px;
+  margin-bottom: 20px;
+  ;
 }
 
 .nav--links {

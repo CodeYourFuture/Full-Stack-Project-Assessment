@@ -1,4 +1,4 @@
-import 'bootswatch/dist/quartz/bootstrap.min.css'
+import "bootswatch/dist/quartz/bootstrap.min.css";
 import "./App.css";
 import React, { useState } from "react";
 import Videos from "./Videos";
@@ -17,7 +17,7 @@ library.add(faThumbsDown, faThumbsUp, faCheckSquare, faCoffee);
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
-  console.log(searchInput)
+  console.log(searchInput);
 
   return (
     <BrowserRouter>

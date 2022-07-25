@@ -6,7 +6,6 @@ const port = process.env.PORT || 5000;
 const bodyparser = require("body-parser");
 const { Client } = require("pg");
 
-//when you write post endpoints don't forget body parser
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
@@ -22,7 +21,6 @@ const client = new Client({
 
 client.connect();
 
-//returns all videos
 app.get("/", (req, res) => {
   client
     .query("SELECT * FROM videos")
@@ -33,7 +31,6 @@ app.get("/", (req, res) => {
     });
 });
 
-//adds a video
 app.post("/", function (req, res) {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
@@ -65,7 +62,6 @@ app.post("/", function (req, res) {
     });
 });
 
-//gets id of each video
 app.get("/id", function (req, res) {
   const id = req.params.id;
 
@@ -78,7 +74,6 @@ app.get("/id", function (req, res) {
     });
 });
 
-//deletes a video
 app.delete("/:id", function (req, res) {
   const id = req.params.id;
 
