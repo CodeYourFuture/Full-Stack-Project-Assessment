@@ -11,6 +11,7 @@ const Skeleton = () => (
     foregroundColor="#e5e4e4"
   >
     <rect x="48" y="8" rx="3" ry="3" width="88" height="6" />
+    <rect x="48" y="8" rx="5" ry="3" width="88" height="16" />
     <rect x="48" y="156" rx="3" ry="3" width="52" height="6" />
     <rect x="0" y="56" rx="3" ry="3" width="410" height="6" />
     <rect x="0" y="72" rx="3" ry="3" width="380" height="6" />
