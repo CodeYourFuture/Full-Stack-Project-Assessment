@@ -25,9 +25,6 @@ main{
   width: 30%;
   gap: 20px;
   display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border: grey solid 2px;
   background-color: #aca9a9;
   border-radius: 10px;
 }
