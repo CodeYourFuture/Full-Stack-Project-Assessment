@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 app.post("/videos", (req, res) => {
   const addNewVideo = req.body;
-  console.log(addNewVideo);
+
   addNewVideo.id = Math.floor(Math.random() * 100000);
   if (!addNewVideo.title || !addNewVideo.url) {
     res.status(400).send({ msg: "Please add a Title & URL from Youtube !" });
@@ -29,9 +29,9 @@ app.post("/videos", (req, res) => {
 
 app.get("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
-  console.log(videoId);
+
   const filterVideo = videosData.find((video) => video.id === videoId);
-  console.log(filterVideo);
+
   if (filterVideo.length === 0) {
     res.status(400).send({ msg: `Video with:${videoId} not found!` });
   } else {
@@ -41,9 +41,8 @@ app.get("/videos/:id", (req, res) => {
 
 app.delete("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
-  console.log(videoId);
   indexVideo = videos.findIndex((video) => video.id == videoId);
-  console.log(indexVideo);
+
   if (indexVideo >= 0) {
     videos.splice(indexVideo, 1);
     res
