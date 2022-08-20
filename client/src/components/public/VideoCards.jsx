@@ -7,7 +7,9 @@ import "../../styles/videocards.css";
 const VideoCards = () => {
   const { videoData, setNewVideo, newVideo } = useContext(UserContext);
 
-  return (
+  return videoData.length === 0 ? (
+    <h1>Loading...</h1>
+  ) : (
     <article className="videoCards_container">
       {videoData.map((video) => {
         return <VideoCard key={video.id} video={video} />;
