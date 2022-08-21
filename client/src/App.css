@@ -40,9 +40,9 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  /* gap: 2rem; */
+  gap: 2rem;
 }
 
-.btn btn-warning video-del-btn {
+/* .btn btn-warning video-del-btn {
   background-color: aqua;
-}
+} */
