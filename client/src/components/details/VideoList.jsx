@@ -69,7 +69,7 @@ const VideoList = (searchText) => {
         <Sort sortHandler={sortHandler} />
       </nav>
       <div className="root">
-        {loading&&<img src=“snippet.gif” alt=”loading...”/>}
+        {loading&&<img src="snippet.gif" alt="loading..."/>}
 
         {videos.map((video) => (
           <VideoCard key={video.id}
