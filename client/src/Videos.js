@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import videoData from "./exampleresponse.json";
+//import videoData from "./exampleresponse.json";
 import Likes from "./Likes";
 import axios from "axios";
 
 const baseURL = "https://newfullstac.herokuapp.com/";
 
 const Videos = ({ searchInput }) => {
-  const [videos, setVideos] = useState("Please wait loading");
+  const [videos, setVideos] = useState([]);
 
   //added use effect, now videos coming from the server
   useEffect(() => {
@@ -26,24 +26,6 @@ const Videos = ({ searchInput }) => {
       setVideos(output);
     });
   };
-
-  // const deleteVideo = async (id) => {
-  //   try {
-  //     const deleteVideo = await fetch(
-  //       `http://newfullstac.herokuapp.com/${id}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: new Headers({
-  //           "Content-type": "application/json",
-  //         }),
-  //       }
-  //     );
-  //     console.log(deleteVideo);
-  //     setVideos(videos.filter((todo) => todo.todo_id !== id));
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
 
   return (
     <>
