@@ -2,7 +2,7 @@
 .search-bar{
    width: 100%;
    padding-top: 2rem;
-   background-color:  #27241d;;
+   background-color:  #27241d;
    margin-left: 1.2rem;
    display: flex;
    flex-direction: column;
@@ -46,7 +46,7 @@
    
    }
    :hover{
-    background-color: #4B7BE5;
+    background-color: #93ade5;
     color: #FFFFFF;
   }
    .active-btn{
@@ -80,6 +80,7 @@
        @media (min-width: 950px) {
          width: 330px;
          font-size: 1.1rem;
+         margin-right: 4rem;
        }
      }
    }

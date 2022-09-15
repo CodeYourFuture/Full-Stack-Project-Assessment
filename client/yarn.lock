@@ -7355,6 +7355,11 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
+"react-loading-icons@^1.1.0":
+  "integrity" "sha512-Y9eZ6HAufmUd8DIQd6rFrx5Bt/oDlTM9Nsjvf8YpajTa3dI8cLNU8jUN5z7KTANU+Yd6/KJuBjxVlrU2dMw33g=="
+  "resolved" "https://registry.npmjs.org/react-loading-icons/-/react-loading-icons-1.1.0.tgz"
+  "version" "1.1.0"
+
 "react-modal-video@^1.2.9":
   "integrity" "sha512-hRjmRzTKEtEFWTG0STvc+JUHscryGQMQq/y8ghbk5f/e8Wptuy3GlPNT8xqOGpXjyCzVtOB8sy7t0h5HdzMu8g=="
   "resolved" "https://registry.npmjs.org/react-modal-video/-/react-modal-video-1.2.9.tgz"

@@ -1,18 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import '../styles/searchBar.scss';
-// import data from '../data/data.json';
 
 
-const SearchBar = ({setSearchInput,setSearchByCategories}) => {
-
+const SearchBar = ({setSearchInput,setSearchByCategories, searchByCategories}) => {
+ 
   const handleSearchQuery = (e) => {
     setSearchInput(e.target.value);
   };
 
+
   const handleSearchQueryByCateregories=(e)=>{
     let searchQuery = e.target.innerText
     if(searchQuery==='All'){
-      setSearchByCategories('')
+      setSearchByCategories('All')
     }else{
       setSearchByCategories(searchQuery)
     }
@@ -20,26 +20,26 @@ const SearchBar = ({setSearchInput,setSearchByCategories}) => {
   return (
       <div className="search-bar">
         <div className="options">
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn active-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='All'?'btn search-option-btn active-btn':'btn search-option-btn '}>
               All
           </button>
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Cartoon'?'btn search-option-btn active-btn':'btn search-option-btn' }>
               Cartoon
           </button>
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Coding'?'btn search-option-btn active-btn':'btn search-option-btn' }>
               Coding
           </button>
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Comedy'?'btn search-option-btn active-btn':'btn search-option-btn' }>
               Comedy
           </button>
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Education'?'btn search-option-btn active-btn':'btn search-option-btn' }>
               Education 
           </button>
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Music'?'btn search-option-btn active-btn':'btn search-option-btn' }>
               Music
           </button>
         
-          <button onClick={handleSearchQueryByCateregories}  className="btn search-option-btn">
+          <button onClick={handleSearchQueryByCateregories}  className={searchByCategories==='Recipe'?'btn search-option-btn active-btn':'btn search-option-btn '}>
               Recipe
           </button>
         </div>

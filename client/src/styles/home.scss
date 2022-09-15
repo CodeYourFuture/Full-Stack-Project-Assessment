@@ -1,6 +1,8 @@
+@import './elements/variables.css';  
+
 #home{
   height: 100%;
-  background-color: #27241d;
+  background-color: var(--bg2);
   padding-top: 130px;
   @media (min-width: 950px) {
   padding-top: 80px;

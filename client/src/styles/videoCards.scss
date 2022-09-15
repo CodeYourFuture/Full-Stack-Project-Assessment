@@ -16,9 +16,7 @@
         @media (min-width: 605px) {
           width: 520px;
           margin: 1rem;
-          height: 375px;
-
-          
+          height: 375px;          
         }
         @media (min-width: 950px) {
           margin: 1.5rem 1rem;
@@ -32,7 +30,7 @@
         }
 
         &:hover {
-          background-color: #FFFFFF;
+          background-color: #e4e2e2;
           color: #1B1A17;
         }
 
@@ -112,7 +110,8 @@
                 }
             }
             .delete-btn{
-              font-size: 1.5rem;
+              font-size: 1.4rem;
+              margin-left: 10px;
             :hover{
               color:#FF1818;
             }
