@@ -6,14 +6,12 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import styled from 'styled-components';
 
 const VideoContent = styled.div`
-
 width: 100%;
-
 `;
 const VidWrapper = styled.div`
-     display: flex,
-     align-self: center,
-     width: 22rem,  
+     display: flex;
+     align-self: center;
+     width: 22rem; 
 `;
 
 const Rating = styled.div`
