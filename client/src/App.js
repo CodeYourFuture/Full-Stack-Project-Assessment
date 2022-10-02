@@ -61,9 +61,6 @@ function App() {
         setDisplayVideo(filteredVideos);
       }
     });
-
-    // const filteredVideos = displayVideo.filter((card) => card.id !== id);
-    //setDisplayVideo(filteredVideos);
   };
 
   return (
