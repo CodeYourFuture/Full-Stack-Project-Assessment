@@ -7,43 +7,43 @@ import styled from 'styled-components';
 
 
 const VideoContent = styled.div`
-     width: 100%;
-     display: flex;
-     flex-wrap: wrap;
-     align-items: center;
-     justify-content: center;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
 `;
 const VidWrapper = styled.div`
-     display: flex;
-     align-self: center;
-     flex-direction: column;
-     justify-conten: center;
-     margin: 1rem;
+      display: flex;
+      align-self: center;
+      flex-direction: column;
+      justify-conten: center;
+      margin: 1rem;
 `;
 
 const Rating = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
 `;
 
 const Title = styled.div`
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem; 
-`;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem; 
+  `;
 
 const DeleteButton = styled.button`
-    margin-top: 1rem;
-    padding: 0.5rem 1.6rem;
-    border-radius: 0.4rem;
-    cursor: pointer;
-    width: 8rem;
-    align-self: center;
-    background-color: red;
-    color: white;
-    font-size: 1.2rem;
-    opacity: 0.8;
+      margin-top: 1rem;
+      padding: 0.5rem 1.6rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      width: 8rem;
+      align-self: center;
+      background-color: red;
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0.8;
 `;
 
 const Youtube = () => {
