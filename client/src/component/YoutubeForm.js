@@ -7,6 +7,10 @@ import styled from 'styled-components';
 const FormContainer =styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
 `
 const FormButtons =styled.div`
     display: flex;
@@ -41,8 +45,10 @@ const Form = styled.form`
 `;
 const FormWrapper = styled.div`
     margin: 1rem;
-
 `;
+// const CannelButton = styled.Button`
+// padding
+// `;
 
 
 export default function YoutubeForm (){

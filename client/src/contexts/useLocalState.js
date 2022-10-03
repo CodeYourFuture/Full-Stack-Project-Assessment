@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-function useLocalStae(key, initial) {
+function useLocalState(key, initial) {
     const [value, setValue ] = useState(()=>{
         if( typeof window !== 'undefined'){
             const savedValue = window.localStorage.getItem(key);
@@ -10,10 +10,10 @@ function useLocalStae(key, initial) {
     })
     useEffect(()=>{
         window.localStorage.setItem(key, JSON.stringify(value));
-    }, [value]);
+    }, [key, value]);
 
   return [value, setValue];
 }
 
 
-export default useLocalStae
+export default useLocalState

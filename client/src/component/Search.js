@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { vidContext } from '../contexts/YoutubeVidContext';
 import './component.css';
 import styled from 'styled-components';
@@ -17,11 +17,11 @@ const InputWrapper = styled.input`
  `
 
 const Search = () => {
-  const {search, inputHanleChange} = useState(vidContext);
+  const {search, inputHanleChange} = useContext(vidContext);
   
   return (
     <SearchWrapper >
-      <InputWrapper  type='text' value ={search} placeholder='search video ...' onChange={inputHanleChange} />
+      <InputWrapper  type='text' value ={search} placeholder='search video ...' onChange={e=>inputHanleChange(e.target.value)} />
     </SearchWrapper>
   )
 }
