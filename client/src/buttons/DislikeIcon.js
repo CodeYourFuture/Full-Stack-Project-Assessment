@@ -1,8 +1,8 @@
 import React from 'react'
 
-function DislikeIcon() {
+function DislikeIcon({ handleDislikeClick }) {
   return (
-    <button>
+    <button aria-label='dislike button' onClick={() => handleDislikeClick()}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

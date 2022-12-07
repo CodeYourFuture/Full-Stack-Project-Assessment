@@ -1,19 +1,23 @@
 import React from "react";
 import "./App.css";
-import Video from "./Video";
-import dataVideos from "./exampleresponse.json";
+import data from "./exampleresponse.json";
+import AddAndSearch from "./components/AddAndSearch";
+import AllVideos from './components/AllVideos'
+import { useState } from 'react';
 
 function App() {
+  const [videos, setVideos] = useState(data);
+  const handleDelete = (id) => {
+    const newData = videos.filter(elem => elem.id !== id)
+    setVideos(newData)
+  }
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <body>
-        {dataVideos.map((video, key) => (
-          <Video video={video} key={key}/>
-        ))}
-      </body>
+      <AddAndSearch videos={videos} setVideos={setVideos} />
+      <AllVideos videos={videos} handleDelete={handleDelete} />
     </div>
   );
 }
