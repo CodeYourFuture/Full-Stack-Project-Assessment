@@ -1,19 +1,20 @@
 .App {
   text-align: center;
+  background-color: #FBEFC6;
+
 }
 
 header {
   display: block;
 }
 
-.App-header{
+.App-header {
   color: #fff;
-  font-style: oblique;
   background-color: #254e70;
   padding: 2rem 0;
 }
 
-body{
+.all {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -23,34 +24,89 @@ body{
   font-weight: 400;
 }
 
-.video-container{
+.video-container {
   display: flex;
   flex-flow: column nowrap;
-  align-items:center;
+  align-items: center;
   margin: 1rem;
-  width: 20rem;
+  width: 25rem;
   height: fit-content;
+  row-gap: 1rem;
+  background-color: #345b82;
+  border-radius: 10px;
+  padding: 10px 0 10px 0;
+  color: #fff
 }
-.video-container > p {
+
+.video-container>p {
   margin: 0;
 }
-button{
-  background-color: white;
-  border: none;
+
+.delete-button {
+  border-radius: 5px;
 }
 
-.delete-button{
-  margin-top: 2rem;
-  border-radius: 10px;
-}
-
-.vote-container{
+.vote-container {
   display: flex;
   flex-flow: row nowrap;
-  justify-content:center;
+  justify-content: center;
   margin: 0 0 1rem 0;
 }
-.vote-container > p{
+
+.vote-container>p {
   padding: 0;
   margin: 0;
+}
+
+.form {
+  padding-top: 2rem;
+  width: 25;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  border: 2px, solid;
+  border: 4px, solid;
+}
+
+input {
+  background-color: #aac3dc;
+}
+
+.search-input {
+  border: none;
+  margin-left: 2.5rem;
+}
+
+.form a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: black;
+  font-weight: 500;
+
+}
+
+label {
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.cancel,
+.add {
+  margin-left: 3rem;
+  width: 4rem;
+  height: 2.5rem;
+  border-radius: 5px;
+
+}
+
+.cancel {
+  background-color: red;
+
+}
+
+.add {
+  background-color: #1C2541;
+  margin-left: 1rem;
+  color: #fff;
 }
