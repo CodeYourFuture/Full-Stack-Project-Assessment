@@ -1,56 +1,46 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-  display: block;
-}
-
-.App-header{
-  color: #fff;
-  font-style: oblique;
-  background-color: #254e70;
-  padding: 2rem 0;
-}
-
-body{
+main {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  margin: 0;
-  padding: 0;
   font-size: 1rem;
   font-weight: 400;
 }
 
-.video-container{
-  display: flex;
-  flex-flow: column nowrap;
-  align-items:center;
+.video-container {
   margin: 1rem;
   width: 20rem;
-  height: fit-content;
 }
-.video-container > p {
-  margin: 0;
-}
-button{
-  background-color: white;
+
+button {
+  background-color: transparent;
   border: none;
 }
 
-.delete-button{
-  margin-top: 2rem;
-  border-radius: 10px;
+
+.like-button {
+  color: rgb(12, 130, 170)
 }
 
-.vote-container{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content:center;
-  margin: 0 0 1rem 0;
+.delete-button>i {
+  color: red;
 }
-.vote-container > p{
+
+.vote-container>p {
   padding: 0;
   margin: 0;
+}
+
+.modal-card {
+  position: fixed;
+  background: rgb(44, 39, 39, .5);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
