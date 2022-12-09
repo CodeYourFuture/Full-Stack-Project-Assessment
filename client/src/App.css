@@ -13,6 +13,11 @@ header {
   padding: 2rem 0;
 }
 
+.Add{
+  margin-left: 60px;
+text-align: start;
+}
+
 body{
   display: flex;
   flex-flow: row wrap;
