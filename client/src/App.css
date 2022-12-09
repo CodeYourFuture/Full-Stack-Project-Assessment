@@ -13,6 +13,13 @@ header {
   padding: 2rem 0;
 }
 
+.Search-Bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3rem;  
+}
+
+
 body{
   display: flex;
   flex-flow: row wrap;
