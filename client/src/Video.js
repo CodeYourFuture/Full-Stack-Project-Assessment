@@ -6,16 +6,35 @@ import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
 
 function Video({ id, title, url, rating, videoData, setVideoData }) {
-  const [ratings, setRatings] = useState(rating);
+  const handleOnClick = (e) => {
+    const selected = e.currentTarget.id;
+
+    if (selected === "dislike") {
+      videoData.map((item) => {
+        if (id === item.id) {
+          item.rating--;
+          setVideoData([...videoData]);
+        }
+      });
+    } else if (selected === "like") {
+      videoData.map((item) => {
+        if (item.id === id) {
+          item.rating++;
+          setVideoData([...videoData]);
+        }
+      });
+    }
+  };
+
   return (
     <div className="video-container">
       <p>{title}</p>
       <div className="vote-container">
-        <LikeIcon ratings={ratings} setRatings={setRatings} />
+        <LikeIcon handleOnClick={handleOnClick} />
         <p>
-          <span>{ratings}</span> Vote
+          <span>{rating}</span> Vote
         </p>
-        <DislikeIcon ratings={ratings} setRatings={setRatings} />
+        <DislikeIcon id={id} handleOnClick={handleOnClick} />
       </div>
       <YouTubeEmbed url={url} title={title} />
       <DeleteButton

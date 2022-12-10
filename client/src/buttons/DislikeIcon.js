@@ -1,11 +1,8 @@
 import React from "react";
 
-function DislikeIcon({ setRatings, ratings }) {
-  const handleClick = (rating) => {
-    setRatings(() => ratings - 1);
-  };
+function DislikeIcon({ id, handleOnClick }) {
   return (
-    <button onClick={() => handleClick(ratings)}>
+    <button id="dislike" onClick={handleOnClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

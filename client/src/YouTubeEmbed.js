@@ -2,7 +2,7 @@ import React from "react";
 
 function YouTubeEmbed({ url, title }) {
   let urlSource = url.replace("watch?v=", "embed/");
-  console.log(url);
+
   return (
     <iframe
       title="YouTube video player"
