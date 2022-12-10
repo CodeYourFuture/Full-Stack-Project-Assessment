@@ -1,8 +1,11 @@
 import React from "react";
 
-function LikeIcon() {
+function LikeIcon({ setRatings, ratings }) {
+  const clickHandler = (ratings) => {
+    setRatings(ratings + 1);
+  };
   return (
-    <button>
+    <button onClick={() => clickHandler(ratings)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
