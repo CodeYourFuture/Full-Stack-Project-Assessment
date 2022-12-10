@@ -17,7 +17,7 @@ function Video({ id, title, url, rating, videoData, setVideoData }) {
       <YouTubeEmbed url={url} title={title} />
       <DeleteButton
         videoData={videoData}
-        SetVideoData={setVideoData}
+        setVideoData={setVideoData}
         id={id}
       />
     </div>

@@ -2,7 +2,8 @@ import React from "react";
 
 function DeleteButton({ videoData, setVideoData, id }) {
   const handleOnClick = (id) => {
-    console.log(id);
+    let result = videoData.filter((vid) => vid.id !== id);
+    setVideoData(result);
   };
 
   return (
