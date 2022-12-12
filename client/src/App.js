@@ -12,11 +12,15 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideoButton />
+      <AddVideoButton
+        videoData={videoData}
+        setVideoData={setVideoData}
+      />
 
       <div className="body">
-        {videoData.map(({ id, title, url, rating }) => (
+        {videoData.map(({ id, title, url, rating }, index) => (
           <Video
+            key={index}
             videoData={videoData}
             setVideoData={setVideoData}
             title={title}

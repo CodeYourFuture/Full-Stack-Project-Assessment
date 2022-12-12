@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import DeleteButton from "./buttons/DeleteButton";
 import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
@@ -15,6 +14,7 @@ function Video({ id, title, url, rating, videoData, setVideoData }) {
           item.rating--;
           setVideoData([...videoData]);
         }
+        return videoData;
       });
     } else if (selected === "like") {
       videoData.map((item) => {
@@ -22,6 +22,7 @@ function Video({ id, title, url, rating, videoData, setVideoData }) {
           item.rating++;
           setVideoData([...videoData]);
         }
+        return videoData;
       });
     }
   };
