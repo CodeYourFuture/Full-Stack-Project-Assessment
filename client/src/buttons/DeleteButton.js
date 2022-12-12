@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
-function DeleteButton() {
+function DeleteButton({ deleteVideos }) {
   return (
-    <button class="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
+    <button
+      class="p-2 mb-1 bg-danger text-white delete-button"
+      onClick={deleteVideos}
+    >
+      Delete
+    </button>
   );
 }
 
-export default DeleteButton
+export default DeleteButton;

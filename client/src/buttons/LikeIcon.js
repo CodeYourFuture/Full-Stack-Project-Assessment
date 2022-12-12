@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-function LikeIcon() {
+function LikeIcon({ handleLikes }) {
   return (
-    <button>
+    <button onClick={handleLikes}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -18,4 +18,4 @@ function LikeIcon() {
   );
 }
 
-export default LikeIcon
+export default LikeIcon;

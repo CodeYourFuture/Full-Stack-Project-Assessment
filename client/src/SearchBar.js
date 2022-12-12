@@ -21,7 +21,7 @@ const SearchBar = ({ search }) => {
         placeholder="Search Here"
         onChange={handleSearchInput}
       />
-      <button type="button" class="btn btn-primary" onSubmit={handleSubmit}>
+      <button type="button" className="btn btn-primary" onSubmit={handleSubmit}>
         Search
       </button>
     </form>
