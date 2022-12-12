@@ -4,23 +4,26 @@ import "./AddVideoButton.css";
 const AddVideoButton = ({ videoData, setVideoData }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
   // handle button press to add new video
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    const video = {
-      id: new Date().getTime().toString(),
-      title,
-      url,
-      rating: 0,
-    };
-    setVideoData((videoData) => {
-      return [...videoData, video];
-    });
-    setTitle("");
-    setUrl("");
+    if (title.length > 0 && url.length > 0) {
+      const video = {
+        id: new Date().getTime().toString(),
+        title,
+        url,
+        rating: 0,
+      };
+      setVideoData((videoData) => {
+        return [...videoData, video];
+      });
+      setTitle("");
+      setUrl("");
+    } else {
+      return alert("Input fields cannot be empty");
+    }
   };
 
   const handleOnClick = (e) => {
@@ -61,7 +64,7 @@ const AddVideoButton = ({ videoData, setVideoData }) => {
           <div className="input_2"></div>
           <label htmlFor="url">URL</label>
           <input
-            type="text"
+            type="email"
             className="addVideoInput m-1 p-1 "
             value={url}
             onChange={(e) => setUrl(e.target.value)}
