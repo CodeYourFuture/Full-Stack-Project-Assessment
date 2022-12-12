@@ -1,0 +1,27 @@
+.formContainer {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.titleButton {
+  display: flex;
+  /* margin-left: 14rem; */
+}
+.addVideoContainer {
+  width: max-content;
+  margin-left: 10%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.title_Button {
+  color: blue;
+}
+
+.title_Button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
