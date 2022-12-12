@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-function DislikeIcon() {
+function DislikeIcon({ handleDisLike }) {
   return (
-    <button>
+    <button onClick={handleDisLike}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -18,4 +18,4 @@ function DislikeIcon() {
   );
 }
 
-export default DislikeIcon
+export default DislikeIcon;
