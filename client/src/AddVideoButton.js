@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from "react";
 import "./AddVideoButton.css";
 
-const AddVideoButton = ({ videoData, setVideoData }) => {
+const AddVideoButton = ({
+  videoData,
+  setVideoData,
+  setUserAddedVid,
+}) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -17,6 +21,7 @@ const AddVideoButton = ({ videoData, setVideoData }) => {
         rating: 0,
       };
       setVideoData((videoData) => {
+        setUserAddedVid(video);
         return [...videoData, video];
       });
       setTitle("");
@@ -64,7 +69,7 @@ const AddVideoButton = ({ videoData, setVideoData }) => {
           <div className="input_2"></div>
           <label htmlFor="url">URL</label>
           <input
-            type="email"
+            type="text"
             className="addVideoInput m-1 p-1 "
             value={url}
             onChange={(e) => setUrl(e.target.value)}
