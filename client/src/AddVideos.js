@@ -24,7 +24,7 @@ function AddVideos({ likes, addVideos }) {
         <div className="addVideo-inform">
           <input
             type="text"
-            id="addVideo"
+            id="addTitle"
             className="form-control"
             placeholder="Insert Video Title"
             value={title}
@@ -33,7 +33,7 @@ function AddVideos({ likes, addVideos }) {
 
           <input
             type="text"
-            id="addVideo"
+            id="addUrl"
             className="form-control"
             placeholder="Insert Video URL"
             value={url}
