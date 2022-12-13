@@ -15,6 +15,19 @@ function App() {
     setVideoData((videoData) => videoData.concat(newVid));
   };
 
+  const updateRatings = (votes, id) => {
+    console.log(votes);
+    setVideoData((videoData) =>
+      videoData.map((el) => {
+        if (el.id === id) {
+          el.rating = votes;
+        }
+        return el;
+      })
+    );
+    console.log(videoData);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -28,6 +41,7 @@ function App() {
               key={video.id}
               vidId={video.id}
               deleteVideo={deleteVideo}
+              updateRatings={updateRatings}
             />
           ))}
         </section>

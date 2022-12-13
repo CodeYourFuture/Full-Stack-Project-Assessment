@@ -5,14 +5,19 @@ import DislikeIcon from "./buttons/DislikeIcon";
 import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
 
-function Video({ vidId, video, deleteVideo }) {
-  const [votes, setVotes] = useState(0);
+function Video({ vidId, video, deleteVideo, updateRatings }) {
+  const [votes, setVotes] = useState(video.rating);
+
   const handleLike = () => {
+    console.log("A", votes);
     setVotes(votes + 1);
+    updateRatings(votes, vidId);
   };
 
   const handleDisLike = () => {
+    console.log("B", votes);
     setVotes(votes - 1);
+    updateRatings(votes, vidId);
   };
 
   return (
@@ -20,7 +25,7 @@ function Video({ vidId, video, deleteVideo }) {
       <p>{video.title}</p>
       <div className="vote-container">
         <LikeIcon handleLike={handleLike} />
-        <p>{votes} Vote</p>
+        <p>{votes} Vote </p>
         <DislikeIcon handleDisLike={handleDisLike} />
       </div>
       <YouTubeEmbed video={video} />
