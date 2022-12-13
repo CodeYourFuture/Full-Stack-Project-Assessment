@@ -16,8 +16,7 @@ function App() {
   };
 
   const updateRatings = (votes, id) => {
-    console.log(votes);
-    setVideoData((videoData) =>
+     setVideoData((videoData) =>
       videoData.map((el) => {
         if (el.id === id) {
           el.rating = votes;
@@ -35,15 +34,28 @@ function App() {
       </header>
       <body>
         <section>
-          {videoData.map((video) => (
-            <Video
-              video={video}
-              key={video.id}
-              vidId={video.id}
-              deleteVideo={deleteVideo}
-              updateRatings={updateRatings}
-            />
-          ))}
+          {videoData
+            .sort((a, b) => {
+              const ratingsA = a.ratings;
+              const ratingsB = b.ratings;
+              if (ratingsA < ratingsB) {
+                return -1;
+              }
+              if (ratingsA > ratingsB) {
+                return 1;
+              }
+              // names must be equal
+              return 0;
+            })
+            .map((video) => (
+              <Video
+                video={video}
+                key={video.id}
+                vidId={video.id}
+                deleteVideo={deleteVideo}
+                updateRatings={updateRatings}
+              />
+            ))}
         </section>
         <section>
           <h2>Add a New Video</h2>

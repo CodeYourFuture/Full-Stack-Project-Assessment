@@ -2,7 +2,7 @@ import React from "react";
 
 function DislikeIcon({ handleDisLike }) {
   return (
-    <button onClick={handleDisLike}>
+    <button aria-label="dislikeIcon" onClick={handleDisLike}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

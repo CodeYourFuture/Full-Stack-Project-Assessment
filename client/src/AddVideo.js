@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AddButton from "./AddButton";
 
 const AddVideo = ({ addVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const ref = useRef(null);
+  // const refURL = useRef(null);
+  const [myFocus, setMyFocus] = useState(false);
+
+  useEffect(() => {
+    if (document.hasFocus() && ref.current.contains(document.activeElement)) {
+      setMyFocus(true);
+    }
+  }, []);
 
   const handleAdd = (event) => {
     event.preventDefault();
-    setTitle();
+    ref.current.focus();
     let vidObj = {
       id: `${url.slice(url.indexOf("=") + 1)}`,
       title: title,
@@ -27,7 +36,10 @@ const AddVideo = ({ addVideo }) => {
           className="form-control"
           placeholder="Enter Video Title"
           value={title}
+          ref={ref}
           onChange={(e) => setTitle(e.target.value)}
+          onFocus={() => setMyFocus(true)}
+          onBlur={() => setMyFocus(false)}
         />
       </div>
       <div className="search-row">
@@ -38,7 +50,10 @@ const AddVideo = ({ addVideo }) => {
           className="form-control"
           placeholder="Enter Video URL"
           value={url}
+          ref={ref}
           onChange={(e) => setUrl(e.target.value)}
+          onFocus={() => setMyFocus(true)}
+          onBlur={() => setMyFocus(false)}
         />
       </div>
       <AddButton />
