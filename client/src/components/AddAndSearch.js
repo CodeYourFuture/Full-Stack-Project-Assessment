@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaSearch } from "react-icons/fa";
 import { useState } from 'react';
+import axios from 'axios';
 
 
 function AddAndSearch({ videos, setVideos }) {
@@ -21,31 +22,14 @@ function AddAndSearch({ videos, setVideos }) {
   const [url, setUrl] = useState('');
 
   const handleAdd = (e) => {
-
-
-    e.preventDefault();// <-- prevent form submit action
-    //(Form Validation) if the user provides the title and url
-    if (title && url) {
-      // on success
-      // take the form values and keep them inside the Newvideo object
-      localStorage.setItem('title', title);
-      localStorage.setItem('url', url);
-      const newVideo = {};
-      newVideo.id = Math.random();//or new Date().getTime().toString()
-      newVideo.title = localStorage.getItem('title');
-      newVideo.url = localStorage.getItem('url');
-      setVideos(videos => [...videos, newVideo]); // <-- update arr state
-
-      setTitle('');
-      setUrl('');
-    } else {
-      // empty values
-      console.log("Plz fill out the form !")
-
-    }
-    //CANCEL
-    // onClick={() => setVideos(videos)}
-
+    const id = videos.length + 1;
+    const rating = 0;
+    axios.post(`http://localhost:5000/`, {
+      title,
+      url,
+      id,
+      rating
+    })
 
   }
 
