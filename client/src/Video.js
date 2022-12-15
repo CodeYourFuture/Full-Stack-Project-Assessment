@@ -4,6 +4,8 @@ import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
 import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 function Video({ vidId, video, deleteVideo, updateRatings }) {
   const [votes, setVotes] = useState(video.rating);
@@ -21,16 +23,16 @@ function Video({ vidId, video, deleteVideo, updateRatings }) {
   };
 
   return (
-    <div className="video-container">
-      <p>{video.title}</p>
+    <ImageListItem className="video-container">
+      <YouTubeEmbed video={video} />
+      <ImageListItemBar title={video.title} position="below" />
       <div className="vote-container">
         <LikeIcon handleLike={handleLike} />
         <p>{votes} Vote </p>
         <DislikeIcon handleDisLike={handleDisLike} />
       </div>
-      <YouTubeEmbed video={video} />
       <DeleteButton vidId={vidId} deleteVideo={deleteVideo} />
-    </div>
+    </ImageListItem>
   );
 }
 

@@ -1,17 +1,19 @@
 import React from "react";
+import Button from "@mui/material/Button";
 
 function DeleteButton({ vidId, deleteVideo }) {
   const id = vidId;
 
   return (
-    <button
-      class="p-2 mb-1 bg-danger text-white delete-button"
+    <Button
+      variant="outlined"
+      className="editbutton"
       onClick={() => {
         deleteVideo(id);
       }}
     >
       Delete
-    </button>
+    </Button>
   );
 }
 

@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import AddButton from "./AddButton";
+import AddButton from "./buttons/AddButton";
+import TextField from "@mui/material/TextField";
 
 const AddVideo = ({ addVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const ref = useRef(null);
-  // const refURL = useRef(null);
-  const [myFocus, setMyFocus] = useState(false);
 
   useEffect(() => {
-    if (document.hasFocus() && ref.current.contains(document.activeElement)) {
-      setMyFocus(true);
-    }
+    ref.current.focus();
   }, []);
 
   const handleAdd = (event) => {
@@ -30,16 +27,19 @@ const AddVideo = ({ addVideo }) => {
     <form className="form-group search-box" onSubmit={handleAdd}>
       <div className="search-row">
         <label htmlFor="vidTitle">Video Title</label>
-        <input
+        <TextField
+          label="Outlined secondary"
+          color="secondary"
+          focused
+          required
+          id="outlined-required"
+          // label="Required"
           type="text"
-          id="vidTitle"
           className="form-control"
           placeholder="Enter Video Title"
           value={title}
           ref={ref}
           onChange={(e) => setTitle(e.target.value)}
-          onFocus={() => setMyFocus(true)}
-          onBlur={() => setMyFocus(false)}
         />
       </div>
       <div className="search-row">
@@ -50,10 +50,7 @@ const AddVideo = ({ addVideo }) => {
           className="form-control"
           placeholder="Enter Video URL"
           value={url}
-          ref={ref}
           onChange={(e) => setUrl(e.target.value)}
-          onFocus={() => setMyFocus(true)}
-          onBlur={() => setMyFocus(false)}
         />
       </div>
       <AddButton />

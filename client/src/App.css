@@ -14,9 +14,6 @@ header {
 }
 
 body {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -25,11 +22,10 @@ body {
 
 .video-container {
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
   margin: 1rem;
   width: 20rem;
-  height: fit-content;
+  align-self: center;
+  justify-self: center;
 }
 
 .video-container > p {
@@ -57,7 +53,7 @@ button {
   margin: 0;
 }
 
-form-control
-.form-control:focus {
-  background: pink;
+.editbutton {
+  align-self: center;
+  justify-self: center;
 }

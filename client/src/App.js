@@ -4,6 +4,15 @@ import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
 import AddVideo from "./AddVideo";
 
+import ImageList from "@mui/material/ImageList";
+
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+
+
 function App() {
   const [videoData, setVideoData] = useState(dataVideos);
 
@@ -16,7 +25,7 @@ function App() {
   };
 
   const updateRatings = (votes, id) => {
-     setVideoData((videoData) =>
+    setVideoData((videoData) =>
       videoData.map((el) => {
         if (el.id === id) {
           el.rating = votes;
@@ -29,39 +38,56 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
+      <header>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              ></IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Video Recommendation
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Box>
       </header>
-      <body>
+      <main>
         <section>
-          {videoData
-            .sort((a, b) => {
-              const ratingsA = a.ratings;
-              const ratingsB = b.ratings;
-              if (ratingsA < ratingsB) {
-                return -1;
-              }
-              if (ratingsA > ratingsB) {
-                return 1;
-              }
-              // names must be equal
-              return 0;
-            })
-            .map((video) => (
-              <Video
-                video={video}
-                key={video.id}
-                vidId={video.id}
-                deleteVideo={deleteVideo}
-                updateRatings={updateRatings}
-              />
-            ))}
+          <ImageList cols={3} gap={8} className="imagelistgridcontainer">
+            {videoData
+              .sort((a, b) => {
+                const ratingsA = a.ratings;
+                const ratingsB = b.ratings;
+                if (ratingsA < ratingsB) {
+                  return -1;
+                }
+                if (ratingsA > ratingsB) {
+                  return 1;
+                }
+                // names must be equal
+                return 0;
+              })
+              .map((video) => (
+                  <Video
+                    key={video.id}
+                    video={video}
+                    vidId={video.id}
+                    deleteVideo={deleteVideo}
+                    updateRatings={updateRatings}
+                  />
+              ))}
+          </ImageList>
         </section>
         <section>
           <h2>Add a New Video</h2>
           <AddVideo addVideo={addVideo} />
         </section>
-      </body>
+      </main>
     </div>
   );
 }
