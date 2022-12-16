@@ -1,10 +1,9 @@
-import React, { useState,useEffect} from "react";
+import React, { useState } from "react";
 import AddButton from "./buttons/AddButton";
 
-function AddVideos({ likes, addVideos}) {
+function AddVideos({ likes, addVideos }) {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-  
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -18,32 +17,18 @@ function AddVideos({ likes, addVideos}) {
     addVideos(vidInfo);
   }
 
-  useEffect(() => {
-    if (document.hasFocus() && ref.current.contains(document.activeElement)) {
-      setFocus(true);
-    }
-  }, []);
-
   return (
-    <div
-      style={{
-        display: "inline-block",
-        borderRadius: 5,
-        padding: 10,        
-      }}>
-        </div>
-
     <div className="col">
       <form className="form-group add-box" onSubmit={handleSubmit}>
         <label htmlFor="addVideo">Add Video and URL Here</label>
-          <div className="addVideo-inform">
-          <input            
+        <div className="addVideo-inform">
+          <input
             type="text"
             id="addTitle"
             className="form-control"
             placeholder="Insert Video Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}           
+            onChange={(e) => setTitle(e.target.value)}
           />
           <input
             type="text"

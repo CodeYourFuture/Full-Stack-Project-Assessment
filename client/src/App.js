@@ -7,6 +7,13 @@ import AddVideos from "./AddVideos";
 function App() {
   const [videoData, setVideoData] = useState(dataVideos);
 
+  fetch({ dataVideos })
+    .then((response) => response.json())
+    .then((data) => {
+      setVideoData(data);
+      console.log(videoData, "Fetching video data");
+    });
+
   const deleteVideos = (id) => {
     setVideoData((videoData) => videoData.filter((data) => data.id !== id));
   };
@@ -25,7 +32,7 @@ function App() {
         return el;
       })
     );
-    console.log(videoData)
+    console.log(videoData);
   };
 
   return (
