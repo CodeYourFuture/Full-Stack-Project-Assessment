@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 const AddButton = () => {
   return (
     <div>
-      <Button variant="outlined" className="editbutton">
+      <Button type="submit" variant="outlined" className="editbutton">
         Add
       </Button>
     </div>

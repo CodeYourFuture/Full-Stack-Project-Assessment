@@ -12,7 +12,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
-
 function App() {
   const [videoData, setVideoData] = useState(dataVideos);
 
@@ -21,6 +20,7 @@ function App() {
   };
 
   const addVideo = (newVid) => {
+    console.log("I got here", newVid);
     setVideoData((videoData) => videoData.concat(newVid));
   };
 
@@ -73,13 +73,13 @@ function App() {
                 return 0;
               })
               .map((video) => (
-                  <Video
-                    key={video.id}
-                    video={video}
-                    vidId={video.id}
-                    deleteVideo={deleteVideo}
-                    updateRatings={updateRatings}
-                  />
+                <Video
+                  key={video.id}
+                  video={video}
+                  vidId={video.id}
+                  deleteVideo={deleteVideo}
+                  updateRatings={updateRatings}
+                />
               ))}
           </ImageList>
         </section>

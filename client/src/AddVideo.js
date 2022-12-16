@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import AddButton from "./buttons/AddButton";
+import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 const AddVideo = ({ addVideo }) => {
@@ -24,37 +25,49 @@ const AddVideo = ({ addVideo }) => {
   };
 
   return (
-    <form className="form-group search-box" onSubmit={handleAdd}>
-      <div className="search-row">
-        <label htmlFor="vidTitle">Video Title</label>
-        <TextField
-          label="Outlined secondary"
-          color="secondary"
-          focused
-          required
-          id="outlined-required"
-          // label="Required"
-          type="text"
-          className="form-control"
-          placeholder="Enter Video Title"
-          value={title}
-          ref={ref}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="search-row">
-        <label htmlFor="vidUrl">Video URL</label>
-        <input
-          type="text"
-          id="vidUrl"
-          className="form-control"
-          placeholder="Enter Video URL"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </div>
-      <AddButton />
-    </form>
+    <Box
+      component="form"
+      sx={{
+        "& > :not(style)": { m: 1, width: "75ch" },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleAdd}
+      className="formStyle" >
+    
+        <div className="search-row">
+          <TextField
+            label="Video Title"
+            color="secondary"
+            focused
+            required
+            id="outlined-required"
+            type="text"
+            className="form-control"
+            placeholder="Enter Video Title"
+            value={title}
+            ref={ref}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div className="search-row">
+          <TextField
+            label="Video URL"
+            color="secondary"
+            required
+            id="vid_url"
+            type="text"
+            className="form-control"
+            placeholder="Enter Video Title"
+            value={url}
+            ref={ref}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+        <AddButton />
+   
+    </Box>
   );
 };
 
