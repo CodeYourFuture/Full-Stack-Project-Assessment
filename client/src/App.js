@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
+import LikeIcon from "./buttons/LikeIcon.js";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       </header>
       <body>
         {dataVideos.map((video, key) => (
-          <Video video={video} key={key}/>
+          <Video video={video} key={key} />
         ))}
       </body>
     </div>
