@@ -3,7 +3,9 @@ import "./Search.css";
 
 const Search = ({ videoData, setVideoData, dataVideos }) => {
   const handleOnChange = (event) => {
-    let result = videoData.filter((vid) => vid.title.includes(event));
+    let result = videoData.filter((vid) =>
+      vid.title.toLowerCase().includes(event)
+    );
     setVideoData(result);
     if (event.length <= 0) {
       setVideoData(dataVideos);
@@ -16,7 +18,9 @@ const Search = ({ videoData, setVideoData, dataVideos }) => {
       </label>
       <input
         className="searchInp"
-        onChange={(e) => handleOnChange(e.target.value)}
+        onChange={(e) =>
+          handleOnChange(e.target.value.toLocaleLowerCase())
+        }
         type="search"
       />
     </div>
