@@ -2,7 +2,11 @@ import React from "react";
 
 function LikeIcon({ handleOnClick }) {
   return (
-    <button id="like" onClick={handleOnClick}>
+    <button
+      aria-label="like button"
+      id="like"
+      onClick={handleOnClick}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

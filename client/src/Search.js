@@ -17,6 +17,7 @@ const Search = ({ videoData, setVideoData, dataVideos }) => {
         Search
       </label>
       <input
+        id="search"
         className="searchInp"
         onChange={(e) =>
           handleOnChange(e.target.value.toLocaleLowerCase())
