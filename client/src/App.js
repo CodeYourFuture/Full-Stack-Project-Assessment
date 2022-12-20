@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Video from "./components/Video";
-import dataVideos from "./exampleresponse.json";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 
 function App() {
 
-  // Model state
   const [openModal, setOpenModal] = useState(false);
+  const [videos, setVideos] = useState([]);
 
   // List of videos
-  const [videos, setVideos] = useState(dataVideos);
+  const getVideos = () => {
+    fetch("http://localhost:5000/")
+      .then(res => res.json())
+      .then(data => setVideos(data))
+      .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getVideos();
+  }, [])
+
+  // Delete a video
   const deleteVideo = (index) => {
-    let newVideos = videos;
-    newVideos.splice(index, 1);
-    setVideos([...newVideos]);
+    // let newVideos = videos;
+    // newVideos.splice(index, 1);
+    // setVideos([...newVideos]);
+    fetch(`http://localhost:5000/${index}`, { method: "delete" })
+      .then((res) => res.json())
+      .then(data => {
+        getVideos();
+        console.log(data);
+      })
+      
   }
 
   // Form details
@@ -24,13 +41,24 @@ function App() {
 
   // Add video to list of videos
   const addVideo = () => {
-    let newVideos = videos;
-    newVideos.push({ title, url });
-    setVideos([...newVideos]);
+    // let newVideos = videos;
+    // newVideos.push({ title, url });
+    // setVideos([...newVideos]);
+    fetch(`http://localhost:5000/`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({id: videos.length, title, url})
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        getVideos();
+        console.log(data);
+      })
 
-    setOpenModal(false); // removing modal from screen
+    setTimeout(() => {
+      setOpenModal(false); // removing modal from screen
+    }, 1000)
   }
-
 
   return (
     <div>
@@ -41,7 +69,7 @@ function App() {
 
       <main className="container mt-3">
         {videos.map((video, key) => (
-          <Video video={video} key={key} removeVideo={() => deleteVideo(key)} />
+          <Video video={video} key={key} removeVideo={() => deleteVideo(video.id)} />
         ))}
 
         {openModal && <Modal
