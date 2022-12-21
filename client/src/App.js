@@ -5,13 +5,14 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 
 function App() {
+  const uri = "https://reco-videos-server.onrender.com/";
 
   const [openModal, setOpenModal] = useState(false);
   const [videos, setVideos] = useState([]);
 
   // List of videos
   const getVideos = () => {
-    fetch("http://localhost:5000/")
+    fetch(uri)
       .then(res => res.json())
       .then(data => setVideos(data))
       .catch(err => console.log(err))
@@ -26,13 +27,12 @@ function App() {
     // let newVideos = videos;
     // newVideos.splice(index, 1);
     // setVideos([...newVideos]);
-    fetch(`http://localhost:5000/${index}`, { method: "delete" })
+    fetch(`${uri}${index}`, { method: "delete" })
       .then((res) => res.json())
       .then(data => {
         getVideos();
         console.log(data);
       })
-      
   }
 
   // Form details
@@ -44,7 +44,7 @@ function App() {
     // let newVideos = videos;
     // newVideos.push({ title, url });
     // setVideos([...newVideos]);
-    fetch(`http://localhost:5000/`, {
+    fetch(`${uri}`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({id: videos.length, title, url})
