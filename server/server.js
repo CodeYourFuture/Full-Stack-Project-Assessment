@@ -85,13 +85,13 @@ app.post("/", (req, res) => {
     title: req.body.title,
     video: req.body.url,
   };
-  if (!req.body.title || !req.body.url) {
+  if (newVideo.title || newVideo.url) {
+    videos.push(newVideo);
+    res.json(videos);
+  } else {
     res.status(400).json({
       msg: "Please ensure that all fields have the required data",
     });
-  } else {
-    videos.push(newVideo);
-    res.json(videos);
   }
 });
 
