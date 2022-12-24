@@ -87,10 +87,13 @@ app.post("/", (req, res) => {
   };
   if (newVideo.title || newVideo.url) {
     videos.push(newVideo);
-    res.json(videos);
+    res.json({
+      id: newVideo.id,
+    });
   } else {
     res.status(400).json({
-      msg: "Please ensure that all fields have the required data",
+      result: "failure",
+      message: "Video could not be saved",
     });
   }
 });
