@@ -98,4 +98,18 @@ app.post("/", (req, res) => {
   }
 });
 
+// GET "{id}""
+
+app.get("/:id", (req, res) => {
+  let videoId = req.params.id;
+  let found = videos.some((video) => video.id === videoId);
+  if (found) {
+    res.json(videos.filter((video) => video.id === videoId));
+  } else {
+    res.status(404).json({
+      msg: `There is no video found with ID: ${videoId}`,
+    });
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
