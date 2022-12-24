@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const crypto = require("crypto");
+const cors = require("cors");
+
+app.use(cors()); // this is installed to allow react to fetch data from the api refer =>  https://tinyurl.com/m4de5wt6 & https://www.npmjs.com/package/cors
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
