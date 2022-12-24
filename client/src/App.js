@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
@@ -6,8 +6,27 @@ import AddVideoButton from "./AddVideoButton";
 import Search from "./Search";
 
 function App() {
-  const [videoData, setVideoData] = useState(dataVideos);
+  const [videoData, setVideoData] = useState([]);
   const [userAddedVid, setUserAddedVid] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(true);
+  const [error, setError] = useState(null);
+
+  //Fetch data from express api running locahost
+  // NB. had to install cors in express for this to work.
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000`)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setVideoData(result);
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  }, []);
 
   return (
     <div className="App">
