@@ -112,4 +112,21 @@ app.get("/:id", (req, res) => {
   }
 });
 
+//DELETE "/{id}"
+
+app.delete("/:id", (req, res) => {
+  const videoId = req.params.id;
+  let found = videos.some((video) => video.id === videoId);
+  if (found) {
+    videos = videos.filter((vid) => vid.id !== videoId);
+    res.json({
+      msg: `Successfully delete video with id: ${videoId}`,
+    });
+  } else {
+    res.status(400).json({
+      msg: `No video with id: ${videoId} found`,
+    });
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
