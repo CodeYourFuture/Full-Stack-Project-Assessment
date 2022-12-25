@@ -1,7 +1,7 @@
 import React from 'react'
 
 function YouTubeEmbed({ video }) {
-  const url = video.url.replace("watch?v=", "embed/");
+  const url = video.link.replace("watch?v=", "embed/");
 
   return (
     <iframe
