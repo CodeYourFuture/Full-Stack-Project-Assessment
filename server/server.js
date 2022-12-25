@@ -1,3 +1,5 @@
+require("dotenv").config();
+console.log(process.env);
 const data = require("../client/src/exampleresponse.json");
 const pool = require("./connection");
 const express = require("express");
