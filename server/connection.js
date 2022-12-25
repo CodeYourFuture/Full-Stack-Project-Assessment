@@ -1,14 +1,11 @@
 const { Pool } = require("pg");
 
-//PGPASSWORD=EHnGlVF3h1gp9qjlT9haETZq3JN0qyXX psql -h dpg-cea4bqda4996meackcmg-a.oregon-postgres.render.com -U anthony guidedb
-//"Server=heffalump.db.elephantsql.com;Port=5432;Database=xbixatua;UserId=xbixatua;Password=MZpFuYnavsnJw65QqMIG9JtHM29yqMz6"
-
-const client = new Pool({
-    host: "heffalump.db.elephantsql.com",
-    user: "xbixatua",
-    database: "xbixatua",
-    password: "MZpFuYnavsnJw65QqMIG9JtHM29yqMz6",
-    port: 5432
+const pool = new Pool({
+    host: process.env.HOST,
+    user: process.env.USER_DB,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT_DB
 })
 
-module.exports = client;
+module.exports = pool;
