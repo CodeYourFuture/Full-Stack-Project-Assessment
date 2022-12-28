@@ -1,16 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function YouTubeEmbed({video}) {
- const url = video.url.replace("watch?v=", "embed/");
- console.log(url);
+function YouTubeEmbed({ video }) {
+  const url = video.url.replace("watch?v=", "embed/");
+  console.log(url);
   return (
     <iframe
       height={"300"}
       src={url}
       alt={`video ${video.title}`}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
+      title={video.title}
     />
   );
 }
 
-export default YouTubeEmbed
+export default YouTubeEmbed;
