@@ -7,33 +7,36 @@ import axios from 'axios';
 
 function App() {
   const [videos, setVideos] = useState([]);
-  useEffect(() => {
 
-    axios.get(`http://localhost:5000/`)
-      .then(res => {
-        const videos = res.data;
-        console.log(videos)
-        setVideos(videos);
-      })
-    // const url = `http://localhost:5000/`;
-    // fetch(url)
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.status === 200) {
-    //       return res.json();
-    //     }
-    //   })
-    //   .then((videos) => {
-    //     console.log(videos);
-    //     setVideos(videos);
-    //   })
-    //   .catch((err) => console.log(err));
+  const getVideos = async () => {
+    try {
+      const response = await axios.get(`/api/videos`);
+      const data = response.data;
+      setVideos(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    getVideos();
   }, []);
 
-  const handleDelete = (id) => {
-    const newData = videos.filter(elem => elem.id !== id)
-    setVideos(newData)
+  const handleDelete = async (id) => {
+    console.log(id)
+    try {
+      const response = await axios.delete(`/api/videos/${id}`);
+      console.log(response)
+      console.log(`video with id ${id} deleted`)
+    } catch (error) {
+      console.log("Something went wrong", error)
+    }
+    const newData = videos.filter((result) => result.id !== id)
+    setVideos(newData);
+
   }
+
+
+
   return (
     <div className="App">
       <header className="App-header">

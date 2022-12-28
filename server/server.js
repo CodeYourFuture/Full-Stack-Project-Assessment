@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const videoRoutes = require('./routes/video.js');
+const videoRoutes = require('./routes/videos.js');
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());

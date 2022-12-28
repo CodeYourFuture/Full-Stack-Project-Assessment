@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 function AddAndSearch({ videos, setVideos }) {
-  //SEARCH
+
   const [search, setSearch] = useState("");
   function handleSearch(e) {
     e.preventDefault();
@@ -17,19 +17,26 @@ function AddAndSearch({ videos, setVideos }) {
     setVideos(searchFiltered);
   }
 
-  //ADD BUTTON
-  const [title, setTitle] = useState('');
-  const [url, setUrl] = useState('');
 
-  const handleAdd = (e) => {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+
+
+  const handleAdd = async (e) => {
+    e.preventDefault()
     const id = videos.length + 1;
     const rating = 0;
-    axios.post(`http://localhost:5000/`, {
-      title,
-      url,
-      id,
-      rating
-    })
+    const newVideo = { title, url, id, rating }
+    try {
+      const response = await axios.post(`/api/videos`, newVideo)
+      console.log(response)
+      setTitle('')
+      setUrl('')
+      console.log('new video added:', newVideo)
+    }
+    catch (error) {
+      console.log(error)
+    }
 
   }
 
@@ -37,7 +44,7 @@ function AddAndSearch({ videos, setVideos }) {
     <div className='container'>
 
 
-      <form form className='form' >
+      <form className='form' >
 
         <div className='search-box'>
 
@@ -46,12 +53,11 @@ function AddAndSearch({ videos, setVideos }) {
 
         </div>
 
-        <a href='#'>Add video</a>
+        <p>Add video</p>
         <div>
-          <label for="title">Title</label>
+          <label htmlFor="title">Title</label>
           <input
             className='input-title'
-            // aria-labelledby="title"
             type='text'
             id='title'
             value={title}
@@ -59,10 +65,9 @@ function AddAndSearch({ videos, setVideos }) {
 
         </div>
         <div>
-          <label for="url">URL</label>
+          <label htmlFor="url">URL</label>
           <input
             className='input'
-            // aria-labelledby="url"
             type='text'
             id='url'
             value={url}
