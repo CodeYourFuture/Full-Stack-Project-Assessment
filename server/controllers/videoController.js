@@ -18,7 +18,7 @@ const getVideo = ((req, res) => {
 });
 
 const deleteVideo = ((req, res) => {
-  const found = videos.some(idFilter(req));
+  const found = videos.some(video => video.id === parseInt(req.params.id));
 
   if (found) {
     res.json({
