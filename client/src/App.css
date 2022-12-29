@@ -42,10 +42,6 @@ header {
   margin: 0;
 }
 
-.delete-button {
-  border-radius: 5px;
-}
-
 .vote-container {
   display: flex;
   flex-flow: row nowrap;
@@ -70,10 +66,12 @@ header {
 }
 
 input {
+
   background-color: #aac3dc;
 }
 
 .search-input {
+  margin-top: 3rem;
   border: none;
   margin-left: 2.5rem;
 }
