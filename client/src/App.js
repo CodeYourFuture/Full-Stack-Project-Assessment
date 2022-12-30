@@ -28,6 +28,9 @@ function App() {
       );
   }, []);
 
+  // sort video data by rating
+  videoData.sort((a, b) => b.rating - a.rating);
+
   return (
     <div className="App">
       <header className="App-header">
