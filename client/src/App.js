@@ -28,7 +28,7 @@ function App() {
       );
   }, []);
 
-  // sort video data by rating
+  // Sort video data by rating
   videoData.sort((a, b) => b.rating - a.rating);
 
   return (

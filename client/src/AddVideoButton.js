@@ -10,15 +10,22 @@ const AddVideoButton = ({
   const [url, setUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
 
+  const youtubeRegex =
+    /^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$/;
+
+  const isYoutubeUrl = youtubeRegex.test(url);
+
   // handle button press to add new video
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (title.length > 0 && url.length > 0) {
+
+    if (title.length > 0 && url.length > 0 && isYoutubeUrl) {
       const video = {
         id: new Date().getTime().toString(),
         title,
         url,
         rating: 0,
+        datePosted: new Date().toLocaleString(),
       };
       setVideoData((videoData) => {
         setUserAddedVid(video);
@@ -27,7 +34,9 @@ const AddVideoButton = ({
       setTitle("");
       setUrl("");
     } else {
-      return alert("Input fields cannot be empty");
+      return alert(
+        "Please ensure that all fields are filled in and that you're using a valid youtube video link."
+      );
     }
   };
 
