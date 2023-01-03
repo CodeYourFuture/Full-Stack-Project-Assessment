@@ -27,8 +27,7 @@ function Video({ video, handleDelete }) {
       <YouTubeEmbed video={video} />
       <DeleteButton handleDelete={handleDelete} id={video.id} />
       <Link to={`post/${video.id}`} className='btn btn-primary btn-details'>
-        ID
-
+        View video
       </Link>
     </div>
   );

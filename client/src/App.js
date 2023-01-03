@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import ViewVideo from "./pages/ViewVideo";
+import ViewOneVideo from "./pages/ViewOneVideo";
 import Error from './pages/Error';
 
 
@@ -16,7 +16,7 @@ function App() {
         <Routes>
 
           <Route exact index element={<Home />} />
-          <Route path="/post/:id" element={<ViewVideo />} />
+          <Route path="/post/:id" element={<ViewOneVideo />} />
           <Route path='*' element={<Error />} />
 
         </Routes>
