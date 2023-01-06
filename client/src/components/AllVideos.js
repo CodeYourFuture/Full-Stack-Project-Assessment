@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Video from './Video';
+import { useGlobalContext } from '../context/VideoContext';
 
-function AllVideos({ videos, handleDelete }) {
+function AllVideos() {
+  const { videos, loading, fetchVideos, handleDelete } = useGlobalContext();
+  useEffect(() => {
+    fetchVideos();
+  }, [])
   return (
-    <section className='all'>
-      {videos.map((video, key) => (
-        <Video video={video} key={video.id} handleDelete={handleDelete} />
-      ))}
-
-    </section>
+    <>
+      {
+        !loading ? (
+          <section className='all'>
+            {
+              videos.map((video, key) => (
+                <Video video={video} key={video.id} handleDelete={handleDelete} />
+              ))
+            }
+          </section >
+        ) : (
+          <div>LOADING...</div>
+        )
+      }
+    </>
   );
 }
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
+import { useGlobalContext } from '../context/VideoContext';
 
-function DeleteButton({ handleDelete, id }) {
+function DeleteButton({ id }) {
+  const { handleDelete } = useGlobalContext()
   return (
     <AiFillDelete
       aria-label="delete video"
