@@ -3,40 +3,30 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactPlayer from 'react-player'
 import axios from "axios";
+import { useGlobalContext } from '../context/VideoContext';
 
 function ViewOneVideo() {
-  const [oneVideo, setOneVideo] = useState([]);
+  const { getOneVideo, oneVideo } = useGlobalContext();
   const { id } = useParams();
 
-  const getOneVideo = async () => {
-    try {
-      const response = await axios.get(`/api/videos/${id}`)
-      console.log(response.data);
-      setOneVideo(response.data);
-    } catch (error) {
-      console.error('Failure!');
-      console.error(error.response.status);
-    }
-
-  }
-
   useEffect(() => {
-    getOneVideo();
+    getOneVideo(id);
   }, [id]);
+
+
 
   return (
     <div className="view-video">
-      <h1>Single Post</h1>
       <br />
       <article>
-        {oneVideo.map((elem) => {
-          const { title, url } = elem;
+        {oneVideo.map((elem, key) => {
+          const { title, url, id } = elem;
           return (
-            <>
+            <div key={elem.id}>
               <p>{elem.title}</p>
-              <div style={{ height: '25rem' }}><ReactPlayer url={elem.url} style={{ marginLeft: '20rem', marginTop: '2rem' }} /></div>
+              <div style={{ height: '30rem' }}><ReactPlayer url={elem.url} style={{ marginLeft: '20rem', marginTop: '4rem' }} /></div>
 
-            </>
+            </div>
           )
 
         })}
@@ -44,7 +34,7 @@ function ViewOneVideo() {
       <Link to='/' className='btn btn-primary'>
         back home
       </Link>
-    </div>
+    </div >
   );
 }
 export default ViewOneVideo;

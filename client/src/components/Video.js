@@ -5,9 +5,11 @@ import DislikeIcon from '../buttons/DislikeIcon';
 import YouTubeEmbed from './YouTubeEmbed';
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../context/VideoContext';
 
-function Video({ video, handleDelete }) {
+function Video({ video }) {
+  const { handleDelete } = useGlobalContext()
   const [rate, setRate] = useState(video.rating)
   const handleLikeClick = () => {
     setRate(rate + 1);
