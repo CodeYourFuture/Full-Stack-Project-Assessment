@@ -3,7 +3,8 @@ const videos = require("../exampleresponse.json");
 const idFilter = req => video => video.id === parseInt(req.params.id);
 
 const getVideos = (req, res) => {
-  res.send(videos);
+  const descSortedVideos = videos.sort((a, b) => b.rating - a.rating);
+  res.send(descSortedVideos);
 
 }
 
