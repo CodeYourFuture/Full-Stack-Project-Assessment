@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 
 function App() {
-  const uri = "https://reco-videos-server.onrender.com/";
+  const uri = "http://localhost:5000/";
 
   const [openModal, setOpenModal] = useState(false);
   const [videos, setVideos] = useState([]);
@@ -36,28 +36,33 @@ function App() {
   }
 
   // Form details
-  const [url, setUrl] = useState();
-  const [title, setTitle] = useState();
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [err, setErr] = useState(false);
 
   // Add video to list of videos
   const addVideo = () => {
     // let newVideos = videos;
     // newVideos.push({ title, url });
     // setVideos([...newVideos]);
-    fetch(`${uri}`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({id: videos.length, title, url})
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        getVideos();
-        console.log(data);
+    if (url.length === 0 || title.length === 0) {
+      setErr(true);
+    } else {
+      fetch(`${uri}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: videos.length, title, url })
       })
+        .then((res) => res.json())
+        .then((data) => {
+          getVideos();
+          console.log(data);
+        })
 
-    setTimeout(() => {
-      setOpenModal(false); // removing modal from screen
-    }, 1000)
+      setTimeout(() => {
+        setOpenModal(false); // removing modal from screen
+      }, 1000)
+    }
   }
 
   return (
@@ -75,7 +80,10 @@ function App() {
         {openModal && <Modal
           cancelModal={() => setOpenModal(false)}
           url={(e) => setUrl(e.target.value)}
+          urlValue={url}
           title={(e) => setTitle(e.target.value)}
+          titleValue={title}
+          err={err}
           add={addVideo} />}
       </main>
 
