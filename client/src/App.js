@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import "./App.css";
 import Video from "./Video";
+// import FormDisabled from "./commponets/FormDisabled";
 import dataVideos from "./exampleresponse.json";
 
 function App() {
@@ -12,6 +13,25 @@ function App() {
     setVideo((data) => data.filter((video) => video.id !== id));
   }
 
+
+
+  function voter(votes, id) {
+    setVideo((data) => data.map((video) => {
+      if (video.id === id) {
+        video.rating = votes;
+      }
+      return video;
+    })
+    );
+    console.log(data);
+  }
+
+  function addVideo(newVid) {
+    console.log("I got here", newVid);
+    setVideo((videoData) => videoData.concat(newVid));
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +39,7 @@ function App() {
       </header>
       <div>
         {data.map((video, key) => (
-          <Video video={video} key={key} deletes={deleteBtn} />
+          <Video video={video} key={key} deletes={deleteBtn} votes={voter} />
         ))}
       </div>
     </div>
