@@ -13,7 +13,7 @@ header {
   padding: 2rem 0;
 }
 
-body{
+.body{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -54,3 +54,4 @@ button{
   padding: 0;
   margin: 0;
 }
+
