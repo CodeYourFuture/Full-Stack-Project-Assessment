@@ -7,7 +7,7 @@ function DeleteButton({ id }) {
   return (
     <AiFillDelete
       aria-label="delete video"
-      style={{ color: 'white', fontSize: '30px' }}
+      style={{ color: 'rgba(255, 149, 0, 0.792)', fontSize: '30px' }}
       onClick={() => handleDelete(id)
       } />
   );

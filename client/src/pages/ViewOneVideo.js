@@ -23,7 +23,7 @@ function ViewOneVideo() {
           const { title, url, id } = elem;
           return (
             <div key={elem.id}>
-              <p>{elem.title}</p>
+              <p style={{ color: '#093e43' }}>{elem.title}</p>
               <div style={{ height: '30rem' }}><ReactPlayer url={elem.url} style={{ marginLeft: '20rem', marginTop: '4rem' }} /></div>
 
             </div>
@@ -31,7 +31,7 @@ function ViewOneVideo() {
 
         })}
       </article>
-      <Link to='/' className='btn btn-primary'>
+      <Link to='/' className='btn btn-secondary'>
         back home
       </Link>
     </div >

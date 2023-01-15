@@ -34,7 +34,7 @@ function AllVideos() {
       <SortByRating handleSort={handleSort} />
       {
         !loading ? (
-          <section className='all'>
+          <section className='videos-container'>
             {
               videos.map((video, key) => (
                 <Video video={video} key={video.id} handleDelete={handleDelete} />
