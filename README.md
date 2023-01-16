@@ -32,7 +32,7 @@ You can find each of the levels split into separate files, linked below.
 - [Level 100](./100.md)
   - A core version of the React front end of the app
 - [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+  - Stretch goals for the front end if you have tim
 
 ### Week 2 - Back End (without Database)
 
