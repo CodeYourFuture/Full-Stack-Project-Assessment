@@ -1,11 +1,14 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Box m={4}>
+        <Typography variant="h3">Video Recommendation</Typography>
+      </Box>
     </div>
   );
 }
