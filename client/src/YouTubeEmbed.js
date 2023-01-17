@@ -5,6 +5,7 @@ function YouTubeEmbed({video}) {
  console.log(url);
   return (
     <iframe
+    title='unique'
       height={"300"}
       src={url}
       alt={`video ${video.title}`}

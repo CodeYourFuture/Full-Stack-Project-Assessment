@@ -9,11 +9,11 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <body>
+      <main>
         {dataVideos.map((video, key) => (
           <Video video={video} key={key}/>
         ))}
-      </body>
+      </main>
     </div>
   );
 }

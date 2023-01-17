@@ -1,19 +1,29 @@
-import React from 'react';
-import DeleteButton from './buttons/DeleteButton';
-import LikeIcon from './buttons/LikeIcon';
-import DislikeIcon from './buttons/DislikeIcon';
-import YouTubeEmbed from './YouTubeEmbed';
+import React, { useState } from "react";
+import DeleteButton from "./buttons/DeleteButton";
+import LikeIcon from "./buttons/LikeIcon";
+import DislikeIcon from "./buttons/DislikeIcon";
+import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
 
-function Video({video}) {
-  
+function Video({ video }) {
+  const [vote, setVote] = useState(video.vote);
+  const [isVoted, setIsVoted] = useState(video.isVoted);
+
+  const handleVote = (e) => {
+    console.log(video.isVoted);
+    let voteCount;
+    voteCount = e ? vote + 1 : vote - 1;
+    setVote(voteCount);
+    setIsVoted(!isVoted);
+  };
+
   return (
     <div className="video-container">
       <p>{video.title}</p>
-      <div className='vote-container'>
-        <LikeIcon />
-        <p>0 Vote</p>
-        <DislikeIcon />
+      <div className="vote-container">
+        <LikeIcon clickFunc={handleVote} isVoted={isVoted} />
+        <p>{vote} Vote</p>
+        <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
       </div>
       <YouTubeEmbed video={video} />
       <DeleteButton />
@@ -21,4 +31,4 @@ function Video({video}) {
   );
 }
 
-export default Video
+export default Video;

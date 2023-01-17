@@ -13,7 +13,7 @@ header {
   padding: 2rem 0;
 }
 
-body{
+main{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
