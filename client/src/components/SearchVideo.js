@@ -1,19 +1,11 @@
 import React from 'react';
 import { FaSearch } from "react-icons/fa";
-import { useState } from 'react';
+import { useGlobalContext } from '../context/VideoContext';
 
 
 function SearchVideo({ videos, setVideos }) {
-  const [search, setSearch] = useState("");
-  function handleSearch(e) {
-    e.preventDefault();
-    const searchInput = e.target.value.toLowerCase();
-    setSearch(searchInput);
-    const searchFiltered = videos.filter((video) => {
-      return video.title.toLowerCase().includes(searchInput);
-    });
-    setVideos(searchFiltered);
-  }
+  const { handleSearch } = useGlobalContext()
+
   return <>
     <div class="input-group rounded" id='search'>
       <input

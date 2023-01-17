@@ -1,8 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactPlayer from 'react-player'
-import axios from "axios";
 import { useGlobalContext } from '../context/VideoContext';
 
 function ViewOneVideo() {
@@ -20,7 +19,7 @@ function ViewOneVideo() {
       <br />
       <article>
         {oneVideo.map((elem, key) => {
-          const { title, url, id } = elem;
+
           return (
             <div key={elem.id}>
               <p style={{ color: '#093e43' }}>{elem.title}</p>
