@@ -7,8 +7,8 @@ import { useRef } from 'react';
 
 
 function AddVideo() {
+  const { videos, dispatch } = useGlobalContext();
   const [showForm, setShowForm] = useState(false);
-  const { dispatch } = useGlobalContext();
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [titleErr, setTitleErr] = useState({});
@@ -61,14 +61,15 @@ function AddVideo() {
 
   //post one video
   const handleAdd = async (e) => {
+    // const { videos } = useGlobalContext()
     e.preventDefault();
     const isValid = formValidation();
     if (isValid) {
       const newVideo = {
         title,
         url,
-        rating: 0,
-        id: new Date().getTime().toString(),
+        rating: 10,
+        id: videos.length + 1,
       };
       try {
         dispatch({ type: 'SENDING_REQUEST' });
