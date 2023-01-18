@@ -1,3 +1,86 @@
 .App {
+  background-color: #E3DCC2;
+  margin-top: 0.6em;
+}
+
+nav {
+  color: #6f32a8;
+  text-shadow: 1px 1px 1px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em;
+  margin-bottom: 2.5em;
+  font-weight: 500;
+  background-image: linear-gradient(
+    0deg,
+    hsl(121, 17%, 53%) 0%,
+    hsl(118deg 17% 60%) 17%,
+    hsl(117deg 37% 80%) 34%,
+    hsl(101deg 44% 77%) 49%,
+    hsl(117deg 37% 80%) 66%,
+    hsl(118deg 17% 60%) 83%,
+    hsl(121, 17%, 53%) 100%
+  );
+}
+.add-video {
   text-align: center;
+}
+.add-video input,.btn{
+  padding: 0.5em;
+  margin: 0.3em;
+  border:1px solid #6f32a8;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: rgb(180, 117, 243);
+  text-shadow: 1px 1px 1px #6f32a8;
+  color: wheat;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cards-grid {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-rows: auto;
+}
+
+.card-container {
+  padding: 0.8em;
+  margin: 0.8em;
+  border-radius: 15px;
+  border-style: groove;
+  box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
+}
+
+.card-bottom-nav{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.vote-icons {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.votes{
+  margin: .3em;
+}
+.like{
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.like:hover{
+  font-size: 1.5rem;
+  color: #7008d0;
+  cursor: pointer;
+}
+
+video{
+  border-radius: 15px;
 }
