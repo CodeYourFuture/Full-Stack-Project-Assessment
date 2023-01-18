@@ -1,6 +1,6 @@
 import React from "react";
 import Data from "../exampleresponse.json";
-import { useState } from "react";
+import EmbeddingVideo from "./EmbeddingVideo";
 import Vote from "./Vote";
 
 function VideoCard(){
@@ -10,9 +10,7 @@ function VideoCard(){
         <section className="cards-grid">
             {Data.map(film=>{
             return(<div key={film.id} className="card-container">
-                     <video width="320" height="240" controls autoPlay>
-                         <source src={film.url} />
-                     </video>
+                     <EmbeddingVideo  url={film.url}  title={film.title}/>
                      <h5>{film.title}</h5>
                      <div className="card-bottom-nav">
                         <Vote data={film.rating}/>

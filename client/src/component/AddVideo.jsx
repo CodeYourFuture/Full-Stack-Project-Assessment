@@ -1,8 +1,6 @@
 import React from "react";
 
 function AddVideo(){
-    
-
     return(
         <div className="add-video">
           <h4>Add Your Suggestion Here</h4>
