@@ -1,17 +1,10 @@
 import React from "react";
 import Data from "../exampleresponse.json";
 import { useState } from "react";
-import {SlLike,SlDislike} from "react-icons/sl";
+import Vote from "./Vote";
 
 function VideoCard(){
-    const [vote , setVote]=useState([]);
-    const likeFunc=()=>{
-         setVote(preVote=> preVote+1)
-    }
-
-    const disLikeFunc=()=>{
-        setVote(preVote=>preVote>0? preVote-1:0)
-    }
+   
 
     return(
         <section className="cards-grid">
@@ -22,11 +15,7 @@ function VideoCard(){
                      </video>
                      <h5>{film.title}</h5>
                      <div className="card-bottom-nav">
-                        <section className="vote-icons">
-                        <SlLike className="like" onClick={likeFunc} />
-                        <h6 className="votes">{film.rating} Votes</h6>
-                        <SlDislike className="like" onClick={disLikeFunc} />
-                     </section>
+                        <Vote data={film.rating}/>
                      <button className="btn">Remove Video</button>
                      </div>
                      

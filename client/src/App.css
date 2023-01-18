@@ -23,6 +23,10 @@ nav {
     hsl(121, 17%, 53%) 100%
   );
 }
+
+nav h3{
+  align-self: flex-start;
+}
 .add-video {
   text-align: center;
 }
