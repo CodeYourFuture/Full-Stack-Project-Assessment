@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.1.10",
+    "body-parser": "^1.20.1",
     "bootstrap": "^5.2.1",
+    "nodemon": "^2.0.20",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0",
@@ -16,8 +18,10 @@
     "start": "react-scripts start",
     "build": "npm i && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon ../server/server.js"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",

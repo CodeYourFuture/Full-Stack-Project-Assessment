@@ -13,7 +13,7 @@ header {
   padding: 2rem 0;
 }
 
-main{
+main > div{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -38,7 +38,9 @@ button{
   background-color: white;
   border: none;
 }
-
+.message{
+  color: darkblue;
+}
 .delete-button{
   margin-top: 2rem;
   border-radius: 10px;
@@ -53,4 +55,8 @@ button{
 .vote-container > p{
   padding: 0;
   margin: 0;
+}
+
+.non-display{
+  display: none;
 }

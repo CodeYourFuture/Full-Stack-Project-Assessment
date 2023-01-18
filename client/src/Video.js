@@ -6,11 +6,12 @@ import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
 
 function Video({ video }) {
+  // states count vote and check for videos voted or not
   const [vote, setVote] = useState(video.vote);
   const [isVoted, setIsVoted] = useState(video.isVoted);
 
+  //handle votes
   const handleVote = (e) => {
-    console.log(video.isVoted);
     let voteCount;
     voteCount = e ? vote + 1 : vote - 1;
     setVote(voteCount);
@@ -18,15 +19,18 @@ function Video({ video }) {
   };
 
   return (
-    <div className="video-container">
-      <p>{video.title}</p>
-      <div className="vote-container">
-        <LikeIcon clickFunc={handleVote} isVoted={isVoted} />
-        <p>{vote} Vote</p>
-        <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
-      </div>
-      <YouTubeEmbed video={video} />
-      <DeleteButton />
+    
+      
+      <div className="video-container">
+        <p>{video.title}</p>
+        <div className="vote-container">
+          <LikeIcon clickFunc={handleVote} isVoted={isVoted} />
+          <p>{vote} Vote</p>
+          <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
+        </div>
+        <YouTubeEmbed video={video} />
+        <DeleteButton />
+      
     </div>
   );
 }
