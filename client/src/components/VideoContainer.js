@@ -8,8 +8,8 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Fab from "@mui/material/Fab";
 
 function VideoContainer({ rating, title, url }) {
   return (
@@ -44,17 +44,17 @@ function VideoContainer({ rating, title, url }) {
         <Typography variant="h7">{rating + " Votes"}</Typography>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Stack direction="row">
-            <IconButton>
-              <ThumbUpAltIcon sx={{ fontSize: 30, color: grey[600] }} />
-            </IconButton>
-            <IconButton>
-              <ThumbDownAltIcon sx={{ fontSize: 30, color: grey[600] }} />
-            </IconButton>
+            <Fab sx={{ mr: 2 }} size="medium">
+              <ThumbUpAltIcon sx={{ fontSize: 25, color: grey[600] }} />
+            </Fab>
+            <Fab size="medium">
+              <ThumbDownAltIcon sx={{ fontSize: 25, color: grey[600] }} />
+            </Fab>
           </Stack>
           <Stack alignItems="end">
-            <Button variant="contained" color="error" size="small">
-              Delete
-            </Button>
+            <Fab  color="error" size="medium">
+              <DeleteIcon sx={{ fontSize: 25}} />
+            </Fab>
           </Stack>
         </CardActions>
       </CardContent>
