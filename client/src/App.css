@@ -1,3 +1,79 @@
 .App {
   text-align: center;
 }
+
+header {
+  display: block;
+}
+
+.App-header {
+  color: #fff;
+  font-style: oblique;
+  background-color: #d612a5;
+  padding: 2rem 0;
+}
+
+.container-fluid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+
+  font-weight: 400;
+}
+
+.video-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 1rem;
+  width: 20rem;
+  height: fit-content;
+}
+
+.video-container>p {
+  margin: 0;
+}
+
+.delete-button {
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.vote-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0 0 1rem 0;
+}
+
+.vote-container>p {
+  padding: 0;
+  margin: 0;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 2em;
+}
+
+.button-container {
+  margin-top: 1em;
+}
+
+.btn {
+  margin: 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 250px;
+  margin: 1em;
+}

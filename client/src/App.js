@@ -1,11 +1,22 @@
 import "./App.css";
-
-function App() {
+import AddVideoButton from "./Buttons/AddVideoButton";
+import Header from "./Components/Header";
+import data from "./exampleresponse.json";
+import Video from "./Components/Video";
+import SearchBar from "./Buttons/SearchBar"
+console.log(data);
+function App({video}) {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <AddVideoButton/>
+      <SearchBar/>
+      <div className="container-fluid">
+        {data.map((video, key) => (  
+          <Video video={video} key={key} />
+        ))}
+
+      </div>
     </div>
   );
 }
