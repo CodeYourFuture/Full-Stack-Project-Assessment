@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,17 +7,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function AddVideoForm() {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+function AddVideoForm({
+  handleClickOpen,
+  handleClose,
+  handleInputChange,
+  handleSubmit,
+  open,
+}) {
   return (
     <div>
       <Button
@@ -37,22 +33,24 @@ function AddVideoForm() {
           <TextField
             autoFocus
             margin="dense"
-            id="title"
+            name="title"
             label="Title"
             type="text"
             fullWidth
             variant="outlined"
             size="small"
+            onChange={handleInputChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="link"
+            name="url"
             label="Link"
             type="url"
             fullWidth
             variant="outlined"
             size="small"
+            onChange={handleInputChange}
           />
         </DialogContent>
         <DialogActions>
@@ -66,9 +64,10 @@ function AddVideoForm() {
           </Button>
           <Button
             variant="contained"
-            onClick={handleClose}
             color="error"
             size="small"
+            type="submit"
+            onClick={handleSubmit}
           >
             Add
           </Button>
