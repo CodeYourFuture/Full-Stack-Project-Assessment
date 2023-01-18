@@ -16,7 +16,7 @@ function VideoContainer({ rating, title, url }) {
     <Card
       m={2}
       sx={{
-        maxWidth: 400,
+        maxWidth: 360,
         height: 480,
       }}
       justifyContent="end"
