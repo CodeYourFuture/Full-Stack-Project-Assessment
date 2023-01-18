@@ -18,9 +18,9 @@ function VideoContainer({ rating, title, url }) {
       sx={{
         maxWidth: 360,
         height: 480,
+        justifyContent: "end",
+        alignItems: "end",
       }}
-      justifyContent="end"
-      alignItems="end"
     >
       <CardMedia
         sx={{ height: 250, width: 400 }}
@@ -28,6 +28,7 @@ function VideoContainer({ rating, title, url }) {
         src={url}
         frameBorder="0"
         allowFullScreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         title={title}
       />
       <CardContent
@@ -57,7 +58,7 @@ function VideoContainer({ rating, title, url }) {
               />
             </Fab>
           </Stack>
-          <Stack alignItems="end">
+          <Stack sx={{ alignItems: "end" }}>
             <Fab color="error" size="medium">
               <DeleteIcon sx={{ fontSize: 25 }} aria-label="delete" />
             </Fab>
