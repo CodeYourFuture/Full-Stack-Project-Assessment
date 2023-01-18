@@ -45,22 +45,16 @@ function VideoContainer({ rating, title, url }) {
         <Typography variant="h7">{rating + " Votes"}</Typography>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Stack direction="row">
-            <Fab sx={{ mr: 2 }} size="medium">
-              <ThumbUpAltIcon
-                sx={{ fontSize: 25, color: grey[600] }}
-                aria-label="like"
-              />
+            <Fab sx={{ mr: 2 }} size="medium" aria-label="like">
+              <ThumbUpAltIcon sx={{ fontSize: 25, color: grey[600] }} />
             </Fab>
-            <Fab size="medium">
-              <ThumbDownAltIcon
-                sx={{ fontSize: 25, color: grey[600] }}
-                aria-label="dislike"
-              />
+            <Fab size="medium" aria-label="dislike">
+              <ThumbDownAltIcon sx={{ fontSize: 25, color: grey[600] }} />
             </Fab>
           </Stack>
           <Stack sx={{ alignItems: "end" }}>
-            <Fab color="error" size="medium">
-              <DeleteIcon sx={{ fontSize: 25 }} aria-label="delete" />
+            <Fab color="error" size="medium" aria-label="delete">
+              <DeleteIcon sx={{ fontSize: 25 }} />
             </Fab>
           </Stack>
         </CardActions>
