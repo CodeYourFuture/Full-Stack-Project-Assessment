@@ -2,50 +2,61 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import Stack from "@mui/material/Stack";
-import { blue, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 
-function VideoContainer() {
+function VideoContainer({ rating, title, url }) {
   return (
-    <Card sx={{ maxWidth: 560 }}>
+    <Card
+      m={2}
+      sx={{
+        maxWidth: 400,
+        height: 480,
+      }}
+      justifyContent="end"
+      alignItems="end"
+    >
       <CardMedia
-        sx={{ height: 315, width: 560 }}
+        sx={{ height: 250, width: 400 }}
         component="iframe"
-        src="https://www.youtube.com/embed/FUeyrEN14Rk"
-        frameborder="0"
-        allowfullscreen
-        title=""
+        src={url}
+        frameBorder="0"
+        allowFullScreen
+        title={title}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Mac & Cheese | Basics with Babish
+      <CardContent
+        sx={{
+          height: 230,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography gutterBottom variant="h6" component="div">
+          {title}
         </Typography>
-        <Stack
-          m={2}
-          direction="row"
-          spacing={{ xs: 1, sm: 2, md: 4 }}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Button>
-            <ThumbUpAltIcon sx={{ fontSize: 40, color: blue[500] }} />
-          </Button>
-          <Typography variant="h6" color="text.secondary">
-            Votes
-          </Typography>
-          <Button color="error">
-            <ThumbDownAltIcon sx={{ fontSize: 40, color: red[600] }} />
-          </Button>
-        </Stack>
-        <Stack mt={3} justifyContent="center" alignItems="center">
-          <Button variant="contained" color="error">
-            Delete
-          </Button>
-        </Stack>
+        <Typography variant="h7">{rating + " Votes"}</Typography>
+        <CardActions sx={{ justifyContent: "space-between" }}>
+          <Stack direction="row">
+            <IconButton>
+              <ThumbUpAltIcon sx={{ fontSize: 30, color: grey[600] }} />
+            </IconButton>
+            <IconButton>
+              <ThumbDownAltIcon sx={{ fontSize: 30, color: grey[600] }} />
+            </IconButton>
+          </Stack>
+          <Stack alignItems="end">
+            <Button variant="contained" color="error" size="small">
+              Delete
+            </Button>
+          </Stack>
+        </CardActions>
       </CardContent>
     </Card>
   );
