@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.my-App-header{
+  color: azure;
+  background-color: aqua;
+  padding: 2rem 0;
+}
