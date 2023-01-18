@@ -8,7 +8,7 @@ videos = videos.map((video) => {
 });
 function VideosGrid() {
   return (
-    <Grid justifyContent="center" container>
+    <Grid justifyContent="center" m={{ xs: 1, md: 2 }} container>
       {videos.map((video, i) => (
         <Grid m={1}>
           <VideoContainer
