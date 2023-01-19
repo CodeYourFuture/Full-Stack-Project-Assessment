@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const Insert = () => {
   const [title, setTitle] = useState("");
@@ -71,9 +73,13 @@ const Insert = () => {
 
   return (
     <div>
-      <button className="btn btn-primary m-3" onClick={handleForm}>
-        Add Video
-      </button>
+      <Button
+        variant="contained"
+        className="bg-primary m-3"
+        onClick={handleForm}
+      >
+        Add New Video
+      </Button>
       <div className={displayForm ? "" : "d-none"}>
         <div
           className={
@@ -84,34 +90,41 @@ const Insert = () => {
           <p className="message">{alert}</p>
         </div>
         <form onSubmit={handleSubmit}>
-          <input
+          <TextField
+            id="outlined-basic"
+            required
+            label="Video Title"
+            variant="outlined"
             type="text"
-            placeholder="Title"
-            className="m-2 form-control"
+            className="m-2 w-30 form-control"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
-          <input
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            required
             type="text"
-            placeholder="YouTube URL"
-            className="m-2 form-control"
+            label="YouTube URL"
+            className="m-2 w-30 form-control"
             value={url}
             onChange={(e) => {
               setUrl(e.target.value);
             }}
           />
-          <button className="btn btn-info m-2" type="submit">
+          <Button variant="contained" className="m-2 bg-info" type="submit">
             Add
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="contained"
             type="reset"
-            className="btn btn-warning m-2"
+            className="bg-warning m-2"
             onClick={handleForm}
           >
             Close
-          </button>
+          </Button>
         </form>
       </div>
     </div>
