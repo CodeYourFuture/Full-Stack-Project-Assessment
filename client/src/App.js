@@ -32,6 +32,36 @@ function App() {
     setOpen(false);
   };
 
+  const incrementRating = (e) => {
+    let videoId = parseInt(e.currentTarget.name);
+    const newVideos = videosData.map((vid) => {
+      if (vid.id === videoId) {
+        return {
+          ...vid,
+          rating: ++vid.rating,
+        };
+      } else {
+        return vid;
+      }
+    });
+    setVideosData(newVideos);
+  };
+
+  const decrementRating = (e) => {
+    let videoId = parseInt(e.currentTarget.name);
+    const newVideos = videosData.map((vid) => {
+      if (vid.id === videoId) {
+        return {
+          ...vid,
+          rating: --vid.rating,
+        };
+      } else {
+        return vid;
+      }
+    });
+    setVideosData(newVideos);
+  };
+
   const handleInputChange = (e) => {
     const updatedVideoData = {
       ...videoData,
@@ -44,7 +74,6 @@ function App() {
     e.preventDefault();
     setVideosData(formatVideosUrl([...videosData, videoData]));
     setOpen(false);
-    console.log({ videoData, videosData });
   };
 
   return (
@@ -58,7 +87,11 @@ function App() {
           handleSubmit={handleSubmit}
           open={open}
         />
-        <VideosGrid videosData={videosData} />
+        <VideosGrid
+          voteUp={incrementRating}
+          voteDown={decrementRating}
+          videosData={videosData}
+        />
       </Box>
     </div>
   );
