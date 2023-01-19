@@ -10,7 +10,7 @@ function App() {
   const [videosData, setVideosData] = useState(formatVideosUrl(videos));
   const [open, setOpen] = useState(false);
   const [videoData, setVideoData] = useState({
-    id: null,
+    id: 0,
     title: "",
     url: "",
     rating: 0,
