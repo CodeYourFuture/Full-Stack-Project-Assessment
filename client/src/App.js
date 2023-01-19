@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import dataVideos from "./exampleresponse.json";
 import VideoCard from "./VideoCard";
 
 function App() {
+  const [videos, setVideos] = useState(dataVideos);
+
+  function handleDelete(id){ 
+    let filterVideos = videos.filter(video => video.id !== id);
+     setVideos(filterVideos);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,9 +19,13 @@ function App() {
       <body>
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {dataVideos.map((video, key) => (
+            {videos.map((video, key) => (
               <div className="col">
-                <VideoCard video={video} key={key} />
+                <VideoCard
+                  video={video}
+                  key={key}
+                  handleDelete={() => handleDelete(video.id)}
+                />
               </div>
             ))}
           </div>

@@ -1,22 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import DeleteButton from "./buttons/DeleteButton";
 import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
 import "./videoCard.css";
 
-function VideoCard({ video }) {
+function VideoCard({ video, handleDelete }) {
   const url = video.url.replace("watch?v=", "embed/");
+
   return (
-    // <div className="video-container">
-    //   <p>{video.title}</p>
-    //   <div className="vote-container">
-    //     <LikeIcon />
-    //     <p>0 Vote</p>
-    //     <DislikeIcon />
-    //   </div>
-    //   <YouTubeEmbed video={video} />
-    //   <DeleteButton />
-    // </div>
     <div className="card">
       <iframe
         src={url}
@@ -39,7 +30,7 @@ function VideoCard({ video }) {
             <DislikeIcon />
           </div>
           <div className="d-flex justify-content-end">
-            <DeleteButton />
+            <DeleteButton onDelete={()=> handleDelete()} />
           </div>
         </div>
       </div>

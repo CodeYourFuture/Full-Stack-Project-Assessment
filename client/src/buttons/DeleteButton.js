@@ -1,7 +1,15 @@
 import React from "react";
 
-function DeleteButton() {
-  return <button class="p-2 mb-1 btn btn-sm btn-outline-danger">Delete</button>;
+function DeleteButton({ video, onDelete }) {
+  return (
+    <button
+      className="p-2 mb-1 btn btn-sm btn-outline-danger"
+      type="button"
+      onClick={() => onDelete()}
+    >
+      Delete
+    </button>
+  );
 }
 
 export default DeleteButton;
