@@ -11,7 +11,7 @@ import { grey } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Fab from "@mui/material/Fab";
 
-function VideoContainer({ rating, title, url }) {
+function VideoContainer({ rating, title, url, voteUp, voteDown, name }) {
   return (
     <Card
       m={2}
@@ -45,10 +45,21 @@ function VideoContainer({ rating, title, url }) {
         <Typography variant="h7">{rating + " Votes"}</Typography>
         <CardActions sx={{ justifyContent: "space-between" }}>
           <Stack direction="row">
-            <Fab sx={{ mr: 2 }} size="medium" aria-label="like">
+            <Fab
+              sx={{ mr: 2 }}
+              size="medium"
+              aria-label="like"
+              name={name}
+              onClick={voteUp}
+            >
               <ThumbUpAltIcon sx={{ fontSize: 25, color: grey[600] }} />
             </Fab>
-            <Fab size="medium" aria-label="dislike">
+            <Fab
+              size="medium"
+              aria-label="dislike"
+              name={name}
+              onClick={voteDown}
+            >
               <ThumbDownAltIcon sx={{ fontSize: 25, color: grey[600] }} />
             </Fab>
           </Stack>
