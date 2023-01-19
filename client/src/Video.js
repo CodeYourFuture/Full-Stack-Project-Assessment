@@ -29,6 +29,7 @@ function Video({ video }) {
           <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
         </div>
         <YouTubeEmbed video={video} />
+        <p className="m-2">Posted at {video.postedDate?video.postedDate:""}</p>
         <DeleteButton />
       
     </div>
