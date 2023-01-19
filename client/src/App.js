@@ -16,6 +16,8 @@ function App() {
     rating: 0,
   });
 
+  videosData.sort((a, b) => b.rating - a.rating);
+
   function formatVideosUrl(videos) {
     const formattedVideosData = videos.map((video) => {
       video.url = video.url.replace("watch?v=", "embed/");
