@@ -5,7 +5,6 @@ import dataVideos from "./exampleresponse.json";
 import Insert from "./insert";
 
 function App() {
-
   return (
     <div className="App">
       <header className="App-header">
@@ -14,11 +13,14 @@ function App() {
       <main>
         <div className="insert">
           <Insert />
-        </div><br></br>
+        </div>
+        <br></br>
         <div>
-          {dataVideos.map((video, key) => (
-            <Video video={video} key={key} />
-          ))}
+          {dataVideos
+            .sort((x, y) => (x.vote < y.vote ? 1 : -1))
+            .map((video, key) => (
+              <Video video={video} key={key} />
+            ))}
         </div>
       </main>
     </div>
