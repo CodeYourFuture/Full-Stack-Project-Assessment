@@ -1,6 +1,6 @@
 import React from "react";
 
-function DeleteButton({ video, onDelete }) {
+function DeleteButton({onDelete }) {
   return (
     <button
       className="p-2 mb-1 btn btn-sm btn-outline-danger"

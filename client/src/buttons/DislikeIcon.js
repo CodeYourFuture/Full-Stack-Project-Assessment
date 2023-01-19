@@ -1,8 +1,12 @@
 import React from "react";
 
-function DislikeIcon() {
+function DislikeIcon({onThumbsDown}) {
   return (
-    <button className="btn-sm btn btn-outline-primary">
+    <button
+      className="btn-sm btn btn-outline-primary"
+      type="button"
+      onClick={() => onThumbsDown()}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import dataVideos from "./exampleresponse.json";
 import VideoCard from "./VideoCard";
 
 function App() {
-  const [videos, setVideos] = useState(dataVideos);
+  const [videos, setVideos] = useState([]);
 
-  function handleDelete(id){ 
-    let filterVideos = videos.filter(video => video.id !== id);
-     setVideos(filterVideos);
+  useEffect(() => {
+    //initialise
+
+    setVideos(dataVideos);
+  }, []);
+
+  function handleDelete(id) {
+    let filterVideos = videos.filter((video) => video.id !== id);
+    setVideos(filterVideos);
   }
+  
 
   return (
     <div className="App">

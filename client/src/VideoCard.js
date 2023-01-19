@@ -4,8 +4,18 @@ import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
 import "./videoCard.css";
 
-function VideoCard({ video, handleDelete }) {
+function VideoCard({ video, handleDelete, onThumbsDown }) {
   const url = video.url.replace("watch?v=", "embed/");
+  const [voteCount, setVoteCount] = useState(video.rating);
+
+  function disLikeVote() {
+    let count = voteCount;
+    count = count - 1;
+    if (count < 0){
+        count = 0
+    }
+    setVoteCount(count);
+  }
 
   return (
     <div className="card">
@@ -25,12 +35,12 @@ function VideoCard({ video, handleDelete }) {
           <div className="d-flex justify-content-start align-items-center">
             <LikeIcon />
             &nbsp;
-            <div>{video.rating}</div>
+            <div>{voteCount}</div>
             &nbsp;
-            <DislikeIcon />
+            <DislikeIcon onThumbsDown={() => disLikeVote()} />
           </div>
           <div className="d-flex justify-content-end">
-            <DeleteButton onDelete={()=> handleDelete()} />
+            <DeleteButton onDelete={() => handleDelete()} />
           </div>
         </div>
       </div>
