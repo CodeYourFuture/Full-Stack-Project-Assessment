@@ -17,12 +17,13 @@ function Header() {
           disableGutters
           sx={{
             display: "flex",
-            alignItems: "end",
+            alignItems: "center",
+            mt: 2,
           }}
         >
           <SmartDisplayIcon
             sx={{
-              fontSize: { xs: 30, md: 40 },
+              fontSize: { xs: 30, md: 55 },
               display: { md: "flex" },
               mr: 2,
             }}
@@ -35,7 +36,8 @@ function Header() {
             sx={{
               mr: 2,
               display: { md: "flex" },
-              fontWeight: { xs: 500, md: 700 },
+              fontSize: { xs: 25, md: 30 },
+              fontWeight: 700,
               letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
