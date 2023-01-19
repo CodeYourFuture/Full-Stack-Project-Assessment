@@ -52,6 +52,7 @@ nav h3{
 }
 
 .card-container {
+  text-align: center;
   padding: 0.8em;
   margin: 0.8em;
   border-radius: 15px;
@@ -59,6 +60,10 @@ nav h3{
   box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
 }
 
+.film-title{
+ color:rgb(0, 0, 0);
+ text-shadow:1px 1px 2px #370c5f;
+}
 .card-bottom-nav{
   display: flex;
   justify-content: space-evenly;
@@ -85,6 +90,8 @@ nav h3{
   cursor: pointer;
 }
 
-video{
+.film{
+  width: 90%;
+  height:20em;
   border-radius: 15px;
 }

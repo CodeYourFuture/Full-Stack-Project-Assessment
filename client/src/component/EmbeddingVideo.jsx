@@ -6,7 +6,7 @@ function EmbeddingVideo(props){
     return(
         <div>
             <iframe 
-            width="560" height="315" 
+            className="film"
             src={filmSrc}
             title={props.title} 
             allow="accelerometer; fullscreen;autoplay" >
