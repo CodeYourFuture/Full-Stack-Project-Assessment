@@ -8,6 +8,15 @@ function VideoCard({ video, handleDelete, onThumbsDown }) {
   const url = video.url.replace("watch?v=", "embed/");
   const [voteCount, setVoteCount] = useState(video.rating);
 
+   function likeVote() {
+     let count = voteCount;
+     count = count + 1;
+     if (count < 0) {
+       count = 0;
+     }
+     setVoteCount(count);
+   }
+
   function disLikeVote() {
     let count = voteCount;
     count = count - 1;
@@ -33,7 +42,7 @@ function VideoCard({ video, handleDelete, onThumbsDown }) {
         </p> */}
         <div className="d-flex justify-content-between flex-row w-100">
           <div className="d-flex justify-content-start align-items-center">
-            <LikeIcon />
+            <LikeIcon onThumbsUp={() => likeVote()} />
             &nbsp;
             <div>{voteCount}</div>
             &nbsp;
