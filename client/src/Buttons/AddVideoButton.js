@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddVideos from "../Components/AddVideos";
 
-function AddVideoButton({videos}) {
+function AddVideoButton({ videos, setVideos }) {
   const [toggle, setToggle] = useState(true);
   const handleClick = () => {
     setToggle(!toggle);
@@ -11,7 +11,7 @@ function AddVideoButton({videos}) {
       <button onClick={handleClick} class="btn ">
         Add video
       </button>
-      {toggle ? <AddVideos /> : <></>}
+      {toggle ? <AddVideos videos={videos} setVideos={setVideos} /> : <></>}
     </div>
   );
 }

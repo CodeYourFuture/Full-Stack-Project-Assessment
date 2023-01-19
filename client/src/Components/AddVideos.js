@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import VideoList from "./VideoList";
 
 const LOCAL_STORAGE_KEY = "videoApp.videos";
 console.log(LOCAL_STORAGE_KEY);
 
-function AddVideos({ video }) {
-  const [videos, setVideos] = useState([]);
-
+function AddVideos({ videos, setVideos }) {
   const VideoNameRef = useRef();
   const VideoUrlRef = useRef();
 
@@ -24,15 +25,12 @@ function AddVideos({ video }) {
     console.log(title);
     if (title === "") return;
     setVideos((prevVideos) => {
-      debugger;
-      console.log(prevVideos);
+      // console.log(prevVideos);
+      const id = uuidv4()
+      console.log(id);
       return [
         ...prevVideos,
-        {
-          name: title,
-          id: Math.floor(Math.random() * 5),
-          src: video.url,
-        },
+        { id: 5, title: title, src: VideoUrlRef.current.value },
       ];
     });
     if (title === "" || title === null) {
@@ -43,8 +41,8 @@ function AddVideos({ video }) {
   }
   function handleUrl(e) {
     const videoUrl = VideoUrlRef.current.value;
-    debugger;
-    console.log(videoUrl);
+
+    console.log(videoUrl + "hhey world");
 
     function validateYouTubeUrl(videoUrl) {
       if (videoUrl) {
@@ -70,6 +68,7 @@ function AddVideos({ video }) {
 
   return (
     <div>
+      {/* <VideoList/> */}
       <form>
         <label>
           Title
@@ -113,8 +112,9 @@ function AddVideos({ video }) {
         className="btn btn-outline-success"
         // onClick={handleAddVideo}
         onClick={() => {
-          handleAddVideo();
+          console.log("hello");
           handleUrl();
+          handleAddVideo();
         }}
         type="submit"
         form="form1"
