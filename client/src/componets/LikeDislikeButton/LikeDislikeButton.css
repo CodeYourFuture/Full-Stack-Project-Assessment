@@ -1,0 +1,18 @@
+.like-dislike {
+    color: #75d9eb;
+    display: flex;
+    flex-flow: row wrap;
+    /* width: 10%; */
+    justify-content: space-evenly;
+    margin-left:10px;
+    margin-right: 10px;
+}
+.icon {
+    font-size: 35px;
+    cursor: pointer;
+    background-color:brown;
+}
+h4{
+    background-color: black;
+   
+}
