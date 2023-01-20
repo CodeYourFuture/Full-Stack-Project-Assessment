@@ -1,35 +1,49 @@
+import { useState } from "react";
 import "./App.css";
 import Video from "./Components/Video";
+import Input from "./Components/Input";
+import data from "./exampleresponse.json";
 
 function App() {
+  const [copyData, setCopyData] = useState(data);
+  const [reqBody, setReqBody] = useState({
+    title: "",
+    url: "",
+  });
+
+  function handleSubmit() {
+    let result = [
+      ...copyData,
+      {
+        id: 0,
+        title: reqBody.title,
+        url: reqBody.url,
+        rating: 2,
+      },
+    ];
+    setCopyData(result);
+  }
+
+  function handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    setReqBody({
+      ...reqBody,
+      [name]: value,
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-
-        <button>Add Video</button>
-        <div>
-          <label for="search">Search</label>
-          <input type="search" id="search" />
-        </div>
-
-        <div>
-          <label for="title">Title</label>
-          <input type="text" />
-
-          <label for="url">URL</label>
-          <input type="text" />
-
-          <button>Cancel</button>
-          <button>Add</button>
-        </div>
-
-       <Video></Video>
-
-
-      </header>
+      <h1>Video Recommendation</h1>
+      <Input
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        reqBody={reqBody}
+      />
+      <Video copyData={copyData} setCopyData={setCopyData}></Video>
     </div>
   );
 }
-
 export default App;
+

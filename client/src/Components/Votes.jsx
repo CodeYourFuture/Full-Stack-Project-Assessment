@@ -10,18 +10,16 @@ function Votes() {
   }
 
   function handleThumbsDown() {
-    setVote((vote) => vote === 0? vote: vote - 1)
+    setVote((vote) => (vote === 0 ? vote : vote - 1));
   }
 
   return (
     <div>
-      <button onClick={handleThumbsUp}>
-        <FaRegThumbsUp />
-      </button>
+      <FaRegThumbsUp onClick={handleThumbsUp} />
+
       <p>{`${vote} votes`} votes</p>
-      <button onClick={handleThumbsDown}>
-        <FaThumbsDown />
-      </button>
+
+      <FaThumbsDown onClick={handleThumbsDown} />
     </div>
   );
 }

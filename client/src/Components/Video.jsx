@@ -1,29 +1,24 @@
 import React from "react";
 import { useState } from "react";
-import data from "../exampleresponse.json";
 import Votes from "./Votes";
 
-function Video() {
-  const [copyData, setCopyData] = useState(data);
-
+function Video(props) {
   function handleDelete(e) {
-    let result = copyData.filter((el, index) => {
+    let result = props.copyData.filter((el, index) => {
       return index !== +e.target.id;
     });
-    setCopyData(result);
+    props.setCopyData(result);
   }
-
-
 
   return (
     <div>
-      {copyData.map((el, key) => {
+      {props.copyData.map((el, key) => {
         let index = el.url.indexOf("=");
         let id = el.url.slice(index + 1);
         return (
-          <div>
+          <div key={key}>
             <p>{el.title}</p>
-           <Votes/>
+            <Votes />
             <iframe
               width="560"
               height="315"

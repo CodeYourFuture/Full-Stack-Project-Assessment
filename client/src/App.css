@@ -1,3 +1,12 @@
-.App {
-  text-align: center;
+body{
+  width: 100vw;
+}
+.search{
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+}
+
+.hidden{
+  display: none;
 }
