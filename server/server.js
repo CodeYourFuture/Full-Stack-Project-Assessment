@@ -1,134 +1,98 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 5000;
 app.use(express.json()); 
-const dataVideos = require("./example.json");
+const port = process.env.PORT || 5000;
 
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const cors = require("cors");
 app.use(cors());
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
-let videos = [{
-    "id": 523523,
-    "title": "Never Gonna Give You Up",
-    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "rating": 23
-  },
-  {
-    "id": 523427,
-    "title": "The Coding Train",
-    "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    "rating": 230
-  },
-  {
-    "id": 82653,
-    "title": "Mac & Cheese | Basics with Babish",
-    "url": "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    "rating": 2111
-  },
-  {
-    "id": 858566,
-    "title": "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    "url": "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    "rating": 11
-  },
-  {
-    "id": 453538,
-    "title": "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    "url": "https://www.youtube.com/watch?v=4As0e4de-rI",
-    "rating": 3211
-  },
-  {
-    "id": 283634,
-    "title": "Learn Unity - Beginner's Game Development Course",
-    "url": "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    "rating": 211
-  },
-  {
-    "id": 562824,
-    "title": "Cracking Enigma in 2021 - Computerphile",
-    "url": "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    "rating": 111
-  },
-  {
-    "id": 442452,
-    "title": "Coding Adventure: Chess AI",
-    "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    "rating": 671
-  },
-  {
-    "id": 536363,
-    "title": "Coding Adventure: Ant and Slime Simulations",
-    "url": "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    "rating": 76
-  },
-  {
-    "id": 323445,
-    "title": "Why the Tour de France is so brutal",
-    "url": "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    "rating": 73
-  }
-]
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    user: 'nishka_kisten',
+    host: 'dpg-cf5g8a1gp3jqkqlpgrm0-a.oregon-postgres.render.com',
+    database: 'cyf_assessment',
+    password: 'z78MncETM7niotplQvTT7vJM1bjJOVUD',
+    port: 5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos).json;
+  // res.send(videos).json;
+  pool.query('SELECT * FROM video')
+  .then((result) => res.send(result.rows).json)
+  .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+  });
 });
 
 // POST "/"
 app.post('/', (req, res) => {
- let { title, url } = req.body;
- let newVideo = {
-    id: videos.length,
-    title: title,
-    url: url,
-  };
-
-if(!newVideo.id || !newVideo.url){
-  res.status(400).send({
-    "result": "failure",
-    "message": "Video could not be saved"
-  });
-}else {
-  videos.push(newVideo);
-     res.sendStatus(200);
-     
-}
-})
+  let title = req.body.title;
+  let url = req.body.url;
+  let rating = req.body.rating
+pool
+.query("INSERT INTO video (title, url, rating) VALUES ($1, $2, $3);", [title, url, rating])
+.then((result) => {
+  if (result.rows.length > 0) {
+    return res
+      .status(400)
+      .send("Video exists!");
+  } else {
+    const query =
+    "INSERT INTO video (title, url, rating) VALUES ($1, $2, $3)";
+    pool
+      .query(query,  [title, url, rating])
+      .then(() => res.send("Video created!"))
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json(error);
+      });
+  }
+});
+});
 
 //`GET` "/{id}"
 app.get("/:id", (req, res) =>{
-let id = parseInt(req.params.id);
-console.log(id);
-let findVideo = videos.find(ID => ID.id === id);
-if(!findVideo){
-  res.send("Baa").status(404)
-}else{
-  res.send(findVideo);
-}
-})
+let videoId = req.params.id;
+pool.query('SELECT * FROM video WHERE id=$1', [videoId])
+.then((result) =>  
+res.json(result.rows))
+.catch((error) => {
+    console.error(error);
+    res.status(500).json(error);
+  });
+});
+
 
 // `DELETE` "/{id}"
 app.delete('/:id', (req, res)=> {
-let id = parseInt(req.params.id);
-let toDel = videos.find(opt => opt.id === id);
-let notDel = videos.filter(opt => opt.id !== id);
-
-if(toDel === undefined){
-  res.send(400).send({
-    "result": "failure",
-    "message": "Video could not be deleted"
-  })
-}else {
-  res.send({}).status(200);
-}
-videos = notDel;
+let vidId = req.params.id;
+// let toDel = videos.find(opt => opt.id === id);
+// let notDel = videos.filter(opt => opt.id !== id);
+pool
+.query("DELETE FROM video WHERE id=$1", [vidId])
+.then(() => res.send(`Video ${vidId} deleted!`))
+.catch((error) => {
+  console.error(error);
+  res.status(500).json(error);
+});
+// if(toDel === undefined){
+//   res.send(400).send({
+//     "result": "failure",
+//     "message": "Video could not be deleted"
+//   })
+// }else {
+//   res.send({}).status(200);
+// }
+// videos = notDel;
 })
 
-
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
 
