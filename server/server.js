@@ -5,7 +5,9 @@ const fs = require("fs");
 
 const filePath = "../client/src/exampleresponse.json";
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 //app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -17,7 +19,7 @@ let videos = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 app.post("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   let maxID = Math.max(...videos.map((c) => c.id));
-
+  let dateTime = new Date();
   videos.push({
     id: ++maxID,
     title: req.body.videoTitle,
@@ -25,6 +27,7 @@ app.post("/", (req, res) => {
     rating: 34,
     isVoted: false,
     vote: 0,
+    postedDate: dateTime.toLocaleString(),
   });
   save();
   res.json({ message: "Video saved successfully" });

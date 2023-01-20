@@ -22,7 +22,8 @@
     "build": "npm i && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon ../server/server.js"
+    "dev": "nodemon ../server/server.js",
+    "host": "node ../server/server.js && npm start"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
