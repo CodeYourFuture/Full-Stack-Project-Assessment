@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="headerApp">
         <h1>Video Recommendation</h1>
       </header>
       <button
@@ -45,7 +45,7 @@ function App() {
           {allVideos
             .sort((a, b) => b.rating - a.rating)
             .map((video) => (
-              <div className="col-sm-4" key={video.id}>
+              <div className="col-sm-6" key={video.id}>
                 <RenderVideo video={video} handleDeletedVideo={deleteViedeos} />
               </div>
             ))}

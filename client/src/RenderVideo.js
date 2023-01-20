@@ -4,7 +4,7 @@ import thumbDown from "../src/images/thumbDown.png";
 
 
 const RenderVideo = ({ video, handleDeletedVideo }) => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(video.rating);
 
     //Increasing Like Button
     const increasingCount = () => {
@@ -17,37 +17,38 @@ const decreasingCount = () => {
 };
 
 return (
-  <div>
+  <section className="video">
     <div>
-      {video.title}
-      <iframe
-        width="500"
-        height="300"
-        src={`http://www.youtube.com/embed/${video.url.split("v=")[1]}`}
-        title="Video Player"
-        frameBorder="1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-      <button onClick={() => handleDeletedVideo(video.id)}>Delete</button>
-      <img
-        src={thumbUp}
-        onClick={increasingCount}
-        alt=""
-        width="50px"
-        height="40px"
-      />
-      {count} votes
-
-      <img
-        src={thumbDown}
-        onClick={decreasingCount}
-        alt=""
-        width="50px"
-        height="40px"
-      />
+      <div className="title">
+        <h3>{video.title}</h3>
+        <iframe
+          width="500"
+          height="300"
+          src={`http://www.youtube.com/embed/${video.url.split("v=")[1]}`}
+          title="Video Player"
+          frameBorder="1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+        <button onClick={() => handleDeletedVideo(video.id)}>Delete</button>
+        <img
+          src={thumbUp}
+          onClick={increasingCount}
+          alt=""
+          width="50px"
+          height="40px"
+        />
+        {count} votes
+        <img
+          src={thumbDown}
+          onClick={decreasingCount}
+          alt=""
+          width="50px"
+          height="40px"
+        />
+      </div>
     </div>
-  </div>
+  </section>
 );
 };
 
