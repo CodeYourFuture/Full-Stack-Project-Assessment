@@ -9,6 +9,11 @@ import "./App.css";
 function App() {
   const [videosData, setVideosData] = useState(formatVideosUrl(videos));
   const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState({
+    isRequiredTitleError: false,
+    isRequiredUrlError: false,
+    isValidUrlError: false,
+  });
   const [videoData, setVideoData] = useState({
     id: 0,
     title: "",
@@ -25,9 +30,21 @@ function App() {
     });
     return formattedVideosData;
   }
+  function isValidYouTubeUrl(url) {
+    if (url !== undefined || url !== "") {
+      const regExp =
+        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
+      return url.match(regExp) ? url : false;
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
+    setErrors({
+      isRequiredTitleError: false,
+      isRequiredUrlError: false,
+      isValidUrlError: false,
+    });
   };
 
   const handleClose = () => {
@@ -65,6 +82,11 @@ function App() {
   };
 
   const handleInputChange = (e) => {
+    setErrors({
+      isRequiredTitleError: false,
+      isRequiredUrlError: false,
+      isValidUrlError: false,
+    });
     const updatedVideoData = {
       ...videoData,
       [e.target.name]: e.target.value,
@@ -74,8 +96,48 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setVideosData(formatVideosUrl([...videosData, videoData]));
-    setOpen(false);
+    if (videoData.title) {
+      if (videoData.url) {
+        if (isValidYouTubeUrl(videoData.url)) {
+          setVideosData(formatVideosUrl([...videosData, videoData]));
+          setOpen(false);
+          setErrors({
+            isRequiredTitleError: false,
+            isRequiredUrlError: false,
+            isValidUrlError: false,
+          });
+        } else {
+          setErrors({ ...errors, isValidUrlError: true });
+        }
+      }
+      if (!videoData.url) {
+        setErrors({ ...errors, isRequiredUrlError: true });
+      }
+    }
+
+    if (!videoData.title) {
+      if (!videoData.url) {
+        setErrors({
+          ...errors,
+          isRequiredTitleError: true,
+          isRequiredUrlError: true,
+        });
+      }
+      if (videoData.url) {
+        if (!isValidYouTubeUrl(videoData.url)) {
+          setErrors({
+            ...errors,
+            isRequiredTitleError: true,
+            isValidUrlError: true,
+          });
+        } else {
+          setErrors({
+            ...errors,
+            isRequiredTitleError: true,
+          });
+        }
+      }
+    }
   };
 
   return (
@@ -88,6 +150,7 @@ function App() {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           open={open}
+          errors={errors}
         />
         <VideosGrid
           voteUp={incrementRating}
