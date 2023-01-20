@@ -1,9 +1,13 @@
 import React from "react";
+// import dataVideos from "./exampleresponse.json";
 
-function DeleteButton() {
+
+function DeleteB(props) {
+ 
+
   return (
-    <button className="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
+    <button onClick={props.removeVideo} className="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
   );
 }
 
-export default DeleteButton;
+export default DeleteB;

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-function LikeIcon({ video }) {
-  const [like, setLike] = useState()
+function LikeIcon({ handleIncrement }) {
+  // const [like, setLike] = useState()
 
-  const increment = () => {
-    setLike(like + 1)
-  }
+  // const increment = () => {
+  //   setLike(like + 1)
+  // }
+
   
   return (
-    <button onClick={increment}>
+    <button onClick={handleIncrement}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

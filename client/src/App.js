@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,27 +17,34 @@ function App() {
   const [addVideo, setAddVideo] = useState(false);
   //
   const [videoData, setVideoData] = useState(dataVideos);
+  const [videosFilter, setVideosFilter] = useState("");
   //
 
   const addVideoHandler = () => {
-    setAddVideo((prevShowParagraph) => !prevShowParagraph);
+    setAddVideo((prevVideo) => !prevVideo);
   };
 
+  useEffect(() => {
+    setVideoData(
+      dataVideos.filter((video) =>
+        video.title.toLowerCase().includes(videosFilter.toLowerCase())
+      )
+    );
+  }, [videosFilter]);
+
   return (
-    <div className="App">
-      <header className="p-3 mb-2 bg-secondary text-white">
+    <div className="App bg-light">
+      <header className="shadow-sm p-3 mb-5 bg-white rounded ">
         <h1>Video Recommendation</h1>
       </header>
       <Container className=" mt-3">
         <Row>
           <Col md>
             <AddVideo onClick={addVideoHandler}>Add Video</AddVideo>
-            {addVideo && (
-              <AddVideoForm setVideoData={setVideoData} />
-            )}
+            {addVideo && <AddVideoForm setVideoData={setVideoData} />}
           </Col>
           <Col md>
-            <Search />
+            <Search handler={(e) => setVideosFilter(e.target.value)} />
           </Col>
         </Row>
       </Container>

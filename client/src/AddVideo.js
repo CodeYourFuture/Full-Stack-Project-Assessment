@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 const AddVideo = (props) => {
   return (
     <Button
-      variant="primary"
+      variant="secondary"
       type={props.type || "button"}
       // className={`${classes.button} ${props.className}`}
       onClick={props.onClick}

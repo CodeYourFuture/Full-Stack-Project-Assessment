@@ -21,8 +21,8 @@ const AddVideoForm = ({ setVideoData }) => {
       timeSent: new Date().toLocaleDateString(),
     };
 
-    newVideoData.title && newVideoData.url
-      ? setVideoData(videos => videos.concat(newVideoData))
+    newVideoData.title && newVideoData.url.includes("www.youtube.com/watch?v=")
+      ? setVideoData((videos) => videos.concat(newVideoData))
       : alert("Please fill all the sections");
   };
   return (
@@ -35,7 +35,7 @@ const AddVideoForm = ({ setVideoData }) => {
                 <Form.Label>Title</Form.Label>
                 <Form.Control
                   onChange={(e) => setTitle(e.target.value)}
-                  className="input"
+                  className="input shadow-sm bg-white rounded"
                   name="title"
                   type="text"
                   required
@@ -48,7 +48,7 @@ const AddVideoForm = ({ setVideoData }) => {
                 <Form.Label>URL</Form.Label>
                 <Form.Control
                   onChange={(e) => setUrl(e.target.value)}
-                  className="input"
+                  className="input shadow-sm bg-white rounded"
                   name="url"
                   type="text"
                   required
@@ -60,7 +60,7 @@ const AddVideoForm = ({ setVideoData }) => {
           <Button
             onClick={handleVideoAdder}
             className=" mt-3 mb-3"
-            variant="primary"
+            variant="secondary"
             type="submit"
           >
             ADD
