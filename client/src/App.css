@@ -1,6 +1,9 @@
+
 .App {
+  width:fit-content;
   background-color: #e3dcc2;
   margin-top: 0.6em;
+
 }
 
 nav {
@@ -31,7 +34,7 @@ nav h3 {
 .btn {
   padding: 0.5em;
   margin: 0.3em;
-  border: 1px solid #090979;
+  border: 1.7px solid #090979;
   border-radius: 5px;
 }
 
@@ -92,4 +95,34 @@ nav h3 {
   width: 90%;
   height: 20em;
   border-radius: 15px;
+}
+/* ============
+  Medium Screen
+============== */
+@media (max-width:1350px){
+
+  nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content:flex-start;
+  }
+  .card-container {
+  width: auto;
+  max-width:80% ;
+  text-align: center;
+  padding: 0.8em;
+  margin: 0.8em;
+  border-radius: 15px;
+  border-style: groove;
+  box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
+}
+
+}
+
+/* ============
+  small Screen
+============== */
+@media (max-width:685px){
+
 }
