@@ -1,5 +1,6 @@
 
 .App {
+  width:fit-content;
   background-color: #e3dcc2;
   margin-top: 0.6em;
 
@@ -95,43 +96,5 @@ nav h3 {
   height: 20em;
   border-radius: 15px;
 }
-/* ======================
-  Small to Medium Screen
-========================= */
-@media screen and (min-width: 500px) and (max-width:1350px){
 
-  nav{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content:flex-start;
-  }
-  .card-container {
-  width: auto;
-  max-width:80% ;
-  text-align: center;
-  padding: 0.8em;
-  margin: 0.8em;
-  border-radius: 15px;
-  border-style: groove;
-  box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
-}
-
-}
-
-/* 500px */
-/* ======================
-  Small Screen
-========================= */
-@media screen and (max-width: 500px){
-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-content: flex-start;
-}
-
-  .App{
-    width: fit-content;
-  }
 }
