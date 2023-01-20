@@ -1,5 +1,6 @@
 import "./App.css";
 import { FaRegThumbsUp, FaThumbsDown } from "react-icons/fa";
+import data from "./exampleresponse.json";
 
 function App() {
   return (
@@ -30,15 +31,21 @@ function App() {
             <FaThumbsDown></FaThumbsDown>
           </div>
 
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/{VIDEO_ID_GOES_HERE}"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          {data.map((el) => {
+            let index = el.url.indexOf("=");
+            let id = el.url.slice(index + 1);
+            return (
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${id}`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            );
+          })}
         </div>
       </header>
     </div>
