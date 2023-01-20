@@ -64,3 +64,8 @@
   margin: auto;
   border-radius: 10px;
 }
+
+.card .video{
+  margin: auto;
+  margin-top:20px;
+}

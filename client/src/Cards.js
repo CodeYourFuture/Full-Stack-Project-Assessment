@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Videos from "./exampleresponse.json";
+import ReactPlayer from "react-player"
 
 function Cards() {
   const [videos, setVideos] = useState(Videos);
@@ -13,6 +14,9 @@ function Cards() {
       <div className="Cards">
         {videos.map((video, index) => (
           <div index={index} key={video.id} title={video.title}  url={video.url} id={video.id}className="card">
+           <div className='video'>
+              <ReactPlayer className="video" width={400} height={300}  url={video.url}/>
+            </div>  
             <div className="card-body">
               <h4>{video.title}</h4>
               <h4>{video.rating}</h4>
