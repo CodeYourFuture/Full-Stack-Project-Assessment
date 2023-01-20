@@ -53,5 +53,14 @@
 
 .card .btn{
   width:300px;
+  background-color: red;
+  border-color: red;
   margin: auto;
+  margin-bottom:10px;
+}
+
+.card .delete{
+  width:100px;
+  margin: auto;
+  border-radius: 10px;
 }
