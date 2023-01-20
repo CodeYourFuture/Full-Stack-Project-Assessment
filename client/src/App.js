@@ -19,6 +19,7 @@ function App() {
     title: "",
     url: "",
     rating: 0,
+    postedAt: 0,
   });
 
   videosData.sort((a, b) => b.rating - a.rating);
@@ -96,9 +97,15 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let date = new Date();
+
     if (videoData.title) {
       if (videoData.url) {
         if (isValidYouTubeUrl(videoData.url)) {
+          setVideoData({
+            ...videoData,
+            postedAt: date,
+          });
           setVideosData(formatVideosUrl([...videosData, videoData]));
           setOpen(false);
           setErrors({
@@ -138,6 +145,8 @@ function App() {
         }
       }
     }
+
+    console.log(videoData);
   };
 
   return (
