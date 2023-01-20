@@ -36,19 +36,23 @@ function App() {
       generateRandomNum();
       (videosList.includes(randomNum))?generateRandomNum():newEntryId=randomNum;
       const newRate = Math.floor(Math.random() * 9000);
-      
+      let date = new Date().toJSON();
+
       let newList={
         id: newEntryId,
         title: formData.title,
         url: formData.url,
-        rating:newRate
+        rating:newRate,
+        submitionDate:date
       };
+
+      console.log(newList);
       setVideosList([...videosList,newList]);
     }else{
       alert(`Make sure you have a title and a valid Youtube link like: ("https://www.youtube.com/watch?v= ...")`);
     } 
   }
-
+  console.log(videosList);
 
   return (
     <div className="App">

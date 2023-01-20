@@ -7,7 +7,7 @@ function VideoCard(props){
 
     return(
         <section className="cards-grid">
-            {
+            { 
             props.videosList.sort((a,b) => b.rating - a.rating).map(film=>{
             return(  <div key={film.id} className="card-container">
                         <EmbeddingVideo  url={film.url}  title={film.title}/>
