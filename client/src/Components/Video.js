@@ -4,7 +4,7 @@ import DislikeButton from "../Buttons/DislikeButton";
 import DeleteButton from "../Buttons/DeleteButton";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-function Video({ video }) {
+function Video({ video, handleDelete}) {
 
   const [rating, setRating] = useState(video.rating);
   
@@ -23,7 +23,10 @@ function Video({ video }) {
         <DislikeButton decrementLikeClick={decrementLikeClick} />
       </div>
       <YoutubeEmbed video={video} />
-      <DeleteButton />
+      {/* <DeleteButton /> */}
+      <button className="btn btn-danger" onClick={()=> {handleDelete(video.id)}}>
+        Delete
+      </button>
     </div>
   );
 }

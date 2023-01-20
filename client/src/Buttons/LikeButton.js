@@ -4,7 +4,7 @@ function LikeButton({ incrementLikeClick }) {
   return (
     <div>
       <button onClick={() => incrementLikeClick()}>
-        Like <i class="fa fa-thumbs-up"></i>
+        Like <i className="fa fa-thumbs-up"></i>
       </button>
     </div>
   );

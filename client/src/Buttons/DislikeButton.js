@@ -4,7 +4,7 @@ function DislikeButton({ decrementLikeClick }) {
   return (
     <div>
       <button onClick={() => decrementLikeClick()} aria-label="dislike-button">
-        Dislike <i class="fa fa-thumbs-down"></i>
+        Dislike <i className="fa fa-thumbs-down"></i>
       </button>
     </div>
   );
