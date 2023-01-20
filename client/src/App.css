@@ -1,3 +1,35 @@
 .App {
   text-align: center;
 }
+
+header {
+  display: block;
+}
+
+.App-header {
+  color: rgba(222, 221, 135, 0.981);
+  font-style: italic;
+  background-color: darkblue;
+  padding: 3rem 0;
+}
+
+body {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+/*.video-container {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  width: 20rem;
+  height: fit-content;
+}
+
+.video-container p {
+ margin: 0;
+}*/
