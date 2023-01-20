@@ -10,14 +10,11 @@ import Footer from "./Components/Footer";
 function App() {
   const [videos, setVideos] = useState(data);
   function handleDelete(id) {
-    console.log("debug", id);
     let filterVideos = videos.filter((video) => video.id !== id);
-    console.log(filterVideos);
     setVideos(filterVideos);
   }
   function addNewVideo(newVideo) {
     const allVideo = videos.concat(newVideo);
-    console.log(newVideo);
     setVideos(allVideo);
   }
   return (

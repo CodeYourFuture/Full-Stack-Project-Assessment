@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import LikeButton from "../Buttons/LikeButton";
 import DislikeButton from "../Buttons/DislikeButton";
-import DeleteButton from "../Buttons/DeleteButton";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-function Video({ video, handleDelete}) {
-
+function Video({ video, handleDelete }) {
   const [rating, setRating] = useState(video.rating);
-  
+
   const incrementLikeClick = () => {
     setRating(rating + 1);
   };
@@ -23,8 +21,12 @@ function Video({ video, handleDelete}) {
         <DislikeButton decrementLikeClick={decrementLikeClick} />
       </div>
       <YoutubeEmbed video={video} />
-      {/* <DeleteButton /> */}
-      <button className="btn btn-danger" onClick={()=> {handleDelete(video.id)}}>
+      <button
+        className="btn btn-danger"
+        onClick={() => {
+          handleDelete(video.id);
+        }}
+      >
         Delete
       </button>
     </div>
