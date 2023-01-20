@@ -8,7 +8,7 @@ import Data from "./exampleresponse.json";
 function App() {
   const [videosList, setVideosList] = useState(Data);
   const [deletedVideoId, setDeletedVideoId] = useState(null);
-  const [newList, setNewList] = useState({id:"",title:"",url:""});
+  // const [newList, setNewList] = useState({});
   const [formData, setFormData] = useState({ title: "", url: "" });
 
 
@@ -26,7 +26,6 @@ function App() {
       }
     })
   }
-  console.log(formData);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -37,13 +36,15 @@ function App() {
     generateRandomNum();
     (videosList.includes(randomNum))?generateRandomNum():newEntryId=randomNum;
     
-    setNewList({
+    let newList={
       id: newEntryId,
       title: formData.title,
-      url: formData.url
-    });
+      url: formData.url,
+      rating:20
+    };
+    setVideosList([...videosList,newList]);
   }
-  console.log(newList);
+
 
   return (
     <div className="App">
