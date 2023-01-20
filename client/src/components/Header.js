@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
+import { grey } from "@mui/material/colors";
 
 function Header() {
   return (
@@ -17,7 +18,7 @@ function Header() {
           disableGutters
           sx={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "first baseline",
             mt: 2,
           }}
         >
@@ -25,25 +26,40 @@ function Header() {
             sx={{
               fontSize: { xs: 30, md: 55 },
               display: { md: "flex" },
-              mr: 2,
+              alignSelf: "center",
+              mr: { xs: 1, md: 2 },
             }}
           />
           <Typography
             variant="h5"
             noWrap
-            component="a"
             href="/"
             sx={{
               mr: 2,
               display: { md: "flex" },
-              fontSize: { xs: 25, md: 30 },
+              alignSelf: "center",
+              fontSize: { xs: 15, md: 30 },
               fontWeight: 700,
               letterSpacing: ".2rem",
               color: "inherit",
-              textDecoration: "none",
             }}
           >
             Videorary
+          </Typography>
+          <Typography
+            variant="body1"
+            wrap="true"
+            sx={{
+              pt: { xs: 0.5, md: 1 },
+              display: { md: "flex" },
+              alignSelf: "center",
+              fontSize: { xs: 10, md: 18 },
+              fontWeight: 500,
+              letterSpacing: ".2rem",
+              color: grey[300],
+            }}
+          >
+            Your Favourite Videos Library
           </Typography>
         </Toolbar>
       </Container>
