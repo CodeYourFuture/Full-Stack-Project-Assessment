@@ -19,8 +19,13 @@ function Cards() {
             </div>  
             <div className="card-body">
               <h4>{video.title}</h4>
-              <h4>{video.rating}</h4>
-              {/* <h5>{video.id}</h5> */}
+              <p>Votes</p>
+              <div className="votes">
+                <button className='up'>Upvote</button>
+                {/* <p>Votes</p> */}
+              <h4 className='videorating'>{video.rating}</h4>
+              <button className='down'>Downvote</button>
+              </div>
               <a
                 href={video.url}
                 rel="noopener noreferrer"
