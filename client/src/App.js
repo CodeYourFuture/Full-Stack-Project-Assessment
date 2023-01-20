@@ -45,7 +45,7 @@ function App() {
       };
       setVideosList([...videosList,newList]);
     }else{
-      alert(`Make sure you have a title and a valid Youtube link like: ("www.youtube.com/watch?v=...")`);
+      alert(`Make sure you have a title and a valid Youtube link like: ("https://www.youtube.com/watch?v= ...")`);
     } 
   }
 
