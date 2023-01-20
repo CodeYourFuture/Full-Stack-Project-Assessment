@@ -1,56 +1,87 @@
 .App {
   text-align: center;
+  background-color: #e1ebee;
+  font-style: oblique;
 }
 
 header {
   display: block;
 }
 
-.App-header{
+.App-header {
   color: #fff;
   font-style: oblique;
   background-color: #254e70;
   padding: 2rem 0;
 }
-
-body{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  margin: 0;
+.video-List {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+  margin: 30px 50px;
   padding: 0;
   font-size: 1rem;
   font-weight: 400;
 }
+body {
+  background-color: #e1ebee;
+}
+.video-container {
+  padding: 30px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 5px 10px 8px #888888;
+  color: white;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(90, 92, 106) 0%,
+    rgb(32, 45, 58) 81.3%
+  );
+}
+.video-container h5 {
+  margin: 20px 0;
+  text-shadow: 6px 6px 6px grey;
+}
 
-.video-container{
+.video-Btn button {
+  margin-right: 10px;
+}
+.buttons {
   display: flex;
-  flex-flow: column nowrap;
-  align-items:center;
-  margin: 1rem;
-  width: 20rem;
-  height: fit-content;
+  justify-content: space-between;
+  margin-top: 20px;
 }
-.video-container > p {
-  margin: 0;
-}
-button{
-  background-color: white;
-  border: none;
-}
-
-.delete-button{
-  margin-top: 2rem;
+.add-Video {
+  text-align: center;
+  margin: 10px 100px;
+  padding: 20px;
+  border: solid #8888 1.5px;
   border-radius: 10px;
+  box-shadow: 5px 10px 8px #888888;
+  color: white;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(90, 92, 106) 0%,
+    rgb(32, 45, 58) 81.3%
+  );
 }
-
-.vote-container{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content:center;
-  margin: 0 0 1rem 0;
+.addVideo-form button {
+  margin-top: 20px;
 }
-.vote-container > p{
-  padding: 0;
-  margin: 0;
+input {
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 300px;
+  height: 40px;
+  border: solid 1.5px #8888;
+  border-radius: 8px;
+  box-shadow: 5px 10px 8px #888888;
+}
+label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+i {
+  margin-top: 5px;
+  color: white;
 }
