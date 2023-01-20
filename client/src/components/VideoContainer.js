@@ -11,7 +11,15 @@ import { grey } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Fab from "@mui/material/Fab";
 
-function VideoContainer({ rating, title, url, voteUp, voteDown, name }) {
+function VideoContainer({
+  rating,
+  title,
+  url,
+  voteUp,
+  voteDown,
+  name,
+  deleteVideo,
+}) {
   return (
     <Card
       m={2}
@@ -64,7 +72,13 @@ function VideoContainer({ rating, title, url, voteUp, voteDown, name }) {
             </Fab>
           </Stack>
           <Stack sx={{ alignItems: "end" }}>
-            <Fab color="error" size="medium" aria-label="delete">
+            <Fab
+              color="error"
+              size="medium"
+              aria-label="delete"
+              name={name}
+              onClick={deleteVideo}
+            >
               <DeleteIcon sx={{ fontSize: 25 }} />
             </Fab>
           </Stack>

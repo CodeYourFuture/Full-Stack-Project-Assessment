@@ -145,9 +145,12 @@ function App() {
         }
       }
     }
-
-    console.log(videoData);
   };
+
+  function deleteVideo(e) {
+    const videoId = parseInt(e.currentTarget.name);
+    setVideosData(videosData.filter((video) => video.id !== videoId));
+  }
 
   return (
     <div className="App">
@@ -165,6 +168,7 @@ function App() {
           voteUp={incrementRating}
           voteDown={decrementRating}
           videosData={videosData}
+          deleteVideo={deleteVideo}
         />
       </Box>
     </div>
