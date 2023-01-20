@@ -24,7 +24,8 @@ function Video({video, remove}) {
       <YouTubeEmbed video={video} />
       <DeleteButton remove={remove}  id={video.id} />
     </div>
-  );
+
+  )
 }
 
 export default Video
