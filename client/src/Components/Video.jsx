@@ -1,34 +1,29 @@
-import React from 'react'
-import { useState } from 'react';
-import { FaRegThumbsUp, FaThumbsDown } from "react-icons/fa";
+import React from "react";
+import { useState } from "react";
 import data from "../exampleresponse.json";
-
+import Votes from "./Votes";
 
 function Video() {
+  const [copyData, setCopyData] = useState(data);
 
-    const [copyData, setCopyData] = useState(data)
+  function handleDelete(e) {
+    let result = copyData.filter((el, index) => {
+      return index !== +e.target.id;
+    });
+    setCopyData(result);
+  }
 
-    function handleDelete(e){
-       let result = copyData.filter((el, index) => {
-        return index !== +e.target.id
-       } )
-       setCopyData(result)
-    }
-   
+
+
   return (
     <div>
-      {copyData.map((el,key) => {
+      {copyData.map((el, key) => {
         let index = el.url.indexOf("=");
         let id = el.url.slice(index + 1);
         return (
           <div>
             <p>{el.title}</p>
-            <div>
-              <FaRegThumbsUp></FaRegThumbsUp>
-              <p>0 votes</p>
-              <FaThumbsDown></FaThumbsDown>
-            </div>
-
+           <Votes/>
             <iframe
               width="560"
               height="315"
@@ -37,7 +32,9 @@ function Video() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <button id = {key} onClick = {handleDelete}>Delete</button>
+            <button id={key} onClick={handleDelete}>
+              Delete
+            </button>
           </div>
         );
       })}
@@ -45,4 +42,4 @@ function Video() {
   );
 }
 
-export default Video
+export default Video;
