@@ -13,6 +13,7 @@ function AddVideoForm({
   handleInputChange,
   handleSubmit,
   open,
+  errors,
 }) {
   return (
     <div>
@@ -28,9 +29,11 @@ function AddVideoForm({
         <DialogTitle>Add New Video</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please insert the video's title and link
+            Please insert the video's title and url
           </DialogContentText>
           <TextField
+            required
+            error={errors.isRequiredTitleError}
             autoFocus
             margin="dense"
             name="title"
@@ -40,17 +43,29 @@ function AddVideoForm({
             variant="outlined"
             size="small"
             onChange={handleInputChange}
+            helperText={
+              errors.isRequiredTitleError ? "This field is required." : ""
+            }
           />
           <TextField
+            required
+            error={errors.isRequiredUrlError || errors.isValidUrlError}
             autoFocus
             margin="dense"
             name="url"
-            label="Link"
+            label="Url"
             type="url"
             fullWidth
             variant="outlined"
             size="small"
             onChange={handleInputChange}
+            helperText={
+              errors.isRequiredUrlError
+                ? "This field is required."
+                : errors.isValidUrlError
+                ? "Please enter a valid YouTube url"
+                : ""
+            }
           />
         </DialogContent>
         <DialogActions>
