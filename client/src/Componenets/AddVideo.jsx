@@ -9,6 +9,7 @@ const AddVideo = () => {
         <label htmlFor="url">Url:</label>
         <input type="text" id="input-url" name="url" />
         <button>Submit</button>
+        {/* add to api */}
       </form>
     </div>
   )

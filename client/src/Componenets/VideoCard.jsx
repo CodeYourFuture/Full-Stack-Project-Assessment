@@ -1,12 +1,13 @@
 import React from 'react'
 import exampleResponse from '../exampleresponse.json'
+// import * as Icon from 'react-bootstrap-icons';
+//import use state
 
 const VideoCard = () => {
   return (
     <div>
-      <button>x</button>
       {exampleResponse.map((video) => (
-        <div>
+        <div className="video-card">
           <h3>{video.title}</h3>
           <iframe
             width="560"
@@ -17,12 +18,17 @@ const VideoCard = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
+          <div className="video-buttons">
+            <span>0</span>
+            <i className="bi bi-hand-thumbs-up"></i>
+            <i className="bi bi-hand-thumbs-down"></i>
+            <button>remove video</button>
+          </div>
         </div>
       ))}
-
+      {/* button to remove video */}
+      {/* how many votes a video has */}
       {/* up vote, down vote icons */}
-      <i class="bi bi-hand-thumbs-up"></i>
-      <i class="bi bi-hand-thumbs-down"></i>
     </div>
   )
 }
