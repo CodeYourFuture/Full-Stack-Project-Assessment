@@ -1,8 +1,15 @@
 import React from 'react'
 
-function DeleteButton() {
+
+function DeleteButton({video, setvideos, videos})  {
   return (
-    <button class="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
+    <button onClick={() => {
+      const filteredVideos = videos.filter((v) => {
+        if (video.id !== v.id)
+        {return (v)};
+      });
+      setvideos (filteredVideos);
+    } } class="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
   );
 }
 

@@ -4,7 +4,7 @@ import LikeIcon from './buttons/LikeIcon';
 import YouTubeEmbed from './YouTubeEmbed';
 import "bootstrap/dist/css/bootstrap.css";
 
-function Video({video}) {
+function Video({video, setvideos, videos}) {
   
   return (
     <div className="video-container">
@@ -13,7 +13,7 @@ function Video({video}) {
         <LikeIcon />
       </div>
       <YouTubeEmbed video={video} />
-      <DeleteButton />
+      <DeleteButton videos={videos} setvideos={setvideos} video={video}  />
     </div>
   );
 }

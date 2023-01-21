@@ -5,6 +5,7 @@ function YouTubeEmbed({video}) {
  console.log(url);
   return (
     <iframe
+      title={"video"}
       width={"400"}
       height={"200"}
       src={url}
