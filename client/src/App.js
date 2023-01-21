@@ -138,7 +138,7 @@ function App() {
       </form>
       <Row xs={1} md={2} className="g-4">
         {videosData.map((video, index) => (
-          <Col>
+          <Col key={index}>
             <Card>
               <Card.Img variant="top" />
               <iframe
