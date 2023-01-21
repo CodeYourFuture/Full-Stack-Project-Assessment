@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Dislike = () => {
+const Dislike = ({downVoteHandler}) => {
   return (
-    <button className='down'>
+    <button onClick={downVoteHandler} className='down'>
         Downvote
     </button>
   )

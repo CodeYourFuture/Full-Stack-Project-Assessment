@@ -23,7 +23,7 @@
 .Cards{
   display: grid;
   gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   margin: 1.5rem;
   text-align: center; 
 }
@@ -45,6 +45,7 @@
   justify-content: center;
   text-justify: center;
   margin: auto;
+  width:100%;
 }
 
 .card-body h4 {
@@ -103,7 +104,8 @@
   font-size: large;
 }
 
-.card p{
-  margin-bottom: -25px;
+.ratings{
   font-size: medium;
+  margin-top:10px;
+  margin-bottom: -10px;
 }
