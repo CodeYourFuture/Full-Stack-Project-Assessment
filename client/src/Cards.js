@@ -1,14 +1,15 @@
 import {useState} from 'react';
 import Videos from "./exampleresponse.json";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player";
+import Dislike from './Dislike';
+import Like from './Like';
 
 function Cards() {
   const [videos, setVideos] = useState(Videos);
   const removeElement = (i) => {
     let newVideos = [...videos];
     newVideos.splice(i,1);
-    setVideos(newVideos)
-  
+    setVideos(newVideos);
   }
     return (
       <div className="Cards">
@@ -21,10 +22,9 @@ function Cards() {
               <h4>{video.title}</h4>
               <p>Votes</p>
               <div className="votes">
-                <button className='up'>Upvote</button>
-                {/* <p>Votes</p> */}
-              <h4 className='videorating'>{video.rating}</h4>
-              <button className='down'>Downvote</button>
+                <Like/>
+                  <h4 className='videorating'>{video.rating}</h4>
+                <Dislike/>
               </div>
               <a
                 href={video.url}
