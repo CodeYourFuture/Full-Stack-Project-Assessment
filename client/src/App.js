@@ -1,4 +1,6 @@
-import "./App.css";
+import './App.css'
+import VideoCard from './Componenets/VideoCard'
+import AddVideo from './Componenets/AddVideo'
 
 function App() {
   return (
@@ -6,8 +8,10 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <VideoCard />
+      <AddVideo />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
