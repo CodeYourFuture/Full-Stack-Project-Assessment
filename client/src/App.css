@@ -23,9 +23,9 @@ body {
 }
 
 button {
-  background-color: green;
+ background-color: white; 
   border: none;
-}
+} 
 
 .vote-container {
   display: flex;
