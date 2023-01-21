@@ -4,17 +4,15 @@
 
 .App-header {
   display: block;
-  background-color: #e6a479;
   margin: auto -16px;
-  /* padding: 16px 32px; */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   color: #fff;
   font-style: oblique;
-  padding: 2rem 0;
+  padding: 2rem 50px 10px 50px;
 }
 
 .App-header h1 {
-  color: #fff;
+  color: rgb(236, 77, 77);
   font-family: "McLaren", cursive;
   font-weight: 200;
 }
@@ -32,10 +30,20 @@ body {
   font-weight: 400;
 }
 
+.container {
+  
+  justify-content: center;
+  font-size: 2rem;
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+}
 
+button {
+  background-color: rgb(241, 10, 10);
+}
 
 footer {
-  /* position: absolute; */
   text-align: center;
   bottom: 0;
   width: 100%;
@@ -45,4 +53,7 @@ footer {
 
 footer p {
   color: rgb(22, 21, 21);
+  font-size: 1.5rem;
+  margin: 50px;
+  font-weight: bold;
 }
