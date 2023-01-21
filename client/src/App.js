@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Video from "./Components/Video";
+import Videos from "./Components/Videos";
 import Input from "./Components/Input";
 import data from "./exampleresponse.json";
 
@@ -41,7 +41,7 @@ function App() {
         handleSubmit={handleSubmit}
         reqBody={reqBody}
       />
-      <Video copyData={copyData} setCopyData={setCopyData}></Video>
+      <Videos copyData={copyData} setCopyData={setCopyData}/>
     </div>
   );
 }

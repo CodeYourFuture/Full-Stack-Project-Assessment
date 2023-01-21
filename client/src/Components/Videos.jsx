@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import SingleVideo from "./SingleVideo";
 import Votes from "./Votes";
 
-function Video(props) {
+function Videos(props) {
   function handleDelete(e) {
     let result = props.copyData.filter((el, index) => {
       return index !== +e.target.id;
@@ -19,14 +20,7 @@ function Video(props) {
           <div key={key}>
             <p>{el.title}</p>
             <Votes />
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${id}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+           <SingleVideo id = {id}/>
             <button id={key} onClick={handleDelete}>
               Delete
             </button>
@@ -37,4 +31,4 @@ function Video(props) {
   );
 }
 
-export default Video;
+export default Videos;
