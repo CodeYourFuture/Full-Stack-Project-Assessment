@@ -3,6 +3,7 @@ import Heading from "./Heading";
 import Footer from "./Footer";
 import MainContent from "./MainContent";
 import Search from "./Search";
+// import Add from "./Add";
 import "./App.css";
 
 function App() {
