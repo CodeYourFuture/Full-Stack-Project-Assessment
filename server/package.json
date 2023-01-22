@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^9.0.0",
+    "youtube-validate": "^1.2.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
