@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+}
+
+header {
+  display: block;
+}
+
+.App-header{
+  color: rgb(216, 103, 103);
+  font-style: oblique;
+  background-color: #fff;
+  padding: 2rem 0;
+}
+
+body{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 20;
+  padding: 50;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color:red;
+}
+
+.video-container{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items:center;
+  margin: 1rem;
+  width: 20rem;
+  height: fit-content;
+}
+.video-container > p {
+  margin: 0;
+}
+button{
+  background-color: white;
+  border: none;
+}
+
+.delete-button{
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.vote-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content:center;
+  margin: 0 0 1rem 0;
+}
+.vote-container > p{
+  padding: 0;
+  margin: 0;
+}
