@@ -1,12 +1,17 @@
 import React from "react";
-// import dataVideos from "./exampleresponse.json";
-
 
 function DeleteB(props) {
- 
+  const handleDelete = (id) => {
+    props.setData(props.data.filter((video) => video.id !== id));
+  };
 
   return (
-    <button onClick={props.removeVideo} className="p-2 mb-1 bg-danger text-white delete-button">Delete</button>
+    <button
+      onClick={() => handleDelete(props.video.id)}
+      className="pl-3 pr-3 mb-4 bg-danger text-white delete-button shadow rounded"
+    >
+      Delete
+    </button>
   );
 }
 

@@ -61,7 +61,7 @@ const AddVideoForm = ({ setVideoData }) => {
           </Row>
           <Button
             onClick={handleVideoAdder}
-            className=" mt-3 mb-3"
+            className=" mt-3 mb-3 shadow rounded"
             variant="secondary"
             type="submit"
           >
@@ -69,7 +69,7 @@ const AddVideoForm = ({ setVideoData }) => {
           </Button>
           <Button
             onClick={() => setAddingVideo(!addingVideo)}
-            className="ml-5 mt-3 mb-3"
+            className="ml-5 mt-3 mb-3 shadow rounded"
             variant="danger"
             type="cancel"
           >

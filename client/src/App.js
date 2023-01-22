@@ -3,9 +3,7 @@ import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
-// import Button from "react-bootstrap/Button";
 
-// import Button from "./AddVideo";
 import AddVideo from "./AddVideo";
 import AddVideoForm from "./AddVideoForm";
 import dataVideos from "./exampleresponse.json";
@@ -51,7 +49,12 @@ function App() {
       <div>
         <Row xs={1} sm={2} md={3} className="mt-3">
           {videoData.map((video, key) => (
-            <Video video={video} key={key} />
+            <Video
+              video={video}
+              key={key}
+              data={videoData}
+              setData={setVideoData}
+            />
           ))}
         </Row>
       </div>
