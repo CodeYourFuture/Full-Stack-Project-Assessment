@@ -24,6 +24,8 @@ const AddVideoForm = ({ setVideoData }) => {
     newVideoData.title && newVideoData.url.includes("www.youtube.com/watch?v=")
       ? setVideoData((videos) => videos.concat(newVideoData))
       : alert("Please fill all the sections");
+    // setTitle('');
+    // setUrl('')
   };
   return (
     <div>

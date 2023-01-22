@@ -1,8 +1,9 @@
 import React, { useState }  from "react";
  
 import DeleteB from "./DeleteB";
-import DislikeB from "./DislikeB";
-import LikeB from "./LikeB";
+// import DislikeB from "./DislikeB";
+// import LikeB from "./LikeB";
+import LikeAndDislike from "./LikeAndDislike";
 
 import dataVideos from "./exampleresponse.json";
 import RenderVideo from "./RenderVideo";
@@ -37,13 +38,14 @@ function Video({ video, ratingFromData  }) {
         <p className="mb-2">{video.title}</p>
         <RenderVideo video={video} />
         <div className="vote-container">
-          <LikeB handleIncrement={handleIncrement} />
+          {/* <LikeB handleIncrement={handleIncrement} /> */}
           {/* <p className="mt-4">{video.rating}</p> */}
           <p className="mt-4">
             {/* {video.rating} */}
             rating: {video.rating}
           </p>
-          <DislikeB handleDecrement={handleDecrement} />
+          {/* <DislikeB handleDecrement={handleDecrement} /> */}
+          <LikeAndDislike video={video} />
           <DeleteB removeVideo={removeVideo} />
           {/* <p>{video.rating}</p> */}
         </div>
