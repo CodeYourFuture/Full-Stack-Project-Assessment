@@ -13,7 +13,7 @@ const pool = new Pool({
   password: "youtuberfarzad@7633",
   port: process.env.PORTS,
 });
-
+//root
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
