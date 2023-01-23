@@ -67,7 +67,7 @@ app.get("/:id", (req, res) => {
     });
 });
 
-//DELETE "/{id}"
+//DELETE BY "/{id}"
 
 app.delete("/:id", (req, res) => {
   const videoId = req.params.id;
