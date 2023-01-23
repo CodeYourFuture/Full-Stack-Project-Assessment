@@ -1,4 +1,5 @@
 import React from "react";
+import VoteButton from "./VoteButton";
 
 const VideosList = ({videoData}) => {
     console.log(videoData)
@@ -25,7 +26,7 @@ const VideosList = ({videoData}) => {
               <div key={item.id}>
                 <p>{item.title}</p>
                 <p>Rating: {item.rating}</p>
-                <div><button onClick={()=>item.rating+1}>Upvote</button><button onClick={()=>item.rating-1}>Downvote{console.log(item.rating)}</button></div>
+                < VoteButton item={item}/>
                 <iframe
                   width="560"
                   height="315"

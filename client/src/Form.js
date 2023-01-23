@@ -1,10 +1,11 @@
 import React from "react";
+import "./App.css";
 
 const Form = () =>{
     
     return (
       <div>
-        <form>
+        <form className="Form">
             <span>Add video</span>
           <label>
             Title:
