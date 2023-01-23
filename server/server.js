@@ -71,17 +71,15 @@ app.get("/:id", (req, res) => {
 
 app.delete("/:id", (req, res) => {
   const videoId = req.params.id;
-  let found = videos.some((video) => video.id === videoId);
-  if (found) {
-    videos = videos.filter((vid) => vid.id !== videoId);
-    res.json({
-      msg: `Successfully delete video with id: ${videoId}`,
+  const query = "DELETE FROM videos WHERE id = $1";
+
+  pool
+    .query(query, [videoId])
+    .then(() => res.send("Video deleted"))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
     });
-  } else {
-    res.status(400).json({
-      msg: `No video with id: ${videoId} found`,
-    });
-  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
