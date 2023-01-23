@@ -4,12 +4,17 @@ function YouTubeEmbed({video}) {
  const url = video.url.replace("watch?v=", "embed/");
  console.log(url);
   return (
-    <iframe
-      height={"300"}
-      src={url}
-      alt={`video ${video.title}`}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
-    />
+    <div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/{VIDEO_ID_GOES_HERE}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   );
 }
 

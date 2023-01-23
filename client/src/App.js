@@ -17,12 +17,12 @@ const [del, setDel] = useState([]);
         <h1>Video Recommendation</h1>
       </header>
       <body>
-        <div>
-          <AddAVideo newVideo={newVideo} />
-        </div>
+        <AddAVideo newVideo={newVideo} />
+
         {dataVideos.map((video, key) => (
           <Video video={video} key={key} />
         ))}
+        
       </body>
     </div>
   );
