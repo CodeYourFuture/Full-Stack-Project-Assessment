@@ -5,7 +5,7 @@ const uuid = require("uuid");
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
+app.use(express.json());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = require("./exampleresponse.json");
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
     : res.status(500).send("No video is available");
 });
 
-// Post new video
+// POST new video
 app.post("/", (req, res) => {
   let newVideo = {
     id: uuid.v4(),
@@ -25,7 +25,6 @@ app.post("/", (req, res) => {
     url: req.body.url,
     postedAt: new Date(),
   };
-
   videos.push(newVideo);
   res.send("The video was successfully added");
 });
