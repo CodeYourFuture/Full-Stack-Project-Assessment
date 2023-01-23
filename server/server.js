@@ -3,11 +3,21 @@ const app = express();
 const port = process.env.PORT || 5000;
 const crypto = require("crypto");
 const cors = require("cors");
+const { Pool } = require("pg");
 
 app.use(cors()); // this is installed to allow react to fetch data from the api refer =>  https://tinyurl.com/m4de5wt6 & https://www.npmjs.com/package/cors
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const pool = new Pool({
+  user: "riyaaz",
+  host: "dpg-cf6i86ta499d72v8lk0g-a.oregon-postgres.render.com",
+  database: "full_stack_db",
+  password: "p16wwl631GxxMFFXsDYmKAmk0NCIa8cQ",
+  port: 5432,
+  ssl: { rejectUnauthorized: false },
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
