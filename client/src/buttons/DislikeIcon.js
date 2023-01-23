@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-function DislikeIcon({disLike}) {
+function DislikeIcon({onClick}) {
   return (
-    <button title="likes" onClick={() => disLike()}>
+    <button title="likes" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

@@ -1,36 +1,21 @@
-import React, { useState } from "react";
-const AddAVideo = ({ newVideo }) => {
-  const [title, Title] = useState("");
-  const [url, Url] = useState("");
+import React from "react";
 
-  const Vid = () => {
-    newVideo({ title, url });
-  };
+function AddVideo({ titleValue, urlValue, titleChange, urlChange, submit }) {
   return (
-    <div>
+    <form onSubmit={submit}>
       <div className="title">
-        <label for="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => Title(e.target.value)}
-        ></input>
+        <p>Title :</p>
+        <input type="text" value={titleValue} onChange={titleChange} />
       </div>
-
+      <div className="url">
+        <p>URL :</p>
+        <input type="text" value={urlValue} onChange={urlChange} />
+      </div>
       <div>
-        <label for="url">Url:</label>
-        <input
-          type="text"
-          id="url"
-          value={url}
-          onChange={(e) => Url(e.target.value)}
-        ></input>
-
-        <input type="button" value="Add" onClick={Vid}></input>
+        <button>Submit</button>
       </div>
-    </div>
+    </form>
   );
-};
+}
 
-export default AddAVideo;
+export default AddVideo;

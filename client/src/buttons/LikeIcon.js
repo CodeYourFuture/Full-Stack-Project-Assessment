@@ -2,9 +2,9 @@ import React from 'react'
 
 
 
-function LikeIcon(add) {
+function LikeIcon({onClick}) {
   return (
-    <button title="likes" onClick={() => add()}>
+    <button title="likes" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
