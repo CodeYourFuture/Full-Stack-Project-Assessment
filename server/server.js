@@ -1,9 +1,25 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
+const youtubeRegex = require("youtube-regex");
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // restrict calls to those this address
+    methods: "GET", // only allow GET requests
+  })
+);
 app.use(express.json());
 
-// import { validateUrl } from "youtube-validate";
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -75,37 +91,65 @@ let videos = [
 ];
 
 const addedVideos = [];
-
+//return all videos
 app.get("/", (req, res) => {
   res.send(videos);
 });
+//posting a new video
 app.post("/", (req, res) => {
-  const newVideo = {
-    id: uuidv4(),
+  let newVideo = {
+    id: parseInt(uuidv4()),
     title: req.body.title,
     url: req.body.url,
+    rating: 0,
   };
-  videos.push(newVideo);
-  if (!req.body.title || req.body.url) {
-    res.status(400).send("Video could not be saved");
-    return;
-  } else {
+  const videoTitle = req.body.title;
+  const videoUrl = req.body.url;
+  const videoRating = 0;
+  if (videoTitle.length < 1) {
+    res.status(400).json({
+      result: "failure",
+      msg: "A title is required.",
+    });
+  } else if (videoUrl.length < 1) {
+    res.status(400).json({
+      result: "failure",
+      msg: "An url is required",
+    });
+  }
+  //validate url
+  const isValidUrl = videoUrl.match(
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
+  );
+  if (isValidUrl) {
     res.send(videos);
   }
+  if (newVideo.title && isValidUrl) {
+    videos.push(newVideo);
+    res.status(200).json({ id: newVideo.id });
+  }
 });
+//getting  a video by id
 app.get("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
-  res.json(videos.find((v) => v.id === videoId));
+  if (videoId > 0) {
+    res.json(videos.find((v) => v.id === videoId));
+  }
+  if (!videoId) {
+    return res.status(400).json({ msg: "Invalid input" });
+  }
 });
+// deleting a video by id
 app.delete("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   const videoIndex = videos.findIndex((v) => v.id === videoId);
 
   if (videoIndex < 0) {
-    res.status(404).send("Video could not be deleted");
+    res
+      .status(404)
+      .json({ result: "failure", message: "Video could not be deleted" });
     return;
   } else {
     videos.splice(videoIndex, 1);
-    res.send("Video deleted");
   }
 });

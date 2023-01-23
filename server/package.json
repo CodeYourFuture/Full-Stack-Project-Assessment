@@ -11,9 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "uuid": "^9.0.0",
-    "youtube-validate": "^1.2.4"
+    "youtube-regex": "^1.0.5",
+    "youtube-validate": "^1.2.4",
+    "youtube-validator": "^1.1.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
