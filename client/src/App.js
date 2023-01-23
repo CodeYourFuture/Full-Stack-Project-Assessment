@@ -14,7 +14,9 @@ function App() {
   //Fetch data from express api running locahost
   // NB. had to install cors in express for this to work.
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000`)
+    fetch(
+      `https://full-stack-project-assessment-server.onrender.com/`
+    )
       .then((res) => res.json())
       .then(
         (result) => {
