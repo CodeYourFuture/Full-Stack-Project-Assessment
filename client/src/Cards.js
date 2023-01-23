@@ -25,6 +25,7 @@ function Cards() {
 			return[...videos, newVideo]
 			})
 		}
+	// put button inside form handleonSubmit dont need handle clack
 	const handleClick = () => {
 		console.log('handleclick working')
 	}
