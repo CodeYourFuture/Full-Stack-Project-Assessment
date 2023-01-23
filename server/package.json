@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "uuid": "^9.0.0"
+    "generate-unique-id": "^2.0.1"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
