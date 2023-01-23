@@ -5,11 +5,12 @@ function Video({ data, video, setVideoData })
 {
     const deleteFunction = (data, id) => 
     {
+        //document.getElementById(id).remove();
         setVideoData(data.filter(data => data.id !== id))
     }
 
     return (
-        <div className="container">
+        <div className="container" id={video.id}>
             <h1>{video.title}</h1>
             <button id="delete" onClick={() => deleteFunction(data, video.id)}>Delete</button>
 
