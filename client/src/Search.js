@@ -2,6 +2,7 @@ import React from "react";
 import "./Search.css";
 
 const Search = ({ videoData, setVideoData, dataVideos }) => {
+  // function to handle search input
   const handleOnChange = (event) => {
     let result = videoData.filter((vid) =>
       vid.title.toLowerCase().includes(event)
@@ -19,9 +20,7 @@ const Search = ({ videoData, setVideoData, dataVideos }) => {
       <input
         id="search"
         className="searchInp"
-        onChange={(e) =>
-          handleOnChange(e.target.value.toLocaleLowerCase())
-        }
+        onChange={(e) => handleOnChange(e.target.value.toLowerCase())}
         type="search"
       />
     </div>

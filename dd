@@ -1,0 +1,323 @@
+[33mcommit 1304063ac6df48a36966d584896cde1beb57b6e2[m[33m ([m[1;36mHEAD -> [m[1;32mlevel-199[m[33m, [m[1;31morigin/level-199[m[33m)[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 31 15:14:47 2022 +0200
+
+    add youtube link validation
+
+[33mcommit ca269a206cfb91a803d96da849eb9b74d50ad6b6[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Fri Dec 30 17:02:46 2022 +0200
+
+    complete sort videos by rating
+
+[33mcommit 13a1b94fe4eb55660f0f16165b69b5f1198ebe99[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 23:35:11 2022 +0200
+
+    complete level 250
+
+[33mcommit d8c6c0d0d3ea1e15d5f468429baf3eddf34e05dc[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 23:34:26 2022 +0200
+
+    installed cors to make server work with react(level 250)
+
+[33mcommit a210def0439f8eba177d276f6ea7cbe76d16ed81[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 13:24:53 2022 +0200
+
+    complete delete by ID request
+
+[33mcommit 8e1b44270926ad3bf75e0c361ec1c10d2fe4ad40[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 12:52:47 2022 +0200
+
+    complete get by ID request
+
+[33mcommit 5726bad69deec0c7b5ee1ea2f01f93071b0fb978[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 10:39:36 2022 +0200
+
+    update server.js
+
+[33mcommit def6d977f785a42b5fa772b4b5922734cf533464[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 10:35:37 2022 +0200
+
+    update server.js
+
+[33mcommit 6ba1c7b7241e2e3dd1b71429759878f5d51ec114[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 24 10:29:31 2022 +0200
+
+    complete GET and POST
+
+[33mcommit de09a006112a7da7775331fd3ca86ba2b6acba17[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sun Dec 18 11:57:25 2022 +0200
+
+    make adjustments to project for lighthouse accessibility test
+
+[33mcommit 0a85dcd63a1ff2a014523a771a6cb2e4df68ff31[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 17 15:37:55 2022 +0200
+
+    update search component
+
+[33mcommit 8c9b15152dbabb244fa96099bbbbb9fbc15b04b3[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 19:18:16 2022 +0200
+
+    update title
+
+[33mcommit 4cb8d1368ee38264724b8e5d7f92724f598d421a[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 19:16:45 2022 +0200
+
+    add search component and functionality
+
+[33mcommit 66c8715090281dcedb0adb5b8c973d277efed70d[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 18:03:40 2022 +0200
+
+    update form section
+
+[33mcommit ce29b0cf8fac5a3f772d1e277c98458736d601f4[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 03:57:27 2022 +0200
+
+    complete add video component
+
+[33mcommit 4b1eff128623071fe5496f11bd3ec523a20fe900[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 02:59:36 2022 +0200
+
+    add cancel button functionality
+
+[33mcommit d6f0f34fd331fcd79ce8d1aed6d906e51bc5580a[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 12 02:27:56 2022 +0200
+
+    add functionality to add video component
+
+[33mcommit 24c932317fe55f03c0113fdeb51567c8fe6d4cd2[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sun Dec 11 01:01:02 2022 +0200
+
+    fix bug on like and dislike functionality
+
+[33mcommit 0807ccf93264247e23b5bd06439c10d7cb8b0dc4[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 10 18:38:53 2022 +0200
+
+    add functionality to rating icons
+
+[33mcommit c5fc63ddbfb7c6230d5b20318f7748b9741e0be8[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 10 17:27:05 2022 +0200
+
+    add functionality to delete button
+
+[33mcommit 8a873cec51e1e22d13720dd20f0f7925753489d3[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 10 17:20:24 2022 +0200
+
+    add deconstruction to components
+
+[33mcommit 8bb681b1ec4fb3fa907a798b3130dd126f9fda31[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Sat Dec 10 01:08:17 2022 +0200
+
+    first commit
+
+[33mcommit eed9eaf257a233d64189bdb27f5254e8012e6b7b[m
+Author: Riyaaz Singh <riyaazct1@gmail.com>
+Date:   Mon Dec 5 21:16:35 2022 +0200
+
+    first commit
+
+[33mcommit 95d1c0893cb47c5c7e030aaf3d5fa1681f66cfb1[m[33m ([m[1;31mupstream/main[m[33m)[m
+Author: Abadi11 <83921761+Abadi11@users.noreply.github.com>
+Date:   Thu Sep 29 00:12:53 2022 +0100
+
+    style the browser
+
+[33mcommit 7511d6df60dd44dae387dc769a5dd3388c52196e[m
+Author: Abadi11 <83921761+Abadi11@users.noreply.github.com>
+Date:   Thu Sep 29 00:12:32 2022 +0100
+
+    show the data in the browser
+
+[33mcommit fcd8c56b8266b14e366a3b8f0e93c4f25a2de172[m
+Author: Abadi11 <83921761+Abadi11@users.noreply.github.com>
+Date:   Thu Sep 29 00:11:09 2022 +0100
+
+    set up the app
+
+[33mcommit bec0abb576dbf295a1c357de033d9c447cdd11d8[m
+Author: youssef910 <youssef.sadek910@gmail.com>
+Date:   Wed Dec 22 17:51:51 2021 +0000
+
+    updating dependancies and installing bootStrap
+
+[33mcommit ba7460567fcbeb89573bb7455b05498814b97faf[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Tue May 4 12:19:26 2021 +0100
+
+    Add final examples
+
+[33mcommit 89bf38d7ec98ad74b6d04949bba41a5786544806[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Thu Apr 29 11:47:30 2021 +0100
+
+    Feedback
+
+[33mcommit 0a8df429bc1e5e5985ef9466cc4249c468b51c89[m
+Author: Chris Owen <chris.owen@codeyourfuture.io>
+Date:   Wed Apr 21 18:02:48 2021 +0100
+
+    Update 100.md
+
+[33mcommit d5276e09073986e69b9134ce12026cf68e1c2bf5[m
+Merge: fdc33ab 0c85f47
+Author: Chris Owen <chris.owen@codeyourfuture.io>
+Date:   Wed Apr 21 17:58:50 2021 +0100
+
+    Merge pull request #1 from illicitonion/tweaks
+    
+    Tweaks
+
+[33mcommit fdc33abd4bb403444ac109198b3b7bde155c9418[m
+Author: Daniel Wagner-Hall <dawagner@gmail.com>
+Date:   Mon Apr 19 22:32:13 2021 +0100
+
+    Fix heading
+
+[33mcommit 0c85f47efba1507c87ecec1272e851b74dc8d91d[m
+Author: Daniel Wagner-Hall <dawagner@gmail.com>
+Date:   Mon Apr 19 22:28:11 2021 +0100
+
+    Be clear about not storing and serving the videos
+    
+    When I started reading this, I thought it was going to involve scary
+    storage. I realised quickly it didn't, but, might as well make it super
+    clear up-front.
+
+[33mcommit 8bf40a7b8158171de3027ef39700054362b69db7[m
+Author: Daniel Wagner-Hall <dawagner@gmail.com>
+Date:   Mon Apr 19 22:26:57 2021 +0100
+
+    Don't just return all videos for POST/DELETE
+    
+    For POST, return the ID of the created video. This makes it easier for
+    the client to determine details about the video which was added.
+    
+    For DELETE, just return an empty object on success.
+
+[33mcommit 99ddeb76772b52db2af5359080f336ae9a2c8ad5[m
+Author: Chris Owen <chris.owen@codeyourfuture.io>
+Date:   Sun Apr 18 12:49:46 2021 +0100
+
+    Update README.md
+
+[33mcommit 5f1ed6ffc3c7f6f069a3aa76338b5eca94264123[m
+Author: Chris Owen <chris.owen@codeyourfuture.io>
+Date:   Fri Apr 16 15:50:42 2021 +0100
+
+    Update README.md
+
+[33mcommit 98f4ba6744df25d3dbeed289c7f751e8bb599276[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 15:06:37 2021 +0100
+
+    Add more setup instructions
+
+[33mcommit 963497c330e15798dc771330621497cceb0a1bea[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:53:26 2021 +0100
+
+    Add bootstrap url
+
+[33mcommit 2b060ddbaec77d8fd3888df732c5a6c4084827b5[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:37:10 2021 +0100
+
+    Update README.md
+
+[33mcommit 4d444823f21f013e7a0adea0eaabbdbfc93a3abb[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:34:42 2021 +0100
+
+    Add design details
+
+[33mcommit 0608fc6d9082887cd6219423911837ae22c8d66d[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:32:09 2021 +0100
+
+    Final wording fixes
+
+[33mcommit d6b8abe78219956069fab25db7945e8b4f8d757c[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:31:19 2021 +0100
+
+    More wording fixed
+
+[33mcommit ca187f7c495065587b613757c404fcca775e5aa7[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:28:52 2021 +0100
+
+    Fix wording
+
+[33mcommit 38338ea43bac866aba9ac4acfd6782b000d8ddfe[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:25:47 2021 +0100
+
+    Add Level 300
+
+[33mcommit c5ac12227257181b1571d35ea217e2b09f8c1a6d[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 14:16:19 2021 +0100
+
+    Add level 250
+
+[33mcommit 824d4d76344eef0616d68ab3cbdc925a94ebe524[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 13:51:20 2021 +0100
+
+    Add install instructions
+
+[33mcommit b13c45340793cfd2f563f4f275f6f49df3a5d3d9[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 13:45:51 2021 +0100
+
+    Add Level 250
+
+[33mcommit c5dd2da3babccbe7679ec704e310fdc85361863a[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Fri Apr 16 13:03:44 2021 +0100
+
+    Add install instructions and node work
+
+[33mcommit 6f4f0782fc83ceaccea42cb6fdd24da53586dffd[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Thu Apr 15 17:33:18 2021 +0100
+
+    Add exampleresponse.json
+
+[33mcommit 4413df054c5d42712a6a2ea58e4a900cb34053b1[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Thu Apr 15 17:12:58 2021 +0100
+
+    Add Levels
+
+[33mcommit 27837900a9a5a8df7cf33d3aa5b3f425c00ab003[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Thu Apr 15 16:39:31 2021 +0100
+
+    Initial Commit
+
+[33mcommit 0e4a8494c221bbfb633f69c4436aa655beb99f2c[m
+Author: Chris Owen <chris@thecodethatchriswrote.com>
+Date:   Thu Apr 15 16:04:47 2021 +0100
+
+    Initial commit
