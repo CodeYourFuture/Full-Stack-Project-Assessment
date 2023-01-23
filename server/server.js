@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
+// CREATE NEW VIDEO
 
 app.post("/", (req, res) => {
   const newVideoTitle = req.body.title;
@@ -53,18 +54,17 @@ app.post("/", (req, res) => {
   }
 });
 
-// GET "{id}""
+// GET by "{id}""
 
 app.get("/:id", (req, res) => {
-  let videoId = req.params.id;
-  let found = videos.some((video) => video.id === videoId);
-  if (found) {
-    res.json(videos.filter((video) => video.id === videoId));
-  } else {
-    res.status(404).json({
-      msg: `There is no video found with ID: ${videoId}`,
+  const videoId = req.params.id;
+  pool
+    .query("SELECT * FROM videos WHERE id = $1", [videoId])
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
     });
-  }
 });
 
 //DELETE "/{id}"
