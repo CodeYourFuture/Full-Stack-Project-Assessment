@@ -12,7 +12,7 @@ function Video({video}) {
       <p>{video.title}</p>
       <div className='vote-container'>
         <LikeIcon />
-        <p>0 Vote</p>
+        <p>{video.rating} Vote</p>
         <DislikeIcon />
       </div>
       <YouTubeEmbed video={video} />
