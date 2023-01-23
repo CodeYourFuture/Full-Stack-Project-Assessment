@@ -7,7 +7,7 @@ header {
 }
 
 .App-header{
-  color: #fff;
+  color: rgb(216, 103, 103);
   font-style: oblique;
   background-color: #254e70;
   padding: 2rem 0;
@@ -17,10 +17,11 @@ header {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  margin: 0;
-  padding: 0;
+  margin: 20;
+  padding: 50;
   font-size: 1rem;
   font-weight: 400;
+  background-color:red;
 }
 
 .video-container{
