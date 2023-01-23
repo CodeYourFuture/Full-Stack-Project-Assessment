@@ -21,14 +21,14 @@ button{
 
 .delete-button{
   margin-top: 2rem;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .vote-container{
   display: flex;
   flex-flow: row nowrap;
   justify-content:center;
-  margin: 0 0 1rem 0;
+  margin: 0 0 -1rem 0;
 }
 .vote-container > p{
   padding: 0;

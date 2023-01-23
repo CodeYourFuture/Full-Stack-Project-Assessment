@@ -4,16 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "server": "node server.js"
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix ../client"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.20.1",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "url": "^0.11.0",
+    "uuid": "^9.0.0"
+  },
+  "repository": {
+    "url": "https://github.com/Dawit-Dev/Full-Stack-Project-Assessment"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "nodemon": "^2.0.7"
   }
 }

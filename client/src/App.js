@@ -17,6 +17,7 @@ function App() {
   const [videoData, setVideoData] = useState(dataVideos);
   const [videosFilter, setVideosFilter] = useState("");
   //
+  videoData.sort((a, b) => b.rating - a.rating)
 
   const addVideoHandler = () => {
     setAddVideo((prevVideo) => !prevVideo);

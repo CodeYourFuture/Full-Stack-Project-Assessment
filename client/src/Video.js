@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.css";
 function Video({ video, data, setData }) {
   return (
     <div>
-      <div className="video-container  shadow p-3 mb-5 bg-white rounded rounded">
+      <div className="video-container  shadow p-3 mb-4 bg-white rounded rounded">
         <p className="mb-2">{video.title}</p>
         <RenderVideo video={video} />
         <div className="vote-container">
