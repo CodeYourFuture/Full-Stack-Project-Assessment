@@ -1,68 +1,98 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
-const { Client } = require("pg");
-
+const { Pool } = require("pg");
 app.use(express.json());
+const cors = require("cors");
 app.use(cors());
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+const pool = new Pool({
+  user: "test_user",
+  host: "dpg-cf4j8cha6gdtfg33f0ug-a.oregon-postgres.render.com",
+  database: "cyf_ecommerce_testdb",
+  password: "6Won6otyntKOsILXN2GdIZ0jqVFWYRfz",
+  port: 5432,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-client.connect();
 
-app.use(express.json());
+//get all videos
 
-app.get("/", (req, res) => {
-  client
-    .query("Select * From videos")
-    .then((result) => res.status(200).json(result.rows))
-    .catch((error) => res.status(500).json(error));
+app.get('/api/videos', (req, res) => {
+  pool
+    .query("SELECT * FROM youtubevideos")
+    .then((allVideos) => res.json(allVideos.rows))
+    .catch((err) => {
+      console.err(err.message);
+      res.status(500).json(err);
+    });
 });
 
-app.post("/", function (req, res) {
-  const { title, url } = req.body;
-  const queryString = `Insert Into videos (title, url) values ($1, $2 , $3)`;
-  client
-    .query(queryString, [title, url])
-    .then(() => res.status(200).send("Video added!"))
-    .catch((error) => res.status(500).json(error));
+
+
+//get one video at a time by id
+
+app.get('/api/videos/:videoId', (req, res) => {
+  const { videoId } = req.params;
+  pool
+    .query("SELECT * FROM youtubevideos WHERE id = $1", [videoId])
+    .then((video) => res.json(video.rows))
+    .catch((err) => {
+      console.err(err.message);
+      res.status(500).json(err);
+    });
 });
 
-app.put("/:videoId/rating", (req, res) => {
-  const id = req.params.videoId;
-  const rate = req.body.rating;
 
-  const queryString = `Update videos Set rating = $1 Where id = $2`;
-  client
-    .query(queryString, [rate, id])
-    .then(() => res.status(201).send("Rating has been updated!"))
-    .catch((error) => res.status(500).json(error));
-});
+//post a video
 
-app.delete("/:videoId", (req, res) => {
-  const id = req.params.videoId;
-  const queryCheck = `Select * From videos where id = $1`;
-  const queryString = `Delete From videos where id = $1`;
-  client
-    .query(queryCheck, [id])
+app.post("/api/videos", (req, res) => {
+
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = req.body.rating;
+
+  if (!Number.isInteger(newRating) || newRating < 0) {
+    return res
+      .status(400)
+      .send("Rating should be a positive integer.");
+  }
+
+  pool
+    .query("SELECT * FROM youtubevideos WHERE title=$1", [newTitle])
     .then((result) => {
-      if (result.rows.length == 0){
-        res.status(404).send("Video does not exist!");
+      if (result.rows.length > 0) {
+        return res
+          .status(400)
+          .send("A video with the same title already exists!");
       } else {
-        client
-          .query(queryString, [id])
-          .then((result) => res.status(200).send("Video has been deleted!"))
-          .catch((error) => res.status(500).json(error));
+        const query =
+          "INSERT INTO youtubevideos (title, url, rating) VALUES ($1, $2, $3)";
+        pool
+          .query(query, [newTitle, newUrl, newRating])
+          .then(() => res.send("Video created!"))
+          .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
+          });
       }
-    })
-    .catch((error) => res.status(500).json(error));
+    });
 });
 
+
+//delete a video by id
+
+app.delete('/api/videos/:videoId', (req, res) => {
+  const { videoId } = req.params;
+  pool
+    .query("DELETE FROM youtubevideos WHERE id = $1", [videoId])
+    .then(() => res.send(`Video with id ${videoId} deleted!`))
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).json(err);
+    });
+});
 
 
 // Store and retrieve your videos from here
@@ -75,5 +105,5 @@ app.delete("/:videoId", (req, res) => {
 //   res.send({ express: "Your Backend Service is Running" });
 // });
 
-
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
