@@ -2,16 +2,16 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const {Pool} = require("pg");
-const jwt = require('jsonwebtoken');
+
 
 const cors = require('cors');
 const {rows} = require("pg/lib/defaults");
-const secret = 'mysecret';
+
 const pool = new Pool({
-    user: "postgres",
+    user: "nagehan",
     host: "localhost",
-    database: "youtube",
-    password: "ender",
+    database: "videos",
+    password: "",
     port: 5432,
 });
 
