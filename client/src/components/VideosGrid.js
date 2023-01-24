@@ -5,7 +5,7 @@ import VideoContainer from "./VideoContainer";
 function VideosGrid({ videosData, voteUp, voteDown, deleteVideo }) {
   return (
     <Grid justifyContent="center" m={{ xs: 0, md: 2 }} container>
-      {videosData &&
+      {videosData.length > 0 &&
         videosData.map((video, i) => (
           <Grid m={1} key={i}>
             <VideoContainer
