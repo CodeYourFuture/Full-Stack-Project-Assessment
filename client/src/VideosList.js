@@ -1,6 +1,7 @@
 import React from "react";
 import VoteButton from "./VoteButton";
 
+
 const VideosList = ({videoData}) => {
     console.log(videoData)
     const videoIdExtract = (url) =>{
@@ -13,19 +14,14 @@ const VideosList = ({videoData}) => {
           //error
         }
     }
-
     videoData.sort((a, b) => b.rating - a.rating);
-
-    
-
     return (
       <div>
         {videoData          
           .map((item) => {
             return (
               <div key={item.id}>
-                <p>{item.title}</p>
-                <p>Rating: {item.rating}</p>
+                <p>{item.title}</p>                
                 < VoteButton item={item}/>
                 <iframe
                   width="560"

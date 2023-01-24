@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 
-const VoteButton = ({item}) =>{
+const VoteButton = ({item}) =>{      
+    const [vote, setVote] = useState(+item.rating)
+    
     return (
       <div>
-        <button onClick={() => item.rating}>Upvote</button>
-        <button onClick={() => item.rating}>Downvote</button>
+        <p>Rating: {vote}</p>
+        <button onClick={() => setVote(vote + 1)}>Upvote</button>
+        <button onClick={() => setVote(vote - 1)}>Downvote</button>
       </div>
     );
 }
