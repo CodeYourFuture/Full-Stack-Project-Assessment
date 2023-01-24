@@ -7,13 +7,15 @@ const port = process.env.PORT || 5000;
 let videos = [];
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "cyf_hotels",
-  password: "youtuberfarzad@7633",
+  user: process.env.DBUSER,
+  host: process.env.DBHOST,
+  database: process.env.DBNAME,
+  password: process.env.DBPASSWORD,
   port: process.env.PORTS,
 });
-//root
+
+pool.connect();
+
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
