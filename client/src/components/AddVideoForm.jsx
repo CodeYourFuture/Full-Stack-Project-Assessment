@@ -76,7 +76,7 @@ const AddVideoForm = ({ setVideos }) => {
       >
         Add Video
       </Button>
-      <span class="warning_messages">{message}</span>
+      <span className="warning_messages">{message}</span>
     </form>
   );
 };
