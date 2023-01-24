@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
+let cors = require("cors");
 const port = process.env.PORT || 5000;
 
 app.use(express.json()); // before our routes definition
-
+app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here

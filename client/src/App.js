@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
-import dataVideos from "./exampleresponse.json";
 import AddVideos from "./AddVideos";
 
 function App() {
-  const [videoData, setVideoData] = useState(dataVideos);
+  const [videoData, setVideoData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  fetch({ dataVideos })
-    .then((response) => response.json())
-    .then((data) => {
-      setVideoData(data);
-      console.log(videoData, "Fetching video data");
-    });
+  useEffect(() => {
+    console.log("Fetching data...");
+    fetch(` http://localhost:5000/`)
+      .then((response) => {
+        if (response.status >= 200 && response.status <= 299) {
+          return response.json();
+        } else {
+          throw new Error(
+            `Encountered something unexpected: ${response.status} ${response.statusText}`
+          );
+        }
+      })
+      .then((data) => {
+        // data.error ? setStatus("loading failed") :
+        setVideoData(data);
+        setLoading(true);
+      })
+      .catch((error) => {
+        // Handle the error
+        console.log(error);
+      });
+  }, [loading]);
 
   const deleteVideos = (id) => {
     setVideoData((videoData) => videoData.filter((data) => data.id !== id));
