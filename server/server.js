@@ -6,7 +6,7 @@ const port = process.env.PORT || 3005;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 let videos = require("./exampleresponse.json");
 
 // Validate url function
@@ -19,7 +19,7 @@ function isValidYouTubeUrl(url) {
 }
 
 // GET all videos
-app.get("/videos", (req, res) => {
+app.get("/api", (req, res) => {
   videos.length > 0
     ? res.json(videos)
     : res
@@ -28,7 +28,7 @@ app.get("/videos", (req, res) => {
 });
 
 // POST new video
-app.post("/", (req, res) => {
+app.post("/api", (req, res) => {
   const videoId = generateUniqueId({
     length: 6,
     useLetters: false,
@@ -38,11 +38,12 @@ app.post("/", (req, res) => {
       id: parseInt(videoId),
       title: req.body.title,
       url: req.body.url,
+      rating: 0,
       postedAt: new Date(),
     };
 
     videos.push(newVideo);
-    res.send(newVideo.id);
+    res.send(newVideo);
   } else {
     res
       .status(400)
@@ -51,7 +52,7 @@ app.post("/", (req, res) => {
 });
 
 // GET video by id
-app.get("/:id", (req, res) => {
+app.get("/api/:id", (req, res) => {
   let video = videos.find(({ id }) => id === parseInt(req.params.id));
   if (video) {
     res.send(video);
@@ -64,7 +65,7 @@ app.get("/:id", (req, res) => {
 });
 
 // DELETE video by id
-app.delete("/:id", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   let videoIndex = videos.findIndex(({ id }) => id === parseInt(req.params.id));
   if (videoIndex >= 0) {
     videos.splice(videoIndex, 1);
