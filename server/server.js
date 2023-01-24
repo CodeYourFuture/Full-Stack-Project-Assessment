@@ -22,7 +22,7 @@ const pool = new Pool({
 // GET "/"
 app.get("/", (req, res) => {
   // res.send(videos).json;
-  pool.query('SELECT * FROM videos')
+  pool.query('SELECT * FROM video')
   .then((result) => res.send(result.rows).json)
   .catch((error) => {
       console.error(error);
@@ -59,7 +59,7 @@ pool
 //`GET` "/{id}"
 app.get("/:id", (req, res) =>{
 let videoId = req.params.id;
-pool.query('SELECT * FROM videos WHERE id=$1', [videoId])
+pool.query('SELECT * FROM video WHERE id=$1', [videoId])
 .then((result) =>  
 res.json(result.rows))
 .catch((error) => {
@@ -73,11 +73,11 @@ res.json(result.rows))
 app.delete('/:id', (req, res)=> {
 let vidId = req.params.id;
 pool
-.query("DELETE FROM videos WHERE id=$1", [vidId])
+.query("DELETE FROM video WHERE id=$1", [vidId])
 .then((result) => {
   if(result.rowCount !== 0){
     return  pool
-    .query("DELETE FROM videos WHERE id=$1", [vidId])
+    .query("DELETE FROM video WHERE id=$1", [vidId])
     .then(() => res.send(`Video ${vidId} deleted!`))
     .catch((error) => {
       res.status(500).json(error);
