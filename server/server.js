@@ -6,10 +6,10 @@ const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+
 let videos = require("./exampleresponse.json");
 
+// validate url function 
 function isValidYouTubeUrl(url) {
   if (url !== undefined || url !== "") {
     const regExp =
@@ -17,6 +17,7 @@ function isValidYouTubeUrl(url) {
     return url.match(regExp) ? url : false;
   }
 }
+
 // GET all videos
 app.get("/", (req, res) => {
   videos.length > 0
