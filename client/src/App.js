@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
- import Video from "./Video";
- //import dataVideos from "./exampleresponse.json";
-  import AddVideo from "./AddVideo";
+import Video from "./Video";
+//import dataVideos from "./exampleresponse.json";
+import AddVideo from "./AddVideo";
 
 function App() {
   const [del, setDel] = useState([])
