@@ -1,21 +1,18 @@
 require("dotenv").config();
-console.log(process.env);
-const data = require("../client/src/exampleresponse.json");
 const pool = require("./connection");
 const express = require("express");
 const cors = require("cors");
-const { query } = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-
 
 app.use(express.json());
 app.use(cors())
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get("/", (req, res) => {
-  pool.query("SELECT * FROM videos")
+// Retrieving videos from database
+app.get("/", async (req, res) => {
+  await pool.query("SELECT * FROM videos")
     .then(result => res.json(result.rows))
     .catch(err => {
       console.error(err)
@@ -23,6 +20,7 @@ app.get("/", (req, res) => {
     });
 });
 
+// Looking for a video using an id
 app.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
@@ -37,8 +35,8 @@ app.get("/:id", (req, res) => {
     })
 });
 
+// Add a video to database
 app.post("/", (req, res) => {
-
   const { title, url } = req.body;
   const video = { title, url };
 
@@ -58,6 +56,7 @@ app.post("/", (req, res) => {
     
 });
 
+// Deleting a video from database
 app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
