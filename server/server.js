@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const fs = require("fs");
+const path = require('path')
 
 const filePath = "../client/src/exampleresponse.json";
 
@@ -10,12 +11,16 @@ app.listen(port, () => {
 });
 //app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(express.static(path.resolve(__dirname, "../build")));
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 // GET "/"
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+});
 app.post("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   let maxID = Math.max(...videos.map((c) => c.id));
