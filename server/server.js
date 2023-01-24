@@ -78,6 +78,20 @@ app.delete("/api/:id", (req, res) => {
   }
 });
 
+// UPDATE video rating by id
+app.patch("/api/:id", (req, res) => {
+  let videoIndex = videos.findIndex(({ id }) => id === parseInt(req.params.id));
+  if (videoIndex >= 0) {
+    videos[videoIndex].rating = req.body.rating;
+    res.send(videos);
+  } else {
+    res.status(400).send({
+      result: "failure",
+      message: "No matching result",
+    });
+  }
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });

@@ -47,7 +47,21 @@ function App() {
       console.log({ error });
     }
   }
-
+  async function updateVideo(e, video, id) {
+    try {
+      const res = await fetch(`api/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(video),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const jsonData = await res.json();
+      setVideosData(jsonData);
+    } catch (error) {
+      console.log({ error });
+    }
+  }
   useEffect(() => {
     getAllVideos();
   }, [videosData]);
@@ -84,32 +98,22 @@ function App() {
 
   const incrementRating = (e) => {
     let videoId = parseInt(e.currentTarget.name);
-    const newVideos = videosData.map((vid) => {
-      if (vid.id === videoId) {
-        return {
-          ...vid,
-          rating: ++vid.rating,
-        };
-      } else {
-        return vid;
-      }
-    });
-    setVideosData(newVideos);
+    let updatedVideo = videosData.filter((vid) => vid.id === videoId);
+
+    if (updatedVideo) {
+      updatedVideo[0].rating += 1;
+      updateVideo(e, updatedVideo[0], updatedVideo[0].id);
+    }
   };
 
   const decrementRating = (e) => {
     let videoId = parseInt(e.currentTarget.name);
-    const newVideos = videosData.map((vid) => {
-      if (vid.id === videoId) {
-        return {
-          ...vid,
-          rating: --vid.rating,
-        };
-      } else {
-        return vid;
-      }
-    });
-    setVideosData(newVideos);
+    let updatedVideo = videosData.filter((vid) => vid.id === videoId);
+
+    if (updatedVideo) {
+      updatedVideo[0].rating -= 1;
+      updateVideo(e, updatedVideo[0], updatedVideo[0].id);
+    }
   };
 
   const handleInputChange = (e) => {
