@@ -4,19 +4,30 @@ import { v4 as uuidv4 } from "uuid";
 export default function AddNewVideo({ addNewVideo }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+
   function handleChangeTitle(e) {
     setTitle(e.target.value);
   }
+
   function handleChangeUrl(e) {
     setUrl(e.target.value);
+    let url = e.target.value;
+    e.preventDefault();
+    let checkUrl =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(checkUrl)) {
+      return true;
+    }
+    alert("Not a valid youtube url");
+    return false;
   }
+
   function handleSubmit() {
     const newVideo = {
       id: uuidv4(),
       title: title,
       url: url,
       rating: 0,
-      time: new Date().getFullYear(),
     };
     addNewVideo(newVideo);
     if (title === "" || title === null) {
@@ -24,18 +35,6 @@ export default function AddNewVideo({ addNewVideo }) {
       return false;
     }
   }
-
-  // function validateYouTubeUrl() {
-  //   if (url) {
-  //     var regExp =
-  //       /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-  //     if (url.match(regExp)) {
-  //       return true;
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   return (
     <div>
@@ -63,6 +62,7 @@ export default function AddNewVideo({ addNewVideo }) {
             required=""
             type="text"
             name="name"
+            label="URL"
             onChange={handleChangeUrl}
           />
         </label>
@@ -75,6 +75,7 @@ export default function AddNewVideo({ addNewVideo }) {
       >
         Cancel
       </button>
+
       <button
         className="btn btn-outline-success"
         onClick={handleSubmit}

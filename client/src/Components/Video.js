@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import LikeButton from "../Buttons/LikeButton";
 import DislikeButton from "../Buttons/DislikeButton";
 import YoutubeEmbed from "./YoutubeEmbed";
 
 function Video({ video, handleDelete }) {
   const [rating, setRating] = useState(video.rating);
-
   const incrementLikeClick = () => {
     setRating(rating + 1);
   };
   const decrementLikeClick = () => {
     setRating(rating - 1);
   };
+
   return (
     <div className="video-container">
       <p>{video.title}</p>
