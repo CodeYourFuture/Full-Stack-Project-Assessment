@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(express.json()); // before our routes definition
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+// If you want, you can copy "example response.json" into here to have some data to work with
 let videos = [
   {
     id: 523523,
@@ -77,15 +79,21 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
-app.post("/videos", (req, res) => {
+app.post("/", (req, res) => {
   let newVideo = req.body;
-  // if (!(req.body.title || req.body.url)) {
-  //   res.status(400).send("No video entered");
-  // } else {
-  console.log(videos.push(newVideo), "I think it works");
-  videos.push(newVideo);
-  res.status(200).send(videos);
-  // }
+  if (!(req.body.title || req.body.url)) {
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  } else {
+    newVideo.id = videos[videos.length - 1].id + 1;
+    console.log(newVideo.id);
+    videos.push(newVideo);
+    res.status(200).json({
+      id: newVideo.id,
+    });
+  }
 });
 
 //  Read one video specified by an ID
