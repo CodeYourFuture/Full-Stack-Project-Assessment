@@ -45,6 +45,16 @@ app.post("/", (req, res) => {
   }
 });
 
+// GET video by id
+app.get("/:id", (req, res) => {
+  let video = videos.find(({ id }) => id === parseInt(req.params.id));
+  if (video) {
+    res.send(video);
+  } else {
+    res.status(400).send("No matching result");
+  }
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
