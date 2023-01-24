@@ -1,3 +1,48 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  text-align: center;
+  background-color: white;
+  padding: 2rem;
+}
+
+.form {
+  margin: 1.5rem;
+}
+
+.footer {
+  background-color: lightgray;
+}
+
+.Card-List,
+.All-Videos-List {
+  list-style: none;
+}
+.btn {
+  margin: 0.25rem;
+}
+.form {
+  margin: 1.5rem;
+}
+
+.Card-List {
+  padding-left: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px black solid;
+}
+.All-Videos-List {
+  padding-left: 0%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* .btn btn-warning video-del-btn {
+  background-color: aqua;
+} */
