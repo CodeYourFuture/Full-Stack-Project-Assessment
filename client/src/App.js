@@ -14,16 +14,15 @@ function App() {
     isValidUrlError: false,
   });
   const [videoData, setVideoData] = useState({
-    id: 0,
     title: "",
     url: "",
     rating: 0,
     postedAt: 0,
   });
 
-  async function fetchData() {
+  async function getAllVideos() {
     try {
-      const res = await fetch("/videos");
+      const res = await fetch("/api");
       const jsonData = await res.json();
       setVideosData(formatVideosUrl(jsonData));
     } catch (error) {
@@ -31,9 +30,25 @@ function App() {
     }
   }
 
+  async function createNewVideo() {
+    try {
+      const res = await fetch("/api", {
+        method: "POST",
+        body: JSON.stringify(videoData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const jsonData = await res.json();
+      console.log("Success:", jsonData);
+    } catch (error) {
+      console.log({ error });
+    }
+  }
+
   useEffect(() => {
-    fetchData();
-  });
+    getAllVideos();
+  }, [videosData]);
 
   videosData.sort((a, b) => b.rating - a.rating);
 
@@ -119,7 +134,7 @@ function App() {
             ...videoData,
             postedAt: date,
           });
-          setVideosData(formatVideosUrl([...videosData, videoData]));
+          createNewVideo();
           setOpen(false);
           setErrors({
             isRequiredTitleError: false,
