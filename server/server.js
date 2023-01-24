@@ -21,11 +21,10 @@ function isValidYouTubeUrl(url) {
 // GET all videos
 app.get("/api", (req, res) => {
   if (videos.length > 0) {
-    if (req.query.order === "desc") {
-      videos.sort((a, b) => b.rating - a.rating);
-    }
     if (req.query.order === "asc") {
       videos.sort((a, b) => a.rating - b.rating);
+    } else {
+      videos.sort((a, b) => b.rating - a.rating);
     }
     res.json(videos);
   } else {
