@@ -20,11 +20,19 @@ function isValidYouTubeUrl(url) {
 
 // GET all videos
 app.get("/api", (req, res) => {
-  videos.length > 0
-    ? res.json(videos)
-    : res
-        .status(500)
-        .send({ result: "failure", message: "No video is available" });
+  if (videos.length > 0) {
+    if (req.query.order === "desc") {
+      videos.sort((a, b) => b.rating - a.rating);
+    }
+    if (req.query.order === "asc") {
+      videos.sort((a, b) => a.rating - b.rating);
+    }
+    res.json(videos);
+  } else {
+    res
+      .status(500)
+      .send({ result: "failure", message: "No video is available" });
+  }
 });
 
 // POST new video
