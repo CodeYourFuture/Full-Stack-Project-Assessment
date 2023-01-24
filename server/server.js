@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 app.get("/:id", function (req, res) {
   let id = parseInt(req.params.id);
   let videoOfId = videos.filter((vid) => vid.id === id);
+  console.log(videoOfId);
   res.status(200).send(videoOfId);
 });
 
@@ -34,7 +35,7 @@ app.post("/", function (req, res) {
       message: "Video could not be saved",
     });
   } else {
-    newVideo.id = `${newVideo.url.slice(newVideo.url.indexOf("=") + 1)}`;
+    newVideo.id = videos[videos.length - 1].id + 1;
     videos.push(newVideo);
     console.log(newVideo, videos.length);
     res.status(200).json({
@@ -50,11 +51,11 @@ app.post("/", function (req, res) {
 //DELETE "/{id}"
 
 app.delete("/:id", function (req, res) {
-  let id = req.params.id;
+  let id = parseInt(req.params.id);
   let result = videos.filter((el) => el.id !== id);
   videos = result;
   if (result) {
-    console.log(videos);
+    console.log(result);
     res.send(result);
   } else {
     res.status(404).send("Incorrect ID, please enter again");
