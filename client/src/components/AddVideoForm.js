@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function AddVideoForm({
   handleClickOpen,
@@ -22,6 +23,7 @@ function AddVideoForm({
         variant="contained"
         onClick={handleClickOpen}
         color="info"
+        startIcon={<AddCircleIcon />}
       >
         Add New Video
       </Button>
