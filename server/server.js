@@ -2,14 +2,14 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const generateUniqueId = require("generate-unique-id");
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3005;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
 
 let videos = require("./exampleresponse.json");
 
-// validate url function 
+// Validate url function
 function isValidYouTubeUrl(url) {
   if (url !== undefined || url !== "") {
     const regExp =
@@ -19,9 +19,9 @@ function isValidYouTubeUrl(url) {
 }
 
 // GET all videos
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   videos.length > 0
-    ? res.send(videos)
+    ? res.json(videos)
     : res
         .status(500)
         .send({ result: "failure", message: "No video is available" });
