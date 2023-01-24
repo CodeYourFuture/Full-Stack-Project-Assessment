@@ -1,0 +1,42 @@
+.App {
+    text-align: center;
+    background-color: rgb(240, 240, 168);
+}
+
+.headerApp {
+    background-color: rgb(20, 168, 213);
+    text-align: center;
+
+    padding: 2rem;
+    color: white;
+}
+
+.container {
+    margin-top: 2rem;
+    color: rgb(20, 168, 213);
+    font-size: 0.9em;
+    font-weight: 500;
+    background-color: rgb(255, 255, 206);
+    border-radius: 3rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.containerVideo {
+    background-color: red;
+    padding: 0rem 0rem 0rem 0rem;
+}
+
