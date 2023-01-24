@@ -1,8 +1,7 @@
 import { useState } from "react"
 import Videos from "./exampleresponse.json"
-import ReactPlayer from "react-player"
-import Votes from "./Votes"
 import uuid from 'react-uuid';
+import Card from "./Card";
 
 function Cards() {
 	const [videos, setVideos] = useState(Videos)
@@ -48,41 +47,9 @@ function Cards() {
 			</div>
 			<div className="Cards">
 				{videos.map((video, index) => (
-				<div
-					key={index}
-					title={video.title}
-					url={video.url}
-					id={video.id}
-          			rating={video.rating}
-					className='card'>
-					<div className='video'>
-						<ReactPlayer
-							className='video'
-							width={380}
-							height={300}
-							url={video.url}
-						/>
-					</div>
-					<div className='card-body'>
-						<h4>{video.title}</h4>
-						<p className="ratings">YouTube ratings: {video.rating}</p>
-					<Votes/>
-						<a
-							href={video.url}
-							rel='noopener noreferrer'
-							className='btn btn-primary'>
-							Watch Now
-						</a>
-						<button
-							className='delete'
-							onClick={() => removeElement(index)}>
-							Delete
-						</button>
-					</div>
-				</div>
+					<Card key={video.id} title={video.title} url={video.url} rating={video.rating} index={index} removeElement={removeElement}/>
 				))}		
-			</div>
-			
+			</div>			
 		</div>
 	)
 }
