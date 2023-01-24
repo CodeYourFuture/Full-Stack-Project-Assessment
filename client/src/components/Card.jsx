@@ -1,0 +1,25 @@
+import React from "react";
+import "./Card.css";
+
+const Card = (props) => {
+  return (
+    <div className="video-card">
+      <h3>{props.title}</h3>
+      <div className="video">
+        <iframe
+          width="250"
+          height="250"
+          src={`https://www.youtube.com/embed/${props.videoLink}`}
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p>{props.rating}</p>
+      <button>Delete</button>
+    </div>
+  );
+};
+
+export default Card;
