@@ -3,11 +3,13 @@ import Box from "@mui/material/Box";
 import VideosGrid from "./components/VideosGrid";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
+import Alert from "@mui/material/Alert";
 import "./App.css";
 
 function App() {
   const [videosData, setVideosData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const [errors, setErrors] = useState({
     isRequiredTitleError: false,
     isRequiredUrlError: false,
@@ -175,10 +177,21 @@ function App() {
     }
   };
 
-  function deleteVideo(e) {
+  async function deleteVideo(e) {
     const videoId = parseInt(e.currentTarget.name);
-    setVideosData(videosData.filter((video) => video.id !== videoId));
+    await fetch(`api/${videoId}`, {
+      method: "DELETE",
+    });
+    setIsDeleted(true);
   }
+
+  // Timer for hiding the banner message
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsDeleted(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [isDeleted]);
 
   return (
     <div className="App">
@@ -192,6 +205,18 @@ function App() {
           open={open}
           errors={errors}
         />
+        {isDeleted && (
+          <Alert
+            sx={{
+              width: { xs: "100%", md: "50%" },
+              justifyContent: "center",
+              margin: "auto",
+            }}
+            severity="success"
+          >
+            Video is successfully deleted
+          </Alert>
+        )}
         <VideosGrid
           voteUp={incrementRating}
           voteDown={decrementRating}
