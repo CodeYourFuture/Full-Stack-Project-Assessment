@@ -14,6 +14,13 @@ app.get("/", (req, res) => {
   //res.send({ express: "Your Backend Service is Running" });
 });
 
+//GET "/{id}"
+app.get("/:id", function (req, res) {
+  let id = parseInt(req.params.id);
+  let videoOfId = videos.filter((vid) => vid.id === id);
+  res.status(200).send(videoOfId);
+});
+
 //POST "/"
 app.post("/", function (req, res) {
   console.log("POST / route - video");
@@ -22,21 +29,23 @@ app.post("/", function (req, res) {
   //checking for an empty object but no need if checking if either fields empty
   //if (!Object.keys(newChat).length)
   if (!(req.body.title || req.body.url)) {
-    res.status(400).send("All fields are required to be entered");
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
   } else {
     newVideo.id = `${newVideo.url.slice(newVideo.url.indexOf("=") + 1)}`;
     videos.push(newVideo);
     console.log(newVideo, videos.length);
-    res.status(200).json(videos);
+    res.status(200).json({
+      id: newVideo.id,
+    });
   }
 });
 
-//GET "/{id}"
-app.get("/:id", function (req, res) {
-  let id = parseInt(req.params.id);
-  let videoOfId = videos.filter((vid) => vid.id === id);
-  res.status(200).send(videoOfId);
-});
+// {
+//   "id": 523523
+// }
 
 //DELETE "/{id}"
 
