@@ -1,6 +1,21 @@
 const express = require("express");
 let cors = require("cors");
 const app = express();
+
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: "test_user",
+  host: "dpg-cf84nkun6mplr412k9q0-a.oregon-postgres.render.com",
+  //host: "postgres://test_user:mgC8PDhAovGQrULdAtHazqSLuwTXA2F9@dpg-cf60rapa6gdjkk3bbkvg-a.oregon-postgres.render.com/cyf_ecommerce_l80y",
+  database: "finalprojectassessmentvideo",
+  password: "TbQmOV6PMJIvufL43RpIjz5ad4ZHHrlK",
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
 const port = process.env.PORT || 5000;
 
 app.use(cors());
