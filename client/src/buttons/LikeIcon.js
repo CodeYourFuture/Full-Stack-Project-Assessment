@@ -13,7 +13,7 @@ function LikeIcon() {
 
     return (
         <div>
-            <button onClick={handleThumbsUp}><svg
+            <button thumbs up onClick={handleThumbsUp}><svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
@@ -26,7 +26,7 @@ function LikeIcon() {
       </svg> </button>
 
 
-            <button onClick={handleThumbsDown}>  <svg
+            <button thumbs down onClick={handleThumbsDown}>  <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"

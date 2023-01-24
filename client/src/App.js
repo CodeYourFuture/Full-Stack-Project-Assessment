@@ -2,9 +2,7 @@ import React, {useState} from "react";
 import "./App.css";
 import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
-import AddVideo from "./AddVideo";
-import SearchBar from "./SearchBar";
-
+import VideoAdd from "./VideoAdd";
 
 
 function App() {
@@ -17,9 +15,8 @@ function App() {
       </header>
       <body>
         <div>
-          <AddVideo />
+          <VideoAdd setvideos={setvideos} videos={videos} />
         </div>
-        <div><SearchBar /></div>
         {videos.map((video, key) => (
           <Video video={video} key={key} setvideos={setvideos} videos={videos}/>
         ))}

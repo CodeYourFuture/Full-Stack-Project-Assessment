@@ -1,15 +1,29 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+app.post(3000, (req, res) => {
+    fs.readFile('./exampleresponse.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error reading exampleresponse.json file');
+        }
+        let videos = JSON.parse(data);
+        videos.push(req.body);
+        fs.writeFile('./exampleresponse.json', JSON.stringify(videos), (err) => {
+   if (err) {
+      console.error(err);
+      return res.status(500).send('Error writing to exampleresponse.json file');
+   }
+   res.json(videos);
+});
+    });
+});
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+app.listen(3000, () => {
+    console.log('Server started on http://localhost:3000');
 });
