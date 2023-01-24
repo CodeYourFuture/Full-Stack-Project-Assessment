@@ -1,3 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap");
+
 .App {
   text-align: center;
+}
+
+.App_header {
+  background-color: #ad2831;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.App_header h1 {
+  color: #fff;
+  margin: 40px;
+  font-weight: 500;
+  font-family: "Lora", serif;
+  font-size: 3rem;
+}
+
+.form_submit {
+  width: 426px;
+  margin: 10px 40px;
+  text-align: left;
+}
+
+.warning_messages {
+  color: #ffcad4;
+  margin: 15px;
+}
+
+.video_container {
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+}
+
+iframe {
+  border: none;
+  margin: 0;
+}
+
+.video_card {
+  overflow: hidden;
+  width: 426px;
+  box-shadow: 0 8px 40px -12px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.video_card h4 {
+  margin-right: 20px;
+  font-weight: 400;
+  color: #403d39;
+}
+
+.video_card_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px 15px;
 }
