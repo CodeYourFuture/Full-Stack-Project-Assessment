@@ -21,7 +21,9 @@ function isValidYouTubeUrl(url) {
 app.get("/", (req, res) => {
   videos.length > 0
     ? res.send(videos)
-    : res.status(500).send("No video is available");
+    : res
+        .status(500)
+        .send({ result: "failure", message: "No video is available" });
 });
 
 // POST new video
@@ -41,7 +43,9 @@ app.post("/", (req, res) => {
     videos.push(newVideo);
     res.send(newVideo.id);
   } else {
-    res.send({ result: "failure", message: "Video could not be saved" });
+    res
+      .status(400)
+      .send({ result: "failure", message: "Video could not be saved" });
   }
 });
 
@@ -51,7 +55,24 @@ app.get("/:id", (req, res) => {
   if (video) {
     res.send(video);
   } else {
-    res.status(400).send("No matching result");
+    res.status(400).send({
+      result: "failure",
+      message: "No matching result",
+    });
+  }
+});
+
+// DELETE video by id
+app.delete("/:id", (req, res) => {
+  let videoIndex = videos.findIndex(({ id }) => id === parseInt(req.params.id));
+  if (videoIndex >= 0) {
+    videos.splice(videoIndex, 1);
+    res.send({});
+  } else {
+    res.status(400).send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
   }
 });
 
