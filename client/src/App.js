@@ -5,11 +5,13 @@ import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import Alert from "@mui/material/Alert";
 import "./App.css";
+import OrderBtns from "./components/OrderBtns";
 
 function App() {
   const [videosData, setVideosData] = useState([]);
   const [open, setOpen] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [order, setOrder] = useState("desc");
   const [errors, setErrors] = useState({
     isRequiredTitleError: false,
     isRequiredUrlError: false,
@@ -24,7 +26,7 @@ function App() {
 
   async function getAllVideos() {
     try {
-      const res = await fetch("/api");
+      const res = await fetch(`api?order=${order}`);
       const jsonData = await res.json();
       setVideosData(formatVideosUrl(jsonData));
     } catch (error) {
@@ -65,8 +67,6 @@ function App() {
   useEffect(() => {
     getAllVideos();
   }, [videosData]);
-
-  videosData.sort((a, b) => b.rating - a.rating);
 
   function formatVideosUrl(videos) {
     const formattedVideosData = videos.map((video) => {
@@ -197,6 +197,9 @@ function App() {
     return () => clearTimeout(timer);
   }, [isDeleted]);
 
+  const handleOrderChange = (e) => {
+    setOrder(e.target.value);
+  };
   return (
     <div className="App">
       <Box>
@@ -209,6 +212,7 @@ function App() {
           open={open}
           errors={errors}
         />
+        <OrderBtns order={order} handleChange={handleOrderChange} />
         {isDeleted && (
           <Alert
             sx={{
