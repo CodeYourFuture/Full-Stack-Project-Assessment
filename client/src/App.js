@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import videos from "./exampleresponse.json";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import VideosGrid from "./components/VideosGrid";
 import Header from "./components/Header";
@@ -7,7 +6,7 @@ import AddVideoForm from "./components/AddVideoForm";
 import "./App.css";
 
 function App() {
-  const [videosData, setVideosData] = useState(formatVideosUrl(videos));
+  const [videosData, setVideosData] = useState([]);
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({
     isRequiredTitleError: false,
@@ -20,6 +19,20 @@ function App() {
     url: "",
     rating: 0,
     postedAt: 0,
+  });
+
+  async function fetchData() {
+    try {
+      const res = await fetch("/videos");
+      const jsonData = await res.json();
+      setVideosData(formatVideosUrl(jsonData));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
   });
 
   videosData.sort((a, b) => b.rating - a.rating);
