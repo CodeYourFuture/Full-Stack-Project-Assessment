@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 
 function App() {
-  const uri = "http://localhost:5000/";
+  const uri = "https://reco-videos-server.onrender.com/";
 
   const [openModal, setOpenModal] = useState(false);
   const [videos, setVideos] = useState([]);
@@ -24,9 +24,6 @@ function App() {
 
   // Delete a video
   const deleteVideo = (index) => {
-    // let newVideos = videos;
-    // newVideos.splice(index, 1);
-    // setVideos([...newVideos]);
     fetch(`${uri}${index}`, { method: "delete" })
       .then((res) => res.json())
       .then(data => {
@@ -42,9 +39,6 @@ function App() {
 
   // Add video to list of videos
   const addVideo = () => {
-    // let newVideos = videos;
-    // newVideos.push({ title, url });
-    // setVideos([...newVideos]);
     if (url.length === 0 || title.length === 0) {
       setErr(true);
     } else {
@@ -92,3 +86,6 @@ function App() {
 }
 
 export default App;
+ // let newVideos = videos;
+    // newVideos.push({ title, url });
+    // setVideos([...newVideos]);
