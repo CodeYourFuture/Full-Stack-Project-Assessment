@@ -5,6 +5,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/material": "^5.11.0",
     "@mui/styled-engine-sc": "^5.11.0",
+    "cors": "^2.8.5",
     "styled-components": "^5.3.6"
   }
 }

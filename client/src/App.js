@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
-import dataVideos from "./exampleresponse.json";
 import AddVideo from "./AddVideo";
-
 import ImageList from "@mui/material/ImageList";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,7 +10,14 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
 function App() {
-  const [videoData, setVideoData] = useState(dataVideos);
+  const initialError = {
+    errorExists: false,
+    errorStatus: 0,
+    errorMessage: "",
+  };
+  const [videoData, setVideoData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [errorInfo, setErrorInfo] = useState(initialError);
 
   const deleteVideo = (id) => {
     setVideoData((videoData) => videoData.filter((el) => el.id !== id));
@@ -35,6 +39,34 @@ function App() {
     );
     console.log(videoData);
   };
+
+  useEffect(() => {
+    console.log("Fetching data...");
+    fetch(`http://localhost:5000`)
+      .then((res) => {
+        if (res.status >= 300) {
+          setErrorInfo((errorInfo) => ({ ...errorInfo, errorExists: true }));
+          setErrorInfo((errorInfo) => ({
+            ...errorInfo,
+            errorStatus: res.status,
+          }));
+          setErrorInfo((errorInfo) => ({
+            ...errorInfo,
+            errorMessage: res.statusText,
+          }));
+          console.log(res.status, errorInfo.errorStatus);
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        if (data) {
+          setVideoData(data);
+          setLoaded(true);
+          console.log(loaded);
+        }
+      });
+  }, [errorInfo.errorStatus, loaded]);
 
   return (
     <div className="App">

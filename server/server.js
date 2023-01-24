@@ -1,6 +1,9 @@
 const express = require("express");
+let cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 app.use(express.json());
 // Store and retrieve your videos from here
@@ -11,6 +14,7 @@ let videos = require("./../client/src/exampleresponse.json");
 // GET "/"
 app.get("/", (req, res) => {
   res.send(videos);
+  console.log("Sending videos to client", videos);
   //res.send({ express: "Your Backend Service is Running" });
 });
 
