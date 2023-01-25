@@ -25,17 +25,20 @@ app.get("/", (req, res) =>
 
 app.post("/", (req, res) =>
 {
-  console.log(body);
+  /*console.log(req.body);
+  console.log("This is id: " + req.body.id);*/
   const video = {
     id: req.body.id,
     title: req.body.title,
     url: req.body.url,
-    rating: req.body.id
+    rating: req.body.rating,
+    added: req.body.added
   };
 
 
-  if (typeof req.body.title == "string" || typeof req.body.url == "string")
+  if (typeof req.body.title !== "string" || typeof req.body.url !== "string")
   {
+    //console.log(video);
     res.status(400).send(fail);
   }
 
