@@ -1,5 +1,7 @@
 import "./App.css";
-import defaultVideos from ""
+import InsertVideo from "./InsertVideo";
+// import video from "./singleVideo.json";
+import defaultVideos from "./exampleresponse.json";
 
 function App() {
   return (
@@ -8,7 +10,10 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <body>
-
+          {defaultVideos.map((video, key) => (
+            <InsertVideo video={video} key={key}/>
+            
+          ))}
       </body>
     </div>
   );

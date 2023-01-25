@@ -7,3 +7,13 @@
   background-color: rgb(106, 50, 209);
   padding: 2rem 0;
 }
+
+.delete {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.inserted-video {
+  text-align: center;
+}
