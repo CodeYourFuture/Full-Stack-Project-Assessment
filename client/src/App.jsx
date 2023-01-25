@@ -1,23 +1,25 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import data from "./exampleResponse.json";
-import Search from "./Components/Search.js"
-import Header from "./Components/Header";
-import NewVid from "./Components/NewVid.js";
-import ShowVideo from "./Components/ShowVideo.js"
+import Search from "./Search.js"
+import Header from "./Header";
+import AddVideo from "./AddVideo.js";
+import ShowVideo from "./ShowVideo.js"
 import "./App.css";
 function App() {
-const [inputValue, setInputValue] = useState("");
+  const [ShowAddVideo, setShowAddVideo] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [videos, setVideos] = useState(data);
 
-const filteredVideo = data.filter(video => (
-video.title.toLowerCase().includes(inputValue.toLowerCase())
-)) 
+  const filteredVideo = videos.filter(video => (
+    video.title.toLowerCase().includes(inputValue.toLowerCase())
+  )) 
 return (
 <div className="App">
   <Header />
   <div className="add-search">
   <div>
-  <NewVid />
+  <AddVideo addVideo={(video) => setVideos([...videos, video])} />
   </div>
   <div>
   <Search inputValue={inputValue} setInputValue={setInputValue} />

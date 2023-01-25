@@ -28,7 +28,7 @@ return (
           </div>
           <iframe width="500" height="355" src={item.url.replace("watch?v=", "embed/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           <br />
-          <button onClick={deleteVideo}>Delete</button>
+          <button onClick={() => deleteVideo(item.id)}>Delete</button>
         </div>
       ))}
     </div>
