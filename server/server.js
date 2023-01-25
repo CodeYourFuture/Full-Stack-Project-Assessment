@@ -1,79 +1,99 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+app.use(express.json());
+const port = process.env.PORT || 5001;
+const fs = require("fs");
+const cors = require ("cors")
+app.use(cors)
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+let videos = JSON.parse(fs.readFileSync("videos.json", "utf-8"));
+
+const save = () => {
+  fs.writeFileSync("videos.json", JSON.stringify(videos, null, 2));
+};
+
+function matchYoutubeUrl(url) {
+  var p =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if (url.match(p)) {
+    return url.match(p)[1];
+  }
+  return false;
+}
 
 // GET "/"
+
 app.get("/", (req, res) => {
-  
   res.json(videos);
 });
 
+app.get("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    res.sendStatus(400);
+    return;
+  }
+  const findVideo = videos.find((a) => a.id === id);
 
+  if (!findVideo) {
+    res.sendStatus(404);
+    return;
+  }
+  res.send(findVideo);
+});
+
+// POST
+
+const compulsoryFields = ["title", "url", "rating"];
+
+app.post("/", (req, res) => {
+  if (!compulsoryFields.every((cf) => req.body.hasOwnProperty(cf))) {
+    res.status(401).send("not all compulsory fields supplied");
+  }
+
+  let newVideo = {
+    id: Date.now(),
+    title: req.body.title,
+    url: req.body.url,
+    rating: req.body.rating,
+  };
+
+  if (!req.body.title || !req.body.url || !req.body.rating) {
+    res.status(400).send("Please enter a valid title, url and rating");
+    return;
+  }
+
+  if (matchYoutubeUrl(req.body.url) === false) {
+    res.status(400).send("Please enter a full valid YouTube url");
+    return;
+  }
+
+  if (isNaN(req.body.rating)) {
+    res.status(400).send("Please enter a valid number as a rating");
+  }
+
+  videos.push(newVideo);
+  save();
+  res.json(newVideo);
+});
+
+// Delete
+
+app.delete("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  if (isNaN(videoId)) {
+    res.sendStatus(400);
+    return;
+  }
+  const findVideo = videos.find((v) => v.id === videoId);
+  if (!findVideo) {
+    res.sendStatus(404);
+    return;
+  }
+  const index = videos.findIndex((v) => v.id === videoId);
+  videos.splice(index, 1);
+  save();
+  res.send(findVideo);
+});

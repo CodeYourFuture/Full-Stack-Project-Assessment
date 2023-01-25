@@ -5,6 +5,9 @@ import VideosList from "./VideosList";
 import Form from "./Form";
 import { useState } from "react";
 
+fetch("http://localhost:5001/",{
+  mode:'cors'})
+  .then((response) => console.log(response.json));
 
 function App() {
   const [videos, setVideos] = useState(VideoData)

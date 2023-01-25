@@ -3,7 +3,7 @@ import VoteButton from "./VoteButton";
 
 
 const VideosList = ({videoData}) => {
-    console.log(videoData)
+    //console.log(videoData)
     const videoIdExtract = (url) =>{
         var regExp =
           /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
