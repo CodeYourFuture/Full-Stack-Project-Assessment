@@ -4,7 +4,15 @@ import DislikeIcon from "./buttons/DislikeIcon";
 import YouTubeEmbed from "./YouTubeEmbed";
 import "bootstrap/dist/css/bootstrap.css";
 
-function Video({ id, title, url, rating, videoData, setVideoData }) {
+function Video({
+  id,
+  title,
+  url,
+  rating,
+  videoData,
+  setVideoData,
+  setUrl,
+}) {
   const handleOnClick = (e) => {
     const selected = e.currentTarget.id;
 
@@ -37,7 +45,7 @@ function Video({ id, title, url, rating, videoData, setVideoData }) {
         </p>
         <DislikeIcon id={id} handleOnClick={handleOnClick} />
       </div>
-      <YouTubeEmbed url={url} title={title} />
+      <YouTubeEmbed url={url} title={title} setUrl={setUrl} />
       <DeleteButton
         videoData={videoData}
         setVideoData={setVideoData}
