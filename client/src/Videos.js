@@ -6,7 +6,19 @@ function Video({ data, video, setVideoData })
     const deleteFunction = (data, id) => 
     {
         //document.getElementById(id).remove();
-        setVideoData(data.filter(data => data.id !== id))
+
+        fetch('http://192.168.0.15:5000/' + id,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => setVideoData(data))
+            .catch((err) => console.log(err.message));
+
+        //setVideoData(data.filter(data => data.id !== id))
     }
 
     return (
@@ -14,7 +26,7 @@ function Video({ data, video, setVideoData })
             <h1>{video.title}</h1>
             <button id="delete" onClick={() => deleteFunction(data, video.id)}>Delete</button>
 
-            <Embed video={video} />
+            <Embed video={video} data={data} />
         </div>
     );
 }
@@ -26,7 +38,7 @@ function Video({ data, video, setVideoData })
 
 
 
-const Embed = ({ video }) => 
+const Embed = ({ video, data, sortData }) => 
 {
     const url = video.url.replace("watch?v=", "embed/");
     const [rating, setRating] = useState(video.rating);
