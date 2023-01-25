@@ -7,28 +7,20 @@ import "./videoCard.css";
 function VideoCard({ video, handleDelete, onThumbsDown }) {
   const url = video.url.replace("watch?v=", "embed/");
   const [voteCount, setVoteCount] = useState(video.rating);
+ 
 
    function likeVote() {
-     let count = voteCount;
-     count = count + 1;
-     if (count < 0) {
-       count = 0;
-     }
-     setVoteCount(count);
+    setVoteCount((voteCount) => voteCount + 1);
    }
 
   function disLikeVote() {
-    let count = voteCount;
-    count = count - 1;
-    if (count < 0){
-        count = 0
-    }
-    setVoteCount(count);
+   setVoteCount((voteCount) => (voteCount === 0 ? voteCount : voteCount - 1));
   }
 
   return (
     <div className="card">
       <iframe
+        title={video.title}
         src={url}
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
