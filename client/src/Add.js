@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function Add({ data, setVideoData, setSorted })
+function Add({ data, setVideoData })
 {
     const [newTitle, setNewTitle] = useState("");
     const [newURL, setNewURL] = useState("");
@@ -19,29 +19,17 @@ function Add({ data, setVideoData, setSorted })
 
         if (newItem.title !== "" && newItem.url !== "")
         {
-            /*
             fetch('http://192.168.0.15:5000/',
                 {
                     method: 'POST',
-                    body: JSON.stringify({ newItem }),
+                    body: JSON.stringify(newItem),
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
                     },
                 })
                 .then((response) => response.json())
-                .then((data) =>
-                {
-                    console.log(data);
-                })
-                .catch((err) =>
-                {
-                    console.log(err.message);
-                });
-                */
-
-
-            setVideoData(previous => [...previous, newItem]);
-            setSorted(false);
+                .then((data) => setVideoData(data))
+                .catch((err) => console.log(err.message));
         }
     }
 
