@@ -4,12 +4,10 @@ const port = process.env.PORT || 3001;
 const fs = require("fs");
 const path = require("path");
 
-
 const filePath = "../client/src/exampleresponse.json";
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
-  console.log(__dirname);
 });
 //app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,8 +18,16 @@ let videos = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 // GET "/"
 
+//find video by ID
+
+app.delete("/:id", (req, res) => {
+  videos = videos.filter((e) => e.id != req.params.id);
+  save();
+  res.json(videos);
+});
+
 app.get("/:id", (req, res) => {
-  res.json(videos.filter(e => e.id == req.params.id))
+  res.json(videos.filter((e) => e));
 });
 
 app.get("/", (req, res) => {
@@ -29,9 +35,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
+  //create new video ID
   let maxID = Math.max(...videos.map((c) => c.id));
+  //get current system date and time
   let dateTime = new Date();
+
+  if (req.body.videoTitle == "" && req.body.videoURL == "") {
+    res.json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+    return;
+  }
+
+  //add video to the the array
   videos.push({
     id: ++maxID,
     title: req.body.videoTitle,
@@ -41,8 +58,11 @@ app.post("/", (req, res) => {
     vote: 0,
     postedDate: dateTime.toLocaleString(),
   });
+
+  // save it to the file
   save();
 
+  //send OK response
   res.json({
     id: maxID,
     message: " saved successfully",
