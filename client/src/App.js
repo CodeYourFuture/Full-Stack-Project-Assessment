@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
-import exampleresponse from "./data/exampleresponse.json";
+// import exampleresponse from "./data/exampleresponse.json";
 import "./App.css";
 
 const sortVideosByRating = (videos) =>
@@ -10,10 +10,35 @@ const sortVideosByRating = (videos) =>
 const deleteVideo = (id, initialVideos) =>
   initialVideos.filter((video) => video.id !== id);
 
-let allVideos = sortVideosByRating([...exampleresponse]);
+// let allVideos = sortVideosByRating([...exampleresponse]);
 
 const App = () => {
-  const [videos, setVideos] = useState(allVideos);
+  //----------------------------------
+  const [videos, setVideos] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const serverUrl = "https://simeon-video-recommendation.onrender.com";
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch(serverUrl);
+        if (!res.ok) {
+          throw new Error(`This is an HTTP error: The status is ${res.status}`);
+        }
+        let actualData = await res.json();
+        setVideos(actualData);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setVideos(null);
+        console.error(`An error occurred: ${err}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
   const deleteAction = (id) => {
     setVideos(deleteVideo(id, videos));
@@ -26,13 +51,18 @@ const App = () => {
         <AddVideoForm setVideos={setVideos} />
       </header>
       <div className="video_container">
-        {videos.map((video) => (
-          <VideoCard
-            video={video}
-            key={video.id}
-            delVid={() => deleteAction(video.id)}
-          />
-        ))}
+        {loading && <span>Loading, please wait...</span>}
+        {error && (
+          <span>{`There is a problem fetching the post data - ${error}`}</span>
+        )}
+        {!loading &&
+          sortVideosByRating(videos.videos).map((video) => (
+            <VideoCard
+              video={video}
+              key={video.id}
+              delVid={() => deleteAction(video.id)}
+            />
+          ))}
       </div>
     </div>
   );
