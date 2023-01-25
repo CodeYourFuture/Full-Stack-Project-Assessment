@@ -19,19 +19,18 @@ function Video({ video }) {
   };
 
   return (
-    
-      
-      <div className="video-container">
-        <p>{video.title}</p>
-        <div className="vote-container">
-          <LikeIcon clickFunc={handleVote} isVoted={isVoted} />
-          <p>{vote} Vote</p>
-          <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
-        </div>
-        <YouTubeEmbed video={video} />
-        <p className="m-2">{video.postedDate?"Posted at "+video.postedDate:""}</p>
-        <DeleteButton />
-      
+    <div className="video-container">
+      <p>{video.title}</p>
+      <div className="vote-container">
+        <LikeIcon clickFunc={handleVote} isVoted={isVoted} />
+        <p>{vote} Vote</p>
+        <DislikeIcon clickFunc={handleVote} isVoted={!isVoted} />
+      </div>
+      {video.url ? <YouTubeEmbed video={video} /> : ""}
+      <p className="m-2">
+        {video.postedDate ? "Posted at " + video.postedDate : ""}
+      </p>
+      <DeleteButton />
     </div>
   );
 }
