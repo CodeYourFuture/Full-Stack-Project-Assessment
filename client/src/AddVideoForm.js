@@ -8,9 +8,20 @@ const AddVideoForm = ({ setVideoData }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
+  function validateYouTubeUrl(urlToParse) {
+    if (urlToParse) {
+      var regExp =
+        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      if (url.match(regExp)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   const handleVideoAdder = (e) => {
     e.preventDefault();
-    const videoId = Math.floor(Math.random() * 1000000);
+    const videoId = Date.now();
     const rating = Math.floor(Math.random() * 10000);
 
     const newVideoData = {
@@ -21,12 +32,37 @@ const AddVideoForm = ({ setVideoData }) => {
       timeSent: new Date().toLocaleDateString(),
     };
 
-    newVideoData.title && newVideoData.url.includes("www.youtube.com/watch?v=")
+    newVideoData.title && validateYouTubeUrl(newVideoData.url)
       ? setVideoData((videos) => videos.concat(newVideoData))
-      : alert("Please fill all the sections");
+      : alert("Please make sure to enter valid URL and TITLE!");
     // setTitle('');
     // setUrl('')
+    //  fetch("/videos", {
+    //    method: "POST",
+    //    headers: { "Content-Type": "application/json" },
+    //    body: JSON.stringify(setVideoData),
+    //  })
+    //    .then((res) => res.json())
+    //    .then((data) => {
+    //      console.log(data);
+    //    })
+    //    .catch((error) => console.log(error));
+
   };
+
+  
+
+  // fetch("/videos", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(setVideoData),
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch((error) => console.log(error));
+
   return (
     <div>
       <Container>

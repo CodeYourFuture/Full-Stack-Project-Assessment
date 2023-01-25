@@ -6,17 +6,14 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import AddVideo from "./AddVideo";
 import AddVideoForm from "./AddVideoForm";
-import dataVideos from "./exampleresponse.json";
-
 import Search from "./Search";
 import Video from "./Video";
 
 function App() {
   const [addVideo, setAddVideo] = useState(false);
   //
-  const [videoData, setVideoData] = useState(dataVideos);
-  const [videosFilter, setVideosFilter] = useState("");
-  //
+  const [videoData, setVideoData] = useState([]);
+  const [backup, setBackup] = useState([]);
   videoData.sort((a, b) => b.rating - a.rating)
 
   const addVideoHandler = () => {
@@ -24,12 +21,15 @@ function App() {
   };
 
   useEffect(() => {
-    setVideoData(
-      dataVideos.filter((video) =>
-        video.title.toLowerCase().includes(videosFilter.toLowerCase())
-      )
-    );
-  }, [videosFilter]);
+    fetch('/videos')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setVideoData(data)
+        setBackup(data)
+      })
+    .catch((error) => console.log(error))
+  }, []);
 
   return (
     <div className="App bg-light">
@@ -43,7 +43,7 @@ function App() {
             {addVideo && <AddVideoForm setVideoData={setVideoData} />}
           </Col>
           <Col md>
-            <Search handler={(e) => setVideosFilter(e.target.value)} />
+            <Search setVideoData={setVideoData} videoData={videoData} backup={backup} />
           </Col>
         </Row>
       </Container>

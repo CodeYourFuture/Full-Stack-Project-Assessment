@@ -1,10 +1,10 @@
 import React from "react";
 
 import DeleteB from "./DeleteB";
-
+import RenderVideo from "./RenderVideo";
 import LikeAndDislike from "./LikeAndDislike";
 
-import RenderVideo from "./RenderVideo";
+
 import "bootstrap/dist/css/bootstrap.css";
 
 function Video({ video, data, setData }) {

@@ -2,6 +2,15 @@ import React from "react";
 
 function DeleteB(props) {
   const handleDelete = (id) => {
+    const videoId = props.video.id;
+    
+    fetch(`/videos/${videoId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json)
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
     props.setData(props.data.filter((video) => video.id !== id));
   };
 
