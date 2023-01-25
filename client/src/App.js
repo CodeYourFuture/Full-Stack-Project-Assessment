@@ -13,12 +13,12 @@ const deleteVideo = (id, initialVideos) =>
 // let allVideos = sortVideosByRating([...exampleresponse]);
 
 const App = () => {
-  //----------------------------------
   const [videos, setVideos] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const serverUrl = "https://simeon-video-recommendation.onrender.com";
 
+// Get "/"
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,16 +29,21 @@ const App = () => {
         let actualData = await res.json();
         setVideos(actualData);
         setError(null);
+        setLoading(false);
       } catch (err) {
         setError(err.message);
         setVideos(null);
-        console.error(`An error occurred: ${err}`);
-      } finally {
         setLoading(false);
-      }
+        console.error(`An error occurred: ${err}`);
+      } 
+      // finally {
+      //   setLoading(false);
+      // }
     };
     getData();
   }, []);
+
+  // Post "/"
 
   const deleteAction = (id) => {
     setVideos(deleteVideo(id, videos));
@@ -55,7 +60,7 @@ const App = () => {
         {error && (
           <span>{`There is a problem fetching the post data - ${error}`}</span>
         )}
-        {!loading &&
+        {videos &&
           sortVideosByRating(videos.videos).map((video) => (
             <VideoCard
               video={video}
