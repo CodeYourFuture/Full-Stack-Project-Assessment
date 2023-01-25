@@ -1,7 +1,9 @@
 import React from "react";
 
-function YouTubeEmbed({ url, title }) {
-  let urlSource = url.replace("watch?v=", "embed/");
+function YouTubeEmbed({ url, title, setUrl }) {
+  let urlSource = url?.replace("watch?v=", "embed/");
+
+  // console.log(urlSource);
 
   return (
     <iframe
@@ -9,7 +11,8 @@ function YouTubeEmbed({ url, title }) {
       height={"300"}
       src={urlSource}
       alt={`video ${title}`}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      // allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
     />
   );
 }

@@ -4,10 +4,11 @@ import "./AddVideoButton.css";
 const AddVideoButton = ({
   videoData,
   setVideoData,
-  setUserAddedVid,
+  url,
+  title,
+  setTitle,
+  setUrl,
 }) => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
 
   const youtubeRegex =
@@ -21,16 +22,41 @@ const AddVideoButton = ({
 
     if (title.length > 0 && url.length > 0 && isYoutubeUrl) {
       const video = {
-        id: new Date().getTime().toString(),
         title,
         url,
         rating: 0,
-        datePosted: new Date().toLocaleString(),
+        // datePosted: new Date().toLocaleString(),
       };
-      setVideoData((videoData) => {
-        setUserAddedVid(video);
-        return [...videoData, video];
-      });
+      // Fetch logic to post
+      // "http://localhost:5000/"
+      // "https://full-stack-project-assessment-server.onrender.com/"
+      fetch(
+        "https://full-stack-project-assessment-server.onrender.com/",
+        {
+          method: "POST",
+          body: JSON.stringify(video),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setVideoData([...videoData, data]);
+          fetch(
+            "https://full-stack-project-assessment-server.onrender.com/"
+          )
+            .then((res) => res.json())
+            .then((result) => {
+              setVideoData(result);
+              setTitle("");
+              setUrl("");
+            });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
       setTitle("");
       setUrl("");
     } else {

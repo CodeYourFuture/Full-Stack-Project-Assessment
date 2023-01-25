@@ -7,9 +7,10 @@ import Search from "./Search";
 
 function App() {
   const [videoData, setVideoData] = useState([]);
-  const [userAddedVid, setUserAddedVid] = useState([]);
   const [isLoaded, setIsLoaded] = useState(true);
   const [error, setError] = useState(null);
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
 
   //Fetch data from express api running locahost
   // NB. had to install cors in express for this to work.
@@ -44,13 +45,15 @@ function App() {
         <AddVideoButton
           videoData={videoData}
           setVideoData={setVideoData}
-          setUserAddedVid={setUserAddedVid}
+          url={url}
+          setUrl={setUrl}
+          title={title}
+          setTitle={setTitle}
         />
         <Search
           videoData={videoData}
-          setVideoData={setVideoData}
           dataVideos={dataVideos}
-          userAddedVid={userAddedVid}
+          setVideoData={setVideoData}
         />
       </div>
       <div className="body">
@@ -63,6 +66,7 @@ function App() {
             url={url}
             id={id}
             rating={rating}
+            setUrl={setUrl}
           />
         ))}
       </div>

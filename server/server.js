@@ -46,7 +46,7 @@ app.post("/", (req, res) => {
         "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)",
         [newVideoTitle, newVideoUrl, newVideoRating]
       )
-      .then(() => res.send("Video created"))
+      .then(() => res.send({ msg: "Video created!" }))
       .catch((error) => {
         console.error(error);
         res.status(500).json(error);
