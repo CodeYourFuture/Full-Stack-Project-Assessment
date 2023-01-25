@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import EmbedVideo from "./EmbedVideo";
+import DeleteButton from "./buttons/DeleteButton";
 import LikeButton from "./buttons/LikeButton";
 import DislikeButton from "./buttons/DisLikeButton";
 
-function Video({ video }) {
+function Video({ video, remove}) {
   const [count, setCount] = useState(video.rating);
   const increment = () => {
     setCount(count + 1);
@@ -20,6 +21,7 @@ function Video({ video }) {
         <DislikeButton decrement={decrement} />
       </div>
       <EmbedVideo video={video} />
+      <DeleteButton remove={remove} id={video.id}/>
     </div>
   );
 }
