@@ -15,6 +15,7 @@ function App() {
     errorStatus: 0,
     errorMessage: "",
   };
+
   const [videoData, setVideoData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [errorInfo, setErrorInfo] = useState(initialError);
@@ -24,7 +25,7 @@ function App() {
   };
 
   const addVideo = (newVid) => {
-    console.log("I got here", newVid);
+    console.log("I got here", newVid, videoData);
     setVideoData((videoData) => videoData.concat(newVid));
   };
 
