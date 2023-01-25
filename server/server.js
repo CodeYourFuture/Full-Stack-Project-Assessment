@@ -4,6 +4,7 @@ const port = process.env.PORT || 3001;
 const fs = require("fs");
 const path = require("path");
 
+
 const filePath = "../client/src/exampleresponse.json";
 
 app.listen(port, () => {
@@ -19,9 +20,14 @@ let videos = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 // GET "/"
 
+app.get("/:id", (req, res) => {
+  res.json(videos.filter(e => e.id == req.params.id))
+});
+
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
+
 app.post("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   let maxID = Math.max(...videos.map((c) => c.id));
@@ -36,7 +42,11 @@ app.post("/", (req, res) => {
     postedDate: dateTime.toLocaleString(),
   });
   save();
-  res.json({ message: "Video saved successfully" });
+
+  res.json({
+    id: maxID,
+    message: " saved successfully",
+  });
 });
 
 const save = () => {

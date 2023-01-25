@@ -22,7 +22,7 @@ const Insert = () => {
       return;
     }
 
-    //Create and send a POST request to server
+    //Create and send a POST request to server (send data to the server)
     try {
       const res = await fetch("/", {
         method: "POST",
@@ -40,7 +40,7 @@ const Insert = () => {
       //
 
       if (res.ok) {
-        setAlert(vid.message);
+        setAlert(`Video ID: ${vid.id} ${vid.message}`);
         setAlertTimeout(5);
       } else {
         setAlert(
