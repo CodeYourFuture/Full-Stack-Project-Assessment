@@ -41,7 +41,9 @@ function App() {
     const allVideo = videos.concat(newVideo);
     setVideos(allVideo);
   }
-
+  videos.sort((a, b) => {
+     return b.rating - a.rating;
+  });
   return isLoading ? (
     "A moment please"
   ) : (
