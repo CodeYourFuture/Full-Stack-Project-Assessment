@@ -20,13 +20,32 @@ let fail = {
 // GET "/"
 app.get("/", (req, res) =>
 {
-  res.send(videos);
+  console.log(req.param("order"))
+  let sorted = req.param("order");
+
+  if (sorted === "asc")
+  {
+    videos = [...videos].sort((a, b) => a.rating - b.rating);
+    console.log(videos)
+    res.send(videos);
+  }
+
+  else if (sorted === "desc")
+  {
+    videos = [...videos].sort((a, b) => b.rating - a.rating);
+    console.log(videos)
+    res.send(videos);
+  }
+
+  else
+  {
+    res.send(videos);
+  }
+
 });
 
 app.post("/", (req, res) =>
 {
-  /*console.log(req.body);
-  console.log("This is id: " + req.body.id);*/
   const video = {
     id: req.body.id,
     title: req.body.title,
@@ -38,7 +57,6 @@ app.post("/", (req, res) =>
 
   if (typeof req.body.title !== "string" || typeof req.body.url !== "string")
   {
-    //console.log(video);
     res.status(400).send(fail);
   }
 
@@ -65,7 +83,7 @@ app.delete("/:id", function (req, res)
   if (filterdVideo.length !== 0)
   {
     videos = videos.filter(video => video.id !== id);
-    res.send({});
+    res.send(videos);
   }
 
   else
