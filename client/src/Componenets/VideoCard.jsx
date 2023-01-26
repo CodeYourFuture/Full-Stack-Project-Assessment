@@ -4,13 +4,19 @@ import VideoCardButtons from './VideoCardButtons'
 //import use state
 
 const VideoCard = () => {
+  const [videos, setVideos] = useState(exampleResponse)
+
+  const removeVideo = (id) => {
+    console.log('clicked!')
+    const updatedResponse = videos.filter((video) => video.id !== id)
+    setVideos(updatedResponse)
+  }
 
   return (
-    <div className='card-container'>
-      {exampleResponse.map((video, i) => (
-        <div className="video-card" key={i}>
+    <div className="card-container">
+      {videos.map((video) => (
+        <div className="video-card" key={video.id}>
           <h4>{video.title}</h4>
-          <h1>{video.url.slice(32, 43)}</h1>
           <iframe
             width="560"
             height="315"
@@ -21,6 +27,7 @@ const VideoCard = () => {
             allowFullScreen
           ></iframe>
           <VideoCardButtons rating={video.rating} />
+          <button onClick={() => removeVideo(video.id)}>remove video</button>
         </div>
       ))}
     </div>
