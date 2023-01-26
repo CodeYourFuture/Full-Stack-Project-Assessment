@@ -36,7 +36,6 @@ app.get('/api/videos/:videoId', (req, res) => {
     .query("SELECT * FROM videos WHERE id = $1", [videoId])
     .then((video) => res.json(video.rows))
     .catch((err) => {
-
       res.status(500).json(err);
     });
 });
