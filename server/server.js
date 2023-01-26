@@ -30,15 +30,6 @@ function createTable() {
   return query;
 }
 
-function uploadData() {
-  let queryInsertArray = videos.map(
-    (el) =>
-      `INSERT INTO videos (id, title, url, rating) VALUES (${el.id}, ${el.title}, ${el.url}, ${el.rating})`
-  );
-  console.log(queryInsertArray);
-  return queryInsertArray;
-} //function close
-
 app.post("/videos", function (req, res) {
   pool
     .query(
@@ -60,7 +51,6 @@ app.post("/videosdata", function (req, res) {
     const newVideoRating = item.rating;
     query += `INSERT INTO videos (id, title, url, rating) VALUES (${newVideoId}, ${newVideoTitle}, ${newVideoUrl},  ${newVideoRating}) `;
   });
-  console.log(query);
   pool
     .query(query)
     .then(() => res.send("Videos created!"))
@@ -74,40 +64,64 @@ app.post("/videosdata", function (req, res) {
 
 //get all example videos
 // GET "/"
-app.get("/", (req, res) => {
-  res.send(videos);
-  console.log("Sending videos to client", videos);
-  //res.send({ express: "Your Backend Service is Running" });
+// app.get("/", (req, res) => {
+//   res.send(videos);
+//   console.log("Sending videos to client", videos);
+//   //res.send({ express: "Your Backend Service is Running" });
+// });
+
+app.get("/", function (req, res) {
+  pool
+    .query("SELECT * FROM videos")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 //GET "/{id}"
 app.get("/:id", function (req, res) {
-  let id = parseInt(req.params.id);
-  let videoOfId = videos.filter((vid) => vid.id === id);
-  console.log(videoOfId);
-  res.status(200).send(videoOfId);
+  const vidId = req.params.id;
+  pool
+    .query("SELECT * FROM videos WHERE id = $1", [vidId])
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
-//POST "/"
+//post new video
+
 app.post("/", function (req, res) {
-  console.log("POST / route - video");
-  let newVideo = req.body;
-  console.log(newVideo, videos.length);
-  //checking for an empty object but no need if checking if either fields empty
-  //if (!Object.keys(newChat).length)
-  if (!(req.body.title || req.body.url)) {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
+  const newVideoTitle = req.body.title;
+  const newVideoUrl = req.body.url;
+ 
+  pool
+    .query("SELECT * FROM videos WHERE name=$1", [newVideoTitle])
+    .then((result) => {
+      if (result.rows.length > 0) {
+        return res.status(400);
+        res.status(400).json({
+          result: "failure",
+          message: "Video could not be saved",
+        });
+      } else {
+        const query = "INSERT INTO videos (title, url) VALUES ($1, $2)";
+        pool
+          .query(query, [newVideoTitle, newVideoUrl])
+          .then(() =>
+            res.status(200).json({
+              id: newVideo.id,
+            })
+          )
+          .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
+          });
+      }
     });
-  } else {
-    newVideo.id = videos[videos.length - 1].id + 1;
-    videos.push(newVideo);
-    console.log(newVideo, videos.length);
-    res.status(200).json({
-      id: newVideo.id,
-    });
-  }
 });
 
 // {
