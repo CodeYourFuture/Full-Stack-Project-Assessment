@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AddVideo(props) {
+  const [message, setMessage] = useState("");
+
+  const REGEXP =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtube\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+  const isValidYoutubeUrl = (link) => {
+    return link.trim().match(REGEXP) !== null;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.handleSubmit(event);
+
+    if (event.target.title.value.trim() === "") {
+      setMessage("Please enter title.");
+    } else if (!isValidYoutubeUrl(event.target.url.value.trim())) {
+      setMessage("Please enter a valid Youtube link.");
+    } else {
+      setMessage("");
+      props.handleSubmit(event);
+    }
   };
 
   return (
@@ -43,19 +60,26 @@ function AddVideo(props) {
           />
         </div>
       </div>
+      <div className="mt-3">
+        <button type="submit" className="btn btn-primary shadow">
+          Add
+        </button>
+        &nbsp;
+        <button
+          type="button"
+          className="btn btn-secondary shadow"
+          onClick={props.handleCancel}
+        >
+          Cancel
+        </button>
+        &nbsp;
+      </div>
       <br />
-      <button type="submit" className="btn btn-primary shadow">
-        Add
-      </button>
-      &nbsp;
-      <button
-        type="button"
-        className="btn btn-secondary shadow"
-        onClick={props.handleCancel}
-      >
-        Cancel
-      </button>
-      &nbsp;
+      {message !== "" ? (
+        <span className="alert alert-warning">{message}</span>
+      ) : (
+        ""
+      )}
     </form>
   );
 }
