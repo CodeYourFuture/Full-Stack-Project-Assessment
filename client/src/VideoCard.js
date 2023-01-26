@@ -26,7 +26,9 @@ function VideoCard({ video, handleDelete, onThumbsDown }) {
         allowfullscreen
       ></iframe>
       <div className="card-body">
-        <h5 className="card-title">{video.title}</h5>
+        <div className="card-title">
+          <p className="h5">{video.title}</p>
+        </div>
         <div className="d-flex justify-content-between flex-row w-100">
           <div className="d-flex justify-content-start align-items-center">
             <LikeIcon onThumbsUp={() => likeVote()} />
