@@ -1,28 +1,24 @@
 import React from 'react';
 import { FaSearch } from "react-icons/fa";
-import { useState } from 'react';
+import { useGlobalContext } from '../context/VideoContext';
 
 
 function SearchVideo({ videos, setVideos }) {
-  const [search, setSearch] = useState("");
-  function handleSearch(e) {
-    e.preventDefault();
-    const searchInput = e.target.value.toLowerCase();
-    setSearch(searchInput);
-    const searchFiltered = videos.filter((video) => {
-      return video.title.toLowerCase().includes(searchInput);
-    });
-    setVideos(searchFiltered);
-  }
+  const { handleSearch } = useGlobalContext()
+
   return <>
-
-    <div className='search-box'>
-
-      <input className='search-input' name='search-input' type='text' placeholder='Search here' onChange={(e) => { handleSearch(e) }} />
-      <FaSearch style={{ color: 'black', fontSize: '20px', marginBottom: '8px', backgroundColor: '#aac3dc', height: '26px', marginTop: '3px' }} />
-
+    <div className="input-group rounded" id='search'>
+      <input
+        type="search"
+        className="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        onChange={(e) => { handleSearch(e) }} />
+      <span className="input-group-text border-0" >
+        <FaSearch />
+      </span>
     </div>
-
   </>
 }
 

@@ -13,11 +13,19 @@ const defaultState = {
   videos: [],
   oneVideo: [],
   loading: true,
+  search: ''
 }
 
 export const VideosContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, defaultState);
+
+  function handleSearch(e) {
+    e.preventDefault();
+    const searchInput = e.target.value.toLowerCase();
+    dispatch({ type: 'SEARCH_VIDEO', payload: searchInput })
+
+  }
 
   //get all videos
 
@@ -71,6 +79,7 @@ export const VideosContextProvider = ({ children }) => {
         fetchVideos,
         getOneVideo,
         handleDelete,
+        handleSearch,
         dispatch,
         ...state
       }}>
