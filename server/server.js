@@ -77,15 +77,30 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
+const REGEXP =
+  /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+const isValidYoutubeUrl = (link) => {
+  return link.trim().match(REGEXP) !== null;
+};
+
+// const getIdFromYoutubeUrl = (link) => {
+//   return link.match(REGEXP) ? link.match(REGEXP)[1] : false;
+// };
+
 app.post("/", (req, res) => {
-  const addedVideoTitle = req.body.title;
-  const addedVideoUrl = req.body.url;
-  if (!addedVideoTitle || !addedVideoUrl) {
+  const addedVideoTitle = req.body.title.trim();
+  const addedVideoUrl = req.body.url.trim();
+
+  if (!addedVideoTitle || !addedVideoUrl || !isValidYoutubeUrl(addedVideoUrl)) {
     res.sendStatus(400);
     return;
   }
+  const videoId = Number(new Date());
+  // const videoId = getIdFromYoutubeUrl(addedVideoUrl);
+
   const addedVideo = {
-    id: Number(new Date()),
+    id: videoId,
     title: addedVideoTitle,
     url: addedVideoUrl,
     rating: 0,
@@ -97,7 +112,10 @@ app.post("/", (req, res) => {
 // GET "/{id}"
 app.get("/:id", (req, res) => {
   const requestedVideoId = Number(req.params.id);
-  const requestedVideo = videos.find((video) => video.id === requestedVideoId);
+  const requestedVideo = videos.filter(
+      (video) => video.id === requestedVideoId
+    );
+  // const requestedVideo = videos.find((video) => video.id === requestedVideoId);
   if (!requestedVideo) {
     res.sendStatus(404);
     return;
