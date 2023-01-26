@@ -5,6 +5,7 @@ function DeleteButton({onDelete }) {
     <button
       className="p-2 mb-1 btn btn-sm btn-outline-danger"
       type="button"
+      aria-label="delete"
       onClick={() => onDelete()}
     >
       Delete

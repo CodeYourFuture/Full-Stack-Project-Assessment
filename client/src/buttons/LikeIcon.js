@@ -5,6 +5,7 @@ function LikeIcon({ onThumbsUp }) {
     <button
       className="btn btn-sm btn-outline-primary"
       type="button"
+      aria-label="like"
       onClick={() => onThumbsUp()}
     >
       <svg

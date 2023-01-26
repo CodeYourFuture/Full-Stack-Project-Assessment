@@ -5,6 +5,7 @@ function DislikeIcon({onThumbsDown}) {
     <button
       className="btn-sm btn btn-outline-primary"
       type="button"
+      aria-label="dislike"
       onClick={() => onThumbsDown()}
     >
       <svg
