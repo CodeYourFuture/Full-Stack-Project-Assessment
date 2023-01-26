@@ -12,6 +12,20 @@
   padding: 1em;
 }
 
+.video-card h4 {
+  font-size: 1.5em;
+}
+
 .video-buttons {
   display: flex;
+}
+
+.video-buttons span,
+.video-buttons i,
+.video-buttons button {
+  padding: 0 .3em;
+}
+
+.video-buttons button {
+  margin-left: auto;
 }
