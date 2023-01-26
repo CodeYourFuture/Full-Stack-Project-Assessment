@@ -7,11 +7,13 @@ const port = process.env.PORT || 5000;
 let videos = [];
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'cyf_hotels',
-    password: 'youtuberfarzad@7633',
-    port: 5432
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT,
+    connectionString: process.env.connectionString,
+    ssl: true
 });
 
 pool.connect();
