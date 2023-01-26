@@ -7,8 +7,8 @@ import "./App.css";
 const sortVideosByRating = (videos) =>
   videos.sort((v1, v2) => (v1.rating < v2.rating ? 1 : -1));
 
-const deleteVideo = (id, initialVideos) =>
-  initialVideos.filter((video) => video.id !== id);
+// const deleteVideo = (id, initialVideos) =>
+//   initialVideos.filter((video) => video.id !== id);
 
 // let allVideos = sortVideosByRating([...exampleresponse]);
 
@@ -23,18 +23,19 @@ const App = () => {
 
   const serverUrl = "https://simeon-video-recommendation.onrender.com";
 
-// Get "/"
+  // Get "/"
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await fetch(serverUrl);
-        if (!res.ok) {
-          throw new Error(`This is an HTTP error: The status is ${res.status}`);
+        if (res.ok) {
+          // throw new Error(`This is an HTTP error: The status is ${res.status}`);
+          // }
+          let actualData = await res.json();
+          setVideos(actualData);
+          setError(null);
+          setLoading(false);
         }
-        let actualData = await res.json();
-        setVideos(actualData);
-        setError(null);
-        setLoading(false);
       } catch (err) {
         setError(err.message);
         setVideos(null);
@@ -49,13 +50,12 @@ const App = () => {
   }, [videos]);
 
   // Post "/"
-
   const addVideo = async (title, url) => {
     const requestOptions = {
       method: "POST",
       body: JSON.stringify({
         title: title,
-        url: url
+        url: url,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -63,23 +63,20 @@ const App = () => {
     };
     await fetch(serverUrl, requestOptions)
       .then((res) => {
-        if (res.status === 400)
-        setMessage("Please enter a valid Youtube link or Title");
-        if (res.ok) {
-          setMessage(`Video was added`);
+        if (res.status === 400) {
+          setMessage("Please enter a valid Youtube link or Title");
         }
-
-        res.json()
+        if (res.ok) {
+          return res.json();
+        }
       })
       .then((data) => {
+        setMessage(`Video ${data.title} was added`);
         // setPosts((posts) => [data, ...posts]);
         setTitle("");
         setUrl("");
       })
       .catch((err) => {
-        // if (response.status === 400)
-        // setMessage("Enter a valid Youtube link or Title.");
-        // console.error(err.message);
         console.error(`An error occurred: ${err}`);
       });
   };
@@ -88,11 +85,28 @@ const App = () => {
     event.preventDefault();
     addVideo(title, url);
   };
-//---------------------------------
-
-  const deleteAction = (id) => {
-    setVideos(deleteVideo(id, videos));
+  //---------------------------------
+  // Delete "/"
+  const deleteVideo = async (id) => {
+    await fetch(`${serverUrl}/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        // setPosts(
+        //   posts.filter((post) => {
+        //     return post.id !== id;
+        setMessage("Video was deleted");
+      } else {
+        return;
+      }
+    });
   };
+
+  //---------------------------------
+
+  // const deleteAction = (id) => {
+  //   setVideos(deleteVideo(id, videos));
+  // };
 
   return (
     <div className="App">
@@ -106,12 +120,9 @@ const App = () => {
           setUrl={setUrl}
           message={message}
         />
-        {/* <AddVideoForm setVideos={setVideos} /> */}
       </header>
       <div className="video_container">
-        {loading && (
-          <span>Loading, please wait...</span>
-        )}
+        {loading && <span>Loading, please wait...</span>}
         {error && (
           <span>{`There is a problem fetching the post data - ${error}`}</span>
         )}
@@ -120,7 +131,7 @@ const App = () => {
             <VideoCard
               video={video}
               key={video.id}
-              delVid={() => deleteAction(video.id)}
+              delVid={() => deleteVideo(video.id)}
             />
           ))}
       </div>
