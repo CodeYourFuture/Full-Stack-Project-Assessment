@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import exampleResponse from '../exampleresponse.json'
 import VideoCardButtons from './VideoCardButtons'
-//import use state
 
-const VideoCard = () => {
+const VideoCard = ( {exampleResponse} ) => {
   const [videos, setVideos] = useState(exampleResponse)
 
   const removeVideo = (id) => {

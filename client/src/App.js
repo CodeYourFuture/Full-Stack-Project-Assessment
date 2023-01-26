@@ -1,6 +1,7 @@
 import './App.css'
 import VideoCard from './Componenets/VideoCard'
 import AddVideo from './Componenets/AddVideo'
+import exampleResponse from './exampleresponse.json'
 
 function App() {
   return (
@@ -8,8 +9,8 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo />
-      <VideoCard />
+      <AddVideo exampleResponse={exampleResponse}/>
+      <VideoCard exampleResponse={exampleResponse}/>
     </div>
   )
 }
