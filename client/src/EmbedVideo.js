@@ -2,7 +2,6 @@ import React from "react";
 
 function EmbedVideo({video}) {
 const url = video.url.replace("watch?v=", "embed/");
- //console.log(url);
  return (
    <iframe
      width="560"
