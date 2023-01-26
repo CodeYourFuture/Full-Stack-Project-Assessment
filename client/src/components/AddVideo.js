@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from "@material-ui/core/Button"
 import { useState } from 'react';
 import axios from 'axios';
 import { useGlobalContext } from '../context/VideoContext';
@@ -6,7 +7,8 @@ import { useRef } from 'react';
 
 
 function AddVideo() {
-  const { dispatch } = useGlobalContext();
+  const { videos, dispatch } = useGlobalContext();
+  const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [titleErr, setTitleErr] = useState({});
@@ -59,14 +61,15 @@ function AddVideo() {
 
   //post one video
   const handleAdd = async (e) => {
+    // const { videos } = useGlobalContext()
     e.preventDefault();
     const isValid = formValidation();
     if (isValid) {
       const newVideo = {
         title,
         url,
-        rating: 0,
-        id: new Date().getTime().toString(),
+        rating: 10,
+        id: videos.length + 1,
       };
       try {
         dispatch({ type: 'SENDING_REQUEST' });
@@ -87,49 +90,71 @@ function AddVideo() {
 
 
   return (
-    <>
-      <div className='container'>
-        <form className='form' >
-          <p>ADD VIDEO:</p>
-          <div>
-            <label htmlFor="title">Title</label>
-            <input
-              className='input-title'
-              ref={titleRef}
-              type='text'
-              id='title'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)} />
-            <div>{Object.keys(titleErr).map((key) => {
-              return <div style={{ color: 'red', backgroundColor: 'white', borderRadius: '5px', width: '10rem', marginLeft: '31rem' }}>{titleErr[key]}<button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleHideTitleErr}>
-                <span aria-hidden="true">&times;</span></button></div>
-            })}</div>
+    <div className='form-container'>
+      <Button
+        variant='outlined'
+        size='large'
+        onClick={() => setShowForm(!showForm)}>
+        add video
+      </Button>
+      <div>
+        {showForm &&
 
-          </div>
-          <div>
-            <label htmlFor="url">URL</label>
-            <input
-              className='input'
-              ref={urlRef}
-              type='text'
-              id='url'
-              value={url}
-              onChange={(e) => setUrl(e.target.value)} />
+          <form className='form-group' id='form' >
+
+            <div>
+              <input
+                className='form-control'
+                ref={titleRef}
+                type='text'
+                id='title'
+                value={title}
+                placeholder='Enter title'
+
+                onChange={(event) => setTitle(event.target.value)} />
+              <div>{Object.keys(titleErr).map((key) => {
+                return <div className='title-error'>{titleErr[key]}
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleHideTitleErr}>
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              })}
+              </div>
+            </div>
+            <div>
+              <input
+                className='form-control'
+                ref={urlRef}
+                type='text'
+                id='url'
+                value={url}
+                placeholder='Enter url'
+                onChange={(event) => setUrl(event.target.value)} />
+            </div>
             <div> {Object.keys(urlErr).map((key) => {
-              return <div style={{ color: 'red', backgroundColor: 'white', borderRadius: '5px', width: '10rem', marginLeft: '31rem' }}>{urlErr[key]}<button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleHideUrlErr}>
-                <span aria-hidden="true">&times;</span></button></div>
-            })}</div>
-
-          </div>
-          <div className='buttons'>
-            <button className='cancel' type='cancel' aria-label="cancel added video" onClick={handleCancel}>Cancel</button>
-            <button className='add' type='submit' autoComplete="on" aria-label='add new video' onClick={handleAdd}>Add</button>
-          </div>
-        </form >
+              return <div className='url-error'>{urlErr[key]}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleHideUrlErr}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            })}
+            </div>
+            <div className='buttons'>
+              <Button
+                variant='contained'
+                aria-label="cancel added video"
+                onClick={handleCancel}>Cancel</Button>
+              <span>   </span>
+              <Button
+                variant='contained'
+                type='submit' autoComplete="on"
+                aria-label='add new video'
+                onClick={handleAdd}>Add</Button>
+            </div>
+          </form >
+        }
       </div >
-    </>
-
-
+    </div >
   );
 }
 

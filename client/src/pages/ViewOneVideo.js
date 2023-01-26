@@ -1,8 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactPlayer from 'react-player'
-import axios from "axios";
 import { useGlobalContext } from '../context/VideoContext';
 
 function ViewOneVideo() {
@@ -20,10 +19,10 @@ function ViewOneVideo() {
       <br />
       <article>
         {oneVideo.map((elem, key) => {
-          const { title, url, id } = elem;
+
           return (
             <div key={elem.id}>
-              <p>{elem.title}</p>
+              <p style={{ color: '#093e43' }}>{elem.title}</p>
               <div style={{ height: '30rem' }}><ReactPlayer url={elem.url} style={{ marginLeft: '20rem', marginTop: '4rem' }} /></div>
 
             </div>
@@ -31,7 +30,7 @@ function ViewOneVideo() {
 
         })}
       </article>
-      <Link to='/' className='btn btn-primary'>
+      <Link to='/' className='btn btn-secondary'>
         back home
       </Link>
     </div >
