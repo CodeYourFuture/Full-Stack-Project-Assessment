@@ -54,7 +54,7 @@ app.post("/", (req, res) => {
   }
 });
 
-// GET by "{id}""
+// GET video by "{id}""
 
 app.get("/:id", (req, res) => {
   const videoId = req.params.id;
