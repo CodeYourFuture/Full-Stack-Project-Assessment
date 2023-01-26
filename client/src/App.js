@@ -7,16 +7,16 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    //initialise
-
-    setVideos(dataVideos);
+    let allVideos = [...dataVideos].sort((a, b) =>
+      a.rating > b.rating ? 1 : -1
+    );
+    setVideos(allVideos);
   }, []);
 
   function handleDelete(id) {
     let filterVideos = videos.filter((video) => video.id !== id);
     setVideos(filterVideos);
   }
-  
 
   return (
     <div className="App">
