@@ -22,7 +22,7 @@ function VideoCard({ video, handleDelete, onThumbsDown }) {
         title={video.title}
         src={url}
         frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
       <div className="card-body">
