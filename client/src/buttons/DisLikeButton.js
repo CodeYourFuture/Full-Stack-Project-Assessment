@@ -13,9 +13,7 @@ function DislikeButton({decrement}) {
             height="20px"
           /> 
           
-          /* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-          https://icons8.com/icon/cPJTvqEzTYvb/thumbs-down
-        </svg> */
+         
         }
       </button>
     );
