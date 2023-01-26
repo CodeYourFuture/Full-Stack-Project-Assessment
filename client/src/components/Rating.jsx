@@ -9,7 +9,7 @@ function Rating(props) {
     setRating(rating + 1);
   };
 
-  const handleDicrease = () => {
+  const handleDecrease = () => {
     setRating(rating - 1);
   };
 
@@ -26,7 +26,7 @@ function Rating(props) {
       <button
         style={{ margin: "20px" }}
         variant="danger"
-        onClick={() => handleDicrease()}
+        onClick={() => handleDecrease()}
       >
         <SentimentVeryDissatisfiedIcon />
       </button>
