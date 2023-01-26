@@ -3,7 +3,7 @@ import React from "react";
 function DislikeButton({ decrementLikeClick }) {
   return (
     <div>
-      <button onClick={() => decrementLikeClick()} aria-label="dislike-button">
+      <button className="dislike-button" onClick={() => decrementLikeClick()} aria-label="dislike-button">
         Dislike <i className="fa fa-thumbs-down"></i>
       </button>
     </div>

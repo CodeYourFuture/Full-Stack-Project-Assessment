@@ -17,7 +17,7 @@ function Video({ video, handleDelete }) {
       <p>{video.title}</p>
       <div className="vote-container">
         <LikeButton incrementLikeClick={incrementLikeClick} />
-        <p> {rating} Vote</p>
+        <p className="rating"> {rating} Vote</p>
         <DislikeButton decrementLikeClick={decrementLikeClick} />
       </div>
       <YoutubeEmbed video={video} />
