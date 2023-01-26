@@ -1,13 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import SampleData from "./SampleData/exampleresponse.json";
+// import SampleData from "./SampleData/exampleresponse.json";
 import ListVideos from "./components/ListVideos";
 import Nav from "./components/Nav";
 import FormDisabled from "./components/FormDisabled";
 
 function App() {
-  const [VideosInfo, setVideosInfo] = useState(SampleData);
+  const [VideosInfo, setVideosInfo] = useState([]);
+  const [load, isLoaded] = useState(false);
   const [searchVideos, setSearchVideos] = useState([]);
+
+  useEffect(() => {
+    console.log("working...")
+    // fetch("https://full-stack-zf9k.onrender.com/")
+    //   .then((res) => {
+    //     if (res.status >= 200 && res.status <= 299) {
+    //       return res.json();
+    //       consloe
+    //     } else {
+    //       throw new Error(
+    //         `Encountered something unexpected: ${res.status} ${res.statusText}`
+    //       );
+    //     }
+    //   })
+    //   .then((data) => {
+    //     console.log(`${data} is delivered`)
+    //     VideosInfo()
+    //     isLoaded(true)
+    //   });
+
+    fetch('http://localhost:5000/')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setVideosInfo(data)
+        isLoaded(true)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }, [load]);
+
   console.log(VideosInfo);
 
   const addVideo = (title, url) => {
