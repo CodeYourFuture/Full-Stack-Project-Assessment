@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import data from "./exampleResponse.json";
 import Search from "./Search.js"
 import Header from "./Header";
@@ -7,7 +7,7 @@ import AddVideo from "./AddVideo.js";
 import ShowVideo from "./ShowVideo.js"
 import "./App.css";
 function App() {
-  const [ShowAddVideo, setShowAddVideo] = useState(false);
+
   const [inputValue, setInputValue] = useState("");
   const [videos, setVideos] = useState(data);
 
