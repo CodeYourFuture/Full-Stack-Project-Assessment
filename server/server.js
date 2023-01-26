@@ -19,7 +19,14 @@ const pool = new Pool({
 pool.connect();
 
 app.get("/", (req, res) => {
-  res.send({ express: "Your Backend Service is Running" });
+  // res.send({ express: "Your Backend Service is Running" });
+    pool
+    .query("SELECT * FROM videos")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.get("/videos/:id", function (req, res) {
