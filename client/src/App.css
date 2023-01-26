@@ -16,4 +16,34 @@
 
 .inserted-video {
   text-align: center;
+  width: 400px;
+}
+
+.all-videos {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 5rem;
+}
+
+.add-video-btn {
+  background-color: blueviolet;
+  color: whitesmoke;
+  margin-right: 30rem;
+}
+
+.upper-div {
+  margin: 2rem;
+  display: flex;
+  
+}
+
+.cancel-btn {
+  background-color: yellow;
+  color: black;
+}
+
+.add-btn {
+  background-color: red;
+  color: white;
 }

@@ -5,7 +5,7 @@ export default function InsertVideo({video}) {
     const src = video.url.replace("watch?v=", "embed/")
   return (
     <div className='inserted-video'>
-      <p>{video.title}</p>
+      <h4>{video.title}</h4>
       <p>Votes</p>
       <iframe src={src} title="YT video" allowFullScreen></iframe>
       <div>
