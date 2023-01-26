@@ -3,13 +3,20 @@ import "./Search.css";
 
 const Search = ({ videoData, setVideoData, dataVideos }) => {
   // function to handle search input
+
   const handleOnChange = (event) => {
     let result = videoData.filter((vid) =>
       vid.title.toLowerCase().includes(event)
     );
     setVideoData(result);
     if (event.length <= 0) {
-      setVideoData(dataVideos);
+      fetch(
+        "https://full-stack-project-assessment-server.onrender.com/"
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setVideoData(result);
+        });
     }
   };
   return (
