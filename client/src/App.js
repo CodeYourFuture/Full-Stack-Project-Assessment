@@ -1,9 +1,11 @@
+
 import React, { useState } from "react";
 import "./App.css";
 import Video from "./Video";
 import videos from "./exampleresponse.json";
 import AddVideo from "./AddVideo";
 import { v4 as uuidv4 } from "uuid";
+
 
 function App() {
   const [videoList, setVideoList] = useState(videos);
@@ -30,6 +32,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+
       <body>
         <div className="video-List">
           {videoList
@@ -42,6 +45,7 @@ function App() {
           <AddVideo onAdd={handleAdd} />
         </div>
       </body>
+
     </div>
   );
 }
