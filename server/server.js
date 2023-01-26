@@ -73,7 +73,7 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json({ videos });
+  res.json(videos);
 });
 
 // POST "/"
@@ -113,9 +113,8 @@ app.post("/", (req, res) => {
 app.get("/:id", (req, res) => {
   const requestedVideoId = Number(req.params.id);
   const requestedVideo = videos.filter(
-      (video) => video.id === requestedVideoId
-    );
-  // const requestedVideo = videos.find((video) => video.id === requestedVideoId);
+    (video) => video.id === requestedVideoId
+  );
   if (!requestedVideo) {
     res.sendStatus(404);
     return;
@@ -126,7 +125,9 @@ app.get("/:id", (req, res) => {
 // DELETE "/{id}"
 app.delete("/:id", (req, res) => {
   const deletedVideoId = Number(req.params.id);
-  const deletedVideoIndex = videos.findIndex((video) => video.id === deletedVideoId);
+  const deletedVideoIndex = videos.findIndex(
+    (video) => video.id === deletedVideoId
+  );
   if (deletedVideoIndex < 0) {
     res.sendStatus(404);
     return;
