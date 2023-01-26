@@ -45,7 +45,8 @@ function VideoAdd() {
   };
   return (
     <div>
-      <button className="add"
+      <button
+        className="add"
         onClick={() => setOpen(!open)}
         aria-controls="example-collapse-text"
         aria-expanded={open}
@@ -60,7 +61,7 @@ function VideoAdd() {
               body
               style={{
                 width: "400px",
-                backgroundColor: "red",
+                backgroundColor: "#665A48",
                 border: "none",
               }}
             >
