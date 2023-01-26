@@ -9,6 +9,7 @@ function App() {
   const [reqBody, setReqBody] = useState({
     title: "",
     url: "",
+    rating: 0,
   });
 
   useEffect(() => {
@@ -41,9 +42,10 @@ function App() {
         id: idPosition,
         title: reqBody.title,
         url: reqBody.url,
-        rating: 2,
+        rating: 0,
       },
     ];
+
     setVideos(result);
     resetForm();
   }
