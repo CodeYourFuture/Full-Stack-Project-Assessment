@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App main{
+  background-color: lavender;
+}
+
 .add-video-card form {
   background-color: black;
   color: white;
@@ -22,18 +26,23 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 2em 0;
 }
 
 .video-card {
   padding: 1em;
+  margin: .5em .5em;
+  background-color: white;
 }
 
 .video-card h4 {
-  font-size: 1.5em;
+  font-size: 1em;
+  padding-bottom: .5em;
 }
 
 .video-buttons {
   display: flex;
+  padding-top: .5em;
 }
 
 .video-buttons span,
@@ -46,3 +55,6 @@
   margin-left: auto;
 }
 
+.video-buttons i:hover {
+  cursor: pointer;
+}
