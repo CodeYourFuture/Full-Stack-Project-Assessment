@@ -1,0 +1,22 @@
+
+.inputWrapper {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+   }
+.searchInput { 
+     height: 2rem;
+     align-self: center;
+     margin: 2rem;
+  };
+  
+  .formButtons {
+      display: flex;
+      flex-direction: row;
+  }
+
+  .formContainer {
+      display: flex;
+      flex-direction: row;
+  }
