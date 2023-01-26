@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 
 function Rating(props) {
@@ -25,7 +25,7 @@ function Rating(props) {
         variant="success"
         onClick={() => handleIncrease()}
       >
-        <ThumbUpIcon />
+        <SentimentSatisfiedAltIcon />
       </button>
       <span style={{ color: "darkgoldenrod", margin: "20px" }}>{rating}</span>
       <button
@@ -33,7 +33,7 @@ function Rating(props) {
         variant="danger"
         onClick={() => handleDicrease()}
       >
-        <ThumbDownIcon />
+        <SentimentVeryDissatisfiedIcon />
       </button>
 
     </div>

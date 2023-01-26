@@ -12,9 +12,14 @@
 }
 
 .App-header h1 {
-  color: rgb(236, 77, 77);
+  color: rgb(223, 25, 25);
   font-family: "McLaren", cursive;
   font-weight: 200;
+   border-color: rgb(187, 20, 20);
+  border-radius: 50px;
+  background-color: rgb(22, 20, 20);
+  margin:10px;
+  padding: 20px;
 }
 
 body {
@@ -28,6 +33,31 @@ body {
   padding: 0;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.search {
+  
+  margin: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border-color: rgb(187, 20, 20);
+  border-radius: 50px;
+  border-width: 10px;
+  background-color: rgb(22, 20, 20);
+  justify-content: space-around;
+
+}
+
+.add {
+  color: #eee;
+margin: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border-color: rgb(187, 20, 20);
+  border-radius: 50px;
+  border-width: 10px;
+  background-color: rgb(17, 14, 14);
+  justify-content: space-around;
 }
 
 .container {
