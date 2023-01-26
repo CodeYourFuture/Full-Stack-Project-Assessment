@@ -16,7 +16,7 @@ const VideoCardButtons = ( { rating, removeVideo, id } ) => {
        <span>{vote}</span>
             <i className="bi bi-hand-thumbs-up" onClick={upVote}></i>
             <i className="bi bi-hand-thumbs-down" onClick={downVote}></i>
-            <button onClick={()=>removeVideo(id)}>remove video</button>
+            <button className="btn btn-dark" onClick={()=>removeVideo(id)}>remove video</button>
     </div>
   )
 }

@@ -29,8 +29,8 @@ const AddVideo = ({ videos, setVideos }) => {
   }
 
   return (
-    <div>
-      <form action="">
+    <div className='add-video-card'>
+      <form onSubmit={addToResponse}>
         <label htmlFor="title">Title: </label>
         <input
           type="text"
@@ -47,7 +47,7 @@ const AddVideo = ({ videos, setVideos }) => {
           onChange={handleUrl}
           required
         />
-        <button onClick={addToResponse}>Submit</button>
+        <button className='btn'>Submit</button>
       </form>
     </div>
   )

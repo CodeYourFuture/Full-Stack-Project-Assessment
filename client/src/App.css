@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.add-video-card form {
+  background-color: black;
+  color: white;
+  padding: 1.5em;
+}
+
+.add-video-card form label{
+  margin: 0 1em;
+}
+
+.add-video-card button {
+  background-color: blueviolet;
+  color: white;
+  margin: 0 1em;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -29,3 +45,4 @@
 .video-buttons button {
   margin-left: auto;
 }
+
