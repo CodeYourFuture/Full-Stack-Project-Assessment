@@ -1,8 +1,6 @@
-
 .App {
   background-color: #e3dcc2;
   margin-top: 0.6em;
-
 }
 
 nav {
@@ -38,7 +36,7 @@ nav h3 {
 }
 
 .btn:hover {
-  background-color:#35358a;
+  background-color: #35358a;
   text-shadow: 1px 1px 1px #090979;
   color: wheat;
   font-weight: 500;
@@ -95,6 +93,12 @@ nav h3 {
   height: 20em;
   border-radius: 15px;
 }
+
+.btn:focus,
+input:focus{
+  background-color: rgb(221, 227, 134);
+}
+
 
 /* ======================
   Small to Medium Screen
