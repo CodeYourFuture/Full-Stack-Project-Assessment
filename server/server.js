@@ -1,3 +1,4 @@
+const { json } = require("express");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
@@ -31,7 +32,18 @@ app.get("/:id", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  //let sortedVideos =
+
+  if (req.query.order !== undefined) {
+    const order = req.query.order.toLowerCase();
+    if (order === "asc") {
+      res.json(videos.sort((x, y) => (x.vote > y.vote ? 1 : -1)));
+    } else if (order === "desc") {
+      res.json(videos.sort((x, y) => (x.vote < y.vote ? 1 : -1)));
+    }
+  } else {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  }
 });
 
 app.post("/", (req, res) => {
