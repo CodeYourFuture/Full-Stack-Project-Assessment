@@ -47,7 +47,6 @@ const AddVideo = ({ exampleResponse }) => {
           required
         />
         <button onClick={addToResponse}>Submit</button>
-        {/* add to  */}
       </form>
     </div>
   )

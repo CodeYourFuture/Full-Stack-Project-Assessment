@@ -5,7 +5,6 @@ const VideoCard = ( {exampleResponse} ) => {
   const [videos, setVideos] = useState(exampleResponse)
 
   const removeVideo = (id) => {
-    console.log('clicked!')
     const updatedResponse = videos.filter((video) => video.id !== id)
     setVideos(updatedResponse)
   }
