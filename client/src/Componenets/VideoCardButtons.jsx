@@ -8,7 +8,7 @@ const VideoCardButtons = ( { rating, removeVideo, id } ) => {
     }
 
     const downVote = () => {
-        setVote(vote--)
+        setVote(vote === 0 ? 0 : vote--)
     }
 
   return (
