@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const VideoCardButtons = ( { rating, removeVideo, index } ) => {
+const VideoCardButtons = ( { rating, removeVideo, id } ) => {
     let [vote, setVote] = useState(rating)
 
     const upVote = () => {
@@ -16,7 +16,7 @@ const VideoCardButtons = ( { rating, removeVideo, index } ) => {
        <span>{vote}</span>
             <i className="bi bi-hand-thumbs-up" onClick={upVote}></i>
             <i className="bi bi-hand-thumbs-down" onClick={downVote}></i>
-            
+            <button onClick={()=>removeVideo(id)}>remove video</button>
     </div>
   )
 }

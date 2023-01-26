@@ -26,8 +26,11 @@ const VideoCard = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <VideoCardButtons rating={video.rating} />
-          <button onClick={() => removeVideo(video.id)}>remove video</button>
+          <VideoCardButtons
+            rating={video.rating}
+            id={video.id}
+            removeVideo={removeVideo}
+          />
         </div>
       ))}
     </div>
