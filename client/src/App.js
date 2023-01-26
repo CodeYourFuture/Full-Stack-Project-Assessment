@@ -90,18 +90,18 @@ function App() {
       rating: videoRate,
     };
 
-    // if (newVideo.title && newVideo.url) {
-    videosData.concat(newVideo);
-    setVideosData([...videosData, newVideo]);
-    console.log(newVideo);
-    // } else {
-    //     alert("Please add videos title and url");
-    //   }
+    if (newVideo.title && newVideo.url) {
+      videosData.concat(newVideo);
+      setVideosData([...videosData, newVideo]);
+      console.log(newVideo);
+    } else {
+      alert("Please add videos title and url");
+    }
   };
 
-  function handleUpvote(rating) {
-    console.log(rating);
-  }
+  // function handleUpvote(rating) {
+  //   console.log(rating);
+  // }
 
   // function handleDownvote(x) {
   //   console.log(x.rating);
@@ -154,13 +154,7 @@ function App() {
                 <Card.Text>
                   Votes :
                   <ButtonGroup aria-label="Basic example">
-                    <Button
-                      onClick={handleUpvote}
-                      variant="secondary"
-                    >
-                      {" "}
-                      &#128077;{" "}
-                    </Button>
+                    <Button variant="secondary"> &#128077; </Button>
                     <span> {video.rating} </span>
                     <Button variant="secondary"> &#128078; </Button>
                   </ButtonGroup>
