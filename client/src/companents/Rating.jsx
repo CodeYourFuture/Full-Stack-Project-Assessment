@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Rating(props) {
 const[rating,setRating]=useState(props.id.rating)
@@ -40,14 +43,14 @@ window.location.reload()
 }
   return (
     <div>
-      <button style={{margin:'10px'}} variant="success" onClick={() => handleDelete(props.id.id)}>k</button>
+      <button style={{margin:'10px'}} variant="success" onClick={() => handleDelete(props.id.id)}> <DeleteIcon/> </button>
 
 
-        <button style={{margin:'10px'}} variant="success" onClick={() => handleIncrease(props.id.id)}> i</button>
+        <button style={{margin:'10px'}} variant="success" onClick={() => handleIncrease(props.id.id)}> < ThumbUpIcon/> </button>
 <span style={{color:"darkgoldenrod",margin:"10px"}}>
     {rating}
 </span>
-<button style={{margin:'10px'}}  variant="danger" onClick={() => handleDicrease(props.id.id)}>+</button>
+<button style={{margin:'10px'}}  variant="danger" onClick={() => handleDicrease(props.id.id)}> <ThumbDownAltIcon /> </button>
 
     </div>
   )
