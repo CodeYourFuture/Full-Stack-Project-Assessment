@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import uuid from 'react-uuid'
 
-const AddVideo = ({ exampleResponse }) => {
+const AddVideo = ({ videos, setVideos }) => {
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
 
@@ -20,11 +20,12 @@ const AddVideo = ({ exampleResponse }) => {
     const newVideo = {
       id: uuid(),
       title: title,
-      url: url
+      url: url,
     }
     console.log(newVideo)
-    exampleResponse.push(newVideo)
-    console.log(exampleResponse)
+    videos.push(newVideo)
+    setVideos(videos)
+    console.log(videos)
   }
 
   return (

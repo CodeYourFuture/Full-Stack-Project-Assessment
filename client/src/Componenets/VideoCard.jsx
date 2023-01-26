@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import VideoCardButtons from './VideoCardButtons'
 
-const VideoCard = ( {exampleResponse} ) => {
-  const [videos, setVideos] = useState(exampleResponse)
+const VideoCard = ( {videos, setVideos} ) => {
+
 
   const removeVideo = (id) => {
     const updatedResponse = videos.filter((video) => video.id !== id)
