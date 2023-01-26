@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
@@ -14,6 +14,7 @@ function VideoList() {
   const [youtubeURLS, setYoutubeURLS] = useState(Exampleresponse);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [date, setDate] = useState(null);
   const [isUrlValid, setIsUrlValid] = useState(null);
   const [isTitle, setIsTitle] = useState(null);
 
@@ -42,7 +43,7 @@ function VideoList() {
   function validateYouTubeUrl(url) {
     if (url) {
       var regExp =
-        /^(?:https?:\/\/)?(?: m\.|www\.)?(?: youtu\.be\/|youtube\.com\/(?: embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\ S+)?$/;
+        /^(?:https?:\/\/)?(?: m\.|www\.)?(?: youtu\.be\/|youtube\.com\/(?: embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?: S+)?$/;
       if (url.match(regExp)) {
         return true;
       }
@@ -58,6 +59,11 @@ function VideoList() {
     }
   }
 
+  useEffect(() => {
+    fetch("{url}").then((response) => console.log(response));
+    console.log(date);
+  }, [date]);
+
   function handleNewVideo(e) {
     e.preventDefault();
 
@@ -70,6 +76,7 @@ function VideoList() {
       setYoutubeURLS([...youtubeURLS, newYoutubeVideo]);
       setIsUrlValid(true);
       setIsTitle(true);
+      setDate(new Date());
     }
 
     if (

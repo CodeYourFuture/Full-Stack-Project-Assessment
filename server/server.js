@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const uuid = require("uuid");
 let videos = require("../client/src/exampleresponse.json");
-const port = process.env.PORT || 5030;
+const port = process.env.PORT || 3000;
 const cors = require("cors");
 const fs = require("fs");
 app.use(express.json());
@@ -20,6 +20,11 @@ app.get("/", (req, res) => {
 // GET "/videos"
 app.get("/videos", (req, res) => {
   res.send(videos);
+});
+
+app.post("/post", (req, res) => {
+  console.log("Connected to React");
+  res.redirect("/");
 });
 
 // POST "/videos"
