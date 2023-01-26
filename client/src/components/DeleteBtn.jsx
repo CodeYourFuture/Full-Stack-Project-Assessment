@@ -3,7 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 function DeleteBtn(props) {
   const { id } = props;
- 
+
   const handleDelete = (id) => {
     fetch(`http://localhost:3011/videos/${id}`, {
       method: "DELETE",

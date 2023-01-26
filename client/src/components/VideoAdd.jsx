@@ -3,9 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Fade, Form } from "react-bootstrap";
 
-
 function VideoAdd() {
-
   const [title, setTitle] = React.useState("");
   const [url, setUrl] = React.useState("");
   const [rating, setRating] = React.useState(0);

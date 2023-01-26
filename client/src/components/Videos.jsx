@@ -1,12 +1,11 @@
-
 import React from "react";
 import Rating from "./Rating";
 
 function Videos(props) {
   // Split after '=' get second array allows to get embed!
 
- let src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
- console.log(props.videos);
+  let src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
+  console.log(props.videos);
 
   return (
     <div>
@@ -18,11 +17,12 @@ function Videos(props) {
             border: "#D43C31 solid",
             margin: "5px",
             padding: "5px",
-            
           }}
         >
           <div>
-            <h6 style={{ color: "#D43C31", fontSize: "2rem"}}>{props.videos.title}</h6>
+            <h6 style={{ color: "#D43C31", fontSize: "2rem" }}>
+              {props.videos.title}
+            </h6>
             <span>
               <Rating video={props.videos} />
             </span>
