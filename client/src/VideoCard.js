@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import DeleteButton from "./buttons/DeleteButton";
 import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
@@ -7,14 +7,13 @@ import "./videoCard.css";
 function VideoCard({ video, handleDelete, onThumbsDown }) {
   const url = video.url.replace("watch?v=", "embed/");
   const [voteCount, setVoteCount] = useState(video.rating);
- 
 
-   function likeVote() {
+  function likeVote() {
     setVoteCount((voteCount) => voteCount + 1);
-   }
+  }
 
   function disLikeVote() {
-   setVoteCount((voteCount) => (voteCount === 0 ? voteCount : voteCount - 1));
+    setVoteCount((voteCount) => (voteCount === 0 ? voteCount : voteCount - 1));
   }
 
   return (
