@@ -3,11 +3,7 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
-;
 const { Pool } = require("pg");
-
-
-// app.use(express.urlencoded({ extended: false }));
 
 const pool = new Pool({
   user: "test_user",
@@ -20,10 +16,9 @@ const pool = new Pool({
   },
 });
 
-
 //get all videos
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   pool
     .query("SELECT * FROM youtubevideos")
     .then((result) => res.json(result.rows))
@@ -33,11 +28,9 @@ app.get('/', (req, res) => {
     });
 });
 
-
-
 //get one video at a time by id
 
-app.get('/api/videos/:videoId', (req, res) => {
+app.get("/api/videos/:videoId", (req, res) => {
   const { videoId } = req.params;
   pool
     .query("SELECT * FROM youtubevideos WHERE id = $1", [videoId])
@@ -48,19 +41,15 @@ app.get('/api/videos/:videoId', (req, res) => {
     });
 });
 
-
 //post a video
 
 app.post("/api/videos", (req, res) => {
-
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = req.body.rating;
 
   if (!Number.isInteger(newRating) || newRating < 0) {
-    return res
-      .status(400)
-      .send("Rating should be a positive integer.");
+    return res.status(400).send("Rating should be a positive integer.");
   }
 
   pool
@@ -84,10 +73,9 @@ app.post("/api/videos", (req, res) => {
     });
 });
 
-
 //delete a video by id
 
-app.delete('/api/videos/:videoId', (req, res) => {
+app.delete("/api/videos/:videoId", (req, res) => {
   const { videoId } = req.params;
   pool
     .query("DELETE FROM youtubevideos WHERE id = $1", [videoId])
@@ -97,17 +85,6 @@ app.delete('/api/videos/:videoId', (req, res) => {
       res.status(500).json(err);
     });
 });
-
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = [];
-
-// // GET "/"
-// app.get("/", (req, res) => {
-//   // Delete this line after you've confirmed your server is running
-//   res.send({ express: "Your Backend Service is Running" });
-// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
