@@ -1,15 +1,36 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+app.use(express.json());
+const dataVideos = require("./example.json")
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
+let videos = [];
+videos.push(dataVideos);
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  
+  res.send(videos).json;
 });
+
+//POST "/"
+app.post('/', (req, res) => {
+  let {title, url } = req.body;
+  let newVideos = {
+    id: videos.length,
+    title: title,
+    url: url
+  };
+
+  if(!newVideos.id || !newVideos.url){
+    res.status(400).send({
+      "result": "fail",
+      "message": "Video can not saved"
+    });
+  }else {
+    videos.push(newVideos);
+    res.sendStatus(200);
+  }
+})
