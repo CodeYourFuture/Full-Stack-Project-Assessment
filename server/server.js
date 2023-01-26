@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
-const { Pool } = require("pg");
-app.use(express.json());
 const cors = require("cors");
-app.use(cors());
+const { Pool } = require("pg");
+
+app.use(cors()); 
+app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 const pool = new Pool({
   user: "test_user",
@@ -19,10 +21,10 @@ const pool = new Pool({
 
 //get all videos
 
-app.get('/api/videos', (req, res) => {
+app.get('/', (req, res) => {
   pool
     .query("SELECT * FROM youtubevideos")
-    .then((allVideos) => res.json(allVideos.rows))
+    .then((result) => res.json(result.rows))
     .catch((err) => {
       console.err(err.message);
       res.status(500).json(err);

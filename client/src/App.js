@@ -4,6 +4,15 @@ import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
 import AddAVideo from "./addAVideo";
 
+
+const cors = require("cors");
+app.use(cors());
+
+
+
+
+
+
 function App() {
 
   const [dataVideo, setDataVideo] = useState(dataVideos);
