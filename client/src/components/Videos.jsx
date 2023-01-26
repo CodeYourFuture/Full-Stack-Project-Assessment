@@ -35,7 +35,7 @@ function Videos(props) {
             src={src}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title="Embedded youtube"
+            title={props.videos.id}
           />
         </div>
       </div>
