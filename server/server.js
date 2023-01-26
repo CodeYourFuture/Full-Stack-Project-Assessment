@@ -1,54 +1,70 @@
 const express = require("express");
 const app = express();
-const videosData = require("./exampleresponse.json");
-app.use(express());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const cors = require("cors");
+const { Pool } = require("pg");
+
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
-// Store and retrieve your videos from here
-let videos = videosData;
+
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send(videosData);
+  pool
+    .query("SELECT * FROM videos")
+    .then((result) => res.send(result.rows))
+    .catch((err) => console.error(err));
 });
-
-app.post("/videos", (req, res) => {
-  const addNewVideo = req.body;
-
-  addNewVideo.id = Math.floor(Math.random() * 100000);
-  if (!addNewVideo.title || !addNewVideo.url) {
-    res.status(400).send({ msg: "Please add a Title & URL from Youtube !" });
-  } else {
-    videos.push(addNewVideo);
-    res.status(200).send({ msg: `Video:${addNewVideo.title} has been added.` });
+app.get("/:id", (req, res) => {
+  const id = req.params.id;
+  pool
+    .query("SELECT * FROM videos WHERE videos.id=$1", [id])
+    .then((result) => {
+      if (result.rows.length > 0) {
+        pool
+          .query("SELECT * FROM videos WHERE videos.id=$1", [id])
+          .then((result) => res.send(result))
+          .catch((err) => console.error(err));
+      } else {
+        res.send("No video with this id.");
+      }
+    })
+    .catch((err) => console.error(err));
+});
+app.get("/", (req, res) => {
+  const order = req.query.order;
+  if (order === "asc") {
+    pool
+      .query("SELECT * FROM videos ORDER BY rating ASC")
+      .then((result) => res.send(result))
+      .catch((err) => console.error(err));
+  }
+  if (order === "desc") {
+    pool
+      .query("SELECT * FROM videos ORDER BY rating DESC")
+      .then((result) => res.send(result))
+      .catch((err) => console.error(err));
   }
 });
 
-app.get("/videos/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-
-  const filterVideo = videosData.find((video) => video.id === videoId);
-
-  if (filterVideo.length === 0) {
-    res.status(400).send({ msg: `Video with:${videoId} not found!` });
-  } else {
-    res.status(200).send(filterVideo);
-  }
+app.post("/", (req, res) => {
+  const { title, url } = req.body;
+  pool
+    .query("INSERT INTO videos (title, url) VALUES ($1, $2)", [title, url])
+    .then(() =>
+      pool
+        .query("SELECT * FROM videos")
+        .then((result) => res.send(result))
+        .catch((err) => console.error(err))
+    )
+    .catch((err) => console.error(err));
 });
 
-app.delete("/videos/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-  indexVideo = videos.findIndex((video) => video.id == videoId);
-
-  if (indexVideo >= 0) {
-    videos.splice(indexVideo, 1);
-    res
-      .status(200)
-      .send({ msg: `Video with id:${videoId} has been deleted. ` });
-  } else {
-    res.status(400).send({ msg: `Video with id:${videoId} not found! ` });
-  }
-});
+app.listen(port, () => console.log(`Listening on port ${port}`));
