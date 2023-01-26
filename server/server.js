@@ -71,12 +71,11 @@ let videos = [
     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
     rating: 73,
   },
- 
 ];
 
 // const maxID = uuid.v4();
 // console.log(maxID);
-const maxID = Math.max(...videos.map((video) => video.id));
+let maxID = Math.max(...videos.map((video) => video.id));
 // GET "/"
 app.get("/", (req, res) => {
   res.json(videos);
@@ -85,7 +84,7 @@ app.get("/", (req, res) => {
 app.get("/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
 
-  let video = videos.find((v) => v.id === vidId);
+  const video = videos.find((v) => v.id === vidId);
   if (!video) {
     res.status(404).send("Not Found");
   }
@@ -95,27 +94,41 @@ app.get("/:id", (req, res) => {
 //POST "/videos"
 
 app.post("/", (req, res) => {
-  if (!req.body.title || !req.body.url) {
+  if (!req.body.title) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+  } else if (!req.body.url) {
     res.status(400).send({ result: "error", message: "Bad Request" });
     return;
   }
+  if (isNaN(req.body.rating)) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+    return;
+  }
+  if (!Number.isInteger(req.body.rating)) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+    return;
+  }
+  if (req.body.rating < 0) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+    return;
+  }
+  //creating a new video
   const newVideo = {
-    id: maxID + 1,
+    id: ++maxID,
     title: req.body.title,
     url: req.body.url,
     rating: req.body.rating,
   };
   videos.push(newVideo);
-
   res.status(201).send({ id: newVideo.id, message: "success" });
 });
 
-app.delete('/:id', (req, res) => {
+app.delete("/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
-  let vidIndex = videos.findIndex((v) => v.id === vidId);
+  const vidIndex = videos.findIndex((v) => v.id === vidId);
   if (vidIndex < 0) {
     res.status(404).send("Video not found");
   }
   videos.splice(vidIndex, 1);
   res.send({ id: vidId, message: "Video deleted" });
-})
+});
