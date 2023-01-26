@@ -16,6 +16,11 @@ const App = () => {
   const [videos, setVideos] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [message, setMessage] = useState("");
+
   const serverUrl = "https://simeon-video-recommendation.onrender.com";
 
 // Get "/"
@@ -35,15 +40,55 @@ const App = () => {
         setVideos(null);
         setLoading(false);
         console.error(`An error occurred: ${err}`);
-      } 
+      }
       // finally {
       //   setLoading(false);
       // }
     };
     getData();
-  }, []);
+  }, [videos]);
 
   // Post "/"
+
+  const addVideo = async (title, url) => {
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        url: url
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+    await fetch(serverUrl, requestOptions)
+      .then((res) => {
+        if (res.status === 400)
+        setMessage("Please enter a valid Youtube link or Title");
+        if (res.ok) {
+          setMessage(`Video was added`);
+        }
+
+        res.json()
+      })
+      .then((data) => {
+        // setPosts((posts) => [data, ...posts]);
+        setTitle("");
+        setUrl("");
+      })
+      .catch((err) => {
+        // if (response.status === 400)
+        // setMessage("Enter a valid Youtube link or Title.");
+        // console.error(err.message);
+        console.error(`An error occurred: ${err}`);
+      });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addVideo(title, url);
+  };
+//---------------------------------
 
   const deleteAction = (id) => {
     setVideos(deleteVideo(id, videos));
@@ -53,10 +98,20 @@ const App = () => {
     <div className="App">
       <header className="App_header">
         <h1>Video Recommendation</h1>
-        <AddVideoForm setVideos={setVideos} />
+        <AddVideoForm
+          handleSubmit={handleSubmit}
+          title={title}
+          setTitle={setTitle}
+          url={url}
+          setUrl={setUrl}
+          message={message}
+        />
+        {/* <AddVideoForm setVideos={setVideos} /> */}
       </header>
       <div className="video_container">
-        {loading && <span>Loading, please wait...</span>}
+        {loading && (
+          <span>Loading, please wait...</span>
+        )}
         {error && (
           <span>{`There is a problem fetching the post data - ${error}`}</span>
         )}
