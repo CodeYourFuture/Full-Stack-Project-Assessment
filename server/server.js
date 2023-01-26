@@ -22,10 +22,10 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/hotels/:id", function (req, res) {
+app.get("/videos/:id", function (req, res) {
   const id = req.params.id;
   pool
-    .query("SELECT * FROM clients WHERE id = $1",[id])
+    .query("SELECT * FROM videos WHERE id = $1",[id])
     .then((result) => res.json(result.rows))
     .catch((error) => {
       console.error(error);
