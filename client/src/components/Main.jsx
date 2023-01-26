@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import DeleteBtn from './DeleteBtn';
-import Videos from '../Videos';
-import dataVideos from "/home/codeyourfuture/Documents/GitHub/Full-Stack-Project-Assessment/client/src/exampleresponse.json";
-
+import dataVideos from "../exampleresponse.json";
+import Videos from "./Videos";
 
 
 function Main() {

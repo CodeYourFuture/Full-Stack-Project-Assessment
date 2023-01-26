@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 
 function Rating(props) {
@@ -25,7 +23,6 @@ function Rating(props) {
         variant="success"
         onClick={() => handleIncrease()}
       >
-        <ThumbUpIcon />
       </button>
       <span style={{ color: "darkgoldenrod", margin: "20px" }}>{rating}</span>
       <button
@@ -33,7 +30,6 @@ function Rating(props) {
         variant="danger"
         onClick={() => handleDicrease()}
       >
-        <ThumbDownIcon />
       </button>
 
     </div>
