@@ -26,7 +26,7 @@ function VideoAdd() {
       url,
       rating,
     };
-    fetch("http://localhost:3001/videos", {
+    fetch("http://localhost:3011/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
