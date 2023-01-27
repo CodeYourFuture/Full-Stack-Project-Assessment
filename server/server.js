@@ -30,10 +30,18 @@ app.get("/videos", (req, res) => {
   res.send(videos);
 });
 
-// Add a new video
-app.post("/video", (req, res) => {
-  console.log(req.body);
+app.get("/videos/:id", function (req, res) {
+  let id = parseInt(req.params.id);
+  let filterVideo = videos.filter((video) => video.id === id);
 
+  if (filterVideo.length === 0) {
+    return res.status(404).json("Video not found");
+  }
+  res.send(filterVideo);
+});
+
+// Add a new video
+app.post("/videos", (req, res) => {
   let title = req.body.title.trim();
   let url = req.body.url.trim();
 
@@ -42,8 +50,6 @@ app.post("/video", (req, res) => {
   let lastIndex = allVideosSorted.length - 1;
   let lastId = allVideosSorted[lastIndex].id;
   let idPosition = lastId + 1;
-
-  console.log(idPosition);
 
   const newVideo = {
     id: idPosition,
