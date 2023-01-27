@@ -2,13 +2,18 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 5001;
-const fs = require("fs");
-const cors = require ("cors")
-app.use(cors)
+//const fs = require("fs");
+const path = require("path");
+const bodyParser = require("body-parser")
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(bodyParser.json())
 
-let videos = JSON.parse(fs.readFileSync("videos.json", "utf-8"));
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+const cors = require("cors");
+app.use(cors);
+
+//let videos = JSON.parse(fs.readFileSync("videos.json", "utf-8"));
+let videos = require("./videos.json");
 
 const save = () => {
   fs.writeFileSync("videos.json", JSON.stringify(videos, null, 2));
@@ -26,10 +31,15 @@ function matchYoutubeUrl(url) {
 // GET "/"
 
 app.get("/", (req, res) => {
+  res.send("Server is listening");
+  //res.json(videos);
+});
+
+app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) {
     res.sendStatus(400);
@@ -48,7 +58,7 @@ app.get("/:id", (req, res) => {
 
 const compulsoryFields = ["title", "url", "rating"];
 
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   if (!compulsoryFields.every((cf) => req.body.hasOwnProperty(cf))) {
     res.status(401).send("not all compulsory fields supplied");
   }
@@ -81,7 +91,7 @@ app.post("/", (req, res) => {
 
 // Delete
 
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   if (isNaN(videoId)) {
     res.sendStatus(400);
@@ -97,3 +107,5 @@ app.delete("/:id", (req, res) => {
   save();
   res.send(findVideo);
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
