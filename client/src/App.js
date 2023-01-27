@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import dataVideos from "./exampleresponse.json";
 import VideoCard from "./VideoCard";
 import AddVideo from "./AddVIdeo";
 
 function App() {
+  const [loadVideos, setLoadVideos] = useState(true);
   const [videos, setVideos] = useState([]);
   const [reqBody, setReqBody] = useState({
     title: "",
@@ -13,11 +13,17 @@ function App() {
   });
 
   useEffect(() => {
-    let allVideos = [...dataVideos].sort((a, b) =>
-      a.rating > b.rating ? 1 : -1
-    );
-    setVideos(allVideos);
-  }, []);
+    
+     fetch(`http://localhost:5001/videos`)
+       .then((res) => res.json())
+       .then((data) => 
+        {
+          let allVideos = [...data].sort((a, b) =>
+            a.rating > b.rating ? 1 : -1
+          );
+          setVideos(allVideos);
+        });
+  }, [loadVideos]);
 
   function handleDelete(id) {
     let filterVideos = videos.filter((video) => video.id !== id);
