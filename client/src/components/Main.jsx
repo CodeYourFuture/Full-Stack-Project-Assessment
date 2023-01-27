@@ -16,14 +16,15 @@ function Main() {
       });
   }, []);
 
-  const handleSearch = (e) => {
-    if (e.target.value === "") {
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (event.target.value === "") {
       setFiltered(videos);
     } else {
       setFiltered(
         videos
           .filter((video) =>
-            video.title.toLowerCase().includes(e.target.value.toLowerCase())
+            video.title.toLowerCase().includes(event.target.value.toLowerCase())
           )
           .sort((a, b) => b.rating - a.rating)
       );
@@ -33,12 +34,7 @@ function Main() {
   return (
     <div>
       <form>
-        <input
-          className="search"
-          type="text"
-          placeholder="Search..."
-          onChange={handleSearch}
-        />
+        <input type="text" placeholder="Search..." onChange={handleSearch} />
       </form>
       <div>
         <VideoAdd />

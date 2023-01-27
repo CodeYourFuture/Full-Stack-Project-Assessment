@@ -15,19 +15,11 @@ function Rating(props) {
 
   return (
     <div>
-      <button
-        style={{ margin: "20px" }}
-        variant="success"
-        onClick={() => handleIncrease()}
-      >
+      <button variant="success" onClick={() => handleIncrease()}>
         <SentimentSatisfiedAltIcon />
       </button>
-      <span style={{ color: "darkgoldenrod", margin: "20px" }}>{rating}</span>
-      <button
-        style={{ margin: "20px" }}
-        variant="danger"
-        onClick={() => handleDecrease()}
-      >
+      <span>{rating}</span>
+      <button variant="danger" onClick={() => handleDecrease()}>
         <SentimentVeryDissatisfiedIcon />
       </button>
     </div>

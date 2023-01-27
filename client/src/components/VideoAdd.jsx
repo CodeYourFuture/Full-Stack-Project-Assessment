@@ -39,7 +39,7 @@ function VideoAdd() {
       })
       .catch((err) => console.log(err));
     alert("Video added successfully.");
-    window.location.href = "http://localhost:3000";
+   window.location.reload();
   };
   return (
     <div>

@@ -35,7 +35,8 @@ body {
   font-weight: 400;
 }
 
-.search {
+input {
+  color: #eee;
   margin: 20px;
   padding: 10px;
   font-size: 1rem;
@@ -45,6 +46,8 @@ body {
   background-color: rgb(22, 20, 20);
   justify-content: space-around;
 }
+
+
 
 .add {
   color: #eee;
@@ -68,6 +71,7 @@ body {
 
 button {
   background-color: rgb(241, 10, 10);
+  margin: 20px;
 }
 
 footer {
