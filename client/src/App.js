@@ -6,11 +6,15 @@ import AddVideo from "./AddVIdeo";
 function App() {
   const [loadVideos, setLoadVideos] = useState(true);
   const [videos, setVideos] = useState([]);
+
+  //request body
   const [reqBody, setReqBody] = useState({
     title: "",
     url: "",
     rating: 0,
   });
+
+  // local api endpoint
   const API_URL = "http://localhost:5001/videos";
 
   useEffect(() => {
