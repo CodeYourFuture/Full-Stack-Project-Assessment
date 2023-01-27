@@ -13,12 +13,12 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
-app.get("/", (req, res) => {
-  res.send({ express: "Your Backend Service is Running" });
-});
+// app.get("/", (req, res) => {
+//   res.send({ express: "Your Backend Service is Running" });
+// });
 
-// GET "/videos"
-app.get("/videos", (req, res) => {
+// GET "/"  to get videos
+app.get("/", (req, res) => {
   res.send(videos);
 });
 
@@ -60,7 +60,7 @@ app.post("/videos", (req, res) => {
 
 // "GET" with "/videos/:id"
 
-app.get("/videos/:id", (req, res) => {
+app.get("/:id", (req, res) => {
   let videoId = req.params.id;
 
   let filteredVideo = videos.filter((vd) => vd.id === parseInt(videoId));
@@ -70,7 +70,7 @@ app.get("/videos/:id", (req, res) => {
 
 // "DELETE" "/videos/:id"
 
-app.delete("/videos/:id", (req, res) => {
+app.delete("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   if (isNaN(videoId)) {
     res.status(400).send({

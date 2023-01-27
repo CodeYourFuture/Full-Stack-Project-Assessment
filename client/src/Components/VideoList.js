@@ -60,7 +60,9 @@ function VideoList() {
   }
 
   useEffect(() => {
-    fetch("{url}").then((response) => console.log(response));
+    fetch("http://localhost:3000/videos").then((res) =>
+      console.log(res.json())
+    );
     console.log(date);
   }, [date]);
 
@@ -147,7 +149,7 @@ function VideoList() {
   return (
     <>
       <div>
-        <form onSubmit={handleNewVideo}>
+        <form onSubmit={handleNewVideo} action="../../videos" method="post">
           <fieldset>
             <br />
             <h3>Add Video</h3>
