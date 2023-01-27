@@ -34,7 +34,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         getVideos(data);
-        console.log(data);
+       
       });
   }
 

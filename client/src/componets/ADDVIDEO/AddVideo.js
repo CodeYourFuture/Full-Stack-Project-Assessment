@@ -17,12 +17,13 @@ const AddVideo = ({ setVideos }) => {
       /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     if (url.match(urlType)) {
       return url.match(urlType)[1];
-    }
+    } 
     return false;
   }
 
   const VideoAdder = (e) => {
     // e.preventDefault();
+    
     const newVideo = { title, url };
     if (matchYoutubeUrl(url)) {
       setTitle("");
