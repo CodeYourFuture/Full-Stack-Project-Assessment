@@ -2,14 +2,7 @@ import React from "react"
 import ReactPlayer from "react-player"
 import Votes from "./Votes"
 
-const Card = ({
-	id,
-	title,
-	url,
-	rating,
-	index,
-	removeElement,
-}) => {
+const Card = ({id, title, url, rating, index,removeElement}) => {
 	return (
 		<div
 			key={id}

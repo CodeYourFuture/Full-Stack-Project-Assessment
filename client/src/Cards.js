@@ -17,7 +17,7 @@ function Cards() {
 			id: uuid(),
 			title: data.title,
 			url: data.url,
-			//  "rating": 23
+			rating: 0,
 		}
 		console.log(data.title, data.url)
 		setVideos((videos) => {
@@ -51,16 +51,19 @@ function Cards() {
 				</form>
 			</div>
 			<div className='Cards'>
-				{videos.map((video, index) => (
-					<Card
-						key={video.id}
-						title={video.title}
-						url={video.url}
-						rating={video.rating}
-						index={index}
-						removeElement={removeElement}
-					/>
-				))}
+				{videos.map((video, index) => {
+					const {id, rating, url, title} = video;
+					return (
+						<Card
+							key={id}
+							title={title}
+							url={url}
+							rating={rating}
+							index={index}
+							removeElement={removeElement}
+						/>
+					)
+				})}
 			</div>
 		</div>
 	)
