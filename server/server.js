@@ -1,9 +1,11 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
-const exampleResponse = require('../client/src/exampleresponse.json')
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 5000
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const exampleResponse = require('../client/src/exampleresponse.json')
+const uuid = require('uuid')
+
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
 app.use(express.json())
 
@@ -11,13 +13,13 @@ app.use(express.json())
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = exampleResponse;
+let videos = exampleResponse
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+  res.send({ express: 'Your Backend Service is Running' })
+})
 
 app.get('/videos', (req, res) => {
   res.json(videos)
@@ -26,6 +28,24 @@ app.get('/videos', (req, res) => {
 app.post('/videos', (req, res) => {
   // res.send(req.body.id)
   // res,json({result: 'failure', message: 'Video could not be saved'})
+  const id = uuid.v4()
+  const title = req.body.title
+  const url = req.body.url
+
+  !(title || !url) &&
+    res
+      .status(404)
+      .json({ result: 'failure', message: 'Video could not be saved' })
+
+  const newVideo = {
+    id: id,
+    title: title,
+    url: url,
+    rating: 0,
+  }
+
+  videos.push(newVideo)
+  res.send(id)
 })
 
 app.get('/videos/:id', (req, res) => {
@@ -41,11 +61,10 @@ app.get('/videos/:id', (req, res) => {
 app.delete('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
   const videoId = videos.find((video) => video.id === id)
-  const videoIndex = videos.findIndex((video) => video.id === id )
+  const videoIndex = videos.findIndex((video) => video.id === id)
 
   !videoId && res.status(404).send('Not Found')
 
   videos.splice(videoIndex, 1)
-  console.log()
   res.send(videos)
 })
