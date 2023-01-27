@@ -1,13 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./App.css";
 import Video from "./Video";
-import dataVideos from "./exampleresponse.json";
 import VideoAdd from "./VideoAdd";
 
-
 function App() {
-  const [videos, setvideos] = useState(dataVideos)
-  
+  const [videos, setvideos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000")
+      .then(res => res.json())
+      .then(data => setvideos(data))
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
