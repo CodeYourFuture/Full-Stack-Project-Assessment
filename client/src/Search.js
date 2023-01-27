@@ -5,7 +5,7 @@ function Search() {
     return (
       <div className="Search">
        <h2>Search videos</h2>      
-       </div>
+      </div>
     );
   }
 

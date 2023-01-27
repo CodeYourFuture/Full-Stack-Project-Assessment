@@ -9,16 +9,16 @@ const Votes = () => {
 		setLikes(likes + 1)
 	}
 
-	function Disliked(){
+	function disliked(){
 		setLikes(likes - 1)
 	}
   return (
-    <div className='votes'>
+   	 <div className='votes'>
 		<Like upVoteHandler={liked} />
 		<h4 className='videorating'>
             Votes:{likes}
         </h4>
-        <Dislike downVoteHandler={Disliked}/>
+        <Dislike downVoteHandler={disliked}/>
 	</div>
   )
 }

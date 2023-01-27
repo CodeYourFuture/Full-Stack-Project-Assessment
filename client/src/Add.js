@@ -11,7 +11,6 @@ const Add = () => {
      "id": uuid(),
      "title": data.title,
      "url":data.url,
-    //  "rating": 23
     }
      Videos.push(newv.json)
     }
