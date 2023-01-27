@@ -39,12 +39,15 @@ app.post('/videos', (req, res) => {
 app.get("/videos/:id", (req, res) => {
   let id = parseInt(req.params.id);
   console.log(id);
-  let findVideo = videos.find(ID => ID.id === id);
+  let findVideo = videos.find((video) => video.id === id);
   if(!findVideo) {
-    res.send("Not Found").status(404)
-  } else {
+   // res.send("Not Found").status(404)
+   res.status(404).send(`no video with the ${id} is found`)
+   return
+  } 
+  //else {
     res.send(findVideo);
-  }
+//}
 })
 app.delete('/:id', (req, res) => {
   let id = parseInt(req.params.id);
