@@ -92,11 +92,11 @@ let videos = [
 
 const addedVideos = [];
 //return all videos
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   res.send(videos);
 });
 //posting a new video
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   let newVideo = {
     id: parseInt(uuidv4()),
     title: req.body.title,
@@ -105,17 +105,23 @@ app.post("/", (req, res) => {
   };
   const videoTitle = req.body.title;
   const videoUrl = req.body.url;
+  let id = uuidv4();
   const videoRating = 0;
   if (videoTitle.length < 1) {
-    res.status(400).json({
+    res.send(400).json({
       result: "failure",
       msg: "A title is required.",
     });
+    return;
   } else if (videoUrl.length < 1) {
     res.status(400).json({
       result: "failure",
       msg: "An url is required",
     });
+    return;
+  }
+  if (id === null) {
+    res.status(404);
   }
   //validate url
   const isValidUrl = videoUrl.match(
@@ -130,7 +136,7 @@ app.post("/", (req, res) => {
   }
 });
 //getting  a video by id
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   if (videoId > 0) {
     res.json(videos.find((v) => v.id === videoId));
@@ -138,9 +144,10 @@ app.get("/:id", (req, res) => {
   if (!videoId) {
     return res.status(400).json({ msg: "Invalid input" });
   }
+  res.send("OK");
 });
 // deleting a video by id
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   const videoIndex = videos.findIndex((v) => v.id === videoId);
 
