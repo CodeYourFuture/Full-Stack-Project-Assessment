@@ -28,7 +28,7 @@ app.post("/post", (req, res) => {
 });
 
 // POST "/videos"
-app.post("/videos", (req, res) => {
+app.post("/", (req, res) => {
   for (const key in req.body) {
     if (!validateURL(req.body[key].url)) {
       res.status(400).send(`Youtube Url is a valid url`);
