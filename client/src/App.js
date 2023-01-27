@@ -25,8 +25,17 @@ function App() {
   }, [loadVideos]);
 
   function handleDelete(id) {
-    let filterVideos = videos.filter((video) => video.id !== id);
-    setVideos(filterVideos);
+    fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLoadVideos(!loadVideos);
+      })
+      .catch((error) => {
+        alert("Could not delete!");
+        console.error("There was an error!", error);
+      });
   }
 
   function resetForm() {
