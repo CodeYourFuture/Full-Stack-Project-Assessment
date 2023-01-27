@@ -67,3 +67,19 @@ app.post("/videos", (req, res) => {
     res.status(200).json(videos);
   }
 });
+
+//Delete video
+app.delete("/videos/:id", function (req, res) {
+  let id = parseInt(req.params.id); // int = integer
+
+  let filterVideo = videos.filter((video) => video.id === id);
+
+  if (filterVideo.length === 0) {
+    return res.status(404).json("Video not found");
+  }
+
+  // take all the videos except the passed id for delete and over write.
+  videos = videos.filter((video) => video.id !== id);
+
+  res.send(videos);
+});
