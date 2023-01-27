@@ -3,7 +3,7 @@
 }
 
 .my-App-header{
-  color: azure;
+  color: rgb(128, 243, 243);
   background-color: rgb(106, 50, 209);
   padding: 2rem 0;
   text-align: center;
@@ -17,14 +17,14 @@
 
 .inserted-video {
   text-align: center;
-  width: 400px;
+  width: 500px;
 }
 
 .all-videos {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  margin: 5rem;
+  margin: 100px;
 }
 
 .add-video-btn {
@@ -36,9 +36,14 @@
   border: none;
 }
 
+.search-video {
+  text-align: right;
+  margin-right: 80px;
+}
+
 .upper-div {
   margin: 2rem;
-  display: flex;
+  /* display: flex; */
   
 }
 
@@ -62,12 +67,12 @@
   align-content: center;
 }
 
-.dislike-button {
+.down-vote {
   background-color: red;
   border: none;
 }
 
-.like-button {
+.up-vote {
   background-color: green;
   border: none;
 }
@@ -82,4 +87,14 @@
 .add-cancel-buttons {
   display: flex;
   margin: 20px;
+}
+
+hr {
+  position: relative;
+  height: 5px;
+  top: 20px;
+  border: none;
+  background: black;
+  margin-bottom: 50px;
+
 }
