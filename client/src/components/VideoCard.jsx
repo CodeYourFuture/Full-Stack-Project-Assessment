@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Avatar, Divider } from "@mui/material";
+import { Avatar, Divider } from "@mui/material";
 import { red } from "@mui/material/colors";
 import Video from "./VideoCard/Video";
 import LikeButton from "./VideoCard/LikeButton";
@@ -21,7 +21,6 @@ const VideoCard = ({ video, delVid, selVid }) => {
       <Video video={video} />
       <div className="video_card_content">
         <h4>{video.title}</h4>
-        {/* <Button variant="text" onClick={selVid}>{video.title}</Button> */}
         <Avatar
           className="circle"
           sx={{ bgcolor: red[400], width: 60, height: 60 }}

@@ -75,29 +75,6 @@ const App = () => {
     addVideo(title, url);
   };
 
-  //---------------------------------
-  // GET "/id"
-
-  // const selectVideo = async (id) => {
-  //   try{
-  //     const res = await fetch(`${serverUrl}/${id}`);
-  //     if (!res.ok) {
-  //       return;
-  //     }
-  //     const data = await res.json();
-  //     setVideos(data);
-  //   } catch (err) {
-  //     console.error(`An error occurred: ${err}`);
-  //   }
-  // };
-
-  // const handleSelectClick = (event, id) => {
-  //   event.preventDefault();
-  //   selectVideo(id);
-  // };
-
-  //---------------------------------
-
   // Delete "/"
   const deleteVideo = async (id) => {
     try {
@@ -136,7 +113,6 @@ const App = () => {
               video={video}
               key={video.id}
               delVid={() => deleteVideo(video.id)}
-              // selVid={(event) => handleSelectClick(event, video.id)}
             />
           ))}
       </div>
