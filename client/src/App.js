@@ -11,18 +11,17 @@ function App() {
     url: "",
     rating: 0,
   });
+  const API_URL = "http://localhost:5001";
 
   useEffect(() => {
-    
-     fetch(`http://localhost:5001/videos`)
-       .then((res) => res.json())
-       .then((data) => 
-        {
-          let allVideos = [...data].sort((a, b) =>
-            a.rating > b.rating ? 1 : -1
-          );
-          setVideos(allVideos);
-        });
+    fetch(`${API_URL}/videos`)
+      .then((res) => res.json())
+      .then((data) => {
+        let allVideos = [...data].sort((a, b) =>
+          a.rating > b.rating ? 1 : -1
+        );
+        setVideos(allVideos);
+      });
   }, [loadVideos]);
 
   function handleDelete(id) {
@@ -38,22 +37,26 @@ function App() {
   }
 
   function handleSubmit() {
-    let lastIndex = videos.length - 1;
-    let lastId = videos[lastIndex].id;
-    let idPosition = lastId + 1;
-
-    let result = [
-      ...videos,
-      {
-        id: idPosition,
+    fetch(`${API_URL}/video`, {
+      method: "POST",
+      body: JSON.stringify({
         title: reqBody.title,
         url: reqBody.url,
-        rating: 0,
+      }),
+      headers: {
+        "Content-Type": "application/json",
       },
-    ];
-
-    setVideos(result);
-    resetForm();
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        resetForm();
+        setLoadVideos(!loadVideos);
+      })
+      .catch((error) => {
+        alert("Could not save!");
+        console.error("There was an error", error);
+      });
   }
 
   function handleChange(e) {
