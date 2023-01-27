@@ -1,47 +1,7 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
 
-// const REGEXP =
-//   /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-
-// const isValidYoutubeUrl = (link) => {
-//   return link.trim().match(REGEXP) !== null;
-// };
-
-// const getIdFromYoutubeUrl = (link) => {
-//   return link.match(REGEXP) ? link.match(REGEXP)[1] : false;
-// };
-
 const AddVideoForm = ({ handleSubmit, title, setTitle, url, setUrl, message }) => {
-  // const [title, setTitle] = useState("");
-  // const [url, setUrl] = useState("");
-  // const [message, setMessage] = useState("");
-
-  // const addVideo = (event) => {
-  //   event.preventDefault();
-
-    // if (!title.trim() || !url.trim()) {
-    //   setMessage("Your field is empty.");
-    //   return;
-    // } else if (!isValidYoutubeUrl(url.trim())) {
-    //   setMessage("Please enter a valid Youtube link.");
-    //   return;
-    // }
-
-    // let videoId = getIdFromYoutubeUrl(url.trim());
-    // let videoUrl = `https://youtube.com/embed/${videoId}`;
-
-    // const newVideo = {
-    //   id: videoId,
-    //   title: title,
-    //   url: videoUrl,
-    //   rating: 0,
-    // };
-    // setVideos((prevVideos) => prevVideos.concat(newVideo));
-  //   setTitle("");
-  //   setUrl("");
-  //   setMessage(`Video ${title} was Added`);
-  // };
 
   return (
     <form onSubmit={handleSubmit} className="form_submit">

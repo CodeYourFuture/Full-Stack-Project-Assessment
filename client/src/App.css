@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@700&display=swap');
 
 .App {
   text-align: center;
@@ -15,9 +15,8 @@
 .App_header h1 {
   color: #fff;
   margin: 40px;
-  font-weight: 500;
-  font-family: "Lora", serif;
-  font-size: 3rem;
+  font-family: 'Kaisei Opti', serif;
+  font-size: 3.1rem;
 }
 
 .form_submit {

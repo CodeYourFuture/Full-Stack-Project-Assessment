@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Avatar, Divider } from "@mui/material";
+import { Button, Avatar, Divider } from "@mui/material";
 import { red } from "@mui/material/colors";
 import Video from "./VideoCard/Video";
 import LikeButton from "./VideoCard/LikeButton";
 import DislikeButton from "./VideoCard/DislikeButton";
 import DeleteButton from "./VideoCard/DeleteButton";
 
-const VideoCard = ({ video, delVid }) => {
+const VideoCard = ({ video, delVid, selVid }) => {
   const [likes, setLikes] = useState(() => video.rating);
 
   function incrementLikes() {
@@ -21,6 +21,7 @@ const VideoCard = ({ video, delVid }) => {
       <Video video={video} />
       <div className="video_card_content">
         <h4>{video.title}</h4>
+        {/* <Button variant="text" onClick={selVid}>{video.title}</Button> */}
         <Avatar
           className="circle"
           sx={{ bgcolor: red[400], width: 60, height: 60 }}
