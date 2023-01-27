@@ -68,7 +68,7 @@ app.delete("/videos/:id", (req, res) => {
   }
   videos.splice(foundVideoIndex, 1);
 
-  res.send(videos);
+  res.send(videos)
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
