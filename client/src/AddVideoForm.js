@@ -35,33 +35,22 @@ const AddVideoForm = ({ setVideoData }) => {
     newVideoData.title && validateYouTubeUrl(newVideoData.url)
       ? setVideoData((videos) => videos.concat(newVideoData))
       : alert("Please make sure to enter valid URL and TITLE!");
-    // setTitle('');
-    // setUrl('')
-    //  fetch("/videos", {
-    //    method: "POST",
-    //    headers: { "Content-Type": "application/json" },
-    //    body: JSON.stringify(setVideoData),
-    //  })
-    //    .then((res) => res.json())
-    //    .then((data) => {
-    //      console.log(data);
-    //    })
-    //    .catch((error) => console.log(error));
+     
+    // fetch("/videos", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(setVideoData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
 
+    //     newVideoData.title && validateYouTubeUrl(newVideoData.url)
+    //       ? setVideoData((videos) => videos.concat(newVideoData))
+    //       : alert("Please make sure to enter valid URL and TITLE!");
+    //   })
+    //   .catch((error) => console.log(error));
   };
-
-  
-
-  // fetch("/videos", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(setVideoData),
-  // })
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error) => console.log(error));
 
   return (
     <div>
