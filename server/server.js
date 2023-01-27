@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 5000
 
 const exampleResponse = require('../client/src/exampleresponse.json')
-const uuid = require('uuid')
+// const uuid = require('uuid')
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 
@@ -28,14 +28,11 @@ app.get('/videos', (req, res) => {
 app.post('/videos', (req, res) => {
   // res.send(req.body.id)
   // res,json({result: 'failure', message: 'Video could not be saved'})
-  const id = uuid.v4()
+  const id = videos.length
   const title = req.body.title
   const url = req.body.url
 
-  !(title || !url) &&
-    res
-      .status(404)
-      .json({ result: 'failure', message: 'Video could not be saved' })
+  !(title || url) && res.status(400).send('Please include a title and a url')
 
   const newVideo = {
     id: id,
@@ -45,7 +42,7 @@ app.post('/videos', (req, res) => {
   }
 
   videos.push(newVideo)
-  res.send(id)
+  res.json({ id: id })
 })
 
 app.get('/videos/:id', (req, res) => {
@@ -63,7 +60,11 @@ app.delete('/videos/:id', (req, res) => {
   const videoId = videos.find((video) => video.id === id)
   const videoIndex = videos.findIndex((video) => video.id === id)
 
-  !videoId && res.status(404).send('Not Found')
+  !videoId &&
+    res.status(404).json({
+      result: 'failure',
+      message: 'Video could not be deleted',
+    })
 
   videos.splice(videoIndex, 1)
   res.send(videos)
