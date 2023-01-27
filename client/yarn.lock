@@ -2383,10 +2383,10 @@
   "resolved" "https://registry.npmjs.org/axe-core/-/axe-core-4.3.5.tgz"
   "version" "4.3.5"
 
-"axios@^1.2.3":
-  "integrity" "sha512-pdDkMYJeuXLZ6Xj/Q5J3Phpe+jbGdsSzlQaFVkMQzRUL05+6+tetX8TV3p4HrU4kzuO9bt+io/yGQxuyxA/xcw=="
-  "resolved" "https://registry.npmjs.org/axios/-/axios-1.2.3.tgz"
-  "version" "1.2.3"
+"axios@^1.2.5":
+  "integrity" "sha512-9pU/8mmjSSOb4CXVsvGIevN+MlO/t9OWtKadTaLuN85Gge3HGorUckgp8A/2FH4V4hJ7JuQ3LIeI7KAV9ITZrQ=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-1.2.5.tgz"
+  "version" "1.2.5"
   dependencies:
     "follow-redirects" "^1.15.0"
     "form-data" "^4.0.0"

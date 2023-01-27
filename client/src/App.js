@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Videos from "./Components/Videos";
 import Input from "./Components/Input";
-import data from "./exampleresponse.json";
+import axios from "axios";
 
 function App() {
-  const [copyData, setCopyData] = useState(data);
+  const [data, setData] = useState([]);
+  const [tracker, setTracker] = useState(0);
+
   const [reqBody, setReqBody] = useState({
     title: "",
     url: "",
   });
 
-  function handleSubmit() {
-    let result = [
-      ...copyData,
-      {
-        id: 0,
-        title: reqBody.title,
-        url: reqBody.url,
-        rating: 2,
-      },
-    ];
-    setCopyData(result);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/videos")
+      .then((data) => {
+        setData(data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [tracker]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/videos", reqBody)
+      .then((value) => console.log(value))
+      .catch((err) => console.log(err));
+    setTracker((el) => el + 1);
   }
 
   function handleChange(e) {
@@ -41,9 +48,8 @@ function App() {
         handleSubmit={handleSubmit}
         reqBody={reqBody}
       />
-      <Videos copyData={copyData} setCopyData={setCopyData}/>
+      <Videos data={data} setTracker={setTracker} />
     </div>
   );
 }
 export default App;
-
