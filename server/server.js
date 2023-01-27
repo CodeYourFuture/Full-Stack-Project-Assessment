@@ -75,7 +75,7 @@ app.delete("/:id", (req, res) => {
 
   pool
     .query(query, [videoId])
-    .then(() => res.send("Video deleted"))
+    .then(() => res.send({ Msg: "Video deleted" }))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
