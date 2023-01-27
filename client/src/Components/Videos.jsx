@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import SingleVideo from "./SingleVideo";
 import Votes from "./Votes";
@@ -12,6 +12,7 @@ function Videos(props) {
   }
 
   return (
+   
     <div>
       {props.copyData.map((el, key) => {
         let index = el.url.indexOf("=");
