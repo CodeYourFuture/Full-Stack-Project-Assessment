@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const AddVideo = ({newData}) =>{
+const AddVideo = ({newVideo}) =>{
     const [title, setTitle] = useState("");
     const[url, setUrl] = useState("");
 
     const addVid = () => {
-        newData({title, url})
+        newVideo({title, url})
     }
     return (
       <div>
