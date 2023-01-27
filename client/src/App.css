@@ -16,7 +16,7 @@
   color: rgb(20, 168, 213);
   font-size: 0.9em;
   font-weight: 500;
-  background-color: rgb(255, 255, 206);
+  /* background-color: rgb(255, 255, 206); */
   border-radius: 3rem;
 }
 
@@ -36,7 +36,4 @@ h3 {
   background-color: red;
   padding: 0rem 0rem 0rem 0rem;
 }
-/* .form-container {
-  margin: 0rem 6rem 3rem 6rem;
 
-} */

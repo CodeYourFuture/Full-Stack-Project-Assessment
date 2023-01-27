@@ -9,13 +9,6 @@ function App() {
   const [addVideo, setAddVideo] = useState(false);
 
   //Removing 1 video
-  // const deleteViedeos = (deletedViedeoId) => {
-  //   setVideoData(
-  //     allVideos.filter((video) => {
-  //       return video.id !== deletedViedeoId;
-  //     })
-  //   );
-  // }
 
   const deleteViedeos = (id) => {
     setVideoData((allVideos) => allVideos.filter((video) => video.id !== id));
