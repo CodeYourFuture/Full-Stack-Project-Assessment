@@ -1,8 +1,9 @@
-const { json } = require("express");
+const { json, response } = require("express");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const fs = require("fs");
+const { endianness } = require("os");
 const path = require("path");
 
 const filePath = "../client/src/exampleresponse.json";
@@ -21,29 +22,31 @@ let videos = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 //find video by ID
 
-app.delete("/:id", (req, res) => {
-  videos = videos.filter((e) => e.id != req.params.id);
-  save();
-  res.json(videos);
-});
+app.get("/order", (req, res) => {
+  //res.json({ message: "successfull executeed " + req.query.by });
 
-app.get("/:id", (req, res) => {
-  res.json(videos.filter((e) => e));
+  //Sort the videos
+
+  if (req.query.by !== undefined) {
+    const order = req.query.by.toLowerCase();
+    if (order === "asc")
+      res.json(videos.sort((x, y) => (x.vote > y.vote ? 1 : -1)));
+    else res.json(videos.sort((x, y) => (x.vote < y.vote ? 1 : -1)));
+  }
 });
 
 app.get("/", (req, res) => {
-  //let sortedVideos =
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
-  if (req.query.order !== undefined) {
-    const order = req.query.order.toLowerCase();
-    if (order === "asc") {
-      res.json(videos.sort((x, y) => (x.vote > y.vote ? 1 : -1)));
-    } else if (order === "desc") {
-      res.json(videos.sort((x, y) => (x.vote < y.vote ? 1 : -1)));
-    }
-  } else {
-    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-  }
+app.delete("/:id", (req, res) => {
+  videos = videos.filter((e) => e.id != req.params.id);
+  save();
+  res.json({ message: "Video Deleted" });
+});
+
+app.get("/:id", (req, res) => {
+  res.json(videos.filter((e) => e.id == req.params.id));
 });
 
 app.post("/", (req, res) => {

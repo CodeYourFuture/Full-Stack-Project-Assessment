@@ -30,7 +30,7 @@ function Video({ video }) {
       <p className="m-2">
         {video.postedDate ? "Posted at " + video.postedDate : ""}
       </p>
-      <DeleteButton />
+      <DeleteButton videoID={video.id} />
     </div>
   );
 }
