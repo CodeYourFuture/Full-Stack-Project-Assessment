@@ -41,10 +41,11 @@ app.get('/videos/:id', (req, res) => {
 app.delete('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
   const videoId = videos.find((video) => video.id === id)
-  const videoIndex = videos.findIndex((i) => i === id )
+  const videoIndex = videos.findIndex((video) => video.id === id )
 
   !videoId && res.status(404).send('Not Found')
 
   videos.splice(videoIndex, 1)
-  res.send('Video deleted')
+  console.log()
+  res.send(videos)
 })
