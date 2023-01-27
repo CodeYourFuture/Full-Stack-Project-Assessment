@@ -31,6 +31,9 @@
   background-color: blueviolet;
   color: whitesmoke;
   margin-right: 30rem;
+  margin-left: 20px;
+  margin-top: 15px;
+  border: none;
 }
 
 .upper-div {
@@ -42,11 +45,13 @@
 .cancel-btn {
   background-color: yellow;
   color: black;
+  margin: 10px;
 }
 
 .add-btn {
   background-color: red;
   color: white;
+  margin: 10px;
 }
 
 .liking {
@@ -65,4 +70,16 @@
 .like-button {
   background-color: green;
   border: none;
+}
+
+.add-form {
+  width: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;;
+}
+
+.add-cancel-buttons {
+  display: flex;
+  margin: 20px;
 }

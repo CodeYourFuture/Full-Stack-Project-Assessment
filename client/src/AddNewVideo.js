@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 
 function AddNewVideo() {
@@ -7,14 +8,16 @@ function AddNewVideo() {
         <h1>Video Recommendation</h1>
       </header>
       <body>
-        <div className="upper-div">
-          <button className="add-video-btn">Add Video</button>
-          <label>Search</label>
-          <input></input><br/>
+        <div className="">
+          <button className="add-video-btn">Home</button>
+          <div className="add-form">
           Title<input></input>
-          URL<input></input>
+          URL<input></input></div>
+          <div className="add-cancel-buttons">
           <button className="cancel-btn">Cancel</button>
           <button className="add-btn">ADD</button>
+
+          </div>
         </div>
         
       </body>
