@@ -8,13 +8,13 @@ const AddVideo = ({newData}) => {
     }
 return (
 <div>
-<label for="title">Title:</label>
-<input type="text" id="title" value={title} onChange={(e)=> setTitle(e.target.value)}></input>
+<label htmlFor="title">Title:</label>
+<input type="text" id="title" value={title} className="input" onChange={(e)=> setTitle(e.target.value)}></input>
 <br/>
-<label for="url">Url:</label>
-<input type="text" id="url" value={url} onChange={(e)=> setUrl(e.target.value)}></input>
+<label htmlFor="url">Url:</label>
+<input type="text" id="url" value={url} className="input" onChange={(e)=> setUrl(e.target.value)}></input>
 <br/>
-<input type="button" value="Add" onClick={addVid}></input>
+<input type="button" value="Add" className="addBtn" onClick={addVid}></input>
 
 </div>)
 }

@@ -19,7 +19,7 @@ const pool = new Pool({
 });
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   // res.send(videos).json;
   pool.query('SELECT * FROM video')
   .then((result) => res.send(result.rows).json)
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
-app.post('/', (req, res) => {
+app.post('/videos', (req, res) => {
   let title = req.body.title;
   let url = req.body.url;
   let rating = req.body.rating
@@ -56,7 +56,7 @@ pool
 });
 
 //`GET` "/{id}"
-app.get("/:id", (req, res) =>{
+app.get("/videos/:id", (req, res) =>{
 let videoId = req.params.id;
 pool.query('SELECT * FROM video WHERE id=$1', [videoId])
 .then((result) =>  
@@ -69,7 +69,7 @@ res.json(result.rows))
 
 
 // `DELETE` "/{id}"
-app.delete('/:id', (req, res)=> {
+app.delete('/videos/:id', (req, res)=> {
 let vidId = req.params.id;
 pool
 .query("DELETE FROM video WHERE id=$1", [vidId])

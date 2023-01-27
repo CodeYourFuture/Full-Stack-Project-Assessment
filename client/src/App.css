@@ -1,31 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
 .App {
+  text-align: center;
+  background-color: #E6E8EF;
+}
+.dislikeBtn, .likeBtn{
+  background-color: #E6E8EF;
+}
+header {
+  display: block;
   text-align: center;
 }
 
-header {
-  display: block;
+.input{
+  display: inline-block;
+  width: 30%;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px 0;
+  margin-left: 7px;
+  box-sizing: border-box;
+}
+
+label{
+  font-size: 18px;
 }
 
 .App-header{
   color: #fff;
-  font-style: oblique;
-  background-color: #254e70;
+ font-family:'Lobster Two', cursive;;
+  background-color: #190933;
   padding: 2rem 0;
 }
 
 .Add{
-  margin-left: 60px;
+margin-left: 60px;
 text-align: start;
+
 }
 
-body{
+.body{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   margin: 0;
   padding: 0;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 500;
+  font-family:Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: #E6E8EF;
 }
 
 .video-container{
@@ -47,6 +72,18 @@ button{
 .delete-button{
   margin-top: 2rem;
   border-radius: 10px;
+  padding: 10px;
+  background-color: #a71e34;
+  color: white;
+}
+.addBtn{
+  border-radius: 10px;
+  padding-bottom: 4px;
+  padding-left: 10px ;
+  padding-right: 10px ;
+  background-color:#190933;
+  color: white;
+  border: none;
 }
 
 .vote-container{

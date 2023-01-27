@@ -10,7 +10,7 @@ function App() {
 
 useEffect(()=> {
 const fetchData = async () => {
-  const result = await fetch('http://localhost:5000')
+  const result = await fetch('http://localhost:5000/videos')
   const jsonResult = await result.json()
   setDel(jsonResult)
 }
@@ -28,11 +28,11 @@ const newData = (video) => { setDel([...del, video])};
         <h1>Video Recommendation</h1>
       </header>
       <div className="Add"><AddVideo newData={newData} /></div>
-      <body>
+      <div className="body">
         { del.map((video, key) => (
         <Video remove={remove}  video={video} key={key}/>
         ))}
-      </body>
+      </div>
     </div>
   );
 }
