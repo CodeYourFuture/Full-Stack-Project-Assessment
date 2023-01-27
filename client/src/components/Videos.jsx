@@ -4,7 +4,8 @@ import Rating from "./Rating";
 function Videos(props) {
   // Split after '=' get second array allows to get embed!
 
-  let src = "https://www.youtube.com/embed/" + props.data.url.split("=")[1];
+  let src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
+  console.log(props.videos);
 
   return (
     <div>
@@ -14,25 +15,27 @@ function Videos(props) {
           style={{
             background: "black",
             border: "#D43C31 solid",
-            margin: "2px",
-            padding: "2px",
+            margin: "5px",
+            padding: "5px",
           }}
         >
           <div>
-            <h6 style={{ color: "#D43C31" }}>{props.data.title}</h6>
+            <h6 style={{ color: "#D43C31", fontSize: "2rem" }}>
+              {props.videos.title}
+            </h6>
             <span>
-              <Rating video={props.data} />
+              <Rating video={props.videos} />
             </span>
           </div>
 
           <iframe
-            style={{ height: "500px", weihgt: "200px" }}
+            style={{ height: "600px", weight: "300px" }}
             className="card-img-top"
-            alt={props.data.Title}
+            alt={props.videos.Title}
             src={src}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title="Embedded youtube"
+            title={props.videos.id}
           />
         </div>
       </div>
