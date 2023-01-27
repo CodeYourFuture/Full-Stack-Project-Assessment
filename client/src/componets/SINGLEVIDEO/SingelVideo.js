@@ -16,12 +16,13 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
   }
 
   return (
-    <div key={id} className="single-vid mr-5 shadow p-3 mb-5 bg-white rounded rounded">
+    <div
+      key={id}
+      className="single-vid ml-4 shadow p-3 mb-5 bg-white rounded rounded"
+    >
       <p> {title}</p>
 
       <iframe
-        // width="500"
-        // height="315"
         src={url}
         title={title}
         border="0"
@@ -33,15 +34,15 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
         handleDecrement={handleDecrement}
         rating={rating}
       />
-     
+
       <Button
-            onClick={() => deleteVideo(id)}
-            className="ml-1 mt-1 mb-1"
-            variant="primary"
-            type="cancel"
-          >
-            Delete
-          </Button>
+        onClick={() => deleteVideo(id)}
+        className="ml-1 mt-1 mb-1"
+        variant="primary"
+        type="cancel"
+      >
+        Delete
+      </Button>
     </div>
   );
 }

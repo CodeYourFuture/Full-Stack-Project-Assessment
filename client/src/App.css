@@ -1,4 +1,6 @@
-.App {
+body {
+  background: lightblue;
+  animation: color 9s infinite linear;
   text-align: center;
-  background-color: aquamarine;
+  padding: 2em;
 }

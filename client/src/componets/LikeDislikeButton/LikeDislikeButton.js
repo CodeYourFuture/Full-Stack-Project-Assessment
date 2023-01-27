@@ -7,11 +7,11 @@ function LikeDislikeButton({ rating, handleIncrement, handleDecrement }) {
   return (
     <div className="like-dislike">
       <span onClick={() => handleIncrement()}>
-        <BsFillHandThumbsUpFill className="icon " />
+        <BsFillHandThumbsUpFill className="icon  like " />
       </span>
       <h4>{rating}</h4>
       <span onClick={() => handleDecrement()}>
-        <BsFillHandThumbsDownFill className="icon" />
+        <BsFillHandThumbsDownFill className="icon dislike" />
       </span>
     </div>
   );
