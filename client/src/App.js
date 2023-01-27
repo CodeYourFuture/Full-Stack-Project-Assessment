@@ -1,30 +1,45 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
-import videos from "./exampleresponse.json";
 import AddVideo from "./AddVideo";
-import { v4 as uuidv4 } from "uuid";
-
 
 function App() {
-  const [videoList, setVideoList] = useState(videos);
+  const [videoList, setVideoList] = useState([]);
 
+  //Get all videos
+  useEffect(() => {
+    fetch("http://localhost:5000/videos")
+      .then((response) => response.json())
+      .then((data) => setVideoList(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  //delete video
   function handleDelete(id) {
-    let filteredVideos = videoList.filter((video) => video.id !== id);
-    setVideoList(filteredVideos);
+    fetch(`http://localhost:5000/videos/${id}`, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result === "success") {
+          setVideoList(data.videoList);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => console.error(error));
   }
 
+  //ADD new Video
   function handleAdd(newVideo) {
-    setVideoList([
-      ...videoList,
-      {
-        ...newVideo,
-        id: uuidv4(),
-        rating: 0,
-        date: new Date().toLocaleString(),
+    fetch("http://localhost:5000/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    ]);
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => setVideoList(data))
+      .catch((error) => console.error(error));
   }
 
   return (
@@ -32,20 +47,16 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-
       <body>
         <div className="video-List">
-          {videoList
-            .sort((a, b) => b.rating - a.rating)
-            .map((video, key) => (
-              <Video video={video} key={key} handleDelete={handleDelete} />
-            ))}
+          {videoList.map((video, key) => (
+            <Video video={video} key={key} handleDelete={handleDelete} />
+          ))}
         </div>
         <div className="add-Video">
           <AddVideo onAdd={handleAdd} />
         </div>
       </body>
-
     </div>
   );
 }
