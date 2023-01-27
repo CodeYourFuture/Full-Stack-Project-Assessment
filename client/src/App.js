@@ -1,20 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
 import dataVideos from "./exampleresponse.json";
 import AddAVideo from "./addAVideo";
 
-
-const cors = require("cors");
-app.use(cors());
-
-
-
-
-
-
 function App() {
-
   const [dataVideo, setDataVideo] = useState(dataVideos);
   const [videoID, setVideoID] = useState(null);
   const deleteVideo = (e) => {
@@ -55,7 +45,6 @@ function App() {
     }
   };
 
- 
   return (
     <div className="App">
       <header className="App-header">
@@ -90,5 +79,5 @@ function App() {
     </div>
   );
 }
-
+//this is a test
 export default App;
