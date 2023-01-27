@@ -11,10 +11,10 @@ function App() {
     url: "",
     rating: 0,
   });
-  const API_URL = "http://localhost:5001";
+  const API_URL = "http://localhost:5001/videos";
 
   useEffect(() => {
-    fetch(`${API_URL}/videos`)
+    fetch(`${API_URL}`)
       .then((res) => res.json())
       .then((data) => {
         let allVideos = [...data].sort((a, b) =>
@@ -37,7 +37,7 @@ function App() {
   }
 
   function handleSubmit() {
-    fetch(`${API_URL}/video`, {
+    fetch(`${API_URL}`, {
       method: "POST",
       body: JSON.stringify({
         title: reqBody.title,
