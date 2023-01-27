@@ -9,8 +9,8 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
-const cors = require("cors");
-app.use(cors);
+// const cors = require("cors");
+// app.use(cors);
 
 //let videos = JSON.parse(fs.readFileSync("videos.json", "utf-8"));
 let videos = require("./videos.json");
