@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 
-const AddNewVideo = (props) => {
+const AddNewVideo = ({setVideoData, setAddVideo, urlToFetch, createVideo}) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    //Increasing of each video ID
-    const newId = (id) => {
-      return id++;
-    };
-    const addVideo = {
-      title,
-      url,
-      id: { newId },
-      rating: 5,
-    };
-
-    props.setVideoData((allVideos) => {
-      return allVideos.concat(addVideo);
-    });
+const handleOnSubmit = async event => {
+  event.preventDefault();
+  const res = await fetch(`${urlToFetch}`, {
+    method: "post",
+    mode: "cors",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ title, url }),
+  });
+  const data = await res.text();
+  console.log(data);
     setTitle("");
     setUrl("");
-  };
+    createVideo();
+};
 
   return (
     <div className="form-container">
@@ -49,7 +44,7 @@ const AddNewVideo = (props) => {
         <div className="btn-form">
           <div className="button1">
             <button
-              onClick={() => props.setAddVideo(false)}
+              onClick={() => setAddVideo(false)}
               type="cancel"
               className="btn btn-warning"
             >

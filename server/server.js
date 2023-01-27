@@ -11,6 +11,26 @@ app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+function youtubeUrl(url) {
+  const regex =
+/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  
+if (url.match(regex)) {
+  return true;
+}
+return false;
+}
+createRandomId = (arr) => {
+  const randomId = Math.floor(100000 + Math.random() * 900000);
+const existingId = arr.some((video) => video.id === randomId);
+if (existingId) {
+  createRandomId(arr);
+} else {
+  return randomId;
+}
+}
+
+
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [
@@ -111,8 +131,8 @@ app.delete("/:id", (req, res) => {
     videos.splice(indexVideo, 1);
     return res.status(200).send({});
   }
-  res.send({ 
+  res.send({
     result: "failure",
-    message: "Video not deleted",
+    message: "Video could not be deleted",
   });
 });

@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AddNewVideo from "./AddNewVideo";
 import "./App.css";
-// import dataVideo from "./exampleresponse.json";
+import dataVideo from "./exampleresponse.json";
 import RenderVideo from "./RenderVideo";
 
 function App() {
-  const [allVideos, setVideoData] = useState([]);
+  const [allVideos, setVideoData] = useState(dataVideo);
   const [addVideo, setAddVideo] = useState(false);
 
-  //Removing 1 video
 
-  const deleteVideos = (id) => {
+  const deleteViedeos = (id) => {
     setVideoData((allVideos) => allVideos.filter((video) => video.id !== id));
-  };
-
-  useEffect(() => {
-    createVideo();
-  }, []);
-
-  const urlToFetch = "http://localhost:5000/";
-
-  const createVideo = () => {
-    fetch(`${urlToFetch}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setVideoData(data);
-      });
   };
 
   return (
@@ -45,8 +30,6 @@ function App() {
           newVideo={allVideos}
           setVideoData={setVideoData}
           setAddVideo={setAddVideo}
-          urlToFetch={urlToFetch}
-          createVideo={createVideo}
         />
       )}
       <div className="container">
@@ -55,7 +38,7 @@ function App() {
             .sort((a, b) => b.rating - a.rating)
             .map((video) => (
               <div className="col-sm-6" key={video.id}>
-                <RenderVideo video={video} handleDeletedVideo={deleteVideos} />
+                <RenderVideo video={video} handleDeletedVideo={deleteViedeos} />
               </div>
             ))}
         </div>
