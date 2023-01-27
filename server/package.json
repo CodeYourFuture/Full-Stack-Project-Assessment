@@ -1,0 +1,29 @@
+{
+  "name": "to-do-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix ../client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  },
+  "repository": {
+    "url": "https://github.com/Mesgna616/Full-Stack-Project-Assessment"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.7"
+  }
+}
