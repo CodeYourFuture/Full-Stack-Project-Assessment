@@ -1,3 +1,107 @@
 .App {
   text-align: center;
+  background-color: #b0baba;
+
+}
+
+
+header {
+  color: #fff;
+  background-color: #025d65;
+  padding: 3rem 0;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+}
+
+.videos-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+
+}
+
+.video-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 1rem;
+  width: 25rem;
+  height: fit-content;
+  row-gap: 1rem;
+  background-color: #093e43;
+  border-radius: 10px;
+  padding: 10px 0 10px 0;
+
+}
+
+.vote-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0 0 1rem 0;
+}
+
+.vote-container>p {
+  padding: 0;
+  margin: 0;
+}
+
+#search {
+  width: 30%;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+p {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 1rem;
+}
+
+#url,
+#title {
+  width: 25%;
+  margin: auto;
+  margin-top: 1rem;
+  font-size: large;
+  font-weight: 400;
+}
+
+.title-error,
+.url-error {
+  color: rgb(137, 6, 6);
+  background-color: #fff;
+  width: 10rem;
+  margin-left: 36rem;
+  border-radius: 5px;
+}
+
+.buttons {
+  padding: 2rem;
+  margin-right: 1rem;
+}
+
+
+.sort {
+  width: 10rem;
+  text-align: center;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(255, 149, 0, 0.792);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  color: #025d65;
+  border-radius: 10px;
+}
+
+h5 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  color: #025d65;
 }
