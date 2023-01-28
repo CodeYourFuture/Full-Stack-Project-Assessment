@@ -16,16 +16,13 @@ const AddVideo = ({ videos, setVideos }) => {
 
   const addToResponse = (e) => {
     e.preventDefault()
-    console.log('hello again react')
     const newVideo = {
       id: uuid(),
       title: title,
       url: url,
     }
-    console.log(videos)
-    // videos.push(newVideo)
+
     setVideos([...videos, newVideo])
-    console.log(videos)
   }
 
   return (
