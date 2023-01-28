@@ -75,7 +75,6 @@ function App() {
     let value = e.target.value;
 
     if (name === "sortBy") {
-      console.log("sortby");
       setOrder(value);
     } else {
       setReqBody({
@@ -101,7 +100,7 @@ function App() {
               reqBody={reqBody}
             />
           </div>
-
+         
           <div class="d-flex w-25 mb-4">
             <select
               className="form-select select-col"
