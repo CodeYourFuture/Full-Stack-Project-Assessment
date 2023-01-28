@@ -22,12 +22,11 @@ function AddVideo(props) {
       props.handleSubmit(event);
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="row gy-3">
         <div className="col-md-6">
-          <label for="cc-name" className="form-label">
+          <label for="title" className="form-label">
             Title
           </label>
           <input
@@ -44,7 +43,7 @@ function AddVideo(props) {
         </div>
 
         <div className="col-md-6">
-          <label for="cc-number" className="form-label">
+          <label for="url" className="form-label">
             YouTube URL
           </label>
           <input

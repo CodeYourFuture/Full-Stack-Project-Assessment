@@ -6,6 +6,7 @@ import AddVideo from "./AddVIdeo";
 function App() {
   const [loadVideos, setLoadVideos] = useState(true);
   const [videos, setVideos] = useState([]);
+  const [order, setOrder] = useState("asc");
 
   //request body
   const [reqBody, setReqBody] = useState({
@@ -18,15 +19,12 @@ function App() {
   const API_URL = "http://localhost:5001/videos";
 
   useEffect(() => {
-    fetch(`${API_URL}`)
+    fetch(`${API_URL}/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
-        let allVideos = [...data].sort((a, b) =>
-          a.rating > b.rating ? 1 : -1
-        );
-        setVideos([...allVideos]);
+        setVideos([...data]);
       });
-  }, [loadVideos]);
+  }, [loadVideos, order]);
 
   function handleDelete(id) {
     fetch(`${API_URL}/${id}`, {
@@ -75,10 +73,16 @@ function App() {
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
-    setReqBody({
-      ...reqBody,
-      [name]: value,
-    });
+
+    if (name === "sortBy") {
+      console.log("sortby");
+      setOrder(value);
+    } else {
+      setReqBody({
+        ...reqBody,
+        [name]: value,
+      });
+    }
   }
 
   return (
@@ -89,7 +93,7 @@ function App() {
 
       <body>
         <div className="container">
-          <div className="m-3">
+          <div className="m-3 title-url ">
             <AddVideo
               handleChange={handleChange}
               handleSubmit={handleSubmit}
@@ -97,7 +101,21 @@ function App() {
               reqBody={reqBody}
             />
           </div>
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+          <div class="d-flex w-25 mb-4">
+            <select
+              className="form-select select-col"
+              aria-label="sort by rating"
+              name="sortBy"
+              id="sortBy"
+              onChange={handleChange}
+            >
+              <option value="asc">Sort By: Rating Asc</option>
+              <option value="desc">Sort By: Rating Desc</option>
+            </select>
+          </div>
+
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
             {videos.map((video, key) => (
               <div className="col">
                 <VideoCard
