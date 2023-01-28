@@ -24,8 +24,8 @@ function App() {
         <h1>Video Recommendations</h1>
       </header>
       <main>
-        <AddVideo exampleResponse={videos} setVideos={setVideos} />
-        <VideoCard videos={videos} setVideos={setVideos} />
+        <AddVideo videos={videos} setVideos={setVideos} />
+        {videos && <VideoCard videos={videos} setVideos={setVideos} />}
       </main>
     </div>
   )

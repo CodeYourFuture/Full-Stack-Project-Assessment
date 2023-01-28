@@ -22,9 +22,9 @@ const AddVideo = ({ videos, setVideos }) => {
       title: title,
       url: url,
     }
-    console.log(newVideo)
-    videos.push(newVideo)
-    setVideos(videos)
+    console.log(videos)
+    // videos.push(newVideo)
+    setVideos([...videos, newVideo])
     console.log(videos)
   }
 
