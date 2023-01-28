@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Video from "./Video";
-import dataVideos from "./exampleresponse.json";
+//import dataVideos from "./exampleresponse.json";
 import AddVideo from "./AddVideo";
 
 
 function App() {
-  const [del, setDel] = useState(dataVideos);
+  const [del, setDel] = useState([])
+
+  useEffect(()=> {
+    const fetchData = async() => {
+      const result = await fetch("http://localhost:5000")
+      const jsonResult = await result.json()
+      setDel(jsonResult)
+    }
+    fetchData()
+  }, [])
   const remove = (id) => {
     let data = del.filter(link => link.id !== id);
     setDel(data);
