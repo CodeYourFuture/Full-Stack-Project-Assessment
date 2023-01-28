@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
+const cors = require('cors')
 
 const exampleResponse = require('../client/src/exampleresponse.json')
 // const uuid = require('uuid')
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+)
 
 app.use(express.json())
 
@@ -69,3 +74,5 @@ app.delete('/videos/:id', (req, res) => {
   videos.splice(videoIndex, 1)
   res.send(videos)
 })
+
+app.listen(3001, () => console.log(`Listening on port 3001`))

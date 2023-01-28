@@ -2,7 +2,7 @@ import React from 'react'
 import VideoCardButtons from './VideoCardButtons'
 
 const VideoCard = ( {videos, setVideos} ) => {
-
+console.log(videos)
 
   const removeVideo = (id) => {
     const updatedResponse = videos.filter((video) => video.id !== id)
