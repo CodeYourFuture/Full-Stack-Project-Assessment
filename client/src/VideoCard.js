@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteButton from "./buttons/DeleteButton";
 import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
 import "./videoCard.css";
 
-function VideoCard({ video, handleDelete, onThumbsDown }) {
-  const url = video.url.replace("watch?v=", "embed/");
-  const [voteCount, setVoteCount] = useState(video.rating);
+function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
+  const [voteCount, setVoteCount] = useState(0);
+  const [video, setVideo] = useState({});
+
+  useEffect(() => {
+    let url = video_detail.url.replace("watch?v=", "embed/");
+    setVoteCount(video_detail.rating);
+    setVideo({ ...video_detail, url });
+  }, [video_detail]);
 
   function likeVote() {
     setVoteCount((voteCount) => voteCount + 1);
@@ -20,7 +26,7 @@ function VideoCard({ video, handleDelete, onThumbsDown }) {
     <div className="card">
       <iframe
         title={video.title}
-        src={url}
+        src={video.url}
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen

@@ -24,7 +24,7 @@ function App() {
         let allVideos = [...data].sort((a, b) =>
           a.rating > b.rating ? 1 : -1
         );
-        setVideos(allVideos);
+        setVideos([...allVideos]);
       });
   }, [loadVideos]);
 
@@ -101,7 +101,7 @@ function App() {
             {videos.map((video, key) => (
               <div className="col">
                 <VideoCard
-                  video={video}
+                  video_detail={video}
                   key={key}
                   handleDelete={() => handleDelete(video.id)}
                 />
