@@ -27,7 +27,32 @@ app.get('/', (req, res) => {
 })
 
 app.get('/videos', (req, res) => {
-  res.json(videos)
+  let orderQuery = req.query.order
+  let videosCopy = videos
+  const desc = videosCopy.sort((a, b) => b.rating - a.rating)
+  const asc = videosCopy.sort((a, b) => a.rating - b.rating)
+
+  orderQuery === 'desc'
+    ? res.json(desc)
+    : orderQuery === 'asc'
+    ? res.json(asc)
+    : res.status(404).json({ msg: 'Not found' })
+
+    res.json(videos)
+})
+
+app.get('/videos',(req,res) => {
+
+})
+
+app.get('/videos/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const videosCopy = videos
+  const videoId = videos.find((video) => video.id === id)
+
+  !videoId && res.status(404).send('Not Found')
+
+  res.json(videosCopy.filter((video) => video.id === id))
 })
 
 app.post('/videos', (req, res) => {
@@ -48,16 +73,6 @@ app.post('/videos', (req, res) => {
 
   videos.push(newVideo)
   res.json({ id: id })
-})
-
-app.get('/videos/:id', (req, res) => {
-  const id = Number(req.params.id)
-  const videosCopy = videos
-  const videoId = videos.find((video) => video.id === id)
-
-  !videoId && res.status(404).send('Not Found')
-
-  res.json(videosCopy.filter((video) => video.id === id))
 })
 
 app.delete('/videos/:id', (req, res) => {
