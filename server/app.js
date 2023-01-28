@@ -1,67 +1,110 @@
-const express = require('express');
-// mongodb+srv://jadejones:jadejones@cluster0.iwmguqu.mongodb.net/?retryWrites=true&w=majority
+const express = require("express");
+const Video = require("./models/video");
 
 const app = express();
-const mongoose = require('mongoose')
-var dotenv = require('dotenv');
+const mongoose = require("mongoose");
+var dotenv = require("dotenv");
 dotenv.config();
 
 app.use(express.json());
 
-const fs = require("fs")
+const fs = require("fs");
 
-let videos = JSON.parse(fs.readFileSync('videos.json', 'utf-8'));
+mongoose
+	.connect(`mongodb+srv://jadejones:jadejones@cluster0.iwmguqu.mongodb.net/?retryWrites=true&w=majority`)
+	.then(() => {
+		console.log("Successfully connected to MongoDB Atlas!");
+	})
+	.catch((error) => {
+		console.log("Unable to connect to MongoDB Atlas!");
+		console.error(error);
+	});
 
-mongoose.connect(`mongodb+srv://jadejones:jadejones@cluster0.iwmguqu.mongodb.net/?retryWrites=true&w=majority`)
-  .then(() => {
-    console.log('Successfully connected to MongoDB Atlas!');
-  })
-  .catch((error) => {
-    console.log('Unable to connect to MongoDB Atlas!');
-    console.error(error);
-  });
+
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
-
-
-app.post('/api/videos',(req, res, next) => {
-    console.log(req.body)
-    res.status(201).json({
-        message: 'Video created successfully'
-    });
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+	next();
 });
-
-app.get('/api/videos', (req, res, next) => {
-    res.status(200).json(videos)
-  });
-
-app.use((req, res, next) => {
-  res.json({ message: 'Your request was successful!' });
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('Response sent successfully!');
-});
-
-module.exports = app;
-
-
-
-
-
-
 
 // // GET "/"
 // app.get("/", (req, res) => {
 //   res.send(videos)
 
 // });
+
+app.post("/", (req, res, next) => {
+	const maxID = Math.max(...videos.map((c) => c.id));
+	const video = new Video({
+		title: req.body.title,
+		url: req.body.url,
+		id: ++maxID,
+		ratings: 0,
+		votes: 0,
+	});
+	video
+		.save()
+		.then(() => {
+			res.status(201).json({
+				message: "Post saved successfully!",
+			});
+		})
+		.catch((error) => {
+			res.status(400).json({
+				error: error,
+			});
+		});
+});
+
+app.get('/:id', (req, res, next) => {
+  Video.findOne({
+    _id: req.params.id
+  }).then(
+    (video) => {
+      res.status(200).json(video);
+    }
+  ).catch(
+    (error) => {
+      res.status(404).json({
+        error: error
+      });
+    }
+  );
+});
+
+app.get("/", (req, res, next) => {
+	Video.find()
+		.then((videos) => {
+			res.status(200).json(videos);
+		})
+		.catch((error) => {
+			res.status(400).json({
+				error: error,
+			});
+		});
+});
+
+app.delete("/videos/:id", (req, res, next) => {
+	Video.deleteOne({_id: req.params.id}).then(
+    () => {
+      res.status(200).json({
+        message: 'Deleted'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  )
+});
+
+module.exports = app;
+
+
 
 // // post
 // app.post('/', (req,res) => {
@@ -101,7 +144,7 @@ module.exports = app;
 
 // app.delete('/:id' , (req, res) => {
 //   const delId = parseInt(req.params.id)
-  
+
 //   const findIndex = videos.findIndex((video) => video.id === delId);
 
 //   if (findIndex >=0){

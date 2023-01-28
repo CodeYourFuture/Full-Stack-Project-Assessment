@@ -35,6 +35,7 @@ function Cards() {
 			title,
 			url,
 			rating: 0,
+			
 		};
 		setVideos((videos) => {
 			return [...videos, newVideo];
