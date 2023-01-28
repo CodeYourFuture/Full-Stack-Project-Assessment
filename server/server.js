@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
-// const youtubeRegex = require("youtube-regex");
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -97,12 +97,14 @@ app.get("/videos", (req, res) => {
 });
 //posting a new video
 app.post("/videos", (req, res) => {
+  console.log("post");
   let newVideo = {
     id: parseInt(uuidv4()),
     title: req.body.title,
     url: req.body.url,
     rating: 0,
   };
+
   const videoTitle = req.body.title;
   const videoUrl = req.body.url;
   let id = uuidv4();
@@ -127,12 +129,12 @@ app.post("/videos", (req, res) => {
   const isValidUrl = videoUrl.match(
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
   );
-  if (isValidUrl) {
-    res.send(videos);
-  }
+
   if (newVideo.title && isValidUrl) {
     videos.push(newVideo);
-    res.status(200).json({ id: newVideo.id });
+    res.status(200).json({
+      message: ` new video with id ${newVideo.id} has been posted`,
+    });
   }
 });
 //getting  a video by id
@@ -144,9 +146,9 @@ app.get("/videos/:id", (req, res) => {
   if (!videoId) {
     return res.status(400).json({ msg: "Invalid input" });
   }
-  res.send("OK");
 });
 // deleting a video by id
+
 app.delete("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
   const videoIndex = videos.findIndex((v) => v.id === videoId);
@@ -158,5 +160,6 @@ app.delete("/videos/:id", (req, res) => {
     return;
   } else {
     videos.splice(videoIndex, 1);
+    res.send("video has been deleted");
   }
 });
