@@ -1,7 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 // import { v4 as uuids4 } from "uuid";
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -9,6 +11,11 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
