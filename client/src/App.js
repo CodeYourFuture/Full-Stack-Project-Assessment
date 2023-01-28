@@ -2,11 +2,15 @@ import React from "react";
 import "./App.css";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
-import dataVideos from "./exampleresponse.json";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [dataVideo, setDataVideo] = useState(dataVideos);
+  const [dataVideo, setDataVideo] = useState([]);
+  useEffect(() => {
+    fetch("https://video-app-node.onrender.com/videos")
+      .then((res) => res.json())
+      .then((data) => setDataVideo(data));
+  }, []);
   const [videoID, setVideoID] = useState(null);
   const deleteVideo = (e) => {
     let videoID = e.target.value;
