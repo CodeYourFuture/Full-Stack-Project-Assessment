@@ -3,18 +3,34 @@ import VideoCard from "./component/VideoCard";
 import AddVideo from "./component/AddVideo";
 import React from "react";
 import { useState, useEffect } from "react";
-import Data from "./exampleresponse.json";
 
 function App() {
-  const [videosList, setVideosList] = useState(Data);
+  const [videosList, setVideosList] = useState([]);
   const [deletedVideoId, setDeletedVideoId] = useState(null);
 
   const [formData, setFormData] = useState({ title: "", url: "" });
 
+ const getData=()=>{  
+  useEffect(()=>{
+    fetch(`http://127.0.0.1:5000/videos`)
+    .then(res=>{
+      if(!res.ok){
+        throw new Error(res.statusText);
+      }
+      return res.json();
+    })
+    .then(data=>{
+      console.log(data);
+      setVideosList(data);
+    })
+    .catch(err=>console.log(err));
+  },[]);
+}
+getData();
 
   useEffect(function removeSelectedVideo() {
 
-    let filteredVideos = videosList.filter((video) => video.id != deletedVideoId);
+    let filteredVideos = videosList.filter((video) => video.id !== deletedVideoId);
     setVideosList(filteredVideos);
   }, [deletedVideoId]);
 
@@ -52,7 +68,7 @@ function App() {
       alert(`Make sure you have a title and a valid Youtube link like: ("https://www.youtube.com/watch?v= ...")`);
     }
   }
-  console.log(videosList);
+  
 
   return (
     <div className="App">
@@ -61,7 +77,7 @@ function App() {
           <h3>Do You Have Any Video Recommendation For Us!?</h3>
           <AddVideo formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
         </nav>
-        <VideoCard videosList={videosList} setDeletedVideoId={setDeletedVideoId} />
+        {videosList?<VideoCard videosList={videosList} setDeletedVideoId={setDeletedVideoId} />:<div>loding...</div>}
       </header>
     </div>
   );

@@ -3,20 +3,33 @@ const express = require("express");
 const videosData = require("./exampleresponse.json");
 const app = express();
 const port = process.env.PORT || 5000;
+const cors = require('cors');
+// const fs = require("fs");
 
+// let videos = JSON.parse(fs.readFileSync('videos.json', 'utf-8'));
+
+const corsOptions = {
+  origin: '*',
+  credentials: true,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+// app.use(express.static(path.resolve(__dirname, "../client/build")));
 // Generate a unique ID
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
-crypto.randomBytes(2, function (err, buffer) {
-  console.log(parseInt(buffer.toString('hex'), 16));
-});
+// crypto.randomBytes(2, function (err, buffer) {
+//   console.log(parseInt(buffer.toString('hex'), 16));
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 // Adding some middleware,You DO NOT NEED express.json() and express.urlencoded() for GET Requests or DELETE Requests.
 // You NEED express.json() and express.urlencoded() for POST and PUT requests, because in both these requests you are sending data 
 // (in the form of some data object) to the server and you are asking the server to accept or store that data (object), which is enclosed in the body.
-app.use(express.json());
-app.use(urlencoded({ extended: true }));
+
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -35,7 +48,7 @@ app.get("/videos", (req, res) => {
 
 });
 
-app.post("/videos", (req,res)=>{
+app.post("/addVideo", (req,res)=>{
   // Both fields - title and url - must be included and be valid for this to succeed.
 let maxId=Math.max(...videos.map(video=>video.id));
   if (req.body.title && req.body.url) {
