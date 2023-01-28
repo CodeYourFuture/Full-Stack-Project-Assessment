@@ -1,5 +1,6 @@
 const express = require("express");
-const cors = require("cors")
+const cors = require("cors");
+const getPostgresClient = require('./postgresClient');
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -78,12 +79,18 @@ function maxId() {
   let idArray = videos.map((el) => el.id);
   return Math.max(...idArray);
 }
-
-
+let client;
 // GET "/"
 app.get("/videos", (req, res) => {
-  res.json(videos);
-});
+  const test = getPostgresClient()
+
+    test.connect()
+
+      test.query('SELECT * FROM video', (err, result) => {
+        res.json(result.rows)
+      })
+  })
+
 
 app.get("/videos/:id", (req, res) => {
   const result = videos.find((el) => el.id === +req.params.id);

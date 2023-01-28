@@ -8,6 +8,7 @@ function Input(props) {
 
       function handleInputDisplay(e) {
         e.target ? setClicked(true) : setClicked(false);
+        console.log(e.target.color1)
       }
 
        function handleCancel() {
@@ -18,7 +19,7 @@ function Input(props) {
   return (
     <div>
       <div className="search">
-        <button onClick={handleInputDisplay}>Add Video</button>
+        <button color1 = "true" onClick={handleInputDisplay}>Add Video</button>
         <div>
           <label htmlFor="search">Search</label>
           <input type="search" id="search" />
