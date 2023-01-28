@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 5001;
-//const fs = require("fs");
+const fs = require("fs");
 const path = require("path");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 // const cors = require("cors");
@@ -70,8 +70,8 @@ app.post("/videos", (req, res) => {
     rating: req.body.rating,
   };
 
-  if (!req.body.title || !req.body.url || !req.body.rating) {
-    res.status(400).send("Please enter a valid title, url and rating");
+  if (!req.body.title) {
+    res.status(400).send("Please enter a valid title");
     return;
   }
 
@@ -80,8 +80,9 @@ app.post("/videos", (req, res) => {
     return;
   }
 
-  if (isNaN(req.body.rating)) {
-    res.status(400).send("Please enter a valid number as a rating");
+  if ((isNaN(req.body.rating) || !req.body.rating)) {
+    res.status(400).send("Please enter a valid number as rating");
+    return;
   }
 
   videos.push(newVideo);
@@ -104,7 +105,7 @@ app.delete("/videos/:id", (req, res) => {
   }
   const index = videos.findIndex((v) => v.id === videoId);
   videos.splice(index, 1);
-  save();
+  save(videos);
   res.send(findVideo);
 });
 
