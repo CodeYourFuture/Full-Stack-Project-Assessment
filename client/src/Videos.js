@@ -68,7 +68,7 @@ const Embed = ({ video, data, sortData }) =>
             <iframe width="auto" height="auto" src={url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
 
             </iframe>
-            <p>Rating: {rating}</p>
+            <p>Rating: {video.rating}</p>
             <button id="up" onClick={upVote} disabled={hasVoted}>Like</button>
             <button id="down" onClick={downVote} disabled={hasVoted}>Dislike</button>
         </div>);
