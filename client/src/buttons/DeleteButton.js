@@ -7,15 +7,17 @@ function DeleteButton({ videoID }) {
 
   const handleDelete = async (e) => {
     setAlert(true);
-    // try {
-    //   const res = await fetch(`/${videoID}`, {
-    //     method: "DELETE",
-    //   });
-    //   const serverMsg = await res.json();
-    //   console.log(serverMsg);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+
+    //send delete request with video id to the server
+      const res = await fetch(`/${videoID}`, {
+        method: "DELETE",
+      });
+      const serverMsg = await res.json();
+      console.log(serverMsg);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div>
