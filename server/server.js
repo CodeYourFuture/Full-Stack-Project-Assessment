@@ -1,11 +1,29 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const { Pool } = require("pg");
 
 app.use(express.json());
 app.use(cors());
 
 const port = process.env.PORT || 4000;
+
+const pool = new Pool({
+  user: "user",
+  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",
+  database: "dbvideos",
+  password: "BzA52BUb5uHl8B2oNiSWM8uixzot4m7W",
+  port: 5432,
+});
+
+
+// const pool = new Pool({
+//   user: "sem",
+//   host: "localhost",
+//   database: "videos",
+//   password: "",
+//   port: 5432,
+// });
 
 let videos = [
   {
@@ -73,8 +91,25 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  pool
+    .query("SELECT * FROM videos")
+    .then((videos) => res.json(videos.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
+
+// app.get("/", function (req, res) {
+//   pool
+//     .query("SELECT * FROM videos")
+//     .then((videos) => res.json(videos.rows))
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).json(error);
+//     });
+// });
+
 
 // POST "/"
 const REGEXP =
