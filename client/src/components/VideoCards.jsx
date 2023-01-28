@@ -9,13 +9,13 @@ function VideoCards(props) {
         className="card mb-4 shadow-sm"
         style={{
           background: "black",
-          border: "#D43C31 solid",
-          margin: "2px",
-          padding: "2px",
+          border: "#D43C34 solid",
+          margin: "6px",
+          padding: "6px",
         }}
       >
         <div>
-          <h6 style={{ color: "#D43C31" }}>{props.video.title}</h6>
+          <h5 style={{ color: "#D43C31" }}>{props.video.title}</h5>
           <span>
             <Rating rt={props.data} v={props.videos} id={props.video} />
           </span>
