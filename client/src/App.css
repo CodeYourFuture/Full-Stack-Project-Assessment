@@ -1,3 +1,27 @@
 .App {
+  margin: 0;
   text-align: center;
+}
+.App-header {
+  margin-bottom: 4rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: lightblue;
+}
+div {
+  padding: 8px;
+}
+.new-vid-wrapper {
+  background-color: blue;
+  display: flex;
+}
+.adding-video-form {
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  flex-direction: column;
+}
+
+.btn {
+  margin-bottom: 1rem;
 }
