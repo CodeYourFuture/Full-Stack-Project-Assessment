@@ -58,15 +58,4 @@ app.post("/video",(req,res)=>{
     });
 })
 
-app.delete("videos/:id",(req,res)=>{
-  const id = Number(req.params.id);
-  pool
-    .query("DELETE FROM videos WHERE id = $1", [id])
-    .then(() => res.json(`video ${id} deleted!`))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-})
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
