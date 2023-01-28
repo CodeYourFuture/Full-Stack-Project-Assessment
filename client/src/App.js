@@ -4,9 +4,7 @@ import AddVideo from './Componenets/AddVideo'
 // import exampleResponse from './exampleresponse.json'
 import { useState, useEffect } from 'react'
 
-// to include backend useEffect
-
-function App() {
+const App = () => {
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
