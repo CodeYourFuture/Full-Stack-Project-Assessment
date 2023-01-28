@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SearchBar.css';
 
 const SearchBar = ({ data, setData, backup }) => {
   const [term, setTerm] = useState("");
@@ -13,13 +14,15 @@ const SearchBar = ({ data, setData, backup }) => {
     }
   };
   return (
-    <div>
-      <form>
+    <div className="Search-video Forms-container">
+      <form className="forms">
+        <label htmlFor="term" className="labels"> Type Search</label>
         <input
           type="text"
           value={term}
           placeholder="Enter search term"
           onChange={onInputChange}
+          className="input"
         />
       </form>
     </div>

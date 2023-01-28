@@ -1,5 +1,6 @@
 import React from "react";
 import CountLike from "./CountLike";
+import './DisplayVideos.css';
 
 function DisplayVideos({ data, setData }) {
   const deleteVideo = (e) => {
@@ -9,8 +10,8 @@ function DisplayVideos({ data, setData }) {
     setData(newArray);
   };
   return (
-    <div>
-      <div>
+    <div className="container">
+      
         {data &&
           data.map((vid) => {
             return (
@@ -39,7 +40,7 @@ function DisplayVideos({ data, setData }) {
             );
           })}
       </div>
-    </div>
+    
   );
 }
 

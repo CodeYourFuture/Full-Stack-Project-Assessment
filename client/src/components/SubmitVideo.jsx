@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import DisplayVideos from "./DisplayVideos";
+import './SubmitVideo.css';
 
 const SubmitVideo = ({ data, setData }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [rating, setRating] = useState(0);
+  const [showAddVideo, setShowAddVideo] = useState(false);
 
   function isValidYouTubeUrl(url) {
     const regExp =
@@ -34,15 +37,21 @@ const SubmitVideo = ({ data, setData }) => {
     setTitle("");
     setUrl("");
   };
-  const cancelAddVideo = (e) => {
-    e.preventDefault();
+  const cancelAddVideo = () => {
+    setShowAddVideo(!showAddVideo);
   };
 
+  let content =<h3>Add Video</h3>;
+  if (showAddVideo) {
+    content = (<DisplayVideos />)
+  }
+
   return (
-    <div>
-      <form>
-        <h2>Add Video</h2>
-        <label>
+    <div className="Add-video Forms-container">
+      <form className="Add-form forms">
+        {/* <h2>Add Video</h2> */}
+        <div>{content}</div>
+        <label htmlFor="title" className="labels">
           Title
           <input
             type="text"
@@ -50,9 +59,10 @@ const SubmitVideo = ({ data, setData }) => {
             placeholder=" Video title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="input"
           />
         </label>
-        <label>
+        <label className="labels" htmlFor="link">
           URL
           <input
             type="text"
@@ -60,6 +70,7 @@ const SubmitVideo = ({ data, setData }) => {
             placeholder=" Enter URL"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            className="input"
           />
         </label>
         <div className="buttons">

@@ -1,5 +1,4 @@
 const express = require("express");
-// const uuid = require("uuid");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -73,15 +72,13 @@ let videos = [
   },
 ];
 
-// const maxID = uuid.v4();
-// console.log(maxID);
 let maxID = Math.max(...videos.map((video) => video.id));
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
 
   const video = videos.find((v) => v.id === vidId);
@@ -93,11 +90,11 @@ app.get("/:id", (req, res) => {
 
 //POST "/videos"
 
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   if (!req.body.title) {
-    res.status(400).send({ result: "error", message: "Bad Request" });
+    res.status(400).send({ result: "error", message: "Enter a valid title" });
   } else if (!req.body.url) {
-    res.status(400).send({ result: "error", message: "Bad Request" });
+    res.status(400).send({ result: "error", message: "Enter a valid URL" });
     return;
   }
   if (isNaN(req.body.rating)) {
@@ -123,7 +120,7 @@ app.post("/", (req, res) => {
   res.status(201).send({ id: newVideo.id, message: "success" });
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
   const vidIndex = videos.findIndex((v) => v.id === vidId);
   if (vidIndex < 0) {
