@@ -1,9 +1,11 @@
 import React from "react";
 import VoteButton from "./VoteButton";
+import DeleteButton from "./DeleteButton";
+import "./App.css";
 
 
-const VideosList = ({videoData}) => {
-    //console.log(videoData)
+const VideosList = ({videoData, setVideoData }) => {
+    console.log(videoData)
     const videoIdExtract = (url) =>{
         var regExp =
           /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -16,13 +18,13 @@ const VideosList = ({videoData}) => {
     }
     videoData.sort((a, b) => b.rating - a.rating);
     return (
-      <div>
+      <div >
         {videoData          
           .map((item) => {
             return (
-              <div key={item.id}>
-                <p>{item.title}</p>                
-                < VoteButton item={item}/>
+              <div key={item.id} className="Video-object">
+                <h6>{item.title}</h6>
+                <VoteButton item={item} />
                 <iframe
                   width="560"
                   height="315"
@@ -30,10 +32,14 @@ const VideosList = ({videoData}) => {
                     item.url
                   )}`}
                   title="YouTube video player"
-                  frameBorder=""
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
+                <DeleteButton
+                  item={item}
+                  videoData={videoData}
+                  setVideoData={setVideoData}
+                />
               </div>
             );
           })}

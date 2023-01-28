@@ -10,3 +10,8 @@
 .Form {
   margin: 20px;
 }
+
+.Video-object {
+  margin-top: 50px;
+  border: 2px ridge rgb(134, 210, 130);
+}

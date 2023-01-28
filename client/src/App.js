@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Heading />
       <Form setVideos={setVideos} />
-      <VideosList videoData={videos} />
+      <VideosList videoData={videos} setVideoData={setVideos}/>
     </div>
   );
 }
