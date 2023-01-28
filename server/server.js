@@ -10,7 +10,8 @@ const port = process.env.PORT || 4000;
 
 const pool = new Pool({
   user: "user",
-  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",
+  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a/dbvideos",
+  // host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",     //external
   database: "dbvideos",
   password: "BzA52BUb5uHl8B2oNiSWM8uixzot4m7W",
   port: 5432,
