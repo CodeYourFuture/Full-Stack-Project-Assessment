@@ -17,14 +17,14 @@ function Cards() {
 			id: uuid(),
 			title: data.title,
 			url: data.url,
-			//  "rating": 23
+			rating: 0,
+			votes: 0,
 		};
 		console.log(data.title, data.url);
 		setVideos((videos) => {
 			return [...videos, newVideo];
 		});
 	};
-	// put button inside form handleonSubmit dont need handle clack
 	const handleClick = () => {
 		console.log("handleclick working");
 	};
