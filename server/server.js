@@ -4,31 +4,22 @@ const videosData = require("./exampleresponse.json");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-// const fs = require("fs");
 
-// let videos = JSON.parse(fs.readFileSync('videos.json', 'utf-8'));
 
 const corsOptions = {
   origin: '*',
   credentials: true,            //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 }
-
-app.use(cors(corsOptions)) // Use this after the variable declaration
-app.use(express.json());
-app.use(urlencoded({ extended: true }));
-// app.use(express.static(path.resolve(__dirname, "../client/build")));
-// Generate a unique ID
-// const crypto = require('crypto');
-
-// crypto.randomBytes(2, function (err, buffer) {
-//   console.log(parseInt(buffer.toString('hex'), 16));
-// });
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
 // Adding some middleware,You DO NOT NEED express.json() and express.urlencoded() for GET Requests or DELETE Requests.
 // You NEED express.json() and express.urlencoded() for POST and PUT requests, because in both these requests you are sending data 
 // (in the form of some data object) to the server and you are asking the server to accept or store that data (object), which is enclosed in the body.
+app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
 // Store and retrieve your videos from here
@@ -36,8 +27,11 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = videosData;
 
 // GET "/"
+app.get("/", (req, res) => {
+  res.send(`API server loading .....`);
+});
+
 app.get("/videos", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   if (videos) {
     res.json(videos);
   } else {
@@ -45,12 +39,11 @@ app.get("/videos", (req, res) => {
       .status(500)
       .send("No video is available");
   };
-
 });
 
-app.post("/addVideo", (req,res)=>{
+app.post("/addVideo", (req, res) => {
   // Both fields - title and url - must be included and be valid for this to succeed.
-let maxId=Math.max(...videos.map(video=>video.id));
+  let maxId = Math.max(...videos.map(video => video.id));
   if (req.body.title && req.body.url) {
     let newVideo = {
       id: ++maxId,
@@ -69,10 +62,10 @@ let maxId=Math.max(...videos.map(video=>video.id));
 });
 
 app.get("/videos/:id", (req, res) => {
-  let targetedId=parseInt(req.params.id);
-  let video = videos.find(video=>video.id===targetedId);
-  if (video) {
-    res.send(video);
+  let targetedId = parseInt(req.params.id);
+  let targetedVideo = videos.find(video => video.id === targetedId);
+  if (targetedVideo) {
+    res.send(targetedVideo);
   } else {
     res.status(400).send({
       result: "failure",
@@ -82,13 +75,12 @@ app.get("/videos/:id", (req, res) => {
 });
 
 app.delete('/videos/:id', (req, res) => {
-  const targetedId = parseInt(req.params.id)
+  const targetedId = parseInt(req.params.id);
+  const targetedVideoIndex = videos.findIndex((video) => video.id === targetedId);
 
-  const targetedVideoIndex= videos.findIndex((video) => video.id === targetedId);
-
-  if (findIndex) {
+  if (targetedVideoIndex >= 0) {
     videos.splice(targetedVideoIndex, 1);
-    res.status(200).send({ msg: `Successfully deleted` })
+    res.status(200).json(videos);
   } else {
     res.status(400).send({
       "result": "failure",
