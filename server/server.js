@@ -3,10 +3,10 @@ const cors = require("cors");
 const app = express();
 const { Pool } = require("pg");
 
+const port = process.env.PORT || 4000;
+
 app.use(express.json());
 app.use(cors());
-
-const port = process.env.PORT || 4000;
 
 const pool = new Pool({
   user: "user",
@@ -16,6 +16,8 @@ const pool = new Pool({
   password: "BzA52BUb5uHl8B2oNiSWM8uixzot4m7W",
   port: 5432,
 });
+
+pool.connect();
 
 
 // const pool = new Pool({
