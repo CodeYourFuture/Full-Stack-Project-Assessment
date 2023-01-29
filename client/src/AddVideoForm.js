@@ -22,13 +22,13 @@ const AddVideoForm = ({ setVideoData }) => {
   const handleVideoAdder = (e) => {
     e.preventDefault();
     const videoId = Date.now();
-    const rating = Math.floor(Math.random() * 10000);
+    // const rating = Math.floor(Math.random() * 10000);
 
     const newVideoData = {
       id: videoId,
       title: title,
       url: url,
-      rating: rating,
+      rating: 0,
       timeSent: new Date().toLocaleDateString(),
     };
 

@@ -15,7 +15,7 @@ const LikeAndDislike = ({ video, data, setData }) => {
   const handleDislike = (id) => {
     setData(
       data.map((video) => {
-        if (video.id === id) {
+        if (video.id === id && video.rating !== 0) {
           return { ...video, rating: video.rating - 1 };
         }
         return video;

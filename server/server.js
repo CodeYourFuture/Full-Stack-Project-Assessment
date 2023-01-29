@@ -67,7 +67,7 @@ app.post("/videos", (req, res) => {
     timeAdded: new Date().toLocaleDateString(),
     title: req.body.title,
     url: req.body.url,
-    rating: req.body.rating,
+    rating: 0
   };
   videos.push(newVideos);
   res.json(videos);
