@@ -1,3 +1,74 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  color: #fff;
+  background-color: #d612a5;
+  padding: 3rem 0;
+}
+
+.container-fluid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 1;
+  padding: 1;
+}
+
+.video-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 1rem;
+  width: 30rem;
+  height: fit-content;
+}
+
+.video-container>p {
+  margin: 0;
+}
+
+.delete-button {
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.vote-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0 0 1rem 0;
+}
+
+.button-container {
+  margin-top: 1em;
+}
+
+.btn {
+  margin: 1em;
+}
+
+.like-button {
+  margin: 1em;
+}
+
+.dislike-button {
+  margin: 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 200px;
+  margin: 1em;
+}
+
+.footer {
+  color: #fff;
+  background-color: #d612a5;
+  padding: 3rem 0;
+}
