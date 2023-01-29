@@ -8,7 +8,7 @@ function App() {
         <h1>Video Recommendation</h1>
         <>
           <VideoList />
-          <form action="../../post" method="post" className="form">
+          <form action="././post" method="post" className="form">
             <button type="submit">Connected?</button>
           </form>
         </>

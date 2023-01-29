@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
-import Exampleresponse from "../exampleresponse.json";
-
-function removeLastPart(url) {
-  let regex = /^.*(youtu.be\/|v\/|u\/w\/|embed\/|watch\?v=|&v=)([^#?]*).*/;
-  let match = url.match(regex);
-  return match && match[2].length === 11 ? match[2] : null;
-}
+// import Exampleresponse from "../exampleresponse.json";
 
 function VideoList() {
-  const [youtubeURLS, setYoutubeURLS] = useState(Exampleresponse);
+  // const [videos, setVideos] = useState([])
+  const [youtubeURLS, setYoutubeURLS] = useState([]);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [date, setDate] = useState(null);
   const [isUrlValid, setIsUrlValid] = useState(null);
   const [isTitle, setIsTitle] = useState(null);
+
+  function removeLastPart(url) {
+    let regex = /^.*(youtu.be\/|v\/|u\/w\/|embed\/|watch\?v=|&v=)([^#?]*).*/;
+    let match = url.match(regex);
+    return match && match[2].length === 11 ? match[2] : null;
+  }
 
   function removeV(index) {
     alert(index);
@@ -60,9 +61,9 @@ function VideoList() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/videos").then((res) =>
-      console.log(res.json())
-    );
+    fetch("http://localhost:3000")
+      .then((res) => res.json())
+      .then((data) => setYoutubeURLS(data));
     console.log(date);
   }, [date]);
 
@@ -151,7 +152,7 @@ function VideoList() {
   return (
     <>
       <div>
-        <form onSubmit={handleNewVideo} action="../../videos" method="post">
+        <form onSubmit={handleNewVideo}>
           <fieldset>
             <br />
             <h3>Add Video</h3>
