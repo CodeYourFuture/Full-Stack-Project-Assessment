@@ -11,7 +11,7 @@ app.use(express.json());
 const fs = require("fs");
 
 mongoose
-	.connect(`mongodb+srv://jadejones:jadejones@cluster0.iwmguqu.mongodb.net/?retryWrites=true&w=majority`)
+	.connect('mongodb+srv://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@' + process.env.MONGO_HOST + '/' + process.env.MONGO_DATABASE_NAME)
 	.then(() => {
 		console.log("Successfully connected to MongoDB Atlas!");
 	})
@@ -36,11 +36,11 @@ app.use((req, res, next) => {
 // });
 
 app.post("/videos", (req, res, next) => {
-	const maxID = Math.max(...videos.map((c) => c.id));
+	// const maxID = Math.max(...data.map((c) => c.id));
 	const video = new Video({
 		title: req.body.title,
 		url: req.body.url,
-		id: ++maxID,
+		// id: ++maxID,
 		ratings: 0,
 		votes: 0,
 	});
