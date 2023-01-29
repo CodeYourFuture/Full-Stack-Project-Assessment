@@ -14,7 +14,7 @@ function Video({ video, handleDelete }) {
 
   return (
     <div className="video-container">
-      <p>{video.title}</p>
+      <p className="video_title">{video.title}</p>
       <div className="vote-container">
         <LikeButton incrementLikeClick={incrementLikeClick} />
         <p className="rating"> {rating} Vote</p>
