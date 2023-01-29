@@ -9,9 +9,12 @@ app.use(express.json());
 app.use(cors());
 
 const pool = new Pool({
+  connectionString:
+    "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",
+  ssl: { rejectUnauthorized: false },
   user: "user",
-  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a/dbvideos",
-  // host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",     //external
+  // host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a/dbvideos",
+  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos", //external
   database: "dbvideos",
   password: "BzA52BUb5uHl8B2oNiSWM8uixzot4m7W",
   port: 5432,
