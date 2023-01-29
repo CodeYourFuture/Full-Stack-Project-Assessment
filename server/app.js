@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // });
 
-app.post("/", (req, res, next) => {
+app.post("/videos", (req, res, next) => {
 	const maxID = Math.max(...videos.map((c) => c.id));
 	const video = new Video({
 		title: req.body.title,
@@ -58,7 +58,7 @@ app.post("/", (req, res, next) => {
 		});
 });
 
-app.get('/:id', (req, res, next) => {
+app.get('/videos/:id', (req, res, next) => {
   Video.findOne({
     _id: req.params.id
   }).then(
@@ -74,7 +74,7 @@ app.get('/:id', (req, res, next) => {
   );
 });
 
-app.get("/", (req, res, next) => {
+app.get("/videos", (req, res, next) => {
 	Video.find()
 		.then((videos) => {
 			res.status(200).json(videos);

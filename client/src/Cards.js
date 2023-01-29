@@ -8,11 +8,15 @@ function Cards() {
 	const [title, setTitle] = useState("");
 
 	useEffect(() => {
-		fetch("http://127.0.0.1:5000")
+		fetchVideos()
+	}, []);
+
+	function fetchVideos(){
+		fetch("http://127.0.0.1:5000/videos")
 			.then((res) => res.json())
 			.then((data) => setVideos(data))
 			.catch((error) => console.log(error));
-	}, []);
+	}
 
 	const removeElement = (i) => {
 		let newVideos = [...videos];
@@ -29,9 +33,8 @@ function Cards() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		let maxID = Math.max(...videos.map((c) => c.id));
+		// let maxID = Math.max(...videos.map((c) => c.id));
 		const newVideo = {
-			id: ++maxID,
 			title,
 			url,
 			rating: 0,
