@@ -14,11 +14,7 @@ function App() {
     setVideoData((allVideos) => allVideos.filter((video) => video.id !== id));
   };
 
-  useEffect(() => {
-    createVideo();
-  }, []);
-
-  const urlToFetch = "http://localhost:5000/";
+  const urlToFetch = "http://localhost:5000";
 
   const createVideo = () => {
     fetch(`${urlToFetch}`)
@@ -27,6 +23,10 @@ function App() {
         setVideoData(data);
       });
   };
+
+  useEffect(() => {
+    createVideo();
+  }, []);
 
   return (
     <div className="App">

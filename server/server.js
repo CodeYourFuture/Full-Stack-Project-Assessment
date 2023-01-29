@@ -4,10 +4,15 @@ const port = process.env.PORT || 5000;
 
 const cors = require("cors");
 
-app.use(cors());
+
 
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -34,7 +39,6 @@ if (existingId) {
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [
-  [
     {
       id: 523523,
       title: "Never Gonna Give You Up",
@@ -96,8 +100,7 @@ let videos = [
       url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
       rating: 73,
     },
-  ],
-];
+  ];
 
 // GET "/"
 app.get("/", (req, res) => {
