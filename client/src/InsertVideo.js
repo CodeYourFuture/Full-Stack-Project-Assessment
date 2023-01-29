@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Delete from "./clickables/Delete";
+// import Delete from "./clickables/Delete";
 // import DownVote from './clickables/DownVote';
 // import UpVote from './clickables/UpVote';
 
@@ -20,7 +20,7 @@ export default function InsertVideo({video}) {
     }
   return (
     <div className="inserted-video">
-      <h4>{video.title}</h4>
+      <h3>{video.title}</h3>
       <div className="liking">
         <button className='up-vote' onClick={handleLikeClick}>👍</button>
         <p>{`${likes}`} Votes</p>
@@ -31,13 +31,11 @@ export default function InsertVideo({video}) {
         height="315"
         src={src}
         title="YT video Player"
-        frameBorder="0"
+        // Border="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div>
-        <Delete />
-      </div>
+      
     </div>
   );
 }

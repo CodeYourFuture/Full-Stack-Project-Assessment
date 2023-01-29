@@ -6,6 +6,7 @@ function AddNewVideo({ videoData, setVideoData }) {
   const [url, setUrl] = useState("");
 
   const cancelNewVideo = (event) => {
+    event.preventDefault();
     event.target.reset();
   }
 
@@ -41,48 +42,33 @@ function AddNewVideo({ videoData, setVideoData }) {
     } else {
       setVideoData(newVideoData);
     }
-    // setTitle("");
-    // setUrl("");
     event.target.reset();
-
-    console.log("A video is successfully added!");
   };
   return (
-    // <div className="">
-    //   <button className="add-video-btn">Home</button>
-    //   <div className="add-form">
-    //     Title<input></input>
-    //     URL<input></input>
-    //   </div>
-    //   <div className="add-cancel-buttons">
-    //     <button className="cancel-btn">Cancel</button>
-    //     <button className="add-btn">ADD</button>
-    //   </div>
-    // </div>
+    
     <div className="upper-div">
       <button className="add-video-btn">Add Video</button>
       <div className="add-form">
         <form onSubmit={addVideo}>
-          <label>Title</label>
+          <label>Title
           <input
             type="text"
             id="title"
             placeholder="Enter Video Title"
             onChange={(event) => setTitle(event.target.value)}
-          ></input>
-          <label>URL</label>
+          ></input></label>
+          <label>URL
           <input
             type="text"
             id="videolink"
             placeholder="Enter the URL"
             onChange={(event) => setUrl(event.target.value)}
-          ></input>
+          ></input></label>
           <button className="add-btn">ADD</button>
           <button className="cancel-btn" onClick={cancelNewVideo}>Cancel</button>
         </form>
       </div>
-      {/* <div className="add-cancel-buttons"> */}
-      {/* </div> */}
+      
     </div>
   );
 }

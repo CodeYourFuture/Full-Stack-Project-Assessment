@@ -10,9 +10,10 @@
 }
 
 .delete {
-  background-color: red;
+  background-color: rgb(180, 29, 29);
   color: white;
   border: none;
+  /* margin: auto; */
 }
 
 .inserted-video {
@@ -25,6 +26,10 @@
   width: 100%;
   flex-wrap: wrap;
   margin: 100px;
+}
+
+.vid-del {
+  text-align: center;
 }
 
 .add-video-btn {
@@ -51,12 +56,14 @@
   background-color: yellow;
   color: black;
   margin: 10px;
+  border: none;
 }
 
 .add-btn {
   background-color: red;
   color: white;
   margin: 10px;
+  border: none;
 }
 
 .liking {
