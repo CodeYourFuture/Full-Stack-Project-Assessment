@@ -43,7 +43,8 @@ function App() {
           "Content-Type": "application/json",
         },
       });
-      await res.json();
+      const result = await res.json();
+      console.log(result);
       if (!res.ok) {
         throw Error(res.statusText);
       }

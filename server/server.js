@@ -71,7 +71,7 @@ app.post("/api", async (req, res) => {
       newVideo.rating,
       newVideo.postedAt,
     ]);
-    res.send({ newVideo: result.rows[0] });
+    res.send({ success: "New video added" });
   } catch (error) {
     res
       .status(400)
