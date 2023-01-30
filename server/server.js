@@ -80,15 +80,19 @@ app.post("/api", async (req, res) => {
 });
 
 // GET video by id
-app.get("/api/:id", (req, res) => {
-  let video = videos.find(({ id }) => id === parseInt(req.params.id));
-  if (video) {
-    res.send(video);
-  } else {
-    res.status(400).send({
-      result: "failure",
-      message: "No matching result",
-    });
+app.get("/api/:id", async (req, res) => {
+  let id = parseInt(req.params.id);
+  try {
+    let result = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
+    if (result.rows.length <= 0) {
+      res.status(404).send({
+        result: "failure",
+        message: "No matching result",
+      });
+    }
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
