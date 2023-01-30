@@ -37,7 +37,7 @@ function isValidYouTubeUrl(url) {
 
 // GET all videos
 app.get("/api", async (req, res) => {
-  let order = req.query.order || "DESC";
+  const order = req.query.order || "DESC";
   try {
     let result = await pool.query(
       `SELECT * FROM videos ORDER BY rating ${order}`
@@ -55,7 +55,7 @@ app.post("/api", async (req, res) => {
       length: 6,
       useLetters: false,
     });
-    let newVideo = {
+    const newVideo = {
       id: parseInt(videoId),
       title: req.body.title,
       url: req.body.url,
@@ -64,7 +64,7 @@ app.post("/api", async (req, res) => {
     };
     const query =
       "INSERT INTO videos (id, title, url, rating, posted_at) VALUES ($1, $2, $3, $4, $5)";
-    let result = await pool.query(query, [
+    await pool.query(query, [
       newVideo.id,
       newVideo.title,
       newVideo.url,
@@ -81,9 +81,9 @@ app.post("/api", async (req, res) => {
 
 // GET video by id
 app.get("/api/:id", async (req, res) => {
-  let id = parseInt(req.params.id);
+  const id = parseInt(req.params.id);
   try {
-    let result = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
     if (result.rows.length <= 0) {
       res.status(404).send({
         result: "failure",
@@ -98,7 +98,7 @@ app.get("/api/:id", async (req, res) => {
 
 // DELETE video by id
 app.delete("/api/:id", async (req, res) => {
-  let id = parseInt(req.params.id);
+  const id = parseInt(req.params.id);
   try {
     await pool.query("DELETE FROM videos WHERE id = $1", [id]);
     res.json({});
@@ -108,16 +108,16 @@ app.delete("/api/:id", async (req, res) => {
 });
 
 // UPDATE video rating by id
-app.patch("/api/:id", (req, res) => {
-  let videoIndex = videos.findIndex(({ id }) => id === parseInt(req.params.id));
-  if (videoIndex >= 0) {
-    videos[videoIndex].rating = req.body.rating;
-    res.send(videos);
-  } else {
-    res.status(400).send({
-      result: "failure",
-      message: "No matching result",
-    });
+app.patch("/api/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const rating = req.body.rating;
+    await pool.query("UPDATE videos SET rating = $1 WHERE id = $2", [
+      rating,
+      id,
+    ]);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
