@@ -15,7 +15,7 @@ function AddVideo(props) {
 
     if (event.target.title.value.trim() === "") {
       setMessage("Please enter title.");
-    } else if (!isValidYoutubeUrl(event.target.url.value.trim())) {
+    } else if (!isValidYoutubeUrl(event.target.videourl.value.trim())) {
       setMessage("Please enter a valid Youtube link.");
     } else {
       setMessage("");
@@ -26,7 +26,7 @@ function AddVideo(props) {
     <form onSubmit={handleSubmit}>
       <div className="row gy-3">
         <div className="col-md-6">
-          <label for="title" className="form-label">
+          <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
@@ -43,19 +43,19 @@ function AddVideo(props) {
         </div>
 
         <div className="col-md-6">
-          <label for="url" className="form-label">
+          <label htmlFor="videourl" className="form-label">
             YouTube URL
           </label>
           <input
             type="text"
-            name="url"
-            id="url"
+            name="videourl"
+            id="videourl"
             className="form-control"
             placeholder="YouTube url"
             required=""
             aria-label="Enter YouTube url"
             onChange={props.handleChange}
-            value={props.reqBody.url}
+            value={props.reqBody.videourl}
           />
         </div>
       </div>

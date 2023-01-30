@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import VideoCard from "./VideoCard";
 import AddVideo from "./AddVIdeo";
+import LoadingBar from "./LoadingBar";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [loadVideos, setLoadVideos] = useState(true);
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("asc");
@@ -11,7 +13,7 @@ function App() {
   //request body
   const [reqBody, setReqBody] = useState({
     title: "",
-    url: "",
+    videourl: "",
     rating: 0,
   });
 
@@ -23,6 +25,12 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setVideos([...data]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        alert("Could not load data!");
+        console.error("There was an error!", error);
       });
   }, [loadVideos, order]);
 
@@ -89,33 +97,32 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-
-      <body>
-        <div className="container">
-          <div className="m-3 title-url ">
-            <AddVideo
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              handleCancel={() => resetForm()}
-              reqBody={reqBody}
-            />
-          </div>
-         
-          <div class="d-flex w-25 mb-4">
-            <select
-              className="form-select select-col"
-              aria-label="sort by rating"
-              name="sortBy"
-              id="sortBy"
-              onChange={handleChange}
-            >
-              <option value="asc">Sort By: Rating Asc</option>
-              <option value="desc">Sort By: Rating Desc</option>
-            </select>
-          </div>
-
+      <div className="container">
+        <div className="m-3 title-url ">
+          <AddVideo
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleCancel={() => resetForm()}
+            reqBody={reqBody}
+          />
+        </div>
+        <div className="d-flex w-25 mb-4">
+          <select
+            className="form-select select-col"
+            aria-label="sort by rating"
+            name="sortBy"
+            id="sortBy"
+            onChange={handleChange}
+          >
+            <option value="asc">Sort By: Rating Asc</option>
+            <option value="desc">Sort By: Rating Desc</option>
+          </select>
+        </div>
+        {isLoading ? (
+          <LoadingBar />
+        ) : (
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-            {videos.map((video, key) => (
+            {videos?.map((video, key) => (
               <div className="col">
                 <VideoCard
                   video_detail={video}
@@ -125,8 +132,8 @@ function App() {
               </div>
             ))}
           </div>
-        </div>
-      </body>
+        )}
+      </div>
     </div>
   );
 }

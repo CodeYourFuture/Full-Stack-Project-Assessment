@@ -9,9 +9,9 @@ function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
   const [video, setVideo] = useState({});
 
   useEffect(() => {
-    let url = video_detail.url.replace("watch?v=", "embed/");
+    let videourl = video_detail.videourl.replace("watch?v=", "embed/");
     setVoteCount(video_detail.rating);
-    setVideo({ ...video_detail, url });
+    setVideo({ ...video_detail, videourl });
   }, [video_detail]);
 
   function likeVote() {
@@ -26,7 +26,7 @@ function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
     <div className="card">
       <iframe
         title={video.title}
-        src={video.url}
+        src={video.videourl}
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
