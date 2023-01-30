@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
 import VideosGrid from "./components/VideosGrid";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import Alert from "@mui/material/Alert";
-import "./App.css";
+import Box from "@mui/material/Box";
 import OrderBtns from "./components/OrderBtns";
+import "./App.css";
 
 function App() {
   const [videosData, setVideosData] = useState([]);
@@ -30,7 +30,7 @@ function App() {
       const jsonData = await res.json();
       setVideosData(formatVideosUrl(jsonData));
     } catch (error) {
-      console.log(error);
+      console.log({ error });
     }
   }
 
@@ -52,6 +52,7 @@ function App() {
       console.log({ error });
     }
   }
+
   async function updateVideo(e, video, id) {
     try {
       const res = await fetch(`api/${id}`, {
@@ -67,6 +68,7 @@ function App() {
       console.log({ error });
     }
   }
+
   useEffect(() => {
     getAllVideos();
   }, [videosData]);
