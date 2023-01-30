@@ -3,6 +3,21 @@ const path = require("path");
 const app = express();
 const generateUniqueId = require("generate-unique-id");
 const port = process.env.PORT || 3005;
+const { Pool } = require("pg");
+const dotenv = require("dotenv");
+
+// Config .env file path
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
+
+// Connection to db setting
+const pool = new Pool({
+  user: process.env.USERNAME,
+  host: process.env.HOST,
+  database: process.env.DB_NAME,
+  password: process.env.PASSWORD,
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
@@ -21,18 +36,15 @@ function isValidYouTubeUrl(url) {
 }
 
 // GET all videos
-app.get("/api", (req, res) => {
-  if (videos.length > 0) {
-    if (req.query.order === "asc") {
-      videos.sort((a, b) => a.rating - b.rating);
-    } else {
-      videos.sort((a, b) => b.rating - a.rating);
-    }
-    res.json(videos);
-  } else {
-    res
-      .status(500)
-      .send({ result: "failure", message: "No video is available" });
+app.get("/api", async (req, res) => {
+  let order = req.query.order || "DESC";
+  try {
+    let result = await pool.query(
+      `SELECT * FROM videos ORDER BY rating ${order}`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
