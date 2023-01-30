@@ -26,7 +26,7 @@ function App() {
 
   async function getAllVideos() {
     try {
-      const res = await fetch(`api?order=${order}`);
+      const res = await fetch(`/api?order=${order}`);
       const jsonData = await res.json();
       setVideosData(formatVideosUrl(jsonData));
     } catch (error) {
@@ -43,8 +43,10 @@ function App() {
           "Content-Type": "application/json",
         },
       });
-      const jsonData = await res.json();
-      console.log("Success:", jsonData);
+      await res.json();
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
     } catch (error) {
       console.log({ error });
     }
