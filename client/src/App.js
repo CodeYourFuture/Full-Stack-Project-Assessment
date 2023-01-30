@@ -10,8 +10,9 @@ function App() {
 
   useEffect(()=> {
     const fetchData = async() => {
-      const result = await fetch("http://localhost:5000")
+      const result = await fetch("http://localhost:5000/videos")
       const jsonResult = await result.json()
+      console.log(jsonResult);
       setDel(jsonResult)
     }
     fetchData()
