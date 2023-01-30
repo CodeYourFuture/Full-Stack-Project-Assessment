@@ -3,8 +3,8 @@ import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
 import "./App.css";
 
-const sortVideosByRating = (videos) =>
-  videos.sort((v1, v2) => (v1.rating < v2.rating ? 1 : -1));
+// const sortVideosByRating = (videos) =>
+//   videos.sort((v1, v2) => (v1.rating < v2.rating ? 1 : -1));
 
 const App = () => {
   const [videos, setVideos] = useState(null);
@@ -25,7 +25,7 @@ const App = () => {
           return;
         }
         let data = await res.json();
-        data = sortVideosByRating(data);
+        // data = sortVideosByRating(data);
         setVideos(data);
         setError(null);
         setLoading(false);
