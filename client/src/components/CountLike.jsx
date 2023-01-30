@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 
 const CountLike = () => {
-  const [upvote, setUpvote] = useState(3);
-  const [downvote, setDownvote] = useState(2);
+  const [upvote, setUpvote] = useState(0);
+  const [downvote, setDownvote] = useState(0);
   const handleUpvote = () => {
     setUpvote((prev) => prev + 1);
-    // setDownvote((prev) => prev - 1);
   };
 
   const handleDownvote = () => {
-    setDownvote((prev) => (prev > 0 ? prev + 1 : 0));
-    // setUpvote((prev) => prev + 1);
+    setDownvote((prev) => (downvote < 0 ? 0 : prev + 1));
   };
 
   return (

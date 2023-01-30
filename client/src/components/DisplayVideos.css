@@ -1,12 +1,10 @@
-.container {
-  width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    background-color: rgb(13, 15, 15);
-    color: bisque;
-   
-}
+/* .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  background-color: rgb(98, 104, 104);
+  color: bisque;
+} */
