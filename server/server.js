@@ -7,6 +7,8 @@ const port = process.env.PORT || 3005;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../client/build")));
+
 let videos = require("./exampleresponse.json");
 
 // Validate url function
