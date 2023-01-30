@@ -1,6 +1,6 @@
 {
-    "name": "Videorary",
-    "short_name": "Videorary",
+    "name": "videos_library",
+    "short_name": "videos_library",
     "start_url": ".",
     "icons": [
         {
