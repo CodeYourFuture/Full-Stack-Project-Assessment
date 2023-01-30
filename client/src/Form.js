@@ -6,6 +6,8 @@ const Form = ({ setVideos }) => {
   const [url, setUrl] = useState("");
   const [rating, setRating] = useState(0);
 
+
+
   const submitForm = (e) => {
     e.preventDefault();
     let newVideo = {
@@ -14,14 +16,8 @@ const Form = ({ setVideos }) => {
       url: url,
       rating: rating,
     };
-    function matchYoutubeUrl(url) {
-      var p =
-        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-      if (url.match(p)) {
-        return url.match(p)[1];
-      }
-      return false;
-    }
+
+    
 
     if (newVideo.title === "") {
       alert("Input valid title");
@@ -32,9 +28,20 @@ const Form = ({ setVideos }) => {
       return;
     }
     if (!newVideo.rating) {
-      alert("Input valid rating")
-    }
-     else {
+      alert("Input valid rating");
+    } else {
+      fetch("/videos", {
+        method: "POST",
+        body: JSON.stringify(newVideo),
+        headers: {
+          "Content-Type": "application/json" 
+        }
+      })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error))
+
+
       setVideos((current) => current.concat(newVideo));
       setTitle("");
       setUrl("");
@@ -46,7 +53,18 @@ const Form = ({ setVideos }) => {
     setTitle("");
     setUrl("");
     setRating("");
+  };
+
+  function matchYoutubeUrl(url) {
+    var p =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+      return url.match(p)[1];
+    }
+    return false;
   }
+
+
   return (
     <div>
       <form className="Form">
@@ -71,7 +89,7 @@ const Form = ({ setVideos }) => {
           Rating
           <input
             type="number"
-            value={rating}            
+            value={rating}
             onChange={(e) => setRating(e.target.value)}
           />
         </label>
@@ -81,5 +99,9 @@ const Form = ({ setVideos }) => {
     </div>
   );
 };
+
+
+
+
 
 export default Form;

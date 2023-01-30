@@ -60,15 +60,27 @@
     "rating": 73
   },
   {
-    "id": 1674675759365,
-    "title": "How to ACTUALLY learn to code... 7 Roadmaps for 2023",
-    "url": "https://www.youtube.com/watch?v=66tfvFeALBQ",
-    "rating": "50000"
-  },
-  {
     "id": 1674923582689,
     "title": "Threat Intel (01/22/23 to 01/28/23) // Cyber Security News",
     "url": "https://www.youtube.com/watch?v=pPLaceR99tw",
     "rating": "5"
+  },
+  {
+    "id": 1675100592729,
+    "title": "Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]",
+    "url": "https://www.youtube.com/watch?v=X48VuDVv0do",
+    "rating": "82000"
+  },
+  {
+    "id": 1675100970247,
+    "title": "Docker Tutorial for Beginners",
+    "url": "https://www.youtube.com/watch?v=pTFZFxd4hOI",
+    "rating": "29000"
+  },
+  {
+    "id": 1675103717658,
+    "title": "Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]",
+    "url": "https://www.youtube.com/watch?v=X48VuDVv0do",
+    "rating": "82001"
   }
 ]

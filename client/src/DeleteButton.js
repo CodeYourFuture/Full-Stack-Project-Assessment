@@ -12,13 +12,26 @@ const DeleteButton = ({item, videoData, setVideoData}) => {
         //     current.splice(index,1)
         //     return current
         // })
+
+        fetch(`/videos/${id}`, {
+          method: "DELETE",          
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error));
+
         const updateVideos = videoData.filter((video)=>
         video.id !==id)
 
+
+
         setVideoData(updateVideos)
 
-        console.log(id)
-        console.log(videoData)
+        // console.log(id)
+        // console.log(videoData)
     }
 
     return (

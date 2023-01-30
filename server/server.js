@@ -64,7 +64,7 @@ app.post("/videos", (req, res) => {
   }
 
   let newVideo = {
-    id: Date.now(),
+    id: req.body.id,
     title: req.body.title,
     url: req.body.url,
     rating: req.body.rating,
@@ -87,7 +87,7 @@ app.post("/videos", (req, res) => {
 
   videos.push(newVideo);
   save();
-  res.json(newVideo);
+  res.status(201).json({"message": "Your video is successfully uploaded"});
 });
 
 // Delete
@@ -106,7 +106,7 @@ app.delete("/videos/:id", (req, res) => {
   const index = videos.findIndex((v) => v.id === videoId);
   videos.splice(index, 1);
   save(videos);
-  res.send(findVideo);
+  res.status(200).json({ message: "Your video is successfully deleted" });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
