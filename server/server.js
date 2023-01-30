@@ -23,8 +23,9 @@ pool.connect();
 
 // GET "/"
 app.get("/", (req, res) => {
+  const query = "SELECT * FROM videos ORDER BY rating DESC";
   pool
-    .query("SELECT * FROM videos")
+    .query(query)
     .then((videos) => res.json(videos.rows))
     .catch((error) => {
       console.error(error);

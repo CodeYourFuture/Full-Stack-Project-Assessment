@@ -62,3 +62,5 @@ VALUES ('Why the Tour de France is so brutal',
 
 ALTER TABLE videos 
 RENAME COLUMN name TO title;
+
+SELECT * FROM videos ORDER BY rating DESC;
