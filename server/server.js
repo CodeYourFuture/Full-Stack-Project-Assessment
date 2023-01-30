@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: "unnqlhex",
+  host: "manny.db.elephantsql.com",
+  database: "unnqlhex",
+  password: "Zd5H87ejBLYTZ-JeQ35qpS5Q-ElId7JR",
+  port: 5432,
+});
 
 const port = process.env.PORT || 5001;
 const videosjson = require("./exampleresponse.json");
@@ -27,7 +36,25 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 app.get("/videos", (req, res) => {
-  res.send(videos);
+  let sortBy = req.query.order || "ASC";
+  const query = "SELECT * FROM videos Order By rating " + sortBy;
+  pool
+    .query(query)
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+  // if (req.query.order === "asc") {
+
+  //   let allVideos = [...videos].sort((a, b) => (a.rating > b.rating ? 1 : -1));
+  //   return res.send(allVideos);
+  // } else if (req.query.order === "desc") {
+  //   let allVideos = [...videos].sort((a, b) => (a.rating < b.rating ? 1 : -1));
+  //   return res.send(allVideos);
+  // } else {
+  //   return res.send(videos);
+  // }
 });
 
 app.get("/videos/:id", function (req, res) {
