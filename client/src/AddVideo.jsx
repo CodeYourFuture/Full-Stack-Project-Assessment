@@ -1,6 +1,14 @@
 import React from "react";
 
-function AddVideo({ titleValue, urlValue, titleChange, urlChange, submit }) {
+function AddVideo({
+  titleValue,
+  urlValue,
+  titleChange,
+  urlChange,
+  ratingValue,
+  ratingChange,
+  submit,
+}) {
   return (
     <form onSubmit={submit}>
       <div className="title">
@@ -11,8 +19,12 @@ function AddVideo({ titleValue, urlValue, titleChange, urlChange, submit }) {
         <p>URL :</p>
         <input type="text" value={urlValue} onChange={urlChange} />
       </div>
+      <div className="title">
+        <p>Rating:</p>
+        <input type="text" value={ratingValue} onChange={ratingChange} />
+      </div>
       <div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </div>
     </form>
   );

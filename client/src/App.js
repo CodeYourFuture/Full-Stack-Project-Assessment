@@ -18,35 +18,50 @@ function App() {
   };
   useEffect(() => {
     let filteredVideos = dataVideo.filter((video) => {
+      // eslint-disable-next-line eqeqeq
       return video.id != videoID;
     });
     setDataVideo(filteredVideos);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoID]);
   const [isHidden, setIsHidden] = useState(true);
   const visibleToolbar = () => {
     setIsHidden(!isHidden);
   };
-  const [titleValue, steTitleValue] = useState("");
+  const [titleValue, setTitleValue] = useState("");
   const titleChange = (e) => {
     console.log(e.target.value);
-    steTitleValue(e.target.value);
+    setTitleValue(e.target.value);
   };
-  const [urlValue, steURLValue] = useState("");
+  const [urlValue, setURLValue] = useState("");
   const urlChange = (e) => {
     console.log(e.target.value);
-    steURLValue(e.target.value);
+    setURLValue(e.target.value);
+  };
+  const [ratingValue, setRatingValue] = useState("");
+  const ratingChange = (e) => {
+    console.log(e.target.value);
+    setRatingValue(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sunmited");
     if (titleValue !== "" && urlValue.includes("youtube.com")) {
-      let newVideo = {
-        id: 0,
-        title: titleValue,
-        url: urlValue,
-        rating: 23,
-      };
-      setDataVideo([...dataVideo, newVideo]);
+      fetch("https://video-app-node.onrender.com/video", {
+        method: "POST",
+        body: JSON.stringify({
+          title: titleValue,
+          url: urlValue,
+          rating: ratingValue,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setDataVideo(data);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
     }
   };
   return (
@@ -66,6 +81,8 @@ function App() {
             urlValue={urlValue}
             titleChange={titleChange}
             urlChange={urlChange}
+            ratingValue={ratingValue}
+            ratingChange={ratingChange}
             submit={handleSubmit}
           />
         )}
