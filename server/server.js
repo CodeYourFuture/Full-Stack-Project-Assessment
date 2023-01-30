@@ -49,12 +49,12 @@ app.get("/api", async (req, res) => {
 });
 
 // POST new video
-app.post("/api", (req, res) => {
-  const videoId = generateUniqueId({
-    length: 6,
-    useLetters: false,
-  });
-  if (req.body.title && req.body.url && isValidYouTubeUrl(req.body.url)) {
+app.post("/api", async (req, res) => {
+  try {
+    const videoId = generateUniqueId({
+      length: 6,
+      useLetters: false,
+    });
     let newVideo = {
       id: parseInt(videoId),
       title: req.body.title,
@@ -62,10 +62,17 @@ app.post("/api", (req, res) => {
       rating: 0,
       postedAt: new Date(),
     };
-
-    videos.push(newVideo);
-    res.send(newVideo);
-  } else {
+    const query =
+      "INSERT INTO videos (id, title, url, rating, posted_at) VALUES ($1, $2, $3, $4, $5)";
+    let result = await pool.query(query, [
+      newVideo.id,
+      newVideo.title,
+      newVideo.url,
+      newVideo.rating,
+      newVideo.postedAt,
+    ]);
+    res.send({ newVideo: result.rows[0] });
+  } catch (error) {
     res
       .status(400)
       .send({ result: "failure", message: "Video could not be saved" });
