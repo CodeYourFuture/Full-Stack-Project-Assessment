@@ -17,12 +17,19 @@ function App() {
       <header className="my-App-header">
         <h1>Video Recommendation</h1>
       </header>
-      
-        <AddNewVideo videoData={videoData} setVideoData={setVideoData} />
-        <hr className="hr"></hr>
-        <SearchVideo />
-        <PopulateVideos defaultVideoData={defaultVideoData} setDefaultVideoData={setVideoData}/>
-      
+
+      <AddNewVideo videoData={videoData} setVideoData={setVideoData} />
+      <hr className="hr"></hr>
+      <SearchVideo videoData={videoData} setVideoData={setVideoData} />
+      {/* <PopulateVideos
+        defaultVideoData={defaultVideoData}
+        setDefaultVideoData={setVideoData}
+      />
+       */}
+      <PopulateVideos
+        defaultVideoData={defaultVideoData}
+        setDefaultVideoData={setVideoData}
+      />
     </div>
   );
 }
