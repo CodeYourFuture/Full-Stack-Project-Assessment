@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const { Pool } = require("pg");
+require("dotenv").config();
 
 const port = process.env.PORT || 4000;
 
@@ -9,15 +10,16 @@ app.use(express.json());
 app.use(cors());
 
 const pool = new Pool({
-  connectionString:
-    "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",
+  connectionString: process.env.DB_CONNECTION_STRING,
   ssl: { rejectUnauthorized: false },
-  user: "user",
-  host: "postgres://user:BzA52BUb5uHl8B2oNiSWM8uixzot4m7W@dpg-cfakkd82i3mjduj6onq0-a.frankfurt-postgres.render.com/dbvideos",
-  database: "dbvideos",
-  password: "BzA52BUb5uHl8B2oNiSWM8uixzot4m7W",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
+
+pool.connect();
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -31,19 +33,18 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
-const todayDate = new Date().toISOString().slice(0, 10);
-const REGEXP =
-  /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-
-const isValidYoutubeUrl = (link) => {
-  return link.trim().match(REGEXP) !== null;
-};
-
 app.post("/", (req, res) => {
+  const REGEXP =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+  const isValidYoutubeUrl = (link) => {
+    return link.trim().match(REGEXP) !== null;
+  };
+
   const addedVideoTitle = req.body.title.trim();
   const addedVideoUrl = req.body.url.trim();
+  const todayDate = new Date().toISOString().slice(0, 10);
   const addedVideoRating = 0;
-  const addedVideoDate = todayDate;
 
   if (!addedVideoTitle || !isValidYoutubeUrl(addedVideoUrl)) {
     res.sendStatus(400);
@@ -53,7 +54,7 @@ app.post("/", (req, res) => {
     .query("SELECT * FROM videos WHERE url=$1", [addedVideoUrl])
     .then((result) => {
       if (result.rows.length > 0) {
-        res.sendStatus(422); // if url already exists
+        res.sendStatus(422); // url already exists
         return;
       }
       const query =
@@ -61,11 +62,11 @@ app.post("/", (req, res) => {
       pool
         .query(query, [
           addedVideoTitle,
-          addedVideoTitle,
+          addedVideoUrl,
           addedVideoRating,
-          addedVideoDate,
+          todayDate,
         ])
-        .then(() => res.status(201))
+        .then(() => res.sendStatus(201))
         .catch((error) => {
           console.error(error);
           res.status(500).json(error);
@@ -77,7 +78,8 @@ app.post("/", (req, res) => {
 app.get("/:id", (req, res) => {
   const requestedVideoId = Number(req.params.id);
   if (!requestedVideoId) {
-    return sendStatus(404);
+    res.sendStatus(404);
+    return;
   }
   const query = "SELECT * FROM videos WHERE id=$1";
   pool
@@ -93,7 +95,8 @@ app.get("/:id", (req, res) => {
 app.delete("/:id", (req, res) => {
   const deletedVideoId = Number(req.params.id);
   if (!deletedVideoId) {
-    return sendStatus(404);
+    res.sendStatus(404);
+    return;
   }
   const query = "DELETE FROM videos WHERE id=$1";
   pool
@@ -106,14 +109,17 @@ app.delete("/:id", (req, res) => {
 });
 
 // PUT "{id}"
-app.put("/id", function (req, res) {
-  const requestedVideoId = req.params.id;
-  const changedVideoRating = req.body.rating;
-  if ((!requestedVideoId) || (!changedVideoRating)) {
-    return sendStatus(404);
+app.put("/:id", (req, res) => {
+  const requestedVideoId = Number(req.params.id);
+  const changedVideoRating = Number(req.body.rating);
+  console.log(requestedVideoId, changedVideoRating);
+  if (!requestedVideoId || !changedVideoRating) {
+    res.sendStatus(404);
+    return;
   }
+  const query = "UPDATE videos SET rating=$1 WHERE id=$2";
   pool
-    .query("UPDATE videos SET rating=$1 WHERE id=$2", [changedVideoRating, requestedVideoId])
+    .query(query, [changedVideoRating, requestedVideoId])
     .then(() => res.sendStatus(201))
     .catch((error) => {
       console.error(error);
