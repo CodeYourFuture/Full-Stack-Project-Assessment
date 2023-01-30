@@ -97,16 +97,13 @@ app.get("/api/:id", async (req, res) => {
 });
 
 // DELETE video by id
-app.delete("/api/:id", (req, res) => {
-  let videoIndex = videos.findIndex(({ id }) => id === parseInt(req.params.id));
-  if (videoIndex >= 0) {
-    videos.splice(videoIndex, 1);
-    res.send({});
-  } else {
-    res.status(400).send({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
+app.delete("/api/:id", async (req, res) => {
+  let id = parseInt(req.params.id);
+  try {
+    await pool.query("DELETE FROM videos WHERE id = $1", [id]);
+    res.json({});
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
