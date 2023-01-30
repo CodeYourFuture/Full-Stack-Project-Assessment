@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const { Pool } = require("pg");
+require("dotenv").config();
+
 const port = process.env.PORT || 5000;
 
 const cors = require("cors");
@@ -102,6 +105,21 @@ let videos = [
     },
   ];
 
+
+
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_URL,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+
+//query here a
 // GET "/"
 app.get("/", (req, res) => {
   res.send(videos);
