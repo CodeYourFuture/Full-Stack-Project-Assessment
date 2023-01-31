@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import LikeDislikeButton from "../LikeDislikeButton/LikeDislikeButton";
+import LikeDislikeButton from "../Like-Dislike-Buttons/LikeDislikeButton";
 import Button from "react-bootstrap/Button";
 
 function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
@@ -28,7 +28,9 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
         border="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></iframe>
+      >
+        
+      </iframe>
       <LikeDislikeButton
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
