@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-// import Videos from "./exampleresponse.json"
 import Card from "./Card";
 
 function Cards() {
@@ -27,8 +26,6 @@ function Cards() {
 				removeElement(index);
 			})
 			.catch((error) => console.log(error));
-
-		// console.log(id)
 	}
 
 	const removeElement = (i) => {
@@ -45,7 +42,6 @@ function Cards() {
 	};
 
 	const handleSubmit = (e) => {
-		// e.preventDefault();
 		let maxID = Math.max(...videos.map((c) => c.id));
 		const newVideo = {
 			id: ++maxID,

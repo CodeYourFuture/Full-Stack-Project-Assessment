@@ -8,8 +8,6 @@ dotenv.config();
 
 app.use(express.json());
 
-const fs = require("fs");
-
 mongoose
 	.connect('mongodb+srv://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@' + process.env.MONGO_HOST + '/' + process.env.MONGO_DATABASE_NAME)
 	.then(() => {
@@ -20,8 +18,6 @@ mongoose
 		console.error(error);
 	});
 
-
-
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
@@ -29,26 +25,20 @@ app.use((req, res, next) => {
 	next();
 });
 
-// // GET "/"
-// app.get("/", (req, res) => {
-//   res.send(videos)
-
-// });
-
 app.post("/videos", (req, res, next) => {
 	// const maxID = Math.max(...data.map((c) => c.id));
 	const video = new Video({
 		title: req.body.title,
 		url: req.body.url,
 		// id: ++maxID,
-		ratings: 0,
+		rating: 0,
 		votes: 0,
 	});
 	video
 		.save()
 		.then(() => {
 			res.status(201).json({
-				message: "Post saved successfully!",
+				message: "Videos saved successfully!",
 			});
 		})
 		.catch((error) => {
@@ -106,51 +96,3 @@ module.exports = app;
 
 
 
-// // post
-// app.post('/', (req,res) => {
-//   let maxID = Math.max(...videos.map(c => c.id));
-//   const newVideo = Object.assign({ id: ++maxID}, req.body);
-
-//   if(!req.body.url || !req.body.title ){
-//     res.status(400).send("All fields are required to be entered");
-//     return
-//   } else{
-//     videos.push(newVideo);
-//   fs.writeFile(`${__dirname}/server/videos.json`, JSON.stringify(videos), err => {
-//     res.status(201).json({
-//         status: 'success',
-//         data: {
-//             video: newVideo
-//         }
-//     });
-// });
-//    }
-
-// })
-
-// // find by id
-
-// app.get(`/:id`, (req, res) => {
-//   const reqId = parseInt(req.params.id);
-
-//   const filteredVideos = videos.find((video) => video.id === reqId);
-
-//   if (filteredVideos.length === 0) {
-//     res.status(400).send({ msg: `Sorry here are no videos with the ID of ${reqId}` });
-//   } else {
-//     res.status(200).send(filteredVideos);
-//   }
-// })
-
-// app.delete('/:id' , (req, res) => {
-//   const delId = parseInt(req.params.id)
-
-//   const findIndex = videos.findIndex((video) => video.id === delId);
-
-//   if (findIndex >=0){
-//     videos.splice(findIndex, 1);
-//     res.status(200).send({msg: 'deleted'})
-//   } else{
-//     res.status(400).send({ msg: `Sorry here are no videos with the ID of ${delId}` });
-//   }
-// })
