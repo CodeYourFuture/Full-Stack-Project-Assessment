@@ -23,13 +23,13 @@ function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
   }
 
   return (
-    <div className="card">
+    <div className="card h-100">
       <iframe
         title={video.title}
         src={video.videourl}
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <div className="card-body">
         <div className="card-title">
