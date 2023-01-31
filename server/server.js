@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { v4: uuidv4 } = require("uuid");
 const { Pool } = require("pg");
 const pool = require("./db.js");
 const bodyParser = require("body-parser");
@@ -37,7 +36,7 @@ app.get("/delete-videos/:id", async (req, res) => {
     ]);
     res.json("Video with ${id} was deleted");
   } catch (error) {
-  res.send(err);
+    res.send(err);
   }
 });
 
@@ -64,14 +63,14 @@ app.get("/videos/:id", async (req, res) => {
 });
 app.post("/post-videos", async (req, res) => {
   const video = {
-    id: parseInt(uuidv4()),
+  
     title: req.body.title,
     url: req.body.url,
     rating: 0,
   };
   const videoTitle = req.body.title;
   const videoUrl = req.body.url;
-  let id = uuidv4();
+
   const videoRating = 0;
   if (videoTitle.length < 1) {
     res.send(400).json({
@@ -86,17 +85,15 @@ app.post("/post-videos", async (req, res) => {
     });
     return;
   }
-  if (id === null && isNaN(id)) {
-    res.status(404);
-  }
+
 
   let validUrl = videoUrl.match(
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
   );
 
-  const insertQuery = `INSERT INTO videos(id, title, url, rating)
-   values(${video.id}, '${video.title}', '${video.url}', '${video.rating}')`;
-   
+  const insertQuery = `INSERT INTO videos( title, url, rating)
+   values('${video.title}', '${video.url}', '${video.rating}')`;
+
   if (validUrl) {
     pool.query(insertQuery, (err, result) => {
       if (!err) {
