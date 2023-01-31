@@ -1,17 +1,17 @@
 import { useState } from "react";
 
 
-function Add({ data, setVideoData })
+function Add({ videoData, setVideoData })
 {
     const [newTitle, setNewTitle] = useState("");
     const [newURL, setNewURL] = useState("");
 
 
-    const addFunction = (data) => 
+    const addFunction = (videoData) => 
     {
         const newItem =
         {
-            id: data.length,
+            id: videoData.length,
             title: newTitle,
             url: newURL,
             rating: 0,
@@ -84,7 +84,7 @@ function Add({ data, setVideoData })
                     <input id='URL' onChange={handleURL} />
                 </label>
             </div>
-            <button onClick={() => addFunction(data)}>Add
+            <button onClick={() => addFunction(videoData)}>Add
             </button>
         </form>
     );

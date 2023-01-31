@@ -7,18 +7,15 @@ import Map from "./Map.js";
 function App()
 {
   const [videoData, setVideoData] = useState([]);
-  const [sort, setSort] = useState("?order=desc");
+  const [sort, setSort] = useState("desc");
 
 
   useEffect(() =>
   {
-
-    fetch("http://192.168.0.15:5000" + sort)
+    fetch("http://192.168.0.15:5000/videos?order=" + sort)
       .then(res => res.json())
       .then(data => setVideoData(data))
       .catch(error => console.log(error))
-
-
   }, [sort]);
 
 
@@ -26,7 +23,7 @@ function App()
   return (
     <div className="App">
       <Sort sort={sort} setSort={setSort} />
-      <Add data={videoData} setVideoData={setVideoData} />
+      <Add videoData={videoData} setVideoData={setVideoData} />
       <div className='Holder'>
         <h1 id="VideoTitle">Videos</h1>
         <Map videoData={videoData} setVideoData={setVideoData} sort={sort} />
