@@ -4,7 +4,7 @@
 
 .App-header {
   color: #fff;
-  background-color: #d612a5;
+  background-color: #b34597;
   padding: 3rem 0;
 }
 
@@ -25,6 +25,8 @@
   height: fit-content;
   border-radius: 1em;
   background-color: rgb(240, 196, 143);
+  border-style:groove;
+  border-color: rgb(212, 129, 28);
 
 }
 
@@ -78,6 +80,6 @@ input {
 
 .footer {
   color: #fff;
-  background-color: #d612a5;
+  background-color: #b34597;
   padding: 3rem 0;
 }
