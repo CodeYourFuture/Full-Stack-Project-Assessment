@@ -51,7 +51,7 @@ function Cards() {
 		};
 		setTitle("");
 		setUrl("");
-		fetch(`http://127.0.0.1:5000/videos/`, {
+		fetch(`http://127.0.0.1:5000/videos`, {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
