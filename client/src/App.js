@@ -24,11 +24,45 @@ function App() {
     postedAt: 0,
   });
 
-  async function getAllVideos() {
+  function formatVideosUrl(videos) {
+    const formattedVideosData = videos.map((video) => {
+      video.url = video.url.replace("watch?v=", "embed/");
+      return video;
+    });
+    return formattedVideosData;
+  }
+
+  function isValidYouTubeUrl(url) {
+    if (url !== undefined || url !== "") {
+      const regExp =
+        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
+      return url.match(regExp) ? url : false;
+    }
+  }
+  useEffect(() => {
+    async function getAllVideos() {
+      try {
+        const res = await fetch(`/api?order=${order}`);
+        const jsonData = await res.json();
+        setVideosData(formatVideosUrl(jsonData));
+      } catch (error) {
+        console.log({ error });
+      }
+    }
+    getAllVideos();
+  }, [order, videosData]);
+
+  async function updateVideo(e, video, id) {
     try {
-      const res = await fetch(`/api?order=${order}`);
+      const res = await fetch(`api/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(video),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const jsonData = await res.json();
-      setVideosData(formatVideosUrl(jsonData));
+      setVideosData(jsonData);
     } catch (error) {
       console.log({ error });
     }
@@ -50,41 +84,6 @@ function App() {
       }
     } catch (error) {
       console.log({ error });
-    }
-  }
-
-  async function updateVideo(e, video, id) {
-    try {
-      const res = await fetch(`api/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify(video),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const jsonData = await res.json();
-      setVideosData(jsonData);
-    } catch (error) {
-      console.log({ error });
-    }
-  }
-
-  useEffect(() => {
-    getAllVideos();
-  }, [videosData]);
-
-  function formatVideosUrl(videos) {
-    const formattedVideosData = videos.map((video) => {
-      video.url = video.url.replace("watch?v=", "embed/");
-      return video;
-    });
-    return formattedVideosData;
-  }
-  function isValidYouTubeUrl(url) {
-    if (url !== undefined || url !== "") {
-      const regExp =
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
-      return url.match(regExp) ? url : false;
     }
   }
 
@@ -205,6 +204,7 @@ function App() {
   const handleOrderChange = (e) => {
     setOrder(e.target.value);
   };
+
   return (
     <div className="App">
       <Box>
