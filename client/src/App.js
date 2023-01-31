@@ -14,7 +14,7 @@ const App = () => {
   const [url, setUrl] = useState("");
   const [message, setMessage] = useState("");
 
-  const serverUrl = "https://simeon-video-recommendation.onrender.com";
+  const serverUrl = "https://simeon-video-recommendation-server.onrender.com";
 
   // Get "/"
   useEffect(() => {

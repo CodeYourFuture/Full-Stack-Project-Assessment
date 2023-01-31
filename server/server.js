@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 // POST "/"
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   const REGEXP =
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
@@ -76,7 +76,7 @@ app.post("/", (req, res) => {
 });
 
 // GET "/{id}"
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const requestedVideoId = Number(req.params.id);
   if (!requestedVideoId) {
     res.sendStatus(404);
@@ -93,7 +93,7 @@ app.get("/:id", (req, res) => {
 });
 
 // DELETE "/{id}"
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const deletedVideoId = Number(req.params.id);
   if (!deletedVideoId) {
     res.sendStatus(404);
@@ -110,7 +110,7 @@ app.delete("/:id", (req, res) => {
 });
 
 // PUT "{id}"
-app.put("/:id", (req, res) => {
+app.put("/videos/:id", (req, res) => {
   const requestedVideoId = Number(req.params.id);
   const changedVideoRating = Number(req.body.rating);
   console.log(requestedVideoId, changedVideoRating);
