@@ -1,5 +1,5 @@
 const express = require("express");
-let cors = require('cors')
+const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 5000;
 const mysql = require('mysql');
@@ -16,7 +16,7 @@ const connection = mysql.createConnection
     host: 'localhost',
     database: 'sys',
     user: 'root',
-    password: '',
+    password: 'ArbeitsEmail123',
     port: 3306
   });
 
