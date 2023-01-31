@@ -24,7 +24,7 @@ function AddVideo({
         <input type="text" value={ratingValue} onChange={ratingChange} />
       </div>
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="submitBtn" >Submit</button>
       </div>
     </form>
   );

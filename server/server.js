@@ -110,7 +110,17 @@ app.delete("/video/:id", (req, res) => {
   const id = Number(req.params.id);
   pool
     .query("DELETE FROM videos WHERE id = $1", [id])
-    .then(() => res.json(`Video ${id} deleted!`))
+    .then(() => {
+      pool
+        .query("SELECT * FROM videos")
+        .then((result) => {
+          res.json(result.rows);
+        })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).json(error);
+        });
+    })
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);

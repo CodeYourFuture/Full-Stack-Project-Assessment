@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 
 function Video({ video, deleteVideo , value }) {
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState(video.rating);
   const addVote = () => {
     setVote((vote) => {
       return vote + 1;
@@ -28,7 +28,6 @@ function Video({ video, deleteVideo , value }) {
       </div>
       <YouTubeEmbed video={video} />
       <DeleteButton deleteVideo={deleteVideo} value={value} />
-      <p>{video.rating}</p>
     </div>
   );
 }

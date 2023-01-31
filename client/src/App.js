@@ -11,19 +11,19 @@ function App() {
       .then((res) => res.json())
       .then((data) => setDataVideo(data));
   }, []);
-  const [videoID, setVideoID] = useState(null);
   const deleteVideo = (e) => {
-    let videoID = e.target.value;
-    setVideoID(videoID);
+    let videoID = Number(e.target.value);
+    fetch(`https://video-app-node.onrender.com/video/${videoID}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setDataVideo(data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   };
-  useEffect(() => {
-    let filteredVideos = dataVideo.filter((video) => {
-      // eslint-disable-next-line eqeqeq
-      return video.id != videoID;
-    });
-    setDataVideo(filteredVideos);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoID]);
   const [isHidden, setIsHidden] = useState(true);
   const visibleToolbar = () => {
     setIsHidden(!isHidden);
@@ -72,7 +72,7 @@ function App() {
           <button onClick={visibleToolbar} className="addBtn">
             Add a video
           </button>
-        </div>
+        </div>        
         {isHidden ? (
           <></>
         ) : (

@@ -9,7 +9,7 @@ header {
 .App-header {
   color: #fff;
   font-style: oblique;
-  background-color: #254e70;
+  background-color: rgb(212, 124, 36);
   padding: 1.2rem 0;
   gap: 1.2rem;
 }
@@ -24,15 +24,31 @@ header {
   gap: 1.2rem;
   margin: 1.1rem;
 }
-
+.submitBtn {
+  font-size: 1.2rem;
+  padding: 0.5rem 1.1rem 0.5rem 1.1rem;
+  border-radius: 1.1rem;
+  background-color: yellow;
+}
+.submitBtn:hover {
+  background-color: rgb(179, 172, 50);
+  color: black;
+}
 .addBtn {
   font-size: 1.2rem;
   padding: 0.5rem 1.1rem 0.5rem 1.1rem;
   border-radius: 1.1rem;
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  justify-self: center;
+  background-color: rgb(236, 232, 155);
 }
 .addBtn:hover {
-  background-color: rgb(174, 197, 219);
-  color: white;
+  background-color: rgb(255, 246, 71);
+  color: black;
 }
 body {
   display: flex;
@@ -45,21 +61,48 @@ body {
 }
 
 .video-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 1rem;
+  background-color: #f2f2f2;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  box-shadow: 0.25rem 0.25rem 0.625rem #999;
+  margin: 2.5rem 0;
+}
+.vote-container {
+  gap: 1rem;
   display: flex;
-  flex-flow: column nowrap;
+  justify-content: center;
   align-items: center;
-  margin: 1rem;
-  width: 20rem;
-  height: fit-content;
+}
+.vote-container p {
+  font-size: 1.3rem;
+}
+.VoteIcon {
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+}
+.VoteIcon:hover {
+  color: rgb(212, 124, 36);
 }
 .video-container > p {
   margin: 0;
+  max-width: 200px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  justify-self: center;
 }
 button {
-  background-color: white;
+  background-color: transparent;
   border: none;
 }
-
 .delete-button {
   margin-top: 2rem;
   border-radius: 10px;
