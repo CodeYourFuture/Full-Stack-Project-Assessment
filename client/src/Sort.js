@@ -2,23 +2,21 @@ function Sort({ sort, setSort })
 {
     const switchSort = () => 
     {
-        if (sort === "?order=asc")
+        if (sort === "asc")
         {
-            setSort("?order=desc");
-            console.log(sort);
+            setSort("desc");
         }
 
-        else if (sort === "?order=desc")
+        else if (sort === "desc")
         {
-            setSort("?order=asc");
-            console.log(sort);
+            setSort("asc");
         }
     }
 
 
     return (
         <div className="sortDiv">
-            <button onClick={() => switchSort(sort)}>Sort</button>
+            <button id="sortButton" onClick={() => switchSort(sort)}>Sort</button>
         </div>
     );
 }
