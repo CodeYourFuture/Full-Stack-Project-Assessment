@@ -6,7 +6,7 @@ import axios from "axios";
 
 function Videos(props) {
   function handleDelete(e) {
-    axios.delete(`http://localhost:5000/videos/${e.target.id}`);
+    axios.delete(`/videos/${e.target.id}`);
     props.setTracker((el) => el + 1)
   }
 
