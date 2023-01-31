@@ -6,20 +6,21 @@ function Add({ data, setVideoData })
     const [newTitle, setNewTitle] = useState("");
     const [newURL, setNewURL] = useState("");
 
-    let newItem = {};
-
 
     const addFunction = (data) => 
     {
-        newItem.id = data.length;
-        newItem.title = newTitle;
-        newItem.url = newURL;
-        newItem.rating = 0;
-        newItem.added = new Date();
-
-        if (newItem.title !== "" && newItem.url !== "")
+        const newItem =
         {
-            fetch('http://192.168.0.15:5000/',
+            id: data.length,
+            title: newTitle,
+            url: newURL,
+            rating: 0,
+            added: new Date()
+        };
+
+        if (newItem.title && newItem.url)
+        {
+            fetch('http://192.168.0.15:5000/videos',
                 {
                     method: 'POST',
                     body: JSON.stringify(newItem),
@@ -40,13 +41,19 @@ function Add({ data, setVideoData })
 
     const handleURL = (event) => 
     {
-        let url = (event.target.value).toString();
+        let url = event.target.value;
 
-        if (url !== "")
+        if (!url)
         {
-            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
-            let match = url.match(regExp);
-            if (match && match[2].length === 11)
+            setNewURL("");
+        }
+
+        else
+        {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
+            const YOUTUBE_ID_LENGTH_CHARS = 11;
+            const match = url.match(regExp);
+            if (match && match[2].length === YOUTUBE_ID_LENGTH_CHARS)
             {
                 setNewURL(event.target.value);
             }
@@ -55,11 +62,6 @@ function Add({ data, setVideoData })
             {
                 setNewURL("");
             }
-        }
-
-        else
-        {
-            setNewURL("");
         }
     }
 
@@ -79,7 +81,7 @@ function Add({ data, setVideoData })
             </div>
             <div className="AddFields">
                 <label>URL:
-                    <input id='URL' onChange={handleURL}></input>
+                    <input id='URL' onChange={handleURL} />
                 </label>
             </div>
             <button onClick={() => addFunction(data)}>Add
