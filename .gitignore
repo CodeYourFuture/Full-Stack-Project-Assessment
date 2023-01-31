@@ -1,4 +1,4 @@
-/server/node_modules
-/server/.env
+/server/node_modules/
 /server/videos.sql
-/client/node_modules
+/client/node_modules/
+/server/.env
