@@ -21,7 +21,7 @@
   text-shadow: 2px 2px 5px rgb(66, 39, 39);
 }
 .card p {
-  font-weight: bold;
+  font-weight: bolder;
 }
 .Video-container {
   width: 90%;
