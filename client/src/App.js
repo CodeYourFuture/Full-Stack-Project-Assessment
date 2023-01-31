@@ -2,81 +2,30 @@ import "./App.css";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-// import videosData from "./exampleresponse.json";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import x from "./exampleresponse.json";
+// import Axios from "axios";
+// import DeleteButton from "./Buttons/DeleteBtn";
+// import Button from "react-bootstrap/Button";
+// import ButtonGroup from "react-bootstrap/ButtonGroup";
+import LikeBtn from "./Buttons/LikeBtn";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
-import { useState } from "react";
-
-const x = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+import { useState, useEffect } from "react";
+import DisLikeBtn from "./Buttons/DisLikeBtn";
+import EmbeddedVideo from "./EmbeddedVideo";
 
 function App() {
   const [videosData, setVideosData] = useState(x);
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
-  // const [rating, setRating] = useState(x.rating);
+  const [rating, setRating] = useState(0);
+
+  // ----fetch data here-----
+  // const [..., set...] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost/5000")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
 
   const handleVideoAdder = (e) => {
     e.preventDefault();
@@ -99,13 +48,22 @@ function App() {
     }
   };
 
-  // function handleUpvote(rating) {
-  //   console.log(rating);
-  // }
+  function handleUpvote() {
+    setRating((rating) => {
+      return rating + 1;
+    });
+  }
 
-  // function handleDownvote(x) {
-  //   console.log(x.rating);
-  // }
+  function handleDownvote() {
+    setRating((rating) => {
+      return rating - 1;
+    });
+  }
+
+  const removeVideo = (index) => {
+    const newVideo = videosData.filter((_, i) => i !== index);
+    setVideosData(newVideo);
+  };
 
   return (
     <div className="App">
@@ -139,25 +97,24 @@ function App() {
       <Row xs={1} md={2} className="g-4">
         {videosData.map((video, index) => (
           <Col key={index}>
-            <Card>
+            <Card key={index}>
+              <Card.Title className="mb-4 mt-4">{video.title}</Card.Title>
               <Card.Img variant="top" />
-              <iframe
-                className="embeddedVideo"
-                title={video.title}
-                height={"300"}
-                src={video.url.replace("watch?v=", "embed/")}
-                alt={video.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
-              />
+              <EmbeddedVideo video={video} />
               <Card.Body>
-                <Card.Title>{video.title}</Card.Title>
                 <Card.Text>
-                  Votes :
-                  <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary"> &#128077; </Button>
-                    <span> {video.rating} </span>
-                    <Button variant="secondary"> &#128078; </Button>
-                  </ButtonGroup>
+                  <div>
+                    Votes :
+                    <LikeBtn onClick={handleUpvote} />
+                    <span> {rating} </span>
+                    <DisLikeBtn onClick={handleDownvote} variant="secondary" />
+                  </div>
+                  <p>{video.rating}</p> <hr />
+                  <div>
+                    <div key={index}>
+                      <button onClick={() => removeVideo(index)}>Delete</button>
+                    </div>
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>
