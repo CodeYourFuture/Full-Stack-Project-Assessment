@@ -2,7 +2,7 @@ import React from "react";
 import CountLike from "./CountLike";
 import "./DisplayVideos.css";
 
-function DisplayVideos({ data, setData, upVote }) {
+function DisplayVideos({ data, setData, upVote, setRating }) {
   const deleteVideo = (e) => {
     const id = parseInt(e.target.id);
     fetch(`/videos/${id}`, {
@@ -21,26 +21,23 @@ function DisplayVideos({ data, setData, upVote }) {
       {data &&
         data.map((vid, key) => {
           return (
-            <div key={key} id={vid.id}>
-              <div>
-                <h3>{vid.title}</h3>
-                <iframe
-                  width="500"
-                  height="315"
-                  src={vid.url.replace("watch?v=", "embed/")}
-                  title={vid.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                <p>Rating: {vid.rating}</p>
-                <CountLike upVote={upVote} />
-                <button id={vid.id} onClick={deleteVideo}>
-                  Delete
-                </button>
-              </div>
-
-              <br />
-              <br />
+            <div className="card" key={key}>
+            <div key={key} id={vid.id} className="Video-container">
+              <h3>{vid.title}</h3>
+              <iframe
+                width="500"
+                height="315"
+                src={vid.url.replace("watch?v=", "embed/")}
+                title={vid.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+              <p>Rating: {vid.rating}</p>
+              <CountLike upVote={upVote} setRating={setRating} />
+              <button className="buttons" id={vid.id} onClick={deleteVideo}>
+                Delete
+              </button>
+            </div>
             </div>
           );
         })}

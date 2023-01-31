@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./SubmitVideo.css";
 
-const SubmitVideo = ({ data, setData, upVote }) => {
+const SubmitVideo = ({ data, setData, rating, setRating }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [rating, setRating] = useState(0);
   const [showAddVideo, setShowAddVideo] = useState(false);
+  const [isButtonVisible, setButtonVisibility] = useState(true);
 
   const isValidYouTubeUrl = (url) => {
     const regExp =
@@ -46,11 +46,21 @@ const SubmitVideo = ({ data, setData, upVote }) => {
     }
   };
 
+  const toggleAddVideo = () => {
+    setShowAddVideo(true);
+    setButtonVisibility(!isButtonVisible);
+  };
+  const hideAddVideo = () => {
+    setShowAddVideo(!showAddVideo);
+    setButtonVisibility(true);
+  };
   return (
-    <div className="Add-video Forms-container">
-      <button onClick={() => setShowAddVideo(true)}>Add Video</button>
+    <div className="">
+      <button className="buttons btn" onClick={toggleAddVideo}>
+        Add Video
+      </button>
       {showAddVideo ? (
-        <form className="Add-form forms">
+        <form className="Add-form">
           <label htmlFor="title" className="labels">
             Title
             <input
@@ -73,11 +83,11 @@ const SubmitVideo = ({ data, setData, upVote }) => {
               className="input"
             />
           </label>
-          <div className="buttons">
-            <button type="submit" onClick={addVideo}>
+          <div>
+            <button className="buttons btn-add" type="submit" onClick={addVideo}>
               Add
             </button>
-            <button onClick={() => setShowAddVideo(!showAddVideo)}>
+            <button className="buttons btn-add" onClick={hideAddVideo}>
               Cancel
             </button>
           </div>

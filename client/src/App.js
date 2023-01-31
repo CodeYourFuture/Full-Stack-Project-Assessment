@@ -9,8 +9,9 @@ import OrderedData from "./components/OrderedData";
 
 //getAllData, addVideo, DeleteVideo fetch data from backend
 // createSQL AND connect to DB
-function App({ upVote }) {
+function App() {
   const [data, setData] = useState([]);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     fetch("/videos")
@@ -24,10 +25,12 @@ function App({ upVote }) {
       <header className="App-header">
         <h1>...Video Recommendation...</h1>
       </header>
-      <OrderedData data={data} />
+      <section className="Video-query">
+      <SubmitVideo setData={setData} data={data} rating={rating} setRating={setRating} />
       <SearchBar data={data} setData={setData} />
-      <SubmitVideo setData={setData} data={data} upVote={upVote} />
-      <DisplayVideos data={data} setData={setData} upVote={upVote} />
+      </section>
+      <OrderedData data={data} />
+      <DisplayVideos data={data} setData={setData} setRating={setRating} />
     </div>
   );
 }

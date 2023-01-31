@@ -143,13 +143,3 @@ app.delete("/videos/:id", async (req, res) => {
     return;
   }
 });
-
-app.delete("/videos/:id", (req, res) => {
-  const vidId = parseInt(req.params.id);
-  const vidIndex = videos.findIndex((v) => v.id === vidId);
-  if (vidIndex < 0) {
-    res.status(404).send("Video not found");
-  }
-  videos.splice(vidIndex, 1);
-  res.send({ id: vidId, message: "Video deleted" });
-});

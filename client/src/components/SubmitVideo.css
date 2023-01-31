@@ -1,17 +1,20 @@
-/* .Add-video{
-  background-color: rgba(202, 195, 202, 0.856);
-  color: rgb(40, 40, 38);
-  padding: 2rem;
-  
-}
-
-.Add-form{
-  display: block;
-} */
-
-/* .buttons {
+.Add-form {
   display: flex;
-  gap: 1rem;
-  align-items: center;
   justify-content: center;
-} */
+  align-items: center;
+  gap: 0.2rem;
+}
+.input {
+  width: 160px;
+  padding: 0.2rem;
+}
+.btn {
+  margin-bottom: 0.6rem;
+}
+.btn-add {
+  width: 5rem;
+  padding: 0.5rem;
+}
+.input {
+  padding: 0.2rem;
+}
