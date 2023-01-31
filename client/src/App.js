@@ -9,26 +9,25 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
-    useEffect(() => {
-      fetch("http://localhost:5000/videos", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  useEffect(() => {
+    fetch("http://localhost:5000/videos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
       })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            throw new Error("Something went wrong");
-          }
-        })
-        .then((myData) => setVideos(myData))
-        .catch((error) => {
-          console.log({ error: error.message });
-        });
-    }, [refresh]);
-
+      .then((myData) => setVideos(myData))
+      .catch((error) => {
+        console.log({ error: error.message });
+      });
+  }, [refresh]);
 
   const addVideo = (newVideo) => {
     fetch(`http://localhost:5000/post-videos`, {
@@ -40,7 +39,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        alert(data.msg);
         setRefresh(refresh + 1);
       })
       .catch((error) => console.log(error));
