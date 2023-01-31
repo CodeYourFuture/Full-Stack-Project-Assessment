@@ -10,8 +10,6 @@ function Videos(props) {
     props.setTracker((el) => el + 1)
   }
 
-
-  
   return (
     <div>
       {props.data.map((el, key) => {

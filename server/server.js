@@ -1,13 +1,13 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
-const getPostgresClient = require('./postgresClient');
+const getPostgresClient = require("./postgresClient");
 const app = express();
 
 const port = process.env.PORT || 5000;
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 let videos = [
   {
@@ -73,24 +73,22 @@ let videos = [
   },
 ];
 
-
-
 function maxId() {
   let idArray = videos.map((el) => el.id);
   return Math.max(...idArray);
 }
-let client;
+
+//.....connecting to postgres
+
+const client = getPostgresClient();
+client.connect();
+
 // GET "/"
 app.get("/videos", (req, res) => {
-  const test = getPostgresClient()
-
-    test.connect()
-
-      test.query('SELECT * FROM video', (err, result) => {
-        res.json(result.rows)
-      })
-  })
-
+  client.query("SELECT * FROM video", (err, result) => {
+    res.json(result.rows);
+  });
+});
 
 app.get("/videos/:id", (req, res) => {
   const result = videos.find((el) => el.id === +req.params.id);
@@ -103,29 +101,20 @@ app.get("/videos/:id", (req, res) => {
 
 app.post("/videos", (req, res) => {
   let { title, url } = req.body;
-  if (title && url) {
-    let id = maxId() + 1;
-    videos.push({ id: id, ...req.body });
-    res.json({ id: id });
-  } else {
-    res.json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
-  }
+  client.query(
+    `INSERT INTO video(title, url) values ($1, $2)`,
+    [title, url],
+    (err, result) => {
+      res.status(203).json({ ...req.body });
+    }
+  );
 });
 
 app.delete("/videos/:id", (req, res) => {
-  const id = req.params.id
-  videos = videos.filter((el) => el.id !== +id);
-  const deletedVideo = videos.find((el) => el.id === +id)
-  if (deletedVideo) {
-    res.json({
-      'result': 'failure',
-      'message': 'Video could not be deleted'
-    })
-  }
-  res.json(deletedVideo);
+  const id = req.params.id;
+  client.query(`DELETE FROM video WHERE id = $1`, [id], (err, result) => {
+    res.status(204).send(result.rows);
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

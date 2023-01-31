@@ -1,6 +1,5 @@
 {
   "name": "to-do-server",
-  
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "pg": "^8.9.0"
   },

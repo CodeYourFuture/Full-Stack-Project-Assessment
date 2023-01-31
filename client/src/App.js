@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/videos")
+      .get("/videos")
       .then((data) => {
         setData(data.data);
       })

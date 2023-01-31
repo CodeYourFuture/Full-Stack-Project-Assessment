@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS video (
     id SERIAL PRIMARY KEY,
     title text,
     url text
-)
+);
 
 INSERT INTO video(title, url) values('Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 
@@ -16,8 +16,6 @@ INSERT INTO video(title, url) values('Videos for Cats to Watch - 8 Hour Bird Bon
  
 INSERT INTO video(title, url) values('The Complete London 2012 Opening Ceremony | London 2012 Olympic Games', 'https://www.youtube.com/watch?v=4As0e4de-rI');
  
-INSERT INTO video(title, url) values("Learn Unity - Beginner's Game Development Course", 'https://www.youtube.com/watch?v=gB1F9G0JXOo');
-
 
 INSERT INTO video(title, url) values('Cracking Enigma in 2021 - Computerphile', 'https://www.youtube.com/watch?v=RzWB5jL5RX0');
 
@@ -26,6 +24,7 @@ INSERT INTO video(title, url) values('Coding Adventure: Chess AI', 'https://www.
 INSERT INTO video(title, url) values('Coding Adventure: Ant and Slime Simulations', 'https://www.youtube.com/watch?v=X-iSQQgOd1A');
 
 INSERT INTO video(title, url) values('Why the Tour de France is so brutal', 'https://www.youtube.com/watch?v=ZacOS8NBK6U');
+
 
 
 

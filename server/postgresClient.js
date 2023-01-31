@@ -1,13 +1,18 @@
 const { Client } = require("pg");
 
- function getPostgresClient() {
+function getPostgresClient() {
+  // return new Client({
+  //   host: "localhost",
+  //   database: "videos",
+  //   port: 5432,
+  //   user: "postgres",
+  //   password: process.env.PASSWORD,
+  // });
   return new Client({
-    host: "localhost",
-    database: "video",
-    port: 5432,
-    user: "postgres",
-    password: "",
+    connectionString:
+      "postgres://video_recommendation_user:Wne3nYZC6CKKJONp6fuY5GJUhpMN1vKR@dpg-cfcj5h6n6mpierpiluig-a.frankfurt-postgres.render.com/video_recommendation",
+    ssl: { rejectUnauthorized: false }
   });
 }
 
-module.exports = getPostgresClient
+module.exports = getPostgresClient;
