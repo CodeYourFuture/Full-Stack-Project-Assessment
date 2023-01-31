@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 //DATABASE CONNECTION
 const isProduction = process.env.NODE_ENV === "production";
+
 const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
 
 const pool = new Pool({
@@ -29,7 +30,10 @@ const isValidYouTubeUrl = (url) => {
   return regExp.test(url);
 };
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+  console.log(isProduction);
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
