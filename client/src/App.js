@@ -8,6 +8,7 @@ import AddVideo from "./AddVideo";
 import AddVideoForm from "./AddVideoForm";
 import Search from "./Search";
 import Video from "./Video";
+import AscDesc from "./AscDesc";
 
 function App() {
   const [addVideo, setAddVideo] = useState(false);
@@ -44,6 +45,7 @@ function App() {
           </Col>
           <Col md>
             <Search setVideoData={setVideoData} videoData={videoData} backup={backup} />
+            <AscDesc />
           </Col>
         </Row>
       </Container>
