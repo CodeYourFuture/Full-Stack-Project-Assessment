@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 //DATABASE CONNECTION
 const isProduction = process.env.NODE_ENV === "production";
+
 const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
 
 const pool = new Pool({
@@ -29,11 +30,12 @@ const isValidYouTubeUrl = (url) => {
   return regExp.test(url);
 };
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 //let videos = [];
+app.get("/", (res, req) => {
+  res.send("Welcome to my Videos API!");
+});
 
 app.get("/videos", async (req, res) => {
   try {
@@ -54,8 +56,7 @@ app.get("/videos", async (req, res) => {
     }
     res.json(data.rows);
   } catch (err) {
-    console.error(err);
-    res.status(500).send({ result: "error", message: "Internal Server Error" });
+    console.error(err.message);
   }
 });
 
@@ -75,8 +76,7 @@ app.get("/videos/:id", async (req, res) => {
         });
     }
   } catch (error) {
-    console.error(error);
-    res.status(404).send({ result: "error", message: "Not Found" });
+    console.error(error.message);
     return;
   }
 });
@@ -105,6 +105,7 @@ app.post("/videos", (req, res) => {
     res.status(400).send({ result: "error", message: "Bad Request" });
     return;
   }
+
   //creating a new video
   //let maxID = Math.max(...videos.map((video) => video.id));
   const { id, title, url, rating } = {
@@ -118,28 +119,33 @@ app.post("/videos", (req, res) => {
       "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING * ",
       [title, url, rating]
     )
-    .then((result) =>
-      res.json({ id: id, message: "Video successfully uploaded" })
-    )
+    .then(() => res.json({ id: id, message: "Video successfully uploaded" }))
     .catch((err) => {
       console.error(err);
-      res
-        .status(500)
-        .send({ result: "error", message: "Internal Server Error" });
+      res.send({ result: "error", message: "Internal Server Error" });
     });
 });
 
 app.delete("/videos/:id", async (req, res) => {
   try {
     const vidId = parseInt(req.params.id);
-    if (vidId) {
-      const video = await pool
-        .query(`DELETE FROM videos WHERE id = ${vidId}`)
-        .then(() => res.json("successfully deleted"));
-    }
+
+    const sqlQuery = pool
+      .query("SELECT * FROM videos WHERE id = $1", [vidId])
+      .then((result) => {
+        if (result.rows.length === 0) {
+          res.json({ result: "error", message: "Video not found" });
+        } else {
+          const video = pool
+            .query(`DELETE FROM videos WHERE id = ${vidId}`)
+            .then(() => res.json("successfully deleted"));
+        }
+      });
   } catch (error) {
-    console.error(error);
-    res.status(404).send({ result: "error", message: "Not Found" });
-    return;
+    console.error(error.message);
   }
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
