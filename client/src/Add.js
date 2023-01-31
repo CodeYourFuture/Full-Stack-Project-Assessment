@@ -84,7 +84,7 @@ function Add({ videoData, setVideoData })
                     <input id='URL' onChange={handleURL} />
                 </label>
             </div>
-            <button onClick={() => addFunction(videoData)}>Add
+            <button id="addButton" onClick={() => addFunction(videoData)}>Add
             </button>
         </form>
     );

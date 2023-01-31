@@ -3,14 +3,14 @@
   background-color: black;
   color: white;
   text-align: center;
-  display: inline-block;
+  display: flexbox;
 }
+
 
 .container
 {
-  text-align: center;
   display: inline-block;
-  margin: auto;
+  text-align: center;
   padding-bottom: 3rem;
   padding: 1rem;
 }
@@ -29,43 +29,51 @@ iframe
 
 
 
-#Title
+
+#Title, #URL
 {
   display: block;
   margin: auto;
   margin-bottom: 1rem;
-  background-color: grey;
-}
-
-#Title:focus
-{
   background-color: darkgrey;
 }
 
 
-#URL
+#Title
 {
-  display: block;
-  margin: auto;
+  margin-bottom: 1rem;
+}
+
+#Title:focus, #URL:focus
+{
+  background-color: white;
+}
+
+
+
+
+
+
+
+
+
+#up, #down, #delete, #sortButton, #addButton
+{
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 10px;
+}
+
+#up:active, #down:active
+{
   background-color: grey;
 }
-
-#URL
-{
-  background-color: darkgrey;
-}
-
-
-
 
 
 #up
 {
   background-color: green;
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 10px;
 }
 
 #up:hover
@@ -73,20 +81,10 @@ iframe
   background-color: darkgreen;
 }
 
-#up:active
-{
-  background-color: grey;
-}
-
-
 
 #down
 {
   background-color: rgb(167, 0, 0);
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 10px;
 }
 
 #down:hover
@@ -94,10 +92,6 @@ iframe
   background-color: darkred;
 }
 
-#down:active
-{
-  background-color: grey;
-}
 
 
 
@@ -105,11 +99,6 @@ iframe
 {
   background-color: red;
   margin-bottom: 1rem;
-
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 10px;
 }
 
 #delete:hover
@@ -123,6 +112,39 @@ iframe
 }
 
 
+
+#sortButton
+{
+  margin-top: 1rem;
+  background-color: lightblue;
+}
+
+#sortButton:hover
+{
+  background-color: skyblue;
+}
+
+#sortButton:active
+{
+  background-color: rgb(0, 139, 194);
+}
+
+
+
+#addButton
+{
+  background-color: grey;
+}
+
+#addButton:hover
+{
+  background-color: darkgrey;
+}
+
+#addButton:active
+{
+  background-color: white;
+}
 
 
 @media ( min-width: 600px ) 
