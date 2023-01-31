@@ -1,12 +1,15 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const path = require('path')
 const getPostgresClient = require("./postgresClient");
 const app = express();
+const paths = path.join(__dirname, '../client/build')
 
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
+app.use(express.static(paths))
 app.use(express.urlencoded({ extended: true }));
 
 let videos = [
@@ -79,12 +82,18 @@ function maxId() {
 }
 
 //.....connecting to postgres
+let client;
 
-const client = getPostgresClient();
-client.connect();
+client = getPostgresClient();
+
 
 // GET "/"
+app.get("/", (req, res) => {
+  res.sendFile("index.html")
+})
+
 app.get("/videos", (req, res) => {
+  client.connect();
   client.query("SELECT * FROM video", (err, result) => {
     res.json(result.rows);
   });
@@ -117,4 +126,4 @@ app.delete("/videos/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`, paths));
