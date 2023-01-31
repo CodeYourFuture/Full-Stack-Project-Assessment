@@ -40,21 +40,11 @@ app.get("/videos", (req, res) => {
   const query = "SELECT * FROM videos Order By rating " + sortBy;
   pool
     .query(query)
-    .then((result) => res.send(result.rows))
+    .then((result) => res.status(200).json(result.rows))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
     });
-  // if (req.query.order === "asc") {
-
-  //   let allVideos = [...videos].sort((a, b) => (a.rating > b.rating ? 1 : -1));
-  //   return res.send(allVideos);
-  // } else if (req.query.order === "desc") {
-  //   let allVideos = [...videos].sort((a, b) => (a.rating < b.rating ? 1 : -1));
-  //   return res.send(allVideos);
-  // } else {
-  //   return res.send(videos);
-  // }
 });
 
 app.get("/videos/:id", function (req, res) {
@@ -69,41 +59,39 @@ app.get("/videos/:id", function (req, res) {
 
 // Add a new video
 app.post("/videos", (req, res) => {
-  let title = req.body.title.trim();
-  let url = req.body.url.trim();
+  let title = req.body.title;
+  let videourl = req.body.videourl;
+  let rating = 0;
 
-  let allVideosSorted = [...videos].sort((a, b) => (a.id > b.id ? 1 : -1));
+  
+  const query =
+    "INSERT INTO videos (title, videourl, rating) VALUES ($1, $2, $3)";
 
-  let lastIndex = allVideosSorted.length - 1;
-  let lastId = allVideosSorted[lastIndex].id;
-  let idPosition = lastId + 1;
-
-  const newVideo = {
-    id: idPosition,
-    title: title,
-    url: url,
-    rating: 0,
-  };
   // validation
-  if (!newVideo.title && !newVideo.url) {
+  if (!title && !videourl) {
     return res.status(400).json("Please include a title and url");
-  } else if (!isValidYoutubeUrl(newVideo.url)) {
+  } else if (!isValidYoutubeUrl(videourl)) {
     return res.status(400).json("Please include a valid YouTube url");
   } else {
-    videos.push(newVideo);
-    res.status(200).json(videos);
+    pool
+      .query(query, [title,videourl,rating])
+      .then(() => res.status(200).json("Video created!"))
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json(error);
+      });
   }
 });
 
 //Delete video
 app.delete("/videos/:id", function (req, res) {
   let id = parseInt(req.params.id); // int = integer
-
-  let videoIndex = videos.findIndex((video) => video.id === id);
-
-  if (videoIndex === -1) {
-    return res.status(404).json("Video not found");
-  }
-  videos.splice(videoIndex, 1);
-  res.send(videos);
+  pool
+    .query("DELETE FROM videos WHERE id=$1", [id])
+    .then(() => pool.query("DELETE FROM videos WHERE id=$1", [id]))
+    .then(() => res.status(200).json(`video ${id} deleted!`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
