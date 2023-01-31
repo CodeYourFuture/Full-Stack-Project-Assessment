@@ -2,17 +2,8 @@ function Sort({ sort, setSort })
 {
     const switchSort = () => 
     {
-        if (sort === "asc")
-        {
-            setSort("desc");
-        }
-
-        else if (sort === "desc")
-        {
-            setSort("asc");
-        }
+        setSort(sort === "asc" ? "desc" : "asc");
     }
-
 
     return (
         <div className="sortDiv">
