@@ -21,6 +21,7 @@ function App() {
   const API_URL = "http://localhost:5001/videos";
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${API_URL}/?order=${order}`)
       .then((res) => res.json())
       .then((data) => {
@@ -51,7 +52,7 @@ function App() {
   function resetForm() {
     setReqBody({
       title: "",
-      url: "",
+      videourl: "",
     });
   }
 
@@ -60,7 +61,8 @@ function App() {
       method: "POST",
       body: JSON.stringify({
         title: reqBody.title,
-        url: reqBody.url,
+        videourl: reqBody.videourl,
+        rating: 0,
       }),
       headers: {
         "Content-Type": "application/json",
