@@ -2,35 +2,12 @@ import Videos from "./Videos.js";
 
 function Map({ videoData, setVideoData, sort })
 {
-    const mappingData = (videoData) => 
-    {
-        if (sort === "?order=asc")
-        {
-            [...videoData].sort((a, b) => a.rating - b.rating);
-            return (
-
-                videoData.map((video, key) =>
-                (
-                    <Videos data={videoData} setVideoData={setVideoData} video={video} key={key} />
-                )))
-        }
-
-        else if (sort === "?order=desc")
-        {
-            [...videoData].sort((a, b) => b.rating - a.rating);
-            return (
-
-                videoData.map((video, key) =>
-                (
-                    <Videos data={videoData} setVideoData={setVideoData} video={video} key={key} />
-                )))
-        }
-
-    }
-
+    const sortedData = videoData.sort((a, b) => sort === "asc" ? a.rating - b.rating : b.rating - a.rating)
     return (
         <div className="sortChange">
-            {mappingData(videoData)}
+            {sortedData.map((video, key) =>
+                <Videos data={videoData} setVideoData={setVideoData} video={video} key={key} />)
+            }
         </div>
     );
 }
