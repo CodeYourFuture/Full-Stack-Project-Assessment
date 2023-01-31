@@ -11,15 +11,16 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = require("../client/src/exampleresponse.json");
+//let videos = require("../client/src/exampleresponse.json");
 
-let connection = mysql.createConnection({
-  host: 'localhost',
-  database: 'sys',
-  user: 'root',
-  password: '',
-  port: 3306
-});
+let connection = mysql.createConnection
+  ({
+    host: 'localhost',
+    database: 'sys',
+    user: 'root',
+    password: 'ArbeitsEmail123',
+    port: 3306
+  });
 
 //let result;
 
@@ -31,7 +32,7 @@ let fail = {
 };
 
 // GET "/"
-app.get("/", (req, res) =>
+app.get("/videos", (req, res) =>
 {
   let sorted = req.query.order;
 
@@ -66,12 +67,17 @@ app.get("/", (req, res) =>
 
   else
   {
-    res.send(videos);
+    connection.query('SELECT * FROM videos', (err, rows) =>
+    {
+      result = Object.values(JSON.parse(JSON.stringify(rows)));
+      result = [...result].sort((a, b) => b.rating - a.rating);
+      res.send(result)
+    });
   }
 
 });
 
-app.post("/", (req, res) =>
+app.post("/videos", (req, res) =>
 {
   const video = {
     id: req.body.id,
@@ -111,20 +117,27 @@ app.post("/", (req, res) =>
   }
 });
 
-app.get("/:id", function (req, res)
+app.get("/videos/:id", function (req, res)
 {
   let id = parseInt(req.params.id);
+  /*
   let filteredVideo = videos.filter(video => video.id === id);
-
   res.send(filteredVideo);
+  */
+  let sql = `SELECT * FROM videos WHERE id = ` + id;
+  connection.query(sql, (err, rows) =>
+  {
+    result = Object.values(JSON.parse(JSON.stringify(rows)));
+    console.log(id)
+    res.send(result)
+  });
 });
 
-app.delete("/:id", function (req, res)
+app.delete("/videos/:id", function (req, res)
 {
   let id = parseInt(req.params.id);
   //let filterdVideo = videos.filter(video => video.id === id);
   let sql = `DELETE FROM videos WHERE id = ` + id;
-  console.log(sql)
   connection.query(sql, (err, rows) =>
   {
     result = Object.values(JSON.parse(JSON.stringify(rows)));
