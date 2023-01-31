@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require('dotenv').config()
 const path = require("path");
 const bodyParser = require("body-parser");
 const { Pool } = require("pg");
@@ -13,7 +14,7 @@ const pool = new Pool({
   user: "postgres",
   host: "localhost",
   database: "cyf_videos",
-  password: "Hannover8",
+  password: process.env.PASS_WORD,
   port: 5432,
 });
 
