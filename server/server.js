@@ -16,16 +16,15 @@ app.use(express.static(paths))
 app.use(express.urlencoded({ extended: true }));
 
 
-//Connecting to postgres
+// Connecting to postgres
 let client
 getPostgresClient().then(result => client = result);
 
 
-//Routes
-// GET "/"
-// app.get("/", (req, res) => {
-//   res.sendFile("index.html")
-// })
+// Routes
+app.get("/", (req, res) => {
+  res.sendFile("index.html")
+})
 
 app.get("/videos", (req, res) => {
   client.query("SELECT * FROM video", (err, result) => {
