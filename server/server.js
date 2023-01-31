@@ -9,85 +9,39 @@ app.use(express.json());
 app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-//let videos = require("../client/src/exampleresponse.json");
 
-let connection = mysql.createConnection
+
+const connection = mysql.createConnection
   ({
     host: 'localhost',
     database: 'sys',
     user: 'root',
-    password: 'ArbeitsEmail123',
+    password: '',
     port: 3306
   });
 
-//let result;
 
 
 
-let fail = {
+const fail = {
   "result": "failure",
   "message": "Video could not be saved"
 };
 
-// GET "/"
+
 app.get("/videos", (req, res) =>
 {
   let sorted = req.query.order;
 
-  if (sorted === "asc")
+  connection.query('SELECT * FROM videos', (err, rows) =>
   {
-    connection.query('SELECT * FROM videos', (err, rows) =>
-    {
-      let result = Object.values(JSON.parse(JSON.stringify(rows)));
-      result = [...result].sort((a, b) => a.rating - b.rating);
-      res.send(result)
-    });
-    /*
-    videos = [...videos].sort((a, b) => a.rating - b.rating);
-    console.log(videos)
-    res.send(videos);*/
-  }
-
-  else if (sorted === "desc")
-  {
-    connection.query('SELECT * FROM videos', (err, rows) =>
-    {
-      result = Object.values(JSON.parse(JSON.stringify(rows)));
-      result = [...result].sort((a, b) => b.rating - a.rating);
-      res.send(result)
-    });
-    /*
-    videos = [...videos].sort((a, b) => b.rating - a.rating);
-    console.log(videos)
-    res.send(videos);
-    */
-  }
-
-  else
-  {
-    connection.query('SELECT * FROM videos', (err, rows) =>
-    {
-      result = Object.values(JSON.parse(JSON.stringify(rows)));
-      result = [...result].sort((a, b) => b.rating - a.rating);
-      res.send(result)
-    });
-  }
-
+    res.send(Object.values(rows).sort((a, b) => sorted === "asc" ? a.rating - b.rating : b.rating - a.rating));
+  })
 });
 
 app.post("/videos", (req, res) =>
 {
-  const video = {
-    id: req.body.id,
-    title: req.body.title,
-    url: req.body.url,
-    rating: req.body.rating,
-    added: req.body.added
-  };
-
-  if (typeof req.body.title !== "string" || typeof req.body.url !== "string")
+  if (!req.body.title || !req.body.url)
   {
     res.status(400).send(fail);
   }
@@ -97,7 +51,7 @@ app.post("/videos", (req, res) =>
   {
     connection.connect(function (err)
     {
-      let sql = `INSERT INTO videos 
+      const sql = `INSERT INTO videos 
       (
           id, title, url, rating
       )
@@ -107,58 +61,29 @@ app.post("/videos", (req, res) =>
       )`;
       connection.query(sql, [req.body.id, req.body.title, req.body.url, req.body.rating], (err, rows) =>
       {
-        result = Object.values(JSON.parse(JSON.stringify(rows)));
+        result = Object.values(rows);
       });
     });
-    /*
-    videos.push(video);
-    res.status(200).json(result);
-    */
   }
 });
 
 app.get("/videos/:id", function (req, res)
 {
-  let id = parseInt(req.params.id);
-  /*
-  let filteredVideo = videos.filter(video => video.id === id);
-  res.send(filteredVideo);
-  */
-  let sql = `SELECT * FROM videos WHERE id = ` + id;
-  connection.query(sql, (err, rows) =>
+  const sql = `SELECT * FROM videos WHERE id = ?`;
+  connection.query(sql, [req.params.id], (err, rows) =>
   {
-    result = Object.values(JSON.parse(JSON.stringify(rows)));
-    console.log(id)
-    res.send(result)
+    res.send(Object.values(rows));
   });
 });
 
 app.delete("/videos/:id", function (req, res)
 {
-  let id = parseInt(req.params.id);
-  //let filterdVideo = videos.filter(video => video.id === id);
-  let sql = `DELETE FROM videos WHERE id = ` + id;
-  connection.query(sql, (err, rows) =>
+  const sql = `DELETE FROM videos WHERE id = ?`;
+  connection.query(sql, [req.params.id], (err, rows) =>
   {
-    result = Object.values(JSON.parse(JSON.stringify(rows)));
-    console.log(result);
-    res.send(result)
+    connection.query(`SELECT * FROM videos`, (err, rows) =>
+    {
+      res.send(Object.values(rows).sort((a, b) => b.rating - a.rating));
+    });
   });
-
-  /*
-  if (filterdVideo.length !== 0)
-  {
-    console.log(filterdVideo)
-
-
-    videos = videos.filter(video => video.id !== id);
-    res.send(videos);
-
-  }
-
-  else
-  {
-    res.send(fail);
-  }
-  */
 });
