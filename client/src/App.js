@@ -50,7 +50,7 @@ function App() {
         handleSubmit={handleSubmit}
         reqBody={reqBody}
       />
-      <Videos data={data} tracker={setTracker} />
+      <Videos data={data} setTracker={setTracker} />
     </div>
   );
 }
