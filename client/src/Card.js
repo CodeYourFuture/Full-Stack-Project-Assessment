@@ -10,12 +10,13 @@ const Card = ({id, title, url, rating, index, removeElement}) => {
 			</div>
 			<div className='card-body'>
 				<h4>{title}</h4>
-				<p className='ratings'>YouTube ratings: {rating}</p>
+				<p className='ratings'>YouTube ratings: {rating} </p>
 				<Votes />
 				<a href={url} rel='noopener noreferrer' className='btn btn-primary'>
 					Watch Now
 				</a>
-				<button className='delete' onClick={() => removeElement(index)}>
+				
+				<button className='delete' onClick={() => removeElement(id, index)}>
 					Delete
 				</button>
 			</div>

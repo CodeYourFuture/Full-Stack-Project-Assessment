@@ -8,14 +8,27 @@ function Cards() {
 	const [title, setTitle] = useState("");
 
 	useEffect(() => {
-		fetchVideos()
+		fetchVideos();
 	}, []);
 
-	function fetchVideos(){
+	function fetchVideos() {
 		fetch("http://127.0.0.1:5000/videos")
 			.then((res) => res.json())
 			.then((data) => setVideos(data))
 			.catch((error) => console.log(error));
+		console.log(videos);
+	}
+
+	function deletevideobyID(id, index) {
+		fetch(`http://127.0.0.1:5000/videos/${id}`, {method: "delete"})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				removeElement(index);
+			})
+			.catch((error) => console.log(error));
+
+		// console.log(id)
 	}
 
 	const removeElement = (i) => {
@@ -32,19 +45,26 @@ function Cards() {
 	};
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
-		// let maxID = Math.max(...videos.map((c) => c.id));
+		// e.preventDefault();
+		let maxID = Math.max(...videos.map((c) => c.id));
 		const newVideo = {
+			id: ++maxID,
 			title,
 			url,
 			rating: 0,
-			
 		};
-		setVideos((videos) => {
-			return [...videos, newVideo];
-		});
 		setTitle("");
 		setUrl("");
+		fetch(`http://127.0.0.1:5000/videos/`, {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(newVideo),
+		})
+			.then((res) => res.json())
+			.then((data) => setVideos(data))
+			.catch((error) => console.log(error));
 	};
 
 	useEffect(() => {
@@ -72,8 +92,8 @@ function Cards() {
 			</div>
 			<div className='Cards'>
 				{videos.map((video, index) => {
-					const {id, rating, url, title} = video;
-					return <Card key={id} title={title} url={url} rating={rating} index={index} removeElement={removeElement} />;
+					const {_id, rating, url, title} = video;
+					return <Card key={_id} id={_id} title={title} url={url} rating={rating} index={index} removeElement={deletevideobyID} />;
 				})}
 			</div>
 		</div>
@@ -81,4 +101,3 @@ function Cards() {
 }
 
 export default Cards;
-
