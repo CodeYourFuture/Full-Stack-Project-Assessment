@@ -1,58 +1,79 @@
 import "./App.css";
 import AddVideoButton from "./Buttons/AddVideoButton";
 import Header from "./Components/Header";
-// import data from "./exampleresponse.json";
 import Video from "./Components/Video";
 import React, { useState, useEffect } from "react";
 import Footer from "./Components/Footer";
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
 
-  useEffect(() => {
-    setIsLoading(true);
+    useEffect(() => {
+      fetch("http://localhost:5000/videos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error("Something went wrong");
+          }
+        })
+        .then((myData) => setVideos(myData))
+        .catch((error) => {
+          console.log({ error: error.message });
+        });
+    }, [refresh]);
 
-    fetch("http://localhost:5000/videos", {
-      method: "GET",
+
+  const addVideo = (newVideo) => {
+    fetch(`http://localhost:5000/post-videos`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newVideo.title, url: newVideo.url }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        alert(data.msg);
+        setRefresh(refresh + 1);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const deleteVideo = (id) => {
+    fetch(`http://localhost:5000/delete-videos/${id}`, {
+      method: "get",
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
+        setRefresh(refresh + 1);
+        return res.json();
       })
-      .then((data) => setVideos(data))
+      .then((myData) => setRefresh(refresh + 1))
       .catch((error) => {
         console.log({ error: error.message });
       });
+  };
 
-    setIsLoading(false);
-  }, [videos]);
-  function handleDelete(id) {
-    let filterVideos = videos.filter((video) => video.id !== id);
-    setVideos(filterVideos);
-  }
-  function addNewVideo(newVideo) {
-    const allVideo = videos.concat(newVideo);
-    setVideos(allVideo);
-  }
   videos.sort((a, b) => {
     return b.rating - a.rating;
   });
-  return isLoading ? (
-    "A moment please"
-  ) : (
+
+  return (
     <div className="App">
       <Header />
-      <AddVideoButton addNewVideoFunction={addNewVideo} />
+      <AddVideoButton addNewVideoFunction={addVideo} />
       <div className="container-fluid">
         {videos.map((video, key) => (
-          <Video video={video} key={key} handleDelete={handleDelete} />
+          <Video video={video} key={key} deleteVideo={deleteVideo} />
         ))}
       </div>
       <Footer />

@@ -3,7 +3,7 @@ import LikeButton from "../Buttons/LikeButton";
 import DislikeButton from "../Buttons/DislikeButton";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-function Video({ video, handleDelete }) {
+function Video({ video, deleteVideo }) {
   const [rating, setRating] = useState(video.rating);
   const incrementLikeClick = () => {
     setRating(rating + 1);
@@ -24,7 +24,7 @@ function Video({ video, handleDelete }) {
       <button
         className="btn btn-danger"
         onClick={() => {
-          handleDelete(video.id);
+          deleteVideo(video.id);
         }}
       >
         Delete
