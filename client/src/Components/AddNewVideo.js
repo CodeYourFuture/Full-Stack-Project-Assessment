@@ -30,10 +30,13 @@ export default function AddNewVideo({ addNewVideo }) {
       rating: 0,
     };
     addNewVideo(newVideo);
+
     if (title === "" || title === null) {
       alert("Please fill all the fields");
       return false;
     }
+    setTitle("");
+    setUrl("");
   }
 
   return (
@@ -47,6 +50,7 @@ export default function AddNewVideo({ addNewVideo }) {
               borderRadius: 10,
             }}
             required=""
+            value={title}
             type="text"
             name="name"
             onChange={handleChangeTitle}
@@ -60,6 +64,7 @@ export default function AddNewVideo({ addNewVideo }) {
               borderRadius: 10,
             }}
             required=""
+            value={url}
             type="text"
             name="name"
             label="URL"

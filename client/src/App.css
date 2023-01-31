@@ -58,8 +58,11 @@ padding-top: 1em;
 .btn {
   margin: 1em;
   font-size: 20px;
+  color:black;
 }
-
+.btn-danger {
+  width:8em;
+}
 .like-button {
   margin: 1em;
 }
