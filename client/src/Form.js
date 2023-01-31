@@ -13,7 +13,8 @@ function Form({addVideo}) {
         e.preventDefault()
         const video = {
           title,
-          url
+          url,
+          rating:0
         }
 
         addVideo(video)
