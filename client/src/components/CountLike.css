@@ -1,0 +1,6 @@
+.Up-vote:hover {
+background-color: green;
+}
+.Down-vote:hover {
+  background-color: red;
+}

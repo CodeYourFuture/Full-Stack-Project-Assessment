@@ -1,121 +1,145 @@
 const express = require("express");
-const uuid = require("uuid");
 const app = express();
 const port = process.env.PORT || 5000;
+const { Pool } = require("pg");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 app.use(express.json());
+dotenv.config();
+app.use(bodyParser.json());
+
+//Add validators for same url and also for the delete button if id doesn't exist
+
+// connection string for production use tenary operator for either prod or dev
+
+//DATABASE CONNECTION
+const isProduction = process.env.NODE_ENV === "production";
+const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
+
+const pool = new Pool({
+  connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+  connectionTimeoutMillis: 6000,
+  ssl: { rejectUnauthorized: false },
+});
+
+const isValidYouTubeUrl = (url) => {
+  const regExp =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  return regExp.test(url);
+};
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
- 
-];
+//let videos = [];
 
-// const maxID = uuid.v4();
-// console.log(maxID);
-const maxID = Math.max(...videos.map((video) => video.id));
-// GET "/"
-app.get("/", (req, res) => {
-  res.json(videos);
+app.get("/videos", async (req, res) => {
+  try {
+    let data = await pool.query("SELECT * FROM videos ORDER BY rating DESC");
+    const order = req.query.order;
+
+    if (order === "asc") {
+      let data = await pool
+        .query("SELECT * FROM videos ORDER BY rating ASC")
+        .then((result) => res.json(result.rows));
+      return;
+    }
+    if (order === "desc") {
+      let data = await pool
+        .query("SELECT * FROM videos ORDER BY rating DESC")
+        .then((result) => res.json(result.rows));
+      return;
+    }
+    res.json(data.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ result: "error", message: "Internal Server Error" });
+  }
 });
 
-app.get("/:id", (req, res) => {
-  const vidId = parseInt(req.params.id);
-
-  let video = videos.find((v) => v.id === vidId);
-  if (!video) {
-    res.status(404).send("Not Found");
+app.get("/videos/:id", async (req, res) => {
+  try {
+    const vidId = parseInt(req.params.id);
+    if (vidId) {
+      const video = await pool
+        .query("SELECT * FROM videos WHERE id = $1", [vidId])
+        .then((result) => {
+          //checks if given video ID exists
+          if (result.rows.length === 0) {
+            res.json({ result: "error", message: "Video not found" });
+            return;
+          }
+          res.json(result.rows);
+        });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(404).send({ result: "error", message: "Not Found" });
+    return;
   }
-  res.send(video);
 });
 
 //POST "/videos"
 
-app.post("/", (req, res) => {
-  if (!req.body.title || !req.body.url) {
+app.post("/videos", (req, res) => {
+  //let maxID = Math.max(...videos.map((video) => video.id));
+  if (!req.body.title) {
+    res.status(400).send({ result: "error", message: "Enter a valid title" });
+  } else if (!req.body.url) {
+    res.status(400).send({ result: "error", message: "Enter a valid URL" });
+    return;
+  } else if (!isValidYouTubeUrl(req.body.url)) {
+    res.sendStatus(403);
+  }
+  if (isNaN(req.body.rating)) {
     res.status(400).send({ result: "error", message: "Bad Request" });
     return;
   }
-  const newVideo = {
-    id: maxID + 1,
+  if (!Number.isInteger(req.body.rating)) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+    return;
+  }
+  if (req.body.rating < 0) {
+    res.status(400).send({ result: "error", message: "Bad Request" });
+    return;
+  }
+  //creating a new video
+  //let maxID = Math.max(...videos.map((video) => video.id));
+  const { id, title, url, rating } = {
+    //id: ++maxID,
     title: req.body.title,
     url: req.body.url,
     rating: req.body.rating,
   };
-  videos.push(newVideo);
-
-  res.status(201).send({ id: newVideo.id, message: "success" });
+  const addNewVideo = pool
+    .query(
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING * ",
+      [title, url, rating]
+    )
+    .then((result) =>
+      res.json({ id: id, message: "Video successfully uploaded" })
+    )
+    .catch((err) => {
+      console.error(err);
+      res
+        .status(500)
+        .send({ result: "error", message: "Internal Server Error" });
+    });
 });
 
-app.delete('/:id', (req, res) => {
-  const vidId = parseInt(req.params.id);
-  let vidIndex = videos.findIndex((v) => v.id === vidId);
-  if (vidIndex < 0) {
-    res.status(404).send("Video not found");
+app.delete("/videos/:id", async (req, res) => {
+  try {
+    const vidId = parseInt(req.params.id);
+    if (vidId) {
+      const video = await pool
+        .query(`DELETE FROM videos WHERE id = ${vidId}`)
+        .then(() => res.json("successfully deleted"));
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(404).send({ result: "error", message: "Not Found" });
+    return;
   }
-  videos.splice(vidIndex, 1);
-  res.send({ id: vidId, message: "Video deleted" });
-})
+});
