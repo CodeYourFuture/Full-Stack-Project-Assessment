@@ -22,22 +22,22 @@ function DisplayVideos({ data, setData, upVote, setRating }) {
         data.map((vid, key) => {
           return (
             <div className="card" key={key}>
-            <div key={key} id={vid.id} className="Video-container">
               <h3>{vid.title}</h3>
+            <div key={key} id={vid.id} className="Video-container">
               <iframe
-                width="500"
+                width="450"
                 height="315"
                 src={vid.url.replace("watch?v=", "embed/")}
                 title={vid.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
+            </div>
               <p>Rating: {vid.rating}</p>
               <CountLike upVote={upVote} setRating={setRating} />
-              <button className="buttons" id={vid.id} onClick={deleteVideo}>
+              <button className="buttons delete" id={vid.id} onClick={deleteVideo}>
                 Delete
               </button>
-            </div>
             </div>
           );
         })}

@@ -7,7 +7,7 @@
   text-align: center;
   background: linear-gradient(
     30deg,
-    rgb(132, 106, 132) 40%,
+    rgb(63, 63, 63) 40%,
     rgba(229, 236, 236, 0.79)
   );
 }
@@ -53,6 +53,9 @@
 .buttons {
   background-color: #121212;
   color: rgb(163, 154, 154);
+  font-weight: 900;
+  font-size: larger;
+  text-shadow: 2px 2px 5px rgb(141, 117, 117);
   padding: 1rem;
   border: 1px solid rgb(1, 32, 33);
   cursor: pointer;
@@ -66,28 +69,10 @@
 }
 
 .Sort {
-margin: 2rem;
-padding: 2rem;
-}
-/*
-.Forms-container {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-  align-items: center;
   margin: 2rem;
+  padding: 2rem;
 }
 
-.labels {
-  margin-right: 0.6rem;
-  font-size: larger;
-  color: rgb(97, 5, 5);
+.Video-data {
+  width: 100%;
 }
-
-
-.input {
-  width: 300px;
-  padding: 0.5rem;
-  border: 1px solid lightgray;
-}
- */

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './CountLike.css'
 const CountLike = ({setRating}) => {
   const [upvote, setUpvote] = useState(0);
   const [downvote, setDownvote] = useState(0);
@@ -15,10 +15,10 @@ const CountLike = ({setRating}) => {
 
   return (
     <div>
-      <button className="buttons" onClick={handleUpvote}>
+      <button className="buttons Up-vote" onClick={handleUpvote}>
         👍 {upvote}
       </button>
-      <button className="buttons" onClick={handleDownvote}>
+      <button className="buttons Down-vote" onClick={handleDownvote}>
         👎{downvote}
       </button>
     </div>

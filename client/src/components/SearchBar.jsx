@@ -26,12 +26,12 @@ const SearchBar = ({ data, setData }) => {
       <form className="forms">
         <label htmlFor="term" className="labels">
           {" "}
-          Type Search
+          Search
         </label>
         <input
           type="text"
           value={term}
-          placeholder="Enter search term"
+          placeholder="Enter search"
           onChange={onInputChange}
           className="input"
         />

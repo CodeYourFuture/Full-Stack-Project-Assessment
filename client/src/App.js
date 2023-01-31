@@ -26,11 +26,18 @@ function App() {
         <h1>...Video Recommendation...</h1>
       </header>
       <section className="Video-query">
-      <SubmitVideo setData={setData} data={data} rating={rating} setRating={setRating} />
-      <SearchBar data={data} setData={setData} />
+        <SubmitVideo
+          setData={setData}
+          data={data}
+          rating={rating}
+          setRating={setRating}
+        />
+        <SearchBar data={data} setData={setData} />
       </section>
       <OrderedData data={data} />
-      <DisplayVideos data={data} setData={setData} setRating={setRating} />
+      <section className="Video-data">
+        <DisplayVideos data={data} setData={setData} setRating={setRating} />
+      </section>
     </div>
   );
 }

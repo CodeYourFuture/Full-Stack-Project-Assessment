@@ -2,10 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}*/
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgb(15, 15, 16);
+  gap: 1rem;
 }
 .card {
-  background-color: black;
-  color: aqua;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr)
-} */
+  background-color: rgb(122, 116, 116);
+  color: rgb(20, 3, 25);
+  margin: 1rem;
+  width: 500px;
+  box-shadow: 0 4px 8px 0 rgba(240, 218, 218, 0.2), 0 6px 20px 0 rgba(179, 93, 93, 0.19);
+  text-align: center;
+}
+.card h3 {
+  text-shadow: 2px 2px 5px rgb(66, 39, 39);
+}
+.card p {
+  font-weight: bold;
+}
+.Video-container {
+  width: 90%;
+  margin: 0.2rem;
+  margin-left: 1rem;
+}
+.delete:hover {
+  background-color: red;
+}
