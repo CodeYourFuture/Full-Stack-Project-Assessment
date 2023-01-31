@@ -9,9 +9,8 @@ function Video({video, setvideos, videos}) {
   return (
     <div className="video-container">
       <p>{video.title}</p>
-      <div className='vote-container'>
-        <LikeIcon />
-      </div>
+      <p>Rating: {video.rating}</p>
+      <LikeIcon />
       <YouTubeEmbed video={video} />
       <DeleteButton videos={videos} setvideos={setvideos} video={video}  />
     </div>

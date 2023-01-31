@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
 
 function LikeIcon() {
-    const [voteScore, setVoteScore] = useState(0);
 
+  const [voteScore, setVoteScore] = useState(0);
+    
     const handleThumbsUp = () => {
         setVoteScore(voteScore + 1);
     }
@@ -11,6 +13,7 @@ function LikeIcon() {
         setVoteScore(voteScore - 1);
     }
 
+    
     return (
         <div>
             <button thumbs up onClick={handleThumbsUp}><svg

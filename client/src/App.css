@@ -54,3 +54,19 @@ button{
   padding: 0;
   margin: 0;
 }
+
+.delete-button{
+  background-color: red;
+  color: white;
+  padding: .5em;
+}
+
+
+.delete-button:focus {
+  background-color: black;
+}
+
+.addVideobutton:focus {
+  background-color: black;
+  color: white;
+}

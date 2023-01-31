@@ -4,8 +4,11 @@ const VideoAdd = ({ setvideos, videos }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
+
+
 const handleSubmit = async (event) => {
   event.preventDefault();
+
 
   const newVideo = {
     id: Date.now(),
@@ -13,24 +16,38 @@ const handleSubmit = async (event) => {
     url: url,
     rating: 0
   };
-   setvideos(prevVideos => [...prevVideos, newVideo])
-};
 
-/*   try {
-    const response = await fetch('./exampleresponse.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newVideo)
-    });
-    const data = await response.json();
-    setvideos(data);
-  } catch (error) {
-    console.error('Error:', error);
+   if (!title) {
+    console.error("Title cannot be empty");
+    return;
   }
-}; */
 
+const youtubeUrlPattern = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/;
+  if (!youtubeUrlPattern.test(url)) {
+    console.error("Invalid YouTube URL");
+    return;
+  }
+  
+  try {
+    const response = await fetch('http://127.0.0.1:5000/video', {
+      method: 'POST',
+      body: JSON.stringify(newVideo),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    
+ 
+  
+    const json = await response.json();
+    if (json.success) {
+      setvideos(prevVideos => [...prevVideos, newVideo])
+    } else {
+      console.log(json.message);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -51,8 +68,10 @@ const handleSubmit = async (event) => {
         />
       </label>
       <br />
-      <button type="submit">Add Video</button>
+      <button type="submit" class= "addVideobutton">Add Video</button>
     </form>
+
+    
   );
 };
 

@@ -1,10 +1,14 @@
 const express = require("express");
-// const uuid = require("uuid");
+
 const app = express();
 const port = process.env.PORT || 5000;
-app.use(express.json());
+const cors = require('cors');
 
-app.listen(port, '127.0.0.1', () => console.log(`Listening on port ${port}`));
+app.use(cors());
+app.use(express.json());
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
 
 let videos = [
   {
@@ -67,18 +71,18 @@ let videos = [
     title: "Why the Tour de France is so brutal",
     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
     rating: 73,
-  },
+  }
 ];
 
 // const maxID = uuid.v4();
 // console.log(maxID);
 let maxID = Math.max(...videos.map((video) => video.id));
 
-app.get("/", (req, res) => {
+app.get("/video/", (req, res) => {
    res.json(videos);
 });
 
-app.get("/:id", (req, res) => {
+app.get("/video/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
 
   const video = videos.find((v) => v.id === vidId);
@@ -90,14 +94,14 @@ app.get("/:id", (req, res) => {
 
 //POST "/videos"
 
-app.post("/", (req, res) => {
+app.post("/video", (req, res) => {
   if (!req.body.title) {
     res.status(400).send({ result: "error", message: "Missing Title" });
       } else if (!req.body.url) {
         res.status(400).send({ result: "error", message: "Missing URL" });
     return;
   }
-  //creating a new video
+ 
   const newVideo = {
     id: ++maxID,
     title: req.body.title,
@@ -108,7 +112,7 @@ app.post("/", (req, res) => {
   res.status(201).send({ id: newVideo.id, message: "data found" });
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/video/:id", (req, res) => {
   const vidId = parseInt(req.params.id);
   const vidIndex = videos.findIndex((v) => v.id === vidId);
   if (vidIndex < 0) {
@@ -117,3 +121,4 @@ app.delete("/:id", (req, res) => {
   videos.splice(vidIndex, 1);
   res.send({ id: vidId, message: "Video deleted" });
 });
+

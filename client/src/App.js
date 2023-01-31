@@ -3,15 +3,17 @@ import "./App.css";
 import Video from "./Video";
 import VideoAdd from "./VideoAdd";
 
+
+
 function App() {
   const [videos, setvideos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000")
+    fetch("http://127.0.0.1:5000/video")
       .then(res => res.json())
       .then(data => setvideos(data))
       .catch(err => console.log(err));
-  }, []);
+  }, [videos]);
 
   return (
     <div className="App">
@@ -22,9 +24,9 @@ function App() {
         <div>
           <VideoAdd setvideos={setvideos} videos={videos} />
         </div>
-        {videos.map((video, key) => (
-          <Video video={video} key={key} setvideos={setvideos} videos={videos}/>
-        ))}
+        {videos.sort((a, b) => b.rating - a.rating).map((video, key) => (
+  <Video video={video} key={key} setvideos={setvideos} videos={videos}/>
+))}
       </body>
     </div>
   );
