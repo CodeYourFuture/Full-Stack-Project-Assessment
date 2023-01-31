@@ -13,26 +13,17 @@ dotenv.config({
 
 // Connection to db setting
 const pool = new Pool({
-  user: process.env.USERNAME,
-  host: process.env.HOST,
-  database: process.env.DB_NAME,
-  password: process.env.PASSWORD,
+  user: "postgres" || process.env.USERNAME,
+  host: "localhost" || process.env.HOST,
+  database: "videos_db" || process.env.DB_NAME,
+  password: "" || process.env.PASSWORD,
+  port: 5432,
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client/build")));
-
-
-// Validate url function
-function isValidYouTubeUrl(url) {
-  if (url !== undefined || url !== "") {
-    const regExp =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\?v=)([^#&?]*).*/;
-    return url.match(regExp) ? url : false;
-  }
-}
 
 // GET all videos
 app.get("/api", async (req, res) => {
