@@ -2,18 +2,23 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 const { Pool } = require("pg");
 
+const isProduction = process.env.NODE_ENV === 'production';
+const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
+
 const pool = new Pool({
-  user: "dawit",
-  host: "localhost",
-  database: "youtube_video",
-  password: "CYF123", //process.env.PASS_WORD,
-  port: 5432,
+  connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+  connectionTimeoutMillis: 6000,
+  ssl: {
+    rejectUnauthorized: false,
+  }
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
