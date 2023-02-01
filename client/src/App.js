@@ -2,9 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Components/Video";
 import AddVideoBtn from "./Buttons/AddVideoBtn";
+import VideoCard from "./Components/VideoCard";
+import exampleVideos from "../src/exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState(exampleVideos);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/videos")
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  }, []);
   function handleDelete(id) {
     let filterVideos = videos.filter((video) => video.id !== id);
     setVideos(filterVideos);
@@ -25,6 +34,7 @@ function App() {
           <Video video={video} key={key} handleDelete={handleDelete} />
         ))}
       </div>
+      <VideoCard />
     </div>
   );
 }

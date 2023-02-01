@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import LikeDislike from "../Buttons/LikeDislikeBtn";
 import EmbedYoutube from "./EmbedYoutube";
+import VideoCard from "./VideoCard";
 
 const Video = ({ video, handleDelete }) => {
   return (
-    <div>
+    <div className="videos-container">
+      <div className = "video-body">
       <h2>{video.title}</h2>
-      <div>
-        <LikeDislike />
-      </div>
+      <LikeDislike />
       <EmbedYoutube video = {video} /> 
       <button
         className="btn btn-default"
@@ -18,6 +18,7 @@ const Video = ({ video, handleDelete }) => {
       >
         Delete Video
       </button>
+      </div>
     </div>
   );
 };

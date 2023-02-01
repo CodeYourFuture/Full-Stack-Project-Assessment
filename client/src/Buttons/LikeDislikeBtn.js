@@ -5,7 +5,7 @@ function LikeDislike() {
   const [dislikes, setDislikes] = useState(0);
 
   return (
-    <div>
+    <div className="like-dislike-btn-container">
       <button onClick={() => setLikes(likes + 1)}>Like</button>
       <button onClick={() => setDislikes(dislikes + 1)}>Dislike</button>
       <p>Likes: {likes}</p>
