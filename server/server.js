@@ -109,38 +109,34 @@ app.get("/videos", (req, res) => {
 
 //POST "/"
 app.post('/videos', (req, res) => {
-  let {title, url } = req.body;
-  let newVideos = {
-    id: videos.length,
-    title: title,
-    url: url
-  };
-
-  if(!newVideos.id || !newVideos.url){
-    res.status(400).send({
-      "result": "fail",
-      "message": "Video can not saved"
-    });
-  }else {
-    videos.push(newVideos);
-    res.sendStatus(200);
-  }
-})
+  let title = req.body.title;
+  let url = req.body.url;
+  let rating = req.body.rating;
+  pool.query("INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3);",[title, url, rating])
+  .then((result) => {
+    if(result.rows.length > 0) {
+      return res.status(400).send("Video exists");
+    } else {
+      const query = "INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)";
+      pool.query(query, [title, url, rating])
+      .then(() => res.send("Video created!"))
+      .catch((error) => {
+        res.status(500).json(error);
+      });
+    }
+  });
+  
+});
 
 //`GET` "/videos/:id"
 app.get("/videos/:id", (req, res) => {
-  let id = parseInt(req.params.id);
-  console.log(id);
-  let findVideo = videos.find((video) => video.id === id);
-  if(!findVideo) {
-   // res.send("Not Found").status(404)
-   res.status(404).send(`no video with the ${id} is found`)
-   return
-  } 
-  //else {
-    res.send(findVideo);
-//}
-})
+  let videoId = req.params.id;
+  pool.query('SELECT * FROM videos WHERE id=$1', [videoId])
+  .then((result) => res.json(result.rows))
+  .catch((error) => {
+    res.status(500).json(error);
+  });
+});
 app.delete('/:id', (req, res) => {
   let id = parseInt(req.params.id);
   let toDel = videos.find(opt => opt.id === id);
