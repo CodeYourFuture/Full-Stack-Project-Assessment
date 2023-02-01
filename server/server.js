@@ -43,36 +43,42 @@ app.use(cors());
 //     url: "https://www.youtube.com/watch?v=4As0e4de-rI",
 //     rating: 3211,
 //   },
+
 //   {
 //     id: 283634,
 //     title: "Learn Unity - Beginner's Game Development Course",
 //     url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
 //     rating: 211,
 //   },
+
 //   {
 //     id: 562824,
 //     title: "Cracking Enigma in 2021 - Computerphile",
 //     url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
 //     rating: 111,
 //   },
+
 //   {
 //     id: 442452,
 //     title: "Coding Adventure: Chess AI",
 //     url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
 //     rating: 671,
 //   },
+
 //   {
 //     id: 536363,
 //     title: "Coding Adventure: Ant and Slime Simulations",
 //     url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
 //     rating: 76,
 //   },
+
 //   {
 //     id: 323445,
 //     title: "Why the Tour de France is so brutal",
 //     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
 //     rating: 73,
 //   },
+
 // ];
 
 
@@ -92,7 +98,13 @@ const pool = new Pool({
 // GET "/"
 app.get("/videos", (req, res) => {
   
-  res.send(videos).json;
+  //res.send(videos).json;
+  pool.query('SELECT * FROM videos')
+  .then((result) => res.send(result.rows).json)
+  .catch((error) => {
+    res.status(500).json(error);
+  });
+
 });
 
 //POST "/"
