@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const { Pool } = require("pg");
 const pool = require("./db.js");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -16,12 +15,6 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     methods: "GET",
-//   })
-// );
 
 app.use(bodyParser.json());
 
