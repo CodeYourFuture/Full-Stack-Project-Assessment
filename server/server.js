@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { Pool } = require("pg");
+// const { Pool } = require("pg");
 const pool = require("./db.js");
 const bodyParser = require("body-parser");
+const path = require("path");
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -14,13 +16,13 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET",
-  })
-);
-app.use(express.json());
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: "GET",
+//   })
+// );
+
 app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000;
@@ -34,7 +36,7 @@ app.get("/delete-videos/:id", async (req, res) => {
     const deleteVideo = await pool.query("DELETE FROM videos WHERE id = $1", [
       id,
     ]);
-    res.json("Video with ${id} was deleted");
+    res.json(`Video with ${id} was deleted`);
   } catch (error) {
     res.send(err);
   }
@@ -63,7 +65,6 @@ app.get("/videos/:id", async (req, res) => {
 });
 app.post("/post-videos", async (req, res) => {
   const video = {
-  
     title: req.body.title,
     url: req.body.url,
     rating: 0,
@@ -85,7 +86,6 @@ app.post("/post-videos", async (req, res) => {
     });
     return;
   }
-
 
   let validUrl = videoUrl.match(
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
