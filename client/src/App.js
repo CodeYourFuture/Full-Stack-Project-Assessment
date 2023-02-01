@@ -79,6 +79,7 @@ function App() {
         console.error("There was an error", error);
       });
   }
+  
   function handleRating(id, rating) {
     fetch(`${API_URL}/vote/${id}`, {
       method: "PUT",
@@ -98,6 +99,7 @@ function App() {
         console.error("There was an error", error);
       });
   }
+
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
