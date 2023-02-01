@@ -22,16 +22,14 @@ function App() {
       .catch((err) => console.log(err));
   }, [tracker]);
 
-
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/videos", reqBody)
+      .post("https://video-recommendation-welt.onrender.com/videos", reqBody)
       .then((value) => console.log(value))
       .catch((err) => console.log(err));
-  setTracker((el) => el + 1);
+    setTracker((el) => el + 1);
   }
-  
 
   function handleChange(e) {
     let name = e.target.name;
