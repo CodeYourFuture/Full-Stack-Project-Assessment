@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require('dotenv').config()
+require("dotenv").config();
 const path = require("path");
 const bodyParser = require("body-parser");
 const { Pool } = require("pg");
@@ -36,7 +36,6 @@ function validateYouTubeUrl(url) {
   return url.match(regExp);
 }
 app.post("/videos", function (req, res) {
-
   const newtTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = 0;
@@ -56,18 +55,19 @@ app.post("/videos", function (req, res) {
     });
 });
 
-// get video by id
 app.get("/videos/:id", (req, res) => {
-  let id = parseInt(req.params.id);
-  let filteredVideos = videos.find((video) => video.id === id);
+  const id = req.params.id;
 
-  if (!filteredVideos) {
-    res.status(404).send(`No video with the ${id} is found`);
-    return;
-  }
-  res.send(filteredVideos);
+  pool
+    .query("SELECT * FROM videos WHERE  id=$1", [id])
+    .then((result) => {
+      if (result.rows.length === 0) res.status(404).send("Id not found");
+      else res.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
 });
-
 app.delete("/videos/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
