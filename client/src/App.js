@@ -79,7 +79,25 @@ function App() {
         console.error("There was an error", error);
       });
   }
-
+  function handleRating(id, rating) {
+    fetch(`${API_URL}/vote/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        rating: rating,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        alert("Could not save!");
+        console.error("There was an error", error);
+      });
+  }
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
@@ -129,6 +147,7 @@ function App() {
                 <VideoCard
                   video_detail={video}
                   key={key}
+                  handleRating={handleRating}
                   handleDelete={() => handleDelete(video.id)}
                 />
               </div>

@@ -4,7 +4,7 @@ import LikeIcon from "./buttons/LikeIcon";
 import DislikeIcon from "./buttons/DislikeIcon";
 import "./videoCard.css";
 
-function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
+function VideoCard({ video_detail, handleRating, handleDelete }) {
   const [voteCount, setVoteCount] = useState(0);
   const [video, setVideo] = useState({});
 
@@ -15,11 +15,15 @@ function VideoCard({ video_detail, handleDelete, onThumbsDown }) {
   }, [video_detail]);
 
   function likeVote() {
-    setVoteCount((voteCount) => voteCount + 1);
+    let rating = voteCount + 1;
+    setVoteCount(rating);
+    handleRating(video.id, rating);
   }
 
   function disLikeVote() {
-    setVoteCount((voteCount) => (voteCount === 0 ? voteCount : voteCount - 1));
+    let rating = voteCount - 1 <= 0 ? 0 : voteCount - 1;
+    setVoteCount(rating);
+    handleRating(video.id, rating);
   }
 
   return (
