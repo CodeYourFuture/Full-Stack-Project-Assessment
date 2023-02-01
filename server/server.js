@@ -38,7 +38,7 @@ function validateYouTubeUrl(url) {
 app.post("/videos", function (req, res) {
   const newtTitle = req.body.title;
   const newUrl = req.body.url;
-  const newRating = 0;
+  const newRating = req.body.rating;
   const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
   if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res
@@ -54,7 +54,7 @@ app.post("/videos", function (req, res) {
       res.status(500).json(error);
     });
 });
-
+// getting videos by id
 app.get("/videos/:id", (req, res) => {
   const id = req.params.id;
 
@@ -68,6 +68,8 @@ app.get("/videos/:id", (req, res) => {
       res.status(500).json(error);
     });
 });
+
+// deleting by id
 app.delete("/videos/:id", (req, res) => {
   const id = parseInt(req.params.id);
 

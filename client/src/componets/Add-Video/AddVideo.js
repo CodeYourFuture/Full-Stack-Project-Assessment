@@ -24,10 +24,7 @@ const AddVideo = ({ setVideos }) => {
   const VideoAdder = (e) => {
     // e.preventDefault();
 
-    // const newVideo = { title, url };
-    const videoId = Date.now();
     const newVideo = {
-      id: videoId,
       title: title,
       url: url,
       rating: 0,
