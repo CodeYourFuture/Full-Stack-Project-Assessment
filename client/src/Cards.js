@@ -11,7 +11,7 @@ function Cards() {
 	}, []);
 
 	function fetchVideos() {
-		fetch("http://127.0.0.1:5000/videos")
+		fetch("https://cyf-wagmi.onrender.com/videos")
 			.then((res) => res.json())
 			.then((data) => setVideos(data))
 			.catch((error) => console.log(error));
@@ -19,7 +19,7 @@ function Cards() {
 	}
 
 	function deletevideobyID(id, index) {
-		fetch(`http://127.0.0.1:5000/videos/${id}`, {method: "delete"})
+		fetch(`https://cyf-wagmi.onrender.com/videos/${id}`, {method: "delete"})
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
@@ -51,7 +51,7 @@ function Cards() {
 		};
 		setTitle("");
 		setUrl("");
-		fetch(`http://127.0.0.1:5000/videos`, {
+		fetch(`https://cyf-wagmi.onrender.com/videos`, {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
