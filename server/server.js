@@ -63,7 +63,6 @@ app.post("/videos", (req, res) => {
   let videourl = req.body.videourl;
   let rating = 0;
 
-  
   const query =
     "INSERT INTO videos (title, videourl, rating) VALUES ($1, $2, $3)";
 
@@ -74,7 +73,7 @@ app.post("/videos", (req, res) => {
     return res.status(400).json("Please include a valid YouTube url");
   } else {
     pool
-      .query(query, [title,videourl,rating])
+      .query(query, [title, videourl, rating])
       .then(() => res.status(200).json("Video created!"))
       .catch((error) => {
         console.error(error);
@@ -82,7 +81,21 @@ app.post("/videos", (req, res) => {
       });
   }
 });
-
+//update rating
+app.put("/videos/vote/:id", function (req, res) {
+  let id = req.params.id;
+  let rating = req.body.rating;
+  if (rating < 0) {
+    rating = 0;
+  }
+  pool
+    .query("UPDATE videos SET rating=$1 WHERE id=$2", [rating, id])
+    .then(() => res.status(200).json(`Videos ${id} rating updated!`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
 //Delete video
 app.delete("/videos/:id", function (req, res) {
   let id = parseInt(req.params.id); // int = integer
