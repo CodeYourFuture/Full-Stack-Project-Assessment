@@ -4,10 +4,13 @@ const port = process.env.PORT || 5000;
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 app.use(express.json());
 dotenv.config();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 //Add validators for same url and also for the delete button if id doesn't exist
 
@@ -34,7 +37,8 @@ const isValidYouTubeUrl = (url) => {
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 //let videos = [];
 app.get("/", (res, req) => {
-  res.json({ message: "Welcome to my Videos API!" });
+  //res.json({ message: "Welcome to my Videos API!" });
+  console.log(__dirname + "/index.html");
 });
 
 app.get("/videos", async (req, res) => {
@@ -129,7 +133,7 @@ app.post("/videos", (req, res) => {
 app.delete("/videos/:id", async (req, res) => {
   try {
     const vidId = parseInt(req.params.id);
-    
+
     const sqlQuery = pool
       .query("SELECT * FROM videos WHERE id = $1", [vidId])
       .then((result) => {
