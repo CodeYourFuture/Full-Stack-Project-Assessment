@@ -19,7 +19,18 @@ const videoId = Date.now();
 
 // Get//
 app.get("/videos", (req, res) => {
+  const sort= req.query.sort;
+  let orderedVideos;
+  if (sort === "asc") {
+    orderedVideos = videos.sort((a, b) => a.rating - b.rating);
+  } else if (sort === "desc") {
+    orderedVideos = videos.sort((a, b) => b.rating - a.rating);
+  } else {
+    orderedVideos = videos;
+  }
+  
   res.json(videos);
+
 });
 
 // SEARCH //

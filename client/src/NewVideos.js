@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const NewVideo= ({ setVideoData }) => {
+const NewVideos= ({ setVideoData }) => {
   const [addingVideo, setAddingVideo] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -89,4 +89,4 @@ const NewVideo= ({ setVideoData }) => {
   );
 };
 
-export default NewVideo;
+export default NewVideos;

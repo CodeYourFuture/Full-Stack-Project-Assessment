@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 import AddVideo from "./AddVideo";
-import NewVideo from "./NewVideo";
+import NewVideos from "./NewVideos";
 import Search from "./Search";
 import Video from "./Video";
 
@@ -39,7 +39,7 @@ function App() {
         <Row>
           <Col md>
             <AddVideo onClick={addingVideo}>Add Video</AddVideo>
-            {addVideo && <NewVideo setVideoData={setVideoData} />}
+            {addVideo && <NewVideos setVideoData={setVideoData} />}
           </Col>
           <Col md>
             <Search setVideoData={setVideoData} videoData={videoData} backup={backup} />
