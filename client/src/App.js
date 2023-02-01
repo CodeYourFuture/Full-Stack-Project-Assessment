@@ -10,12 +10,7 @@ function App() {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/videos", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch("/videos")
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -30,7 +25,7 @@ function App() {
   }, [refresh]);
 
   const addVideo = (newVideo) => {
-    fetch(`http://localhost:5000/post-videos`, {
+    fetch(`/post-videos`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: newVideo.title, url: newVideo.url }),
@@ -45,7 +40,7 @@ function App() {
   };
 
   const deleteVideo = (id) => {
-    fetch(`http://localhost:5000/delete-videos/${id}`, {
+    fetch(`/delete-videos/${id}`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
