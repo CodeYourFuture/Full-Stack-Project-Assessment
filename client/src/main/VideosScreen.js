@@ -13,11 +13,15 @@ const VideoScreen = () => {
     setUnLike(unLike + 1);
   }
   function deleteHandler(index) {
+    console.log(index);
     setVideos(videos.filter((video, i) => i !== index));
   }
+  const addVideo = (title, url) => {
+    setVideos([...videos, { title: title, url: url }]);
+  };
   return (
     <div>
-      <AddVideo />
+      <AddVideo addVideo={addVideo} />
       <div>
         {videos.map((video, index) => {
           return (
