@@ -10,12 +10,12 @@ function App() {
 
   //Get all videos
   useEffect(() => {
-    fetch(`http://localhost:5000/videos?order=${sortOrder}`)
+    fetch(`/videos?order=${sortOrder}`)
       .then((response) => response.json())
       .then((data) => setVideoList(data))
       .catch((error) => console.error(error));
   }, [refresh, sortOrder]);
-console.log(`http://localhost:5000/videos?order=${sortOrder}`);
+console.log(`/videos?order=${sortOrder}`);
 console.log(videoList);
 
 // handle the sorting order
@@ -25,7 +25,7 @@ console.log(videoList);
 
   //delete video
   function handleDelete(id) {
-    fetch(`http://localhost:5000/videos/${id}`, { method: "DELETE" })
+    fetch(`/videos/${id}`, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to delete the video");
@@ -41,7 +41,7 @@ console.log(videoList);
 
   //ADD new Video
   function handleAdd(newVideo) {
-    fetch("http://localhost:5000/videos", {
+    fetch("/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

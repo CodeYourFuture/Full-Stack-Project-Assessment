@@ -8,7 +8,7 @@ function VoteButtons(props) {
   //Increase the Ratings
   function handleLikeClick() {
     setNumVotes(numVotes + 1);
-    fetch(`http://localhost:5000/videos/${props.id}`, {
+    fetch(`/videos/${props.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ function VoteButtons(props) {
   //decrease the Ratings
   function handleDislikeClick() {
     setNumVotes(numVotes - 1);
-    fetch(`http://localhost:5000/videos/${props.id}`, {
+    fetch(`/videos/${props.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
