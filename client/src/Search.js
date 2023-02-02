@@ -23,10 +23,6 @@ const Search = ({ setVideoData, videoData, backup }) => {
         aria-describedby="search-addon"
         onChange={handler}
       />
-
-      {/* <button type="button" className="btn btn-outline-primary">
-        search
-      </button> */}
     </div>
   );
 };

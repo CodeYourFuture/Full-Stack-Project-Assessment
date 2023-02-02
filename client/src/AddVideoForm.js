@@ -32,10 +32,6 @@ const AddVideoForm = ({ setVideoData }) => {
       timeSent: new Date().toLocaleDateString(),
     };
 
-    // newVideoData.title && validateYouTubeUrl(newVideoData.url)
-    //   ? setVideoData((videos) => videos.concat(newVideoData))
-    //   : alert("Please make sure to enter valid URL and TITLE!");
-     
     fetch("/videos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -46,9 +42,9 @@ const AddVideoForm = ({ setVideoData }) => {
         console.log(data);
       })
       .catch((error) => console.log(error));
-     newVideoData.title && validateYouTubeUrl(newVideoData.url)
-       ? setVideoData((videos) => videos.concat(newVideoData))
-       : alert("Please make sure to enter valid URL and TITLE!");
+    newVideoData.title && validateYouTubeUrl(newVideoData.url)
+      ? setVideoData((videos) => videos.concat(newVideoData))
+      : alert("Please make sure to enter valid URL and TITLE!");
   };
 
   return (

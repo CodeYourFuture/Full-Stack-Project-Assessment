@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 
 const { Pool } = require("pg");
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
 
 const pool = new Pool({
@@ -18,7 +18,7 @@ const pool = new Pool({
   connectionTimeoutMillis: 6000,
   ssl: {
     rejectUnauthorized: false,
-  }
+  },
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
@@ -28,8 +28,6 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
-
-/////
 
 app.get("/", (req, res) => {
   res.send("Hello");
@@ -44,17 +42,6 @@ app.get("/videos", (req, res) => {
   pool.query(query).then((result) => res.status(200).json(result.rows));
 });
 
-// Get all video
-// app.get("/videos", function (req, res) {
-//   pool
-//     .query("SELECT * FROM videos")
-//     .then((result) => res.json(result.rows))
-//     .catch((error) => {
-//       console.error(error);
-//       res.status(500).json(error);
-//     });
-// });
-
 // Search a video by title
 app.get("/videos/:videoTitle", function (req, res) {
   const videoTitle = req.params.videoTitle;
@@ -66,8 +53,6 @@ app.get("/videos/:videoTitle", function (req, res) {
       res.status(500).json(error);
     });
 });
-
-
 
 // Add a new video
 // const videoId = Date.now();
