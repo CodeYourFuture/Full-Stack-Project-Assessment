@@ -53,8 +53,8 @@ const VideoScreen = () => {
                 title={video.title}
                 className="card-img-top"
               />
-              <h4 key={index}>{video.title}</h4>
-              <h5 key={index}>Rating:{video.rating}</h5>
+              <h3 key={index}>{video.title}</h3>
+              <h4 key={index}>Rating:{video.rating}</h4>
               {/* <h5>Voted:{video.rating}</h5> */}
               <button onClick={() => likeHandler(index)}>👏🏼 Up Vote</button>
               <button onClick={() => unLikeHandler(index)}>🍅 Down Vote</button>

@@ -10,7 +10,7 @@ const AddVideo = ({ addVideo }) => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="form">
-        <h4 className="form-header">Add your favorite video</h4>
+        <h2 className="form-header">Add your favorite video</h2>
         <label>Title</label>
         <input
           type="text"
