@@ -41,10 +41,10 @@ h1 {
 }
 .search-box {
   position:relative;
-  left:10%;
-  bottom: 6%;
+  right: 105px;
+  top: -102.5px;
   width: 50%;
-  color:blue;
+  color:black;
 }
 .add-search {
   display: flex;

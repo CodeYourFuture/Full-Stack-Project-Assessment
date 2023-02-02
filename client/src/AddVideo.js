@@ -14,12 +14,12 @@ const AddVideo = ({ addVideo }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        TITLE &nbsp;
+        <b>Title</b> &nbsp;
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
       </label>
       <br />
       <label>
-        URL &nbsp;
+      <b>Url</b> &nbsp;
         <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
       </label>
       <br />

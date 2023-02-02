@@ -1,16 +1,29 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 3800;
+const { Pool } = require("pg");
+const path = require("path");
 
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "videos",
+  password: "",
+  port: 5432,
+});
+app.use(express.json())
+app.use(cors());
 // Store and retrieve your videos from here
 let videos = require("../client/src/exampleResponse.json");
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+// If you want, you can copy "example-response.json" into here to have some data to work with
 app.use(express.json())
+// connect server to client
+app.use(express.static(path.resolve(__dirname, "../client/build")))
 // GET "/"
 app.get("/", (req, res) => {
   res.json(videos)
 });
-
 
 //Get one video, specified by an ID
 app.get("/:id", function(req, res){
