@@ -1,16 +1,30 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 3001;
 const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
-
+const dotenv = require("dotenv")
+dotenv.config()
 app.use(bodyParser.json());
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 // const cors = require("cors");
 // app.use(cors);
+
+// DATABASE connection
+// const isProduction = process.env.NODE_ENV === "production";
+// const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`
+
+// const pool = new Pool({
+//   connectionString: isProduction? process.env.DATABASE_URL : connectionString,
+//   connectionTimeoutMillis: 6000,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// })
+
 
 //let videos = JSON.parse(fs.readFileSync("videos.json", "utf-8"));
 let videos = require("./videos.json");
