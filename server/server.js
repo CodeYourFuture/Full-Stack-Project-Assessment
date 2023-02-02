@@ -1,10 +1,22 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 5000
 const cors = require('cors')
+const { Pool } = require('pg')
+// LEVEL 300
+// CREATE A VIDEOS DATABASE (fsa_videos)
+// HOST IT
+// CONNECT IT TO FILE
+const pool = new Pool({
+  user: 'michelle',
+  host: 'localhost',
+  database: 'fsa_videos',
+  password: 'michelle',
+  port: 5432,
+})
+
+pool.connect()
 
 const exampleResponse = require('../client/src/exampleresponse.json')
-// const uuid = require('uuid')
 
 app.use(
   cors({
@@ -14,8 +26,6 @@ app.use(
 
 app.use(express.json())
 
-// app.use(express.static(path.resolve(__dirname, "../client/build")));
-
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = exampleResponse
@@ -23,27 +33,33 @@ let videos = exampleResponse
 // GET "/"
 app.get('/', (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: 'Your Backend Service is Running' })
+  res.send(`Welcome to Michelle's Video App(: 
+  ask for /videos to get started`)
+  // res.send({ express: 'Your Backend Service is Running' })
 })
 
 app.get('/videos', (req, res) => {
-  let orderQuery = req.query.order
-  let videosCopy = videos
-  const desc = videosCopy.sort((a, b) => b.rating - a.rating)
-  const asc = videosCopy.sort((a, b) => a.rating - b.rating)
-
-  orderQuery === 'desc'
-    ? res.json(desc)
-    : orderQuery === 'asc'
-    ? res.json(asc)
-    : res.status(404).json({ msg: 'Not found' })
-
-    res.json(videos)
+  pool.query(`select * from videos`, (err, response) => {
+    if (!err) {
+      response.rows
+    } else {
+      console.log(err.message)
+    }
+    pool.end()
+  })
+  res.json(videos)
 })
 
-app.get('/videos',(req,res) => {
-
-})
+// app.get('/videos', (req, res) => {
+//   let orderQuery = req.query.order
+//   const desc = videosCopy.sort((a, b) => b.rating - a.rating)
+//   const asc = videosCopy.sort((a, b) => a.rating - b.rating)
+//   orderQuery === 'desc'
+//     ? res.json(desc)
+//     : orderQuery === 'asc'
+//     ? res.json(asc)
+//     : res.status(404).json({ msg: 'Not found' })
+// })
 
 app.get('/videos/:id', (req, res) => {
   const id = Number(req.params.id)

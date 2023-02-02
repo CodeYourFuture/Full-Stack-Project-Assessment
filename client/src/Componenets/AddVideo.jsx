@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import uuid from 'react-uuid'
+import OrderButton from './OrderButton'
 
 const AddVideo = ({ videos, setVideos }) => {
   const [title, setTitle] = useState('')
@@ -26,7 +26,7 @@ const AddVideo = ({ videos, setVideos }) => {
   }
 
   return (
-    <div className='add-video-card'>
+    <div className="add-video-card">
       <form onSubmit={addToResponse}>
         <label htmlFor="title">Title: </label>
         <input
@@ -44,8 +44,9 @@ const AddVideo = ({ videos, setVideos }) => {
           onChange={handleUrl}
           required
         />
-        <button className='btn'>Submit</button>
+        <button className="btn">Submit</button>
       </form>
+      <OrderButton videos={videos} setVideos={setVideos} />
     </div>
   )
 }

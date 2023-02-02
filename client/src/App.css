@@ -2,8 +2,14 @@
   text-align: center;
 }
 
-.App main{
+.App main {
   background-color: lavender;
+}
+
+.add-video-card {
+  display: flex;
+  background-color: black;
+  justify-content: center;
 }
 
 .add-video-card form {
@@ -12,7 +18,7 @@
   padding: 1.5em;
 }
 
-.add-video-card form label{
+.add-video-card form label {
   margin: 0 1em;
 }
 
@@ -20,6 +26,15 @@
   background-color: blueviolet;
   color: white;
   margin: 0 1em;
+}
+
+.order-buttons {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-self: center;
+  font-size: 2em;
+  cursor: pointer;
 }
 
 .card-container {
@@ -31,24 +46,24 @@
 
 .video-card {
   padding: 1em;
-  margin: .5em .5em;
+  margin: 0.5em 0.5em;
   background-color: white;
 }
 
 .video-card h4 {
   font-size: 1em;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 
 .video-buttons {
   display: flex;
-  padding-top: .5em;
+  padding-top: 0.5em;
 }
 
 .video-buttons span,
 .video-buttons i,
 .video-buttons button {
-  padding: 0 .3em;
+  padding: 0 0.3em;
 }
 
 .video-buttons button {
