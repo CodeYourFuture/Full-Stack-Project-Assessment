@@ -1,15 +1,11 @@
-import React, {} from "react";
+import React from "react";
 
-import Button from "react-bootstrap/Button";
-
-function OrderButton() {
-   
+function OrderButton({ toggleButton }) {
   return (
     <div className="mb-5 ">
-      <Button variant="primary">
-        Sort
-      </Button>
-      
+      <button type="button" class="btn btn-success" onClick={toggleButton}>
+        Order Ratings
+      </button>
     </div>
   );
 }

@@ -10,21 +10,21 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 
-
-
 function App() {
   const [videos, setVideos] = useState([]);
   const [originalState, setOriginalState] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [order, setOrder] = useState("asc");
+  const [isAsc, setIsAsc] = useState(false);
 
-  // videos.sort((a, b) => b.rating - a.rating);
-  // getting data from local server
-
+ 
+  const toggleButton = () => {
+    setIsAsc(!isAsc);
+  };
+  
   useEffect(() => {
     console.log("data working");
-    fetch("/videos")
+    fetch(`/videos?order=${isAsc ? "asc" : "desc"}`)
       .then((res) => {
         if (res.status === 500) {
           throw new Error(res.status);
@@ -39,9 +39,8 @@ function App() {
         setOriginalState(data);
       })
       .catch((error) => setError(true));
-  }, []);
+  }, [isAsc]);
 
-  
   const removeVideo = (id) => {
     axios.delete(`videos/${id}`).then((res) => {
       if (res.status === 200) {
@@ -60,7 +59,7 @@ function App() {
           <Row>
             <Col md>
               <AddVideo setVideos={setVideos} />
-              <OrderButton />
+              <OrderButton  toggleButton={toggleButton}/>
             </Col>
             <Col md>
               <Search
