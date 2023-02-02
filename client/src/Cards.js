@@ -70,19 +70,18 @@ function Cards() {
 	return (
 		<div>
 			<div className='add'>
+				<form >
 				<h4>Add a video</h4>
-
-				<form>
-					<label>
+					<label >
 						Title
-						<input type='text' value={title} onChange={updateTitle} />
+						<input type='text' className='label' value={title} onChange={updateTitle} />
 					</label>
-					<label>
+					<label >
 						URL
-						<input type='text' value={url} onChange={updateUrl} />
+						<input type='text' className='label' value={url} onChange={updateUrl} />
 					</label>
-					<button onClick={handleSubmit} type='submit'>
-						This is the button
+					<button onClick={handleSubmit} type='submit' className="formButton">
+						Add to library
 					</button>
 				</form>
 			</div>

@@ -28,6 +28,32 @@
   text-align: center; 
 }
 
+.add{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.label{
+  margin-right: 40px;
+  margin-left: 10px;
+  border-radius: 10px;
+  border-color: black;
+  border-width: 2px;
+}
+
+.input{
+  border-radius: 15px;
+}
+
+.formButton{
+  padding:1px 10px;
+  border-radius: 10px;
+  border-color: black;
+  background-color: black;
+  color: white;
+  box-shadow: 0 3px 8px 3px rgba(0, 0, 0, 0.5);
+}
+
 .card {
   display: flex;
   flex-direction: column;

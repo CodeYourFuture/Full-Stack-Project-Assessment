@@ -4,7 +4,7 @@ import "./App.css";
 function Heading() {
     return (
       <header className="App-header">
-       <h1>My Video App</h1> 
+       <h1>MyTube</h1> 
       </header>
     );
   }
