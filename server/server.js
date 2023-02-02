@@ -35,10 +35,31 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
+app.get("/videos", (req, res) => {
+  const orderBy = req.query.order;
+  const query =
+    orderBy === "desc"
+      ? `SELECT * FROM videos ORDER BY rating desc`
+      : `SELECT * FROM videos ORDER BY rating`;
+  pool.query(query).then((result) => res.status(200).json(result.rows));
+});
+
 // Get all video
-app.get("/videos", function (req, res) {
+// app.get("/videos", function (req, res) {
+//   pool
+//     .query("SELECT * FROM videos")
+//     .then((result) => res.json(result.rows))
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).json(error);
+//     });
+// });
+
+// Search a video by title
+app.get("/videos/:videoTitle", function (req, res) {
+  const videoTitle = req.params.videoTitle;
   pool
-    .query("SELECT * FROM videos")
+    .query("SELECT * FROM videos WHERE id=$1", [videoTitle])
     .then((result) => res.json(result.rows))
     .catch((error) => {
       console.error(error);
@@ -46,24 +67,7 @@ app.get("/videos", function (req, res) {
     });
 });
 
-// Search a video
-app.get("/videos", function (req, res) {
-  const videoTitleQuery = req.query.title;
-  let query = `SELECT * FROM videos`;
-  let params = [];
-  if (videoTitleQuery) {
-    query = `SELECT * FROM videos WHERE title LIKE $1`;
-    params.push(`%${videoTitleQuery}%`);
-  }
 
-  pool
-    .query(query, params)
-    .then((result) => res.json(result.rows))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-});
 
 // Add a new video
 // const videoId = Date.now();
@@ -110,6 +114,16 @@ app.delete("/videos/:videosId", function (req, res) {
       res.status(500).json(error);
     });
 });
+
+app.put("/videos/:id", (req, res) => {
+  const updateId = req.params.id;
+  const newRating = req.body.rating;
+  pool
+    .query("UPDATE example SET rating=$1 WHERE id=$2", [updateId, newRating])
+    .then(() => res.status(200).send("Rating has been updated"))
+    .catch((error) => console.log(error));
+});
+
 //////
 
 // Store and retrieve your videos from here
