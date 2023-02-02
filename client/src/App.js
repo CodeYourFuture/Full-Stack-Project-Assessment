@@ -120,10 +120,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1 className="display-5 fw-bold p-3 border-bottom">
+          Video Recommendation
+        </h1>
       </header>
       <div className="container">
-        <div className="m-3 title-url ">
+        <div className="px-5 py-4 my-5 title-url mb-4" width="100%">
           <AddVideo
             handleChange={handleChange}
             handleSubmit={handleSubmit}
