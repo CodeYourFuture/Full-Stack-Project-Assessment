@@ -1,7 +1,7 @@
 import AddVideo from "./componets/Add-Video/AddVideo";
 import SingleVideo from "./componets/Single-Video/SingleVideo";
 import Search from "./componets/Search-Bar/Search";
-import OrderButton from "./componets/OrderButtons";
+import OrderButton from "./componets/OrderButtons.js";
 import axios from "axios";
 
 import "./App.css";
@@ -20,6 +20,7 @@ function App() {
  
   const toggleButton = () => {
     setIsAsc(!isAsc);
+    console.log(isAsc)
   };
   
   useEffect(() => {
@@ -78,9 +79,9 @@ function App() {
             {loading && <span>Loading, please wait until video loads...</span>}
             {error && <span>{`There is a problem fetching the  data `}</span>}
             {videos.length > 0 &&
-              videos.map((video, id) => {
+              videos.map((video) => {
                 return (
-                  <div key={id}>
+                  <div key={video.id}>
                     <SingleVideo
                       id={video.id}
                       title={video.title}
@@ -94,6 +95,9 @@ function App() {
           </Row>
         </Container>
       </main>
+      <footer >
+    <h4 > Designed by Mesgna Woldeab</h4>
+      </footer>
     </div>
   );
 }

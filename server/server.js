@@ -21,6 +21,7 @@ const pool = new Pool({
 
 app.get("/videos", (req, res) => {
   const orderBy = req.query.order; 
+  console.log(orderBy)
 
   const query =
     orderBy === "desc"

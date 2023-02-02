@@ -28,9 +28,7 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
         border="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      >
-        
-      </iframe>
+      ></iframe>
       <LikeDislikeButton
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
