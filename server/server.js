@@ -11,21 +11,23 @@ app.use(bodyParser.json());
 // const videos = require("./movieData.json");
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "cyf_videos",
-  password: process.env.PASS_WORD,
-  port: 5432,
+ connectionString: process.env.DATABASE_URL,
+ connectionTimeoutMillis : 6000,
+ ssl: {
+  rejectUnauthorized : false
+ }
 });
 
-app.get("/videos", async (req, res) => {
-  let order = req.query.order || "DESC";
-  try {
-    let result = await pool.query(`SELECT * FROM videos `);
-    res.json(result.rows);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+
+app.get("/videos", (req, res) => {
+  const orderBy = req.query.order; 
+
+  const query =
+    orderBy === "desc"
+      ? `SELECT * FROM videos ORDER BY rating desc`
+      : `SELECT * FROM videos ORDER BY rating`;
+
+  pool.query(query).then((result) => res.status(200).json(result.rows));
 });
 
 // Post videos
@@ -92,5 +94,8 @@ app.delete("/videos/:id", (req, res) => {
       res.status(500).json(error);
     });
 });
+
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
