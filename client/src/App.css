@@ -4,7 +4,9 @@
   font-style: oblique;
 }
 
-
+.App-header button {
+  float: right;
+}
 header {
   display: block;
 }
@@ -13,7 +15,7 @@ header {
   color: #fff;
   font-style: oblique;
   background-color: #254e70;
-  padding: 2rem 0;
+  padding: 3rem 1rem 3rem 0;
 }
 .video-List {
   display: grid;
@@ -24,7 +26,7 @@ header {
   font-size: 1rem;
   font-weight: 400;
 }
-body {
+section {
   background-color: #e1ebee;
 }
 .video-container {
@@ -66,6 +68,9 @@ body {
     rgb(32, 45, 58) 81.3%
   );
 }
+.add-Video h2 {
+  text-shadow: 6px 6px 6px grey;
+}
 .addVideo-form button {
   margin-top: 20px;
 }
@@ -86,4 +91,3 @@ i {
   margin-top: 5px;
   color: white;
 }
-

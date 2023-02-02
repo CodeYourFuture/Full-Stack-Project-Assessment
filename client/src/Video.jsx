@@ -9,7 +9,7 @@ function Video(props) {
       <h5>{props.video.title}</h5>
       <EmbeddedVideo url={props.video.url} title={props.video.title} />
       <div className="buttons">
-        <VoteButtons video={props.video} />
+        <VoteButtons id={props.video.id} rating={props.video.rating}/>
         <i>{props.video.date ? `Uploaded at : ${props.video.date}` : ""}</i>
         <DeleteBtn handleDelete={() => props.handleDelete(props.video.id)} />
       </div>

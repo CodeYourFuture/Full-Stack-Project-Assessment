@@ -21,31 +21,34 @@ function AddVideo({ onAdd }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="addVideo-form">
-      <label>
-        Title:
-        <input
-          type="text"
-          value={title}
-          placeholder="Enter the Title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        URL:
-        <input
-          type="text"
-          value={url}
-          placeholder="Enter the URL"
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </label>
-      <br />
-      <button className="btn btn-success" type="submit">
-        Upload
-      </button>
-    </form>
+    <div>
+      <h2>Add new Videos:</h2>
+      <form onSubmit={handleSubmit} className="addVideo-form">
+        <label>
+          Title:
+          <input
+            type="text"
+            value={title}
+            placeholder="Enter the Title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          URL:
+          <input
+            type="text"
+            value={url}
+            placeholder="Enter the URL"
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </label>
+        <br />
+        <button className="btn btn-success" type="submit">
+          Upload
+        </button>
+      </form>
+    </div>
   );
 }
 

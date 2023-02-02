@@ -3,35 +3,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 function VoteButtons(props) {
-  const [numVotes, setNumVotes] = useState(props.video.rating);
+  const [numVotes, setNumVotes] = useState(props.rating);
 
   //Increase the Ratings
   function handleLikeClick() {
     setNumVotes(numVotes + 1);
-    fetch(`http://localhost:5000/videos/${props.video.id}`, {
+    fetch(`http://localhost:5000/videos/${props.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ rating: numVotes + 1 }),
     })
-      .then((response) => response.json())
-      .then((data) => setNumVotes(data.rating))
+      .then((response) => setNumVotes(numVotes + 1))
       .catch((error) => console.error(error));
   }
 
   //decrease the Ratings
-  function handleDislikeClick(id) {
+  function handleDislikeClick() {
     setNumVotes(numVotes - 1);
-    fetch(`http://localhost:5000/videos/${props.video.id}`, {
+    fetch(`http://localhost:5000/videos/${props.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ rating: numVotes - 1 }),
     })
-      .then((response) => response.json())
-      .then((data) => setNumVotes(data.rating))
+      .then((response) => setNumVotes(numVotes - 1))
       .catch((error) => console.error(error));
   }
 
