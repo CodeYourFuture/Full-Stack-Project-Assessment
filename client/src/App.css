@@ -34,3 +34,7 @@ button{
   padding: 0;
   margin: 0;
 }
+
+header h1 {
+  text-shadow: 7px 7px 6px rgba(85, 83, 83, 0.2);
+}
