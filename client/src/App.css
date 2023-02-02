@@ -21,6 +21,7 @@ body{
   padding: 0;
   font-size: 1rem;
   font-weight: 400;
+  background-color: grey;
 }
 
 .video-container{
@@ -70,3 +71,10 @@ button{
   background-color: black;
   color: white;
 }
+
+
+.ascendbutton{
+    background-color: rgb(13, 129, 110);
+    color: white;
+    padding: .2em;
+  }

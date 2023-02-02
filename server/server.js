@@ -78,9 +78,19 @@ let videos = [
 // console.log(maxID);
 let maxID = Math.max(...videos.map((video) => video.id));
 
-app.get("/video/", (req, res) => {
-   res.json(videos);
+app.get("/video", (req, res) => {
+  const order = req.query.order;
+  let sortedVideos;
+  if (order === "asc") {
+    sortedVideos = videos.sort((a, b) => a.rating - b.rating);
+  } else if (order === "desc") {
+    sortedVideos = videos.sort((a, b) => b.rating - a.rating);
+  } else {
+    sortedVideos = videos.sort((a, b) => b.rating - a.rating);
+  }
+  res.json(sortedVideos);
 });
+
 
 app.get("/video/:id", (req, res) => {
   const vidId = parseInt(req.params.id);

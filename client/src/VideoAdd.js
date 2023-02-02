@@ -11,10 +11,11 @@ const handleSubmit = async (event) => {
 
 
   const newVideo = {
-    id: Date.now(),
+    id: [],
     title: title,
     url: url,
-    rating: 0
+    rating: 0,
+    added: Date.now().toString(),
   };
 
    if (!title) {
