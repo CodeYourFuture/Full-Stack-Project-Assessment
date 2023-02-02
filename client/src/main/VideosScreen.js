@@ -3,10 +3,7 @@ import data from "../exampleresponse.json";
 import AddVideo from "./AddVideo";
 
 const VideoScreen = () => {
-  const [like, setLike] = useState(0);
-  const [unLike, setUnLike] = useState(0);
   const [videos, setVideos] = useState(data);
-  const [vote, setVote] = useState(0);
   function likeHandler(index) {
     setVideos(
       videos.map((video, i) => {
@@ -35,12 +32,12 @@ const VideoScreen = () => {
     setVideos([...videos, { title: title, url: url, rating: 0 }]);
   };
   return (
-    <div className="card-item">
+    <div>
       <AddVideo addVideo={addVideo} />
-      <div>
+      <div className="card">
         {videos.map((video, index) => {
           return (
-            <div>
+            <div className="card-item">
               <iframe
                 width="400"
                 height="280"

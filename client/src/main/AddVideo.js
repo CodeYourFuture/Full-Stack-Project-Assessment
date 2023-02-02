@@ -8,9 +8,9 @@ const AddVideo = ({ addVideo }) => {
     addVideo(title, url);
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h4>Add your favorite video</h4>
+    <div>
+      <form onSubmit={handleSubmit} className="form">
+        <h4 className="form-header">Add your favorite video</h4>
         <label>Title</label>
         <input
           type="text"
@@ -25,7 +25,7 @@ const AddVideo = ({ addVideo }) => {
         ></input>
         <button type="submit">Add Video</button>
       </form>
-    </>
+    </div>
   );
 };
 export default AddVideo;
