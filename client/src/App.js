@@ -18,9 +18,12 @@ function App() {
   });
 
   // local api endpoint
-  const API_URL = "http://localhost:5001/videos";
+  //const API_URL = "http://localhost:5001/videos";
 
-  useEffect(() => {
+  //render API
+  const API_URL = "https://cyf-videos-kp.onrender.com/videos";
+
+  https: useEffect(() => {
     setIsLoading(true);
     fetch(`${API_URL}/?order=${order}`)
       .then((res) => res.json())
@@ -79,7 +82,7 @@ function App() {
         console.error("There was an error", error);
       });
   }
-  
+
   function handleRating(id, rating) {
     fetch(`${API_URL}/vote/${id}`, {
       method: "PUT",
