@@ -16,12 +16,14 @@ const AddVideo = ({ addVideo }) => {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter the title"
         ></input>
         <label>Url</label>
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          placeholder="Enter Valid Youtube Url"
         ></input>
         <button type="submit">Add Video</button>
       </form>

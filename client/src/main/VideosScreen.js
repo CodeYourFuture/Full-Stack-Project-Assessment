@@ -29,7 +29,12 @@ const VideoScreen = () => {
     setVideos(videos.filter((video, i) => i !== index));
   }
   const addVideo = (title, url) => {
-    setVideos([...videos, { title: title, url: url, rating: 0 }]);
+    const newFavVideo = { title: title, url: url, rating: 0 };
+    if (!title || !url || !url.includes("https://www.youtube.com/")) {
+      console.log("Both title and URL must be filled");
+    } else {
+      setVideos([...videos, newFavVideo]);
+    }
   };
   return (
     <div>
