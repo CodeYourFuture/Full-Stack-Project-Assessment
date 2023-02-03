@@ -8,13 +8,13 @@ function VideoCard(props){
     return(
         <section className="cards-grid">
             { 
-            props.videosList.map(film=>{
-            return(  <div key={film.id} className="card-container">
-                        <EmbeddingVideo  url={film.video_url}  title={film.video_title}/>
-                        <h5 className="film-title">{film.video_title}</h5>
+            props.videosList.map(video=>{
+            return(  <div key={video.id} className="card-container">
+                        <EmbeddingVideo  url={video.video_url}  title={video.video_title}/>
+                        <h5 className="video-title">{video.video_title}</h5>
                         <div className="card-bottom-nav">
-                        <Vote data={film.video_rating}/>
-                        <button className="btn" onClick={()=>props.setDeletedVideoId(film.id)}>Remove Video</button>
+                        <Vote data={video.video_rating}/>
+                        <button className="btn" onClick={()=>props.setDeletedVideoId(video.id)}>Remove Video</button>
                         </div>
                     </div>
             )})};
