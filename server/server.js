@@ -1,15 +1,19 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 dotenv.config()
-const data = require("")
+app.use(express.json())
+app.use(bodyParser.json());
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const data = require("./exampleresponse.json")
+let videos = data;
 
 // GET "/"
 // app.get("/", (req, res) => {
@@ -18,5 +22,16 @@ let videos = [];
 // });
 
 app.get("/", (req, res) => {
-  res.json("About to start")
+  res.json(videos)
+  
 });
+
+app.post("/", (req, res) => {
+
+})
+
+
+
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

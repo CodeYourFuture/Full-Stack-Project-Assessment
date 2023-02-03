@@ -1,13 +1,33 @@
-import React, { useState } from "react";
-// import ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-// import video from "./singleVideo.json";
-import defaultVideoData from "./exampleresponse.json";
 import AddNewVideo from "./AddNewVideo";
 import SearchVideo from "./SearchVideo";
 import PopulateVideos from "./PopulateVideos";
 
 function App() {
+  const [defaultVideoData, setDefaultVideoData] = useState([]);
+
+  useEffect(() => {
+    fetch("/")
+      .then((response) => response.json())
+      .then(data => setDefaultVideoData(data))
+      .catch((e) => console.log(e));
+  }, [])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch("/videos");
+  //       const json = await res.json();
+  //       setDefaultVideoData(json);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [])
+  console.log(defaultVideoData);
+
   const [videoData, setVideoData] = useState(defaultVideoData);
   videoData.sort((b, a) => a.rating - b.rating)
   
