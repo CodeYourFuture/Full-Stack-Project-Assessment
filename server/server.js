@@ -3,7 +3,8 @@ const express = require("express");
 const videos = require("./../client/src/exampleresponse.json");
 const cors = require("cors");
 const path = require("path");
-const bodyParser = require("body-parser")
+const { Pool } = require("pg");
+const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 5000;
@@ -13,12 +14,32 @@ app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// GET "/" gets all videos
-app.get("/videos", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  // res.send({ express: "Your Backend Service is Running" });
-  res.send({ videos });
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "videosdata",
+  password: "Lidya2021",
+  port: 5432,
 });
+
+app.get("/videos", (req, res) => {
+  const sql = "SELECT video_title FROM videos";
+  const params = [];
+  pool
+    .query(sql, params)
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+
+// GET "/" gets all videos
+// app.get("/videos", (req, res) => {
+// Delete this line after you've confirmed your server is running
+// res.send({ express: "Your Backend Service is Running" });
+// res.send({ videos });
+// });
 
 // POST "/videos" add a video
 app.post("/videos", (req, res) => {
