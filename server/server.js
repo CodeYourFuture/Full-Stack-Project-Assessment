@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 const videos = require("./exampleresponse.json");
+const path = require("path");
+
 const REGEXP =
   /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtube\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 const isValidYoutubeUrl = (link) => {
@@ -11,8 +13,9 @@ const isValidYoutubeUrl = (link) => {
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(express.static(path.resolve(__dirname, "../client/build"))); // connect to client with server
 
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const maxId = Math.max(...videos.map((video) => video.id));
 
@@ -32,18 +35,20 @@ app.post("/videos", (req, res) => {
   let url = req.body.url;
   const newVideo = {
     id: maxId + 1,
-    title: req.body.title,
-    url: req.body.url,
+    title: title,
+    url: url,
     rating: req.body.rating,
   };
-  if (!req.body.title || !req.body.url) {
-    return res
+  if (!title || !url) {
+    res
       .status(400)
       .json({ error: "error", message: "Please enter a title and a url" });
+    return;
   } else if (!isValidYoutubeUrl(newVideo.url)) {
-    return res
+    res
       .status(400)
       .json({ error: "error", message: "NOT a valid youtube url" });
+    return;
   }
   videos.push(newVideo);
   res.status(200).json(videos);
