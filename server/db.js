@@ -4,8 +4,10 @@ dotenv.config();
 
 const pool = new Pool({
   user: "postgres",
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  connectionString:
+    process.env.DATABASE_URL ||
+    "postgresql://postgres:CYFStudent123@localhost:5432/db_videos",
+  ssl: process.env.DATABASE_URL ? true : false,
 });
 
 module.exports = pool;
