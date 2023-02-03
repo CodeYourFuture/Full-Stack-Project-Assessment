@@ -8,7 +8,7 @@ const App = () => {
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/videos')
+    fetch('https://michellejanay-cyf-video-app.onrender.com/videos')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data)
