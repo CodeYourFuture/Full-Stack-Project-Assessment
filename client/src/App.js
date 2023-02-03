@@ -61,7 +61,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <div className="m-auto">
+      <div className="video-data">
         <Row xs={1} sm={2} md={3} lg={4} className="m-auto">
           {videoData.map((video, key) => (
             <Video

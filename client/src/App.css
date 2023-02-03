@@ -38,3 +38,9 @@ button{
 header h1 {
   text-shadow: 7px 7px 6px rgba(85, 83, 83, 0.2);
 }
+.video-data {
+  
+   grid-gap: 16px;
+  padding: 16px;
+  margin: 0 auto;
+}
