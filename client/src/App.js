@@ -15,10 +15,8 @@ function App() {
       .then((data) => setVideoList(data))
       .catch((error) => console.error(error));
   }, [refresh, sortOrder]);
-console.log(`/videos?order=${sortOrder}`);
-console.log(videoList);
 
-// handle the sorting order
+  // handle the sorting order
   function handleSortOrderChange() {
     setSortOrder(sortOrder === "desc" ? "asc" : "desc");
   }

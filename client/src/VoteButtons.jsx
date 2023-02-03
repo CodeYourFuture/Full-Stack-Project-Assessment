@@ -4,7 +4,7 @@ import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 function VoteButtons(props) {
   const [numVotes, setNumVotes] = useState(props.rating);
-
+  
   //Increase the Ratings
   function handleLikeClick() {
     setNumVotes(numVotes + 1);
@@ -21,16 +21,18 @@ function VoteButtons(props) {
 
   //decrease the Ratings
   function handleDislikeClick() {
-    setNumVotes(numVotes - 1);
-    fetch(`/videos/${props.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ rating: numVotes - 1 }),
-    })
-      .then((response) => setNumVotes(numVotes - 1))
-      .catch((error) => console.error(error));
+    if (numVotes > 0) {
+      setNumVotes(numVotes - 1);
+      fetch(`/videos/${props.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: numVotes - 1 }),
+      })
+        .then((response) => setNumVotes(numVotes - 1))
+        .catch((error) => console.error(error));
+    }
   }
 
   return (
