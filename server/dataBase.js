@@ -23,17 +23,48 @@ app.use(cors({ origin: "*" }));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get('/videos', (req, res) => {
-    const query = "SELECT * FROM videos";
-    pool
-      .query(query)
-      .then((result) => {
-        res.status(200).json(result.rows);
-      })
-      .catch((error) => {
-        throw error;
-      });
-
+app.get("/videos", (req, res) => {
+  const query = "SELECT * FROM videos";
+  pool
+    .query(query)
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      throw error;
+    });
 });
 
+app.post("/videos", (req, res) => {
+  let title = req.body.title;
+  let url = req.body.url;
 
+  const query = "INSERT INTO videos (title, url) VALUES ($1, $2)";
+  pool 
+  .query(query, [title, url])
+  .then(() => res.send("New video added successfully"))
+  .catch ((error) => {
+    console.log(error); 
+    res.status(500).json(error);
+  }); 
+});
+
+app.delete("/videos/:id", async (req, res) => {
+  try {
+    const videoId = parseInt(req.params.id);
+
+    pool
+      .query("SELECT * FROM videos WHERE id = $1", [videoId])
+      .then((result) => {
+        if (result.rows.length === 0) {
+          res.json({ result: "error", message: "Video not found" });
+        } else {
+          const video = pool
+            .query(`DELETE FROM videos WHERE id = ${videoId}`)
+            .then(() => res.json("successfully deleted"));
+        }
+      });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
