@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
-// import OrderButton from './OrderButton'
+import OrderButton from './OrderButton'
 
 const AddVideo = ({ videos, setVideos }) => {
   const [title, setTitle] = useState('')
@@ -49,7 +49,7 @@ const AddVideo = ({ videos, setVideos }) => {
           />
           <button className="btn">Submit</button>
         </form>
-        {/* <OrderButton videos={videos} setVideos={setVideos} /> */}
+        <OrderButton videos={videos} setVideos={setVideos} />
       </div>
     </div>
   )
