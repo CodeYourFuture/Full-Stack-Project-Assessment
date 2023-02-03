@@ -21,9 +21,19 @@ const pool = new Pool({
 
 pool.connect();
 
-// GET "/"
-app.get("/", (req, res) => {
-  const query = "SELECT * FROM videos ORDER BY rating DESC";
+// GET "/" ; /?order=asc ; /?order=desc
+app.get("/videos", (req, res) => {
+  const { order } = req.query;
+  let query = "SELECT * FROM videos";
+  if (!order) {
+    query += " ORDER BY id ASC";
+  }
+  if (order === "asc") {
+    query += " ORDER BY rating ASC";
+  }
+  if (order === "desc") {
+    query += " ORDER BY rating DESC";
+  }
   pool
     .query(query)
     .then((videos) => res.json(videos.rows))
@@ -35,19 +45,12 @@ app.get("/", (req, res) => {
 
 // POST "/"
 app.post("/videos", (req, res) => {
-  const REGEXP =
-    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-
-  const isValidYoutubeUrl = (link) => {
-    return link.trim().match(REGEXP) !== null;
-  };
-
   const addedVideoTitle = req.body.title.trim();
   const addedVideoUrl = req.body.url.trim();
   const todayDate = new Date().toISOString().slice(0, 10);
   const addedVideoRating = 0;
 
-  if (!addedVideoTitle || !isValidYoutubeUrl(addedVideoUrl)) {
+  if (!addedVideoTitle || !addedVideoUrl) {
     res.sendStatus(400);
     return;
   }
@@ -77,7 +80,7 @@ app.post("/videos", (req, res) => {
 
 // GET "/{id}"
 app.get("/videos/:id", (req, res) => {
-  const requestedVideoId = Number(req.params.id);
+  const requestedVideoId = parseInt(req.params.id);
   if (!requestedVideoId) {
     res.sendStatus(404);
     return;
@@ -85,7 +88,7 @@ app.get("/videos/:id", (req, res) => {
   const query = "SELECT * FROM videos WHERE id=$1";
   pool
     .query(query, [requestedVideoId])
-    .then((result) => res.json(result.rows))
+    .then((video) => res.json(video.rows))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
@@ -94,9 +97,13 @@ app.get("/videos/:id", (req, res) => {
 
 // DELETE "/{id}"
 app.delete("/videos/:id", (req, res) => {
-  const deletedVideoId = Number(req.params.id);
+  const deletedVideoId = parseInt(req.params.id);
   if (!deletedVideoId) {
     res.sendStatus(404);
+    return;
+  }
+  if (deletedVideoId < 10) {
+    res.sendStatus(403); // no access
     return;
   }
   const query = "DELETE FROM videos WHERE id=$1";
@@ -111,11 +118,15 @@ app.delete("/videos/:id", (req, res) => {
 
 // PUT "{id}"
 app.put("/videos/:id", (req, res) => {
-  const requestedVideoId = Number(req.params.id);
-  const changedVideoRating = Number(req.body.rating);
+  const requestedVideoId = parseInt(req.params.id);
+  const changedVideoRating = parseInt(req.body.rating);
   console.log(requestedVideoId, changedVideoRating);
-  if (!requestedVideoId || !changedVideoRating) {
+  if (!requestedVideoId) {
     res.sendStatus(404);
+    return;
+  }
+  if (changedVideoRating < 0) {
+    res.sendStatus(400);
     return;
   }
   const query = "UPDATE videos SET rating=$1 WHERE id=$2";
