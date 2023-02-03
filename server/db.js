@@ -3,11 +3,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = new Pool({
-  user: "postgres",
-  connectionString:
-    process.env.DATABASE_URL ||
-    "postgresql://postgres:CYFStudent123@localhost:5432/video_lists",
-  ssl: process.env.DATABASE_URL ? true : false,
+  user: "tsioneta",
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 module.exports = pool;
