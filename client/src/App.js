@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 import AddVideo from "./AddVideo";
 import NewVideos from "./NewVideos";
@@ -13,14 +13,27 @@ function App() {
   const [addVideo, setAddVideo] = useState(false);
   const [videoData, setVideoData] = useState([]);
   const [backup, setBackup] = useState([]);
+  const [sortD, setSortD] =useState("desc");
   videoData.sort((a, b) => b.rating - a.rating)
 
   const addingVideo= () => {
     setAddVideo((prevVideo) => !prevVideo);
+
+
   };
 
+  const toggleList = () => {
+    setSortD(sortD === "asc" ? "desc" : "asc");
+  };
+  const sortedVideos = videoData.sort((a, b) => {
+    if (sortD === "asc") {
+      return a.rating - b.rating;
+    }
+    return b.rating - a.rating;
+  });
+
   useEffect(() => {
-    fetch('http://localhost:5000/videos')
+    fetch('http://localhost:5000/movies')
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
@@ -44,11 +57,23 @@ function App() {
           <Col md>
             <Search setVideoData={setVideoData} videoData={videoData} backup={backup} />
           </Col>
+          {/* <Col md>
+        <button onClick={toggleList}
+        className=" mt-3 mb-3 shadow rounded"
+        variant="info" 
+        type="submit">Sort </button>
+      </Col> */}
         </Row>
+        
+        <Button onClick={toggleList}
+         className=" mt-3 mb-3 shadow rounded"
+         variant="primary" 
+        type="button">Sort </Button>
+        
       </Container>
       <div>
         <Row xs={1} sm={2} md={3} className="mt-3">
-          {videoData.map((video, key) => (
+          {sortedVideos.map((video, key) => (
             <Video
               video={video}
               key={key}

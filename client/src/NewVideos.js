@@ -22,21 +22,36 @@ const NewVideos= ({ setVideoData }) => {
   const handleVideoAdder = (e) => {
     e.preventDefault();
     const videoId = Date.now();
-    const rating = Math.floor(Math.random() * 10000);
-
-    const newVideoData = {
+    
+    
+    const videoData = {
       id: videoId,
       title: title,
       url: url,
-      rating: rating,
+      rating: 0,
       timeSent: new Date().toLocaleDateString(),
     };
 
-    newVideoData.title && validateYouTubeUrl(newVideoData.url)
-      ? setVideoData((videos) => videos.concat(newVideoData))
-      : alert("Please make sure to enter valid URL and TITLE!");
     
+    fetch("movies", {
+      method:"POST",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify(videoData),
+      
+    })
+    .then(res=>{res.json()})
+    .then(data=>{console.log(data)
+    
+  })
+  
+    .catch(error=> console.log(error)); 
 
+     
+    videoData.title && validateYouTubeUrl(videoData.url)
+    ? setVideoData((videos) => videos.concat(videoData))
+    : alert("Please make sure to enter valid URL and TITLE!")
+
+   
   };
 
   return (
@@ -53,7 +68,7 @@ const NewVideos= ({ setVideoData }) => {
                   name="title"
                   type="text"
                   required
-                  placeholder="title..."/>
+                  placeholder="title....."/>
               </Form.Group>
             </Col>
             <Col md>
@@ -65,21 +80,20 @@ const NewVideos= ({ setVideoData }) => {
                   name="url"
                   type="text"
                   required
-                  placeholder="url..."/>
+                  placeholder="url....."/>
               </Form.Group>
             </Col>
           </Row>
-          <Button
-            onClick={handleVideoAdder}
+          <Button onClick={handleVideoAdder}
             className=" mt-3 mb-3 shadow rounded"
-            variant="secondary"
+            variant="info"
             type="submit">
             ADD
           </Button>
           <Button
             onClick={() => setAddingVideo(!addingVideo)}
             className="ml-5 mt-3 mb-3 shadow rounded"
-            variant="danger"
+            variant="warning"
             type="cancel">
             Cancel
           </Button>
