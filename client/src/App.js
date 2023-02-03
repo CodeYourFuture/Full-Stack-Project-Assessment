@@ -61,7 +61,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <div>
+      <div className="m-auto">
         <Row xs={1} sm={2} md={3} lg={4} className="m-auto">
           {videoData.map((video, key) => (
             <Video
@@ -74,7 +74,7 @@ function App() {
         </Row>
       </div>
       <footer className="shadow p-3 bg-white rounded ">
-        <h6>Created by Dawit Abraha</h6>
+        <h6>Created and designed by Dawit Abraha</h6>
       </footer>
     </div>
   );
