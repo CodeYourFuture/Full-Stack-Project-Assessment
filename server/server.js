@@ -2,21 +2,17 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const { Pool } = require('pg')
-// LEVEL 300
-// CREATE A VIDEOS DATABASE (fsa_videos)
-// HOST IT
-// CONNECT IT TO FILE
+require('dotenv').config()
+
 const pool = new Pool({
-  user: 'michelle',
-  host: 'localhost',
-  database: 'fsa_videos',
-  password: 'michelle',
-  port: 5432,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
 })
 
 pool.connect()
-
-const exampleResponse = require('../client/src/exampleresponse.json')
 
 app.use(
   cors({
@@ -25,10 +21,6 @@ app.use(
 )
 
 app.use(express.json())
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = exampleResponse
 
 // GET "/"
 app.get('/', (req, res) => {
@@ -39,22 +31,31 @@ app.get('/', (req, res) => {
 
 app.get('/videos', (req, res) => {
   pool
-    .query(`select * from videos`)
+    .query(`select * from videos order by video_rating desc`)
     .then((response) => res.json(response.rows))
-    .catch((err) => console.log(err))
-  // res.json(videos)
+    .catch((err) => {
+      console.log(err)
+      res.status(400).json({ id: 'Not found' })
+    })
 })
 
-// app.get('/videos', (req, res) => {
-//   let orderQuery = req.query.order
-//   const desc = videosCopy.sort((a, b) => b.rating - a.rating)
-//   const asc = videosCopy.sort((a, b) => a.rating - b.rating)
-//   orderQuery === 'desc'
-//     ? res.json(desc)
-//     : orderQuery === 'asc'
-//     ? res.json(asc)
-//     : res.status(404).json({ msg: 'Not found' })
-// })
+app.get('/videos', (req, res) => {
+  // let orderQuery = req.query.order
+  // const desc = videosCopy.sort((a, b) => b.rating - a.rating)
+  // const asc = videosCopy.sort((a, b) => a.rating - b.rating)
+  // orderQuery === 'desc'
+  //   ? res.json(desc)
+  //   : orderQuery === 'asc'
+  //   ? res.json(asc)
+  //   : res.status(404).json({ msg: 'Not found' })
+
+  // pool
+  //   .query(`select * from videos order by video_rating`)
+  //   .then((result) => res.json(result.rows))
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+})
 
 app.get('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
@@ -65,54 +66,30 @@ app.get('/videos/:id', (req, res) => {
 })
 
 app.post('/videos', (req, res) => {
-  // res.send(req.body.id)
-  // res,json({result: 'failure', message: 'Video could not be saved'})
-  const id = videos.length
-  const title = req.body.title
-  const url = req.body.url
-
   pool
     .query(
       'insert into videos (video_title, video_url, video_rating) values ($1, $2, 0)',
       [title, url]
     )
-    .then((response) => res.json(response.rows))
-    .catch((err) => console.log(err))
-
-  // !(title || url) &&
-  //   res
-  //     .status(400)
-  //     .send({ result: 'failure', message: 'Video could not be saved' })
-
-  // const newVideo = {
-  //   id: id,
-  //   title: title,
-  //   url: url,
-  //   rating: 0,
-  // }
-
-  // videos.push(newVideo)
-  // res.json({ id: id })
+    .then((response) => res.json({ msg: 'Video added' }))
+    .catch((err) => {
+      console.log(err)
+      res
+        .status(400)
+        .json({ result: 'failure', message: 'Video could not be saved' })
+    })
 })
 
 app.delete('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
-  // const videoId = videos.find((video) => video.id === id)
-  // const videoIndex = videos.findIndex((video) => video.id === id)
-
-  // !videoId &&
-  //   res.status(404).json({
-  //     result: 'failure',
-  //     message: 'Video could not be deleted',
-  //   })
-
-  // videos.splice(videoIndex, 1)
-  // res.send(videos)
 
   pool
     .query('delete from videos where id = $1', [id])
     .then((response) => res.json({ msg: 'Video deleted' }))
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      console.log(err)
+      res.status(404).json({ id: 'Not found' })
+    })
 })
 
 app.listen(3001, () => console.log(`Listening on port 3001`))
