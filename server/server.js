@@ -6,15 +6,16 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-  })
-)
 require('dotenv').config()
 app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET",
+  })
+);
 
 const pool = new Pool({
   user: process.env.PG_USER,
