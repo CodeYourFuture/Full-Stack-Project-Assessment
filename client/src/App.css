@@ -1,3 +1,23 @@
 .App {
   text-align: center;
+  background-color: black;
+}
+
+.cards {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 30px;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: max-content 200px 1fr;
+}
+
+.card iframe {
+  object-fit: cover;
+  width: 200px;
+  height: 100%;
 }

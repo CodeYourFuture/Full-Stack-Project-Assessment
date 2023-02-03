@@ -45,24 +45,26 @@ function VideoList() {
     const youtubeEmbed = `https://www.youtube.com/embed/${youtubeId}`;
     return (
       <>
-        <div key={index}>
+        <div key={index} className="card">
           <iframe
-            width="560"
-            height="315"
+            width="516"
+            height="79"
             src={youtubeEmbed}
             title="Tsione's YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <h4 key={movie.title}>Title : {movie.title}</h4>
           <div>
-            <span>{movie.rating}</span>
-            <RatingBtn
-              movie={movie}
-              youtube={youtubeURLS}
-              setYoutube={setYoutubeURLS}
-            />
+            <h4 key={movie.title}>{movie.title}</h4>
+            <div>
+              <span>{movie.rating}</span>
+              <RatingBtn
+                movie={movie}
+                youtube={youtubeURLS}
+                setYoutube={setYoutubeURLS}
+              />
+            </div>
           </div>
 
           <div>
@@ -88,7 +90,7 @@ function VideoList() {
           <NewVideo setYoutubeURLS={setYoutubeURLS} youtubeURLS={youtubeURLS} />
         </PopUp>
       </div>
-      <div>{videoPlayer}</div>
+      <div className="cards">{videoPlayer}</div>
     </>
   );
 }

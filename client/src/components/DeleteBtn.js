@@ -4,15 +4,15 @@ const DeleteBtn = ({ setYoutube, youtube, movie }) => {
   function removeV(index) {
     alert("Do you want to delete " + movie.title);
 
-    fetch(`http://localhost:5000/videos/${index}`, {
+    fetch(`/videos/${index}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log();
-        setYoutube(youtube.filter((video) => video.id !== index));
+        console.log(data);
       })
       .catch((error) => console.error(error));
+    setYoutube(youtube.filter((video) => video.id !== index));
   }
 
   return (

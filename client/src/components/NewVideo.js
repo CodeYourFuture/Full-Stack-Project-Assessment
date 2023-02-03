@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
   const [title, setTitle] = useState("");
@@ -6,6 +7,9 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
   const [isUrlValid, setIsUrlValid] = useState(null);
   const [isTitle, setIsTitle] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const iD = uuidv4()
+    .replace(/[^0-9]/g, "")
+    .slice(0, 6);
 
   function validateYouTubeUrl(url) {
     if (url) {
@@ -56,13 +60,14 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
     setLoading(true);
 
     let newYoutubeVideo = {
+      id: iD,
       title,
       url,
       rating: 0,
       timeSent: new Date().toLocaleDateString(),
     };
 
-    fetch("http://127.0.0.1:5000/videos", {
+    fetch("/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,17 +77,17 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setYoutubeURLS([...youtubeURLS, newYoutubeVideo]);
-        setLoading(false);
-        setIsUrlValid(true);
-        setIsTitle(true);
-        setUrl("");
-        setTitle("");
       })
       .catch((error) => {
         console.log("Error while making request");
         setLoading(false);
       });
+    setYoutubeURLS([...youtubeURLS, newYoutubeVideo]);
+    setLoading(false);
+    setIsUrlValid(true);
+    setIsTitle(true);
+    setUrl("");
+    setTitle("");
   }
 
   return (
