@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+const dotenv = require("dotenv");
+dotenv.config()
+const data = require("")
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -9,7 +12,11 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = [];
 
 // GET "/"
+// app.get("/", (req, res) => {
+//   // Delete this line after you've confirmed your server is running
+//   res.send({ express: "Your Backend Service is Running" });
+// });
+
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.json("About to start")
 });

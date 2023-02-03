@@ -10,8 +10,8 @@ export default function PopulateVideos({defaultVideoData, setDefaultVideoData}) 
   return (
     <div className="all-videos">
       {defaultVideoData.map((video, key) => (
-        <div className="vid-del">
-          <InsertVideo video={video} key={video.id}/>
+        <div className="vid-del" key={key} id={video.id}>
+          <InsertVideo video={video}/>
           <button className="delete" id={key} onClick={handleDelete}>
             Delete
           </button>

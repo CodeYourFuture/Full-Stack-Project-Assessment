@@ -9,6 +9,8 @@ import PopulateVideos from "./PopulateVideos";
 
 function App() {
   const [videoData, setVideoData] = useState(defaultVideoData);
+  videoData.sort((b, a) => a.rating - b.rating)
+  
   // const [title, setTitle] = useState("");
   // const [url, setUrl] = useState('');
   // const [rating, setRating] = useState(0);
