@@ -1,16 +1,25 @@
 const { urlencoded } = require("express");
 const express = require("express");
-const videosData = require("./exampleresponse.json");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
+const { Pool } = require('pg');
+
+
+const pool = new Pool({
+  user: 'codeyourfuture',
+  host: 'localhost',
+  database: 'video-recommendation-db',
+  password: 'felfel',
+  port: 5432
+});
 
 
 const corsOptions = {
   origin: '*',
   credentials: true,            //access-control-allow-credentials:true
   optionSuccessStatus: 200,
-}
+};
 // Adding some middleware,You DO NOT NEED express.json() and express.urlencoded() for GET Requests or DELETE Requests.
 // You NEED express.json() and express.urlencoded() for POST and PUT requests, because in both these requests you are sending data 
 // (in the form of some data object) to the server and you are asking the server to accept or store that data (object), which is enclosed in the body.
@@ -22,69 +31,104 @@ app.use(urlencoded({ extended: true }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = videosData;
-
 // GET "/"
 app.get("/", (req, res) => {
   res.send(`API server loading .....`);
 });
 
 app.get("/videos", (req, res) => {
-  if (videos) {
-    res.json(videos);
-  } else {
-    res
-      .status(500)
-      .send("No video is available");
-  };
+  const order = req.query.order || "DESC";
+  
+  pool.query('SELECT * FROM videos ORDER BY video_rating')
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
+
+
 
 app.post("/addVideo", (req, res) => {
   // Both fields - title and url - must be included and be valid for this to succeed.
   let maxId = Math.max(...videos.map(video => video.id));
+  const newRate = Math.floor(Math.random() * 9000);
+  let date = new Date().toJSON();
+
   if (req.body.title && req.body.url) {
     let newVideo = {
       id: ++maxId,
       title: req.body.title,
       url: req.body.url,
-      postedAt: new Date(),
+      rating: newRate,
+      submissionDate: date,
     };
+    const query =
+      "INSERT INTO videos (id, title, url, rating, submissionDate) VALUES ($1, $2, $3, $4, $5)";
 
-    videos.push(newVideo);
-    res.send(newVideo);
+    pool.query(query, [
+      newVideo.id,
+      newVideo.title,
+      newVideo.url,
+      newVideo.rating,
+      newVideo.submissionDate,
+    ]);
+    res.json({ success: "New video added" }).send(newVideo);
   } else {
     res
       .status(400)
-      .send({ result: "failure", message: "Video could not be saved" });
+      .send({ result: "failure", message: "Video could not be saved URL or Title is missing" });
   }
 });
 
-app.get("/videos/:id", (req, res) => {
-  let targetedId = parseInt(req.params.id);
-  let targetedVideo = videos.find(video => video.id === targetedId);
-  if (targetedVideo) {
-    res.send(targetedVideo);
-  } else {
-    res.status(400).send({
-      result: "failure",
-      message: "No matching result",
+app.get("/videos/:videoId", function (req, res) {
+  const videoId = req.params.videoId;
+
+  pool
+    .query("SELECT * FROM videos WHERE id=$1", [videoId])
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
     });
-  }
 });
 
-app.delete('/videos/:id', (req, res) => {
-  const targetedId = parseInt(req.params.id);
-  const targetedVideoIndex = videos.findIndex((video) => video.id === targetedId);
+// updating a video url
+app.put("/videos/:videoId", function (req, res) {
+  const videoId = req.params.videoId;
+  const newVideoUrl = req.body.newVideoUrl;
 
-  if (targetedVideoIndex >= 0) {
-    videos.splice(targetedVideoIndex, 1);
-    res.status(200).json(videos);
-  } else {
-    res.status(400).send({
-      "result": "failure",
-      "message": "Video could not be deleted"
+  pool
+    .query("UPDATE videos SET email=$1 WHERE id=$2", [newVideoUrl, videoId])
+    .then(() => res.send(`video ${videoId} updated!`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
     });
-  }
-})
+});
+
+app.delete("/videos/:videoId",(req, res)=>{
+  let videoId = parseInt(req.params.videoId);
+
+  pool
+    .query("DELETE FROM videos WHERE id=$1", [videoId])
+    .then(() => res.send(`video ${videoId} deleted successfully!`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+// app.delete("/videos/:id", (req, res) => {
+//   const targetedId = req.params.id;
+//   const targetedVideoIndex = videos.findIndex((video) => video.id === targetedId);
+
+//   if (targetedVideoIndex >= 0) {
+//     videos.splice(targetedVideoIndex, 1);
+//     res.status(200).json(videos);
+//   } else {
+//     res.status(400).send({
+//       "result": "failure",
+//       "message": "Video could not be deleted"
+//     });
+//   };
+// });

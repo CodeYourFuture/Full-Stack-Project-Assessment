@@ -1,10 +1,10 @@
 import React from "react";
 
 function EmbeddingVideo(props){
-    console.log(typeof(props.url));
-    let filmSrc=props.url.replace("watch?v=", "embed/");
-    
-  
+
+    // let filmSrc=props.url.replace("watch?v=", "embed/");
+     let filmSrc=props.url
+
     return(
         <div>
             <iframe 

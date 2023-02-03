@@ -29,9 +29,10 @@ function App() {
   getData();
 
   const removeSelectedVideo = () => {
+  
     useEffect( ()=>{
       console.log(deletedVideoId);
-      fetch(`http://127.0.0.1:5000/videos/${deletedVideoId}`, { method: 'DELETE' })
+      fetch(`http://localhost:5000/videos/${deletedVideoId}`, { method: 'DELETE' })
         .then(res => {
           if (!res.ok) {
             throw new Error(res.statusText);
@@ -52,9 +53,9 @@ function App() {
         return {
           ...prevFormData,
           [event.target.name]: event.target.value
-        }
-      })
-    }
+        };
+      });
+    };
   
 
   function handleSubmit(event) {
@@ -65,15 +66,15 @@ function App() {
       const generateRandomNum = () => randomNum = Math.floor(100000 + Math.random() * 900000);
       generateRandomNum();
       (videosList.includes(randomNum)) ? generateRandomNum() : newEntryId = randomNum;
-      const newRate = Math.floor(Math.random() * 9000);
+      // const newRate = Math.floor(Math.random() * 9000);
       let date = new Date().toJSON();
 
       let newList = {
         id: newEntryId,
         title: formData.title,
         url: formData.url,
-        rating: newRate,
-        submitionDate: date
+        rating:"",
+        submissionDate: date
       };
 
       console.log(newList);

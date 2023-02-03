@@ -8,12 +8,12 @@ function VideoCard(props){
     return(
         <section className="cards-grid">
             { 
-            props.videosList.sort((a,b) => b.rating - a.rating).map(film=>{
+            props.videosList.map(film=>{
             return(  <div key={film.id} className="card-container">
-                        <EmbeddingVideo  url={film.url}  title={film.title}/>
-                        <h5 className="film-title">{film.title}</h5>
+                        <EmbeddingVideo  url={film.video_url}  title={film.video_title}/>
+                        <h5 className="film-title">{film.video_title}</h5>
                         <div className="card-bottom-nav">
-                        <Vote data={film.rating}/>
+                        <Vote data={film.video_rating}/>
                         <button className="btn" onClick={()=>props.setDeletedVideoId(film.id)}>Remove Video</button>
                         </div>
                     </div>
