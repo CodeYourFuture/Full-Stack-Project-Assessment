@@ -108,28 +108,6 @@ app.get("/videos", (req, res) => {
 
 });
 
-//POST "/"
-// app.post('/videos', (req, res) => {
-//   let title = req.body.title;
-//   let url = req.body.url;
-//   let rating = req.body.rating;
-//   pool.query("INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)",[title, url, rating])
-//   .then((result) => {
-//     if(result.rows.length > 0) {
-//       return res.status(400).send("Video exists");
-//     } else {
-//       const query = "INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)";
-//       pool.query(query, [title, url, rating])
-//       .then(() => res.send("Video created!"))
-//       .catch((error) => {
-//         res.status(500).json(error);
-//       });
-//     }
-//   });
-  
-// });
-
-
 app.post("/videos", (req, res) => {
     const {title,url,rating} = req.body;
     const query = 'INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)';
