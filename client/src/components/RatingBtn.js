@@ -36,7 +36,11 @@ const RatingBtn = ({ setYoutube, youtube, movie }) => {
         <FontAwesomeIcon icon={faThumbsUp} className="faIcon" />
       </button>
 
-      <button aria-label="Unlike" onClick={() => decreaseRatings(movie.id)}>
+      <button
+        className="jello-horizontal "
+        aria-label="Unlike"
+        onClick={() => decreaseRatings(movie.id)}
+      >
         <FontAwesomeIcon icon={faThumbsDown} className="faIcon" />
       </button>
     </>

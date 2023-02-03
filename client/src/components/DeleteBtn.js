@@ -17,6 +17,7 @@ const DeleteBtn = ({ setYoutube, youtube, movie }) => {
 
   return (
     <button
+      id="delete"
       className="jello-horizontal"
       aria-label="delete Video"
       onClick={() => removeV(movie.id)}

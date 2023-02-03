@@ -4,15 +4,18 @@
 }
 
 .cards {
-  position: absolute;
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 70px;
   background-color: #000;
   
 }
 
 .card {
+  height: 400px;
+  justify-content: center;
+  align-items: center;
   position: relative;
   display: grid;
   grid-template-rows: max-content 100px 1fr;
@@ -21,9 +24,15 @@
 .card iframe {
   object-fit: cover;
   width: 100%;
-  height: 100%;
-  margin-bottom: 20px;
+  height: 110%;
   
+  
+}
+
+.card h4{
+  margin-top: 130px;
+  padding: 20px;
+  font-size: 20px;
 }
 
 
@@ -43,6 +52,11 @@
 #btn2 {
   margin-left: 20px;
 }
+
+#delete{
+  margin-top: 100px;
+}
+
 .jello-horizontal {
     background-color: #b6b6b6;
     border: none;
