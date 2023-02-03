@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 //const dataVideos = require("./example.json")
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+
 const cors = require("cors");
 app.use(cors());
 
@@ -99,35 +99,52 @@ const pool = new Pool({
 app.get("/videos", (req, res) => {
   
   //res.send(videos).json;
-  pool.query('SELECT * FROM videos')
-  .then((result) => res.send(result.rows).json)
+  pool.query("SELECT * FROM videos")
+  .then((result) => res.json(result.rows))
   .catch((error) => {
+    //console.error(error);
     res.status(500).json(error);
   });
 
 });
 
 //POST "/"
-app.post('/videos', (req, res) => {
-  let title = req.body.title;
-  let url = req.body.url;
-  let rating = req.body.rating;
-  pool.query("INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3);",[title, url, rating])
-  .then((result) => {
-    if(result.rows.length > 0) {
-      return res.status(400).send("Video exists");
-    } else {
-      const query = "INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)";
-      pool.query(query, [title, url, rating])
-      .then(() => res.send("Video created!"))
-      .catch((error) => {
-        res.status(500).json(error);
-      });
-    }
-  });
+// app.post('/videos', (req, res) => {
+//   let title = req.body.title;
+//   let url = req.body.url;
+//   let rating = req.body.rating;
+//   pool.query("INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)",[title, url, rating])
+//   .then((result) => {
+//     if(result.rows.length > 0) {
+//       return res.status(400).send("Video exists");
+//     } else {
+//       const query = "INSERT INTO videos(title, url, rating) VALUES ($1, $2, $3)";
+//       pool.query(query, [title, url, rating])
+//       .then(() => res.send("Video created!"))
+//       .catch((error) => {
+//         res.status(500).json(error);
+//       });
+//     }
+//   });
   
-});
+// });
 
+
+app.post("/videos", (req, res) => {
+    const {title,url,rating} = req.body;
+    const query = 'INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)';
+    const values = [title, url, rating];
+    pool.query
+    (query, values)
+        .then(result => {
+            res.status(201).json({message: 'Video created'});
+        })
+        .catch(error => {
+            throw error;
+
+        }
+    );
+})
 //`GET` "/videos/:id"
 app.get("/videos/:id", (req, res) => {
   let videoId = req.params.id;
@@ -137,18 +154,12 @@ app.get("/videos/:id", (req, res) => {
     res.status(500).json(error);
   });
 });
-app.delete('/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  let toDel = videos.find(opt => opt.id === id);
-  let notDel = videos.filter(opt => opt.id !== id);
+app.delete("/videos/:id", (req, res) => {
+  // 
+  let vidId = parseInt(req.params.id);
+  pool.query("DELETE from videos WHERE id=$1", [vidId]).then(() => res.send(`Video ${vidId} deleted`)).catch((error) => {
+    console.error(error);
+  });
 
-  if(toDel === undefined) {
-    res.send(400).send({
-      "result": "failure",
-      "message": "Video could not be deleted"
-    })
-  } else {
-    res.send({}).status(200);
-  }
-  videos = notDel;
 })
+app.listen(port, () => console.log(`Listening on port ${port}`));
