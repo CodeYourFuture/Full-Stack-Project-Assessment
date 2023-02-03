@@ -1,14 +1,14 @@
 CREATE TABLE videos (
   id SERIAL PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
-  url VARCHAR(150) NOT NULL,
+  url VARCHAR(500) NOT NULL,
   rating INT,
   date DATE
 );
 
 INSERT INTO videos (title, url, rating, date)
-VALUES ('Never Gonna Give You Up',
-'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+VALUES ('Lenny Kravitz “Fly Away iTunes Festival London',
+'https://www.youtube.com/watch?v=WCKn8xGwJVw',
 23,
 '2023-01-28');
 
@@ -21,7 +21,7 @@ VALUES ('The Coding Train',
 INSERT INTO videos (title, url, rating, date)
 VALUES ('Mac & Cheese | Basics with Babish',
 'https://www.youtube.com/watch?v=FUeyrEN14Rk',
-2111,
+1009,
 '2023-01-28');
 
 INSERT INTO videos (title, url, rating, date)
@@ -31,9 +31,9 @@ VALUES ('Videos for Cats to Watch - 8 Hour Bird Bonanza',
 '2023-01-28');
 
 INSERT INTO videos (title, url, rating, date)
-VALUES ('The Complete London 2012 Opening Ceremony | Olympic Games',
+VALUES ('Live Performance at the London 2012 Olympic Games',
 'https://www.youtube.com/watch?v=CwzjlmBLfrQ',
-3211,
+1211,
 '2023-01-28');
 
 INSERT INTO videos (title, url, rating, date)

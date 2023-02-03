@@ -4,11 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const DeleteButton = (props) => {
   return (
-    <IconButton
-      aria-label="delete"
-      size="large"
-      onClick={props.handleBtnClick}
-    >
+    <IconButton aria-label="delete" size="large" onClick={props.handleBtnClick}>
       <DeleteIcon fontSize="inherit" />
     </IconButton>
   );

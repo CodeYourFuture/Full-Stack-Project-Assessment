@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
 import AddVideoForm from "./components/AddVideoForm";
+import MainTitle from "./components/MainTitle";
 import VideoCard from "./components/VideoCard";
+import OrderSelect from "./components/OrderSelect";
+import { CircularProgress } from "@mui/material";
 import "./App.css";
 
-// const sortVideosByRating = (videos) =>
-//   videos.sort((v1, v2) => (v1.rating < v2.rating ? 1 : -1));
+const serverUrl = "https://simeon-video-recommendation.onrender.com";
+const REGEXP =
+  /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+const isValidYoutubeUrl = (link) => {
+  return link.trim().match(REGEXP) !== null;
+};
 
 const App = () => {
   const [videos, setVideos] = useState(null);
@@ -13,20 +21,22 @@ const App = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [message, setMessage] = useState("");
-
-  const serverUrl = "https://simeon-video-recommendation-server.onrender.com";
+  const [order, setOrder] = useState("");
 
   // Get "/"
   useEffect(() => {
+    let orderPath = "";
+    if (order) {
+      orderPath = `/?order=${order}`;
+    }
     const getData = async () => {
       try {
-        const res = await fetch(serverUrl);
+        const res = await fetch(`${serverUrl}/videos${orderPath}`);
         if (!res.ok) {
           return;
         }
-        let data = await res.json();
-        // data = sortVideosByRating(data);
-        setVideos(data);
+        let allVideos = await res.json();
+        setVideos(allVideos);
         setError(null);
         setLoading(false);
       } catch (err) {
@@ -37,14 +47,14 @@ const App = () => {
       }
     };
     getData();
-  }, [videos]);
+  }, [videos, order]);
 
   // Post "/"
-  const addVideo = async (title, url) => {
+  const addVideo = async () => {
     const newVideo = {
-      "title": title,
-      "url": url
-    }
+      title: title,
+      url: url,
+    };
     const requestOptions = {
       method: "POST",
       body: JSON.stringify(newVideo),
@@ -53,16 +63,19 @@ const App = () => {
       },
     };
     try {
-      const res = await fetch(serverUrl, requestOptions);
+      const res = await fetch(`${serverUrl}/videos`, requestOptions);
       if (res.status === 400) {
         setMessage("Please enter a valid Youtube link or Title");
+        return;
+      }
+      if (res.status === 422) {
+        setMessage("This video already exists");
         return;
       }
       if (!res.ok) {
         return;
       }
-      const data = await res.json();
-      setMessage(`Video ${data.title} was added`);
+      setMessage(`Video ${newVideo.title} was added`);
       setTitle("");
       setUrl("");
     } catch (err) {
@@ -72,27 +85,23 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addVideo(title, url);
+    if (!title || !isValidYoutubeUrl(url)) {
+      setMessage("Please enter a valid Youtube link or Title");
+      return;
+    }
+    addVideo();
   };
 
-  // Delete "/"
-  const deleteVideo = async (id) => {
-    try {
-      const res = await fetch(`${serverUrl}/${id}`, {
-      method: "DELETE"});
-      if (!res.ok) {
-        return;
-      }
-      setMessage("Video was deleted");
-    } catch (err) {
-      console.error(`An error occurred: ${err}`);
-    }
+  const handleOnChangeOrder = (event) => {
+    event.preventDefault();
+    const value = event.target.value;
+    setOrder(value);
   };
 
   return (
     <div className="App">
       <header className="App_header">
-        <h1>Video Recommendation</h1>
+        <MainTitle />
         <AddVideoForm
           handleSubmit={handleSubmit}
           title={title}
@@ -102,8 +111,16 @@ const App = () => {
           message={message}
         />
       </header>
+      <nav className="nav_wrapper">
+        <OrderSelect handleOnChangeOrder={handleOnChangeOrder} />
+      </nav>
       <div className="video_container">
-        {loading && <span>Loading, please wait...</span>}
+        {loading && (
+          <div>
+            <CircularProgress /> <br />
+            <span>Loading, please wait...</span>
+          </div>
+        )}
         {error && (
           <span>{`There is a problem fetching the post data - ${error}`}</span>
         )}
@@ -112,7 +129,8 @@ const App = () => {
             <VideoCard
               video={video}
               key={video.id}
-              delVid={() => deleteVideo(video.id)}
+              setMessage={setMessage}
+              serverUrl={serverUrl}
             />
           ))}
       </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@700&display=swap");
 
 .App {
   text-align: center;
@@ -14,20 +14,39 @@
 
 .App_header h1 {
   color: #fff;
-  margin: 40px;
-  font-family: 'Kaisei Opti', serif;
-  font-size: 3.1rem;
+  margin: 10px 40px;
+  font-family: "Kaisei Opti", serif;
 }
 
 .form_submit {
-  width: 426px;
+  width: 300px;
   margin: 10px 40px;
   text-align: left;
 }
 
+.form_select {
+  margin: 10px 40px;
+}
+
 .warning_messages {
   color: #ffcad4;
-  margin-left: 15px;
+}
+
+.nav_wrapper {
+  background-color: #f8f9fa;
+}
+
+.date_wrapper {
+  background-color: rgb(239, 83, 80);
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
+
+.date {
+  color: #fff;
+  font-size: small;
+  margin-right: 10px;
 }
 
 .video_container {
@@ -37,7 +56,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
-  padding: 30px;
+  padding: 10px 30px 30px;
 }
 
 iframe {
