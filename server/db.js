@@ -1,5 +1,5 @@
 const Pool = require("pg").Pool;
-const dotenv = require(".env");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = new Pool({
