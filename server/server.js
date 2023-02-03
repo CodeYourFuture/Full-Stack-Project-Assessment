@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { Pool } = require("pg");
+const pool = require("./db.js");
 const bodyParser = require("body-parser");
 const path = require("path");
 const port = process.env.PORT || 5000;
