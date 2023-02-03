@@ -1,16 +1,17 @@
 const express = require("express");
-
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-// const pool = require("./database");
+const path = require('path');
+//const pool = require("./database");
+
 
 app.use(cors());
 app.use(express.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(express.static(path.join(__dirname, '../client/build'))); // connect to client with server
 
 const { Pool } = require('pg');
-
 const pool = new Pool({
     connectionString: 'postgres://dewayne:QWLHeEPQ2fCSL58qpqVL6o2JmV8ROx2Z@dpg-cfdos482i3mmlo3gli7g-a.frankfurt-postgres.render.com/videos_nwpu',
   ssl: { rejectUnauthorized: false },
@@ -31,9 +32,49 @@ app.get("/video", function(req, res) {
 });
 
 
+app.post("/video", (req, res) => {
+  if (!req.body.title) {
+    res.status(400).send({ result: "error", message: "Missing Title" });
+      } else if (!req.body.url) {
+        res.status(400).send({ result: "error", message: "Missing URL" });
+    return;
+  }
+
+  const newVideo = {
+    title: req.body.title,
+    url: req.body.url,
+    rating: req.body.rating
+  };
+
+  pool.query("INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)",
+    [newVideo.title, newVideo.url, newVideo.rating], (error, result) => {
+      if (error) {
+        res.status(500).send({ result: "error", message: error.message });
+        return;
+      }
+      res.status(201).send({ id: result.insertId, message: "Data inserted successfully" });
+    });
+});
+
+  
+app.delete("/video/:id", (req, res) => {
+  const vidId = parseInt(req.params.id);
+  pool.query(`DELETE FROM videos WHERE id = ${vidId}`, (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).send("Video not found");
+      return;
+    }
+    res.send({ id: vidId, message: "Video deleted" });
+  });
+});
 
 
-/* 
+
+/*
 let maxID = Math.max(...videos.map((video) => video.id));
 
 app.get("/video", (req, res) => {
@@ -61,6 +102,7 @@ app.get("/video/:id", (req, res) => {
 });
 
 //POST "/videos"
+
 
 app.post("/video", (req, res) => {
   if (!req.body.title) {
