@@ -6,7 +6,7 @@ import LikeButton from "./VideoCard/LikeButton";
 import DislikeButton from "./VideoCard/DislikeButton";
 import DeleteButton from "./VideoCard/DeleteButton";
 
-const VideoCard = ({ video, setVideos, serverUrl, setMessage }) => {
+const VideoCard = ({ video, serverUrl, setMessage }) => {
   const [likes, setLikes] = useState(() => video.rating);
 
   const initialRender = useRef(true);
