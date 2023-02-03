@@ -16,6 +16,8 @@ function Main() {
       });
   }, []);
 
+
+
   const handleSearch = (event) => {
     event.preventDefault();
     if (event.target.value === "") {
@@ -31,18 +33,26 @@ function Main() {
     }
   };
 
+const handleSort = () => {
+  
+  setFiltered(videos.sort((b, a) => a.rating - b.rating));
+};
+
   return (
     <div>
       <form>
         <input type="text" placeholder="Search..." onChange={handleSearch} />
       </form>
+    <br />
+    <button onClick={handleSort}>ORDER</button>
+
       <div>
         <VideoAdd />
       </div>
 
       <div>
         {filtered.map((video) => (
-          <div>
+          <div key={video.id}>
             <Videos videos={video} />
             <DeleteBtn videos={setVideos} id={video.id} data={videos} />
           </div>

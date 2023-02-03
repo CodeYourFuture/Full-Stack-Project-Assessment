@@ -39,7 +39,7 @@ function VideoAdd() {
       })
       .catch((err) => console.log(err));
     alert("Video added successfully.");
-   window.location.reload();
+    window.location.reload();
   };
   return (
     <div>
