@@ -1,11 +1,16 @@
 import "./App.css";
+import Header from "./component/Header";
+import Main from "./component/Main";
+import Search from "./component/Search";
+import Footer from "./component/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+    <div >
+    <Header/>
+    <Main/>
+    <Search/>
+    <Footer/>
     </div>
   );
 }
