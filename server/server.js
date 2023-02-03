@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const { Pool } = require('pg')
 const path = require('path')
+const bodyParser = require('body-parser')
 
 app.use(express.json())
 app.use(
@@ -12,6 +13,8 @@ app.use(
 )
 require('dotenv').config()
 app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
   user: process.env.PG_USER,
@@ -19,6 +22,8 @@ const pool = new Pool({
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
+  connectionString: process.env.PG_CONNECTION,
+  ssl: { rejectUnauthorized: false }
 })
 
 pool.connect()
