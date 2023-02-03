@@ -32,22 +32,17 @@ let videos = exampleResponse
 
 // GET "/"
 app.get('/', (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send(`Welcome to Michelle's Video App(: 
   ask for /videos to get started`)
   // res.send({ express: 'Your Backend Service is Running' })
 })
 
 app.get('/videos', (req, res) => {
-  pool.query(`select * from videos`, (err, response) => {
-    if (!err) {
-      response.rows
-    } else {
-      console.log(err.message)
-    }
-    pool.end()
-  })
-  res.json(videos)
+  pool
+    .query(`select * from videos`)
+    .then((response) => res.json(response.rows))
+    .catch((err) => console.log(err))
+  // res.json(videos)
 })
 
 // app.get('/videos', (req, res) => {
@@ -63,12 +58,10 @@ app.get('/videos', (req, res) => {
 
 app.get('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
-  const videosCopy = videos
-  const videoId = videos.find((video) => video.id === id)
-
-  !videoId && res.status(404).send('Not Found')
-
-  res.json(videosCopy.filter((video) => video.id === id))
+  pool
+    .query('select * from videos where id = $1', [id])
+    .then((response) => res.json(response.rows))
+    .catch((error) => console.error(error))
 })
 
 app.post('/videos', (req, res) => {
@@ -78,32 +71,48 @@ app.post('/videos', (req, res) => {
   const title = req.body.title
   const url = req.body.url
 
-  !(title || url) && res.status(400).send('Please include a title and a url')
+  pool
+    .query(
+      'insert into videos (video_title, video_url, video_rating) values ($1, $2, 0)',
+      [title, url]
+    )
+    .then((response) => res.json(response.rows))
+    .catch((err) => console.log(err))
 
-  const newVideo = {
-    id: id,
-    title: title,
-    url: url,
-    rating: 0,
-  }
+  // !(title || url) &&
+  //   res
+  //     .status(400)
+  //     .send({ result: 'failure', message: 'Video could not be saved' })
 
-  videos.push(newVideo)
-  res.json({ id: id })
+  // const newVideo = {
+  //   id: id,
+  //   title: title,
+  //   url: url,
+  //   rating: 0,
+  // }
+
+  // videos.push(newVideo)
+  // res.json({ id: id })
 })
 
 app.delete('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
-  const videoId = videos.find((video) => video.id === id)
-  const videoIndex = videos.findIndex((video) => video.id === id)
+  // const videoId = videos.find((video) => video.id === id)
+  // const videoIndex = videos.findIndex((video) => video.id === id)
 
-  !videoId &&
-    res.status(404).json({
-      result: 'failure',
-      message: 'Video could not be deleted',
-    })
+  // !videoId &&
+  //   res.status(404).json({
+  //     result: 'failure',
+  //     message: 'Video could not be deleted',
+  //   })
 
-  videos.splice(videoIndex, 1)
-  res.send(videos)
+  // videos.splice(videoIndex, 1)
+  // res.send(videos)
+
+  pool
+    .query('delete from videos where id = $1', [id])
+    .then((response) => res.json({ msg: 'Video deleted' }))
+    .catch((err) => console.log(err))
 })
 
 app.listen(3001, () => console.log(`Listening on port 3001`))
