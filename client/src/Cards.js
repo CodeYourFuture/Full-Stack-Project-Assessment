@@ -49,6 +49,7 @@ function Cards() {
 			url,
 			rating: 0,
 		};
+		// e.preventDefault();
 		setTitle("");
 		setUrl("");
 		fetch(`https://cyf-wagmi-backend.onrender.com/videos`, {
@@ -70,17 +71,17 @@ function Cards() {
 	return (
 		<div>
 			<div className='add'>
-				<form >
-				<h4>Add a video</h4>
-					<label >
+				<form>
+					<h4>Add a video</h4>
+					<label>
 						Title
 						<input type='text' className='label' value={title} onChange={updateTitle} />
 					</label>
-					<label >
+					<label>
 						URL
 						<input type='text' className='label' value={url} onChange={updateUrl} />
 					</label>
-					<button onClick={handleSubmit} type='submit' className="formButton">
+					<button onClick={handleSubmit} type='submit' className='formButton'>
 						Add to library
 					</button>
 				</form>

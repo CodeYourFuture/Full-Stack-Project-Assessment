@@ -9,7 +9,7 @@ dotenv.config();
 app.use(express.json());
 
 mongoose
-	.connect('mongodb+srv://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@' + process.env.MONGO_HOST + '/' + process.env.MONGO_DATABASE_NAME)
+	.connect("mongodb+srv://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@" + process.env.MONGO_HOST + "/" + process.env.MONGO_DATABASE_NAME)
 	.then(() => {
 		console.log("Successfully connected to MongoDB Atlas!");
 	})
@@ -48,20 +48,18 @@ app.post("/videos", (req, res, next) => {
 		});
 });
 
-app.get('/videos/:id', (req, res, next) => {
-  Video.findOne({
-    _id: req.params.id
-  }).then(
-    (video) => {
-      res.status(200).json(video);
-    }
-  ).catch(
-    (error) => {
-      res.status(404).json({
-        error: error
-      });
-    }
-  );
+app.get("/videos/:id", (req, res, next) => {
+	Video.findOne({
+		_id: req.params.id,
+	})
+		.then((video) => {
+			res.status(200).json(video);
+		})
+		.catch((error) => {
+			res.status(404).json({
+				error: error,
+			});
+		});
 });
 
 app.get("/videos", (req, res, next) => {
@@ -77,22 +75,17 @@ app.get("/videos", (req, res, next) => {
 });
 
 app.delete("/videos/:id", (req, res, next) => {
-	Video.deleteOne({_id: req.params.id}).then(
-    () => {
-      res.status(200).json({
-        message: 'Deleted'
-      });
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  )
+	Video.deleteOne({_id: req.params.id})
+		.then(() => {
+			res.status(200).json({
+				message: "Deleted",
+			});
+		})
+		.catch((error) => {
+			res.status(400).json({
+				error: error,
+			});
+		});
 });
 
 module.exports = app;
-
-
-

@@ -5,13 +5,13 @@ import Cards from "./Cards";
 import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <Heading/>
-      <Cards/>
-      <Footer/>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Heading />
+			<Cards />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
