@@ -6,13 +6,14 @@ function Videos() {
   const [videos, setVideos] = useState([]);
   const [filter, setFilter] = useState(videos);
   useEffect(() => {
-    fetch(`http://localhost:5000/videos`)
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
-        setFilter(videos);
-        // console.log(data);
-      });},[])
+    fetch('http://localhost:5000/videos')
+        .then(res => res.json())
+        .then(data => {
+            setVideos(data.sort((a, b) => b.rating - a.rating));
+            setFilter(data.sort((a, b) => b.rating - a.rating));
+
+        })
+}, []);
     console.log()
   const handleSearch = (e) => {
     if (e.target.value === "") {
