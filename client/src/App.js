@@ -1,7 +1,6 @@
 import './App.css'
 import VideoCard from './Componenets/VideoCard'
 import AddVideo from './Componenets/AddVideo'
-// import exampleResponse from './exampleresponse.json'
 import { useState, useEffect } from 'react'
 
 const App = () => {
