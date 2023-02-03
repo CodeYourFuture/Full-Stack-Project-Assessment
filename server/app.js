@@ -26,11 +26,9 @@ app.use((req, res, next) => {
 });
 
 app.post("/videos", (req, res, next) => {
-	// const maxID = Math.max(...data.map((c) => c.id));
 	const video = new Video({
 		title: req.body.title,
 		url: req.body.url,
-		// id: ++maxID,
 		rating: 0,
 		votes: 0,
 	});
