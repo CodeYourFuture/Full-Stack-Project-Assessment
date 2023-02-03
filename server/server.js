@@ -4,7 +4,6 @@ const cors = require('cors')
 const { Pool } = require('pg')
 const path = require('path')
 const bodyParser = require('body-parser')
-const dotenv = require('dotenv')
 
 app.use(express.json())
 app.use(bodyParser.json())
