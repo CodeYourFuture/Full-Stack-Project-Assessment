@@ -28,7 +28,11 @@ const RatingBtn = ({ setYoutube, youtube, movie }) => {
 
   return (
     <>
-      <button aria-label="Like" onClick={() => increaseRatings(movie.id)}>
+      <button
+        className="jello-horizontal"
+        aria-label="Like"
+        onClick={() => increaseRatings(movie.id)}
+      >
         <FontAwesomeIcon icon={faThumbsUp} className="faIcon" />
       </button>
 

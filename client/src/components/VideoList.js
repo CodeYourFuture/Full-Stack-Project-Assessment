@@ -47,8 +47,8 @@ function VideoList() {
       <>
         <div key={index} className="card">
           <iframe
-            width="516"
-            height="79"
+            width="560"
+            height="315"
             src={youtubeEmbed}
             title="Tsione's YouTube video player"
             frameBorder="0"
@@ -81,14 +81,27 @@ function VideoList() {
 
   return (
     <>
-      <div>
-        <button onClick={toggleList}>Sort </button>
-      </div>
-      <div>
-        <button onClick={() => setPopBtn(true)}>Add a Video</button>
-        <PopUp trigger={popBtn} setTrigger={setPopBtn}>
-          <NewVideo setYoutubeURLS={setYoutubeURLS} youtubeURLS={youtubeURLS} />
-        </PopUp>
+      <div className="buttons">
+        <div>
+          <button className="jello-horizontal" id="btn1" onClick={toggleList}>
+            Sort{" "}
+          </button>
+        </div>
+        <div>
+          <button
+            className="jello-horizontal"
+            id="btn2"
+            onClick={() => setPopBtn(true)}
+          >
+            Add a Video
+          </button>
+          <PopUp trigger={popBtn} setTrigger={setPopBtn}>
+            <NewVideo
+              setYoutubeURLS={setYoutubeURLS}
+              youtubeURLS={youtubeURLS}
+            />
+          </PopUp>
+        </div>
       </div>
       <div className="cards">{videoPlayer}</div>
     </>

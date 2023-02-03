@@ -19,10 +19,15 @@
     width: 100%;
     max-width: 640px;
     background-color: #fff;
+    border-radius: 12px;
 }
 
 .innerpop .close {
     position: absolute;
     top: 16px;
     right: 16px;
+}
+
+.addVideo {
+    font-size: 3.5em;
 }

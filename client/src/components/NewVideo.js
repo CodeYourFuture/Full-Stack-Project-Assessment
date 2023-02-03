@@ -96,7 +96,7 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
         <form onSubmit={handleNewVideo}>
           <fieldset>
             <br />
-            <h3>Add Video</h3>
+            <h3 className="addVideo">Add Video</h3>
             <br />
             Title :{" "}
             <input
@@ -109,7 +109,8 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
               }}
             />
             <br />
-            URL :
+            <br />
+            URL :{" "}
             <input
               aria-label="mainInput"
               type="text"
@@ -121,7 +122,11 @@ const NewVideo = ({ setYoutubeURLS, youtubeURLS }) => {
             />
             <br />
             <br />
-            <button type="submit" disabled={isLoading}>
+            <button
+              className="jello-horizontal"
+              type="submit"
+              disabled={isLoading}
+            >
               Submit
             </button>
           </fieldset>

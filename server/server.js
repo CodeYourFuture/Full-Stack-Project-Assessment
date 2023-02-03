@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const { Pool } = require("pg");
 const bodyParser = require("body-parser");
-const uuid = require("uuid");
 const path = require("path");
 const port = process.env.PORT || 5000;
 const cors = require("cors");
@@ -14,22 +13,14 @@ app.use(express.static(path.resolve(__dirname, "../client/build"))); //to connec
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "video_lists",
-  password: "CYFStudent123",
-  port: 5432,
-});
-
-// GET "/"  to get videos
+// GET "/videos"  to get videos
 app.get("/videos", (req, res) => {
-  const sort = req.query.sort;
+  const sorted = req.query.sort;
   let sql;
 
-  if (sort === "asc") {
+  if (sorted === "asc") {
     sql = "SELECT * FROM videos ORDER BY rating ASC";
-  } else if (sort === "desc") {
+  } else if (sorted === "desc") {
     sql = "SELECT * FROM videos ORDER BY rating DESC";
   } else {
     sql = "SELECT * FROM videos ORDER BY rating DESC";
