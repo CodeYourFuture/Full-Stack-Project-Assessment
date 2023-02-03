@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/" gets all videos
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   // res.send({ express: "Your Backend Service is Running" });
   res.send({ videos });
