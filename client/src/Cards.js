@@ -8,14 +8,13 @@ function Cards() {
 
 	useEffect(() => {
 		fetchVideos();
-	}, []);
+	}, [videos]);
 
 	function fetchVideos() {
 		fetch("https://cyf-wagmi-backend.onrender.com/videos")
 			.then((res) => res.json())
 			.then((data) => setVideos(data))
 			.catch((error) => console.log(error));
-		console.log(videos);
 	}
 
 	function deletevideobyID(id, index) {
@@ -42,6 +41,7 @@ function Cards() {
 	};
 
 	const handleSubmit = (e) => {
+		// e.preventDefault();
 		let maxID = Math.max(...videos.map((c) => c.id));
 		const newVideo = {
 			id: ++maxID,
@@ -49,7 +49,7 @@ function Cards() {
 			url,
 			rating: 0,
 		};
-		// e.preventDefault();
+		
 		setTitle("");
 		setUrl("");
 		fetch(`https://cyf-wagmi-backend.onrender.com/videos`, {
@@ -63,11 +63,6 @@ function Cards() {
 			.then((data) => setVideos(data))
 			.catch((error) => console.log(error));
 	};
-
-	useEffect(() => {
-		console.log(videos);
-	}, [videos]);
-
 	return (
 		<div>
 			<div className='add'>
