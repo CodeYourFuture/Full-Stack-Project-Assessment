@@ -7,8 +7,6 @@ const port = process.env.PORT || 5000;
 
 const cors = require("cors");
 
-
-
 app.use(express.json());
 
 app.use(
@@ -21,23 +19,22 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 function youtubeUrl(url) {
   const regex =
-/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-  
-if (url.match(regex)) {
-  return true;
-}
-return false;
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+  if (url.match(regex)) {
+    return true;
+  }
+  return false;
 }
 createRandomId = (arr) => {
   const randomId = Math.floor(100000 + Math.random() * 900000);
-const existingId = arr.some((video) => video.id === randomId);
-if (existingId) {
-  createRandomId(arr);
-} else {
-  return randomId;
-}
-}
-
+  const existingId = arr.some((video) => video.id === randomId);
+  if (existingId) {
+    createRandomId(arr);
+  } else {
+    return randomId;
+  }
+};
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -116,21 +113,20 @@ const pool = new Pool({
   },
 });
 
-
 // GET "/"
 app.get("/", (req, res) => {
   pool
- .query("SELECT * FROM videos")
- .then((result) => res.json(result.rows))
- .catch((error) => {
-  console.error(error);
-  res.status(500).json(error);
- });
+    .query("SELECT * FROM videos")
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
 });
 
 app.post("/", (req, res) => {
   const { title, url } = req.body;
- 
+
   if (title && youtubeUrl(url)) {
      pool
        .query("INSERT INTO videos(title, url) values ($1, $2)", [title, url])
@@ -143,6 +139,8 @@ app.post("/", (req, res) => {
   }
 });
 
+
+
 app.get("/:id", (req, res) => {
   const videoId = req.params.id;
   pool
@@ -152,22 +150,28 @@ app.get("/:id", (req, res) => {
       console.error(error);
       res.status(500).json(error);
     });
-
 });
 
 //delete
 app.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const indexVideo = videos.findIndex((v) => v.id === Number(id));
-
-  if (indexVideo !== -1) {
-    videos.splice(indexVideo, 1);
-    return res.status(200).send({});
+pool
+.query("SELECT * FROM videos WHERE id = $1", [id])
+.then((result) => {
+  if (result.rows.length === 0) res.status(404).send("Video not exist");
+  else {
+    pool
+    .query("DELETE FROM videos WHERE id =$1", [id])
+    .then((result) => {
+      res.status(200).json( { message: "Video deleted"});
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
   }
-  res.send({
-    result: "failure",
-    message: "Video could not be deleted",
-  });
+})
+.catch((error) => {
+  res.status(500).json(error);
 });
+}); 
 
-// delete from the client side

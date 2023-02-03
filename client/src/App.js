@@ -10,16 +10,18 @@ function App() {
 
   //Removing 1 video
 
-  const deleteVideos = (id) => {
-    setVideoData((allVideos) => allVideos.filter((video) => video.id !== id));
-  };
+  // const deleteVideos = (id) => {
+  //   setVideoData((allVideos) => allVideos.filter((video) => video.id !== id));
+  // };
 
   const urlToFetch = "http://localhost:5000";
 
   const createVideo = () => {
+    console.log('test')
     fetch(`${urlToFetch}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         setVideoData(data);
       });
   };
@@ -55,7 +57,7 @@ function App() {
             .sort((a, b) => b.rating - a.rating)
             .map((video) => (
               <div className="col-sm-6" key={video.id}>
-                <RenderVideo video={video} handleDeletedVideo={deleteVideos} />
+                <RenderVideo video={video} urlToFetch={urlToFetch} createVideo={createVideo} />
               </div>
             ))}
         </div>
