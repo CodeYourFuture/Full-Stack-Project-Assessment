@@ -9,12 +9,12 @@ const App = () => {
 
   useEffect(() => {
     fetch('http://localhost:3001/videos')
-        .then(res => res.json())
-        .then(data => {
-            setVideos(data);
-            // setFiltered(data.sort((a, b) => b.rating - a.rating));
-        })
-}, []);
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data)
+        // setFiltered(data.sort((a, b) => b.rating - a.rating));
+      })
+  }, [])
 
   return (
     <div className="App">

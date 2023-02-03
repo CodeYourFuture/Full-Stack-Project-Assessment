@@ -2,7 +2,16 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const { Pool } = require('pg')
+const path = require('path')
+
+app.use(express.json())
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+)
 require('dotenv').config()
+app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
 
 const pool = new Pool({
   user: process.env.PG_USER,
@@ -13,14 +22,6 @@ const pool = new Pool({
 })
 
 pool.connect()
-
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-  })
-)
-
-app.use(express.json())
 
 // GET "/"
 app.get('/', (req, res) => {
@@ -48,7 +49,6 @@ app.get('/videos', (req, res) => {
   //   : orderQuery === 'asc'
   //   ? res.json(asc)
   //   : res.status(404).json({ msg: 'Not found' })
-
   // pool
   //   .query(`select * from videos order by video_rating`)
   //   .then((result) => res.json(result.rows))
