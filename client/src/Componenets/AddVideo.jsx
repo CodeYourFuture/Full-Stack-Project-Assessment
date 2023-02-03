@@ -49,7 +49,7 @@ const AddVideo = ({ videos, setVideos }) => {
           />
           <button className="btn">Submit</button>
         </form>
-        <OrderButton videos={videos} setVideos={setVideos} />
+        {/* <OrderButton videos={videos} setVideos={setVideos} /> */}
       </div>
     </div>
   )
