@@ -14,19 +14,6 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  function handleDelete(id) {
-    let filterVideos = videos.filter((video) => video.id !== id);
-    setVideos(filterVideos);
-
-    // fetch(`/video/${id}`, {
-    //   method: 'DELETE',
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    // .then ((response) => response.json())
-    // .then((data) => setVideos(data))
-    // .catch ((error) => console.log(error));
-  }
-
   function addNewVideo(newVideo) {
     fetch("/videos", {
       method: "POST",
@@ -48,7 +35,7 @@ function App() {
       <AddVideoBtn addNewVideoFunction={addNewVideo} />
       <div className="container-fluid">
         {videos.map((video, key) => (
-          <Video video={video} key={key} handleDelete={handleDelete} />
+          <Video video={video} key={key} data = {setVideos} />
         ))}
       </div>
       <VideoCard />
