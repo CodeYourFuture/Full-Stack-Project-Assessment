@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+.App-title {
+  background-color: rgba(0, 0, 255, 0.37);
+  height: 100px;
+  text-align: center;
+}
+
+.all-videos {
+  display: flex;
+}
