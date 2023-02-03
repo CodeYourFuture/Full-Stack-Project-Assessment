@@ -1,6 +1,31 @@
-body{
-  width: 100vw;
+.title{
+  grid-area: header;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
+.input-container{
+  grid-area: input;
+}
+.videos{
+  grid-area: videos;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+}
+.App {
+  display: grid;
+    grid-template-areas:
+    '. . header header header .'
+    'input input input input input input'
+    'videos videos videos videos videos videos';
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: rgb(130, 138, 225);
+}
+
+
+
+
 .search{
   display: flex;
   width: 90%;
@@ -9,4 +34,17 @@ body{
 
 .hidden{
   display: none;
+}
+.input-section{
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+.input-field{
+  width: 150px;
+}
+.title-url{
+  display: flex;
+  gap: 1.5rem;
 }

@@ -22,9 +22,9 @@ getPostgresClient().then(result => client = result);
 
 
 // Routes
-app.get("/", (req, res) => {
-  res.sendFile("index.html")
-})
+// app.get("/", (req, res) => {
+//   res.sendFile("index.html")
+// })
 
 app.get("/videos", (req, res) => {
   client.query("SELECT * FROM video", (err, result) => {
@@ -43,13 +43,20 @@ app.get("/videos/:id", (req, res) => {
 
 app.post("/videos", (req, res) => {
   let { title, url } = req.body;
-  client.query(
-    `INSERT INTO video(title, url) values ($1, $2)`,
-    [title, url],
-    (err, result) => {
-      res.status(203).json({ ...req.body });
-    }
-  );
+  if (title && url) {
+    client.query(
+      `INSERT INTO video(title, url) values ($1, $2)`,
+      [title, url],
+      (err, result) => {
+        res.status(203).json({ ...req.body });
+      }
+    );
+  } else {
+    res.status(400).json({
+      status: "failed",
+      message: "Please provide a valid title or url"
+    })
+  }
 });
 
 app.delete("/videos/:id", (req, res) => {
@@ -60,4 +67,4 @@ app.delete("/videos/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}, ${paths}`));

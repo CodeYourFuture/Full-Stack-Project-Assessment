@@ -10,7 +10,7 @@ function Videos(props) {
   }
 
   return (
-    <div>
+    <div className="videos">
       {props.data.map((el, key) => {
         let index = el.url.indexOf("=");
         let id = el.url.slice(index + 1);

@@ -25,7 +25,7 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("https://video-recommendation-welt.onrender.com/videos", reqBody)
+      .post("/videos", reqBody)
       .then((value) => console.log(value))
       .catch((err) => console.log(err));
     setTracker((el) => el + 1);
@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Video Recommendation</h1>
+      <h1 className="title">Video Recommendation</h1>
       <Input
         handleChange={handleChange}
         handleSubmit={handleSubmit}

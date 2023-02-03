@@ -1,55 +1,56 @@
-import React from 'react'
-import { useState } from 'react';
- 
-
+import React from "react";
+import { useState } from "react";
 
 function Input(props) {
-     const [clicked, setClicked] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-      function handleInputDisplay(e) {
-        e.target ? setClicked(true) : setClicked(false);
-        console.log(e.target.color1)
-      }
-
-       function handleCancel() {
-         setClicked(false);
-       }
-
-    
+  function handleInputDisplay(e) {
+    isVisible? setIsVisible(false):setIsVisible(true)
+  }
+  
   return (
-    <div>
+    <div className="input-container">
       <div className="search">
-        <button color1 = "true" onClick={handleInputDisplay}>Add Video</button>
+        <button color1="true" onClick={handleInputDisplay}>
+          Add Video
+        </button>
         <div>
           <label htmlFor="search">Search</label>
           <input type="search" id="search" />
         </div>
       </div>
 
-      <div className={clicked ? "input-section" : "hidden"}>
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={props.handleChange}
-          value={props.reqBody.title}
-        />
+      <div className={isVisible ? "input-section" : "hidden"}>
+        <div className="title-url">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onChange={props.handleChange}
+            value={props.reqBody.title}
+            className="input-field"
+          />
+        </div>
 
-        <label htmlFor="url">URL</label>
-        <input
-          type="text"
-          name="url"
-          id="url"
-          onChange={props.handleChange}
-          value={props.reqBody.url}
-        />
+        <div className="title-url">
+          <label htmlFor="url">URL</label>
+          <input
+            type="text"
+            name="url"
+            id="url"
+            onChange={props.handleChange}
+            value={props.reqBody.url}
+            className="input-field"
+          />
+        </div>
 
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={props.handleSubmit}>Add</button>
+        <div>
+          <button onClick={props.handleSubmit}>Add</button>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Input
+export default Input;
