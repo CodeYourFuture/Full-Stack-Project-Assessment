@@ -18,11 +18,11 @@ const Video = (props) => {
   return (
     <div className="videos-container">
       <div className="video-body">
-        <h2>{props.video.title}</h2>
+        <h2 className="video-title">{props.video.title}</h2>
         <LikeDislike />
         <EmbedYoutube video={props.video} />
         <button
-          className="btn btn-default"
+          className="btn btn-outline-danger"
           onClick={() => {
             handleDelete(props.video.id);
           }}

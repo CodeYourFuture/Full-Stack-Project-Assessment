@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {FcLike} from "react-icons/fc"; 
+import {FcDislike} from "react-icons/fc"; 
 
 function LikeDislike() {
   const [likes, setLikes] = useState(0);
@@ -6,10 +8,10 @@ function LikeDislike() {
 
   return (
     <div className="like-dislike-btn-container">
-      <button onClick={() => setLikes(likes + 1)}>Like</button>
-      <button onClick={() => setDislikes(dislikes + 1)}>Dislike</button>
-      <p>Likes: {likes}</p>
-      <p>Dislikes: {dislikes}</p>
+      <div className="btn-wrapper">
+      <button className="button"  onClick={() => setLikes(likes + 1)}><FcLike /> {likes}</button>
+      <button className ="button" onClick={() => setDislikes(dislikes + 1)}><FcDislike /> {dislikes}</button>
+      </div> 
     </div>
   );
 }

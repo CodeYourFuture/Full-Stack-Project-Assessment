@@ -8,8 +8,8 @@ const AddVideoBtn = ({ addNewVideoFunction }) => {
     setShowForm(!showForm);
   };
   return (
-    <div>
-      <button onClick={handleClick} className="btn btn-primary">
+    <div className="add-video-form-wrapper">
+      <button onClick={handleClick} className="btn btn-outline-primary">
         Add a Video
       </button>
 

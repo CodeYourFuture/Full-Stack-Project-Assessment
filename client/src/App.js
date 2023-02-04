@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import {FcStart} from "react-icons/fc" 
 import Video from "./Components/Video";
 import AddVideoBtn from "./Buttons/AddVideoBtn";
 import VideoCard from "./Components/VideoCard";
@@ -30,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1> <FcStart /> Video Recommendation</h1>
       </header>
       <AddVideoBtn addNewVideoFunction={addNewVideo} />
       <div className="container-fluid">
@@ -38,7 +39,7 @@ function App() {
           <Video video={video} key={key} data = {setVideos} />
         ))}
       </div>
-      <VideoCard />
+      {/* <VideoCard /> */}
     </div>
   );
 }

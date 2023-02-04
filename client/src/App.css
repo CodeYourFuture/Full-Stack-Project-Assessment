@@ -1,15 +1,22 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 body {
    --white: #ffffff;
   --color: #4d5061; 
   --black: #000000;
+  --red: #CD0404;
   --shadow: 0 5px 10px 0 rgba(107, 8, 8, 10);
-  --light-grey: #B2B2B2; 
+  --dark-purple: rgb(68,13,87); 
   --border-radius: 5px;
+  --shadow1: 0 10px 10px 0 rgba(67, 11, 116, 0.927);
+}
+
+h1{
+  font-size: 4rem;
+  font-family:'Times New Roman', Times, serif;
+  
+  
+}
+#root{
+  background-color: var(--dark-purple);
 }
 
 .App {
@@ -20,7 +27,7 @@ body {
 .App-header {
   margin: 1rem 0;
   padding: 2rem;
-  background-color: lightblue;
+  background-color: #C147E9;
 }
 div {
   padding: 8px;
@@ -32,30 +39,70 @@ div {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
+.add-video-form-wrapper{
+  padding: 5rem 0; 
+}
+
 .adding-video-form {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: antiquewhite;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+label{
+  padding: 10px; 
+  font-size: 1.3rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+input{
+  background-color: var(--dark-purple);
+  border: none;
+  border-bottom: 2px solid var(--black);
+}
+
+.like-dislike-btn-container{
+  display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
 }
-
-.btn {
-  margin-bottom: 1rem;
+.btn-wrapper{
+  display: flex;
+  justify-content: space-around;
 }
-
+.button {
+  margin-bottom: 1rem;
+  background-color: var(--black);
+  padding: 16px;
+  cursor: pointer;
+  font-size: larger;
+  color: var(--white);
+  border: none; 
+  transition: 0.1s;
+  border-radius: 15px;
+}
+.button:hover{
+ border: 2px solid var(--red);
+}
 .videos-container {
   display: flex;
   flex-direction: column;
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow1);
   padding: 1rem;
   background-color: var(--black);
   color: var(--white);
   font-size: 1rem;
+  border-radius: 15px;
 }
-.like-dislike-btn-container{
-  
+.video-title{
+  box-shadow: var(--shadow1);
+  padding: .6rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--white);
+  cursor: pointer;
 }
+

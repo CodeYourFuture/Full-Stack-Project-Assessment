@@ -18,6 +18,7 @@ const REGEXP =
 const isValidYoutubeUrl = (link) => {
   return link.trim().match(REGEXP) !== null;
 };
+
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
