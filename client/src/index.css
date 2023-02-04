@@ -7,7 +7,7 @@
 body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
  background: #f1f5f8;
- color: #222;
+ color: rgba(34, 34, 34, 0.527);
   
 }
 
@@ -60,15 +60,41 @@ body{
   gap: 20px;
   margin-top: 10px;
 }
+
+.btn-container > button{
+ display: flex;
+ background-color: yellow;
+  
+
+}
+.btn-container > button:nth-child(2){
+  background-color: green;
+}
+.btn-add{
+background-color: green;
+}
+  
+/* video icons and containers */
+
+.video-icons {
+  color: rgb(247, 247, 24);
+}
+
+.video-icons > .downVote{
+  color: rebeccapurple;
+}
+
 .videos-container{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   margin-top: 50px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .video{
   width: 300px;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  box-shadow: 3px 1px 5px rgba(0,0,0,0.2);
 
 }
 .video >h3{
@@ -78,5 +104,19 @@ body{
   display: flex;
   gap: 20px;
   margin-bottom: 5px;
+
+}
+
+/*  container for removing videos*/
+.remove-container{
+display: flex;
+  
+  
+}
+.remove-container > button{
+  display: inline;
+  align-content: center;
+  background-color: rgb(245, 107, 107);
+
 
 }
