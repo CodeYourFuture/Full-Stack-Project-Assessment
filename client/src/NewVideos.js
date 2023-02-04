@@ -7,7 +7,7 @@ const NewVideos= ({ setVideoData }) => {
   const [addingVideo, setAddingVideo] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-
+let id = 0;
   function validateYouTubeUrl(urlToParse) {
     if (urlToParse) {
       var regExp =
@@ -21,11 +21,11 @@ const NewVideos= ({ setVideoData }) => {
 
   const handleVideoAdder = (e) => {
     e.preventDefault();
-    const videoId = Date.now();
+    // const videoId = Date.now();
     
     
     const videoData = {
-      id: videoId,
+      id: id++,
       title: title,
       url: url,
       rating: 0,
@@ -33,7 +33,7 @@ const NewVideos= ({ setVideoData }) => {
     };
 
     
-    fetch("movies", {
+    fetch("/videos", {
       method:"POST",
       headers:{"Content-Type": "application/json"},
       body: JSON.stringify(videoData),

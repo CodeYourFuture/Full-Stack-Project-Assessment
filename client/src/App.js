@@ -33,7 +33,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:5000/movies')
+    fetch('videos')
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
