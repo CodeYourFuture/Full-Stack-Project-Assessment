@@ -3,15 +3,14 @@ import Rating from "./Rating";
 
 function Videos(props) {
   // Split after '=' get second array allows to get embed!
-let src;
-if(props.videos.url) {
- src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
-console.log(props.videos);
+  let src;
+  if (props.videos.video_url) {
+    src =
+      "https://www.youtube.com/embed/" + props.videos.video_url.split("=")[1];
+    console.log(props.videos);
+  }
+  console.log(props.videos.video_url);
 
-} 
-
-
-  
   return (
     <div>
       <div className="container">
@@ -26,7 +25,7 @@ console.log(props.videos);
         >
           <div>
             <h6 style={{ color: "#D43C31", fontSize: "2rem" }}>
-              {props.videos.title}
+              {props.videos.video_title}
             </h6>
             <span>
               <Rating video={props.videos} />
@@ -40,7 +39,7 @@ console.log(props.videos);
             src={src}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title={props.videos.id}
+            title={props.videos.video_title}
           />
         </div>
       </div>

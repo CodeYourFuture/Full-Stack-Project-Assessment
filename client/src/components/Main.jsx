@@ -11,8 +11,11 @@ function Main() {
     fetch("/videos")
       .then((res) => res.json())
       .then((data) => {
-        setVideos(data.sort((a, b) => b.rating - a.rating));
-        setFiltered(data.sort((a, b) => b.rating - a.rating));
+          // data.sort((a, b) => b.rating - a.rating);
+        
+        setVideos(data);
+        
+        setFiltered(data);
       });
   }, []);
 
@@ -26,18 +29,18 @@ function Main() {
       setFiltered(
         videos
           .filter((video) =>
-            video.title.toLowerCase().includes(event.target.value.toLowerCase())
+            video.video_title.toLowerCase().includes(event.target.value.toLowerCase())
           )
-          .sort((a, b) => b.rating - a.rating)
+          .sort((a, b) => b.video_rating - a.video_rating)
       );
     }
   };
 
 const handleSort = () => {
   
-  setFiltered(videos.sort((b, a) => a.rating - b.rating));
+  setFiltered(videos.sort((b, a) => a.video_rating - b.video_rating));
 };
-
+console.log(filtered);
   return (
     <div>
       <form>

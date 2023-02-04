@@ -3,7 +3,7 @@ import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 function Rating(props) {
-  const [rating, setRating] = useState(props.video.rating);
+  const [rating, setRating] = useState(props.video.video_rating);
 
   const handleIncrease = () => {
     setRating(rating + 1);
