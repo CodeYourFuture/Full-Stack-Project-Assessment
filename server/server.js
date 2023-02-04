@@ -2,12 +2,16 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { Pool } = require("pg");
+const path = require("path");
+const dotenv = require("dotenv");
 
+dotenv.config();
+//connecting to render server
 const pool = new Pool({
-  user: "unnqlhex",
-  host: "manny.db.elephantsql.com",
-  database: "unnqlhex",
-  password: "Zd5H87ejBLYTZ-JeQ35qpS5Q-ElId7JR",
+  user:process.env.PG_USER,
+  host:process.env.PG_HOST,
+  database: process.env.PG_DB,
+  password: process.env.PG_PASSWORD,
   port: 5432,
 });
 
@@ -16,6 +20,7 @@ const videosjson = require("./exampleresponse.json");
 
 app.use(cors({ origin: "*" }));
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, "../client/build")));//to connect our client with server 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -101,7 +106,6 @@ app.delete("/videos/:id", function (req, res) {
   let id = parseInt(req.params.id); // int = integer
   pool
     .query("DELETE FROM videos WHERE id=$1", [id])
-    .then(() => pool.query("DELETE FROM videos WHERE id=$1", [id]))
     .then(() => res.status(200).json(`video ${id} deleted!`))
     .catch((error) => {
       console.error(error);
