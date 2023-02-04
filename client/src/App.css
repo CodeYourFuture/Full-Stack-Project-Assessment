@@ -31,6 +31,8 @@ button {
   padding: 5px 10px;
   border-radius: 4px;
   margin: 5px;
+  cursor: pointer;
+  text-align: center;
 }
 .form-header {
   text-align: center;
@@ -42,4 +44,9 @@ button {
   align-content: space-around;
   flex-wrap: wrap;
   align-items: stretch;
+  gap: 10px;
+}
+.card-text {
+  font-size: 20px;
+  text-align: center;
 }

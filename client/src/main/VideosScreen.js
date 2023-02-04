@@ -4,6 +4,7 @@ import AddVideo from "./AddVideo";
 
 const VideoScreen = () => {
   const [videos, setVideos] = useState(data);
+  const [showMessage, setShowMessage] = useState(false);
   function likeHandler(index) {
     setVideos(
       videos.map((video, i) => {
@@ -30,15 +31,26 @@ const VideoScreen = () => {
   }
   const addVideo = (title, url) => {
     const newFavVideo = { title: title, url: url, rating: 0 };
-    if (!title || !url || !url.includes("https://www.youtube.com/")) {
+    if (!title || !url) {
       console.log("Both title and URL must be filled");
+      setShowMessage(true);
+    } else if (!url.includes("https://www.youtube.com/")) {
+      console.log("Youtube Url not valid");
+      setShowMessage(true);
     } else {
       setVideos([...videos, newFavVideo]);
+      setShowMessage(false);
     }
   };
   return (
     <div>
       <AddVideo addVideo={addVideo} />
+      {showMessage && (
+        <div className="error-message">
+          Both title and URL must be filled and the URL must be a valid YouTube
+          URL.
+        </div>
+      )}
       <div className="card">
         {videos.map((video, index) => {
           return (
@@ -53,8 +65,12 @@ const VideoScreen = () => {
                 title={video.title}
                 className="card-img-top"
               />
-              <h3 key={index}>{video.title}</h3>
-              <h4 key={index}>Rating:{video.rating}</h4>
+              <h3 className="card-text" key={index}>
+                {video.title}
+              </h3>
+              <h4 className="card-text" key={index}>
+                Rating:{video.rating}
+              </h4>
               {/* <h5>Voted:{video.rating}</h5> */}
               <button onClick={() => likeHandler(index)}>👏🏼 Up Vote</button>
               <button onClick={() => unLikeHandler(index)}>🍅 Down Vote</button>
