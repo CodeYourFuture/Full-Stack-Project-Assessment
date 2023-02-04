@@ -32,14 +32,16 @@ const handleDicrease=(id)=>{
 window.location.reload()
 }
 
-const handleDelete=(id)=>{
-  fetch(`http://localhost:3001/videos/${id}`,{
-    method:"delete"
+
+const handleDelete= (id) => {
+  fetch(`http://localhost:3001/videos/${id}`, {
+      method: 'DELETE',
   })
-  .then(res=>res.json())
-  .then(data=>console.log(data))
-window.location.reload()
-  
+      .then(res => res.json())
+      .then(data => {
+          console.log(data);
+      })
+  window.location.reload();
 }
   return (
     <div>

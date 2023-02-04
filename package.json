@@ -1,0 +1,23 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "## Background",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nagehan1/Full-Stack-Project-Assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nagehan1/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/Nagehan1/Full-Stack-Project-Assessment#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

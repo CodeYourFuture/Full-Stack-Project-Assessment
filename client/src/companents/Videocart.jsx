@@ -10,7 +10,7 @@ function Videocart(props) {
 
 <div className="card mb-4 shadow-sm" style={{background:"black",border:"#D43C31 solid",margin:'2px',padding:'2px'}}>
  <div>
-     <h6 style={{color:"#D43C31"}}>{props.data.title}</h6>
+     <h6 style={{color:"#D43C31"}}>{props.video.title}</h6>
      <span>
      <Rating rt={props.data} v={props.videos} id={props.video}/>
        
@@ -18,7 +18,7 @@ function Videocart(props) {
  </div>
 
     <iframe
-        style={{"height":"500px",'weihgt':"200px"}} className="card-img-top" alt={props.data.title}
+        style={{"height":"500px",'weihgt':"200px"}} className="card-img-top" alt={props.video.title}
         src={src}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

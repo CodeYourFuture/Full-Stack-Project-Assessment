@@ -6,7 +6,7 @@ function Main() {
 const[videos,setVideos]=useState([])
 const [filtered, setFiltered] = useState(videos);
 useEffect(()=>{
-    fetch('http://localhost:3001/videos')
+    fetch('postgres://nagehan:ffg6HspieX5f17AMQkODvU99ETuVk8u3@dpg-cfck9j02i3mhen75eic0-a.frankfurt-postgres.render.com/videos_hhx6')
             .then(res => res.json())
             .then(data => {
                 setVideos(data.sort((a, b) => b.rating - a.rating));

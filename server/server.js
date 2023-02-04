@@ -2,17 +2,19 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const {Pool} = require("pg");
+const dotenv = require("dotenv");
+dotenv.config()
 
 
 const cors = require('cors');
 const {rows} = require("pg/lib/defaults");
 
 const pool = new Pool({
-    user: "nagehan",
-    host: "localhost",
-    database: "videos",
-    password: "",
-    port: 5432,
+   
+    connectionString:process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false}
+    
 });
 
 app.use(cors({
@@ -85,5 +87,5 @@ app.delete("/videos/:id", (req, res) => {
 })
 
 app.listen(3001, () => {
-    console.log("Server is listening on port 3001");
+    console.log("Server is listening on port 3001",process.env.DATABASE_URL)
 });
