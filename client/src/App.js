@@ -21,7 +21,7 @@ setsortAscending(!sortAscending);
 return (
 <div className="App">
 <header className="App-header">
-<h1>YouVideos</h1>
+<h1>YouVideos.</h1>
 
 <VideoAdd setvideos={setvideos} videos={videos} />
 <button className="ascendbutton" onClick={handleSort}>
