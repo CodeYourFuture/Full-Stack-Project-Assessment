@@ -8,7 +8,7 @@ const [videos, setvideos] = useState([]);
 const [sortAscending, setsortAscending] = useState(false);
 
 useEffect(() => {
-    fetch("https://videos-server-8o8d.onrender.com/video")
+fetch("https://videos-server-8o8d.onrender.com/video")
 .then(res => res.json())
 .then(data => setvideos(data))
 .catch(err => console.log(err));
