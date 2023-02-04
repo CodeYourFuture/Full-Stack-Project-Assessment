@@ -27,7 +27,7 @@ function VideoCard({ video_detail, handleRating, handleDelete }) {
   }
 
   return (
-    <div className="card h-100">
+    <div className="card h-100 rounded shadow">
       <iframe
         title={video.title}
         src={video.videourl}

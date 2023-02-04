@@ -125,7 +125,7 @@ function App() {
         </h1>
       </header>
       <div className="container">
-        <div className="px-5 py-4 my-5 title-url mb-4" width="100%">
+        <div className="px-5 py-4 my-5 title-url mb-4 rounded shadow-sm" width="100%">
           <AddVideo
             handleChange={handleChange}
             handleSubmit={handleSubmit}
@@ -167,3 +167,5 @@ function App() {
 }
 
 export default App;
+
+
