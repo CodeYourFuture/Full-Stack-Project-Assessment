@@ -1,7 +1,8 @@
-const { json } = require("express");
+//const { json } = require("express");
 const express = require("express");
 const app = express();
-const port = process.env.PORT ||3400;
+const cors = require('cors');
+const port = process.env.PORT ||3001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -9,7 +10,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let allVideos = require("../client/src/exampleresponse.json");
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(cors({origin: "http://localhost:3001/",}));
+
+
+
 // GET "/"
 app.get("/", (req, res) => {
 
@@ -18,13 +22,14 @@ app.get("/", (req, res) => {
 //Add a Video to API
 app.post("/",(req,res) => {
   let newVideo = req.body;
-  newVideo.id = Math.floor(Math.random()*100000);
+  newVideo.id = Math.floor(Math.random());
   if(!newVideo.title || !newVideo.url){
     res. status (400).send({msg:"Please add a Title & Url from videos !"});
   }else{
   allVideos.push(newVideo);
   res.status(200).send({msg: `Video:${newVideo.title} has been added.`});
   }
+  
 });
 
 //Search video 
@@ -47,7 +52,7 @@ app.get("/:id", (req, res) => {
   const Id = parseInt(req.params.id);
   const filteredVideo = allVideos.find((video) => video.id === Id);
 
-  if(filteredVideo.length === 0){
+  if(filteredVideo?.length === 0){
     res.status(400).send(({msg: `Video with Id:${Id} not found!`}));
   }else{
     res.status(200).send(filteredVideo);
