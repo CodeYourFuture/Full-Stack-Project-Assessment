@@ -1,3 +1,146 @@
-.App {
+/* Heading */
+
+.heading {
+  background-color: #330066;
+  color: white;
+  text-shadow: red;
   text-align: center;
+}
+
+.heading h1 {
+  padding: 30px;
+  margin-bottom: 50px;
+}
+
+/* Footer */
+.Footer {
+  background-color: #330066;
+  color: white;
+  text-align: center;
+  
+}
+
+/* Cards */
+.Cards {
+  display: grid;
+  grid-gap: 5em;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  margin: 1rem;
+  text-align: center;
+}
+
+/* Add Video */
+.addVideo {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  background-color: #330066;
+  color: white;
+  border-radius: 40px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-justify: center;
+  margin: auto;
+  width: 100%;
+}
+
+.card-body h4 {
+  margin: auto;
+}
+
+.card .btn {
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  cursor: pointer;
+  padding-left: 8px;
+}
+
+/* Delete Button */
+.card .deleteVideo {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 100px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.card .video {
+  margin: auto;
+  margin-top: 20px;
+}
+
+
+/* Votes */
+
+.card .votes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 340px;
+  padding: 20px 0;
+  margin: auto;
+}
+
+/* Vote Up Button */
+.card .likeVideo {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(2, 184, 117);
+  border-radius: 100px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Vote Down Button */
+.card .dislikeVideo {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(238, 64, 86);
+  border-radius: 100px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* YouTube Video Rating */
+.Video-Rating {
+  font-size: medium;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+
+button {
+  border-radius: 50%;
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+
+}
+
+
+.videoTitle {
+  margin-right: 50px;
+}
+
+
+.newVideoTitle {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
 }

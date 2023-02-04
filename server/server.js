@@ -1,15 +1,18 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const path = require('path');
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(cors())
+app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.static(path.resolve(__dirname, '../client/build')))
+const port = process.env.PORT || 5000
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const videos = require("./videos.json")
+app.get('/videos', (request, response)=>{
+response.json(videos)
+})
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+app.listen(port,()=>console.log(`Server is listening on port ${port}`));
