@@ -30,7 +30,7 @@ const youtubeUrlPattern = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+
   }
   
   try {
-    const response = await fetch('http://127.0.0.1:5000/video', {
+    const response = await fetch('https://videos-server-8o8d.onrender.com/video', {
       method: 'POST',
       body: JSON.stringify(newVideo),
       headers: { 'Content-Type': 'application/json' }

@@ -4,7 +4,7 @@ import React from 'react'
 function DeleteButton({video, setvideos, videos})  {
   const handleClick = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/video/${video.id}`, {
+      const response = await fetch(`https://videos-server-8o8d.onrender.com/video/${video.id}`, {
         method: 'DELETE',
       });
 
