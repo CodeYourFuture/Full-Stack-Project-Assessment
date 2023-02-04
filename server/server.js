@@ -4,18 +4,18 @@ const cors = require('cors')
 const { Pool } = require('pg')
 const path = require('path')
 const bodyParser = require('body-parser')
+const port = process.env.PORT || 3001
 
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    method: 'get',
-  })
-)
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//     method: 'get',
+//   })
+// )
 require('dotenv').config()
-app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   next()
@@ -24,10 +24,16 @@ app.use((req, res, next) => {
 const pool = new Pool({
   user: process.env.PG_USER,
   connectionString: process.env.PG_CONNECTION,
-  ssl: { rejectUnauthorized: false },
+  ssl: true,
 })
 
 pool.connect()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors())
+} else {
+  app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
+}
 
 // GET "/"
 app.get('/', (req, res) => {
@@ -72,12 +78,14 @@ app.get('/videos/:id', (req, res) => {
 })
 
 app.post('/videos', (req, res) => {
+  const title = req.body.title
+  const url = req.body.url
   pool
     .query(
       'insert into videos (video_title, video_url, video_rating) values ($1, $2, 0)',
       [title, url]
     )
-    .then((response) => res.json({ msg: 'Video added' }))
+    .then(() => res.json({ msg: 'Video added' }))
     .catch((err) => {
       console.log(err)
       res
@@ -91,11 +99,11 @@ app.delete('/videos/:id', (req, res) => {
 
   pool
     .query('delete from videos where id = $1', [id])
-    .then((response) => res.json({ msg: 'Video deleted' }))
+    .then(() => res.json({ msg: 'Video deleted' }))
     .catch((err) => {
       console.log(err)
       res.status(404).json({ id: 'Not found' })
     })
 })
 
-app.listen(3001, () => console.log(`Listening on port 3001`))
+app.listen(port, () => console.log(`Listening on port ${port}`))
