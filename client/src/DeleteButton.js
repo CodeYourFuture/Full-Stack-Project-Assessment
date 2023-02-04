@@ -30,8 +30,8 @@ const DeleteButton = ({item, videoData, setVideoData}) => {
 
         setVideoData(updateVideos)
 
-        // console.log(id)
-        // console.log(videoData)
+        //  console.log(id)
+        //  console.log(videoData)
     }
 
     return (

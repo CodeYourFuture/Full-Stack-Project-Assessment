@@ -141,19 +141,21 @@ app.delete("/videos/:id", (req, res) => {
     return;
   }
 
-  const deleteQuery = `delete from videos where id=${videoId}`;
-  const findVideo = `select from videos where id=${videoId}`;
-  const result = pool.query(findVideo);
-  if (!result.rowCount) {
-    res.sendStatus(404);
-    return;
-  }
-  pool
-    .query(deleteQuery)
-    .then(() => {
-      res.json({ message: `Video by ${videoId} has been deleted` });
-    })
-    .catch((error) => console.error(error));
+  const deleteQuery = `DELETE FROM videos WHERE id=$1`;
+  const findVideo = `SELECT * FROM videos WHERE id=${videoId}`;
+  pool.query(findVideo).then((result) => {
+    if (!result.rowCount) {
+      res.sendStatus(404);
+      return;
+    }
+    pool
+      .query(deleteQuery, [videoId])
+      .then((result) => {
+        console.log(result);
+        res.json({ message: `Video by ${videoId} has been deleted` });
+      })
+      .catch((error) => console.error(error));
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
