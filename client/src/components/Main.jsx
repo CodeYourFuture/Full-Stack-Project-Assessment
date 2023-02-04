@@ -8,7 +8,7 @@ function Main() {
 
   const [filtered, setFiltered] = useState(videos);
   useEffect(() => {
-    fetch("http://localhost:3011/videos")
+    fetch("https://youtubevideos.onrender.com/videos")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data.sort((a, b) => b.rating - a.rating));
