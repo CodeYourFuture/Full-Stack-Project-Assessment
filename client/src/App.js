@@ -41,7 +41,7 @@ function App() {
 
   const deleteVideo = (id) => {
     fetch(`/delete-videos/${id}`, {
-      method: "get",
+      method: "delete",
       headers: {
         "Content-Type": "application/json",
       },

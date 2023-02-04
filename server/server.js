@@ -23,7 +23,7 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 //deleting videos
-app.get("/delete-videos/:id", async (req, res) => {
+app.delete("/delete-videos/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteVideo = await pool.query("DELETE FROM videos WHERE id = $1", [
