@@ -7,13 +7,13 @@ import "./App.css";
 const VideosList = ({videoData, setVideoData }) => {
     console.log(videoData)
     const videoIdExtract = (url) =>{
-        var regExp =
+        let regExp =
           /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-        var match = url.match(regExp);
+        let match = url.match(regExp);
         if (match && match[7].length === 11) {
           return match[7];
         } else {
-          //error
+          console.log("Video Id extractor has experienced an issue")
         }
     }
     videoData.sort((a, b) => b.rating - a.rating);
