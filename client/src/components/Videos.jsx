@@ -3,10 +3,15 @@ import Rating from "./Rating";
 
 function Videos(props) {
   // Split after '=' get second array allows to get embed!
+let src;
+if(props.videos.url) {
+ src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
+console.log(props.videos);
 
-  let src = "https://www.youtube.com/embed/" + props.videos.url.split("=")[1];
-  console.log(props.videos);
+} 
 
+
+  
   return (
     <div>
       <div className="container">
