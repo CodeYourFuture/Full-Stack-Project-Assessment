@@ -142,7 +142,7 @@ app.delete("/videos/:id", (req, res) => {
   }
 
   const deleteQuery = `delete from videos where id=${videoId}`;
-  const findVideo = `select form videos where id=${videoId}`;
+  const findVideo = `select from videos where id=${videoId}`;
   const result = pool.query(findVideo);
   if (!result.rowCount) {
     res.sendStatus(404);
