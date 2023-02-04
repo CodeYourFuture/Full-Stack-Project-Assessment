@@ -7,7 +7,7 @@ function DeleteBtn(props) {
   const { id } = props;
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3011/videos/${id}`, {
+    fetch(`/videos/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

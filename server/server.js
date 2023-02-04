@@ -5,7 +5,10 @@ const { Pool } = require("pg");
 const cors = require("cors");
 const { rows } = require("pg/lib/defaults");
 const dotenv = require("dotenv");
+const path = require("path");
 
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 dotenv.config();
 
 const pool = new Pool({
@@ -16,7 +19,7 @@ const pool = new Pool({
  }
 });
 
-
+app.use(cors());
 
 
 // app.use(
@@ -87,8 +90,9 @@ app.delete("/videos/:id", (req, res) => {
     });
 });
 
-app.listen(3011, () => {
-  console.log("Server is listening on port 3011.");
+const port= process.env.PORT || 3011;
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}.`);
 });
 
 
