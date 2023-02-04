@@ -52,25 +52,25 @@ app.get("/videos", (req, res) => {
 app.post("/addVideo", (req, res) => {
   // Both fields - title and url - must be included and be valid for this to succeed.
   let maxId = Math.max(...videos.map(video => video.id));
-  const newRate = Math.floor(Math.random() * 9000);
+  let newRate = Math.floor(Math.random() * 9000);
   let date = new Date().toJSON();
 
   if (req.body.title && req.body.url) {
     let newVideo = {
       id: ++maxId,
-      title: req.body.title,
-      url: req.body.url,
-      rating: newRate,
+      video_title: req.body.title,
+      video_url: req.body.url,
+      video_rating: newRate,
       submissionDate: date,
     };
     const query =
-      "INSERT INTO videos (id, title, url, rating, submissionDate) VALUES ($1, $2, $3, $4, $5)";
+      "INSERT INTO videos (id, video_title, video_url, video_rating, submissionDate) VALUES ($1, $2, $3, $4, $5)";
 
     pool.query(query, [
       newVideo.id,
-      newVideo.title,
-      newVideo.url,
-      newVideo.rating,
+      newVideo.video_title,
+      newVideo.video_url,
+      newVideo.video_rating,
       newVideo.submissionDate,
     ]);
     res.json({ success: "New video added" }).send(newVideo);

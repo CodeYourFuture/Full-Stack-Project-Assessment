@@ -60,27 +60,27 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (formData.title !== "" && formData.url.includes("www.youtube.com/watch?v=")) {
+    if (formData.title !== "" && formData.url.includes("www.youtube.com")) {
       let newEntryId;
       let randomNum;
       const generateRandomNum = () => randomNum = Math.floor(100000 + Math.random() * 900000);
       generateRandomNum();
       (videosList.includes(randomNum)) ? generateRandomNum() : newEntryId = randomNum;
-      // const newRate = Math.floor(Math.random() * 9000);
+      const newRate = Math.floor(Math.random() * 9000);
       let date = new Date().toJSON();
 
       let newList = {
         id: newEntryId,
-        title: formData.title,
-        url: formData.url,
-        rating:"",
+        video_title: formData.title,
+        video_url: formData.url,
+        video_rating:newRate,
         submissionDate: date
       };
 
       console.log(newList);
       setVideosList([...videosList, newList]);
     } else {
-      alert(`Make sure you have a title and a valid Youtube link like: ("https://www.youtube.com/watch?v= ...")`);
+      alert(`Make sure you have a title and a valid Youtube link like: ("https://www.youtube.com ...")`);
     }
   }
 

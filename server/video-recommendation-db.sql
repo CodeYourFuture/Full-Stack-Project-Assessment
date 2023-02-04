@@ -16,5 +16,5 @@ INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Learn Unity -
 INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Cracking Enigma in 2021 - Computerphile', 'https://www.youtube.com/embed/RzWB5jL5RX0', 111);
 INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Coding Adventure: Chess AI', 'https://www.youtube.com/embed/U4ogK0MIzqk', 671);
 INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Coding Adventure: Ant and Slime Simulations', 'https://www.youtube.com/embed/X_iSQQgOd1A', 76);
-INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Why the Tour de France is so brutal', 'Why the Tour de France is so brutal', 73);
+INSERT INTO videos (video_title, video_url, video_rating) VALUES ('Why the Tour de France is so brutal', 'https://www.youtube.com/embed/ZacOS8NBK6U', 73);
 
