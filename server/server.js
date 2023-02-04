@@ -142,8 +142,8 @@ app.delete("/videos/:id", (req, res) => {
   }
 
   const deleteQuery = `DELETE FROM videos WHERE id=$1`;
-  const findVideo = `SELECT * FROM videos WHERE id=${videoId}`;
-  pool.query(findVideo).then((result) => {
+  const findVideo = `SELECT * FROM videos WHERE id=$1`;
+  pool.query(findVideo, [videoId]).then((result) => {
     if (!result.rowCount) {
       res.sendStatus(404);
       return;
@@ -152,7 +152,7 @@ app.delete("/videos/:id", (req, res) => {
       .query(deleteQuery, [videoId])
       .then((result) => {
         console.log(result);
-        res.json({ message: `Video by ${videoId} has been deleted` });
+        res.json({ message: `Video by ID ${videoId} has been deleted` });
       })
       .catch((error) => console.error(error));
   });
