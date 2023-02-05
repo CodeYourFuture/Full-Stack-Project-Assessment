@@ -37,7 +37,7 @@ app.delete("/delete-videos/:id", async (req, res) => {
 
 app.get("/videos", async (req, res) => {
   try {
-    const allVideos = await pool.query("SELECT * FROM videos");
+    const allVideos = await pool.query("SELECT * FROM videos ORDER BY rating");
     res.json(allVideos.rows);
   } catch (error) {
     res.send(err);
@@ -46,12 +46,11 @@ app.get("/videos", async (req, res) => {
 
 app.get("/videos/:id", async (req, res) => {
   let videoId = parseInt(req.params.id);
-
   try {
     const video = await pool.query("SELECT * FROM videos WHERE id=$1", [
       videoId,
     ]);
-    res.send(video);
+    res.json(video);
   } catch (error) {
     res.send(err);
   }
@@ -64,8 +63,8 @@ app.post("/post-videos", async (req, res) => {
   };
   const videoTitle = req.body.title;
   const videoUrl = req.body.url;
-
   const videoRating = 0;
+
   if (videoTitle.length < 1) {
     res.send(400).json({
       result: "failure",
@@ -101,4 +100,36 @@ app.post("/post-videos", async (req, res) => {
       }
     });
   }
+});
+
+app.put("/videos/uprating/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  pool
+    .query(
+      `update videos 
+  set rating = rating + 1 
+  where id = $1`,
+      [id]
+    )
+    .then(() => res.json({ rating: "+1" }))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ result: "failure", message: "Try later" });
+    });
+});
+
+app.put("/videos/downrating/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  pool
+    .query(
+      `update videos 
+  set rating = rating - 1 
+  where id = $1`,
+      [id]
+    )
+    .then(() => res.json({ rating: "-1" }))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ result: "failure", message: "Try later" });
+    });
 });
