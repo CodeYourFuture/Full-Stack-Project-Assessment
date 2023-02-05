@@ -9,6 +9,10 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
+  videos.sort((a, b) => {
+    return b.rating - a.rating;
+  });
+
   useEffect(() => {
     fetch("/videos")
       .then((res) => {
@@ -56,17 +60,18 @@ function App() {
       });
   };
 
-  videos.sort((a, b) => {
-    return b.rating - a.rating;
-  });
-
   return (
     <div className="App">
       <Header />
       <AddVideoButton addNewVideoFunction={addVideo} />
       <div className="container-fluid">
         {videos.map((video, key) => (
-          <Video video={video} key={key} deleteVideo={deleteVideo} />
+          <Video
+            video={video}
+            key={key}
+            deleteVideo={deleteVideo}
+            id={video.id}
+          />
         ))}
       </div>
       <Footer />

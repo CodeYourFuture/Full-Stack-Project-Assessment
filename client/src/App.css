@@ -77,7 +77,8 @@ form {
 }
 
 input {
-  width: 200px;
+  width: 350px;
+  height: 3em;
   margin: 1em;
 }
 

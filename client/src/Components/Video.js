@@ -3,13 +3,27 @@ import LikeButton from "../Buttons/LikeButton";
 import DislikeButton from "../Buttons/DislikeButton";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-function Video({ video, deleteVideo }) {
+function Video({ id, video, deleteVideo }) {
   const [rating, setRating] = useState(video.rating);
   const incrementLikeClick = () => {
     setRating(rating + 1);
+    fetch(`/videos/uprating/${video.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: video.id }),
+    });
   };
   const decrementLikeClick = () => {
     setRating(rating - 1);
+    fetch(`/videos/downrating/${video.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: video.id }),
+    });
   };
 
   return (

@@ -43,7 +43,7 @@ export default function AddNewVideo({ addNewVideo }) {
     <div>
       <form>
         <label>
-          Title
+          TITLE
           <input
             style={{
               color: "black",
@@ -73,22 +73,13 @@ export default function AddNewVideo({ addNewVideo }) {
         </label>
       </form>
       <button
-        className="btn btn-outline-warning"
-        type="submit"
-        form="form1"
-        value="Submit"
-      >
-        Cancel
-      </button>
-
-      <button
         className="btn btn-outline-success"
         onClick={handleSubmit}
         type="submit"
         form="form1"
         value="Submit"
       >
-        Add
+        Submit
       </button>
     </div>
   );
