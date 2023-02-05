@@ -2,11 +2,7 @@ import React from 'react'
 import VideoCardButtons from './VideoCardButtons'
 import Embeded from './Embeded'
 
-const VideoCard = ({ videos, setVideos }) => {
-  const removeVideo = (id) => {
-    const updatedResponse = videos.filter((video) => video.id !== id)
-    setVideos(updatedResponse)
-  }
+const VideoCard = ({ videos, removeVideo }) => {
 
   return (
     <div className="card-container">

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import uuid from 'react-uuid'
 import OrderButton from './OrderButton'
 
 const AddVideo = ({ videos, setVideos }) => {
-  const [title, setTitle] = useState('')
-  const [url, setUrl] = useState('')
+  const [newTitle, setTitle] = useState('')
+  const [newUrl, setUrl] = useState('')
 
   const handleTitle = (e) => {
     setTitle(e.target.value)
@@ -14,23 +13,21 @@ const AddVideo = ({ videos, setVideos }) => {
     setUrl(e.target.value)
   }
 
-  const addToResponse = (e) => {
-    e.preventDefault()
-    const newVideo = {
-      id: uuid(),
-      video_title: title,
-      video_url: url,
-    }
-
-    const videosPlus = videos.concat(newVideo)
-    setVideos(videosPlus)
-    // setVideos([...videos, newVideo])
+  const addVideo = (e) => {
+    fetch('http://localhost:3001/videos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: newTitle, url: newUrl }),
+    })
+      .then((res) => res.json())
+      .then(setVideos(videos))
+      .catch((err) => console.log(err))
   }
 
   return (
     <div>
       <div className="add-video-card">
-        <form onSubmit={addToResponse}>
+        <form onSubmit={addVideo}>
           <label htmlFor="title">Title: </label>
           <input
             type="text"
