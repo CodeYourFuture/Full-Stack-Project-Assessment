@@ -1,10 +1,12 @@
 const express = require("express");
 const { Pool } = require("pg");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
-app.use(express.static(path.resolve(__dirname, "../build")));
+//app.use(express.static(path.resolve(__dirname, "../build")));
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 3001;
 
 const pool = new Pool({
@@ -30,8 +32,8 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET "/"
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./build", "index.html"));
+app.get("/", (req, res) => {
+  res.json({ message: "connection established." });
 });
 
 app.post("/", (req, res) => {
