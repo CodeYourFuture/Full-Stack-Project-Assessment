@@ -88,7 +88,6 @@ app.put('/videos/upvote/:id', (req, res) => {
         .status(400)
         .json({ result: 'failure', message: 'Video could not be liked' })
     })
-  console.log(id)
 })
 
 app.put('/videos/downvote/:id', (req, res) => {
@@ -107,7 +106,6 @@ app.put('/videos/downvote/:id', (req, res) => {
         .status(400)
         .json({ result: 'failure', message: 'Video could not be liked' })
     })
-  console.log(id)
 })
 
 app.delete('/videos/:id', (req, res) => {
