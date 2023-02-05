@@ -1,21 +1,25 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
-const {Pool} = require("pg");
-const dotenv = require("dotenv");
-dotenv.config()
+const { Pool } = require("pg");
+require("dotenv").config();
+
+// dotenv.config()
 
 
 const cors = require('cors');
 const {rows} = require("pg/lib/defaults");
 
 const pool = new Pool({
-   
-    connectionString:process.env.DATABASE_URL,
+    user: process.env.DB_USER,
+    host: process.env.DB_URL,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASS,
+    port: 5432,
     ssl: {
-        rejectUnauthorized: false}
-    
-});
+      rejectUnauthorized: false,
+    },
+  });
 
 app.use(cors({
         origin: 'http://localhost:3000',
