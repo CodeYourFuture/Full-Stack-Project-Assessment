@@ -4,6 +4,7 @@ const videos = require("./../client/src/exampleresponse.json");
 const cors = require("cors");
 const path = require("path");
 const { Pool } = require("pg");
+const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
@@ -15,15 +16,18 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "videosdata",
-  password: "Lidya2021",
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
+  database: process.env.Pg_DB,
+  ssl: true,
   port: 5432,
 });
 
+dotenv.config();
+
 app.get("/videos", (req, res) => {
-  const sql = "SELECT video_title FROM videos";
+  const sql = "SELECT * FROM videos";
   const params = [];
   pool
     .query(sql, params)
