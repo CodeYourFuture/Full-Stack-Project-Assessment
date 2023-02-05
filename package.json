@@ -1,0 +1,19 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "My FUll-Stack-Project-Assessment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatouMabando/Full-Stack-Project-Assessment.git"
+  },
+  "author": "Patou Mabando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatouMabando/Full-Stack-Project-Assessment/issues"
+  },
+  "homepage": "https://github.com/PatouMabando/Full-Stack-Project-Assessment#readme"
+}
