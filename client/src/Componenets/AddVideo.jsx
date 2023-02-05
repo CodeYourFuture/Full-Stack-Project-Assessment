@@ -13,8 +13,8 @@ const AddVideo = ({ videos, setVideos }) => {
     setUrl(e.target.value)
   }
 
-  const addVideo = (e) => {
-    fetch('http://localhost:3001/videos', {
+  const addVideo = () => {
+    fetch('https://michellejanay-cyf-video-app.onrender.com/videos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: newTitle, url: newUrl }),
