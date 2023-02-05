@@ -8,7 +8,7 @@ const App = () => {
   const [update, setUpdate] = useState(0)
 
   useEffect(() => {
-    fetch('https://michellejanay-cyf-video-app.onrender.com/videos')
+    fetch('http://localhost:3001/videos')
       .then((res) => res.json())
       .then((data) => {
         setVideos(data)
@@ -17,7 +17,7 @@ const App = () => {
 
   const removeVideo = (id) => {
     console.log(id)
-    fetch(`https://michellejanay-cyf-video-app.onrender.com/videos/${id}`, {
+    fetch(`http://localhost:3001/videos/${id}`, {
       method: 'delete',
     })
       .then((res) => res.json)
