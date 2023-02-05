@@ -65,8 +65,8 @@ Here is an example solution for the Back End:
 https://video-rec.herokuapp.com
 
 ## Design
-
 You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
+
 
 ## Getting Started
 
