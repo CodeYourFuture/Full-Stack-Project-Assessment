@@ -72,6 +72,42 @@ app.post('/videos', (req, res) => {
     })
 })
 
+app.put('/videos/upvote/:id', (req, res) => {
+  const id = Number(req.params.id)
+  pool
+    .query(
+      `update videos 
+  set video_rating = video_rating + 1 
+  where id = $1`,
+      [id]
+    )
+    .then(() => res.json({ video_rating: '+1' }))
+    .catch((err) => {
+      console.log(err)
+      res
+        .status(400)
+        .json({ result: 'failure', message: 'Video could not be liked' })
+    })
+})
+
+app.put('/videos/downvote/:id', (req, res) => {
+  const id = Number(req.params.id)
+  pool
+    .query(
+      `update videos 
+  set video_rating = video_rating - 1 
+  where id = $1`,
+      [id]
+    )
+    .then(() => res.json({ video_rating: '-1' }))
+    .catch((err) => {
+      console.log(err)
+      res
+        .status(400)
+        .json({ result: 'failure', message: 'Video could not be liked' })
+    })
+})
+
 app.delete('/videos/:id', (req, res) => {
   const id = Number(req.params.id)
 

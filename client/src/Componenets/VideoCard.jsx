@@ -2,8 +2,7 @@ import React from 'react'
 import VideoCardButtons from './VideoCardButtons'
 import Embeded from './Embeded'
 
-const VideoCard = ({ videos, removeVideo }) => {
-
+const VideoCard = ({ videos, removeVideo}) => {
   return (
     <div className="card-container">
       {videos.map((video) => (
