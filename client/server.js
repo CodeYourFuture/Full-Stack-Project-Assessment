@@ -31,8 +31,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // GET "/"
 app.get("*", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./build", "index.html"));
 });
 
 app.post("/", (req, res) => {
