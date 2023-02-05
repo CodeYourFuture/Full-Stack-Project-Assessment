@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": " react-scripts start",
-    "build": "npm i && react-scripts build",
+    "build": "npm i && npm i express && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "nodemon ../server/server.js",
