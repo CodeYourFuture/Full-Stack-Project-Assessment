@@ -18,11 +18,12 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": " react-scripts start",
+    "build": "npm i && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon run dev"
+    "dev": "nodemon ../server/server.js",
+    "host": "node ../server/server.js && npm start"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {

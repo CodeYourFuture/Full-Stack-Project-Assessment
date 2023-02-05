@@ -6,12 +6,21 @@ app.use(express.json());
 const port = process.env.PORT || 3001;
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "YT_videos",
-  password: "omid",
+  user: "cyf",
+  host: "dpg-cffsda82i3mg6p9tkeag-a.frankfurt-postgres.render.com",
+  database: "yt_videos",
+  password: "SuHGK5ii0vUrMbQFgEsN1zudxGXWTtEH",
   port: 5432,
+  ssl: true,
 });
+
+// const pool = new Pool({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "YT_videos",
+//   password: "omid",
+//   port: 5432,
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
