@@ -14,6 +14,12 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   next()
 })
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    method: 'get',
+  })
+)
 
 const pool = new Pool({
   user: process.env.PG_USER,
@@ -23,11 +29,7 @@ const pool = new Pool({
 
 pool.connect()
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(cors())
-} else {
-  app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
-}
+app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
 
 // GET "/"
 app.get('/', (req, res) => {
