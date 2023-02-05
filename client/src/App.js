@@ -2,7 +2,7 @@ import "./App.css";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import x from "./exampleresponse.json";
+// import x from "./exampleresponse.json";
 // import Axios from "axios";
 // import DeleteButton from "./Buttons/DeleteBtn";
 // import Button from "react-bootstrap/Button";
@@ -14,7 +14,7 @@ import DisLikeBtn from "./Buttons/DisLikeBtn";
 import EmbeddedVideo from "./EmbeddedVideo";
 
 function App() {
-  const [videosData, setVideosData] = useState(x);
+  const [videosData, setVideosData] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [rating, setRating] = useState(0);
@@ -22,9 +22,13 @@ function App() {
   // ----fetch data here-----
   // const [..., set...] = useState([]);
   useEffect(() => {
-    fetch("http://localhost/5000")
+    fetch("/videos")
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        setVideosData(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const handleVideoAdder = (e) => {
@@ -48,10 +52,23 @@ function App() {
     }
   };
 
-  function handleUpvote() {
-    setRating((rating) => {
-      return rating + 1;
+  function handleUpvote(index) {
+    let x;
+    videosData.map((video) => {
+      if (video.id === index) {
+        x = video.rating + 1;
+        return x;
+      }
+      return setRating(x);
     });
+
+    // console.log(videosData[0].rating);
+    // if (videosData[0].rating.filter((_, i) => i === index)) {
+    //   setRating((rating) => {
+    //     console.log(rating);
+    //     return rating + 1;
+    //   });
+    // }
   }
 
   function handleDownvote() {
@@ -98,24 +115,19 @@ function App() {
         {videosData.map((video, index) => (
           <Col key={index}>
             <Card key={index}>
-              <Card.Title className="mb-4 mt-4">{video.title}</Card.Title>
-              <Card.Img variant="top" />
+              <Card.Title className="mb-4 mt-4">{video.video_title}</Card.Title>
+              {/* <Card.Img variant="top" /> */}
               <EmbeddedVideo video={video} />
               <Card.Body>
-                <Card.Text>
-                  <div>
-                    Votes :
-                    <LikeBtn onClick={handleUpvote} />
-                    <span> {rating} </span>
-                    <DisLikeBtn onClick={handleDownvote} variant="secondary" />
-                  </div>
-                  <p>{video.rating}</p> <hr />
-                  <div>
-                    <div key={index}>
-                      <button onClick={() => removeVideo(index)}>Delete</button>
-                    </div>
-                  </div>
+                <Card.Text key={index}>
+                  Votes :
+                  <LikeBtn onClick={() => handleUpvote(index)} />
+                  <span> {video.video_rating} </span>
+                  <DisLikeBtn onClick={handleDownvote} variant="secondary" />
+                  {video.video_rating}
                 </Card.Text>
+                <hr />
+                <button onClick={() => removeVideo(index)}>Delete</button>
               </Card.Body>
             </Card>
           </Col>

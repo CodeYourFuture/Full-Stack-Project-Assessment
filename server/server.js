@@ -1,36 +1,35 @@
 const express = require("express");
 // const uuid = require("uuid");
-const videos = require("./../client/src/exampleresponse.json");
+// const videos = require("./../client/src/exampleresponse.json");
 const cors = require("cors");
 const path = require("path");
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const app = express();
-app.use(cors());
+app.use(express.json());
 const port = process.env.PORT || 5000;
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
+
 app.use(bodyParser.json());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+dotenv.config({ path: "../.env" });
+app.use(cors());
 
 const pool = new Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  database: process.env.Pg_DB,
-  ssl: true,
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 6000,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-
-dotenv.config();
 
 app.get("/videos", (req, res) => {
   const sql = "SELECT * FROM videos";
-  const params = [];
+
   pool
-    .query(sql, params)
+    .query(sql)
     .then((result) => res.json(result.rows))
     .catch((error) => {
       console.error(error);
@@ -91,3 +90,5 @@ app.delete("/videos/:id", (req, res) => {
       .json({ result: "failure", message: "Video could not be deleted" });
   }
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
