@@ -1,7 +1,9 @@
 const express = require("express");
 const { Pool } = require("pg");
+const path = require("path");
 
 const app = express();
+app.use(express.static(path.resolve(__dirname, "../build")));
 app.use(express.json());
 const port = process.env.PORT || 3001;
 
@@ -28,9 +30,9 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
 });
 
 app.post("/", (req, res) => {
