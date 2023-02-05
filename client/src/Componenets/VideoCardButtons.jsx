@@ -5,7 +5,7 @@ const VideoCardButtons = ({ rating, removeVideo, id }) => {
 
   const upVote = () => {
     setVote(vote++)
-    fetch(`http://localhost:3001/videos/upvote/${id}`, {
+    fetch(`https://michellejanay-cyf-video-app.onrender.com/videos/upvote/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const VideoCardButtons = ({ rating, removeVideo, id }) => {
   const downVote = () => {
     setVote(vote === 0 ? 0 : vote--)
 
-    fetch(`http://localhost:3001/videos/downvote/${id}`, {
+    fetch(`https://michellejanay-cyf-video-app.onrender.com/videos/downvote/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
