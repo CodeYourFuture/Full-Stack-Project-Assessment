@@ -26,7 +26,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -45,7 +44,7 @@ app.post("/", (req, res) => {
   if (videoTitle == "" && videoURL == "") {
     res.json({
       result: "failure",
-      message: "Video could not be saved",
+      message: "Faild to save video",
     });
     return;
   }
