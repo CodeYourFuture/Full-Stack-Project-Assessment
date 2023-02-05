@@ -32,7 +32,13 @@ const App = () => {
       </header>
       <main>
         <AddVideo videos={videos} setVideos={setVideos} />
-        {videos && <VideoCard videos={videos} removeVideo={removeVideo} />}
+        {videos && (
+          <VideoCard
+            videos={videos}
+            removeVideo={removeVideo}
+            setVideos={setVideos}
+          />
+        )}
       </main>
     </div>
   )
