@@ -18,7 +18,7 @@ const App = () => {
   const removeVideo = (id) => {
     console.log(id)
     fetch(`https://michellejanay-cyf-video-app.onrender.com/videos/${id}`, {
-      method: 'delete',
+      method: 'DELETE',
     })
       .then((res) => res.json)
       .then(setUpdate(update + 1))
