@@ -52,32 +52,38 @@ const VideoScreen = () => {
         </div>
       )}
       <div className="card">
-        {videos.map((video, index) => {
-          return (
-            <div className="card-item">
-              <iframe
-                width="400"
-                height="280"
-                src={video.url}
-                frameBorder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={video.title}
-                className="card-img-top"
-              />
-              <h3 className="card-text" key={index}>
-                {video.title}
-              </h3>
-              <h4 className="card-text" key={index}>
-                Rating:{video.rating}
-              </h4>
-              {/* <h5>Voted:{video.rating}</h5> */}
-              <button onClick={() => likeHandler(index)}>👏🏼 Up Vote</button>
-              <button onClick={() => unLikeHandler(index)}>🍅 Down Vote</button>
-              <button onClick={() => deleteHandler(index)}>Delete video</button>
-            </div>
-          );
-        })}
+        {videos
+          .sort((a, b) => b.rating - a.rating)
+          .map((video, index) => {
+            return (
+              <div className="card-item">
+                <iframe
+                  width="400"
+                  height="280"
+                  src={video.url}
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={video.title}
+                  className="card-img-top"
+                />
+                <h3 className="card-text" key={index}>
+                  {video.title}
+                </h3>
+                <h4 className="card-text" key={index}>
+                  Rating:{video.rating}
+                </h4>
+                {/* <h5>Voted:{video.rating}</h5> */}
+                <button onClick={() => likeHandler(index)}>👏🏼 Up Vote</button>
+                <button onClick={() => unLikeHandler(index)}>
+                  🍅 Down Vote
+                </button>
+                <button onClick={() => deleteHandler(index)}>
+                  Delete video
+                </button>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
