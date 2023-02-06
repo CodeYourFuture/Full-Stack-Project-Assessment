@@ -68,6 +68,7 @@ app.post("/videos", function (req, res) {
     
     return;
   }
+})
 
 
 // app.post("/videos", (req, res) => {
