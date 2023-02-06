@@ -54,14 +54,14 @@ function validateYouTubeUrl(url) {
 
 app.post("/videos", function (req, res) {
   // const newVideoId = videoId
-  const newtTitle = req.body.video_title;
-  const newUrl = req.body.video_url;
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
   const newRating = 0;
 
   const query =
-    "INSERT INTO videos (video_title, video_url, video_rating) VALUES ($1, $2, $3)";
+    "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
 
-  if (!req.body.video_title || !validateYouTubeUrl(req.body.video_url)) {
+  if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res.status(404).send({
       result: "failure",
       message: "Video could not be saved",
@@ -71,7 +71,7 @@ app.post("/videos", function (req, res) {
   }
 
   pool
-    .query(query, [newtTitle, newUrl, newRating])
+    .query(query, [newTitle, newUrl, newRating])
     .then(() => res.send("Video added!"))
     .catch((error) => {
       console.error(error);
