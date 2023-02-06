@@ -12,7 +12,7 @@ function ItemVideo({ title, url, rating }) {
         allowFullScreen
       ></iframe>
       <button>like</button>
-      <button>dislike</button>
+      <button>Dislike</button>
       <p>{rating}</p>
     </div>
   );
