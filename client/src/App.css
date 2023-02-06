@@ -28,6 +28,11 @@
   margin: 0 1em;
 }
 
+.add-video-card button:hover {
+  background-color: white;
+  color: black;
+}
+
 .order-buttons {
   background-color: black;
   color: white;
@@ -72,4 +77,12 @@
 
 .video-buttons i:hover {
   cursor: pointer;
+}
+
+.fade-in {
+  transition: opacity 1s ease;
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
 }

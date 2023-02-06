@@ -29,9 +29,8 @@ const pool = new Pool({
 
 pool.connect()
 
-app.use(express.static(path.resolve(__dirname, '../client/build'))) //to connect server and client side
+app.use(express.static(path.resolve(__dirname, '../client/build'))) 
 
-// GET "/"
 app.get('/', (req, res) => {
   res.send(`Welcome to Michelle's Video App(: 
   ask for /videos to get started`)
@@ -41,10 +40,7 @@ app.get('/videos', (req, res) => {
   pool
     .query(`select * from videos order by video_rating desc`)
     .then((response) => res.json(response.rows))
-    .catch((err) => {
-      console.log(err)
-      res.status(400).json({ id: 'Not found' })
-    })
+    .catch(() => res.status(400).json({ id: 'Not found' }))
 })
 
 app.get('/videos/:id', (req, res) => {
@@ -52,24 +48,26 @@ app.get('/videos/:id', (req, res) => {
   pool
     .query('select * from videos where id = $1', [id])
     .then((response) => res.json(response.rows))
-    .catch((error) => console.error(error))
+    .catch(() => res.status(404).json({ id: 'Not found' }))
 })
 
 app.post('/videos', (req, res) => {
   const title = req.body.title
   const url = req.body.url
-  pool
-    .query(
-      'insert into videos (video_title, video_url, video_rating) values ($1, $2, 0)',
-      [title, url]
-    )
-    .then(() => res.json({ msg: 'Video added' }))
-    .catch((err) => {
-      console.log(err)
-      res
-        .status(400)
-        .json({ result: 'failure', message: 'Video could not be saved' })
-    })
+  
+  url.includes('youtube.com/') &&
+    pool
+      .query(
+        'insert into videos (video_title, video_url, video_rating) values ($1, $2, 0)',
+        [title, url]
+      )
+      .then(() => res.json({ msg: 'Video added' }))
+      .catch(() =>
+        res
+          .status(400)
+          .json({ result: 'failure', message: 'Video could not be saved' })
+      )
+  res.status(404).json({ result: 'failure', message: 'Video could not be saved' })
 })
 
 app.put('/videos/upvote/:id', (req, res) => {
@@ -82,8 +80,7 @@ app.put('/videos/upvote/:id', (req, res) => {
       [id]
     )
     .then(() => res.json({ video_rating: '+1' }))
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
       res
         .status(400)
         .json({ result: 'failure', message: 'Video could not be liked' })
@@ -96,12 +93,12 @@ app.put('/videos/downvote/:id', (req, res) => {
     .query(
       `update videos 
   set video_rating = video_rating - 1 
-  where id = $1`,
+  where id = $1
+  and video_rating > 1`,
       [id]
     )
     .then(() => res.json({ video_rating: '-1' }))
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
       res
         .status(400)
         .json({ result: 'failure', message: 'Video could not be liked' })
@@ -114,8 +111,7 @@ app.delete('/videos/:id', (req, res) => {
   pool
     .query('delete from videos where id = $1', [id])
     .then(() => res.json({ msg: 'Video deleted' }))
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
       res.status(404).json({ id: 'Not found' })
     })
 })

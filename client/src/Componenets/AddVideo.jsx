@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import OrderButton from './OrderButton'
 
-const AddVideo = ({ videos, setVideos }) => {
+const AddVideo = ({ update, setUpdate, videos, setVideos }) => {
   const [newTitle, setTitle] = useState('')
   const [newUrl, setUrl] = useState('')
 
@@ -14,14 +14,15 @@ const AddVideo = ({ videos, setVideos }) => {
   }
 
   const addVideo = () => {
-    fetch('https://michellejanay-cyf-video-app.onrender.com/videos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: newTitle, url: newUrl }),
-    })
-      .then((res) => res.json())
-      .then(setVideos(videos))
-      .catch((err) => console.log(err))
+    newUrl.includes('youtube.com/') &&
+      fetch('https://michellejanay-cyf-video-app.onrender.com/videos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: newTitle, url: newUrl }),
+      })
+        .then((res) => res.json())
+        .then(setUpdate(videos))
+        .catch((err) => console.log(err))
   }
 
   return (
