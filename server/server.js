@@ -45,24 +45,49 @@ app.get("/videos", (req, res) => {
 // });
 
 // POST "/videos" add a video
-app.post("/videos", (req, res) => {
-  const newVideo = {
-    // id: uuid.v4(),
-    id: videos.length + 1,
-    title: req.params.title,
-    url: req.params.url,
-  };
+function validateYouTubeUrl(url) {
+  let regExp =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
-  if (!newVideo.title || !newVideo.url) {
+  return url.match(regExp);
+}
+
+app.post("/videos", function (req, res) {
+  // const newVideoId = videoId
+  const newtTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = 0;
+
+  const query = "INSERT INTO videos (video_title, video_url, video_rating) VALUES ($1, $2, $3)";
+
+  if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res.status(404).send({
       result: "failure",
       message: "Video could not be saved",
     });
+    
+    return;
   }
 
-  videos.push(newVideo);
-  res.json({ videos });
-});
+
+// app.post("/videos", (req, res) => {
+//   const newVideo = {
+//     // id: uuid.v4(),
+//     id: videos.length + 1,
+//     title: req.params.title,
+//     url: req.params.url,
+//   };
+
+//   if (!newVideo.title || !newVideo.url) {
+//     res.status(404).send({
+//       result: "failure",
+//       message: "Video could not be saved",
+//     });
+//   }
+
+//   videos.push(newVideo);
+//   res.json({ videos });
+// });
 
 // get a single video by id
 app.get("/videos/:id", (req, res) => {
