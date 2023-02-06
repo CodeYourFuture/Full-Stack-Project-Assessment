@@ -16,9 +16,8 @@ const App = () => {
   }, [update])
 
   const removeVideo = (id) => {
-    console.log(id)
     fetch(`https://michellejanay-cyf-video-app.onrender.com/videos/${id}`, {
-      method: 'delete',
+      method: 'DELETE',
     })
       .then((res) => res.json)
       .then(setUpdate(update + 1))
@@ -31,7 +30,12 @@ const App = () => {
         <h1>Video Recommendations</h1>
       </header>
       <main>
-        <AddVideo videos={videos} setVideos={setVideos} />
+        <AddVideo
+          update={update}
+          setUpdate={setUpdate}
+          videos={videos}
+          setVideos={setVideos}
+        />
         {videos && <VideoCard videos={videos} removeVideo={removeVideo} />}
       </main>
     </div>
