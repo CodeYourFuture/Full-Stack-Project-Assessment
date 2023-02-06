@@ -8,9 +8,11 @@ function App() {
   const [defaultVideoData, setDefaultVideoData] = useState([]);
 
   useEffect(() => {
-    fetch("/")
+    fetch("/videos")
       .then((response) => response.json())
-      .then(data => setDefaultVideoData(data))
+      .then(data => {
+        console.log(data)
+        setDefaultVideoData(data)})
       .catch((e) => console.log(e));
   }, [])
 

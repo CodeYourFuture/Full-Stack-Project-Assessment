@@ -10,11 +10,11 @@ function AddNewVideo({ videoData, setVideoData }) {
     event.target.reset();
   }
 
-  const addVideo = (event) => {
+  const handleAddVideo = (event) => {
     event.preventDefault();
     let id = Math.max(...videoData.filter((v) => v.id)) + 1;
-    setTitle(event.target.value);
-    setUrl(event.target.value);
+    // setTitle(event.target.value);
+    // setUrl(event.target.value);
     const rating = 0;
 
     const isUrlValid = (url) => {
@@ -26,7 +26,7 @@ function AddNewVideo({ videoData, setVideoData }) {
         }
       }
       return false;
-    }
+    };
 
     let newVideo = {
       id: id,
@@ -49,7 +49,7 @@ function AddNewVideo({ videoData, setVideoData }) {
     <div className="upper-div">
       <button className="add-video-btn">Add Video</button>
       <div className="add-form">
-        <form onSubmit={addVideo}>
+        <form>
           <label>Title
           <input
             type="text"
@@ -64,7 +64,7 @@ function AddNewVideo({ videoData, setVideoData }) {
             placeholder="Enter the URL"
             onChange={(event) => setUrl(event.target.value)}
           ></input></label>
-          <button className="add-btn">ADD</button>
+          <button className="add-btn" onClick={handleAddVideo}>ADD</button>
           <button className="cancel-btn" onClick={cancelNewVideo}>Cancel</button>
         </form>
       </div>
