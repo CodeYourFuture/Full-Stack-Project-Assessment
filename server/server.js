@@ -58,18 +58,25 @@ app.post("/videos", function (req, res) {
   const newUrl = req.body.video_url;
   const newRating = 0;
 
-  const query = "INSERT INTO videos (video_title, video_url, video_rating) VALUES ($1, $2, $3)";
+  const query =
+    "INSERT INTO videos (video_title, video_url, video_rating) VALUES ($1, $2, $3)";
 
-  if (!req.body.title || !validateYouTubeUrl(req.body.video_url)) {
+  if (!req.body.video_title || !validateYouTubeUrl(req.body.video_url)) {
     res.status(404).send({
       result: "failure",
       message: "Video could not be saved",
     });
-    
+
     return;
   }
-})
 
+  pool
+    .query(query, [newtTitle, newUrl, newRating])
+    .then(() => res.send("Video added!"))
+    .catch((error) => {
+      console.error(error);
+    });
+});
 
 // app.post("/videos", (req, res) => {
 //   const newVideo = {
