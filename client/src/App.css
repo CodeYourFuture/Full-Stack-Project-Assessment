@@ -3,11 +3,37 @@
 }
 
 .App-title {
-  background-color: rgba(0, 0, 255, 0.37);
+  background-color: rgba(10, 10, 146, 0.664);
   height: 100px;
   text-align: center;
+  font-size: 25px;
+  font-style: italic;
+  color: antiquewhite;
 }
 
 .all-videos {
   display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 100px;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.video {
+  text-align: center;
+  width: 450px;
+  margin: 50px;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: none;
 }
