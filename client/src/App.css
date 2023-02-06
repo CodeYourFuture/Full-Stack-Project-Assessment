@@ -4,3 +4,27 @@
 .App-header{
   text-align: center;
 }
+.cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(161, 222, 206);
+  gap: 20px;
+
+}
+.card{
+  border-radius: 10px;
+  padding: 0.5em;
+  margin: 1em;
+}
+.card h4{
+  background-color: black;
+  color:white;
+  font-family: cursive;
+  padding: 0.5em;
+  border-radius: 10px;
+  justify-content: center;
+}
+.card iframe{
+
+}
