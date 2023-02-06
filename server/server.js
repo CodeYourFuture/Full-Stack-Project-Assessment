@@ -54,13 +54,13 @@ function validateYouTubeUrl(url) {
 
 app.post("/videos", function (req, res) {
   // const newVideoId = videoId
-  const newtTitle = req.body.title;
-  const newUrl = req.body.url;
+  const newtTitle = req.body.video_title;
+  const newUrl = req.body.video_url;
   const newRating = 0;
 
   const query = "INSERT INTO videos (video_title, video_url, video_rating) VALUES ($1, $2, $3)";
 
-  if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
+  if (!req.body.title || !validateYouTubeUrl(req.body.video_url)) {
     res.status(404).send({
       result: "failure",
       message: "Video could not be saved",
@@ -90,30 +90,30 @@ app.post("/videos", function (req, res) {
 // });
 
 // get a single video by id
-app.get("/videos/:id", (req, res) => {
-  const found = videos.some((video) => video.id === parseInt(req.params.id));
+// app.get("/videos/:id", (req, res) => {
+//   const found = videos.some((video) => video.id === parseInt(req.params.id));
 
-  if (found) {
-    res.json(videos.filter((video) => video.id === parseInt(req.params.id)));
-  } else {
-    res.status(404).json({ msg: `No video with the id of ${req.params.id}` });
-  }
-});
+//   if (found) {
+//     res.json(videos.filter((video) => video.id === parseInt(req.params.id)));
+//   } else {
+//     res.status(404).json({ msg: `No video with the id of ${req.params.id}` });
+//   }
+// });
 
 // Delete video by id
-app.delete("/videos/:id", (req, res) => {
-  const found = videos.some((video) => video.id === parseInt(req.params.id));
+// app.delete("/videos/:id", (req, res) => {
+//   const found = videos.some((video) => video.id === parseInt(req.params.id));
 
-  if (found) {
-    res.json({
-      msg: "Booking deleted",
-      videos: videos.filter((video) => video.id !== parseInt(req.params.id)),
-    });
-  } else {
-    res
-      .status(404)
-      .json({ result: "failure", message: "Video could not be deleted" });
-  }
-});
+//   if (found) {
+//     res.json({
+//       msg: "Booking deleted",
+//       videos: videos.filter((video) => video.id !== parseInt(req.params.id)),
+//     });
+//   } else {
+//     res
+//       .status(404)
+//       .json({ result: "failure", message: "Video could not be deleted" });
+//   }
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
