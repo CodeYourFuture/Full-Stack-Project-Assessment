@@ -1,4 +1,5 @@
 import "./App.css";
+import VideoScreen from "./main/VideosScreen";
 
 function App() {
   return (
@@ -6,6 +7,9 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <main>
+        <VideoScreen />
+      </main>
     </div>
   );
 }

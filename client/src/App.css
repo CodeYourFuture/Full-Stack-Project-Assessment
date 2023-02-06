@@ -1,3 +1,52 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Khula", sans-serif;
+}
+
+.App-header {
+  text-align: center;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.card-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+}
+button {
+  all: unset;
+  background-color: bisque;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+.form-header {
+  text-align: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-around;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+.card-text {
+  font-size: 20px;
   text-align: center;
 }
