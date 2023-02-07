@@ -113,7 +113,7 @@ app.delete("/videos/:videosId", function (req, res) {
 
   pool
     .query("DELETE FROM videos WHERE id=$1", [videosId])
-    .then(() => res.send(`Video ${videosId} deleted!`))
+    .then(() => res.send(`Video id ${videosId} deleted!`))
     .catch((error) => {
       console.error(error);
       res.status(500).json(error);
