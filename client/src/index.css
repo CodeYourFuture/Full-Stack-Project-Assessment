@@ -5,9 +5,86 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #2B6777;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+header {
+  background-color: white;
+  height: 100px;
+  padding-top: 25px;
+}
+
+.container-videos {
+  max-width: 90%;
+  margin: 50px auto 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 500px);
+  justify-content: center;
+  gap: 20px;
+}
+
+.container-video {
+  background-color: #C8D8E4;
+  padding: 30px;
+  border-radius: 20px;
+  color: black;
+}
+
+.video-title {
+  margin-bottom: 20px;
+}
+
+.container-buttons {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.container-buttons svg {
+  font-size: 30px;
+}
+
+.container-ratings span {
+  margin-left: 5px;
+}
+
+.container-thumbs {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+
+form {
+  background-color: #C8D8E4;
+  margin: 50px auto 0px auto;
+  border-radius: 20px;
+  padding: 50px;
+  width: 60%;
+  font-size: 20px;
+}
+
+label {
+  text-align: left;
+}
+
+.btn-submit {
+  background-color: #2B6777;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+}
+
+input {
+  border-radius: 5px;
+  border: none;
+  outline: none;
 }
