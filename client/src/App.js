@@ -13,14 +13,28 @@ function App() {
     setList(newList);
   }
 
+  function searchVideo(text) {
+    const newList = data.filter((video) => video.title.toLowerCase().includes(text.toLowerCase()));
+    if (text === "") {
+      setList(data);
+    } else {
+      setList(newList);
+    }
+  }
+
+  function addNewVideo(obj) {
+    const newList = [...list, obj];
+    setList(newList);
+  }
+
   return (
     <div className="App">
       <header className="header">
         <h1>Video Recommendation</h1>
       </header>
       <div className="input-section">
-        <AddVideo />
-        <Search />
+        <AddVideo addNewVideo={addNewVideo} />
+        <Search searchVideo={searchVideo} />
       </div>
       <div className="video-list">
         {list.map((video) => {

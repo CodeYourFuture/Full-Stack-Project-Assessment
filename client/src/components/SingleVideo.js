@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BsHandThumbsUp, BsHandThumbsDown } from "react-icons/bs";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 function SingleVideo({ id, title, url, rating, handleRemove }) {
   const [count, setCount] = useState(rating);
@@ -21,7 +22,10 @@ function SingleVideo({ id, title, url, rating, handleRemove }) {
           </i>
         </button>
       </div>
-      <button onClick={() => handleRemove(id)}>Remove</button>
+      <button className="remove-btn" onClick={() => handleRemove(id)}>
+        {<AiOutlineCloseCircle />}
+      </button>
+      <p>{id}</p>
     </div>
   );
 }

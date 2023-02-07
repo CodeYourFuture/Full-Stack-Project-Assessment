@@ -28,25 +28,23 @@ button {
   background-color: #e76f51;
   border-radius: 8px;
   border-style: none;
-  box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
-  display: inline-block;
   font-size: 18px;
   font-weight: 600;
   height: 40px;
   line-height: 20px;
-  margin: 0;
   padding: 10px 16px;
-  position: relative;
   text-align: center;
   transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
 }
 
 button:hover {
   background-color: #f4a261;
+}
+
+button:active {
+  outline: none;
 }
 
 .video-list {
@@ -60,6 +58,10 @@ button:hover {
 .single-video {
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .single-video button {
@@ -82,6 +84,13 @@ button:hover {
   padding-top: 40px;
 }
 
+.single-video .remove-btn {
+  margin: 0 auto;
+  color: red;
+  width: fit-content;
+}
+
 iframe {
   width: 100%;
+  height: 200px;
 }
