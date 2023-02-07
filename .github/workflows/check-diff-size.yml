@@ -17,7 +17,7 @@ jobs:
       - name: "Check that diff isn't too large"
         run: |
           FILES_CHANGED=$(git diff origin/${{github.base_ref}}...origin/${{github.head_ref}} --name-status | wc -l)
-          if [ $FILES_CHANGED > 10 ]
+          if [ $FILES_CHANGED -gt 10 ]
           then
             echo $FILES_CHANGED
             echo "The diff is too large. Please the check the number of files changed in your PR!"
