@@ -1,3 +1,61 @@
 .App {
   text-align: center;
 }
+
+.header {
+  padding: 2em 0;
+  background-color: #2a9d8f;
+  color: white;
+}
+
+.show {
+  visibility: hidden;
+}
+
+.input-section {
+  width: 1000px;
+  margin: 4em auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  margin: 0.5em 0 0.5em 1em;
+  padding: 4px 10px;
+}
+
+button {
+  background-color: #e76f51;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+}
+
+button:hover {
+  background-color: #f4a261;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 500px);
+  gap: 30px;
+}
+
+.single-video {
+  border: 2px solid red;
+  padding: 2em;
+}
