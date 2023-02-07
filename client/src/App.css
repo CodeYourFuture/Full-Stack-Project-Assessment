@@ -37,8 +37,7 @@ header ::placeholder {
    margin-right: 5px;
    border:1px solid #5B0077;
    font-size:14px;
-   color:#5b0077;
-   
+   color:#5b0077; 
  }
 
 .content{
@@ -47,13 +46,15 @@ header ::placeholder {
 }
 
 .add{
-  width: 400px;
+  flex-basis:25%;
+  flex-shrink:0
 }
 
 .add .form{
   display:flex;
   flex-direction:column;
   align-items:center;
+  
 }
 .add .form>button{
   width:130px;
@@ -129,7 +130,8 @@ justify-content: space-between;
  }
 
  .video{
-  width: 100%;
+  flex-basis:75%;
+  flex-shrink:0;
   display: grid;
  grid-template-columns: repeat(auto-fill, 200px);
  gap: 30px;
@@ -140,15 +142,15 @@ justify-content: space-between;
  }
 
  .delete-btn{
-      width: 47%;
-      border: none;
-      border-radius: 8px;
-      padding: 5px 7px;
-      font-family: 'Outfit';
-      font-size: 13px;
-      border: 1px solid #5b0077;
-      background: #5b0077;
-      color:#fff;
+    width: 47%;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 7px;
+    font-family: 'Outfit';
+    font-size: 13px;
+    border: 1px solid #5b0077;
+    background: #5b0077;
+    color:#fff;
  }
 
  iframe{
@@ -167,4 +169,36 @@ justify-content: space-between;
  border:none;
  background:#fff;
  font-size: 20px;
+}
+
+
+
+ 
+
+@media only screen and (max-width: 790px) {
+ 
+ .content{
+  flex-direction:column;
+ }
+ .add{
+  flex-basis:100%; 
+  padding-bottom:30px;
+ }
+ .video{
+  flex-basis:100%; 
+ }
+ 
+}
+@media only screen and (max-width: 530px) { 
+ header{
+  flex-direction:column; 
+ }
+ .search{
+  margin-top: 15px;
+ }
+}
+@media only screen and (max-width: 486px) {
+  .video{
+   grid-template-columns: repeat(auto-fill,100%);
+  }
 }

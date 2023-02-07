@@ -1,22 +1,26 @@
 import { useRef, useState } from "react";
 
 
-const Add=()=>{
+const Add=({handelSave})=>{
+    
     const title= useRef();
     const url=useRef();
 
     const [showStatus ,setShowStatus ] = useState("none")
-
+  
     const openForm = ()=>{
         setShowStatus("flex")
-    }
+    } 
 
     const closeForm = ()=>{
         setShowStatus("none")
     }
+ 
     const saveVideo= ()=>{
-        console.log(title.current.value, url.current.value)
+        handelSave(title.current.value ,url.current.value);
+        title.current.value = url.current.value = '';
     }
+
     return (
         <div className="form">
             <button onClick={openForm}> Add New Video </button>
