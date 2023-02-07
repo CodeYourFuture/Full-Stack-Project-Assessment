@@ -54,11 +54,19 @@ header {
   margin-left: 5px;
 }
 
+.container-delete svg:hover {
+  cursor: pointer;
+}
+
 .container-thumbs {
   width: 100px;
   display: flex;
   justify-content: space-between;
   margin-right: 20px;
+}
+
+.container-thumbs svg:hover {
+  cursor: pointer;
 }
 
 form {

@@ -1,17 +1,26 @@
 import { useState } from "react";
 
-export default function AddVideo() {
+export default function AddVideo({ addVideo }) {
   const [input, setInput] = useState({
+    id: 0,
     title: "",
-    url: ""
+    url: "",
+    rating: 0
   });
 
   const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+    setInput({ ...input, [e.target.name]: e.target.value, id: Math.round(Math.random() * 1000) });
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    addVideo(input);
+    setInput({ ...input, title: "", url: "" });
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div>
         <label>
           Title
