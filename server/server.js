@@ -1,9 +1,11 @@
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 let videos = require("./data/exampleresponse.json");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json(videos);
@@ -34,12 +36,43 @@ app.post("/", (req, res) => {
   }
 });
 
+app.patch("/:id/inc-rating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video => video.id !== videoId ? video : { ...video, rating: video.rating + 1 })
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted"
+    });
+  }
+});
+
+app.patch("/:id/dec-rating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video => video.id !== videoId ? video : { ...video, rating: video.rating - 1 })
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted"
+    });
+  }
+});
+
 app.delete("/:id", (req, res) => {
   const videoId = +req.params.id;
 
   try {
     videos = videos.filter(video => video.id !== videoId);
-    console.log(videos[0]);
 
     res.json({});
   } catch (error) {

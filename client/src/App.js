@@ -2,34 +2,51 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import AddVideo from "./components/AddVideo";
 import VideosContainer from "./components/VideosContainer";
-import videosData from "./data/exampleresponse.json";
 
 function App() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     async function getVideos() {
-      setVideos([...videosData]);
+      const res = await fetch("http://localhost:5000");
+      const data = await res.json();
+
+      setVideos([...data]);
     }
 
     getVideos();
   }, []);
 
-  const addVideo = (video) => {
-    console.log(video);
+  const addVideo = (video, id) => {
+    video.id = id;
     setVideos([...videos, video]);
   }
 
-  const deleteVideo = (id) => {
+  const deleteVideo = async (id) => {
+    const res = await fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE"
+    });
+    await res.json();
+
     setVideos(videos.filter(video => video.id !== id));
   }
 
-  const incRating = (id) => {
+  const incRating = async (id) => {
+    const res = await fetch(`http://localhost:5000/${id}/inc-rating`, {
+      method: "PATCH"
+    });
+    await res.json();
+
     setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating + 1 }));
   }
 
-  const decRating = (id, rating) => {
+  const decRating = async (id, rating) => {
     if (rating > 0) {
+      const res = await fetch(`http://localhost:5000/${id}/dec-rating`, {
+        method: "PATCH"
+      });
+      await res.json();
+
       setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating - 1 }));
     }
   }
