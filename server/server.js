@@ -108,8 +108,8 @@ app.post("/videos", function (req, res) {
 // });
 
 // Delete video by id
-app.delete("/videos/:videosId", function (req, res) {
-  const videosId = req.params.videosId;
+app.delete("/videos/:id", function (req, res) {
+  const videosId = req.params.id;
 
   pool
     .query("DELETE FROM videos WHERE id=$1", [videosId])
