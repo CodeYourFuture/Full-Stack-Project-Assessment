@@ -16,7 +16,7 @@ jobs:
 
       - name: "Check that diff isn't too large"
         run: |
-          FILES_CHANGED=$(git diff origin/${{github.base_ref}}...origin/${{github.head_ref}} --name-status | wc -l)
+          FILES_CHANGED=$(gh pr diff ${{github.event.pull_request.number}} --name-only | wc -l)
           echo "Number of files changed in this PR: ${FILES_CHANGED}"
           if [ $FILES_CHANGED -gt 10 ]
           then
