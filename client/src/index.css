@@ -28,22 +28,27 @@ header {
   gap: 20px;
 }
 
+.video-title {
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
 .container-video {
   background-color: #C8D8E4;
   padding: 30px;
   border-radius: 20px;
   color: black;
-}
-
-.video-title {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 575px;
 }
 
 .container-buttons {
   font-size: 20px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: auto;
 }
 
 .container-buttons svg {

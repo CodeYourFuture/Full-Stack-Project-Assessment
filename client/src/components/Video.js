@@ -4,8 +4,8 @@ import { faRemove, faStar, faThumbsDown, faThumbsUp } from '@fortawesome/free-so
 export default function Video({ video, deleteVideo, incRating, decRating }) {
   return (
     <div className="container-video">
-      <h4 className="video-title">{video.title}</h4>
-      <iframe width="100%" height="300" src={`https://www.youtube.com/embed/${video.url.split("watch?v=")[1]}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <span className="video-title">{video.title}</span>
+      <iframe width="100%" height="300" src={`https://www.youtube.com/embed/${video.url.split("watch?v=")[1]}`} title={video.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <div className="container-buttons">
         <div className="container-ratings">
           <FontAwesomeIcon icon={faStar} />
