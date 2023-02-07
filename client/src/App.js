@@ -11,51 +11,40 @@ function App() {
     fetch("/videos")
       .then((response) => response.json())
       .then(data => {
-        console.log(data)
-        setDefaultVideoData(data)})
+        setDefaultVideoData(data.sort((a, b) => a.rating - b.rating))})
       .catch((e) => console.log(e));
-  }, [])
+    }, [])
+    
+  const handleSorting = (event) => {
+    defaultVideoData.sort((a, b) => b.rating - a.rating);
+    setDefaultVideoData(defaultVideoData);
+    // console.log("Sort button clicked");
+    console.log(defaultVideoData);
+  };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await fetch("/videos");
-  //       const json = await res.json();
-  //       setDefaultVideoData(json);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [])
+  
   console.log(defaultVideoData);
 
-  const [videoData, setVideoData] = useState(defaultVideoData);
-  videoData.sort((b, a) => a.rating - b.rating)
+  let [videoData, setVideoData] = useState(defaultVideoData);
   
-  // const [title, setTitle] = useState("");
-  // const [url, setUrl] = useState('');
-  // const [rating, setRating] = useState(0);
-  return (
-    <div className="App">
-      <header className="my-App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-
-      <AddNewVideo videoData={videoData} setVideoData={setVideoData} />
-      <hr className="hr"></hr>
-      <SearchVideo videoData={videoData} setVideoData={setVideoData} />
-      {/* <PopulateVideos
-        defaultVideoData={defaultVideoData}
-        setDefaultVideoData={setVideoData}
-      />
-       */}
-      <PopulateVideos
-        defaultVideoData={defaultVideoData}
-        setDefaultVideoData={setVideoData}
-      />
-    </div>
-  );
+    return (
+      <div className="App">
+        <header className="my-App-header">
+          <h1>Video Recommendation</h1>
+        </header>
+        <AddNewVideo videoData={videoData} setVideoData={setVideoData} />
+        <hr className="hr"></hr>
+        <SearchVideo videoData={videoData} setVideoData={setVideoData} />
+        <button className="asc-desc" onClick={handleSorting}>
+          Desc
+        </button>
+        <PopulateVideos
+          defaultVideoData={defaultVideoData}
+          setDefaultVideoData={setVideoData}
+          // setDefaultVideoData={setDefaultVideoData}
+        />
+      </div>
+    );
 }
 
 export default App;

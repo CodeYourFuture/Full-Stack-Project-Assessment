@@ -18,6 +18,10 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 // Read in from the json file
 let data = JSON.parse(fs.readFileSync("./exampleresponse.json", "utf-8"));
+
+// Read video data from the API
+// fetch("http://localhost:5000")
+
 let videos = data;
 let maxID = Math.max(...videos.map((c) => c.id));
 
@@ -27,7 +31,7 @@ let maxID = Math.max(...videos.map((c) => c.id));
 //   res.send({ express: "Your Backend Service is Running" });
 // });
 
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
@@ -70,7 +74,6 @@ app.delete("/:id", (req, res) => {
   }
 
   videos.splice(videoIndex, 1);
-
   res.send("Video deleted!");
 });
 
