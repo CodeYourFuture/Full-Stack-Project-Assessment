@@ -1,54 +1,26 @@
-import React, { useState } from "react";
 import "./App.css";
-import exampleresponse from "./exampleresponse.json";
-import VideoList from "./component/VideoList";
-import AddVideo from "./component/AddVideo";
+import { useState } from "react";
+import exampleresponse from '../src/data/exampleresponse.json'
+import VideoCard from './components/VideoCard'
+import Video  from './components/video'
+
 
 function App() {
-  const [videos, setVideos] = useState(exampleresponse)
-
-  const upVote = (id) => {
-    setVideos(prevVideos => {
-      prevVideos.map(video => {
-        if (video.id === id) {
-          return { ...video, rating: video.rating + 1 }
-        }
-        return video;
-      })
-    })
-  }
-
-  const downVote = (id) => {
-    setVideos(prevVideos => {
-      prevVideos.map(video => {
-        if (video.id === id) {
-          return { ...video, rating: video.rating - 1 }
-        }
-        return video;
-      })
-    })
-  }
-
-  const removeVideo = id => {
-    setVideos(prevVideos => prevVideos.filter(video => video.id !== id));
-  }
-
-  const addVideo = video => {
-    setVideos(prevVideos => [...prevVideos, video])
-  }
-
+  const[form,setForm]=useState(false)
+  const [videolist,setVideolist]=useState(exampleresponse)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <AddVideo addVideo={addVideo} />
-      <VideoList
-        videos={videos}
-        upVote={upVote}
-        downVote={downVote}
-        removeVideo={removeVideo}
-      />
+    <div className="container">
+      <button onClick={()=>setForm(!form)}>Add Video</button>
+      <Video form={form} videolist={videolist} setVideolist={setVideolist} />
+      <div className="row">
+        
+   {videolist.map((item)=> {return <div className="videoList">
+    <VideoCard key={item.id} item={item} setVideolist={setVideolist} videolist={videolist}/></div>
+
+   
+   })}
+   </div>
     </div>
   );
 }
