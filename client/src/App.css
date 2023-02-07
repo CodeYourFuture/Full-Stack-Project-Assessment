@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.inputData{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}

@@ -1,11 +1,16 @@
 import "./App.css";
+import Header from './components/Header';
+import Search from './components/Search';
+import Videos from './components/Videos';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header/>
+      <div className="inputData">
+        <Search/>
+        <Videos/>
+      </div>
     </div>
   );
 }
