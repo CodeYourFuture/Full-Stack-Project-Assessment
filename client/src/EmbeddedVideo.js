@@ -2,16 +2,16 @@ import React from "react";
 
 function EmbeddedVideo({ video }) {
   let url;
-  if (video.video_url) {
-    url = video.video_url.replace("watch?v=", "embed/");
+  if (video.url) {
+    url = video.url.replace("watch?v=", "embed/");
   }
   return (
     <iframe
       className="embeddedVideo"
-      title={video.video_title}
+      title={video.title}
       height={"300"}
       src={url}
-      alt={video.video_title}
+      alt={video.title}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
     />
   );

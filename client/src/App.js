@@ -52,30 +52,19 @@ function App() {
     }
   };
 
-  function handleUpvote(index) {
-    let x;
-    videosData.map((video) => {
-      if (video.id === index) {
-        x = video.rating + 1;
-        return x;
-      }
-      return setRating(x);
-    });
-
-    // console.log(videosData[0].rating);
-    // if (videosData[0].rating.filter((_, i) => i === index)) {
-    //   setRating((rating) => {
-    //     console.log(rating);
-    //     return rating + 1;
-    //   });
-    // }
-  }
-
-  function handleDownvote() {
+  const handleUpvote = () => {
     setRating((rating) => {
-      return rating - 1;
+      return rating + 1;
     });
-  }
+  };
+
+  const handleDownvote = () => {
+    if (rating > 0) {
+      setRating((rating) => {
+        return rating - 1;
+      });
+    }
+  };
 
   const removeVideo = (index) => {
     const newVideo = videosData.filter((_, i) => i !== index);
@@ -115,16 +104,15 @@ function App() {
         {videosData.map((video, index) => (
           <Col key={index}>
             <Card key={index}>
-              <Card.Title className="mb-4 mt-4">{video.video_title}</Card.Title>
+              <Card.Title className="mb-4 mt-4">{video.title}</Card.Title>
               {/* <Card.Img variant="top" /> */}
               <EmbeddedVideo video={video} />
               <Card.Body>
                 <Card.Text key={index}>
                   Votes :
-                  <LikeBtn onClick={() => handleUpvote(index)} />
-                  <span> {video.video_rating} </span>
+                  <LikeBtn onClick={handleUpvote} />
+                  <span> {rating} </span>
                   <DisLikeBtn onClick={handleDownvote} variant="secondary" />
-                  {video.video_rating}
                 </Card.Text>
                 <hr />
                 <button onClick={() => removeVideo(index)}>Delete</button>
