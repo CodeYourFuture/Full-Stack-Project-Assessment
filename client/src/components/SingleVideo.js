@@ -1,16 +1,27 @@
-function SingleVideo({ title, url, rating }) {
-  
+import { useState } from "react";
+import { BsHandThumbsUp, BsHandThumbsDown } from "react-icons/bs";
+
+function SingleVideo({ id, title, url, rating, handleRemove }) {
+  const [count, setCount] = useState(rating);
   const link = url.slice(-11);
   return (
     <div className="single-video">
-      <h4>{title}</h4>
-      <iframe
-        width="400"
-        height="240"
-        src={`https://www.youtube.com/embed/${link}`}
-        title={title}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen></iframe>
+      <iframe src={`https://www.youtube.com/embed/${link}`} title={title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <h6>{title}</h6>
+      <div className="card-btn-container">
+        <button className="thumbs-down-btn" onClick={() => setCount(count - 1)}>
+          <i>
+            <BsHandThumbsDown />
+          </i>
+        </button>
+        <p>{count}</p>
+        <button onClick={() => setCount(count + 1)}>
+          <i>
+            <BsHandThumbsUp />
+          </i>
+        </button>
+      </div>
+      <button onClick={() => handleRemove(id)}>Remove</button>
     </div>
   );
 }

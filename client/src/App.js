@@ -1,11 +1,18 @@
+import { useState } from "react";
 import "./App.css";
 import AddVideo from "./components/AddVideo";
 import Search from "./components/Search";
 import SingleVideo from "./components/SingleVideo";
 import data from "./exampleresponse.json";
-console.log(data);
 
 function App() {
+  const [list, setList] = useState(data);
+
+  function handleRemove(id) {
+    const newList = list.filter((video) => video.id !== id);
+    setList(newList);
+  }
+
   return (
     <div className="App">
       <header className="header">
@@ -16,8 +23,8 @@ function App() {
         <Search />
       </div>
       <div className="video-list">
-        {data.map((video) => {
-          return <SingleVideo key={video.id} {...video} />;
+        {list.map((video) => {
+          return <SingleVideo key={video.id} {...video} handleRemove={handleRemove} />;
         })}
       </div>
     </div>

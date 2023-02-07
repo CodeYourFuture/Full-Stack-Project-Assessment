@@ -50,12 +50,38 @@ button:hover {
 }
 
 .video-list {
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 500px);
+  grid-template-columns: repeat(auto-fill, 360px);
+  justify-content: center;
   gap: 30px;
 }
 
 .single-video {
-  border: 2px solid red;
-  padding: 2em;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.single-video button {
+  background-color: transparent;
+  color: green;
+  font-size: 38px;
+}
+
+.single-video .thumbs-down-btn {
+  color: red;
+}
+
+.card-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-btn-container p {
+  padding-top: 40px;
+}
+
+iframe {
+  width: 100%;
 }
