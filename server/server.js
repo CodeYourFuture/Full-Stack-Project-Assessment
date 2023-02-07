@@ -47,7 +47,7 @@ app.post("/videos", function (req, res) {
   const newtTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = 0;
-  const query = "INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)";
+  const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
   if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res
       .status(400)
@@ -55,7 +55,7 @@ app.post("/videos", function (req, res) {
     return;
   }
   pool
-    .query(query, [newId, newtTitle, newUrl, newRating])
+    .query(query, [newtTitle, newUrl, newRating])
     .then(() => res.send("Video added!"))
     .catch((error) => {
       console.error(error);

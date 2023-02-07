@@ -7,7 +7,7 @@ const NewVideos= ({ setVideoData }) => {
   const [addingVideo, setAddingVideo] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-let id = 0;
+ let id = 0;
   function validateYouTubeUrl(urlToParse) {
     if (urlToParse) {
       var regExp =
@@ -21,11 +21,11 @@ let id = 0;
 
   const handleVideoAdder = (e) => {
     e.preventDefault();
-    // const videoId = Date.now();
+    //  const videoId = Date.now();
     
     
     const videoData = {
-      id: id++,
+       id: id++,
       title: title,
       url: url,
       rating: 0,
