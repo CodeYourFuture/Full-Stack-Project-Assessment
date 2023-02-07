@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  pull_request:
+
+jobs:
+
+  check-diff:
+    name: Check diff size
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "Check that diff isn't too large"
+        run: |
+          FILES_CHANGED=$(git diff origin/${{github.base_ref}}...origin/${{github.head_ref}} --name-status | wc -l)
+          if [ $FILES_CHANGED > 10 ]
+          then
+            echo "The diff is too large. Please the check the number of files changed in your PR!"
+            exit 1
+          else 
+            echo "The diff looks nice and small - good work! 😎"
+            exit 0
+          fi
+           
