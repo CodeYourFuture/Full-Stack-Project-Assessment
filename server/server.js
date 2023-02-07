@@ -58,8 +58,7 @@ app.post("/videos", function (req, res) {
   const newUrl = req.body.url;
   const newRating = 0;
 
-  const query =
-    "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+  const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
 
   if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res.status(404).send({
@@ -109,6 +108,18 @@ app.post("/videos", function (req, res) {
 // });
 
 // Delete video by id
+app.delete("/videos/:videosId", function (req, res) {
+  const videosId = req.params.videosId;
+
+  pool
+    .query("DELETE FROM videos WHERE id=$1", [videosId])
+    .then(() => res.send(`Video ${videosId} deleted!`))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+
 // app.delete("/videos/:id", (req, res) => {
 //   const found = videos.some((video) => video.id === parseInt(req.params.id));
 
