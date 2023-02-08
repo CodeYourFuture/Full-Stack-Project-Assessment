@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import "./App.css";
 import AddVideo from "./component/AddVideo";
 import ListVideo from "./component/ListVideo";
+import VoteVideo from "./component/VoteVideo";
 
 
 
@@ -13,6 +14,7 @@ function App() {
       </header>
       <AddVideo/>
       <ListVideo/>
+      {/* <VoteVideo/> */}
     </div>
   );
 }
