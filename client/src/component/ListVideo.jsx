@@ -1,56 +1,31 @@
 import React, { useState } from "react"; //use to array
-import YoutubeVideo from "./YoutubeVideo";
+import CardVideo from "./CardVideo";
+import { increasementVote, decreasementVote, deleteVideo } from "./VoteVideo";
 import exampleresponse from "../exampleresponse.json";
 
 
-const ListVideo=()=>{
-
-  const [videosYoutube,setVideosYoutube]=useState(exampleresponse)
-
-    const increasementVote=(id)=>{
-      setVideosYoutube(videos=>{
-      videos.map(video=>{
-        if(video.id===id){
-          return {...video,rating: video.rating+1}
-        }
-        return video;
-      })
-    })
-  }
-
-  const decreasementVote=(id)=>{
-    setVideosYoutube(videos=>{
-      videos.map(video=>{
-        if(video.id===id){
-          return{...video,rating:video.rating-1}
-        }
-        return video;
-      })
-    })
-  }
-
-  const removeVideo=id=>{
-    setVideosYoutube(videos=>videos.filter(video=>video.id!==id));
-  }
+export default function ListVideo() {
+  const [videosYoutube, setVideosYoutube] = useState(exampleresponse);
 
   videosYoutube.sort((a, b) => b.rating - a.rating);
 
-     return (
-       <div className="video-list">
-         {videosYoutube.map((video) => (
-           <YoutubeVideo
-             key={video.id}
-             video={video}
-             increasementVote={() => increasementVote(video.id)}
-             decreasementVote={() => decreasementVote(video.id)}
-             removeVideo={() => removeVideo(video.id)}
-           />
-         ))}
-       </div>
-     )
-
+  return (
+    <div className="container-list-videos">
+      {videosYoutube.map((video) => (
+        <CardVideo
+          key={video.id}
+          video={video}
+          increasementVote={(id) => {
+            increasementVote(setVideosYoutube, videosYoutube, id);
+          }}
+          decreasementVote={(id) => {
+            decreasementVote(setVideosYoutube, videosYoutube, id);
+          }}
+          deleteVideo={(id) => {
+            deleteVideo(setVideosYoutube, id);
+          }}
+        />
+      ))}
+    </div>
+  );
 }
-
-
-
-export default ListVideo;
