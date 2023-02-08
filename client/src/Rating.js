@@ -3,7 +3,6 @@ import React, { useState } from "react";
 export default function Rating({ rating }) {
   let [rate, setRate] = useState(rating);
   function incrementRate() {
-    console.log(rate);
     setRate(rate + 1);
   }
   function decrementRate() {
