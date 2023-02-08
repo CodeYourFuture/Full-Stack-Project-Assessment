@@ -1,3 +1,29 @@
 .App {
   text-align: center;
 }
+.App-header{
+  background-color: rgb(19, 19, 88);
+  color: white;
+  padding:30px;
+ 
+}
+.App-header h1{
+font-style: italic;
+}
+.video-content form{
+  margin: 20px;
+}
+.video-content h5{
+  color:rgb(69, 69, 223);
+}
+.video-content{
+  text-align: center;
+  display:flex;
+  flex-direction: row;
+  margin: 20px;
+}
+.search_button{
+  margin-top:50px;
+  float:right; 
+}
+
