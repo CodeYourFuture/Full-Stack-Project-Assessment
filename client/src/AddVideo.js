@@ -10,6 +10,7 @@ export default function AddVideo({ addVideo }) {
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+  
   const onSubmit = (e) => {
     e.preventDefault();
     input.id = uuidv4();

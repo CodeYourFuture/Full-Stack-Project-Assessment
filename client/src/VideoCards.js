@@ -1,10 +1,10 @@
 import React from "react";
 import Rating from "./Rating";
 
-export default function VideoCards(props) {
+export default function VideoCards({ videoList, removeVideo }) {
   return (
     <div className="d-flex justify-content-center">
-      {props.videoList.map((element, index) => (
+      {videoList.map((element, index) => (
         <span key={index} className="card">
           <iframe
             width="560"
@@ -21,8 +21,14 @@ export default function VideoCards(props) {
           <div className="card-body">
             <p>{element.title}</p>
             <Rating rating={element.rating} />
-            
-            <button type="button" className="btn btn-primary">
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => {
+                removeVideo(element.id);
+              }}
+            >
               Remove
             </button>
           </div>

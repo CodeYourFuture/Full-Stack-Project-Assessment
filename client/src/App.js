@@ -8,9 +8,13 @@ import data from "./exampleresponse.json";
 function App() {
 let [videos, setVideos] = useState(data);
 
-let addVideo = (video) => {
+function addVideo(video) {
     setVideos([...videos, video]);
-  }
+  };
+
+function removeVideo(id) {
+    setVideos(videos.filter(video => video.id !== id));
+    };
   
   return (
     
@@ -19,7 +23,7 @@ let addVideo = (video) => {
         <h1>Video Recommendation</h1>
       </header>
       <AddVideo addVideo={addVideo}/>
-      <VideoCards videoList={videos} />
+      <VideoCards videoList={videos} removeVideo={removeVideo} />
     </div>
   );
 }
