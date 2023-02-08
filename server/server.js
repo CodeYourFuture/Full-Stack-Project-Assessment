@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const { Pool } = require('pg');
 require("dotenv").config();
+const path=require("path");
 
 
 const pool = new Pool({
@@ -25,7 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
-
+app.use(express.static(path.resolve(__dirname,"../client/build")));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
