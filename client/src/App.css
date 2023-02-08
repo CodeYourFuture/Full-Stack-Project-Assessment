@@ -1,3 +1,140 @@
 .App {
+  background-color: #e3dcc2;
+  margin-top: 0.6em;
+}
+
+nav {
+  color: wheat;
+  text-shadow: 1px 1px 1px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em;
+  margin-bottom: 2.5em;
+  font-weight: 500;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+nav h3 {
+  align-self: flex-start;
+}
+.add-video {
   text-align: center;
+}
+.add-video input,
+.btn {
+  padding: 0.5em;
+  margin: 0.3em;
+  border: 1.7px solid #090979;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #35358a;
+  text-shadow: 1px 1px 1px #090979;
+  color: wheat;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cards-grid {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-rows: auto;
+}
+
+.card-container {
+  text-align: center;
+  padding: 0.8em;
+  margin: 0.8em;
+  border-radius: 15px;
+  border-style: groove;
+  box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
+}
+
+.film-title {
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px 2px #090979;
+}
+.card-bottom-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.vote-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.votes {
+  margin: 0.3em;
+}
+.like {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.like:hover {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+}
+
+.film {
+  width: 90%;
+  height: 20em;
+  border-radius: 15px;
+}
+
+.btn:focus,
+input:focus{
+  background-color: rgb(221, 227, 134);
+}
+
+
+/* ======================
+  Small to Medium Screen
+========================= */
+@media screen and (min-width: 500px) and (max-width: 1350px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
+  .card-container {
+    width: auto;
+    max-width: 80%;
+    text-align: center;
+    padding: 0.8em;
+    margin: 0.8em;
+    border-radius: 15px;
+    border-style: groove;
+    box-shadow: -4px 4px 15px 1px rgb(49, 72, 34);
+  }
+}
+
+/* 500px */
+/* ======================
+  Small Screen
+========================= */
+@media screen and (max-width: 500px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
+
+  .App {
+    width: fit-content;
+  }
 }
