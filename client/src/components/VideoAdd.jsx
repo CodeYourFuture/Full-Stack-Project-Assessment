@@ -60,10 +60,12 @@ function VideoAdd() {
               style={{
                 width: "400px",
                 backgroundColor: "#665A48",
-                border: "none",
+                border: "5px",
+                margin: "30px",
+                textAlign: "center",
               }}
             >
-              <Form style={{ height: "200px", width: "200px" }}>
+              <Form style={{ height: "250px", width: "250px" }}>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   <Form.Label>Title</Form.Label>
                   <Form.Control

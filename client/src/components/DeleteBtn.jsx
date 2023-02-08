@@ -1,9 +1,7 @@
-import React  from "react";
+import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-
 function DeleteBtn(props) {
-  
   const { id } = props;
 
   const handleDelete = (id) => {
@@ -17,8 +15,7 @@ function DeleteBtn(props) {
     window.location.reload();
   };
   return (
-    <div className="container">
-     
+    <div className="delete">
       <button onClick={() => handleDelete(id)}>
         <DeleteIcon />
         Delete

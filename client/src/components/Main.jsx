@@ -5,21 +5,18 @@ import Videos from "./Videos";
 
 function Main() {
   const [videos, setVideos] = useState([]);
+  const [sort, setSort] = useState(["asc"]);
 
   const [filtered, setFiltered] = useState(videos);
   useEffect(() => {
-    fetch("/videos")
+    fetch("https://youtubevideos.onrender.com")
       .then((res) => res.json())
       .then((data) => {
-          // data.sort((a, b) => b.rating - a.rating);
-        
+        console.log(data);
         setVideos(data);
-        
         setFiltered(data);
       });
   }, []);
-
-
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -27,32 +24,44 @@ function Main() {
       setFiltered(videos);
     } else {
       setFiltered(
-        videos
-          .filter((video) =>
-            video.video_title.toLowerCase().includes(event.target.value.toLowerCase())
-          )
-          .sort((a, b) => b.video_rating - a.video_rating)
+        videos.filter((video) =>
+          video.video_title
+            .toLowerCase()
+            .includes(event.target.value.toLowerCase())
+        )
       );
     }
   };
 
-const handleSort = () => {
-  
-  setFiltered(videos.sort((b, a) => a.video_rating - b.video_rating));
-};
-console.log(filtered);
+  const handleSort = () => {
+    if (sort === "asc") {
+      setFiltered((prevState) =>
+        prevState.sort((a, b) => a.video_rating - b.video_rating)
+      );
+      setSort("desc");
+    } else {
+      setFiltered((prevState) =>
+        prevState.sort((a, b) => b.video_rating - a.video_rating)
+      );
+      setSort("asc");
+    }
+  };
+
   return (
     <div>
-      <form>
-        <input type="text" placeholder="Search..." onChange={handleSearch} />
+      <form className="form-container">
+        <input
+          className="search-box"
+          type="text"
+          placeholder="Search..."
+          onChange={handleSearch}
+        />
+        <button className="order" onClick={handleSort}>
+          {sort === "asc" ? "order asc" : "order desc"}
+        </button>
       </form>
-    <br />
-    <button onClick={handleSort}>ORDER</button>
-
-      <div>
-        <VideoAdd />
-      </div>
-
+      <br />
+      <VideoAdd />
       <div>
         {filtered.map((video) => (
           <div key={video.id}>

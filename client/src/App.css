@@ -3,12 +3,21 @@
 }
 
 .App-header {
-  display: block;
-  margin: auto -16px;
+  padding: 20px;
+  margin: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   color: #fff;
   font-style: oblique;
   padding: 2rem 50px 10px 50px;
+  border-color: rgb(187, 20, 20);
+  border-radius: 50px;
+}
+
+.form-container {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .App-header h1 {
@@ -16,10 +25,11 @@
   font-family: "McLaren", cursive;
   font-weight: 200;
   border-color: rgb(187, 20, 20);
+  border-width: 20px;
   border-radius: 50px;
   background-color: rgb(22, 20, 20);
-  margin: 10px;
-  padding: 20px;
+  margin: 20px;
+  padding: 10px;
 }
 
 body {
@@ -35,9 +45,11 @@ body {
   font-weight: 400;
 }
 
-input {
+.search-box,
+.order {
+  height: 60px;
   color: #eee;
-  margin: 20px;
+  margin: 20px auto;
   padding: 10px;
   font-size: 1rem;
   border-color: rgb(187, 20, 20);
@@ -46,8 +58,6 @@ input {
   background-color: rgb(22, 20, 20);
   justify-content: space-around;
 }
-
-
 
 .add {
   color: #eee;
@@ -62,16 +72,32 @@ input {
 }
 
 .container {
+  width: 800px;
+  height: 50px;
   justify-content: center;
+  flex-wrap: wrap;
   font-size: 2rem;
   display: inline-block;
   text-align: center;
   margin: auto;
+  padding: 20px auto;
+  background: "black";
+  border: "#D43C31 solid";
+          
 }
 
+
+
 button {
-  background-color: rgb(241, 10, 10);
+  color: #eee;
   margin: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border-color: rgb(187, 20, 20);
+  border-radius: 50px;
+  border-width: 10px;
+  background-color: rgb(17, 14, 14);
+  justify-content: space-around;
 }
 
 footer {

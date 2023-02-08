@@ -12,27 +12,27 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 dotenv.config();
 
 const pool = new Pool({
-  user: "test_user",
-  database: "full_stack_project_assisment_testdb",
-  password: "eFzzVWRX5fG2FMspFWFlkPEECsgc4IWV",
-  host: "dpg-cfd5271gp3jl4ddrqfrg-a.oregon-postgres.render.com",
-  port: 5432,
+  // user: "test_user",
+  // database: "full_stack_project_assisment_testdb",
+  // password: "eFzzVWRX5fG2FMspFWFlkPEECsgc4IWV",
+  // host: "dpg-cfd5271gp3jl4ddrqfrg-a.oregon-postgres.render.com",
+  // port: 5432,
 
-  //  connectionString: process.env.DATABASE_URL,
-  //  connectionTimeoutMillis: 5000,
-  //  ssl: {
-  //    rejectUnauthorized: false,
-  //  }
+   connectionString: process.env.DATABASE_URL,
+   connectionTimeoutMillis: 5000,
+   ssl: {
+     rejectUnauthorized: false,
+   }
 });
 
-app.use(cors());
 
 
-// app.use(
-//   cors({
-//     // origin: "http://localhost:3000",
-//   })
-// );
+
+app.use(
+  cors({
+    accessControlAllowOrigin: "*",
+  })
+);
 
 app.get("/videos", (req, res) => {
   const order = req.query.order;
@@ -41,7 +41,7 @@ app.get("/videos", (req, res) => {
   if (order === "asc") {
     query = query + " ORDER BY  rating "
   } else if (order === "desc") {
-    //console.log(order);
+    
     query = query + " ORDER BY  rating desc ";
 };
   pool
