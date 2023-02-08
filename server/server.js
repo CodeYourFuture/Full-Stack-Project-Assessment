@@ -4,14 +4,13 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
 const { Pool } = require('pg');
+require("dotenv").config();
 
 
 const pool = new Pool({
-  user: 'codeyourfuture',
-  host: 'localhost',
-  database: 'video-recommendation-db',
-  password: 'felfel',
-  port: 5432
+  user: process.env.user,
+ connectionString: process.env.connection,
+  ssl:true
 });
 
 

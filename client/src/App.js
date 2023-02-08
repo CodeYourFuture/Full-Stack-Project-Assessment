@@ -27,8 +27,6 @@ function App() {
     },[]);
   }
   getData();
-
-  const removeSelectedVideo = () => {
   
     useEffect( ()=>{
       console.log(deletedVideoId);
@@ -40,13 +38,12 @@ function App() {
           return res.json();
         })
       .then(data=>{
-        setVideosList(data);
+        setVideosList(...data);
       })
       .catch(err => console.log(err));
 
     }, [deletedVideoId]);
-  };
-    removeSelectedVideo();
+ 
 
     function handleChange(event) {
       setFormData(prevFormData => {
