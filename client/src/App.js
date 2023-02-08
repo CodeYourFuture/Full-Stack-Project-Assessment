@@ -12,7 +12,7 @@ function App() {
 
   const getData = () => {
     useEffect(() => {
-      fetch(`http://localhost:5000/videos`)
+      fetch(`https://full-stack-video-recommendation.onrender.com/videos`)
         .then(res => {
           if (!res.ok) {
             throw new Error(res.statusText);
@@ -30,7 +30,7 @@ function App() {
   
     useEffect( ()=>{
       console.log(deletedVideoId);
-      fetch(`http://localhost:5000/videos/${deletedVideoId}`, { method: 'DELETE' })
+      fetch(`https://full-stack-video-recommendation.onrender.com/videos/${deletedVideoId}`, { method: 'DELETE' })
         .then(res => {
           if (!res.ok) {
             throw new Error(res.statusText);
