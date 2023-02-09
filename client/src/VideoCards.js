@@ -13,9 +13,17 @@ function Cards() {
       .catch((error) => console.log(error));
   }, []);
 
-  const removeElement = (i) => {
+  const removeElement = (id) => {
+    console.log(typeof id);
     let newVideos = [...videos];
-    newVideos.splice(i, 1);
+    fetch(`/videos/${id}`, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"},
+    })
+    .then((res)=> res.json())
+    .then((data) =>console.log(data))
+    .catch((error)=> console.log(error))
+    newVideos = newVideos.filter(video => video.id !== id) 
     createVideos(newVideos);
   };
   const updateTitle = (event) => {
@@ -28,23 +36,28 @@ function Cards() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let maxID = Math.max(...videos.map((c) => c.id));
+ 
     const newVideo = {
-      id: ++maxID,
       title,
       url,
       rating: 0,
     };
-    createVideos((videos) => {
-      return [...videos, newVideo];
-    });
+
+     fetch("/videos", {
+      method: "POST",
+      body: JSON.stringify(newVideo),
+      headers: {"Content-Type": "application/json"} 
+    })
+    .then((res)=> res.json())
+    .then((data)=>console.log(data))
+    .catch((error)=> console.log(error))
+    let updatedVideos = [...videos, newVideo];
+
+    createVideos(updatedVideos);
     createTitle("");
     createUrl("");
   };
 
-  useEffect(() => {
-    console.log(videos);
-  }, [videos]);
 
   return (
     <div>
@@ -67,13 +80,12 @@ function Cards() {
       </div>
       <div className="Cards">
         {videos.map((video, index) => {
-          const { id, rating, url, title } = video;
-          return (
+             return (
             <Card
-              key={id}
-              title={title}
-              url={url}
-              rating={rating}
+              id={video.id}
+              title={video.title}
+              url={video.url}
+              rating={video.rating}
               index={index}
               removeElement={removeElement}
             />

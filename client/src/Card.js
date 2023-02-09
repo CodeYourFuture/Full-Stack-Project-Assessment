@@ -22,7 +22,7 @@ const Card = ({ id, title, url, rating, index, removeElement }) => {
         <a href={url} className="btn btn-primary">
           🎞️
         </a>
-        <button className="deleteVideo" onClick={() => removeElement(index)}>
+        <button className="deleteVideo" onClick={() => removeElement(id)}>
           ❌
         </button>
       </div>

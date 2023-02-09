@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Cards from "./VideoCards";
+import VideoCards from "./VideoCards";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Cards />
+      <VideoCards />
       <Footer />
     </div>
   );
