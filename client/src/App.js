@@ -1,4 +1,6 @@
 import "./App.css";
+import VideoList from "./components/VideoList";
+
 
 function App() {
   return (
@@ -6,6 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <VideoList/>
     </div>
   );
 }
