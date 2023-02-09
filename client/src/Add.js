@@ -6,7 +6,6 @@ function Add({ videoData, setVideoData })
     const [newTitle, setNewTitle] = useState("");
     const [newURL, setNewURL] = useState("");
 
-
     const addFunction = (videoData) => 
     {
         const newItem =
