@@ -3,7 +3,7 @@ import Rating from "./Rating";
 
 export default function VideoCards({ videoList, removeVideo }) {
   return (
-    <div className="d-flex justify-content-center">
+    <div className="grid-container">
       {videoList.map((element, index) => (
         <span key={index} className="card">
           <iframe
@@ -19,9 +19,8 @@ export default function VideoCards({ videoList, removeVideo }) {
             allowfullscreen
           ></iframe>{" "}
           <div className="card-body">
-            <p>{element.title}</p>
+            <h4>{element.title}</h4>
             <Rating rating={element.rating} />
-
             <button
               type="button"
               className="btn btn-primary"
@@ -29,7 +28,7 @@ export default function VideoCards({ videoList, removeVideo }) {
                 removeVideo(element.id);
               }}
             >
-              Remove
+              Remove video
             </button>
           </div>
         </span>

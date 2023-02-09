@@ -11,7 +11,8 @@ export default function Rating({ rating }) {
 
   return (
     <div>
-      {rate}
+      Rating: {rate}
+      <br />
       <button type="button" className="btn btn-primary" onClick={incrementRate}>
         Up Vote
       </button>

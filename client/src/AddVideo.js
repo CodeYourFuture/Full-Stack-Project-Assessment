@@ -10,7 +10,7 @@ export default function AddVideo({ addVideo }) {
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
-  
+
   const onSubmit = (e) => {
     e.preventDefault();
     input.id = uuidv4();
@@ -29,7 +29,7 @@ export default function AddVideo({ addVideo }) {
   return (
     <form onSubmit={onSubmit}>
       <div>
-        <h2>Add a video</h2>
+        <h3>Add a video</h3>
         <label>Title:</label>
         <input
           id="title"
@@ -37,6 +37,7 @@ export default function AddVideo({ addVideo }) {
           name="title"
           value={input.title}
           onChange={handleChange}
+          required
         />
         <label>URL:</label>
         <input
@@ -45,6 +46,7 @@ export default function AddVideo({ addVideo }) {
           name="url"
           value={input.url}
           onChange={handleChange}
+          required
         />
         <button type="submit" className="btn btn-primary">
           Add
