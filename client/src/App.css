@@ -1,3 +1,157 @@
-.App {
+:root
+{
+  background-color: black;
+  color: white;
   text-align: center;
+  display: flexbox;
+}
+
+
+.container
+{
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 3rem;
+  padding: 1rem;
+}
+
+
+#VideoTitle
+{
+  padding-top: 3rem;
+}
+
+
+iframe
+{
+  border-radius: 10px;
+}
+
+
+
+
+#Title, #URL
+{
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+  background-color: darkgrey;
+}
+
+
+#Title
+{
+  margin-bottom: 1rem;
+}
+
+#Title:focus, #URL:focus
+{
+  background-color: white;
+}
+
+
+
+
+
+
+
+
+
+#up, #down, #delete, #sortButton, #addButton
+{
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 10px;
+}
+
+#up:active, #down:active
+{
+  background-color: grey;
+}
+
+
+#up
+{
+  background-color: green;
+}
+
+#up:hover
+{
+  background-color: darkgreen;
+}
+
+
+#down
+{
+  background-color: rgb(167, 0, 0);
+}
+
+#down:hover
+{
+  background-color: darkred;
+}
+
+
+
+
+#delete
+{
+  background-color: red;
+  margin-bottom: 1rem;
+}
+
+#delete:hover
+{
+  background-color: darkred;
+}
+
+#delete:active
+{
+  background-color: black;
+}
+
+
+
+#sortButton
+{
+  margin-top: 1rem;
+  background-color: lightblue;
+}
+
+#sortButton:hover
+{
+  background-color: skyblue;
+}
+
+#sortButton:active
+{
+  background-color: rgb(0, 139, 194);
+}
+
+
+
+#addButton
+{
+  background-color: grey;
+}
+
+#addButton:hover
+{
+  background-color: darkgrey;
+}
+
+#addButton:active
+{
+  background-color: white;
+}
+
+
+@media ( min-width: 600px ) 
+{
+  iframe
+  {
+    width: 560px;
+    height: 315px;
+  }
 }

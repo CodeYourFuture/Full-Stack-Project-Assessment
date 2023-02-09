@@ -1,11 +1,33 @@
-import "./App.css";
+import { useState, useEffect } from "react";
+import './App.css';
+import Add from "./Add.js";
+import Sort from "./Sort.js";
+import Map from "./Map.js";
 
-function App() {
+function App()
+{
+  const [videoData, setVideoData] = useState([]);
+  const [sort, setSort] = useState("desc");
+
+
+  useEffect(() =>
+  {
+    fetch("http://192.168.0.15:5000/videos?order=" + sort)
+      .then(res => res.json())
+      .then(data => setVideoData(data))
+      .catch(error => console.log(error))
+  }, [sort]);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Sort sort={sort} setSort={setSort} />
+      <Add videoData={videoData} setVideoData={setVideoData} />
+      <div className='Holder'>
+        <h1 id="VideoTitle">Videos</h1>
+        <Map videoData={videoData} setVideoData={setVideoData} sort={sort} />
+      </div>
     </div>
   );
 }
