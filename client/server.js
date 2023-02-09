@@ -1,8 +1,12 @@
 const express = require("express");
 const { Pool } = require("pg");
+const path = require("path");
+const cors = require("cors");
 
 const app = express();
+app.use(express.static(path.resolve(__dirname, "../build")));
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 3001;
 
 const pool = new Pool({
@@ -26,12 +30,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
 // GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../build", "index.html"));
 });
 
 app.post("/", (req, res) => {
@@ -45,7 +47,7 @@ app.post("/", (req, res) => {
   if (videoTitle == "" && videoURL == "") {
     res.json({
       result: "failure",
-      message: "Video could not be saved",
+      message: "Faild to save video",
     });
     return;
   }
