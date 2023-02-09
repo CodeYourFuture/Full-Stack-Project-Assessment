@@ -78,14 +78,13 @@ function Cards() {
         </form>
       </div>
       <div className="Cards">
-        {videos.length && videos.map((video, index) => {
+        {videos.length && videos.map((video) => {
              return (
             <Card
               id={video.id}
               title={video.title}
               url={video.url}
               rating={video.rating}
-              index={index}
               removeElement={removeElement}
             />
           );

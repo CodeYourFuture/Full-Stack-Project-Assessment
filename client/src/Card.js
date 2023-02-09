@@ -2,14 +2,10 @@ import React from "react";
 import ReactPlayer from "react-player";
 import Votes from "./Voting";
 
-const Card = ({ id, title, url, rating, index, removeElement }) => {
+const Card = ({ id, title, url, rating, removeElement }) => {
   return (
     <div
       key={id}
-      title={title}
-      url={url}
-      id={id}
-      rating={rating}
       className="card"
     >
       <div className="video">
