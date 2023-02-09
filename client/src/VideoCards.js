@@ -14,7 +14,6 @@ function Cards() {
   }, []);
 
   const removeElement = (id) => {
-    console.log(typeof id);
     let newVideos = [...videos];
     fetch(`/videos/${id}`, {
       method: "DELETE",
@@ -79,7 +78,7 @@ function Cards() {
         </form>
       </div>
       <div className="Cards">
-        {videos.map((video, index) => {
+        {videos.length && videos.map((video, index) => {
              return (
             <Card
               id={video.id}
