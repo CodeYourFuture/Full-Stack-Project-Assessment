@@ -4,7 +4,7 @@
 
 Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
 
-This means that we need to be sure that you can create a Full Stack app.
+This means that we need to be sure that you can create a Full Stack App.
 
 ## Challenge
 

@@ -1,3 +1,138 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;500;600;700&display=swap");
+
+body {
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+}
+.app {
   text-align: center;
+  font-family: "Nunito Sans", sans-serif, "Taviraj", serif;
+  font-family: "Edu NSW ACT Foundation", cursive;
+}
+.app-header {
+  color: white;
+  background-color: #c2090932;
+  text-align: left;
+  padding: 20px 0 20px 50px;
+}
+
+h1 {
+  font-size: xx-large;
+}
+
+.form-wrapper {
+  margin: 2rem;
+}
+.sub-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+form {
+  margin: 10px;
+}
+
+h2 {
+  text-align: left;
+  margin: 0 50px;
+  font-weight: 800;
+  color: #f4e73b;
+  text-align: center;
+  font-size: 200;
+}
+
+input {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 10px 0;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  background-color: #62f2e855;
+}
+.video-container {
+  margin: 20px;
+}
+.video-header {
+  color: #333535;
+}
+.wrapper {
+  background-color: #ffffff5c;
+  padding: 3px 0 16px;
+  border-radius: 5px;
+  text-align: center;
+}
+.wrapper:hover {
+  background-color: #d8bff577;
+}
+
+iframe {
+  width: 350px;
+  height: 320px;
+}
+
+.button {
+  margin: 4px;
+  padding: 8px 15px;
+  border: none;
+  background-color: #00dade4d;
+  background-image: linear-gradient(90deg, #00dade4a 0%, #fb00ff4f 100%);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #c20909;
+}
+.button:hover {
+  color: #821b35aa;
+}
+/* .vote-button {
+  background-color: #fbac7ea9;
+  background-image: linear-gradient(62deg, #fbac7e7e 0%, #f7cf686f 100%);
+} */
+
+.btn{
+  background-color: #c850c000;
+}
+
+@media (min-width: 600px) {
+  .sub-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    padding: 3rem;
+  }
+
+  .vote-button {
+    margin: 0 3rem;
+  }
+
+  .video-header {
+    height: 18%;
+  }
+}
+
+.footer {
+  background-color: #09a0c2;
+  margin-top: 2rem;
+  padding: 1rem;
+  color: white;
+}
+
+@media (min-width: 900px) {
+  .sub-container {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    padding: 3rem;
+  }
+
+
+iframe {
+  width: 450px;
+  height: 320px;
+}
 }
