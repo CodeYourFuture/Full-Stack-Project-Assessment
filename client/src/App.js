@@ -6,7 +6,7 @@ import SingleVideo from "./components/SingleVideo";
 import data from "./exampleresponse.json";
 
 function App() {
-  const [list, setList] = useState(data);
+  const [list, setList] = useState(data.sort((a, b) => b.rating - a.rating));
 
   function handleRemove(id) {
     const newList = list.filter((video) => video.id !== id);
