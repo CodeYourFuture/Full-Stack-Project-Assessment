@@ -1,13 +1,15 @@
-import "./App.css";
+
 import React from "react";
+import { Header, Forms } from "./components/index.js";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+    <div>
+     <Header/>
+     <Forms/>
     </div>
+   
   );
 }
 
