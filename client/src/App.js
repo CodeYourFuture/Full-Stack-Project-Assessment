@@ -15,7 +15,7 @@ function App() {
       <Form form={form} videolist={videolist} setVideolist={setVideolist} />
       <div className="row">
         
-   {videolist.map((item)=> {return <div className="col-6 col-md-4">
+   {videolist.sort((a,b)=>b.rating-a.rating).map((item)=> {return <div className="col-6 col-md-4">
     <Card key={item.id} item={item} setVideolist={setVideolist} videolist={videolist}/></div>
 
    

@@ -1,13 +1,25 @@
 import React,{useState} from 'react'
+import moment from 'moment'
 
 export default function Form({form,setVideolist,videolist}) {
  const[addvideo,setAddvideo]=useState({
   'title':'',
-  'url':''
+  'url':'',
+  uploadDate:moment().format('YYYY-MM-DD'),
+
+  uploadTime:moment().format('h:mm:ss')
+
 })
   const handelAdd=(e)=>{
   e.preventDefault();
-  setVideolist([...videolist,addvideo])
+  if(addvideo.url.includes('https://www.youtube.com/'))
+  { setVideolist([...videolist,addvideo])}
+
+  else{
+    console.log(addvideo);
+    alert('Please enter vaild address')
+  }
+  
 
 }
 const handlechange=(event)=>{
@@ -23,14 +35,13 @@ else {
   }
 }}
 )
-console.log(addvideo);
 }
 
   return (
     <div>
       <form onSubmit={handelAdd} style={{display: form ? 'inline' : 'none'}}>
         <label>Title</label>
-        <input name='title'onChange={handlechange} value={addvideo.title} ></input><br/>
+        <input name='title'onChange={handlechange} value={addvideo.title} required></input><br/>
         <label>URL</label>
         <input name='url'onChange={handlechange} value={addvideo.url}></input><br/>
         <button >Add</button>
