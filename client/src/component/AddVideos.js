@@ -18,11 +18,9 @@ export default function AddVideos({ videodata, setVideoData }) {
   return (
     <div>
       <section>
-        <h3>
-          <span className="badge badge-success"> Add Videos</span>
-        </h3>
+        <button className="btn btn-dark">Add Videos</button>
         <form onSubmit={handleSubmit}>
-          <div className="form-group form">
+          <div className=" from group form">
             <label htmlFor="Title">Title</label>
             <input
               required
@@ -35,7 +33,7 @@ export default function AddVideos({ videodata, setVideoData }) {
               onChange={(event) => setTitle(event.target.value)}
             />
           </div>
-          <div className="form-group form">
+          <div className=" from group form">
             <label htmlFor="url">URL</label>
             <input
               required
@@ -49,7 +47,7 @@ export default function AddVideos({ videodata, setVideoData }) {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-dark">
             Submit
           </button>
         </form>

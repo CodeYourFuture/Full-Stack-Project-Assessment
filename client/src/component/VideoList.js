@@ -10,7 +10,7 @@ export default function VideoList({ videodata, setVideoData }) {
     // console.log(!newVideoList)
   }
   return (
-    <div>
+    <div className="videoList">
       {videodata.map((eachVideo, index) => (
         <VideoCard
           eachVideo={eachVideo}
