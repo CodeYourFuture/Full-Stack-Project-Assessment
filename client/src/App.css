@@ -21,8 +21,10 @@ header{
   padding: 30px 30px;  
 } 
 header ::placeholder { 
-   color:    #5b0077;
+   color:  #5b0077;
+ 
 } 
+ 
 .search button{
   border:1px solid #5B0077;
   border-radius:8px;
@@ -32,8 +34,11 @@ header ::placeholder {
   background-color:#5b0077;
   color:#fff
 }
+.search button:hover{
+  border-color:#fff
+}
  .search input{
-   padding : 5px 10px;
+   padding : 6px 10px;
    margin-right: 5px;
    border:1px solid #5B0077;
    font-size:14px;
@@ -56,7 +61,7 @@ header ::placeholder {
   align-items:center;
   
 }
-.add .form>button{
+.add .form >button{
   width:130px;
   background-color:#5b0077;
   border:none;
@@ -133,8 +138,8 @@ justify-content: space-between;
   flex-basis:75%;
   flex-shrink:0;
   display: grid;
- grid-template-columns: repeat(auto-fill, 200px);
- gap: 30px;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 30px;
  }
 
  .single-video{
@@ -149,7 +154,7 @@ justify-content: space-between;
     font-family: 'Outfit';
     font-size: 13px;
     border: 1px solid #5b0077;
-    background: #5b0077;
+    background-color: #5b0077!important;
     color:#fff;
  }
 
@@ -170,8 +175,13 @@ justify-content: space-between;
  background:#fff;
  font-size: 20px;
 }
-
-
+ 
+.uploaded-date span{
+  font-size:10px; 
+ text-align:right;
+ display:block
+}
+ 
 
  
 

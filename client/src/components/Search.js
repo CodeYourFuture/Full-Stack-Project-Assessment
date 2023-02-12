@@ -1,5 +1,8 @@
 import { useRef } from "react";
-
+import Button from "@mui/material/Button";
+import SearchIcon from "@mui/icons-material/Search";
+ 
+ 
 const Search = ({ handelSearch }) => {
   const keyword = useRef();
 
@@ -17,9 +20,14 @@ const Search = ({ handelSearch }) => {
         ref={keyword}
         placeholder="Search Here"
       />
-      <button onClick={() => handelSearch(keyword.current.value)}>
+
+      <Button
+        onClick={() => handelSearch(keyword.current.value)}
+        variant="outlined"
+        startIcon={<SearchIcon />}
+      >
         Search Video
-      </button>
+      </Button>
     </div>
   );
 };

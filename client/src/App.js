@@ -4,7 +4,7 @@ import Add from "./components/Add";
 import data from "./exampleresponse.json";
 import Singlevideo from "./components/SingleVideo";
 import { useState } from "react";
-
+ 
 function App() {
   //   199-1  Ordering Results
   data.sort((a, b) => b.rating - a.rating);
@@ -24,6 +24,7 @@ function App() {
     });
     setList(newList);
   };
+
   const handelSave = (title, url) => {
     data = data.concat([
       {
@@ -31,6 +32,7 @@ function App() {
         title: title,
         url: url,
         rating: 0,
+        uploadedDate : new Date().toLocaleString('en-US', { hour12: false })
       },
     ]);
 
@@ -62,7 +64,7 @@ function App() {
             );
           })}
         </div>
-      </section>
+      </section> 
     </main>
   );
 }
