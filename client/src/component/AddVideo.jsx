@@ -1,17 +1,17 @@
 import React, { useState } from "react"; //use to array
 
 export default function AddVideo({addVideo}){
-  
-    const [titleVideo,setTitleVideo]=useState("");
-    const[urlYoutube,seturlYoutube]=useState("");
     const [showInputs,setShowInputs] = useState(false);
   
     const handleSubmit = event=>{
       event.preventDefault();
-       if (titleVideo && urlYoutube) {
-        addVideo({titleVideo,urlYoutube,rating:0});
-        setTitleVideo("");
-        seturlYoutube("");
+
+      const data = new FormData(event.currentTarget);
+      const videoTitle = data.get('video-title')
+      const videoUrl = data.get('video-url')
+      const videoId = 100000 + Math.random() * 900000
+       if (videoTitle && videoUrl) {
+        addVideo({id: videoId, title: videoTitle, url: videoUrl,rating:0});
        }
   }
   
@@ -28,8 +28,7 @@ export default function AddVideo({addVideo}){
             <input
               id="title"
               type="text"
-              value={titleVideo}
-              onChange={(e) => setTitleVideo(e.target.value)}
+              name="video-title"
               required
             />
 
@@ -37,11 +36,10 @@ export default function AddVideo({addVideo}){
             <input
               id="url"
               type="text"
-              value={urlYoutube}
-              onChange={(e) => seturlYoutube(e.target.value)} //target return the element where the event occured
+              name="video-url"
               required
             />
-            <button className = "add-video-button" onClick = {handleSubmit} type="submit">Add Video</button>
+            <button className = "add-video-button" type="submit">Add Video</button>
             <button  className = "cancel-button margin-left" onClick = {()=>{setShowInputs(false)}} >Cancel</button>
           </form>:null}
         </div>
@@ -50,4 +48,3 @@ export default function AddVideo({addVideo}){
     );
 
 }
-

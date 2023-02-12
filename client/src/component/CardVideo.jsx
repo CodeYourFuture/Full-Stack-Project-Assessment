@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -6,15 +6,25 @@ import {
   faThumbsDown,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Video({
+export default function CardVideo({
   video,
-  increasementVote,
-  decreasementVote,
-  deleteVideo,
+  deleteVideo
 }) {
+
+  const [rating, setRating] = useState(video.rating)
+
   if (!video) {
     return null;
   }
+
+  const increaseRating = () => {
+    setRating(rating + 1)
+  }
+
+  const decreaseRating = () => {
+    setRating(rating - 1)
+  }
+
   return (
     <div className="container-card">
       <div className="container-video">
@@ -35,27 +45,25 @@ export default function Video({
 
       <div className="container-rating">
         <FontAwesomeIcon className="icon-star" icon={faStar}></FontAwesomeIcon>
-        <span className="text-rating">{video.rating}</span>
+        <span className="text-rating">{rating}</span>
       </div>
 
       <section className="container-buttons">
-        <button className="thumbs-up-button" onClick={() => increasementVote(video.id, video.rating)}>
+        <button className="thumbs-up-button" onClick={increaseRating}>
           <FontAwesomeIcon
             icon={faThumbsUp}
           />
         </button>
-        <button className="thumbs-down-button" onClick={() => decreasementVote(video.id, video.rating)}>
+        <button className="thumbs-down-button" onClick={decreaseRating}>
           <FontAwesomeIcon
             icon={faThumbsDown}    
           />
         </button>
 
-        <button className="delete-button" onClick={() => deleteVideo(video.id)}>
+        <button className="delete-button" onClick={() => {deleteVideo(video.id)}}>
           Delete
         </button>
       </section>
     </div>
   );
 }
-
-// export default Video;
