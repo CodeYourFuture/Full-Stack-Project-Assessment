@@ -15,7 +15,8 @@ code {
 
 header {
   height: 100px;
-  padding-top: 35px;
+  font-size: 30px;
+  padding-top: 25px;
   background-color: #646464;
   color: #fff;
 }
