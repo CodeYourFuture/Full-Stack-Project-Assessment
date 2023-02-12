@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import AddVideo from "./component/AddVideo";
 import ListVideo from "./component/ListVideo";
-import exampleresponse from "./exampleresponse.json";
+import exampleresponse from "../../server/data/exampleresponse.json";
 
 function App() {
   const [videosYoutube, setVideosYoutube] = useState(exampleresponse);
