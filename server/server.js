@@ -6,10 +6,15 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const videosFromJson = require("./exampleresponse.json");
+let videos = [videosFromJson];
 
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
+});
+app.get("/videos", (req, res) => {
+  res.status(200).send(videos);
+
 });
