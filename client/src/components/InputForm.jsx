@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { CDBBtn } from "cdbreact";
 import Form from "react-bootstrap/Form";
 import { FormGroup } from "react-bootstrap";
-import data from "../data/dataArray";
+// import data from "../data/dataArray";
 //import data2 from "../data/exampleresponse.json";
 //console.log(data);
 
-function InputForm() {
+function InputForm({ addVideo }) {
   const [video, setVieo] = useState({
     title: "",
     url: "",
@@ -23,7 +23,9 @@ function InputForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(video);
-    data.push(video);
+    // data.push(video);
+
+    addVideo(video);
   };
 
   return (

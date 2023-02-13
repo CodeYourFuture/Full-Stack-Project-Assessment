@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import VideoCard from "./VideoCard";
 
-import data from "../data/exampleresponse.json";
 
 
 
-function VideoList() {
-  const [videos, setVideos] = useState([""]);
 
-  useEffect(() => {
-    setVideos(data);
-  }, []);
+function VideoList({videos}) {
+  // const [videos, setVideos] = useState([""]);
+
+  // useEffect(() => {
+  //   setVideos(data);
+  // }, []);
 
   return (
     <div>
