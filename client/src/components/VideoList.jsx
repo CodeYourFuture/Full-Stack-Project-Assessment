@@ -3,7 +3,7 @@ import VideoCard from "./VideoCard";
 
 import data from "../data/exampleresponse.json";
 
-console.log(data);
+
 
 function VideoList() {
   const [videos, setVideos] = useState([""]);
