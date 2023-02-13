@@ -7,7 +7,7 @@ export default function Form({form,setVideolist,videolist}) {
   'url':'',
   uploadDate:moment().format('YYYY-MM-DD'),
 
-  uploadTime:moment().format('h:mm:ss')
+  uploadTime:''
 
 })
   const handelAdd=(e)=>{
@@ -16,25 +16,27 @@ export default function Form({form,setVideolist,videolist}) {
   { setVideolist([...videolist,addvideo])}
 
   else{
-    console.log(addvideo);
+    
     alert('Please enter vaild address')
   }
   
 
 }
 const handlechange=(event)=>{
-const {name,value}=event.target
-setAddvideo((pre)=>{if(name==='title'){
-  return {'title':value,
-          'url':pre.url}
-}
-else {
-  return{'title':pre.title,
-         'url':value
+  setAddvideo({...addvideo, [event.target.name]:event.target.value,uploadTime:moment().format('hh:mm:ss')})
+  console.log(addvideo);
+// const {name,value}=event.target
+// setAddvideo((pre)=>{if(name==='title'){
+//   return {'title':value,
+//           'url':pre.url}
+// }
+// else {
+//   return{'title':pre.title,
+//          'url':value
 
-  }
-}}
-)
+//   }
+// }}
+// )
 }
 
   return (

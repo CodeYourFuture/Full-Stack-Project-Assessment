@@ -16,8 +16,9 @@ setVideolist(filtered);
     <div>
        <div className="w3-card-4 w3-dark-grey" style={{width:"50%"}}>
 
-<div className="w3-container w3-center">
+<div className="w3-container w3-center" style={{border:'2px solid gray'}}>
   <h3>{item.title}</h3>
+  <p>{item.uploadDate}</p>
   <div className="w3-section">
     <button className="w3-button w3-green" onClick={()=>setLike(like+1)}>Like</button>
     <button className="w3-button w3-red" onClick={()=>setLike(like-1)}>Dislike
