@@ -1,0 +1,11 @@
+.App-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    background-color: #254E70;
+}
+
+.App-header h1{
+    color: white;
+}
