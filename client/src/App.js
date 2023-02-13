@@ -1,11 +1,19 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VideoCards from "./VideoCards";
 import AddVideo from "./AddVideo";
-import data from "./exampleresponse.json";
+// import data from "./exampleresponse.json";
 
 function App() {
-  let [videos, setVideos] = useState(data);
+  let [videos, setVideos] = useState([]);
+
+  useEffect(function () {
+    fetch("http://localhost:5000")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data.videos);
+      });
+  }, []);
 
   function addVideo(video) {
     setVideos([...videos, video]);

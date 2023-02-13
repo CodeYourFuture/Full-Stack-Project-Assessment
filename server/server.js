@@ -103,14 +103,12 @@ app.post("/", function (req, res) {
   }
 });
 
-
 //GET "/{id}"
 app.get("/:vId", function (req, res) {
   const idToFind = Number(req.params.vId);
   const video = videos.find((video) => video.id === idToFind);
   res.status(200).json({ video });
 });
-
 
 //DELETE "/{id}"
 app.delete("/:vId", function (req, res) {
