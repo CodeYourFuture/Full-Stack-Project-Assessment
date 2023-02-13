@@ -1,15 +1,47 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
+const http = require("http");
+const app = require("./app");
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const normalizePort = (val) => {
+	const port = parseInt(val, 10);
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+	if (isNaN(port)) {
+		return val;
+	}
+	if (port >= 0) {
+		return port;
+	}
+	return false;
+};
+const port = normalizePort(process.env.PORT || "10000");
+app.set("port", port);
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+const errorHandler = (error) => {
+	if (error.syscall !== "listen") {
+		throw error;
+	}
+	const address = server.address();
+	const bind = typeof address === "string" ? "pipe " + address : "port: " + port;
+	switch (error.code) {
+		case "EACCES":
+			console.error(bind + " requires elevated privileges.");
+			process.exit(1);
+			break;
+		case "EADDRINUSE":
+			console.error(bind + " is already in use.");
+			process.exit(1);
+			break;
+		default:
+			throw error;
+	}
+};
+
+const server = http.createServer(app);
+
+server.on("error", errorHandler);
+server.on("listening", () => {
+	const address = server.address();
+	const bind = typeof address === "string" ? "pipe " + address : "port " + port;
+	console.log("Listening on " + bind);
 });
+
+server.listen(port);
