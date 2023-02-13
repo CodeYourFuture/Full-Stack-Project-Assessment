@@ -1,12 +1,27 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import "./App.css";
 import AddVideos from "./component/AddVideos";
 import VideoList from "./component/VideoList";
-import exampleData from "./data/exampleresponse.json";
+// import exampleData from "./data/exampleresponse.json";
 
 
 function App() {
- const [videodata, setVideoData] = useState(exampleData)
+ const [videodata, setVideoData] = useState([])
+
+ useEffect(() => {
+  fetch("http://localhost:5000/")
+    .then((res) => res.json())
+    .then((data) => setVideoData(data)
+     )
+   
+    // console.log(setVideoData)
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+ }, [])
  
   return (
     <div className="App">

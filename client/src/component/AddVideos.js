@@ -6,13 +6,30 @@ export default function AddVideos({ videodata, setVideoData }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(title);
-    console.log(url);
+    // console.log(title);
+    // console.log(url);
     const newVideoObject = {
       title: title,
       url: url,
     };
     setVideoData((prev) => prev.concat(newVideoObject));
+
+    fetch("http://localhost:5000/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideoObject),
+    })
+      //  .then((response) => console.log(response))
+
+      // console.log(setVideoData)
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
   }
 
   return (
