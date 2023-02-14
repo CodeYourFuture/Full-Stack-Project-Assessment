@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import VideoList from './VideoList';
 
 
 const AddVideo = () => {
@@ -8,10 +9,7 @@ const AddVideo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(title === ""){
-      alert("please fill out this field");
-    }
-
+    
   }
 
 
@@ -29,6 +27,7 @@ const AddVideo = () => {
           <button className='cancel-video'  >Cancel</button>
           
         </form>
+        <VideoList/>
       </div>
     </div>
   )
