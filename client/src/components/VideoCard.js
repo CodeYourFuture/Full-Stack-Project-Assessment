@@ -4,11 +4,17 @@ import React, { useState } from 'react'
 export default function VideoCard({ item, setVideolist, videolist }) {
     const [like, setLike] = useState(item.rating)
 
-    const handleDelete = () => {
+ 
 
-        const filtered = videolist.filter(i => i.id !== item.id)
-        setVideolist(filtered);
-    }
+        const handleDelete = (id) => {
+            fetch(`http://localhost:5000/videos/:${id}`, { method: 'DELETE' })
+                .then(res => res.json())
+                .then(data => console.log(data))
+            const filtered = videolist.filter(i => i.id !== item.id)
+            setVideolist(filtered);
+
+        }
+
 
     return (
         <div>
