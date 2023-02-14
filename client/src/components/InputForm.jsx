@@ -28,6 +28,7 @@ function InputForm({ addVideo }) {
       setTitle("");
       setUrl("");
     } else {
+      alert("Invalid URL");
       console.log("Invalid URL");
     }
   };
