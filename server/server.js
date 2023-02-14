@@ -5,7 +5,7 @@ const videos = require("../exampleresponse.json");
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(express.json());
-app.get("/", (req, res) => {
+app.get("/", (request, response) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
