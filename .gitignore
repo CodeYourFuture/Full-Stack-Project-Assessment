@@ -1,2 +1,4 @@
 node_modules
 *.lock
+.gitignore
+server/package.json
