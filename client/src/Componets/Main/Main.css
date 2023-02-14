@@ -1,0 +1,29 @@
+.contenar{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.left{
+    display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+}
+.search{
+position: relative;
+font-size: 1.5rem;
+margin-right: .5rem;
+}
+button{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+label{
+    margin-right: 20px;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
