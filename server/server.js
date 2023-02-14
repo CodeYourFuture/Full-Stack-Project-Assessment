@@ -12,7 +12,7 @@ app.use(cors())
 
 // GET "/"
 app.get("/", (req, res) => {
-    res.send({ videosExample });
+    res.json(videosExample);
 });
 
 //POST
@@ -29,7 +29,7 @@ app.post("/", (req, res) => {
     "rating" :0
   }
   videosExample.push(newVideos)
-  res.status(201).json({newVideos})
+  res.status(201).json(newVideos)
 });
 
 app.get("/:id", (req, res) => {

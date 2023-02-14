@@ -1,11 +1,19 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./App.css";
-import exampleresponse from "./exampleresponse.json";
 import VideoList from "./component/VideoList";
 import AddVideo from "./component/AddVideo";
 
 function App() {
-  const [videos,setVideos]=useState(exampleresponse)
+  const [videos,setVideos]=useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://localhost:5000/");
+      const data = await response.json();
+      setVideos(data);
+    }
+    fetchData();
+  }, []);
 
   const upVote=(id)=>{
     setVideos(prevVideos=>{
@@ -30,7 +38,21 @@ function App() {
   }
 
   const removeVideo=id=>{
-    setVideos(prevVideos=>prevVideos.filter(video=>video.id!==id));
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(() => {
+        setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id)) })
+      .catch((error) => {
+        console.error("There was a problem deleting the video: ", error);
+      });
+   
   }
 
   const addVideo=video=>{

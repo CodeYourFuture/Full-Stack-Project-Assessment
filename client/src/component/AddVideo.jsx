@@ -5,17 +5,32 @@ const AddVideo=({addVideo})=>{
     const[url,setUrl]=useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = event=>{
-        event.preventDefault();
-         if (!title || !url) {
-           setErrorMessage("Please enter a Title and URL");
-           return;
-         }
-        addVideo({title,url});
-        setTitle("");
-        setUrl("");
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  if (!title || !url) {
+    setErrorMessage("Please enter a Title and URL");
+    return;
+  }
+  try {
+    const response = await fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, url }),
+    });
+    const data = await response.json();
+    if (data.success) {
+      addVideo({ title, url });
+      setTitle("");
+      setUrl("");
+    } else {
+      setErrorMessage(data.message);
     }
-
+  } catch (error) {
+    setErrorMessage(error.message);
+  }
+};
     return (
       <div className="video-adder">
         <form onSubmit={handleSubmit}>
