@@ -9,7 +9,7 @@ function App() {
 
   const upVote=(id)=>{
     setVideos(prevVideos=>{
-      prevVideos.map(video=>{
+    return  prevVideos.map(video=>{
         if(video.id===id){
           return {...video,rating: video.rating+1}
         }
@@ -20,7 +20,7 @@ function App() {
 
   const downVote=(id)=>{
     setVideos(prevVideos=>{
-      prevVideos.map(video=>{
+     return prevVideos.map(video=>{
         if(video.id===id){
           return{...video,rating:video.rating-1}
         }
