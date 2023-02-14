@@ -1,4 +1,6 @@
 import React from "react";
+import VideoVotes from "./VideoVotes";
+import Button from "react-bootstrap";
 
 const VideoCard = () => {
   return (
@@ -12,6 +14,11 @@ const VideoCard = () => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
+      <div>
+        <h2>title</h2>
+        <VideoVotes />
+        <Button>Delete</Button>
+      </div>
     </div>
   );
 };
