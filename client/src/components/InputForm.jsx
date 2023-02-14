@@ -2,45 +2,73 @@ import React, { useState } from "react";
 import { CDBBtn } from "cdbreact";
 import Form from "react-bootstrap/Form";
 import { FormGroup } from "react-bootstrap";
-// import data from "../data/dataArray";
-//import data2 from "../data/exampleresponse.json";
-//console.log(data);
 
 function InputForm({ addVideo }) {
-  const [video, setVieo] = useState({
-    title: "",
-    url: "",
-  });
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
 
-  const handleChanges = (e) => {
-    const fildname = e.target.name;
-    const value = e.target.value;
-    //console.log({ fildname, value });
-    setVieo((currentVideo) => {
-      return { ...currentVideo, [fildname]: value };
-    });
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
+
+  const handleUrlChange = (e) => {
+    setUrl(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(video);
-    // data.push(video);
-
-    addVideo(video);
+    if (isYoutubeUrlValid(url)) {
+      const newVideo = {
+        id: Date.now(),
+        title: title,
+        url: url,
+        rating: 0,
+      };
+      addVideo(newVideo);
+      setTitle("");
+      setUrl("");
+    } else {
+      console.log("Invalid URL");
+    }
   };
 
+  function isYoutubeUrlValid(url) {
+    try {
+      const validUrl = new URL(url);
+      return (
+        validUrl.hostname === "www.youtube.com" ||
+        validUrl.hostname === "youtu.be"
+      );
+    } catch {
+      return false;
+    }
+  }
+
   return (
-    <Form className="form">
+    <Form className="form" onSubmit={handleSubmit}>
       <FormGroup>
         <label htmlFor="title">Title</label>
-        <input onChange={handleChanges} id="title" name="title" type="text" />
+        <input
+          id="title"
+          name="title"
+          type="text"
+          value={title}
+          onChange={handleTitleChange}
+        />
       </FormGroup>
       <FormGroup>
         <label htmlFor="url">URL</label>
-        <input onChange={handleChanges} id="url" name="url" type="text" />
+        <input
+          id="url"
+          name="url"
+          type="text"
+          value={url}
+          onChange={handleUrlChange}
+        />
       </FormGroup>
 
       <div className="btn-section">
-        <CDBBtn onClick={handleSubmit} color="primary" circle>
+        <CDBBtn color="primary" circle type="submit">
           Add Video
         </CDBBtn>
 
