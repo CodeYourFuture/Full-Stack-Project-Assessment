@@ -1,10 +1,20 @@
-import { useState } from "react";
-import data from "../exampleresponse.json";
+import { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
 
 const VideoScreen = () => {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   function likeHandler(index) {
     setVideos(
       videos.map((video, i) => {
