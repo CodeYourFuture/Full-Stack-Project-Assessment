@@ -4,6 +4,8 @@ const bodyParser=require('body-parser')
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 const port = process.env.PORT || 5000;
+const cors = require('cors')
+app.use(cors())
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -24,14 +26,14 @@ let videos = [ {
 },];
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.json({ videos});
+  res.json( videos);
 });
 
 //POST "/"
 
-app.post("/",(req,res)=>{
+app.post("/videos",(req,res)=>{
   const {title,url}=req.body;
   const newobj={
     url:url,
@@ -41,13 +43,13 @@ app.post("/",(req,res)=>{
   res.send(videos)
 })
 
-app.get("/:id",(req,res)=>{
+app.get("/videos/:id",(req,res)=>{
   const id =+req.params.id
   const itemFind= videos.find(video=>video.id===id)
   if(itemFind){res.status(200).send(itemFind)}
   else{res.status(404).send('Video not found')}
 })
-app.delete("/:id",(req,res)=>{
+app.delete("/videos/:id",(req,res)=>{
   const id =+req.params.id;
   const deletedItem=videos.filter((video)=>video.id!==id)
   if(deletedItem.length>0){res.send(deletedItem)}

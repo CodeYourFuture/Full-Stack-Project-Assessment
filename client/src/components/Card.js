@@ -6,15 +6,18 @@ export default function Card({item,setVideolist,videolist }) {
   
   
 
-  const handleDelete=()=>{
-
+  const handleDelete=(id)=>{
+fetch(`http://localhost:5000/videos/:${id}`,{method:'DELETE'})
+.then(res=>res.json())
+.then(data=>console.log(data))
 const filtered=videolist.filter(i=>i.id!==item.id)
 setVideolist(filtered);
+
   }
 
   return (
     <div>
-       <div className="w3-card-4 w3-dark-grey" style={{width:"50%"}}>
+       <div className="w3-card-4 w3-dark-grey" style={{width:"90%"}}>
 
 <div className="w3-container w3-center" style={{border:'2px solid gray'}}>
   <h3>{item.title}</h3>
