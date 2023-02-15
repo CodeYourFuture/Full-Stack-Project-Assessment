@@ -1,11 +1,11 @@
 import React from "react";
-import "../App.css"
+import "./compStyle.css"
 
 
 export const Header = () => {
 
     return (
-        <div className="App bg-danger">
+    <div className="App gradient">
     <header className="App-header">
       <h1>Video Recommendation</h1>
     </header>
