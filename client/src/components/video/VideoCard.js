@@ -1,6 +1,6 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import VideoVotes from "./VideoVotes";
-import Button from "react-bootstrap";
 
 const VideoCard = () => {
   return (
@@ -17,7 +17,7 @@ const VideoCard = () => {
       <div>
         <h2>title</h2>
         <VideoVotes />
-        <Button>Delete</Button>
+        <Button variant="primary">Delete</Button>
       </div>
     </div>
   );

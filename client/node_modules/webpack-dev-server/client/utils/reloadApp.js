@@ -1,6 +1,12 @@
-/* global __webpack_hash__ */
 import hotEmitter from "webpack/hot/emitter.js";
 import { log } from "./log.js";
+/** @typedef {import("../index").Options} Options
+/** @typedef {import("../index").Status} Status
+
+/**
+ * @param {Options} options
+ * @param {Status} status
+ */
 
 function reloadApp(_ref, status) {
   var hot = _ref.hot,
@@ -12,11 +18,18 @@ function reloadApp(_ref, status) {
 
   var currentHash = status.currentHash,
       previousHash = status.previousHash;
-  var isInitial = currentHash.indexOf(previousHash) >= 0;
+  var isInitial = currentHash.indexOf(
+  /** @type {string} */
+  previousHash) >= 0;
 
   if (isInitial) {
     return;
   }
+  /**
+   * @param {Window} rootWindow
+   * @param {number} intervalId
+   */
+
 
   function applyReload(rootWindow, intervalId) {
     clearInterval(intervalId);

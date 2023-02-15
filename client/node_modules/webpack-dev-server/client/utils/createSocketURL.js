@@ -1,9 +1,76 @@
-import url from "url"; // We handle legacy API that is Node.js specific, and a newer API that implements the same WHATWG URL Standard used by web browsers
-// Please look at https://nodejs.org/api/url.html#url_url_strings_and_url_objects
+/**
+ * @param {{ protocol?: string, auth?: string, hostname?: string, port?: string, pathname?: string, search?: string, hash?: string, slashes?: boolean }} objURL
+ * @returns {string}
+ */
+function format(objURL) {
+  var protocol = objURL.protocol || "";
+
+  if (protocol && protocol.substr(-1) !== ":") {
+    protocol += ":";
+  }
+
+  var auth = objURL.auth || "";
+
+  if (auth) {
+    auth = encodeURIComponent(auth);
+    auth = auth.replace(/%3A/i, ":");
+    auth += "@";
+  }
+
+  var host = "";
+
+  if (objURL.hostname) {
+    host = auth + (objURL.hostname.indexOf(":") === -1 ? objURL.hostname : "[".concat(objURL.hostname, "]"));
+
+    if (objURL.port) {
+      host += ":".concat(objURL.port);
+    }
+  }
+
+  var pathname = objURL.pathname || "";
+
+  if (objURL.slashes) {
+    host = "//".concat(host || "");
+
+    if (pathname && pathname.charAt(0) !== "/") {
+      pathname = "/".concat(pathname);
+    }
+  } else if (!host) {
+    host = "";
+  }
+
+  var search = objURL.search || "";
+
+  if (search && search.charAt(0) !== "?") {
+    search = "?".concat(search);
+  }
+
+  var hash = objURL.hash || "";
+
+  if (hash && hash.charAt(0) !== "#") {
+    hash = "#".concat(hash);
+  }
+
+  pathname = pathname.replace(/[?#]/g,
+  /**
+   * @param {string} match
+   * @returns {string}
+   */
+  function (match) {
+    return encodeURIComponent(match);
+  });
+  search = search.replace("#", "%23");
+  return "".concat(protocol).concat(host).concat(pathname).concat(search).concat(hash);
+}
+/**
+ * @param {URL & { fromCurrentScript?: boolean }} parsedURL
+ * @returns {string}
+ */
+
 
 function createSocketURL(parsedURL) {
   var hostname = parsedURL.hostname; // Node.js module parses it as `::`
-  // `new URL(urlString, [baseURLstring])` parses it as '[::]'
+  // `new URL(urlString, [baseURLString])` parses it as '[::]'
 
   var isInAddrAny = hostname === "0.0.0.0" || hostname === "::" || hostname === "[::]"; // why do we need this check?
   // hostname n/a for file protocol (example, when using electron, ionic)
@@ -57,7 +124,7 @@ function createSocketURL(parsedURL) {
     socketURLPathname = parsedURL.pathname;
   }
 
-  return url.format({
+  return format({
     protocol: socketURLProtocol,
     auth: socketURLAuth,
     hostname: socketURLHostname,
