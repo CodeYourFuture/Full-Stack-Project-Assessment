@@ -40,7 +40,10 @@ const App = () => {
   };
 
   const onAdd = (video) => {
-    setVideos([...videos, { ...video, id: videos.length + 1, rating: 0 }]);
+    setVideos([
+      ...videos,
+      { ...video, id: videos.length + 1, rating: 0, dateAdded: Date.now() },
+    ]);
     setIsOpen(false);
   };
 
@@ -48,6 +51,7 @@ const App = () => {
     setIsOpen(false);
   };
 
+  console.log(videos);
   return (
     <div className="flex flex-col items-center">
       <VideoAdder
