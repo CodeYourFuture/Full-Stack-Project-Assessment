@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react'
 import moment from 'moment'
 
@@ -10,8 +11,8 @@ export default function Form({form,setVideolist,videolist}) {
   uploadTime:''
 
 })
-  const handelAdd=(obj)=>{
-  obj.preventDefault();
+  const handelAdd=(e)=>{
+  e.preventDefault();
   if(addvideo.url.includes('https://www.youtube.com/'))
   { setVideolist([...videolist,addvideo])}
 
@@ -19,19 +20,15 @@ export default function Form({form,setVideolist,videolist}) {
     
     alert('Please enter vaild address')
   }
-  fetch("/videos", {
+  fetch("http://localhost:5000/videos", {
     method: "POST",
     headers: {
-      Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(obj),
+    body: JSON.stringify(e),
   })
   .then(res=>res.json())
-  .then(res=>console.log(res))
-
-  
-
+  .then(data=>console.log(data))
 }
 const handlechange=(event)=>{
   setAddvideo({...addvideo, [event.target.name]:event.target.value,uploadTime:moment().format('hh:mm:ss')})
@@ -52,6 +49,7 @@ const handlechange=(event)=>{
 
   return (
     <div>
+      
       <form onSubmit={handelAdd} style={{display: form ? 'inline' : 'none'}}>
         <label>Title</label>
         <input name='title'onChange={handlechange} value={addvideo.title} required></input><br/>

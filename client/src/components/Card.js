@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 export default function Card({item,setVideolist,videolist }) {
   const[like,setLike]=useState(item.rating)
   
@@ -23,9 +24,9 @@ setVideolist(filtered);
   <h3>{item.title}</h3>
   <p>{item.uploadDate}</p>
   <div className="w3-section">
-    <button className="w3-button w3-green" onClick={()=>setLike(like+1)}>Like</button>
-    <button className="w3-button w3-red" onClick={()=>setLike(like-1)}>Dislike
-    </button>
+  <FontAwesomeIcon className='thumbup' icon={faThumbsUp} onClick={()=>setLike(like+1)}/>
+  <FontAwesomeIcon icon={faThumbsDown} onClick={()=>setLike(like-1)}/>
+    
   </div>
   
   <iframe id="inlineFrameExample"
@@ -38,7 +39,7 @@ setVideolist(filtered);
   <h5>{like}</h5>
 
   <div className="w3-section">
-    <button className="w3-button w3-green" onClick={handleDelete}>Delete</button>
+  <FontAwesomeIcon icon={faTrash} onClick={handleDelete}/>
     
   </div>
 </div>

@@ -19,12 +19,9 @@ useEffect(() => {
   getVideos();
 }, []);
 
-
-
-
-
   return (
     <div className="container" >
+      <h1><i class="fa-thin fa-poo"></i></h1>
       <div className="title">
       <button onClick={()=>setForm(!form)} style={{margin:'40px auto'}}>Add Video</button>
       <Form form={form} videolist={videolist} setVideolist={setVideolist} />
