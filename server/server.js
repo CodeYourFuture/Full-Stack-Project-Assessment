@@ -1,8 +1,10 @@
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 let videos = require("./data/exampleresponse.json");
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -30,6 +32,38 @@ app.post("/", (req, res) => {
     res.json({
       result: "failure",
       message: "Video could not be saved"
+    });
+  }
+});
+
+app.patch("/:id/increaserating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video => video.id !== videoId ? video : { ...video, rating: video.rating + 1 })
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted"
+    });
+  }
+});
+
+app.patch("/:id/decreaseRating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video => video.id !== videoId ? video : { ...video, rating: video.rating - 1 })
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted"
     });
   }
 });

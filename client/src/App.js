@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import AddVideo from "./component/AddVideo";
 import ListVideo from "./component/ListVideo";
-import exampleresponse from "../../server/data/exampleresponse.json";
 
 function App() {
-  const [videosYoutube, setVideosYoutube] = useState(exampleresponse);
+
+  const [videosYoutube, setVideosYoutube] = useState([]);
+
+  useEffect(() => {
+    async function getVideos() {
+      const res = await fetch("http://localhost:5000");
+      const data = await res.json();
+
+      setVideosYoutube([...data]);
+    }
+
+    getVideos();
+  }, []);
 
   const addVideo = (video) => {
-    console.log(video);
     let newVideoList = [...videosYoutube];
     newVideoList.push(video);
-    console.log(newVideoList);
     setVideosYoutube(newVideoList);
   };
 
-  const deleteVideo = (videoId) => {
-    const newVideoList = videosYoutube.filter((video) => video.id !== videoId);
-    setVideosYoutube(newVideoList);
+  const deleteVideo = async (videoId) => {
+
+      const res = await fetch(`http://localhost:5000/${videoId}`, {
+      method: "DELETE"
+    });
+    await res.json();
+    setVideosYoutube(videosYoutube.filter((video) => video.id !== videoId));
   };
 
   return (

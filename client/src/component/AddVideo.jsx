@@ -3,7 +3,7 @@ import React, { useState } from "react"; //use to array
 export default function AddVideo({addVideo}){
     const [showInputs,setShowInputs] = useState(false);
   
-    const handleSubmit = event=>{
+    const handleSubmit = async (event)=>{
       event.preventDefault();
 
       const data = new FormData(event.currentTarget);
@@ -11,7 +11,12 @@ export default function AddVideo({addVideo}){
       const videoUrl = data.get('video-url')
       const videoId = 100000 + Math.random() * 900000
        if (videoTitle && videoUrl) {
+
+        const res = await fetch("http://localhost:5000");
+        const data = await res.json();
+
         addVideo({id: videoId, title: videoTitle, url: videoUrl,rating:0});
+
        }
   }
   

@@ -17,12 +17,24 @@ export default function CardVideo({
     return null;
   }
 
-  const increaseRating = () => {
+  const increaseRating = async (id) => {
+    const res = await fetch(`http://localhost:5000/${id}/increaseRating`, {
+      method: "PATCH"
+    });
+    await res.json();
+
     setRating(rating + 1)
   }
 
-  const decreaseRating = () => {
-    setRating(rating - 1)
+  const decreaseRating = async (id) => {
+    if (rating > 0) {
+      const res = await fetch(`http://localhost:5000/${id}/decreaseRating`, {
+        method: "PATCH"
+      });
+      await res.json();
+
+      setRating(rating - 1)
+    }
   }
 
   return (
