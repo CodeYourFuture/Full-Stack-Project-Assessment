@@ -1,7 +1,7 @@
 import "./App.css";
 import Search from "./components/Search";
 import Add from "./components/Add";
-// import data from "./exampleresponse.json";
+// import list from "./exampleresponse.json";
 import Singlevideo from "./components/SingleVideo";
 import { useState, useEffect } from "react";
 
@@ -15,7 +15,7 @@ function App() {
   const [list, setList] = useState(undefined);
 
   useEffect(() => {
-    fetch("/videos")
+    fetch("/videos") ///GET
       .then((response) => response.json())
       .then((videos) => {
         data = videos.sort((a, b) => b.rating - a.rating);
