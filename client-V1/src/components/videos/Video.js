@@ -10,7 +10,7 @@ import "../../assets/css/general.css";
 
 export default function Video({ video, deleteVideo, incRating, decRating }) {
   return (
-    <div className="container-video">
+    <div>
       <h4 className="video-title">{video.title}</h4>
       <iframe
         src={`https://www.youtube.com/embed/${video.url.split("watch?v=")[1]}`}
