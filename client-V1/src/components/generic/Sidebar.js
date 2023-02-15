@@ -26,9 +26,9 @@ function getItem(label, key, icon, children, type) {
 
 const items = [
   getItem("Dashboard", "dashboard", <DashboardOutlined />, [
-    getItem(<Link to="/Week1">Week 1</Link>, "list", <SolutionOutlined />),
-    getItem("Week 2", "Week2", <SolutionOutlined />),
-    getItem("Week 3", "Week3", <SolutionOutlined />),
+    getItem(<Link to="/Week1">Week 1</Link>, "Week1", <SolutionOutlined />),
+    getItem(<Link to="/Week2">Week 2</Link>, "Week 2", <SolutionOutlined />),
+    getItem(<Link to="/Week3">Week 3</Link>, "Week 3", <SolutionOutlined />),
   ]),
   getItem("Video management", "video", <VideoCameraOutlined />, [
     getItem(

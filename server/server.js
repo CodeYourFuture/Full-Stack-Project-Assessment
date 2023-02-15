@@ -1,25 +1,11 @@
-// const express = require("express");
-// const app = express();
-// const port = process.env.PORT || 5000;
-
-// app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// // Store and retrieve your videos from here
-// // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = [];
-
-// // GET "/"
-// app.get("/", (req, res) => {
-//   // Delete this line after you've confirmed your server is running
-//   res.send({ express: "Your Backend Service is Running" });
-// });
-
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5001;
 let videos = require("./data/exampleresponse.json");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json(videos);
@@ -46,6 +32,76 @@ app.post("/", (req, res) => {
     res.json({
       result: "failure",
       message: "Video could not be saved",
+    });
+  }
+});
+
+// app.put("/:id", (req, res) => {
+//   const videoId = +req.params.id;
+//   const video = videos.find(video => video.id === videoId);
+
+//   try {
+//     video.title = req.body.title;
+//     video.url = req.body.url;
+//     video.rating = req.body.rating;
+
+//     res.json({});
+//   } catch (error) {
+//     res.json({
+//       result: "failure",
+//       message: "Video could not be updated",
+//     });
+//   }
+// });
+
+// app.patch("/:id", (req, res) => {
+//   const videoId = +req.params.id;
+//   const video = videos.find(video => video.id === videoId);
+
+//   try {
+//     video.rating = req.body.rating;
+
+//     res.json({});
+//   } catch (error) {
+//     res.json({
+//       result: "failure",
+//       message: "Video could not be updated",
+//     });
+//   }
+// });
+
+app.patch("/:id/inc-rating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video =>
+      video.id !== videoId ? video : { ...video, rating: video.rating + 1 }
+    );
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
+
+app.patch("/:id/dec-rating", (req, res) => {
+  const videoId = +req.params.id;
+
+  try {
+    videos = videos.map(video =>
+      video.id !== videoId ? video : { ...video, rating: video.rating - 1 }
+    );
+    console.log(videos[0]);
+
+    res.json({});
+  } catch (error) {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted",
     });
   }
 });

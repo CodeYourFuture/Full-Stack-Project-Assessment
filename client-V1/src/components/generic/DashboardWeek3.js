@@ -1,10 +1,10 @@
 import React from "react";
 import "../../assets/scss/dashboard.scss";
 
-export default function Dashboard() {
+export default function DashboardWeek1() {
   return (
     <div className="dashboard">
-      <h1># Level 100 - Week 1 - Front End</h1>
+      <h1># Level Front End</h1>
       <p>
         <span className="Required">## Required Features </span> <br /> 1. Videos
         should be loaded from a local javascript variable containing the data

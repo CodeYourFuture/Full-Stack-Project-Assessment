@@ -3,23 +3,26 @@ import React, { useState } from "react";
 
 export default function AddVideo({ addVideo }) {
   const [input, setInput] = useState({
-    id: 0,
     title: "",
     url: "",
     rating: 0,
   });
 
   const handleChange = e => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-      id: Math.round(Math.random() * 1000),
-    });
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
   };
 
-  const onFinish = e => {
-    console.log(e);
-    addVideo(input);
+  const onFinish = async () => {
+    const res = await fetch("http://localhost:5001", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    });
+    const data = await res.json();
+    addVideo(data);
     setInput({ ...input, title: "", url: "" });
   };
 

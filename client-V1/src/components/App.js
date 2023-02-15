@@ -6,10 +6,12 @@ import { Routes, Route } from "react-router-dom";
 import Hedear from "./generic/Header";
 import Footer from "./generic/Footer";
 import Sidebar from "./generic/Sidebar";
-import Dashboard from "./generic/Dashboard";
+import DashboardWeek1 from "./generic/DashboardWeek1";
+import DashboardWeek2 from "./generic/DashboardWeek2";
+import DashboardWeek3 from "./generic/DashboardWeek3";
 import VideoList from "./videos/VideoList";
 import AddVideo from "./videos/AddVideo";
-import videosData from "../data/exampleresponse.json";
+// import videosData from "../data/exampleresponse.json";
 
 const { Content } = Layout;
 
@@ -17,21 +19,33 @@ export default function App() {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     async function getVideos() {
-      setVideos([...videosData]);
+      // setVideos([...videosData]);
+      const res = await fetch("http://localhost:5001");
+      const data = await res.json();
+
+      setVideos([...data]);
     }
     getVideos();
   }, []);
 
-  const addVideo = video => {
-    console.log(video);
+  const addVideo = (video, id) => {
+    video.id = id;
     setVideos([...videos, video]);
   };
 
-  const deleteVideo = id => {
+  const deleteVideo = async id => {
+    const res = await fetch(`http://localhost:5001/${id}`, {
+      method: "DELETE",
+    });
+    await res.json();
     setVideos(videos.filter(video => video.id !== id));
   };
 
-  const incRating = id => {
+  const incRating = async id => {
+    const res = await fetch(`http://localhost:5001/${id}/inc-rating`, {
+      method: "PATCH",
+    });
+    await res.json();
     setVideos(
       videos.map(video =>
         video.id !== id ? video : { ...video, rating: video.rating + 1 }
@@ -39,8 +53,13 @@ export default function App() {
     );
   };
 
-  const decRating = (id, rating) => {
+  const decRating = async (id, rating) => {
     if (rating > 0) {
+      const res = await fetch(`http://localhost:5001/${id}/dec-rating`, {
+        method: "PATCH",
+      });
+      await res.json();
+
       setVideos(
         videos.map(video =>
           video.id !== id ? video : { ...video, rating: video.rating - 1 }
@@ -48,6 +67,7 @@ export default function App() {
       );
     }
   };
+
   return (
     <div className="App">
       <Layout>
@@ -56,7 +76,9 @@ export default function App() {
           <Sidebar />
           <Content className="content">
             <Routes>
-              <Route path="/Week1" element={<Dashboard />} />
+              <Route path="/Week1" element={<DashboardWeek1 />} />
+              <Route path="/Week2" element={<DashboardWeek2 />} />
+              <Route path="/Week3" element={<DashboardWeek3 />} />
               <Route
                 path="/video"
                 element={
