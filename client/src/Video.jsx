@@ -3,13 +3,11 @@ import React from "react";
 
 const Video = ({ video, onVote, onRemove }) => {
   const handleUpVote = () => {
-    if (video.votes < 100) {
-      onVote(video.id, 1);
-    }
+    onVote(video.id, 1);
   };
 
   const handleDownVote = () => {
-    if (video.votes > 0) {
+    if (video.rating > 0) {
       onVote(video.id, -1);
     }
   };
@@ -45,7 +43,7 @@ const Video = ({ video, onVote, onRemove }) => {
         >
           Up Vote
         </button>
-        <div className="text-xs font-medium">{video.votes}</div>
+        <div className="text-xs font-medium">{video.rating}</div>
         <button
           type="button"
           className="text-xs font-medium bg-red-500 text-white p-2 rounded-full"

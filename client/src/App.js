@@ -1,36 +1,34 @@
 import React, { useState } from "react";
 import VideoList from "./VideoList";
 import VideoAdder from "./VideoAdder";
+import ExampleResponse from "./exampleresponse.json";
 
 const App = () => {
-  const [videos, setVideos] = useState([
-    {
-      id: 1,
-      title: "Video 1",
-      url: "https://www.youtube.com/embed/FHTbsZEJspU",
-      votes: 0,
-    },
-    {
-      id: 2,
-      title: "Video 2",
-      url: "https://www.youtube.com/embed/2",
-      votes: 0,
-    },
-    {
-      id: 3,
-      title: "Video 3",
-      url: "https://www.youtube.com/embed/3",
-      votes: 0,
-    },
-  ]);
+  // change the youtube vidoUrl to in a format to be embeded in the app
+  const videoUrl = "https://www.youtube.com/embed/";
+  const newVideoArray = ExampleResponse.map((video) => {
+    const regex = /v=([^&]*)/;
+    const match = video.url.match(regex);
+    let container = {};
+    if (match) {
+      const videoId = match[1]; // Extract the video ID from the first group of the match
+      const videoLink = videoUrl.concat(videoId);
+      container = { ...video, url: videoLink };
+    }
+    return container;
+  });
 
+  //sort the displayed videos descending by ratings
+  newVideoArray.sort((a, b) => b.rating - a.rating);
+
+  const [videos, setVideos] = useState(newVideoArray);
   const [isOpen, setIsOpen] = useState(false);
 
   const onVote = (id, vote) => {
     setVideos(
       videos.map((video) => {
         if (video.id === id) {
-          return { ...video, votes: video.votes + vote };
+          return { ...video, rating: video.rating + vote };
         }
         return video;
       })
@@ -42,7 +40,7 @@ const App = () => {
   };
 
   const onAdd = (video) => {
-    setVideos([...videos, { ...video, id: videos.length + 1, votes: 0 }]);
+    setVideos([...videos, { ...video, id: videos.length + 1, rating: 0 }]);
     setIsOpen(false);
   };
 

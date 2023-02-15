@@ -3,19 +3,50 @@ import React, { useState } from "react";
 const VideoAdder = ({ isOpen, onAdd, onClose }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [errors, setErrors] = useState({ title: "", url: "" });
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const videoId = url.split("v=")[1];
-    const link = `https://www.youtube.com/embed/${videoId}`;
-    console.log(link, "<--- Video");
-    onAdd({ title, url: link });
+    let formIsValid = true;
+    const newErrors = { title: "", url: "" };
 
-    //    onAdd({ title, url });
-    setTitle("");
-    setUrl("");
-    onClose();
+    if (title.trim() === "") {
+      newErrors.title = "Please enter a title";
+      formIsValid = false;
+    }
+
+    if (url.trim() === "") {
+      newErrors.url = "Please enter a YouTube video link";
+      formIsValid = false;
+    } else {
+      const videoId = getVideoIdFromUrl(url);
+      if (!videoId) {
+        newErrors.url = "Please enter a valid YouTube video link";
+        formIsValid = false;
+      } else {
+        const link = `https://www.youtube.com/embed/${videoId}`;
+        onAdd({ title, url: link });
+      }
+    }
+
+    setErrors(newErrors);
+
+    if (formIsValid) {
+      setTitle("");
+      setUrl("");
+      onClose();
+    }
+  };
+
+  const getVideoIdFromUrl = (url) => {
+    const regex = /[?&]v=([^&]*)/; // Regular expression to extract value of 'v' parameter
+    const match = url.match(regex); // Match the regular expression with the URL
+    if (match) {
+      return match[1]; // Extract the video ID from the first group of the match
+    } else {
+      return null;
+    }
   };
 
   return (
@@ -37,12 +68,17 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
               Title
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${
+                errors.title ? "border-red-500" : "border-gray-200"
+              } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
               id="title"
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
+            {errors.title && (
+              <p className="text-red-500 text-xs italic">{errors.title}</p>
+            )}
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -54,13 +90,17 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
               URL
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${
+                errors.url ? "border-red-500" : "border-gray-200"
+              } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
               id="url"
-              required
               type="text"
               value={url}
               onChange={(event) => setUrl(event.target.value)}
             />
+            {errors.url && (
+              <p className="text-red-500 text-xs italic">{errors.url}</p>
+            )}
           </div>
         </div>
         <div className="flex justify-end">
