@@ -1,12 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 app.use(express.json());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = require("./data/exampleresponse.json");
 // GET "/"
 app.get("/", (req, res) => {
-  res.send({ videos });
+  res.json(videos);
 });
 //post add new videos
 app.post("/", (req, res) => {
