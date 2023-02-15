@@ -16,7 +16,6 @@ function Main({ addVideos }) {
   function handleSubmit(e) {
     e.preventDefault();
     addVideos(input);
-    // console.log(addVideo);
   }
   return (
     <div className="left">
