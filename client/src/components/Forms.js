@@ -22,6 +22,7 @@ let newTitle = document.getElementById("title").value
     if(newUrl.match(p)){
       
         let addNewVideo = {
+          id : Math.random()*10000,
           url : newUrl,
           title :newTitle,
         }
