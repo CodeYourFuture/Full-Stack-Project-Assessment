@@ -1,11 +1,12 @@
 import "./App.css";
+import Header from "./components/header/Header";
+import VideoCard from "./components/video/VideoCard";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <VideoCard/>
     </div>
   );
 }
