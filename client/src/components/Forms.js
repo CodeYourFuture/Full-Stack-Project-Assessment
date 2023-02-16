@@ -18,7 +18,6 @@ const validateInput = (e) => {
 let newUrl = document.getElementById("enterurl").value;
 let newTitle = document.getElementById("title").value
 
-
   let p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     if(newUrl.match(p)){
       
@@ -41,7 +40,7 @@ let newTitle = document.getElementById("title").value
     <div className="row mb-3">
       <label htmlFor="title" className="col-sm-1 col-form-label">Title</label>
       <div className="col-sm-3">
-        <input type="text" className="form-control" id="title" placeholder="Enter Title"/>
+        <input type="text" className="form-control" id="title" placeholder="Enter Title"></input>
       </div>
     </div>
     <div className="row mb-3">

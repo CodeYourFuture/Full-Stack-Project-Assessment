@@ -2,20 +2,25 @@
 import React from "react";
 import { useState } from "react";
 import { Header, Forms, Cards } from "./components/index.js";
+import ExampleResponse from  "./data/exampleresponse.json"
 
 
 function App() {
 
-  const [state, setState] = useState({})
+  const [datas, setDatas] = useState(ExampleResponse)
   const callback = (parametre) => {
-    setState(parametre)
+    if(parametre.url !== undefined){
+      setDatas((states) => {
+        return [...states,parametre]
+      })
+    }
   }
 
   return (
     <div>
      <Header/>
      <Forms callback={callback}/>
-     <Cards newVideo = {state}/>
+     <Cards videos = {datas}/>
     </div>
    
   );
