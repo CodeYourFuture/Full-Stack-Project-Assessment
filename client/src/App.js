@@ -1,14 +1,21 @@
 
 import React from "react";
-import { Header, Forms } from "./components/index.js";
+import { useState } from "react";
+import { Header, Forms, Cards } from "./components/index.js";
 
 
 function App() {
 
+  const [state, setState] = useState({})
+  const callback = (parametre) => {
+    setState(parametre)
+  }
+
   return (
     <div>
      <Header/>
-     <Forms/>
+     <Forms callback={callback}/>
+     <Cards newVideo = {state}/>
     </div>
    
   );
