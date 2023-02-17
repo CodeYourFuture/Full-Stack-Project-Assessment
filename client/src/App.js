@@ -1,14 +1,13 @@
 import "./App.css";
 import React from "react";
-import { Header, Forms } from "./compenents";
-
-
+import { Header, Forms, VideoCards } from "./components";
 
 function App() {
   return (
     <div>
       <Header />
       <Forms />
+      <VideoCards />
     </div>
   );
 }
