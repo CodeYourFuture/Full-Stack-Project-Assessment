@@ -3,25 +3,25 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 
 function VideoCard({ rating, title, url }) {
-  const [vote, setvote] = useState(rating);
+  const [like, setLike] = useState(rating);
 
+  // adds one vote
   const handleVoteUp = (e) => {
-    let value = e.target.value;
     e.preventDefault();
-    console.log(value);
-    setvote(rating + 1); // this is to add only one vote per user, another word i don't want user to keep adding more votes.
+    setLike(rating + 1);
   };
 
+  // setting back to the original rating number, and can substract one
   const handleVoteDown = (e) => {
     e.preventDefault();
-    setvote(rating - 1); // this is to add only one vote per user, another word i don't want user to keep adding more votes.
+    like > rating ? setLike(rating) : setLike(rating - 1);
   };
 
   return (
     <Container className="card">
       <div>
         <button onClick={handleVoteUp}>Vote Up</button>
-        <span>{vote}</span>
+        <span>{like}</span>
         <button onClick={handleVoteDown}>Vote Down</button>
       </div>
       <h3>{title}</h3>
@@ -32,4 +32,3 @@ function VideoCard({ rating, title, url }) {
 }
 
 export default VideoCard;
-
