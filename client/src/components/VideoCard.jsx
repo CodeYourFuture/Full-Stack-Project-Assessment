@@ -21,7 +21,7 @@ function VideoCard({ rating, title, url }) {
     <Container className="card">
       <div>
         <button onClick={handleVoteUp}>Vote Up</button>
-        <span onClick={handleVoteUp}>{vote}</span>
+        <span>{vote}</span>
         <button onClick={handleVoteDown}>Vote Down</button>
       </div>
       <h3>{title}</h3>
