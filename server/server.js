@@ -7,7 +7,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
 app.get("/", (request, response) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  response.send({ express: "Your Backend Service is Running" });
 });
 
 app.get("/videos", function (request, response) {

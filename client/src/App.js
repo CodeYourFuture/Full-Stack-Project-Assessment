@@ -28,7 +28,7 @@ function App() {
           <p>loadind...</p>
         ) : (
           list.map((video) => {
-            return <SingleVideo key={video.id} {...video} />;
+            return <ItemVideo key={video.id} {...video} />;
           })
         )}
       </div>
