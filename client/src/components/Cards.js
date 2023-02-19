@@ -7,7 +7,7 @@ export const Cards = (props) => {
   return (
     <Container>
       <Row>
-        {props.videos.map((val) => {
+        {props.videos.length && props.videos.map((val) => {
           return <Video url={val.url} title={val.title} key={val.id} />;
         })}
       </Row>
