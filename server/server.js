@@ -90,5 +90,10 @@ app.get("/videos", (req, res) => {
   res.send(database.videos);
 });
 
+// POST VIDEO INFOS TO THE API
+
+
+
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
