@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const supabase = require("../supabase");
 
-let videos = require("../data/videos");
-
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { title, url, rating = 0 } = req.body;
 
   if (!title || !url) {
@@ -13,19 +12,19 @@ router.post("/", (req, res) => {
     });
   }
 
-  const newID = Number(
-    Date.now().toString().substr(-3) + Math.random().toString().substr(2, 3)
-  );
-  const createvideo = {
-    id: newID,
-    title: title,
-    url: url,
-    rating: rating,
-  };
+  const { data, error } = await supabase
+    .from("fav_video")
+    .insert({ title, url, rating });
 
-  videos.push(createvideo);
-  console.log(createvideo);
-  res.status(201).json({ id: newID });
+  if (error) {
+    console.error(error);
+    return res.status(500).json({
+      result: "Failure",
+      message: "Server error",
+    });
+  }
+
+  res.status(201);
 });
 
 module.exports = router;

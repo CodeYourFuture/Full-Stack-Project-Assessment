@@ -1,2 +1,4 @@
 node_modules
 client/node_modules/.cache/.eslintcache
+server/package-lock.json
+server/.env

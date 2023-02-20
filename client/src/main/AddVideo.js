@@ -1,14 +1,44 @@
 import { useState } from "react";
+
 const AddVideo = ({ addVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [isVideoAdded, setIsVideoAdded] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    addVideo(title, url);
+
+    if (!title.trim() || !url.trim()) {
+      alert("Please enter a title and URL");
+      return;
+    }
+
+    if (!/^https?:\/\/(www\.)?youtube.com\//.test(url)) {
+      alert("Please enter a valid YouTube URL");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/videos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, url }),
+      });
+      const data = await response.json();
+      addVideo(title, url, data.id);
+      setTitle("");
+      setUrl("");
+      window.location.reload();
+      setIsVideoAdded(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
+      {isVideoAdded && (
+        <div className="success-message">Video added successfully!</div>
+      )}
       <form onSubmit={handleSubmit} className="form">
         <h2 className="form-header">Add your favorite video</h2>
         <label>Title</label>
@@ -30,4 +60,5 @@ const AddVideo = ({ addVideo }) => {
     </div>
   );
 };
+
 export default AddVideo;

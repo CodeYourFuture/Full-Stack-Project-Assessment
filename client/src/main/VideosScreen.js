@@ -39,22 +39,10 @@ const VideoScreen = () => {
     console.log(index);
     setVideos(videos.filter((video, i) => i !== index));
   }
-  const addVideo = (title, url) => {
-    const newFavVideo = { title: title, url: url, rating: 0 };
-    if (!title || !url) {
-      console.log("Both title and URL must be filled");
-      setShowMessage(true);
-    } else if (!url.includes("https://www.youtube.com/")) {
-      console.log("Youtube Url not valid");
-      setShowMessage(true);
-    } else {
-      setVideos([...videos, newFavVideo]);
-      setShowMessage(false);
-    }
-  };
+
   return (
     <div>
-      <AddVideo addVideo={addVideo} />
+      <AddVideo />
       {showMessage && (
         <div className="error-message">
           Both title and URL must be filled and the URL must be a valid YouTube
