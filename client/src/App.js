@@ -63,7 +63,7 @@ function App() {
       </div>
       <div className="video-list">
         {list === undefined ? (
-          <p>loadind...</p>
+          <p>Loadind...</p>
         ) : (
           list.map((video) => {
             return <SingleVideo key={video.id} {...video} handleRemove={handleRemove} />;
