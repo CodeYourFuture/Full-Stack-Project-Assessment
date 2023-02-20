@@ -1,3 +1,12 @@
 .App {
   text-align: center;
 }
+.App-header {
+  background-color: rgb(71, 161, 235);
+  font-style: italic;
+  font-size: small;
+  color: white;
+  height: 100px
+  
+  
+}
