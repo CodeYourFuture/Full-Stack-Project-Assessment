@@ -13,30 +13,12 @@ export const Forms = ({ callback }) => {
 
   const handleForm = (e) => {
     e.preventDefault();
-   
+    console.log("i am working")
     let newUrl = document.getElementById("enterurl").value;
-    let newTitle = document.getElementById("title").value;
     let p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     if (!newUrl.match(p)) {
       return alert("Not a valid YouTube url");
-    } else {
-    }
-    
-    let newMessage = {
-      id: Math.floor(Math.random() * 100000),
-      url: newUrl,
-      title: newTitle,
-    };
-    console.log(newMessage)
-    fetch("https://grizzly-shining-caravan.glitch.me/videos", {
-      method: "POST",
-      body: JSON.stringify(newMessage),
-    })
-      // .then(res => res.json())
-      // .then(data => console.log(data))
-      // .catch((error) => {
-      //   console.error('Error:', error);
-      // });
+    } 
   };
   return (
     <div className="m-5">
@@ -44,7 +26,7 @@ export const Forms = ({ callback }) => {
         Add Video
       </p>
       <div className={addVideo ? "d-block" : "d-none"}>
-        <form onSubmit={handleForm}>
+        <form action="https://grizzly-shining-caravan.glitch.me/videos" method="post">
           <div className="row mb-3">
             <label htmlFor="title" className="col-sm-1 col-form-label">
               Title

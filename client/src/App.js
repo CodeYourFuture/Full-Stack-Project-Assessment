@@ -15,7 +15,7 @@ function App() {
         setDisplaySpin(false);
       });
     return () => {};
-  }, []);
+  }, [datas]);
 
   // const callback = (parametre) => {
   //   if (parametre.url !== undefined) {

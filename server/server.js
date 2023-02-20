@@ -91,7 +91,23 @@ app.get("/videos", (req, res) => {
 });
 
 // POST VIDEO INFOS TO THE API
+app.post('/videos',(req,res)=>{
+  
+  // console.log(req.body)
+  let url=req.body.from
+  let title=req.body.text
+  let newMessage={
+    'id':Math.floor(Math.random()*100000),
+    'url':url,
+    'title':title,
 
+  }
+  if(!url|| !title ){
+    res.status(404).send('Complete the form')
+  }else{ database.push(newMessage)
+    res.json({database})}
+
+})
 
 
 
