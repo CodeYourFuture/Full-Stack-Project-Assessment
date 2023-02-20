@@ -11,13 +11,13 @@ function SingleVideo({ id, title, url, rating, handleRemove }) {
       <iframe src={`https://www.youtube.com/embed/${link}`} title={title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <h6>{title}</h6>
       <div className="card-btn-container">
-        <button className="thumbs-down-btn" onClick={() => setCount(count - 1)}>
+        <button className="thumbs-down-btn" onClick={() => setCount(+count - 1)}>
           <i>
             <BsHandThumbsDown />
           </i>
         </button>
         <p>{count}</p>
-        <button onClick={() => setCount(count + 1)}>
+        <button onClick={() => setCount(+count + 1)}>
           <i>
             <BsHandThumbsUp />
           </i>
