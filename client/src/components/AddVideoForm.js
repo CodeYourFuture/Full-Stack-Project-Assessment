@@ -28,15 +28,6 @@ const AddVideoForm = ({ setClicked, videos, setVideos }) => {
     }else {
       alert('This video is already in the videos list.');
     }
-    
-    fetch("https://omer-cyf-video-recommendation.herokuapp.com", {
-      method: "POST",
-      body: JSON.stringify(newVideo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => console.log(response));
   }
     return (
       <form
