@@ -11,14 +11,14 @@ function App() {
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
-      .then(res => res.json())
-    .then(data => setVideos(data))
+      .then((res) => res.json())
+      .then((data) => setVideos(data));
     //setVideos(data);
   }, []);
 
-  const addVideo = (video) => {
-    setVideos([...videos, video]);
-  };
+  // const addVideo = (video) => {
+  //   setVideos([...videos, video]);
+  // };
 
   const displayForm = () => setShowForm(true);
   const hideForm = () => setShowForm(false);
@@ -31,7 +31,7 @@ function App() {
 
       <div className="addVideoForm">
         <AddVideoButton displayForm={displayForm} hideForm={hideForm} />
-        {showForm ? <InputForm addVideo={addVideo} /> : null}
+        {showForm ? <InputForm /> : null}
       </div>
 
       <VideoList videos={videos} />

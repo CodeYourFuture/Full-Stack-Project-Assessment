@@ -2,3 +2,7 @@ node_modules
 *.lock
 .gitignore
 server/package.json
+firebase-debug.log
+.gitignore
+server/package-lock.json
+server/package.json
