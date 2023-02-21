@@ -1,43 +1,34 @@
 const express = require("express");
 const app = express();
 const videos = require("./exampleresponse.json");
-
+const { Pool } = require("pg");
 
 const port = 5000;
 app.use(express.json()); 
- 
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const db = new Pool({
+  host: "localhost",
+  port: 5432,
+  user: "postgres",
+  password: "1",
+  database: "videos_list_project",
+});
+
+app.listen(port, () =>{
+  console.log(`Listening on port ${port}`);
+
+});
 
 //  level200-start
-app.get("/videos", (req, res) => {
+app.get("/videos", (req, res) => { 
+  let { order } = req.query; 
+  order = order === "asc" ? "ASC" : "DESC";
   //  level299-Ordered Data - Back End/start
   // send url: http://localhost:5000/videos?order=desc or asc for test in postman
-  if (req.query.order === "asc") {
-    videos.sort((a, b) => {
-      return Math.sign(a.rating - b.rating);
-      // if (a.id < b.id) {
-      //   return -1;
-      // }
-      // if (a.id > b.id) {
-      //   return 1;
-      // }
-      // return 0;
-    });
-  } else if (req.query.order === "desc") {
-    videos.sort((a, b) => {
-      return Math.sign(b.rating - a.rating);
-      // if (a.rating > b.rating) {
-      //   return -1;
-      // }
-      // if (a.rating < b.rating) {
-      //   return 1;
-      // }
-      // return 0;
-    });
-  }
-  // level299-Ordered Data - Back End/end
-  res.json(videos);
+ 
+  db.query("SELECT * FROM youtube_videos ORDER BY rating "+ order )
+    .then((result) => res.json(result.rows))
+    .catch((error) => res.status(500).json(error));
 });
 
 // for convert string to number add + before request
@@ -83,5 +74,6 @@ app.delete("/videos/:id", (req, res) => {
   res.json({});
 });
 // level 200-end
+
 
 

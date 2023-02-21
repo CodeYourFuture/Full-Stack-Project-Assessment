@@ -18,8 +18,12 @@ function App() {
     fetch("/videos") ///GET
       .then((response) => response.json())
       .then((videos) => {
+        console.log(videos);
         data = videos.sort((a, b) => b.rating - a.rating);
         setList(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
