@@ -1,14 +1,13 @@
-import React from 'react';
-import url from 'examplesresponse.json';
+import React from 'react'
 
 const Video = () => {
   return (
     <div>
-      
+
 
 
     </div>
   )
 }
 
-export default Video;
+export default Video
