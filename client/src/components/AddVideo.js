@@ -9,7 +9,7 @@ const AddVideo = ({ videos, setVideos }) => {
     }
     return (
       <div>
-        <a href="#" onClick={handleClick}>
+        <a className='add_video' href="#" onClick={handleClick}>
           <h3>Add Video</h3>
         </a>
         {clicked ? 

@@ -2,6 +2,14 @@
 	text-align: center;
 }
 
+.App-header {
+	color: black;
+}
+
+.add_video {
+	text-decoration: none;
+}
+
 .videoVote {
 	display: flex;
 	justify-content: center;
