@@ -1,3 +1,12 @@
 .App {
+ align-items: center;
+}
+
+.video-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 50px;
   text-align: center;
 }
+
+
