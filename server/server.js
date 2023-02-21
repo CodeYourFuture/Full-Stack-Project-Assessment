@@ -79,4 +79,21 @@ app.delete("/videos/:id", async (req, res) => {
   }
 });
 
+//Change the rating of the Videos
+
+app.put("/videos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const vote = parseInt(req.body.vote);
+    const { rows } = await pool.query(
+      "UPDATE videos SET rating = rating + $1 WHERE id = $2 RETURNING *",
+      [vote, id]
+    );
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
