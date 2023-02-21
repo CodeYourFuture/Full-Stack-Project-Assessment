@@ -1,13 +1,14 @@
-import "./App.css";
+import './App.css';
+import Header from './components/Header';
+import VideosComponent from './components/VideosComponent';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Header />
+			<VideosComponent />
+		</div>
+	);
 }
 
 export default App;
