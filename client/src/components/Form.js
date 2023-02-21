@@ -3,6 +3,8 @@ import { useState } from "react";
 
 const Form = ({ callNewVideo }) => {
   const [showForm, setShowForm] = useState(true);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
   const hideForm = (e) => {
     e.preventDefault();
     setShowForm(false);
@@ -11,10 +13,16 @@ const Form = ({ callNewVideo }) => {
     e.preventDefault();
     setShowForm(true);
   };
-  
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleUrlChange = (e) => {
+    setUrl(e.target.value);
+  };
   const addVideo = () => {
-    let newUrl = document.getElementById("formGroupExampleInput2").value;
-    let newTitle = document.getElementById("formGroupExampleInput").value;
+    let newUrl = url;
+    let newTitle = title;
     let addNewVideo = {
       url: newUrl,
       title: newTitle,
@@ -23,27 +31,29 @@ const Form = ({ callNewVideo }) => {
     callNewVideo(addNewVideo);
   };
   return (
-    <div>
+    <div className="form-container">
       <p onClick={displayForm} className="text-primary">
         Add Video{" "}
       </p>
       <div className={showForm ? "" : "d-none"}>
-        <div class="mb-3 col-sm-3">
+        <div class="form-text-input">
           <label for="formGroupExampleInput" class="form-label">
             Title
           </label>
           <input
+            onChange={handleTitleChange}
             type="text"
             class="form-control"
             id="formGroupExampleInput"
             placeholder="Enter your movie here.."
           />
         </div>
-        <div class="mb-3 col-sm-3">
+        <div class="form-text-input">
           <label for="formGroupExampleInput2" class="form-label">
             URL
           </label>
           <input
+            onChange={handleUrlChange}
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
