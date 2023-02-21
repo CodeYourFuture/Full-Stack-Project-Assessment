@@ -26,7 +26,7 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
         formIsValid = false;
       } else {
         const link = `https://www.youtube.com/embed/${videoId}`;
-        onAdd({ title, url: link });
+        onAdd({ title, url, link });
       }
     }
 
