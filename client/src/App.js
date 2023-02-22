@@ -7,6 +7,7 @@ const App = () => {
 
   const [videos, setVideos] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   // Helper function to get the Video Url Link
   const getVideoUrl = function (video) {
@@ -31,6 +32,7 @@ const App = () => {
       newVideoArray.sort((a, b) => b.rating - a.rating);
       setVideos(newVideoArray);
     } catch (err) {
+      setError(err);
       console.error(err);
     }
   };
@@ -88,16 +90,20 @@ const App = () => {
         },
         body: JSON.stringify(video),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to add video. Please try again later.");
+      }
+
       if (response.ok) {
         const newVideo = await response.json();
-        console.log("newVideo:", newVideo);
         setVideos([...videos, { ...getVideoUrl(newVideo) }]);
-        console.log(videos);
         setIsOpen(false);
       } else {
         console.error("Error adding video");
       }
     } catch (err) {
+      alert(err.message);
       console.error(err);
     }
   };
@@ -108,6 +114,7 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center">
+      {error && <p>Failed to load resource: net::ERR_CONNECTION_REFUSED</p>}
       <VideoAdder
         isOpen={isOpen}
         setIsOpen={setIsOpen}

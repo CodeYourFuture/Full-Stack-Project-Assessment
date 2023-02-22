@@ -6,12 +6,9 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // To parse the incoming requests with JSON payloads
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = require("../exampleresponse.json");
+app.use(express.json());
 
-// GET "/"
+// GET all Videos
 app.get("/videos", async (req, res) => {
   try {
     const allVideos = await pool.query("SELECT * FROM videos");
@@ -21,7 +18,7 @@ app.get("/videos", async (req, res) => {
   }
 });
 
-// GET a video by ID
+// GET a video by its ID
 
 app.get("/videos/:id", async (req, res) => {
   try {
