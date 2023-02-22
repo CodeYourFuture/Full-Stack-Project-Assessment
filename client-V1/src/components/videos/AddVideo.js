@@ -13,7 +13,9 @@ export default function AddVideo({ addVideo }) {
     setInput({ ...input, [name]: value });
   };
 
-  const onFinish = async () => {
+  const onFinish = async e => {
+    // e.preventDefault();
+
     const res = await fetch("http://localhost:5001", {
       method: "POST",
       headers: {
@@ -22,7 +24,7 @@ export default function AddVideo({ addVideo }) {
       body: JSON.stringify(input),
     });
     const data = await res.json();
-    addVideo(data);
+    addVideo(input, data.id);
     setInput({ ...input, title: "", url: "" });
   };
 
