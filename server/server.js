@@ -17,29 +17,29 @@ const pool = new Pool({
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+ 
 
 //  level200-start
-app.get("/videos", (req, res) => {
-  // let { order } = req.query;
-  // order = order === "asc" ? "ASC" : "DESC";
-  //  level299-Ordered Data - Back End/start
-  // send url: http://localhost:5000/videos?order=desc or asc for test in postman
+app.get("/videos", (req, res) => { 
+  //  level299-Ordered Data - Back End/start 
   pool.query("SELECT * FROM videos", (error, result) => {
     res.json(result.rows);
-  });
-  // db.query("SELECT * FROM youtube_videos ORDER BY rating "+ order )
-  //   .then((result) => res.json(result.rows))
-  //   .catch((error) => res.status(500).json(error));
+  }); 
 });
 
 // for convert string to number add + before request
 app.get("/videos/:id", (req, res) => {
-  const newId = +req.params.id;
-  const oneVideo = videos.find((video) => video.id === newId);
-  if (oneVideo) {
-    res.json(oneVideo);
-  }
-  res.json({ result: "not Found" });
+  const newId =+ req.params.id; 
+    pool
+      .query("SELECT * FROM videos WHERE id = " + newId )
+      .then((result) => {
+        if ( result.rows.length > 0) {
+          res.status(200).json(result.rows);
+        } else {
+          res.status(200).json({ result: "not Found" });
+        } 
+      })
+      .catch((error) => res.status(500).json(error)); 
 });
 
 // insert into the database
@@ -47,11 +47,13 @@ app.post("/videos", function (req, res) {
   const { title, url } = req.body;
   if (title && url) {
     pool.query(
-      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)",
-      [title, url, 0],
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0)",
+      [title, url ],
       (error, results) => {
         if (error) {
           throw error;
+        }else{
+          res.status(204).json({result:"created"})
         }
       }
     );
@@ -62,6 +64,8 @@ app.post("/videos", function (req, res) {
     });
   }
 });
+
+
 // delete from database
 app.delete("/videos/:id", (req, res) => {
   const newId = +req.params.id;
