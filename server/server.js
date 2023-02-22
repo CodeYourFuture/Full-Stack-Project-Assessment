@@ -43,12 +43,14 @@ app.post("/videos",(req,res)=>{
   res.send(videos)
 })
 
+//read videos with specific id
 app.get("/videos/:id",(req,res)=>{
   const id =+req.params.id
   const itemFind= videos.find(video=>video.id===id)
   if(itemFind){res.status(200).send(itemFind)}
   else{res.status(404).send('Video not found')}
 })
+//delete videos with specific id
 app.delete("/videos/:id",(req,res)=>{
   const id =+req.params.id;
   const deletedItem=videos.filter((video)=>video.id!==id)

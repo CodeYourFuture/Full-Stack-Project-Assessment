@@ -11,6 +11,7 @@ export default function Form({form,setVideolist,videolist}) {
   uploadTime:''
 
 })
+// the function adds the values of the inputs to our video list
   const handelAdd=(e)=>{
   e.preventDefault();
   if(addvideo.url.includes('https://www.youtube.com/'))
@@ -30,6 +31,7 @@ export default function Form({form,setVideolist,videolist}) {
   .then(res=>res.json())
   .then(data=>console.log(data))
 }
+
 const handlechange=(event)=>{
   setAddvideo({...addvideo, [event.target.name]:event.target.value,uploadTime:moment().format('hh:mm:ss')})
   console.log(addvideo);

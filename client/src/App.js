@@ -9,7 +9,7 @@ function App() {
 
   const[form,setForm]=useState(false)
   const [videolist,setVideolist]=useState([])
-
+//fetch data from server side
 useEffect(() => {
   async function getVideos() {
     const res = await fetch("http://localhost:5000/videos");
@@ -18,7 +18,7 @@ useEffect(() => {
   }
   getVideos();
 }, []);
-
+// Mapping on our Data and using my card component 
   return (
     <div className="container" >
       <h1><i class="fa-thin fa-poo"></i></h1>
