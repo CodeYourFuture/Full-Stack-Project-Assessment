@@ -1,0 +1,12 @@
+.App {
+    text-align: center;
+  }
+.cursoring:hover {
+    cursor: pointer
+}
+
+.gradient {
+    
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,15,125,1) 3%, rgba(9,9,121,1) 6%, rgba(0,212,255,1) 58%);
+  }
