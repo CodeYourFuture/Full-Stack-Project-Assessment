@@ -1,0 +1,29 @@
+@font-face {
+  font-family: PlayfairDisplay;
+  src: url(../fonts/PlayfairDisplay.ttf);
+}
+
+body {
+  font-family: PlayfairDisplay !important;
+}
+.content {
+  margin: 2em 5em;
+  background-color: #d4e3e4;
+  padding: 2em;
+}
+
+.video-title {
+  margin: 0 0.5em 0.5em 0.5em;
+  height: 4.5rem;
+}
+
+.container-icon {
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+.like {
+  margin-left: 4.5em;
+}
+.dislike {
+  margin-left: 10px;
+}
