@@ -6,6 +6,7 @@ import { BeatLoader } from "react-spinners";
 function App() {
   const [datas, setDatas] = useState([]);
   const [displaySpin, setDisplaySpin] = useState(true);
+
   const baseurl = "https://grizzly-shining-caravan.glitch.me";
   useEffect(() => {
     fetch(`${baseurl}/videos`)
@@ -15,7 +16,7 @@ function App() {
         setDisplaySpin(false);
       });
     return () => {};
-  }, [datas]);
+  }, []);
 
   // const callback = (parametre) => {
   //   if (parametre.url !== undefined) {
@@ -28,8 +29,7 @@ function App() {
   return (
     <div>
       <Header />
-
-      <Forms /*callback={callback}*/ />
+      <Forms updateData={setDatas} />
       {displaySpin ? (
         <div
           style={{
@@ -41,7 +41,7 @@ function App() {
           <BeatLoader color="maroon" />
         </div>
       ) : (
-        <Cards videos={datas} />
+        <Cards videos={datas.filter((val) => !!val.url)} />
       )}
     </div>
   );
