@@ -1,4 +1,4 @@
-function Video({ id, title, rating, remove }) {
+function Video({ id, title, rating, remove, like }) {
   return (
     <div className="Video">
       <header className="Video-name">
@@ -18,6 +18,10 @@ function Video({ id, title, rating, remove }) {
       <button className="btn-remove-vid" onClick={remove}>
         remove video
       </button>
+      <button className="add-like" onClick={like}>
+        like this video
+      </button>
+      <button className="remove-like">unlike this video</button>
     </div>
   );
 }
