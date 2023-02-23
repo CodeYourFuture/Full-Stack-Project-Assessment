@@ -4,6 +4,7 @@ const AddVideo=({addVideo})=>{
     const [title,setTitle]=useState("");
     const[url,setUrl]=useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    let rating=0;
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -17,7 +18,7 @@ const handleSubmit = async (event) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, url }),
+      body: JSON.stringify({ title, url ,rating}),
     });
     const data = await response.json();
     if (data.success) {

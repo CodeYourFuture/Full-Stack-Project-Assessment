@@ -48,7 +48,8 @@ function App() {
         throw new Error("Network response was not ok.");
       })
       .then(() => {
-        setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id)) })
+        // setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id)) })
+        setVideos( videos.filter((video) => video.id !== id)) })
       .catch((error) => {
         console.error("There was a problem deleting the video: ", error);
       });
