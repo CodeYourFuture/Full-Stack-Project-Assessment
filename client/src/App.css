@@ -42,51 +42,30 @@ h4 {
   margin-bottom: 0.75rem;
 }
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 h4 {
-  font-size: 0.875rem;
+  font-size: 1.2rem;
 }
 p {
   margin-bottom: 1.25rem;
-  color: var(--font-color);
-  font-weight: bold;
-}
-@media screen and (min-width: 800px) {
-  h1 {
-    font-size: 4rem;
-    padding: 2rem;
-    
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
-  h3 {
-    font-size: 1.75rem;
-  }
-  h4 {
-    font-size: 1rem;
-     
-  }
-  /* body {
-     color: var(--font-color);
 
-  } */
-  h1,
+}
+ h1,
   h2,
   h3,
-  h4 {
+  h4, p {
     line-height: 1;
     color: var(--font-color);
         font-weight: bold;
   }
-}
+
 
  .App{
   background-color: var(--main-bg-color);
@@ -101,17 +80,18 @@ p {
 }
 .videoList {
   display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
+    /* grid-template-rows: auto; */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     justify-content: center;
-    padding: 2%;
+    align-items: center;
+    padding: 0.5rem;
     margin: auto;
-    gap: 0.5rem;
+    grid-gap: 0.5rem;
     min-height: 600px;
+    width: 95vw;
     /* background-color: var(--body-bg-color); */
     
 }
-
 
 .videoCard{
       /* border: 2px solid red; */
@@ -123,9 +103,9 @@ p {
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
     border-radius: 6px;
     /* transition: ease-in-out 0.2s; */
-    position: relative;
+    /* position: relative; */
     cursor: pointer;
-    overflow: hidden;
+    /* overflow: hidden;  */
   
 }
 .title{
@@ -155,3 +135,9 @@ iframe{
 button{
   margin: 1rem;
 }
+
+
+
+
+
+
