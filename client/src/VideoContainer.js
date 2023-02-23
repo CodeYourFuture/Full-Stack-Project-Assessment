@@ -1,3 +1,4 @@
+import AddVideo from "./AddVideo";
 import Video from "./Video";
 import Data from "./exampleresponse.json";
 import { useState } from "react";
@@ -7,12 +8,13 @@ function getVideos() {
 }
 
 function getRatings() {
-  return Data.rating;
+  console.log(Data.rating);
+  return Data;
 }
 
 function VideoContainer() {
   const [videos, SetVideos] = useState(getVideos);
-  const [like, setLike] = useState(getRatings);
+  const [likes, setLikes] = useState(getRatings);
   //SetVideos(getVideos());
 
   function removeVideo(index) {
@@ -21,7 +23,7 @@ function VideoContainer() {
   }
 
   function addLike() {
-    setLike(like + 1);
+    setLikes(likes + 1);
   }
 
   const allVideos = videos.map((video, index) => {
@@ -29,16 +31,23 @@ function VideoContainer() {
     const videoId = video.url.split("v=")[1];
     const like = () => addLike();
     return (
-      <Video
-        id={videoId}
-        title={video.title}
-        rating={video.rating}
-        remove={remove}
-        like={like}
-      ></Video>
+      <div>
+        <Video
+          id={videoId}
+          title={video.title}
+          rating={video.rating}
+          remove={remove}
+          like={like}
+        ></Video>
+      </div>
     );
   });
-  return <div className="videoContainer">{allVideos};</div>;
+  return (
+    <div>
+      <AddVideo></AddVideo>
+      <div className="videoContainer">{allVideos};</div>
+    </div>
+  );
 }
 
 export default VideoContainer;

@@ -1,5 +1,4 @@
 import "./App.css";
-import Video from "./Video.js";
 import VideoContainer from "./VideoContainer";
 
 function App() {
