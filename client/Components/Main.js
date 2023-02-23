@@ -7,12 +7,16 @@ function Main({ addVideos }) {
     url: "",
     rating: 0,
   });
+
+  // this is the function that will handle the change of the input
   const handleChange = (event) => {
     setinput({
       ...input,
       [event.target.name]: event.target.value,
     });
   };
+
+  // this is the function that will handle the submit of the form
   function handleSubmit(e) {
     e.preventDefault();
     addVideos(input);
@@ -30,7 +34,7 @@ function Main({ addVideos }) {
               value={input.title}
               onChange={handleChange}
             />
-            <label>URL </label>
+            <label>URL</label>
             <input
               type="text"
               name="url"

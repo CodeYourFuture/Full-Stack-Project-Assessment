@@ -1,0 +1,20 @@
+.allvideo{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 25px;
+}
+.video{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid black;
+    background-color: rgb(240, 239, 239);
+    /* box-shadow: 2px 2px 0px 2px; */
+    border-radius: 25px;
+}
+.reating{
+    display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+}
