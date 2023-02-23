@@ -14,8 +14,8 @@ export const VideoVotes = () => {
     };
     return (
         <div className="thumbs-icons">
-            <i class="fa-regular fa-thumbs-up" onClick={increaseVotes}>  </i>
-            <i class="fa-regular fa-thumbs-down" onClick={decreaseVotes}></i>
+            <i className="fa-regular fa-thumbs-up" onClick={increaseVotes}>  </i>
+            <i className="fa-regular fa-thumbs-down" onClick={decreaseVotes}></i>
             <p>{votes}</p>
         </div>
     );

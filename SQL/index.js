@@ -1,3 +1,5 @@
+const cors = require('cors');
+
 const express = require("express");
 const app = express();
 
@@ -11,8 +13,11 @@ const db = new Pool({
     port: 5432
 });
 
-const port = 6000 || process.env.PORT;
+const port = 3030 || process.env.PORT;
 app.use(express.json());
+
+app.use(cors());
+
 app.get('/', (req, res) => {
     res.json("hello this is the backend")
 });
