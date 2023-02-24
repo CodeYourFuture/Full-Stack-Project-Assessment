@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const VideoAdder = ({ isOpen, onAdd, onClose }) => {
   const [title, setTitle] = useState("");
@@ -35,8 +35,19 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
     if (formIsValid) {
       setTitle("");
       setUrl("");
+      setErrors({});
       onClose();
     }
+  };
+
+  useEffect(() => {
+    setErrors({ title: "", url: "" });
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setTitle("");
+    setUrl("");
+    onClose();
   };
 
   const getVideoIdFromUrl = (url) => {
@@ -51,12 +62,12 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-900 opacity-100 ${
+      className={`z-10 fixed inset-0 flex items-center justify-center bg-gray-300 opacity-85 ${
         isOpen ? "flex" : "hidden"
       }`}
     >
       <form
-        className="w-full max-w-md mx-auto p-4 bg-white"
+        className="w-full h-90 max-w-md mx-auto p-4 bg-white"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -103,10 +114,10 @@ const VideoAdder = ({ isOpen, onAdd, onClose }) => {
             )}
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={onClose}
+            onClick={handleClose}
           >
             Close
           </button>

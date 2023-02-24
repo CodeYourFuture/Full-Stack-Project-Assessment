@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import VideoList from "./VideoList";
-import VideoAdder from "./VideoAdder";
-
+import VideoList from "./components/VideoList";
+import VideoAdder from "./components/VideoAdder";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 const App = () => {
   const videoUrl = "https://www.youtube.com/embed/";
 
   const [videos, setVideos] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(null);
+  const [originalVideos, setOriginalVideos] = useState([]);
 
   // Helper function to get the Video Url Link
   const getVideoUrl = function (video) {
@@ -24,13 +26,15 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/videos");
+      const url = `http://localhost:5000/videos`;
+      const response = await fetch(url);
       const data = await response.json();
       const newVideoArray = data.map((video) => {
         return getVideoUrl(video);
       });
       newVideoArray.sort((a, b) => b.rating - a.rating);
       setVideos(newVideoArray);
+      setOriginalVideos(newVideoArray);
     } catch (err) {
       setError(err);
       console.error(err);
@@ -108,6 +112,17 @@ const App = () => {
     }
   };
 
+  const onSearch = (searchTerm) => {
+    if (searchTerm.trim() === "") {
+      setVideos(originalVideos); // if search term is empty, show all videos
+    } else {
+      const filteredVideos = originalVideos.filter((video) =>
+        video.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setVideos(filteredVideos); // otherwise, filter videos by title
+    }
+  };
+
   const onClose = () => {
     setIsOpen(false);
   };
@@ -115,21 +130,18 @@ const App = () => {
   return (
     <div className="flex flex-col items-center">
       {error && <p>Failed to load resource: net::ERR_CONNECTION_REFUSED</p>}
+      <NavBar onSearch={onSearch} onAdd={onAdd} setIsOpen={setIsOpen} />
       <VideoAdder
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onAdd={onAdd}
         onClose={onClose}
       />
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => setIsOpen(true)}
-      >
-        Add Video
-      </button>
+
       <div className="flex flex-wrap">
         <VideoList videos={videos} onVote={onVote} onRemove={onRemove} />
       </div>
+      <Footer />
     </div>
   );
 };
