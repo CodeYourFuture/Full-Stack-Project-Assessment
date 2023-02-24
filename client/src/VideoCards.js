@@ -7,7 +7,7 @@ function Cards() {
   const [title, createTitle] = useState("");
 
   useEffect(() => {
-    fetch('/videos')
+    fetch("/videos")
       .then((res) => res.json())
       .then((data) => createVideos(data))
       .catch((error) => console.log(error));
@@ -17,12 +17,12 @@ function Cards() {
     let newVideos = [...videos];
     fetch(`/videos/${id}`, {
       method: "DELETE",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
-    .then((res)=> res.json())
-    .then((data) =>console.log(data))
-    .catch((error)=> console.log(error))
-    newVideos = newVideos.filter(video => video.id !== id) 
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+    newVideos = newVideos.filter((video) => video.id !== id);
     createVideos(newVideos);
   };
   const updateTitle = (event) => {
@@ -35,28 +35,27 @@ function Cards() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
- 
+
     const newVideo = {
       title,
       url,
       rating: 0,
     };
 
-     fetch("/videos", {
+    fetch("/videos", {
       method: "POST",
       body: JSON.stringify(newVideo),
-      headers: {"Content-Type": "application/json"} 
+      headers: { "Content-Type": "application/json" },
     })
-    .then((res)=> res.json())
-    .then((data)=>console.log(data))
-    .catch((error)=> console.log(error))
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
     let updatedVideos = [...videos, newVideo];
 
     createVideos(updatedVideos);
     createTitle("");
     createUrl("");
   };
-
 
   return (
     <div>
@@ -78,17 +77,18 @@ function Cards() {
         </form>
       </div>
       <div className="Cards">
-        {videos.length && videos.map((video) => {
-             return (
-            <Card
-              id={video.id}
-              title={video.title}
-              url={video.url}
-              rating={video.rating}
-              removeElement={removeElement}
-            />
-          );
-        })}
+        {videos.length &&
+          videos.map((video) => {
+            return (
+              <Card
+                id={video.id}
+                title={video.title}
+                url={video.url}
+                rating={video.rating}
+                removeElement={removeElement}
+              />
+            );
+          })}
       </div>
     </div>
   );
