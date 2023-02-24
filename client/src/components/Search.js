@@ -1,6 +1,9 @@
 // function Search() {
 //   return (
 //     <div>
+{
+  /* <div></div> */
+}
 //       <label htmlFor="search">Search</label>
 //       <input type="text" name="search" id="search" />
 //     </div>
