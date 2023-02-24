@@ -1,35 +1,62 @@
 import React,{useState} from 'react'
-import VideoList from './VideoList';
 
 
-const AddVideo = () => {
+const AddVideo = (props) => {
   const [title, setTitle]= useState("");
   const [url, setUrl] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
     e.preventDefault();
 
     
   }
 
+  const handleChangeUrl = (e) =>{
+    setUrl(e.target.value);
+    e.preventDefault();
+  }
+  function addVideoObj() {
+    const videoObj = {title: title, url: url};
+    props.addVideo(videoObj);
+    setTitle("");
+    setUrl("");
+  }
+
 
   return (
-    
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Title</label>
-          <input type="text" id='title' value={title} onChange={(e) => setTitle(e.target.value)} />
+    <div className="add-video-container">
+        <div className="add-video-title">
+          <p>Title</p>
+          <input
+            type="text"
+            value={title}
+            onChange={handleChangeTitle}
+          />
+        </div>
 
-          <label htmlFor="url">Url</label>
-          <input type="text" id='url' value={url} onChange={(e) => setUrl(e.target.value)}/>
+        <div className="add-url">
+          <p>URL</p>
+          <input
+            type="url"
+            placeholder="https://example.com"
+            value={url}
+            onChange={handleChangeUrl}
+          />
+        </div>
 
-          <button className='add-video' onClick={handleSubmit}>Add Video</button>
-          
-          
-        </form>
-        <VideoList/>
+        <div className="add-cancel-buttons-container">
+          <div className="add-button">
+            <button onClick={addVideoObj}>ADD</button>
+          </div>
+
+          <div className="cancel-button">
+            <button>CANCEL</button>
+          </div>
+        </div>
       </div>
-  
+
+    
   )
 }
 
