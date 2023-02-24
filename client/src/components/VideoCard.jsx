@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
+import * as Fa from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
-function VideoCard({ rating, title, url }) {
+function VideoCard({ handleDeleteVideo, id, rating, title, url }) {
   const [like, setLike] = useState(rating);
 
   // adds one vote
@@ -17,16 +19,21 @@ function VideoCard({ rating, title, url }) {
     like > rating ? setLike(rating) : setLike(rating - 1);
   };
 
+  const getId = (e) => {
+    handleDeleteVideo(id);
+  };
+
   return (
     <Container className="card">
-      <div>
-        <button onClick={handleVoteUp}>Vote Up</button>
+      <div className="rating-Class">
+        <Fa.FaThumbsUp onClick={handleVoteUp} />
         <span>{like}</span>
-        <button onClick={handleVoteDown}>Vote Down</button>
+        <Fa.FaThumbsDown onClick={handleVoteDown} />
       </div>
       <h3>{title}</h3>
 
       <iframe title="video" src={url} width="853" height="480"></iframe>
+      <MdDelete onClick={getId} />
     </Container>
   );
 }

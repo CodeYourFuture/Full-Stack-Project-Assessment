@@ -1,8 +1,11 @@
 // import React, { useEffect, useState } from "react";
+
 import VideoCard from "./VideoCard";
 
-
-function VideoList({videos}) {
+function VideoList({ handleDeleteVideo, videos }) {
+  if (videos === null) {
+    return <p>..loading</p>;
+  }
 
   return (
     <div>
@@ -11,7 +14,8 @@ function VideoList({videos}) {
         .map((video) => (
           <>
             <VideoCard
-              key={video.id}
+              handleDeleteVideo={handleDeleteVideo}
+              id={video.v_id}
               rating={video.rating}
               title={video.title}
               url={video.url}

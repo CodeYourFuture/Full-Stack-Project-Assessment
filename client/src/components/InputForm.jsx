@@ -19,23 +19,22 @@ function InputForm({ addVideo }) {
     e.preventDefault();
     if (isYoutubeUrlValid(url)) {
       const newVideo = {
-        id: Date.now(),
+        id: Number(new Date().getTime()),
         title: title,
         url: url,
-        rating: 0,
+        rating: 1,
       };
       fetch("http://127.0.0.1:5000/addVideo", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(newVideo)
+        body: JSON.stringify(newVideo),
       })
-        .then(res => res.json())
-      .then(data => data)
+        .then((res) => res.json())
+        .then((data) => data);
 
-
-      //addVideo(newVideo);
+      addVideo(newVideo);
       setTitle("");
       setUrl("");
     } else {

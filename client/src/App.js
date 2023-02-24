@@ -3,22 +3,25 @@ import VideoList from "./components/VideoList";
 import InputForm from "./components/InputForm";
 import AddVideoButton from "./components/AddVideoButton";
 import { useState, useEffect } from "react";
-//import data from "./data/exampleresponse.json";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [videos, setVideos] = useState([""]);
+  const [videos, setVideos] = useState(null);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
       .then((res) => res.json())
       .then((data) => setVideos(data));
-    //setVideos(data);
   }, []);
 
-  // const addVideo = (video) => {
-  //   setVideos([...videos, video]);
-  // };
+  const handleDeleteVideo = (key) => {
+    fetch(`http://127.0.0.1:5000/delete/${key}`, {
+      method: "delete",
+      body: JSON.stringify(key),
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
   const displayForm = () => setShowForm(true);
   const hideForm = () => setShowForm(false);
@@ -34,7 +37,7 @@ function App() {
         {showForm ? <InputForm /> : null}
       </div>
 
-      <VideoList videos={videos} />
+      <VideoList handleDeleteVideo={handleDeleteVideo} videos={videos} />
     </div>
   );
 }
