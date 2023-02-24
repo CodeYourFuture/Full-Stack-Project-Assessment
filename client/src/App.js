@@ -10,7 +10,10 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(null);
   const [originalVideos, setOriginalVideos] = useState([]);
-
+  const [sortVideos, setSortVideos] = useState({
+    sortBy: "rating",
+    sortDirection: "desc",
+  });
   // Helper function to get the Video Url Link
   const getVideoUrl = function (video) {
     const regex = /v=([^&]*)/;
@@ -123,6 +126,30 @@ const App = () => {
     }
   };
 
+  const handleSort = (sortBy) => {
+    const sortedVideos = [...videos].sort((a, b) => {
+      if (sortBy === "title") {
+        if (sortVideos.sortDirection === "asc") {
+          return a.title.localeCompare(b.title);
+        } else {
+          return b.title.localeCompare(a.title);
+        }
+      } else {
+        if (sortVideos.sortDirection === "asc") {
+          return a.rating - b.rating;
+        } else {
+          return b.rating - a.rating;
+        }
+      }
+    });
+
+    setVideos(sortedVideos);
+    setSortVideos({
+      sortBy: sortBy,
+      sortDirection: sortVideos.sortDirection === "asc" ? "desc" : "asc",
+    });
+  };
+
   const onClose = () => {
     setIsOpen(false);
   };
@@ -130,7 +157,14 @@ const App = () => {
   return (
     <div className="flex flex-col items-center">
       {error && <p>Failed to load resource: net::ERR_CONNECTION_REFUSED</p>}
-      <NavBar onSearch={onSearch} onAdd={onAdd} setIsOpen={setIsOpen} />
+      <NavBar
+        onSearch={onSearch}
+        onAdd={onAdd}
+        setIsOpen={setIsOpen}
+        sortingVideos={handleSort}
+        sortVideos={sortVideos}
+        setSortVideos={setSortVideos}
+      />
       <VideoAdder
         isOpen={isOpen}
         setIsOpen={setIsOpen}
