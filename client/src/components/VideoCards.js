@@ -1,21 +1,19 @@
 import React from "react";
-import { VideoVotes } from "./VideoVotes";
+// import { VideoVotes } from "./VideoVotes";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import ReactPlayer from "react-player";
 
 
 export const VideoCards = () => {
-
     const [videos, setVideos] = useState([]);
-
     useEffect(() => {
-
         const fetchAllVideos = async () => {
             try {
                 const res = await axios.get("http://localhost:3030/videos");
-                setVideos(res);
-                console.log(res);
+                setVideos(res.data);
+                // console.log(res);
             }
             catch (e) {
                 console.log(e);
@@ -23,18 +21,32 @@ export const VideoCards = () => {
         }
         fetchAllVideos();
     }, []);
-
-
+    const [votes, setVotes] = useState(0);
+    const increaseVotes = () => {
+        setVotes(votes + 1)
+    }
+    const decreaseVotes = () => {
+        if (votes > 0) {
+            setVotes(votes - 1)
+        }
+    };
     return (
         <div>
-            <h1>Videos</h1>
             <div>
-                {videos.data.map((video) => (
+                {videos.map((video) => (
+                    <div className="video" key={video.id}>
+                        <p>{video.title}</p>
 
-                    <h3>video.title</h3>
-
+                        <ReactPlayer
+                            url={video.url}
+                        />
+                        <div className="thumbs-icons">
+                            <p>{parseInt(video.rating) + votes}</p>
+                            <i className="fa-regular fa-thumbs-up" onClick={increaseVotes}></i>
+                            <i className="fa-regular fa-thumbs-down" onClick={decreaseVotes}></i>
+                        </div>
+                    </div>
                 ))}
-
             </div>
             {/* <h2>Title</h2>
             <iframe
@@ -46,12 +58,9 @@ export const VideoCards = () => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             ></iframe> */}
-            <div>
-                <VideoVotes />
-                <button type="button" className="btn btn-primary">
-                    Delete
-                </button>
-            </div>
+            <button type="button" className="btn btn-primary">
+                Delete
+            </button>
         </div>
     );
 }
