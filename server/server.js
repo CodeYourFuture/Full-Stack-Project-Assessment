@@ -2,11 +2,16 @@ const { response, request } = require("express");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+const cors = require("cors");
+
 // to generate unique id (npm i uuid) source express crash course traversy media
 const uuid = require("uuid");
 // body parser middleware
 // body parser middleware. The urlencoded method within body-parser tells body-parser to extract data from the <form> </form> element and add them to the body property in the request object.
 app.use(express.json());
+app.use(cors());
+//node js
+
 // Using body-parser allows you to access req.body from within routes and use that data.
 app.use(express.urlencoded({ extended: false }));
 
@@ -19,8 +24,11 @@ const videos = require("../client/src/data/exampleresponse.json");
 // GET "/" method
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.status(200).json({ videos });
+  res.status(200).json( videos );
 });
+
+
+
 
 // task-POST mehtod
 // This endpoint is used to add a video to the API.
