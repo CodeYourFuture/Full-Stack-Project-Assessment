@@ -19,21 +19,26 @@ export const Videos = (props) => {
         }
     };
     return (
-        <div className="video-container">
-            <div className="video">
-                <p>{props.title}</p>
-                <ReactPlayer
-                    url={props.url}
-                />
+        <div className="main-container" >
+            <div className="cards" >
+                <p display="flex" flex-wrap="wrap">{props.title}</p>
+                <div className>
+                    <ReactPlayer width="355px" height="200px"
+                        url={props.url} />
+                </div>
+                <br />
                 <div className="thumbs-icons">
-                    <p>{parseInt(props.rating) + votes}</p>
+
                     <button className="fa-regular fa-thumbs-up" onClick={increaseVotes}> +</button>
+                    <p>{parseInt(props.rating) + votes}</p>
                     <button className="fa-regular fa-thumbs-down" onClick={() => decreaseVotes(parseInt(props.rating))}> - </button>
                 </div>
+
+                <button type="button" className="btn btn-primary">
+                    Delete
+                </button>
+
             </div>
-            <button type="button" className="btn btn-primary">
-                Delete
-            </button>
         </div>
     );
 }

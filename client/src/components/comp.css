@@ -2,6 +2,30 @@
     cursor: pointer;
     color: red;
 }
-.video-container{
+
+.thumbs-icons{
+    display: flex;
+    justify-content:space-around;
+}
+
+ .main-container{
+    background-color:rgba(255, 0, 0, 0.274);
+    text-align: center;
+    margin: 10px;
+    height: 375px;
+    width: 375px;
     
+}
+.cards{
+    margin: 10px;
+    
+}
+body{
+    background-color: brown;
+}
+header{
+    background-color: crimson;
+}
+.form{
+    background-color: rgba(249, 116, 0, 0.781);
 }

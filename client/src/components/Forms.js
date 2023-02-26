@@ -13,7 +13,7 @@ export const Forms = () => {
     }
     return (
 
-        <div>
+        <div className="form">
             <h2 onClick={displayForm} className="coloring">Add Video</h2>
             <form className={dlt ? "d-block" : "d-none"}>
                 <div className="mb-3">
@@ -27,7 +27,6 @@ export const Forms = () => {
                 <div><button type="submit" className="btn btn-primary" onClick={hideForm}>Cancel</button>
                     <p> </p>
                     <button type="submit" className="btn btn-primary">Add</button> </div>
-
             </form>
         </div>
     )
