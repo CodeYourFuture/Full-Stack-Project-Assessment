@@ -3,15 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
 
-const { Pool } = require("pg");
-
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "project_assessment",
-  password: "Kdagaal123",
-  port: 5432,
-});
+const { pool } = require("./dbConfig");
 
 const cors = require("cors");
 

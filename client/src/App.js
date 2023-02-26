@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [videos, setVideos] = useState(null);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")

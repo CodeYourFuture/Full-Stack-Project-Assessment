@@ -3,9 +3,6 @@
 import VideoCard from "./VideoCard";
 
 function VideoList({ handleDeleteVideo, videos }) {
-  if (videos === null) {
-    return <p>..loading</p>;
-  }
 
   return (
     <div>

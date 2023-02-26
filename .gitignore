@@ -6,3 +6,4 @@ firebase-debug.log
 .gitignore
 server/package-lock.json
 server/package.json
+server/.env
