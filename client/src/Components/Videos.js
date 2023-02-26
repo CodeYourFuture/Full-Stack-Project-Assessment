@@ -1,30 +1,34 @@
-import React from "react";
-import YoutubeVideos from "./YoutubeVideos";
-import allvideos from "./Allvideos";
+import React, {useState} from "react";
+import LikeButton from "./LikeButton";
+import VideosArray from "./VideosArray";
+import VideosForm from "./VideosForm";
 
 function showVideos(allvideo) {
-    return <YoutubeVideos 
+    return <LikeButton
     title = {allvideo.title}
      link = {allvideo.url}   
      rating = {allvideo.rating}
     />
 }
-
 function Videos() {
+    const [allVideoArray, setAllVideoArray] = useState(VideosArray);
+  
+    function handleAddVideo(title, link, rating) {
+        const newVideo = {
+            title,
+            link,
+            rating,
+            id: self.crypto.randomUUID()
+        }
+
+        setAllVideoArray([...allVideoArray, newVideo])
+   
+    }
+
 return(
 <div className="video-container">
-{allvideos.map(showVideos)}
-    {/* <YoutubeVideos 
-title = {AllVideos[0].title}
-link = {AllVideos[0].url}
-rating = {AllVideos[0].rating}
-    />
-
-<YoutubeVideos 
-title = {AllVideos[1].title}
-link = {AllVideos[1].url}
-rating = {AllVideos[1].rating}
-    /> */}
+<VideosForm onAddVideo = {handleAddVideo}/>
+{VideosArray.map(showVideos)}
 </div>
 )
 }
