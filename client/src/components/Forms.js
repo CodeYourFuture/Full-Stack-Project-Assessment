@@ -3,19 +3,19 @@ import "./comp.css";
 export const Forms = () => {
     const [dlt, setDlt] = useState(true)
     const displayForm = () => {
-        setDlt(true);
+        setDlt(false);
     }
 
     const hideForm = (e) => {
 
         e.preventDefault();
-        setDlt(false);
+        setDlt(true);
     }
     return (
 
         <div className="form">
             <h2 onClick={displayForm} className="coloring">Add Video</h2>
-            <form className={dlt ? "d-block" : "d-none"}>
+            <form className={!dlt ? "d-block" : "d-none"}>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label col-sm-3">Title</label>
                     <input type="text" className="form-control col-sm-3" id="exampleInputEmail1" aria-describedby="emailHelp" />
