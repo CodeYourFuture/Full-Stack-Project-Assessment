@@ -18,16 +18,18 @@ function Videos() {
             title,
             link,
             rating,
-            id: self.crypto.randomUUID()
+            id: window.self.crypto.randomUUID()
         }
 
         setAllVideoArray([...allVideoArray, newVideo])
+
+        console.log(newVideo)
    
     }
 
 return(
 <div className="video-container">
-<VideosForm onAddVideo = {handleAddVideo}/>
+<VideosForm onAddVideo = {handleAddVideo} />
 {VideosArray.map(showVideos)}
 </div>
 )

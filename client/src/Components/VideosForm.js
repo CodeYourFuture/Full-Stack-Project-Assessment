@@ -19,7 +19,7 @@ function VideosForm(onAddVideo) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Add Joke</button>
+        <button type="submit">Add Video</button>
       </form>
     );
   }

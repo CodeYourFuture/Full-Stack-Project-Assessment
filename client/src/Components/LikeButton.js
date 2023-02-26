@@ -13,7 +13,18 @@ function LikesButton(props) {
 
   return (
     <div>
-      <p>{props.text}</p>
+      <p>{props.title}</p>
+      
+  <iframe src={props.link} 
+title="YouTube video player" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowFullScreen
+width="560" height="315">
+</iframe>
+
+
+<h3> Rating: {props.rating}</h3>
+
       <p>Like: {like} </p>
       <button onClick={handleLike}>👍</button>
       <button onClick={handleDislike}>👎</button>
