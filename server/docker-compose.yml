@@ -1,0 +1,45 @@
+version: '3.8'
+# each 'service' below is similar to a docker run command - we have 2. One for the Express app (custom Docker build) and one for Postgres (using the official image)
+services:
+  web:
+    image: fs_proj_backend:latest
+    container_name: fs_proj_backend
+    build:
+      context: ./
+    # /src is the working directory in the Dockerfile. This maps that file to our root
+    volumes:
+      - .:/src
+    # command overrides the default command declared by the container image (i.e. by Dockerfile’s CMD).
+    # this is helpful so that we can differentiate what we run between dev and production environments
+    command: npm run start:dev
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      NODE_ENV: development
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      # note that 'db' is NOT localhost - it must match the service name below
+      DB_HOST: db
+      DB_NAME: fs_assessment_db
+      DB_PORT: 5432
+  db:
+    container_name: postgres_db
+    image: postgres:15.2-alpine
+    # adds logging to Postgres container (will log out the queries)
+    command: ["postgres", "-c", "log_statement=all"]
+    # container will restart if it is stopped automatically (but not if stopped manually)
+    restart: unless-stopped
+    # we can set environment variables (in Node, these would be accessed as process.env.VAR_NAME, but of course this is not Node)
+    # more information on the available options can be found on the Postgres Docker Hub
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      # if not set, this defaults to the same value as POSTGRES_USER
+      - POSTGRES_DB=fs_assessment_db
+    ports:
+      # host/machine port 5432 (arbitrary number) will map to the container port (5432 because that is Postgres default, so that's where it will be running inside the container)
+      - '5432:5432'
+    volumes: 
+      # docker-entrypoint-initdb.d is where the initialisation scripts should normally be inside the Docker container, but we are mapping this to '/sql' directory so we can store scripts there instead and just map them across
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
