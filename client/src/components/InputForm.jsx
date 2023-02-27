@@ -7,8 +7,8 @@ function InputForm({ addVideo }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const handleTitleChange = (e) => { 
+      setTitle(e.target.value);
   };
 
   const handleUrlChange = (e) => {
@@ -21,7 +21,7 @@ function InputForm({ addVideo }) {
       const newVideo = {
         id: Number(new Date().getTime()),
         title: title,
-        url: url,
+        url: extractVideoKey(url),
         rating: 1,
       };
       fetch("http://127.0.0.1:5000/addVideo", {
@@ -45,14 +45,19 @@ function InputForm({ addVideo }) {
 
   function isYoutubeUrlValid(url) {
     try {
-      const validUrl = new URL(url);
-      return (
-        validUrl.hostname === "www.youtube.com" ||
-        validUrl.hostname === "youtu.be"
-      );
+      const { hostname } = new URL(url);
+
+      return hostname === "www.youtube.com" || hostname === "youtu.be";
     } catch {
       return false;
     }
+  }
+
+  function extractVideoKey(url) {
+    const regex = /watch\?v=(\w+)/;
+    const match = url.match(regex);
+    const videoId = match[1];
+    return `https://www.youtube.com/embed/${videoId}`;
   }
 
   return (
