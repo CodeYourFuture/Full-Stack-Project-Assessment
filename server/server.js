@@ -19,7 +19,7 @@ app.get("/", (request, response) => {
 
 app.get("/:id", (request, response) => {
   // Delete this line after you've confirmed your server is running
-  console.log(request.body);
+  // console.log(request.body);
   const returnVideo = localVideosFile.filter(video => video.id == request.params.id)
   response.json(returnVideo);
 });
