@@ -1,8 +1,9 @@
 import React, { useEffect, useState }  from "react";
 import "./App.css";
-import AddVideos from "./component/AddVideos";
+// import AddVideos from "./component/AddVideos";
 import VideoList from "./component/VideoList";
 // import exampleData from "./data/exampleresponse.json";
+import AddVideosBtn from "./component/AddVideosBtn";
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideos videodata={videodata} setVideoData={setVideoData} />
+      <AddVideosBtn videodata={videodata} setVideoData={setVideoData} />
+      {/* <AddVideos videodata={videodata} setVideoData={setVideoData} /> */}
       <VideoList videodata={videodata} setVideoData={setVideoData} />
     </div>
   );
