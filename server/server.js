@@ -13,7 +13,7 @@ app.use(express.json());
 app.get("/", (request, response) => {
   // Delete this line after you've confirmed your server is running
   console.log(request.body);
-  response.send({ express: "Your Backend Service is Running" });
+  response.json(localVideosFile);
 });
 
 
