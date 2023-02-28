@@ -8,3 +8,49 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h3 {
+  width: 60%;
+  font-size: 0.95rem;
+  margin: 10px auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.video-container {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.vote-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hand-up,
+.hand-down {
+  cursor: pointer;
+}
+
+.hand-up:hover,
+.hand-down:hover {
+  color: blue;
+}
+
+button {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkred;
+}
