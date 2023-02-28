@@ -2,6 +2,8 @@ import "./App.css";
 import { useState } from "react";
 import Video from "./Video";
 import AddVideoButton from "./AddVideoButton";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -20,18 +22,20 @@ function App() {
         <h1>React Video Recommendation Engine</h1>
         <AddVideoButton onVideoAdded={addVideo} />
       </header>
-      <div className="container">
+      <Container>
         {videos.map((video) => (
-          <Video className="col-sm"
-            key={video.id}
-            id={video.id}
-            title={video.title}
-            url={video.url}
-            votes={video.votes}
-            onVideoRemoved={removeVideo}
-          />
+          <Col>
+            <Video
+              key={video.id}
+              id={video.id}
+              title={video.title}
+              url={video.url}
+              votes={video.votes}
+              onVideoRemoved={removeVideo}
+            />
+          </Col>
         ))}
-      </div>
+      </Container>
     </div>
   );
 }
