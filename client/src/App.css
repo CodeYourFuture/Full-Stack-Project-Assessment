@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+
+.container{
+ 
+ margin-left: 100px;
+ padding-left: 190px;
+ display: flex; 
+ flex-wrap: wrap;
+ align-items: center;
+}

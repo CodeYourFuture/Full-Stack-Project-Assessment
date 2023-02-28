@@ -22,7 +22,7 @@ function App() {
         <h1>React Video Recommendation Engine</h1>
         <AddVideoButton onVideoAdded={addVideo} />
       </header>
-      <Container>
+      <Container className="container">
         {videos.map((video) => (
           <Col>
             <Video
