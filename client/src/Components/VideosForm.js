@@ -13,12 +13,32 @@ function VideosForm(onAddVideo) {
     return (
       <form onSubmit={handleSubmit}>
         <input
+        name ="title"
           type="text"
-          placeholder="Add Video"
+          placeholder="Enter Video Title"
           id="text"
-          value={text}
+          value={text.title}
           onChange={(e) => setText(e.target.value)}
         />
+
+<input
+name ="url"
+          type="text"
+          placeholder="Enter Video Link"
+          id="text"
+          value={text.url}
+          onChange={(e) => setText(e.target.value)}
+        />
+
+        <input
+        name ="rating"
+          type="text"
+          placeholder="Enter Ratings"
+          id="text"
+          value={text.rating}
+          onChange={(e) => setText(e.target.value)}
+        />
+
         <button type="submit">Add Video</button>
       </form>
     );

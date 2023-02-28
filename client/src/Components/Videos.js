@@ -3,13 +3,6 @@ import LikeButton from "./LikeButton";
 import VideosArray from "./VideosArray";
 import VideosForm from "./VideosForm";
 
-function showVideos(allvideo) {
-    return <LikeButton
-    title = {allvideo.title}
-     link = {allvideo.url}   
-     rating = {allvideo.rating}
-    />
-}
 function Videos() {
     const [allVideoArray, setAllVideoArray] = useState(VideosArray);
   
@@ -30,7 +23,13 @@ function Videos() {
 return(
 <div className="video-container">
 <VideosForm onAddVideo = {handleAddVideo} />
-{VideosArray.map(showVideos)}
+{VideosArray.map(video => (
+    <LikeButton
+    title = {video.title}
+     link = {video.url}   
+     rating = {video.rating}
+    />
+))}
 </div>
 )
 }

@@ -12,7 +12,7 @@ function LikesButton(props) {
   }
 
   return (
-    <div>
+    <div className="container">
       <p>{props.title}</p>
       
   <iframe src={props.link} 
