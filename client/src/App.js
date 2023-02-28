@@ -22,6 +22,7 @@ function App() {
         <h1>React Video Recommendation Engine</h1>
         <AddVideoButton onVideoAdded={addVideo} />
       </header>
+      <hr />
       <Container className="container">
         {videos.map((video) => (
           <Col>
@@ -36,6 +37,7 @@ function App() {
           </Col>
         ))}
       </Container>
+      <hr />
     </div>
   );
 }
