@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge'
 
 function Video(props) {
   const [votes, setVotes] = useState(props.votes);
@@ -21,13 +23,23 @@ function Video(props) {
       <iframe
         width="560"
         height="315"
-        src={props.src}
+        src={props.url}
         title={props.title}
       ></iframe>
-      <p>{votes} votes</p>
-      <button onClick={removeVideo}>Remove Video</button>
-      <button onClick={voteUp}>Up Vote</button>
-      <button onClick={voteDown}>Down Vote</button>
+      <p>
+        <Badge pill bg="primary">
+          votes {votes}
+        </Badge>{" "}
+      </p>
+      <Button variant="success" style={{ margin: "5px" }} onClick={voteUp}>
+        Up Vote
+      </Button>
+      <Button variant="danger" style={{ margin: "5px" }} onClick={voteDown}>
+        Down Vote
+      </Button>
+      <Button variant="dark" style={{ margin: "5px" }} onClick={removeVideo}>
+        Remove Video
+      </Button>
     </div>
   );
 }

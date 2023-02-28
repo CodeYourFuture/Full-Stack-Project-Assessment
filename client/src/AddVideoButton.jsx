@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Input from "react-bootstrap/FormCheckInput"
 
 function AddVideoButton(props) {
   const [title, setTitle] = useState("");
@@ -22,18 +24,22 @@ function AddVideoButton(props) {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        style={{ margin: "5px" }}
         type="text"
         placeholder="Title"
         value={title}
         onChange={handleTitleChange}
       />
       <input
+        style={{ margin: "5px" }}
         type="text"
         placeholder="URL"
         value={url}
         onChange={handleUrlChange}
       />
-      <button type="submit">Add Video</button>
+      <Button style={{ margin: "5px" }} size="sm" variant="dark" type="submit">
+        Add Video
+      </Button>
     </form>
   );
 }
