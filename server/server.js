@@ -6,47 +6,72 @@ app.use(express.json());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = require("./data/exampleresponse.json");
+const { Pool } = require("pg");
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
+const db = new Pool({
+  user: "kmona", 
+  host: "localhost",
+  database: "cyf_videos",
+  password: process.env.db_password,
+  port: 5432,
+});
+
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  db.query("SELECT * FROM videos", (error, result) => {
+    console.log(result);
+    res.json(result.rows);
+  });
 });
 //post add new videos
 app.post("/", (req, res) => {
-  const addVideo = req.body;
-  let newID = videos[videos.length - 1].id + 1;
-  if (addVideo.title === "" || addVideo.url === "") {
-    res.status(404).json({
-      result: "failure",
-      message: "Video could not be Saved",
-    });
-  } else {
-    let add = {
-      id: newID,
-      ...addVideo,
-    };
-    videos.push(add);
-    res.send({ videos });
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = req.body.rating;
+  try {
+    const query =
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+      db.query(query, [newTitle, newUrl, newRating])
+      .then(() => res.send("customer created!"))
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
   }
+  
 });
 //get video by id
 app.get("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const filterVideo = videos.filter((vd) => vd.id === id);
-  res.send({ filterVideo });
+  try {
+    db.query(
+      `SELECT * FROM videos
+       Where id=${id}
+    `,
+      (error, result) => {
+        if(result){
+          res.json(result.rows);
+        } else {
+          console.error(error)
+          res.status(500).json(error)
+        }
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
 });
 // delete video
 app.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const filterVideo = videos.filter((vd) => vd.id === id);
-  if (filterVideo.length === 0) {
-    res.status(404).json({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
-  } else {
-    const deleteVideo = videos.filter((vd) => vd.id !== id);
-    res.send({ deleteVideo });
-  }
+    db.query("DELETE FROM videos WHERE id=$1", [id])
+        .then(() => res.send(`video ${id} deleted!`))
+        .catch((e) => console.error(e));
+
 });
+
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
