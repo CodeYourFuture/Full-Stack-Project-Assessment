@@ -82,12 +82,12 @@ app.post("/", function (request, response) {
    const newRating = request.body.rating;
   
 
-  if (!newId || !newTitle || !newUrl ) {
+  if (!newTitle || !newUrl ) {
     response.status(400).json({ failureObject });
   } else {
     const query =
       "INSERT INTO videodata (id, title, url, rating) VALUES ($1, $2, $3, $4)";
-    db.query(query, [ newId, newTitle, newUrl, 0], (err, results) => {
+    db.query(query, [ 0, newTitle, newUrl, 0], (err, results) => {
       if (err) {
         // throw error;
         console.error(err);
