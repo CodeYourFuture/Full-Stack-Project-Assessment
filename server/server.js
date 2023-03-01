@@ -125,3 +125,6 @@ app.delete("/:id", (request, response) => {
 });
 
 // Level 300 complete
+// ERROR IDENTIFIED!
+// 127.0.0.1:5000 --> WORKS FINE
+// localhost:5000 --> KEEPS FAILING (eventhough should be interchangeable)
