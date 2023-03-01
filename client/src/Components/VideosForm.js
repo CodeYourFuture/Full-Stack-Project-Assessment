@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function VideosForm(onAddVideo) {
+function VideosForm({onAddVideo}) {
 
     const [text, setText] = useState("");
   
@@ -13,7 +13,6 @@ function VideosForm(onAddVideo) {
     return (
       <form onSubmit={handleSubmit}>
         <input
-        name ="title"
           type="text"
           placeholder="Enter Video Title"
           id="text"
@@ -21,9 +20,8 @@ function VideosForm(onAddVideo) {
           onChange={(e) => setText(e.target.value)}
         />
 
-<input
-name ="url"
-          type="text"
+        <input
+          type="url"
           placeholder="Enter Video Link"
           id="text"
           value={text.url}
@@ -31,8 +29,7 @@ name ="url"
         />
 
         <input
-        name ="rating"
-          type="text"
+          type="number"
           placeholder="Enter Ratings"
           id="text"
           value={text.rating}
