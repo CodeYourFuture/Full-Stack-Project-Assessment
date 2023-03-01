@@ -13,8 +13,21 @@ function AddVideoButton(props) {
     setUrl(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const postData = {title: title, url: url};
+     const res = await fetch(`http://localhost:5000/`, {
+       method: "POST",
+       headers: {
+         Accept: "application/json",
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(postData),
+     });
+     await res.json();
+
+
+
     props.onVideoAdded(
       title,url);
     setTitle("");

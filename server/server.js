@@ -60,7 +60,7 @@ app.post("/", (request, response) => {
     if (!body["id"] && !body["rating"]) {
       db.query(
         "INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)",
-        [Math.floor(Math.random() * 100000), body["title"], body["url"], 0],
+        [Math.floor(Math.random() * 1000000), body["title"], body["url"], 0],
         (error, results) => {
           if (error) {
             throw error;

@@ -5,9 +5,15 @@
 
 .container{
  
- margin-left: 100px;
- padding-left: 190px;
+ margin: 50px;
+ padding: 25px;
  display: flex; 
  flex-wrap: wrap;
  align-items: center;
+}
+
+.video{
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+
 }

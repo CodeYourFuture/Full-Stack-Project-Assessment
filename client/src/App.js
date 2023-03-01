@@ -10,7 +10,6 @@ function App() {
 
   const addVideo = (title, url) => {
     
-
     setVideos([...videos, { title, url, votes: 0, id: videos.length }]);
   };
 
@@ -44,7 +43,7 @@ function App() {
       <Container className="container">
         {videos.map((video) => (
           <Col>
-            <Video
+            <Video className="video"
               key={video.id}
               id={video.id}
               title={video.title}
