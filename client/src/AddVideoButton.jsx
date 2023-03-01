@@ -16,13 +16,7 @@ function AddVideoButton(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.onVideoAdded(
-      title,
-      "https://youtube.com/embed/" +
-        url
-          .match(/v=([^&]+)/g)
-          .join()
-          .slice(2)
-    );
+      title,url);
     setTitle("");
     setUrl("");
   };
@@ -49,6 +43,5 @@ function AddVideoButton(props) {
     </form>
   );
 }
-
 
 export default AddVideoButton;

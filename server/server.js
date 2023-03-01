@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 const localVideosFile = require("../exampleresponse.json");
 const { Pool } = require("pg");
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
+app.use(cors());
+
 
 // POSTGRES CONNECTOR
 const db = new Pool({
@@ -28,16 +31,16 @@ app.get("/", (request, response) => {
 });
 
 app.get("/:id", (request, response) => {
-    const body = request.body;
+  const body = request.body;
 
   // const returnVideo = localVideosFile.filter(video => video.id == request.params.id)
   // response.json(returnVideo);
   db.query(
-    "SELECT * FROM videos WHERE id=$1",
-    [request.params.id],
+    `SELECT * FROM videos WHERE id='${request.params.id}'`,
+
     (error, results) => {
       if (error) {
-        throw error;
+        // throw error;
       } else {
         response.json(results.rows);
       }
@@ -45,10 +48,9 @@ app.get("/:id", (request, response) => {
   );
 });
 
-
 app.post("/", (request, response) => {
   const body = request.body;
-
+  console.log(body);
   if (body["title"] && body["url"]) {
     // localVideosFile.push({
     //   id: Math.floor(Math.random() * 100000),
