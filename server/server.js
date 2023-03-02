@@ -21,23 +21,20 @@ const db = new Pool({
 // GET "/"
 app.get("/", (req, res) => {
   db.query("SELECT * FROM videos", (error, result) => {
-    console.log(result);
     res.json(result.rows);
   });
 });
 //post add new videos
-app.post("/", (req, res) => {
+app.post("/",  (req, res)  => {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = req.body.rating;
   try {
-    const query =
-      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+    const query =  "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
       db.query(query, [newTitle, newUrl, newRating])
-      .then(() => res.send("customer created!"))
+      .then(() => res.send("add video !"))
   } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
+    res.status(500).json(">>>>",error);
   }
   
 });
@@ -64,9 +61,9 @@ app.get("/:id", (req, res) => {
   }
 });
 // delete video
-app.delete("/:id", (req, res) => {
+app.delete("/:id", async (req, res) => {
   const id = Number(req.params.id);
-    db.query("DELETE FROM videos WHERE id=$1", [id])
+   await db.query("DELETE FROM videos WHERE id=$1", [id])
         .then(() => res.send(`video ${id} deleted!`))
         .catch((e) => console.error(e));
 
