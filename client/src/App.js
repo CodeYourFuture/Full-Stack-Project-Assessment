@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Video from "./Video";
-// import Button from "./components/Button";
+import Button from "./components/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 
@@ -37,7 +37,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>React Video Recommendation Engine</h1>
-        <AddVideo onVideoAdded={addVideo} />
+        <Button onVideoAdded={addVideo} />
       </header>
       <hr />
       <Container className="container">
@@ -61,6 +61,7 @@ function App() {
         ))}
       </Container>
       <hr />
+
     </div>
   );
 }

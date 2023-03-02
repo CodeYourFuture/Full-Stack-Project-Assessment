@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge'
+import Badge from 'react-bootstrap/Badge';
 
 function Video(props) {
   const [votes, setVotes] = useState(props.votes);
@@ -31,13 +31,13 @@ function Video(props) {
           votes {votes}
         </Badge>{" "}
       </p>
-      <Button variant="success" style={{ margin: "5px" }} onClick={voteUp}>
+      <Button variant="success" style={{ margin: "6px" }} onClick={voteUp}>
         Up Vote
       </Button>
-      <Button variant="danger" style={{ margin: "5px" }} onClick={voteDown}>
+      <Button variant="danger" style={{ margin: "6px" }} onClick={voteDown}>
         Down Vote
       </Button>
-      <Button variant="dark" style={{ margin: "5px" }} onClick={removeVideo}>
+      <Button variant="dark" style={{ margin: "6px" }} onClick={removeVideo}>
         Remove Video
       </Button>
     </div>
