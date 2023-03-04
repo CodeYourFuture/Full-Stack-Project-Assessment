@@ -5,31 +5,39 @@ function AddVid({ newVideoData }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Call the newVideoData function with the input data
+    newVideoData({ title: title, url: url });
+
+    // Reset the input fields
+    setTitle("");
+    setUrl("");
+  };
+
   return (
     <div className="vidAdd-container">
-      <p>Add Video</p>
-      <div className="vidAdd">
-        <form>
-          <label for="title">Title:</label>
-
+      <p>Add a new video:</p>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Title:
           <input
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-          <br></br>
-          <label for="url">URL:</label>
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </label>
+        <label>
+          URL:
           <input
             type="text"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          ></input>
-        </form>
-      </div>
-      {/* <button className="uploadBtn" onClick={addVideo}>
-        Upload
-      </button> */}
-      {/* <AddButton /> */}
+            onChange={(event) => setUrl(event.target.value)}
+          />
+        </label>
+        <button type="submit">Add</button>
+      </form>
     </div>
   );
 }
