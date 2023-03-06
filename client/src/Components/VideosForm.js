@@ -5,9 +5,9 @@ function VideosForm({onAddVideo}) {
     const [text, setText] = useState("");
   
     const handleSubmit = (e) => {
-      e.preventDefault();
       onAddVideo(text);
       setText("");
+      e.preventDefault();
     };
 
     return (
@@ -24,7 +24,7 @@ function VideosForm({onAddVideo}) {
           type="url"
           placeholder="Enter Video Link"
           id="text"
-          value={text.url}
+          value={text.rating}
           onChange={(e) => setText(e.target.value)}
         />
 
