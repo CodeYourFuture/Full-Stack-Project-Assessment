@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 const bodyParser = require("body-parser");
-const videosExample=require("./exampleresponse.json");
+// const videosExample=require("./exampleresponse.json");
 const cors = require("cors");
 const {Pool} =require("pg")
 
@@ -49,7 +49,7 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.patch("/:id/upVote", async(req,res)=>{
+app.put("/:id/upVote", async(req,res)=>{
   const videoId=Number(req.params.id);
   try {
     await db.query("UPDATE videos SET rating=(rating + 1) WHERE id=$1" ,[videoId]);
@@ -58,7 +58,7 @@ app.patch("/:id/upVote", async(req,res)=>{
     
   }
 })
-app.patch("/:id/downVote" , async(req,res)=>{
+app.put("/:id/downVote" , async(req,res)=>{
   const videoId=Number(req.params.id);
   try {
         await db.query("UPDATE videos SET rating=(rating - 1) WHERE id=$1", [videoId]);
@@ -71,10 +71,7 @@ app.get("/:id", async(req, res) => {
   const id=Number(req.params.id)
   await db.query("SELECT * FROM videos WHERE id=$1",[id]);
   
-  // const find=videosExample.find(ele=>ele.id===id)
-  // if(find){
-  //   res.status(200).json({find})
-  // }else res.status(404).json({message:"not found"})
+  
 });
 
 app.delete("/:id",async(req,res)=>{

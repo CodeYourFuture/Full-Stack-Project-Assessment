@@ -42,14 +42,16 @@ function App() {
       method: "DELETE",
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("Network response was not ok.");
+        if (!res.ok) {
+           throw new Error("Network response was not ok.");
+        }      
       })
       .then(() => {
-        // setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id)) })
-        setVideos( videos.filter((video) => video.id !== id)) })
+        console.log(videos);
+        setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id)) 
+        console.log(videos);
+      })
+              
       .catch((error) => {
         console.error("There was a problem deleting the video: ", error);
       });

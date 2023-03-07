@@ -20,7 +20,7 @@ const Video=({video,upVote,downVote,removeVideo})=>{
            allowFullScreen
         ></iframe>{" "}
         <section className="vote-section">
-          <p className="vote-score">Votes :{video.rating}</p>
+          <p className="vote-score">Votes :{video.rating ?? 0}</p>
 
           <button className="vote-button" onClick={upVote}>
             UpVote
