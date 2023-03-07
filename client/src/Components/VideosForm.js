@@ -3,11 +3,21 @@ import React, { useState } from "react";
 function VideosForm({onAddVideo}) {
 
     const [text, setText] = useState("");
+    const [stateUrl, setStateURL] = useState("");
+    const [stateRating, setStateRating] = useState("");
   
     const handleSubmit = (e) => {
-      onAddVideo(text);
-      setText("");
       e.preventDefault();
+      console.log(text)
+
+        if (text && stateUrl) {
+          onAddVideo(text, stateRating, stateUrl);
+          setText("");
+          setStateRating("");
+          setStateURL("");
+        } else {
+          alert("You suck")
+        }
     };
 
     return (
@@ -21,19 +31,20 @@ function VideosForm({onAddVideo}) {
         />
 
         <input
-          type="url"
+          type="text"
           placeholder="Enter Video Link"
           id="text"
-          value={text.rating}
-          onChange={(e) => setText(e.target.value)}
+          value= {text.url}
+
+        onChange={(e) => setStateURL(e.target.value)}
         />
 
         <input
           type="number"
           placeholder="Enter Ratings"
           id="text"
-          value={text.rating}
-          onChange={(e) => setText(e.target.value)}
+          value={text.rating} 
+          onChange={(e) => setStateRating(e.target.value)}
         />
 
         <button type="submit">Add Video</button>

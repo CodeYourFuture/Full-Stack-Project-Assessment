@@ -15,9 +15,15 @@ function Videos() {
         }
 
         setAllVideoArray([...allVideoArray, newVideo])
+        console.log(allVideoArray)
 
         console.log(newVideo)
    
+    }
+
+    function handleDelete(id){
+        setAllVideoArray(allVideoArray.filter(video => video.id !==id))
+        console.log("I have delete " + id)
     }
 
 return(
@@ -25,6 +31,7 @@ return(
 <VideosForm onAddVideo = {handleAddVideo} />
 {VideosArray.map(video => (
     <LikeButton
+    onDelete = {handleDelete}
     title = {video.title}
      link = {video.url}   
      rating = {video.rating}

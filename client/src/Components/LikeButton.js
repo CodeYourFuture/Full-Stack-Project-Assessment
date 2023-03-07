@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function LikesButton(props) {
+function LikesButton({title, link, rating, id, onDelete}) {
   const [like, setLike] = useState(0);
 
   function handleLike() {
@@ -12,22 +12,27 @@ function LikesButton(props) {
   }
 
   return (
-    <div className="container">
-      <p>{props.title}</p>
+    <div className="container" key={id}>
+      <p>{title}</p>
+
       
-  <iframe src={props.link} 
+      <video width="320" height="240" src={link} controls autoPlay/>
+
+
+      
+  {/* <iframe src={link} 
 title="YouTube video player" 
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 allowFullScreen
 width="560" height="315">
-</iframe>
+</iframe> */}
 
 
-<h3> Rating: {props.rating}</h3>
-
+<h3> Rating: {rating}</h3>
       <p>Like: {like} </p>
       <button onClick={handleLike}>👍</button>
       <button onClick={handleDislike}>👎</button>
+      <button onClick={() => onDelete(id)}>Delete</button>
     </div>
   );
 }
