@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import videoList from "./exampleresponse.json";
+import React, { useState, useEffect } from "react";
+// import videoList from "./exampleresponse.json";(from my local machine)
 import Video from "./Video";
 import "./index.css";
 
 const App = () => {
-  const [videos, setVideos] = useState(videoList);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetch("/videoList")
+      .then((response) => response.json())
+      .then((data) => {
+        return setVideos(data);
+      });
+  }, []);
 
   const handleDelete = (id) => {
     setVideos(videos.filter((video) => video.id !== id));
