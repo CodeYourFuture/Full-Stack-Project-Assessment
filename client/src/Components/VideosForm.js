@@ -4,17 +4,16 @@ function VideosForm({onAddVideo}) {
 
     const [text, setText] = useState("");
     const [stateUrl, setStateURL] = useState("");
-    const [stateRating, setStateRating] = useState("");
+    // const [stateRating, setStateRating] = useState("");
   
     const handleSubmit = (e) => {
       e.preventDefault();
+      setText("");
+      setStateURL("");
       console.log(text)
 
         if (text && stateUrl) {
-          onAddVideo(text, stateRating, stateUrl);
-          setText("");
-          setStateRating("");
-          setStateURL("");
+          onAddVideo(text, stateUrl);
         } else {
           alert("You suck")
         }
@@ -31,20 +30,12 @@ function VideosForm({onAddVideo}) {
         />
 
         <input
-          type="text"
+          type="url"
           placeholder="Enter Video Link"
           id="text"
           value= {text.url}
 
         onChange={(e) => setStateURL(e.target.value)}
-        />
-
-        <input
-          type="number"
-          placeholder="Enter Ratings"
-          id="text"
-          value={text.rating} 
-          onChange={(e) => setStateRating(e.target.value)}
         />
 
         <button type="submit">Add Video</button>

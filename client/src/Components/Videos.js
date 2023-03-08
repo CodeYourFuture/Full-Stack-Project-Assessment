@@ -6,14 +6,15 @@ import VideosForm from "./VideosForm";
 function Videos() {
     const [allVideoArray, setAllVideoArray] = useState(VideosArray);
   
-    function handleAddVideo(title, link, rating) {
+    function handleAddVideo(title, link) {
         const newVideo = {
             title,
             link,
-            rating,
+            rating: Math.floor(Math.random() *10000),
             id: window.self.crypto.randomUUID()
         }
 
+        allVideoArray.push(newVideo)
         setAllVideoArray([...allVideoArray, newVideo])
         console.log(allVideoArray)
 
@@ -35,6 +36,7 @@ return(
     title = {video.title}
      link = {video.url}   
      rating = {video.rating}
+     key = {video.id}
     />
 ))}
 </div>

@@ -12,20 +12,20 @@ function LikesButton({title, link, rating, id, onDelete}) {
   }
 
   return (
-    <div className="container" key={id}>
+    <div className="container">
       <p>{title}</p>
 
       
-      <video width="320" height="240" src={link} controls autoPlay/>
+      {/* <video width="320" height="240" src={link} controls/> */}
 
 
       
-  {/* <iframe src={link} 
+  <iframe src={link} 
 title="YouTube video player" 
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 allowFullScreen
 width="560" height="315">
-</iframe> */}
+</iframe>
 
 
 <h3> Rating: {rating}</h3>
