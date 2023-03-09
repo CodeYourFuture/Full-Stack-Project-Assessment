@@ -7,26 +7,41 @@ function App() {
 
 const [backendData, setBackendData] = useState([{}])
 
+// useEffect(() => {
+//   fetch("/").then(
+//     response => response.json()
+//   ).then(
+//     data => {
+//       setBackendData(data)
+//     }
+//   )
+// }, [])
+
 useEffect(() => {
-  fetch("/").then(
-    response => response.json()
-  ).then(
-    data => {
-      setBackendData(data)
+  fetch("/").then(res => {
+    if(res.ok) {
+      return res.json()
     }
-  )
-}, [])
+  }).then(jsonRes => setBackendData(jsonRes.videos))
+})
 
   return (
     <div className="App">
-{(typeof backendData.videos ==="undefined") ? (
+{/* {(typeof backendData.videos ==="undefined") ? (
 <h1>Loading...</h1>
 
 ) : (
   backendData.videos.map((video, i) => (
     <p key={i}>{video}</p>
   ))
+)} */}
+
+
+{backendData.map(data => 
+<p key={data.id}>{data.title}</p>
+
 )}
+
 
 
         <header className="App-header">
