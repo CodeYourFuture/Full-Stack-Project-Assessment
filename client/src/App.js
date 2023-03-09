@@ -1,28 +1,37 @@
 import React, { useState, useEffect } from "react";
-// import videoList from "./exampleresponse.json";(from my local machine)
 import Video from "./Video";
-import "./index.css";
+import axios from "axios";
+import videos from "./exampleresponse.json";
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
+  // const [videosData, setVideosData] = useState(videos);
+  const [videosData, setVideosData] = useState([]);
 
   useEffect(() => {
-    fetch("/videoList")
-      .then((response) => response.json())
-      .then((data) => {
-        return setVideos(data);
-      });
+    const fetchVideos = async () => {
+      try {
+        const response = await axios.get("/videos");
+        setVideosData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchVideos();
   }, []);
 
   const handleDelete = (id) => {
-    setVideos(videos.filter((video) => video.id !== id));
+    const updatedVideosData = videosData.filter((video) => video.id !== id);
+    setVideosData(updatedVideosData);
   };
 
   return (
     <div className="container">
-      {videos.map((video) => (
-        <Video key={video.id} video={video} handleDelete={handleDelete} />
-      ))}
+      {videosData.map((video) => {
+        return (
+          <Video key={video.id} video={video} handleDelete={handleDelete} />
+        );
+      })}
     </div>
   );
 };
