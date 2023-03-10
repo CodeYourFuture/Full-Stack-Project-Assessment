@@ -21,3 +21,8 @@ h5 {
 .video {
   margin: 30px 0;
 }
+
+span,
+button {
+  cursor: pointer;
+}
