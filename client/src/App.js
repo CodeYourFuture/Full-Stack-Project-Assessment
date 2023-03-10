@@ -5,10 +5,10 @@ import React, {useEffect, useState} from "react";
 
 function App() {
 
-const [backendData, setBackendData] = useState([{}])
+const [backendData, setBackendData] = useState([])
 
 // useEffect(() => {
-//   fetch("/").then(
+//   fetch("/api/").then(
 //     response => response.json()
 //   ).then(
 //     data => {
@@ -17,13 +17,21 @@ const [backendData, setBackendData] = useState([{}])
 //   )
 // }, [])
 
-useEffect(() => {
-  fetch("/").then(res => {
-    if(res.ok) {
+// useEffect(() => {
+//   fetch("/").then(res => {
+//     if(res.ok) {
+//       return res.json()
+//     }
+//   }).then(jsonRes => setBackendData(jsonRes.videos))
+// })
+
+useEffect(() =>{
+  fetch("/api/").then(res => {
+    if(res.okay){
       return res.json()
     }
-  }).then(jsonRes => setBackendData(jsonRes.videos))
-})
+  }).then(jsonResponse => setBackendData(jsonResponse.videos))
+},[])
 
   return (
     <div className="App">
@@ -37,10 +45,13 @@ useEffect(() => {
 )} */}
 
 
-{backendData.map(data => 
+{/* {backendData.map(data => 
 <p key={data.id}>{data.title}</p>
 
-)}
+)} */}
+
+
+{backendData.length > 0 && backendData.map((e,i) => <li key={i}>{e}</li>)}
 
 
 
