@@ -2,36 +2,26 @@ import React, {useState} from "react";
 import DeleteBtn from "./DeleteBtn";
 import LikeBtn from "./LikeBtn";
 import UnlikeBtn from "./UnlikeBtn";
-import YouTube from 'react-youtube';
+import EmbedVid from "./EmbedVid";
 
+const Videos = ({data}) => {
 
-const Videos = ({data, count}) => {
-    console.log(data);
-
-    const opts = {
-        height: '390',
-        width: '640',
-        playerVars: {
-          autoplay: 1,
-        },
-      };
-
-    const [clicked , setClicked]  = useState(0);
-
-    const handleAdd = () => setClicked(clicked) ? count+1 : count;
-    const handleMinus = () => count >= 0 ? count - 1 : 0;
-    const handleDelete = (item) => item.splice({item});
+    const [Delete , setDelete]  = useState([data]);
+    const handleDelete = (index) => {
+        const newItems = [...Delete];
+        newItems.splice(index, 1);
+        setDelete(newItems);
+    };
 
     return(
         <div>
             <ul>
-                {data.map((object) => (<li key={object.id} title={object.title} src={object.url}>
-                    <YouTube videoId="data.id" title={data.title} alt={data.title} opts={opts}/>
+                {data.map((object, index) => (<li key={object.id} title={object.title} >
                     <h2>{object.title}</h2>
-                    <span className="likes-counter" >This video has {count} Likes</span>
-                    <LikeBtn handleAdd={handleAdd} />
-                    <UnlikeBtn handleMinus={handleMinus} />
-                    <DeleteBtn handleDelete={handleDelete} />
+                    <EmbedVid data={data} />
+                    <DeleteBtn data={data}onClick={() => handleDelete(index)} />
+                    <LikeBtn/>
+                    <UnlikeBtn/>
                 </li>))}                
             </ul>
         </div>

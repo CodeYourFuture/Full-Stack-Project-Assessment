@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
-const LikeBtn= ({handleAdd}) => {
+const LikeBtn= () => {
+    const [add, setAdd] = useState(0);
     
+    const handleAdd = () => setAdd(add + 1);
+       
     return (
         <div>
-            <button className={"Vote-up"} onClick={handleAdd}>Vote Up</button>
+            <p>This video has {add} likes</p>
+            <button onClick={handleAdd} >Vote Up</button>
         </div>
     );
 };
 
-export default LikeBtn
+export default LikeBtn;
+
+

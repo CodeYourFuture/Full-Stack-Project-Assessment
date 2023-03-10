@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-const UnlikeBtn = ({handleMinus}) => {
+const UnlikeBtn = () => {
+    const [minus, setMinus] = useState(0);
     
+    const handleMinus = () => setMinus(minus + 1);
    
     return (
         <div>
-            <button className={"Vote-down"} onClick={handleMinus}>Vote Down</button>
+            <p>This video has {minus} dislikes</p>
+            <button onClick={handleMinus}>Vote Down</button>
         </div>
     );
 };

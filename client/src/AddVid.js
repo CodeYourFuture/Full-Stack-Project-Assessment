@@ -13,7 +13,7 @@ const AddVid = ({data}) => {
                     <input type="text" name="title"/>
                 </div>
                 <div>
-                    <label htmlFor="url">Please enter the URL</label>
+                    <label htmlFor="url">Please enter the embedded URL here</label>
                     <input type="url"  name="title" />
                 </div>
                 <button>Cancel</button>

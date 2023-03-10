@@ -1,11 +1,12 @@
 import React from "react";
 
-const DeleteBtn = ({handleDelete}) => {
+const DeleteBtn = () => {
+    
     return (
         <div>
-            <button onClick={handleDelete}>Delete</button>
+            <button>Delete</button>
         </div>
-    );
+    );  
 };
 
 export default DeleteBtn
