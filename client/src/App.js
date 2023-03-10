@@ -80,7 +80,7 @@ const App = () => {
     <div className="main-container">
       <h1>Video Recommendations</h1>
 
-      <div className="search-container">
+      <div className="add-container">
         <input
           type="text"
           placeholder="Title"
@@ -94,12 +94,6 @@ const App = () => {
           onChange={(e) => setNewUrl(e.target.value)}
         />
         <button onClick={handleAdd}>Add</button>
-        <input
-          type="text"
-          placeholder="Search for a video..."
-          value={searchTerm}
-          onChange={handleSearch}
-        />
       </div>
 
       <div className="search-container">

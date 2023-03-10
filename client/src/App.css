@@ -26,3 +26,7 @@ span,
 button {
   cursor: pointer;
 }
+
+input {
+  margin: 20px;
+}
