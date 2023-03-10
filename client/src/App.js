@@ -1,33 +1,23 @@
-// import React from "react";
+import React, { useEffect, useState } from "react";
 // import videos from "./exampleresponse.json";
-// import Video from "./Video";
-// import "./App.css";
-
-// const App = () => {
-//   return (
-//     <div className="main-container">
-//       <h1>video Recomendation</h1>
-
-//       <div className="video-container">
-//         {videos.map((video) => {
-//           let url = video.url.split("v=")[1];
-//           return <Video title={video.title} rating={video.rating} url={url} />;
-//         })}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default App;
-
-import React, { useState } from "react";
-import videos from "./exampleresponse.json";
 import Video from "./Video";
 import "./App.css";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [videoList, setVideoList] = useState(videos);
+  //const [videoList, setVideoList] = useState(videos);
+
+  //get video from expres
+  const [videoList, setVideoList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/videos");
+      const data = await response.json();
+      setVideoList(data);
+    };
+    fetchData();
+  }, []);
 
   const handleThumbUp = (index) => {
     const newVideos = [...videoList];
