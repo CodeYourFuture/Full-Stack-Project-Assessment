@@ -5,6 +5,9 @@ import "./App.css";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newUrl, setNewUrl] = useState("");
+
   //const [videoList, setVideoList] = useState(videos);
 
   //get video from expres
@@ -18,6 +21,32 @@ const App = () => {
     };
     fetchData();
   }, []);
+
+  const handleAdd = async () => {
+    // Create a new video object with the newTitle and newUrl
+    const newVideo = {
+      title: newTitle,
+      url: newUrl,
+      rating: 0,
+      id: videoList.length + 1,
+    };
+
+    // Send a POST request to the server to store the new video
+    await fetch("/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    });
+
+    // Add the new video to the list
+    setVideoList([...videoList, newVideo]);
+
+    // Reset the newTitle and newUrl states
+    setNewTitle("");
+    setNewUrl("");
+  };
 
   const handleThumbUp = (index) => {
     const newVideos = [...videoList];
@@ -50,6 +79,28 @@ const App = () => {
   return (
     <div className="main-container">
       <h1>Video Recommendations</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Title"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="YouTube URL"
+          value={newUrl}
+          onChange={(e) => setNewUrl(e.target.value)}
+        />
+        <button onClick={handleAdd}>Add</button>
+        <input
+          type="text"
+          placeholder="Search for a video..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </div>
 
       <div className="search-container">
         <input

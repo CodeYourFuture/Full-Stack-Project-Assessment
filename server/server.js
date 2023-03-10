@@ -17,3 +17,11 @@ app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
 });
+
+// POST "/videos"
+app.post("/videos", (req, res) => {
+  const newVideo = req.body;
+  newVideo.id = videos.length + 1;
+  videos.push(newVideo);
+  res.status(201).send(newVideo);
+});
