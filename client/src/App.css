@@ -1,3 +1,23 @@
 .App {
   text-align: center;
 }
+
+.main-container {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.video-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+h5 {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.video {
+  margin: 30px 0;
+}
