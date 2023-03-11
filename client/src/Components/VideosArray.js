@@ -1,17 +1,16 @@
 
-
-
 const allvideos =[
   {
     "id": 523523,
     "title": "Never Gonna Give You Up",
-    "url": "https://www.youtube.com/watch?v=Qw4w9WgXcQ",
+    "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
     "rating": 23
   },
   {
     "id": 523427,
     "title": "The Coding Train",
     "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
+    
     "rating": 230
   },
   {
@@ -63,6 +62,9 @@ const allvideos =[
     "rating": 73
   }
 ]
+
+// const embeded = Videos.url.replace("watch?v=", "embed/")
+// console.log(embeded)
 
 export default allvideos;
 

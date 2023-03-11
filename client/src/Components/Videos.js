@@ -3,9 +3,12 @@ import LikeButton from "./LikeButton";
 import VideosArray from "./VideosArray";
 import VideosForm from "./VideosForm";
 
+
 function Videos() {
-    const [allVideoArray, setAllVideoArray] = useState(VideosArray);
   
+    const [allVideoArray, setAllVideoArray] = useState(VideosArray);
+
+      
     function handleAddVideo(title, link) {
         const newVideo = {
             title,
@@ -27,14 +30,17 @@ function Videos() {
         console.log("I have delete " + id)
     }
 
+
+
 return(
+    
 <div className="video-container">
 <VideosForm onAddVideo = {handleAddVideo} />
 {VideosArray.map(video => (
     <LikeButton
     onDelete = {handleDelete}
     title = {video.title}
-     link = {video.url}   
+     link = {video.url.replace("watch?v=", "embed/")}   
      rating = {video.rating}
      key = {video.id}
     />

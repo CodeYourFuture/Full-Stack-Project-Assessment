@@ -1,32 +1,98 @@
 const express = require("express");
-const fs = require("fs");
+// const fs = require("fs");
 const app = express();
+app.use(express.json());
 const port = process.env.PORT || 3001;
+const { Pool } = require('pg');
+
+
+// Variables
+const pool = new Pool({
+    user: 'test_user',
+    host: 'dpg-cg6cpk1mbg5ab7k83iv0-a.oregon-postgres.render.com',
+    database: 'fullstack_project_e43i',
+    password: 'zg4sHNebKaOkHGFNU5zm31MFB4upQJuX',
+    port: 5432
+    , ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+//Routes
+//GET
+app.get("/", function(req, res) {
+  pool.query('SELECT * FROM finaltable')
+      .then((result) => res.json(result.rows))
+      .catch((error) => {
+          console.error(error);
+          res.status(500).json(error);
+      });
+});
+
+//POST
+
+app.post("/", function (req, res) {
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = req.body.rating;
+  
+  // if (!Number.isInteger(newHotelRooms) || newHotelRooms <= 0) {
+  //   return res
+  //     .status(400)
+  //     .send("The number of rooms should be a positive integer.");
+  // }
+  
+  pool
+    .query("SELECT * FROM finaltable WHERE url=$1", [newUrl])
+    .then((result) => {
+      if (result.rows.length > 0) {
+        return res
+          .status(400)
+          .send("A video with the same link already exists");
+      } else {
+        const query =
+          "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)";
+        pool
+          .query(query, [newTitle, newUrl, newRating])
+          .then(() => res.send("Video created!"))
+          .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
+          });
+      }
+    });
+  });
+
+
+
+
+
+// OLD CODE
 
 //This will read the data from videos.json file
-let videos = JSON.parse(fs.readFileSync("/Users/admin/Desktop/Newsletter-Signup/Full-Stack-Project-Assessment/server/data/videos.json"));
+// let videos = JSON.parse(fs.readFileSync("/Users/admin/Desktop/Newsletter-Signup/Full-Stack-Project-Assessment/server/data/videos.json"));
 
-app.use(express.json());
+// app.use(express.json());
 
 
 // For parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET "/"
-app.get("/api/", (req, res) => {
-  res.status(200).json({
-    status: "Success",
-    data: {
-      videos: videos
-    }
-  })
-  // Delete this line after you've confirmed your server is running
+// app.get("/api/", (req, res) => {
+//   res.status(200).json({
+//     status: "Success",
+//     data: {
+//       videos: videos
+//     }
+//   })
+//   // Delete this line after you've confirmed your server is running
   
-});
+// });
 
 
 // app.post("/", (req, res) => {
