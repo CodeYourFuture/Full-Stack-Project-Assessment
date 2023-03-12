@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function LikesButton({title, url, rating, id, onDelete}) {
+function LikesButton({title, url, rating, id}) {
   const [like, setLike] = useState(0);
 
   function handleLike() {
@@ -18,22 +18,7 @@ function LikesButton({title, url, rating, id, onDelete}) {
 
   return (
     <div className="container">
-      <p>{title}</p>
-
       
-      {/* <video width="320" height="240" src={link} controls/> */}
-
-
-      
-  <iframe src={url} 
-title="YouTube video player" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowFullScreen
-width="560" height="315">
-</iframe>
-
-
-<h3> Rating: {rating}</h3>
       <p>Like: {like} </p>
       <button onClick={handleLike}>👍</button>
       <button onClick={handleDislike}>👎</button>

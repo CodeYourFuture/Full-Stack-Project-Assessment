@@ -4,69 +4,58 @@ const app = express();
 const bodyParser = require("body-parser");
 app.use(express.json());
 const port = process.env.PORT || 3001;
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 const cors = require("cors");
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true}))
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Variables
 const pool = new Pool({
-    user: 'test_user',
-    host: 'dpg-cg6cpk1mbg5ab7k83iv0-a.oregon-postgres.render.com',
-    database: 'fullstack_project_e43i',
-    password: 'zg4sHNebKaOkHGFNU5zm31MFB4upQJuX',
-    port: 5432
-    , ssl: {
-        rejectUnauthorized: false
-    }
+  user: "test_user",
+  host: "dpg-cg6cpk1mbg5ab7k83iv0-a.oregon-postgres.render.com",
+  database: "fullstack_project_e43i",
+  password: "zg4sHNebKaOkHGFNU5zm31MFB4upQJuX",
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 //Routes
 //POST
-app.post("/api/insert", function(req, res) {
-
+app.post("/api/insert", function (req, res) {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = req.body.rating;
 
-const sqlInsert = "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)"
-pool.query(sqlInsert, [newTitle, newUrl, newRating], (err, result) => {
-// console.log(result)
-})
+  const sqlInsert = "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)";
+
+pool.query(sqlInsert, [newTitle, newUrl, newRating])
+.then(() => {
+  res.send("Video added")
+}).catch(err => {
+  console.log(err)
+});
 });
 
 // GET
-app.get("/api/get", function(req, res) {
-
-  const sqlInsert = "SELECT * FROM finaltable"
+app.get("/api/get", function (req, res) {
+  const sqlInsert = "SELECT * FROM finaltable";
   pool.query(sqlInsert, (err, result) => {
-  res.send(result)
-
+    res.send(result);
+  });
 });
+
+// DELETING DATA
+
+app.delete("/api/delete/:id", (req, res) => {
+  const id = req.params.id;
+  const sqlDelete = "DELETE FROM finaltable WHERE id=$1";
+  pool.query(sqlDelete, [id], (err, result) => {
+    if (err) console.log(err);
+  });
 });
-
-  // DELETING DATA
-
-  app.delete("/api/delete/:id", (req, res) => {
-    const id = req.params.id
-    const sqlDelete = "DELETE FROM finaltable WHERE id=$1";
-    pool.query(sqlDelete, [id], (err, result) => {
-      if(err) console.log(err)
-    })
-  })
-
-
- 
-  
-
-
-
-
-
-
-
 
 //POST
 
@@ -74,13 +63,13 @@ app.get("/api/get", function(req, res) {
 //   const newTitle = req.body.title;
 //   const newUrl = req.body.url;
 //   const newRating = req.body.rating;
-  
+
 //   // if (!Number.isInteger(newHotelRooms) || newHotelRooms <= 0) {
 //   //   return res
 //   //     .status(400)
 //   //     .send("The number of rooms should be a positive integer.");
 //   // }
-  
+
 //   pool
 //     .query("SELECT * FROM finaltable WHERE url=$1", [newUrl])
 //     .then((result) => {
@@ -102,10 +91,6 @@ app.get("/api/get", function(req, res) {
 //     });
 //   });
 
-
-
-
-
 // OLD CODE
 
 //This will read the data from videos.json file
@@ -113,10 +98,8 @@ app.get("/api/get", function(req, res) {
 
 // app.use(express.json());
 
-
 // For parsing application/x-www-form-urlencoded
 // app.use(express.urlencoded({ extended: true }));
-
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -130,9 +113,8 @@ app.get("/api/get", function(req, res) {
 //     }
 //   })
 //   // Delete this line after you've confirmed your server is running
-  
-// });
 
+// });
 
 // app.post("/", (req, res) => {
 //   const newId = videos[videos.length -1].id +1;
@@ -149,7 +131,6 @@ app.get("/api/get", function(req, res) {
 //   })
 // })
 //   })
-
 
 // //DELETE
 // app.delete("/:id", (req, res) => {
@@ -176,6 +157,5 @@ app.get("/api/get", function(req, res) {
 //   })
 // })
 // })
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
