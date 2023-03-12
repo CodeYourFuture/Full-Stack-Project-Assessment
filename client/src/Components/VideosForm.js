@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import LikeButton from "./LikeButton";
 import axios from "axios";
 
-function VideosForm() {
+function VideosForm(props) {
 
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
@@ -40,6 +40,7 @@ setVideoList([
           type="text"
           placeholder="Enter Video Title"
           id="text"
+          value = {props.title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
@@ -47,13 +48,15 @@ setVideoList([
           type="url"
           placeholder="Enter Video Link"
           id="text"
+          value = {props.link}
         onChange={(e) => setUrl(e.target.value)}
         />
 
         <input
           type="number"
-          placeholder="Enter Video Link"
+          placeholder="Enter Rating"
           id="text"
+          value = {props.rating}
         onChange={(e) => setRating(e.target.value)}
         />
         <button onClick={handleSubmit}>Add Video</button>
