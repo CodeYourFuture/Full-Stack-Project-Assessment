@@ -1,9 +1,14 @@
 const express = require("express");
 // const fs = require("fs");
 const app = express();
+const bodyParser = require("body-parser");
 app.use(express.json());
 const port = process.env.PORT || 3001;
 const { Pool } = require('pg');
+const cors = require("cors");
+
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}))
 
 
 // Variables
@@ -19,49 +24,70 @@ const pool = new Pool({
 });
 
 //Routes
-//GET
-app.get("/", function(req, res) {
-  pool.query('SELECT * FROM finaltable')
-      .then((result) => res.json(result.rows))
-      .catch((error) => {
-          console.error(error);
-          res.status(500).json(error);
-      });
-});
-
 //POST
+app.post("/api/insert", function(req, res) {
 
-app.post("/", function (req, res) {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = req.body.rating;
+
+const sqlInsert = "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)"
+pool.query(sqlInsert, [newTitle, newUrl, newRating], (err, result) => {
+// console.log(result)
+})
+});
+
+// GET
+app.get("/api/get", function(req, res) {
+
+  const sqlInsert = "SELECT * FROM finaltable"
+  pool.query(sqlInsert, (err, result) => {
+  res.send(result)
+
+});
+});
+
+
+
+
+
+
+
+
+
+//POST
+
+// app.post("/", function (req, res) {
+//   const newTitle = req.body.title;
+//   const newUrl = req.body.url;
+//   const newRating = req.body.rating;
   
-  // if (!Number.isInteger(newHotelRooms) || newHotelRooms <= 0) {
-  //   return res
-  //     .status(400)
-  //     .send("The number of rooms should be a positive integer.");
-  // }
+//   // if (!Number.isInteger(newHotelRooms) || newHotelRooms <= 0) {
+//   //   return res
+//   //     .status(400)
+//   //     .send("The number of rooms should be a positive integer.");
+//   // }
   
-  pool
-    .query("SELECT * FROM finaltable WHERE url=$1", [newUrl])
-    .then((result) => {
-      if (result.rows.length > 0) {
-        return res
-          .status(400)
-          .send("A video with the same link already exists");
-      } else {
-        const query =
-          "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)";
-        pool
-          .query(query, [newTitle, newUrl, newRating])
-          .then(() => res.send("Video created!"))
-          .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
-          });
-      }
-    });
-  });
+//   pool
+//     .query("SELECT * FROM finaltable WHERE url=$1", [newUrl])
+//     .then((result) => {
+//       if (result.rows.length > 0) {
+//         return res
+//           .status(400)
+//           .send("A video with the same link already exists");
+//       } else {
+//         const query =
+//           "INSERT INTO finaltable (title, url, rating) VALUES ($1, $2, $3)";
+//         pool
+//           .query(query, [newTitle, newUrl, newRating])
+//           .then(() => res.send("Video created!"))
+//           .catch((error) => {
+//             console.error(error);
+//             res.status(500).json(error);
+//           });
+//       }
+//     });
+//   });
 
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function LikesButton({title, link, rating, id, onDelete}) {
+function LikesButton({title, url, rating, id, onDelete}) {
   const [like, setLike] = useState(0);
 
   function handleLike() {
@@ -25,7 +25,7 @@ function LikesButton({title, link, rating, id, onDelete}) {
 
 
       
-  <iframe src={link} 
+  <iframe src={url} 
 title="YouTube video player" 
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 allowFullScreen

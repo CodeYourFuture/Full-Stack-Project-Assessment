@@ -1,45 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
+import LikeButton from "./LikeButton";
+import axios from "axios";
 
-function VideosForm({onAddVideo}) {
+function VideosForm() {
 
-    const [text, setText] = useState("");
-    const [stateUrl, setStateURL] = useState("");
+    const [title, setTitle] = useState("");
+    const [url, setUrl] = useState("");
+    const [rating, setRating] = useState("");
+    const [videoList, setVideoList] = useState([]);
     // const [stateRating, setStateRating] = useState("");
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setText("");
-      setStateURL("");
-      console.log(text)
 
-        if (text && stateUrl) {
-          onAddVideo(text, stateUrl);
-        } else {
-          alert("You suck")
-        }
+    useEffect(() => {
+      axios.get("http://localhost:3001/api/get").then((response) => {
+setVideoList(response.data)
+      })
+    },[]);
+  
+    function handleSubmit() {
+ axios.post("http://localhost:3001/api/insert", {
+  newTitle:title, newUrl:url, newRating:rating
+}).then(() => {
+  alert("Video Successfully Added");
+})
     };
 
     return (
-      <form onSubmit={handleSubmit}>
+      <div>
+      
         <input
           type="text"
           placeholder="Enter Video Title"
           id="text"
-          value={text.title}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
 
         <input
           type="url"
           placeholder="Enter Video Link"
           id="text"
-          value= {text.url}
-
-        onChange={(e) => setStateURL(e.target.value)}
+        onChange={(e) => setUrl(e.target.value)}
         />
 
-        <button type="submit">Add Video</button>
-      </form>
+        <input
+          type="number"
+          placeholder="Enter Video Link"
+          id="text"
+        onChange={(e) => setRating(e.target.value)}
+        />
+
+        <button onClick={handleSubmit}>Add Video</button>
+
+        {videoList.map(video => {
+          return(
+           <div>
+           title = {video.title}
+            url = {video.url}
+            rating = {video.rating}
+            key = {video.id}
+            
+            </div>
+            
+          )
+        })}
+</div>
     );
   }
 
