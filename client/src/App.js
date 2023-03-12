@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
-import videoImport from "./exampleresponse.json";
+// import videoImport from "./exampleresponse.json";
 import Video from "./Video.js";
 import AddVid from "./AddVid.js";
 
 function App() {
-  const [videos, setVideos] = useState(videoImport);
-  const [del, setDel] = useState(videoImport);
+  const [videos, setVideos] = useState([]);
+  const [del, setDel] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch("http://localhost:5000");
+      const jsonResult = await result.json();
+      setDel(jsonResult);
+    };
+    fetchData();
+  }, []);
 
   const removeVid = (id) => {
     // let newVids = videos.filter((el) => el.id !== id);
@@ -15,6 +24,16 @@ function App() {
 
     let newDel = del.filter((el) => el.id !== id);
     setDel(newDel);
+    fetch(
+      `http://dpg-cg3jpapmbg5fch553i8g-a.oregon-postgres.render.com/${id}`,
+      {
+        method: "DELETE",
+      }.then(
+        ((res) => res.json()).then((data) => {
+          return;
+        })
+      )
+    );
   };
 
   const newVideoData = (newVideo) => {
