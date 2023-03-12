@@ -47,6 +47,17 @@ app.get("/api/get", function(req, res) {
 });
 });
 
+  // DELETING DATA
+
+  app.delete("/api/delete/:id", (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM finaltable WHERE id=$1";
+    pool.query(sqlDelete, id)
+  })
+
+
+ 
+  
 
 
 

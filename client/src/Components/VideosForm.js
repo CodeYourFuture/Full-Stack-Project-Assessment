@@ -12,20 +12,29 @@ function VideosForm() {
 
     useEffect(() => {
       axios.get("http://localhost:3001/api/get").then((response) => {
-setVideoList(response.data)
+setVideoList(response.data.rows)
       })
     },[]);
   
     function handleSubmit() {
  axios.post("http://localhost:3001/api/insert", {
   newTitle:title, newUrl:url, newRating:rating
-}).then(() => {
-  alert("Video Successfully Added");
-})
+});
+
+setVideoList([
+  ...videoList, 
+  {newTitle:title, newUrl:url, newRating:rating},
+]);
     };
+
+    function handleDelete(vid) {
+      axios.delete(`http://localhost:3001/api/delete/${vid}`);
+     };
 
     return (
       <div>
+
+
       
         <input
           type="text"
@@ -47,21 +56,20 @@ setVideoList(response.data)
           id="text"
         onChange={(e) => setRating(e.target.value)}
         />
-
         <button onClick={handleSubmit}>Add Video</button>
 
-        {videoList.map(video => {
-          return(
-           <div>
-           title = {video.title}
-            url = {video.url}
-            rating = {video.rating}
-            key = {video.id}
-            
-            </div>
-            
-          )
-        })}
+        {videoList.map(video => (
+          <div>
+    <LikeButton
+    title = {video.title}
+     link = {video.url}   
+     rating = {video.rating}
+     key = {video.id}
+    />
+
+<button onClick={() => {handleDelete(video.id)}}>Delete</button>
+</div>
+))} 
 </div>
     );
   }

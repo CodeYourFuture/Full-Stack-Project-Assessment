@@ -37,7 +37,6 @@ width="560" height="315">
       <p>Like: {like} </p>
       <button onClick={handleLike}>👍</button>
       <button onClick={handleDislike}>👎</button>
-      <button onClick={() => onDelete(id)}>Delete</button>
     </div>
   );
 }
