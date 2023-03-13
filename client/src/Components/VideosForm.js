@@ -17,18 +17,20 @@ function VideosForm(props) {
     });
   }, []);
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     console.log(title)
     axios.post("http://localhost:3001/api/insert", {
       title: title,
       url: url,
       rating: rating,
+      
     });
 
     setVideoList([
       ...videoList,
       { newTitle: title, newUrl: url, newRating: rating },
     ]);
+    e.preventDefault();
   }
 
   function handleDelete(vid) {
@@ -68,7 +70,14 @@ function VideosForm(props) {
         <div>
           <p>{video.title}</p>
 
-      <EmbedVideo video={video}/>
+          <iframe
+        src={video.url.replace("watch?v=", "embed/")}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        width="560"
+        height="315"
+      ></iframe>
 
           <h3> Rating: {video.rating}</h3>
 
