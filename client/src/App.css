@@ -1,3 +1,73 @@
 .App {
   text-align: center;
 }
+
+header {
+  display: block;
+}
+
+body {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 1rem;
+  width: 20rem;
+  height: fit-content;
+}
+
+.video-container > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dltBtn {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin-bottom: 1.5rem;
+}
+
+.likeVotes {
+  display: inline-block;
+  margin-top: 12.5px;
+  background-color: grey;
+}
+
+.disLikeVotes {
+  display: inline-block;
+  margin-top: -8.5px;
+}
+
+.vidAdd-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.uploadBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  margin-left: 610px;
+}
+
+/* .vidAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+} */
