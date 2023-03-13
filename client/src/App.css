@@ -34,10 +34,14 @@ button {
  align-items: center;
 }
 
-.video-container {
+.videos{
   display: grid;
   grid-template-columns: auto auto;
+  grid-gap: 80px;
   padding: 50px;
+  text-align: center;
+  margin: 5% auto;
+  padding: 10px 0;
   text-align: center;
 }
 
@@ -54,17 +58,15 @@ input {
   font: normal 11px/100% "Andale Mono", AndaleMono, monospace;
   color: black;
   font-weight: 300;
-}
-
-.container {
-  margin: 5% auto;
-  padding: 10px 0;
-  text-align: center;
-}
-
-form {
   margin-right: auto;
-  margin-bottom: 400px;
+  margin-bottom: 10px;
+  align-content: center;
+}
+
+
+.form {
+ padding-bottom: 200px;
+  margin-right: 300px;
   align-content: center;
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LikeButton from "./LikeButton";
-import EmbedVideo from "./EmbedVideo"
+// import EmbedVideo from "./EmbedVideo"
 import axios from "axios";
 
 function VideosForm(props) {
@@ -8,7 +8,7 @@ function VideosForm(props) {
   const [url, setUrl] = useState("");
   const [rating, setRating] = useState("");
   const [videoList, setVideoList] = useState([]);
-  const [link, setLink] = useState("");
+  // const [link, setLink] = useState("");
   // const [stateRating, setStateRating] = useState("");
 
   useEffect(() => {
@@ -38,8 +38,10 @@ function VideosForm(props) {
   }
 
   return (
-    <div>
-      <input
+    <div className="videos">
+    <div className="form">
+    <p>Add more videos:</p>
+      <input className="video-input"
         type="text"
         placeholder="Enter Video Title"
         id="text"
@@ -47,7 +49,7 @@ function VideosForm(props) {
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      <input
+      <input className="video-input"
         type="url"
         placeholder="Enter Video Link"
         id="text"
@@ -55,22 +57,23 @@ function VideosForm(props) {
         onChange={(e) => setUrl(e.target.value)}
       />
 
-      <input
+      <input className="video-input"
         type="number"
         placeholder="Enter Rating"
         id="text"
         value={rating}
         onChange={(e) => setRating(e.target.value)}
       />
-      <button onClick={handleSubmit}>Add Video</button>
+      <button className="video-input" onClick={handleSubmit}>Add Video</button>
+</div>
 
 
       {videoList.map((video) => (
 
-        <div>
-          <p>{video.title}</p>
+        <div className="flex-container">
+         <p>{video.title}</p> 
 
-          <iframe
+         <iframe
         src={video.url.replace("watch?v=", "embed/")}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -79,9 +82,9 @@ function VideosForm(props) {
         height="315"
       ></iframe>
 
-          <h3> Rating: {video.rating}</h3>
+         <h3> Rating: {video.rating}</h3> 
 
-          <LikeButton key={video.id} id={video.id} />
+          <LikeButton key={video.id} id={video.id} /> 
 
           <button
             onClick={() => {
@@ -89,7 +92,7 @@ function VideosForm(props) {
             }}
           >
             Delete
-          </button>
+          </button> 
         </div>
       ))}
     </div>
