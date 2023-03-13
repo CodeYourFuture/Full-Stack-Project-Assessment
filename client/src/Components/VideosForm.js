@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LikeButton from "./LikeButton";
-// import EmbedVideo from "./EmbedVideo"
+import EmbedVideo from "./EmbedVideo"
 import axios from "axios";
 
 function VideosForm(props) {
@@ -8,7 +8,7 @@ function VideosForm(props) {
   const [url, setUrl] = useState("");
   const [rating, setRating] = useState("");
   const [videoList, setVideoList] = useState([]);
-  // const [link, setLink] = useState("");
+  const [link, setLink] = useState("");
   // const [stateRating, setStateRating] = useState("");
 
   useEffect(() => {
@@ -25,12 +25,12 @@ function VideosForm(props) {
       rating: rating,
       
     });
+    e.preventDefault();
 
     setVideoList([
       ...videoList,
       { newTitle: title, newUrl: url, newRating: rating },
     ]);
-    e.preventDefault();
   }
 
   function handleDelete(vid) {
@@ -68,10 +68,11 @@ function VideosForm(props) {
 </div>
 
 
-      {videoList.map((video) => (
+      {videoList.map(video => (
 
         <div className="flex-container">
          <p>{video.title}</p> 
+         {/* <EmbedVideo video = {video.url} /> */}
 
          <iframe
         src={video.url.replace("watch?v=", "embed/")}
