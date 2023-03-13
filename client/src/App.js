@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-
 import "./App.css";
-// import videoImport from "./exampleresponse.json";
 import Video from "./Video.js";
 import AddVid from "./AddVid.js";
 
@@ -22,28 +20,22 @@ function App() {
   const removeVid = async (id) => {
     await fetch(`http://localhost:5000/${id}`, { method: "DELETE" });
 
-    let newDel = del.filter((el) => el.id !== id);
-    setDel(newDel);
+    setDel(del.filter((el) => el.id !== id));
   };
 
-  const newVideoData = (newVideo) => {
-    // Generate a unique ID for the new video
-    const newId = Math.floor(Math.random() * 1000000);
-    // setVideos(videoImport) => videoImport.
-
-    // Create a new video object with the input data and the generated ID
-    const newVideoObj = {
-      id: newId,
-      title: newVideo.title,
-      url: newVideo.url,
-      rating: 0,
-    };
+  const newVideoData = async (newVideo) => {
+    const response = await fetch("http://localhost:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    });
+    const data = await response.json();
+    console.log(data);
 
     // Add the new video object to the list of videos
-    setVideos([...videos, newVideoObj]);
-
-    // Delete videos from array
-    setDel([...del, newVideoObj]);
+    setVideos([...videos, data]);
   };
 
   return (

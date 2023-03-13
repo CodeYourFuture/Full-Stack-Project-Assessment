@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-// import AddButton from "./AddButton";
 
 function AddVid({ newVideoData }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     // Call the newVideoData function with the input data
-    newVideoData({ title: title, url: url });
+    newVideoData({
+      title: title,
+      url: url,
+      rating: 0,
+    });
 
     // Reset the input fields
     setTitle("");
