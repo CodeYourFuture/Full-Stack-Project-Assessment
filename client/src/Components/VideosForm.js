@@ -20,12 +20,17 @@ function VideosForm(props) {
   function handleSubmit(e) {
     console.log(title)
     console.log(url)
-    axios.post("http://localhost:3001/api/insert", {
-      title: title,
-      url: url,
-      rating: rating,
-      
-    });
+    if (title && url) {
+      axios.post("http://localhost:3001/api/insert", {
+        title: title,
+        url: url,
+        rating: rating,
+        
+      });
+    } else {
+      alert("Please Enter Video Title and Video Link")
+    }
+
     e.preventDefault();
 
     setVideoList([

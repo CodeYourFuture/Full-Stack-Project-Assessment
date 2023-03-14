@@ -2,9 +2,11 @@ import react from "react";
 
 
 function EmbedVideo({video}){
-    const embedUrl = video.url.replace("watch?v=", "embed/")
-    console.log(embedUrl)
-
+  let embedUrl =""
+  if(video.url !== undefined){
+    embedUrl = video.url.replace("watch?v=", "embed/")
+ 
+  }
 
 
     return(
@@ -17,6 +19,7 @@ function EmbedVideo({video}){
         height="315"
       ></iframe>
     )
+  
 }
 
 export default EmbedVideo
