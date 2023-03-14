@@ -3,6 +3,7 @@ import react from "react";
 
 function EmbedVideo({video}){
     const embedUrl = video.url.replace("watch?v=", "embed/")
+    console.log(embedUrl)
 
 
 

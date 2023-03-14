@@ -19,6 +19,7 @@ function VideosForm(props) {
 
   function handleSubmit(e) {
     console.log(title)
+    console.log(url)
     axios.post("http://localhost:3001/api/insert", {
       title: title,
       url: url,
@@ -68,20 +69,20 @@ function VideosForm(props) {
 </div>
 
 
-      {videoList.map(video => (
+      {videoList.map((video, i) => (
 
-        <div className="flex-container">
+        <div className="flex-container" key={i}>
          <p>{video.title}</p> 
-         {/* <EmbedVideo video = {video.url} /> */}
+         <EmbedVideo video={video} />
 
-         <iframe
+         {/* <iframe
         src={video.url.replace("watch?v=", "embed/")}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         width="560"
         height="315"
-      ></iframe>
+      ></iframe> */}
 
          <h3> Rating: {video.rating}</h3> 
 
