@@ -15,7 +15,7 @@ function App() {
       </header>
       <div className="App-holder">
         <AddVid />
-        <Videos data={data}/>
+        <Videos data={data} />
       </div>
     </div>
   );

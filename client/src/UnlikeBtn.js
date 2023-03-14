@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const UnlikeBtn = () => {
     const [minus, setMinus] = useState(0);
     
-    const handleMinus = () => setMinus(minus + 1);
+    const handleMinus = () => setMinus(minus - 1);
    
     return (
         <div>
