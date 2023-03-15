@@ -1,5 +1,4 @@
 import "./App.css";
-import Videos from "/Users/admin/Desktop/Newsletter-Signup/Full-Stack-Project-Assessment/client/src/Components/Videos.js"
 import VideosForm from "./Components/VideosForm"
 
 function App() {
