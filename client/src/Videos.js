@@ -4,8 +4,8 @@ import LikeBtn from "./LikeBtn";
 import UnlikeBtn from "./UnlikeBtn";
 
 
-const Videos = ({data}) => {
-    const embUrls = data.map((obj) => ({...obj, url: obj.url.replace("watch?v=", "embed/")}));
+const Videos = ({embUrls}) => {
+    // const embUrls = data.map((obj) => ({...obj, url: obj.url.replace("watch?v=", "embed/")}));
 
     return(
         <div>
@@ -17,10 +17,10 @@ const Videos = ({data}) => {
                     src={object.url}
                     title="YouTube video player"
                     frameBorder="0"
-                    alt={`video ${data.title}`}
+                    alt={`video ${object.title}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 />
-                <DeleteBtn data={data} />
+                <DeleteBtn embUrls={embUrls} />
                 <LikeBtn/>
                 <UnlikeBtn/>
             </span>))}      

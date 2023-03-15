@@ -30,6 +30,7 @@ app.get("/", (req, res) => {
 });
 // Getting a video with a particular id
 app.get("/videos/:id", (req, res) => {
+    const id = req.body.id
     pool.query('SELECT * FROM videos where id=$', [id])
         .then((result) => res.json(result.rows))
         .catch((error) => {
@@ -41,7 +42,7 @@ app.get("/videos/:id", (req, res) => {
 app.post("/videos/post", (req, res)=>{
     const {title, url} = req.body;
     pool
-        .query('select title from videos')
+        .query('select title, url from videos')
         .then((result)=>{
             if (result.title === videos.title && result.url === videos.url){
              return res
@@ -53,7 +54,7 @@ app.post("/videos/post", (req, res)=>{
                 pool
                     .query(query, [vid_id, title, url, rating])
                     .then(() => res.send('Video saved'))
-                    .catch((error)=> res.status(500).json(error))
+                    .catch((error)=> res.status(500).json({ error: error.message }));
             }
         })
     })  

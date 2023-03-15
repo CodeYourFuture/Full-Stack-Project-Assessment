@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 
-const AddVid = () => {
+const AddVid = ({embUrls}) => {
     const[title, setTitle] = useState('');
     const[url, setUrl] = useState('');
+
 
 // Handling the new title
     const handleTitle = (event) => setTitle(event.target.value);

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-const DeleteBtn = ({data}) => {
-    const [Delete , setDelete]  = useState([data]);
+const DeleteBtn = ({embUrls}) => {
+    const [Delete , setDelete]  = useState([embUrls]);
     const handleDelete = (index) => {
         const newItems = [...Delete];
         newItems.splice(index, 1);

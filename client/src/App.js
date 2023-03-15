@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
      
   let data = VideosObj;
+  const embUrls = data.map((obj) => ({...obj, url: obj.url.replace("watch?v=", "embed/")}));
   
     return (
     <div className="App">
@@ -14,8 +15,8 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <div className="App-holder">
-        <AddVid />
-        <Videos data={data} />
+        <AddVid embUrls={embUrls} />
+        <Videos embUrls={embUrls} />
       </div>
     </div>
   );
