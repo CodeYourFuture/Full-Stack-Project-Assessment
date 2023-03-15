@@ -24,7 +24,7 @@ const pool = new Pool({
 
 //Routes
 //POST
-app.post("/api/insert", function (req, res) {
+app.post("/post/videos", function (req, res) {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = req.body.rating;
@@ -40,7 +40,7 @@ pool.query(sqlInsert, [newTitle, newUrl, newRating])
 });
 
 // GET
-app.get("/api/get", function (req, res) {
+app.get("/get/videos", function (req, res) {
   const sqlInsert = "SELECT * FROM finaltable";
   pool.query(sqlInsert, (err, result) => {
     res.send(result);
@@ -49,7 +49,7 @@ app.get("/api/get", function (req, res) {
 
 // DELETING DATA
 
-app.delete("/api/delete/:id", (req, res) => {
+app.delete("/delete/videos/:id", (req, res) => {
   const id = req.params.id;
   const sqlDelete = "DELETE FROM finaltable WHERE id=$1";
   pool.query(sqlDelete, [id], (err, result) => {

@@ -11,17 +11,19 @@ function VideosForm(props) {
   const [link, setLink] = useState("");
   // const [stateRating, setStateRating] = useState("");
 
+//Get method
   useEffect(() => {
-    axios.get("http://localhost:3001/api/get").then((response) => {
+    axios.get("http://localhost:3001/get/videos").then((response) => {
       setVideoList(response.data.rows);
     });
   }, []);
 
+  //Creating new object to be added to the array
   function handleSubmit(e) {
     console.log(title)
     console.log(url)
     if (title && url) {
-      axios.post("http://localhost:3001/api/insert", {
+      axios.post("http://localhost:3001/post/videos", {
         title: title,
         url: url,
         rating: rating,
@@ -32,15 +34,16 @@ function VideosForm(props) {
     }
 
     e.preventDefault();
-
+//To add new value to an array
     setVideoList([
       ...videoList,
       { newTitle: title, newUrl: url, newRating: rating },
     ]);
   }
 
+  //Delete function
   function handleDelete(vid) {
-    axios.delete(`http://localhost:3001/api/delete/${vid}`);
+    axios.delete(`http://localhost:3001/delete/videos/${vid}`);
   }
 
   return (
@@ -79,15 +82,6 @@ function VideosForm(props) {
         <div className="flex-container" key={i}>
          <p>{video.title}</p> 
          <EmbedVideo video={video} />
-
-         {/* <iframe
-        src={video.url.replace("watch?v=", "embed/")}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        width="560"
-        height="315"
-      ></iframe> */}
 
          <h3> Rating: {video.rating}</h3> 
 
