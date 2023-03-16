@@ -25,3 +25,28 @@ app.post("/videos", (req, res) => {
   videos.push(newVideo);
   res.status(201).send(newVideo);
 });
+
+// GET "/videos/:id"
+app.get("/videos/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const video = videos.find((v) => v.id === id);
+
+  if (!video) {
+    res.status(404).send("Video not found");
+  } else {
+    res.send(video);
+  }
+});
+
+// DELETE "/videos/:id"
+app.delete("/videos/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = videos.findIndex((v) => v.id === id);
+
+  if (index === -1) {
+    res.status(404).send("Video not found");
+  } else {
+    videos.splice(index, 1);
+    res.sendStatus(204);
+  }
+});
