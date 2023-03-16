@@ -1,11 +1,11 @@
 // libraries
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
-const { Pool } = require('pg');
-const cors = require('cors')
-
+const cors = require("cors");
 app.use(cors());
+app.use(express.json());
+
+const { Pool } = require('pg');
 
 const pool = new Pool({
     user: 'chris_user',
@@ -21,7 +21,7 @@ const pool = new Pool({
 // End Points
 // Getting all the videos saved
 app.get("/", (req, res) => {
-  pool.query('SELECT * FROM videos')
+  pool.query('SELECT * FROM videos ')
       .then((result) => res.json(result.rows))
       .catch((error) => {
           console.error(error);
@@ -30,8 +30,8 @@ app.get("/", (req, res) => {
 });
 // Getting a video with a particular id
 app.get("/videos/:id", (req, res) => {
-    const id = req.body.id
-    pool.query('SELECT * FROM videos where id=$', [id])
+    const id = req.params.id
+    pool.query('SELECT * FROM videos where id=$1', [id])
         .then((result) => res.json(result.rows))
         .catch((error) => {
             console.error(error);
@@ -44,13 +44,15 @@ app.post("/videos/post", (req, res)=>{
     pool
         .query('select title, url from videos')
         .then((result)=>{
+            console.log(result)
             if (result.rows.find(v => v.title === title && v.url === url)){
              return res
-                .status(400)
+                .status(500)
                 .json({ error: "Video already exists" });
             } else {
                 const query =
-                'INSERT INTO videos(vid_id, title, url, rating)VALUES(uuid_generate_v4(),$1, $2, $3, 0)';
+                'INSERT INTO videos(title, url, rating)VALUES($1, $2, 0)';
+                console.log(query)
                 pool
                     .query(query, [title, url])
                     .then(() => res.json({ message: 'Video saved' }))
@@ -59,22 +61,24 @@ app.post("/videos/post", (req, res)=>{
         })
     })  
 // Deleting a video
-app.delete("/delete/:id", (req, res)=> {
-    const vidId = req.params.id;
+app.delete("/videos/delete/:id", (req, res)=> {
+    const id = req.params.id;
     pool
       .query("DELETE FROM videos WHERE id=$1", [id])
-      .then(() => res.send(`Video ${vidId} deleted!`))
+      .then(() => res.send(`Video ${id} deleted!`))
       .catch((error) => {
         console.error(error);
         res.status(500).json(error);
       });
   });
 
+
+const port = process.env.PORT || 5000;  
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+// let videos = [];
 
 // GET "/"
 

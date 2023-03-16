@@ -2,10 +2,24 @@ import React from "react";
 import DeleteBtn from "./DeleteBtn";
 import LikeBtn from "./LikeBtn";
 import UnlikeBtn from "./UnlikeBtn";
+import axios from 'axios';
+
 
 
 const Videos = ({embUrls}) => {
-    // const embUrls = data.map((obj) => ({...obj, url: obj.url.replace("watch?v=", "embed/")}));
+
+    const handleDelete = (id) => {
+        axios.delete(`/videos/delete/${id}`)
+          .then((response) => {
+            console.log(response.data);
+            // do something to update the UI (e.g. remove the video from a list)
+          })
+          .catch((error) => {
+            console.error(error);
+            // handle the error (e.g. display an error message)
+          });
+      };
+      
 
     return(
         <div>
@@ -20,7 +34,7 @@ const Videos = ({embUrls}) => {
                     alt={`video ${object.title}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 />
-                <DeleteBtn embUrls={embUrls} />
+                <DeleteBtn onClick={() => handleDelete(embUrls.id)} />
                 <LikeBtn/>
                 <UnlikeBtn/>
             </span>))}      

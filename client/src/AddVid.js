@@ -14,8 +14,8 @@ const AddVid = ({embUrls}) => {
     
     const handleAdd = (event) => {
         event.preventDefault();
-        fetch('videos/post', {
-            method: 'POST',
+        fetch("/videos/post", {
+            method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -25,7 +25,7 @@ const AddVid = ({embUrls}) => {
             if(!response.ok){
                 throw new Error('Network response was not ok');
             }
-            response.json()
+            return response.json()
         })
         .then(data => {
             // Creating a new object with the title and embedded URL
@@ -48,10 +48,10 @@ const AddVid = ({embUrls}) => {
                 </div>
                 <div>
                     <label htmlFor="url">Please enter the embedded URL here</label>
-                    <input id="url" type="text"  onChange={handleUrl} />
+                    <input id="url" type="text"  value={url} onChange={handleUrl} />
                 </div>
                 {/* <button>Cancel</button> */}
-                <button type="submit">Add</button>
+                <button type="submit" onclick={() => handleAdd}>Add</button>
             </form>
         </div>
     );
