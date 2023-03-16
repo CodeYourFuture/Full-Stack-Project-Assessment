@@ -1,3 +1,75 @@
-.App {
+body {
+  font: normal 14px/100% "Andale Mono", AndaleMono, monospace;
+  color: #fff;
+  padding: 50px;
+  /* width: 300px; */
+  margin: 0 auto;
+  background-color: #374954;
   text-align: center;
 }
+
+h1 {
+  font-size: 20px;
+}
+
+/* .container {
+  margin: 60% auto;
+} */
+
+button {
+  display: inline-block;
+  background-color: #5e7d8f;
+  border: 0;
+  width: 90px;
+  margin: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 6%;
+}
+
+
+.App {
+ align-items: center;
+}
+
+.videos{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 80px;
+  padding: 50px;
+  text-align: center;
+  margin: 5% auto;
+  padding: 10px 0;
+  text-align: center;
+}
+
+input {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  background-color: #AEBFB6;
+  width: 150px;
+  border-radius: 6px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font: normal 11px/100% "Andale Mono", AndaleMono, monospace;
+  color: black;
+  font-weight: 300;
+  margin-right: auto;
+  margin-bottom: 10px;
+  align-content: center;
+}
+
+
+.form {
+ padding-bottom: 200px;
+  margin-right: 300px;
+  align-content: center;
+}
+
+
+
+
