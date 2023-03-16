@@ -1,4 +1,5 @@
 const express = require("express");
+require ("dotenv").config();
 // const fs = require("fs");
 const app = express();
 const bodyParser = require("body-parser");
@@ -12,11 +13,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Variables
 const pool = new Pool({
-  user: "test_user",
-  host: "dpg-cg6cpk1mbg5ab7k83iv0-a.oregon-postgres.render.com",
-  database: "fullstack_project_e43i",
-  password: "zg4sHNebKaOkHGFNU5zm31MFB4upQJuX",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+port: process.env.DB_PORT,
+
   ssl: {
     rejectUnauthorized: false,
   },
