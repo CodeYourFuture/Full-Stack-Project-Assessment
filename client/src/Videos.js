@@ -10,12 +10,12 @@ const Videos = ({embUrls}) => {
     return(
         <div>
             {embUrls.map((object) => (<span key={object.id} title={object.title} >
-              <h2>{object.title}</h2>
+              <h3>{object.title}</h3>
               <iframe
                     width = "560"
                     height="315"
                     src={object.url}
-                    title="YouTube video player"
+                    title={object.title}
                     frameBorder="0"
                     alt={`video ${object.title}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen

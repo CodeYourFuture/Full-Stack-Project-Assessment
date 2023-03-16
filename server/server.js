@@ -44,16 +44,16 @@ app.post("/videos/post", (req, res)=>{
     pool
         .query('select title, url from videos')
         .then((result)=>{
-            if (result.title === videos.title && result.url === videos.url){
+            if (result.rows.find(v => v.title === title && v.url === url)){
              return res
                 .status(400)
-                .send(" Video already exist");
+                .json({ error: "Video already exists" });
             } else {
                 const query =
-                'INSERT INTO videos(vid_id, title, url, rating)VALUES($1, $2, $3, $4)';
+                'INSERT INTO videos(vid_id, title, url, rating)VALUES(uuid_generate_v4(),$1, $2, $3, 0)';
                 pool
-                    .query(query, [vid_id, title, url, rating])
-                    .then(() => res.send('Video saved'))
+                    .query(query, [title, url])
+                    .then(() => res.json({ message: 'Video saved' }))
                     .catch((error)=> res.status(500).json({ error: error.message }));
             }
         })

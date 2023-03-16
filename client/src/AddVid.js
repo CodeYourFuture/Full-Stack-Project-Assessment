@@ -3,6 +3,7 @@ import React, {useState} from "react";
 const AddVid = ({embUrls}) => {
     const[title, setTitle] = useState('');
     const[url, setUrl] = useState('');
+    const[setEmbUrls] = useState(embUrls);
 
 
 // Handling the new title
@@ -20,25 +21,34 @@ const AddVid = ({embUrls}) => {
             },
             body: JSON.stringify({ title, url })
         })
-        .then(response => response.json())
+        .then(response => {
+            if(!response.ok){
+                throw new Error('Network response was not ok');
+            }
+            response.json()
+        })
         .then(data => {
-      // Updating state with new data
-            setTitle(data.title);
-            setUrl(data.url);            
+            // Creating a new object with the title and embedded URL
+            const newVideo = { title: data.title, url: data.url };
+            // Updating the embUrls state by appending the new object
+            setEmbUrls(prevState => [...prevState, newVideo]);
+            // Clearing the input fields
+            setTitle("");
+            setUrl("");            
         })
     };
 
     return (
         <div>
-            <h3>Add Video</h3>
+            <h2>Add Video</h2>
             <form onSubmit={handleAdd}>
                 <div>
                     <label htmlFor="title">Please enter your Title here</label>
-                    <input type="text" value={title} onChange={handleTitle}/>
+                    <input id="title" type="text" value={title} onChange={handleTitle}/>
                 </div>
                 <div>
                     <label htmlFor="url">Please enter the embedded URL here</label>
-                    <input type="text"  onChange={handleUrl} />
+                    <input id="url" type="text"  onChange={handleUrl} />
                 </div>
                 {/* <button>Cancel</button> */}
                 <button type="submit">Add</button>
