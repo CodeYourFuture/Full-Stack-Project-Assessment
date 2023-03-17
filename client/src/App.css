@@ -1,26 +1,27 @@
-.App {
-  text-align: center;
+
+div.App {
+  text-align: center; 
 }
 
 header {
-  display: block;
+ display:block;
 }
 
-.App-header{
+header.App-header{
   color: #fff;
   font-style: oblique;
   background-color: #254e70;
   padding: 2rem 0;
 }
 
-body{
-  display: flex;
-  flex-flow: row wrap;
+.mainSec{
+  flex-flow: row nowrap;
   justify-content: space-around;
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 0;
   font-size: 1rem;
   font-weight: 400;
+  border: 1px solid red;
 }
 
 .video-container{
@@ -31,6 +32,7 @@ body{
   width: 20rem;
   height: fit-content;
 }
+
 .video-container > p {
   margin: 0;
 }
@@ -55,18 +57,53 @@ button{
   margin: 0;
 }
 .btnAdd{
-  padding-left:  20px;
-  margin: 10px 3px;
+  padding:  2px 6px;
+  margin: 1px 4px;
+  font-weight: 400;
   font-size: 1rem;
   text-align: center;
-  border: 1px solid white;
+  border-radius: 2px;
+  color: #f8f5f5;
+  background-color: black;
+  border: 1px solid #0f0101;
 }
+
+.btnAdd:hover{
+  color: #080000;
+  background-color: #f0f0f3;
+}
+
 .input{
-  border-radius: 1px
+  border-radius: 1px;
+  border: 0;
 }
 
 .form{
-  width:  450px;
-  padding: 10px;
-  background-color: blue;;
+  width: 100%;
+  height: 40px;
+  margin: 0 0 8px 0;
+  line-height: 40px;
+  color: white;
+  background-color: black;
 }
+
+div.form-control{
+  color: white;
+  background-color: #230b2b;
+}
+
+.form-control label{
+  margin: 0.45rem;
+}
+article{
+  margin: 5px 0px;
+}
+
+/* @media(min-width: 575px){
+  input{
+    margin: 3px;
+  }
+  .video-container{
+   display: block;
+  }
+} */

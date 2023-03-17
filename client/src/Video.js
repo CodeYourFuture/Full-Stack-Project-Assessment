@@ -5,19 +5,19 @@ import DislikeIcon from './buttons/DislikeIcon';
 import YouTubeEmbed from './YouTubeEmbed';
 import "bootstrap/dist/css/bootstrap.css";
 
-function Video({video}) {
-  
+function Video({video, removeItem}) {
+  const {id, title, rating} = video;
   return (
-    <div className="video-container">
-      <p>{video.title}</p>
+    <article className='col gx-1' key={id}>
+      <p>{title}</p>
       <div className='vote-container'>
         <LikeIcon />
-        <p>{video.rating} Vote</p>
+        <p>{rating}Vote</p>
         <DislikeIcon />
       </div>
       <YouTubeEmbed video={video} />
-      <DeleteButton />
-    </div>
+      <DeleteButton video={video}  removeItem={removeItem}/>
+    </article>
   );
 }
 
