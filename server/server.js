@@ -1,11 +1,15 @@
 const express = require("express");
+let cors = require("cors");
 const app = express();
-const videosData = require("./exampleresponse.json");
+const videosData = require("./../client/src/components/exampleresponse.json");
+
+//middleware
+app.use(cors());
 app.use(express());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const port = process.env.PORT || 5000;
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -43,7 +47,7 @@ app.post("/videos", (req, res) => {
 app.get("/videos/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
 
-  const filterVideo = videosData.find((video) => video.id === videoId);
+  const filterVideo = videosData.filter((video) => video.id === videoId);
 
   if (filterVideo.length === 0) {
     res.status(400).send({ msg: `Video with:${videoId} not found!` });
