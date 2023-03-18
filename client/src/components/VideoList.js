@@ -1,5 +1,5 @@
 import React from 'react'
-import data from "../data/exampleresponse.json"
+import data from "./exampleresponse.json"
 
 const VideoList = () => {
 

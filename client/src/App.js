@@ -1,5 +1,6 @@
 import "./App.css";
 import AddVideo from "./components/AddVideo";
+import Video from "./components/Video.js";
 
 function App() {
   return (
@@ -7,7 +8,8 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      { <AddVideo/> }
+      <AddVideo/>
+      <Video />
     </div>
   );
 }
