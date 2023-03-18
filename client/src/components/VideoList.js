@@ -1,5 +1,5 @@
 import React from 'react'
-// import data from "./exampleresponse.json"
+// import data from "./exampleresponse.json" level 250
 import Video from "./../Video"
 import { useEffect, useState } from "react";
 
@@ -10,10 +10,8 @@ const VideoList = () => {
   useEffect(() => {
     fetch("http://localhost:5000")
       .then((res) => {
-        console.log(res)
         return res.json()})
       .then((vidData) => {
-        console.log(vidData);
         setData(vidData);
       });
   }, []);
