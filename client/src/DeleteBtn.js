@@ -1,16 +1,19 @@
 import React from "react";
 
-const DeleteBtn = () => {
-    // const [Delete , setDelete]  = useState([embUrls]);
-    // const handleDelete = (index) => {
-    //     const newItems = [...Delete];
-    //     newItems.splice(index, 1);
-    //     setDelete(newItems);
-    // }; 
+const DeleteBtn = ({dataEmb}) => {
+    const handleDelete = (id) => {
+    if (!id) {
+      console.error("ID is undefined");
+      return;
+    }
+    fetch(`/videos/remove/${id}`)
+      .then((response) =>  console.log(response.data))
+      .catch((error) => console.error(error));
+  };
 
     return (
         <div>
-            <button>Delete</button>
+            <button onClick={() => handleDelete(dataEmb.id)}>Delete</button>
         </div>
     );  
 };

@@ -1,42 +1,41 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import AddVid from "./AddVid";
 import DeleteBtn from "./DeleteBtn";
 import LikeBtn from "./LikeBtn";
 import UnlikeBtn from "./UnlikeBtn";
-import axios from 'axios';
 
 
 
-const Videos = ({embUrls}) => {
+const Videos = () => {
+  const [state, setState] = useState([])
 
-    const handleDelete = (id) => {
-        axios.delete(`/videos/delete/${id}`)
-          .then((response) => {
-            console.log(response.data);
-            // do something to update the UI (e.g. remove the video from a list)
-          })
-          .catch((error) => {
-            console.error(error);
-            // handle the error (e.g. display an error message)
-          });
-      };
-      
+// fetching data from Render
+useEffect(() => {
+fetch("http://localhost:5000/")
+  .then((response) => response.json())
+  .then((data) => setState(data));
+}, [])
 
-    return(
+const dataEmb = state.map((obj) => ({...obj, url: obj.url.replace("watch?v=", "embed/")}));
+console.log(dataEmb)
+    
+return(
         <div>
-            {embUrls.map((object) => (<span key={object.id} title={object.title} >
+          <AddVid dataEmb={dataEmb} />
+            {dataEmb.map((object) => (<span key={object.id} title={object.title} >
               <h3>{object.title}</h3>
               <iframe
                     width = "560"
                     height="315"
                     src={object.url}
                     title={object.title}
-                    frameBorder="0"
+                    frameBorder="1"
                     alt={`video ${object.title}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 />
-                <DeleteBtn onClick={() => handleDelete(embUrls.id)} />
-                <LikeBtn/>
-                <UnlikeBtn/>
+                <DeleteBtn dataEmb={dataEmb} videoId={object.id} />
+                <LikeBtn videoId={object.id} />
+                <UnlikeBtn videoId={object.id} />
             </span>))}      
         </div>
     );
