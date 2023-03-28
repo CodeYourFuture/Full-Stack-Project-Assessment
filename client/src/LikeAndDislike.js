@@ -33,7 +33,7 @@ const LikeAndDislike = ({ video, data, setData }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
                 height="30"
-                color="#0f68b0"
+                color="#14A44D"
                 fill="currentColor"
                 className="bi bi-hand-thumbs-up-fill mt-1 rounded-circle bg-light"
                 viewBox="0 0 16 16"
@@ -43,9 +43,7 @@ const LikeAndDislike = ({ video, data, setData }) => {
             </button>
           </Col>
           <Col>
-            <p className="mt-4 fw-bold">
-              Rating: {video.rating}
-            </p>
+            <p className="mt-4 fw-bold">Rating: {video.rating}</p>
           </Col>
           <Col>
             <button onClick={() => handleDislike(video.id)}>
@@ -53,7 +51,7 @@ const LikeAndDislike = ({ video, data, setData }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 width="30"
                 height="30"
-                color="red"
+                color="#DC4C64"
                 fill="currentColor"
                 className="bi bi-hand-thumbs-down-fill mt-1"
                 viewBox="0 0 16 16"
