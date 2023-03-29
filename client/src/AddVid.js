@@ -1,17 +1,8 @@
-    import React, {useState, useEffect} from "react";
+    import React, {useState} from "react";
 
-    const AddVid = ({dataEmb}) => {
+    const AddVid = (item) => {
         const[title, setTitle] = useState('');
         const[url, setUrl] = useState('');
-        const [setVideos] = useState([dataEmb]);
-
-    // fetching data from Render
-        useEffect(() => {
-            fetch("/videos/insert")
-            .then((response) => response.json())
-            .then((data) => setVideos(data));
-        }, [setVideos]);
-
 
     // Handling the new title
         const handleTitle = (event) => setTitle(event.target.value);
@@ -20,7 +11,7 @@
     // Handling the adding of the video
         const handleAdd = (event) => {
             event.preventDefault();
-            fetch("/videos/add",{ title, url }, {
+            fetch("/videos/add", {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,11 +28,12 @@
                 // Creating a new object with the title and embedded URL
                 const newVideo = { title: data.title, url: data.url };
                 // Updating the embUrls state by appending the new object
-                setVideos(videos => [...videos, newVideo]);
+                item(videos => [...videos, newVideo]);
                 // Clearing the input fields
                 setTitle("");
                 setUrl("");            
             })
+            .catch(error => console.error('Error:', error));
         };
 
         return (
@@ -56,22 +48,7 @@
                         <label htmlFor="url">Please enter the embedded URL here</label>
                         <input id="url" type="text"  value={url} onChange={handleUrl} />
                     </div>
-                    {/* <button>Cancel</button> */}
                     <button type="submit">Add</button>
-                    {/* {videos.map((video, index) => (
-                        <span key={index}>
-                            <h3>{video.title}</h3>
-                            <iframe 
-                                width = "560"
-                                height="315"
-                                src={video.url}
-                                title={video.title}
-                                frameBorder="0"
-                                alt={`video ${video.title}`}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
-                            />
-                        </span>
-                    ))} */}
                 </form>
             </div>
         );

@@ -4,7 +4,7 @@ require('dotenv').config();
 const app = express();
 const cors = require("cors");
 app.use(cors());
-app.use(express.json({limit: '100mb'}));
+app.use(express.json({limit: '10gb'}));
 
 const port = process.env.PORT || 5000; 
 
@@ -23,8 +23,8 @@ const pool = new Pool({
 
 
 // End Points
-// Creating the table
-app.post('/create', (req, res) => {
+// Creating the video table
+app.post('/create/videos', (req, res) => {
     pool
     .query('CREATE TABLE videos (id serial PRIMARY KEY, title VARCHAR(500) NOT NULL, url VARCHAR(1000) NOT NULL, rating INTEGER)')
     .then((result) => res.status(200).json(result.command))
@@ -32,13 +32,12 @@ app.post('/create', (req, res) => {
 })
 app.post("/videos/insert", (req, res)=>{
     const {title, url, rating} = req.body
-    console.log(title);
     const query = 'INSERT INTO videos (title, url, rating) VALUES($1, $2, $3)'
     pool
         .query(query, [title, url, rating])
         .then(() => res.status(200).json({ message: 'Videos loaded' }))
         .catch((error)=> res.status(500).json({ error: "Error saving videos: " + error.message }));
-})
+});
 
 // Getting all the videos saved
 app.get("/", (req, res) => {
@@ -60,18 +59,15 @@ app.get("/videos/:id", (req, res) => {
         });
   });
 // Adding a video
-app.post("/videos/add", (req, res)=>{
+app.post("/videos/add", (req, res) => {
     const {title, url} = req.body;
-    
-    const query = `CREATE UNIQUE CLUSTERED INDEX idx_videos_title_url ON videos(title, url);
-                    INSERT INTO videos(title, url, rating)
-                    SELECT $1, $2, 0
-                    WHERE NOT EXISTS (SELECT 1 FROM videos WHERE title=$1 AND url=$2)`;
-                pool
-                    .query(query, [title, url])
-                    .then(() => res.status(200).json({ message: 'Video saved' }))
+    const query = `INSERT INTO videos(title, url, rating) VALUES($1, $2, 0);`
+        pool
+            .query(query, [title, url])
+            .then(() => res.status(200).json({ message: 'Video saved' }))
             .catch((error)=> res.status(500).json({ error: "Error saving video: " + error.message }));
-    })  
+    }); 
+
 // Deleting a video
 app.delete("/videos/remove/:id", (req, res)=> {
     const id = req.params.id;
@@ -84,7 +80,18 @@ app.delete("/videos/remove/:id", (req, res)=> {
       });
   });
 
-
+// Updating the ratings
+app.put("videos/:id", (req, res)=>{
+    // const id = req.params.id;
+    const {rating, id} = req.body;
+    pool
+        .query('UPDATE videos SET rating=$1 WHERE id=$2', [rating, id])
+        .then(()=> res.status(200).json({message: 'Rating updated'}))
+        .catch((error)=>{
+            console.log(error)
+            res.status(500).json(error)
+        })
+});
   
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

@@ -6,8 +6,10 @@ const DeleteBtn = ({dataEmb}) => {
       console.error("ID is undefined");
       return;
     }
-    fetch(`/videos/remove/${id}`)
-      .then((response) =>  console.log(response.data))
+    fetch(`/videos/remove/${id}`,{
+      method: "DELETE"
+    })
+      .then((response) => console.log(response.data))
       .catch((error) => console.error(error));
   };
 
