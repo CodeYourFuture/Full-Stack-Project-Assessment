@@ -89,8 +89,8 @@ app.put("videos/:id", (req, res)=>{
         .then(()=> res.status(200).json({message: 'Rating updated'}))
         .catch((error)=>{
             console.log(error)
-            res.status(500).json(error)
-        })
+            res.status(500).json(error);
+        });
 });
   
 app.listen(port, () => console.log(`Listening on port ${port}`));

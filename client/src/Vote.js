@@ -2,49 +2,43 @@ import React, {useState, useEffect} from "react";
 const fetch = window.fetch;
 
 const Vote = ({count, videoId}) =>{
+    const [likes, setLikes] = useState(count);
 
-    const [add, setAdd] = useState(count);
-    const [minus, setMinus] = useState(count);
-
-    const handleAdd = () => {
-        setAdd(prevLikes => prevLikes + 1);
+    const updateRating = (rating) => {
         fetch(`/videos/${videoId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({rating: add + 1 })
+            body: JSON.stringify({rating, id: videoId}),
         })
         .then(response => response.json())
         .then(data => console.log(data))
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
     };
 
-    const handleMinus = () => {
-        setMinus(prevLikes => prevLikes - 1);
-        fetch(`/videos/${videoId}`,{
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({rating: minus - 1 })
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.log(error));
+    const handleAdd = () => {
+        const updateLikes = likes + 1;
+        setLikes(updateLikes);
+        updateRating(updateLikes);        
+    };
+
+    const handleMinus = ()=> {
+        const updateLikes = likes + 1;
+        setLikes(updateLikes);
+        updateRating(updateLikes);   
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/')
-        setAdd(count);
-        setMinus(count);
-      },[count]);
+        setLikes(count);
+      },[count]);    
        
-return(
-    <div>
-        <button onClick={handleAdd}>Vote Up</button>
-        <p>This video has {add + minus} likes</p>
-        <button onClick={handleMinus} >Vote Down</button>
-    </div>
-);  
-
-}
+    return(
+        <div>
+            <button onClick={handleAdd}>Vote Up</button>
+            <p>This video has {likes} likes</p>
+            <button onClick={handleMinus} >Vote Down</button>
+        </div>
+    );  
+};
 
 
 export default Vote;

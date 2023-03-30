@@ -32,7 +32,7 @@ return(
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 />
                 <DeleteBtn dataEmb={dataEmb} videoId={object.id}  />
-                <Vote videoId={object.id} count={object.rating} />
+                <Vote videoId={object.id} count={object.rating} object={object} />
             </span>))}      
         </div>
     );
