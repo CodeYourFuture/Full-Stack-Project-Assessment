@@ -13,33 +13,29 @@ function App() {
   const [videosFilter, setVideosFilter] = useState("");
   const [filteredVideoData, setFilteredVideoData] = useState([]);
 
-
   const addVideoHandler = () => {
     setAddVideo((prevVideo) => !prevVideo);
   };
 
+  useEffect(() => {
+    fetch("http://localhost:5000/video/")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideoData(data);
+        setFilteredVideoData(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
-  fetch("http://localhost:5000/video/")
-    .then((res) => res.json())
-    .then((data) => {
-      setVideoData(data);
-      setFilteredVideoData(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}, []);
-
-useEffect(() => {
-  setFilteredVideoData(
-    videoData?.filter((video) =>
-      video.title.toLowerCase().includes(videosFilter.toLowerCase())
-    ) || []
-  );
-}, [videosFilter, videoData]);
-
-
+    setFilteredVideoData(
+      videoData?.filter((video) =>
+        video.title.toLowerCase().includes(videosFilter.toLowerCase())
+      ) || []
+    );
+  }, [videosFilter, videoData]);
 
   return (
     <div className="App bg-secondary.bg-gradient">
@@ -50,8 +46,9 @@ useEffect(() => {
         <Row>
           <Col md>
             <AddVideo onClick={addVideoHandler}>Add Video</AddVideo>
-            {addVideo && <AddVideoForm setVideoData={setVideoData} />}
-             <AddVideoForm videoData={videoData} setVideoData={setVideoData} />
+            {addVideo && (
+              <AddVideoForm setVideoData={setVideoData} videoData={videoData} />
+            )}
           </Col>
           <Col md>
             <Search handler={(e) => setVideosFilter(e.target.value)} />
@@ -75,7 +72,3 @@ useEffect(() => {
 }
 
 export default App;
-
-
-
-
