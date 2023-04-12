@@ -1,21 +1,29 @@
 import "./App.css";
-import TheVideos from"./components/TheVideos.js";
-import EmbedVideos from "./components/EmbedVideos.js";
-//import NewVideos from "./components/NewVideos";      
+import TheVideos from "./components/TheVideos.js";
+import About from './components/About.js';
+import Features from "./components/Features.js";
+import Pricing from "./components/Pricing.js";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home.js";
+import Romantic from "./components/Romantic";
+import Documentary from "./components/Documentary";
+
 import React from "react";
-import Asending from "./components/Asending";
-import IframeVideo from "./components/IframeVideo";
 function App({ lik }) {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      <hr/>
-      <Asending />
-      <TheVideos/> 
-      <IframeVideo/>
-     <EmbedVideos /> 
+      <>
+        <Routes>
+          <Route path="/" element={<TheVideos />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/romantic" element={<Romantic />} />
+          <Route path="/documentary" element={<Documentary />} />
+        </Routes>
+      </>
+      {/* <TheVideos/>  */}
     </div>
   );
 }
