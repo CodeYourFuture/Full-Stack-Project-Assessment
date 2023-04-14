@@ -1,3 +1,10 @@
+body {
+  background-color: #666;
+  color: #fff;
+}
 .App {
   text-align: center;
+}
+nav {
+  background-color: #000;
 }
