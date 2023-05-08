@@ -1,0 +1,36 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Video {
+  id            String @id @default(uuid())
+  title         String
+  url           String
+  rating        Int    @default(0)
+  likes         Like[]
+  created_by_id String
+  created_by    User?  @relation(fields: [created_by_id], references: [id])
+}
+
+model User {
+  id     String  @id @default(uuid())
+  likes  Like[]
+  videos Video[]
+}
+
+model Like {
+  created_at DateTime @default(now())
+  user_id    String
+  video_id   String
+  user       User     @relation(fields: [user_id], references: [id])
+  video      Video    @relation(fields: [video_id], references: [id])
+  vote       Int
+
+  @@id([user_id, video_id])
+  @@unique([user_id, video_id])
+}
