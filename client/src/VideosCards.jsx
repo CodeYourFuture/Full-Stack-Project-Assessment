@@ -1,8 +1,15 @@
-import React from "react";
+import { useState, React } from "react";
 import data from "./exampleresponse.json";
 import "./VideosCards.css";
 
 export const VideosCards = () => {
+  const [getID, setGetID] = useState(null);
+
+  const handleDeleteClick = (id) => {
+    setGetID(id);
+    return (data = data.filter((video) => video.id !== id));
+  };
+
   const Card = (v) => {
     return (
       <div className="cardContainer" key={v.id}>
@@ -16,7 +23,7 @@ export const VideosCards = () => {
         ></iframe>
         <h6>{v.title}</h6>
         <p>{v.rating}</p>
-        <button>Delete Video</button>
+        <button onClick={() => handleDeleteClick(v.id)}>Delete Video</button>
       </div>
     );
   };

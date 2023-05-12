@@ -37,15 +37,9 @@ button {
   border: none;
   background: none;
   background-color: none;
-  /* width: 100%; */
   text-align: start;
-  /* border-radius: 10px; */
-
-  /* border-bottom-color: red; */
-  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15); */
   background: none;
   color: Red;
-  /* font-weight: bold; */
   font-size: small;
 }
 /* end of delete btn*/
