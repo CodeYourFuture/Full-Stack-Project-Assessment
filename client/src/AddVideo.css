@@ -21,3 +21,7 @@ input :focus-visible {
 body {
   font-family: "Roboto", "Arial", sans-serif;
 }
+
+.addVideoContainer {
+  padding: 5% 0%;
+}

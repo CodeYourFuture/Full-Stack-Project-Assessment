@@ -46,7 +46,7 @@ export const AddVideo = ({ videos, setVideos }) => {
   console.log(urlInput);
 
   return (
-    <div>
+    <div className="addVideoContainer">
       <a href="#" alt="Add video button" onClick={handleAddVideoButton}>
         Add video
       </a>
