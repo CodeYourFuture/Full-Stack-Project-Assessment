@@ -41,12 +41,9 @@ export const VideosCards = () => {
           allowfullscreen
         ></iframe>
         <h6>{v.title}</h6>
-        <p>
-          Rating:
-          {v.rating}
-        </p>
         <span className="UpDownVote">
-          <i class="fa fa-thumbs-up" onClick={() => increaseRating(v.id)}></i>|
+          <i class="fa fa-thumbs-up" onClick={() => increaseRating(v.id)}></i>
+          {v.rating}
           <i class="fa fa-thumbs-down" onClick={() => decreaseRating(v.id)}></i>
         </span>
 

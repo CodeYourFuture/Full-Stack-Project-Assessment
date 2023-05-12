@@ -20,6 +20,7 @@
   width: 100%;
 }
 .cardContainer h6 {
+  padding: 20px 0px;
   font-weight: bolder;
   color: #0f0f0f;
 }
