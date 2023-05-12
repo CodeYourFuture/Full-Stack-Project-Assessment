@@ -70,3 +70,19 @@ body {
   }
 }
 /* end of delete btn*/
+@media only screen and (max-width: 768px) {
+  .cardContainer {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .allCardsContainer {
+    margin: 2% 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cardContainer {
+    width: 90%;
+  }
+}

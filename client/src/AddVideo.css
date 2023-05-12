@@ -11,12 +11,6 @@ input {
   padding: 5px 10px;
   border-radius: 20px;
 }
-input :focus-visible {
-  outline: none;
-  background-color: blue;
-  /* border-style: none;
-  box-shadow: 0px 10px 47px -19px red; */
-}
 
 body {
   font-family: "Roboto", "Arial", sans-serif;
@@ -24,4 +18,9 @@ body {
 
 .addVideoContainer {
   padding: 5% 0%;
+}
+
+.addVideo {
+  color: #0f0f0f;
+  align-items: center;
 }
