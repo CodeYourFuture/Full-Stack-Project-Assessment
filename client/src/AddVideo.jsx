@@ -1,7 +1,7 @@
 import { useState, React } from "react";
 import "./AddVideo.css";
 
-export const AddVideo = (props) => {
+export const AddVideo = ({ videos, setVideos }) => {
   const [clickAdd, setClickAdd] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [urlInput, setUrlInput] = useState("");
@@ -17,15 +17,29 @@ export const AddVideo = (props) => {
 
   const handleUrlInputChange = (e) => {
     e.preventDefault();
-    setUrlInput(e.target.value);
+    let url = e.target.value;
+    if (url.includes("https://www.youtube.com/watch?v=")) {
+      url = url.replace("watch?v=", "embed/");
+      return setUrlInput(url);
+    } else {
+      alert("Invalid URL format. Please provide a YouTube URL");
+    }
   };
 
   const handleFormSubmit = () => {
-    let newCard = {};
-    newCard = { title: titleInput, url: urlInput };
-    props.videos = props.videos.push(newCard);
-    return props.videos;
-    console.log(props.videos.push(newCard));
+    const videoId = Math.floor(Math.random() * 1000000);
+    const videoRating = Math.floor(Math.random() * 10000);
+    let newVideo = {};
+    newVideo = {
+      id: videoId,
+      rating: videoRating,
+      title: titleInput,
+      url: urlInput,
+    };
+    setVideos((videos) => [...videos, newVideo]);
+
+    setTitleInput("");
+    setUrlInput("");
   };
 
   console.log(titleInput);

@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { AddVideo } from "./AddVideo";
 import "./App.css";
 import { VideosCards } from "./VideosCards";
 import data from "./exampleresponse.json";
 
 function App() {
+  const [videos, setVideos] = useState(data);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,8 +15,8 @@ function App() {
         </a>
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo videos={data} />
-      <VideosCards videos={data} />
+      <AddVideo videos={videos} setVideos={setVideos} />
+      <VideosCards videos={videos} setVideos={setVideos} />
     </div>
   );
 }

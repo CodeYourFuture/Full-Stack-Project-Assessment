@@ -1,8 +1,8 @@
-import { useState, React } from "react";
+import { React } from "react";
 import "./VideosCards.css";
 
-export const VideosCards = (props) => {
-  const [videos, setVideos] = useState(props.videos);
+export const VideosCards = ({ videos, setVideos }) => {
+  // const [videos, setVideos] = useState(video);
 
   const handleDeleteClick = (id) => {
     let newData = [];
