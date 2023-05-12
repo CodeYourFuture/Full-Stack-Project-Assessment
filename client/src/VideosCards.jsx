@@ -16,6 +16,7 @@ export const VideosCards = () => {
         ></iframe>
         <h6>{v.title}</h6>
         <p>{v.rating}</p>
+        <button>Delete Video</button>
       </div>
     );
   };
