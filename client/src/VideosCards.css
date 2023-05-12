@@ -1,0 +1,32 @@
+.allCardsContainer {
+  margin: 2% 10%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 31%;
+  align-items: flex-start;
+}
+.cardContainer iframe {
+  border-radius: 10px;
+  width: 100%;
+}
+.cardContainer h6 {
+  font-weight: bolder;
+  color: #0f0f0f;
+}
+.cardContainer p {
+  color: #606060;
+  font-size: 14px;
+}
+
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+}
