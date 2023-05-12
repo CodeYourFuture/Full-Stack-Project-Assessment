@@ -22,8 +22,20 @@ export const VideosCards = () => {
           allowfullscreen
         ></iframe>
         <h6>{v.title}</h6>
-        <p>{v.rating}</p>
-        <button onClick={() => handleDeleteClick(v.id)}>Delete Video</button>
+        <p>
+          Rating:
+          {v.rating}
+        </p>
+        <span className="UpDownVote">
+          <i class="fa fa-thumbs-up"></i>|<i class="fa fa-thumbs-down"></i>
+        </span>
+
+        <button
+          className="deleteButton"
+          onClick={() => handleDeleteClick(v.id)}
+        >
+          Delete Video
+        </button>
       </div>
     );
   };
