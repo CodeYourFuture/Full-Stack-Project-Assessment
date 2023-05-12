@@ -4,10 +4,29 @@ import "./VideosCards.css";
 
 export const VideosCards = () => {
   const [getID, setGetID] = useState(null);
+  const [videos, setVideos] = useState(data);
 
   const handleDeleteClick = (id) => {
     setGetID(id);
-    return (data = data.filter((video) => video.id !== id));
+    let newData = [];
+    newData = data.filter((video) => video.id !== id);
+    return setVideos(newData);
+  };
+
+  const increaseRating = (id) => {
+    let newData = [];
+    newData = videos.map((video) =>
+      video.id === id ? { ...video, rating: video.rating + 1 } : video
+    );
+    return setVideos(newData);
+  };
+
+  const decreaseRating = (id) => {
+    let newData = [];
+    newData = videos.map((video) =>
+      video.id === id ? { ...video, rating: video.rating - 1 } : video
+    );
+    return setVideos(newData);
   };
 
   const Card = (v) => {
@@ -27,7 +46,8 @@ export const VideosCards = () => {
           {v.rating}
         </p>
         <span className="UpDownVote">
-          <i class="fa fa-thumbs-up"></i>|<i class="fa fa-thumbs-down"></i>
+          <i class="fa fa-thumbs-up" onClick={() => increaseRating(v.id)}></i>|
+          <i class="fa fa-thumbs-down" onClick={() => decreaseRating(v.id)}></i>
         </span>
 
         <button
@@ -41,6 +61,8 @@ export const VideosCards = () => {
   };
 
   return (
-    <div className="allCardsContainer">{data.map((video) => Card(video))}</div>
+    <div className="allCardsContainer">
+      {videos.map((video) => Card(video))}
+    </div>
   );
 };
