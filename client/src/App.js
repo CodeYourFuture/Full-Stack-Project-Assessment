@@ -1,6 +1,7 @@
 import { AddVideo } from "./AddVideo";
 import "./App.css";
 import { VideosCards } from "./VideosCards";
+import data from "./exampleresponse.json";
 
 function App() {
   return (
@@ -11,8 +12,8 @@ function App() {
         </a>
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo />
-      <VideosCards />
+      <AddVideo videos={data} />
+      <VideosCards videos={data} />
     </div>
   );
 }

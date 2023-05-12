@@ -1,15 +1,12 @@
 import { useState, React } from "react";
-import data from "./exampleresponse.json";
 import "./VideosCards.css";
 
-export const VideosCards = () => {
-  const [getID, setGetID] = useState(null);
-  const [videos, setVideos] = useState(data);
+export const VideosCards = (props) => {
+  const [videos, setVideos] = useState(props.videos);
 
   const handleDeleteClick = (id) => {
-    setGetID(id);
     let newData = [];
-    newData = data.filter((video) => video.id !== id);
+    newData = videos.filter((video) => video.id !== id);
     return setVideos(newData);
   };
 
