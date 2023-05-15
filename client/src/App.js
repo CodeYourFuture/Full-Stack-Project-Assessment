@@ -11,7 +11,6 @@ function App() {
 
   const handleDelete = async (videoId) => {
     setListOfVideos(listOfVideos.filter((video) => video.id !== videoId));
-    console.log(`Deleting video with ID ${videoId}`);
   };
 
   //to update rating on the page
