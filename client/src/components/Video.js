@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import DeleteVideo from "./DeleteVideo.js";
 import VoteScore from "./VoteScore.js";
 
 const Video = ({ video, handleDelete, updateRating }) => {
-  const [rating, setRating] = useState(video.rating);
+ 
 
    const increaseRating = () => {
      const newRating = video.rating + 1;
@@ -25,7 +25,7 @@ const Video = ({ video, handleDelete, updateRating }) => {
       <p>Number of Votes: {video.rating} </p>
       <DeleteVideo video={video} handleDelete={handleDelete} />
       <VoteScore
-        rating={rating}
+        
         increaseRating={increaseRating}
         decreaseRating={decreaseRating}
       />

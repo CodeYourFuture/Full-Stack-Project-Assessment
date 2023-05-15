@@ -22,7 +22,7 @@ function App() {
       )
     );
   };
-
+  //to add a new video to the page
   function addVideo(title, link) {
     const newVideo = {
       id: listOfVideos.length + 1,

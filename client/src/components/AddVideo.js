@@ -1,24 +1,22 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-const AddVideo = ({addVideo}) => {
-    const [title, setTitle] = useState("");
-    const [link, setLink] = useState("");
+const AddVideo = ({ addVideo }) => {
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
 
-    const handleTitleChange = (e) => {
-      setTitle(e.target.value);
-      console.log(e.target.value);
-    };
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-    const handleLinkChange = (e) => {
-      setLink(e.target.value);
-      console.log(e.target.value)
-    };
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  };
 
-     const handleAddVideo = () => {
-       addVideo(title, link);
-       setTitle("");
-       setLink("");
-     };
+  const handleAddVideo = () => {
+    addVideo(title, link);
+    setTitle("");
+    setLink("");
+  };
   return (
     <div className="add-video-form">
       <label htmlFor="title">

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const VoteScore = ({rating, increaseRating, decreaseRating }) => {
+const VoteScore = ({increaseRating, decreaseRating }) => {
  
   return (
     <div>
