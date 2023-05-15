@@ -1,6 +1,6 @@
 const Navbar = () => {
      return (
-       <nav>
+       <nav className="nav-bar">
        <div>  Video Recommendation </div>
        </nav>
      );
