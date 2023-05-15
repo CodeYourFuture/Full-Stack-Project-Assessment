@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import Votes from "./Votes";
+import DeleteVideo from "./DeleteVideo";
 
 function VideoInfo({ videos, setVideos, video }) {
-  const [votes, setVotes] = useState(0);
-
   function handleDeleteVideo(videoID) {
     const updatedVideos = videos.filter((video) => video.id !== videoID);
     setVideos(updatedVideos);
@@ -15,32 +14,17 @@ function VideoInfo({ videos, setVideos, video }) {
         <iframe
           width="300"
           height="250"
-          src={`https://www.youtube.com/embed/${video.videoID}`}
-          title="YouTube video player"
+          src={`https://www.youtube.com/embed/${video.url.slice(32)}`}
+          title={video.title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
         <aside>
-          <span>{votes} votes</span>
-          <button
-            onClick={() => {
-              setVotes((c1) => c1 + 1);
-            }}
-          >
-            Up Vote
-          </button>
-          <button
-            onClick={() => {
-              setVotes((c2) => c2 - 1);
-            }}
-          >
-            Down Vote
-          </button>
+          <span>{video.rating}</span>
+          <Votes video={video} setVideos={setVideos} videos={videos} />
         </aside>
-        <button onClick={() => handleDeleteVideo(video.id)}>
-          Remove Video
-        </button>
+        <DeleteVideo handleDeleteVideo={handleDeleteVideo} video={video} />
       </div>
     </div>
   );

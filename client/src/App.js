@@ -19,6 +19,7 @@ function App() {
           video={video}
           videos={videos}
           setVideos={setVideos}
+          initialVideos={initialVideos}
         />
       ))}
     </div>
