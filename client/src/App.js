@@ -6,11 +6,20 @@ import data from "./exampleresponse.json";
 
 function App() {
   //to delete, update the videos
-  const [listOfVideos, setLIstOfVideos] = useState(data);
+  const [listOfVideos, setListOfVideos] = useState(data);
 
   const handleDelete = async (videoId) => {
-    setLIstOfVideos(listOfVideos.filter((video) => video.id !== videoId));
+    setListOfVideos(listOfVideos.filter((video) => video.id !== videoId));
     console.log(`Deleting video with ID ${videoId}`);
+  };
+
+  //to update rating on the page
+  const updateRating = async (videoId, newRating) => {
+    setListOfVideos((prevList) =>
+      prevList.map((video) =>
+        video.id === videoId ? { ...video, rating: newRating } : video
+      )
+    );
   };
 
   return (
@@ -24,7 +33,7 @@ function App() {
             key={video.id}
             video={video}
             handleDelete={handleDelete}
-           
+            updateRating={updateRating}
           />
         ))}
       </div>

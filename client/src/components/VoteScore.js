@@ -1,9 +1,12 @@
-const VoteScore = ({ video }) => {
+import React, { useState } from "react";
+
+const VoteScore = ({rating, increaseRating, decreaseRating }) => {
+ 
   return (
     <div>
-      <button>Up Vote</button>
+      <button onClick={increaseRating}>Up Vote</button>
 
-      <button>Down Vote</button>
+      <button onClick={decreaseRating}>Down Vote</button>
     </div>
   );
 };
