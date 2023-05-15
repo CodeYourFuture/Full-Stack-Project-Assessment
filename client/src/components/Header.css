@@ -7,19 +7,11 @@ h1 {
   line-height: 1;
   letter-spacing: 4px;
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(90deg, black, white, black);
+  background:#eeeeee;
   background-size: 70% 100%;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: shade 5s linear infinite;
+  padding: .5rem;
 }
 
-@keyframes shade {
-  0% {
-    background-position-x: -200%;
-  }
-  100% {
-    background-position-x: 200%;
-  }
-}

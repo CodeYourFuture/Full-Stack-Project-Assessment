@@ -1,0 +1,83 @@
+@import "https://rsms.me/inter/inter.css";
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+label {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  color: #222;
+  position: relative;
+  margin: 10px;
+}
+
+.input-top {
+  min-width: 350px;
+  height: 50px;
+  position: relative;
+  border-radius: 50px;
+  cursor: pointer;
+  background: conic-gradient(from var(--r), #222 0%, #eee 10%, #222 20%);
+  border: none;
+  animation: rotating 3s linear infinite;
+}
+
+@property --r {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rotating {
+  0% {
+    --r: 0deg;
+  }
+  100% {
+    --r: 360deg;
+  }
+}
+
+input {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #222;
+  inset: 5px;
+  border-radius: 45px;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding-left: 1rem;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+button {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  min-width: 100px;
+  height: 50px;
+  position: relative;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #222;
+  border: none;
+  animation: rotating 3s linear infinite;
+  color: white;
+  font-size: 20px;
+  transition: opacity 0.3s ease;
+}
+
+
+button:hover,
+button:focus,
+button:active {
+  background:#444;
+}
