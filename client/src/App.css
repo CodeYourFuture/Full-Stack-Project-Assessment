@@ -1,3 +1,21 @@
 .App {
   text-align: center;
 }
+ 
+
+
+  .video-container {
+  display: grid;
+   grid-template-columns: repeat(3, 1fr); 
+}  
+
+
+/* .video-wrapper {
+  margin-top: 50px;
+  width: 300px;
+} 
+
+iframe {
+  width: 300px;
+  height: 300px;
+} */
