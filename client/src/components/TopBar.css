@@ -81,3 +81,8 @@ button:focus,
 button:active {
   background:#444;
 }
+
+
+.error-message{
+color: white;
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "./Card";
 import "./Cards.css";
 import Data from "../exampleresponse.json";
+import TopBar from "./TopBar";
 
 const Cards = () => {
   const [cards, setCards] = useState(Data);
@@ -20,19 +21,26 @@ const Cards = () => {
     }
   };
 
+  const handleAddCard = (newCard) => {
+    setCards((prevCards) => [...prevCards, newCard]);
+  };
+
   return (
-    <div className="cards">
-      {sortedCards.map((card) => (
-        <Card
-          key={card.id}
-          id={card.id}
-          title={card.title.trim() !== "" ? card.title : "No Title"}
-          url={card.url}
-          rating={card.rating}
-          onDelete={handleDeleteCard}
-        />
-      ))}
-    </div>
+    <>
+      <TopBar onAddCard={handleAddCard} cards={cards} />
+      <div className="cards">
+        {sortedCards.map((card) => (
+          <Card
+            key={card.id}
+            id={card.id}
+            title={card.title.trim() !== "" ? card.title : "No Title"}
+            url={card.url}
+            rating={card.rating}
+            onDelete={handleDeleteCard}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
