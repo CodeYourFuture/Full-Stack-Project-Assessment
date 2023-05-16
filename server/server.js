@@ -50,7 +50,16 @@ app.get("/", (req, res) => {
 
   // GET "/videos"
 app.get("/videos", (req, res) => {
-  res.json(videos);
+  let orderedVideos = [...videos];
+
+  const orderParam = req.query.order;
+  if (orderParam === "asc") {
+    orderedVideos.sort((a, b) => a.rating - b.rating);
+  } else if (orderParam === "desc") {
+    orderedVideos.sort((a, b) => b.rating - a.rating);
+  } // If no order parameter is provided, the default order is descending (desc)
+
+  res.json(orderedVideos);
 });
 
 // post
