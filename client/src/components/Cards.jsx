@@ -6,16 +6,24 @@ import TopBar from "./TopBar";
 const Cards = () => {
   const [cards, setCards] = useState([]);
   const [order, setOrder] = useState("desc");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true); // Set loading state to true before making the request
     fetch(`https://video-server-iiqf.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
-      .then((data) => setCards(data))
-      .catch((error) => console.log(error));
+      .then((data) => {
+        setCards(data);
+        setLoading(false); // Set loading state to false after receiving the response
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false); // Set loading state to false if an error occurs
+      });
   }, [order]);
 
   const handleDeleteCard = (id) => {
-    // Send a DELETE request to the server
+    setLoading(true); // Set loading state to true before sending the delete request
     fetch(`https://video-server-iiqf.onrender.com/videos/${id}`, {
       method: "DELETE",
     })
@@ -33,8 +41,12 @@ const Cards = () => {
           (card) => card.id !== deletedVideo.id
         );
         setCards(updatedCards);
+        setLoading(false); // Set loading state to false after deleting the video
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false); // Set loading state to false if an error occurs
+      });
   };
 
   const handleAddCard = (newCard) => {
@@ -53,7 +65,9 @@ const Cards = () => {
         onOrderChange={handleOrderChange}
       />
       <div className="cards">
-        {cards.length > 0 ? (
+        {loading ? (
+          <p className="loading">Loading... Please wait for my server to wake up :D</p> // Display a loading indicator while waiting for the data
+        ) : cards.length > 0 ? (
           cards.map((card) => (
             <Card
               key={card.id}
