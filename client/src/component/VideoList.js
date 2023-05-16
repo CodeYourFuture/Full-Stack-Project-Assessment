@@ -1,8 +1,5 @@
 import React from "react";
 import VideoItem from "./VideoItem";
-
-
-
 const VideoList = ({ videos, onRemove }) => {
   return (
     <div className="video-list">
@@ -12,5 +9,4 @@ const VideoList = ({ videos, onRemove }) => {
     </div>
   );
 };
-
 export default VideoList;

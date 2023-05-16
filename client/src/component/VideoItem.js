@@ -1,15 +1,12 @@
-
 import React from "react";
 import ReactPlayer from "react-player";
 
 const VideoItem = ({ video, onRemove }) => {
   const { id, title, url, rating } = video;
-
   const handleRemove = () => {
     onRemove(id);
   };
-
-  return (
+ return (
     <div className="video-item">
       <h2>{title}</h2>
       <ReactPlayer url={url} controls />
@@ -18,7 +15,4 @@ const VideoItem = ({ video, onRemove }) => {
     </div>
   );
 };
-
-
-
 export default VideoItem;
