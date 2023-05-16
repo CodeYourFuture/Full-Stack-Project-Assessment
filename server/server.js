@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
-require("dotenv").config();
+const https = require("https");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -9,12 +11,20 @@ const port = process.env.PORT || 8080;
 // Database configuration
 const pool = new Pool({
   connectionString: process.env.DB_URL,
+  ssl: {
+    rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
+  },
 });
 
 app.use(cors());
 app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+const options = {
+  // Your other options...
+  rejectUnauthorized: false,
+};
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -42,14 +52,20 @@ app.get("/videos", async (req, res) => {
   }
 });
 
+
 // POST "/videos"
 app.post("/videos", async (req, res) => {
   try {
-    const { title, url, rating, date } = req.body;
+    const { title, url } = req.body;
+    const rating = 0;
+
+    const currentDate = new Date().toLocaleDateString("en-US", {
+      timeZone: process.env.TIMEZONE, // Replace with your server's timezone
+    });
 
     const query =
       "INSERT INTO videos (title, url, rating, date) VALUES ($1, $2, $3, $4) RETURNING *";
-    const values = [title, url, rating, date];
+    const values = [title, url, rating, currentDate];
     const result = await pool.query(query, values);
     const newVideo = result.rows[0];
 
@@ -84,7 +100,6 @@ app.delete("/videos/:id", async (req, res) => {
       .json({ error: "An error occurred while deleting the video" });
   }
 });
-
 // PUT "/videos/:id/rating"
 app.put("/videos/:id/rating", async (req, res) => {
   try {

@@ -19,11 +19,18 @@ const Cards = () => {
     fetch(`https://video-server-iiqf.onrender.com/videos/${id}`, {
       method: "DELETE",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          // Return an empty object if the response is not 200 OK
+          return {};
+        }
+      })
       .then((deletedVideo) => {
         // Filter out the deleted card from the current cards
         const updatedCards = cards.filter(
-          (card) => card.id !== deletedVideo[0].id
+          (card) => card.id !== deletedVideo.id
         );
         setCards(updatedCards);
       })

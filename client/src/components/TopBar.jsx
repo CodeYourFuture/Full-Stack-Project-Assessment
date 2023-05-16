@@ -36,12 +36,15 @@ function TopBar({ onAddCard, cards, onOrderChange }) {
 
     const videoCode = url.split("v=")[1];
 
-    // Check if the video is already in the cards
-    const isDuplicate = cards.some((card) => card.url === videoCode);
-    if (isDuplicate) {
-      setErrorMessage("This video is already added.");
-      return;
+    if(cards.length > 0){
+const isDuplicate = cards.some((card) => card.url === videoCode);
+if (isDuplicate) {
+  setErrorMessage("This video is already added.");
+  return;
+}
     }
+    // Check if the video is already in the cards
+    
 
     const newCard = {
       title: title.trim(),

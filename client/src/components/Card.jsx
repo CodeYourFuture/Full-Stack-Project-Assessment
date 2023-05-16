@@ -45,6 +45,8 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
       .catch((error) => console.log(error));
   };
 
+  const formattedDate = date.slice(0, 10);
+
   return (
     <div className="card">
       <h2>{title}</h2>
@@ -59,7 +61,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
         ></iframe>
       </div>
       <p>Rating: {currentRating}</p>
-      <div className="card-date">Added on: {date.toLocaleString()}</div>
+      <div className="card-date">Added on: {formattedDate}</div>
       <div className="btn-group">
         <div className="rate-btn up" onClick={handleRateUp}>
           <RiThumbUpFill size={32} />
@@ -67,7 +69,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
         <div className="rate-btn down" onClick={handleRateDown}>
           <RiThumbDownFill size={32} />
         </div>
-        <div className="delete-btn" onClick={handleDeleteCard}>
+        <div className="delete-btn" onClick={() => handleDeleteCard()}>
           <RiDeleteBin5Fill size={32} />
         </div>
       </div>
