@@ -42,3 +42,17 @@ app.get("/:id", (request, response) => {
   const findEl = videos.find((el) => Number(el.id) === Number(id));
   response.send(findEl);
 });
+
+app.delete("/:id", (request, response) => {
+  const id = request.params.id;
+  const findEl = videos.find((el) => Number(el.id) === Number(id));
+  if (findEl) {
+    videos = videos.filter((el) => Number(el.id) !== Number(id));
+    response.send(videos);
+  } else {
+    response.status(400).json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
