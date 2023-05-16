@@ -32,10 +32,13 @@
   align-items: center;
 }
 
+
+
 .add-video-form input {
-  margin: 15px auto 0 auto;
+  margin: 15px auto 0 5px;
   border: 2px solid black;
   border-radius: 15px;
+  padding: 2px;
 }
 
 .add-video-form input:focus {
@@ -55,6 +58,7 @@
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   margin: 10px auto;
   max-width: 400px;
+  border-radius: 7px;
 }
 
 .video-frame {
