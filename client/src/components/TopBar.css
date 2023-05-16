@@ -84,4 +84,8 @@ button:active {
 
 .error-message{
 color: white;
+padding: 0 2rem;
+display: flex;
+justify-content: center;
+align-items: center;
 }
