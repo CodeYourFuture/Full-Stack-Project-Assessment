@@ -6,3 +6,8 @@
     align-items: center;
     padding: 1rem;
 }
+
+.no-video{
+    color: white;
+    font-size: 40px;
+}

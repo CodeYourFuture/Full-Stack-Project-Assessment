@@ -46,17 +46,21 @@ const Cards = () => {
         onOrderChange={handleOrderChange}
       />
       <div className="cards">
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            title={card.title.trim() !== "" ? card.title : "No Title"}
-            url={card.url}
-            rating={card.rating}
-            date={card.date}
-            onDelete={handleDeleteCard}
-          />
-        ))}
+        {cards.length > 0 ? (
+          cards.map((card) => (
+            <Card
+              key={card.id}
+              id={card.id}
+              title={card.title.trim() !== "" ? card.title : "No Title"}
+              url={card.url}
+              rating={card.rating}
+              date={card.date}
+              onDelete={handleDeleteCard}
+            />
+          ))
+        ) : (
+          <p className="no-video">No video available.</p>
+        )}
       </div>
     </>
   );
