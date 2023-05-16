@@ -12,10 +12,11 @@ const isValidInput = (title, url) => {
   return isValidTitle && isValidUrl;
 };
 
-function TopBar({ onAddCard, cards }) {
+function TopBar({ onAddCard, cards, onOrderChange }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [order, setOrder] = useState("desc");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -64,6 +65,12 @@ function TopBar({ onAddCard, cards }) {
       .catch((error) => console.log(error));
   };
 
+  const handleOrderChange = () => {
+    const newOrder = order === "desc" ? "asc" : "desc";
+    setOrder(newOrder);
+    onOrderChange(newOrder);
+  };
+
   return (
     <div className="top-bar">
       <div className="input-top">
@@ -89,6 +96,7 @@ function TopBar({ onAddCard, cards }) {
         />
       </div>
       <button onClick={handleAddClick}>ADD</button>
+      <button onClick={handleOrderChange}>{order === "desc" ? "Desc" : "Asc"}</button>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );

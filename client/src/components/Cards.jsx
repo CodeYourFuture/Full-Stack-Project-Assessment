@@ -5,16 +5,14 @@ import TopBar from "./TopBar";
 
 const Cards = () => {
   const [cards, setCards] = useState([]);
+  const [order, setOrder] = useState("desc");
 
   useEffect(() => {
-    fetch("https://video-server-iiqf.onrender.com/videos")
+    fetch(`https://video-server-iiqf.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => setCards(data))
       .catch((error) => console.log(error));
-  }, []);
-
-  // Sort the cards array based on the rating property
-  const sortedCards = [...cards].sort((a, b) => b.rating - a.rating);
+  }, [order]);
 
   const handleDeleteCard = (id) => {
     // Send a DELETE request to the server
@@ -36,11 +34,19 @@ const Cards = () => {
     setCards((prevCards) => [...prevCards, newCard]);
   };
 
+  const handleOrderChange = (newOrder) => {
+    setOrder(newOrder);
+  };
+
   return (
     <>
-      <TopBar onAddCard={handleAddCard} cards={cards} />
+      <TopBar
+        onAddCard={handleAddCard}
+        cards={cards}
+        onOrderChange={handleOrderChange}
+      />
       <div className="cards">
-        {sortedCards.map((card) => (
+        {cards.map((card) => (
           <Card
             key={card.id}
             id={card.id}
