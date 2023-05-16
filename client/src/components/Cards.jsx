@@ -1,30 +1,40 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import "./Cards.css";
-import Data from "../exampleresponse.json";
 import TopBar from "./TopBar";
 
 const Cards = () => {
-  const [cards, setCards] = useState(Data);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/videos")
+      .then((response) => response.json())
+      .then((data) => setCards(data))
+      .catch((error) => console.log(error));
+  }, []);
 
   // Sort the cards array based on the rating property
   const sortedCards = [...cards].sort((a, b) => b.rating - a.rating);
 
   const handleDeleteCard = (id) => {
-    // Find the index of the card with the given id
-    const index = cards.findIndex((card) => card.id === id);
-    if (index !== -1) {
-      // Create a new array without the deleted card
-      const updatedCards = [...cards];
-      updatedCards.splice(index, 1);
-      setCards(updatedCards);
-    }
+    // Send a DELETE request to the server
+    fetch(`http://localhost:8080/videos/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((deletedVideo) => {
+        // Filter out the deleted card from the current cards
+        const updatedCards = cards.filter(
+          (card) => card.id !== deletedVideo[0].id
+        );
+        setCards(updatedCards);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleAddCard = (newCard) => {
     setCards((prevCards) => [...prevCards, newCard]);
   };
-
 
   return (
     <>
