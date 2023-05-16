@@ -1,0 +1,40 @@
+.video-card {
+    width: 650px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.video-player {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.video-rating {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.remove-button {
+    background-color: #ff3b3b;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
