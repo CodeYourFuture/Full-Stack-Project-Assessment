@@ -1,11 +1,16 @@
 import "./App.css";
+import AddVideo from "./Components/AddVideo";
+import Header from "./Components/Header";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <AddVideo />
+      <Button>This is button</Button>
+      <Button>This is button 2</Button>
     </div>
   );
 }
