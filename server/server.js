@@ -53,12 +53,28 @@ app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
-// POST "/videos"
+// post
 app.post("/videos", (req, res) => {
   const newVideo = req.body;
-  videos.push(newVideo);
-  res.status(201).json(newVideo);
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1; // Note: Month is zero-based
+  const day = currentDate.getDate();
+  const newCard = {
+    id: generateUniqueId(),
+    title: newVideo.title.trim(),
+    url: newVideo.url,
+    rating: 0,
+    date: `${year}-${month}-${day}`,
+  };
+  videos.push(newCard);
+  res.status(201).json(newCard);
 });
+
+function generateUniqueId() {
+  // For simplicity, we'll use a random number here
+  return Math.floor(Math.random() * 100000);
+}
 
 // DELETE "/videos/:id"
 app.delete("/videos/:id", (req, res) => {
