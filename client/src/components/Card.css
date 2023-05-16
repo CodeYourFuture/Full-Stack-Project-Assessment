@@ -24,15 +24,8 @@ margin-top: 0;
 font-size: 20px;
 }
 
-a {
-  color: #007bff;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-}
 
 p {
-  
   margin-bottom: 16px;
 }
 
@@ -43,12 +36,18 @@ p {
 
 .rate-btn,
 .delete-btn {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+}
+
+.rate-btn:hover,
+.delete-btn:hover,.rate-btn:focus,
+.delete-btn:focus{
+  background-color: #222;
 }
 
 .up{

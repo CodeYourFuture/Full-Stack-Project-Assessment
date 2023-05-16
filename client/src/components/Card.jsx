@@ -48,15 +48,15 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
         Added on: {date.toLocaleString()}
       </div>
       <div className="btn-group">
-        <button className="rate-btn up" onClick={handleRateUp}>
+        <div className="rate-btn up" onClick={handleRateUp}>
           <RiThumbUpFill size={32} />
-        </button>
-        <button className="rate-btn down" onClick={handleRateDown}>
+        </div>
+        <div className="rate-btn down" onClick={handleRateDown}>
           <RiThumbDownFill size={32} />
-        </button>
-        <button className="delete-btn" onClick={handleDeleteCard}>
+        </div>
+        <div className="delete-btn" onClick={handleDeleteCard}>
           <RiDeleteBin5Fill size={32} />
-        </button>
+        </div>
       </div>
     </div>
   );

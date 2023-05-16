@@ -19,7 +19,6 @@ label {
   height: 50px;
   position: relative;
   border-radius: 50px;
-  cursor: pointer;
   background: conic-gradient(from var(--r), #222 0%, #eee 10%, #222 20%);
   border: none;
   animation: rotating 3s linear infinite;
