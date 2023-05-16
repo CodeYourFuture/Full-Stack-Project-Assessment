@@ -21,6 +21,7 @@ function App() {
       )
     );
   };
+
   //to add a new video to the page
   function addVideo(title, link) {
     const newVideo = {
@@ -31,12 +32,13 @@ function App() {
     };
     setListOfVideos(listOfVideos.concat(newVideo));
   }
+
   return (
     <div className="App">
       <Navbar />
       {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
       <AddVideo addVideo={addVideo} />
-      <div className="">
+      <div className="videos">
         {/* I use listOfVideos here to update the list of videos with new, and to delete them*/}
         {listOfVideos.map((video) => (
           <Video

@@ -2,20 +2,126 @@
   padding: 0;
   margin: 0;
 }
-
-.nav-bar {
-  background-color: red;
+.App {
+  margin: 0 auto;
+  background-color: #f3f5f7;
 }
+.nav-bar {
+  height: 60px;
+  background-color: #282828;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  border: 1px solid #d8d8d8;
+  box-shadow: 12px 11px 12px 3px rgba(0, 0, 0, 0.1);
+}
+
 .add-video-form {
   display: flex;
   flex-direction: column;
+  margin: 50px auto;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  width: 350px;
+  padding: 30px;
+
+  align-items: center;
 }
 
 .add-video-form input {
+  margin: 15px auto 0 auto;
   border: 2px solid black;
+  border-radius: 15px;
+}
+
+.add-video-form input:focus {
+  border: 2px dashed #ff0000;
+}
+
+.videos {
+  margin: 20px auto;
 }
 
 .video-container {
   padding: 10px;
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: whitesmoke;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  margin: 10px auto;
+  max-width: 400px;
+}
+
+.video-frame {
+  box-shadow: 0px 0px 15px 8px #d8d8d8;
+  margin: 15px auto;
+}
+
+.vote-btns-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* button CSS */
+
+.btn {
+  background-color: #ff0000;
+  border-radius: 11rem;
+  padding: 10px 20px;
+  margin: 10px auto 5px auto;
+  box-shadow: 19px 12px 26px 8px rgba(0, 0, 0, 0.1);
+  width: 110px;
+}
+
+.btn:hover {
+  opacity: 80%;
+  color: white;
+  border: 1px solid #282828;
+}
+
+.btn:focus {
+  opacity: 80%;
+  color: white;
+  border: 1px dashed #282828;
+}
+
+.btn-delete {
+  background-color: #282828;
+  color: white;
+  width: 150px;
+}
+
+.btn-delete:hover {
+  background-color: white;
+  color: #282828;
+  width: 150px;
+  border: 1px dashed #282828;
+}
+
+.text-heading {
+  margin: 15px auto 0 auto;
+  font-size: 1.3rem;
+  padding: 10px 40px;
+  color: black;
+  text-align: center;
+}
+
+/*for desctop and tablet version*/
+@media (min-width: 768px) {
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .video-container {
+    width: calc(50% - 10px); 
+    margin-bottom: 20px;
+  }
 }

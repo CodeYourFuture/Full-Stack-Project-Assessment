@@ -3,10 +3,14 @@ import React from "react";
 const VoteScore = ({increaseRating, decreaseRating }) => {
  
   return (
-    <div>
-      <button onClick={increaseRating}>Up Vote</button>
+    <div className="vote-btns-container">
+      <button className="btn" onClick={increaseRating}>
+        Up Vote
+      </button>
 
-      <button onClick={decreaseRating}>Down Vote</button>
+      <button className="btn" onClick={decreaseRating}>
+        Down Vote
+      </button>
     </div>
   );
 };

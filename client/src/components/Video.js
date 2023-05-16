@@ -17,15 +17,19 @@ const Video = ({ video, handleDelete, updateRating }) => {
 
   return (
     <div className="video-container">
-      <h2>{video.title}</h2>
-      <iframe src={video.url} title={video.title} allowFullScreen>
+      <p className="text-heading">{video.title}</p>
+      <iframe
+        className="video-frame"
+        src={video.url}
+        title={video.title}
+        allowFullScreen
+      >
         {" "}
         allowFullScreen
       </iframe>
-      <p>Number of Votes: {video.rating} </p>
+      <p className="text-heading">Number of Votes: {video.rating} </p>
       <DeleteVideo video={video} handleDelete={handleDelete} />
       <VoteScore
-        
         increaseRating={increaseRating}
         decreaseRating={decreaseRating}
       />

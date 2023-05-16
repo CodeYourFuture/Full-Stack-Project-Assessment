@@ -19,6 +19,7 @@ const AddVideo = ({ addVideo }) => {
   };
   return (
     <div className="add-video-form">
+      <h1>Add video from YouTube</h1>
       <label htmlFor="title">
         Title
         <input
@@ -39,7 +40,7 @@ const AddVideo = ({ addVideo }) => {
         ></input>
       </label>
 
-      <button onClick={handleAddVideo}>Add video</button>
+      <button className="btn" onClick={handleAddVideo}>Add video</button>
     </div>
   );
 };

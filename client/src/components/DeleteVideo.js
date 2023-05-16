@@ -1,5 +1,5 @@
 const DeleteVideo = ({video, handleDelete}) => {
-  return <button onClick={() => handleDelete(video.id)}>Delete</button>;
+  return <button className="btn btn-delete" onClick={() => handleDelete(video.id)}>Delete</button>;
 };
 
 export default DeleteVideo;
