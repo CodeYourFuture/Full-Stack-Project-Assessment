@@ -10,8 +10,8 @@ const VCard = ({ data }) => {
 
   return (
     <div>
-      {list.map((video, index) => (
-        <div key={index} className="video-card">
+      {list.map((video) => (
+        <div key={video.id} className="video-card">
           <h3>{video.title}</h3>
           <iframe
             src={video.url.replace("watch?v=", "embed/")}
