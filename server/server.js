@@ -16,7 +16,8 @@ app.get("/", (req, res) => {
 
 //POST '/'
 app.post("/", (request, response) => {
-  const id = uuidv4();
+  // const id = uuidv4();
+  const id = videos.length;
   let { title, url } = request.body;
   let newVideo = { id, title, url };
 
@@ -34,4 +35,10 @@ app.post("/", (request, response) => {
       message: "Video could not be saved",
     });
   }
+});
+
+app.get("/:id", (request, response) => {
+  const id = request.params.id;
+  const findEl = videos.find((el) => Number(el.id) === Number(id));
+  response.send(findEl);
 });
