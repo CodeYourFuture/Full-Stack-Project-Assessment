@@ -1,111 +1,105 @@
 const express = require("express");
 const cors = require("cors");
+const { Pool } = require("pg");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 8080;
+
+// Database configuration
+const pool = new Pool({
+  connectionString: process.env.DB_URL,
+});
 
 app.use(cors());
 app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [{
-    "id": 523523,
-    "title": "Never Gonna Give You Up",
-    "url": "dQw4w9WgXcQ",
-    "rating": 23,
-    "date": "2023-05-16"
-  },
-  {
-    "id": 523427,
-    "title": "The Coding Train",
-    "url": "HerCR8bw_GE",
-    "rating": 230,
-    "date": "2023-05-15"
-  },
-  {
-    "id": 82653,
-    "title": "Mac & Cheese | Basics with Babish",
-    "url": "FUeyrEN14Rk",
-    "rating": 2111,
-    "date": "2023-05-14"
-  },
-  {
-    "id": 858566,
-    "title": "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    "url": "xbs7FT7dXYc",
-    "rating": 11,
-    "date": "2023-05-13"
-  }];
-
-
-
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
 
-  // GET "/videos"
-app.get("/videos", (req, res) => {
-  let orderedVideos = [...videos];
+// GET "/videos"
+app.get("/videos", async (req, res) => {
+  try {
+    const orderParam = req.query.order;
+    let orderBy = "rating DESC"; // Default order is descending (desc)
 
-  const orderParam = req.query.order;
-  if (orderParam === "asc") {
-    orderedVideos.sort((a, b) => a.rating - b.rating);
-  } else if (orderParam === "desc") {
-    orderedVideos.sort((a, b) => b.rating - a.rating);
-  } // If no order parameter is provided, the default order is descending (desc)
+    if (orderParam === "asc") {
+      orderBy = "rating ASC";
+    }
 
-  res.json(orderedVideos);
+    const query = `SELECT * FROM videos ORDER BY ${orderBy}`;
+    const result = await pool.query(query);
+    const orderedVideos = result.rows;
+
+    res.json(orderedVideos);
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    res.status(500).json({ error: "An error occurred while fetching videos" });
+  }
 });
 
-// post
-app.post("/videos", (req, res) => {
-  const newVideo = req.body;
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth() + 1; // Note: Month is zero-based
-  const day = currentDate.getDate();
-  const newCard = {
-    id: generateUniqueId(),
-    title: newVideo.title.trim(),
-    url: newVideo.url,
-    rating: 0,
-    date: `${year}-${month}-${day}`,
-  };
-  videos.push(newCard);
-  res.status(201).json(newCard);
-});
+// POST "/videos"
+app.post("/videos", async (req, res) => {
+  try {
+    const { title, url, rating, date } = req.body;
 
-function generateUniqueId() {
-  // For simplicity, we'll use a random number here
-  return Math.floor(Math.random() * 100000);
-}
+    const query =
+      "INSERT INTO videos (title, url, rating, date) VALUES ($1, $2, $3, $4) RETURNING *";
+    const values = [title, url, rating, date];
+    const result = await pool.query(query, values);
+    const newVideo = result.rows[0];
+
+    res.status(201).json(newVideo);
+  } catch (error) {
+    console.error("Error creating video:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the video" });
+  }
+});
 
 // DELETE "/videos/:id"
-app.delete("/videos/:id", (req, res) => {
-  const videoId = req.params.id;
-  const index = videos.findIndex((video) => video.id === parseInt(videoId));
-  if (index !== -1) {
-    const deletedVideo = videos.splice(index, 1);
-    res.json(deletedVideo);
-  } else {
-    res.status(404).json({ message: "Video not found" });
+app.delete("/videos/:id", async (req, res) => {
+  try {
+    const videoId = req.params.id;
+
+    const query = "DELETE FROM videos WHERE id = $1 RETURNING *";
+    const values = [videoId];
+    const result = await pool.query(query, values);
+    const deletedVideo = result.rows[0];
+
+    if (deletedVideo) {
+      res.json(deletedVideo);
+    } else {
+      res.status(404).json({ message: "Video not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting the video" });
   }
 });
 
 // PUT "/videos/:id/rating"
-app.put("/videos/:id/rating", (req, res) => {
-  const videoId = req.params.id;
-  const { rating } = req.body;
-  const index = videos.findIndex((video) => video.id === parseInt(videoId));
-  if (index !== -1) {
-    videos[index].rating = rating;
+app.put("/videos/:id/rating", async (req, res) => {
+  try {
+    const videoId = req.params.id;
+    const { rating } = req.body;
+
+    const query = "UPDATE videos SET rating = $1 WHERE id = $2";
+    const values = [rating, videoId];
+    await pool.query(query, values);
+
     res.json({ message: "Rating updated successfully" });
-  } else {
-    res.status(404).json({ message: "Video not found" });
+  } catch (error) {
+    console.error("Error updating rating:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating the rating" });
   }
 });
