@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Card from "./Card";
 import "./Cards.css";
 import Data from "../exampleresponse.json";
@@ -25,6 +25,7 @@ const Cards = () => {
     setCards((prevCards) => [...prevCards, newCard]);
   };
 
+
   return (
     <>
       <TopBar onAddCard={handleAddCard} cards={cards} />
@@ -36,6 +37,7 @@ const Cards = () => {
             title={card.title.trim() !== "" ? card.title : "No Title"}
             url={card.url}
             rating={card.rating}
+            date={card.date}
             onDelete={handleDeleteCard}
           />
         ))}

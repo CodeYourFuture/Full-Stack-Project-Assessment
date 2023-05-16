@@ -42,12 +42,18 @@ function TopBar({ onAddCard, cards }) {
       return;
     }
 
-    const newCard = {
-      id: Math.floor(Math.random() * 100000),
-      title: title.trim(),
-      url: videoCode,
-      rating: 0,
-    };
+   const currentDate = new Date();
+   const year = currentDate.getFullYear();
+   const month = currentDate.getMonth() + 1; // Note: Month is zero-based
+   const day = currentDate.getDate();
+
+   const newCard = {
+     id: Math.floor(Math.random() * 100000),
+     title: title.trim(),
+     url: videoCode,
+     rating: 0,
+     date: `${year}-${month}-${day}`, // Format: YYYY-MM-DD
+   };
 
     onAddCard(newCard);
 

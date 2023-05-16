@@ -6,7 +6,7 @@ import {
   RiDeleteBin5Fill,
 } from "react-icons/ri";
 
-const Card = ({ id, title, url, rating, onDelete }) => {
+const Card = ({ id, title, url, date, rating, onDelete }) => {
   const [currentRating, setCurrentRating] = useState(rating);
 
   const handleRateUp = () => {
@@ -33,6 +33,7 @@ const Card = ({ id, title, url, rating, onDelete }) => {
   return (
     <div className="card">
       <h2>{title}</h2>
+
       <div className="video-container">
         <iframe
           src={`https://www.youtube.com/embed/${url}`}
@@ -43,6 +44,9 @@ const Card = ({ id, title, url, rating, onDelete }) => {
         ></iframe>
       </div>
       <p>Rating: {currentRating}</p>
+      <div className="card-date">
+        Added on: {date.toLocaleString()}
+      </div>
       <div className="btn-group">
         <button className="rate-btn up" onClick={handleRateUp}>
           <RiThumbUpFill size={32} />
