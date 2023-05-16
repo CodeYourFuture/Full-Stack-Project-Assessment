@@ -71,3 +71,16 @@ app.delete("/videos/:id", (req, res) => {
     res.status(404).json({ message: "Video not found" });
   }
 });
+
+// PUT "/videos/:id/rating"
+app.put("/videos/:id/rating", (req, res) => {
+  const videoId = req.params.id;
+  const { rating } = req.body;
+  const index = videos.findIndex((video) => video.id === parseInt(videoId));
+  if (index !== -1) {
+    videos[index].rating = rating;
+    res.json({ message: "Rating updated successfully" });
+  } else {
+    res.status(404).json({ message: "Video not found" });
+  }
+});

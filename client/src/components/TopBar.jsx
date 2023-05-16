@@ -55,7 +55,7 @@ function TopBar({ onAddCard, cards }) {
       date: `${year}-${month}-${day}`, // Format: YYYY-MM-DD
     };
 
-    fetch("http://localhost:8080/videos", {
+    fetch("https://video-server-iiqf.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

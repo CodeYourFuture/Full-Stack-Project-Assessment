@@ -13,6 +13,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
     if (id) {
       // Check if the provided id matches the card's id
       setCurrentRating(currentRating + 1);
+      updateRating(id, currentRating + 1);
     }
   };
 
@@ -20,6 +21,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
     if (id && currentRating > 0) {
       // Check if the provided id matches the card's id and current rating is above zero
       setCurrentRating(currentRating - 1);
+      updateRating(id, currentRating - 1);
     }
   };
 
@@ -28,6 +30,19 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
       // Check if the provided id matches the card's id
       onDelete(id);
     }
+  };
+
+  const updateRating = (id, newRating) => {
+    fetch(`https://video-server-iiqf.onrender.com/videos/${id}/rating`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: newRating }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -44,9 +59,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
         ></iframe>
       </div>
       <p>Rating: {currentRating}</p>
-      <div className="card-date">
-        Added on: {date.toLocaleString()}
-      </div>
+      <div className="card-date">Added on: {date.toLocaleString()}</div>
       <div className="btn-group">
         <div className="rate-btn up" onClick={handleRateUp}>
           <RiThumbUpFill size={32} />

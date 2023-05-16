@@ -7,7 +7,7 @@ const Cards = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/videos")
+    fetch("https://video-server-iiqf.onrender.com/videos")
       .then((response) => response.json())
       .then((data) => setCards(data))
       .catch((error) => console.log(error));
@@ -18,7 +18,7 @@ const Cards = () => {
 
   const handleDeleteCard = (id) => {
     // Send a DELETE request to the server
-    fetch(`http://localhost:8080/videos/${id}`, {
+    fetch(`https://video-server-iiqf.onrender.com/videos/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
