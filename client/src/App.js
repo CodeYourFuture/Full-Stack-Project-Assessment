@@ -41,12 +41,23 @@ function App() {
       setVideos(updatedVideos);
     }
 
+    const sortedVideos = videos.concat().sort(( a, b) => {
+      if (a.rating > b.rating){
+        return -1
+      }else if(a.rating === b.rating){
+        return 0
+      }else if(a.rating < b.rating){
+        return 1
+      }
+    })
+
+  
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      {videos.map((video) => {
+      {sortedVideos.map((video) => {
         return (
           <div className="newvideos" key={video.id}>
             <h3> Title:{video.title}</h3>
