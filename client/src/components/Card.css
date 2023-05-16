@@ -14,8 +14,14 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-h3 {
-  margin-top: 0;
+.card:hover , .card:focus {
+ background-color: #003157;
+}
+
+
+h2{
+margin-top: 0;
+font-size: 20px;
 }
 
 a {
@@ -26,6 +32,7 @@ a {
 }
 
 p {
+  
   margin-bottom: 16px;
 }
 

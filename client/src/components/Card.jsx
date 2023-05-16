@@ -32,7 +32,7 @@ const Card = ({ id, title, url, rating, onDelete }) => {
 
   return (
     <div className="card">
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <div className="video-container">
         <iframe
           src={`https://www.youtube.com/embed/${url}`}
