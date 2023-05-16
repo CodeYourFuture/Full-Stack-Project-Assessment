@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Card.css";
 import {
   RiThumbUpFill,
@@ -6,17 +6,28 @@ import {
   RiDeleteBin5Fill,
 } from "react-icons/ri";
 
-const Card = ({ id, title, url, rating }) => {
+const Card = ({ id, title, url, rating, onDelete }) => {
+  const [currentRating, setCurrentRating] = useState(rating);
+
   const handleRateUp = () => {
-    // Handle rate up logic
+    if (id) {
+      // Check if the provided id matches the card's id
+      setCurrentRating(currentRating + 1);
+    }
   };
 
   const handleRateDown = () => {
-    // Handle rate down logic
+    if (id && currentRating > 0) {
+      // Check if the provided id matches the card's id and current rating is above zero
+      setCurrentRating(currentRating - 1);
+    }
   };
 
   const handleDeleteCard = () => {
-    // Handle delete card logic
+    if (id) {
+      // Check if the provided id matches the card's id
+      onDelete(id);
+    }
   };
 
   return (
@@ -31,7 +42,7 @@ const Card = ({ id, title, url, rating }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <p>Rating: {rating}</p>
+      <p>Rating: {currentRating}</p>
       <div className="btn-group">
         <button className="rate-btn up" onClick={handleRateUp}>
           <RiThumbUpFill size={32} />
