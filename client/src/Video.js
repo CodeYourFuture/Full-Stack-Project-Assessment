@@ -1,13 +1,24 @@
 import React from "react";
 
-function Video() {
+const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
   return (
     <>
-      <div>Video</div>
-      <button>Up vote</button>
-      <button>Down vote</button>
+      <h2>Title:{title}</h2>
+      <iframe
+        width="560"
+        height="315"
+        src={url}
+        title={title}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <div>Votes :{votes}</div>
+      <button onClick={onUpVote}>Up vote</button>
+      <button onClick={onDownVote}>Down vote</button>
+      <button onClick={onRemove}>Remove video</button>
     </>
   );
-}
+};
 
 export default Video;
