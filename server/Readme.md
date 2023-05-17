@@ -44,7 +44,7 @@ example:
 - GET /: Retrieves a simple message to verify that the backend service is running.
 - GET /videos: Retrieves a list of videos in the database, ordered by rating (descending by default, ascending if order=asc query parameter is provided).
 - POST /videos: Creates a new video with the provided title and url in the request body. The rating is set to 0 by default.
-- DELETE /videos/:id: Deletes the video with the specified id.
+- DELETE /videos/:id : Deletes the video with the specified id.
 - PUT /videos/:id/rating: Updates the rating of the video with the specified id with the provided rating value in the request body.
 
 Note: Replace :id with the actual video ID when making requests to the /videos/:id and /videos/:id/rating endpoints.
