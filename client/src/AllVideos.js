@@ -56,8 +56,11 @@ export const AllVideos = () => {
           ?.sort((a, b) => b.rating - a.rating)
           .map((video) => {
             return (
-              <ScrollAnimation animateIn="animate__animated animate__fadeInUp">
-                <div className="video-section-wrapper" key={video.id}>
+              <ScrollAnimation
+                key={video.id}
+                animateIn="animate__animated animate__fadeInUp"
+              >
+                <div className="video-section-wrapper">
                   <iframe
                     // src={`https://www.youtube.com/embed/${
                     //   video.url.split("=")[1]

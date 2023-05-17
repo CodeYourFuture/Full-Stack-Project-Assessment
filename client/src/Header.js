@@ -10,7 +10,7 @@ export const Header = () => {
           type="video/mp4"
         />
         <source src="movie.ogg" type="video/ogg" />
-        <track
+        {/* <track
           src="captions_en.vtt"
           kind="captions"
           srclang="en"
@@ -21,7 +21,7 @@ export const Header = () => {
           kind="captions"
           srclang="es"
           label="spanish_captions"
-        />
+        /> */}
       </video>
       <div className="header-wrapper">
         <div className="header-left-wrapper">

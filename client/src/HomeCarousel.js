@@ -1,11 +1,24 @@
 import "./HomeCarousel.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { videosContext } from "./App.js";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export const HomeCarousel = () => {
   const { videos } = useContext(videosContext);
+  console.log(videos);
+  //Chatgpt advice below
+  useEffect(() => {
+    // const subscription = subscribeToData();
+    // const task = performAsyncTask();
+    // return () => {
+    //   // Clean up the subscription
+    //   subscription.unsubscribe();
+    //   // Clear the async task
+    //   task.cancel();
+    // };
+  }, [videos]);
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
