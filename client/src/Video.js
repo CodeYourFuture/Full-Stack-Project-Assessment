@@ -1,35 +1,34 @@
-import React from 'react';
-
-function Video({info}) {
-  return (
-    <div>
+import React from "react"
+    function Video({info}) {
+      return (
         <div>
-        <h1>
-        {info.title}
-        </h1>
-        <iframe src={`https://www.youtube.com/embed/${info.url}`}
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-        allowFullScreen
-        title='Embedded youtube'
-        >
-        </iframe>
-        <p>
-        {info.rating}
-        </p>
-        <button>
-            like
-        </button>
-        <button>
-            dislike
-        </button>
-        <button>
-            Delete
-        </button>
+            <div>
+            <h1>
+            {info.title}
+            </h1>
+            <iframe src={`https://www.youtube.com/embed/${info.url}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
+            >
+            </iframe>
+            <p>
+            {info.rating}
+            </p>
+            <button>
+            👍🏻
+            </button>
+            <button>
+              👎🏻
+            </button>
+            <button>
+                ❌
+            </button>
+            </div>
         </div>
-    </div>
-  )
-}
-export default Video
+      )
+    }
+    export default Video
 
 
 
