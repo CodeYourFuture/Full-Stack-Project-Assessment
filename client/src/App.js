@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import { AddVideo } from "./AddVideo";
 import "./App.css";
 import { VideosCards } from "./VideosCards";
+import { OrderButton } from "./OrderButton";
 // import data from "./exampleresponse.json";
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [error, setError] = useState(null);
+  const [order, setOrder] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/", {
+    fetch(`http://localhost:5000/?order=${order}`, {
       mode: "cors",
     })
       .then((res) => {
@@ -18,12 +20,11 @@ function App() {
       })
       .then((data) => {
         setVideos(data);
-        console.log(data);
       })
       .catch((error) => {
         setError("Error", error);
       });
-  }, []);
+  }, [order]);
 
   return (
     <div className="App">
@@ -34,6 +35,12 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <AddVideo videos={videos} setVideos={setVideos} />
+      <OrderButton
+        videos={videos}
+        setVideos={setVideos}
+        order={order}
+        setOrder={setOrder}
+      />
       <VideosCards videos={videos} setVideos={setVideos} />
     </div>
   );

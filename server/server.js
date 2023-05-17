@@ -19,7 +19,15 @@ app.use((req, res, next) => {
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.send(videos);
+  const orderedVideos = [...videos];
+  if (req.query.order) {
+    let orderParams = req.query.order;
+    if (orderParams === "asc")
+      orderedVideos.sort((a, b) => a.rating - b.rating);
+    else if (orderParams === "desc")
+      orderedVideos.sort((a, b) => b.rating - a.rating);
+  }
+  res.send(orderedVideos);
 });
 
 //POST '/'
