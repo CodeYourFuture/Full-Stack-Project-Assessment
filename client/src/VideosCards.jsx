@@ -5,9 +5,20 @@ export const VideosCards = ({ videos, setVideos }) => {
   // const [videos, setVideos] = useState(video);
 
   const handleDeleteClick = (id) => {
-    let newData = [];
-    newData = videos.filter((video) => video.id !== id);
-    return setVideos(newData);
+    fetch(`http://localhost:5000/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("delete", data);
+        setVideos(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const increaseRating = (id) => {
@@ -25,6 +36,8 @@ export const VideosCards = ({ videos, setVideos }) => {
     );
     return setVideos(newData);
   };
+
+  // console.log(videos);
 
   const Card = (v) => {
     return (

@@ -1,13 +1,21 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 const { v4: uuidv4 } = require("uuid");
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(cors());
 app.use(express.json());
 
 let videos = require("../exampleresponse.json");
 // let allVideos = [videos];
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.removeHeader("Permissions-Policy");
+  next();
+});
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -16,10 +24,11 @@ app.get("/", (req, res) => {
 
 //POST '/'
 app.post("/", (request, response) => {
-  // const id = uuidv4();
   const id = videos.length;
+  const rating = Math.floor(Math.random() * 10000);
   let { title, url } = request.body;
-  let newVideo = { id, title, url };
+
+  let newVideo = { id, title, url, rating };
 
   if (
     newVideo.title &&

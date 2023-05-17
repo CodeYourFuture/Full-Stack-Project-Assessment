@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import { useState, useEffect, React } from "react";
 import "./AddVideo.css";
 
 export const AddVideo = ({ videos, setVideos }) => {
@@ -23,31 +23,44 @@ export const AddVideo = ({ videos, setVideos }) => {
       return setUrlInput(url);
     } else {
       alert("Invalid URL format. Please provide a YouTube URL");
+      setUrlInput("");
     }
   };
 
-  const handleFormSubmit = () => {
-    const videoId = Math.floor(Math.random() * 1000000);
-    const videoRating = Math.floor(Math.random() * 10000);
-    let newVideo = {};
-    newVideo = {
-      id: videoId,
-      rating: videoRating,
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    let newVideo = {
       title: titleInput,
       url: urlInput,
     };
-    setVideos((videos) => [...videos, newVideo]);
+    fetch("http://localhost:5000/", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
     setTitleInput("");
     setUrlInput("");
   };
 
-  console.log(titleInput);
-  console.log(urlInput);
-
   return (
     <div className="addVideoContainer">
-      <a className="addVideo" href="#" alt="Add video button" onClick={handleAddVideoButton}>
+      <a
+        className="addVideo"
+        href="#"
+        alt="Add video button"
+        onClick={handleAddVideoButton}
+      >
         Add video
       </a>
       {clickAdd === true ? (
