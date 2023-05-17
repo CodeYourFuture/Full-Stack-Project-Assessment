@@ -7,7 +7,6 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  /* background-color: rgb(246, 215, 243); */
 }
 
 #root {
@@ -15,8 +14,6 @@
   background-color: rgb(254, 203, 236);
   margin-top: 4rem;
   color: rgb(80, 11, 51);
-  /* display: grid;
-    grid-template-columns: auto auto auto; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
