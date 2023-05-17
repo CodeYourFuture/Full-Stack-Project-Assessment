@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import VideoList from "./component/VideoList";
 import videosData from "./exampleresponse.json";
 import AddVideoForm from "./component/AddVideoForm";
+import "./App.css";
 
 const App = () => {
   const [videos, setVideos] = useState(videosData);
@@ -25,7 +26,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Video List</h1>
+      <h1 className="app-title">Video List</h1>
       <AddVideoForm onAddVideo={handleAddVideo} />
       <VideoList videos={videos} onRemove={handleRemove} onVote={handleVote} />
     </div>
