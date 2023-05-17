@@ -36,7 +36,11 @@ function AddVideoForm({ onAddVideo }) {
           onChange={(event) => setUrl(event.target.value)}
         />
       </label>
-      <button type="submit">Add Video</button>
+      <div className="submit">
+        <button type="submit">
+          Add Video
+        </button>
+      </div>
     </form>
   );
 }

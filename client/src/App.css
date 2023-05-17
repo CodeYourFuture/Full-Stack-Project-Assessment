@@ -1,3 +1,83 @@
 .App {
   text-align: center;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  /* background-color: rgb(246, 215, 243); */
+}
+
+#root {
+  border: 6px solid rgb(247, 147, 209);
+  background-color: rgb(254, 203, 236);
+  margin-top: 4rem;
+  color: rgb(80, 11, 51);
+  /* display: grid;
+    grid-template-columns: auto auto auto; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+
+}
+
+body {
+  margin-top: 1rem;;
+  background-color: rgb(247, 147, 209);
+}
+h1{
+  background-color: rgb(231, 162, 237);
+  font-weight: 600; 
+}
+h3{
+  font-style: normal;
+  font-weight: 600;
+}
+
+.newvideos{
+  padding: 25px;
+  border-bottom: 3px solid rgb(247, 147, 209);
+}
+
+button{
+  display: flex;
+  gap: 3em;
+  border: 3px solid rgb(250, 131, 190);
+  color: rgb(20, 1, 1);
+  background-color: rgb(252, 206, 228);
+  padding: 8px 23px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: 700;
+
+}
+.vote-btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 3px;
+}
+
+.delete{
+  display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+form{
+  padding: 30px;
+  margin-top: 20px;
+}
+form input{
+  height: 50px;
+  width: 20em;
+}
+
+
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}

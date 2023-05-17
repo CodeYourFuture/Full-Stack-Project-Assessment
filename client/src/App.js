@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import exampleresponse from "./exampleresponse.json";
 import AddVideoForm from "./AddVideoForm";
+import "./App.css";
 
 function App() {
   const [videos, setVideos] = useState(exampleresponse);
-  
-  function addNewVideo(video){
+
+  function addNewVideo(video) {
     const newVideosAdded = videos.concat(video);
     setVideos(newVideosAdded);
   }
@@ -36,31 +37,30 @@ function App() {
     setVideos(updatedVideos);
   }
 
-    function deleteVideo(videoId) {
-      const updatedVideos = videos.filter((video) => video.id !== videoId);
-      setVideos(updatedVideos);
+  function deleteVideo(videoId) {
+    const updatedVideos = videos.filter((video) => video.id !== videoId);
+    setVideos(updatedVideos);
+  }
+
+  const sortedVideos = videos.concat().sort((b, a) => {
+    if (a.rating > b.rating) {
+      return 1;
+    } else if (a.rating === b.rating) {
+      return 0;
+    } else if (a.rating < b.rating) {
+      return -1;
     }
+  });
 
-    const sortedVideos = videos.concat().sort(( a, b) => {
-      if (a.rating > b.rating){
-        return -1
-      }else if(a.rating === b.rating){
-        return 0
-      }else if(a.rating < b.rating){
-        return 1
-      }
-    })
-
-  
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>Gayle's Video Recommendations</h1>
       </header>
       {sortedVideos.map((video) => {
         return (
           <div className="newvideos" key={video.id}>
-            <h3> Title:{video.title}</h3>
+            <h3> Title: {video.title}</h3>
 
             <iframe
               width="560"
@@ -73,15 +73,19 @@ function App() {
             ></iframe>
 
             <h3>Rating: {video.rating}</h3>
-            <button id="vote-btn" onClick={() => voteUp(video.id)}>
-              Up Vote
-            </button>
-            <button id="vote-btn" onClick={() => voteDown(video.id)}>
-              Down Vote
-            </button>
+            <div className="vote-btns">
+              <button id="vote-btn" onClick={() => voteUp(video.id)}>
+                Up Vote
+              </button>
+              <button id="vote-btn" onClick={() => voteDown(video.id)}>
+                Down Vote
+              </button>
+            </div>
+            <div className="delete">
             <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
-              DELETE
+              DELETE VIDEO
             </button>
+            </div>
           </div>
         );
       })}
