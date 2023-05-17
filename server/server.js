@@ -15,10 +15,15 @@ app.get("/videos", (request, response) => {
   response.send(videos);
 });
 
-// app.post("/", (req, res) => {
-//   // Delete this line after you've confirmed your server is running
-//   res.send(videos);
-// });
+app.get("/videos/:id", function (request, response) {
+  const videosId = request.params.id;
+  const eachAddedVideo = videos.find(
+    (eachAddedVideo) => eachAddedVideo.id === parseInt(videosId)
+  );
+  eachAddedVideo
+    ? response.json(eachAddedVideo)
+    : response.json({message: "There're no videos matching your request" });
+});
 
 app.post("/videos/addnew", function (request, response) {
   const addNewVideo = {
