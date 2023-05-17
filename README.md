@@ -60,8 +60,8 @@ npm start
 ## Technologies Used
 The Video Recommendation utilizes the following technologies and frameworks:
 
-- Front-end: React, JavaScript, HTML, CSS, React Icons.
-- Back-end: Node.js, Express, PostgreSQL, Knex.js.
+- Front-end: React, JavaScript, CSS, React Icons.
+- Back-end: Node.js, Express, PostgreSQL.
 - Database: PostgreSQL.
 
 ---
