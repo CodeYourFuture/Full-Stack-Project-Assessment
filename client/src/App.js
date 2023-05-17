@@ -1,7 +1,7 @@
+import React,{ useState } from "react";
 import "./App.css";
-import { VideoCards } from "./VideoCards";
-import { AddVideo } from "./AddVideo";
-import { useState } from "react";
+import  VideoCards   from "./VideoCards";
+import  AddVideo  from "./AddVideo";
 import data from './exampleresponse.json';
 
 
@@ -16,6 +16,9 @@ function App() {
         </a>
         <h1>Video Recommendation</h1>
       </header>
+      <AddVideo videos={videos} setVideos={setVideos} />
+      <VideoCards videos={videos} setVideos={setVideos} />
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import "./VideosCards.css";
+import "./VideoCards.css";
 
-const VideosCards = ({ videos, setVideos }) => {
+const VideoCards = ({ videos, setVideos }) => {
     const handleDeleteClick = (id) => {
     let newData = [];
     newData = videos.filter((video) => video.id !== id);
@@ -18,9 +18,9 @@ const decreaseRating = (id) => {
     newData = videos.map((video) => 
     video.id === id? {...video, rating: video.rating - 1}: video);
 return setVideos(newData);
-}
+} 
 
-const card =(video) => {
+const Card =(video) => {
   return (
     <div className='cardContainer' key={video.id}>
         <iframe
@@ -46,11 +46,11 @@ const card =(video) => {
   );
 };
 
-// return (
-//     <div className="allCardsContainer">
-//       {videos.map((video) => Card(video))}
-//     </div>
-//   );
+return (
+    <div className="allCardsContainer">
+       {videos.map((video) => Card(video))}
+     </div>
+  );
 
 }
-export default VideosCards;
+export default VideoCards;
