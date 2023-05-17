@@ -6,7 +6,7 @@ const isValidInput = (title, url) => {
   const isValidTitle = typeof title === "string" && title.trim() !== "";
   const isValidUrl =
     typeof url === "string" &&
-    /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}$/.test(
+    /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}($|&list=[\w-]+)/.test(
       url
     );
   return isValidTitle && isValidUrl;
@@ -17,6 +17,8 @@ function TopBar({ onAddCard, cards, onOrderChange }) {
   const [url, setUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [order, setOrder] = useState("desc");
+  const [fetching, setFetching] = useState(false);
+
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -31,20 +33,33 @@ function TopBar({ onAddCard, cards, onOrderChange }) {
       setErrorMessage(
         "Input URL or Title is invalid. Please provide a valid YouTube link."
       );
+      setFetching(false);
       return;
     }
 
-    const videoCode = url.split("v=")[1];
+    setFetching(true);
 
-    if(cards.length > 0){
-const isDuplicate = cards.some((card) => card.url === videoCode);
-if (isDuplicate) {
-  setErrorMessage("This video is already added.");
-  return;
-}
+    let videoCode = "";
+
+    if (url.includes("youtu.be/")) {
+      videoCode = url.split("youtu.be/")[1];
+    } else if (url.includes("&list=")) {
+      videoCode = url.split("watch?v=")[1].split("&")[0];
+    } else if (url.includes("watch?v=")) {
+      videoCode = url.split("watch?v=")[1];
+    } else {
+      setErrorMessage("Invalid YouTube URL format.");
+      return;
     }
-    // Check if the video is already in the cards
-    
+
+    if (cards.length > 0) {
+      const isDuplicate = cards.some((card) => card.url === videoCode);
+      if (isDuplicate) {
+        setErrorMessage("This video is already added.");
+        setFetching(false);
+        return;
+      }
+    }
 
     const newCard = {
       title: title.trim(),
@@ -65,13 +80,20 @@ if (isDuplicate) {
         setUrl("");
         setErrorMessage("");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => {
+        // Re-enable buttons after fetch completes
+        setFetching(false);
+      });
   };
 
   const handleOrderChange = () => {
     const newOrder = order === "desc" ? "asc" : "desc";
     setOrder(newOrder);
     onOrderChange(newOrder);
+    setTitle("");
+    setUrl("");
+    setErrorMessage("");
   };
 
   return (
@@ -98,8 +120,12 @@ if (isDuplicate) {
           required
         />
       </div>
-      <button onClick={handleAddClick}>ADD</button>
-      <button onClick={handleOrderChange}>{order === "desc" ? "Desc" : "Asc"}</button>
+      <button onClick={handleAddClick} disabled={fetching}>
+        ADD
+      </button>
+      <button onClick={handleOrderChange} disabled={fetching}>
+        {order === "desc" ? "Desc" : "Asc"}
+      </button>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
