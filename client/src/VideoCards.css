@@ -1,0 +1,88 @@
+.allCardsContainer {
+    margin: 2% 10%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 31%;
+    margin-bottom: 1em;
+    text-align: left;
+  }
+  
+  .cardContainer iframe {
+    border-radius: 10px;
+    width: 100%;
+  }
+  .cardContainer h6 {
+    padding: 20px 0px;
+    font-weight: bolder;
+    color: #0f0f0f;
+  }
+  .cardContainer p,
+  .UpDownVote {
+    color: #606060;
+    font-size: 14px;
+  }
+  .UpDownVote {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(189, 186, 186, 0.1);
+    border-radius: 10px;
+    padding: 2px 5px;
+  }
+  
+  .UpDownVote i {
+    padding: 5%;
+  }
+  
+  body {
+    font-family: "Roboto", "Arial", sans-serif;
+  }
+  /* delete btn */
+  .deleteButton {
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: none;
+    background: none;
+    color: rgb(234, 86, 86);
+    font-size: small;
+    font-weight: bold;
+  }
+  .cardContainer:hover {
+    font-size: large;
+    .deleteButton {
+      color: white;
+      width: 100%;
+      background-color: red;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 1%;
+      cursor: pointer;
+    }
+  }
+  /* end of delete btn*/
+  @media only screen and (max-width: 768px) {
+    .cardContainer {
+      width: 45%;
+    }
+  }
+  @media only screen and (max-width: 540px) {
+    .allCardsContainer {
+      margin: 2% 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cardContainer {
+      width: 90%;   
+    }
+  }
