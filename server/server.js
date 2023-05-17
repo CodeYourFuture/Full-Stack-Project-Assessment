@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const allVideos = require("./exampleresponse.json");
 
 app.use(express.json());
+app.use(cors()); // Enable CORS for all routes
+
 //all videos
 app.get("/", (req, res) => {
-  res.send({ allVideos });
+  res.json(allVideos);
 });
 
 //add new video
@@ -29,7 +32,7 @@ app.get("/:id", (req, res) => {
   const id = Number(req.params.id);
   const find = allVideos.find((video) => video.id === id);
   if (find) {
-    res.status(200).json({ find });
+    res.status(200).json(find);
   } else res.status(404).json({ message: "not found" });
 });
 

@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 
-function AddVideo({ videoData }) {
-  const [showForm, SetShowForm] = useState(false);
+function AddVideo({ updateVideoData }) {
+  const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [allData, setAllData] = useState(videoData);
 
   const handleShowForm = () => {
-    SetShowForm(!showForm);
+    setShowForm(!showForm);
   };
+
   const handleAddVideo = (event) => {
     event.preventDefault();
 
     const newVideoData = {
-      id: Math.floor(Math.random() * 1000),
       title,
       url,
     };
 
-    setAllData([...allData, newVideoData]);
+    updateVideoData(newVideoData);
     handleShowForm();
     setTitle("");
     setUrl("");
@@ -29,25 +28,23 @@ function AddVideo({ videoData }) {
       {showForm ? (
         <form onSubmit={handleAddVideo}>
           <div>
-            <label htmlFor="title">Tile:</label>
+            <label htmlFor="title">Title:</label>
             <input
               type="text"
               id="title"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            ></input>
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </div>
           <div>
-            <label htmlFor="url">Url:</label>
+            <label htmlFor="url">URL:</label>
             <input
               type="text"
               id="url"
-              onChange={(e) => {
-                setUrl(e.target.value);
-              }}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
               required
-            ></input>
+            />
           </div>
           <div>
             <button type="button" onClick={handleShowForm}>
