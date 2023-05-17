@@ -11,7 +11,7 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
         title={title}
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <div>Votes :{votes}</div>
       <button onClick={onUpVote}>Up vote</button>
