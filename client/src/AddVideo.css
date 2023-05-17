@@ -1,0 +1,26 @@
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  input {
+    border-style: none;
+    border-bottom: 1px solid red;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+  
+  body {
+    font-family: "Roboto", "Arial", sans-serif;
+  }
+  
+  .addVideoContainer {
+    padding: 5% 0%;
+  }
+  
+  .addVideo {
+    color: #0f0f0f;
+    align-items: center;
+  }
