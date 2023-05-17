@@ -17,12 +17,28 @@ app.get("/videos", (request, response) => {
 
 app.get("/videos/:id", function (request, response) {
   const videosId = request.params.id;
-  const eachAddedVideo = videos.find(
-    (eachAddedVideo) => eachAddedVideo.id === parseInt(videosId)
+  const eachVideo = videos.find(
+    (eachVideo) => eachVideo.id === parseInt(videosId)
   );
-  eachAddedVideo
-    ? response.json(eachAddedVideo)
+  eachVideo
+    ? response.json(eachVideo)
     : response.json({message: "There're no videos matching your request" });
+});
+
+app.delete("/videos/:id", function (request, response) {
+  const videosId = request.params.id;
+  const eachVideo = videos.find(
+    (eachVideo) => eachVideo.id === parseInt(videosId)
+  );
+
+  if (eachVideo) {
+    videos = videos.filter(
+      (eachVideo) => eachVideo.id !== parseInt(videosId)
+    );
+    response.json({ message: "Video Succesfully deleted" });
+  } else {
+    response.json({ message: "Unable to find or delete video" });
+  }
 });
 
 app.post("/videos/addnew", function (request, response) {
