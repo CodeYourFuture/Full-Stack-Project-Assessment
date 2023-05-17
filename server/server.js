@@ -1,7 +1,14 @@
+const video = require("./exampleresponse.json") 
+const cors =require("cors")
+
+
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5009;
 
+app.use(express.json());
+app.use(cors())
+ app.use(express.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -13,3 +20,11 @@ app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
+
+// get all information from example by writing this get
+app.get("/video",(req, res)=> {
+  
+  res.json(video)
+
+  
+})
