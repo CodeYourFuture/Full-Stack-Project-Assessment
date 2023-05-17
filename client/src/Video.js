@@ -1,10 +1,12 @@
 import React from "react";
+import Youtube from "react-youtube";
+
 
 const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
   return (
     <>
       <h2>Title:{title}</h2>
-      <iframe
+      <Youtube
         width="560"
         height="315"
         src={url}
@@ -12,7 +14,7 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></iframe>
+      ></Youtube>
       <div>Votes :{votes}</div>
       <button onClick={onUpVote}>Up vote</button>
       <button onClick={onDownVote}>Down vote</button>
