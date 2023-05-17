@@ -67,9 +67,12 @@ form{
   padding: 30px;
   margin-top: 20px;
 }
-form input{
+form input :focus{
   height: 50px;
   width: 20em;
+  border-color: rgb(117, 14, 213);
+  box-shadow: 0 0 5px rgb(139, 32, 233);
+     
 }
 
 
