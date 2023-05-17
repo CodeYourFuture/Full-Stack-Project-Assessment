@@ -26,6 +26,7 @@ body {
   background-color: rgb(247, 147, 209);
 }
 h1{
+  margin-top: 2rem;
   background-color: rgb(231, 162, 237);
   font-weight: 600; 
 }

@@ -27,7 +27,7 @@ function AddVideoForm({ onAddVideo }) {
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
-      </label>
+      </label> <br></br>
       <label>
         URL:
         <input
