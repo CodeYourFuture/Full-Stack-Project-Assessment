@@ -1,0 +1,191 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.all-videos-wrapper {
+    width: 100%;
+    margin: 80px 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media only screen and (min-width: 375px) {
+    .all-videos-wrapper {
+        width: 100%;
+        margin: 120px 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    } 
+}
+
+.all-videos-title {
+    color: white;
+    text-align: center;
+    margin: 0 20px 0 20px;
+    padding-bottom: 20px;
+    border-bottom: .5px solid #fcd277;
+}
+
+@media only screen and (min-width: 375px) {
+    .all-videos-title {
+        margin: 0 65px 50px 65px;
+        margin-bottom: 50px;
+    }
+}
+
+.all-videos-filter-wrapper {
+    display: flex;
+    gap: 5px;
+} 
+
+@media only screen and (min-width: 375px) {
+    .all-videos-filter-wrapper {
+        display: flex;
+        gap: 5px;
+    } 
+}
+
+.all-videos-filter-text {
+    padding-left: 20px;
+    color: #e4e0e0;
+}
+
+@media only screen and (min-width: 375px) {
+    .all-videos-filter-text {
+        padding-top: 5px;
+        margin-left: 90px;
+    }
+}
+
+.all-videos-filter-icon {
+    background-color: transparent;
+    border: none;
+}
+
+@media only screen and (min-width: 375px) {
+    .all-videos-filter-icon {
+        margin-top: 5px;
+    } 
+}
+
+.all-videos-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    max-width: 100%;
+    padding: 0 20px 10px 20px;
+}
+
+@media only screen and (min-width: 375px) {
+    .all-videos-container {
+        padding: 0 80px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        column-gap: 40px;
+        row-gap: 40px;
+    }
+  }
+
+.video-section-wrapper {
+    min-height: 600px;
+    background-color: #171519;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+.video-iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    padding: 0;
+}
+
+.video-text-wrapper {
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 10px;
+    margin: 0;
+}
+
+.video-title {
+    color: white;
+    font-size: 20px;
+}
+
+.video-like-btns-wrapper {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.video-dislike-btn {
+    border: none; 
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    color: #e4e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: 10px 20px;
+    border: 1px solid #615c5c;
+    border-radius: 10px;
+}
+
+.video-dislike-btn:hover {
+   border: 1px solid #b750fc;
+   color: #b750fc;
+}
+
+.video-like-btn {
+    border: none; 
+    outline: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    color: #e4e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: 10px 20px;
+    border: 1px solid #615c5c;
+    border-radius: 10px;
+}
+ 
+.video-like-btn:hover {
+    border: 1px solid #f0b22c;
+    color: #f0b22c;
+}
+
+.video-rating-text {
+    color: #e4e0e0;
+}
+ 
+.video-delete-btn {
+    width: 248px;
+    padding: 10px 0;
+    background-color: transparent;
+    border: 1px solid #615c5c;
+    color: white;
+    border-radius: 5px;
+}
+
+.video-delete-btn:hover {
+    background-color: #946dae;
+    border: none;
+}

@@ -1,0 +1,31 @@
+.about-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 0 60px 0;
+    gap: 10px;
+}
+  
+@media only screen and (min-width: 375px) {
+    .about-card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 100px 0 20px 0;
+      gap: 10px;
+      margin: 220px auto 60px auto;
+    }
+}
+
+.about-link {
+    padding-top: 10px;
+    color: #e94de9;
+}
+  
+.about-link:hover {
+    color: #f0b22c;
+}
+
+  

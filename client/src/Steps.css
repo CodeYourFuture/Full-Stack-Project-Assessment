@@ -1,0 +1,32 @@
+.steps-wrapper {
+    z-index: -50;
+    width: 100%;
+    margin-top: -100px;
+    padding: 40px 40px 80px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+    border: .5px solid #fcd277;
+}
+
+.steps-title {
+    font-size: 24px;
+    color: #e4e0e0;
+}
+
+@media only screen and (min-width: 375px) {
+    .steps-title {
+        font-size: 34px;
+        color: #e4e0e0;
+    }
+}
+
+.steps-section-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+
