@@ -35,9 +35,7 @@ app.post("/videos/addnew", function (request, response) {
       .status(400)
       .json({ message: "Please fill out the required areas" });
   }
-  // if (!validator.validate(addNewVideo.URL)) {
-  //   return response.status(400).json({ message: "Please enter a valid url link" });
-  // }
+ 
 
   videos.push(addNewVideo);
   response.json(videos);
