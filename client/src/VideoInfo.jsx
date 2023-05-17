@@ -2,11 +2,6 @@ import Votes from "./Votes";
 import DeleteVideo from "./DeleteVideo";
 
 function VideoInfo({ videos, setVideos, video }) {
-  function handleDeleteVideo(videoID) {
-    const updatedVideos = videos.filter((video) => video.id !== videoID);
-    setVideos(updatedVideos);
-  }
-
   return (
     <div>
       <div>
@@ -24,7 +19,7 @@ function VideoInfo({ videos, setVideos, video }) {
           <span>{video.rating}</span>
           <Votes video={video} setVideos={setVideos} videos={videos} />
         </aside>
-        <DeleteVideo handleDeleteVideo={handleDeleteVideo} video={video} />
+        <DeleteVideo video={video} videos={videos} setVideos={setVideos} />
       </div>
     </div>
   );

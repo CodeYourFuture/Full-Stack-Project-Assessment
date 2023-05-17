@@ -12,20 +12,49 @@ function AddVideos({ setVideos }) {
 
   const [formData, setFormData] = useState(initialState);
 
-  function handleSubmit(event) {
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+
+  //   let randomID = Math.floor(100000 + Math.random() * 900000);
+
+  //   const newVideo = {
+  //     id: randomID,
+  //     title: formData.title,
+  //     url: formData.url,
+  //     rating: formData.rating,
+  //   };
+  //   setVideos((prevVideos) => [...prevVideos, newVideo]);
+  //   setFormData(initialState);
+  // }
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    let randomID = Math.floor(100000 + Math.random() * 900000);
-
-    const newVideo = {
-      id: randomID,
-      title: formData.title,
-      url: formData.url,
-      rating: formData.rating,
-    };
-    setVideos((prevVideos) => [...prevVideos, newVideo]);
-    setFormData(initialState);
-  }
+    fetch("http://localhost:3005/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: formData.title,
+        url: formData.url,
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Failed to add video");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        setVideos(data);
+        setFormData(initialState);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   function handleChange(event) {
     event.preventDefault();

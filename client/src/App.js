@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import initialVideos from "./exampleresponse.json";
 import AddVideos from "./AddVideos";
 import VideoInfo from "./VideoInfo";
 
 function App() {
-  const [videos, setVideos] = useState(initialVideos);
+  const [videos, setVideos] = useState([]);
 
   const [toggleArea, setToggleArea] = useState(false);
 
   const toggleShow = () => setToggleArea((s) => !s);
+
+  function getAllVideos() {
+    fetch("http://localhost:3005/")
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);
 
   return (
     <div className="App">
@@ -19,13 +31,13 @@ function App() {
       <AddVideos setVideos={setVideos} />
       <button onClick={toggleShow}>Show Videos</button>
       {toggleArea &&
+        videos.length > 0 &&
         videos.map((video) => (
           <VideoInfo
             key={video.id}
             video={video}
             videos={videos}
             setVideos={setVideos}
-            initialVideos={initialVideos}
           />
         ))}
     </div>

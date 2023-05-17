@@ -31,11 +31,11 @@ app.post("/", (req, res) => {
   if (!newVideo.title || !newVideo.url) {
     return res
       .status(400)
-      .json({ result: "failure", message: "Video could not be saved" });
+      .json({ result: "failure", message: "Video could not be added" });
   }
 
   videos.push(newVideo);
-  res.status(200).json({ message: "New video added", videos });
+  res.json(videos);
 });
 
 // GET BY ID
