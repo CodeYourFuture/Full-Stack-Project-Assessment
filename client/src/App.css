@@ -3,19 +3,13 @@
 }
  
 
-
   .video-container {
   display: grid;
    grid-template-columns: repeat(3, 1fr); 
 }  
+.Container {
+  position: absolute;
+  top:0;
+  width: 200px;
+}
 
-
-/* .video-wrapper {
-  margin-top: 50px;
-  width: 300px;
-} 
-
-iframe {
-  width: 300px;
-  height: 300px;
-} */

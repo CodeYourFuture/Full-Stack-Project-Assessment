@@ -28,9 +28,9 @@
       return (
         <div>
             <div>
-            <h1>
+            <h6>
             {info.title}
-            </h1>
+            </h6>
             <iframe src={`https://www.youtube.com/embed/${info.url}`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

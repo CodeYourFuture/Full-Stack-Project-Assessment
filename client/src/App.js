@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Menu from "./Menu";
+
 function App() {
   
   const [isOpen , setIsOpen]= useState(false)
@@ -63,21 +65,29 @@ function App() {
   const addclickHandler =() => {
     !title ? alert("Please enter a title") : 
     validateUrl(url)
+    const response = axios.post ("http://localhost:5009/video", {
+     title: title , 
+      url: url.split("watch?v=")[1]
+
+    })
+    console.log(response)
     
   }
  
   return (
     <div className="App">
       <header className="App-header">
+       <Menu></Menu>
         <h1>Video Recommendation</h1>
       </header>
-       <Container>
+
+       <Container className="Container">
       <Row>
         <Col><Button variant="link" onClick={clickHandler}> Add Video </Button>
         { isOpen && (
           <>
         <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
+        <InputGroup.Text >Title</InputGroup.Text>
         <Form.Control
           onChange={handleTitleChange}
           placeholder="Title"
@@ -95,8 +105,8 @@ function App() {
         />
       </InputGroup>
       <br></br>
-      <Button variant="Add">Add</Button>{' '}
-      <Button variant="Cancle" onClick={addclickHandler}>Cancel</Button>{' '}
+      <Button variant="Add" onClick={addclickHandler}> Add</Button>{' '}
+      <Button variant="Cancle">Cancle</Button>{' '}
       
         </>)}      
 </Col>
