@@ -1,4 +1,3 @@
-import React from "react";
 import Video from "./Video";
 
 const VideoList = ({ videos, onUpVote, onDownVote, onRemove }) => {
