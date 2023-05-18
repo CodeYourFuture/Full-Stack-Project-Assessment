@@ -49,6 +49,23 @@ app.delete("/:id", (req, res) => {
     res.json(allVideos);
   }
 });
+
+//  updating the rating by Id
+app.put("/:id", (req, res) => {
+  const videoId = Number(req.body.id);
+  const newRating = Number(req.body.rating);
+
+  // Find the video with the given ID
+  const video = allVideos.find((video) => video.id === videoId);
+
+  // Update the rating of the video,
+  if (video) {
+    video.rating = newRating;
+    res.json(allVideos);
+  } else {
+    res.status(404).json({ message: "Video not found" });
+  }
+});
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
