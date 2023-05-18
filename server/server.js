@@ -1,4 +1,4 @@
-const video = require("./exampleresponse.json") 
+const data = require("./exampleresponse.json") 
 const cors =require("cors")
 
 
@@ -22,9 +22,9 @@ app.get("/", (req, res) => {
 });
 
 // get all information from example by writing this get
-app.get("/video",(req, res)=> {
+app.get("/videos",(req, res)=> {
   
-  res.json(video)
+  res.json(data)
 
   
 })
