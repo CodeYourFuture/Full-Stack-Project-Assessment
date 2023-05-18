@@ -78,12 +78,6 @@ let videos = [
   },
 ];
 
-// GET "/"
-// app.get("/videos", (request, response) => {
-//   videos = videos.sort((a, b) => b.rating - a.rating);
-//   response.status(200).json(videos);
-// });
-
 app.get("/videos", (request, response) => {
   const sortType = request.query.sort;
   videos = videos.sort((a, b) => b.rating - a.rating);
@@ -96,27 +90,6 @@ app.get("/videos", (request, response) => {
   }
   response.status(200).json(videos);
 });
-
-// app.get("/videos?sort=asc", (request, response) => {
-//   console.log(request.query.sort);
-
-//   if (request.query.sort === 'asc')
-//   if (videos.sort((a, b) => a.rating - b.rating)) {
-//     response.status(200).json(videos);
-//   } else {
-//     videos = videos.sort((a, b) => b.rating - a.rating);
-//     response.status(200).json(videos);
-//   }
-// });
-
-// app.get("/videos?sort=desc", (request, response) => {
-//   if (videos.sort((a, b) => b.rating - a.rating)) {
-//     response.status(200).json(videos);
-//   } else {
-//     videos = videos.sort((a, b) => b.rating - a.rating);
-//     response.status(200).json(videos);
-//   }
-// });
 
 // POST"/"
 app.post("/videos", function (request, response) {
