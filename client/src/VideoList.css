@@ -1,0 +1,30 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 350px;
+  height: 500px;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.group-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  
+}
