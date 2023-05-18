@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Rating from "./Rating";
 import "./VCard.css";
-const VCard = ({ videoData }) => {
-  const [list, setList] = useState(videoData);
-
-  const handleDelete = (id) => {
-    setList(list.filter((video) => video.id !== id));
+import DeleteBtn from "./DeleteBtn";
+const VCard = ({ videoData, onDelete }) => {
+  const handleDelete = (videoId) => {
+    onDelete(videoId);
   };
-
   return (
     <div>
-      {list.map((video) => (
+      {videoData.map((video) => (
         <div key={video.id} className="video-card">
           <h3>{video.title}bb</h3>
           <iframe
@@ -19,7 +17,7 @@ const VCard = ({ videoData }) => {
           ></iframe>
 
           <Rating rating={video.rating} />
-          <button onClick={() => handleDelete(video.id)}>Remove</button>
+          <DeleteBtn videoId={video.id} onDelete={handleDelete} />
         </div>
       ))}
     </div>
