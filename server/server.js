@@ -28,3 +28,8 @@ app.get("/videos",(req, res)=> {
 
   
 })
+app.post ("/video",(req, res)=> {
+  const postData = req.body
+  console.log(postData)
+  res.send ("dataRecived")
+})
