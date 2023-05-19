@@ -53,8 +53,41 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>Tony's Video App</h1>
       </header>
+      {sortedVideos.map((video) => {
+        return (
+          <div>
+            <h3>
+              Title: {video.title}
+            </h3>
+
+            <iframe width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${video.url.slice(32)}`}
+              title={video.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen >
+
+            </iframe>
+
+            <h3>
+              Rating: {video.rating}
+            </h3>
+            <div className='voting' >
+              <button id='vote' on onClick={() => voteUp(video.id)}> Up Vote</button>
+              <button id='vote' on onClick={() => voteDown(video.id)}> Down Vote</button>
+              
+            </div>
+            <div className='delete'>
+              <button id='delete-btn' on onClick={() => deleteVideo(video.id)}> Delete Video</button>
+            </div>
+          </div>
+        );
+      })}
+      <NewVideoForm newVideoAdded = {newVideo} />
+      
     </div>
   );
 }
