@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import videoData from '../../exampleresponse.json';
+import videoData from './exampleresponse.json';
 import NewVideoForm from './NewVideoForm';
 import "./App.css";
 
@@ -36,7 +36,7 @@ function App() {
   }
   
   function deleteVideo(videoId) {
-    const updatedVideos = video.filter((video) => video.id !== videoId);
+    const updatedVideos = videos.filter((video) => video.id !== videoId);
     setVideos(updatedVideos);
   }
 
