@@ -8,6 +8,7 @@ import Sort from "./Sort";
 
 const HomePage = () => {
   const [videoData, setVideoData] = useState([]);
+  const [order, setOrder] = useState("desc");
 
   useEffect(() => {
     fetch("http://localhost:5000")
@@ -48,14 +49,13 @@ const HomePage = () => {
   };
 
   const handleSortChange = (selectedValue) => {
-    // Perform sorting logic based on the selected value
-    let sortedVideoData = [...videoData];
-    if (selectedValue === "desc") {
-      sortedVideoData.sort((a, b) => b.rating - a.rating);
-    } else if (selectedValue === "asc") {
-      sortedVideoData.sort((a, b) => a.rating - b.rating);
-    }
-    setVideoData(sortedVideoData);
+    fetch(`http://localhost:5000/?order=${selectedValue}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setVideoData(data);
+        setOrder(selectedValue);
+      })
+      .catch((error) => console.log(error));
   };
 
   const updateRating = (videoId, newRating) => {

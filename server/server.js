@@ -8,7 +8,18 @@ app.use(cors()); // Enable CORS for all routes
 
 //all videos
 app.get("/", (req, res) => {
-  res.json(allVideos);
+  let sortedVideos = [...allVideos];
+  sortedVideos.sort((a, b) => b.rating - a.rating);
+
+  if (req.query.order === "desc") {
+    // Sorting by rating in descending order
+    sortedVideos.sort((a, b) => b.rating - a.rating);
+  } else if (req.query.order === "asc") {
+    // Sorting by rating in ascending order
+    sortedVideos.sort((a, b) => a.rating - b.rating);
+  }
+
+  res.json(sortedVideos);
 });
 
 //add new video
