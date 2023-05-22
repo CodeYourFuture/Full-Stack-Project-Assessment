@@ -1,3 +1,85 @@
-.App {
-  text-align: center;
+.steps-form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 40px;
+  padding: 60px 20px;
 }
+
+@media only screen and (min-width: 375px) {
+  .steps-form-wrapper {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding: 0 100px 150px 140px;
+  }
+}
+
+.home-form {
+  z-index: 100;
+  background-color: #946dae;
+  box-shadow: 0 10px 10px rgba(54, 52, 52, 0.2);
+  color: #e4e0e0;
+  width: 100%;
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid #615c5c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 30px 50px 30px;
+}
+
+@media only screen and (min-width: 375px) {
+  .home-form{
+  margin-left: -100px;
+  padding: 40px;
+  }
+}
+
+.animate__animated.animate__backInLeft {
+  --animate-duration: 2s;
+}
+
+legend {
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+@media only screen and (min-width: 375px) {
+  legend {
+    text-align: center;
+  }
+}
+
+.form-section-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  border: none;
+  padding: 5px;
+  background-color: transparent;
+  border-bottom: .5px solid #e4e0e0;
+  margin-bottom: 20px;
+}
+
+.home-form-btn {
+  margin-top: 20px;
+  font-weight: bold;
+  border: none;
+  background: linear-gradient(to right, #fcd277, #b750fc);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  color: white;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.home-form-btn:hover {
+  background:  #f8cc6c;
+}
+
+
