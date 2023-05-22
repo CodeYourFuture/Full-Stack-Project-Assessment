@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import videoData from "./exampleresponse.json";
+import React, { useState, useEffect } from "react";
 import "./VideoList.css";
 import Input from "./Input";
 
 const VideoList = () => {
-  const [videos, setVideos] = useState(videoData);
+  const [videos, setVideos] = useState([]);
 
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/videos`)
+    .then(res => res.json())
+      .then(data => setVideos(data))
+    .catch(error => console.log(error))
+  },[])
   const handleVoteUp = (id) => {
     const updatedVideos = videos.map((video) => {
       if (video.id === id) {
@@ -27,21 +33,39 @@ const VideoList = () => {
     setVideos(updatedVideos);
   };
 
+const handleDelete = async (id) => {
+  const response = await fetch(`http://localhost:8080/video/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response.ok) {
+    const updatedVideos = await response.json();
+    setVideos(updatedVideos);
+  } else {
+    // Handle error
+  }
+};
 
-  const handleDelete = (id) => {
-    const filteredVideos = videos.filter((video) => video.id !== id);
-    setVideos(filteredVideos);
+
+  const handleAddVideo = async (title, url) => {
+    const response = await fetch("http://localhost:8080/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, url }),
+    });
+
+    if (response.ok) {
+      const newVideo = await response.json();
+      setVideos([...videos, newVideo]);
+    } else {
+      // Handle error
+    }
   };
 
-  const handleAddVideo = (title, url) => {
-    const newVideo = {
-      id: Date.now(),
-      title,
-      url,
-      rating: 0,
-    };
-    setVideos([...videos, newVideo]);
-  };
 
   return (
     <>
