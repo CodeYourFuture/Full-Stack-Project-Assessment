@@ -9,51 +9,35 @@ import "animate.css/animate.min.css";
 export const AddVideoForm = () => {
   const { videos, setVideos } = useContext(videosContext);
 
-  const [newVideo, setNewVideo] = useState({});
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
-
-  //Should I leave this function here or put it in the server?
-  //Do I check if the url is valid in the front end?
-  function isValidUrl(url) {
-    try {
-      new URL(url);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    videoTitle !== ""
-      ? (newVideo.title = videoTitle)
-      : alert("Please add a title for your video.");
-
-    isValidUrl(videoUrl)
-      ? (newVideo.url = videoUrl)
-      : alert("Please add a valid url.");
-    newVideo.rating = Math.floor(Math.random() * 5000) + 1;
-
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; // add 1 because getMonth() returns 0-11
-    const currentDay = currentDate.getDate();
-    newVideo.date = currentYear + "-" + currentMonth + "-" + currentDay;
-
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    const currentMinutes = currentTime.getMinutes();
-    const currentSeconds = currentTime.getSeconds();
-    newVideo.time = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-
-    newVideo.id = videoUrl.split("=")[1];
-    setVideos([...videos, newVideo]);
-
-    setNewVideo({});
-    setVideoTitle("");
-    setVideoUrl("");
+    fetch("http://localhost:5000/videos", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: videoTitle,
+        url: videoUrl,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Please ensure the information is correct");
+        }
+        return response.json();
+      })
+      .then((newVideo) => {
+        setVideos([...videos, newVideo]);
+        setVideoTitle("");
+        setVideoUrl("");
+      })
+      .catch((error) => alert(error.message));
   }
 
   return (

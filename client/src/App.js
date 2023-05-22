@@ -2,30 +2,45 @@ import "./App.css";
 import "./Card.css";
 import "animate.css/animate.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, React, createContext } from "react";
+import { useState, React, createContext, useEffect } from "react";
 import { AllVideos } from "./AllVideos";
 import { AddVideoForm } from "./AddVideoForm";
 import { Header } from "./Header";
-import VideosJson from "./exampleresponse.json";
-import { HomeCarousel } from "./HomeCarousel";
 import { Main } from "./Main";
 import { HomeHero } from "./HomeHero";
 import { Steps } from "./Steps";
-import { Login } from "./Login";
-import { Footer } from "./Footer";
 import { About } from "./About.js";
 
 export let videosContext = createContext(null);
 
 function App() {
-  const [videos, setVideos] = useState(VideosJson);
+  const [videos, setVideos] = useState("");
+  const [isDesc, setIsDesc] = useState(true);
+
+  const url = "http://localhost:5000/videos";
+
+  useEffect(() => {
+    function fetchData() {
+      fetch(`${url}?sort=${isDesc ? "desc" : "asc"}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setVideos(data);
+        })
+        .catch((error) => error);
+    }
+    fetchData();
+  }, [isDesc]);
 
   return (
     <div className="App">
       <videosContext.Provider value={{ videos, setVideos }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route
               path="/"
               element={
@@ -38,9 +53,9 @@ function App() {
                     <Steps />
                     <AddVideoForm />
                   </div>
-                  <HomeCarousel />
-                  <AllVideos />
-                  <Footer />
+                  {videos.length > 0 && (
+                    <AllVideos desc={isDesc} setDesc={setIsDesc} />
+                  )}
                 </div>
               }
             />

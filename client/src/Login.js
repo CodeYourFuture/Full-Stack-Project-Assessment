@@ -18,34 +18,24 @@ export const Login = () => {
   function register() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
         alert("Registered Successfully");
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
-        // const errorMessage = error.message;
         alert(errorCode);
-        // ..
       });
   }
 
   function login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         user ? navigate("/videos") : alert("Login Failed");
-        // console.log(user);
-        // alert("Login Successfully");
-
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
-        // const errorMessage = error.message;
         alert(errorCode);
       });
   }
