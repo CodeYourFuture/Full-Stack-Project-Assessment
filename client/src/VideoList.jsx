@@ -7,10 +7,10 @@ const VideoList = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:8080/videos`)
-    .then(res => res.json())
-      .then(data => setVideos(data))
-    .catch(error => console.log(error))
+    fetch(`https://full-stack-project-assessment-server-f16d.onrender.com/videos`)
+      .then((res) => res.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.log(error));
   },[])
   const handleVoteUp = (id) => {
     const updatedVideos = videos.map((video) => {
@@ -34,12 +34,15 @@ const VideoList = () => {
   };
 
 const handleDelete = async (id) => {
-  const response = await fetch(`http://localhost:8080/video/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `https://full-stack-project-assessment-server-f16d.onrender.com/video/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   if (response.ok) {
     const updatedVideos = await response.json();
     setVideos(updatedVideos);
@@ -50,7 +53,7 @@ const handleDelete = async (id) => {
 
 
   const handleAddVideo = async (title, url) => {
-    const response = await fetch("http://localhost:8080/videos", {
+    const response = await fetch("https://full-stack-project-assessment-server-f16d.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
