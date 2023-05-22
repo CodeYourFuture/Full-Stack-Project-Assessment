@@ -14,8 +14,8 @@ import { About } from "./About.js";
 export let videosContext = createContext(null);
 
 function App() {
-  const [videos, setVideos] = useState("");
-  const [isDesc, setIsDesc] = useState(true);
+  const [videos, setVideos] = useState([]);
+  // const [isDesc, setIsDesc] = useState(true);
 
   const url = "http://localhost:5000/videos";
 
@@ -30,13 +30,14 @@ function App() {
           return response.json();
         })
         .then((data) => {
+          console.log("inside", videos);
           setVideos(data);
         })
         .catch((error) => error);
     }
     fetchData();
-  }, [isDesc]);
-
+  }, []);
+  console.log("outside", videos);
   return (
     <div className="App">
       <videosContext.Provider value={{ videos, setVideos }}>
@@ -55,7 +56,9 @@ function App() {
                     <AddVideoForm />
                   </div>
                   {videos.length > 0 && (
-                    <AllVideos desc={isDesc} setDesc={setIsDesc} />
+                    // <AllVideos desc={isDesc} setDesc={setIsDesc} />
+
+                    <AllVideos />
                   )}
                 </div>
               }

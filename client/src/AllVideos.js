@@ -6,7 +6,8 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export const AllVideos = ({ desc, setDesc }) => {
+// export const AllVideos = ({ desc, setDesc }) => {
+export const AllVideos = () => {
   const { videos, setVideos } = useContext(videosContext);
 
   function handleLikes(videoId) {
@@ -41,9 +42,9 @@ export const AllVideos = ({ desc, setDesc }) => {
       <div className="all-videos-filter-wrapper">
         <button
           className="all-videos-filter-btn"
-          onClick={() => setDesc((value) => !value)}
+          // onClick={() => setDesc((value) => !value)}
         >
-          {desc ? "Top Rated" : "Least Rated"}
+          {/* {desc ? "Top Rated" : "Least Rated"} */}
         </button>
 
         <TuneIcon
@@ -58,7 +59,7 @@ export const AllVideos = ({ desc, setDesc }) => {
         />
       </div>
       <div className="all-videos-container">
-        {videos.map((video) => {
+        {videos?.map((video) => {
           return (
             <ScrollAnimation
               key={video.id}
@@ -66,7 +67,7 @@ export const AllVideos = ({ desc, setDesc }) => {
             >
               <div className="video-section-wrapper">
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}`}
+                  src={`https://www.youtube.com/embed/${video.url.slice(33)}`}
                   title={video.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

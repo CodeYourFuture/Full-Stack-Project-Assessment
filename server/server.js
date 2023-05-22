@@ -2,29 +2,57 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
+require("dotenv").config();
 const bodyParser = require("body-parser");
-
-const { Pool } = require("pg");
-
-const db = new Pool({
-  host: "localhost",
-  user: "karleenrichards",
-  port: 5432,
-  password: "",
-  database: "kr-videos",
-});
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/videos", function (req, res) {
-  db.query("SELECT * FROM movies")
-    .then((result) => {
-      res.status(200).json({ videos: result.rows });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const { Pool } = require("pg");
+
+// const db = new Pool({
+//   host: "localhost",
+//   user: "karleenrichards",
+//   port: 5432,
+//   password: "",
+//   database: "kr-videos",
+// });
+
+const db = new Pool({
+  host: process.env.HOST,
+  user: process.env.USER,
+  port: 5432,
+  password: "",
+  database: process.env.DATABASE,
+});
+
+// const db = new Pool({
+//   host: "localhost",
+//   user: process.env.USER,
+//   port: 5432,
+//   password: "",
+//   database: process.env.DATABASE,
+// });
+
+// app.get("/videos", function (req, res) {
+//   db.query("SELECT * FROM movies")
+//     .then((result) => {
+//       res.status(200).json(result.rows);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+app.get("/videos", (req, res) => {
+  db.query("SELECT * FROM movies", (err, result) => {
+    if (err) {
+      console.error("Error executing query:", err);
+      res.status(500).send("Internal server error");
+    } else {
+      res.json(result.rows);
+    }
+  });
 });
 
 // app.get("/videos", (request, response) => {
