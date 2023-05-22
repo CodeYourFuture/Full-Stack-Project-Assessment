@@ -10,16 +10,22 @@ app.use(express.urlencoded({ extended: false }));
 
 let videos = require("../exampleresponse.json");
 
-// GET ALL VIDEOS
+// GET
 app.get("/", (req, res) => {
+  res.send("You are on Andriana's video server");
+});
+
+// GET ALL VIDEOS
+app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
 // POST VIDEO
-app.post("/", (req, res) => {
+app.post("/video", (req, res) => {
   const { title, url } = req.body;
   let randomID = Math.floor(100000 + Math.random() * 900000);
   let randomRating = Math.floor(100 + Math.random() * 900);
+  const word = "youtube";
 
   const newVideo = {
     id: randomID,
@@ -34,12 +40,21 @@ app.post("/", (req, res) => {
       .json({ result: "failure", message: "Video could not be added" });
   }
 
+  if (!newVideo.url.includes(word)) {
+    return res.status(404).json({ message: "Enter valid YouTube address" });
+  }
+
+  if (newVideo.url.split("").length > 43) {
+    console.log(newVideo.url.split("").slice(0, 43).join(""));
+    // res.send()
+  }
+
   videos.push(newVideo);
   res.json(videos);
 });
 
 // GET BY ID
-app.get("/:id", (req, res) => {
+app.get("/video:id", (req, res) => {
   const foundVideo = videos.find(
     (video) => video.id === parseInt(req.params.id)
   );
@@ -50,7 +65,7 @@ app.get("/:id", (req, res) => {
 });
 
 // DELETE BY ID
-app.delete("/:id", (req, res) => {
+app.delete("/video:id", (req, res) => {
   const foundVideo = videos.find(
     (video) => video.id === parseInt(req.params.id)
   );

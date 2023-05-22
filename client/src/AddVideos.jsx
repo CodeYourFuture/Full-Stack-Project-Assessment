@@ -12,6 +12,8 @@ function AddVideos({ setVideos }) {
 
   const [formData, setFormData] = useState(initialState);
 
+  const [handleError, setHandleError] = useState(null);
+
   // function handleSubmit(event) {
   //   event.preventDefault();
 
@@ -29,7 +31,7 @@ function AddVideos({ setVideos }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3005/", {
+    fetch("http://localhost:3005/video", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,18 +43,23 @@ function AddVideos({ setVideos }) {
     })
       .then((response) => {
         console.log(response);
-        if (!response.ok) {
-          throw new Error("Failed to add video");
-        }
+        // if (!response.ok) {
+        //   throw new Error("Failed to add video");
+        // }
         return response.json();
       })
       .then((data) => {
-        console.log("Success:", data);
-        setVideos(data);
-        setFormData(initialState);
+        if (data.message) {
+          console.log(data.message);
+          setHandleError(data.message);
+        } else {
+          console.log("Success:", data);
+          setVideos(data);
+          setFormData(initialState);
+        }
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.log(error);
       });
   };
 
@@ -61,37 +68,268 @@ function AddVideos({ setVideos }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
+  // return (
+  //   <div>
+  //     {handleError ? (
+  //       <div>
+  //         <p>{handleError}</p>
+  //         <div className="container">
+  //           <form onSubmit={handleSubmit} className="booking-form">
+  //             <input
+  //               id="title"
+  //               placeholder="Title"
+  //               type="text"
+  //               className="form-control"
+  //               value={formData.title}
+  //               name="title"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="first"
+  //               placeholder="Enter first name"
+  //               type="text"
+  //               className="form-control"
+  //               value={formData.firstName}
+  //               name="firstName"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="last"
+  //               placeholder="Enter surname"
+  //               type="text"
+  //               className="form-control"
+  //               value={formData.surname}
+  //               name="surname"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="email"
+  //               placeholder="Enter email"
+  //               type="email"
+  //               className="form-control"
+  //               value={formData.email}
+  //               name="email"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="room-id"
+  //               placeholder="Enter Room ID"
+  //               type="number"
+  //               className="form-control"
+  //               value={formData.roomId}
+  //               name="roomId"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="check-in"
+  //               placeholder="Check-in date"
+  //               type="date"
+  //               className="form-control"
+  //               value={formData.checkInDate}
+  //               name="checkInDate"
+  //               onChange={handleInputChange}
+  //             />
+  //             <input
+  //               id="check-out"
+  //               placeholder="Check-out date"
+  //               type="date"
+  //               className="form-control"
+  //               value={formData.checkOutDate}
+  //               name="checkOutDate"
+  //               onChange={handleInputChange}
+  //             />
+  //           </form>
+  //           <button
+  //             id="submit-form"
+  //             className="btn btn-primary"
+  //             type="submit"
+  //             onClick={handleSubmit}
+  //           >
+  //             Submit
+  //           </button>
+  //         </div>
+  //       </div>
+  //     ) : (
+  //       <div className="container">
+  //         <form onSubmit={handleSubmit} className="booking-form">
+  //           <input
+  //             id="title"
+  //             placeholder="Title"
+  //             type="text"
+  //             className="form-control"
+  //             value={formData.title}
+  //             name="title"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="first"
+  //             placeholder="Enter first name"
+  //             type="text"
+  //             className="form-control"
+  //             value={formData.firstName}
+  //             name="firstName"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="last"
+  //             placeholder="Enter surname"
+  //             type="text"
+  //             className="form-control"
+  //             value={formData.surname}
+  //             name="surname"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="email"
+  //             placeholder="Enter email"
+  //             type="email"
+  //             className="form-control"
+  //             value={formData.email}
+  //             name="email"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="room-id"
+  //             placeholder="Enter Room ID"
+  //             type="number"
+  //             className="form-control"
+  //             value={formData.roomId}
+  //             name="roomId"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="check-in"
+  //             placeholder="Check-in date"
+  //             type="date"
+  //             className="form-control"
+  //             value={formData.checkInDate}
+  //             name="checkInDate"
+  //             onChange={handleInputChange}
+  //           />
+  //           <input
+  //             id="check-out"
+  //             placeholder="Check-out date"
+  //             type="date"
+  //             className="form-control"
+  //             value={formData.checkOutDate}
+  //             name="checkOutDate"
+  //             onChange={handleInputChange}
+  //           />
+  //         </form>
+  //         <button
+  //           id="submit-form"
+  //           className="btn btn-primary"
+  //           type="submit"
+  //           onClick={handleSubmit}
+  //         >
+  //           Submit
+  //         </button>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
+
   return (
     <div>
-      <button onClick={toggleShow}>Add Video</button>
+      <section>
+        <button onClick={toggleShow}>Click for form to add video</button>
+      </section>
       {toggleArea && (
-        <form method="post" onSubmit={handleSubmit}>
-          <legend>Video Submission</legend>
-          <section className="title-block">
-            <label htmlFor="title">Enter title: </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </section>
-          <section>
-            <label htmlFor="url">Enter URL: </label>
-            <input
-              type="url"
-              id="url"
-              name="url"
-              value={formData.url}
-              onChange={handleChange}
-            />
-          </section>
-          <button type="submit">Add Video</button>
-        </form>
+        <section>
+          {handleError ? (
+            <div>
+              <p>{handleError}</p>
+              <section>
+                <form method="post" onSubmit={handleSubmit}>
+                  <legend>Video Submission</legend>
+                  <section className="title-block">
+                    <label htmlFor="title">Enter title: </label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                    />
+                  </section>
+                  <section>
+                    <label htmlFor="url">Enter URL: </label>
+                    <input
+                      type="url"
+                      id="url"
+                      name="url"
+                      value={formData.url}
+                      onChange={handleChange}
+                    />
+                  </section>
+                  <button type="submit">Add Video</button>
+                </form>
+              </section>
+            </div>
+          ) : (
+            <section>
+              <form method="post" onSubmit={handleSubmit}>
+                <legend>Video Submission</legend>
+                <section className="title-block">
+                  <label htmlFor="title">Enter title: </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                  />
+                </section>
+                <section>
+                  <label htmlFor="url">Enter URL: </label>
+                  <input
+                    type="url"
+                    id="url"
+                    name="url"
+                    value={formData.url}
+                    onChange={handleChange}
+                  />
+                </section>
+                <button type="submit">Add Video</button>
+              </form>
+            </section>
+          )}
+        </section>
       )}
     </div>
   );
+
+  // return (
+  //   <div>
+  //     <button onClick={toggleShow}>Add Video</button>
+  //     {toggleArea && (
+  //       <form method="post" onSubmit={handleSubmit}>
+  //         <legend>Video Submission</legend>
+  //         <section className="title-block">
+  //           <label htmlFor="title">Enter title: </label>
+  //           <input
+  //             type="text"
+  //             id="title"
+  //             name="title"
+  //             value={formData.title}
+  //             onChange={handleChange}
+  //           />
+  //         </section>
+  //         <section>
+  //           <label htmlFor="url">Enter URL: </label>
+  //           <input
+  //             type="url"
+  //             id="url"
+  //             name="url"
+  //             value={formData.url}
+  //             onChange={handleChange}
+  //           />
+  //         </section>
+  //         <button type="submit">Add Video</button>
+  //       </form>
+  //     )}
+  //   </div>
+  // );
 }
 
 export default AddVideos;

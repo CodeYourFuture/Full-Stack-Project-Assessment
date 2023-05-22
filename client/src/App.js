@@ -11,7 +11,7 @@ function App() {
   const toggleShow = () => setToggleArea((s) => !s);
 
   function getAllVideos() {
-    fetch("http://localhost:3005/")
+    fetch("http://localhost:3005/videos")
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
