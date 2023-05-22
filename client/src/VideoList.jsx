@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./VideoList.css";
-import videoData from "./exampleresponse.json";
 import Input from "./Input";
-import Button from "@mui/material/Button";
 
 const VideoList = () => {
-  const [videos, setVideos] = useState(videoData);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    orderVideosByUpvotes();
+    fetch(`http://localhost:8080/videos`)
+      .then((res) => res.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.log(error));
   }, []);
-
-  const orderVideosByUpvotes = () => {
-    const orderedVideos = [...videos].sort((a, b) => b.rating - a.rating);
-    setVideos(orderedVideos);
-  };
 
   const handleVoteUp = (id) => {
     const updateVideos = videos.map((video) => {
@@ -38,27 +34,32 @@ const VideoList = () => {
     setVideos(updateVideos);
   };
 
-  const handleDelete = (id) => {
-    const filteredVideos = videos.filter((video) => video.id !== id);
-    setVideos(filteredVideos);
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:8080/videos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      const deletedVideoList = await response.json();
+      setVideos(deletedVideoList);
+    }
   };
 
-  const isValidYouTubeURL = (url) => {
-    // Regular expression to match YouTube URL pattern
-    const youtubeRegex = /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
-    return youtubeRegex.test(url);
-  };
-
-  const handleAddVideo = (title, url) => {
-    if (title !== "" && isValidYouTubeURL(url)) {
-      const newVideo = {
-        id: Date.now(),
-        title,
-        url,
-        rating: 0,
-        postedAt: new Date().toLocaleString(), // Add the current date and time
-      };
+  const handleAddVideo = async (title, url) => {
+    const response = await fetch("http://localhost:8080/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, url }),
+    });
+    if (response.ok) {
+      const newVideo = await response.json();
       setVideos([...videos, newVideo]);
+    } else {
+      // Handle error
     }
   };
 
