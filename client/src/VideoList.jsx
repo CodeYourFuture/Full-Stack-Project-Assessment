@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./VideoList.css";
 import videoData from "./exampleresponse.json";
 import Input from "./Input";
+import Button from "@mui/material/Button";
 
 const VideoList = () => {
   const [videos, setVideos] = useState(videoData);
+
+  useEffect(() => {
+    orderVideosByUpvotes();
+  }, []);
+
+  const orderVideosByUpvotes = () => {
+    const orderedVideos = [...videos].sort((a, b) => b.rating - a.rating);
+    setVideos(orderedVideos);
+  };
 
   const handleVoteUp = (id) => {
     const updateVideos = videos.map((video) => {
@@ -33,14 +43,23 @@ const VideoList = () => {
     setVideos(filteredVideos);
   };
 
+  const isValidYouTubeURL = (url) => {
+    // Regular expression to match YouTube URL pattern
+    const youtubeRegex = /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+    return youtubeRegex.test(url);
+  };
+
   const handleAddVideo = (title, url) => {
-    const newVideo = {
-      id: Date.now(),
-      title,
-      url,
-      rating: 0,
-    };
-    setVideos([...videos, newVideo]);
+    if (title !== "" && isValidYouTubeURL(url)) {
+      const newVideo = {
+        id: Date.now(),
+        title,
+        url,
+        rating: 0,
+        postedAt: new Date().toLocaleString(), // Add the current date and time
+      };
+      setVideos([...videos, newVideo]);
+    }
   };
 
   return (
@@ -60,6 +79,7 @@ const VideoList = () => {
               ></iframe>
             </div>
             <p>vote: {video.rating}</p>
+            <p>Uploaded At: {video.postedAt}</p>
             <div className="group-button">
               <button onClick={() => handleVoteUp(video.id)}>Vote Up</button>
               <button onClick={() => handleVoteDown(video.id)}>
