@@ -4,88 +4,80 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const { Pool } = require("pg");
+
+const db = new Pool({
+  host: "localhost",
+  user: "karleenrichards",
+  port: 5432,
+  password: "",
+  database: "kr-videos",
+});
+
 app.use(bodyParser.json());
 app.use(cors());
 
-let videos = [
-  {
-    id: "keZdZjpZWnY",
-    title: "[5/10/2023] Judy Justice S02",
-    url: "https://www.youtube.com/watch?v=keZdZjpZWnY",
-    rating: 11,
-  },
-
-  {
-    id: "hplD4QyV4Q8",
-    title: "Squash - Trending",
-    url: "https://www.youtube.com/watch?v=hplD4QyV4Q8",
-    rating: 230,
-  },
-
-  {
-    id: "xlMGUWjIitk",
-    title: "1 In A Trillion Moments in Sports",
-    url: "https://www.youtube.com/watch?v=5BeEjfq5dYI",
-    rating: 73,
-  },
-
-  {
-    id: "v=qO--eo7xyV4",
-    title: "The Simpsons | Best Moments",
-    url: "https://www.youtube.com/watch?v=qO--eo7xyV4",
-    rating: 3211,
-  },
-
-  {
-    id: "kbKty5ZVKMY",
-    title: "Learn Basic SQL in 15 minutes",
-    url: "https://www.youtube.com/watch?v=kbKty5ZVKMY",
-    rating: 211,
-  },
-  {
-    id: "7dPlIY6GPho",
-    title: "100 Amazing Phone Cases - Life Hacks",
-    url: "https://www.youtube.com/watch?v=7dPlIY6GPho",
-    rating: 111,
-  },
-  {
-    id: "71h8MZshGSs",
-    title: "ABC Song + More Nursery Rhymes & Kids Songs - CoComelon",
-    url: "https://www.youtube.com/watch?v=71h8MZshGSs",
-    rating: 171,
-  },
-  {
-    id: "h7spCXYLndY",
-    title: "Easy Summer Box Braids! (Beginner Friendly)",
-    url: "https://www.youtube.com/watch?v=h7spCXYLndY",
-    rating: 76,
-  },
-  {
-    id: "uhYiRmGURwE",
-    title: "I Turned Dollar Store Food Gourmet",
-    url: "https://www.youtube.com/watch?v=uhYiRmGURwE",
-    rating: 23,
-  },
-
-  {
-    id: "zJytmRO8K7M",
-    title: "Osocity Soca Maix - Best Of Old School",
-    url: "https://www.youtube.com/watch?v=zJytmRO8K7M",
-    rating: 2111,
-  },
-];
-
-app.get("/videos", (request, response) => {
-  const sortType = request.query.sort;
-  videos = videos.sort((a, b) => b.rating - a.rating);
-
-  if (sortType === "asc") {
-    videos.sort((a, b) => a.rating - b.rating);
-  } else if (sortType === "desc") {
-    videos.sort((a, b) => b.rating - a.rating);
-  }
-  response.status(200).json(videos);
+app.get("/videos", function (req, res) {
+  db.query("SELECT * FROM movies")
+    .then((result) => {
+      res.status(200).json({ videos: result.rows });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
+
+// app.get("/videos", (request, response) => {
+//   const sortType = request.query.sort;
+//   videos = videos.sort((a, b) => b.rating - a.rating);
+
+//   if (sortType === "asc") {
+//     videos.sort((a, b) => a.rating - b.rating);
+//   } else if (sortType === "desc") {
+//     videos.sort((a, b) => b.rating - a.rating);
+//   }
+//   response.status(200).json(videos);
+// });
+
+app.delete("/videos/:id", function (req, res) {
+  const videoId = parseInt(req.params.id);
+  db.query("SELECT * FROM movies WHERE id = $1", [videoId])
+    .then((result) => {
+      res.status(200).send("Video deleted successfully");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// GET BY ID
+// app.get("/videos/:id", function (request, response) {
+//   const videoId = request.params.id;
+//   let video = videos.find((video) => video.id === videoId);
+//   video ? response.send(video) : response.status(404);
+// });
+
+app.get("/videos/:id", function (req, res) {
+  const videoId = parseInt(req.params.id);
+  db.query("DELETE * FROM movies WHERE id = $1", [videoId])
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// DELETE BY ID
+// app.delete("/videos/:id", function (request, response) {
+//   const videoId = request.params.id;
+//   videos.find((video) => video.id === videoId)
+//     ? (videos = videos.filter((video) => {
+//         return video.id !== videoId;
+//       }))
+//     : response.status(404);
+//   response.send(videos).status(204);
+// });
 
 // POST"/"
 app.post("/videos", function (request, response) {
@@ -112,6 +104,18 @@ app.post("/videos", function (request, response) {
     ""
   );
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentDay = currentDate.getDate();
+  const uploadDate = currentYear + "-" + currentMonth + "-" + currentDay;
+
+  const currentTime = new Date();
+  const currentHours = currentTime.getHours();
+  const currentMinutes = currentTime.getMinutes();
+  const currentSeconds = currentTime.getSeconds();
+  const uploadTime = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+
   request.body.uploadTime = uploadTime;
   request.body.uploadDate = uploadDate;
   request.body.likes = 0;
@@ -124,22 +128,6 @@ app.post("/videos", function (request, response) {
         result: "failure",
         message: "Video could not be saved",
       });
-});
-
-app.get("/videos/:id", function (request, response) {
-  const videoId = request.params.id;
-  let video = videos.find((video) => video.id === videoId);
-  video ? response.send(video) : response.status(404);
-});
-
-app.delete("/videos/:id", function (request, response) {
-  const videoId = request.params.id;
-  videos.find((video) => video.id === videoId)
-    ? (videos = videos.filter((video) => {
-        return video.id !== videoId;
-      }))
-    : response.status(404);
-  response.send(videos).status(204);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
