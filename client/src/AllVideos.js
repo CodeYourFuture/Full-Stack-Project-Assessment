@@ -4,8 +4,9 @@ import { videosContext } from "./App.js";
 import TuneIcon from "@mui/icons-material/Tune";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export const AllVideos = () => {
+export const AllVideos = ({ desc, setDesc }) => {
   const { videos, setVideos } = useContext(videosContext);
 
   function handleLikes(videoId) {
@@ -38,7 +39,12 @@ export const AllVideos = () => {
     <div className="all-videos-wrapper">
       <h2 className="all-videos-title">Videos</h2>
       <div className="all-videos-filter-wrapper">
-        <p className="all-videos-filter-text">Filter By</p>
+        <button
+          className="all-videos-filter-btn"
+          onClick={() => setDesc((value) => !value)}
+        >
+          {desc ? "Top Rated" : "Least Rated"}
+        </button>
 
         <TuneIcon
           className="all-videos-filter-icon"
@@ -52,60 +58,52 @@ export const AllVideos = () => {
         />
       </div>
       <div className="all-videos-container">
-        {videos
-          ?.sort((a, b) => b.rating - a.rating)
-          .map((video) => {
-            return (
-              <ScrollAnimation
-                key={video.id}
-                animateIn="animate__animated animate__fadeInUp"
-              >
-                <div className="video-section-wrapper">
-                  <iframe
-                    // src={`https://www.youtube.com/embed/${
-                    //   video.url.split("=")[1]
-                    // }`}
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    title={video.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="video-iframe"
-                  ></iframe>
-                  <div className="video-text-wrapper">
-                    <p className="video-title">{video.title}</p>
-                    <div className="video-like-btns-wrapper">
-                      <button
-                        // id="Like"
-                        // title="Like"
-                        className="video-like-btn"
-                        onClick={() => handleLikes(video.id)}
-                      >
-                        Like
-                      </button>
-                      <button
-                        className="video-dislike-btn"
-                        onClick={() => handleDislikes(video.id)}
-                      >
-                        Dislike
-                      </button>
-                    </div>
-                    <div>
-                      <p className="video-rating-text">{video.rating} Likes</p>
-                    </div>
-                    <div className="video-delete-btn-wrapper">
-                      <button
-                        className="video-delete-btn"
-                        onClick={() => handleDelete(video.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+        {videos.map((video) => {
+          return (
+            <ScrollAnimation
+              key={video.id}
+              animateIn="animate__animated animate__fadeInUp"
+            >
+              <div className="video-section-wrapper">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe"
+                ></iframe>
+                <div className="video-text-wrapper">
+                  <p className="video-title">{video.title}</p>
+                  <div className="video-like-btns-wrapper">
+                    <button
+                      className="video-like-btn"
+                      onClick={() => handleLikes(video.id)}
+                    >
+                      Like
+                    </button>
+                    <button
+                      className="video-dislike-btn"
+                      onClick={() => handleDislikes(video.id)}
+                    >
+                      Dislike
+                    </button>
+                    <button
+                      className="video-delete-btn"
+                      onClick={() => handleDelete(video.id)}
+                    >
+                      <DeleteIcon />
+                    </button>
                   </div>
+                  <div>
+                    <p className="video-rating-text">{video.rating} Likes</p>
+                  </div>
+                  <div className="video-delete-btn-wrapper"></div>
                 </div>
-              </ScrollAnimation>
-            );
-          })}
+              </div>
+            </ScrollAnimation>
+          );
+        })}
       </div>
     </div>
   );

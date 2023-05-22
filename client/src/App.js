@@ -6,57 +6,41 @@ import { useState, React, createContext, useEffect } from "react";
 import { AllVideos } from "./AllVideos";
 import { AddVideoForm } from "./AddVideoForm";
 import { Header } from "./Header";
-// import VideosJson from "./exampleresponse.json";
-import { HomeCarousel } from "./HomeCarousel";
 import { Main } from "./Main";
 import { HomeHero } from "./HomeHero";
 import { Steps } from "./Steps";
-import { Login } from "./Login";
-import { Footer } from "./Footer";
 import { About } from "./About.js";
 
 export let videosContext = createContext(null);
 
 function App() {
   const [videos, setVideos] = useState("");
+  const [isDesc, setIsDesc] = useState(true);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/videos")
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error("Something went wrong");
-  //       }
-  //       res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setVideos(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [videos]);
-
-  async function fetchData() {
-    try {
-      const response = await fetch("http://localhost:5000/videos");
-      const data = await response.json();
-      console.log(data);
-      setVideos(data);
-      // Code to handle the data will be added here
-    } catch (error) {
-      // Error handling code will be added here
-    }
-  }
+  const url = "http://localhost:5000/videos";
 
   useEffect(() => {
+    function fetchData() {
+      fetch(`${url}?sort=${isDesc ? "desc" : "asc"}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setVideos(data);
+        })
+        .catch((error) => error);
+    }
     fetchData();
-  }, []);
+  }, [isDesc]);
 
   return (
     <div className="App">
       <videosContext.Provider value={{ videos, setVideos }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route
               path="/"
               element={
@@ -69,9 +53,9 @@ function App() {
                     <Steps />
                     <AddVideoForm />
                   </div>
-                  {videos.length && <HomeCarousel />}
-                  {videos.length && <AllVideos />}
-                  <Footer />
+                  {videos.length > 0 && (
+                    <AllVideos desc={isDesc} setDesc={setIsDesc} />
+                  )}
                 </div>
               }
             />

@@ -4,11 +4,8 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 app.use(bodyParser.json());
 app.use(cors());
-// app.use(cors({ origin: "http://localhost:3001" }));
 
 let videos = [
   {
@@ -81,7 +78,6 @@ let videos = [
 app.get("/videos", (request, response) => {
   const sortType = request.query.sort;
   videos = videos.sort((a, b) => b.rating - a.rating);
-  console.log(sortType);
 
   if (sortType === "asc") {
     videos.sort((a, b) => a.rating - b.rating);
@@ -93,9 +89,9 @@ app.get("/videos", (request, response) => {
 
 // POST"/"
 app.post("/videos", function (request, response) {
-  // console.log(request.body.url.split("="));
   const videoTitle = request.body.title;
   const VideoUrl = request.body.url;
+
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
 
   if (!videoTitle) {
@@ -115,6 +111,9 @@ app.post("/videos", function (request, response) {
     "https://www.youtube.com/watch?v=",
     ""
   );
+
+  request.body.uploadTime = uploadTime;
+  request.body.uploadDate = uploadDate;
   request.body.likes = 0;
   request.body.dislikes = 0;
   videos.push(request.body);
@@ -127,14 +126,12 @@ app.post("/videos", function (request, response) {
       });
 });
 
-// GET BY ID
 app.get("/videos/:id", function (request, response) {
   const videoId = request.params.id;
   let video = videos.find((video) => video.id === videoId);
   video ? response.send(video) : response.status(404);
 });
 
-// DELETE BY ID
 app.delete("/videos/:id", function (request, response) {
   const videoId = request.params.id;
   videos.find((video) => video.id === videoId)

@@ -32,9 +32,6 @@ legend {
 @media only screen and (min-width: 375px) {
     legend {
       text-align: center;
-      /* font-weight: bold;
-      font-size: 24px; */
-      /* margin: 0; */
     }
 }
   

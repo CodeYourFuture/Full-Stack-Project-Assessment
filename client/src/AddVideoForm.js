@@ -9,39 +9,21 @@ import "animate.css/animate.min.css";
 export const AddVideoForm = () => {
   const { videos, setVideos } = useContext(videosContext);
 
-  const [newVideo, setNewVideo] = useState({});
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
-  const [uploadTime, setUploadTime] = useState("");
-  const [uploadDate, setUploadDate] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; // add 1 because getMonth() returns 0-11
-    const currentDay = currentDate.getDate();
-    newVideo.uploadDate = currentYear + "-" + currentMonth + "-" + currentDay;
-
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    const currentMinutes = currentTime.getMinutes();
-    const currentSeconds = currentTime.getSeconds();
-    newVideo.uploadTime =
-      currentHours + ":" + currentMinutes + ":" + currentSeconds;
-
     fetch("http://localhost:5000/videos", {
       method: "POST",
-      mode: "cors", // no-cors, *cors, same-origin
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title: videoTitle,
         url: videoUrl,
-        time: uploadTime,
-        date: uploadDate,
       }),
     })
       .then((response) => {
@@ -52,11 +34,8 @@ export const AddVideoForm = () => {
       })
       .then((newVideo) => {
         setVideos([...videos, newVideo]);
-        setNewVideo({});
         setVideoTitle("");
         setVideoUrl("");
-        setUploadTime("");
-        setUploadDate("");
       })
       .catch((error) => alert(error.message));
   }

@@ -42,7 +42,15 @@
 .all-videos-filter-wrapper {
     display: flex;
     gap: 5px;
+    padding-left: 100px;
 } 
+
+.all-videos-filter-btn {
+    /* border: 2px dotted red; */
+    background-color: transparent;
+    color: white;
+    border: none;
+}
 
 @media only screen and (min-width: 375px) {
     .all-videos-filter-wrapper {
@@ -177,7 +185,7 @@
 }
  
 .video-delete-btn {
-    width: 248px;
+    width: 50px;
     padding: 10px 0;
     background-color: transparent;
     border: 1px solid #615c5c;
@@ -186,6 +194,6 @@
 }
 
 .video-delete-btn:hover {
-    background-color: #946dae;
+    background-color: rgb(212, 4, 4);
     border: none;
 }
