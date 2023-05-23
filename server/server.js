@@ -22,6 +22,7 @@ app.post("/", (req, res) => {
     id: videos.length + 1,
     title: title,
     url: url,
+    votes: 0,
   };
 
   videos.push(newVideo);
