@@ -8,7 +8,7 @@ import Sort from "./Sort";
 
 const HomePage = () => {
   const [videoData, setVideoData] = useState([]);
-  const [order, setOrder] = useState("desc");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     fetch("http://localhost:5000")
@@ -48,16 +48,17 @@ const HomePage = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleSortChange = (selectedValue) => {
-    fetch(`http://localhost:5000/?order=${selectedValue}`)
+  const handleToggleSortOrder = () => {
+    let newSortOrder = "";
+    sortOrder === "desc" ? (newSortOrder = "asc") : (newSortOrder = "desc");
+    setSortOrder(newSortOrder);
+    fetch(`http://localhost:5000/?order=${newSortOrder}`)
       .then((response) => response.json())
       .then((data) => {
         setVideoData(data);
-        setOrder(selectedValue);
       })
       .catch((error) => console.log(error));
   };
-
   const updateRating = (videoId, newRating) => {
     // Make a PUT request to update the rating on the server
     fetch(`http://localhost:5000/${videoId}`, {
@@ -78,7 +79,7 @@ const HomePage = () => {
     <div>
       <Header />
       <AddVideo updateVideoData={updateVideoData} />
-      <Sort onChange={handleSortChange} />
+      <Sort sortOrder={sortOrder} onToggleSortOrder={handleToggleSortOrder} />
       <VCard
         videoData={videoData}
         onDelete={deleteVideo}
