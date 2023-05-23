@@ -27,7 +27,9 @@ function AddVideo({ videos, setVideos }) {
         }
     };
 
-    const handleFormSubmit = () => {
+    
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
         const videoId = Math.floor(Math.random() * 1000000);
         const videoRating = Math.floor(Math.random() * 10000);
         let newVideo = {};
