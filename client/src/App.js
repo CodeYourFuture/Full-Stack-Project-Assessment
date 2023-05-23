@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
 // import React, {useState, useEffect} from "react";
+import { OrderButton } from "./OrderButton";
 import VideoComponent from "./VideoComponent";
 // import data from "`./exampleresponse.json;
 
@@ -71,11 +72,16 @@ import VideoComponent from "./VideoComponent";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
-  const [ascending, setAscending] =useState(false)
+  // const [ascending, setAscending] =useState(false)
+   const [error, setError] = useState(null);
+   const [order, setOrder] = useState("");
   async function fetchData() {
     try {
       const fetchURL =
-        "http://localhost:5000/videos?sort=" + (ascending ? "asc" : "desc");
+        (`http://localhost:5000/?order=${order}`,{
+          mode: "cors",
+        }
+        );
       const response = await fetch(fetchURL );
       console.log("fetchURL", fetchURL);
       const data = await response.json();
@@ -83,21 +89,28 @@ const App = () => {
       setVideos(data);
       // Code to handle the data will be added here
     } catch (error) {
-      // Error handling code will be added here
+      setError("Error", error);
+      console.log("error");
     }
   }
+   
 
   useEffect(() => {
     fetchData();
     console.log("useEffect");
-  }, []);
+  }, [order]);
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
       <AddVideo videos={videos} setVideos={setVideos} />
-{/* <button onclick={}></button> */}
+      <OrderButton
+        videos={videos}
+        setVideos={setVideos}
+        order={order}
+        setOrder={setOrder}
+      />
       <VideoComponent videos={videos} setVideos={setVideos} />
     </div>
   );
