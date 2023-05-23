@@ -1,17 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
+import Rating from "./Rating";
+
 
 const VideoComponent = ({ data }) => {
+  const [videos, setVideos] = useState(data);
+
+  const handleDelete = (id) => {
+    setVideos(videos.filter((video) => video.id !== id));
+  };
   return (
     <div>
-      {data.map((video, index) => (
+      {videos.map((video, index) => (
         <div key={index} className="video-card">
           <h3>{video.title}</h3>
           <iframe
             src={video.url.replace("watch?v=", "embed/")}
             title={video.title}
           ></iframe>
-          <p>Votes: {video.rating}</p>
-          <button>Remove</button>
+          <Rating rating={video.rating} />
+          <button onClick={() => handleDelete(video.id)}>Remove</button>
         </div>
       ))}
     </div>

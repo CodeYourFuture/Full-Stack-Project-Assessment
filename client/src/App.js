@@ -1,5 +1,7 @@
 import "./App.css";
 import React from "react";
+import AddVideo from "./AddVideo";
+
 
 import VideoComponent from "./VideoComponent";
 
@@ -75,9 +77,9 @@ const App = () => {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <AddVideo data={videoData} />
 
-      <VideoComponent data={videoData}/>
-
+      <VideoComponent data={videoData} />
     </div>
   );
 };
