@@ -33,3 +33,4 @@ const Video = ({ video, handleVote, handleRemove }) => {
 };
 
 export default Video;
+
