@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 
-
-
-
-function AddVideo({ videoData }) {
+function AddVideo({ videos, setVideos }) {
   const [showValid, Setvalid] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [allData, setAllData] = useState(videoData);
+  //   const [, setVideos] = useState(videos);
 
   const handleShowValid = () => {
     Setvalid(!showValid);
@@ -21,7 +18,7 @@ function AddVideo({ videoData }) {
       url,
     };
 
-    setAllData([...allData, newVideoData]);
+    setVideos([newVideoData, ...videos]);
     handleShowValid();
     setTitle("");
     setUrl("");
