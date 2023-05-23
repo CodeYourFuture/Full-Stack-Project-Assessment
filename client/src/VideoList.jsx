@@ -6,7 +6,9 @@ const VideoList = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/videos`)
+    fetch(
+      `https://full-stack-project-assessment-server-kus1.onrender.com/videos`
+    )
       .then((res) => res.json())
       .then((data) => setVideos(data))
       .catch((error) => console.log(error));
@@ -35,12 +37,15 @@ const VideoList = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:8080/videos/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `https://full-stack-project-assessment-server-kus1.onrender.com/videos/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const deletedVideoList = await response.json();
       setVideos(deletedVideoList);
@@ -48,13 +53,16 @@ const VideoList = () => {
   };
 
   const handleAddVideo = async (title, url) => {
-    const response = await fetch("http://localhost:8080/videos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, url }),
-    });
+    const response = await fetch(
+      "https://full-stack-project-assessment-server-kus1.onrender.com/videos",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, url }),
+      }
+    );
     if (response.ok) {
       const newVideo = await response.json();
       setVideos([...videos, newVideo]);
