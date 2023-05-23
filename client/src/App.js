@@ -2,8 +2,10 @@ import { useState } from "react";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
+import SortFilters from "./components/SortFilters";
 import data from "./exampleresponse.json";
 import "./App.css";
+import Search from "./components/Search";
 
 function App() {
   const [videos, setVideos] = useState(data);
@@ -38,20 +40,54 @@ function App() {
     );
   };
 
+  const sortByVotes = (sortOrder) => {
+    const sortedVideos = [...videos].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.rating - b.rating;
+      } else {
+        return b.rating - a.rating;
+      }
+    });
+    setVideos(sortedVideos);
+  };
+
+  const sortByTitle = (sortOrder) => {
+    const sortedVideos = [...videos].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    });
+    setVideos(sortedVideos);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <header className="App-header">
+        <Header />
+      </header>
       <AddVideoForm onAddVideo={addVideo} />
-      <div className="video-list">
-        {videos.map((video) => (
-          <VideoCard
-            key={video.id}
-            video={video}
-            removeVideo={removeVideo}
-            upVote={upVote}
-            downVote={downVote}
+
+      <div className="video-section">
+        <div className="header-controls">
+          <SortFilters
+            onSortByVotes={sortByVotes}
+            onSortByTitle={sortByTitle}
           />
-        ))}
+          <Search />
+        </div>
+        <div className="video-list">
+          {videos.map((video) => (
+            <VideoCard
+              key={video.id}
+              video={video}
+              removeVideo={removeVideo}
+              upVote={upVote}
+              downVote={downVote}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3,11 +3,19 @@ body {
   background-color: #000;
 }
 
-.App {
+.App,
+.App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+.video-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .video-list {
@@ -17,4 +25,10 @@ body {
   gap: 20px;
   max-width: 1290px;
   width: 100%;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
