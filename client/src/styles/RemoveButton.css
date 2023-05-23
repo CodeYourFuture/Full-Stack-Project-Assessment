@@ -1,0 +1,21 @@
+.remove-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  height: 40px;
+  background-color: red;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.remove-icon {
+  color: white;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.remove-text {
+  color: white;
+  font-size: 16px;
+}

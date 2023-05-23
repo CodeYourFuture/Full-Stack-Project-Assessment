@@ -1,0 +1,27 @@
+.vote-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.vote-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.like {
+  background-color: red;
+  color: white;
+}
+
+.dislike {
+  background-color: blue;
+  color: white;
+}
