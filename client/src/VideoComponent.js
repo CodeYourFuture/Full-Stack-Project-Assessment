@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import Rating from "./Rating";
 
 
-const VideoComponent = ({ data }) => {
-  const [videos, setVideos] = useState(data);
+const VideoComponent = ({ videos, setVideos }) => {
+
+  
+  // const [videos, setVideos] = useState(data);
 
   const handleDelete = (id) => {
     setVideos(videos.filter((video) => video.id !== id));

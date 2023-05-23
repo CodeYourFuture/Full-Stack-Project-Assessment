@@ -1,11 +1,9 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
-
-
+// import React, {useState, useEffect} from "react";
 import VideoComponent from "./VideoComponent";
-
-
+// import data from "`./exampleresponse.json;
 
 const videoData = [
   {
@@ -72,14 +70,31 @@ const videoData = [
 ];
 
 const App = () => {
+  const [videos, setVideos] = useState([]);
+  async function fetchData() {
+    try {
+      const response = await fetch("http://localhost:5000/videos");
+      const data = await response.json();
+      console.log(data);
+      setVideos(data);
+      // Code to handle the data will be added here
+    } catch (error) {
+      // Error handling code will be added here
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log("useEffect");
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo data={videoData} />
+      <AddVideo data={videos} />
 
-      <VideoComponent data={videoData} />
+      <VideoComponent videos={videos} setVideos={setVideos} />
     </div>
   );
 };
