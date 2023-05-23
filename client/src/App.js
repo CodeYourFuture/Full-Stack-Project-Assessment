@@ -1,12 +1,16 @@
 import { useState } from "react";
+import Header from "./components/Header";
+import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
-import RemoveButton from "./components/RemoveButton";
-import VoteButtons from "./components/VoteButtons";
 import data from "./exampleresponse.json";
 import "./App.css";
 
 function App() {
   const [videos, setVideos] = useState(data);
+
+  const addVideo = (video) => {
+    setVideos([video, ...videos]);
+  };
 
   const removeVideo = (id) => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
@@ -36,19 +40,19 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-      {videos.map((video) => (
-        <div className="video-list" key={video.id}>
-          <VideoCard video={video} />
-          <RemoveButton onclick={() => removeVideo(video.id)} />
-          <VoteButtons
-            onUpVote={() => upVote(video.id)}
-            onDownVote={() => downVote(video.id)}
+      <Header />
+      <AddVideoForm onAddVideo={addVideo} />
+      <div className="video-list">
+        {videos.map((video) => (
+          <VideoCard
+            key={video.id}
+            video={video}
+            removeVideo={removeVideo}
+            upVote={upVote}
+            downVote={downVote}
           />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
