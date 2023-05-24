@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import videos from "./exampleresponse.json";
 import Header from "./Header";
 import VCard from "./VCard";
 import AddVideo from "./AddVideo";
@@ -9,16 +8,19 @@ import Footer from "./Footer";
 const HomePage = () => {
   const [videoData, setVideoData] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://localhost:5000")
       .then((response) => response.json())
       .then((data) => {
         setVideoData(data);
-        console.log(data);
+        setIsLoading(false);
       })
-
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   }, []);
 
   const updateVideoData = (newVideoData) => {
@@ -35,7 +37,6 @@ const HomePage = () => {
   };
 
   const deleteVideo = (videoId) => {
-    // Make a DELETE request to the server with the videoId
     fetch(`http://127.0.0.1:5000/${videoId}/?order=${sortOrder}`, {
       method: "DELETE",
     })
@@ -44,14 +45,13 @@ const HomePage = () => {
         setVideoData(data);
         console.log(data);
       })
-
       .catch((error) => console.log(error));
   };
 
   const handleToggleSortOrder = () => {
-    let newSortOrder = "";
-    sortOrder === "desc" ? (newSortOrder = "asc") : (newSortOrder = "desc");
+    let newSortOrder = sortOrder === "desc" ? "asc" : "desc";
     setSortOrder(newSortOrder);
+
     fetch(`http://localhost:5000/?order=${newSortOrder}`)
       .then((response) => response.json())
       .then((data) => {
@@ -59,8 +59,8 @@ const HomePage = () => {
       })
       .catch((error) => console.log(error));
   };
+
   const updateRating = (videoId, newRating) => {
-    // Make a PUT request to update the rating on the server
     fetch(`http://localhost:5000/${videoId}`, {
       method: "PUT",
       headers: {
@@ -75,6 +75,7 @@ const HomePage = () => {
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <div className="container">
       <Header />
@@ -82,11 +83,15 @@ const HomePage = () => {
         <AddVideo updateVideoData={updateVideoData} />
         <Sort sortOrder={sortOrder} onToggleSortOrder={handleToggleSortOrder} />
       </div>
-      <VCard
-        videoData={videoData}
-        onDelete={deleteVideo}
-        onUpdateRating={updateRating}
-      />
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <VCard
+          videoData={videoData}
+          onDelete={deleteVideo}
+          onUpdateRating={updateRating}
+        />
+      )}
       <Footer />
     </div>
   );
