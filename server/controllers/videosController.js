@@ -1,7 +1,9 @@
-// neccessary for live deployment because older versions of node do not include `fetch`
-import fetch from "node-fetch";
-
 const database = require("../database/databaseConnection");
+
+// older versions of node do not include `fetch`
+// neccessary for live deployment
+// must use node-fetch@2 for CJS (node-fetch@3 is ESM)
+const fetch = require("node-fetch");
 
 const getAllVideos = async (req, res) => {
   try {
