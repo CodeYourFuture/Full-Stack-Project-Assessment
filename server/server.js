@@ -1,15 +1,22 @@
+require("dotenv").config();
+
 const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const videosRoutes = require("./routes/videosRoutes");
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+app.use(cors());
+app.use(morgan("dev"));
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/videos", videosRoutes);
+
+app.listen(process.env.PORT, () =>
+  console.log(`Server running on port ${process.env.PORT}`)
+);

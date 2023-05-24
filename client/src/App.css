@@ -1,3 +1,361 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", system-ui, sans-serif;
+  color: hsl(0, 0%, 20%);
+  /* line-height: 1.5; */
+  /* border: 1px solid red; */
+}
+
+:root {
+  --c1s1: hsl(184, 100%, 94%);
+  --c1s2: hsl(218, 100%, 87%);
+  --c1s3: hsl(227, 100%, 80%);
+  --c1s4: hsl(232, 100%, 74%);
+  --c1s5: hsl(234, 100%, 66%);
+  --c2s1: hsl(184, 74%, 89%);
+  --c2s2: hsl(219, 73%, 83%);
+  --c2s3: hsl(229, 75%, 76%);
+  --c2s4: hsl(234, 74%, 70%);
+  --c2s5: hsl(237, 73%, 63%);
+  --baz: hsl(195, 73%, 75%);
+}
+
+body {
+  max-width: 1080px;
+  margin: 0 auto;
+  background-color: hsl(0, 0%, 10%);
+}
+
+#App {
+  margin: 10px 0;
+  background-color: var(--c1s1);
+  border-radius: 5px;
+}
+
+.header-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: linear-gradient(var(--c2s1) 50%, var(--c1s3));
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid var(--c2s3);
+}
+
+.header-title-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-title {
+  padding: 10px;
+  /* background-color: var(--c2s1); */
+  /* background: linear-gradient(hsl(195, 73%, 75%) 15%, var(--c2s1)); */
+  background-color: hsl(0, 0%, 100%, 0.4);
+  border: 1px solid var(--c2s2);
+  border-radius: 5px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.header-title-image-container {
+}
+
+.header-title-image {
+  display: block;
+  max-height: 60px;
+}
+
+.header-controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.add-video-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.add-video-image-container {
+}
+
+.add-video-image {
+  display: block;
+  max-height: 48px;
+}
+
+.add-video-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  /* background-color: var(--c2s1); */
+  /* background: linear-gradient(hsl(195, 73%, 75%) 15%, var(--c2s1)); */
+  background-color: hsl(0, 0%, 100%, 0.4);
+  border: 1px solid var(--c2s2);
+}
+
+.add-video-form-fieldset {
+  border: 0;
+  padding: 5px 0;
+}
+
+.add-video-form-legend {
+  /* font-size: 16px; */
+  font-weight: 600;
+}
+
+.add-video-form-group-container {
+  display: flex;
+  gap: 5px;
+}
+
+.add-video-form-label {
+  font-weight: 600;
+}
+
+.add-video-form-input {
+  font-size: 13px;
+  width: 320px;
+}
+
+.add-video-form-submit {
+  padding: 5px 30px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  border: 1px solid var(--c1s3);
+  background-color: var(--c1s2);
+}
+
+.add-video-form-submit:hover {
+  background-color: var(--c1s3);
+}
+
+.sort-videos-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sort-videos-image-container {
+}
+
+.sort-videos-image {
+  display: block;
+  max-height: 48px;
+}
+
+.sort-videos-form {
+  padding: 5px 10px;
+  border-radius: 5px;
+  /* background-color: var(--c2s1); */
+  /* background: linear-gradient(hsl(195, 73%, 75%) 15%, var(--c2s1)); */
+  background-color: hsl(0, 0%, 100%, 0.4);
+  border: 1px solid var(--c2s2);
+}
+
+.sort-videos-form-fieldset {
+  border: 0;
+  padding: 5px 0;
+  display: grid;
+  grid-template-columns: 0.25fr 0.75fr;
+  row-gap: 5px;
+}
+
+.sort-videos-form-legend {
+  /* font-size: 16px; */
+  font-weight: 600;
+}
+
+.sort-videos-form-label {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sort-videos-form-radio {
+  cursor: pointer;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-image {
+  max-height: 60px;
+}
+
+.loading-message {
+  color: hsl(113, 48%, 40%);
+  font-size: 20px;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-image {
+  max-height: 60px;
+}
+
+.error-message {
+  color: hsl(337, 96%, 50%);
+  font-size: 18px;
+}
+
+.video-page-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 0;
+}
+
+.video-card {
+  width: 340px;
+  padding: 5px;
+  border-radius: 5px;
+  /* background-color: var(--c2s1); */
+  /* background: linear-gradient(var(--c1s1), var(--c2s3)); */
+  background: linear-gradient(var(--c2s1) 70%, hsl(195, 73%, 75%));
+  border: 1px solid var(--c2s2);
+}
+
+.video-card-title {
+  height: 44px;
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0 5px;
+  /* text-align: center; */
+}
+
+.video-card-iframe-container {
+  position: relative;
+  width: 100%;
+  /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  background-color: inherit;
+  /* Want to implement saturation on hover... */
+  /* filter: saturate(0.25); */
+}
+
+.video-card-iframe-container:hover {
+  /* Want to implement saturation on hover... */
+  /* filter: saturate(1); */
+}
+
+
+.video-card-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: inherit;
+}
+
+.video-card-functionality-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.video-card-vote-up-button,
+.video-card-vote-down-button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.video-card-vote-up-image,
+.video-card-vote-down-image {
+  display: block;
+  max-height: 28px;
+}
+
+.video-card-rating {
+  /* font-weight: 500; */
+  color: hsl(0, 0%, 25%);
+}
+
+.video-card-rating-positive {
+  font-weight: 600;
+  color: hsl(120, 80%, 40%);
+}
+
+.video-card-rating-negative {
+  font-weight: 600;
+  color: hsl(0, 80%, 40%);
+}
+
+.video-card-rating-neutral {
+  font-weight: 600;
+  color: hsl(0, 0%, 25%);
+}
+
+.video-card-favourite {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.video-card-favourite-image {
+  display: block;
+  max-height: 28px;
+}
+
+.video-card-delete {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.video-card-delete-image {
+  display: block;
+  max-height: 28px;
+}
+
+.video-card-date-id-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-card-date,
+.video-card-id {
+  color: hsl(0, 0%, 25%);
+  font-size: 11px;
 }
