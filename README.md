@@ -1,75 +1,107 @@
-# Video Recommendation App
+# FullStack Videos
 
-## Background
+## Project Screenshot:
 
-Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
+![Project Screenshot](project-screenshot.png)
 
-This means that we need to be sure that you can create a Full Stack app.
+## Description:
 
-## Challenge
+This is a Fullstack Video Recommendations application using:
 
-In this project you will be building a project that fulfills the following User Stories
+React, JavaScript, HTML and CSS for the frontend client
 
-- As a user, I want to be able to view a list of all YouTube videos posted on the site
-- As a user, I want to be able to post videos that I like from YouTube to my website.
-- As a user, I want to be able to delete videos from the website that I no longer like.
-- As a user, I want to be able to watch the videos embedded in the website.
-- As a user, I want to be able to "Up Vote" a video if I like it.
-- As a user, I want to be able to "Down Vote" a video if I dislike.
+and
 
-You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+Node, Express (API) with a PostgreSQL Database for the backend server
 
-## Levels
+## Functionality
 
-This project is split into several levels that you should complete each week of the three week project.
+- Users can add videos from YouTube using the full URL, the title is automatically appended.
 
-You can find each of the levels split into separate files, linked below.
+- Users can up vote or down vote individual videos.
 
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+- Users can favourite individual videos.
 
-### Week 1 - Front End
+- Users can delete individual videos.
 
-- [Level 100](./100.md)
-  - A core version of the React front end of the app
-- [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+- Users can sort videos by votes descending (default), votes ascending, and by id number.
 
-### Week 2 - Back End (without Database)
+## Learning
 
-- [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
-- [Level 250](./250.md)
-  - Connect your Front End and Back End together
-- [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
+This was a useful exercise in learning how to interact with a PostgreSQL database via a Node Express API.
 
-### Week 3 - Back End (with Database)
+Successful live deployment across multiple online providers was achieved.
 
-- [Level 300](./300.md)
-  - Integrate the back end with a database
-- [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
-- [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
+For a result that a React Frontend, a Node Express API, and a PostgreSQL database all communicate correctly.
 
-## Sample Solution
+## Improvements
 
-Here is an example solution of the Front End:
+The application uses the database as it's single source of truth.
 
-https://vid-rec2.netlify.app/
+And therefore it takes time to make the request and response cycle before the User Interface updates.
 
-**Note:** You can design the website to look however you like.
+It would be good to implement context so there is a direct tie between frontend state and backend state.
 
-Here is an example solution for the Back End:
+This would remove any visual delay or responsiveness compromise.
 
-https://video-rec.herokuapp.com
+Currently the VideoPage is controlled by a workaround state, this should be converted into Context.
 
-## Design
+---
 
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
+## Project Setup:
 
-## Getting Started
+1. clone the repo `git clone https://github.com/bazmurphy/fullstack-videos`
 
-Fork this repository and then clone it to your computer.
+## Server:
 
-Progress to Level 100 when you are ready.
+1. `cd server`
+2. `npm install`
+3. copy the `.env.sample` as `.env`
+4. add the Database Connection variables
+5. `npm run start`
+
+## Client:
+
+1. `cd client`
+2. `npm install`
+3. copy the `.env.sample` as `.env`
+4. add the API URL variable
+5. `npm run start`
+
+---
+
+## Database Setup:
+
+### Local:
+
+1.  Create a local database: `createdb fullstack_videos`
+2.  Connect to the local database: `psql fullstack_videos`
+3.  Populate the Database: `\i videos.sql`
+4.  Add ENV variables to the local `.env` file
+
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=fullstack_videos
+DB_USER={your database username}
+DB_PASS={your database password}
+```
+
+### Online:
+
+1.  Make a PostgreSQL database on Render
+2.  Connect to PostgreSQL database on Render via the terminal:
+    `psql -h {hostname}.{region}-postgres.render.com -U {your_username} {your database name}`
+3.  Enter password:
+    `{your_password}`
+4.  Populate the Database:
+    `\i fullstackprojectassessment.sql`
+5.  Add ENV variables to the Render API settings
+
+```
+DB_HOST : {hostname}.{region}-postgres.render.com
+DB_PORT : 5432
+DB_NAME : {your Render database name}
+DB_USER : {your Render database username}
+DB_PASS : {your Render database password}
+```
