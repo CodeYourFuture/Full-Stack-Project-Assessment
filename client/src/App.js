@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Video from "./components/Video";
-import data from "./exampleresponse.json";
+// import data from "./exampleresponse.json";
 import AddVideo from "./components/AddVideo";
 
 function App() {
+
+
+
   //to delete, update the videos
-  const [listOfVideos, setListOfVideos] = useState(data);
+  const [listOfVideos, setListOfVideos] = useState([]);
+
+ useEffect(() => {
+   fetch("http://localhost:5000/")
+     .then((response) => response.json())
+     .then((data) => {
+       setListOfVideos(data); 
+     })
+     .catch((error) => {
+       console.error("Error:", error);
+     });
+ }, []);
 
   const handleDelete = async (videoId) => {
     setListOfVideos(listOfVideos.filter((video) => video.id !== videoId));
