@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
+import ExtractVideoId from "../utils/ExtractVideoId";
 import "../styles/AddVideoForm.css";
 
 const AddVideoForm = ({ onAddVideo }) => {
@@ -25,6 +27,19 @@ const AddVideoForm = ({ onAddVideo }) => {
     setShowForm((prevShowForm) => !prevShowForm); // Toggle the value of showForm
   };
 
+  const handleAddVideo = () => {
+    const videoID = ExtractVideoId(url); // Corrected function name
+    const video = {
+      id: Math.floor(Math.random() * 1000000),
+      title: title,
+      url: `https://www.youtube.com/watch?v=${videoID}`,
+      rating: 0,
+    };
+    onAddVideo(video);
+    setTitle("");
+    setUrl("");
+  };
+
   return (
     <div className="add-video-container">
       <h2 className="add-video-text" onClick={handleAddVideoClick}>
@@ -33,9 +48,8 @@ const AddVideoForm = ({ onAddVideo }) => {
       {showForm && (
         <form className="add-video-form" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
+            <label htmlFor="title">Title</label>
+            <TextField
               id="title"
               placeholder="Video title"
               value={title}
@@ -44,17 +58,18 @@ const AddVideoForm = ({ onAddVideo }) => {
             />
           </div>
           <div>
-            <label htmlFor="url">URL:</label>
-            <input
-              type="url"
+            <label htmlFor="url">URL</label>
+            <TextField
               id="url"
-              placeholder="Video URL"
+              placeholder="Video Url"
               value={url}
               onChange={handleUrlChange}
               required
             />
           </div>
-          <button type="submit">Add</button>
+          <Button variant="contained" type="submit" onClick={handleAddVideo}>
+            Add
+          </Button>
         </form>
       )}
     </div>

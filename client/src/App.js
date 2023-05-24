@@ -9,9 +9,12 @@ import Search from "./components/Search";
 
 function App() {
   const [videos, setVideos] = useState(data);
+  const [filteredVideos, setFilteredVideos] = useState([]);
 
   const addVideo = (video) => {
-    setVideos([video, ...videos]);
+    const currentDate = new Date().toISOString(); // Get the current date and time
+    const videoWithDate = { ...video, uploadedDate: currentDate, rating: 0 };
+    setVideos([videoWithDate, ...videos]);
   };
 
   const removeVideo = (id) => {
@@ -62,10 +65,19 @@ function App() {
     setVideos(sortedVideos);
   };
 
+  const searchVideos = (searchTerm) => {
+    const filtered = videos.filter((video) =>
+      video.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredVideos(filtered);
+  };
+
+  const displayedVideos = filteredVideos.length > 0 ? filteredVideos : videos;
+
   return (
     <div className="App">
       <header className="App-header">
-        <Header />
+        <Header videos={videos} />
       </header>
       <AddVideoForm onAddVideo={addVideo} />
 
@@ -75,10 +87,10 @@ function App() {
             onSortByVotes={sortByVotes}
             onSortByTitle={sortByTitle}
           />
-          <Search />
+          <Search onSearch={searchVideos} />
         </div>
         <div className="video-list">
-          {videos.map((video) => (
+          {displayedVideos.map((video) => (
             <VideoCard
               key={video.id}
               video={video}

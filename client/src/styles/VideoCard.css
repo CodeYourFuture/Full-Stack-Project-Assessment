@@ -6,26 +6,26 @@
   max-width: 1290px;
 }
 
-.video-card {
+.video-card,
+.custom-card-class {
   width: 280px;
   margin: 10px;
-  background-color: #191a1d;
+  background-color: #191a1d !important;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 10px !important;
   text-align: center;
+  color: #fff !important;
 }
 
 .video-card iframe {
   overflow: hidden;
   width: 100%;
 }
-
 .video-details {
-  margin-top: 20px;
-  padding: 20px;
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
 .video-details h2 {
   margin-bottom: 10px;
   font-size: 1.2rem;
@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .heart-icon {

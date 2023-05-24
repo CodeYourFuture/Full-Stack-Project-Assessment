@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+
 import "../styles/SortFilters.css";
 
 const SortFilters = ({ onSortByVotes, onSortByTitle }) => {
@@ -19,8 +21,12 @@ const SortFilters = ({ onSortByVotes, onSortByTitle }) => {
 
   return (
     <div className="sort-filters">
-      <button onClick={handleSortByVotes}>Sort by Votes</button>
-      <button onClick={handleSortByTitle}>Sort by Title</button>
+      <Button variant="contained" color="primary" onClick={handleSortByVotes}>
+        Sort by Votes
+      </Button>
+      <Button variant="contained" color="primary" onClick={handleSortByTitle}>
+        Sort by Title
+      </Button>
     </div>
   );
 };

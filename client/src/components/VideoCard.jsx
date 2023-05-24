@@ -1,8 +1,8 @@
 import YouTube from "react-youtube";
 import { FaHeart } from "react-icons/fa";
+import { Card, CardContent, Typography } from "@material-ui/core";
 import RemoveButton from "./RemoveButton";
 import VoteButtons from "./VoteButtons";
-
 import "../styles/VideoCard.css";
 
 const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
@@ -16,13 +16,29 @@ const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
     height: "157",
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options);
+  };
+
+  // Check if the uploadedDate property exists in the video object
+  const uploadedDate = video.uploadedDate
+    ? video.uploadedDate
+    : "2021-01-01T00:00:00.000Z"; // : new Date().toISOString();
+
   return (
     <div className="video-card-container">
-      <div className="video-card">
+      <Card className="video-card custom-card-class">
         <YouTube videoId={extractVideoId(video.url)} opts={opts} />
 
-        <div className="video-details">
-          <h2>{video.title}</h2>
+        <CardContent className="video-details">
+          <Typography variant="h6" component="h2">
+            {video.title}
+          </Typography>
+          <Typography variant="subtitle2">
+            Uploaded on: {formatDate(uploadedDate)}
+          </Typography>
           <div className="heart-icon-container">
             <div className="heart-icon">
               <FaHeart />
@@ -34,8 +50,8 @@ const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
             onDownVote={() => downVote(video.id)}
           />
           <RemoveButton onClick={() => removeVideo(video.id)} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

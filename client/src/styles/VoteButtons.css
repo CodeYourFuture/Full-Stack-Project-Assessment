@@ -1,7 +1,6 @@
 .vote-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
 }
 
 .vote-button {

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { TextField, Button } from "@material-ui/core";
+
 import "../styles/Search.css";
 
 const Search = ({ onSearch }) => {
@@ -20,14 +22,16 @@ const Search = ({ onSearch }) => {
 
   return (
     <div className="search-container">
-      <input
-        type="text"
+      <TextField
         placeholder="Search videos"
+        variant="outlined"
         value={searchTerm}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
-      <button onClick={handleSearch}>Search</button>
+      <Button variant="contained" color="primary" onClick={handleSearch}>
+        Search
+      </Button>
     </div>
   );
 };

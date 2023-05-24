@@ -1,14 +1,19 @@
 .header-container {
-  background-color: #616161;
   padding: 20px;
   text-align: center;
   color: #fff;
+  /* background-color: #191a1d; */
 }
 
 .header-container h1 {
   color: #fff;
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+.video-container iframe {
+  margin: 10px;
+  border-radius: 10px;
 }
 
 .slick-slider {
