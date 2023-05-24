@@ -70,14 +70,18 @@ function App() {
       url: url.split("watch?v=")[1]
 
     })
+   
     console.log(response)
+    setTitle("")
+    setUrl("")
+    alert("video has been sent")
     
   }
  
   return (
     <div className="App">
       <header className="App-header">
-       <Menu></Menu>
+      
         <h1>Video Recommendation</h1>
       </header>
 
@@ -105,8 +109,8 @@ function App() {
         />
       </InputGroup>
       <br></br>
-      <Button variant="Add" onClick={addclickHandler}> Add</Button>{' '}
-      <Button variant="Cancle">Cancle</Button>{' '}
+      <Button variant="outline-success" onClick={addclickHandler}>Add</Button>{' '}
+      <Button variant="outline-warning">Cancle</Button>{' '}
       
         </>)}      
 </Col>
