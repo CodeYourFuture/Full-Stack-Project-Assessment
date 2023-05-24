@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 const initialData = require("./exampleresponse.json");
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*"
+  })
+);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

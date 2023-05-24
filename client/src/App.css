@@ -30,15 +30,37 @@ h1{
   background-color: rgb(231, 162, 237);
   font-weight: 600; 
 }
-h3{
+h4{
   font-style: normal;
   font-weight: 600;
 }
 
-.newvideos{
-  padding: 25px;
-  border-bottom: 3px solid rgb(247, 147, 209);
+.newvideos {
+  display: inline-block;
+  width: calc(33.33% - 10px);
+  /* Adjust the width as needed */
+  margin-top: 3rem;
+  /* margin: 5px; */
+  vertical-align: bottom;
 }
+
+@media screen and (max-width: 768px) {
+  .newvideos {
+    width: calc(50% + 10px);
+    /* Adjust the width for smaller screens */
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .newvideos {
+    width: 100%;
+    /* Adjust the width for mobile screens */
+  }
+}
+
+
+
+
 
 button{
   display: flex;
@@ -61,7 +83,7 @@ button{
 .delete{
   display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 form{

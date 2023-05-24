@@ -23,40 +23,79 @@
     "url": "https://www.youtube.com/watch?v=xbs7FT7dXYc",
     "rating": 11
   },
+ 
   {
     "id": 4,
-    "title": "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    "url": "https://www.youtube.com/watch?v=4As0e4de-rI",
-    "rating": 3211
-  },
-  {
-    "id": 5,
     "title": "Learn Unity - Beginner's Game Development Course",
     "url": "https://www.youtube.com/watch?v=gB1F9G0JXOo",
     "rating": 211
   },
+
   {
-    "id": 6,
+    "id": 5,
     "title": "Cracking Enigma in 2021 - Computerphile",
     "url": "https://www.youtube.com/watch?v=RzWB5jL5RX0",
     "rating": 111
   },
   {
-    "id": 7,
+    "id": 6,
     "title": "Coding Adventure: Chess AI",
     "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
     "rating": 671
   },
   {
-    "id": 8,
+    "id": 7,
     "title": "Coding Adventure: Ant and Slime Simulations",
     "url": "https://www.youtube.com/watch?v=X-iSQQgOd1A",
     "rating": 76
   },
   {
+    "id": 8,
+    "title": "Coding Interview 101",
+    "url": "https://www.youtube.com/watch?v=K5qbSQm1Dr4&t=1347s",
+    "rating": 20345
+  },
+
+  {
     "id": 9,
-    "title": "Why the Tour de France is so brutal",
-    "url": "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    "rating": 73
+    "title": "Brandy Song",
+    "url": "https://www.youtube.com/watch?v=gCVo2sLIndU",
+    "rating": 9730
+  }, 
+
+  {
+    
+   "id": 10,
+    "title": "SQL Tutorial - Full Database Course for Beginners",
+    "url": "https://www.youtube.com/watch?v=HXV3zeQKqGY&t=4724s",
+    "rating": 77779
+  }, 
+
+  {
+     "id": 11,
+    "title": "Codility - Binary Gap (JavaScript)",
+    "url": "https://www.youtube.com/watch?v=PWADsooDNMg&list=PLqDHFR_FjG5-rH6Bg5xYMR-HTmSOqyF-L",
+    "rating": 9800
+  }, 
+
+  {
+     "id": 12,
+    "title": "Learn Basic SQL in 15 Minutes",
+    "url": "https://www.youtube.com/watch?v=kbKty5ZVKMY",
+    "rating": 10450
+  },
+
+  {
+     "id": 13,
+    "title": "Studying Skills for the Tech Interview",
+    "url": "https://www.youtube.com/watch?v=X-jUp2O_3M8",
+    "rating": 10420
+  }, 
+
+   {
+     "id": 14,
+    "title": "How to Ace Your First Entry-Level Technical Interview",
+    "url": "https://www.youtube.com/watch?v=DzMp3e8l04k",
+    "rating": 10400
   }
 ]
