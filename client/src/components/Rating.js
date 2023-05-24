@@ -12,7 +12,8 @@ function Rating({ rating, onUpdateRating }) {
   };
 
   const handleClickDownVote = () => {
-    const newRating = vote - 1;
+    let newRating = 0;
+    vote > 0 ? (newRating = vote - 1) : (newRating = 0);
     setVote(newRating);
     onUpdateRating(newRating);
   };
