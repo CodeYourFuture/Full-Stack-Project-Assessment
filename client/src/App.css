@@ -5,7 +5,10 @@
 .App {
   margin: 0 auto;
   background-color: #f3f5f7;
+
 }
+
+
 .nav-bar {
   height: 60px;
   background-color: #282828;
@@ -26,13 +29,11 @@
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   background-color: whitesmoke;
-  width: 350px;
+  min-width: 350px;
+  max-width: 70%;
   padding: 30px;
-
   align-items: center;
 }
-
-
 
 .add-video-form input {
   margin: 15px auto 0 5px;
@@ -57,7 +58,8 @@
   background: whitesmoke;
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   margin: 10px auto;
-  max-width: 400px;
+  max-width: 350px;
+
   border-radius: 7px;
 }
 
@@ -122,10 +124,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    column-gap: 30px;
+    max-width: 70%;
   }
 
   .video-container {
-    width: calc(50% - 10px); 
+    width: calc(50% - 10px);
     margin-bottom: 20px;
   }
 }
