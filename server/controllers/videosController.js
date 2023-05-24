@@ -1,4 +1,6 @@
 const database = require("../database/databaseConnection");
+// neccessary for live deployment because older versions of node do not include `fetch`
+const fetch = require("node-fetch");
 
 const getAllVideos = async (req, res) => {
   try {
