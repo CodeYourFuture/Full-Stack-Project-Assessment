@@ -1,24 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
 import SortFilters from "./components/SortFilters";
-import data from "./exampleresponse.json";
-import "./App.css";
 import Search from "./components/Search";
+import "./App.css";
+// import data from "./exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const addVideo = (video) => {
-    const currentDate = new Date().toISOString(); // Get the current date and time
-    const videoWithDate = { ...video, uploadedDate: currentDate, rating: 0 };
-    setVideos([videoWithDate, ...videos]);
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5001");
+      if (!response.ok) {
+        throw new Error("Failed to fetch videos!");
+      }
+      const data = await response.json();
+      setVideos(data);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
   };
 
-  const removeVideo = (id) => {
-    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+  const addVideo = async (video) => {
+    try {
+      const response = await fetch("http://127.0.0.1:5001", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(video),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add video!");
+      }
+      const data = await response.json();
+      const videoWithDate = { ...video, id: data.id, rating: 0 };
+      setVideos([videoWithDate, ...videos]);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const removeVideo = async (id) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5001/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Video not found!");
+      }
+      setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const upVote = (id) => {
@@ -79,27 +124,36 @@ function App() {
       <header className="App-header">
         <Header videos={videos} />
       </header>
+
       <AddVideoForm onAddVideo={addVideo} />
 
       <div className="video-section">
-        <div className="header-controls">
-          <SortFilters
-            onSortByVotes={sortByVotes}
-            onSortByTitle={sortByTitle}
-          />
-          <Search onSearch={searchVideos} />
-        </div>
-        <div className="video-list">
-          {displayedVideos.map((video) => (
-            <VideoCard
-              key={video.id}
-              video={video}
-              removeVideo={removeVideo}
-              upVote={upVote}
-              downVote={downVote}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
+          <>
+            <div className="header-controls">
+              <SortFilters
+                onSortByVotes={sortByVotes}
+                onSortByTitle={sortByTitle}
+              />
+              <Search onSearch={searchVideos} />
+            </div>
+            <div className="video-list">
+              {displayedVideos.map((video) => (
+                <VideoCard
+                  key={video.id}
+                  video={video}
+                  removeVideo={removeVideo}
+                  upVote={upVote}
+                  downVote={downVote}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

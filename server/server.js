@@ -1,9 +1,12 @@
 const express = require("express");
 const fs = require("fs");
 const app = express();
+const cors = require("cors");
+
 const port = process.env.PORT || 5001;
 
 app.use(express.json());
+app.use(cors());
 
 // Store and retrieve videos
 let videos = [];
@@ -14,7 +17,7 @@ fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
   } else {
     try {
       videos = JSON.parse(data);
-      console.log("Example response loaded:", videos);
+      // console.log("Example response loaded:", videos);
     } catch (parseError) {
       console.error("Error parsing example response:", parseError);
     }
