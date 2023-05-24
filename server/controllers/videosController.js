@@ -36,7 +36,9 @@ const getAllVideos = async (req, res) => {
     }
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
@@ -72,7 +74,9 @@ const getVideoById = async (req, res) => {
       .json({ success: true, error: false, payload: queryGetVideoById.rows });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
@@ -178,7 +182,9 @@ const addVideo = async (req, res) => {
     });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
@@ -242,7 +248,9 @@ const updateVideo = async (req, res) => {
     });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
@@ -295,7 +303,9 @@ const toggleFavourite = async (req, res) => {
     });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
@@ -342,7 +352,9 @@ const deleteVideo = async (req, res) => {
     });
   } catch (error) {
     // console.log(error);
-    res.status(500).json({ success: false, error: error });
+    res
+      .status(500)
+      .json({ success: false, error: true, message: error.toString() });
   }
 };
 
