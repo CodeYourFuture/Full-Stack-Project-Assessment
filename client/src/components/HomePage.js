@@ -22,7 +22,7 @@ const HomePage = () => {
   }, []);
 
   const updateVideoData = (newVideoData) => {
-    fetch("http://127.0.0.1:5000", {
+    fetch(`http://127.0.0.1:5000/?order=${sortOrder}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const HomePage = () => {
 
   const deleteVideo = (videoId) => {
     // Make a DELETE request to the server with the videoId
-    fetch(`http://127.0.0.1:5000/${videoId}`, {
+    fetch(`http://127.0.0.1:5000/${videoId}/?order=${sortOrder}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

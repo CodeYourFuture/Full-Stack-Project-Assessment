@@ -4,13 +4,25 @@ function AddVideo({ updateVideoData }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleShowForm = () => {
     setShowForm(!showForm);
+    setErrorMessage(""); // Reset error message when showing the form
   };
 
   const handleAddVideo = (event) => {
     event.preventDefault();
+
+    // Check if the URL is a valid YouTube URL
+    const youtubeUrlRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+    if (!youtubeUrlRegex.test(url)) {
+      setErrorMessage("Invalid YouTube URL");
+      setTitle(""); // Clear the title field
+      setUrl(""); // Clear the URL field
+      return;
+    }
 
     const newVideoData = {
       title,
@@ -45,6 +57,7 @@ function AddVideo({ updateVideoData }) {
               onChange={(e) => setUrl(e.target.value)}
               required
             />
+            {errorMessage && <p>{errorMessage}</p>}
           </div>
           <div>
             <button type="button" onClick={handleShowForm}>
