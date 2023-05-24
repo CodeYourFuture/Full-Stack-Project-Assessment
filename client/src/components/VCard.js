@@ -1,6 +1,5 @@
 import React from "react";
 import Rating from "./Rating";
-import "./VCard.css";
 import DeleteBtn from "./DeleteBtn";
 const VCard = ({ videoData, onDelete, onUpdateRating }) => {
   const handleDelete = (videoId) => {
@@ -10,10 +9,10 @@ const VCard = ({ videoData, onDelete, onUpdateRating }) => {
     onUpdateRating(videoId, newRating);
   };
   return (
-    <div>
+    <div className="video-container">
       {videoData.map((video) => (
         <div key={video.id} className="video-card">
-          <h3>{video.title}</h3>
+          <p>{video.title}</p>
           <iframe
             src={video.url.replace("watch?v=", "embed/")}
             title={video.title}

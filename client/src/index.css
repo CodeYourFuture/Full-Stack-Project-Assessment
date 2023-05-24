@@ -1,13 +1,151 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: blanchedalmond;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 1rem;
+}
+
+.top-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.header {
+  background-color: rgb(61 91 69);
+  height: 15vh;
+}
+
+.header h1 {
+  color: blanchedalmond;
+  padding-top: 1.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+}
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 40px;
+  width: 100%;
+  align-items: center;
+  margin: 1rem 0;
+}
+.video-card {
+  display: flex;
+  max-height: 400px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%;
+  border: 4px solid #3d5b4f;
+  border-radius: 0.5rem;
+  align-items: center;
+  padding-bottom: 1.4rem;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.dataLoading {
+  font-size: 1.3rem;
+}
+.addVideo {
+  margin: 1rem 0;
+}
+
+.addVideo label {
+  margin: 1rem 0;
+  width: 50px;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 400px;
+}
+
+.video-card p {
+  max-width: 80%;
+  text-align: center;
+  font-weight: bold;
+}
+input {
+  margin-left: 1.5rem;
+}
+
+button {
+  color: blanchedalmond;
+  background-color: #3d5b4f;
+  border-radius: 0.2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  margin-left: 0.4rem;
+}
+
+button:hover {
+  background-color: #0c0c0c;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.rating p {
+  margin: 0 0.5rem;
+}
+
+.rating .icon {
+  cursor: pointer;
+  margin: 0 0.2rem;
+  font-size: 2.5rem;
+  color: #3d5b4f;
+}
+
+.rating .icon:hover {
+  color: #010905;
+}
+
+.footer {
+  background-color: rgb(61 91 69);
+  height: 8vh;
+  width: 100%;
+}
+
+.footer h3 {
+  color: blanchedalmond;
+  padding: 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 1240px) {
+  .video-container {
+    flex-direction: column;
+  }
+
+  .video-card {
+    width: 100%;
+  }
+  .header h1 {
+    padding-top: 3.1rem;
+    font-size: 1rem;
+  }
+  .footer h3 {
+    padding-top: 2.3rem;
+    font-size: 0.6rem;
+  }
 }

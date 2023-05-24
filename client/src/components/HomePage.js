@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 //import videos from "./exampleresponse.json";
-import "./HomePage.css";
 import Header from "./Header";
 import VCard from "./VCard";
 import AddVideo from "./AddVideo";
 import Sort from "./Sort";
+import Footer from "./Footer";
 
 const HomePage = () => {
   const [videoData, setVideoData] = useState([]);
@@ -76,15 +76,18 @@ const HomePage = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div>
+    <div className="container">
       <Header />
-      <AddVideo updateVideoData={updateVideoData} />
-      <Sort sortOrder={sortOrder} onToggleSortOrder={handleToggleSortOrder} />
+      <div className="top-page">
+        <AddVideo updateVideoData={updateVideoData} />
+        <Sort sortOrder={sortOrder} onToggleSortOrder={handleToggleSortOrder} />
+      </div>
       <VCard
         videoData={videoData}
         onDelete={deleteVideo}
         onUpdateRating={updateRating}
       />
+      <Footer />
     </div>
   );
 };

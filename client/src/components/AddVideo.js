@@ -36,7 +36,7 @@ function AddVideo({ updateVideoData }) {
   };
 
   return (
-    <div>
+    <div className="addVideo">
       {showForm ? (
         <form onSubmit={handleAddVideo}>
           <div>
