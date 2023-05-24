@@ -30,10 +30,10 @@ const AddVideoForm = ({ onAddVideo }) => {
   const handleAddVideo = () => {
     const videoID = ExtractVideoId(url); // Corrected function name
     const video = {
-      id: Math.floor(Math.random() * 1000000),
+      // id: Math.floor(Math.random() * 1000000),
       title: title,
       url: `https://www.youtube.com/watch?v=${videoID}`,
-      rating: 0,
+      // rating: 0,
     };
     onAddVideo(video);
     setTitle("");
