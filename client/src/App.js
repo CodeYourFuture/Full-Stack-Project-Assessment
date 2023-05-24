@@ -6,25 +6,29 @@ import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
 
 function App() {
-
-
-
   //to delete, update the videos
   const [listOfVideos, setListOfVideos] = useState([]);
 
- useEffect(() => {
-   fetch("http://localhost:5000/")
-     .then((response) => response.json())
-     .then((data) => {
-       setListOfVideos(data); 
-     })
-     .catch((error) => {
-       console.error("Error:", error);
-     });
- }, []);
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then((response) => response.json())
+      .then((data) => {
+        setListOfVideos(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [listOfVideos]);
 
   const handleDelete = async (videoId) => {
-    setListOfVideos(listOfVideos.filter((video) => video.id !== videoId));
+    try {
+      await fetch(`http://localhost:5000/${videoId}`, {
+        method: "DELETE",
+      });
+      setListOfVideos(listOfVideos.filter((video) => video.id !== videoId));
+    } catch (e) {
+      console.log("Error in handleDelete function" + e);
+    }
   };
 
   //to update rating on the page
@@ -39,12 +43,23 @@ function App() {
   //to add a new video to the page
   function addVideo(title, link) {
     const newVideo = {
-      id: listOfVideos.length + 1,
       title: title,
       url: link,
-      rating: 0,
     };
-    setListOfVideos(listOfVideos.concat(newVideo));
+
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setListOfVideos(listOfVideos.concat(data));
+      })
+      .catch((error) => console.log("AddVideo function error: " + error));
   }
 
   return (
