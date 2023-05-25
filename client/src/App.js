@@ -27,7 +27,9 @@ function App() {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5001");
+      const response = await fetch(
+        "https://full-stack-project-assessment-1fgd.onrender.com"
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch videos!");
       }
@@ -42,13 +44,16 @@ function App() {
 
   const addVideo = async (video) => {
     try {
-      const response = await fetch("http://127.0.0.1:5001", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(video),
-      });
+      const response = await fetch(
+        "https://full-stack-project-assessment-1fgd.onrender.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(video),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to add video!");
       }
@@ -62,9 +67,12 @@ function App() {
 
   const removeVideo = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5001/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://full-stack-project-assessment-1fgd.onrender.com/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error("Video not found!");
       }
