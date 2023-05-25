@@ -11,7 +11,7 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("https://video-3.onrender.com/")
       .then((response) => response.json())
       .then((data) => {
         setVideoData(data);
@@ -24,7 +24,7 @@ const HomePage = () => {
   }, []);
 
   const updateVideoData = (newVideoData) => {
-    fetch(`http://127.0.0.1:5000/?order=${sortOrder}`, {
+    fetch(`https://video-3.onrender.com/?order=${sortOrder}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const HomePage = () => {
   };
 
   const deleteVideo = (videoId) => {
-    fetch(`http://127.0.0.1:5000/${videoId}/?order=${sortOrder}`, {
+    fetch(`https://video-3.onrender.com/${videoId}/?order=${sortOrder}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -52,7 +52,7 @@ const HomePage = () => {
     let newSortOrder = sortOrder === "desc" ? "asc" : "desc";
     setSortOrder(newSortOrder);
 
-    fetch(`http://localhost:5000/?order=${newSortOrder}`)
+    fetch(`https://video-3.onrender.com/?order=${newSortOrder}`)
       .then((response) => response.json())
       .then((data) => {
         setVideoData(data);
@@ -61,7 +61,7 @@ const HomePage = () => {
   };
 
   const updateRating = (videoId, newRating) => {
-    fetch(`http://localhost:5000/${videoId}`, {
+    fetch(`https://video-3.onrender.com/${videoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
