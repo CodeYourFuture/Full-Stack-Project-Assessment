@@ -23,9 +23,13 @@ const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
   };
 
   // Check if the uploadedDate property exists in the video object
-  const uploadedDate = video.uploadedDate
+  const isFromAPI = video.uploadedDate ? true : false;
+  const uploadedDate = isFromAPI
     ? video.uploadedDate
-    : "2021-01-01T00:00:00.000Z"; // : new Date().toISOString();
+    : // : "2021-01-01T00:00:00.000Z";
+      new Date().toISOString();
+
+  const formattedDate = formatDate(uploadedDate);
 
   return (
     <div className="video-card-container">
@@ -37,7 +41,7 @@ const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
             {video.title}
           </Typography>
           <Typography variant="subtitle2">
-            Uploaded on: {formatDate(uploadedDate)}
+            Uploaded on: {formattedDate}
           </Typography>
           <div className="heart-icon-container">
             <div className="heart-icon">
