@@ -1,7 +1,7 @@
 import Votes from "./Votes";
 import DeleteVideo from "./DeleteVideo";
 
-function VideoInfo({ videos, setVideos, video }) {
+function VideoInfo({ videos, setVideos, video, getAllVideos }) {
   return (
     <div>
       <div>
@@ -19,7 +19,7 @@ function VideoInfo({ videos, setVideos, video }) {
           <span>{video.rating}</span>
           <Votes video={video} setVideos={setVideos} videos={videos} />
         </aside>
-        <DeleteVideo video={video} videos={videos} setVideos={setVideos} />
+        <DeleteVideo video={video} getAllVideos={getAllVideos} />
       </div>
     </div>
   );

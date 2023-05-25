@@ -1,3 +1,76 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#switch-btn {
+  /* cursor: pointer;
+  text-indent: -9999px;
+  width: 200px;
+  height: 100px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative; */
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 5em;
+  height: 2.5em;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  margin-bottom: 0;
+  margin-right: 0.3em;
+  margin-left: 0.3em;
+}
+
+#switch-btn:after {
+  /* content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s; */
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 2em;
+  height: 2em;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.1s;
+}
+
+input:checked + #switch-btn {
+  background: #bada55;
+}
+
+input:checked + #switch-btn:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+#switch-btn:active:after {
+  width: 130px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+}
