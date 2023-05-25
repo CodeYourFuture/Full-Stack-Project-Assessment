@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Container } from "@mui/material";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
