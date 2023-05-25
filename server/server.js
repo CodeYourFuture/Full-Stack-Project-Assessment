@@ -65,14 +65,14 @@ app.post("/", async (req, res) => {
   }
 });
 
-//show video by Id
-app.get("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const find = allVideos.find((video) => video.id === id);
-  if (find) {
-    res.status(200).json(find);
-  } else res.status(404).json({ message: "not found" });
-});
+// //show video by Id
+// app.get("/:id", (req, res) => {
+//   const id = Number(req.params.id);
+//   const find = allVideos.find((video) => video.id === id);
+//   if (find) {
+//     res.status(200).json(find);
+//   } else res.status(404).json({ message: "not found" });
+// });
 
 app.delete("/:id", async (req, res) => {
   try {
