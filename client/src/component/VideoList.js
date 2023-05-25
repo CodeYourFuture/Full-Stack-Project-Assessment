@@ -18,3 +18,5 @@ const VideoList = ({ videos, onRemove, onVote }) => {
   );
 };
 export default VideoList;
+
+
