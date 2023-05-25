@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import Header from "./components/Header";
 import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
@@ -12,6 +19,7 @@ function App() {
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     fetchVideos();
@@ -88,6 +96,10 @@ function App() {
     );
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
+  };
+
   const sortByVotes = (sortOrder) => {
     const sortedVideos = [...videos].sort((a, b) => {
       if (sortOrder === "asc") {
@@ -120,42 +132,45 @@ function App() {
   const displayedVideos = filteredVideos.length > 0 ? filteredVideos : videos;
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header videos={videos} />
-      </header>
+    <Container maxWidth="lg">
+      <Header videos={videos} />
 
-      <AddVideoForm onAddVideo={addVideo} />
+      <div className="App">
+        <AddVideoForm onAddVideo={addVideo} />
 
-      <div className="video-section">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : (
-          <>
-            <div className="header-controls">
-              <SortFilters
-                onSortByVotes={sortByVotes}
-                onSortByTitle={sortByTitle}
-              />
-              <Search onSearch={searchVideos} />
-            </div>
-            <div className="video-list">
-              {displayedVideos.map((video) => (
-                <VideoCard
-                  key={video.id}
-                  video={video}
-                  removeVideo={removeVideo}
-                  upVote={upVote}
-                  downVote={downVote}
+        <div className="video-section">
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : (
+            <>
+              <div className="header-controls">
+                <SortFilters
+                  onSortByVotes={sortByVotes}
+                  onSortByTitle={sortByTitle}
                 />
-              ))}
-            </div>
-          </>
-        )}
+                <Search onSearch={searchVideos} />
+                <button onClick={toggleSortOrder}>
+                  {sortOrder === "asc" ? "Order Descending" : "Order Ascending"}
+                </button>
+              </div>
+              <div className="video-list">
+                {displayedVideos.map((video) => (
+                  <VideoCard
+                    key={video.id}
+                    video={video}
+                    removeVideo={removeVideo}
+                    upVote={upVote}
+                    downVote={downVote}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }
 
