@@ -1,0 +1,113 @@
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(
+    to right,
+    hsl(187, 85%, 43%),
+    hsl(0, 0%, 100%)
+  );
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: grb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--whiteColorDeam);
+  width: 100%;
+  padding: 1rem;
+  z-index: 999;
+  height: 60px;
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+
+  .logo {
+    color: var(--blackColor);
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+
+    .icon {
+      font-size: 25px;
+      color: var(--PrimaryColor);
+      transform: translate(5px);
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .nav_bar {
+      position: absolute;
+      background: var();
+      height: max-content;
+      width: 90%;
+      padding: 1rem;
+      border-radius: 1rem;
+      top: -500rem;
+      left: 50%;
+      transform: translate(-50%);
+      z-index: 2000;
+      box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+      transition: 0.3 ease;
+
+      .nav_lists {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+
+        .nav_item {
+          padding: 0.5rem 0;
+
+          .nav_link {
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+
+            &hover {
+              color: var(--PrimaryColor);
+            }
+          }
+        }
+
+        .btn {
+          margin-top: 1rem;
+          font-weight: 600;
+          color: var(--whiteColor);
+        }
+      }
+
+      .close_nav_bar {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        color: var(--PrimaryColor);
+        &:hover {
+          color: var(--se);
+        }
+      }
+    }
+
+    .show_nav_bar {
+      top: 7rem;
+    }
+  }
+
+  .toggle_nav_bar {
+    .icon {
+      font-size: 25px;
+      color: var(--PrimaryColor);
+      &:hover {
+        color: var(--SecondaryColor);
+      }
+    }
+  }
+}
