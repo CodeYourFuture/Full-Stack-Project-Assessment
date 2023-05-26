@@ -52,7 +52,9 @@ function AddVideos({ getAllVideos }) {
   return (
     <div>
       <section>
-        <button onClick={toggleShow}>Click for submission form</button>
+        <button onClick={toggleShow} className="click-btn btn">
+          Click for submission form
+        </button>
       </section>
       {toggleArea && (
         <section>
@@ -82,7 +84,9 @@ function AddVideos({ getAllVideos }) {
                       onChange={handleChange}
                     />
                   </section>
-                  <button type="submit">Add Video</button>
+                  <button type="submit" className="click-btn btn">
+                    Add Video
+                  </button>
                 </form>
               </section>
             </div>
@@ -110,7 +114,9 @@ function AddVideos({ getAllVideos }) {
                     onChange={handleChange}
                   />
                 </section>
-                <button type="submit">Add Video</button>
+                <button type="submit" className="click-btn btn">
+                  Add Video
+                </button>
               </form>
             </section>
           )}

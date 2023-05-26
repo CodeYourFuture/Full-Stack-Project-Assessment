@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
+import LandingPage from "./LandingPage";
 import AddVideos from "./AddVideos";
-import VideoInfo from "./VideoInfo";
+import ShowVideos from "./ShowVideos";
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -33,20 +35,29 @@ function App() {
   return (
     <div className="App">
       <Header handleOrderChange={handleOrderChange} />
-      <AddVideos getAllVideos={getAllVideos} />
-      <button onClick={toggleShow}>Show Videos</button>
-      <section>
-        {toggleArea &&
-          videos.length > 0 &&
-          videos.map((video) => (
-            <VideoInfo
-              key={video.id}
-              video={video}
-              videos={videos}
-              setVideos={setVideos}
-              getAllVideos={getAllVideos}
+      <section className="page-body">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/add"
+              element={<AddVideos getAllVideos={getAllVideos} />}
             />
-          ))}
+            <Route
+              path="/videos"
+              element={
+                <ShowVideos
+                  toggleShow={toggleShow}
+                  toggleArea={toggleArea}
+                  handleOrderChange={handleOrderChange}
+                  videos={videos}
+                  setVideos={setVideos}
+                  getAllVideos={getAllVideos}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
       </section>
     </div>
   );

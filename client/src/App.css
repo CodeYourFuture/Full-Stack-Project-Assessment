@@ -1,11 +1,59 @@
 .App {
   text-align: center;
+  background: #322f37;
+  color: whitesmoke;
 }
 
 .App-header {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  margin: 1.5em 0.5em;
+}
+
+.click-btn {
+  padding: 0.5em 1em;
+  color: whitesmoke;
+}
+
+.click-btn h3 {
+  margin-bottom: 0;
+}
+
+.btn {
+  background: #322f37;
+}
+
+.click-btn:hover {
+  text-decoration: none;
+  border-bottom: 2px solid #0aaf70;
+  border-left: 2px solid #0aaf70;
+  border-radius: 5px;
+  border-top: 0.5px solid #0aaf70;
+  border-right: 0.5px solid #0aaf70;
+  box-shadow: 6px 9px 7px #f5f9cd;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.page-body {
+  font-family: "Acme", sans-serif;
+  margin: 0.5em;
+  padding: 1em;
+}
+
+.landing-section {
+  border: #0aaf70 solid 2px;
+  margin-bottom: 3em;
+  border-radius: 11px;
+  padding: 1em;
+  box-shadow: 6px 9px 7px #f5f9cd;
+}
+
+.eachVideo {
+  margin: 1em 1em 3em 1em;
 }
 
 input[type="checkbox"] {
@@ -15,19 +63,11 @@ input[type="checkbox"] {
 }
 
 #switch-btn {
-  /* cursor: pointer;
-  text-indent: -9999px;
-  width: 200px;
-  height: 100px;
-  background: grey;
-  display: block;
-  border-radius: 100px;
-  position: relative; */
   cursor: pointer;
   text-indent: -9999px;
   width: 5em;
   height: 2.5em;
-  background: grey;
+  background: #05a5db;
   display: block;
   border-radius: 100px;
   position: relative;
@@ -37,28 +77,19 @@ input[type="checkbox"] {
 }
 
 #switch-btn:after {
-  /* content: "";
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 90px;
-  height: 90px;
-  background: #fff;
-  border-radius: 90px;
-  transition: 0.3s; */
   content: "";
   position: absolute;
   top: 4px;
   left: 5px;
   width: 2em;
   height: 2em;
-  background: #fff;
+  background: #faea5b;
   border-radius: 90px;
   transition: 0.1s;
 }
 
 input:checked + #switch-btn {
-  background: #bada55;
+  background: #11c367;
 }
 
 input:checked + #switch-btn:after {
@@ -73,4 +104,62 @@ input:checked + #switch-btn:after {
 .toggle-btn {
   display: flex;
   align-items: center;
+  margin: 1em;
+}
+
+.order-name {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------ */
+
+.App-header h1 {
+  margin: 0;
+  font-size: 7em;
+  color: #e1e1e103;
+  background-image: url("https://images.unsplash.com/photo-1676816823266-a8bb9a998de7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80");
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  animation: animate 20s ease-in-out infinite;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    background-position: left top;
+  }
+  25% {
+    background-position: right bottom;
+  }
+  50% {
+    background-position: left bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ins-points {
+  padding: 0;
+  text-align: left;
+}
+
+.instructions {
+  list-style: none;
+}
+
+.instructions span {
+  margin-left: 2em;
 }
