@@ -26,12 +26,14 @@ function App() {
         throw new Error("Failed to fetch videos!");
       }
       const data = await response.json();
+
       const updatedVideos = data.map((video) => {
-        if (!video.uploadedDate) {
+        if (!video.uploaddate) {
           return { ...video, uploadedDate: "2021-01-01T00:00:00.000Z" };
         }
         return video;
       });
+
       setVideos(updatedVideos);
       setLoading(false);
     } catch (error) {

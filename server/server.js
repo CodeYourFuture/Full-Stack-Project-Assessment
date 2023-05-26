@@ -51,15 +51,14 @@ app.get("/", async (req, res) => {
 });
 
 // POST "/"
-app.post("/", async (req, res) => {
+app.post("/videos", async (req, res) => {
   const { title, url } = req.body;
-  const rating = 0;
 
   if (title && url) {
     try {
       const result = await pool.query(
-        "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id",
-        [title, url, rating]
+        "INSERT INTO videos (title, url, rating) VALUES ($1, $2) RETURNING id",
+        [title, url]
       );
       // const id = Math.floor(Math.random() * 1000000);
       const id = result.rows[0].id;
