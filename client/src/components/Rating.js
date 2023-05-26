@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 function Rating({ rating, onUpdateRating }) {
   const [vote, setVote] = useState(rating);
@@ -20,17 +20,9 @@ function Rating({ rating, onUpdateRating }) {
 
   return (
     <div className="rating">
-      <FontAwesomeIcon
-        icon={faThumbsUp}
-        className="icon"
-        onClick={handleClickUpVote}
-      />
+      <FaThumbsUp className="icon-2" onClick={handleClickUpVote} />
       <p>{vote}</p>
-      <FontAwesomeIcon
-        icon={faThumbsDown}
-        className="icon"
-        onClick={handleClickDownVote}
-      />
+      <FaThumbsDown className="icon-1" onClick={handleClickDownVote} />
     </div>
   );
 }

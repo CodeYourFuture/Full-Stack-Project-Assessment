@@ -105,17 +105,24 @@ button:hover {
 }
 
 .rating p {
-  margin: 0 0.5rem;
+  margin: 0 1rem;
 }
 
-.rating .icon {
+.icon-1,
+.icon-2 {
   cursor: pointer;
   margin: 0 0.2rem;
   font-size: 2.5rem;
   color: #3d5b4f;
+  vertical-align: middle;
 }
 
-.rating .icon:hover {
+.icon-1 {
+  margin-top: 15px;
+}
+
+.icon-1:hover,
+.icon-2:hover {
   color: #010905;
 }
 
