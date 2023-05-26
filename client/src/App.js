@@ -6,14 +6,12 @@ import VideoCard from "./components/VideoCard";
 import SortFilters from "./components/SortFilters";
 import Search from "./components/Search";
 import "./App.css";
-// import data from "./exampleresponse.json";
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     fetchVideos();
@@ -102,10 +100,6 @@ function App() {
         return video;
       })
     );
-  };
-
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
   };
 
   const sortByVotes = (sortOrder) => {
