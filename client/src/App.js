@@ -6,14 +6,12 @@ import VideoCard from "./components/VideoCard";
 import SortFilters from "./components/SortFilters";
 import Search from "./components/Search";
 import "./App.css";
-// import data from "./exampleresponse.json";
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     fetchVideos();
@@ -28,12 +26,14 @@ function App() {
         throw new Error("Failed to fetch videos!");
       }
       const data = await response.json();
+
       const updatedVideos = data.map((video) => {
-        if (!video.uploadedDate) {
+        if (!video.uploaddate) {
           return { ...video, uploadedDate: "2021-01-01T00:00:00.000Z" };
         }
         return video;
       });
+
       setVideos(updatedVideos);
       setLoading(false);
     } catch (error) {
@@ -102,10 +102,6 @@ function App() {
         return video;
       })
     );
-  };
-
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
   };
 
   const sortByVotes = (sortOrder) => {
