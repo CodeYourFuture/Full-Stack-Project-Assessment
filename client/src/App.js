@@ -159,9 +159,6 @@ function App() {
                   onSortByTitle={sortByTitle}
                 />
                 <Search onSearch={searchVideos} />
-                <button onClick={toggleSortOrder}>
-                  {sortOrder === "asc" ? "Order Descending" : "Order Ascending"}
-                </button>
               </div>
               <div className="video-list">
                 {displayedVideos.map((video) => (
