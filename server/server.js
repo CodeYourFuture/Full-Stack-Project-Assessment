@@ -39,7 +39,11 @@ app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM videos ORDER BY id ASC");
     console.log("Database connection successful");
-    res.json(result.rows);
+
+    // Combine videos from the database with videos from the JSON file
+    const combinedVideos = [...result.rows, ...videos];
+
+    res.json(combinedVideos);
   } catch (error) {
     console.error("Error fetching videos:", error);
     res.status(500).json({ error: "Failed to fetch videos" });
