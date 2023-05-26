@@ -44,6 +44,10 @@
   padding: 1em;
 }
 
+.info {
+  margin-bottom: 3em;
+}
+
 .landing-section {
   border: #0aaf70 solid 2px;
   margin-bottom: 3em;
@@ -162,4 +166,88 @@ input:checked + #switch-btn:after {
 
 .instructions span {
   margin-left: 2em;
+}
+
+.submit {
+  margin-top: 2em;
+}
+
+.title-url {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5em;
+}
+
+.vote-btn {
+  border: none;
+  background: #322f37;
+  font-size: 1.4em;
+}
+
+.icon-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-btn span {
+  font-size: 1.1em;
+}
+
+.icon-btn aside {
+  display: flex;
+  gap: 0.8em;
+}
+
+/* grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    column-gap: 1em;
+    display: grid; */
+
+.about {
+  grid-area: about;
+}
+.add-video {
+  grid-area: add-vid;
+}
+.see-video {
+  grid-area: see-vid;
+}
+
+.landing-area {
+  display: grid;
+  grid-template-areas:
+    "about"
+    "add-vid"
+    "see-vid";
+}
+
+@media screen and (min-width: 700px) {
+  .landing-area {
+    grid-template-columns: 47% auto;
+    column-gap: 3em;
+    grid-template-areas:
+      "about add-vid"
+      "see-vid add-vid";
+  }
+
+  iframe {
+    width: 32em;
+    height: 22em;
+  }
+
+  .icon-btn {
+    padding: 0 3.5em;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .landing-area {
+    grid-template-columns: 15em auto 15em;
+    grid-template-areas: "about add-vid see-vid";
+    column-gap: 2em;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

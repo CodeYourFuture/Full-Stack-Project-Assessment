@@ -1,3 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
+
 function Votes({ videos, setVideos, video }) {
   function upVote(id) {
     let newVideos = videos.map((eachVideo) => {
@@ -23,18 +27,28 @@ function Votes({ videos, setVideos, video }) {
   return (
     <aside>
       <button
+        className="vote-btn"
         onClick={() => {
           upVote(video.id);
         }}
       >
-        Up Vote
+        <FontAwesomeIcon
+          icon={faThumbsUp}
+          beatFade
+          style={{ color: "#34d181" }}
+        />
       </button>
       <button
+        className="vote-btn"
         onClick={() => {
           downVote(video.id);
         }}
       >
-        Down Vote
+        <FontAwesomeIcon
+          icon={faThumbsDown}
+          beatFade
+          style={{ color: "#08b1eb" }}
+        />
       </button>
     </aside>
   );

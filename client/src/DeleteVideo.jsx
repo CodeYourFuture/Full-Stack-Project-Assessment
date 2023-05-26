@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+
 function DeleteVideo({ video, getAllVideos }) {
   function handleDeleteVideo(videoID) {
     fetch(`http://localhost:3005/video/${videoID}`, {
@@ -17,7 +20,9 @@ function DeleteVideo({ video, getAllVideos }) {
   }
 
   return (
-    <button onClick={() => handleDeleteVideo(video.id)}>Remove Video</button>
+    <button className="vote-btn" onClick={() => handleDeleteVideo(video.id)}>
+      <FontAwesomeIcon icon={faTrashCan} style={{ color: "#e2cd4c" }} />
+    </button>
   );
 }
 

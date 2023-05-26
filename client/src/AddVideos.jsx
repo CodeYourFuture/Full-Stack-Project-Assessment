@@ -57,14 +57,14 @@ function AddVideos({ getAllVideos }) {
         </button>
       </section>
       {toggleArea && (
-        <section>
+        <section className="submit">
           {handleError ? (
             <div>
               <p>{handleError}</p>
               <section>
                 <form method="post" onSubmit={handleSubmit}>
                   <legend>Video Submission</legend>
-                  <section className="title-block">
+                  <section className="title-url">
                     <label htmlFor="title">Enter title: </label>
                     <input
                       type="text"
@@ -74,7 +74,7 @@ function AddVideos({ getAllVideos }) {
                       onChange={handleChange}
                     />
                   </section>
-                  <section>
+                  <section className="title-url">
                     <label htmlFor="url">Enter URL: </label>
                     <input
                       type="url"
@@ -94,7 +94,7 @@ function AddVideos({ getAllVideos }) {
             <section>
               <form method="post" onSubmit={handleSubmit}>
                 <legend>Video Submission</legend>
-                <section className="title-block">
+                <section className="title-url">
                   <label htmlFor="title">Enter title: </label>
                   <input
                     type="text"
@@ -104,7 +104,7 @@ function AddVideos({ getAllVideos }) {
                     onChange={handleChange}
                   />
                 </section>
-                <section>
+                <section className="title-url">
                   <label htmlFor="url">Enter URL: </label>
                   <input
                     type="url"

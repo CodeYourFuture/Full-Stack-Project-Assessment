@@ -14,11 +14,11 @@ function VideoInfo({ videos, setVideos, video, getAllVideos }) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <aside>
-        <span>{video.rating}</span>
+      <section className="icon-btn">
+        <span>Rating: {video.rating}</span>
         <Votes video={video} setVideos={setVideos} videos={videos} />
-      </aside>
-      <DeleteVideo video={video} getAllVideos={getAllVideos} />
+        <DeleteVideo video={video} getAllVideos={getAllVideos} />
+      </section>
     </div>
   );
 }
