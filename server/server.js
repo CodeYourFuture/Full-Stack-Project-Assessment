@@ -1,135 +1,136 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
 const cors = require("cors");
-require("dotenv").config();
 const bodyParser = require("body-parser");
-
-app.use(bodyParser.json());
-app.use(cors());
-
+const PORT = process.env.PORT || 5500;
+const app = express();
 const { Pool } = require("pg");
+app.use(cors());
+app.use(bodyParser.json());
 
-const db = new Pool({
+const videosPool = new Pool({
   host: process.env.DB_HOST,
-  user: process.env.DB_USER,
   port: process.env.DB_PORT,
-  password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  ssl: false,
 });
 
-app.get("/videos", (req, res) => {
-  db.query("SELECT * FROM movies", (err, result) => {
-    if (err) {
-      console.error("Error executing query:", err);
-      res.status(500).send("Internal server error");
+app.get("/videos", async (req, res) => {
+  const sortType = req.query.sort;
+  try {
+    let query = "SELECT * FROM videos";
+    if (sortType !== "asc") {
+      query += " ORDER BY ratings DESC";
     } else {
-      res.json(result.rows);
+      query += " ORDER BY ratings";
     }
-  });
+    const allVideos = await videosPool.query(query);
+    res.json(allVideos.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
-// app.get("/videos", (request, response) => {
-//   const sortType = request.query.sort;
-//   videos = videos.sort((a, b) => b.rating - a.rating);
+app.post("/videos/:id/like", async (req, res) => {
+  const videoId = req.body.id;
+  const likeQuery =
+    "UPDATE videos SET ratings = ratings + 1 WHERE id = $1 RETURNING *";
+  try {
+    const { rows } = await videosPool.query(likeQuery, [videoId]);
 
-//   if (sortType === "asc") {
-//     videos.sort((a, b) => a.rating - b.rating);
-//   } else if (sortType === "desc") {
-//     videos.sort((a, b) => b.rating - a.rating);
-//   }
-//   response.status(200).json(videos);
-// });
+    if (rows.length === 0) {
+      res.status(404).json({ message: "Video not found" });
+    } else {
+      const updatedVideo = rows[0];
+      res.status(200).json(updatedVideo);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
 
-app.delete("/videos/:id", function (req, res) {
+app.post("/videos/:id/dislike", async (req, res) => {
+  const videoId = req.body.id;
+  const dislikeQuery =
+    "UPDATE videos SET ratings = ratings - 1 WHERE id = $1 RETURNING *";
+  try {
+    const { rows } = await videosPool.query(dislikeQuery, [videoId]);
+
+    if (rows.length === 0) {
+      res.status(404).json({ message: "Video not found" });
+    } else {
+      const updatedVideo = rows[0];
+      res.status(200).json(updatedVideo);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+
+app.delete("/videos/:id", async (req, res) => {
   const videoId = parseInt(req.params.id);
-  db.query("SELECT * FROM movies WHERE id = $1", [videoId])
-    .then((result) => {
-      res.status(200).send("Video deleted successfully");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    await videosPool.query("DELETE FROM videos WHERE id = $1", [videoId]);
+    res.status(200).json({ id: videoId });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-// GET BY ID
-// app.get("/videos/:id", function (request, response) {
-//   const videoId = request.params.id;
-//   let video = videos.find((video) => video.id === videoId);
-//   video ? response.send(video) : response.status(404);
-// });
-
-app.get("/videos/:id", function (req, res) {
-  const videoId = parseInt(req.params.id);
-  db.query("DELETE * FROM movies WHERE id = $1", [videoId])
-    .then((result) => {
-      res.status(200).json(result.rows);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
-// DELETE BY ID
-// app.delete("/videos/:id", function (request, response) {
-//   const videoId = request.params.id;
-//   videos.find((video) => video.id === videoId)
-//     ? (videos = videos.filter((video) => {
-//         return video.id !== videoId;
-//       }))
-//     : response.status(404);
-//   response.send(videos).status(204);
-// });
-
-// POST"/"
-app.post("/videos", function (request, response) {
-  const videoTitle = request.body.title;
-  const VideoUrl = request.body.url;
-
+app.post("/videos", async (req, res) => {
+  const videoTitle = req.body.title;
+  const videoUrl = req.body.url;
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
 
   if (!videoTitle) {
-    return response
+    return res
       .status(400)
       .json({ message: "Please add a title for your video" });
   }
-  if (!VideoUrl) {
-    return response.status(400).json({ message: "Please enter a url" });
+  if (!videoUrl) {
+    return res.status(400).json({ message: "Please enter a URL" });
   }
-
-  if (request.body.url.match(youtubeRegex) === null) {
-    return response.status(400).json({ message: "Please add a valid url" });
+  if (req.body.url.match(youtubeRegex) === null) {
+    return res.status(400).json({ message: "Please add a valid URL" });
   }
-
-  request.body.id = request.body.url.replace(
-    "https://www.youtube.com/watch?v=",
-    ""
-  );
 
   const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDate();
-  const uploadDate = currentYear + "-" + currentMonth + "-" + currentDay;
+  const uploadDate = `${currentDate.getFullYear()}-${
+    currentDate.getMonth() + 1
+  }-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
 
-  const currentTime = new Date();
-  const currentHours = currentTime.getHours();
-  const currentMinutes = currentTime.getMinutes();
-  const currentSeconds = currentTime.getSeconds();
-  const uploadTime = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+  const ratings = 0;
 
-  request.body.uploadTime = uploadTime;
-  request.body.uploadDate = uploadDate;
-  request.body.likes = 0;
-  request.body.dislikes = 0;
-  videos.push(request.body);
+  try {
+    const existingVideo = await videosPool.query(
+      "SELECT * FROM videos WHERE url = $1",
+      [videoUrl]
+    );
+    if (existingVideo.rows.length > 0) {
+      return res.status(409).json({ error: "Video already exists" });
+    }
 
-  videos.find((video) => video.id === request.body.id)
-    ? response.status(201).json(request.body)
-    : response.status(400).json({
-        result: "failure",
-        message: "Video could not be saved",
-      });
+    const insertedVideo = await videosPool.query(
+      `INSERT INTO videos (title, url, ratings, upload_date)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, title, url, ratings, upload_date`,
+      [videoTitle, videoUrl, ratings, uploadDate]
+    );
+
+    const newVideo = insertedVideo.rows[0];
+    return res.json(newVideo);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error.message);
+  }
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -1,0 +1,30 @@
+.card-title {
+    color: white;
+    font-size: 24px;
+}
+
+@media only screen and (min-width: 375px) {
+    .card-title {
+        font-size: 42px;
+    }
+}
+
+.card-subtitle {
+    margin-bottom: 0;
+    color: #e4e0e0;
+}
+
+.card-text {
+    font-size: 18px;
+    width: 90%;
+    color: #e4e0e0; 
+} 
+
+@media only screen and (min-width: 500px) {
+    .card-text {
+        font-size: 18px;
+        width: 62%;
+        color: #e4e0e0;
+    }
+} 
+
