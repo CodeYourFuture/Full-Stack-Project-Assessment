@@ -1,0 +1,36 @@
+.vid-contaner{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.vidBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border:gray 2px solid;
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+h3 {
+    color: brown;
+}
+
+.rate-delete {
+    margin:10px 10px;
+    display: flex;
+    justify-content:space-between;
+    width: 500px;
+}
+.rate-delete >span{
+    color:brown;
+}
+
+
+button{
+    width: fit-content;
+    
+}
