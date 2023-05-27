@@ -34,7 +34,7 @@ export const AddVideo = ({ videos, setVideos }) => {
       title: titleInput,
       url: urlInput,
     };
-    fetch("http://localhost:5000/", {
+    fetch("https://lorena-fullstack-app.onrender.com/", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",

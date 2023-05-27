@@ -5,7 +5,7 @@ export const VideosCards = ({ videos, setVideos }) => {
   // const [videos, setVideos] = useState(video);
 
   const handleDeleteClick = (id) => {
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`https://lorena-fullstack-app.onrender.com/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

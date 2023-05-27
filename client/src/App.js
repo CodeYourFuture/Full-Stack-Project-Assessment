@@ -11,7 +11,7 @@ function App() {
   const [order, setOrder] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/?order=${order}`, {
+    fetch(`https://lorena-fullstack-app.onrender.com/?order=${order}`, {
       mode: "cors",
     })
       .then((res) => {
