@@ -17,7 +17,9 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [isDesc, setIsDesc] = useState(true);
 
-  const url = "http://localhost:5500/videos";
+  // const url = "http://localhost:5500/videos";
+  const url =
+    "https://https-github-com-karleenmsrichards-full.onrender.com/videos";
 
   const fetchData = useCallback(() => {
     fetch(`${url}?sort=${isDesc ? "desc" : "asc"}`)

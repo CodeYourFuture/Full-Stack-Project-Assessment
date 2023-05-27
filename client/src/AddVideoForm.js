@@ -33,7 +33,6 @@ export const AddVideoForm = () => {
         return response.json();
       })
       .then((newVideo) => {
-        console.log(newVideo);
         setVideos((value) => [...value, newVideo]);
         setVideoTitle("");
         setVideoUrl("");

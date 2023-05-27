@@ -82,13 +82,10 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
         return response.json();
       })
       .then((deletedVideo) => {
-        console.log("Deleted video:", deletedVideo);
         const updatedVideos = videos.filter(
           (video) => Number(video.id) !== Number(deletedVideo.id)
         );
-        console.log("before", updatedVideos);
         setVideos(updatedVideos);
-        console.log("after", updatedVideos);
       })
       .catch((error) => alert(error.message));
   }

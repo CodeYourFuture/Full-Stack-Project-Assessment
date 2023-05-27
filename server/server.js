@@ -99,7 +99,7 @@ app.post("/videos", async (req, res) => {
     return res.status(400).json({ message: "Please enter a URL" });
   }
   if (req.body.url.match(youtubeRegex) === null) {
-    return res.status(400).json({ message: "Please add a valid URL" });
+    return res.status(400).json({ message: "Please add a valid Youtube URL" });
   }
 
   const currentDate = new Date();
