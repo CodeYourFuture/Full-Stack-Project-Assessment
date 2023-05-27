@@ -25,6 +25,7 @@ function App() {
         setError("Error", error);
       });
   }, [order]);
+  console.log(error);
 
   return (
     <div className="App">
