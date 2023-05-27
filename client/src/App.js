@@ -7,7 +7,7 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1/5000")
+    fetch("http://localhost:5000/data")
       .then((response) => response.json())
       .then((data) => {
         // Order the videos by rating in descending order
