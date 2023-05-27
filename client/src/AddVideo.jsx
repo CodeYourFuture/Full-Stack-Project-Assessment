@@ -18,7 +18,7 @@ export const AddVideo = ({ videos, setVideos }) => {
   const handleUrlInputChange = (e) => {
     e.preventDefault();
     let url = e.target.value;
-    if (url.includes("https://www.youtube.com/watch?v=")) {
+    if (url.includes("https://www.youtube.com/")) {
       url = url.replace("watch?v=", "embed/");
       return setUrlInput(url);
     } else {
@@ -43,7 +43,7 @@ export const AddVideo = ({ videos, setVideos }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setVideos(data);
+        setVideos([...videos, data]);
       })
       .catch((error) => {
         console.error("Error:", error);

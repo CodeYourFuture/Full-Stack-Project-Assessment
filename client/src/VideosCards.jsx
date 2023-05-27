@@ -13,8 +13,8 @@ export const VideosCards = ({ videos, setVideos }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("delete", data);
-        setVideos(data);
+        let newData = videos.filter((el) => el.id !== data.id);
+        setVideos(newData);
       })
       .catch((error) => {
         console.error("Error:", error);
