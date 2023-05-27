@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+body {
+  background-color: beige;
+}
+
+@media only screen and (min-width: 768px) {
+  iframe{
+    height: 13em;
+  }
+  .card{
+    width: 25%;
+  }
+}
