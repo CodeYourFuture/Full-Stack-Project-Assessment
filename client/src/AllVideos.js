@@ -10,16 +10,19 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
   const { videos, setVideos } = useContext(videosContext);
 
   function handleLikes(videoId) {
-    fetch(`http://localhost:5500/videos/${videoId}/like`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: videoId,
-      }),
-    })
+    fetch(
+      `https://full-stack-project-server.onrender.com/videos/${videoId}/like`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: videoId,
+        }),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Unable to like the video");
@@ -39,16 +42,19 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
   }
 
   function handleDislikes(videoId) {
-    fetch(`http://localhost:5500/videos/${videoId}/dislike`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: videoId,
-      }),
-    })
+    fetch(
+      `https://full-stack-project-server.onrender.com/videos/${videoId}/dislike`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: videoId,
+        }),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Unable to dislike the video");
@@ -68,7 +74,7 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
   }
 
   function handleDelete(videoId) {
-    fetch(`http://localhost:5500/videos/${videoId}`, {
+    fetch(`https://full-stack-project-server.onrender.com/videos/${videoId}`, {
       method: "DELETE",
       mode: "cors",
       headers: {

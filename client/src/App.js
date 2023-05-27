@@ -17,7 +17,6 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [isDesc, setIsDesc] = useState(true);
 
-  // const url = "http://localhost:5500/videos";
   const url = "https://full-stack-project-server.onrender.com/videos";
 
   const fetchData = useCallback(() => {
