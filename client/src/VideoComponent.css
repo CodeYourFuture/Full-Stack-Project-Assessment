@@ -1,7 +1,7 @@
 .video-card {
     width: 650px;
     margin-bottom: 20px;
-    background-color: #f0f0f0;
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -19,11 +19,6 @@
     padding-bottom: 56.25%;
 }
 
-.react-player {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
 
 .video-rating {
     font-size: 14px;
@@ -38,3 +33,50 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+.upvote-button,
+.downvote-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #606060;
+    margin-right: 10px;
+    padding: 0;
+}
+
+.upvote-button:hover,
+.downvote-button:hover {
+    color: #ff3b3b;
+}
+
+.video-form {
+    margin-bottom: 20px;
+}
+
+.video-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.video-form input[type="text"] {
+    width: 50%;
+    margin: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.video-form button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.video-form button:hover {
+    background-color: #45a049;
+}
+
