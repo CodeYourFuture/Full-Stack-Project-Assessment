@@ -18,22 +18,32 @@ let videos = [
   },
   {
     id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
+    title: "Kind Of Blue",
+    url: "https://www.youtube.com/watch?v=NPIsXsrd9W0",
     rating: 230,
   },
   {
     id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
+    title: "Walk On By",
+    url: "https://www.youtube.com/watch?v=SQegEoll5Lc",
     rating: 2111,
   },
 ];
 
 // GET "/"
-app.get("/data", (req, res) => {
-  res.json(videos);
+app.get("/", (req, res) => {
+  let orderedVideos = [...videos];
+
+  const order = req.query.order;
+  if (order === "asc") {
+    orderedVideos.sort((a, b) => a.rating - b.rating); 
+  } else {
+    orderedVideos.sort((a, b) => b.rating - a.rating); 
+  };
+
+  res.json(orderedVideos);
 });
+
 
 // POST "/"
 app.post("/", (req, res) => {

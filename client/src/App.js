@@ -5,14 +5,15 @@ import "./App.css";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [order, setOrder] = useState("Asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/data")
+    fetch("http://127.0.0.1:5000/")
       .then((response) => response.json())
       .then((data) => {
         // Order the videos by rating in descending order
-        const sortedVideos = data.sort((a, b) => b.rating - a.rating);
-        setVideos(sortedVideos);
+        //const sortedVideos = data.sort((a, b) => b.rating - a.rating);
+        setVideos(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -20,6 +21,7 @@ function App() {
   }, []);
 
   console.log(videos);
+  console.log(order);
 
   const handleAddVideo = (newVideo) => {
     setVideos((prevVideos) => [...prevVideos, newVideo]);
@@ -47,14 +49,26 @@ function App() {
     );
   };
 
+  const handleOrder = () => {
+    setOrder((prev) => (prev === "Asc" ? "Desc" : "Asc"));
+    if (order === "Asc")
+      setVideos((prev) => prev.sort((a, b) => a.rating - b.rating));
+    else setVideos((prev) => prev.sort((a, b) => b.rating - a.rating));
+  }
+
+  // useEffect (() => {
+    
+  // },[order]);
+
   return (
     <div className="App">
       <section className="hero">
         <header>
-          <h1>Video Recommendation</h1>
+          <h1>Music Video Recommendation</h1>
         </header>
         <AddVideoForm onAddVideo={handleAddVideo} />
       </section>
+      <button onClick={handleOrder}>{order}</button>
       {videos.map((video) => (
         <VideoComponent
           key={video.id}

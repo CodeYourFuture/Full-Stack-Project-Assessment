@@ -5,18 +5,24 @@ import "./VideoComponent.css";
 const AddVideoForm = ({ onAddVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [error, setError] = useState("");
+  const [urlError, setUrlError] = useState("");
+  const [titleError, setTitleError] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // clear error
+    setTitleError("");
+    setUrlError("");
+
     // Validate title and URL
     if (!title.trim()) {
-      setError("Video title is required.");
+      setTitleError("Video title is required.");
       return;
     }
     if (!isValidYouTubeUrl(url)) {
-      setError("Invalid YouTube URL.");
+      setUrlError("Invalid YouTube URL.");
       return;
     }
 
@@ -29,10 +35,9 @@ const AddVideoForm = ({ onAddVideo }) => {
 
     onAddVideo(newVideo);
 
-    // Clear form fields and error
+    // Clear form fields
     setTitle("");
     setUrl("");
-    setError("");
   };
 
   const isValidYouTubeUrl = (url) => {
@@ -51,6 +56,7 @@ const AddVideoForm = ({ onAddVideo }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <label>{titleError}</label>
       </label>
       <label>
         URL:
@@ -59,6 +65,7 @@ const AddVideoForm = ({ onAddVideo }) => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
+        <label>{urlError}</label>
       </label>
       <button type="submit">Add Video</button>
     </form>
