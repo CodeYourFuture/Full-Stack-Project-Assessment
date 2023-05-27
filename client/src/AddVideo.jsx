@@ -57,7 +57,7 @@ export const AddVideo = ({ videos, setVideos }) => {
     <div className="addVideoContainer">
       <a
         className="addVideo"
-        href="#"
+        href="/index"
         alt="Add video button"
         onClick={handleAddVideoButton}
       >
