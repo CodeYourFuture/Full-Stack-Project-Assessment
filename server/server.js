@@ -3,6 +3,7 @@ dotenv.config();
 
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 5500;
 const app = express();
@@ -10,13 +11,30 @@ const { Pool } = require("pg");
 app.use(cors());
 app.use(bodyParser.json());
 
-const videosPool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  ssl: false,
+// const videosPool = new Pool({
+//   host: process.env.DB_HOST,
+//   port: process.env.DB_PORT,
+//   database: process.env.DB_NAME,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   ssl: false,
+// });
+
+fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
+  if (err) {
+    console.error("Error reading example response file:", err);
+  } else {
+    try {
+      videos = JSON.parse(data);
+      // console.log("Example response loaded:", videos);
+    } catch (parseError) {
+      console.error("Error parsing example response:", parseError);
+    }
+  }
+});
+
+app.get("/", (req, res) => {
+  res.status(200).json(videos);
 });
 
 app.get("/videos", async (req, res) => {
