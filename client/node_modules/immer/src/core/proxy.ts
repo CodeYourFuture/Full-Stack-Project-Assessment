@@ -158,11 +158,11 @@ export const objectTraps: ProxyHandler<ProxyState> = {
 		}
 
 		if (
-			state.copy_![prop] === value &&
+			(state.copy_![prop] === value &&
+				// special case: handle new props with value 'undefined'
+				(value !== undefined || prop in state.copy_)) ||
 			// special case: NaN
-			typeof value !== "number" &&
-			// special case: handle new props with value 'undefined'
-			(value !== undefined || prop in state.copy_)
+			(Number.isNaN(value) && Number.isNaN(state.copy_![prop]))
 		)
 			return true
 
@@ -223,7 +223,8 @@ each(objectTraps, (key, fn) => {
 })
 arrayTraps.deleteProperty = function(state, prop) {
 	if (__DEV__ && isNaN(parseInt(prop as any))) die(13)
-	return objectTraps.deleteProperty!.call(this, state[0], prop)
+	// @ts-ignore
+	return arrayTraps.set!.call(this, state, prop, undefined)
 }
 arrayTraps.set = function(state, prop, value) {
 	if (__DEV__ && prop !== "length" && isNaN(parseInt(prop as any))) die(14)
