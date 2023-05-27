@@ -1,0 +1,33 @@
+.add-video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.add-video-container h3 {
+    font-weight: 700;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 800px;
+    gap: 10px;
+    margin: 30px;
+}
+
+.add-video-input, .add-video-button {
+    padding: 7px 10px;
+    border-radius: 10px;
+}
+
+.add-video-button {
+    width: 200px;
+}
+
+.add-video-button:hover {
+    cursor: pointer;
+}

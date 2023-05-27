@@ -1,0 +1,22 @@
+.videos-list-container {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.videos-list-container h3 {
+    font-weight: 700;
+}
+
+.your-videos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1700px;
+    margin: auto;
+}
