@@ -37,6 +37,18 @@ app.get("/", (req, res) => {
   res.status(200).json(videos);
 });
 
+app.get("/video", async (req, res) => {
+  try {
+    const results = await videosPool.query(
+      "SELECT * FROM videos ORDER BY ratings"
+    );
+    res.json(results.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+
 app.get("/videos", async (req, res) => {
   const sortType = req.query.sort;
   try {
