@@ -87,6 +87,6 @@ app.get("/:id", (request, response) => {
       response.status(200).json(result.rows[0]);
     })
     .catch((err) => {
-      res.status(500).json({ error: err });
+      response.status(500).json({ error: err });
     });
 });
