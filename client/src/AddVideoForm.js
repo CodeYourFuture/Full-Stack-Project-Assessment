@@ -15,7 +15,7 @@ export const AddVideoForm = () => {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://localhost:5500/videos", {
+    fetch("https://full-stack-project-server.onrender.com/videos", {
       method: "POST",
       mode: "cors",
       headers: {
