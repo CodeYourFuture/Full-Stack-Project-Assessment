@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv"); // Module for loading environment variables from a .env file
+const dotenv = require("dotenv");
 
 dotenv.config();
 app.listen(port, () => console.log(`Listening on port ${port}`));
