@@ -12,16 +12,18 @@ function ShowVideos({
   return (
     <div>
       <ToggleArea handleOrderChange={handleOrderChange} />
-      {videos.length > 0 &&
-        videos.map((video) => (
-          <VideoInfo
-            key={video.id}
-            video={video}
-            videos={videos}
-            setVideos={setVideos}
-            getAllVideos={getAllVideos}
-          />
-        ))}
+      <section className="video-grid">
+        {videos.length > 0 &&
+          videos.map((video) => (
+            <VideoInfo
+              key={video.id}
+              video={video}
+              videos={videos}
+              setVideos={setVideos}
+              getAllVideos={getAllVideos}
+            />
+          ))}
+      </section>
     </div>
   );
 }

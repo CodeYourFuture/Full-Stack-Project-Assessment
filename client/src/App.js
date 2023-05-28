@@ -16,7 +16,7 @@ function App() {
   const toggleShow = () => setToggleArea((s) => !s);
 
   function getAllVideos() {
-    fetch(`http://localhost:3005/videos?order=${order}`)
+    fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);

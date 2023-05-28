@@ -3,7 +3,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 function DeleteVideo({ video, getAllVideos }) {
   function handleDeleteVideo(videoID) {
-    fetch(`http://localhost:3005/video/${videoID}`, {
+    fetch(`https://video-server-1vzq.onrender.com/video/${videoID}`, {
       method: "DELETE",
       headers: {
         Content_Type: "application/json",

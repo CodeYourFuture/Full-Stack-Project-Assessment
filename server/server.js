@@ -46,42 +46,95 @@ app.get("/videos", (req, res) => {
 });
 
 // POST VIDEO
-app.post("/video", (req, res) => {
-  const newTitle = req.body.title;
-  const newURL = req.body.url;
+app.post("/video", async (req, res) => {
+  try {
+    const newTitle = req.body.title;
+    const newURL = req.body.url;
 
-  const postQuery = `INSERT INTO videos(id, title, url, rating, date) VALUES ($1, $2, $3, $4, $5)`;
-  const getQuery = `SELECT 1 FROM videos WHERE url = $1`;
+    const postQuery = `INSERT INTO videos(id, title, url, rating, date) VALUES ($1, $2, $3, $4, $5)`;
+    const getQuery = `SELECT 1 FROM videos WHERE url = $1`;
 
-  const randomID = Math.floor(100000 + Math.random() * 900000);
-  const randomRating = Math.floor(100 + Math.random() * 900);
-  const postDate = new Date().toLocaleString();
-  const word = "youtube";
+    const randomID = Math.floor(100000 + Math.random() * 900000);
+    const randomRating = Math.floor(100 + Math.random() * 900);
+    const postDate = new Date().toLocaleString();
+    const word = "youtube";
 
-  videoData
-    .query(getQuery, [newURL])
-    .then((result) => {
-      if (result.rowCount > 0) {
-        return Promise.reject({ error: "Video already exists" });
-      } else if (!newTitle || !newURL) {
-        return Promise.reject({ error: "Please fill all fields" });
-      } else if (!newURL.includes(word)) {
-        return Promise.reject({ error: "Enter valid YouTube address" });
-      } else {
-        return videoData.query(postQuery, [
-          randomID,
-          newTitle,
-          newURL,
-          randomRating,
-          postDate,
-        ]);
-      }
-    })
-    .then(() => {
-      res.status(200).json({ message: "New Video added" });
-    })
-    .catch((error) => res.send(error));
+    const result = await videoData.query(getQuery, [newURL]);
+    if (result.rowCount > 0) {
+      throw { error: "Video already exists" };
+    } else if (!newTitle || !newURL) {
+      throw { error: "Please fill all fields" };
+    } else if (!newURL.includes(word)) {
+      throw { error: "Enter valid YouTube address" };
+    }
+
+    await videoData.query(postQuery, [
+      randomID,
+      newTitle,
+      newURL,
+      randomRating,
+      postDate,
+    ]);
+
+    res.status(200).json({ message: "New Video added" });
+  } catch (error) {
+    res.json(error);
+  }
 });
+
+// app.post("/video", (req, res) => {
+//   const newTitle = req.body.title;
+//   const newURL = req.body.url;
+
+//   const postQuery = `INSERT INTO videos(id, title, url, rating, date) VALUES ($1, $2, $3, $4, $5)`;
+//   const getQuery = `SELECT 1 FROM videos WHERE url = $1`;
+
+//   const randomID = Math.floor(100000 + Math.random() * 900000);
+//   const randomRating = Math.floor(100 + Math.random() * 900);
+//   const postDate = new Date().toLocaleString();
+//   const word = "youtube";
+
+//   videoData
+//     .query(getQuery, [newURL])
+//     .then((result) => {
+//       if (result.rowCount > 0) {
+//         return Promise.reject({ error: "Video already exists" });
+//       } else if (!newTitle || !newURL) {
+//         return Promise.reject({ error: "Please fill all fields" });
+//       } else if (!newURL.includes(word)) {
+//         return Promise.reject({ error: "Enter valid YouTube address" });
+//       } else {
+//         return videoData.query(postQuery, [
+//           randomID,
+//           newTitle,
+//           newURL,
+//           randomRating,
+//           postDate,
+//         ]);
+//       }
+//     })
+//     .then(() => {
+//       res.status(200).json({ message: "New Video added" });
+//     })
+//     .catch((error) => res.json(error));
+// });
+
+// app.post("/api/items", async (req, res) => {
+//   const { description } = req.body;
+//   try {
+//     const newItem = await itemsPool.query(
+//       "INSERT INTO items (description) VALUES ($1) RETURNING *",
+//       [description]
+//     );
+//     res.status(201).json({
+//       message: "New item added!",
+//       item: newItem.rows,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error.message);
+//   }
+// });
 
 // GET BY ID
 app.get("/video/:id", (req, res) => {
@@ -100,6 +153,23 @@ app.get("/video/:id", (req, res) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+// UPDATE BY ID
+app.put("/video/:id", (req, res) => {
+  const videoID = parseInt(req.params.id);
+  const newRating = req.body.rating;
+  const newDate = req.body.date;
+
+  const updateQuery = "UPDATE videos SET rating = $2, date = $3 WHERE id = $1";
+
+  videoData
+    .query(updateQuery, [videoID, newRating, newDate])
+    .then(() => res.status(200).send("Video updated"))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
     });
 });
 

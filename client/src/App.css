@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  background: #322f37;
-  color: whitesmoke;
 }
 
 .App-header {
@@ -23,15 +21,15 @@
 
 .btn {
   background: #322f37;
-}
-
-.click-btn:hover {
-  text-decoration: none;
   border-bottom: 2px solid #0aaf70;
   border-left: 2px solid #0aaf70;
   border-radius: 5px;
   border-top: 0.5px solid #0aaf70;
   border-right: 0.5px solid #0aaf70;
+}
+
+.click-btn:hover {
+  text-decoration: none;
   box-shadow: 6px 9px 7px #f5f9cd;
   text-transform: uppercase;
   font-weight: bold;
@@ -249,5 +247,24 @@ input:checked + #switch-btn:after {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .about,
+  .see-video {
+    max-height: 19em;
+  }
+
+  .video-heading {
+    margin-bottom: 7em;
+  }
+
+  iframe {
+    width: 25em;
+    height: 18em;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
   }
 }

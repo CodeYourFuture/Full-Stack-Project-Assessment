@@ -3,27 +3,67 @@ import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
 
 function Votes({ videos, setVideos, video }) {
+  function updateRating(id, newRating) {
+    fetch(`http://localhost:3005/video/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: newRating }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          let newVideos = videos.map((eachVideo) => {
+            if (eachVideo.id === id) {
+              return { ...eachVideo, rating: newRating };
+            } else {
+              return eachVideo;
+            }
+          });
+          setVideos(newVideos);
+          console.log("Video rating updated");
+        } else {
+          console.log("Failed to update video rating");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   function upVote(id) {
-    let newVideos = videos.map((eachVideo) => {
-      if (eachVideo.id === id) {
-        return { ...eachVideo, rating: eachVideo.rating + 1 };
-      } else {
-        return eachVideo;
-      }
-    });
-    setVideos(newVideos);
+    const video = videos.find((video) => video.id === id);
+    const newRating = video.rating + 1;
+    updateRating(id, newRating);
   }
 
   function downVote(id) {
-    let newVideos = videos.map((eachVideo) => {
-      if (eachVideo.id === id) {
-        return { ...eachVideo, rating: eachVideo.rating - 1 };
-      } else {
-        return eachVideo;
-      }
-    });
-    setVideos(newVideos);
+    const video = videos.find((video) => video.id === id);
+    const newRating = video.rating - 1;
+    updateRating(id, newRating);
   }
+
+  // function upVote(id) {
+  //   let newVideos = videos.map((eachVideo) => {
+  //     if (eachVideo.id === id) {
+  //       return { ...eachVideo, rating: eachVideo.rating + 1 };
+  //     } else {
+  //       return eachVideo;
+  //     }
+  //   });
+  //   setVideos(newVideos);
+  // }
+
+  // function downVote(id) {
+  //   let newVideos = videos.map((eachVideo) => {
+  //     if (eachVideo.id === id) {
+  //       return { ...eachVideo, rating: eachVideo.rating - 1 };
+  //     } else {
+  //       return eachVideo;
+  //     }
+  //   });
+  //   setVideos(newVideos);
+  // }
   return (
     <aside>
       <button

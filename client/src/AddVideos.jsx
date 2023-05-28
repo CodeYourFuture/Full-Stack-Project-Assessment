@@ -14,35 +14,81 @@ function AddVideos({ getAllVideos }) {
 
   const [handleError, setHandleError] = useState(null);
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   fetch("http://localhost:3005/video", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       title: formData.title,
+  //       url: formData.url,
+  //     }),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(response.json());
+  //       }
+  //       console.log(response.json());
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       console.log(data.error);
+  //       getAllVideos();
+  //       setFormData(initialState);
+  //       setHandleError(data.error);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3005/video", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: formData.title,
-        url: formData.url,
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.json());
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Success:", data);
-        getAllVideos();
-        setFormData(initialState);
-        setHandleError(data.error);
-      })
-      .catch((error) => {
-        console.log(error.error);
-      });
+
+    const data = {
+      title: formData.title,
+      url: formData.url,
+    };
+
+    try {
+      await postRequest(data);
+      getAllVideos();
+      setFormData(initialState);
+      setHandleError(null);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+  async function postRequest(data) {
+    try {
+      const response = await fetch(
+        "https://video-server-1vzq.onrender.com/video",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(await response.json());
+      }
+
+      const result = await response.json();
+      console.log("Success:", result);
+      setHandleError(result.error);
+      return result;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  }
 
   function handleChange(event) {
     event.preventDefault();

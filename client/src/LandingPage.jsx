@@ -65,7 +65,7 @@ function LandingPage() {
         </section>
 
         <section className="landing-section see-video" id="c">
-          <h4>Want to see our video selection</h4>
+          <h4 className="video-heading">Want to see our video selection</h4>
           <a href="/videos">
             <button className="click-btn btn">Click for All Videos</button>
           </a>
