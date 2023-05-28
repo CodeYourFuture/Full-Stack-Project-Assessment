@@ -20,12 +20,12 @@ function App() {
       })
       .then((data) => {
         setVideos(data);
+        setError(error);
       })
       .catch((error) => {
         setError("Error", error);
       });
   }, [order]);
-  console.log(error);
 
   return (
     <div className="App">
