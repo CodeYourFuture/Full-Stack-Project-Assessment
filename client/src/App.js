@@ -15,14 +15,14 @@ function App() {
 
   const toggleShow = () => setToggleArea((s) => !s);
 
-  function getAllVideos() {
+  const getAllVideos = () => {
     fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   function handleOrderChange() {
     order === "ASC" ? setOrder("DESC") : setOrder("ASC");
@@ -52,6 +52,7 @@ function App() {
                   handleOrderChange={handleOrderChange}
                   videos={videos}
                   setVideos={setVideos}
+                  order={order}
                   getAllVideos={getAllVideos}
                 />
               }
