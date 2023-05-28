@@ -13,7 +13,7 @@ function SingleVideo(props) {
   }
 
   return (
-    <div className="single-video-container">
+    <div className="single-video-card">
       <h4>{props.title}</h4>
       <div className="ratings-container">
         <p>Likes: {likes}</p>
@@ -35,9 +35,6 @@ function SingleVideo(props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
-      <button className="delete-video-button">
-        Delete video
-      </button>
     </div>
   );
 }

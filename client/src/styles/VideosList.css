@@ -20,3 +20,25 @@
     max-width: 1700px;
     margin: auto;
 }
+
+.single-video-container {
+    width: 300px;
+    height: 450px;
+    border: solid black 1px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.delete-video-button {
+    padding: 7px 10px;
+    border-radius: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.delete-video-button:hover {
+    cursor: pointer;
+}
