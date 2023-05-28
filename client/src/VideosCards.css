@@ -75,7 +75,11 @@ body {
     width: 45%;
   }
 }
-@media only screen and (max-width: 540px) {
+
+@media only screen and (max-width: 570px) {
+  .play-btn {
+    display: none;
+  }
   .allCardsContainer {
     margin: 2% 10%;
     display: flex;

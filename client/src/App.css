@@ -64,7 +64,7 @@
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid rgba(255, 255, 255, 0.75);
+  /* border: 1% solid rgba(255, 255, 255, 0.75); */
   top: -30%;
   left: -30%;
   background: rgba(198, 16, 0, 0);
