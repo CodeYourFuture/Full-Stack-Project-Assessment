@@ -4,7 +4,7 @@ import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
 
 function Votes({ videos, setVideos, video }) {
   function updateRating(id, newRating) {
-    fetch(`http://localhost:3005/video/${id}`, {
+    fetch(`https://video-server-1vzq.onrender.com/video/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

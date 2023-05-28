@@ -14,6 +14,8 @@ function AddVideos({ getAllVideos }) {
 
   const [handleError, setHandleError] = useState(null);
 
+  const [handleSuccess, setHandleSuccess] = useState(null);
+
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   fetch("http://localhost:3005/video", {
@@ -82,7 +84,9 @@ function AddVideos({ getAllVideos }) {
 
       const result = await response.json();
       console.log("Success:", result);
+      setHandleSuccess(result.message);
       setHandleError(result.error);
+      setFormData(initialState);
       return result;
     } catch (error) {
       console.error("Error:", error);
@@ -106,7 +110,7 @@ function AddVideos({ getAllVideos }) {
         <section className="submit">
           {handleError ? (
             <div>
-              <p>{handleError}</p>
+              <p className="submit-msg">ALERT: {handleError}</p>
               <section>
                 <form method="post" onSubmit={handleSubmit}>
                   <legend>Video Submission</legend>
@@ -138,6 +142,9 @@ function AddVideos({ getAllVideos }) {
             </div>
           ) : (
             <section>
+              {handleSuccess && (
+                <p className="submit-success">{handleSuccess}</p>
+              )}
               <form method="post" onSubmit={handleSubmit}>
                 <legend>Video Submission</legend>
                 <section className="title-url">

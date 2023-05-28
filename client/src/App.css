@@ -10,6 +10,40 @@
   margin: 1.5em 0.5em;
 }
 
+.App-header h1 {
+  margin: 0;
+  font-size: 7em;
+  color: #e1e1e103;
+  background-image: url("https://images.unsplash.com/photo-1676816823266-a8bb9a998de7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80");
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  animation: animate 20s ease-in-out infinite;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    background-position: left top;
+  }
+  25% {
+    background-position: right bottom;
+  }
+  50% {
+    background-position: left bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+}
+
+.navbar {
+  display: flex;
+  column-gap: 1em;
+}
+
 .click-btn {
   padding: 0.5em 1em;
   color: whitesmoke;
@@ -17,6 +51,7 @@
 
 .click-btn h3 {
   margin-bottom: 0;
+  font-family: "Acme", sans-serif;
 }
 
 .btn {
@@ -113,37 +148,6 @@ input:checked + #switch-btn:after {
   margin-bottom: 0;
 }
 
-/* ------------------------------------------ */
-
-.App-header h1 {
-  margin: 0;
-  font-size: 7em;
-  color: #e1e1e103;
-  background-image: url("https://images.unsplash.com/photo-1676816823266-a8bb9a998de7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80");
-  background-repeat: repeat;
-  -webkit-background-clip: text;
-  animation: animate 20s ease-in-out infinite;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-@keyframes animate {
-  0%,
-  100% {
-    background-position: left top;
-  }
-  25% {
-    background-position: right bottom;
-  }
-  50% {
-    background-position: left bottom;
-  }
-  75% {
-    background-position: right top;
-  }
-}
-
 .order {
   display: flex;
   flex-direction: column;
@@ -180,6 +184,7 @@ input:checked + #switch-btn:after {
   border: none;
   background: #322f37;
   font-size: 1.4em;
+  cursor: pointer;
 }
 
 .icon-btn {
@@ -197,10 +202,17 @@ input:checked + #switch-btn:after {
   gap: 0.8em;
 }
 
-/* grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
-    column-gap: 1em;
-    display: grid; */
+.submit-msg {
+  font-size: 1.5em;
+  text-transform: capitalize;
+  color: red;
+}
+
+.submit-success {
+  font-size: 1.5em;
+  color: #05a5db;
+  text-transform: capitalize;
+}
 
 .about {
   grid-area: about;

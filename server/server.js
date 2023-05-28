@@ -66,6 +66,8 @@ app.post("/video", async (req, res) => {
       throw { error: "Please fill all fields" };
     } else if (!newURL.includes(word)) {
       throw { error: "Enter valid YouTube address" };
+    } else if (newURL.length > 43) {
+      throw { error: "YouTube address exceeds permitted limit" };
     }
 
     await videoData.query(postQuery, [
@@ -117,23 +119,6 @@ app.post("/video", async (req, res) => {
 //       res.status(200).json({ message: "New Video added" });
 //     })
 //     .catch((error) => res.json(error));
-// });
-
-// app.post("/api/items", async (req, res) => {
-//   const { description } = req.body;
-//   try {
-//     const newItem = await itemsPool.query(
-//       "INSERT INTO items (description) VALUES ($1) RETURNING *",
-//       [description]
-//     );
-//     res.status(201).json({
-//       message: "New item added!",
-//       item: newItem.rows,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send(error.message);
-//   }
 // });
 
 // GET BY ID
