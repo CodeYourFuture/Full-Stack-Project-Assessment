@@ -38,7 +38,12 @@ function App() {
     try {
       fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
         // fetch(`https://video-server-1vzq.onrender.com/videos`)
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("SOMETHING");
+          }
+          return response.json();
+        })
         .then((data) => {
           console.log(data);
           setVideos(data);
