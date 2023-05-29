@@ -23,3 +23,7 @@ App-header {
   background-color: #254e70;
   padding: 2rem 0;
 }
+
+.custom-header {
+  background-color: #3b3636; /* Replace with your desired background color */
+}

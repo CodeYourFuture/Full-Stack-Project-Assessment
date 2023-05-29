@@ -56,7 +56,7 @@ app.post ("/video",(req, res)=> {
   console.log(req.body)
   const {title, url} = req.body
 
-const q = "insert into videos (tittle, url) values ($1, $2) "
+const q = "insert into videos (title, url) values ($1, $2) "
 const info= [title, url]
 pool.query (q,info, (err, res)=> {
 
