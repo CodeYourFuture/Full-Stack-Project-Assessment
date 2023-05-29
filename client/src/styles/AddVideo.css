@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 50px;
+    width: 100%;
 }
 
 .add-video-container h3 {
