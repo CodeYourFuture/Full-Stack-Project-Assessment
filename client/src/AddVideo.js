@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AddVideo.css';
 
 function AddVideo({ videos, setVideos }) {
@@ -19,39 +19,53 @@ function AddVideo({ videos, setVideos }) {
     const handleUrlInputChange = (e) => {
         e.preventDefault();
         let url = e.target.value;
-        if(url.includes('https://www.youtube.com/watch?v=')){
+        if(url.includes('https://www.youtube.com/')){
             url = url.replace('watch?v=', 'embed/');
             return setUrlInput(url);
         }else{
-            alert('Invalid URL format. Please provide a YouTube URL');
+            alert('Invalid URL format. Please provide a YouTube URL!');
+            setUrlInput("");
         }
     };
 
     
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const videoId = Math.floor(Math.random() * 1000000);
-        const videoRating = Math.floor(Math.random() * 10000);
-        let newVideo = {};
-        newVideo = {
-            id: videoId,
-            rating: videoRating,
+        // const videoId = Math.floor(Math.random() * 1000000);
+        // const videoRating = Math.floor(Math.random() * 10000);
+        let newVideo = {
+        // newVideo = {
+        //     id: videoId,
+        //     rating: videoRating,
             title: titleInput,
-            url: urlInput
+            url: urlInput,
         }
-        setVideos((videos) => [...videos, newVideo]);
+        fetch("http://localhost:5000/",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newVideo),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            setVideos((videos) => [...videos, data]);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 
         setTitleInput('');
         setUrlInput('');
     };
-    console.log(titleInput);
-  console.log(urlInput);
-
+    
   return (
     <div className="addVideoContainer">
        <button
+       
        className="addVideo" 
-       href="#" alt="Add video button" 
+       href="#" 
+       alt="Add video button" 
        onClick={handleAddVideoButton}>
         Add video
         </button>
