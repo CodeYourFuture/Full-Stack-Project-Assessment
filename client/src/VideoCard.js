@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const VideoCard = ({ title, url, ratings, addLike, removeLike, likes, vid }) => {
+const VideoCard = ({ title, url, ratings, addLike, removeLike, vid }) => {
   //console.log(likes, "likes inside videcard");
   //console.log({ vid });
   //const videoUrl = url;
@@ -25,8 +25,8 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, likes, vid }) => 
     //console.log({ vid });
     removeLike(parameter);
   };
-  const [checkedRating] = likes.filter((el) => el.id === vid);
-  const { rating: latestRating } = checkedRating;
+  /* const [checkedRating] = likes.filter((el) => el.id === vid);
+  const { rating: latestRating } = checkedRating; */
   //console.log({ latestRating });
   //console.log({ checkedRating });
   // - - the cheked rating is not iterable
@@ -37,7 +37,8 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, likes, vid }) => 
     <VideoCardContainer>
       <button onClick={handleClick}>like</button>
       {/* <h2>likes {likes.id === vid && likes.rating}</h2> */}
-      <h2>likes {latestRating}</h2>
+      {/* <h2>likes {latestRating}</h2> */}
+      <h2>likes {ratings}</h2>
 
       <button onClick={handleUnClick}>dislike</button>
       <VideoCardTitle>{title}</VideoCardTitle>

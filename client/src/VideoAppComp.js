@@ -1,20 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import VideoForm from "./VideoSubForm";
 import VideoCard from "./VideoCard";
-import exampleresponse from "./exampleresponse.json";
+//import exampleresponse from "./exampleresponse.json";
 
 const VideoApp = () => {
-  const [videos, setVideos] = useState([...exampleresponse]);
-  const getRatings = (arr) => {
+  useEffect(() => {
+    const getAPI = () => {
+      // Change this endpoint to whatever local or online address you have
+      // Local PostgreSQL Database
+      const API = "http://127.0.0.1:5000/";
+
+      fetch(`${API}videos`)
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          console.log(data.videoes);
+          //setLoading(false);
+          //setApiData(data);
+          setVideos(data.videoes);
+        });
+    };
+    getAPI();
+  }, []);
+  /* const [apiData, setApiData] = useState([]);
+  const [loading, setLoading] = useState(true); */
+  //console.log(apiData, "all videos ");
+  const [videos, setVideos] = useState([]);
+  console.log(videos, "videoes");
+  //const [videos, setVideos] = useState([...exampleresponse]);
+  /* const getRatings = (arr) => {
     const likes = arr.map((el) => ({ id: el.id, rating: el.rating }));
-    //console.log(likes);
+    console.log(likes);
     return likes;
   };
-  const [likes, setLikes] = useState(getRatings(videos));
+  const [likes, setLikes] = useState(getRatings(videos)); */
 
   //console.log(likes, "likes state");
   function addLike(param) {
+    //console.log(param, "param inside App");
+    //console.log(typeof param, "expect number");
+    const updatedLikes = videos.filter((el) => el.id !== param);
+    console.log({ updatedLikes });
+    const newLike = videos.filter((el) => el.id === param);
+    console.log({ newLike });
+
+    //console.log(newLike[0], "befor change");
+    newLike[0].rating++;
+    //console.log(newLike[0], "after change");
+    // - - need to sort array befor spreading it back into setVideo post
+    // - - or just posting it back to the server
+    setVideos([...updatedLikes, newLike[0]]);
+    //console.log({ likes });
+    /*  if (likes.id === vid) {
+
+  } */
+    //setLikes(likes + 1);
+  }
+  /*   function addLike(param) {
     //console.log(param, "param inside App");
     //console.log(typeof param, "expect number");
     const updatedLikes = likes.filter((el) => el.id !== param);
@@ -28,12 +74,10 @@ const VideoApp = () => {
 
     setLikes([...updatedLikes, newLike[0]]);
     //console.log({ likes });
-    /*  if (likes.id === vid) {
-
-  } */
+     //if (likes.id === vid) {}
     //setLikes(likes + 1);
-  }
-  function removeLike(param) {
+  } */
+  /* function removeLike(param) {
     const updatedLikes = likes.filter((el) => el.id !== param);
 
     const newLike = likes.filter((el) => el.id === param);
@@ -46,9 +90,23 @@ const VideoApp = () => {
     setLikes([...updatedLikes, newLike[0]]);
     //console.log({ likes });
     //setLikes(likes - 1);
+  } */
+  function removeLike(param) {
+    const updatedLikes = videos.filter((el) => el.id !== param);
+
+    const newLike = videos.filter((el) => el.id === param);
+    //console.log({ newLike });
+
+    console.log(newLike[0], "befor change");
+    newLike[0].rating--;
+    //console.log(newLike[0], "after change");
+
+    setVideos([...updatedLikes, newLike[0]]);
+    //console.log({ likes });
+    //setLikes(likes - 1);
   }
 
-  const uniqueId = (array) => {
+  /*  const uniqueId = (array) => {
     const min = 100000; // Minimum 6-digit number (inclusive)
     const max = 999999; // Maximum 6-digit number (inclusive)
     let idArr = array.map((obj) => obj.id);
@@ -58,8 +116,8 @@ const VideoApp = () => {
     newId = Math.floor(Math.random() * (max - min + 1)) + min;
     return newId;
   };
-
-  const uniqueRating = (array) => {
+ */
+  /*  const uniqueRating = (array) => {
     const min = 100000; // Minimum 6-digit number (inclusive)
     const max = 999999; // Maximum 6-digit number (inclusive)
     let idArr = array.map((obj) => obj.id);
@@ -68,10 +126,17 @@ const VideoApp = () => {
     if (!idArr.includes(newRating)) return newRating;
     newRating = Math.floor(Math.random() * (max - min + 1)) + min;
     return newRating;
-  };
+  }; */
 
-  const addVideo = (title, url) => {
+  /* const addVideo = (title, url) => {
     const newVideo = { title, url, id: uniqueId(videos), ratings: uniqueRating(videos) };
+    setVideos([...videos, newVideo]);
+  }; */
+  const addVideo = (title, url) => {
+    const newVideo = {
+      title,
+      url,
+    };
     setVideos([...videos, newVideo]);
   };
 
@@ -88,7 +153,7 @@ const VideoApp = () => {
             ratings={video.rating}
             addLike={addLike}
             removeLike={removeLike}
-            likes={likes}
+            //likes={likes}
             vid={video.id}
           />
         ))}
