@@ -66,8 +66,6 @@ app.post("/video", async (req, res) => {
       throw { error: "Please fill all fields" };
     } else if (!newURL.includes(word)) {
       throw { error: "Enter valid YouTube address" };
-    } else if (newURL.length > 43) {
-      throw { error: "YouTube address exceeds permitted limit" };
     }
 
     await videoData.query(postQuery, [
