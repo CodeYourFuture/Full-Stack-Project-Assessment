@@ -26,22 +26,30 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 app.get("/videos", (request, response) => {
-  const sortType = request.query.sort;
-  videos = videos.sort((a, b) => b.rating - a.rating);
-  console.log(sortType);
+ db.query("SELECT * FROM videos")
+   .then((result) => {
+     res.status(200).json({ videos: result.rows });
+   })
+   .catch((err) => {
+     console.log(err);
+   });
 
-  if (sortType === "asc") {
-    videos.sort((a, b) => a.rating - b.rating);
-  } else if (sortType === "desc") {
-    videos.sort((a, b) => b.rating - a.rating);
-  }
-  response.status(200).json(videos);
+ 
+  
 });
 
 app.get("/:id", (request, response) => {
-  const id = request.params.id;
-  const findEl = videos.find((el) => Number(el.id) === Number(id));
-  response.send(findEl);
+   const videoId = parseInt(req.params.id);
+   db.query("DELETE * FROM movies WHERE id = $1", [videoId])
+     .then((result) => {
+       res.status(200).json(result.rows);
+     })
+     .catch((error) => {
+       console.log(error);
+     });
+  // const id = request.params.id;
+  // const findEl = videos.find((el) => Number(el.id) === Number(id));
+  // response.send(findEl);
 });
 app.post("/", (req, res) => {
   if (req.body.title.trim() === "" || req.body.url.trim() === "") {
@@ -59,15 +67,23 @@ app.post("/", (req, res) => {
   res.status(201).json(videos);
 });
 app.delete("/:id", (request, response) => {
-  const id = request.params.id;
-  const findEl = videos.find((el) => Number(el.id) === Number(id));
-  if (findEl) {
-    videos = videos.filter((el) => Number(el.id) !== Number(id));
-    response.send(videos);
-  } else {
-    response.status(400).json({
-      result: "failure",
-      message: "Video could not be deleted",
+  const videoTodelete = parseInt(req.params.id);
+  db.query("SELECT * FROM movies WHERE id = $1", [videoTodelete])
+    .then((result) => {
+      res.status(200).send("Video deleted successfully");
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  }
+  // const id = request.params.id;
+  // const findEl = videos.find((el) => Number(el.id) === Number(id));
+  // if (findEl) {
+  //   videos = videos.filter((el) => Number(el.id) !== Number(id));
+  //   response.send(videos);
+  // } else {
+  //   response.status(400).json({
+  //     result: "failure",
+  //     message: "Video could not be deleted",
+  //   });
+  // }
 });
