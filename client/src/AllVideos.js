@@ -129,7 +129,11 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
         {videos?.map((video) => {
           return (
             <ScrollAnimation animateIn="animate__animated animate__fadeInUp">
-              <div key={video.id} className="video-section-wrapper">
+              <div
+                id="all-videos"
+                key={video.id}
+                className="video-section-wrapper"
+              >
                 <iframe
                   src={`https://www.youtube.com/embed/${video.url?.slice(32)}`}
                   title={video.title}

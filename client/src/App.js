@@ -10,6 +10,7 @@ import { Main } from "./Main";
 import { HomeHero } from "./HomeHero";
 import { Steps } from "./Steps";
 import { About } from "./About.js";
+import { AboutPage } from "./AboutPage";
 
 export let videosContext = createContext(null);
 
@@ -18,7 +19,6 @@ function App() {
   const [isDesc, setIsDesc] = useState(true);
 
   const url = "https://full-stack-project-server.onrender.com/videos";
-
   const fetchData = useCallback(() => {
     fetch(`${url}?sort=${isDesc ? "desc" : "asc"}`)
       .then((response) => {
@@ -66,20 +66,7 @@ function App() {
                 </div>
               }
             />
-            <Route
-              path="/about"
-              element={
-                <div>
-                  <h1>More info to be added soon, stay tuned...</h1>
-                  <p>Yes the contrast here needs adjusting.</p>
-                  <p>
-                    Guess the Lighthouse score for accessibility for this page?
-                  </p>
-                  <p>Thank you for visiting! 😎</p>
-                  <a href="/">Go back</a>
-                </div>
-              }
-            />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </BrowserRouter>
       </videosContext.Provider>

@@ -94,7 +94,7 @@ app.post("/videos", async (req, res) => {
       .status(400)
       .json({ message: "Please add a title for your video" });
   }
-  if (!videoUrl) {
+  if (videoUrl === "") {
     return res.status(400).json({ message: "Please enter a URL" });
   }
   if (req.body.url.match(youtubeRegex) === null) {

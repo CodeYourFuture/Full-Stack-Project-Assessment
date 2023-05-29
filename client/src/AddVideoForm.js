@@ -26,9 +26,21 @@ export const AddVideoForm = () => {
         url: videoUrl,
       }),
     })
+      // .then((response) => {
+      //   if (!response.ok) {
+      //     throw new Error("Please ensure the information is correct");
+      //   }
+      //   return response.json();
+      // })
+
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Please ensure the information is correct");
+        if (response.status > 400 && response.status < 500) {
+          throw new Error(
+            "Please ensure your video has a title and a valid Youtube url."
+          );
+        }
+        if (response.status > 500 && response.status < 600) {
+          throw new Error("Internal Server Error.");
         }
         return response.json();
       })
