@@ -3,13 +3,13 @@ import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-regular-svg-icons";
 
 function Votes({ videos, setVideos, video }) {
-  function updateRating(id, newRating) {
+  function updateRating(id, newRating, newDate) {
     fetch(`https://video-server-1vzq.onrender.com/video/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ rating: newRating }),
+      body: JSON.stringify({ rating: newRating, date: newDate }),
     })
       .then((response) => {
         if (response.ok) {
@@ -21,9 +21,9 @@ function Votes({ videos, setVideos, video }) {
             }
           });
           setVideos(newVideos);
-          console.log("Video rating updated");
+          console.log("Video rating and date updated");
         } else {
-          console.log("Failed to update video rating");
+          console.log("Failed to update video rating and date");
         }
       })
       .catch((error) => {
@@ -34,13 +34,15 @@ function Votes({ videos, setVideos, video }) {
   function upVote(id) {
     const video = videos.find((video) => video.id === id);
     const newRating = video.rating + 1;
-    updateRating(id, newRating);
+    const newDate = new Date().toLocaleString();
+    updateRating(id, newRating, newDate);
   }
 
   function downVote(id) {
     const video = videos.find((video) => video.id === id);
     const newRating = video.rating - 1;
-    updateRating(id, newRating);
+    const newDate = new Date().toLocaleString();
+    updateRating(id, newRating, newDate);
   }
 
   return (
