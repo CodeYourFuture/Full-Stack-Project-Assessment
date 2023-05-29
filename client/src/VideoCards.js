@@ -5,7 +5,7 @@ function VideoCards() {
     <>
       <div class="card">
         <iframe title="myFrame"
-          src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
