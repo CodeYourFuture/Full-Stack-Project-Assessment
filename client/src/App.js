@@ -1,11 +1,18 @@
 import "./App.css";
+import Header from "./components/Header/Header";
+import Categories from "./components/Categories/Categories";
+import VideoPicker from "./components/VideoPicker/VideoPicker";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <main>
+        <Categories />
+        <VideoPicker />
+      </main>
+      <Footer />
     </div>
   );
 }

@@ -1,13 +1,14 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One&family=Orbitron:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --dark-blue: #110e19;
+  --light-blue: #1f1a2e;
+  --pink: #f30544;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  background-color: var(--dark-blue);
 }
+/* font-family: "Bowlby One", cursive; */
