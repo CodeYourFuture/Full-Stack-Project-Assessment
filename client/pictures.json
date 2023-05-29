@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "link": "/media/pictures/Comedy.webp"
+  },
+  {
+    "id": 2,
+    "link": "/media/pictures/Music.webp"
+  },
+  {
+    "id": 3,
+    "link": "/media/pictures/Beauty.webp"
+  },
+  {
+    "id": 4,
+    "link": "/media/pictures/Travel.webp"
+  },
+  {
+    "id": 5,
+    "link": "/media/pictures/Favorites.webp"
+  },
+  {
+    "id": 6,
+    "link": "/media/pictures/Others.webp"
+  }
+]
