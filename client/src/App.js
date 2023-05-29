@@ -6,6 +6,16 @@ import { useState } from "react";
 
 function App() {
   const [videos, setVideos] = useState(listOfVideos);
+  
+  const handleListOfVideos = (id) => {
+     const index = videos.findIndex((video) => video.id == id)
+     if (index !== -1) {
+      // Create a new array without the deleted card
+      const updatedVideos = [...videos];
+      updatedVideos.splice(index, 1);
+      setVideos(updatedVideos);
+     }
+  }
 
   return (
     <div className="App">
@@ -18,7 +28,7 @@ function App() {
           <VideoCards
             key={video.id}
             video={video}
-            setVideos={setVideos}
+            handleListOfVideos={handleListOfVideos}
           />
         ))}
       </div>

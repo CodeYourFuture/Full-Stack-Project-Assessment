@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-function VideoCards({video, setVideos}) {
+function VideoCards({video, handleListOfVideos}) {
 
   const [currentRate, setCurrentRate] = useState(video.rating)
    
@@ -17,6 +17,7 @@ function VideoCards({video, setVideos}) {
   }
   const handleDelete = () => {
    if(video.id){
+    handleListOfVideos(video.id)
    }
   }
 
