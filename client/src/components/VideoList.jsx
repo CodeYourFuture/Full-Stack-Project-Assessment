@@ -6,14 +6,29 @@ import AddVideoForm from "./AddVideoForm";
 import moment from "moment";
 import "./VideoList.css";
 
-const VideoList = ({ videos }) => {
-  const [videoList, setVideoList] = useState(videos);
+const VideoList = () => {
+  const [videoList, setVideoList] = useState([]);
   const [sortedVideoList, setSortedVideoList] = useState([]);
 
   useEffect(() => {
-    const sortedList = [...videoList].sort((a, b) => b.rating - a.rating);
-    setSortedVideoList(sortedList);
-  }, [videoList]);
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/videos");
+      if (res.ok) {
+        const data = await res.json();
+        setVideoList(data);
+        const sortedList = [...data].sort((a, b) => b.rating - a.rating);
+        setSortedVideoList(sortedList);
+      } else {
+        throw new Error("Failed to fetch videos");
+      }
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    }
+  };
 
   const addVideo = (newVideo) => {
     const timestamp = moment().format("YYYY-MM-DD HH:mm");
@@ -22,11 +37,17 @@ const VideoList = ({ videos }) => {
       { ...newVideo, rating: 0, timestamp },
     ];
     setVideoList(updatedVideoList);
+    setSortedVideoList(
+      [...updatedVideoList].sort((a, b) => b.rating - a.rating)
+    );
   };
 
   const removeVideo = (videoId) => {
     const updatedVideoList = videoList.filter((video) => video.id !== videoId);
     setVideoList(updatedVideoList);
+    setSortedVideoList(
+      [...updatedVideoList].sort((a, b) => b.rating - a.rating)
+    );
   };
 
   const handleVote = (videoId, voteType) => {
@@ -47,6 +68,9 @@ const VideoList = ({ videos }) => {
       return video;
     });
     setVideoList(updatedVideoList);
+    setSortedVideoList(
+      [...updatedVideoList].sort((a, b) => b.rating - a.rating)
+    );
   };
 
   return (
