@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const vidData = require("./exampleresponse.json");
 const port = process.env.PORT || 5000;
 
@@ -19,6 +20,9 @@ function getNewUniqueId(array) {
   return newId;
 }
 
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
@@ -32,6 +36,7 @@ app.get("/", (req, res) => {
 app.get("/videos", (req, res) => {
   res.json({ allVideoes: "all videoes", videoes: vidData });
 });
+
 app.post("/videos", (req, res) => {
   if (!req) {
     return res.json({
@@ -41,8 +46,22 @@ app.post("/videos", (req, res) => {
       },
     });
   }
-  const uniId = getNewUniqueId();
-  res.json({ allVideoes: { info: "new video added", uniqueId: `${uniId}` } });
+  //const id = req.body.id;
+  const uniId = getNewUniqueId(videos);
+  console.log(req.body);
+  const title = req.body.title;
+  const url = req.body.url;
+  const rating = req.body.rating;
+  const newVidToAdd = {
+    uniId,
+    title,
+    url,
+    rating,
+  };
+
+  res.json({
+    allVideoes: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
+  });
 });
 
 app.get("/videos/search", (req, res) => {
@@ -72,6 +91,18 @@ app.get("/videos/search", (req, res) => {
   });
 });
 
+app.delete("/videos/:idp", (req, res) => {
+  if (!req) {
+    return res.json({
+      videoAddError: {
+        result: "failure",
+        message: "Video could not be deleted",
+      },
+    });
+  }
+  const idInPram = req.params.idp;
+  res.json({ allVideoes: { info: " video deleted", videoId: `${idInPram}` } });
+});
 app.get("/videos/:idp", (req, res) => {
   const idInPram = req.params.idp;
 
