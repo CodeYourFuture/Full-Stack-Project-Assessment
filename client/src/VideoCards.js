@@ -1,22 +1,20 @@
-import { VoteUpDown } from "./VoteUpDown";
 
-function VideoCards() {
+import { useState } from "react";
+
+function VideoCards({video, videos, setVideos}) {
+
   return (
     <>
-      <div class="card">
+      <div className="card">
         <iframe title="myFrame"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          src={`https://www.youtube.com/embed/${video.videoID}`}
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
         ></iframe>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text"> 
-            Card Rating
-          </p>
+        <div className="card-body">
+          <h5 className="card-title">Title: {video.title}</h5>
+          <p className="card-text"> Rating: {video.rating}</p>
         </div>
-        <VoteUpDown />
       </div>
     </>
   );

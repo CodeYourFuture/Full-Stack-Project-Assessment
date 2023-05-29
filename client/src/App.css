@@ -5,11 +5,19 @@ body {
   background-color: beige;
 }
 
-@media only screen and (min-width: 768px) {
+
   iframe{
-    height: 13em;
+    height: 15em;
   }
   .card{
-    width: 25%;
-  }
+    width: 30%;}
+
+
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
