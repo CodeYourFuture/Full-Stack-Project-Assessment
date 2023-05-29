@@ -5,19 +5,24 @@ body {
   background-color: beige;
 }
 
+iframe {
+  height: 15em;
+}
+.card {
+  width: 30%;
+}
 
-  iframe{
-    height: 15em;
-  }
-  .card{
-    width: 30%;}
-
-
-.cards{
+.cards {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   padding: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
 }
