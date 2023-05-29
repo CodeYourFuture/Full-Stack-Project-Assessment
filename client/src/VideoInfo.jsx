@@ -2,7 +2,6 @@ import Votes from "./Votes";
 import DeleteVideo from "./DeleteVideo";
 
 function VideoInfo({ videos, setVideos, video, getAllVideos }) {
-  console.log(video.url.slice(32));
   return (
     <div className="eachVideo">
       <h2>{video.title}</h2>

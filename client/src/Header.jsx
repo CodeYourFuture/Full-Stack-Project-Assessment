@@ -6,9 +6,6 @@ function Header({ handleOrderChange }) {
         <a href="/" className="click-btn btn">
           <h3>Home</h3>
         </a>
-        <a href="/videos" className="click-btn btn">
-          <h3>All Videos</h3>
-        </a>
       </nav>
     </header>
   );

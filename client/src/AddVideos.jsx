@@ -16,37 +16,6 @@ function AddVideos({ getAllVideos }) {
 
   const [handleSuccess, setHandleSuccess] = useState(null);
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   fetch("http://localhost:3005/video", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       title: formData.title,
-  //       url: formData.url,
-  //     }),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(response.json());
-  //       }
-  //       console.log(response.json());
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       console.log(data.error);
-  //       getAllVideos();
-  //       setFormData(initialState);
-  //       setHandleError(data.error);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -177,38 +146,6 @@ function AddVideos({ getAllVideos }) {
       )}
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <button onClick={toggleShow}>Add Video</button>
-  //     {toggleArea && (
-  //       <form method="post" onSubmit={handleSubmit}>
-  //         <legend>Video Submission</legend>
-  //         <section className="title-block">
-  //           <label htmlFor="title">Enter title: </label>
-  //           <input
-  //             type="text"
-  //             id="title"
-  //             name="title"
-  //             value={formData.title}
-  //             onChange={handleChange}
-  //           />
-  //         </section>
-  //         <section>
-  //           <label htmlFor="url">Enter URL: </label>
-  //           <input
-  //             type="url"
-  //             id="url"
-  //             name="url"
-  //             value={formData.url}
-  //             onChange={handleChange}
-  //           />
-  //         </section>
-  //         <button type="submit">Add Video</button>
-  //       </form>
-  //     )}
-  //   </div>
-  // );
 }
 
 export default AddVideos;

@@ -1,13 +1,7 @@
 import ToggleArea from "./ToggleArea";
 import VideoInfo from "./VideoInfo";
 
-function ShowVideos({
-  handleOrderChange,
-  videos,
-  setVideos,
-  getAllVideos,
-  //   order,
-}) {
+function ShowVideos({ handleOrderChange, videos, setVideos, getAllVideos }) {
   return (
     <div>
       <ToggleArea handleOrderChange={handleOrderChange} />

@@ -22,56 +22,27 @@ app.get("/", (req, res) => {
 });
 
 // GET ALL VIDEOS
-// app.get("/videos", (req, res) => {
-//   const order = req.query.order || null;
-
-//   let query = "SELECT * FROM videos";
-
-//   if (order) {
-//     query += ` ORDER BY rating ${order.toUpperCase()}`;
-//   }
-
-//   videoData
-//     .query(query)
-//     .then((result) => {
-//       if (result.rowCount === 0) {
-//         res.status(400).json({ error: "No videos available" });
-//       } else {
-//         return res.status(200).json(result.rows);
-//       }
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
-
 app.get("/videos", (req, res) => {
-  try {
-    const order = req.query.order || null;
+  const order = req.query.order || null;
 
-    let query = "SELECT * FROM videos";
+  let query = "SELECT * FROM videos";
 
-    if (order) {
-      query += ` ORDER BY rating ${order.toUpperCase()}`;
-    }
-
-    videoData
-      .query(query)
-      .then((result) => {
-        if (result.rowCount === 0) {
-          res.status(400).json({ error: "No videos available" });
-        } else {
-          return res.status(200).json(result.rows);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        res.status(500).json({ error: "Internal server error" });
-      });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+  if (order) {
+    query += ` ORDER BY rating ${order.toUpperCase()}`;
   }
+
+  videoData
+    .query(query)
+    .then((result) => {
+      if (result.rowCount === 0) {
+        res.status(400).json({ error: "No videos available" });
+      } else {
+        return res.status(200).json(result.rows);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 // POST VIDEO
@@ -112,43 +83,6 @@ app.post("/video", async (req, res) => {
     res.json(error);
   }
 });
-
-// app.post("/video", (req, res) => {
-//   const newTitle = req.body.title;
-//   const newURL = req.body.url;
-
-//   const postQuery = `INSERT INTO videos(id, title, url, rating, date) VALUES ($1, $2, $3, $4, $5)`;
-//   const getQuery = `SELECT 1 FROM videos WHERE url = $1`;
-
-//   const randomID = Math.floor(100000 + Math.random() * 900000);
-//   const randomRating = Math.floor(100 + Math.random() * 900);
-//   const postDate = new Date().toLocaleString();
-//   const word = "youtube";
-
-//   videoData
-//     .query(getQuery, [newURL])
-//     .then((result) => {
-//       if (result.rowCount > 0) {
-//         return Promise.reject({ error: "Video already exists" });
-//       } else if (!newTitle || !newURL) {
-//         return Promise.reject({ error: "Please fill all fields" });
-//       } else if (!newURL.includes(word)) {
-//         return Promise.reject({ error: "Enter valid YouTube address" });
-//       } else {
-//         return videoData.query(postQuery, [
-//           randomID,
-//           newTitle,
-//           newURL,
-//           randomRating,
-//           postDate,
-//         ]);
-//       }
-//     })
-//     .then(() => {
-//       res.status(200).json({ message: "New Video added" });
-//     })
-//     .catch((error) => res.json(error));
-// });
 
 // GET BY ID
 app.get("/video/:id", (req, res) => {

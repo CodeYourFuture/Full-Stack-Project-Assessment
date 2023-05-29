@@ -5,6 +5,7 @@ import Header from "./Header";
 import LandingPage from "./LandingPage";
 import AddVideos from "./AddVideos";
 import ShowVideos from "./ShowVideos";
+import Footer from "./Footer";
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -19,7 +20,6 @@ function App() {
     fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setVideos(data);
       })
       .catch((error) => console.log(error));
@@ -33,47 +33,6 @@ function App() {
     getAllVideos();
   }, [getAllVideos]);
 
-  // const getAllVideos = useCallback(() => {
-  //   try {
-  //     fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
-  //       // fetch(`https://video-server-1vzq.onrender.com/videos`)
-  //       .then((response) => {
-  //         if (!response.ok) {
-  //           throw new Error("SOMETHING");
-  //         }
-  //         return response.json();
-  //       })
-  //       .then((data) => {
-  //         console.log(data);
-  //         setVideos(data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         // Handle the error here
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //     // Handle the error here
-  //   }
-  // }, [order]);
-
-  // function handleOrderChange() {
-  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
-  // }
-
-  // useEffect(() => {
-  //   try {
-  //     getAllVideos();
-  //   } catch (error) {
-  //     console.log(error);
-  //     // Handle the error here
-  //   }
-  // }, [getAllVideos]);
-
-  // function buttonChange() {
-  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
-  // }
-
   return (
     <div className="App">
       <Header handleOrderChange={handleOrderChange} />
@@ -85,20 +44,6 @@ function App() {
               path="/add"
               element={<AddVideos getAllVideos={getAllVideos} />}
             />
-            {/* <Route
-              path="/videos"
-              element={
-                <ShowVideos
-                  toggleShow={toggleShow}
-                  toggleArea={toggleArea}
-                  handleOrderChange={handleOrderChange}
-                  videos={videos}
-                  setVideos={setVideos}
-                  order={order}
-                  getAllVideos={getAllVideos}
-                />
-              }
-            /> */}
           </Routes>
         </BrowserRouter>
         <button onClick={toggleShow} className="click-btn btn">
@@ -116,6 +61,7 @@ function App() {
           />
         )}
       </section>
+      <Footer />
     </div>
   );
 }

@@ -16,7 +16,7 @@
   color: #e1e1e103;
   background-image: url("https://images.unsplash.com/photo-1676816823266-a8bb9a998de7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80");
   background-repeat: repeat;
-  -webkit-background-clip: text;
+  background-clip: text;
   animation: animate 20s ease-in-out infinite;
   text-align: center;
   text-transform: uppercase;
@@ -222,16 +222,12 @@ input:checked + #switch-btn:after {
 .add-video {
   grid-area: add-vid;
 }
-/* .see-video {
-  grid-area: see-vid;
-} */
 
 .landing-area {
   display: grid;
   grid-template-areas:
     "about"
     "add-vid";
-  /* "see-vid"; */
 }
 
 @media screen and (min-width: 700px) {

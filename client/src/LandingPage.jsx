@@ -63,13 +63,6 @@ function LandingPage() {
           </ol>
           <AddVideos />
         </article>
-
-        {/* <article className="landing-section see-video" id="c">
-          <h4 className="video-heading">Want to see our video selection</h4>
-          <a href="/videos">
-            <button className="click-btn btn">Click for All Videos</button>
-          </a>
-        </article> */}
       </section>
     </div>
   );
