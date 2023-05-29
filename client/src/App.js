@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
@@ -15,14 +15,15 @@ function App() {
 
   const toggleShow = () => setToggleArea((s) => !s);
 
-  const getAllVideos = () => {
+  const getAllVideos = useCallback(() => {
     fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setVideos(data);
       })
       .catch((error) => console.log(error));
-  };
+  }, [order]);
 
   function handleOrderChange() {
     order === "ASC" ? setOrder("DESC") : setOrder("ASC");
@@ -30,7 +31,7 @@ function App() {
 
   useEffect(() => {
     getAllVideos();
-  }, [order]);
+  }, [getAllVideos]);
 
   return (
     <div className="App">
@@ -59,6 +60,20 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
+        {/* <button onClick={toggleShow} className="click-btn btn">
+          Click to view videos
+        </button>
+        {toggleArea && (
+          <ShowVideos
+            toggleShow={toggleShow}
+            toggleArea={toggleArea}
+            handleOrderChange={handleOrderChange}
+            videos={videos}
+            setVideos={setVideos}
+            order={order}
+            getAllVideos={getAllVideos}
+          />
+        )} */}
       </section>
     </div>
   );

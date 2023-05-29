@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ToggleArea from "./ToggleArea";
 import VideoInfo from "./VideoInfo";
 
@@ -7,12 +6,8 @@ function ShowVideos({
   videos,
   setVideos,
   getAllVideos,
-  order,
+  //   order,
 }) {
-  useEffect(() => {
-    getAllVideos();
-  }, [order]);
-
   return (
     <div>
       <ToggleArea handleOrderChange={handleOrderChange} />
