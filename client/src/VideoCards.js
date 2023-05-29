@@ -3,22 +3,34 @@ import "./VideoCards.css";
 
 const VideoCards = ({ videos, setVideos }) => {
     const handleDeleteClick = (id) => {
-    let newData = [];
-    newData = videos.filter((video) => video.id !== id);
-    setVideos(newData);
-}
+        fetch(`http://localhost:5000/${id}`,{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) =>{
+            let newData = videos.filter((video) => video.id !== data.id)
+            setVideos(newData);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+
+};
 const increaseRating = (id) => {
     let newData = [];
     newData = videos.map((video) => 
-    video.id === id? {...video, rating: video.rating + 1}: video);
+    video.id === id ? { ...video, rating: video.rating + 1 }: video);
 return setVideos(newData);
 }
 const decreaseRating = (id) => {
     let newData = [];
     newData = videos.map((video) => 
-    video.id === id? {...video, rating: video.rating - 1}: video);
+    video.id === id ? {...video, rating: video.rating - 1}: video);
 return setVideos(newData);
-} 
+}; 
 
 const Card =(video) => {
   return (
@@ -34,7 +46,7 @@ const Card =(video) => {
 
         <h6>{video.title}</h6>
         <span className='UpDownVote'>
-            <i className='fa fa-thumbs-down' onClick={() => increaseRating(video.id)}></i>
+            <i className='fa fa-thumbs-up' onClick={() => increaseRating(video.id)}></i>
             {video.rating}
             <i className='fa fa-thumbs-down' onClick={() => decreaseRating(video.id)}></i>
         </span>
