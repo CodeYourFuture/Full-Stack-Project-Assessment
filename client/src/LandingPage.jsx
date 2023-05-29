@@ -6,7 +6,7 @@ function LandingPage() {
   return (
     <div>
       <section className="info">
-        <h2>Welcome to RapNB</h2>
+        <h2>Welcome to Rap N Blues</h2>
         <h4>Your one stop vlog for all Rap and RnB videos </h4>
       </section>
 
@@ -14,8 +14,8 @@ function LandingPage() {
         <article className="landing-section about" id="a">
           <h4>About Us</h4>
           <p>
-            RapNB is a platform that showcases Rap and RnB music videos you
-            would like to see
+            Rap N Blues is a platform that showcases Rap and RnB music videos
+            you would like to see
           </p>
           <p>
             All videos are recommendations from our users and are subject to
@@ -64,12 +64,12 @@ function LandingPage() {
           <AddVideos />
         </article>
 
-        <article className="landing-section see-video" id="c">
+        {/* <article className="landing-section see-video" id="c">
           <h4 className="video-heading">Want to see our video selection</h4>
           <a href="/videos">
             <button className="click-btn btn">Click for All Videos</button>
           </a>
-        </article>
+        </article> */}
       </section>
     </div>
   );

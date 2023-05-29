@@ -103,7 +103,7 @@ function AddVideos({ getAllVideos }) {
     <div>
       <section>
         <button onClick={toggleShow} className="click-btn btn">
-          Click for submission form
+          {toggleArea ? "Close" : "Click for submission form"}
         </button>
       </section>
       {toggleArea && (

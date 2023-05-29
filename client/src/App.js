@@ -15,47 +15,14 @@ function App() {
 
   const toggleShow = () => setToggleArea((s) => !s);
 
-  // const getAllVideos = useCallback(() => {
-  //   fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
-  //     // fetch(`https://video-server-1vzq.onrender.com/videos`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setVideos(data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, [order]);
-
-  // function handleOrderChange() {
-  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
-  // }
-
-  // useEffect(() => {
-  //   getAllVideos();
-  // }, [getAllVideos]);
-
   const getAllVideos = useCallback(() => {
-    try {
-      fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
-        // fetch(`https://video-server-1vzq.onrender.com/videos`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("SOMETHING");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setVideos(data);
-        })
-        .catch((error) => {
-          console.log(error);
-          // Handle the error here
-        });
-    } catch (error) {
-      console.log(error);
-      // Handle the error here
-    }
+    fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setVideos(data);
+      })
+      .catch((error) => console.log(error));
   }, [order]);
 
   function handleOrderChange() {
@@ -63,13 +30,49 @@ function App() {
   }
 
   useEffect(() => {
-    try {
-      getAllVideos();
-    } catch (error) {
-      console.log(error);
-      // Handle the error here
-    }
+    getAllVideos();
   }, [getAllVideos]);
+
+  // const getAllVideos = useCallback(() => {
+  //   try {
+  //     fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
+  //       // fetch(`https://video-server-1vzq.onrender.com/videos`)
+  //       .then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error("SOMETHING");
+  //         }
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data);
+  //         setVideos(data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //         // Handle the error here
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //     // Handle the error here
+  //   }
+  // }, [order]);
+
+  // function handleOrderChange() {
+  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
+  // }
+
+  // useEffect(() => {
+  //   try {
+  //     getAllVideos();
+  //   } catch (error) {
+  //     console.log(error);
+  //     // Handle the error here
+  //   }
+  // }, [getAllVideos]);
+
+  // function buttonChange() {
+  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
+  // }
 
   return (
     <div className="App">
@@ -82,7 +85,7 @@ function App() {
               path="/add"
               element={<AddVideos getAllVideos={getAllVideos} />}
             />
-            <Route
+            {/* <Route
               path="/videos"
               element={
                 <ShowVideos
@@ -95,11 +98,11 @@ function App() {
                   getAllVideos={getAllVideos}
                 />
               }
-            />
+            /> */}
           </Routes>
         </BrowserRouter>
-        {/* <button onClick={toggleShow} className="click-btn btn">
-          Click to view videos
+        <button onClick={toggleShow} className="click-btn btn">
+          {toggleArea ? "Close" : "Click to view videos"}
         </button>
         {toggleArea && (
           <ShowVideos
@@ -111,7 +114,7 @@ function App() {
             order={order}
             getAllVideos={getAllVideos}
           />
-        )} */}
+        )}
       </section>
     </div>
   );

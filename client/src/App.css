@@ -155,6 +155,8 @@ input:checked + #switch-btn:after {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2em;
+  margin: 2em auto 0 auto;
 }
 
 .ins-points {
@@ -220,16 +222,16 @@ input:checked + #switch-btn:after {
 .add-video {
   grid-area: add-vid;
 }
-.see-video {
+/* .see-video {
   grid-area: see-vid;
-}
+} */
 
 .landing-area {
   display: grid;
   grid-template-areas:
     "about"
-    "add-vid"
-    "see-vid";
+    "add-vid";
+  /* "see-vid"; */
 }
 
 @media screen and (min-width: 700px) {
@@ -238,7 +240,7 @@ input:checked + #switch-btn:after {
     column-gap: 3em;
     grid-template-areas:
       "about add-vid"
-      "see-vid add-vid";
+      "about add-vid";
   }
 
   iframe {
@@ -249,20 +251,23 @@ input:checked + #switch-btn:after {
   .icon-btn {
     padding: 0 3.5em;
   }
+
+  .about {
+    max-height: 24em;
+  }
 }
 
 @media screen and (min-width: 1000px) {
   .landing-area {
-    grid-template-columns: 15em auto 15em;
-    grid-template-areas: "about add-vid see-vid";
+    grid-template-columns: 28em auto;
+    grid-template-areas: "about add-vid";
     column-gap: 2em;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .about,
-  .see-video {
+  .about {
     max-height: 19em;
   }
 
