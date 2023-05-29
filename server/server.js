@@ -22,27 +22,56 @@ app.get("/", (req, res) => {
 });
 
 // GET ALL VIDEOS
+// app.get("/videos", (req, res) => {
+//   const order = req.query.order || null;
+
+//   let query = "SELECT * FROM videos";
+
+//   if (order) {
+//     query += ` ORDER BY rating ${order.toUpperCase()}`;
+//   }
+
+//   videoData
+//     .query(query)
+//     .then((result) => {
+//       if (result.rowCount === 0) {
+//         res.status(400).json({ error: "No videos available" });
+//       } else {
+//         return res.status(200).json(result.rows);
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
+
 app.get("/videos", (req, res) => {
-  const order = req.query.order || null;
+  try {
+    const order = req.query.order || null;
 
-  let query = "SELECT * FROM videos";
+    let query = "SELECT * FROM videos";
 
-  if (order) {
-    query += ` ORDER BY rating ${order.toUpperCase()}`;
+    if (order) {
+      query += ` ORDER BY rating ${order.toUpperCase()}`;
+    }
+
+    videoData
+      .query(query)
+      .then((result) => {
+        if (result.rowCount === 0) {
+          res.status(400).json({ error: "No videos available" });
+        } else {
+          return res.status(200).json(result.rows);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).json({ error: "Internal server error" });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  videoData
-    .query(query)
-    .then((result) => {
-      if (result.rowCount === 0) {
-        res.status(400).json({ error: "No videos available" });
-      } else {
-        return res.status(200).json(result.rows);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 });
 
 // POST VIDEO

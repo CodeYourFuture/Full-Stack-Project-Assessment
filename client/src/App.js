@@ -15,23 +15,55 @@ function App() {
 
   const toggleShow = () => setToggleArea((s) => !s);
 
+  // const getAllVideos = useCallback(() => {
+  //   fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
+  //     // fetch(`https://video-server-1vzq.onrender.com/videos`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setVideos(data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, [order]);
+
+  // function handleOrderChange() {
+  //   order === "ASC" ? setOrder("DESC") : setOrder("ASC");
+  // }
+
+  // useEffect(() => {
+  //   getAllVideos();
+  // }, [getAllVideos]);
+
   const getAllVideos = useCallback(() => {
-    // fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
-    fetch(`https://video-server-1vzq.onrender.com/videos`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setVideos(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    try {
+      fetch(`https://video-server-1vzq.onrender.com/videos?order=${order}`)
+        // fetch(`https://video-server-1vzq.onrender.com/videos`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setVideos(data);
+        })
+        .catch((error) => {
+          console.log(error);
+          // Handle the error here
+        });
+    } catch (error) {
+      console.log(error);
+      // Handle the error here
+    }
+  }, [order]);
 
   function handleOrderChange() {
     order === "ASC" ? setOrder("DESC") : setOrder("ASC");
   }
 
   useEffect(() => {
-    getAllVideos();
+    try {
+      getAllVideos();
+    } catch (error) {
+      console.log(error);
+      // Handle the error here
+    }
   }, [getAllVideos]);
 
   return (
