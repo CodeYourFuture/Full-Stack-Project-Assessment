@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import data from "./exampleresponse.json";
 import VideoList from "./VideoList";
@@ -9,6 +9,13 @@ function App() {
   const [VideosData, setVideosData] = useState(data);
   const [searchVideos, setSearchVideos] = useState([]);
   console.log(VideosData);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((res) => res.json())
+      .then((data) => setVideosData(data));
+    //setVideosData(data);
+  }, []);
 
   function addVideo(title, url) {
     let newVideo = {
