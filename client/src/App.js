@@ -18,7 +18,6 @@ function App() {
           <VideoCards
             key={video.id}
             video={video}
-            videos={videos}
             setVideos={setVideos}
           />
         ))}

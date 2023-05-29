@@ -1,15 +1,23 @@
 
 import { useState } from "react";
 
-function VideoCards({video, videos, setVideos}) {
+function VideoCards({video, setVideos}) {
+
+  const [currentRate, setCurrentRate] = useState(video.rating)
+   
   const handleUp = () => {
-
+    console.log(currentRate);
+    if (video.id)
+      {setCurrentRate(currentRate + 1)}
   }
-  const handleDown = () => {
 
+  const handleDown = () => {
+    if(video.id && currentRate>0)
+    {setCurrentRate(currentRate - 1)}
   }
   const handleDelete = () => {
-
+   if(video.id){
+   }
   }
 
   return (
@@ -22,7 +30,7 @@ function VideoCards({video, videos, setVideos}) {
         ></iframe>
         <div className="card-body">
           <h5 className="card-title">{video.title}</h5>
-          <p className="card-text"> Rating: {video.rating}</p>
+          <p className="card-text"> Rating: {currentRate}</p>
         </div>
         <div className="button-group">
         <button type="button" class="btn btn-success" onClick={handleUp}>Up</button>
