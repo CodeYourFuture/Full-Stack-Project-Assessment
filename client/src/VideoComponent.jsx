@@ -2,10 +2,10 @@ import React from "react";
 import Rating from "./Rating";
 
 
-const VideoComponent = ({ videos, setVideos }) => {
+const VideoComponent = ({ videos, setVideos,  }) => {
 
   
-  // const [videos, setVideos] = useState(data);
+  // \qq
 
   const handleDelete = (id) => {
     setVideos(videos.filter((video) => video.id !== id));
@@ -16,10 +16,15 @@ const VideoComponent = ({ videos, setVideos }) => {
         <div key={index} className="video-card">
           <h3>{video.title}</h3>
           <iframe
-            src={video.url.replace("watch?v=", "embed/")}
-            title={video.title}
+            width="560"
+            height="315"
+            src={videos.Url}
+            title={videos.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           ></iframe>
-          <Rating rating={video.rating} />
+          <Rating rating={videos.rating} />
           <button onClick={() => handleDelete(video.id)}>Remove</button>
         </div>
       ))}
