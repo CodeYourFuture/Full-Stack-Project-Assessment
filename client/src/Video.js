@@ -1,5 +1,6 @@
 import React from "react";
 import Youtube from "react-youtube";
+import "./Video.css";
 
 
 const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
@@ -15,10 +16,16 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></Youtube>
-      <div>Votes :{votes}</div>
-      <button onClick={onUpVote}>Up vote</button>
-      <button onClick={onDownVote}>Down vote</button>
-      <button onClick={onRemove}>Remove video</button>
+      <div>Votes:{votes}</div>
+      <button onClick={onUpVote} className="up_vote">
+        ♡
+      </button>
+      <button onClick={onDownVote} className="down_vote">
+        💔
+      </button>
+      <button onClick={onRemove} className="delete">
+        ␡
+      </button>
     </>
   );
 };
