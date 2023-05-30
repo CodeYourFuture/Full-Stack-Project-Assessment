@@ -1,0 +1,15 @@
+.footer {
+    background-color: #FFD700;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-text {
+    color: rgb(7, 7, 72);
+    font-size: 11px;
+    font-weight: bold;
+  }
+  
+  .footer-text:hover {
+    font-size: 19px;
+  }

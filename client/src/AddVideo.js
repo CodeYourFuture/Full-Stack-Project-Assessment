@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AddVideo.css';
 
 function AddVideo({ videos, setVideos }) {
     const [clickAdd, setClickAdd] = useState(false);
     const[titleInput, setTitleInput] = useState("");
     const[urlInput, setUrlInput] = useState("");
-
-
+    
     const handleAddVideoButton = () => {
         clickAdd === false ? setClickAdd(true) : setClickAdd(false);
     };

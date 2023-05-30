@@ -4,6 +4,7 @@ import  VideoCards   from "./VideoCards";
 import  AddVideo  from "./AddVideo";
 import data from './exampleresponse.json';
 import OrderButton from "./OrderButton";
+import Footer from "./Footer";
 
 function App() {
   const [videos, setVideos] = useState(data);
@@ -44,6 +45,7 @@ useEffect(() => {
        order={order}
        setOrder={setOrder}
        />
+       <Footer />
     </div>
   );
 }
