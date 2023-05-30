@@ -2,15 +2,20 @@ import data from "../Data/data.json";
 import "../Style/Videos.css";
 // console.log(data);
 const Videos = () => {
+  
   return (
     <div className="videos">
-      {data.map((vid, index) => (
+      {data.map((vid, index) => {
+        const videoId = vid.url.substring(vid.url.indexOf("?v=")+3)
+        console.log(videoId);
+     return (
+
         <section key={index} className="videos-cont">
           
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/${VIDEO_ID_GOES_HERE}"
+            src={"https://www.youtube.com/embed/"+videoId}
             title={vid.title}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -28,7 +33,8 @@ const Videos = () => {
 
           <div></div>
         </section>
-      ))}
+     )
+      })}
     </div>
   );
 };
