@@ -1,11 +1,11 @@
 import data from "../Data/data.json";
 import "../Style/Videos.css";
 // console.log(data);
-const Videos = () => {
+const Videos = ({videos}) => {
   
   return (
     <div className="videos">
-      {data.map((vid, index) => {
+      {videos.map((vid, index) => {
         const videoId = vid.url.substring(vid.url.indexOf("?v=")+3)
         console.log(videoId);
      return (
