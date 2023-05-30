@@ -1,4 +1,18 @@
-.App {
+/* ---- Header--- */
+.app {
+  display: flex;
   text-align: center;
-  background-color: #ffaaa5;
+}
+
+.app-header h1 {
+  border-bottom: 4mm ridge rgba(128, 128, 128, 0.6);
+}
+@media screen and (width > 400px) {
+  .app {
+    background-color: #ececec;
+  }
+  .app-header h1 {
+    border-bottom: .75rem solid;
+    width: 100%;
+  }
 }
