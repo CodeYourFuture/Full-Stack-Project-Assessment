@@ -1,0 +1,82 @@
+.videos {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.videos-cont {
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+iframe {
+  border-radius: 8px;
+  padding: 20px;
+  background-color: gray;
+}
+h3{
+ padding-left: 10px;
+  align-self:self-start;
+  margin-bottom: 5px;
+}
+/********************/
+.like-dislik-delete-span {
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: 60px;
+}
+/****************************/
+span {
+  position: absolute;
+  left: 2%;
+}
+.like-dislik-delete {
+  display: flex;
+  position: absolute;
+  right: 2%;
+}
+
+/* Like button */
+.like-button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e6e6e6;
+  color: #606060;
+  cursor: pointer;
+}
+
+.like-button:hover {
+  background-color: #f2f2f2;
+}
+
+/* Dislike button */
+.dislike-button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e6e6e6;
+  color: #606060;
+  cursor: pointer;
+}
+
+.dislike-button:hover {
+  background-color: #f2f2f2;
+}
+/*********************************/
+.delete {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e6e6e6;
+  color: #606060;
+  cursor: pointer;
+}
+.delete:hover {
+  background-color: #f2f2f2;
+}
