@@ -5,12 +5,20 @@ import VideoPicker from "./components/VideoPicker/VideoPicker";
 import Footer from "./components/Footer/Footer";
 
 function App() {
+  const categories = [
+    "Comedy",
+    "Music",
+    "Beauty",
+    "Travel",
+    "Favorites",
+    "Others",
+  ];
   return (
     <div className="App">
-      <Header />
+      <Header categories={categories} />
       <main>
-        <Categories />
-        <VideoPicker />
+        <Categories categories={categories} />
+        <VideoPicker categories={categories} />
       </main>
       <Footer />
     </div>

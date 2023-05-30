@@ -1,15 +1,7 @@
 import "./Header.css";
 import { useEffect, useState } from "react";
 
-const Header = () => {
-  const categories = [
-    "Comedy",
-    "Music",
-    "Beauty",
-    "Travel",
-    "Favorites",
-    "Others",
-  ];
+const Header = ({ categories }) => {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
 
   useEffect(() => {
