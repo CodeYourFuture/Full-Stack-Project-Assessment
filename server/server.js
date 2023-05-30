@@ -14,10 +14,10 @@ app.use(cors())
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const pool = new Pool({
-  user: 'student',
-  host: 'localhost',
-  database: 'postgres',
-  password:'postgres',
+  user: 'hengamehpostgres_user',
+  host: 'postgres://hengamehpostgres_user:CideWUIBBcUSwdTecTWTxlrF17Gj9wI2@dpg-chqkbm67avjb90m29q0g-a/hengamehpostgres',
+  database: 'hengamehpostgres',
+  password:'CideWUIBBcUSwdTecTWTxlrF17Gj9wI2',
   port: 5432, // default PostgreSQL port
 });
 
