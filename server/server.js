@@ -134,3 +134,29 @@ app.delete("/:id", function (req, res) {
     res.status(404).json(failureMessage);
   }
 });
+
+
+// PUT "/:id/rating"
+app.put("/:id/rating", function (req, res) {
+  const videoId = Number(req.params.id);
+  const rating = req.body.rating;
+
+  if (rating !== 1 && rating !== -1) {
+    return res.status(400).json({
+      result: "failure",
+      message: "Invalid rating value. Only +1 or -1 allowed.",
+    });
+  }
+
+  const video = videos.find((video) => video.id === videoId);
+
+  if (video) {
+    video.rating += rating;
+    res.send(`Updated rating for the video with ID ${videoId}`);
+  } else {
+    res.status(404).json({
+      result: "failure",
+      message: `Video with ID ${videoId} not found`,
+    });
+  }
+});

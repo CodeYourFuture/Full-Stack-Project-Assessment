@@ -125,7 +125,7 @@ h1.text-heading {
     height: 120px;
 }
 
-/*for desctop and tablet version*/
+/*for desktop and tablet versions*/
 @media (min-width: 768px) {
   .videos {
     display: flex;
