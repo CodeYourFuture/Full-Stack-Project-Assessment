@@ -1,7 +1,7 @@
 import data from "../Data/data.json";
 import "../Style/Videos.css";
 // console.log(data);
-const Videos = ({videos}) => {
+const Videos = ({videos, onVideoDelete}) => {
   
   return (
     <div className="videos">
@@ -27,7 +27,7 @@ const Videos = ({videos}) => {
             <div className="like-dislik-delete">
               <button className="like-button">Up Vote</button>
               <button className="dislike-button">Down Vote</button>
-              <button className="delete">Delete</button>
+              <button className="delete" onClick={()=> onVideoDelete(index)}>Delete</button>
             </div>
           </div>
 

@@ -6,6 +6,13 @@ import { useState } from "react";
 console.log(data)
 function App() {
   const [videos, setVideos] = useState(data);
+   
+  const onVideoDelete = (index)=>{
+    console.log(onVideoDelete);
+    const videosCopy = [...videos];
+    videosCopy.splice(index,1)
+    setVideos(videosCopy);
+  }
 
   return (
     <div >
@@ -13,7 +20,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <AddVid />
-      <Videos videos={videos} />
+      <Videos videos={videos} onVideoDelete={onVideoDelete} />
     </div>
   );
 }
