@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import "./VideoComponent.css";
 
-
 const AddVideoForm = ({ onAddVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
   const [titleError, setTitleError] = useState("");
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // clear error
@@ -27,11 +25,19 @@ const AddVideoForm = ({ onAddVideo }) => {
     }
 
     const newVideo = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 900000) + 100000,
       title: title.trim(),
       url: url.trim(),
       rating: 0,
     };
+
+    await fetch("http://127.0.0.1:5000/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    });
 
     onAddVideo(newVideo);
 

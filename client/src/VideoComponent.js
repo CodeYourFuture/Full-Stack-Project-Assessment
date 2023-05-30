@@ -1,20 +1,35 @@
 import React from "react";
 import "./VideoComponent.css";
 
-
 const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   const { id, title, url, rating } = video;
 
-  const handleRemoveClick = () => {
+  const handleRemoveClick = async () => {
+    await fetch(`http://127.0.0.1:5000/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
     onRemove(id);
   };
 
-  const handleUpvoteClick = () => {
-    onUpvote(id);
-  };
+  const handleVoteClick = async (vote) => {
+    const isUpVote = vote === "upVote";
 
-  const handleDownvoteClick = () => {
-    onDownvote(id);
+    await fetch(`http://127.0.0.1:5000/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ isUpVote }),
+    });
+
+    if (isUpVote) {
+      onUpvote(id);
+    } else {
+      onDownvote(id);
+    }
   };
 
   return (
@@ -36,10 +51,20 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
         <button className="remove-button" onClick={handleRemoveClick}>
           Remove
         </button>
-        <button className="upvote-button" onClick={handleUpvoteClick}>
+        <button
+          className="upvote-button"
+          onClick={() => {
+            handleVoteClick("upVote");
+          }}
+        >
           Up Vote
         </button>
-        <button className="downvote-button" onClick={handleDownvoteClick}>
+        <button
+          className="downvote-button"
+          onClick={() => {
+            handleVoteClick("downVote");
+          }}
+        >
           Down Vote
         </button>
       </div>

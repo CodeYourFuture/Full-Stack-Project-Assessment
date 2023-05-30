@@ -1,5 +1,6 @@
 const getVideos = require("./getVideos");
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
@@ -32,8 +33,25 @@ app.get("/", async (req, res) => {
   res.json(orderedVideos);
 });
 
+// GET "/:id"
+app.get("/:id", async (req, res) => {
+  const videos = await getVideos(db);
+
+  const videoId = parseInt(req.params.id);
+
+  const video = videos.find((v) => v.id === videoId);
+  if (!video) {
+    return res
+      .status(404)
+      .json({ result: "failure", message: "Video not found." });
+  }
+
+  res.json(video);
+});
+
 // POST "/"
-app.post("/", (req, res) => {
+app.post("/", bodyParser.json(), async (req, res) => {
+  console.log({ body: req.body });
   const { title, url } = req.body;
 
   // Check if title and URL are provided
@@ -53,31 +71,42 @@ app.post("/", (req, res) => {
   }
 
   const newVideo = {
-    id: Date.now(),
+    id: Math.floor(Math.random() * 900000) + 100000,
     title,
     url,
     rating: 0,
   };
 
-  videos.push(newVideo);
+  const query = `INSERT INTO videos (id, title, url, rating) VALUES (${newVideo.id}, '${newVideo.title}', '${newVideo.url}', ${newVideo.rating})`;
+  console.log({ query });
+
+  await db.query(query);
 
   res.json({ id: newVideo.id });
 });
 
-// GET "/:id"
-app.get("/:id", async (req, res) => {
-  const videos = await getVideos(db);
-
+app.put("/:id", bodyParser.json(), async (req, res) => {
+  console.log({ body: req.body });
   const videoId = parseInt(req.params.id);
 
-  const video = videos.find((v) => v.id === videoId);
-  if (!video) {
-    return res
-      .status(404)
-      .json({ result: "failure", message: "Video not found." });
-  }
+  const { isUpVote } = req.body;
 
-  res.json(video);
+  // Get video with id
+  // Get vote number of video
+  // Add/Minus vote number by one
+  // Update the new vote numer
+
+
+  const query = `SELECT rating FROM videos WHERE id = ${videoId}`;
+  const rows = await db.query(query).then((result) => {
+    return result.rows;
+  });
+  const oldRating = rows[0].rating;
+  const newRating = isUpVote ? oldRating + 1 : oldRating - 1;
+  const updateQuery = `UPDATE videos SET rating = ${newRating} WHERE id = ${videoId}`;
+  await db.query(updateQuery);
+
+  res.json({ query, rows });
 });
 
 // DELETE "/:id"
@@ -92,7 +121,11 @@ app.delete("/:id", async (req, res) => {
       .json({ result: "failure", message: "Video not found." });
   }
 
-  videos.splice(index, 1);
+  // videos.splice(index, 1);
+  const query = `DELETE FROM videos WHERE id = ${videoId}`;
+  console.log({ query });
+
+  await db.query(query);
 
   res.json({});
 });
