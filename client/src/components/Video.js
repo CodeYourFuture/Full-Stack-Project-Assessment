@@ -3,21 +3,19 @@ import DeleteVideo from "./DeleteVideo.js";
 import VoteScore from "./VoteScore.js";
 
 const Video = ({ video, handleDelete, updateRating }) => {
- 
+  const increaseRating = () => {
+    const newRating = video.rating + 1;
+    updateRating(video.id, newRating);
+  };
 
-   const increaseRating = () => {
-     const newRating = video.rating + 1;
-     updateRating(video.id, newRating);
-   };
-
-   const decreaseRating = () => {
-     const newRating = video.rating - 1;
-     updateRating(video.id, newRating);
-   };
+  const decreaseRating = () => {
+    const newRating = video.rating - 1;
+    updateRating(video.id, newRating);
+  };
 
   return (
     <div className="video-container">
-      <p className="text-heading">{video.title}</p>
+      <h1 className="text-heading">{video.title}</h1>
       <iframe
         className="video-frame"
         src={video.url}

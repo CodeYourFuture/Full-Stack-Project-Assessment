@@ -115,7 +115,14 @@
   font-size: 1.3rem;
   padding: 10px 40px;
   color: black;
+  display: flex;
   text-align: center;
+  align-items: center;
+}
+
+h1.text-heading {
+    letter-spacing: 0.2ch;
+    height: 120px;
 }
 
 /*for desctop and tablet version*/
