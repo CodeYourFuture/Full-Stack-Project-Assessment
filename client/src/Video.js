@@ -2,7 +2,6 @@ import React from "react";
 import Youtube from "react-youtube";
 import "./Video.css";
 
-
 const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
   return (
     <>
@@ -17,15 +16,17 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
         allowFullScreen
       ></Youtube>
       <div>Votes:{votes}</div>
-      <button onClick={onUpVote} className="up_vote">
-        ♡
-      </button>
-      <button onClick={onDownVote} className="down_vote">
-        💔
-      </button>
-      <button onClick={onRemove} className="delete">
-        ␡
-      </button>
+      <div className="votes_btn_wrap">
+        <button onClick={onUpVote} className="up_vote">
+          ♡
+        </button>
+        <button onClick={onDownVote} className="down_vote">
+          💔
+        </button>
+        <button onClick={onRemove} className="delete">
+          ␡
+        </button>
+      </div>
     </>
   );
 };

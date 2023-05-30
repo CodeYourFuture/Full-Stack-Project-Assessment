@@ -1,4 +1,11 @@
 /* ----buttons---- */
+.votes_btn_wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 .up_vote {
   width: 50px;
   height: 50px;
