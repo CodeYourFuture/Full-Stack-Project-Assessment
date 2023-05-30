@@ -153,11 +153,12 @@ function App() {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [items, setItems] = useState(null);
+  const [search,setSearch] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://full-stack-assessment.onrender.com//videos");
+        const response = await axios.get("http://localhost:5009/videos");
         const sortedItems = [...response.data].sort((a, b) => b.rating - a.rating);
         setItems(sortedItems);
       } catch (e) {
@@ -166,6 +167,15 @@ function App() {
     };
     fetchData();
   }, []);
+
+
+  async function serachHandler () {
+    const lowercase = search.toLowerCase()
+        const res = await axios.get(`http://localhost:5009/search/?title=${lowercase}`)
+        console.log(res.data)
+        setItems(res.data)
+
+  }
 
   const clickHandler = () => {
     setIsOpen(true);
@@ -198,7 +208,7 @@ function App() {
 
     try {
       const response = await axios.post("http://localhost:5009/video", {
-        title: title,
+        title: title.toLowerCase(),
         url: url.split("watch?v=")[1],
       });
 
@@ -206,6 +216,7 @@ function App() {
       setTitle("");
       setUrl("");
       alert("Video has been sent");
+      window.location.reload()
     } catch (e) {
       console.log(e);
     }
@@ -255,8 +266,10 @@ function App() {
           </Col>
           <Col md={6}>
             <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
-              <Form.Control placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+              {/* <InputGroup.Text id="basic-addon1" >Search</InputGroup.Text> */}
+              <Button onClick={serachHandler}>Search</Button>
+              <Form.Control placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
+               onChange={(e)=> setSearch(e.target.value)} value = {search} />
             </InputGroup>
           </Col>
         </Row>

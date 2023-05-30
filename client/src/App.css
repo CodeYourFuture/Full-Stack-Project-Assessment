@@ -2,7 +2,6 @@
   text-align: center;
 }
  
-
   .video-container {
   display: grid;
    grid-template-columns: repeat(3, 1fr); 
@@ -27,3 +26,4 @@ App-header {
 .custom-header {
   background-color: #3b3636; /* Replace with your desired background color */
 }
+

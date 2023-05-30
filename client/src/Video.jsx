@@ -37,7 +37,8 @@
 
   import React from "react";
   import Button from "react-bootstrap/Button";
-  
+  import axios from "axios";
+
   function Video({ info }) {
     const handleLike = () => {
       // Handle like button click
@@ -47,14 +48,19 @@
       // Handle dislike button click
     };
   
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+      axios.delete(`http://localhost:5009/video/${id}`)
+      alert ("video has been deleted")
+      window.location.reload()
+
       // Handle delete button click
     };
   
     return (
     
         <div>
-          <h6>{info.title}</h6>
+          <h6 className="title" >{info.title}</h6>
+
           <iframe
             src={`https://www.youtube.com/embed/${info.url}`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -71,7 +77,7 @@
                 👎
               </Button>
             </div>
-            <Button variant="outline-danger" onClick={handleDelete}>
+            <Button variant="outline-danger" onClick={() => handleDelete(info.id)}>
               Delete
             </Button>
           </div>
