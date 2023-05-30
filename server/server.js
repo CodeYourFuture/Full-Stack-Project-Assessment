@@ -1,6 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -9,7 +12,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = [];
 
 // GET "/"
-app.get("/", (req, res) => {
+//app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+  //res.send({ express: "Your Backend Service is Running" });
+//});
