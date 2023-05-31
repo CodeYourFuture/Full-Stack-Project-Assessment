@@ -23,27 +23,6 @@ const pool = new Pool({
 
 
 
-// const pool = new Pool({
-//   user: 'hengamehpostgres_user',
-//   host: 'postgres://hengamehpostgres_user:CideWUIBBcUSwdTecTWTxlrF17Gj9wI2@dpg-chqkbm67avjb90m29q0g-a/hengamehpostgres',
-//   database: 'hengamehpostgres',
-//   password:'CideWUIBBcUSwdTecTWTxlrF17Gj9wI2',
-//   port: 5432, // default PostgreSQL port
-// });
-
-
-
-
-
-
-// const pool = new Pool({
-//   user: 'student',
-//   host: 'localhost',
-//   database: 'postgres',
-//   password:'postgres',
-//   port: 5432, // default PostgreSQL port
-// });
-
 // Use the pool to query the database
 app.get("/videos",(req, res)=> {
   pool.query('SELECT * from videos', (err, result) => {
@@ -91,7 +70,6 @@ pool.query (q,info, (err, res)=> {
 
   }
 })
-
 
 // videos.push({
 //   "id": 442452,
