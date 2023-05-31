@@ -13,14 +13,19 @@
   background-color: #393e46;
 }
 
-.add_video_form input{
-    border-radius: 14px;
-    background-color: rgb(219, 240, 233);
-    width:50%;
+.add_video_form input {
+  border-radius: 14px;
+  background-color: rgb(219, 240, 233);
+  width: 100%;
 }
-.add_video_form button{
-     border-radius: 14px;
-     background-color: black;
-     border: 2px solid red;
-     color:rgb(219, 240, 233);
+@media screen and (width > 400px) {
+  .add_video_form input {
+    width: 66%;
+  }
+}
+.add_video_form button {
+  border-radius: 14px;
+  background-color: black;
+  border: 2px solid red;
+  color: rgb(219, 240, 233);
 }
