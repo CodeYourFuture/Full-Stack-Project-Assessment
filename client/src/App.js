@@ -2,6 +2,7 @@ import Videos from "./Comp/Videos";
 import AddVid from "./Comp/AddVid";
 import data from "./Data/data.json";
 import { useState } from "react";
+import Header from "./Comp/Header";
 
 console.log(data)
 function App() {
@@ -16,9 +17,7 @@ function App() {
 
   return (
     <div >
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
       <AddVid />
       <Videos videos={videos} onVideoDelete={onVideoDelete} />
     </div>

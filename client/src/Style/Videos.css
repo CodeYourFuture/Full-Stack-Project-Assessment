@@ -17,7 +17,7 @@
 iframe {
   border-radius: 8px;
   padding: 20px;
-  background-color: rgb(122, 28, 28);
+  /* background-color: rgb(122, 28, 28); */
 }
 h3{
  padding-left: 10px;
