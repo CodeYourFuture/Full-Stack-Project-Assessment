@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -18,7 +18,7 @@ app.get("/running", (req, res) => {
 
 // GET "/" This endpoint is used to return all of the videos
 app.get("/", (req, res) => {
-  res.send({ videos: videos });
+  res.send(videos);
 });
 
 // `POST` This endpoint is used to add a video to the API.
