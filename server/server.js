@@ -23,15 +23,45 @@ app.get("/", (req, res) => {
 
 // `POST` This endpoint is used to add a video to the API.
 app.post("/", (req, res) => {
-  const newVideo = req.body;
-  const {
-    id,
-    title,
-    url,
-    rating
-  } = newVideo
+  const { title, url } = req.body;
+  const newVideo = {
+    id: videos.length + 1,
+    title: title,
+    url: url,
+    rating: videos.length + 1,
+  };
+
+  if (!newVideo.title || !newVideo.url) {
+    return res
+      .status(400)
+      .json({ msg: "something in the input was falsey" });
+  }
+
   videos.push(newVideo);
-  res.status(201).json(newVideo);
+  res.status(200).json({ message: "New video added", videos });
 });
 
 
+// `GET` "/{id}"
+app.get("/:id", function(req, res) {
+  const findId = Number(req.params.id)
+  const video = videos.find((video) => findId == video.id)
+  res.json({video})
+})
+
+//`DELETE` "/{id}"
+
+app.delete("/:id", (req, res) => {
+  const findVideo = videos.find(
+    (video) => video.id === Number(req.params.id)
+  );
+
+  if (findVideo) {
+    videos = videos.filter((video) => video.id !== Number(req.params.id));
+    res.json({ message: `Video ${req.params.id} deleted` });
+  } else {
+    res
+      .status(400)
+      .json({ result: "failure", message: "Video could not be found" });
+  }
+});
