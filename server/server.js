@@ -30,13 +30,24 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 //   port: 5432, // default PostgreSQL port
 // });
 
+
+
 const pool = new Pool({
-  user: 'student',
-  host: 'localhost',
-  database: 'postgres',
-  password:'postgres',
-  port: 5432, // default PostgreSQL port
+  user: 'hengamehpostgres_user',
+  host: 'dpg-chqkbm67avjb90m29q0g-a.frankfurt-postgres.render.com',
+  database: 'hengamehpostgres',
+  password: 'CideWUIBBcUSwdTecTWTxlrF17Gj9wI2',
+  port: 5432,
 });
+
+
+// const pool = new Pool({
+//   user: 'student',
+//   host: 'localhost',
+//   database: 'postgres',
+//   password:'postgres',
+//   port: 5432, // default PostgreSQL port
+// });
 
 // Use the pool to query the database
 app.get("/videos",(req, res)=> {
