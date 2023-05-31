@@ -69,8 +69,6 @@ app.delete("/:id", (req, res) => {
     success: true,
     message: `Video wih ID: ${idToDelete} has been deleted`,
   });
-
-  res.status(200).json({});
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
