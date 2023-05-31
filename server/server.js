@@ -2,8 +2,7 @@ const { Pool } = require('pg');
 
 const data = require("./exampleresponse.json") 
 const cors =require("cors")
-const dotenv = require("dotenv");
-dotenv.config();
+require('dotenv').config();
 
 
 const express = require("express");
@@ -12,15 +11,17 @@ const port = process.env.PORT || 5009;
 
 app.use(express.json());
 app.use(cors())
- app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// const pool = new Pool({
-//   connectionString: process.env.DB_URL,
-//   ssl: {
-//     rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
-//   },
-// })
+const pool = new Pool({
+  connectionString: process.env.DB-URL || "postgres://hengamehpostgres_user:CideWUIBBcUSwdTecTWTxlrF17Gj9wI2@dpg-chqkbm67avjb90m29q0g-a.frankfurt-postgres.render.com/hengamehpostgres",
+  ssl: {
+    rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
+  },
+});
+
+
 
 // const pool = new Pool({
 //   user: 'hengamehpostgres_user',
@@ -32,13 +33,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 
 
-const pool = new Pool({
-  user: 'hengamehpostgres_user',
-  host: 'dpg-chqkbm67avjb90m29q0g-a.frankfurt-postgres.render.com',
-  database: 'hengamehpostgres',
-  password: 'CideWUIBBcUSwdTecTWTxlrF17Gj9wI2',
-  port: 5432,
-});
+
 
 
 // const pool = new Pool({
@@ -96,7 +91,6 @@ pool.query (q,info, (err, res)=> {
 
   }
 })
-
 
 
 // videos.push({
