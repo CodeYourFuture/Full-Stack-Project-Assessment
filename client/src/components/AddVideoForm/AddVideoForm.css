@@ -1,0 +1,145 @@
+form {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.video_form h1 {
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+form label {
+  color: white;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+form .field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+form input,
+select {
+  background-color: transparent;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  font-size: 18px;
+  font-family: "Orbitron", sans-serif;
+  height: 34px;
+}
+
+form input {
+  padding: 1px 10px;
+}
+
+/* custom select menu */
+.custom_select .css-13cymwt-control {
+  background-color: var(--dark-blue);
+  border: 1px solid var(--pink);
+  flex-direction: row;
+  height: 34px;
+  color: var(--pink);
+  border-radius: 0;
+  font-size: 18px;
+}
+
+.custom_select .css-1fdsijx-ValueContainer {
+  color: var(--pink);
+  display: block;
+}
+
+.custom_select .css-1dimb5e-singleValue {
+  color: var(--pink);
+  text-align: left;
+}
+
+.custom_select .css-1jqq78o-placeholder {
+  color: var(--pink);
+  text-align: left;
+  padding: 5px 0px;
+}
+
+.custom_select .css-1u9des2-indicatorSeparator {
+  margin-top: 0;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.custom_select .css-1xc3v61-indicatorContainer {
+  padding: 0 5px;
+  color: var(--pink);
+}
+
+.custom_select .css-mohuvp-dummyInput-DummyInput {
+  display: none;
+}
+
+.custom_select .css-1nmdiq5-menu {
+  background-color: var(--pink);
+}
+
+.custom_select .css-10wo9uf-option {
+  color: var(--dark-blue);
+}
+
+.custom_select .css-d7l1ni-option {
+  color: var(--pink);
+  background-color: var(--dark-blue);
+}
+
+.custom_select .css-tr4s17-option {
+  color: var(--pink);
+  background-color: var(--light-blue);
+}
+
+.custom_select__option--is-selected {
+  background-color: blue;
+  color: white;
+}
+
+form button {
+  background-color: var(--pink);
+  margin: 10px 0;
+  font-size: 18px;
+  font-family: "Orbitron", sans-serif;
+  color: var(--dark-blue);
+  border: 1px solid var(--pink);
+  height: 38px;
+  cursor: pointer;
+  transition: all ease-in-out 250ms;
+}
+
+form button:hover,
+form button:focus {
+  color: var(--pink);
+  background-color: transparent;
+}
+
+.error_message {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: end;
+  }
+}
+
+@media (min-width: 1025px) {
+  form {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  form button {
+    width: 170px;
+  }
+}
