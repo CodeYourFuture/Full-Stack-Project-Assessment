@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import VideoList from "./VideoList";
-import AddVideoForm from "./AddVideoForm";
+import AddVideoForm from "./components/AddVideoForm";
 import videoData from "./exampleresponse.json";
+import Video from "./components/Video";
+import Header from "./components/Header";
 import "./App.css";
+import "./components/AddVideoForm.css";
 
 const App = () => {
-  const [videos, setVideos] = useState(videoData);
+  const [videos, setVideos] = useState(
+    videoData.map((video) => ({
+      ...video,
+      votes: video.rating || 0,
+    }))
+  );
   const handleUpVote = (videoId) => {
     setVideos((oldVideos) =>
       oldVideos.map((video) =>
@@ -25,20 +32,24 @@ const App = () => {
   };
 
   const handleAddVideo = (newVideo) => {
-    setVideos((oldVideos) => [...oldVideos, newVideo]);
+    setVideos((oldVideos) => [...oldVideos, { ...newVideo, votes: 0 }]);
   };
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Video Recommendation</h1>
-        <VideoList
-          videos={videos}
-          onUpVote={handleUpVote}
-          onDownVote={handleDownVote}
-          onRemove={handleRemoveVideo}
+      <Header />
+      <AddVideoForm onAddVideo={handleAddVideo} />
+      {videos.map((video) => (
+        <Video
+          key={video.id}
+          title={video.title}
+          url={video.url}
+          votes={video.votes}
+          onUpVote={() => handleUpVote(video.id)}
+          onDownVote={() => handleDownVote(video.id)}
+          onRemove={() => handleRemoveVideo(video.id)}
         />
-        <AddVideoForm onAddVideo={handleAddVideo} />
-      </header>
+      ))}
+      ;
     </div>
   );
 };
