@@ -10,8 +10,8 @@ app.use(cors());
 let videos = [];
 
 // GET "/"
-// app.get("/", (req, res) => {
+app.get("/", (req, res) => {
 // Delete this line after you've confirmed your server is running
-// res.send({ express: "Your Backend Service is Running" });
-// });
+res.send({ express: "Your Backend Service is Running" });
+});
 app.listen(port, () => console.log(`Listening on port ${port}`));

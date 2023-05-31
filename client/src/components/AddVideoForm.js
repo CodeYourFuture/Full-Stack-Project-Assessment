@@ -15,7 +15,7 @@ const AddVideoForm = ({ onAddVideo }) => {
     setUrl("");
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add_video_form">
       <input
         type="text"
         placeholder="Title"

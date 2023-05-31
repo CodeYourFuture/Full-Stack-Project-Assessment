@@ -4,8 +4,8 @@ import "./Video.css";
 
 const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
   return (
-    <>
-      <h2>Title:{title}</h2>
+    <div className="video_wrapper">
+      <h2 className="video_title">Title:{title}</h2>
       <Youtube
         width="560"
         height="315"
@@ -27,7 +27,7 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
           ␡
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
