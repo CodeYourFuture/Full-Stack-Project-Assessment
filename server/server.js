@@ -51,16 +51,16 @@ app.post("/videos", (req, res) => {
   console.log(req.body);
   const title = req.body.title;
   const url = req.body.url;
-  const rating = req.body.rating;
+  const rating = 0;
   const newVidToAdd = {
-    uniId,
+    id: uniId,
     title,
     url,
     rating,
   };
 
   res.json({
-    allVideoes: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
+    addedData: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
   });
 });
 

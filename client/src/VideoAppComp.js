@@ -5,29 +5,30 @@ import VideoCard from "./VideoCard";
 //import exampleresponse from "./exampleresponse.json";
 
 const VideoApp = () => {
+  const API = "http://127.0.0.1:5000/";
   useEffect(() => {
     const getAPI = () => {
       // Change this endpoint to whatever local or online address you have
       // Local PostgreSQL Database
-      const API = "http://127.0.0.1:5000/";
 
       fetch(`${API}videos`)
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          console.log(data.videoes);
-          //setLoading(false);
           //setApiData(data);
           setVideos(data.videoes);
+          setLoading(false);
+          console.log(data);
+          console.log(data.videoes);
         });
     };
     getAPI();
   }, []);
-  /* const [apiData, setApiData] = useState([]);
-  const [loading, setLoading] = useState(true); */
+  /* const [apiData, setApiData] = useState([]); */
+  const [loading, setLoading] = useState(true);
+  const [uploadError, setUploadError] = useState(false);
   //console.log(apiData, "all videos ");
   const [videos, setVideos] = useState([]);
   console.log(videos, "videoes");
@@ -137,26 +138,63 @@ const VideoApp = () => {
       title,
       url,
     };
-    setVideos([...videos, newVideo]);
+
+    console.log("newVideo", newVideo);
+    const request = new Request(`${API}videos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    });
+    fetch(request)
+      .then((response) => {
+        if (!response.ok) {
+          setUploadError(true);
+          throw new Error("Whoops!");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        const successUpdatedVideo = data.addedData.videoAdded;
+
+        setVideos([...videos, successUpdatedVideo]);
+      })
+      .catch((error) => {
+        console.log("fetch failed", error);
+        setUploadError(true);
+      });
+    //setVideos([...videos, newVideo]);
   };
 
   return (
     <VideoAppContainer>
       <Heading>Add your videos</Heading>
       <VideoForm onSubmit={addVideo} />
+      {uploadError ? (
+        <p>video NOT added please try again</p>
+      ) : (
+        <p>add title and url then press submit</p>
+      )}
       <VideoCardsContainer>
-        {videos.map((video, index) => (
-          <VideoCard
-            key={index}
-            title={video.title}
-            url={video.url}
-            ratings={video.rating}
-            addLike={addLike}
-            removeLike={removeLike}
-            //likes={likes}
-            vid={video.id}
-          />
-        ))}
+        {loading ? (
+          <p>video loading ...</p>
+        ) : (
+          videos.map((video, index) => (
+            <VideoCard
+              key={index}
+              title={video.title}
+              url={video.url}
+              ratings={video.rating}
+              addLike={addLike}
+              removeLike={removeLike}
+              //likes={likes}
+              vid={video.id}
+            />
+          ))
+        )}
       </VideoCardsContainer>
     </VideoAppContainer>
   );
