@@ -1,5 +1,9 @@
 import data from "../Data/data.json";
 import "../Style/Videos.css";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 // console.log(data);
 const Videos = ({videos, onVideoDelete}) => {
   
@@ -9,31 +13,35 @@ const Videos = ({videos, onVideoDelete}) => {
         const videoId = vid.url.substring(vid.url.indexOf("?v=")+3)
         console.log(videoId);
      return (
+       <section key={index} className="videos-cont">
+         <iframe
+           width="560"
+           height="315"
+           src={"https://www.youtube.com/embed/" + videoId}
+           title={vid.title}
+           frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+           allowfullscreen
+         />
+         <h3>{vid.title}</h3>
+         <div className="like-dislik-delete-span">
+           <span><StarBorderIcon />{vid.rating}</span>
+           <div className="like-dislik-delete">
+             <button className="like-button">
+               <ThumbUpOutlinedIcon />
+             </button>
+             <button className="dislike-button">
+               <ThumbDownOutlinedIcon />
+             </button>
+             <button className="delete" onClick={() => onVideoDelete(index)}>
+               <DeleteOutlineIcon />
+             </button>
+           </div>
+         </div>
 
-        <section key={index} className="videos-cont">
-          
-          <iframe
-            width="560"
-            height="315"
-            src={"https://www.youtube.com/embed/"+videoId}
-            title={vid.title}
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
-          <h3>{vid.title}</h3>
-          <div className="like-dislik-delete-span">
-            <span>Rating:{vid.rating}</span>
-            <div className="like-dislik-delete">
-              <button className="like-button">Up Vote</button>
-              <button className="dislike-button">Down Vote</button>
-              <button className="delete" onClick={()=> onVideoDelete(index)}>Delete</button>
-            </div>
-          </div>
-
-          <div></div>
-        </section>
-     )
+         <div></div>
+       </section>
+     );
       })}
     </div>
   );
