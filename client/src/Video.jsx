@@ -49,7 +49,7 @@
     };
   
     const handleDelete = (id) => {
-      axios.delete(`http://localhost:5009/video/${id}`)
+      axios.delete(`https://full-stack-assessment.onrender.com/video/${id}`)
       alert ("video has been deleted")
       window.location.reload()
 

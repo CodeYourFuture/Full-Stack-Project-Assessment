@@ -171,7 +171,7 @@ function App() {
 
   async function serachHandler () {
     const lowercase = search.toLowerCase()
-        const res = await axios.get(`http://localhost:5009/search/?title=${lowercase}`)
+        const res = await axios.get(`https://full-stack-assessment.onrender.com/search/?title=${lowercase}`)
         console.log(res.data)
         setItems(res.data)
 
@@ -207,7 +207,7 @@ function App() {
     validateUrl(url);
 
     try {
-      const response = await axios.post("http://localhost:5009/video", {
+      const response = await axios.post("https://full-stack-assessment.onrender.com/video", {
         title: title.toLowerCase(),
         url: url.split("watch?v=")[1],
       });
