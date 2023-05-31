@@ -11,10 +11,11 @@ function VideosList() {
     fetch("http://localhost:5000/")
     .then((res) => res.json())
     .then((data) => {
-      setVideos(data)
+      setVideos(data.videos)
     })
     .catch((error) => console.log(error))
   }, []);
+
 
   
 
