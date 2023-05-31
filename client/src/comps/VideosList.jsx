@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/VideosList.css";
-import data from "../data.json";
+// import data from "../data.json";
 import SingleVideo from "./SingleVideo";
 import AddVideo from "./AddVideo";
 
 function VideosList() {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
 
-  function handleDeleteVideo(id) {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+    .then((res) => res.json())
+    .then((data) => {
+      setVideos(data)
+    })
+    .catch((error) => console.log(error))
+  }, []);
+
+  
+
+  const handleDeleteVideo = async (id) => {
+    fetch(`http://localhost:5000/${id}`, {method: "DELETE",})
+    .then((res) => res.json())
+    .then((data) => {
+      const updatedVideos = data.filter((video) => video.id !== id);
+      setVideos(updatedVideos);
+    });
   }
+
+  // function handleDeleteVideo(id) {
+  //   const updatedVideos = videos.filter((video) => video.id !== id);
+  //   setVideos(updatedVideos);
+  // }
 
   // Add new video
   const handleVideoAdd = (video) => {

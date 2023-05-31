@@ -15,6 +15,11 @@
     text-align: center;
 }
 
+.single-video-card iframe {
+    width: 300px;
+    height: auto;
+}
+
 .ratings-container {
     width: 100%;
     display: flex; 
