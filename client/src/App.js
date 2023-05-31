@@ -1,12 +1,23 @@
 import "./App.css";
 import VideoCards from "./VideoCards";
 import Header from "./Header";
-import listOfVideos from "./exampleresponse.json";
-import { useState } from "react";
+// import listOfVideos from "./exampleresponse.json";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [videos, setVideos] = useState(listOfVideos);
+  const [videos, setVideos] = useState([]);
   
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:3001/`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      });
+  }, []);
+
   const handleListOfVideos = (id) => {
      const index = videos.findIndex((video) => video.id === id)
      if (index !== -1) {

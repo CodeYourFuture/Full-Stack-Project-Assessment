@@ -25,7 +25,7 @@ function VideoCards({video, handleListOfVideos}) {
     <>
       <div className="card">
         <iframe title="myFrame"
-          src={`https://www.youtube.com/embed/${video.videoID}`}
+          src={`https://www.youtube.com/embed/${video.url.slice(32)}`}
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
