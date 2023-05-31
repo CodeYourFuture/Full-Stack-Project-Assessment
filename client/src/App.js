@@ -19,15 +19,21 @@ function App() {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch(
-        "https://full-stack-project-assessment-1fgd.onrender.com"
-      );
-      if (!response.ok) {
+      const [jsonResponse, dbResponse] = await Promise.all([
+        fetch("https://full-stack-project-jcr4.onrender.com/"),
+        fetch("https://full-stack-project-jcr4.onrender.com/videos"),
+      ]);
+
+      if (!jsonResponse.ok || !dbResponse.ok) {
         throw new Error("Failed to fetch videos!");
       }
-      const data = await response.json();
 
-      const updatedVideos = data.map((video) => {
+      const jsonData = await jsonResponse.json();
+      const dbData = await dbResponse.json();
+
+      const combinedVideos = [...jsonData, ...dbData];
+
+      const updatedVideos = combinedVideos.map((video) => {
         if (!video.uploaddate) {
           return { ...video, uploadedDate: "2021-01-01T00:00:00.000Z" };
         }
@@ -45,7 +51,7 @@ function App() {
   const addVideo = async (video) => {
     try {
       const response = await fetch(
-        "https://full-stack-project-assessment-1fgd.onrender.com",
+        "https://full-stack-project-jcr4.onrender.com/videos",
         {
           method: "POST",
           headers: {
@@ -68,7 +74,7 @@ function App() {
   const removeVideo = async (id) => {
     try {
       const response = await fetch(
-        `https://full-stack-project-assessment-1fgd.onrender.com/${id}`,
+        `https://full-stack-project-jcr4.onrender.com/videos${id}`,
         {
           method: "DELETE",
         }
