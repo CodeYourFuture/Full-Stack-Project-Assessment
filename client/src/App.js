@@ -158,7 +158,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5009/videos");
+        const response = await axios.get("https://full-stack-assessment.onrender.com/videos");
         const sortedItems = [...response.data].sort((a, b) => b.rating - a.rating);
         setItems(sortedItems);
       } catch (e) {

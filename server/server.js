@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const pool = new Pool({
-  connectionString: process.env.DB-URL || "postgres://hengamehpostgres_user:CideWUIBBcUSwdTecTWTxlrF17Gj9wI2@dpg-chqkbm67avjb90m29q0g-a.frankfurt-postgres.render.com/hengamehpostgres",
+  connectionString: process.env.DB_URL ,
   ssl: {
     rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
   },
