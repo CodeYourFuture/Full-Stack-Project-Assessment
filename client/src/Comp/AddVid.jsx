@@ -1,10 +1,10 @@
 import { useState } from "react";
-
+import "../Style/Addvid.css"
 const AddVid = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   return (
-    <form onSubmit={submitVid}>
+    <form onSubmit={submitVid} className="form">
       <label>Title:</label>
       <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}/>
       <label>Url:</label>
