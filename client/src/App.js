@@ -7,12 +7,13 @@ import "./App.css";
 import "./components/AddVideoForm.css";
 
 const App = () => {
-  const [videos, setVideos] = useState(
-    videoData.map((video) => ({
+  const [videos, setVideos] = useState(() => {
+    const sortedVideos = videoData.sort((a, b) => b.rating - a.rating);
+    return sortedVideos.map((video) => ({
       ...video,
       votes: video.rating || 0,
     }))
-  );
+});
   const handleUpVote = (videoId) => {
     setVideos((oldVideos) =>
       oldVideos.map((video) =>
