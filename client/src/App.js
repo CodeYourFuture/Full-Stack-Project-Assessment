@@ -4,93 +4,27 @@ import AddVideo from "./AddVideo";
 // import React, {useState, useEffect} from "react";
 import { OrderButton } from "./OrderButton";
 import VideoComponent from "./VideoComponent";
-// import data from "`./exampleresponse.json;
-
-// const videoData = [
-//   {
-//     id: 523523,
-//     title: "Never Gonna Give You Up",
-//     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-//     rating: 23,
-//   },
-//   {
-//     id: 523427,
-//     title: "The Coding Train",
-//     url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-//     rating: 230,
-//   },
-//   {
-//     id: 82653,
-//     title: "Mac & Cheese | Basics with Babish",
-//     url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-//     rating: 2111,
-//   },
-//   {
-//     id: 858566,
-//     title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-//     url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-//     rating: 11,
-//   },
-//   {
-//     id: 453538,
-//     title:
-//       "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-//     url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-//     rating: 3211,
-//   },
-//   {
-//     id: 283634,
-//     title: "Learn Unity - Beginner's Game Development Course",
-//     url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-//     rating: 211,
-//   },
-//   {
-//     id: 562824,
-//     title: "Cracking Enigma in 2021 - Computerphile",
-//     url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-//     rating: 111,
-//   },
-//   {
-//     id: 442452,
-//     title: "Coding Adventure: Chess AI",
-//     url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-//     rating: 671,
-//   },
-//   {
-//     id: 536363,
-//     title: "Coding Adventure: Ant and Slime Simulations",
-//     url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-//     rating: 76,
-//   },
-//   {
-//     id: 323445,
-//     title: "Why the Tour de France is so brutal",
-//     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-//     rating: 73,
-//   },
-// ];
 
 const App = () => {
   const [videos, setVideos] = useState([]);
   // const [ascending, setAscending] =useState(false)
    const [error, setError] = useState(null);
    const [order, setOrder] = useState("");
+   const [isDesc, setIsDesc] = useState(true);
   async function fetchData() {
     try {
       const fetchURL =
-        (`http://localhost:5000/?order=${order}`,{
-          mode: "cors",
-        }
-        );
+      `http://localhost:5000/videos`;
       const response = await fetch(fetchURL );
-      console.log("fetchURL", fetchURL);
+
+      console.log(response);
       const data = await response.json();
       console.log(data);
-      setVideos(data);
+      setVideos(data.videos);
       // Code to handle the data will be added here
     } catch (error) {
       setError("Error", error);
-      console.log("error");
+      console.log(error);
     }
   }
    
@@ -112,6 +46,13 @@ const App = () => {
         setOrder={setOrder}
       />
       <VideoComponent videos={videos} setVideos={setVideos} />
+      <button
+        onClick={() => {
+          setIsDesc(!isDesc);
+        }}
+      >
+        change order
+      </button>
     </div>
   );
 };

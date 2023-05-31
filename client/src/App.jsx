@@ -1,8 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";
-import Header from "./Header";
-// import React, {useState, useEffect} from "react";
+// import Header from "./Header";
+
 
 import VideoComponent from "./VideoComponent";
 
@@ -32,20 +32,12 @@ useEffect(() => {
 
   }, [isDesc]);
 
-
-  
-
-  
   return (
+
     <div className="App">
-      
-       
       <AddVideo videos={videos} setVideos={setVideos} />
-     
-
-
-    
       <VideoComponent videos={videos} setVideos={setVideos} />
+      <button onClick = {() => {setIsDesc(!isDesc)}}>change order</button>
     </div>
   );
 };

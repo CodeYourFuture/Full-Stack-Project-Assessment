@@ -16,7 +16,7 @@ const db = new Pool({
   user: "mickeyhaile",
   port: 5432,
   password: "",
-  database: "cyf-videos",
+  database: "cyf_videos",
 });
 
 
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.get("/videos", (request, response) => {
  db.query("SELECT * FROM videos")
    .then((result) => {
-     res.status(200).json({ videos: result.rows });
+     response.status(200).json({ videos: result.rows });
    })
    .catch((err) => {
      console.log(err);
@@ -40,9 +40,9 @@ app.get("/videos", (request, response) => {
 
 app.get("/:id", (request, response) => {
    const videoId = parseInt(req.params.id);
-   db.query("DELETE * FROM movies WHERE id = $1", [videoId])
+   db.query("DELETE * FROM videos WHERE id = $1", [videoId])
      .then((result) => {
-       res.status(200).json(result.rows);
+       response.status(200).json(result.rows);
      })
      .catch((error) => {
        console.log(error);
@@ -68,9 +68,9 @@ app.post("/", (req, res) => {
 });
 app.delete("/:id", (request, response) => {
   const videoTodelete = parseInt(req.params.id);
-  db.query("SELECT * FROM movies WHERE id = $1", [videoTodelete])
+  db.query("SELECT * FROM videos WHERE id = $1", [videoTodelete])
     .then((result) => {
-      res.status(200).send("Video deleted successfully");
+      response.status(200).send("Video deleted successfully");
     })
     .catch((error) => {
       console.log(error);
