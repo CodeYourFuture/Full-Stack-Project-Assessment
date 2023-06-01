@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 // import exampleresponse from "./exampleresponse.json";
 import AddVideoForm from "./AddVideoForm";
 import "./App.css";
-
-
+// import Button from "@mui/material/Button";
 
 function App() {
   const [videos, setVideos] = useState([]);
 
-  const fetchVideos =() => {
+  const fetchVideos = () => {
     fetch("http://localhost:5000/videos/")
       .then((response) => {
         console.log(response.status);
@@ -24,11 +23,9 @@ function App() {
         console.log(error);
       });
   };
-   useEffect(() => {
-     fetchVideos();
-   }, []);
-
-  
+  useEffect(() => {
+    fetchVideos();
+  }, []);
 
   function addNewVideo(video) {
     const newVideosAdded = videos.concat(video);
@@ -66,6 +63,7 @@ function App() {
     setVideos(updatedVideos);
   }
 
+  // eslint-disable-next-line array-callback-return
   const sortedVideos = videos.concat().sort((b, a) => {
     if (a.rating > b.rating) {
       return 1;
@@ -115,7 +113,8 @@ function App() {
           );
         })}
       </div>
-      <AddVideoForm onAddVideo={addNewVideo} />
+      <AddVideoForm fetchVideos={fetchVideos} 
+      onAddVideo={addNewVideo} />
     </div>
   );
 }
