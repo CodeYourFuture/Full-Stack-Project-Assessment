@@ -136,7 +136,7 @@ const VideoApp = () => {
   const addVideo = (title, url) => {
     const newVideo = {
       title,
-      url,
+      url_link: url,
     };
 
     console.log("newVideo", newVideo);
@@ -186,7 +186,7 @@ const VideoApp = () => {
             <VideoCard
               key={index}
               title={video.title}
-              url={video.url}
+              url={video.url_link}
               ratings={video.rating}
               addLike={addLike}
               removeLike={removeLike}

@@ -1,8 +1,11 @@
 const express = require("express");
+const pool = require("./config/dbSqlConn");
 const app = express();
 const cors = require("cors");
 const vidData = require("./exampleresponse.json");
 const port = process.env.PORT || 5000;
+
+//console.log("pool", pool);
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -33,9 +36,27 @@ app.get("/", (req, res) => {
 
 //example routes
 
-app.get("/videos", (req, res) => {
-  res.json({ allVideoes: "all videoes", videoes: vidData });
+app.get("/videos", async (req, res) => {
+  //const query = "SELECT * FROM tableName;";
+  // to return query in consitsten order
+  // DESC is the same as heighes first and lowest last
+  // - with time the most recent point is the highest
+  const query = "SELECT * FROM videos ORDER BY id DESC;";
+  // table and row names are not dynamic
+  try {
+    const { rows } = await pool.query(query);
+    const vidData = rows;
+    //console.log({ vidData });
+    res.json({ allVideoes: "all videoes", videoes: vidData });
+  } catch (err) {
+    console.error("Error executing query", err);
+    res.status(500).send("Internal server error");
+  }
 });
+
+/* app.get("/videos", (req, res) => {
+  res.json({ allVideoes: "all videoes", videoes: vidData });
+}); */
 
 app.post("/videos", (req, res) => {
   if (!req) {
@@ -119,4 +140,5 @@ app.get("/videos/:idp", (req, res) => {
     },
   });
 });
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
