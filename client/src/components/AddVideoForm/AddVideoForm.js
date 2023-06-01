@@ -6,7 +6,6 @@ const AddVideoForm = ({ categories }) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState("");
   let options = [];
 
@@ -30,10 +29,6 @@ const AddVideoForm = ({ categories }) => {
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedOption(selectedOption);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
   };
 
   const handleLinkChange = (e) => {
@@ -88,14 +83,13 @@ const AddVideoForm = ({ categories }) => {
 
         <div className="field">
           <label htmlFor="selectMenu">Category</label>
-          <div onClick={toggleMenu} id="selectMenu">
+          <div id="selectMenu">
             <ReactSelect
               options={options}
               value={selectedOption}
               onChange={handleCategoryChange}
               className="custom_select"
               isSearchable={false}
-              menuIsOpen={isMenuOpen} // Set the menu visibility based on isMenuOpen state
               required
             />
           </div>

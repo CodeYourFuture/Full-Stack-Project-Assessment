@@ -3,8 +3,6 @@ import ReactSelect from "react-select";
 import { useState } from "react";
 
 const VideoPicker = ({ categories }) => {
-  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false);
-  const [isOrderMenuOpen, setIsOrderMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const orderOptions = [
@@ -21,14 +19,6 @@ const VideoPicker = ({ categories }) => {
     categoryOptions.push(newOption);
   });
 
-  const toggleCategoryMenu = () => {
-    setIsCategoryMenuOpen(!isCategoryMenuOpen);
-  };
-
-  const toggleOrderMenu = () => {
-    setIsOrderMenuOpen(!isOrderMenuOpen);
-  };
-
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
   };
@@ -41,24 +31,22 @@ const VideoPicker = ({ categories }) => {
     <div className="video_picker">
       <h1>Watch videos</h1>
       <div className="selectors">
-        <div className="selector_field" onClick={toggleCategoryMenu}>
+        <div className="selector_field">
           <ReactSelect
             options={categoryOptions}
             value={selectedCategory}
             onChange={handleCategoryChange}
             className="custom_select"
             isSearchable={false}
-            menuIsOpen={isCategoryMenuOpen} // Set the menu visibility based on isMenuOpen state
           />
         </div>
-        <div className="selector_field" onClick={toggleOrderMenu}>
+        <div className="selector_field">
           <ReactSelect
             options={orderOptions}
             value={selectedOrder}
             onChange={handleOrderChange}
             className="custom_select"
             isSearchable={false}
-            menuIsOpen={isOrderMenuOpen} // Set the menu visibility based on isMenuOpen state
           />
         </div>
       </div>
