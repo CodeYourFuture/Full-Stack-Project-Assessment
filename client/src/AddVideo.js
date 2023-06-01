@@ -9,7 +9,7 @@ function extractID(url) {
 function AddVideo({ onAdd }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [id, setId] = useState("");
+  //const [id, setId] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,7 +17,7 @@ function AddVideo({ onAdd }) {
     onAdd({ title, url, id });
     setTitle("");
     setUrl("");
-    setId("");
+    //setId("");
   }
 
   return (
@@ -35,9 +35,10 @@ function AddVideo({ onAdd }) {
         onChange={(e) => setUrl(e.target.value)}
       />
       <input
-        type="hidden"
-        value={id}
-        onChange={(e) => setId(extractID(e.target.value))}
+        type="text"
+        placeholder="YouTube URL"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
       />
       <button type="submit">Add Video</button>
     </form>
