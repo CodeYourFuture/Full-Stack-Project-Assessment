@@ -4,35 +4,42 @@ import Input from "./Input";
 
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
-
-
+  
   useEffect(() => {
-    fetch(`https://full-stack-project-assessment-server-f16d.onrender.com/videos`)
+    fetch(
+      `https://full-stack-project-assessment-server-f16d.onrender.com/videos`
+    )
       .then((res) => res.json())
       .then((data) => setVideos(data))
       .catch((error) => console.log(error));
-  },[])
-  const handleVoteUp = (id) => {
-    const updatedVideos = videos.map((video) => {
-      if (video.id === id) {
-        return { ...video, rating: video.rating + 1 };
-      }
-      return video;
-    });
-    setVideos(updatedVideos);
-  };
+  }, [])
+  
 
-  const handleVoteDown = (id) => {
-    const updatedVideos = videos.map((video) => {
-      if (video.id === id) {
-        const newRating = Math.max(0, video.rating - 1); // Ensure the rating doesn't go below 0
-        return { ...video, rating: newRating };
-      }
-      return video;
-    });
-    setVideos(updatedVideos);
-  };
+   const handleVoteUp = (id) => {
+     const updatedVideos = videos.map((video) => {
+       if (video.id === id) {
+         return { ...video, rating: video.rating + 1 };
+       }
+       return video;
+     });
+     setVideos(updatedVideos);
+     updateRating(id, updatedVideos.find((video) => video.id === id).rating); // finding the id in front end  to update database
+   };
 
+   const handleVoteDown = (id) => {
+     const updatedVideos = videos.map((video) => {
+       if (video.id === id) {
+         const newRating = Math.max(0, video.rating - 1); // Ensure the rating doesn't go below 0
+         return { ...video, rating: newRating };
+       }
+       return video;
+     });
+     setVideos(updatedVideos);
+     updateRating(id, updatedVideos.find((video) => video.id === id).rating); //
+   };
+
+ 
+  
 const handleDelete = async (id) => {
   const response = await fetch(
     `https://full-stack-project-assessment-server-f16d.onrender.com/video/${id}`,
@@ -44,8 +51,8 @@ const handleDelete = async (id) => {
     }
   );
   if (response.ok) {
-    const updatedVideos = await response.json();
-    setVideos(updatedVideos);
+    
+   setVideos(videos.filter((video) => video.id !== id));
   } else {
     // Handle error
   }
@@ -53,13 +60,16 @@ const handleDelete = async (id) => {
 
 
   const handleAddVideo = async (title, url) => {
-    const response = await fetch("https://full-stack-project-assessment-server-f16d.onrender.com/videos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, url }),
-    });
+    const response = await fetch(
+      "https://full-stack-project-assessment-server-f16d.onrender.com/videos",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, url }),
+      }
+    );
 
     if (response.ok) {
       const newVideo = await response.json();
@@ -69,7 +79,23 @@ const handleDelete = async (id) => {
     }
   };
 
-
+  const updateRating = (id, newRating) => {
+    fetch(
+      `https://full-stack-project-assessment-server-f16d.onrender.com/videos/${id}/rating`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: newRating }),
+      }
+    )
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
+    
+      }
+      
+      
   return (
     <>
       <Input onAddVideo={handleAddVideo} />
