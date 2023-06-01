@@ -2,17 +2,13 @@ import "./App.css";
 import Search from "./components/Search";
 import AddVideos from "./components/Add-Videos";
 import { useEffect, useState } from "react";
-import data from "./exampleresponse.json";
+// import data from "./exampleresponse.json";
 import Header from "./components/Header";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
 function App() {
   const [visible, setVisible] = useState(false);
-  const [videos, setVideos] = useState(data);
-  const [changeInRating, setChangeInRating] = useState(0);
-  const [videoId, setVideoId] = useState(null);
-
-  const [newVideo, setNewVideo] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [addedVideo, setAddedVideo] = useState({
     title: "",
     url: "",
@@ -26,38 +22,76 @@ function App() {
     }));
   };
 
-  const addToVideos = (event) => {
+  const addToVideos = async (event) => {
     event.preventDefault();
-    setNewVideo(
-      newVideo.concat({
-        id: nanoid(),
-        title: addedVideo.title,
-        url: addedVideo.url,
-      })
-    );
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(addedVideo),
+      });
+      const data = await response.json();
+      setVideos(data);
+    } catch (err) {
+      console.error(err);
+    }
+
     event.target.reset();
   };
 
   useEffect(() => {
-    setVideos((data) => [...data, ...newVideo]);
-  }, [newVideo]);
+    async function fetchData() {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVERURL}/`);
+        const data = await response.json();
+        setVideos(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, []);
 
   function inputsTableVisibility() {
-    visible ? setVisible(false) : setVisible(true);
+    setVisible((prevVisible) => !prevVisible);
   }
 
-  const increaseVote = (currentVideoId) => {
-    setVideoId(currentVideoId);
-    setChangeInRating(changeInRating + 1);
+  const newVote = async (videoId, changing) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/${videoId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ changing: changing }),
+        }
+      );
+      if (response.status === 200) {
+        console.log("WORKED");
+        const data = await response.json();
+        setVideos(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const decreaseVote = (tVideoId) => {
-    setVideoId(tVideoId);
-    setChangeInRating(changeInRating - 1);
-  };
-
-  const deleteVote = (tVideoId) => {
-    setVideos((data) => data.filter((video) => video.id !== tVideoId));
+  const deleteVote = async (videoId) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/${videoId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.status === 200) {
+        const data = await response.json();
+        setVideos(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -70,7 +104,7 @@ function App() {
       {visible && (
         <AddVideos
           inputsTableVisibility={inputsTableVisibility}
-          addToVideos={(event) => addToVideos(event)}
+          addToVideos={addToVideos}
           handleChange={handleChange}
         />
       )}
@@ -88,11 +122,9 @@ function App() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-              <div>
-                {video.rating + (videoId === video.id ? changeInRating : 0)}
-              </div>
-              <button onClick={() => increaseVote(video.id)}>Up Vote</button>
-              <button onClick={() => decreaseVote(video.id)}>Down Vote</button>
+              <div>{video.rating}</div>
+              <button onClick={() => newVote(video.id, 1)}>Up Vote</button>
+              <button onClick={() => newVote(video.id, -1)}>Down Vote</button>
               <button onClick={() => deleteVote(video.id)}>Delete</button>
             </div>
           ))}
