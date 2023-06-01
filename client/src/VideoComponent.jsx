@@ -1,36 +1,48 @@
-import React from "react";
+// import FaTrash from "react-icons/fa";
 import Rating from "./Rating";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 
-const VideoComponent = ({ videos, setVideos,  }) => {
+const VideoComponent = () => {
+const [videos, setVideos] = useState([]);
+  //  const [filteredVideos, setFilteredVideos] = useState([]);
+   const [videoList, setVideoList] = useState([]);
+   const [sortedVideoList, setSortedVideoList] = useState([]);
+  async function fetchData() {
+    try {
+      const url = "http://localhost:5000/videos";
+      const fetchURL = `${url}`;
+      // `http://localhost:5000/videos`;
+      const response = await fetch(fetchURL );
+      if(response.ok){
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        setVideos(data.videos);
+        const sortedList = [...(data.videos)].sort((a, b) => b.rating - a.rating);
+        setSortedVideoList(sortedList);
+      }
+    } catch (error) {
+      
+      console.log(error);
+    }
+  }
+   
 
-  
-  // function handleDeleteVideo(videoID) {
-    
-  //   fetch(`http://localhost:5000/video/${videoID}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       Content_Type: "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`${videoID} could not be found`);
-  //       }
-  //       console.log(response);
-  //       getAllVideos();
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
+  useEffect(() => {
+    fetchData();
+    console.log("useEffect");
+  }, []);
 
- 
 
-  const handleDelete = (id) => {
+
+  const handleRemove = (id) => {
     setVideos(videos.filter((video) => video.id !== id));
   };
   return (
     <div>
-      {videos.map((video, index) => (
+      {sortedVideoList.map((video, index) => (
         <div key={index} className="video-card">
           <h3>{video.title}</h3>
           <iframe
@@ -42,8 +54,15 @@ const VideoComponent = ({ videos, setVideos,  }) => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <Rating rating={videos.rating} />
-          <button onClick={() => handleDelete(video.id)}>Remove</button>
+          <Rating rating={sortedVideoList} />
+           <button
+                className="remove-button"
+                onClick={() => handleRemove(video.id)}
+              >Remove
+                {/* <FaTrash /> */}
+              </button>
+          
+       
         </div>
       ))}
     </div>

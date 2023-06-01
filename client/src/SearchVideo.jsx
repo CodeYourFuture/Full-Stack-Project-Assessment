@@ -1,34 +1,69 @@
 import React, { useState } from "react";
+import moment from "moment";
 
-function SearchVideo({ videos }) {
-  const [searchTerm, setSearchterm] = useState("");
-  const [searchedVideos, setSearchedVideos] = useState([]);
+const SearchVideo = ({onSearch}) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (e) => {
-    setSearchterm(e.target.value);
-    setSearchedVideos(searchVideos(videos, searchTerm));
+  const handleSearch = () => {
+    onSearch(searchTerm);
   };
 
-  const searchVideos = (videos, searchTerm) => {
-    return videos.filtered((video) => {
-      return video.title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
   };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className="Search videos">
+    <div className="search-container">
       <input
-        type="text"
-        placeholder="Search for videos..."
+        placeholder="Search videos"
+        variant="outlined"
         value={searchTerm}
-        onChange={handleSearch}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
       />
-      <ul>
-        {searchedVideos.map((video) => (
-          <li key={video.id}>{video.title}</li>
-        ))}
-      </ul>
+      <button variant="contained" color="primary" onClick={handleSearch}>
+        Search
+      </button>
     </div>
   );
-}
+};
+
+
+// function SearchVideo({ videos, searchTerm }) {
+//   const [searchTerm, setSearchterm] = useState("");
+//   const [searchedVideos, setSearchedVideos] = useState([]);
+
+//   const handleSearch = (e) => {
+//     setSearchterm(e.target.value);
+//     setSearchedVideos(videos, searchTerm);
+//   };
+
+//   const searchVideos = ({videos,}) => {
+//     return videos.filtered((video) => {
+//       return video.title.toLowerCase().includes(videos.toLowerCase());
+//     });
+//   };
+//   return (
+//     <div className="Search videos">
+//       <input
+//         type="text"
+//         placeholder="Search for videos..."
+//         value={searchTerm}
+//         onChange={handleSearch}
+//       />
+//       <ul>
+//         {searchedVideos.map((video) => (
+//           <li key={video.id}>{video.title}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
 
 export default SearchVideo;
