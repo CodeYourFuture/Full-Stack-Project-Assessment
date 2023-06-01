@@ -2,9 +2,7 @@ import "./App.css";
 import Search from "./components/Search";
 import AddVideos from "./components/Add-Videos";
 import { useEffect, useState } from "react";
-// import data from "./exampleresponse.json";
 import Header from "./components/Header";
-// import { nanoid } from "nanoid";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -24,7 +22,6 @@ function App() {
 
   const addToVideos = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVERURL}/`, {
         method: "POST",
@@ -32,11 +29,11 @@ function App() {
         body: JSON.stringify(addedVideo),
       });
       const data = await response.json();
+      console.log("ok")
       setVideos(data);
     } catch (err) {
       console.error(err);
     }
-
     event.target.reset();
   };
 
