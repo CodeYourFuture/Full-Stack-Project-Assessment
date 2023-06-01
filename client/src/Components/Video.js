@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./Video.css";
 import Data from "./exampleresponse.json"
 import Card from "./Card";
@@ -23,7 +23,7 @@ function Video() {
 
     return(
 
-<div className="video"> <h3>We are waiting for video here</h3>
+<div className="video"> 
     {Data.map((item)=>(
         <Card
         key={item.id}

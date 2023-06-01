@@ -3,7 +3,8 @@ import "./Form.css";
 
 function Form() {
     return(
-        <div className="addvideo flex">
+      
+        <div className="form" >
         <a href="#">Add Videos</a>
         <div id="form">
           <form action="#" method="get">

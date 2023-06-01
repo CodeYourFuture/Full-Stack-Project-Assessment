@@ -1,15 +1,28 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+  height: 500px;
+  text-align: center;
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+  .video-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 350px;
-    height: 500px;
-    text-align: center;
-    background-color: transparent;
-    color: #fff;
-    border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  }
+
+  .btn-section {
+    display: flex;
+  gap: 10px;
   }
