@@ -10,8 +10,6 @@ app.use(
   })
 );
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = initialData;
@@ -51,12 +49,13 @@ app.post("/videos/addnew", function (request, response) {
   const addNewVideo = {
     id: videos.length + 1,
     title: request.body.title,
-    URL: request.body.url
+    url: request.body.url,
+    rating: 0
   };
 
   if (
     !addNewVideo.title ||
-     !addNewVideo.URL
+     !addNewVideo.url
   ) {
     return response
       .status(400)
@@ -67,3 +66,6 @@ app.post("/videos/addnew", function (request, response) {
   videos.push(addNewVideo);
   response.json(videos);
 });
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
