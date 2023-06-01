@@ -1,14 +1,10 @@
 import "./VideoPicker.css";
 import ReactSelect from "react-select";
 import { useState } from "react";
+import VideoCard from "../VideoCard/VideoCard";
+import videos from "../../exampleresponse.json";
 
 const VideoPicker = ({ categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState(null);
-  const orderOptions = [
-    { value: "Ascending", label: "Ascending" },
-    { value: "Descending", label: "Descending" },
-  ];
   let categoryOptions = [];
 
   //adding values to the options array
@@ -18,6 +14,15 @@ const VideoPicker = ({ categories }) => {
     newOption.label = category;
     categoryOptions.push(newOption);
   });
+  const orderOptions = [
+    { value: "Ascending", label: "Ascending" },
+    { value: "Descending", label: "Descending" },
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState(categoryOptions[0]);
+  const [selectedOrder, setSelectedOrder] = useState(orderOptions[0]);
+
+  console.log(videos);
 
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
@@ -49,6 +54,11 @@ const VideoPicker = ({ categories }) => {
             isSearchable={false}
           />
         </div>
+      </div>
+      <div className="video_cards">
+        {videos.map((video) => (
+          <VideoCard key={video.id} video={video} />
+        ))}
       </div>
     </div>
   );

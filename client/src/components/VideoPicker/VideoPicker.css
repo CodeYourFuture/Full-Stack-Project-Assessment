@@ -15,6 +15,13 @@
   margin-bottom: 20px;
 }
 
+/* video card */
+.video_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (min-width: 480px) {
   .selectors {
     flex-direction: row;
@@ -22,5 +29,11 @@
   .selectors .selector_field {
     margin-right: 10px;
     width: 250px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .video_cards {
+    justify-content: space-between;
   }
 }
