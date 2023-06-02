@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import "../Style/Addvid.css"
+import "../Style/Addvid.css";
 const AddVid = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -14,14 +14,16 @@ const AddVid = () => {
       />
       <label>Url:</label>
       <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-      <button type="submit"><CloudUploadOutlinedIcon /></button>
+      <button type="submit">
+        <CloudUploadOutlinedIcon />
+      </button>
     </form>
   );
 };
-const submitVid = (e)=>{
-    e.preventDefault();
-    // addVideo({ title, url });
-    // setTitle("");
-    // setUrl("");
-}
-export default AddVid ;
+const submitVid = (e) => {
+  e.preventDefault();
+  // addVideo({ title, url });
+  // setTitle("");
+  // setUrl("");
+};
+export default AddVid;

@@ -4,19 +4,19 @@ import data from "./Data/data.json";
 import { useState } from "react";
 import Header from "./Comp/Header";
 
-console.log(data)
+console.log(data);
 function App() {
   const [videos, setVideos] = useState(data);
-   
-  const onVideoDelete = (index)=>{
+
+  const onVideoDelete = (index) => {
     console.log(onVideoDelete);
     const videosCopy = [...videos];
-    videosCopy.splice(index,1)
+    videosCopy.splice(index, 1);
     setVideos(videosCopy);
-  }
+  };
 
   return (
-    <div >
+    <div>
       <Header />
       <AddVid />
       <Videos videos={videos} onVideoDelete={onVideoDelete} />
