@@ -7,13 +7,21 @@ function AddVideo({ onAddVideo }) {
   function handleSubmit(event) {
     event.preventDefault();
     if (!title || !url) return;
+
     const newVideo = {
-      id: Math.floor(Math.random() * 1000000),
       title: title,
-      url: url,
-      rating: 0,
-    };
-    onAddVideo(newVideo);
+      url: url
+    }
+
+    fetch("http://localhost:9999", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((res) => res.json())
+      .then((data) => onAddVideo(data));
     setTitle("");
     setUrl("");
   }
