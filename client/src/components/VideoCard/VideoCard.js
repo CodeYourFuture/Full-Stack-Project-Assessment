@@ -18,22 +18,31 @@ const VideoCard = ({ video }) => {
       <iframe
         src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
         title={video.title}
-        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
       <h1>{video.title}</h1>
       <p>Rating: {video.rating}</p>
       <div className="video_card_controls">
-        <img src="/media/icons/thumbs_up.svg" alt="thumb up - like the video" />
+        <img
+          src="/media/icons/thumbs_up.svg"
+          alt="thumb up - like the video"
+          tabIndex="0"
+        />
         <img
           src="/media/icons/heart_empty.svg"
           alt="empty heart - add to favorites category"
+          tabIndex="0"
         />
-        <img src="/media/icons/trash_can.svg" alt="trash - remove the video" />
+        <img
+          src="/media/icons/trash_can.svg"
+          alt="trash - remove the video"
+          tabIndex="0"
+        />
         <img
           src="/media/icons/thumbs_down.svg"
           alt="thumb down - dislike the video"
+          tabIndex="0"
         />
       </div>
     </div>

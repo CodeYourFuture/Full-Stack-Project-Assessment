@@ -44,7 +44,16 @@
 .video_card .video_card_controls img {
   width: 25px;
   height: 25px;
+  border: 2px solid transparent;
   margin: 8px;
+  cursor: pointer;
+}
+
+.video_card .video_card_controls img:hover,
+.video_card .video_card_controls img:focus {
+  border: none;
+  width: 27px;
+  height: 27px;
 }
 
 @media (min-width: 480px) {

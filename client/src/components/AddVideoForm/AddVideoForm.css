@@ -39,6 +39,10 @@ form input {
 }
 
 /* custom select menu */
+.custom_select:focus {
+  border: 1px solid white;
+}
+
 .custom_select .css-13cymwt-control {
   background-color: var(--dark-blue);
   border: 1px solid var(--pink);

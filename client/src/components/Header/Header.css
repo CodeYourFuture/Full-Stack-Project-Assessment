@@ -15,6 +15,11 @@ header h1 {
   justify-content: center;
 }
 
+.header-container img {
+  width: 60px;
+  height: 60px;
+}
+
 .header_categories_container {
   display: grid;
   grid-template-columns: repeat(3, 100px);
