@@ -7,6 +7,8 @@ import videos from "../../exampleresponse.json";
 const VideoPicker = ({ categories }) => {
   let categoryOptions = [];
 
+  //adding one value to the options array
+  categoryOptions.push({ value: "All videos", label: "All videos" });
   //adding values to the options array
   categories.forEach((category) => {
     const newOption = {};
