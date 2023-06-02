@@ -1,8 +1,8 @@
-import "./App.css";
 import Search from "./components/Search";
 import AddVideos from "./components/Add-Videos";
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
+import VideoCard from "./components/VideoCard";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -29,7 +29,6 @@ function App() {
         body: JSON.stringify(addedVideo),
       });
       const data = await response.json();
-      console.log("ok")
       setVideos(data);
     } catch (err) {
       console.error(err);
@@ -65,7 +64,6 @@ function App() {
         }
       );
       if (response.status === 200) {
-        console.log("WORKED");
         const data = await response.json();
         setVideos(data);
       }
@@ -91,10 +89,29 @@ function App() {
     }
   };
 
+  const handleSearchInput = async (event) => {
+    const input = event.target.value;
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/search?input=${input}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.status === 200) {
+        const data = await response.json();
+        setVideos(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="App">
       <Header />
-      <Search />
+      <Search handleSearchInput={handleSearchInput} />
       <button className="add-video" onClick={inputsTableVisibility}>
         Add Video
       </button>
@@ -105,27 +122,15 @@ function App() {
           handleChange={handleChange}
         />
       )}
-      <div>
-        <div>
-          {videos.map((video) => (
-            <div key={video.id}>
-              <div>{video.title}</div>
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${video.url.split("=")[1]}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <div>{video.rating}</div>
-              <button onClick={() => newVote(video.id, 1)}>Up Vote</button>
-              <button onClick={() => newVote(video.id, -1)}>Down Vote</button>
-              <button onClick={() => deleteVote(video.id)}>Delete</button>
-            </div>
-          ))}
-        </div>
+      <div className="videos-container">
+        {videos.map((video) => (
+          <VideoCard
+            key={video.id}
+            video={video}
+            newVote={newVote}
+            deleteVote={deleteVote}
+          />
+        ))}
       </div>
     </div>
   );
