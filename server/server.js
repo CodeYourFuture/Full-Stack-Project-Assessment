@@ -45,12 +45,8 @@ fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
 // GET "/" from the json file
 app.get("/", async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM videos ORDER BY id ASC");
-    console.log("Database connection successful");
-
-    // Combine videos from the database with videos from the JSON file
     const jsonVideos = [...videos];
-
+    console.log("connection successful");
     res.json(jsonVideos);
   } catch (error) {
     console.error("Error fetching videos:", error);
@@ -64,7 +60,6 @@ app.get("/videos", async (req, res) => {
     const result = await db.query("SELECT * FROM videos ORDER BY id ASC");
     console.log("Database connection successful");
 
-    // Combine videos from the database with videos from the JSON file
     const dbVideos = [...result.rows];
 
     res.json(dbVideos);
@@ -81,7 +76,7 @@ app.post("/videos", async (req, res) => {
   if (title && url) {
     try {
       const result = await db.query(
-        "INSERT INTO videos (title, url, rating, uploaddate) VALUES ($1, $2, 0, CURRENT_TIMESTAMP) RETURNING id",
+        "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, CURRENT_TIMESTAMP, 0 ) RETURNING id",
         [title, url]
       );
       const id = result.rows[0].id;
@@ -126,19 +121,24 @@ app.post("/videos/:videoId/rating", async (req, res) => {
   const { like, dislike } = req.body;
 
   try {
-    // Insert or update the video_ratings table based on the user's input
+    // Update the likes and dislikes columns in the videos table
     if (like) {
-      await db.query(
-        "INSERT INTO video_ratings (video_id, likes) VALUES ($1, 1) ON CONFLICT (video_id) DO UPDATE SET likes = video_ratings.likes + 1",
-        [videoId]
-      );
+      await db.query("UPDATE videos SET likes = likes + 1 WHERE id = $1", [
+        videoId,
+      ]);
     }
     if (dislike) {
       await db.query(
-        "INSERT INTO video_ratings (video_id, dislikes) VALUES ($1, 1) ON CONFLICT (video_id) DO UPDATE SET dislikes = video_ratings.dislikes + 1",
+        "UPDATE videos SET dislikes = dislikes + 1 WHERE id = $1",
         [videoId]
       );
     }
+
+    // Recalculate the rating based on likes and dislikes
+    await db.query(
+      "UPDATE videos SET rating = likes - dislikes WHERE id = $1",
+      [videoId]
+    );
 
     res.status(200).json({ message: "Rating updated successfully" });
   } catch (error) {
