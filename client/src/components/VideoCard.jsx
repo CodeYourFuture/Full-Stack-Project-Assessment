@@ -11,7 +11,7 @@ const VideoCard = ({ video, newVote, deleteVote }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <div>{video.rating}</div>
+      <div className="rating">{video.rating}</div>
       <button onClick={() => newVote(video.id, 1)}>Up Vote</button>
       <button onClick={() => newVote(video.id, -1)}>Down Vote</button>
       <button onClick={() => deleteVote(video.id)}>Delete</button>

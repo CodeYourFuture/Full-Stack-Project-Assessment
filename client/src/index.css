@@ -12,37 +12,19 @@ body {
   padding: 20px;
 }
 
-.add-video {
-  margin-bottom: 10px;
-  background-color: #e50914;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-video:hover {
-  background-color: #b2070a;
-}
-
 .videos-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  justify-items: center;
   margin-top: 20px;
 }
 
-/* VideoCard.css */
 .video-card {
   position: relative;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #333;
+  background-color: #222;
   transition: transform 0.3s ease;
   overflow: hidden;
 }
@@ -59,8 +41,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
-  z-index: -1; /* Adjusted z-index to ensure button accessibility */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 1) 100%);
+  z-index: -1;
 }
 
 .video-card div {
@@ -71,8 +53,7 @@ body {
 
 .video-card iframe {
   width: 100%;
-  height: 200px;
-  margin-bottom: 10px;
+  height: 80%;
   border: none;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -87,63 +68,102 @@ body {
 .video-card button {
   padding: 8px 12px;
   margin-top: auto;
-  background-color: #e50914;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   position: relative;
-  z-index: 1; /* Ensure button accessibility */
+  z-index: 1;
 }
 
 .video-card button:hover {
-  background-color: #b2070a;
+  background-color: #eee;
 }
 
 /* AddVideos.css */
-form {
-  display: flex;
-  flex-direction: column;
+.add-videos-container {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 18px;
-  color: #fff;
+.add-videos-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-input {
-  padding: 8px;
+.add-videos-form h2 {
+  color: #fff;
+  font-size: 24px;
   margin-bottom: 10px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  color: #fff;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.form-row input {
+  padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-button {
-  margin-top: 10px;
-  background-color: #e50914;
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cancel-button {
+  background-color: #ff3c00;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 8px 12px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.cancel-button:hover {
+  background-color: #d32f00;
+}
+
+.add-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #b2070a;
+.add-button:hover {
+  background-color: #45a049;
 }
+
 
 /* Header.css */
 .App-header {
   padding: 20px;
+  background-color: #000;
   color: #fff;
-  background-color: #333;
 }
 
 .App-header h1 {
@@ -167,21 +187,19 @@ button:hover {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #222;
+  color: #fff;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .videos-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .video-card iframe {
-    height: 150px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (max-width: 480px) {
-  .video-card iframe {
-    height: 100px;
+  .videos-container {
+    grid-template-columns: 1fr;
   }
 }
