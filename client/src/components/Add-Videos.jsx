@@ -1,6 +1,6 @@
 const AddVideos = ({ inputsTableVisibility, addToVideos, handleChange }) => {
   return (
-    <form onSubmit={addToVideos}>
+    <form onSubmit={addToVideos} className="add-video">
       <label htmlFor="title">Title</label>
       <input
         type="text"
