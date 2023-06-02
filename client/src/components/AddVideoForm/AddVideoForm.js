@@ -2,7 +2,7 @@ import "./AddVideoForm.css";
 import { useState } from "react";
 import ReactSelect from "react-select";
 
-const AddVideoForm = ({ categories }) => {
+const AddVideoForm = ({ categories, fetchVideos }) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
@@ -66,8 +66,7 @@ const AddVideoForm = ({ categories }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Handle the response from the server
-        console.log(data);
+        fetchVideos();
       })
       .catch((error) => {
         console.error(error);

@@ -42,7 +42,7 @@ function App() {
       <Header categories={categories} />
       <main>
         <Categories categories={categories} setVideos={setVideos} />
-        <AddVideoForm categories={categories} />
+        <AddVideoForm categories={categories} fetchVideos={fetchVideos} />
         <VideoPicker
           categories={categories}
           videos={videos}
