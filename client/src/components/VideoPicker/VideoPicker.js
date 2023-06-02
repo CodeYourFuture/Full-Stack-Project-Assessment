@@ -1,6 +1,6 @@
 import "./VideoPicker.css";
 import ReactSelect from "react-select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import videos from "../../exampleresponse.json";
 
@@ -15,14 +15,20 @@ const VideoPicker = ({ categories }) => {
     categoryOptions.push(newOption);
   });
   const orderOptions = [
-    { value: "Ascending", label: "Ascending" },
-    { value: "Descending", label: "Descending" },
+    { value: "Most Popular", label: "Most Popular" },
+    { value: "Least Popular", label: "Least Popular" },
   ];
-
   const [selectedCategory, setSelectedCategory] = useState(categoryOptions[0]);
   const [selectedOrder, setSelectedOrder] = useState(orderOptions[0]);
+  const [videoList, setVideoList] = useState(videos);
 
-  console.log(videos);
+  console.log(videoList);
+
+  useEffect(() => {
+    const sortedVideos = [...videos]; // Create a copy of the videos array
+    sortedVideos.sort((a, b) => b.rating - a.rating); // Sort the copied array
+    setVideoList(sortedVideos); // Set the sorted array as the videoList state
+  }, []);
 
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
@@ -30,6 +36,14 @@ const VideoPicker = ({ categories }) => {
 
   const handleOrderChange = (selectedOrder) => {
     setSelectedOrder(selectedOrder);
+
+    if (selectedOrder.value === "Most Popular") {
+      videoList.sort((a, b) => b.rating - a.rating);
+    } else {
+      videoList.sort((a, b) => a.rating - b.rating);
+    }
+
+    setVideoList([...videoList]); // Trigger re-render by updating the videoList state
   };
 
   return (
@@ -56,7 +70,7 @@ const VideoPicker = ({ categories }) => {
         </div>
       </div>
       <div className="video_cards">
-        {videos.map((video) => (
+        {videoList.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}
       </div>
