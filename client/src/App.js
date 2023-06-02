@@ -3,12 +3,7 @@ import React, { useState, useEffect } from "react";
 import AddVideoForm from "./AddVideoForm";
 import moment from "moment";
 import VideoComponent from "./VideoComponent";
-
-
-
-
-
-
+import Footer from "./Footer";
 
 const App = () => {
   const [videoList, setVideoList] = useState([]);
@@ -32,62 +27,48 @@ const App = () => {
       console.error("Error fetching videos:", error);
     }
   };
-  //   useEffect(() => {
-  //     addVideo();
-  //   }, []);
-  // const addVideo = async (newVideo) => {
-  //    const time = moment().format("YYYY-MM-DD HH:mm");
-  //   try {
-      
-  //     const response = await fetch("http://localhost:5000/videos", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(newVideo),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error("Failed to add video!");
-  //     }
-  //     const data = await response.json();
-      
-  //     const updatedVideoList = [
-  //     ...videoList,
-  //     { ...newVideo, id: data.id, rating: 0, time },
-  //   ];
-  //   setVideoList(updatedVideoList);
-  //   setSortedVideoList(
-  //     [...updatedVideoList].sort((a, b) => b.rating - a.rating));
-      
-  //   } catch (error) {
-  //    console.log(error);
-  //   }
-  // };
-   const addVideo = (newVideo) => {
+ 
+  const addVideo = async (newVideo) => {
      const time = moment().format("YYYY-MM-DD HH:mm");
-     const updatedVideoList = [
-       ...videoList,
-       { ...newVideo, rating: 0, time },
-     ];
-     setVideoList(updatedVideoList);
-     setSortedVideoList(
-       [...updatedVideoList].sort((a, b) => b.rating - a.rating)
-     );
-   };
+    try {
+      
+      const response = await fetch("http://localhost:5000/videos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add video!");
+      }
+      const data = await response.json();
+      
+      const updatedVideoList = [
+      ...videoList,
+      { ...newVideo, id: data.id, rating: 0, time },
+    ];
+    setVideoList(updatedVideoList);
+    setSortedVideoList(
+      [...updatedVideoList].sort((a, b) => b.rating - a.rating));
+      
+    } catch (error) {
+     console.log(error);
+    }
+  };
+  
   return (
-    
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <div>
-        <AddVideoForm AddVideo={addVideo}/>
-      </div>
-     
-
-      <VideoComponent />
+      <div className="form-wrapper">
+        <AddVideoForm AddVideo={addVideo} />
       
-   
+
+      <VideoComponent sortedVideoList={sortedVideoList} />
+      <Footer />
+      </div>
     </div>
   );
 };

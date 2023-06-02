@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import moment from "moment";
 
 function AddVideoForm({AddVideo}) {
 //   const [showValid, Setvalid] = useState(true);
@@ -32,22 +33,16 @@ function AddVideoForm({AddVideo}) {
       ? (newVideo.url = videoUrl)
       : alert("Please add a valid url.");
     newVideo.rating = Math.floor(Math.random() * 5000) + 1;
-
     
+   
 
-    AddVideo(newVideo);
+     AddVideo(newVideo);
     setVideoData({
       title: "",
       url: "",
+     
     });
-
-    // const newVideoData = {
-    //   id: Math.floor(Math.random() * 1000),
-    //   title,
-    //   url,
-    // };
-    
- newVideo.id = Math.floor(Math.random() * 1000);
+newVideo.id = Math.floor(Math.random() * 1000);
     // setVideos([newVideo, ...videos]);
      setNewVideo({});
     setTitle("");

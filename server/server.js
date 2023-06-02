@@ -40,7 +40,7 @@ app.get("/videos", (request, response) => {
 
 app.get("/:id", (request, response) => {
    const videoId = parseInt(req.params.id);
-   db.query("DELETE * FROM videos WHERE id = $1", [videoId])
+   db.query('SELECT * FROM videos WHERE id = $1', [videoId])
      .then((result) => {
        response.status(200).json(result.rows);
      })
@@ -68,7 +68,7 @@ app.post("/", (req, res) => {
 });
 app.delete("/:id", (request, response) => {
   const videoTodelete = parseInt(req.params.id);
-  db.query("SELECT * FROM videos WHERE id = $1", [videoTodelete])
+  db.query('DELETE * FROM videos WHERE id = $1', [videoTodelete])
     .then((result) => {
       response.status(200).send("Video deleted successfully");
     })

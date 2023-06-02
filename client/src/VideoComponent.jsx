@@ -1,13 +1,13 @@
 // import FaTrash from "react-icons/fa";
 import Rating from "./Rating";
 import React, { useState, useEffect } from "react";
-import moment from "moment";
+// import moment from "moment";
 
 
 const VideoComponent = () => {
 const [videos, setVideos] = useState([]);
   //  const [filteredVideos, setFilteredVideos] = useState([]);
-   const [videoList, setVideoList] = useState([]);
+  //  const [videoList, setVideoList] = useState([]);
    const [sortedVideoList, setSortedVideoList] = useState([]);
   async function fetchData() {
     try {
@@ -43,7 +43,7 @@ const [videos, setVideos] = useState([]);
   return (
     <div>
       {sortedVideoList.map((video, index) => (
-        <div key={index} className="video-card">
+        <div key={index} className="form-card">
           <h3>{video.title}</h3>
           <iframe
             width="560"
