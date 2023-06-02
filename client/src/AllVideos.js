@@ -18,9 +18,6 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: videoId,
-        }),
       }
     )
       .then((response) => {
@@ -50,9 +47,6 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: videoId,
-        }),
       }
     )
       .then((response) => {
@@ -101,7 +95,7 @@ export const AllVideos = ({ isDesc, setIsDesc, fetchData }) => {
   }, [isDesc]);
 
   return (
-    <div className="all-videos-wrapper">
+    <div>
       <h2 className="all-videos-title">Videos</h2>
       <div className="all-videos-filter-wrapper">
         <button

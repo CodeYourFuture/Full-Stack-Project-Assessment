@@ -13,7 +13,7 @@ export const Card = ({
   return (
     <div className={wrapperClass}>
       <p className="card-subtitle">{cardSubtitle}</p>
-      <h1 className="card-title">{cardTitle}</h1>
+      <h2 className="card-title">{cardTitle}</h2>
       <p className={cardTextClass}>{cardText}</p>
       <a href={cardLink} className={cardLinkClass}>
         {cardLinkText}

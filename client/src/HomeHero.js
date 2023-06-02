@@ -1,6 +1,12 @@
 import "./HomeHero.css";
 
 export const HomeHero = () => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById("addvideo");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div>
       <div className="home-hero-text-wrapper">
@@ -15,9 +21,9 @@ export const HomeHero = () => {
           </a>
           .
         </p>
-        <a href="#addvideo" className="add-video-link">
+        <button className="add-video-link" onClick={scrollToForm}>
           Add a Video
-        </a>
+        </button>
       </div>
     </div>
   );

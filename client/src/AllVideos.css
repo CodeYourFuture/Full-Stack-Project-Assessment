@@ -1,29 +1,3 @@
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-.all-videos-wrapper {
-    width: 100%;
-    margin: 80px 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-@media only screen and (min-width: 375px) {
-    .all-videos-wrapper {
-        width: 100%;
-        margin: 120px 0;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    } 
-}
-
 .all-videos-title {
     color: white;
     text-align: center;
@@ -49,13 +23,6 @@
     background-color: transparent;
     color: white;
     border: none;
-}
-
-@media only screen and (min-width: 375px) {
-    .all-videos-filter-wrapper {
-        display: flex;
-        gap: 5px;
-    } 
 }
 
 .all-videos-filter-text {

@@ -36,7 +36,7 @@ app.get("/videos", async (req, res) => {
 });
 
 app.post("/videos/:id/like", async (req, res) => {
-  const videoId = req.body.id;
+  const videoId = req.params.id;
   const likeQuery =
     "UPDATE videos SET ratings = ratings + 1 WHERE id = $1 RETURNING *";
   try {
@@ -55,7 +55,7 @@ app.post("/videos/:id/like", async (req, res) => {
 });
 
 app.post("/videos/:id/dislike", async (req, res) => {
-  const videoId = req.body.id;
+  const videoId = req.params.id;
   const dislikeQuery =
     "UPDATE videos SET ratings = ratings - 1 WHERE id = $1 RETURNING *";
   try {
