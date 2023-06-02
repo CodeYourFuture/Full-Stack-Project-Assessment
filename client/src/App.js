@@ -4,6 +4,7 @@ import Categories from "./components/Categories/Categories";
 import VideoPicker from "./components/VideoPicker/VideoPicker";
 import Footer from "./components/Footer/Footer";
 import AddVideoForm from "./components/AddVideoForm/AddVideoForm";
+import { useState, useEffect } from "react";
 
 function App() {
   const categories = [
@@ -14,13 +15,17 @@ function App() {
     "Favorites",
     "Others",
   ];
+  const [videos, setVideos] = useState([]);
+
+  console.log("now");
+  console.log(videos);
   return (
     <div className="App">
       <Header categories={categories} />
       <main>
-        <Categories categories={categories} />
+        <Categories categories={categories} setVideos={setVideos} />
         <AddVideoForm categories={categories} />
-        <VideoPicker categories={categories} />
+        <VideoPicker categories={categories} videos={videos} />
       </main>
       <Footer />
     </div>

@@ -2,9 +2,8 @@ import "./VideoPicker.css";
 import ReactSelect from "react-select";
 import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
-import videos from "../../exampleresponse.json";
 
-const VideoPicker = ({ categories }) => {
+const VideoPicker = ({ categories, videos }) => {
   let categoryOptions = [];
 
   //adding one value to the options array
@@ -24,7 +23,7 @@ const VideoPicker = ({ categories }) => {
   const [selectedOrder, setSelectedOrder] = useState(orderOptions[0]);
   const [videoList, setVideoList] = useState(videos);
 
-  console.log(videoList);
+  // console.log(videoList);
 
   useEffect(() => {
     const sortedVideos = [...videos]; // Create a copy of the videos array

@@ -53,9 +53,25 @@ const AddVideoForm = ({ categories }) => {
 
     const newVideo = {
       title,
-      selectedOption,
-      link,
+      category: selectedOption.value,
+      url: link,
     };
+
+    fetch("https://video-server-wtvy.onrender.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the server
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     // Clear the form fields
     setTitle("");
