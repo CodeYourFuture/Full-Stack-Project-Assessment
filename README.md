@@ -1,75 +1,74 @@
-# Video Recommendation App
+# Full Stack Project Assessment
 
-## Background
+This is a Full Stack Project Assessment that involves building a video management application. The application allows users to view a list of videos, add new videos, and delete existing videos.
+![Video Management Application](./extra/Screenshot%202023-05-24%20at%2017.20.37.png)
 
-Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
+## Technologies Used
 
-This means that we need to be sure that you can create a Full Stack app.
+The project utilizes the following technologies:
 
-## Challenge
+### Frontend
 
-In this project you will be building a project that fulfills the following User Stories
+- React: A JavaScript library for building user interfaces.
+- HTML: The standard markup language for creating web pages.
+- CSS: A style sheet language used for describing the presentation of a document written in HTML.
 
-- As a user, I want to be able to view a list of all YouTube videos posted on the site
-- As a user, I want to be able to post videos that I like from YouTube to my website.
-- As a user, I want to be able to delete videos from the website that I no longer like.
-- As a user, I want to be able to watch the videos embedded in the website.
-- As a user, I want to be able to "Up Vote" a video if I like it.
-- As a user, I want to be able to "Down Vote" a video if I dislike.
+### Backend
 
-You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- Express: A web application framework for Node.js.
+- PostgreSQL: A powerful, open-source object-relational database system.
 
-## Levels
+## Implementation
 
-This project is split into several levels that you should complete each week of the three week project.
+The project consists of two main components: the frontend and the backend.
 
-You can find each of the levels split into separate files, linked below.
+### Frontend
 
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+The frontend of the application is built using React. It allows users to view a list of videos, add new videos, and delete existing videos.
 
-### Week 1 - Front End
+Key files and folders in the frontend project:
 
-- [Level 100](./100.md)
-  - A core version of the React front end of the app
-- [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+- `src/components`: Contains React components that make up the different parts of the application, such as the video list and video form components.
+- `src/services/api.js`: Provides functions for interacting with the backend API to fetch videos, add a new video, and delete a video.
 
-### Week 2 - Back End (without Database)
+To run the frontend locally, follow these steps:
 
-- [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
-- [Level 250](./250.md)
-  - Connect your Front End and Back End together
-- [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
+1. Navigate to the `frontend` directory: `cd frontend`.
+2. Install the dependencies: `npm install`.
+3. Start the development server: `npm start`.
+4. Open your web browser and visit `http://localhost:3000` to view the application.
 
-### Week 3 - Back End (with Database)
+### Backend
 
-- [Level 300](./300.md)
-  - Integrate the back end with a database
-- [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
-- [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
+The backend of the application is built using Node.js and Express. It provides API endpoints for fetching videos, adding a new video, and deleting a video. It also connects to a PostgreSQL database to store and retrieve videos.
 
-## Sample Solution
+Key files and folders in the backend project:
 
-Here is an example solution of the Front End:
+- `index.js`: The main entry point of the backend application.
+- `routes/videos.js`: Defines the API routes for videos, including GET, POST, and DELETE endpoints.
+- `db.js`: Configures the connection to the PostgreSQL database.
 
-https://vid-rec2.netlify.app/
+To run the backend locally, follow these steps:
 
-**Note:** You can design the website to look however you like.
+1. Navigate to the `backend` directory: `cd backend`.
+2. Install the dependencies: `npm install`.
+3. Set up the PostgreSQL database and update the `.env` file with the appropriate credentials.
+4. Start the backend server: `npm start`.
+5. The server will be running at `http://localhost:5001`.
 
-Here is an example solution for the Back End:
+## Deployment
 
-https://video-rec.herokuapp.com
+The application can be deployed to a hosting platform of your choice. Here are the general steps to deploy the frontend and backend:
 
-## Design
+1. Frontend:
 
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
+   - Build the production-ready version of the frontend: `npm run build`.
+   - Deploy the generated build files to a static file hosting service like Netlify, Vercel, or AWS S3.
 
-## Getting Started
+2. Backend:
+   - Set up a PostgreSQL database on a hosting platform or cloud provider.
+   - Configure the database connection in the `.env` file with the appropriate credentials.
+   - Deploy the backend code to a hosting platform like Heroku, AWS EC2, or DigitalOcean.
 
-Fork this repository and then clone it to your computer.
-
-Progress to Level 100 when you are ready.
+Make sure to update the frontend API endpoint in the frontend code (`src/services/api.js`) to match the deployed backend URL.

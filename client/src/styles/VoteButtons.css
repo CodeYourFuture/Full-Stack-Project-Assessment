@@ -24,3 +24,8 @@
   background-color: #007bff;
   color: white;
 }
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

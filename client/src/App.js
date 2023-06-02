@@ -5,6 +5,7 @@ import AddVideoForm from "./components/AddVideoForm";
 import VideoCard from "./components/VideoCard";
 import SortFilters from "./components/SortFilters";
 import Search from "./components/Search";
+
 import "./App.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [votedVideos, setVotedVideos] = useState([]);
 
   useEffect(() => {
     fetchVideos();
@@ -19,21 +21,20 @@ function App() {
 
   const fetchVideos = async () => {
     try {
-      const [jsonResponse, dbResponse] = await Promise.all([
-        fetch("https://full-stack-project-jcr4.onrender.com/"),
-        fetch("https://full-stack-project-jcr4.onrender.com/videos"),
-      ]);
+      const response = await fetch(
+        "https://full-stack-project-jcr4.onrender.com/videos"
+      );
 
-      if (!jsonResponse.ok || !dbResponse.ok) {
+      if (!response.ok) {
         throw new Error("Failed to fetch videos!");
       }
 
-      const jsonData = await jsonResponse.json();
-      const dbData = await dbResponse.json();
+      const data = await response.json();
 
-      const combinedVideos = [...jsonData, ...dbData];
+      // Sort the videos by ID in descending order (latest video first)
+      const sortedVideos = data.sort((a, b) => b.id - a.id);
 
-      const updatedVideos = combinedVideos.map((video) => {
+      const updatedVideos = sortedVideos.map((video) => {
         if (!video.uploaddate) {
           return { ...video, uploadedDate: "2021-01-01T00:00:00.000Z" };
         }
@@ -74,7 +75,7 @@ function App() {
   const removeVideo = async (id) => {
     try {
       const response = await fetch(
-        `https://full-stack-project-jcr4.onrender.com/videos${id}`,
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}`,
         {
           method: "DELETE",
         }
@@ -88,26 +89,72 @@ function App() {
     }
   };
 
-  const upVote = (id) => {
-    setVideos((prevVideos) =>
-      prevVideos.map((video) => {
-        if (video.id === id) {
-          return { ...video, rating: video.rating + 1 };
+  const upVote = async (id) => {
+    if (votedVideos.includes(id)) {
+      // User has already voted on this video
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}/rating`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ like: true }),
         }
-        return video;
-      })
-    );
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update rating!");
+      }
+      setVideos((prevVideos) =>
+        prevVideos.map((video) => {
+          if (video.id === id) {
+            return { ...video, rating: video.rating + 1 };
+          }
+          return video;
+        })
+      );
+      setVotedVideos((prevVotedVideos) => [...prevVotedVideos, id]);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
-  const downVote = (id) => {
-    setVideos((prevVideos) =>
-      prevVideos.map((video) => {
-        if (video.id === id) {
-          return { ...video, rating: video.rating - 1 };
+  const downVote = async (id) => {
+    if (votedVideos.includes(id)) {
+      // User has already voted on this video
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}/rating`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dislike: true }),
         }
-        return video;
-      })
-    );
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update rating!");
+      }
+      setVideos((prevVideos) =>
+        prevVideos.map((video) => {
+          if (video.id === id) {
+            return { ...video, rating: video.rating - 1 };
+          }
+          return video;
+        })
+      );
+      setVotedVideos((prevVotedVideos) => [...prevVotedVideos, id]);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const sortByVotes = (sortOrder) => {
@@ -170,6 +217,7 @@ function App() {
                     removeVideo={removeVideo}
                     upVote={upVote}
                     downVote={downVote}
+                    votedVideos={votedVideos} // Make sure to pass the votedVideos prop here
                   />
                 ))}
               </div>

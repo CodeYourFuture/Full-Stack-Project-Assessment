@@ -3,9 +3,10 @@ import { FaHeart } from "react-icons/fa";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import RemoveButton from "./RemoveButton";
 import VoteButtons from "./VoteButtons";
+
 import "../styles/VideoCard.css";
 
-const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
+const VideoCard = ({ video, removeVideo, upVote, downVote, votedVideos }) => {
   const extractVideoId = (url) => {
     const videoId = url.split("v=")[1];
     return videoId;
@@ -50,8 +51,10 @@ const VideoCard = ({ video, removeVideo, upVote, downVote }) => {
             <span className="rating-count">{video.rating}</span>
           </div>
           <VoteButtons
-            onUpVote={() => upVote(video.id)}
-            onDownVote={() => downVote(video.id)}
+            video={video}
+            onUpVote={upVote}
+            onDownVote={downVote}
+            votedVideos={votedVideos}
           />
           <RemoveButton onClick={() => removeVideo(video.id)} />
         </CardContent>
