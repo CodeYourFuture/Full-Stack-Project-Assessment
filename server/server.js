@@ -121,24 +121,32 @@ app.post("/videos/:videoId/rating", async (req, res) => {
   const { like, dislike } = req.body;
 
   try {
-    // Update the likes and dislikes columns in the videos table
+    let query = "";
+    let queryParams = [];
+
     if (like) {
-      await db.query("UPDATE videos SET likes = likes + 1 WHERE id = $1", [
-        videoId,
-      ]);
+      query = "UPDATE videos SET likes = likes + 1";
+      queryParams.push(videoId);
     }
+
     if (dislike) {
-      await db.query(
-        "UPDATE videos SET dislikes = dislikes + 1 WHERE id = $1",
-        [videoId]
-      );
+      query = "UPDATE videos SET dislikes = dislikes + 1";
+      queryParams.push(videoId);
+    }
+
+    if (like || dislike) {
+      // Update the likes or dislikes columns in the videos table
+      await db.query(`${query} WHERE id = $1`, queryParams);
     }
 
     // Recalculate the rating based on likes and dislikes
-    await db.query(
-      "UPDATE videos SET rating = likes - dislikes WHERE id = $1",
-      [videoId]
-    );
+    const ratingQuery = `
+      UPDATE videos
+      SET rating = (SELECT COALESCE(SUM(likes), 0) - COALESCE(SUM(dislikes), 0) FROM videos WHERE id = $1)
+      WHERE id = $1
+    `;
+
+    await db.query(ratingQuery, [videoId]);
 
     res.status(200).json({ message: "Rating updated successfully" });
   } catch (error) {
