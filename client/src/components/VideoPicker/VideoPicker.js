@@ -3,7 +3,7 @@ import ReactSelect from "react-select";
 import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 
-const VideoPicker = ({ categories, videos }) => {
+const VideoPicker = ({ categories, videos, setOrder, setVideos }) => {
   let categoryOptions = [];
 
   //adding one value to the options array
@@ -22,29 +22,34 @@ const VideoPicker = ({ categories, videos }) => {
   const [selectedCategory, setSelectedCategory] = useState(categoryOptions[0]);
   const [selectedOrder, setSelectedOrder] = useState(orderOptions[0]);
   const [videoList, setVideoList] = useState(videos);
-
-  // console.log(videoList);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
-    const sortedVideos = [...videos]; // Create a copy of the videos array
-    sortedVideos.sort((a, b) => b.rating - a.rating); // Sort the copied array
-    setVideoList(sortedVideos); // Set the sorted array as the videoList state
-  }, []);
+    setVideoList(videos);
+  }, [videos]);
+
+  useEffect(() => {
+    if (category.length > 0) {
+      fetch(`https://video-server-wtvy.onrender.com/category/${category}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setVideos(data);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [category, setVideos]);
 
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
+    setCategory(selectedCategory.value);
+    console.log(selectedCategory.value);
   };
 
   const handleOrderChange = (selectedOrder) => {
     setSelectedOrder(selectedOrder);
 
-    if (selectedOrder.value === "Most Popular") {
-      videoList.sort((a, b) => b.rating - a.rating);
-    } else {
-      videoList.sort((a, b) => a.rating - b.rating);
-    }
-
-    setVideoList([...videoList]); // Trigger re-render by updating the videoList state
+    console.log(selectedOrder.value);
+    selectedOrder.value.includes("Most") ? setOrder("desc") : setOrder("asc");
   };
 
   return (

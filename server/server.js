@@ -11,6 +11,7 @@ let videos = require("../exampleresponse.json");
 function generateUniqueId() {
   return Math.floor(Math.random() * 1000000) + 1;
 }
+
 // GET "/"
 app.get("/", (req, res) => {
   let orderedVideos = [...videos]; // Create a copy of the videos array
@@ -89,13 +90,17 @@ app.delete("/:id", (req, res) => {
 // GET "/category/:name"
 app.get("/category/:name", (req, res) => {
   const { name } = req.params;
+  let orderedVideos = [...videos];
+
+  orderedVideos.sort((a, b) => b.rating - a.rating);
 
   if (name === "All videos") {
-    // Return all videos
-    res.json(videos);
+    res.json(orderedVideos);
   } else {
     // Filter the videos by category name
-    const categoryVideos = videos.filter((video) => video.category === name);
+    const categoryVideos = orderedVideos.filter(
+      (video) => video.category === name
+    );
 
     if (categoryVideos.length === 0) {
       return res.status(404).json({

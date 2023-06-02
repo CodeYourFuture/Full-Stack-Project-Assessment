@@ -16,6 +16,24 @@ function App() {
     "Others",
   ];
   const [videos, setVideos] = useState([]);
+  const [order, setOrder] = useState("desc");
+
+  useEffect(() => {
+    fetchVideos();
+  }, [order]);
+
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch(
+        `https://video-server-wtvy.onrender.com?order=${order}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setVideos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   console.log("now");
   console.log(videos);
@@ -25,7 +43,12 @@ function App() {
       <main>
         <Categories categories={categories} setVideos={setVideos} />
         <AddVideoForm categories={categories} />
-        <VideoPicker categories={categories} videos={videos} />
+        <VideoPicker
+          categories={categories}
+          videos={videos}
+          setOrder={setOrder}
+          setVideos={setVideos}
+        />
       </main>
       <Footer />
     </div>
