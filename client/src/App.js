@@ -34,6 +34,7 @@ function App() {
     });
     setVideos(updatedVideos);
   }
+  const sortedVideos = [...videos].sort((a, b) => b.rating - a.rating);
 
   function deleteVideo(videoId) {
     const updatedVideos = videos.filter((video) => video.id !== videoId);
@@ -46,7 +47,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
       <AddVideo onAddVideo={addVideo} />
-      {videos.map((video) => {
+      {sortedVideos.map((video) => {
         return (
           <div className="newvideos" key={video.id}>
             <h3> Title:{video.title}</h3>
