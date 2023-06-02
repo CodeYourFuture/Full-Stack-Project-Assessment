@@ -18,9 +18,9 @@ app.get("/", (req, res) => {
 
 // POST "/"
 app.post("/", (req, res) => {
-  const { title, url } = req.body;
+  const { title, category, url } = req.body;
 
-  if (!title || !url) {
+  if (!title || !category || !url) {
     return res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
@@ -30,6 +30,7 @@ app.post("/", (req, res) => {
   const newVideo = {
     id: generateUniqueId(),
     title,
+    category,
     url,
     rating: 0,
   };
@@ -73,6 +74,28 @@ app.delete("/:id", (req, res) => {
   videos.splice(index, 1);
 
   res.json({});
+});
+
+// GET "/category/:name"
+app.get("/category/:name", (req, res) => {
+  const { name } = req.params;
+
+  if (name === "All videos") {
+    // Return all videos
+    res.json(videos);
+  } else {
+    // Filter the videos by category name
+    const categoryVideos = videos.filter((video) => video.category === name);
+
+    if (categoryVideos.length === 0) {
+      return res.status(404).json({
+        result: "failure",
+        message: "No videos found for the specified category",
+      });
+    }
+
+    res.json(categoryVideos);
+  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
