@@ -13,7 +13,17 @@ function generateUniqueId() {
 }
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  let orderedVideos = [...videos]; // Create a copy of the videos array
+
+  const order = req.query.order; // Get the value of the "order" parameter
+
+  if (order === "asc") {
+    orderedVideos.sort((a, b) => a.rating - b.rating); // Sort videos in ascending order by rating
+  } else {
+    orderedVideos.sort((a, b) => b.rating - a.rating); // Sort videos in descending order by rating (default)
+  }
+
+  res.json(orderedVideos);
 });
 
 // POST "/"
