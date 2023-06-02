@@ -1,15 +1,78 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(express.json());
+app.use(cors());
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+let videos = require("../exampleresponse.json");
 
+function generateUniqueId() {
+  return Math.floor(Math.random() * 1000000) + 1;
+}
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.json(videos);
 });
+
+// POST "/"
+app.post("/", (req, res) => {
+  const { title, url } = req.body;
+
+  if (!title || !url) {
+    return res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  }
+
+  const newVideo = {
+    id: generateUniqueId(),
+    title,
+    url,
+    rating: 0,
+  };
+
+  videos.push(newVideo);
+
+  res.status(201).json({
+    id: newVideo.id,
+  });
+});
+
+// GET "/{id}"
+app.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  const video = videos.find((v) => v.id === Number(id));
+
+  if (!video) {
+    return res.status(404).json({
+      result: "failure",
+      message: "Video not found",
+    });
+  }
+
+  res.json(video);
+});
+
+// DELETE "/{id}"
+app.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  const index = videos.findIndex((v) => v.id === Number(id));
+
+  if (index === -1) {
+    return res.status(404).json({
+      result: "failure",
+      message: "Video not found",
+    });
+  }
+
+  videos.splice(index, 1);
+
+  res.json({});
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
