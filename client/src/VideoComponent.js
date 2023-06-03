@@ -1,7 +1,7 @@
 import React from "react";
 // import "./VideoComponent.css";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
@@ -46,13 +46,13 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
 
   return (
     <Container sx={{ py: 5 }} maxWidth="md">
-      <Grid container spacing={4}>
+      <Grid container spacing={1}>
         <Grid item key={video.id} xs={12} sm={6} md={4}>
-          <Card
+          <Box
             sx={{
-              height: "100%",
               display: "flex",
-              flexDirection: "column",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
             }}
           >
             <CardMedia
@@ -61,7 +61,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
               title="YouTube video player"
               sx={{
                 // 16:9 aspect ratio
-                pt: ".25%",
+                pt: "0.25%",
               }}
             />
             <CardContent sx={{ flexGrow: 1 }}>
@@ -93,7 +93,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
                 <SentimentDissatisfiedOutlinedIcon />
               </Button>
             </CardActions>
-          </Card>
+          </Box>
         </Grid>
       </Grid>
     </Container>

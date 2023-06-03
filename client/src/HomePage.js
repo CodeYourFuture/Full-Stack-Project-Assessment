@@ -5,6 +5,8 @@ import AddVideoForm from "./AddVideoForm";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -86,73 +88,78 @@ function HomePage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <div>
-        {/* hero section */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Music Video Recommendation
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Are you a music lover searching for the perfect platform to
-              discover and enjoy the latest and greatest music videos? Look no
-              further! Our Music Video Recommendation is here to cater to all
-              your musical cravings.
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={5}
-              justifyContent="center"
-            >
-              <AddVideoForm onAddVideo={handleAddVideo} />
-            </Stack>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={5}
-              justifyContent="center"
-            >
-              <Button variant="contained" onClick={handleOrderAscending}>
-                Ascending Order
-              </Button>
-              <Button variant="outlined" onClick={handleOrderDescending}>
-                Descending Order
-              </Button>
-            </Stack>
-          </Container>
-        </Box>
+      {/* hero section */}
+      <Box
+        sx={{
+          bgcolor: "background.paper",
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Music Video Recommendation
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="text.secondary"
+            paragraph
+          >
+            Are you a music lover searching for the perfect platform to discover
+            and enjoy the latest and greatest music videos? Look no further! Our
+            Music Video Recommendation is here to cater to all your musical
+            cravings.
+          </Typography>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={5}
+            justifyContent="center"
+          >
+            <AddVideoForm onAddVideo={handleAddVideo} />
+          </Stack>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={5}
+            justifyContent="center"
+          >
+            <Button variant="contained" onClick={handleOrderAscending}>
+              Ascending Order
+            </Button>
+            <Button variant="outlined" onClick={handleOrderDescending}>
+              Descending Order
+            </Button>
+          </Stack>
+        </Container>
+      </Box>
 
-        {/* video display */}
+      {/* video display */}
+      <Grid container spacing={4}>
         {videos.map((video) => (
-          <VideoComponent
-            key={video.id}
-            video={video}
-            onRemove={handleRemoveVideo}
-            onUpvote={handleUpvote}
-            onDownvote={handleDownvote}
-          />
+          <Grid item key={video.id} xs={12} sm={6} md={4}>
+            <Card
+              sx={{ height: "90%", display: "flex", flexDirection: "column" }}
+            >
+              <VideoComponent
+                video={video}
+                onRemove={handleRemoveVideo}
+                onUpvote={handleUpvote}
+                onDownvote={handleDownvote}
+              />
+            </Card>
+          </Grid>
         ))}
+      </Grid>
 
-        <Copyright />
-      </div>
+      <Copyright />
     </ThemeProvider>
   );
 }
