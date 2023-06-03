@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS videos;
 CREATE TABLE videos(
    id     INTEGER  NOT NULL PRIMARY KEY 
-  ,title  VARCHAR(29) NOT NULL
-  ,url    VARCHAR(43) NOT NULL
+  ,title  VARCHAR(50) NOT NULL
+  ,url    VARCHAR(50) NOT NULL
   ,rating INTEGER  NOT NULL
 
 );
