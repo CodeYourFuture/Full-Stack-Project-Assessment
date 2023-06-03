@@ -77,7 +77,12 @@ function App() {
           />
         ))}
       </div>
-      <footer className="App-footer">Designed by Natalie Zablotska</footer>
+      <footer className="App-footer">
+        Designed by&nbsp;
+        <a href="https://www.linkedin.com/in/nataliia-zablotska/">
+          Natalie Zablotska
+        </a>
+      </footer>
     </div>
   );
 }
