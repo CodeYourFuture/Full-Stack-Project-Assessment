@@ -88,6 +88,7 @@ function HomePage() {
           pt: 8,
           pb: 6,
         }}
+        
       >
         <Container maxWidth="sm">
           <Typography
@@ -116,12 +117,7 @@ function HomePage() {
             spacing={5}
             justifyContent="center"
           >
-            <Button variant="contained" onClick={handleOrderAscending}>
-              Ascending Order
-            </Button>
-            <Button variant="outlined" onClick={handleOrderDescending}>
-              Descending Order
-            </Button>
+            <AddVideoForm onAddVideo={handleAddVideo} />
           </Stack>
           <Stack
             sx={{ pt: 4 }}
@@ -129,7 +125,12 @@ function HomePage() {
             spacing={5}
             justifyContent="center"
           >
-            <AddVideoForm onAddVideo={handleAddVideo} />
+            <Button variant="contained" onClick={handleOrderAscending}>
+              Ascending Order
+            </Button>
+            <Button variant="outlined" onClick={handleOrderDescending}>
+              Descending Order
+            </Button>
           </Stack>
         </Container>
       </Box>
