@@ -140,3 +140,16 @@ h1.text-heading {
     margin-bottom: 20px;
   }
 }
+
+.App-footer{
+   height: 60px;
+  background-color: #282828;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  border: 1px solid #d8d8d8;
+  box-shadow: 12px 11px 12px 3px rgba(0, 0, 0, 0.1);
+}

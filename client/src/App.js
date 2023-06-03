@@ -77,6 +77,7 @@ function App() {
           />
         ))}
       </div>
+      <footer className="App-footer">Designed by Natalie Zablotska</footer>
     </div>
   );
 }
