@@ -18,7 +18,7 @@ function VideosList() {
 
   //delete video
   const handleDeleteVideo = async (id) => {
-    fetch(`https://full-stack-project-assessment-gb1q.onrender.com//${id}`, {
+    fetch(`https://full-stack-project-assessment-gb1q.onrender.com/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -39,7 +39,7 @@ function VideosList() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(video),
+      body: JSON.stringify({video}),
     })
       .then((res) => {
         if (res.ok) {
