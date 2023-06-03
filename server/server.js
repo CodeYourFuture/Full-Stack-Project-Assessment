@@ -20,6 +20,9 @@ const db = new Pool({
 // GET "/"
 app.get("/", async (req, res) => {
   const videos = await getVideos(db);
+  const searchText = req.query.searchText;
+
+  console.log({ searchText });
 
   let orderedVideos = [...videos];
 
@@ -96,15 +99,15 @@ app.put("/:id", bodyParser.json(), async (req, res) => {
   // Add/Minus vote number by one
   // Update the new vote numer
 
-
   const query = `SELECT rating FROM videos WHERE id = ${videoId}`;
   const rows = await db.query(query).then((result) => {
     return result.rows;
   });
   const oldRating = rows[0].rating;
   const newRating = isUpVote ? oldRating + 1 : oldRating - 1;
-  const updateQuery = `UPDATE videos SET rating = ${newRating} WHERE id = ${videoId}`;
-  await db.query(updateQuery);
+  await db.query(
+    "UPDATE videos SET rating = $1 WHERE id = $2" , [newRating, videoId]
+  );
 
   res.json({ query, rows });
 });
