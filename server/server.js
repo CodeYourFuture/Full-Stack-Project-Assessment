@@ -20,10 +20,6 @@ const db = new Pool({
 // GET "/"
 app.get("/", async (req, res) => {
   const videos = await getVideos(db);
-  const searchText = req.query.searchText;
-
-  console.log({ searchText });
-
   let orderedVideos = [...videos];
 
   const order = req.query.order;
@@ -50,6 +46,23 @@ app.get("/:id", async (req, res) => {
   }
 
   res.json(video);
+});
+
+// GET "/search"
+app.get("/search", async (req, res) => {
+  const videos = await getVideos(db);
+  const searchTerm = req.query.term;
+  if (!searchTerm) {
+    return res
+      .status(400)
+      .json({ result: "failure", message: "Search term is required." });
+  }
+
+  const matchedVideos = videos.filter((video) =>
+    video.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  res.json(matchedVideos);
 });
 
 // POST "/"
@@ -80,10 +93,11 @@ app.post("/", bodyParser.json(), async (req, res) => {
     rating: 0,
   };
 
-  const query = `INSERT INTO videos (id, title, url, rating) VALUES (${newVideo.id}, '${newVideo.title}', '${newVideo.url}', ${newVideo.rating})`;
-  console.log({ query });
+  const query =
+    "INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)";
+  const values = [newVideo.id, newVideo.title, newVideo.url, newVideo.rating];
 
-  await db.query(query);
+  await db.query(query, values);
 
   res.json({ id: newVideo.id });
 });
@@ -105,9 +119,10 @@ app.put("/:id", bodyParser.json(), async (req, res) => {
   });
   const oldRating = rows[0].rating;
   const newRating = isUpVote ? oldRating + 1 : oldRating - 1;
-  await db.query(
-    "UPDATE videos SET rating = $1 WHERE id = $2" , [newRating, videoId]
-  );
+  await db.query("UPDATE videos SET rating = $1 WHERE id = $2", [
+    newRating,
+    videoId,
+  ]);
 
   res.json({ query, rows });
 });
@@ -124,11 +139,10 @@ app.delete("/:id", async (req, res) => {
       .json({ result: "failure", message: "Video not found." });
   }
 
-  // videos.splice(index, 1);
-  const query = `DELETE FROM videos WHERE id = ${videoId}`;
-  console.log({ query });
+  // before database was used: videos.splice(index, 1);
 
-  await db.query(query);
+  const query = "DELETE FROM videos WHERE id = $1";
+  await db.query(query, [videoId]);
 
   res.json({});
 });
