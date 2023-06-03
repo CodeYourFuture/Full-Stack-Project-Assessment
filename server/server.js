@@ -38,9 +38,7 @@ app.post("/", (req, res) => {
 // GET /:id //
 app.get("/:id", (req, res) => {
   const idToFind = Number(req.params.id);
-  console.log(idToFind);
   const video = videos.find((vid) => vid.id === idToFind);
-  console.log(video);
 
   videos.includes(video) === false
     ? res.status(404).json({
