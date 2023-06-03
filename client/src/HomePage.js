@@ -5,7 +5,7 @@ import AddVideoForm from "./AddVideoForm";
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
-  const [order, setOrder] = useState(" ");
+  const [order, setOrder] = useState("Desc");
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
@@ -47,13 +47,17 @@ function HomePage() {
   };
 
   const handleOrderAscending = () => {
-    setOrder("Asc");
-    setVideos((prev) => prev.sort((a, b) => a.rating - b.rating));
+    if (order === "Desc") {
+      setOrder("Asc");
+      setVideos((prev) => prev.sort((a, b) => a.rating - b.rating));
+    }
   };
 
   const handleOrderDescending = () => {
-    setOrder("Desc");
-    setVideos((prev) => prev.sort((a, b) => b.rating - a.rating));
+    if (order === "Asc") {
+      setOrder("Desc");
+      setVideos((prev) => prev.sort((a, b) => b.rating - a.rating));
+    }
   };
 
   return (
