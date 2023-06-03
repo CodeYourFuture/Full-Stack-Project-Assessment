@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import data from "./exampleresponse.json";
 import VideoList from "./VideoList";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 function App() {
-  const [VideosData, setVideosData] = useState(data);
+  const [videosData, setVideosData] = useState(data);
   const [searchVideos, setSearchVideos] = useState([]);
-  console.log(VideosData);
+  console.log(videosData);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((res) => res.json())
+      .then((data) => setVideosData(data));
+    //setVideosData(data);
+  }, []);
 
   function addVideo(title, url) {
     let newVideo = {
@@ -17,7 +24,7 @@ function App() {
       rating: Math.floor(Math.random() * 10000),
     };
 
-    let updateList = VideosData.concat(newVideo);
+    let updateList = videosData.concat(newVideo);
     setVideosData(updateList);
   }
 
@@ -27,14 +34,14 @@ function App() {
     let searchQuery = e.target.value;
     console.log("searching:", searchQuery);
 
-    const filteredResult = VideosData.filter((element) => {
+    const filteredResult = videosData.filter((element) => {
       return element.title.toLowerCase().includes(searchQuery.toLowerCase());
     });
     setSearchVideos(filteredResult);
   }
   // Function delete videos
   const removeVideo = (id) => {
-    const dataCopy = [...VideosData];
+    const dataCopy = [...videosData];
     console.log(`remove video with id:${id}`);
 
     const index = dataCopy.findIndex((video) => {
@@ -54,9 +61,7 @@ function App() {
 
         {searchVideos.length > 0 ? (
           <VideoList data={searchVideos} delete={removeVideo} />
-        ) : (
-          <VideoList data={VideosData} delete={removeVideo} />
-        )}
+        ) : null}
       </div>
     </div>
   );
