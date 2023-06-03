@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 function Votes() {
-  const [Like, setLike] = useState(0);
+  const [like, setLike] = useState(0);
 
   const handleLike = () => {
-    setLike(Votes + 1);
+    setLike(like + 1);
   };
-  const [Dislike, setDislike] = useState(0);
+  const [dislike, setDislike] = useState(0);
 
   const handleDislike = () => {
     setDislike(Votes + 1);
@@ -14,12 +14,12 @@ function Votes() {
 
   return (
     <div className="thumbs">
-      <p>Votes: {Like}</p>
+      <p>Votes: {like}</p>
 
       <i className="fa fa-thumbs-up" onClick={handleLike}></i>
       {/*Dislike Thumb*/}
 
-      <p>Votes: {Dislike}</p>
+      <p>Votes: {dislike}</p>
       <i className="fa fa thumbs-down" onClick={handleDislike}></i>
     </div>
   );
