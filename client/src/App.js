@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import data from "./exampleresponse.json";
 import VideoList from "./VideoList";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
 function App() {
-  const [videosData, setVideosData] = useState(data);
+  const [videosData, setVideosData] = useState([]);
   const [searchVideos, setSearchVideos] = useState([]);
   console.log(videosData);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch("http://127.0.0.1:5000/videos")
       .then((res) => res.json())
       .then((data) => setVideosData(data));
-    //setVideosData(data);
+
+    // setVideosData(data);
   }, []);
 
   function addVideo(title, url) {
@@ -59,9 +59,10 @@ function App() {
         <SearchVideo search={search} />
         <AddVideo addVideo={addVideo} />
 
-        {searchVideos.length > 0 ? (
-          <VideoList data={searchVideos} delete={removeVideo} />
-        ) : null}
+        <VideoList
+          data={searchVideos.length > 0 ? searchVideos : videosData}
+          delete={removeVideo}
+        />
       </div>
     </div>
   );
