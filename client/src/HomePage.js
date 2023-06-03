@@ -113,7 +113,7 @@ function HomePage() {
           <Stack
             sx={{ pt: 4 }}
             direction="row"
-            spacing={2}
+            spacing={5}
             justifyContent="center"
           >
             <Button variant="contained" onClick={handleOrderAscending}>
@@ -123,9 +123,17 @@ function HomePage() {
               Descending Order
             </Button>
           </Stack>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={5}
+            justifyContent="center"
+          >
+            <AddVideoForm onAddVideo={handleAddVideo} />
+          </Stack>
         </Container>
       </Box>
-      <AddVideoForm onAddVideo={handleAddVideo} />
+
       {/* video display */}
       {videos.map((video) => (
         <VideoComponent
@@ -136,6 +144,7 @@ function HomePage() {
           onDownvote={handleDownvote}
         />
       ))}
+
       <Copyright />
     </div>
   );

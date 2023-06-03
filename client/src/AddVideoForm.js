@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./VideoComponent.css";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText,
+} from "@mui/material";
+import { styled } from "@mui/system";
 
 const isValidYouTubeUrl = (url) => {
   // Regular expression to validate YouTube URL
@@ -9,7 +16,26 @@ const isValidYouTubeUrl = (url) => {
   return youtubeUrlRegex.test(url);
 };
 
+const useStyles = styled((theme) => ({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(2),
+  },
+  formControl: {
+    marginBottom: theme.spacing(2),
+  },
+  addButton: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+}));
+
 const AddVideoForm = ({ onAddVideo }) => {
+  const classes = useStyles();
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -65,31 +91,43 @@ const AddVideoForm = ({ onAddVideo }) => {
   return (
     <div>
       {showForm ? (
-        <form onSubmit={handleSubmit} className="video-form">
-          <label>
-            Title:
-            <input
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="title">Title</InputLabel>
+            <Input
+              id="title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <label>{titleError}</label>
-          </label>
-          <label>
-            URL:
-            <input
+            {titleError && <FormHelperText error>{titleError}</FormHelperText>}
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="url">URL</InputLabel>
+            <Input
+              id="url"
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
-            <label>{urlError}</label>
-          </label>
-          <button type="submit">Add Video</button>
+            {urlError && <FormHelperText error>{urlError}</FormHelperText>}
+          </FormControl>
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.addButton}
+          >
+            Add Video
+          </Button>
         </form>
       ) : (
-        <button className="add-video" onClick={handleAddVideoClick}>
-          Add video
-        </button>
+        <Button
+          variant="contained"
+          className={classes.addButton}
+          onClick={handleAddVideoClick}
+        >
+          Add Video
+        </Button>
       )}
     </div>
   );
