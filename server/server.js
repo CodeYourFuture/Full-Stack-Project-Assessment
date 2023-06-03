@@ -118,12 +118,18 @@ app.put("/:id", bodyParser.json(), async (req, res) => {
   const rows = await db.query(query).then((result) => {
     return result.rows;
   });
-  const oldRating = rows[0].rating;
-  const newRating = isUpVote ? oldRating + 1 : oldRating - 1;
-  await db.query("UPDATE videos SET rating = $1 WHERE id = $2", [
-    newRating,
-    videoId,
-  ]);
+
+  if (rows.length > 0) {
+      const oldRating = rows[0].rating;
+      const newRating = isUpVote ? oldRating + 1 : oldRating - 1;
+      await db.query("UPDATE videos SET rating = $1 WHERE id = $2", [
+        newRating,
+        videoId,
+      ]);
+  } else {
+    console.log("No rows found for the specified videoId:", videoId);
+  }
+
 
   res.json({ query, rows });
 });

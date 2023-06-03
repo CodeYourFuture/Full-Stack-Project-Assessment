@@ -107,7 +107,7 @@ function HomePage() {
           >
             Are you a music lover searching for the perfect platform to discover
             and enjoy the latest and greatest music videos? Look no further! Our
-            Music Video App Recommendation is here to cater to all your musical
+            Music Video Recommendation is here to cater to all your musical
             cravings.
           </Typography>
           <Stack
