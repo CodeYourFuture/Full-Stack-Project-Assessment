@@ -17,7 +17,7 @@ console.log(videos);
 app.get("/", (req, res) => {
   res.send(videos);
 });
-/*************** */
+/*************** Create Video */
 app.post("/", (req, res) => {
   const newVideo = {
     id: 1,
@@ -35,7 +35,7 @@ app.post("/", (req, res) => {
     res.status(200).json({message: "New video added", videos})
   }
 });
-/******************* */
+/******************* Get Video with Id */
 app.get("/:id", (req, res) => {
   const newId = Number(req.params.id);
   const foundVideo = videos.find(el => el.id === newId);
@@ -43,7 +43,7 @@ app.get("/:id", (req, res) => {
   res.status(200).json(foundVideo);
 
 });
-
+/******************** Delete The Video */
 app.delete("/:id", (req, res) => {
   const newId = Number(req.params.id);
   const foundVideo = videos.findIndex(el => el.id === newId);
