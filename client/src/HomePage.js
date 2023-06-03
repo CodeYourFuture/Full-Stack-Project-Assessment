@@ -8,7 +8,11 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+
+const defaultTheme = createTheme();
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -80,74 +84,76 @@ function HomePage() {
   };
 
   return (
-    <div>
-      {/* hero section */}
-      <Box
-        sx={{
-          bgcolor: "background.paper",
-          pt: 8,
-          pb: 6,
-        }}
-        
-      >
-        <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            Music Video Recommendation
-          </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-            color="text.secondary"
-            paragraph
-          >
-            Are you a music lover searching for the perfect platform to discover
-            and enjoy the latest and greatest music videos? Look no further! Our
-            Music Video Recommendation is here to cater to all your musical
-            cravings.
-          </Typography>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={5}
-            justifyContent="center"
-          >
-            <AddVideoForm onAddVideo={handleAddVideo} />
-          </Stack>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={5}
-            justifyContent="center"
-          >
-            <Button variant="contained" onClick={handleOrderAscending}>
-              Ascending Order
-            </Button>
-            <Button variant="outlined" onClick={handleOrderDescending}>
-              Descending Order
-            </Button>
-          </Stack>
-        </Container>
-      </Box>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <div>
+        {/* hero section */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Music Video Recommendation
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Are you a music lover searching for the perfect platform to
+              discover and enjoy the latest and greatest music videos? Look no
+              further! Our Music Video Recommendation is here to cater to all
+              your musical cravings.
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={5}
+              justifyContent="center"
+            >
+              <AddVideoForm onAddVideo={handleAddVideo} />
+            </Stack>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={5}
+              justifyContent="center"
+            >
+              <Button variant="contained" onClick={handleOrderAscending}>
+                Ascending Order
+              </Button>
+              <Button variant="outlined" onClick={handleOrderDescending}>
+                Descending Order
+              </Button>
+            </Stack>
+          </Container>
+        </Box>
 
-      {/* video display */}
-      {videos.map((video) => (
-        <VideoComponent
-          key={video.id}
-          video={video}
-          onRemove={handleRemoveVideo}
-          onUpvote={handleUpvote}
-          onDownvote={handleDownvote}
-        />
-      ))}
+        {/* video display */}
+        {videos.map((video) => (
+          <VideoComponent
+            key={video.id}
+            video={video}
+            onRemove={handleRemoveVideo}
+            onUpvote={handleUpvote}
+            onDownvote={handleDownvote}
+          />
+        ))}
 
-      <Copyright />
-    </div>
+        <Copyright />
+      </div>
+    </ThemeProvider>
   );
 }
 

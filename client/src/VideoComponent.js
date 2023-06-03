@@ -8,6 +8,10 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import SentimentDissatisfiedOutlinedIcon from "@mui/icons-material/SentimentDissatisfiedOutlined";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   const { id, title, url, rating } = video;
@@ -65,12 +69,12 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
                 {title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Votes: {rating}
+                <FavoriteOutlinedIcon /> {rating}
               </Typography>
             </CardContent>
             <CardActions>
               <Button size="small" onClick={handleRemoveClick}>
-                Remove
+                <DeleteForeverOutlinedIcon />
               </Button>
               <Button
                 size="small"
@@ -78,7 +82,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
                   handleVoteClick("upVote");
                 }}
               >
-                Up Vote
+                <FavoriteBorderOutlinedIcon />
               </Button>
               <Button
                 size="small"
@@ -86,7 +90,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
                   handleVoteClick("downVote");
                 }}
               >
-                Down Vote
+                <SentimentDissatisfiedOutlinedIcon />
               </Button>
             </CardActions>
           </Card>
