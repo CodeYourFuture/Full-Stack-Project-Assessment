@@ -162,9 +162,6 @@
 
 
 
-
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -193,6 +190,12 @@ async function run() {
 
     const database = client.db("cluster-nataliiazab-fsp");
     const collection = database.collection(collectionName);
+
+    // Delete the collection with previous videos
+    await collection.drop();
+    console.log("Collection deleted");
+
+    //insert the videos into the collection
     const initialVideos = [
       {
         id: 523523,
@@ -273,7 +276,14 @@ async function run() {
           message: "Video could not be saved",
         });
       } else {
+        const maxIdVideo = await collection.findOne({}, { sort: { id: -1 } });
+
+        let newId = 1;
+        if (maxIdVideo) {
+          newId = maxIdVideo.id + 1;
+        }
         const newVideo = {
+          id: newId,
           title,
           url,
           rating: 0,
