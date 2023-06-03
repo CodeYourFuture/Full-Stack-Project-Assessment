@@ -68,7 +68,6 @@ import React, { useState } from "react";
 
 // export default AddVideoForm;
 
-
 function AddVideoForm({ onAddVideo, fetchVideos }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -129,14 +128,11 @@ function AddVideoForm({ onAddVideo, fetchVideos }) {
       <br></br>
       <label>
         URL:
-        <input
-          type="text"
-          name="url"
-          value={url}
-          onChange={handleInputChange}
-        />
+        <input type="url" name="url" value={url} onChange={handleInputChange} />
       </label>
-      <button type="submit" className="submit">Add Video</button>
+      <button type="submit" className="submit">
+        Add Video
+      </button>
     </form>
   );
 }

@@ -62,7 +62,6 @@ app.post("/videos/addnew", function (request, response) {
       .json({ message: "Please fill out the required areas" });
   }
  
-
   videos.push(addNewVideo);
   response.json(videos);
 });
