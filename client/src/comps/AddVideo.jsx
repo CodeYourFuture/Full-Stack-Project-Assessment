@@ -4,6 +4,7 @@ import "../styles/AddVideo.css";
 function AddVideo({ onVideoAdd }) {
   const [newVideoTitle, setNewVideoTitle] = useState("");
   const [newVideoUrl, setNewVideoUrl] = useState("");
+  
 
   const handleNewTitle = (e) => {
     setNewVideoTitle(e.target.value);
@@ -18,6 +19,7 @@ function AddVideo({ onVideoAdd }) {
       const video = {
         title: newVideoTitle,
         url: newVideoUrl,
+        rating: 0
       };
 
       onVideoAdd(video);

@@ -39,7 +39,7 @@ function VideosList() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({video}),
+      body: JSON.stringify(video),
     })
       .then((res) => {
         if (res.ok) {
