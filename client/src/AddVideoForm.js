@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./VideoComponent.css";
+// import "./VideoComponent.css";
 
 const isValidYouTubeUrl = (url) => {
   // Regular expression to validate YouTube URL

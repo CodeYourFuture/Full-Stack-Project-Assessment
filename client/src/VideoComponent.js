@@ -1,5 +1,13 @@
 import React from "react";
-import "./VideoComponent.css";
+// import "./VideoComponent.css";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
 
 const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   const { id, title, url, rating } = video;
@@ -33,42 +41,58 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   };
 
   return (
-    <div>
-      <div className="video-card">
-        <h2 className="video-title">{title}</h2>
-        <div className="video-player">
-          <iframe
-            width="560"
-            height="315"
-            src={url.replace("watch?v=", "embed/")}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-        <p className="video-rating">Votes: {rating}</p>
-        <button className="remove-button" onClick={handleRemoveClick}>
-          Remove
-        </button>
-        <button
-          className="upvote-button"
-          onClick={() => {
-            handleVoteClick("upVote");
-          }}
-        >
-          Up Vote
-        </button>
-        <button
-          className="downvote-button"
-          onClick={() => {
-            handleVoteClick("downVote");
-          }}
-        >
-          Down Vote
-        </button>
-      </div>
-    </div>
+    <Container sx={{ py: 5 }} maxWidth="md">
+      <Grid container spacing={4}>
+        <Grid item key={video.id} xs={12} sm={6} md={4}>
+          <Card
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <CardMedia
+              component="iframe"
+              src={url.replace("watch?v=", "embed/")}
+              title="YouTube video player"
+              sx={{
+                // 16:9 aspect ratio
+                pt: ".25%",
+              }}
+            />
+            <CardContent sx={{ flexGrow: 1 }}>
+              <Typography gutterBottom variant="h5" component="h2">
+                {title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Votes: {rating}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={handleRemoveClick}>
+                Remove
+              </Button>
+              <Button
+                size="small"
+                onClick={() => {
+                  handleVoteClick("upVote");
+                }}
+              >
+                Up Vote
+              </Button>
+              <Button
+                size="small"
+                onClick={() => {
+                  handleVoteClick("downVote");
+                }}
+              >
+                Down Vote
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

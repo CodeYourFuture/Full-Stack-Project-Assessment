@@ -2,6 +2,25 @@ import React, { useEffect, useState } from "react";
 import VideoComponent from "./VideoComponent";
 import "./VideoComponent.css";
 import AddVideoForm from "./AddVideoForm";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="">
+        Ying Xing
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
@@ -62,18 +81,52 @@ function HomePage() {
 
   return (
     <div>
-      <section className="hero">
-        <header>
-          <h1>Music Video Recommendation</h1>
-        </header>
-        <AddVideoForm onAddVideo={handleAddVideo} />
-      </section>
-      <button className="order-button" onClick={handleOrderAscending}>
-        Ascending Order
-      </button>
-      <button className="order-button" onClick={handleOrderDescending}>
-        Descending Order
-      </button>
+      {/* hero section */}
+      <Box
+        sx={{
+          bgcolor: "background.paper",
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Music Video Recommendation
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="text.secondary"
+            paragraph
+          >
+            Are you a music lover searching for the perfect platform to discover
+            and enjoy the latest and greatest music videos? Look no further! Our
+            Music Video App Recommendation is here to cater to all your musical
+            cravings.
+          </Typography>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+          >
+            <Button variant="contained" onClick={handleOrderAscending}>
+              Ascending Order
+            </Button>
+            <Button variant="outlined" onClick={handleOrderDescending}>
+              Descending Order
+            </Button>
+          </Stack>
+        </Container>
+      </Box>
+      <AddVideoForm onAddVideo={handleAddVideo} />
+      {/* video display */}
       {videos.map((video) => (
         <VideoComponent
           key={video.id}
@@ -83,9 +136,7 @@ function HomePage() {
           onDownvote={handleDownvote}
         />
       ))}
-      <footer className="footer">
-        <p>&copy; 2023 Ying Xing. All rights reserved.</p>
-      </footer>
+      <Copyright />
     </div>
   );
 }
