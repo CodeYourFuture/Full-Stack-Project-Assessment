@@ -16,7 +16,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  margin-top: 20px;
+  margin: 20px auto;
+  justify-content: center;
 }
 
 .video-card {
@@ -27,6 +28,11 @@ body {
   background-color: #222;
   transition: transform 0.3s ease;
   overflow: hidden;
+  height: fit-content;
+}
+
+.video-card div.title {
+  height: 60px;
 }
 
 .video-card:hover {
@@ -41,7 +47,11 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 1) 100%);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
   z-index: -1;
 }
 
@@ -53,7 +63,7 @@ body {
 
 .video-card iframe {
   width: 100%;
-  height: 80%;
+  height: 300px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -67,7 +77,7 @@ body {
 
 .video-card button {
   padding: 8px 12px;
-  margin-top: auto;
+  margin: 10px;
   background-color: #fff;
   color: #000;
   border: none;
@@ -83,11 +93,61 @@ body {
 }
 
 /* AddVideos.css */
+.add-video {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.add-video:hover,
+.add-video:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.add-video:hover {
+  transform: translateY(-1px);
+}
+
+.add-video:active {
+  background-color: #f0f0f1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
 .add-videos-container {
   background-color: #333;
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  width: 40%;
+  text-align: center;
 }
 
 .add-videos-form {
@@ -119,6 +179,7 @@ body {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 60%;
 }
 
 .buttons {
@@ -158,7 +219,6 @@ body {
   background-color: #45a049;
 }
 
-
 /* Header.css */
 .App-header {
   padding: 20px;
@@ -180,6 +240,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   color: #fff;
+  margin: 10px;
 }
 
 .search input {

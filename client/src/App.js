@@ -30,10 +30,11 @@ function App() {
       });
       const data = await response.json();
       setVideos(data);
+      setVisible(false);
+      event.target.reset();
     } catch (err) {
       console.error(err);
     }
-    event.target.reset();
   };
 
   useEffect(() => {
@@ -113,7 +114,7 @@ function App() {
       <Header />
       <Search handleSearchInput={handleSearchInput} />
       <button className="add-video" onClick={inputsTableVisibility}>
-        Add Video
+       New Video
       </button>
       {visible && (
         <AddVideos

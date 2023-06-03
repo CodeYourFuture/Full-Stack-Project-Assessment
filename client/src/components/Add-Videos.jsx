@@ -2,7 +2,6 @@ const AddVideos = ({ inputsTableVisibility, addToVideos, handleChange }) => {
   return (
     <div className="add-videos-container">
       <form onSubmit={addToVideos} className="add-videos-form">
-        <h2>Add Video</h2>
         <div className="form-row">
           <label htmlFor="title">Title:</label>
           <input

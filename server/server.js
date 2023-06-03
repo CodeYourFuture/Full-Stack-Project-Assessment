@@ -66,19 +66,19 @@ app.get("/search", async (req, res) => {
 });
 
 // Get a video with id
-// app.get("/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const video = videos.find((video) => video.id.toString() === id);
-//     if (!video) {
-//       res.status(400).json("ID is not valid");
-//     } else {
-//       res.status(200).json(video);
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+app.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const video = await pool.query(`SELECT * FROM videos WHERE id = $1;`, [id]);
+    if (!video) {
+      res.status(400).json("ID is not valid");
+    } else {
+      res.status(200).json(video.rows);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // Delete a video with id
 app.delete("/:id", async (req, res) => {
