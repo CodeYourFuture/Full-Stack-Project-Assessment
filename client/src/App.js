@@ -1,12 +1,19 @@
 import Videos from "./Comp/Videos";
 import AddVid from "./Comp/AddVid";
-import data from "./Data/data.json";
-import { useState } from "react";
+// import data from "./Data/data.json";
+import { useState, useEffect } from "react";
 import Header from "./Comp/Header";
 
-console.log(data);
+// console.log(data);
 function App() {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
+
+useEffect(()=>{
+  fetch("http://localhost:5000/")
+  .then(res => res.json())
+  .then(data => setVideos(data))
+  .catch(Error => console.log("error"))
+},[]);
 
   const onVideoDelete = (index) => {
     const videosCopy = [...videos];
