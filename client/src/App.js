@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Video from "./components/Video";
-// import data from "./exampleresponse.json";
 import AddVideo from "./components/AddVideo";
 
 function App() {
