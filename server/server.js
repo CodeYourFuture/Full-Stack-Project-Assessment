@@ -4,17 +4,18 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
+require("dotenv").config();
 
 app.use(cors());
 
 const { Pool } = require("pg");
 
 const db = new Pool({
-  user: "xingying", // replace with you username
-  host: "localhost",
-  database: "videos_app",
-  password: "",
-  port: 5432,
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 // GET "/"

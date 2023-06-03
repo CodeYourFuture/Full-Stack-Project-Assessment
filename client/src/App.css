@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+.footer{
+  text-align: center;
+}
 .videoContainer {
   width: 500px;
   height: auto;

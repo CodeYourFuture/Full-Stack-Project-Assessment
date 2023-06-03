@@ -39,10 +39,11 @@
     cursor: pointer;
 }
 .order-button {
-    background-color:#ffffff;
+    background-color:#d7d4d4;
     color: #8f8888;
     border: none;
     padding: 8px 16px;
+    margin-left: 10px;
     border-radius: 4px;
     cursor: pointer;
         
