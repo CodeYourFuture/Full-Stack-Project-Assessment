@@ -11,5 +11,49 @@ let videos = [];
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.json(videos);
+});
+
+app.post('/', (req, res) => {
+  const { title, url } = req.body;
+
+  if (!title || !url) {
+    return res.status(400).json({ result: 'failure', message: 'Video could not be saved' });
+  }
+
+  const newVideo = {
+    id: Date.now(),
+    title,
+    url,
+    rating: 0,
+  };
+
+  videos.push(newVideo);
+  res.json({ id: newVideo.id });
+});
+
+app.get('/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const video = videos.find((v) => v.id === id);
+
+  if (!video) {
+    return res.status(404).json({ result: 'failure', message: 'Video not found' });
+  }
+
+  res.json(video);
+});
+
+
+app.delete('/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const index = videos.findIndex((v) => v.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ result: 'failure', message: 'Video not found' });
+  }
+
+  videos.splice(index, 1);
+  res.json({});
 });
