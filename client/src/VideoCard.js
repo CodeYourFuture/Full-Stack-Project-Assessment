@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
 const VideoCard = ({ title, url, ratings, addLike, removeLike, vid, deleteVid, getVid }) => {
-  //console.log(likes, "likes inside videcard");
-  //console.log({ vid });
-  //const videoUrl = url;
-  // should work for all url with /watch?v=
   console.log({ url: url });
   const videoID = url.split("=").slice(-1)[0];
-  /*  console.log(typeof videoUrl, "video url");
-  console.log(videoID, "video id"); */
+
   const embedUrl = `https://www.youtube.com/embed/${videoID}`;
   //console.log(embedUrl);
 
@@ -40,19 +35,11 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, vid, deleteVid, g
     //console.log({ vid });
     getVid(parameter);
   };
-  /* const [checkedRating] = likes.filter((el) => el.id === vid);
-  const { rating: latestRating } = checkedRating; */
-  //console.log({ latestRating });
-  //console.log({ checkedRating });
-  // - - the cheked rating is not iterable
-  //console.log([...checkedRating]);
-  //console.log(checkedRating.id);
-  //const testRating = checkedRating.rating;
+
   return (
     <VideoCardContainer>
       <button onClick={handleClick}>like</button>
-      {/* <h2>likes {likes.id === vid && likes.rating}</h2> */}
-      {/* <h2>likes {latestRating}</h2> */}
+
       <h2>likes {ratings}</h2>
 
       <button onClick={handleUnClick}>dislike</button>
@@ -87,11 +74,6 @@ const VideoCardTitle = styled.h2`
   margin-bottom: 10px;
 `;
 
-/* const VideoCardFrame = styled.iframe`
-  width: 560px;
-  height: 315px;
-  border: none;
-`; */
 const VideoCardFrame = styled.iframe`
   width: 100%;
   min-height: 250px;
