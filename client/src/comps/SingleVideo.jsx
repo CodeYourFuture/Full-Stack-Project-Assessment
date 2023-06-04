@@ -6,34 +6,31 @@ function SingleVideo(props) {
 
   function handleLikes() {
     setLikes((rating) => rating + 1);
-    // updateVideoRating({ ...props, rating: likes + 1 });
+    updateVideoRating({ ...props, rating: likes + 1 });
   }
 
   function handleUnlikes() {
     setLikes((rating) => rating - 1);
-    // updateVideoRating({ ...props, rating: likes - 1 });
+    updateVideoRating({ ...props, rating: likes - 1 });
   }
 
-  // const updateVideoRating = async (updatedVideo) => {
-  //   fetch(
-  //     `https://full-stack-project-assessment-gb1q.onrender.com/${updatedVideo.id}`,
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ rating: updatedVideo.rating }),
-  //     }
-  //   )
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         console.log("Video rating updated");
-  //       } else {
-  //         throw new Error("Failed to update video rating");
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  const updateVideoRating = async (updatedVideo) => {
+    fetch(`http://localhost:5000/${updatedVideo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: updatedVideo.rating }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("Video rating updated");
+        } else {
+          throw new Error("Failed to update video rating");
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="single-video-card">

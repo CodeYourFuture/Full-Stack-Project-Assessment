@@ -1,18 +1,18 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { Pool } = require("pg");
 const dotenv = require("dotenv");
+const { Pool } = require("pg");
 const port = process.env.PORT || 5000;
+
+dotenv.config();
+app.use(express.json());
+app.use(cors());
 
 const pool = new Pool({
   connectionString: process.env.DB_URL,
   ssl: { rejectUnauthorized: false },
 });
-
-dotenv.config();
-app.use(express.json());
-app.use(cors());
 
 // GET "/"
 app.get("/", async (req, res) => {
@@ -22,12 +22,12 @@ app.get("/", async (req, res) => {
     const videos = result.rows;
     res.status(200).json({ videos });
   } catch (error) {
-    console.log("error")
+    console.log("Error retrieving videos:", error);
   }
 });
 
 // POST 
-app.post("/", async (request, response) => {
+app.post("/", async (req, res) => {
   try {
     const { title, url } = request.body;
     const rating = 0;
@@ -38,7 +38,7 @@ app.post("/", async (request, response) => {
     const newvideo = result.rows[0];
     res.status(201).send(newvideo);
   } catch (error) {
-    console.log("error");
+    console.log("post error");
   }
 });
 

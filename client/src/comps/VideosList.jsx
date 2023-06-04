@@ -7,7 +7,7 @@ function VideosList() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch("https://full-stack-project-assessment-gb1q.onrender.com/")
+    fetch("http://localhost:5000/")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -18,7 +18,7 @@ function VideosList() {
 
   //delete video
   const handleDeleteVideo = async (id) => {
-    fetch(`https://full-stack-project-assessment-gb1q.onrender.com/${id}`, {
+    fetch(`http://localhost:5000/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -34,7 +34,7 @@ function VideosList() {
 
   //Add new video
   const handleAddVideo = async (video) => {
-    fetch("https://full-stack-project-assessment-gb1q.onrender.com/", {
+    fetch("http://localhost:5000/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
