@@ -1,59 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Card.css";
-import {
-  MdOutlineThumbUp,
-  MdOutlineThumbDownAlt,
-} from "react-icons/md";
-import {ImBin2} from "react-icons/im";
+import { MdOutlineThumbUp, MdOutlineThumbDownAlt } from "react-icons/md";
+import { ImBin2 } from "react-icons/im";
 
+const Card = ({ id, title, url, rating, onDelete }) => {
+  const [voteScore, setVoteScore] = useState(rating);
 
-
-const Card = ({ id, title, url, rating }) => {
-
-
-  const handleRateUp = () => {
-    // Handle rate up logic
+  const handleUpVote = () => {
+    setVoteScore(voteScore + 1);
   };
 
-  const handleRateDown = () => {
-    // Handle rate down logic
+  const handleDownVote = () => {
+    setVoteScore(voteScore - 1);
   };
 
   const handleDeleteCard = () => {
-    // Handle delete card logic
+    onDelete(id);
   };
 
-
-    return(
-<div className="card">
+  return (
+    <div className="card">
       <h3>{title}</h3>
-      
+
       <div className="video-responsive">
-    <iframe
-      width="250"
-      height="250"
-     src={url.replace("watch?v=", "embed/")}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube"
-    />
-  </div>
-      <p>Rating: {rating}</p>
+        <iframe
+          width="250"
+          height="250"
+          src={url.replace("watch?v=", "embed/")}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={title}
+        />
+      </div>
+      <p>Rating: {voteScore}</p>
       <div className="btn-section">
-        <button className="rate-btn up" onClick={handleRateUp}>
-          <MdOutlineThumbUp size={28} />
+        <button className="rate-btn up" onClick={handleUpVote}>
+          <MdOutlineThumbUp size={24} />
         </button>
-        <button className="rate-btn down" onClick={handleRateDown}>
-          <MdOutlineThumbDownAlt size={28} />
+        <button className="rate-btn down" onClick={handleDownVote}>
+          <MdOutlineThumbDownAlt size={24} />
         </button>
         <button className="delete-btn" onClick={handleDeleteCard}>
-          <ImBin2 size={28} />
+          <ImBin2 size={24} />
         </button>
       </div>
     </div>
-    );
+  );
 };
-
 
 export default Card;

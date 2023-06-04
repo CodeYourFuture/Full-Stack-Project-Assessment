@@ -1,39 +1,22 @@
 import React from "react";
 import "./Video.css";
-import Data from "./exampleresponse.json"
 import Card from "./Card";
 
-
-function Video() {
-//     // react Hook For State Handler
-//     const [data , setData]=useState(null)
-
-// // Fetch Function   
-// fetch("./exampleresponse.json").then(
-//     function(res){
-//     return res.json()
-//   }).then(function(data){
-//   // store Data in State Data Variable
-//     setData(data)
-//   }).catch(
-//     function(err){
-//       console.log(err, ' error')
-//     }
-//   )
-
-    return(
-
-<div className="video"> 
-    {Data.map((item)=>(
+function Video({ videos, onDelete }) {
+  return (
+    <div className="video">
+      {videos.map((card) => (
         <Card
-        key={item.id}
-        id={item.id}
-        title={item.title}
-        url={item.url}
-        rating={item.rating} />
-    ))}
-</div>
-    );
+          key={card.id}
+          id={card.id}
+          title={card.title.trim() !== "" ? card.title : "There is no title"}
+          url={card.url}
+          rating={card.rating}
+          onDelete={onDelete} // Pass onDelete prop
+        />
+      ))}
+    </div>
+  );
 }
 
 export default Video;
