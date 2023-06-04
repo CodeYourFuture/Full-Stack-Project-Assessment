@@ -11,6 +11,7 @@ app.use(cors());
 
 const pool = new Pool({
   connectionString: process.env.DB_URL,
+  password: process.env.DB_PASSWORD,
   ssl: { rejectUnauthorized: false },
 });
 
