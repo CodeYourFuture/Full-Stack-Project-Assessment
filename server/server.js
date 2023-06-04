@@ -44,6 +44,7 @@ app.get("/videos", async (req, res) => {
   // to return query in consitsten order
   // DESC is the same as heighes first and lowest last
   // - with time the most recent point is the highest
+  //const query = "SELECT * FROM videos ORDER BY id DESC;";
   const query = "SELECT * FROM videos ORDER BY id DESC;";
   // table and row names are not dynamic
   try {
@@ -79,19 +80,19 @@ app.post("/videos", (req, res) => {
   const uniId = getNewUniqueId(videos);
   console.log(req.body);
   const title = req.body.title;
-  const url = req.body.url;
+  const url = req.body.url_link;
   const rating = 0;
   const newVidToAdd = {
     id: uniId,
     title,
-    url,
+    url_link: url,
     rating,
   };
-  const query = `INSERT INTO videos (id, title, url_link, rating)
-    VALUES ($1, $2, $3, $4) RETURNING *`;
+  const query = `INSERT INTO videos (id, title, url_link, rating, likes)
+    VALUES ($1, $2, $3, $4, $5) RETURNING *`;
 
   pool
-    .query(query, [uniId, title, url, rating])
+    .query(query, [uniId, title, url, rating, rating])
     .then((result) => {
       const newVid = result.rows[0];
       console.log({ newVid });
@@ -325,13 +326,13 @@ app.put("/videos/:idp", (req, res) => {
   //const id = req.body.id;
   const id = req.params.idp;
   console.log({ id });
-  const title = req.body.title;
-  console.log({ title });
+  const rating = req.body.rating;
+  console.log({ rating });
 
-  const query = `UPDATE videos SET title = $1 WHERE id = $2 RETURNING *`;
+  const query = `UPDATE videos SET rating = $1 WHERE id = $2 RETURNING *`;
 
   pool
-    .query(query, [title, id])
+    .query(query, [rating, id])
     .then((result) => {
       const newVid = result.rows[0];
       console.log({ newVid });

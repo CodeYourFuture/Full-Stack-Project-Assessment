@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const VideoCard = ({ title, url, ratings, addLike, removeLike, vid }) => {
+const VideoCard = ({ title, url, ratings, addLike, removeLike, vid, deleteVid, getVid }) => {
   //console.log(likes, "likes inside videcard");
   //console.log({ vid });
   //const videoUrl = url;
   // should work for all url with /watch?v=
+  console.log({ url: url });
   const videoID = url.split("=").slice(-1)[0];
   /*  console.log(typeof videoUrl, "video url");
   console.log(videoID, "video id"); */
@@ -24,6 +25,20 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, vid }) => {
     const parameter = vid;
     //console.log({ vid });
     removeLike(parameter);
+  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    //console.log("onlick inside vid card ");
+    const parameter = vid;
+    //console.log({ vid });
+    deleteVid(parameter);
+  };
+  const handleShowOne = (e) => {
+    e.preventDefault();
+    //console.log("onlick inside vid card ");
+    const parameter = vid;
+    //console.log({ vid });
+    getVid(parameter);
   };
   /* const [checkedRating] = likes.filter((el) => el.id === vid);
   const { rating: latestRating } = checkedRating; */
@@ -50,6 +65,8 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, vid }) => {
         frameBorder="0"
         allowFullScreen
       ></VideoCardFrame>
+      <button onClick={handleDelete}>delete</button>
+      <button onClick={handleShowOne}>more info</button>
     </VideoCardContainer>
   );
 };
