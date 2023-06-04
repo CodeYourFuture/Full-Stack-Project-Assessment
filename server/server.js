@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
-dotenv.config();
 const port = process.env.PORT || 5000;
 
 const pool = new Pool({
@@ -11,6 +10,7 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
+dotenv.config();
 app.use(express.json());
 app.use(cors());
 
