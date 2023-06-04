@@ -15,13 +15,16 @@ function SingleVideo(props) {
   }
 
   const updateVideoRating = async (updatedVideo) => {
-    fetch(`http://localhost:5000/${updatedVideo.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ rating: updatedVideo.rating }),
-    })
+    fetch(
+      `https://full-stack-project-assessment-gb1q.onrender.com/${updatedVideo.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: updatedVideo.rating }),
+      }
+    )
       .then((res) => {
         if (res.ok) {
           console.log("Video rating updated");
