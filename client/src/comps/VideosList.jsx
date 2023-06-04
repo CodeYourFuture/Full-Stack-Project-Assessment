@@ -14,7 +14,7 @@ function VideosList() {
         setVideos(data.videos);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [videos]);
 
   //delete video
   const handleDeleteVideo = async (id) => {
