@@ -2,6 +2,7 @@ const express = require("express");
 const pool = require("./config/dbSqlConn");
 const app = express();
 const cors = require("cors");
+//const bodyParser = require("body-parser");
 const vidData = require("./exampleresponse.json");
 const port = process.env.PORT || 5000;
 
@@ -26,6 +27,8 @@ function getNewUniqueId(array) {
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+// express has its own body prarser
+//app.use(bodyParser.json());
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
@@ -59,7 +62,11 @@ app.get("/videos", async (req, res) => {
 }); */
 
 app.post("/videos", (req, res) => {
-  if (!req) {
+  const error = {
+    result: "failure",
+    message: "Video could not be saved",
+  };
+  if (!req.body) {
     return res.json({
       videoAddError: {
         result: "failure",
@@ -67,6 +74,7 @@ app.post("/videos", (req, res) => {
       },
     });
   }
+
   //const id = req.body.id;
   const uniId = getNewUniqueId(videos);
   console.log(req.body);
@@ -79,11 +87,51 @@ app.post("/videos", (req, res) => {
     url,
     rating,
   };
+  const query = `INSERT INTO videos (id, title, url_link, rating)
+    VALUES ($1, $2, $3, $4) RETURNING *`;
 
+  pool
+    .query(query, [uniId, title, url, rating])
+    .then((result) => {
+      const newVid = result.rows[0];
+      console.log({ newVid });
+      //res.status(201).send("Created a new customer");
+      res.json({
+        addedData: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(error);
+    });
+});
+
+/* app.post("/videos", (req, res) => {
+  if (!req.body) {
+    return res.json({
+      videoAddError: {
+        result: "failure",
+        message: "Video could not be saved",
+      },
+    });
+  }
+
+  //const id = req.body.id;
+  const uniId = getNewUniqueId(videos);
+  console.log(req.body);
+  const title = req.body.title;
+  const url = req.body.url;
+  const rating = 0;
+  const newVidToAdd = {
+    id: uniId,
+    title,
+    url,
+    rating,
+  };
   res.json({
     addedData: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
   });
-});
+}); */
 
 app.get("/videos/search", (req, res) => {
   //const tags = req.query.tags.split(",");
@@ -112,7 +160,11 @@ app.get("/videos/search", (req, res) => {
   });
 });
 
-app.delete("/videos/:idp", (req, res) => {
+/* app.delete("/videos/:idp", (req, res) => {
+  const error = {
+    result: "failure",
+    message: "Video could not be deleted",
+  };
   if (!req) {
     return res.json({
       videoAddError: {
@@ -122,10 +174,124 @@ app.delete("/videos/:idp", (req, res) => {
     });
   }
   const idInPram = req.params.idp;
-  res.json({ allVideoes: { info: " video deleted", videoId: `${idInPram}` } });
+
+  const query = "DELETE FROM videos WHERE id = $1 RETURNING *";
+
+  pool
+    .query(query, [idInPram])
+    .then((result) => {
+      const deletedVid = result.rows[0];
+      console.log({ deletedVid });
+      if (!deletedVid)
+        return res.status(404).json({
+          videoAddError: {
+            result: "failure",
+            message: "Video could not be found",
+          },
+        });
+      //res.status(201).send("Created a new customer");
+      res.json({ allVideoes: { info: " video deleted", videoId: `${idInPram}` } });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(error);
+    });
 });
-app.get("/videos/:idp", (req, res) => {
+ */
+/* app.get("/videos/:idp", async (req, res) => {
   const idInPram = req.params.idp;
+
+  try {
+    const query = "SELECT * FROM videos WHERE id = $1";
+    const values = [idInPram];
+    const { rows } = await pool.query(query, values);
+    const result = rows[0];
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+  res.json({
+    param: idInPram,
+    oneVideo: {
+      info: "only one video",
+      details: {
+        id: 1,
+        title: "Never Gonna Give You Up",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        rating: 23,
+      },
+    },
+  });
+}); */
+
+app.delete("/videos/:idp", (req, res) => {
+  const error = {
+    result: "failure",
+    message: "Video could not be deleted",
+  };
+  if (!req) {
+    return res.json({
+      videoAddError: {
+        result: "failure",
+        message: "Video could not be deleted",
+      },
+    });
+  }
+  const idInPram = req.params.idp;
+
+  const query = "DELETE FROM videos WHERE id = $1 RETURNING *";
+
+  pool
+    .query(query, [idInPram])
+    .then((result) => {
+      const deletedVid = result.rows[0];
+      console.log({ deletedVid });
+      if (!deletedVid)
+        return res.status(404).json({
+          videoAddError: {
+            result: "failure",
+            message: "Video could not be found",
+          },
+        });
+      //res.status(201).send("Created a new customer");
+      res.json({ allVideoes: { info: " video deleted", videoId: `${idInPram}` } });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(error);
+    });
+});
+
+app.get("/videos/:idp", async (req, res) => {
+  const idInPram = req.params.idp;
+  const error = {
+    result: "failure",
+    message: "Video could not be found",
+  };
+
+  try {
+    const query = "SELECT * FROM videos WHERE id = $1";
+    const values = [idInPram];
+    const { rows } = await pool.query(query, values);
+    const result = rows[0];
+
+    if (!result)
+      return res.status(404).json({
+        videoAddError: {
+          result: "failure",
+          message: "Video could not be found",
+        },
+      });
+
+    res.json({ videoInfo: "one video", videoes: result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(error);
+  }
+});
+/* app.get("/videos/:idp", async (req, res) => {
+  const idInPram = req.params.idp;
+
 
   res.json({
     param: idInPram,
@@ -139,6 +305,45 @@ app.get("/videos/:idp", (req, res) => {
       },
     },
   });
+});
+ */
+
+app.put("/videos/:idp", (req, res) => {
+  const error = {
+    result: "failure",
+    message: "Video could not be updatedd",
+  };
+  if (!req.body) {
+    return res.json({
+      videoAddError: {
+        result: "failure",
+        message: "Video could not be saved",
+      },
+    });
+  }
+
+  //const id = req.body.id;
+  const id = req.params.idp;
+  console.log({ id });
+  const title = req.body.title;
+  console.log({ title });
+
+  const query = `UPDATE videos SET title = $1 WHERE id = $2 RETURNING *`;
+
+  pool
+    .query(query, [title, id])
+    .then((result) => {
+      const newVid = result.rows[0];
+      console.log({ newVid });
+      //res.status(201).send("Created a new customer");
+      res.json({
+        updatedData: { info: "new video updated", uniqueId: `${id}` },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(error);
+    });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
