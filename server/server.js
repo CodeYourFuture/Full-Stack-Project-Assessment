@@ -1,44 +1,69 @@
+const dotenv =require("dotenv");
+dotenv.config();
+
+
+
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-const onInitialLoad = require('./exampleresponse.json');
-app.use(express.json());
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = onInitialLoad;
+app.use(express.json());
+const videoList =require('./DBConfig');
+
+let videos = [];
 
 // GET "/"
+app.get("/", (req, res)=>{
+  res.send('Welcome to Island Tony');
+})
+
 app.get("/videos", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send(videos);
+  
+  const sorting = req.query.sorting || null;
+  let query = "SELECT * FROM videos";
+  if (sorting) {
+    query += `ORDER BY rating ${sorting.toUpperCase()}`;
+  }
+videoList.query(query).then((result)=> {
+  if(result.rowCount === 0) {
+    res.status(400).json({error: "No Videos to List"});
+  } else {
+    return res.status(200).json(result.rows);
+  }
+});
+
 });
 
 app.get("/videos/:id", (req,res) => {
-  const videosId = request.params.id;
-  const eachVideo=videos.find((eachVideo) =>eachVideo.id ===parseInt(videosId));
-  eachVideo? res.json(eachVideo) : res.json({message: 'No video matching that Id number. Please check the Id again'});
+  const videosId = parseInt(req.params.id);
+  const eachVideo= "SELECT * FROM videos WHERE id=$1";
+  videoList.query(eachVideo, [videosId]).then((result)=>{
+    if(result.rowCount === 0) {
+    res.status(400).json({message: `Video ${videosId} not found`});
+  } else {
+    return res.status(200).json(result.rows);
+  }
+  })  
 });
 
-app.delete('/videos/:id', function (request, response) {
-  const videosId = request.params.id;
-  const eachVideo = videos.find((eachVideo) =>eachVideo.id ===parseInt(videosId));
-  if (eachVideo) {
-    videos = videos.filter((eachVideo)=> eachVideo.id !== parseInt(videosId));
-    response.json({message:'This video is now deleted!'});
-  } else {response.json({message:'Unable to locate that id to delete. Please check video id!'})}
-})
-
-app.post('/videos/addnew', function(request, response) {
-  const addVideo = {
-    id: videos.length +1,
-    title: request.body.title,
-    URL: request.body.url
-  };
-   if(!addVideo.title || !addVideo.URL) {
-    return response.status(400).json({message:'All fields need to be filled'});
-   }
-   videos.push(addVideo);
-   response.json(videos);
+app.delete('/videos/:id', function (req, res) {
+  const videosId = parseInt(request.params.id);
+  const eachVideo = "DELETE FROM videos WHERE id = $1";
+videoList.query(eachVideo, [videosId]).then(()=>res.status(200).json({message:`Video ${videosId} deleted`})).catch((error)=> console.log(error));
 });
+
+app.post('/videos', async(req, res)=> {
+  try {
+    const newTitle = req.body.title;
+    const newURL = req.body.url;
+    const postQuery = `INSERT INTO videos(id,title,url,rating,date) VALUES ($1,$2,$3,$4,$5)`;
+    const getQuery=`SELECT 1 FROM videos WHERE url=$1`;
+    const randomID = Math.floor(100000+Math.random()*900000);
+    const randomRating=Math.floor(100+Math.random()*900);
+    const postDate = newDate().toLocaleString();
+    const word=youtube;
+    const result = await videoList.query(postQuery, [randomID, newTitle, newURL, randomRating, postDate,]);
+    res.status(200).json({message:"New Video added"});
+  } catch (error) {res.json(error);}
+});
+app.listen(port,()=>console.log(`Listening on port ${port}`));
