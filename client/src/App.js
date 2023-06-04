@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react";
-// import exampleresponse from "./exampleresponse.json";
+import "./App.css";
 import AddVideo from "./AddVideo";
 
 function App() {
   const [videos, setVideos] = useState([]);
 
-   useEffect(() => {
-     fetchVideos();
-   }, []);
+  useEffect(() => {
+    fetchVideos();
+  }, [videos]);
 
-   async function fetchVideos() {
-     try {
-       const response = await fetch("http://localhost:9999"); // Replace with your API endpoint
-       if (!response.ok) {
-         throw new Error("Failed to fetch videos");
-       }
-       const data = await response.json();
-       setVideos(data);
-     } catch (error) {
-       console.error(error);
-     }
-   }
+  async function fetchVideos() {
+    try {
+      const response = await fetch("http://localhost:9999");
+      if (!response.ok) {
+        throw new Error("Failed to fetch videos");
+      }
+      const data = await response.json();
+      setVideos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-   function addVideo(newVideo) {
-     setVideos((prevVideos) => [...prevVideos, newVideo]);
-     fetchVideos(); // Call fetchVideos after adding a new video
-   }
-
-  
+  function addVideo(newVideo) {
+    setVideos((prevVideos) => [...prevVideos, newVideo]);
+    //  fetchVideos();
+  }
 
   function voteUp(videoId) {
     const updatedVideos = videos.map((video) => {
@@ -97,45 +95,46 @@ function App() {
     }
   }
 
-
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <nav>
+          <h1>Khadija's Video Recommendation</h1>
+        </nav>
       </header>
       <AddVideo onAddVideo={addVideo} />
-      {sortedVideos.map((video) => {
-        return (
-          <div className="newvideos" key={video.id}>
-            <h3> Title:{video.title}</h3>
-
-            <iframe
-              width="560"
-              height="315"
-              src={
-                video.url
-                  ? `https://www.youtube.com/embed/${video.url.slice(32)}`
-                  : ""
-              }
-              title={video.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-
-            <h3>Rating: {video.rating}</h3>
-            <button id="vote-btn" onClick={() => voteUp(video.id)}>
-              👍
-            </button>
-            <button id="vote-btn" onClick={() => voteDown(video.id)}>
-              👎
-            </button>
-            <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
-              delete
-            </button>
-          </div>
-        );
-      })}
+      <div className="card-container">
+        {sortedVideos.map((video) => {
+          return (
+            <div className="new-video" key={video.id}>
+              <iframe
+                width="300"
+                height="150"
+                src={
+                  video.url
+                    ? `https://www.youtube.com/embed/${video.url.slice(32)}`
+                    : ""
+                }
+                title={video.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+              <h3 className="title"> Title:{video.title}</h3>
+              <h3>Rating: {video.rating}</h3>
+              <button id="vote-btn" onClick={() => voteUp(video.id)}>
+                <img className="rating-buttons" src="/icons/thumbs-up-solid.svg" alt="thumbs up"/>
+              </button>
+              <button id="vote-btn" onClick={() => voteDown(video.id)}>
+                👎
+              </button>
+              <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
+                delete
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

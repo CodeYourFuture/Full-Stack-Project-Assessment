@@ -1,2 +1,30 @@
+.App{
+  text-align: center;
+  background: rgb(212, 237, 246);
+}
+
+.App-header{
+  background: black;
+  color: rgb(212, 237, 246);
+}
+.card-container{
+  display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+.new-video {
+      width: 350px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+}
+
+.rating-buttons{
+  width: 15px;
+  height: 15px;
+  /* background-color: red; */
+}
 
 

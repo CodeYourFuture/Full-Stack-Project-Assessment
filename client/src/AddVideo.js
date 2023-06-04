@@ -29,18 +29,18 @@ function AddVideo({ onAddVideo }) {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Title:
         <input
           type="text"
           value={title}
+          placeholder="Title"
           onChange={(event) => setTitle(event.target.value)}
         />
       </label>
       <label>
-        URL:
         <input
           type="text"
           value={url}
+          placeholder="video link"
           onChange={(event) => setUrl(event.target.value)}
         />
       </label>
