@@ -29,28 +29,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-// POST OLD //
-// app.post("/", (req, res) => {
-//   const newVideo = {
-//     id: videos[videos.length - 1].id + 1,
-//     title: req.body.title,
-//     url: req.body.url,
-//     rating: 0,
-//     date: new Date().toLocaleDateString(),
-//   };
-
-//   if (!newVideo.title || !newVideo.url) {
-//     res
-//       .status(400)
-//       .json({ success: false, error: "Please provide all fields" });
-//   } else {
-//     videos.push(newVideo);
-//     res.status(200).json({ success: "true", videos });
-//   }
-// });
-
-
-// POST NEW
+// POST 
 app.post("/", async (request, response) => {
   try {
     const { title, url } = request.body;
@@ -66,6 +45,7 @@ app.post("/", async (request, response) => {
   }
 });
 
+// UPDATE
 app.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -83,22 +63,7 @@ app.put("/:id", async (req, res) => {
   }
 });
 
-// GET /:id //
-// app.get("/:id", (req, res) => {
-//   const idToFind = Number(req.params.id);
-//   const video = videos.find((vid) => vid.id === idToFind);
-
-//   videos.includes(video) === false
-//     ? res.status(404).json({
-//         success: false,
-//         error: `Video not found`,
-//       })
-//     : res.status(200).json({
-//         success: true,
-//         video,
-//       });
-// });
-
+//GET ID
 app.get("/:id", async (req, res) => {
   try {
     const idToFind = Number(req.params.id);
@@ -116,6 +81,7 @@ app.get("/:id", async (req, res) => {
   }
 });
 
+//DELETE
 app.delete("/:id", async (req, res) => {
   try {
     const idToDelete = Number(req.params.id);
