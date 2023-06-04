@@ -35,8 +35,8 @@ app.post("/", async (req, res) => {
       "INSERT INTO videos (title, url, rating) VALUES ($1,$2,$3) RETURNING *";
     const values = [title, url, rating];
     const result = await pool.query(query, values);
-    const newvideo = result.rows[0];
-    res.status(201).send(newvideo);
+    const newVideo = result.rows[0];
+    res.status(201).send(newVideo);
   } catch (error) {
     console.log("post error");
   }

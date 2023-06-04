@@ -7,7 +7,7 @@ function VideosList() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch("https://full-stack-project-assessment-gb1q.onrender.com")
+    fetch("https://full-stack-project-assessment-gb1q.onrender.com/")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
