@@ -26,10 +26,10 @@ app.get("/", async (req, res) => {
   }
 });
 
-// POST 
+// POST
 app.post("/", async (req, res) => {
   try {
-    const { title, url } = request.body;
+    const { title, url } = req.body;
     const rating = 0;
     const query =
       "INSERT INTO videos (title, url, rating) VALUES ($1,$2,$3) RETURNING *";
@@ -87,12 +87,10 @@ app.delete("/:id", async (req, res) => {
     if (result.rowCount === 0) {
       res.status(404).json({ success: false, error: "Video not found" });
     } else {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: `Video with ID: ${idToDelete} has been deleted`,
-        });
+      res.status(200).json({
+        success: true,
+        message: `Video with ID: ${idToDelete} has been deleted`,
+      });
     }
   } catch (error) {
     console.error("Error deleting video:", error);
