@@ -1,114 +1,109 @@
-const { Pool } = require('pg');
+const { Pool } = require("pg");
+const dotenv = require("dotenv");
+const data = require("./exampleresponse.json");
+const cors = require("cors");
 
-const data = require("./exampleresponse.json") 
-const cors =require("cors")
-require('dotenv').config();
-
-
+dotenv.config();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5009;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const pool = new Pool({
-  connectionString: process.env.DB_URL ,
+  connectionString: process.env.DB_URL,
   ssl: {
     rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
   },
 });
 
-
-
 // Use the pool to query the database
-app.get("/videos",(req, res)=> {
-  pool.query('SELECT * from videos', (err, result) => {
+app.get("/videos", (req, res) => {
+  pool.query("SELECT * from videos", (err, result) => {
     if (err) {
-      console.error('Error executing query', err);
+      console.error("Error executing query", err);
     } else {
-      console.log('Conected to PostgreSQL database');
-      console.log('Current date:', result.rows);
-      res.json(result.rows)
+      console.log("Conected to PostgreSQL database");
+      // console.log("Current date:", result.rows);
+      res.json(result.rows);
     }
-    // pool.end(); // Clo
-  })
-  
-
-
-})
-
+  });
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.json({ express: "Your Backend Service is Running" });
 });
 
 // get all information from example by writing this get
 
-app.post ("/video",(req, res)=> {
-  const postData = req.body
-  console.log(req.body)
-  const {title, url} = req.body
+app.post("/video", (req, res) => {
+  const { title, url } = req.body;
+  const rating = 0;
 
-const q = "insert into videos (title, url) values ($1, $2) "
-const info= [title, url]
-pool.query (q,info, (err, res)=> {
-
-  if (err) {
-    console.log(err)
-  }else{
-    console.log("data inserted")
-    console.log(res.rows)
-
-  }
-})
-
-// videos.push({
-//   "id": 442452,
-//     "title": postData.title,
-//     "url": postData.url,
-//     "rating": postData.rating
-// })
-  res.send ("dataRecived")
-  
-})
-
-app.delete("/video/:id", (req, res) => {
-  const id = req.params.id
-
-  const q = "delete from videos where id = $1"
-  const info = [id]
+  const q = "insert into videos (title, url,rating) values ($1, $2, $3) ";
+  const info = [title, url, rating];
   pool.query(q, info, (err, res) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      console.log("data deleted")
-      console.log(res.rows)
-
+      res.send("data inserted");
+      // console.log(res.rows);
     }
-  })
-})
+  });
+  res.send("dataRecived");
+});
+
+
+app.delete("/video/:id", (req, res) => {
+  const id = req.params.id;
+
+  const q = "delete from videos where id = $1";
+  const info = [id];
+  pool.query(q, info, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("data deleted");
+      // console.log(res.rows);
+    }
+  });
+});
 
 app.get("/search", (req, res) => {
-  const title = req.query.title
-  console.log(title)
-  const q = "select * from videos where title = $1"
-  const info = [title]
+  const title = req.query.title;
+  const q =
+    "SELECT * FROM videos WHERE lower(title) LIKE '%' ||lower($1) || '%'";
+  const info = [title];
   pool.query(q, info, (err, result) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-  
-      res.json(result.rows)
-
+      res.json(result.rows);
     }
-  })
-})
+  });
+});
+
+app.put("/video/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const newRate = parseInt(req.body.newRate);
+  const q = "UPDATE videos SET rating = $1 WHERE id = $2";
+  const info = [newRate, id];
+  pool.query(q, info, (err, response) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .json({ error: "An error occurred while updating the video" });
+    } else {
+      console.log("Video updated");
+      res.status(200).json({ message: "Video updated successfully" });
+    }
+  });
+});

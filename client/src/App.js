@@ -13,13 +13,19 @@ function App() {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [items, setItems] = useState(null);
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://full-stack-assessment.onrender.com/videos");
-        const sortedItems = [...response.data].sort((a, b) => b.rating - a.rating);
+        const response = await axios.get(
+          "https://full-stack-assessment.onrender.com/videos"
+        );
+        const sortedItems = [...response.data].sort(
+          (a, b) => b.rating - a.rating
+        );
+        setIsLoading(true);
         setItems(sortedItems);
       } catch (e) {
         console.log(e);
@@ -29,25 +35,31 @@ function App() {
   }, []);
 
 
-  async function serachHandler () {
-    const lowercase = search.toLowerCase()
-        const res = await axios.get(`https://full-stack-assessment.onrender.com/search/?title=${lowercase}`)
-        console.log(res.data)
-        setItems(res.data)
-
+  async function serachHandler() {
+    const res = await axios.get(
+      `https://full-stack-assessment.onrender.com/search/?title=${search}`
+    );
+    setItems(res.data);
   }
 
   const clickHandler = () => {
     setIsOpen(true);
   };
 
+  const cancelHandler = () => {
+    setIsOpen(false);
+  };
+
+
   const handleUrlChange = (event) => {
     setUrl(event.target.value);
   };
 
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
+
 
   const validateUrl = (value) => {
     // Regular expression for URL validation
@@ -67,16 +79,18 @@ function App() {
     validateUrl(url);
 
     try {
-      const response = await axios.post("https://full-stack-assessment.onrender.com/video", {
-        title: title.toLowerCase(),
-        url: url.split("watch?v=")[1],
-      });
+      const response = await axios.post(
+        "https://full-stack-assessment.onrender.com/video",
+        {
+          title: title.toLowerCase(),
+          url: url.split("watch?v=")[1],
+        }
+      );
 
-      console.log(response);
       setTitle("");
       setUrl("");
       alert("Video has been sent");
-      window.location.reload()
+      window.location.reload();
     } catch (e) {
       console.log(e);
     }
@@ -84,13 +98,13 @@ function App() {
 
   return (
     <div className="App">
-     <header className="App-header bg-primary py-4 custom-header">
-  <h1 className="text-center mb-0">Video Recommendation</h1>
-</header>
+      <header className="App-header bg-primary py-4 custom-header">
+        <h1 className="text-center mb-0">Video Recommendation</h1>
+      </header>
 
       <Container className="p-4">
         <Row>
-          <Col md={6} className="mb-4">
+          <Col md={4} className="mb-4">
             <Button variant="link" onClick={clickHandler}>
               Add Video
             </Button>
@@ -120,23 +134,32 @@ function App() {
                 <Button variant="outline-success" onClick={addclickHandler}>
                   Add
                 </Button>{" "}
-                <Button variant="outline-warning">Cancel</Button>{" "}
+                <Button variant="outline-warning" onClick={cancelHandler}>
+                  Cancel
+                </Button>{" "}
               </>
             )}
           </Col>
-          <Col md={6}>
-            <InputGroup className="mb-3">
-              {/* <InputGroup.Text id="basic-addon1" >Search</InputGroup.Text> */}
-              <Button onClick={serachHandler}>Search</Button>
-              <Form.Control placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"
-               onChange={(e)=> setSearch(e.target.value)} value = {search} />
+          <Col></Col>
+          <Col md={4}>
+            <InputGroup className="mb-3 mt-3">
+              <Form.Control
+                placeholder="Search..."
+                aria-label="Search"
+                aria-describedby="basic-addon1"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+              />
+              <Button onClick={serachHandler} className="mr-5">
+                Search
+              </Button>
             </InputGroup>
           </Col>
         </Row>
       </Container>
-
       <Container>
         <Row xs={1} sm={2} md={3}>
+          {!isLoading && <h1>Loading...</h1>}
           {items &&
             items.map((item) => (
               <Col key={item.id}>
