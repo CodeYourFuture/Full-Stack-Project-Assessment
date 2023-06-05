@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "./App.css";
 import Form from "./Components/Form";
 import Video from "./Components/Video";
@@ -17,11 +17,16 @@ function App() {
     setVideos(updatedVideos);
   };
 
+  const sortedVideos = useMemo(() => {
+    // Sort videos based on rating
+    return [...videos].sort((a, b) => b.rating - a.rating);
+  }, [videos]);
+
   return (
     <div className="App">
       <Header />
       <Form onAddVideo={handleAddVideo} />
-      <Video videos={videos} onDelete={handleDelete} />
+      <Video videos={sortedVideos} onDelete={handleDelete} />
     </div>
   );
 }

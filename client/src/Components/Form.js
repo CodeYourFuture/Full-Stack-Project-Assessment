@@ -3,29 +3,10 @@ import "./Form.css";
 
 
 
-// Task:
-//On the page there must be another React component that will add a Video.
-//    - It should include fields to add a
-//      - Title
-//      - Url
-//    - When a button is clicked the video should be added to the list
-
-//Validation 
-// const isValidInput = (title, url) => {
-//   const isValidTitle = typeof title === "string" && title.trim() !== "";
-//   const isValidUrl =
-//     typeof url === "string" &&
-//     /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}($|&list=[\w-]+)/.test(
-//       url
-//     );
-//   return isValidTitle && isValidUrl;
-// };
-
-
-
-function Form({onAddVideo}) {
+function Form({onAddVideo, }) {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+ 
 
   const handleTitleChange =(event) => {
     setTitle(event.target.value);
@@ -75,14 +56,10 @@ function Form({onAddVideo}) {
             required/><br />
           </form>
         </div>
-        <button onClick={handleSubmit} >
+        <button className="add-button" onClick={handleSubmit} >
         ADD
       </button>
-      {/* <button onClick={handleOrderChange} disabled={fetching}>
-        {order === "desc" ? "Desc" : "Asc"}
-      </button>
-      {errorMessage && <div className="error-message">{errorMessage}</div>} */}
-  
+      
       </div>
     );
 }

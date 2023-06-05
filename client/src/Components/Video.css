@@ -1,8 +1,6 @@
-.video{
+.video {
     display: flex;
     flex-wrap: wrap;
-    gap: .5rem;
     justify-content: center;
-    align-items: center;
     padding: 1rem;
-}
+  }
