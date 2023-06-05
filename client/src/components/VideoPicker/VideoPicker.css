@@ -22,6 +22,12 @@
   justify-content: center;
 }
 
+.info_msg {
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
 @media (min-width: 480px) {
   .selectors {
     flex-direction: row;

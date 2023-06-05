@@ -35,10 +35,10 @@ const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // Fetch videos when the order changes
-  //   fetchVideos();
-  // }, [order]);
+  useEffect(() => {
+    // Fetch videos when the page is loaded
+    fetchVideos();
+  }, []);
 
   return (
     <div className="App">
@@ -55,6 +55,7 @@ const App = () => {
         <VideoPicker
           categories={categories}
           videos={videos}
+          order={order}
           setOrder={setOrder}
           setVideos={setVideos}
           passedCategory={passedCategory}

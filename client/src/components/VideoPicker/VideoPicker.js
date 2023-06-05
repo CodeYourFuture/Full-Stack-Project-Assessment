@@ -6,6 +6,7 @@ import VideoCard from "../VideoCard/VideoCard";
 const VideoPicker = ({
   categories,
   videos,
+  order,
   setOrder,
   setVideos,
   passedCategory,
@@ -30,6 +31,7 @@ const VideoPicker = ({
   const [selectedOrder, setSelectedOrder] = useState(orderOptions[0]);
   const [videoList, setVideoList] = useState(videos);
   const [category, setCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (passedCategory.length > 0) {
@@ -45,16 +47,21 @@ const VideoPicker = ({
 
   useEffect(() => {
     if (category.length > 0) {
+      setIsLoading(true);
       fetch(
-        `https://video-server-wtvy.onrender.com/category/${category}?order=desc`
+        `https://video-server-wtvy.onrender.com/category/${category}?order=${order}`
       )
         .then((response) => response.json())
         .then((data) => {
           setVideos(data);
+          setIsLoading(false);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false);
+        });
     }
-  }, [category, setVideos]);
+  }, [category, order, setVideos]);
 
   useEffect(() => {
     setVideoList(videos);
@@ -114,7 +121,9 @@ const VideoPicker = ({
           </div>
         </div>
         <div className="video_cards">
-          {videos.length > 0 ? (
+          {isLoading ? (
+            <p className="info_msg">Loading...</p>
+          ) : videos.length > 0 ? (
             videoList.map((video) => (
               <VideoCard
                 key={video.id}
@@ -124,7 +133,9 @@ const VideoPicker = ({
               />
             ))
           ) : (
-            <p>Loading...</p>
+            <p className="info_msg">
+              No videos found for the specified category.
+            </p>
           )}
         </div>
       </div>
