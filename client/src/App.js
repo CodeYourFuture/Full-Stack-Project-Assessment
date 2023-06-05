@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch("http://localhost:5050/videos");
+      const res = await fetch("https://video-server-tumg.onrender.com/videos");
       const data = await res.json();
       setVideos(data);
     } catch (err) {
@@ -25,13 +25,16 @@ const App = () => {
 
   const handleAddVideo = async (newVideo) => {
     try {
-      const res = await fetch("http://localhost:5050/videos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVideo),
-      });
+      const res = await fetch(
+        "https://video-server-tumg.onrender.com/videos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newVideo),
+        }
+      );
       const data = await res.json();
       setVideos((prevVideos) => [...prevVideos, data]);
     } catch (err) {
@@ -41,12 +44,15 @@ const App = () => {
 
   const handleUpVote = async (videoId) => {
     try {
-      await fetch(`http://localhost:5050/videos/${videoId}/upvote`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await fetch(
+        `https://video-server-tumg.onrender.com/videos/${videoId}/upvote`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setVideos((prevVideos) =>
         prevVideos.map((video) =>
           video.id === videoId ? { ...video, rating: video.rating + 1 } : video
@@ -59,12 +65,15 @@ const App = () => {
 
   const handleDownVote = async (videoId) => {
     try {
-      await fetch(`http://localhost:5050/videos/${videoId}/downvote`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await fetch(
+        `https://video-server-tumg.onrender.com/videos/${videoId}/downvote`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setVideos((prevVideos) =>
         prevVideos.map((video) =>
           video.id === videoId ? { ...video, rating: video.rating - 1 } : video
@@ -77,7 +86,7 @@ const App = () => {
 
   const handleRemoveVideo = async (videoId) => {
     try {
-      await fetch(`http://localhost:5050/videos/${videoId}`, {
+      await fetch(`https://video-server-tumg.onrender.com/videos/${videoId}`, {
         method: "DELETE",
       });
       setVideos((prevVideos) =>
