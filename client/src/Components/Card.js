@@ -3,7 +3,7 @@ import "./Card.css";
 import { MdOutlineThumbUp, MdOutlineThumbDownAlt } from "react-icons/md";
 import { ImBin2 } from "react-icons/im";
 
-const Card = ({ id, title, url, rating, onDelete }) => {
+const Card = ({ id, title, url, rating, uploadedAt, onDelete }) => {
   const [voteScore, setVoteScore] = useState(rating);
 
   const handleUpVote = () => {
@@ -34,6 +34,7 @@ const Card = ({ id, title, url, rating, onDelete }) => {
         />
       </div>
       <p>Rating: {voteScore}</p>
+      <p>Uploaded at: {uploadedAt}</p> {/* Display the uploadedAt information */}
       <div className="btn-section">
         <button className="rate-btn up" onClick={handleUpVote}>
           <MdOutlineThumbUp size={24} />

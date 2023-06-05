@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import "./Form.css";
 
 function Form({ onAddVideo }) {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [error, setError] = useState("");
+
+  const [videoForm, setVideoForm] = useState({
+      url: "",
+      title: "",
+      error: ""
+  })
 
   const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+    setVideoForm({...videoForm, title: event.target.value});
   };
 
   const handleUrlChange = (event) => {
-    setUrl(event.target.value);
+    setVideoForm({...videoForm, url: event.target.value});
   };
 
   const validateUrl = (inputUrl) => {
@@ -25,13 +28,12 @@ function Form({ onAddVideo }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (title.trim() === "") {
-      setError("Title cannot be empty");
-      return;
+    if (videoForm.title.trim() === "") {
+      setVideoForm({...videoForm, error: "Title cannot be empty"})
     }
 
-    if (!validateUrl(url)) {
-      setError("Invalid YouTube URL");
+    if (!validateUrl(videoForm.url)) {
+      setVideoForm({...videoForm, error: "invalid YouTube URL"});
       return;
     }
 
@@ -39,20 +41,18 @@ function Form({ onAddVideo }) {
     const id = currentDate.getTime(); // Use the timestamp as the ID
     const newVideo = {
       id: id,
-      title: title,
-      url: url,
+      title: videoForm.title,
+      url: videoForm.url,
       rating: 0,
+      uploadedAt: currentDate.toLocaleString() // Store the upload timestamp
     };
 
     onAddVideo(newVideo);
-    setTitle("");
-    setUrl("");
-    setError("");
+    setVideoForm({...videoForm, title: "", url: ""})
   };
 
   return (
     <div className="form">
-      <a href="#">Add Videos</a>
       <div id="form">
         <form action="#" method="get">
           <label htmlFor="title">Title</label>
@@ -61,7 +61,7 @@ function Form({ onAddVideo }) {
             id="title"
             name="title"
             placeholder="Title"
-            value={title}
+            value={videoForm.title}
             onChange={handleTitleChange}
             required
           />
@@ -72,14 +72,14 @@ function Form({ onAddVideo }) {
             id="url"
             name="url"
             placeholder="URL"
-            value={url}
+            value={videoForm.url}
             onChange={handleUrlChange}
             required
           />
           <br />
         </form>
       </div>
-      {error && <p className="error">{error}</p>}
+      {videoForm.error && <p className="error">{videoForm.error}</p>}
       <button className="add-button" onClick={handleSubmit}>
         ADD
       </button>
