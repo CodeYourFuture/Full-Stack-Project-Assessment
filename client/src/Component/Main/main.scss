@@ -1,0 +1,55 @@
+.main_container {
+  background-color: var(--bodyColor);
+  row-gap: 50px;
+  .videos_container {
+    row-gap: 30px;
+  }
+}
+.form_container {
+  width: 350px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 100px;
+  padding: 1rem;
+  row-gap: 5px;
+  color: var(--whiteColor);
+  font-weight: 600;
+  background-color: var(--SecondaryColor);
+  box-shadow: 0 4px 4px var(--blackColor);
+  border-radius: 15px;
+  .btn {
+    justify-self: center;
+    background: var(--PrimaryColor);
+    margin-top: 1rem;
+  }
+}
+
+.card_container {
+  height: 100%;
+  align-items: center;
+  text-align: center;
+  row-gap: 10px;
+  justify-content: center;
+  background-color: var(--PrimaryColor);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px #495057;
+  margin: 1rem 3rem;
+  flex-direction: column;
+  .video_title {
+    color: var(--textColor);
+  }
+  iframe {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .form_container {
+    width: 400px;
+  }
+
+  .videos_container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}

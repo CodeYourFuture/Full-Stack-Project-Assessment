@@ -1,0 +1,101 @@
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--PrimaryColor);
+  width: 100%;
+  padding: 1rem;
+  z-index: 999;
+  height: 60px;
+  box-shadow: 0 2px 4px var(--blackColor);
+
+  .logo {
+    color: var(--textColor);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    column-gap: 10px;
+
+    .icon {
+      font-size: 30px;
+      color: var(--blackColor);
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .nav_bar {
+      position: absolute;
+      background: var(--PrimaryColor);
+      height: max-content;
+      width: 100%;
+      height: 100vh;
+      padding: 1rem;
+      top: -500rem;
+      left: 50%;
+      transform: translate(-50%);
+      z-index: 2000;
+      transition: 0.3 ease;
+
+      .nav_lists {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+
+        .nav_item {
+          padding: 1rem 0;
+
+          .nav_link {
+            color: var(--textColor);
+            font-size: 1.5rem;
+            font-weight: 600;
+
+            &:hover {
+              color: var(--PrimaryColor);
+              background: var(--SecondaryColor);
+              padding: 0.5rem;
+              border-radius: 10px;
+            }
+          }
+        }
+
+        .btn {
+          font-size: 1.5rem;
+          margin-top: 1rem;
+          font-weight: 600;
+          color: var(--whiteColor);
+          &:hover {
+            color: var(--SecondaryColor);
+            background: var(--PrimaryColor);
+          }
+        }
+      }
+
+      .close_nav_bar {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        color: var(--SecondaryColor);
+        &:hover {
+          color: var(--textColor);
+        }
+      }
+    }
+
+    .show_nav_bar {
+      display: flex;
+      top: 50px;
+    }
+  }
+
+  .toggle_nav_bar {
+    .icon {
+      font-size: 25px;
+      color: var(--blackColor);
+      &:hover {
+        color: var(--SecondaryColor);
+      }
+    }
+  }
+}

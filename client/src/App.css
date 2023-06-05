@@ -1,3 +1,68 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/*default styling*/
+:root {
+  --PrimaryColor: #e9ecef;
+  --SecondaryColor: #6c757d;
+  --gradientColor: linear-gradient(to right, #6c757d, #e9ecef);
+  --whiteColor: #f8f9fa;
+  --blackColor: #212529;
+  --textColor: #343a40;
+  --greyText: #adb5bd;
+  --inputColor: #dee2e6;
+  --bodyColor: #f8f9fa;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  align-items: center;
+}
+
+.btn {
+  padding: .6rem 1.5rem;
+  background: var(--gradientColor);
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px var(--blackColor);
+  font-weight: 600;
+  color: var(--textColor);
+}
+
+.btn:hover {
+  background-color: var(--SecondaryColor);
+}
+
+input {
+  font-size: 100%;
+  background-color: var(--inputColor);
+}
+
+body {
+  background: var(--bodyColor);
 }
