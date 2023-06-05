@@ -8,11 +8,6 @@ const { Pool } = require("pg");
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: false,
-  // connectionString:
-  //   "postgres://videos_recommendations_user:x4lYTYQsPAllyyOFEEWMmnPI4MTFu0Fm@dpg-chv05v67avj345ftl870-a.frankfurt-postgres.render.com/videos_recommendations",
-  // ssl: {
-  //   rejectUnauthorized: true, // Enable SSL validation
-  // },
 });
 
 app.use(express.json());

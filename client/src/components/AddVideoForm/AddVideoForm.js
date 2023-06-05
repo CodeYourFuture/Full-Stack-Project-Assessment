@@ -7,19 +7,18 @@ const AddVideoForm = ({ categories, fetchVideos }) => {
   const [link, setLink] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState("");
-  let options = [];
 
-  //adding values to the options array
-  categories.forEach((category) => {
-    const newOption = {};
-    newOption.value = category;
-    newOption.label = category;
-    options.push(newOption);
-  });
+  // Create options array for ReactSelect from categories
+  const options = categories.map((category) => ({
+    value: category,
+    label: category,
+  }));
 
+  // Handle title input change
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
 
+    // Validate title length
     if (title.length < 2) {
       setError("Please provide at least 3 characters in Title.");
     } else {
@@ -27,22 +26,27 @@ const AddVideoForm = ({ categories, fetchVideos }) => {
     }
   };
 
+  // Handle category selection change
   const handleCategoryChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
 
+  // Handle link input change
   const handleLinkChange = (e) => {
     setLink(e.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validate title length
     if (title.length < 3) {
       setError("Please provide at least 3 characters.");
       return; // Prevent form submission
     }
 
+    // Validate YouTube link format
     const youtubeLinkRegex =
       /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
 
@@ -51,12 +55,14 @@ const AddVideoForm = ({ categories, fetchVideos }) => {
       return; // Prevent form submission
     }
 
+    // Create new video object
     const newVideo = {
       title,
       category: selectedOption.value,
       url: link,
     };
 
+    // Send POST request to add the new video
     fetch("https://video-server-wtvy.onrender.com/", {
       method: "POST",
       headers: {
@@ -72,13 +78,11 @@ const AddVideoForm = ({ categories, fetchVideos }) => {
         console.error(error);
       });
 
-    // Clear the form fields
+    // Clear the form fields and error message
     setTitle("");
     setSelectedOption("");
     setLink("");
     setError("");
-
-    console.log(newVideo);
   };
 
   return (

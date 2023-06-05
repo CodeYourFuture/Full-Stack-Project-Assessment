@@ -1,9 +1,7 @@
 import "./VideoCard.css";
-import { useState } from "react";
 
 const VideoCard = ({ video, updateVideoRating, deleteVideo }) => {
-  const [rating, setRating] = useState(video.rating);
-
+  // Increase the rating of the video
   const increaseRating = () => {
     if (video) {
       fetch(
@@ -12,12 +10,12 @@ const VideoCard = ({ video, updateVideoRating, deleteVideo }) => {
         .then((response) => response.json())
         .then((data) => {
           updateVideoRating(video.id, data.rating);
-          setRating(data.rating);
         })
         .catch((error) => console.error(error));
     }
   };
 
+  // Decrease the rating of the video
   const decreaseRating = () => {
     if (video) {
       fetch(
@@ -26,12 +24,12 @@ const VideoCard = ({ video, updateVideoRating, deleteVideo }) => {
         .then((response) => response.json())
         .then((data) => {
           updateVideoRating(video.id, data.rating);
-          setRating(data.rating);
         })
         .catch((error) => console.error(error));
     }
   };
 
+  // Delete the video
   const handleDelete = () => {
     if (video) {
       fetch(`https://video-server-wtvy.onrender.com/${video.id}`, {

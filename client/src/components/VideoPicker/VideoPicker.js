@@ -12,17 +12,12 @@ const VideoPicker = ({
   passedCategory,
   videoPickerRef,
 }) => {
-  let categoryOptions = [];
+  // Create category options
+  const categoryOptions = [
+    { value: "All videos", label: "All videos" },
+    ...categories.map((category) => ({ value: category, label: category })),
+  ];
 
-  //adding one value to the options array
-  categoryOptions.push({ value: "All videos", label: "All videos" });
-  //adding values to the options array
-  categories.forEach((category) => {
-    const newOption = {};
-    newOption.value = category;
-    newOption.label = category;
-    categoryOptions.push(newOption);
-  });
   const orderOptions = [
     { value: "Most Popular", label: "Most Popular" },
     { value: "Least Popular", label: "Least Popular" },
@@ -33,18 +28,18 @@ const VideoPicker = ({
   const [category, setCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // Update selected category when passedCategory prop changes
   useEffect(() => {
     if (passedCategory.length > 0) {
       const newCategory = {
         value: passedCategory,
         label: passedCategory,
       };
-      console.log("new category is: ");
-      console.log(newCategory);
       setSelectedCategory(newCategory);
     }
   }, [passedCategory]);
 
+  // Fetch videos based on category and order
   useEffect(() => {
     if (category.length > 0) {
       setIsLoading(true);
@@ -63,24 +58,24 @@ const VideoPicker = ({
     }
   }, [category, order, setVideos]);
 
+  // Update video list when videos prop changes
   useEffect(() => {
     setVideoList(videos);
   }, [videos]);
 
+  // Handle category change
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
     setCategory(selectedCategory.value);
-    console.log(selectedCategory);
-    console.log(selectedCategory.value);
   };
 
+  // Handle order change
   const handleOrderChange = (selectedOrder) => {
     setSelectedOrder(selectedOrder);
-
-    console.log(selectedOrder.value);
     selectedOrder.value.includes("Most") ? setOrder("desc") : setOrder("asc");
   };
 
+  // Update video rating
   const updateVideoRating = (videoId, rating) => {
     setVideos((prevVideos) =>
       prevVideos.map((video) =>
@@ -89,6 +84,7 @@ const VideoPicker = ({
     );
   };
 
+  // Delete video
   const deleteVideo = (videoId) => {
     setVideos((prevVideos) =>
       prevVideos.filter((video) => video.id !== videoId)
