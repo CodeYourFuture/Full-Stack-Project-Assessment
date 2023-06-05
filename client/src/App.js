@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./App.css";
 import Header from "./components/Header/Header";
 import Categories from "./components/Categories/Categories";
@@ -6,7 +7,7 @@ import Footer from "./components/Footer/Footer";
 import AddVideoForm from "./components/AddVideoForm/AddVideoForm";
 import { useState, useEffect, useRef } from "react";
 
-function App() {
+const App = () => {
   const categories = [
     "Comedy",
     "Music",
@@ -20,25 +21,25 @@ function App() {
   const [passedCategory, setPassedCategory] = useState("");
   const videoPickerRef = useRef(null);
 
-  useEffect(() => {
-    fetchVideos();
-  }, [order]);
-
+  // Function to fetch videos from the server
   const fetchVideos = async () => {
     try {
       const response = await fetch(
         `https://video-server-wtvy.onrender.com?order=${order}`
       );
       const data = await response.json();
-      console.log(data);
+
       setVideos(data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log("now");
-  console.log(videos);
+  useEffect(() => {
+    // Fetch videos when the order changes
+    fetchVideos();
+  }, [order]);
+
   return (
     <div className="App">
       <Header categories={categories} />
@@ -63,6 +64,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

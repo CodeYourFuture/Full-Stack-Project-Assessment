@@ -24,11 +24,12 @@
   border-radius: 10px;
 }
 
-.categories_cat a {
+.categories_cat h2 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin: 0;
   color: white;
   font-size: 24px;
   font-weight: bold;

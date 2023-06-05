@@ -1,5 +1,5 @@
 import "./Categories.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const Categories = ({
   categories,
@@ -12,6 +12,7 @@ const Categories = ({
 
   useEffect(() => {
     if (category.length > 0) {
+      // Fetch videos for the selected category
       fetch(`https://video-server-wtvy.onrender.com/category/${category}`)
         .then((response) => response.json())
         .then((data) => setVideos(data))
@@ -19,13 +20,14 @@ const Categories = ({
     }
   }, [category]);
 
-  const handleCategoryClick = (category) => {
-    setCategory(category);
-    setPassedCategory(category);
+  const handleCategoryClick = (clickedCategory) => {
+    setCategory(clickedCategory);
+    setPassedCategory(clickedCategory);
   };
 
   useEffect(() => {
     if (videoPickerRef.current) {
+      // Scroll to the video picker section when category changes
       videoPickerRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [videoPickerRef, passedCategory]);
@@ -40,7 +42,7 @@ const Categories = ({
             onClick={() => handleCategoryClick(category)}
           >
             <div className="overlay"></div>
-            <a href="#">{category}</a>
+            <h2>{category}</h2>
             <img src={`/media/pictures/${category}.webp`} alt="pic" />
           </div>
         ))}

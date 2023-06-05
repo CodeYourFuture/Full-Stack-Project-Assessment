@@ -24,7 +24,7 @@ const Header = ({ categories }) => {
         <div className="header_categories_container">
           {categories.map((category, index) => (
             <span
-              key={index}
+              key={category}
               className={`category_animation ${
                 index === currentCategoryIndex ? "fade-in" : "fade-out"
               }`}
