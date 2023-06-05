@@ -14,10 +14,14 @@ const Header = ({ categories }) => {
     return () => clearInterval(interval);
   }, [categories.length]);
 
+  const handleReloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <header>
       <div className="header">
-        <div className="header-container">
+        <div className="header-container" onClick={handleReloadPage}>
           <img src="/media/icons/logo_lens.svg" alt="logo lens" />
           <h1>VideoVortex</h1>
         </div>
