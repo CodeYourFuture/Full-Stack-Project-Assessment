@@ -7,8 +7,7 @@ const AddVideoForm = ({ onAddVideo }) => {
     e.preventDefault();
     const newVideo = {
       title,
-      url,
-      votes: 0,
+      url
     };
     onAddVideo(newVideo);
     setTitle("");

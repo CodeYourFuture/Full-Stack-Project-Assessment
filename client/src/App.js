@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch("http://localhost:5000/videos");
+      const res = await fetch("http://localhost:5050/videos");
       const data = await res.json();
       setVideos(data);
     } catch (err) {
@@ -25,7 +25,7 @@ const App = () => {
 
   const handleAddVideo = async (newVideo) => {
     try {
-      const res = await fetch("http://localhost:5000/videos", {
+      const res = await fetch("http://localhost:5050/videos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const App = () => {
         body: JSON.stringify(newVideo),
       });
       const data = await res.json();
-      setVideos((prevVideos) => [...prevVideos, { ...newVideo, id: data.id }]);
+      setVideos((prevVideos) => [...prevVideos, data]);
     } catch (err) {
       console.log("Error adding video:", err);
     }
@@ -41,7 +41,7 @@ const App = () => {
 
   const handleUpVote = async (videoId) => {
     try {
-      await fetch(`http://localhost:5000/videos/${videoId}/upvote`, {
+      await fetch(`http://localhost:5050/videos/${videoId}/upvote`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const App = () => {
 
   const handleDownVote = async (videoId) => {
     try {
-      await fetch(`http://localhost:5000/videos/${videoId}/downvote`, {
+      await fetch(`http://localhost:5050/videos/${videoId}/downvote`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const App = () => {
 
   const handleRemoveVideo = async (videoId) => {
     try {
-      await fetch(`http://localhost:5000/videos/${videoId}`, {
+      await fetch(`http://localhost:5050/videos/${videoId}`, {
         method: "DELETE",
       });
       setVideos((prevVideos) =>
