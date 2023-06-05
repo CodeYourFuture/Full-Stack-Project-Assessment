@@ -3,7 +3,7 @@ import VideoList from './VideoList';
 import AddVideoForm from './AddVideoForm';
 
 const App = () => {
-  const [videos, setVideos] = useState([]); // initial videos array
+  const [videos, setVideos] = useState([]); 
 
   const handleVote = (video, isUpVote) => {
     setVideos((prevVideos) => {
