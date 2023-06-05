@@ -6,13 +6,13 @@ const { Pool } = require("pg");
 
 // Create a PostgreSQL connection pool using the DATABASE_URL environment variable
 const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: false,
-  // connectionString:
-  //   "postgres://videos_recommendations_user:x4lYTYQsPAllyyOFEEWMmnPI4MTFu0Fm@dpg-chv05v67avj345ftl870-a.frankfurt-postgres.render.com/videos_recommendations",
-  // ssl: {
-  //   rejectUnauthorized: true, // Enable SSL validation
-  // },
+  // connectionString: process.env.DATABASE_URL,
+  // ssl: false,
+  connectionString:
+    "postgres://videos_recommendations_user:x4lYTYQsPAllyyOFEEWMmnPI4MTFu0Fm@dpg-chv05v67avj345ftl870-a.frankfurt-postgres.render.com/videos_recommendations",
+  ssl: {
+    rejectUnauthorized: true, // Enable SSL validation
+  },
 });
 
 app.use(express.json());
@@ -144,9 +144,10 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-// GET "/category/:name"
+// GET "/category/:name?order=asc"
 app.get("/category/:name", async (req, res) => {
   const { name } = req.params;
+  const order = req.query.order;
 
   try {
     let query;
@@ -167,6 +168,12 @@ app.get("/category/:name", async (req, res) => {
         result: "failure",
         message: "No videos found for the specified category",
       });
+    }
+
+    if (order === "asc") {
+      categoryVideos.sort((a, b) => a.rating - b.rating);
+    } else {
+      categoryVideos.sort((a, b) => b.rating - a.rating);
     }
 
     res.json(categoryVideos);

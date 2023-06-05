@@ -35,10 +35,10 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    // Fetch videos when the order changes
-    fetchVideos();
-  }, [order]);
+  // useEffect(() => {
+  //   // Fetch videos when the order changes
+  //   fetchVideos();
+  // }, [order]);
 
   return (
     <div className="App">

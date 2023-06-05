@@ -32,10 +32,6 @@ const VideoPicker = ({
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    setVideoList(videos);
-  }, [videos]);
-
-  useEffect(() => {
     if (passedCategory.length > 0) {
       const newCategory = {
         value: passedCategory,
@@ -49,7 +45,9 @@ const VideoPicker = ({
 
   useEffect(() => {
     if (category.length > 0) {
-      fetch(`https://video-server-wtvy.onrender.com/category/${category}`)
+      fetch(
+        `https://video-server-wtvy.onrender.com/category/${category}?order=desc`
+      )
         .then((response) => response.json())
         .then((data) => {
           setVideos(data);
@@ -57,6 +55,10 @@ const VideoPicker = ({
         .catch((error) => console.error(error));
     }
   }, [category, setVideos]);
+
+  useEffect(() => {
+    setVideoList(videos);
+  }, [videos]);
 
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
