@@ -99,7 +99,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <nav>
-          <h1>Khadija's Video Recommendation</h1>
+          <h1 className="">Khadija's Video Recommendation</h1>
         </nav>
       </header>
       <AddVideo onAddVideo={addVideo} />
@@ -108,7 +108,7 @@ function App() {
           return (
             <div className="new-video" key={video.id}>
               <iframe
-                width="300"
+                width="100%"
                 height="150"
                 src={
                   video.url
@@ -122,15 +122,29 @@ function App() {
               ></iframe>
               <h3 className="title"> Title:{video.title}</h3>
               <h3>Rating: {video.rating}</h3>
-              <button id="vote-btn" onClick={() => voteUp(video.id)}>
-                <img className="rating-buttons" src="/icons/thumbs-up-solid.svg" alt="thumbs up"/>
-              </button>
-              <button id="vote-btn" onClick={() => voteDown(video.id)}>
-                👎
-              </button>
-              <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
-                delete
-              </button>
+              <div className="video-buttons-container">
+                <button id="vote-btn" onClick={() => voteUp(video.id)}>
+                  <img
+                    className="rating-buttons"
+                    src="/icons/thumbs-up-solid.svg"
+                    alt="thumbs up"
+                  />
+                </button>
+                <button id="vote-btn" onClick={() => voteDown(video.id)}>
+                  <img
+                    className="rating-buttons"
+                    src="/icons/thumbs-down-solid.svg"
+                    alt="thumbs down"
+                  />
+                </button>
+                <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
+                  <img
+                    className="rating-buttons"
+                    src="/icons/trash-can-solid.svg"
+                    alt="delete button"
+                  />
+                </button>
+              </div>
             </div>
           );
         })}
