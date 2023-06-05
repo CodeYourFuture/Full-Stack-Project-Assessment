@@ -1,6 +1,6 @@
 const { Pool } = require("pg");
 const dotenv = require("dotenv");
-const data = require("./exampleresponse.json");
+// const data = require("./exampleresponse.json");
 const cors = require("cors");
 
 dotenv.config();
@@ -20,18 +20,30 @@ const pool = new Pool({
   },
 });
 
+
 // Use the pool to query the database
-app.get("/videos", (req, res) => {
-  pool.query("SELECT * from videos", (err, result) => {
-    if (err) {
+app.get("/videos/", (req, res) => {
+  const { ordering } = req.query;
+  sqlQuery = "SELECT * FROM videos";
+
+  pool
+    .query(sqlQuery)
+    .then((result) => {
+      console.log("Connected to PostgreSQL database");
+      let videos = result.rows;
+      if (ordering === "asc") {
+        videos.sort((a, b) => a.rating - b.rating);
+      } else {
+        videos.sort((a, b) => b.rating - a.rating);
+      }
+      res.status(200).json(videos);
+    })
+    .catch((err) => {
       console.error("Error executing query", err);
-    } else {
-      console.log("Conected to PostgreSQL database");
-      // console.log("Current date:", result.rows);
-      res.json(result.rows);
-    }
-  });
+      res.status(500).json({ error: "An error occurred while fetching videos" });
+    });
 });
+
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -59,7 +71,6 @@ app.post("/video", (req, res) => {
   });
   res.send("dataRecived");
 });
-
 
 app.delete("/video/:id", (req, res) => {
   const id = req.params.id;

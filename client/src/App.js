@@ -9,40 +9,44 @@ import Col from "react-bootstrap/Col";
 import Video from "./Video";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [items, setItems] = useState(null);
   const [search, setSearch] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAscending, setIsAscending] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://full-stack-assessment.onrender.com/videos"
-        );
-        const sortedItems = [...response.data].sort(
-          (a, b) => b.rating - a.rating
+          `https://full-stack-assessment.onrender.com/videos?ordering=${
+            isAscending ? "asc" : "desc"
+          }`
         );
         setIsLoading(true);
-        setItems(sortedItems);
+        setItems(response.data);
       } catch (e) {
         console.log(e);
       }
     };
+
     fetchData();
-  }, []);
+  }, [isAscending]);
 
+  const orderHandler = (e) => {
+    setIsAscending(!isAscending);
+  };
 
-  async function serachHandler() {
+  const searchHandler = async () => {
     const res = await axios.get(
       `https://full-stack-assessment.onrender.com/search/?title=${search}`
     );
     setItems(res.data);
-  }
+  };
 
-  const clickHandler = () => {
+  const openHandler = () => {
     setIsOpen(true);
   };
 
@@ -50,16 +54,13 @@ function App() {
     setIsOpen(false);
   };
 
-
-  const handleUrlChange = (event) => {
+  const urlHandler = (event) => {
     setUrl(event.target.value);
   };
 
-
-  const handleTitleChange = (event) => {
+  const titleHandler = (event) => {
     setTitle(event.target.value);
   };
-
 
   const validateUrl = (value) => {
     // Regular expression for URL validation
@@ -70,14 +71,12 @@ function App() {
     return null; // Return null for no validation errors
   };
 
-  const addclickHandler = async () => {
+  const addClickHandler = async () => {
     if (!title) {
       alert("Please enter a title");
       return;
     }
-
     validateUrl(url);
-
     try {
       const response = await axios.post(
         "https://full-stack-assessment.onrender.com/video",
@@ -86,7 +85,6 @@ function App() {
           url: url.split("watch?v=")[1],
         }
       );
-
       setTitle("");
       setUrl("");
       alert("Video has been sent");
@@ -105,7 +103,7 @@ function App() {
       <Container className="p-4">
         <Row>
           <Col md={4} className="mb-4">
-            <Button variant="link" onClick={clickHandler}>
+            <Button variant="link" onClick={openHandler}>
               Add Video
             </Button>
             {isOpen && (
@@ -113,7 +111,7 @@ function App() {
                 <InputGroup className="mb-3">
                   <InputGroup.Text>Title</InputGroup.Text>
                   <Form.Control
-                    onChange={handleTitleChange}
+                    onChange={titleHandler}
                     value={title}
                     placeholder="Title"
                     aria-label="Title"
@@ -123,7 +121,7 @@ function App() {
                 <InputGroup className="mb-3">
                   <InputGroup.Text>URL</InputGroup.Text>
                   <Form.Control
-                    onChange={handleUrlChange}
+                    onChange={urlHandler}
                     value={url}
                     placeholder="Youtube URL"
                     aria-label="URL"
@@ -131,16 +129,20 @@ function App() {
                   />
                 </InputGroup>
                 <br />
-                <Button variant="outline-success" onClick={addclickHandler}>
+                <Button variant="outline-success" onClick={addClickHandler}>
                   Add
-                </Button>{" "}
+                </Button>
                 <Button variant="outline-warning" onClick={cancelHandler}>
                   Cancel
-                </Button>{" "}
+                </Button>
               </>
             )}
           </Col>
-          <Col></Col>
+          <Col>
+            <Button onClick={orderHandler} id="asc-btn">
+              {isAscending ? "Descending" : "Ascending"}
+            </Button>
+          </Col>
           <Col md={4}>
             <InputGroup className="mb-3 mt-3">
               <Form.Control
@@ -150,7 +152,7 @@ function App() {
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
               />
-              <Button onClick={serachHandler} className="mr-5">
+              <Button onClick={searchHandler} className="mr-5">
                 Search
               </Button>
             </InputGroup>
