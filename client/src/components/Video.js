@@ -2,7 +2,7 @@ import React from "react";
 import Youtube from "react-youtube";
 import "./Video.css";
 
-const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
+const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
   return (
     <div className="video_wrapper">
       <h2 className="video_title">Title:{title}</h2>
@@ -15,12 +15,12 @@ const Video = ({ title, url, votes, onUpVote, onDownVote, onRemove }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></Youtube>
-      <div>Votes:{votes}</div>
+      <div>Votes:{rating}</div>
       <div className="votes_btn_wrap">
         <button onClick={onUpVote} className="up_vote">
           ♡
         </button>
-        <button onClick={onDownVote} className="down_vote">
+        <button onClick={onUpVote} className="down_vote">
           💔
         </button>
         <button onClick={onRemove} className="delete">

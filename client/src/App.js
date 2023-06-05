@@ -11,6 +11,7 @@ const App = () => {
   useEffect(() => {
     fetchVideos();
   }, []);
+
   const fetchVideos = async () => {
     try {
       const res = await fetch("http://localhost:5000/videos");
@@ -39,42 +40,40 @@ const App = () => {
 
   const handleUpVote = async (videoId) => {
     try {
-      const res = await fetch(`http://localhost:5000/videos/${videoId}`);
-      const data = await res.json();
-      const updatedVideo = { ...data, votes: data.votes + 1 };
-      await fetch(`http://localhost:5000/videos/${videoId}`, {
+      await fetch(`http://localhost:5000/videos/${videoId}/upvote`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedVideo),
       });
       setVideos((prevVideos) =>
-        prevVideos.map((video) => (video.id === videoId ? updatedVideo : video))
+        prevVideos.map((video) =>
+          video.id === videoId ? { ...video, rating: video.rating + 1 } : video
+        )
       );
     } catch (err) {
       console.log("Error upvoting video:", err);
     }
   };
+
   const handleDownVote = async (videoId) => {
     try {
-      const res = await fetch(`http://localhost:5000/videos/${videoId}`);
-      const data = await res.json();
-      const updatedVideo = { ...data, votes: data.votes - 1 };
-      await fetch(`http://localhost:5000/videos/${videoId}`, {
+      await fetch(`http://localhost:5000/videos/${videoId}/downvote`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedVideo),
       });
       setVideos((prevVideos) =>
-        prevVideos.map((video) => (video.id === videoId ? updatedVideo : video))
+        prevVideos.map((video) =>
+          video.id === videoId ? { ...video, rating: video.rating - 1 } : video
+        )
       );
     } catch (err) {
       console.log("Error downvoting video:", err);
     }
   };
+
   const handleRemoveVideo = async (videoId) => {
     try {
       await fetch(`http://localhost:5000/videos/${videoId}`, {
@@ -97,13 +96,12 @@ const App = () => {
           key={video.id}
           title={video.title}
           url={video.url}
-          votes={video.votes}
+          rating={video.rating}
           onUpVote={() => handleUpVote(video.id)}
           onDownVote={() => handleDownVote(video.id)}
           onRemove={() => handleRemoveVideo(video.id)}
         />
       ))}
-      ;
     </div>
   );
 };

@@ -74,7 +74,7 @@ let videos = [
 app.get("/videos", (req, res) => {
   res.json(videos);
 });
-let idCounter = 858567;
+let idCounter = Math.max(...videos.map((video) => video.id)) + 1;
 
 //  Add a video to the API.
 app.post("/videos", (req, res) => {
@@ -82,7 +82,7 @@ app.post("/videos", (req, res) => {
     return res.status(400).json({ Message: "Video could not be saved" });
   }
   const newVideos = {
-    id: idCounter++,
+    id: idCounter,
     title: req.body.title,
     url: req.body.url,
     rating: 0,
@@ -114,6 +114,30 @@ app.delete("/videos/:id", (req, res) => {
     res
       .status(404)
       .json({ result: "failure", message: "Video could not be deleted" });
+  }
+});
+
+// Upvote a video by ID
+app.put("/videos/:id/upvote", (req, res) => {
+  const id = parseInt(req.params.id);
+  const foundVideo = videos.find((video) => video.id === id);
+  if (foundVideo) {
+    foundVideo.rating += 1;
+    res.json(foundVideo);
+  } else {
+    res.status(404).json({ result: "failure", message: "Video not found" });
+  }
+});
+
+// Downvote a video by ID
+app.put("/videos/:id/downvote", (req, res) => {
+  const id = parseInt(req.params.id);
+  const foundVideo = videos.find((video) => video.id === id);
+  if (foundVideo) {
+    foundVideo.rating -= 1;
+    res.json(foundVideo);
+  } else {
+    res.status(404).json({ result: "failure", message: "Video not found" });
   }
 });
 
