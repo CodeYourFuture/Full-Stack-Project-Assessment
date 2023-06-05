@@ -10,7 +10,6 @@ const VideoPicker = ({
   setVideos,
   passedCategory,
   videoPickerRef,
-  fetchVideos,
 }) => {
   let categoryOptions = [];
 
@@ -73,6 +72,14 @@ const VideoPicker = ({
     selectedOrder.value.includes("Most") ? setOrder("desc") : setOrder("asc");
   };
 
+  const updateVideoRating = (videoId, rating) => {
+    setVideos((prevVideos) =>
+      prevVideos.map((video) =>
+        video.id === videoId ? { ...video, rating } : video
+      )
+    );
+  };
+
   return (
     <>
       <div ref={videoPickerRef}></div>
@@ -104,7 +111,7 @@ const VideoPicker = ({
               <VideoCard
                 key={video.id}
                 video={video}
-                fetchVideos={fetchVideos}
+                updateVideoRating={updateVideoRating}
               />
             ))
           ) : (

@@ -1,7 +1,9 @@
 import "./VideoCard.css";
-import { useEffect } from "react";
+import { useState } from "react";
 
-const VideoCard = ({ video, fetchVideos }) => {
+const VideoCard = ({ video, updateVideoRating }) => {
+  const [rating, setRating] = useState(video.rating);
+
   const increaseRating = () => {
     if (video) {
       fetch(
@@ -9,7 +11,8 @@ const VideoCard = ({ video, fetchVideos }) => {
       )
         .then((response) => response.json())
         .then((data) => {
-          fetchVideos();
+          updateVideoRating(video.id, data.rating);
+          setRating(data.rating);
         })
         .catch((error) => console.error(error));
     }
@@ -22,7 +25,8 @@ const VideoCard = ({ video, fetchVideos }) => {
       )
         .then((response) => response.json())
         .then((data) => {
-          fetchVideos();
+          updateVideoRating(video.id, data.rating);
+          setRating(data.rating);
         })
         .catch((error) => console.error(error));
     }
