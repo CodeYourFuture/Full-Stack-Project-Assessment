@@ -98,9 +98,11 @@ const VideoPicker = ({
           </div>
         </div>
         <div className="video_cards">
-          {videoList.map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))}
+          {videos.length > 0 ? (
+            videoList.map((video) => <VideoCard key={video.id} video={video} />)
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </>
