@@ -30,11 +30,6 @@ const VideoCard = ({ video }) => {
           tabIndex="0"
         />
         <img
-          src="/media/icons/heart_empty.svg"
-          alt="empty heart - add to favorites category"
-          tabIndex="0"
-        />
-        <img
           src="/media/icons/trash_can.svg"
           alt="trash - remove the video"
           tabIndex="0"
