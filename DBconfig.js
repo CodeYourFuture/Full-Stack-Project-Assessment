@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-const videoData = new Pool({
+const videoDB = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_NAME,
@@ -10,4 +10,4 @@ const videoData = new Pool({
   },
 });
 
-module.exports = videoData;
+module.exports = videoDB;
