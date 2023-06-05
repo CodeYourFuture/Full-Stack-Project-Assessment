@@ -1,6 +1,5 @@
 import "./App.css";
-import exampleresponse from "./exampleresponse.json"
-import VideoCard from "./VideoCard.jsx";
+import VideoCard from "./VideoCard.jsx"
 import Header from "./Header"
 
 function App() {
