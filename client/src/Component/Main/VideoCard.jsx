@@ -1,9 +1,8 @@
 import { useState } from "react";
-import "./videoCard.scss";
 import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, deleteHandler }) => {
   const [rating, setRating] = useState(video.rating);
 
   const increseRating = () => {
@@ -15,22 +14,24 @@ const VideoCard = ({ video }) => {
   };
 
   return (
-    <div className="card_container grid">
+    <div className="card_container flex">
       <h3 className="video_title">{video.title}</h3>
       <iframe
         src={video.url.replace("watch?v=", "embed/")}
         title="video.title"
       ></iframe>
       <div className="flex">
-        <button onClick={increseRating}>
+        <span onClick={increseRating}>
           <GrLike className="icon" />
-          {rating}
-        </button>
-        <button onClick={decreaseRating}>
+        </span>
+        <span>{rating}</span>
+        <span onClick={decreaseRating}>
           <GrDislike className="icon" />
-        </button>
+        </span>
       </div>
-      <button className="btn">REMOVE</button>
+      <button className="btn" onClick={() => deleteHandler(video.id)}>
+        REMOVE
+      </button>
     </div>
   );
 };

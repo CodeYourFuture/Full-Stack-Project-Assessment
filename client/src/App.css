@@ -9,19 +9,15 @@
 
 /*default styling*/
 :root {
-  --PrimaryColor: hsl(199, 100%, 33%);
-  --SecondaryColor: hsl(187, 85%, 43%);
-  --gradientColor: linear-gradient(to right,
-      hsl(187, 85%, 43%),
-      hsl(0, 0%, 100%));
-  --whiteColor: hsl(0, 0%, 100%);
-  --blackColor: hsl(201, 33%, 16%);
-  --textColor: hsl(240, 4%, 36%);
-  --whiteColorDeam: hsl(0, 0%, 93%);
-  --greyText: grb(190, 190, 190);
-  --inputColor: rgb(239, 239, 239);
-  --bodyColor: rgb(240, 240, 246);
-  --cardBG: rgb(225, 225, 235);
+  --PrimaryColor: #e9ecef;
+  --SecondaryColor: #6c757d;
+  --gradientColor: linear-gradient(to right, #6c757d, #e9ecef);
+  --whiteColor: #f8f9fa;
+  --blackColor: #212529;
+  --textColor: #343a40;
+  --greyText: #adb5bd;
+  --inputColor: #dee2e6;
+  --bodyColor: #f8f9fa;
 }
 
 a {
@@ -30,15 +26,6 @@ a {
 
 li {
   list-style: none;
-}
-
-.section {
-  padding: 4rem 0 2rem;
-}
-
-.container {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .icon {
@@ -58,29 +45,22 @@ li {
 
 .btn {
   padding: .6rem 1.5rem;
-  background-color: var(--PrimaryColor);
+  background: var(--gradientColor);
   border-radius: 3rem;
   border: none;
   cursor: pointer;
-}
-
-.btn a {
-  color: var(--whiteColor);
-  font-weight: 500;
+  box-shadow: 0 2px 4px var(--blackColor);
+  font-weight: 600;
+  color: var(--textColor);
 }
 
 .btn:hover {
   background-color: var(--SecondaryColor);
 }
 
-img,
-video {
-  width: 100%;
-  height: auto;
-}
-
 input {
   font-size: 100%;
+  background-color: var(--inputColor);
 }
 
 body {
