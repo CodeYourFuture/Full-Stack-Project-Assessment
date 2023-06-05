@@ -10,6 +10,7 @@ const VideoPicker = ({
   setVideos,
   passedCategory,
   videoPickerRef,
+  fetchVideos,
 }) => {
   let categoryOptions = [];
 
@@ -99,7 +100,13 @@ const VideoPicker = ({
         </div>
         <div className="video_cards">
           {videos.length > 0 ? (
-            videoList.map((video) => <VideoCard key={video.id} video={video} />)
+            videoList.map((video) => (
+              <VideoCard
+                key={video.id}
+                video={video}
+                fetchVideos={fetchVideos}
+              />
+            ))
           ) : (
             <p>Loading...</p>
           )}

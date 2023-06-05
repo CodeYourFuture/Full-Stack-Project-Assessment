@@ -1,6 +1,33 @@
 import "./VideoCard.css";
+import { useEffect } from "react";
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, fetchVideos }) => {
+  const increaseRating = () => {
+    if (video) {
+      fetch(
+        `https://video-server-wtvy.onrender.com/${video.id}?action=thumbs-up`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          fetchVideos();
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
+  const decreaseRating = () => {
+    if (video) {
+      fetch(
+        `https://video-server-wtvy.onrender.com/${video.id}?action=thumbs-down`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          fetchVideos();
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
   // Extract the YouTube video ID from the link
   const getYouTubeVideoId = (videoLink) => {
     const videoId = videoLink.split("v=")[1];
@@ -28,6 +55,7 @@ const VideoCard = ({ video }) => {
           src="/media/icons/thumbs_up.svg"
           alt="thumb up - like the video"
           tabIndex="0"
+          onClick={increaseRating}
         />
         <img
           src="/media/icons/trash_can.svg"
@@ -38,6 +66,7 @@ const VideoCard = ({ video }) => {
           src="/media/icons/thumbs_down.svg"
           alt="thumb down - dislike the video"
           tabIndex="0"
+          onClick={decreaseRating}
         />
       </div>
     </div>

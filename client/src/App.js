@@ -58,6 +58,7 @@ function App() {
           setVideos={setVideos}
           passedCategory={passedCategory}
           videoPickerRef={videoPickerRef}
+          fetchVideos={fetchVideos}
         />
       </main>
       <Footer />
