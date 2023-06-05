@@ -18,14 +18,14 @@ const App = () => {
   ];
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc");
-  const [passedCategory, setPassedCategory] = useState("");
+  const [passedCategory, setPassedCategory] = useState("All videos");
   const videoPickerRef = useRef(null);
 
   // Function to fetch videos from the server
   const fetchVideos = async () => {
     try {
       const response = await fetch(
-        `https://video-server-wtvy.onrender.com?order=${order}`
+        `https://video-server-wtvy.onrender.com/category/${passedCategory}?order=${order}`
       );
       const data = await response.json();
 
@@ -36,6 +36,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    setPassedCategory("All videos");
     // Fetch videos when the page is loaded
     fetchVideos();
   }, []);

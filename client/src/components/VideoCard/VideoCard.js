@@ -68,6 +68,7 @@ const VideoCard = ({ video, updateVideoRating, deleteVideo }) => {
         allowFullScreen
       ></iframe>
       <h1>{video.title}</h1>
+      <p>Category: {video.category}</p>
       <p>Rating: {video.rating}</p>
       <div className="video_card_controls">
         <img
