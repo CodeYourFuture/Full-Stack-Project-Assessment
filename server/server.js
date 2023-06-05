@@ -1,12 +1,20 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 3001;
+const dotenv = require('dotenv')
+const { Pool } = require('pg')
+dotenv.config()
 app.use(express.json());
 app.use(cors());
+
+const port = process.env.PORT || 3001;
+const pool = new Pool({
+	connectionString: process.env.DB_URL,
+	ssl: { rejectUnauthorized: false },
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// const videoDB = require("./DBConfig");
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -18,52 +26,70 @@ app.get("/running", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-// GET "/" This endpoint is used to return all of the videos
-app.get("/", (req, res) => {
-  res.send(videos);
-});
+app.get('/', async (req, res) => {
+	try {
+		const result = await pool.query('SELECT * FROM videos')
+		res.status(200).json(result.rows)
+	} catch (error) {
+		console.log(error)
+		res.status(500).json({ error: 'Error Message' })
+	}
+})
 
 // `POST` This endpoint is used to add a video to the API.
-app.post("/", (req, res) => {
-  const { title, url } = req.body;
-  const newVideo = {
-    id: videos.length + 1,
-    title: title,
-    url: url,
-    rating: videos.length + 1,
-  };
-
-  if (!newVideo.title || !newVideo.url) {
-    return res
-      .status(400)
-      .json({ msg: "something in the input was falsey" });
-  }
-
-  videos.push(newVideo);
-  res.status(200).json({ message: "New video added", videos });
+app.post("/", async (req, res) => {
+  try {
+    const rating = 0
+		const query =
+			'INSERT INTO videos (title, url, rating) VALUES ($1,$2,$3) RETURNING *'
+		const values = [title, url, rating]
+		const result = await pool.query(query, values)
+		res.status(201).json(result.rows[0])
+    }
+   catch (error) {
+		console.log(error)
+		res.status(500).json({ error: 'Error Message' })
+	}
 });
 
 
 // `GET` "/{id}"
-app.get("/:id", function(req, res) {
-  const findId = Number(req.params.id)
-  const video = videos.find((video) => findId == video.id)
-  res.json({video})
-})
+app.get("/:id", (req, res) => {
+  const videoID = Number(req.params.id);
+
+  const idQuery = "SELECT * FROM videos WHERE id = $1";
+
+  videos
+    .query(idQuery, [videoID])
+    .then((result) => {
+      if (result.rowCount === 0) {
+        res.status(400).json({ message: `Video ${videoID} not found` });
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 
 //`DELETE` "/{id}"
 
-app.delete("/:id", (req, res) => {
-  const findVideo = videos.find(
-    (video) => video.id === Number(req.params.id)
-  );
+app.delete('/:id', async (req, res) => {
+	try {
+		const videoID = Number(req.params.id)
+		const query = 'DELETE FROM videos WHERE id = $1 RETURNING *'
+		const values = [videoID]
+		const result = await pool.query(query, values)
+		const deleteVideos = result.rows[0]
 
-  if (findVideo) {
-    videos = videos.filter((video) => video.id !== Number(req.params.id));
-    res.json({ message: `Video ${req.params.id} deleted` });
-  } else {
-    res
-      .status(400)
-      .json({ result: "failure", message: "Video could not be found" });
-  }
-});
+		if (deleteVideos) {
+			res.status(200).json(deleteVideos)
+		} else {
+			res.status(404).json({ message: 'Video Not Found' })
+		}
+	} catch (error) {
+		res.status(500).json({ error: 'Error Message' })
+	}
+})
