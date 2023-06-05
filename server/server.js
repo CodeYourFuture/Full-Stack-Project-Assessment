@@ -53,27 +53,6 @@ app.post("/", async (req, res) => {
 });
 
 
-// `GET` "/{id}"
-app.get("/:id", (req, res) => {
-  const videoID = Number(req.params.id);
-
-  const idQuery = "SELECT * FROM videos WHERE id = $1";
-
-  videos
-    .query(idQuery, [videoID])
-    .then((result) => {
-      if (result.rowCount === 0) {
-        res.status(400).json({ message: `Video ${videoID} not found` });
-      } else {
-        res.status(200).json(result.rows);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
-
 //`DELETE` "/{id}"
 
 app.delete('/:id', async (req, res) => {
