@@ -9,7 +9,9 @@ function App() {
   const [videos, setVideos] = useState(Data);
 
   const handleAddVideo = (newVideo) => {
-    setVideos([...videos, newVideo]);
+    const updatedVideos = [...videos, newVideo];
+    updatedVideos.sort((a, b) => b.rating - a.rating); // Sort videos based on rating in descending order
+    setVideos(updatedVideos);
   };
 
   const handleDelete = (id) => {
