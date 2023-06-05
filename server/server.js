@@ -17,8 +17,17 @@ function generateUniqueId() {
   return Math.floor(Math.random() * 1000000) + 1;
 }
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Error:", err);
+  res.status(500).json({
+    result: "failure",
+    message: "Something went wrong",
+  });
+});
+
 // GET "/category/:name?order=asc"
-app.get("/category/:name", async (req, res) => {
+app.get("/category/:name", async (req, res, next) => {
   const { name } = req.params;
   const order = req.query.order;
 
@@ -51,16 +60,12 @@ app.get("/category/:name", async (req, res) => {
 
     res.json(categoryVideos);
   } catch (error) {
-    console.error("Error fetching category videos:", error);
-    res.status(500).json({
-      result: "failure",
-      message: "Failed to fetch category videos",
-    });
+    next(error);
   }
 });
 
 // GET "/{id}?action=thumbs-up"
-app.get("/:id", async (req, res) => {
+app.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -88,16 +93,12 @@ app.get("/:id", async (req, res) => {
 
     res.json(video);
   } catch (error) {
-    console.error("Error fetching video:", error);
-    res.status(500).json({
-      result: "failure",
-      message: "Failed to fetch video",
-    });
+    next(error);
   }
 });
 
 // POST "/"
-app.post("/", async (req, res) => {
+app.post("/", async (req, res, next) => {
   const { title, category, url } = req.body;
 
   if (!title || !category || !url) {
@@ -130,16 +131,12 @@ app.post("/", async (req, res) => {
       id: newVideo.id,
     });
   } catch (error) {
-    console.error("Error saving video:", error);
-    res.status(500).json({
-      result: "failure",
-      message: "Failed to save video",
-    });
+    next(error);
   }
 });
 
 // DELETE "/{id}"
-app.delete("/:id", async (req, res) => {
+app.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -148,11 +145,7 @@ app.delete("/:id", async (req, res) => {
 
     res.json({});
   } catch (error) {
-    console.error("Error deleting video:", error);
-    res.status(500).json({
-      result: "failure",
-      message: "Failed to delete video",
-    });
+    next(error);
   }
 });
 

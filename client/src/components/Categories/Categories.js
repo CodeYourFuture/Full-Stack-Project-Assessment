@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./Categories.css";
 import { useState, useEffect } from "react";
 
