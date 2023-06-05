@@ -1,7 +1,7 @@
 import "./VideoCard.css";
 import { useState } from "react";
 
-const VideoCard = ({ video, updateVideoRating }) => {
+const VideoCard = ({ video, updateVideoRating, deleteVideo }) => {
   const [rating, setRating] = useState(video.rating);
 
   const increaseRating = () => {
@@ -27,6 +27,23 @@ const VideoCard = ({ video, updateVideoRating }) => {
         .then((data) => {
           updateVideoRating(video.id, data.rating);
           setRating(data.rating);
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
+  const handleDelete = () => {
+    if (video) {
+      fetch(`https://video-server-wtvy.onrender.com/${video.id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Delete successful, call the deleteVideo function to update the video list
+            deleteVideo(video.id);
+          } else {
+            throw new Error("Failed to delete video");
+          }
         })
         .catch((error) => console.error(error));
     }
@@ -65,6 +82,7 @@ const VideoCard = ({ video, updateVideoRating }) => {
           src="/media/icons/trash_can.svg"
           alt="trash - remove the video"
           tabIndex="0"
+          onClick={handleDelete}
         />
         <img
           src="/media/icons/thumbs_down.svg"

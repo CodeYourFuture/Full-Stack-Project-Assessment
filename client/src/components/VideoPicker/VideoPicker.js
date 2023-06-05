@@ -80,6 +80,12 @@ const VideoPicker = ({
     );
   };
 
+  const deleteVideo = (videoId) => {
+    setVideos((prevVideos) =>
+      prevVideos.filter((video) => video.id !== videoId)
+    );
+  };
+
   return (
     <>
       <div ref={videoPickerRef}></div>
@@ -112,6 +118,7 @@ const VideoPicker = ({
                 key={video.id}
                 video={video}
                 updateVideoRating={updateVideoRating}
+                deleteVideo={deleteVideo}
               />
             ))
           ) : (
