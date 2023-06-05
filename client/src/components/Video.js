@@ -20,7 +20,7 @@ const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
         <button onClick={onUpVote} className="up_vote">
           ♡
         </button>
-        <button onClick={onUpVote} className="down_vote">
+        <button onClick={onDownVote} className="down_vote">
           💔
         </button>
         <button onClick={onRemove} className="delete">
