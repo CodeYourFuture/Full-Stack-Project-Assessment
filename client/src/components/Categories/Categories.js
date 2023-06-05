@@ -1,7 +1,13 @@
 import "./Categories.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-const Categories = ({ categories, setVideos }) => {
+const Categories = ({
+  categories,
+  setVideos,
+  passedCategory,
+  setPassedCategory,
+  videoPickerRef,
+}) => {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
@@ -15,7 +21,14 @@ const Categories = ({ categories, setVideos }) => {
 
   const handleCategoryClick = (category) => {
     setCategory(category);
+    setPassedCategory(category);
   };
+
+  useEffect(() => {
+    if (videoPickerRef.current) {
+      videoPickerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [videoPickerRef, passedCategory]);
 
   return (
     <>

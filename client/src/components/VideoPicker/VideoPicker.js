@@ -3,7 +3,14 @@ import ReactSelect from "react-select";
 import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 
-const VideoPicker = ({ categories, videos, setOrder, setVideos }) => {
+const VideoPicker = ({
+  categories,
+  videos,
+  setOrder,
+  setVideos,
+  passedCategory,
+  videoPickerRef,
+}) => {
   let categoryOptions = [];
 
   //adding one value to the options array
@@ -29,6 +36,18 @@ const VideoPicker = ({ categories, videos, setOrder, setVideos }) => {
   }, [videos]);
 
   useEffect(() => {
+    if (passedCategory.length > 0) {
+      const newCategory = {
+        value: passedCategory,
+        label: passedCategory,
+      };
+      console.log("new category is: ");
+      console.log(newCategory);
+      setSelectedCategory(newCategory);
+    }
+  }, [passedCategory]);
+
+  useEffect(() => {
     if (category.length > 0) {
       fetch(`https://video-server-wtvy.onrender.com/category/${category}`)
         .then((response) => response.json())
@@ -42,6 +61,7 @@ const VideoPicker = ({ categories, videos, setOrder, setVideos }) => {
   const handleCategoryChange = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
     setCategory(selectedCategory.value);
+    console.log(selectedCategory);
     console.log(selectedCategory.value);
   };
 
@@ -53,34 +73,37 @@ const VideoPicker = ({ categories, videos, setOrder, setVideos }) => {
   };
 
   return (
-    <div className="video_picker">
-      <h1>Watch videos</h1>
-      <div className="selectors">
-        <div className="selector_field">
-          <ReactSelect
-            options={categoryOptions}
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="custom_select"
-            isSearchable={false}
-          />
+    <>
+      <div ref={videoPickerRef}></div>
+      <div className="video_picker">
+        <h1>Watch videos</h1>
+        <div className="selectors">
+          <div className="selector_field">
+            <ReactSelect
+              options={categoryOptions}
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="custom_select"
+              isSearchable={false}
+            />
+          </div>
+          <div className="selector_field">
+            <ReactSelect
+              options={orderOptions}
+              value={selectedOrder}
+              onChange={handleOrderChange}
+              className="custom_select"
+              isSearchable={false}
+            />
+          </div>
         </div>
-        <div className="selector_field">
-          <ReactSelect
-            options={orderOptions}
-            value={selectedOrder}
-            onChange={handleOrderChange}
-            className="custom_select"
-            isSearchable={false}
-          />
+        <div className="video_cards">
+          {videoList.map((video) => (
+            <VideoCard key={video.id} video={video} />
+          ))}
         </div>
       </div>
-      <div className="video_cards">
-        {videoList.map((video) => (
-          <VideoCard key={video.id} video={video} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

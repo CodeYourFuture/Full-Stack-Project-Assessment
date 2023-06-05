@@ -4,7 +4,7 @@ import Categories from "./components/Categories/Categories";
 import VideoPicker from "./components/VideoPicker/VideoPicker";
 import Footer from "./components/Footer/Footer";
 import AddVideoForm from "./components/AddVideoForm/AddVideoForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const categories = [
@@ -17,6 +17,8 @@ function App() {
   ];
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc");
+  const [passedCategory, setPassedCategory] = useState("");
+  const videoPickerRef = useRef(null);
 
   useEffect(() => {
     fetchVideos();
@@ -41,13 +43,21 @@ function App() {
     <div className="App">
       <Header categories={categories} />
       <main>
-        <Categories categories={categories} setVideos={setVideos} />
+        <Categories
+          categories={categories}
+          setVideos={setVideos}
+          passedCategory={passedCategory}
+          setPassedCategory={setPassedCategory}
+          videoPickerRef={videoPickerRef}
+        />
         <AddVideoForm categories={categories} fetchVideos={fetchVideos} />
         <VideoPicker
           categories={categories}
           videos={videos}
           setOrder={setOrder}
           setVideos={setVideos}
+          passedCategory={passedCategory}
+          videoPickerRef={videoPickerRef}
         />
       </main>
       <Footer />
