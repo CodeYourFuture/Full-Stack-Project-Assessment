@@ -65,18 +65,39 @@ app.delete("/:id", async (req, res) => {
 });
 
   app.post("/", async (request, response) => {
-  
     try {
       const {title, url} = request.body;
       const rating = 0;
       const query = "INSERT INTO videos (title, url, rating) VALUES ($1,$2,$3) RETURNING * ";
-      const values = [title, url, rating]
+      const values = [title, url, rating];
       const result = await database.query(query, values);
       const newvideo = result.rows[0];
-      res.status(201).send(newvideo);
+      response.status(201).send(newvideo);
     } catch (error) {
       console.log("error");
+      response.status(500).send("Internal Server Error");
     }
   });
+
+app.post("/rating", async (req, res) => {
+  try {
+    const { id, increment } = req.body;
+    const result = await database.query(
+      "UPDATE videos SET rating = rating + $1 WHERE id = $2 RETURNING *",
+      [increment, id]
+    );
+    if (result.rowCount === 1) {
+      res.status(200).json({ result: "success", message: "Rating updated successfully" });
+    } else {
+      res.status(404).json({ result: "failure", message: "Video not found" });
+    }
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+  
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
