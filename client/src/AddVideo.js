@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddVideo.css';
 
 function AddVideo({ videos, setVideos }) {
@@ -7,23 +7,24 @@ function AddVideo({ videos, setVideos }) {
     const[urlInput, setUrlInput] = useState("");
     
     const handleAddVideoButton = () => {
-        clickAdd === false ? setClickAdd(true) : setClickAdd(false);
+        //clickAdd === false ? setClickAdd(true) : setClickAdd(false);
+        setClickAdd(!clickAdd);
     };
 
     const handleTitleInputChange = (e) => {
-        e.preventDefault();
+       // e.preventDefault();
         setTitleInput(e.target.value);
     };
 
     const handleUrlInputChange = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         let url = e.target.value;
         if(url.includes('https://www.youtube.com/')){
-            url = url.replace('watch?v=', 'embed/');
+          url = url.replace('watch?v=', 'embed/');
             return setUrlInput(url);
         }else{
             alert('Invalid URL format. Please provide a YouTube URL!');
-            setUrlInput("");
+            setUrlInput('');
         }
     };
 
@@ -48,7 +49,7 @@ function AddVideo({ videos, setVideos }) {
         })
         .then((response) => response.json())
         .then((data) => {
-            setVideos((videos) => [...videos, data]);
+            setVideos((videos) => [...videos, data.video]);
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -57,18 +58,18 @@ function AddVideo({ videos, setVideos }) {
         setTitleInput('');
         setUrlInput('');
     };
-    
+
   return (
     <div className="addVideoContainer">
-       <button
-       
-       className="addVideo" 
-       href="#" 
-       alt="Add video button" 
+       <button className="addVideo" 
+    //    href="#" 
+    //    alt="Add video button" 
        onClick={handleAddVideoButton}>
         Add video
         </button>
-      {clickAdd === true ? (
+      {/* {clickAdd === true ? ( */}
+
+      {clickAdd && (
         <form onSubmit={handleFormSubmit}>
             <label>
                 Title<input type='text' 
@@ -87,7 +88,8 @@ function AddVideo({ videos, setVideos }) {
             <input id="submitBtn" type="submit" />
             </label>
         </form>
-      ) : null }  
+    //   ) : null }  
+      )}
       </div>
   )
 } 

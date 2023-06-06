@@ -11,28 +11,29 @@ const VideoCards = ({ videos, setVideos }) => {
         })
         .then((response) => response.json())
         .then((data) =>{
-            let newData = videos.filter((video) => video.id !== data.id)
+            let newData = videos.filter((video) => video.id !== data.id);
             setVideos(newData);
         })
         .catch((error) => {
             console.error("Error:", error);
         });
-
 };
+
 const increaseRating = (id) => {
     let newData = [];
     newData = videos.map((video) => 
     video.id === id ? { ...video, rating: video.rating + 1 }: video);
-return setVideos(newData);
+    return setVideos(newData);
 }
+
 const decreaseRating = (id) => {
     let newData = [];
     newData = videos.map((video) => 
     video.id === id ? {...video, rating: video.rating - 1}: video);
-return setVideos(newData);
+    return setVideos(newData);
 }; 
 
-const Card =(video) => {
+const Card = (video) => {
   return (
     <div className='cardContainer' key={video.id}>
         <iframe
@@ -58,10 +59,12 @@ const Card =(video) => {
   );
 };
 
-return (
+console.log(videos);
+
+return(
     <div className="allCardsContainer">
        {videos.map((video) => Card(video))}
-     </div>
+    </div>
   );
 
 }

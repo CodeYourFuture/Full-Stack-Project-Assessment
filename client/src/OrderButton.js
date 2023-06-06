@@ -7,12 +7,12 @@ const OrderButton = ({ videos, setVideos, order, setOrder }) => {
   }
     return (
          <div>
-            <form>
-                <input type='submit' value="asc" onClick={handleChange}/>
-                <input type='submit' value="desc" onClick={handleChange}/>
+            <form onSubmit={handleChange}>
+                <input type='submit' value="asc" />
+                <input type='submit' value="desc" />
             </form>
            </div>
   )
 };
 
-export default OrderButton
+export default OrderButton;

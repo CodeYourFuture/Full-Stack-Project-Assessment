@@ -1,15 +1,20 @@
 import React,{ useEffect, useState } from "react";
 import "./App.css";
-import  VideoCards   from "./VideoCards";
-import  AddVideo  from "./AddVideo";
+import VideoCards   from "./VideoCards";
+import AddVideo  from "./AddVideo";
 import data from './exampleresponse.json';
 import OrderButton from "./OrderButton";
 import Footer from "./Footer";
 
 function App() {
+  
   const [videos, setVideos] = useState(data);
   const [error, setError] = useState(null);
   const [order, setOrder] = useState("");
+
+  console.log(data)
+  console.log("videos....")
+  console.log(videos)
 
 useEffect(() => {
   fetch(`http://localhost:5000/?order=${order}`, {
@@ -20,7 +25,8 @@ useEffect(() => {
     return res.json();
   })
   .then((data) => {
-    setVideos(data);
+    const sortedVideos = data.sort((a, b) => b.rating - a.rating);
+    setVideos(sortedVideos);
   })
   .catch((error) => {
     setError("Error", error);
