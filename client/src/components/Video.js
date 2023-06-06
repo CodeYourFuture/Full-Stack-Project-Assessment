@@ -1,5 +1,4 @@
 import React from "react";
-import Youtube from "react-youtube";
 import "./Video.css";
 
 const Video = ({ title, url, rating, onUpVote, onDownVote, onRemove }) => {
