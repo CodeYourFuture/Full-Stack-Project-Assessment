@@ -69,13 +69,8 @@ function VideosList() {
                 title={vid.title}
                 url={`https://www.youtube.com/embed/${vid.url.slice(32)}`}
                 rating={vid.rating}
+                onDeleteVideo={() => handleDeleteVideo(vid.id)}
               />
-              <button
-                onClick={() => handleDeleteVideo(vid.id)}
-                className="delete-video-button"
-              >
-                Delete video
-              </button>
             </div>
           ))}
       </div>

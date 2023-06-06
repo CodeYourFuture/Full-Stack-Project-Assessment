@@ -5,6 +5,9 @@
     justify-content: center;
     align-items: center;
     gap: 40px;
+    /* background-color: antiquewhite; */
+    background-size: cover;
+    /* background-color: #F9F1F0; */
 }
 
 .videos-list-container h3 {
@@ -16,29 +19,22 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     max-width: 1700px;
     margin: auto;
 }
 
 .single-video-container {
     width: 300px;
-    height: 450px;
-    border: solid black 1px;
+    height: 400px;
+    /* border: solid black 1px; */
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
 }
 
-.delete-video-button {
-    padding: 7px 10px;
-    border-radius: 10px;
-    /* margin-bottom: 10px; */
-}
-
-.delete-video-button:hover {
-    cursor: pointer;
+.single-video-container:hover {
+    scale: 1.02;
 }

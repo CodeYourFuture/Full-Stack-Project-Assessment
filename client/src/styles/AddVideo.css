@@ -23,12 +23,26 @@
 .add-video-input, .add-video-button {
     padding: 7px 10px;
     border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 10px #b39894;;
+}
+
+.add-video-input:hover, .add-video-button:hover {
+    scale: 1.02;
+}
+
+.add-video-input:focus, .add-video-button:focus {
+    outline: none;
 }
 
 .add-video-button {
-    width: 200px;
+    width: 175px;
+    background-color: rgb(101, 158, 101);
+    color: white;
+    border: none;
 }
 
 .add-video-button:hover {
     cursor: pointer;
+    scale: 1.03;
 }

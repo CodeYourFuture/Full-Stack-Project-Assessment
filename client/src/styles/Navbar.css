@@ -2,15 +2,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: grey;
+    background-color: rgb(105, 41, 41);
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 999;
     box-shadow: 2px 2px 15px rgb(125, 125, 131);
-    min-height: 50px;
+    min-height: 75px;
 }
 
 .nav-title {
     font-weight: 700;
+    color: white;
+    font-size: 20px;
 }
