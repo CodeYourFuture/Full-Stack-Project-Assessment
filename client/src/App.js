@@ -27,10 +27,6 @@ function App() {
     fetchVideos();
   }, []);
 
-  const handleAddVideo = (newVideo) => {
-    const updatedVideos = [...videos, newVideo];
-    setVideos(updatedVideos);
-  };
 
   const handleDelete = (id) => {
     const updatedVideos = videos.filter((video) => video.id !== id);
@@ -46,7 +42,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Form onAddVideo={handleAddVideo} />
+      <Form fetchVideos={fetchVideos} />
       <Video videos={sortedVideos} onDelete={handleDelete} />
     </div>
   );

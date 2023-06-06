@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css";
 
-function Form({ onAddVideo }) {
+function Form({ fetchVideos }) {
 
   const [videoForm, setVideoForm] = useState({
       url: "",
@@ -37,17 +37,29 @@ function Form({ onAddVideo }) {
       return;
     }
 
-    const currentDate = new Date();
-    const id = currentDate.getTime(); // Use the timestamp as the ID
     const newVideo = {
-      id: id,
       title: videoForm.title,
       url: videoForm.url,
-      rating: 0,
-      uploadedAt: currentDate.toLocaleString() // Store the upload timestamp
     };
 
-    onAddVideo(newVideo);
+
+    // Send POST request to add the new video
+    fetch("https://video-server-kddf.onrender.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        fetchVideos();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    // Clear the form fields and error message
     setVideoForm({...videoForm, title: "", url: ""})
   };
 

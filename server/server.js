@@ -13,11 +13,11 @@ let videos = require("./exampleresponse.json")
 app.use(express.json());
 
 // GET "/"
-
     app.get("/", (req, res) => {
         res.json(videos);
     });
     
+    // POST "/"
     app.post("/", (req, res) => {
         const { title, url } = req.body;
         if (!title || !url) {
@@ -30,11 +30,13 @@ app.use(express.json());
         }
         
         const id = Date.now();
+        const currentDate = new Date();
         const newVideo = {
             id,
         title,
         url,
         rating: 0,
+        uploadedAt: currentDate.toLocaleString() // Store the upload timestamp
     };
     videos.push(newVideo);
     res.status(201).json(newVideo);
