@@ -9,7 +9,6 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [order, setOrder] = useState("ASC");
-  const [rate, setRate] = useState(false);
 
   useEffect(() => {
     // fetch(`https://server-7g43.onrender.com/`)
@@ -23,7 +22,7 @@ const Home = () => {
         console.log(error);
         setIsLoading(false);
       });
-  }, [order, rate]);
+  }, [order]);
 
   const updateVideoData = (newVideoData) => {
     fetch(`https://server-7g43.onrender.com/videos/?order=${order}`, {
@@ -64,10 +63,8 @@ const Home = () => {
       body: JSON.stringify({ rating: newRating }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        // setVideos(data);
-        setRate(!rate);
-      })
+      // .then((data) => {
+      // })
       .catch((err) => console.log(err));
   };
 
