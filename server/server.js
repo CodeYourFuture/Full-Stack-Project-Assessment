@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+const app = express();
 const dotenv = require("dotenv");
 const { Pool } = require("pg");
 
@@ -9,18 +11,19 @@ const db = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-db.connect();
-const app = express();
 const port = process.env.PORT || 5005;
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
+db.connect();
 // GET "/"
 app.get("/", (req, res) => {
   res.send("Welcome to Island Tony");
 });
 
-app.get("/videos", (req, res) => {
+//get request for all videos
+app.get("/videos", async (req, res) => {
+try {
   const sorting = req.query.sorting || null;
   const sqlQuery = "SELECT * FROM videos";
   if (sorting) {
@@ -37,6 +40,7 @@ app.get("/videos", (req, res) => {
       }
     })
     .catch((err) => console.error(err));
+  }
 });
 
 app.get("/videos/:id", (req, res) => {
