@@ -41,7 +41,7 @@ const VideoPicker = ({
 
   // Fetch videos based on category and order
   useEffect(() => {
-    if (category.length > 0) {
+    if (category) {
       setIsLoading(true);
       fetch(
         `https://video-server-wtvy.onrender.com/category/${category}?order=${order}`
@@ -50,6 +50,7 @@ const VideoPicker = ({
         .then((data) => {
           setVideos(data);
           setIsLoading(false);
+          console.log("here");
         })
         .catch((error) => {
           console.error(error);
@@ -76,7 +77,8 @@ const VideoPicker = ({
   // Handle order change
   const handleOrderChange = (selectedOrder) => {
     setSelectedOrder(selectedOrder);
-    selectedOrder.value.includes("Most") ? setOrder("desc") : setOrder("asc");
+    const newOrder = selectedOrder.value === "Most Popular" ? "desc" : "asc";
+    setOrder(newOrder);
   };
 
   // Update video rating
