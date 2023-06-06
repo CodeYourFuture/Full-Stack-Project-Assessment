@@ -11,7 +11,7 @@ const db = new Pool({
 
 db.connect();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5005;
 app.use(express.json());
 
 
