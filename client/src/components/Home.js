@@ -11,7 +11,7 @@ function Home() {
   const [order, setOrder] = useState("ASC");
 
   useEffect(() => {
-    fetch(`https://server-7g43.onrender.com/videos`)
+    fetch("https://server-7g43.onrender.com/videos")
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
