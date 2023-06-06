@@ -17,17 +17,18 @@ app.use(cors());
 
 // db.connect();
 // GET "/"
-app.get("/", (req, res) => {
-  res.send("Welcome to Island Tony");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to Island Tony");
+// });
 
 //get request for all videos
-app.get("/videos", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const order = req.query.order || "asc";
     const query = "SELECT * FROM videos ORDER BY rating ${order}";
     const result = await pool.query(query);
     const sortedVideos = result.rows;
+    console.log(result.rows)
     res.json(sortedVideos);
   } catch (error) {
     console.error("Error retrieving videos:", error);

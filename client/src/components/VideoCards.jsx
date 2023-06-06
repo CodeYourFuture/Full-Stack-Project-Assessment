@@ -3,6 +3,7 @@ import Voting from "./Voting";
 import DeleteButton from "./DeleteButton";
 
 const VideoCards = ({ videoData, onDelete, onUpdateRating }) => {
+  console.log(videoData);
   const handleDelete = (videoId) => {
     onDelete(videoId);
   };

@@ -5,19 +5,22 @@ import AddVideos from "./AddVideos";
 import VideoCards from "./VideoCards";
 // import Footer from './components/Footer';
 
-function Home() {
+const Home = () => {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [order, setOrder] = useState("ASC");
+  const [order, setOrder] = useState("asc");
 
   useEffect(() => {
-    fetch("https://server-7g43.onrender.com/videos")
+    fetch(`https://server-7g43.onrender.com/`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   }, []);
 
   const updateVideoData = (newVideoData) => {
@@ -90,5 +93,5 @@ function Home() {
       )}
     </div>
   );
-}
+};
 export default Home;
