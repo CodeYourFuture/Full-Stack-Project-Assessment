@@ -6,7 +6,7 @@ const { Pool } = require("pg");
 
 dotenv.config();
 
-const db = new Pool({
+const pool = new Pool({
   connectionString: process.env.db_url,
   ssl: { rejectUnauthorized: false },
 });
@@ -23,23 +23,15 @@ app.get("/", (req, res) => {
 
 //get request for all videos
 app.get("/videos", async (req, res) => {
-try {
-  const sorting = req.query.sorting || null;
-  const sqlQuery = "SELECT * FROM videos";
-  if (sorting) {
-    sqlQuery += `ORDER BY rating ${sorting.toUpperCase()}`;
-  }
-  db.query(sqlQuery)
-    .then((result) => {
-      if (result.rowCount === 0) {
-        res.status(400).json({ error: "No Videos to List" });
-        return;
-      } else {
-        res.status(200).json(result.rows);
-        return;
-      }
-    })
-    .catch((err) => console.error(err));
+  try {
+    const order = req.query.order || "asc";
+    const query = "SELECT * FROM videos ORDER BY rating ${order}";
+    const result = await pool.query(query);
+    const sortedVideos = result.rows;
+    res.json(sortedVideos);
+  } catch (error) {
+    console.error("Error retrieving videos:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
