@@ -11,7 +11,9 @@ function App() {
 
   async function fetchVideos() {
     try {
-      const response = await fetch("http://localhost:9999");
+      const response = await fetch(
+        "https://server-full-stack-assessment.onrender.com/"
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch videos");
       }

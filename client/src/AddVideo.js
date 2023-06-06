@@ -13,7 +13,7 @@ function AddVideo({ onAddVideo }) {
       url: url
     }
 
-    fetch("http://localhost:9999", {
+    fetch("https://server-full-stack-assessment.onrender.com/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
