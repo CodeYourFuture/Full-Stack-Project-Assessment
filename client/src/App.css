@@ -1,70 +1,29 @@
-
-
-.App-header {
-  background-color: rgba(83, 84, 92, 0.983);
-  height: 80px;
-}
-
-.btn1 {
-  background-color: green;
-  border-radius: 8px;
-  margin-right: 20px;
-  margin-left: 25px;
-}
-
-.btn2 {
-  background-color: red;
-  border-radius: 8px;
-}
 .App {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  
-  color: rgb(19, 17, 17);
 }
-.Search.videos input {
-  width: 50%;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 1rem;
-  font-weight: 800;
-  font-size: inherit;
-  cursor: pointer;
+ 
+  .video-container {
+  display: grid;
+   grid-template-columns: repeat(3, 1fr); 
+}  
+.Container {
+  position: absolute;
+  top:0;
+  width: 500px;
+}
+/* margin-top: 0;
+margin-bottom: 0.5rem;
+font-weight: 500;
+line-height: 1.2; */
+
+.App-header {
+  color: #fff;
+  font-style: oblique;
+  background-color: #254e70;
+  padding: 2rem 0;
 }
 
-.form-group input {
-  border-radius: 8px;
-  font-size: inherit;
-}
-
-.btn {
-  border-radius: 8px;
-  margin: 1rem;
-}
-
-.Card-List,
-.Videos-List {
-  list-style: none;
-}
-
-.thumbs {
-  display: flex;
-  justify-content: center;
-}
-
-.Card-List {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px rgb(164, 164, 177) solid;
-  gap: 0.5rem;
-  border-radius: 8px;
-}
-
-.Videos-List {
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+.custom-header {
+  background-color: #3b3636; /* Replace with your desired background color */
 }
 
