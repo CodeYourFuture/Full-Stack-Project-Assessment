@@ -24,7 +24,7 @@
     }
   }
 
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 699px) {
     .nav_bar {
       position: absolute;
       background: var(--PrimaryColor);
@@ -96,6 +96,22 @@
       &:hover {
         color: var(--SecondaryColor);
       }
+    }
+  }
+}
+@media screen and (min-width: 700px) {
+  .toggle_nav_bar,
+  .close_nav_bar {
+    display: none;
+  }
+
+  .header {
+    padding: 40px 10px;
+
+    .nav_link {
+      padding: 10px;
+      color: var(--textColor);
+      font-weight: 600;
     }
   }
 }
