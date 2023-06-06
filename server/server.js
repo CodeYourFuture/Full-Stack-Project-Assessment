@@ -1,105 +1,120 @@
+const { Pool } = require("pg");
+const dotenv = require("dotenv");
+// const data = require("./exampleresponse.json");
+const cors = require("cors");
+
+dotenv.config();
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5009;
 
-
+app.use(express.json());
+// app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+const pool = new Pool({
+  connectionString: process.env.DB_URL,
+  ssl: {
+    rejectUnauthorized: false, // Set this to true if you have a valid SSL/TLS certificate
+  },
+});
+
+// Use the pool to query the database
+app.get("/videos/", (req, res) => {
+  const { ordering } = req.query;
+  sqlQuery = "SELECT * FROM videos";
+
+  pool
+    .query(sqlQuery)
+    .then((result) => {
+      console.log("Connected to PostgreSQL database");
+      let videos = result.rows;
+      if (ordering === "asc") {
+        videos.sort((a, b) => a.rating - b.rating);
+      } else {
+        videos.sort((a, b) => b.rating - a.rating);
+      }
+      res.status(200).json(videos);
+    })
+    .catch((err) => {
+      console.error("Error executing query", err);
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching videos" });
+    });
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [{
-  "id": 523523,
-  "title": "Never Gonna Give You Up",
-  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "rating": 23
-},
-{
-  "id": 523427,
-  "title": "The Coding Train",
-  "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
-  "rating": 230
-},
-{
-  "id": 82653,
-  "title": "Mac & Cheese | Basics with Babish",
-  "url": "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-  "rating": 2111
-},
-{
-  "id": 858566,
-  "title": "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-  "url": "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-  "rating": 11
-},
-{
-  "id": 453538,
-  "title": "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-  "url": "https://www.youtube.com/watch?v=4As0e4de-rI",
-  "rating": 3211
-},
-{
-  "id": 283634,
-  "title": "Learn Unity - Beginner's Game Development Course",
-  "url": "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-  "rating": 211
-},
-{
-  "id": 562824,
-  "title": "Cracking Enigma in 2021 - Computerphile",
-  "url": "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-  "rating": 111
-},
-{
-  "id": 442452,
-  "title": "Coding Adventure: Chess AI",
-  "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-  "rating": 671
-},
-{
-  "id": 536363,
-  "title": "Coding Adventure: Ant and Slime Simulations",
-  "url": "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-  "rating": 76
-},
-{
-  "id": 323445,
-  "title": "Why the Tour de France is so brutal",
-  "url": "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-  "rating": 73
-}];
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send(videos);
+  res.json({ express: "Your Backend Service is Running" });
 });
 
-app.post("/", (req, res) => {
-  const video1 = {
-    "title": "",
-    "url": ""
-  }
-  const id = uuidv4();
-  video1.id=id;
-  videos.push(video1);
-    res.send({id});
-  
+// get all information from example by writing this get
+
+app.post("/video", (req, res) => {
+  const { title, url } = req.body;
+  const rating = 0;
+
+  const q = "insert into videos (title, url,rating) values ($1, $2, $3) ";
+  const info = [title, url, rating];
+  pool
+    .query(q, info)
+    .then(() => res.send("data inserted"))
+    .catch((err) => console.error(err));
+  // console.log(res.rows);
+});
+
+app.delete("/video/:id", (req, res) => {
+  const id = req.params.id;
+
+  const q = "delete from videos where id = $1";
+  const info = [id];
+  pool.query(q, info, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("data deleted");
+      // console.log(res.rows);
+    }
   });
-
-
-app.get("/:id", (req, res) => {
-  
-  const videoID=videos.find(c => c.id === parseInt(req.params.id));
-  if (!videoID) res.status(404).send('The video with the given ID was not found')
-  res.send(videoID);
 });
 
-// DELETE "/{id}"
-app.delete('/:id', (req, res) => {
-  
-  const videoID=videos.find(c => c.id === parseInt(req.params.id));
-  if (!videoID) res.status(404).send('The video with the given ID was not found')
-  const index = videos.indexOf(videoID);
-  videos.splice(index, 1);
-  res.send(videos);
+app.get("/search", (req, res) => {
+  const title = req.query.title;
+  const q =
+    "SELECT * FROM videos WHERE lower(title) LIKE '%' ||lower($1) || '%'";
+  const info = [title];
+  pool.query(q, info, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result.rows);
+    }
+  });
 });
+
+app.put("/video/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const newRate = parseInt(req.body.newRate);
+  const q = "UPDATE videos SET rating = $1 WHERE id = $2";
+  const info = [newRate, id];
+  pool.query(q, info, (err, response) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .json({ error: "An error occurred while updating the video" });
+    } else {
+      console.log("Video updated");
+      res.status(200).json({ message: "Video updated successfully" });
+    }
+  });
+});
+
+
+
