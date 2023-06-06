@@ -11,8 +11,7 @@ const Home = () => {
   const [order, setOrder] = useState("ASC");
 
   useEffect(() => {
-    // fetch(`https://server-7g43.onrender.com/`)
-    fetch(`http://localhost:5005/?order=${order}`)
+    fetch(`https://server-7g43.onrender.com/?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
@@ -56,8 +55,7 @@ const Home = () => {
   };
 
   const updateRating = (videoId, newRating) => {
-    // fetch(`https://server-7g43.onrender.com/video/${videoId}`, {
-    fetch(`http://localhost:5005/video/${videoId}`, {
+    fetch(`https://server-7g43.onrender.com/video/${videoId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rating: newRating }),

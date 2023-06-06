@@ -75,17 +75,11 @@ app.put("/video/:id", async (req, res) => {
   try {
     const videosId = Number(req.params.id);
     const newRating = Number(req.body.rating);
-    // const order = req.query.order || "ASC";
     const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
     const updateValues = [newRating, videosId];
 
     await pool.query(updateQuery, updateValues);
-
-    // const allVideosQuery = `SELECT * FROM videos ORDER BY rating ${order}`;
-    // const allVideosResult = await pool.query(allVideosQuery);
-    // const allVideos = allVideosResult.rows;
     res.status(200).json({ message: "success" });
-    // res.json(allVideos);
   } catch (error) {
     console.error("Video could not be updated", error);
     res.status(500).json({ error: " Internal Server Error" });
