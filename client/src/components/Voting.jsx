@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+// import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+// import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 function Voting({ rating, onUpdateRating }) {
   const [vote, setVote] = useState(rating);
@@ -20,11 +21,12 @@ function Voting({ rating, onUpdateRating }) {
   return (
     <div className="vote">
       <button onClick={handleClickDownVote}>
-        <ThumbDownIcon />
+        <FaThumbsDown />
       </button>
       <p>{vote}</p>
       <button onClick={handleClickUpVote}>
-        <ThumbUpIcon />
+        {" "}
+        <FaThumbsUp />
       </button>
     </div>
   );
