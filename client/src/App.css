@@ -59,7 +59,14 @@ h4{
 }
 
 
-
+#onclickBtn{
+  margin-top: 2rem;
+  margin-left: 35rem;
+  border: 4px solid rgb(201, 117, 243);
+  border-radius: 10%;
+  color: rgb(69, 5, 52);
+  font-size: larger;
+}
 
 
 button{
