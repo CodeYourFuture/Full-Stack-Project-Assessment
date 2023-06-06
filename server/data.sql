@@ -12,7 +12,7 @@ CREATE TABLE
 
  INSERT INTO videos SELECT * FROM json_populate_recordset(null::videos, :'content');
 
--- ..............--
+-- .............. --
 
 with customer_json (doc) as (
    values 
