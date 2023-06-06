@@ -17,7 +17,7 @@ const VideoCard = ({ video, deleteHandler }) => {
     <div className="card_container flex">
       <h3 className="video_title">{video.title}</h3>
       <iframe
-        src={video.url.replace("watch?v=", "embed/")}
+        src={video.link.replace("watch?v=", "embed/")}
         title="video.title"
       ></iframe>
       <div className="flex">

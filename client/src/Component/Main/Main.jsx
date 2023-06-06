@@ -13,10 +13,11 @@ const Videos = () => {
 
   useEffect(() => {
     async function fetchData() {
+      console.log("hello");
       try {
         const response = await fetch("http://localhost:5000");
         const data = await response.json();
-        setVideoData(data.data);
+        setVideoData(data.video);
       } catch (error) {
         console.error(error);
       }
@@ -36,17 +37,12 @@ const Videos = () => {
       });
 
       const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        // serRequire(true);
-        setVideoData(data.data);
+
+      if (data.result) {
+        setVideoData(data.video);
       } else {
-        // serRequire(false);
-        // setMessage(data.message)
       }
-    } catch {
-      // setError(true);
-    }
+    } catch {}
   };
 
   const deleteHandler = (videoID) => {
@@ -58,7 +54,7 @@ const Videos = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setVideoData(data.data));
+      .then((data) => setVideoData(data.video));
   };
 
   return (
