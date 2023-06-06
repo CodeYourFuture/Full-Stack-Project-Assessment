@@ -23,6 +23,7 @@ function App() {
     return [...videos].sort((a, b) => b.rating - a.rating);
   }, [videos]);
 
+
   return (
     <div className="App">
       <Header />

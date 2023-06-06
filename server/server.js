@@ -5,14 +5,92 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+let videos = require("./exampleresponse.json")
+app.use(express.json());
 
 // GET "/"
 // app.get("/", (req, res) => {
-//   Delete this line after you've confirmed your server is running
-//   res.send({ express: "Your Backend Service is Running" });
-// });
+    //   Delete this line after you've confirmed your server is running
+    //   res.send({ express: "Your Backend Service is Running" });
+    // });
+    //Endpoint to get all videos
+    app.get("/", (req, res) => {
+        res.json(videos);
+    });
+    
+    app.post("/", (req, res) => {
+        const { title, url } = req.body;
+        if (!title || !url) {
+            return res.status(400).json({ error: "Both title and url are required" });
+        }
+        
+        const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})$/;
+        if (!youtubeUrlPattern.test(url)) {
+            return res.status(400).json({ error: "Invalid YouTube URL" });
+        }
+        
+        const id = Date.now();
+        const newVideo = {
+            id,
+        title,
+        url,
+        rating: 0,
+    };
+    videos.push(newVideo);
+    res.status(201).json(newVideo);
+});
+
+// Define a route for GET /:id
+// app.get('/:id', (req, res) => {
+//     const videoId = parseInt(req.params.id);
+//     const video = findVideoById(videoId);
+  
+//     if (video) {
+//       res.json(video);
+//     } else {
+//       res.status(404).json({ error: 'Video not found' });
+//     }
+//   });
+  
+//   function findVideoById(id) {
+//     return videos.find(video => video.id === id) || null;
+// })
+//GET "/{id}"
+app.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  const video = videos.find((v) => v.id === Number(id));
+
+  if (!video) {
+    return res.status(404).json({
+      result: "failure",
+      message: "Video not found",
+    });
+  }
+
+  res.json(video);
+});  
+
+// DELETE "/{id}"
+app.delete("/:id", (req, res) => {
+    const { id } = req.params;
+  
+    const index = videos.findIndex((v) => v.id === Number(id));
+  
+    if (index === -1) {
+      return res.status(404).json({
+        result: "failure",
+        message: "Video not found",
+      });
+    }
+  
+    videos.splice(index, 1);
+  
+    res.json({});
+  });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
