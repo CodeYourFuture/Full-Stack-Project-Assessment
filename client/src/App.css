@@ -1,3 +1,29 @@
 .App {
   text-align: center;
 }
+ 
+  .video-container {
+  display: grid;
+   grid-template-columns: repeat(3, 1fr); 
+}  
+.Container {
+  position: absolute;
+  top:0;
+  width: 500px;
+}
+/* margin-top: 0;
+margin-bottom: 0.5rem;
+font-weight: 500;
+line-height: 1.2; */
+
+.App-header {
+  color: #fff;
+  font-style: oblique;
+  background-color: #254e70;
+  padding: 2rem 0;
+}
+
+.custom-header {
+  background-color: #3b3636; /* Replace with your desired background color */
+}
+

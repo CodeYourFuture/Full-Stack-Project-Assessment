@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "nodemon": "^2.0.22",
+    "react-bootstrap": "^2.7.4"
+  }
+}
