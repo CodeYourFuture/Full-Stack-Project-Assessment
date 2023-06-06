@@ -15,7 +15,7 @@ const port = process.env.PORT || 5005;
 app.use(express.json());
 app.use(cors());
 
-db.connect();
+// db.connect();
 // GET "/"
 app.get("/", (req, res) => {
   res.send("Welcome to Island Tony");
