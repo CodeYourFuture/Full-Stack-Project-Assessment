@@ -13,7 +13,7 @@ const db = new Pool({
 
 const port = process.env.PORT || 5005;
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors());
 
 db.connect();
 // GET "/"
