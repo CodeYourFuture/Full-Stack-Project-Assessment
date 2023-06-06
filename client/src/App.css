@@ -20,7 +20,7 @@ body {
 
 .card {
   width: 300px;
-  height: 300px;
+  height: 400px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px;
@@ -44,6 +44,10 @@ body {
 /* Video details */
 .details {
   padding: 10px;
+}
+
+.vote {
+  display: flex;
 }
 
 /*.title {

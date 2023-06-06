@@ -1,13 +1,10 @@
 import React from "react";
 
-function SortOrder ({order, onToggle}) {
-    const sortOrder = () => {
-        onToggle();
-    };
+function SortOrder ({order, onToggleSort}) {
 
     return (
         <div>
-        <button onClick={sortOrder}>
+        <button onClick={onToggleSort}>
         {order === 'ASC' ? 'ASC' : 'DESC'}
         </button>
         </div>

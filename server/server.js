@@ -15,28 +15,13 @@ const port = process.env.PORT || 5005;
 app.use(express.json());
 app.use(cors());
 
-// db.connect();
+// pool.connect();
 // GET "/"
 // app.get("/", (req, res) => {
 //   res.send("Welcome to Island Tony");
 // });
 
-//get request for all videos
-app.get("/", async (req, res) => {
-  try {
-    const order = req.query.order || "asc";
-    const query = "SELECT * FROM videos ORDER BY rating ${order}";
-    const result = await pool.query(query);
-    const sortedVideos = result.rows;
-    console.log(result.rows)
-    res.json(sortedVideos);
-  } catch (error) {
-    console.error("Error retrieving videos:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-app.get("/videos/:id", (req, res) => {
+app.get("/video/:id", (req, res) => {
   const videosId = parseInt(req.params.id);
   const eachVideo = "SELECT * FROM videos WHERE id=$1";
   db.query(eachVideo, [videosId]).then((result) => {
@@ -46,6 +31,23 @@ app.get("/videos/:id", (req, res) => {
       res.status(200).json(result.rows);
     }
   });
+});
+
+//get request for all videos
+app.get("/", async (req, res) => {
+  try {
+    const order = req.query.order || "ASC";
+    let query = "SELECT * FROM videos ORDER BY rating ";
+    if (order === "DESC") {
+      query = "SELECT * FROM videos ORDER BY rating DESC";
+    }
+    const result = await pool.query(query);
+    const sortedVideos = result.rows;
+    res.json(sortedVideos);
+  } catch (error) {
+    console.error("Error retrieving videos:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.delete("/videos/:id", function (request, res) {
@@ -66,6 +68,27 @@ app.post("/videos", async (req, res) => {
     res.status(200).json({ message: "New Video added" });
   } catch (error) {
     res.json(error);
+  }
+});
+
+app.put("/video/:id", async (req, res) => {
+  try {
+    const videosId = Number(req.params.id);
+    const newRating = Number(req.body.rating);
+    // const order = req.query.order || "ASC";
+    const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
+    const updateValues = [newRating, videosId];
+
+    await pool.query(updateQuery, updateValues);
+
+    // const allVideosQuery = `SELECT * FROM videos ORDER BY rating ${order}`;
+    // const allVideosResult = await pool.query(allVideosQuery);
+    // const allVideos = allVideosResult.rows;
+    res.status(200).json({ message: "success" });
+    // res.json(allVideos);
+  } catch (error) {
+    console.error("Video could not be updated", error);
+    res.status(500).json({ error: " Internal Server Error" });
   }
 });
 

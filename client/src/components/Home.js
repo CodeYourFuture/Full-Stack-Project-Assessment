@@ -8,10 +8,12 @@ import VideoCards from "./VideoCards";
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [order, setOrder] = useState("asc");
+  const [order, setOrder] = useState("ASC");
+  const [rate, setRate] = useState(false);
 
   useEffect(() => {
-    fetch(`https://server-7g43.onrender.com/`)
+    // fetch(`https://server-7g43.onrender.com/`)
+    fetch(`http://localhost:5005/?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
@@ -21,7 +23,7 @@ const Home = () => {
         console.log(error);
         setIsLoading(false);
       });
-  }, []);
+  }, [order, rate]);
 
   const updateVideoData = (newVideoData) => {
     fetch(`https://server-7g43.onrender.com/videos/?order=${order}`, {
@@ -52,25 +54,19 @@ const Home = () => {
   const sortOrder = () => {
     let newSortOrder = order === "ASC" ? "DESC" : "ASC";
     setOrder(newSortOrder);
-
-    fetch(`https://server-7g43.onrender.com/videos/?order=${newSortOrder}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVideos(data);
-      })
-      .catch((err) => console.log(err));
   };
 
   const updateRating = (videoId, newRating) => {
-    fetch(`https://server-7g43.onrender.com/videos/${videoId}`, {
+    // fetch(`https://server-7g43.onrender.com/video/${videoId}`, {
+    fetch(`http://localhost:5005/video/${videoId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: videoId, rating: newRating }),
+      body: JSON.stringify({ rating: newRating }),
     })
       .then((response) => response.json())
       .then((data) => {
-        setVideos(data);
-        console.log(data);
+        // setVideos(data);
+        setRate(!rate);
       })
       .catch((err) => console.log(err));
   };
