@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./App.css";
 import Form from "./Components/Form";
 import Video from "./Components/Video";
@@ -6,7 +6,26 @@ import Header from "./Components/Header";
 import Data from "./Components/exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState(Data);
+  const [videos, setVideos] = useState([]);
+
+  // Function to fetch videos from the server
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch(
+        `https://video-server-kddf.onrender.com/`
+      );
+      const data = await response.json();
+      setVideos(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch videos when the page is loaded
+    fetchVideos();
+  }, []);
 
   const handleAddVideo = (newVideo) => {
     const updatedVideos = [...videos, newVideo];
@@ -21,7 +40,7 @@ function App() {
   const sortedVideos = useMemo(() => {
     // Sort videos based on rating
     return [...videos].sort((a, b) => b.rating - a.rating);
-  }, [videos]);
+  }, [videos]); 
 
 
   return (

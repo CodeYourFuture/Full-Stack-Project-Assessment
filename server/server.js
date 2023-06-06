@@ -13,11 +13,7 @@ let videos = require("./exampleresponse.json")
 app.use(express.json());
 
 // GET "/"
-// app.get("/", (req, res) => {
-    //   Delete this line after you've confirmed your server is running
-    //   res.send({ express: "Your Backend Service is Running" });
-    // });
-    //Endpoint to get all videos
+
     app.get("/", (req, res) => {
         res.json(videos);
     });
@@ -44,22 +40,7 @@ app.use(express.json());
     res.status(201).json(newVideo);
 });
 
-// Define a route for GET /:id
-// app.get('/:id', (req, res) => {
-//     const videoId = parseInt(req.params.id);
-//     const video = findVideoById(videoId);
-  
-//     if (video) {
-//       res.json(video);
-//     } else {
-//       res.status(404).json({ error: 'Video not found' });
-//     }
-//   });
-  
-//   function findVideoById(id) {
-//     return videos.find(video => video.id === id) || null;
-// })
-//GET "/{id}"
+
 app.get("/:id", (req, res) => {
   const { id } = req.params;
 

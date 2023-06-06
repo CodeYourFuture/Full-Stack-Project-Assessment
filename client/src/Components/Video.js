@@ -2,7 +2,9 @@ import React from "react";
 import "./Video.css";
 import Card from "./Card";
 
+
 function Video({ videos, onDelete }) {
+  
   return (
     <div className="video">
       {videos.map((card) => (
