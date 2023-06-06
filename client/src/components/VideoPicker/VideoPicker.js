@@ -60,7 +60,11 @@ const VideoPicker = ({
 
   // Update video list when videos prop changes
   useEffect(() => {
-    setVideoList(videos);
+    if (Array.isArray(videos)) {
+      setVideoList(videos);
+    } else {
+      setVideoList([]);
+    }
   }, [videos]);
 
   // Handle category change
