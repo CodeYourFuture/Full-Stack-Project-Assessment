@@ -11,7 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.17.1",
+    "pg": "^8.11.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

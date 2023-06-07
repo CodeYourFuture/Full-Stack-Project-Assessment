@@ -6,22 +6,50 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Video from "./Video.jsx";
-import data from "./exampleresponse.json";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
   const [newVideoTitle, setNewVideoTitle] = useState("");
   const [newVideoUrl, setNewVideoUrl] = useState("");
+
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  function fetchVideos() {
+    fetch("http://localhost:5000/videos")
+      .then((res) => res.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.log(error));
+  }
 
   function handleShowModal() {
     setShowModal(!showModal);
   }
 
   function handleDelete(id) {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
+    fetch(`http://localhost:5000/videos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return {};
+        }
+      })
+      .then((deleteVideo) => {
+        const updatedVideos = videos.filter(
+          (video) => video.id !== deleteVideo.id
+        );
+        setVideos(updatedVideos);
+      })
+      .catch((error) => console.log(error));
   }
 
   function handleAddVideo() {
@@ -35,18 +63,28 @@ function App() {
       return;
     }
 
-    const newVideoId = Date.now().toString(); // Generate unique ID using current timestamp
+    // const newVideoId = Date.now().toString(); // Generate unique ID using current timestamp
 
     const formattedUrl = newVideoUrl.replace("watch?v=", "embed/"); // Modify the URL format
 
     const newVideo = {
-      id: newVideoId,
+      //id: newVideoId,
       title: newVideoTitle,
       url: formattedUrl,
-      rating: 0,
+      //rating: 0,
     };
 
-    setVideos([...videos, newVideo]);
+    fetch("http://localhost:5000/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((res) => res.json())
+      .then((data) => setVideos([...videos, data]))
+      .catch((error) => console.log(error));
+
     setNewVideoTitle("");
     setNewVideoUrl("");
     setShowModal(false);
@@ -57,11 +95,15 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      
+
       <Container>
         <Row>
           <Col>
-            <Button className="addVideoBtn" variant="link" onClick={handleShowModal}>
+            <Button
+              className="addVideoBtn"
+              variant="link"
+              onClick={handleShowModal}
+            >
               Add video
             </Button>
             {showModal && (
