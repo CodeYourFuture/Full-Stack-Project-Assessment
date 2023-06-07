@@ -76,11 +76,13 @@ function App() {
       <header className="App-header">
         <h1>Gayle's Video Recommendations</h1>
       </header>
-      <button id="onclickBtn" onClick={toggleOrder}>
-        {order === "desc"
-          ? "View Videos in Ascending Order"
-          : "View Videos in Descending Order"}
-      </button>
+      <h2>
+        <button id="onclickBtn" onClick={toggleOrder}>
+          {order === "desc"
+            ? "View Videos in Ascending Order"
+            : "View Videos in Descending Order"}
+        </button>
+      </h2>
       <div className="video-grid">
         {sortedVideos.map((video) => (
           <div className="newvideos" key={video.id}>
