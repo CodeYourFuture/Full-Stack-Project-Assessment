@@ -2,6 +2,7 @@ import React from "react";
 // import "./VideoComponent.css";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
@@ -17,7 +18,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   const { id, title, url, rating } = video;
 
   const handleRemoveClick = async () => {
-    await fetch(`http://127.0.0.1:5000/${id}`, {
+    await fetch(`https://musicvideos-app.onrender.com/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
@@ -29,7 +30,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
   const handleVoteClick = async (vote) => {
     const isUpVote = vote === "upVote";
 
-    await fetch(`http://127.0.0.1:5000/${id}`, {
+    await fetch(`https://musicvideos-app.onrender.com/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -48,26 +49,23 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
     <Container sx={{ py: 5 }} maxWidth="md">
       <Grid container spacing={1}>
         <Grid item key={video.id} xs={12} sm={6} md={4}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-            }}
-          >
-            <CardMedia
+          <Card sx={{ minWidth: 400 }}>
+            <CardMedia 
               component="iframe"
               src={url.replace("watch?v=", "embed/")}
               title="YouTube video player"
               sx={{
                 // 16:9 aspect ratio
                 pt: "0.25%",
+                minHeight: 200
               }}
             />
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography gutterBottom variant="h5" component="h2">
-                {title}
-              </Typography>
+              <Box sx={{ minHeight: 100 }}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {title}
+                </Typography>
+              </Box>
               <Typography variant="body2" color="text.secondary">
                 <FavoriteOutlinedIcon /> {rating}
               </Typography>
@@ -93,7 +91,7 @@ const VideoComponent = ({ video, onRemove, onUpvote, onDownvote }) => {
                 <SentimentDissatisfiedOutlinedIcon />
               </Button>
             </CardActions>
-          </Box>
+          </Card>
         </Grid>
       </Grid>
     </Container>

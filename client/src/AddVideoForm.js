@@ -115,6 +115,7 @@ const AddVideoForm = ({ onAddVideo }) => {
           <Button
             type="submit"
             variant="contained"
+            size="large"
             className={classes.addButton}
           >
             Add Video

@@ -6,13 +6,12 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+// import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 
 const defaultTheme = createTheme();
 function Copyright() {
@@ -33,7 +32,7 @@ function HomePage() {
   const [order, setOrder] = useState("Desc");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch("https://musicvideos-app.onrender.com")
       .then((response) => response.json())
       .then((data) => {
         // Order the videos by rating in descending order
@@ -125,36 +124,32 @@ function HomePage() {
           >
             <AddVideoForm onAddVideo={handleAddVideo} />
           </Stack>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={5}
-            justifyContent="center"
-          >
-            <Button variant="contained" onClick={handleOrderAscending}>
-              Ascending Order
-            </Button>
-            <Button variant="outlined" onClick={handleOrderDescending}>
-              Descending Order
-            </Button>
-          </Stack>
         </Container>
       </Box>
 
       {/* video display */}
+      <Stack
+        sx={{ pt: 4, pl: 3 }}
+        direction="row"
+        spacing={5}
+        justifyContent="left"
+      >
+        <Button variant="contained" size="small" onClick={handleOrderAscending}>
+          Ascending
+        </Button>
+        <Button variant="outlined" size="small" onClick={handleOrderDescending}>
+          Descending
+        </Button>
+      </Stack>
       <Grid container spacing={4}>
         {videos.map((video) => (
           <Grid item key={video.id} xs={12} sm={6} md={4}>
-            <Card
-              sx={{ height: "90%", display: "flex", flexDirection: "column" }}
-            >
-              <VideoComponent
-                video={video}
-                onRemove={handleRemoveVideo}
-                onUpvote={handleUpvote}
-                onDownvote={handleDownvote}
-              />
-            </Card>
+            <VideoComponent
+              video={video}
+              onRemove={handleRemoveVideo}
+              onUpvote={handleUpvote}
+              onDownvote={handleDownvote}
+            />
           </Grid>
         ))}
       </Grid>
