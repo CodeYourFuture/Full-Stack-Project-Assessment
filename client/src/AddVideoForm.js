@@ -67,7 +67,7 @@ const AddVideoForm = ({ onAddVideo }) => {
       rating: 0,
     };
 
-    await fetch("http://127.0.0.1:5000/", {
+    await fetch("https://musicvideos-app.onrender.com", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
