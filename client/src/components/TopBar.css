@@ -9,9 +9,8 @@
 
 label {
   font-family: "Yanone Kaffeesatz", sans-serif;
-  color: #222;
+  color: transparent;
   position: relative;
-  margin: 10px;
 }
 
 .input-top {

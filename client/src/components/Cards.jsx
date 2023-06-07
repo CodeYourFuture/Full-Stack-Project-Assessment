@@ -10,21 +10,27 @@ const Cards = () => {
 
   useEffect(() => {
     setLoading(true); // Set loading state to true before making the request
-    fetch(`https://video-server-iiqf.onrender.com/videos?order=${order}`)
-      .then((response) => response.json())
+    fetch(`${process.env.REACT_APP_API_URL}/videos?order=${order}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+        return response.json();
+      })
       .then((data) => {
         setCards(data);
-        setLoading(false); // Set loading state to false after receiving the response
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false); // Set loading state to false if an error occurs
+        setLoading(false);
       });
+
   }, [order]);
 
   const handleDeleteCard = (id) => {
     setLoading(true); // Set loading state to true before sending the delete request
-    fetch(`https://video-server-iiqf.onrender.com/videos/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/videos/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

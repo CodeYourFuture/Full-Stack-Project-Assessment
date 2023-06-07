@@ -66,7 +66,7 @@ function TopBar({ onAddCard, cards, onOrderChange }) {
       url: videoCode,
     };
 
-    fetch("https://video-server-iiqf.onrender.com/videos", {
+    fetch(`${process.env.REACT_APP_API_URL}/videos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

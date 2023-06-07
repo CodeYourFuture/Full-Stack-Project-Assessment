@@ -33,7 +33,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
   };
 
   const updateRating = (id, newRating) => {
-    fetch(`https://video-server-iiqf.onrender.com/videos/${id}/rating`, {
+    fetch(`${process.env.API_URL}/videos/${id}/rating`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

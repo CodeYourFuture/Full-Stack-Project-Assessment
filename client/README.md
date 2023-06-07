@@ -32,6 +32,16 @@ To run the front-end locally, follow these steps:
 
 ---
 
+## Configuration
+### Environment Variables
+The Video Recommendation front-end relies on environment variables for certain configurations. Before running the application, make sure to set up the following environment variable:
+
+- REACT_APP_API_URL: The base URL of the backend API. It should point to the API endpoint where the video data is retrieved from.
+To configure the environment variable, create a .env file in the root directory of the client folder and define the variables as follows:
+```bash
+   REACT_APP_API_URL="http://localhost:8080"
+```
+---
 
 ## Usage
 The Video App front-end provides a user interface for managing and viewing videos. The main components of the front-end are:
