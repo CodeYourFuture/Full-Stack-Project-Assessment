@@ -18,6 +18,8 @@ const Card = ({ id, title, url, rating, uploadedAt, onDelete }) => {
     onDelete(id);
   };
 
+   
+
   return (
     <div className="card">
       <h3>{title}</h3>
