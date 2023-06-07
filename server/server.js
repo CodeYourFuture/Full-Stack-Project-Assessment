@@ -21,10 +21,10 @@ app.use(cors());
 //   res.send("Welcome to Island Tony");
 // });
 
-app.get("/video/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const videosId = parseInt(req.params.id);
   const eachVideo = "SELECT * FROM videos WHERE id=$1";
-  db.query(eachVideo, [videosId]).then((result) => {
+  pool.query(eachVideo, [videosId]).then((result) => {
     if (result.rowCount === 0) {
       res.status(400).json({ message: `Video ${videosId} not found` });
     } else {
@@ -50,24 +50,42 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.delete("/videos/:id", function (request, res) {
-  const videosId = parseInt(request.params.id);
+app.delete("/videos/:id", function (req, res) {
+  const videosId = parseInt(req.params.id);
   const eachVideo = "DELETE FROM videos WHERE id = $1";
-  db.query(eachVideo, [videosId])
+  pool
+    .query(eachVideo, [videosId])
     .then(() => res.status(200).json({ message: `Video ${videosId} deleted` }))
     .catch((error) => console.log(error));
 });
 
 app.post("/videos", async (req, res) => {
   try {
-    const { title, url } = req.body;
-    const postQuery =
+    if (req.body.title.trim() === "" || req.body.url.trim() === "") {
+      res.status(400).json({ message: "All fields need to be filled" });
+      return;
+    }
+    const order = req.query.order || asc;
+    const newVideo = {
+      title: req.body.title,
+      url: req.body.url,
+      rating: 0,
+    };
+
+    const query =
       "INSERT INTO videos(title,url,rating,date) VALUES ($1,$2,$3,$4)";
     const postDate = new Date().toLocaleString();
-    const result = await db.query(postQuery, [title, url, 0, postDate]);
-    res.status(200).json({ message: "New Video added" });
+    const values = [newVideo.title, newVideo.url, newVideo.rating, postDate];
+    const result = await pool.query(query, values);
+    const createdVideo = result.rows[0];
+
+    const allVideosQuery = `SELECT * FROM videos ORDER BY rating ${order}`;
+    const allVideosResult = await pool.query(allVideosQuery);
+    const allVideos = allVideosResult.rows;
+
+    res.status(201).json(allVideos);
   } catch (error) {
-    res.json(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
