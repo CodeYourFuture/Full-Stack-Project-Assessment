@@ -1,5 +1,6 @@
 body {
   background-color: darkgray;
+  text-align: center;
 }
 
 .AddVideos {
@@ -15,7 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: #eba7a7;
+  background-color: #a381f2;
 }
 
 .card {
@@ -28,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #aaa0a0;
+  background-color: #f0c08f;
 }
 
 /* Video thumbnail */
@@ -48,6 +49,13 @@ body {
 
 .vote {
   display: flex;
+}
+
+button {
+  color: aqua;
+  background-color: #3d5b4f;
+  border-radius: 0.2rem;
+  margin: 1.5rem 0.4rem;
 }
 
 /*.title {
