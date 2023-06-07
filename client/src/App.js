@@ -27,11 +27,10 @@ const App = () => {
       console.error("Error fetching videos:", error);
     }
   };
- 
+
   const addVideo = async (newVideo) => {
-     const time = moment().format("YYYY-MM-DD HH:mm");
+    const time = moment().format("YYYY-MM-DD HH:mm");
     try {
-      
       const response = await fetch("http://localhost:5000/videos", {
         method: "POST",
         headers: {
@@ -43,20 +42,20 @@ const App = () => {
         throw new Error("Failed to add video!");
       }
       const data = await response.json();
-      
+
       const updatedVideoList = [
-      ...videoList,
-      { ...newVideo, id: data.id, rating: 0, time },
-    ];
-    setVideoList(updatedVideoList);
-    setSortedVideoList(
-      [...updatedVideoList].sort((a, b) => b.rating - a.rating));
-      
+        ...videoList,
+        { ...newVideo, id: data.id, rating: 0, time },
+      ];
+      setVideoList(updatedVideoList);
+      setSortedVideoList(
+        [...updatedVideoList].sort((a, b) => b.rating - a.rating)
+      );
     } catch (error) {
-     console.log(error);
+      console.log(error);
     }
   };
-  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -64,10 +63,9 @@ const App = () => {
       </header>
       <div className="form-wrapper">
         <AddVideoForm AddVideo={addVideo} />
-      
 
-      <VideoComponent sortedVideoList={sortedVideoList} />
-      <Footer />
+        <VideoComponent sortedVideoList={sortedVideoList} />
+        <Footer />
       </div>
     </div>
   );
