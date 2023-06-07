@@ -3,22 +3,37 @@ import "./Card.css";
 import { MdOutlineThumbUp, MdOutlineThumbDownAlt } from "react-icons/md";
 import { ImBin2 } from "react-icons/im";
 
-const Card = ({ id, title, url, rating, uploadedAt, onDelete }) => {
-  const [voteScore, setVoteScore] = useState(rating);
+const Card = ({ id, title, url, rating, uploadedAt, onDelete, updateVideoRating }) => {
 
   const handleUpVote = () => {
-    setVoteScore(voteScore + 1);
+    if(id) {
+      fetch(
+        `https://video-server-kddf.onrender.com/${id}?action=thumbs-up`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          updateVideoRating(id, data.rating);
+        })
+        .catch((error) => console.error(error));
+    }
   };
 
   const handleDownVote = () => {
-    setVoteScore(voteScore - 1);
+    if(id) {
+      fetch(
+        `https://video-server-kddf.onrender.com/${id}?action=thumbs-down`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          updateVideoRating(id, data.rating);
+        })
+        .catch((error) => console.error(error));
+    }
   };
 
   const handleDeleteCard = () => {
     onDelete(id);
   };
-
-   
 
   return (
     <div className="card">
@@ -35,7 +50,7 @@ const Card = ({ id, title, url, rating, uploadedAt, onDelete }) => {
           title={title}
         />
       </div>
-      <p>Rating: {voteScore}</p>
+      <p>Rating: {rating}</p>
       <p>Uploaded at: {uploadedAt}</p> {/* Display the uploadedAt information */}
       <div className="btn-section">
         <button className="rate-btn up" onClick={handleUpVote}>

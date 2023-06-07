@@ -27,11 +27,27 @@ function App() {
     fetchVideos();
   }, []);
 
+  // Update video list when videos prop changes
+  useEffect(() => {
+    if (Array.isArray(videos)) {
+      setVideos(videos);
+    } else {
+      setVideos([]);
+    }
+  }, [videos]);
+
 
   const handleDelete = (id) => {
     const updatedVideos = videos.filter((video) => video.id !== id);
     setVideos(updatedVideos);
   };
+
+   // Update video rating
+   const updateVideoRating = (videoId, rating) => {
+    const updatedVideos = videos.map(video =>  video.id === videoId ? { ...video, rating } : video);
+    setVideos(updatedVideos);
+  };
+
 
   const sortedVideos = useMemo(() => {
     // Sort videos based on rating
@@ -43,7 +59,7 @@ function App() {
     <div className="App">
       <Header />
       <Form fetchVideos={fetchVideos} />
-      <Video videos={sortedVideos} onDelete={handleDelete} />
+      <Video videos={sortedVideos} onDelete={handleDelete} updateVideoRating={updateVideoRating}/>
     </div>
   );
 }

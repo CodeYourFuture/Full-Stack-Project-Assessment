@@ -3,7 +3,7 @@ import "./Video.css";
 import Card from "./Card";
 
 
-function Video({ videos, onDelete }) {
+function Video({ videos, onDelete, updateVideoRating }) {
   
   return (
     <div className="video">
@@ -14,8 +14,9 @@ function Video({ videos, onDelete }) {
           title={card.title.trim() !== "" ? card.title : "There is no title"}
           url={card.url}
           rating={card.rating}
-          uploadedAt={card.uploadedAt}
+          uploadedAt={card.uploadedat}
           onDelete={onDelete} // Pass onDelete prop
+          updateVideoRating={updateVideoRating}
         />
       ))}
     </div>
