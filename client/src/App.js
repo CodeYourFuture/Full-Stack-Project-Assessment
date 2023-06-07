@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   function fetchVideos() {
-    fetch("http://localhost:5000/videos")
+    fetch("https://video-server-wsp9.onrender.com/videos")
       .then((res) => res.json())
       .then((data) => setVideos(data))
       .catch((error) => console.log(error));
@@ -30,7 +30,7 @@ function App() {
   }
 
   function handleDelete(id) {
-    fetch(`http://localhost:5000/videos/${id}`, {
+    fetch(`https://video-server-wsp9.onrender.com/videos/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ function App() {
       //rating: 0,
     };
 
-    fetch("http://localhost:5000/videos", {
+    fetch("https://video-server-wsp9.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

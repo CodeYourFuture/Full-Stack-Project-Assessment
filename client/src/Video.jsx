@@ -23,7 +23,7 @@ function Video({ info, handleDelete }) {
   }
 
   function updateRating(id, newRating) {
-    fetch(`http://localhost:5000/videos/${id}/rating`, {
+    fetch(`https://video-server-wsp9.onrender.com/videos/${id}/rating`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
