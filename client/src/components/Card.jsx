@@ -33,7 +33,7 @@ const Card = ({ id, title, url, date, rating, onDelete }) => {
   };
 
   const updateRating = (id, newRating) => {
-    fetch(`${process.env.API_URL}/videos/${id}/rating`, {
+    fetch(`${process.env.REACT_APP_API_URL}/videos/${id}/rating`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
