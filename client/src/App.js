@@ -18,22 +18,22 @@ function App() {
   const [isAscending, setIsAscending] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://full-stack-assessment.onrender.com/videos?ordering=${
-            isAscending ? "asc" : "desc"
-          }`
-        );
-        setIsLoading(true);
-        setItems(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAscending]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://full-stack-assessment.onrender.com/videos?ordering=${
+          isAscending ? "asc" : "desc"
+        }`
+      );
+      setIsLoading(true);
+      setItems(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const orderHandler = (e) => {
     setIsAscending(!isAscending);
@@ -78,6 +78,7 @@ function App() {
     }
     validateUrl(url);
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
         "https://full-stack-assessment.onrender.com/video",
         {
@@ -129,7 +130,11 @@ function App() {
                   />
                 </InputGroup>
                 <br />
-                <Button variant="outline-success" onClick={addClickHandler}>
+                <Button
+                  variant="outline-success"
+                  onClick={addClickHandler}
+                  className="mr-3"
+                >
                   Add
                 </Button>
                 <Button variant="outline-warning" onClick={cancelHandler}>

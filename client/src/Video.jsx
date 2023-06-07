@@ -23,12 +23,26 @@ function Video({ info }) {
     }
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`https://full-stack-assessment.onrender.com/video/${id}`);
-    alert("video has been deleted");
-    window.location.reload();
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://full-stack-assessment.onrender.com/video/${id}`
+    
+      );
+      if (response.status === 200) {
+        alert("Video has been deleted successfully.");
+        window.location.reload();
+        // Perform any necessary actions after successful deletion
+      } else {
+        alert("Failed to delete the video.");
+        // Handle the error or provide appropriate feedback
+      }
+    } catch (err) {
+      console.log(err);
+      alert("An error occurred while deleting the video.");
+      // Handle the error or provide appropriate feedback
+    }
   };
-
   return (
     <div>
       <h6 className="title">{info.title}</h6>

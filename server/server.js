@@ -20,7 +20,6 @@ const pool = new Pool({
   },
 });
 
-
 // Use the pool to query the database
 app.get("/videos/", (req, res) => {
   const { ordering } = req.query;
@@ -40,10 +39,11 @@ app.get("/videos/", (req, res) => {
     })
     .catch((err) => {
       console.error("Error executing query", err);
-      res.status(500).json({ error: "An error occurred while fetching videos" });
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching videos" });
     });
 });
-
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -77,14 +77,10 @@ app.delete("/video/:id", (req, res) => {
 
   const q = "delete from videos where id = $1";
   const info = [id];
-  pool.query(q, info, (err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send("data deleted");
-      // console.log(res.rows);
-    }
-  });
+  pool
+    .query(q, info)
+    .then(() => res.json({ message: "Deleted" }))
+    .catch((err) => console.error(err));
 });
 
 app.get("/search", (req, res) => {
