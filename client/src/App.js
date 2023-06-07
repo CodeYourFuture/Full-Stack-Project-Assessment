@@ -86,7 +86,7 @@ function App() {
       <div className="video-grid">
         {sortedVideos.map((video) => (
           <div className="newvideos" key={video.id}>
-            <h4> Title: {video.title}</h4>
+            <h4> {video.title}</h4>
             <iframe
               width="400"
               height="250"
