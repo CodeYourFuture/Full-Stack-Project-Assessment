@@ -49,13 +49,13 @@ function Video({ info, handleDelete }) {
       <p>{currentRating}</p>
       <div className="groupBtn">
         <button class="btn btn-success" onClick={handleLike}>
-          <AiFillLike size={40} />
+          <AiFillLike size={20} />
         </button>
         <button class="btn btn-warning" onClick={handleDislike}>
-          <AiFillDislike size={40} />
+          <AiFillDislike size={20} />
         </button>
         <button class="btn btn-danger" onClick={handleDeleteBtn}>
-          <AiFillDelete size={40} />
+          <AiFillDelete size={20} />
         </button>
       </div>
     </div>

@@ -98,7 +98,7 @@ function App() {
 
       <Container>
         <Row>
-          <Col>
+          <Col className="addVideoDiv">
             <Button
               className="addVideoBtn"
               variant="link"

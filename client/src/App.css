@@ -1,15 +1,13 @@
 .App {
   text-align: center;
-  /* background: #000042; */
-  background-image: linear-gradient(to right,#000042, #000095, #000042);
+  background: linear-gradient(to top left, #28b487, #7dd56f);
   padding-bottom: 50px;
 }
 
 header {
   display: flex;
   color: antiquewhite;
-  /* background: #000042; */
-  background-image: linear-gradient(to right,#000042, #000095, #000042);
+  background: linear-gradient(to top left, #28b487, #7dd56f);
   width: 100%;
   height: 150px;
   margin-bottom: 50px;
@@ -25,6 +23,7 @@ header h1 {
   font-size: 2rem;
   color: white;
   cursor: pointer;
+  padding-bottom: 60px;
 }
 
 .cards {
@@ -32,7 +31,7 @@ header h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 .card {
@@ -42,14 +41,15 @@ header h1 {
   justify-content: space-between;
   width: 350px;
   height: 500px;
-  background: #000b22;
-  box-shadow: 0 0 5px #2525ff;
+  background: #007c1c;
+  box-shadow: 0 0 15px #6d0000;
   border: none;
+  border-radius: 20px;
 }
 
 .card:hover {
-  background-color: #0000b769;
-  box-shadow: 0 0 10px #5eb7ff;
+  background-color: #57ad6b;
+  box-shadow: 0 0 10px #6d0000;
 }
 
 .card h1 {
@@ -67,4 +67,8 @@ header h1 {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
+}
+
+.addVideoDiv {
+  padding-bottom: 60px;
 }
