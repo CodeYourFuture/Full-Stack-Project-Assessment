@@ -27,9 +27,8 @@ function Video({ info }) {
     try {
       const response = await axios.delete(
         `https://full-stack-assessment.onrender.com/video/${id}`
-    
       );
-      if (response.status === 200) {
+      if (response.ok) {
         alert("Video has been deleted successfully.");
         window.location.reload();
         // Perform any necessary actions after successful deletion
