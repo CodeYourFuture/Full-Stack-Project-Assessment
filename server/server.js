@@ -66,25 +66,27 @@ app.delete("/videos/:id", async function (request, response) {
   }
 });
 
-
 app.post("/videos/addnew", async function (request, response) {
   try {
-    const { title, url } = request.body;
-    if (!title || !url) {
+    const { genre, title, url } = request.body;
+    if (!genre || !title || !url) {
       return response
         .status(400)
-        .json({ message: "Please fill out the required fields" });
+        .json({ message: "Please fill all required fields" });
     }
 
     const insertNewVideoQuery =
-      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0)";
-    const insertVideo = await database.query(insertNewVideoQuery, [title, url]);
+      "INSERT INTO videos (genre, title, url, rating) VALUES ($1, $2, $3, 0)";
+    const insertVideo = await database.query(insertNewVideoQuery, [
+      genre,
+      title,
+      url,
+    ]);
 
     return response.json({ message: "Video successfully added" });
   } catch (error) {
     return response.status(500).json({ error: "not a valid info" });
   }
 });
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
