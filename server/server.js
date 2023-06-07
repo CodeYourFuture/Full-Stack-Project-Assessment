@@ -77,10 +77,14 @@ app.delete("/video/:id", (req, res) => {
 
   const q = "delete from videos where id = $1";
   const info = [id];
-  pool
-    .query(q, info)
-    .then(() => res.json({ message: "Deleted" }))
-    .catch((err) => console.error(err));
+  pool.query(q, info, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("data deleted");
+      // console.log(res.rows);
+    }
+  });
 });
 
 app.get("/search", (req, res) => {
