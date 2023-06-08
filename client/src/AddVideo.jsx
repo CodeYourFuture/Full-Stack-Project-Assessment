@@ -29,24 +29,7 @@ function AddVideo({ videos, setVideos }) {
       : alert("Please add a valid url.");
     newVideo.rating = Math.floor(Math.random() * 5000) + 1;
 
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; 
-    const currentDay = currentDate.getDate();
-    newVideo.date = currentYear + "-" + currentMonth + "-" + currentDay;
-
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    const currentMinutes = currentTime.getMinutes();
-    const currentSeconds = currentTime.getSeconds();
-    newVideo.time = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-
-
-    // const newVideoData = {
-    //   id: Math.floor(Math.random() * 1000),
-    //   title,
-    //   url,
-    // };
+ 
  newVideo.id = videoUrl.split("=")[1];
     setVideos([newVideo, ...videos]);
      setNewVideo({});
