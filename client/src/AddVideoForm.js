@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-function AddVideoForm({ onAddVideo, fetchVideos }) {
+function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [genre, setGenre] = useState("");
   const [filledForm, setFilledForm] = useState(null);
-  const [errorPopUp, setErrorPopUp] = useState(false);
+  const [errorMsgPopUp, setErrorMsgPopUp] = useState(false);
+  const [showVideosOnLoad, setShowVideosOnLoad] = useState(false);
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!genre || !title || !url) {
-      setErrorPopUp(true);
+      setErrorMsgPopUp(true);
       return;
     }
 
@@ -51,9 +53,17 @@ function AddVideoForm({ onAddVideo, fetchVideos }) {
     }
   }
 
-  function handleCloseModal() {
-    setErrorPopUp(false);
+  function handleErrorMsgPopup() {
+    setErrorMsgPopUp(false);
   }
+
+  // function renderVideos(){
+  //   return videos.map((video, index) => (
+  //     <p key={index}> 
+  //     {video.title} - {video.url}
+  //     </p>
+  //   ))
+  // }
 
   return (
     <div>
@@ -95,18 +105,31 @@ function AddVideoForm({ onAddVideo, fetchVideos }) {
         </button>
       </form>
 
-      {/* Modal for displaying error message */}
-      <Modal show={errorPopUp} onHide={handleCloseModal}>
+      {/* Modal form for displaying error message */}
+      <Modal show={errorMsgPopUp} onHide={handleErrorMsgPopup}>
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
         </Modal.Header>
         <Modal.Body>Please fill in all required fields to proceed.</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" onClick={handleErrorMsgPopup}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Toggle button for hiding/showing videos */}
+      {/* <button onClick={handleToggleVideos}>
+        {showVideosOnLoad ? "Hide Videos" : "Show Videos"}
+      </button> */}
+
+      {/* Render videos if showVideos is true */}
+      {showVideosOnLoad && (
+        <div>
+          {/* Render your videos here
+          {renderVideos(setShowVideosOnLoad)} */}
+        </div>
+      )}
     </div>
   );
 }
