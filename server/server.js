@@ -72,7 +72,7 @@ app.post("/videos", (req, res) => {
     .query(query, [uniId, title, url, rating, rating])
     .then((result) => {
       const newVid = result.rows[0];
-
+      console.log({ newVid });
       res.json({
         addedData: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
       });
