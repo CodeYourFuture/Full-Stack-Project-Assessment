@@ -48,7 +48,7 @@ const [videos, setVideos] = useState([]);
           <iframe
             width="560"
             height="315"
-            src={videos.Url}
+            src={video.url.replace("watch?v=", "embed/")}
             title={videos.title}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

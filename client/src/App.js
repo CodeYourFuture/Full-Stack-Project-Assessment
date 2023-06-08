@@ -18,6 +18,7 @@ const App = () => {
       if (res.ok) {
         const data = await res.json();
         setVideoList(data);
+        console.log(data);
         const sortedList = [...data].sort((a, b) => b.rating - a.rating);
         setSortedVideoList(sortedList);
       } else {
