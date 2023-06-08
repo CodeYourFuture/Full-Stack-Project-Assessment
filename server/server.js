@@ -114,14 +114,6 @@ app.post("/videos", async (req, res) => {
   }
 });
 
-// app.get("/:id", (req, res) => {
-//   const videoId = +req.params.id;
-//   const filteredVideos = videos.filter((video) => video.id === videoId);
-//   res.status(200).send(filteredVideos);
-// });
-
-// GET a video by ID
-
 app.get("/videos/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
