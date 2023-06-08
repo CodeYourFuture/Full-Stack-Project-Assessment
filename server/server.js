@@ -22,16 +22,13 @@ app.get("/videos", async (req, res) => {
     res.status(200).json(videos);
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: "Failed to retrieve videos." });
   }
 });
-// let idCounter = Math.max(...videos.map((video) => video.id)) + 1;
 
 //  Add a video to the API.
 app.post("/videos", async (req, res) => {
   try {
-    //  if  (!req.body.title || !req.body.url) {
-    //     return res.status(400).json({ Message: "Video could not be saved" });
-    //   }
     const { title, url } = req.body;
     const rating = 0;
     const query =
@@ -42,16 +39,10 @@ app.post("/videos", async (req, res) => {
     res.status(201).json(newVideo);
   } catch (error) {
     console.error(error);
+    res
+      .status(500)
+      .json({ error: "Something went wrong. Please try again later." });
   }
-  // const newVideos = {
-  //   id: idCounter,
-  //   title: req.body.title,
-  //   url: req.body.url,
-  //   rating: 0,
-  // };
-  // videos.push(newVideos);
-  // console.log("New video added:", newVideos);
-  // res.json({ id: newVideos.id });
 });
 
 // Get the video with the ID
@@ -117,9 +108,4 @@ app.put("/videos/:id/downvote", async (req, res) => {
   }
 });
 
-// GET "/"
-// app.get("/", (req, res) => {
-// Delete this line after you've confirmed your server is running
-// res.send({ express: "Your Backend Service is Running" });
-// });
 app.listen(port, () => console.log(`Listening on port ${port}`));
