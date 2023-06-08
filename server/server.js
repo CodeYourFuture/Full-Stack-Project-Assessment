@@ -46,7 +46,7 @@ app.delete("/:id", async (request, response) => {
     let videoID = +request.params.id;
 
     if (!videoID) {
-      return response.status(400).json({ "result": "failure", "message": "there is an error!" })
+      return response.status(400).json({ "result": "failure", "message": "there is an error, this Id is not exist " })
     }
 
     const deleteQuery = "DELETE FROM videos WHERE id=$1";

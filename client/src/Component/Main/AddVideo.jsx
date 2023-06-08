@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddVideo = ({ addVideo }) => {
+const AddVideo = ({ testUrl, addVideo }) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
   const [formInput, setFormInput] = useState({
@@ -25,7 +25,7 @@ const AddVideo = ({ addVideo }) => {
       return;
     }
 
-    if (!isValidYouTubeUrl(formInput.url)) {
+    if (!testUrl(formInput.url)) {
       setError(true);
       setErrorMessage(["please insert a valid youtube url"]);
       return;
@@ -38,12 +38,6 @@ const AddVideo = ({ addVideo }) => {
       url: "",
     });
   };
-
-  function isValidYouTubeUrl(url) {
-    let youtubePattern =
-      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{10}[A-Z]$/;
-    return youtubePattern.test(url);
-  }
 
   return (
     <form className="form_container grid" onSubmit={submitHandler}>

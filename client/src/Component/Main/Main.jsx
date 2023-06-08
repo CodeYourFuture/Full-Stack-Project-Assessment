@@ -1,5 +1,4 @@
 import "./main.scss";
-// import Data from "../../data/exampleresponse.json";
 import VideoCard from "./VideoCard";
 import AddVideo from "./AddVideo";
 import { useState, useEffect } from "react";
@@ -7,13 +6,14 @@ import { useState, useEffect } from "react";
 const Videos = () => {
   const [videosData, setVideoData] = useState([]);
 
-  // const addVideo = (formValue) => {
-  //   setVideoData([...videosData, formValue]);
-  // };
+  function isValidYouTubeUrl(url) {
+    let youtubePattern =
+      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{10}[A-Z]$/;
+    return youtubePattern.test(url);
+  }
 
   useEffect(() => {
     async function fetchData() {
-      console.log("hello");
       try {
         const response = await fetch("http://localhost:5000");
         const data = await response.json();
@@ -42,7 +42,7 @@ const Videos = () => {
         setVideoData(data.video);
       } else {
       }
-    } catch {}
+    } catch (error) {}
   };
 
   const deleteHandler = (videoID) => {
@@ -59,7 +59,7 @@ const Videos = () => {
 
   return (
     <div className="main_container grid">
-      <AddVideo addVideo={addVideo} />
+      <AddVideo testUrl={isValidYouTubeUrl} addVideo={addVideo} />
       <div className="videos_container grid">
         {videosData.map((video) => (
           <VideoCard video={video} deleteHandler={deleteHandler} />
