@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import data from "./exampleresponse.json";
 import VideoList from "./VideoList";
 import AddVideo from "./AddVideo";
 import SearchVideo from "./SearchVideo";
+
 function App() {
-  const [videosData, setVideosData] = useState([]);
+  console.log(data);
+  const [videosData, setVideosData] = useState(data);
   const [searchVideos, setSearchVideos] = useState([]);
   console.log(videosData);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/videos")
+    fetch("http://127.0.0.1:5000/")
       .then((res) => res.json())
       .then((data) => setVideosData(data));
 

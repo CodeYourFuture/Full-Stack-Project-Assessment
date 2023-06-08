@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: rgba(55, 77, 166, 0.983);
-  color: white;
+  background-color: rgba(1, 46, 225, 0.983);
+  color: rgb(2, 2, 2);
 }
 .Search.videos input {
   width: 100%;
@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border: 1px rgb(164, 164, 177) solid;
+  border: 1px rgb(9, 9, 11) solid;
   gap: 0.5rem;
   border-radius: 8px;
 }

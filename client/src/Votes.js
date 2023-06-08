@@ -9,7 +9,7 @@ function Votes() {
   const [dislike, setDislike] = useState(0);
 
   const handleDislike = () => {
-    setDislike(Votes + 1);
+    setDislike(dislike + 1);
   };
 
   return (
