@@ -10,30 +10,30 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, vid, deleteVid, g
   const handleClick = (e) => {
     e.preventDefault();
     //console.log("onlick inside vid card ");
-    const parameter = vid;
+    //const parameter = vid;
     //console.log({ vid });
-    addLike(parameter);
+    addLike(vid);
   };
   const handleUnClick = (e) => {
     e.preventDefault();
     //console.log("onlick inside vid card ");
-    const parameter = vid;
+    //const parameter = vid;
     //console.log({ vid });
-    removeLike(parameter);
+    removeLike(vid);
   };
   const handleDelete = (e) => {
     e.preventDefault();
     //console.log("onlick inside vid card ");
-    const parameter = vid;
+    //const parameter = vid;
     //console.log({ vid });
-    deleteVid(parameter);
+    deleteVid(vid);
   };
   const handleShowOne = (e) => {
     e.preventDefault();
     //console.log("onlick inside vid card ");
-    const parameter = vid;
+    //const parameter = vid;
     //console.log({ vid });
-    getVid(parameter);
+    getVid(vid);
   };
 
   return (
