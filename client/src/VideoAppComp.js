@@ -2,21 +2,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import VideoForm from "./VideoSubForm";
 import VideoCard from "./VideoCard";
-//import exampleresponse from "./exampleresponse.json";
 
 const VideoApp = () => {
   const API = "http://127.0.0.1:5000/";
   const getAPI = () => {
-    // Change this endpoint to whatever local or online address you have
-    // Local PostgreSQL Database
-
     fetch(`${API}videos`)
       .then((response) => {
-        //console.log(response);
         return response.json();
       })
       .then((data) => {
-        //setApiData(data);
         setVideos(data.videoes);
         setLoading(false);
         console.log(data);
@@ -26,37 +20,23 @@ const VideoApp = () => {
   useEffect(() => {
     getAPI();
   }, []);
-  /* const [apiData, setApiData] = useState([]); */
+
   const [loading, setLoading] = useState(true);
   const [uploadError, setUploadError] = useState(false);
-  //console.log(apiData, "all videos ");
+
   const [videos, setVideos] = useState([]);
   console.log(videos, "videoes");
-  //const [videos, setVideos] = useState([...exampleresponse]);
 
   function addLike(param) {
-    const updatedLikes = videos.filter((el) => el.id !== param);
-    console.log({ updatedLikes });
     const newLike = videos.filter((el) => el.id === param);
-    console.log({ newLike });
-
-    //console.log(newLike[0], "befor change");
     newLike[0].rating++;
-    //console.log(newLike[0], "after change");
-    // - - need to sort array befor spreading it back into setVideo post
-
-    // - - or just posting it back to the server
     updateVideo(newLike[0].rating, param);
     getAPI();
-    //setVideos([...updatedLikes, newLike[0]]);
   }
 
   function removeLike(param) {
     const newLike = videos.filter((el) => el.id === param);
-
-    console.log(newLike[0], "befor change");
     newLike[0].rating--;
-
     updateVideo(newLike[0].rating, param);
     getAPI();
   }
@@ -67,7 +47,6 @@ const VideoApp = () => {
       url_link: url,
     };
 
-    console.log("newVideo", newVideo);
     const request = new Request(`${API}videos`, {
       method: "POST",
       headers: {
@@ -84,17 +63,13 @@ const VideoApp = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-
         const successUpdatedVideo = data.addedData.videoAdded;
-
         setVideos([...videos, successUpdatedVideo]);
       })
       .catch((error) => {
         console.log("fetch failed", error);
         setUploadError(true);
       });
-    //setVideos([...videos, newVideo]);
   };
   const updateVideo = (rating, id) => {
     const updateVid = {
@@ -102,7 +77,6 @@ const VideoApp = () => {
       id,
     };
 
-    console.log("newVideo", updateVid);
     const request = new Request(`${API}videos/${id}`, {
       method: "PUT",
       headers: {
@@ -113,7 +87,6 @@ const VideoApp = () => {
     fetch(request)
       .then((response) => {
         if (!response.ok) {
-          //setUploadError(true);
           throw new Error("Whoops!");
         }
         return response.json();
@@ -121,21 +94,14 @@ const VideoApp = () => {
       .then((data) => {
         console.log(data);
         getAPI();
-        /* const successUpdatedVideo = data.addedData.videoAdded;
-
-        setVideos([...videos, successUpdatedVideo]); */
       })
       .catch((error) => {
         console.log("fetch failed UPDATE", error);
-        //setUploadError(true);
       });
-    //setVideos([...videos, newVideo]);
   };
-  const deleteVideo = (vidId) => {
-    const id = vidId;
 
-    console.log("videoId", id);
-    const request = new Request(`${API}videos/${id}`, {
+  const deleteVideo = (vidId) => {
+    const request = new Request(`${API}videos/${vidId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -145,29 +111,22 @@ const VideoApp = () => {
       .then((response) => {
         if (!response.ok) {
           console.log("resoponse not ok");
-          //setUploadError(true);
           throw new Error("Whoops!");
         }
         return response.json();
       })
       .then((data) => {
         console.log(data);
-
-        //const successUpdatedVideo = data.addedData.videoAdded;
-
         getAPI();
       })
       .catch((error) => {
         console.log("fetch failed", error);
         setUploadError(true);
       });
-    //setVideos([...videos, newVideo]);
   };
-  const getVideo = (vidId) => {
-    const id = vidId;
 
-    console.log("videoId", id);
-    const request = new Request(`${API}videos/${id}`, {
+  const getVideo = (vidId) => {
+    const request = new Request(`${API}videos/${vidId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -177,23 +136,17 @@ const VideoApp = () => {
       .then((response) => {
         if (!response.ok) {
           console.log("resoponse not ok");
-          //setUploadError(true);
           throw new Error("Whoops!");
         }
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-
         const successUpdatedVideo = data.videoes;
         setVideos([successUpdatedVideo]);
-        //getAPI();
       })
       .catch((error) => {
         console.log("fetch failed get 1", error);
-        //setUploadError(true);
       });
-    //setVideos([...videos, newVideo]);
   };
 
   return (
@@ -217,7 +170,6 @@ const VideoApp = () => {
               ratings={video.rating}
               addLike={addLike}
               removeLike={removeLike}
-              //likes={likes}
               vid={video.id}
               deleteVid={deleteVideo}
               getVid={getVideo}

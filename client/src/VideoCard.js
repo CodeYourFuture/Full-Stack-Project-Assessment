@@ -5,34 +5,21 @@ const VideoCard = ({ title, url, ratings, addLike, removeLike, vid, deleteVid, g
   const videoID = url.split("=").slice(-1)[0];
 
   const embedUrl = `https://www.youtube.com/embed/${videoID}`;
-  //console.log(embedUrl);
 
   const handleClick = (e) => {
     e.preventDefault();
-    //console.log("onlick inside vid card ");
-    //const parameter = vid;
-    //console.log({ vid });
     addLike(vid);
   };
   const handleUnClick = (e) => {
     e.preventDefault();
-    //console.log("onlick inside vid card ");
-    //const parameter = vid;
-    //console.log({ vid });
     removeLike(vid);
   };
   const handleDelete = (e) => {
     e.preventDefault();
-    //console.log("onlick inside vid card ");
-    //const parameter = vid;
-    //console.log({ vid });
     deleteVid(vid);
   };
   const handleShowOne = (e) => {
     e.preventDefault();
-    //console.log("onlick inside vid card ");
-    //const parameter = vid;
-    //console.log({ vid });
     getVid(vid);
   };
 

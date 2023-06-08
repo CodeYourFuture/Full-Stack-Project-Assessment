@@ -2,65 +2,43 @@ const express = require("express");
 const pool = require("./config/dbSqlConn");
 const app = express();
 const cors = require("cors");
-//const bodyParser = require("body-parser");
+
 const vidData = require("./exampleresponse.json");
 const port = process.env.PORT || 5000;
 
-//console.log("pool", pool);
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [...vidData];
-// - - functions - - //
+
 function getNewUniqueId(array) {
-  // request an array of ids from the database
-  //or check the lenth of of he object array
-  const min = 1000; // Minimum 6-digit number (inclusive)
-  const max = 9999; // Maximum 6-digit number (inclusive)
+  const min = 1000;
+  const max = 9999;
   let newId;
   do {
-    newId = Math.floor(Math.random() * (max - min + 1)) + min; // generate a random number between 1 and 1000
-  } while (array.some((obj) => obj.id === newId)); // check if the id already exists in the array
+    newId = Math.floor(Math.random() * (max - min + 1)) + min;
+  } while (array.some((obj) => obj.id === newId));
   return newId;
 }
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// express has its own body prarser
-//app.use(bodyParser.json());
-// GET "/"
+
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
 
-/* app.use("/videos", require("./routes/api/videos")); */
-
-//example routes
-
 app.get("/videos", async (req, res) => {
-  //const query = "SELECT * FROM tableName;";
-  // to return query in consitsten order
-  // DESC is the same as heighes first and lowest last
-  // - with time the most recent point is the highest
-  //const query = "SELECT * FROM videos ORDER BY id DESC;";
   const query = "SELECT * FROM videos ORDER BY id DESC;";
-  // table and row names are not dynamic
+
   try {
     const { rows } = await pool.query(query);
     const vidData = rows;
-    //console.log({ vidData });
+
     res.json({ allVideoes: "all videoes", videoes: vidData });
   } catch (err) {
     console.error("Error executing query", err);
     res.status(500).send("Internal server error");
   }
 });
-
-/* app.get("/videos", (req, res) => {
-  res.json({ allVideoes: "all videoes", videoes: vidData });
-}); */
 
 app.post("/videos", (req, res) => {
   const error = {
@@ -76,7 +54,6 @@ app.post("/videos", (req, res) => {
     });
   }
 
-  //const id = req.body.id;
   const uniId = getNewUniqueId(videos);
   console.log(req.body);
   const title = req.body.title;
@@ -95,8 +72,7 @@ app.post("/videos", (req, res) => {
     .query(query, [uniId, title, url, rating, rating])
     .then((result) => {
       const newVid = result.rows[0];
-      console.log({ newVid });
-      //res.status(201).send("Created a new customer");
+
       res.json({
         addedData: { info: "new video added", uniqueId: `${uniId}`, videoAdded: newVidToAdd },
       });
@@ -128,7 +104,6 @@ app.delete("/videos/:idp", (req, res) => {
     .query(query, [idInPram])
     .then((result) => {
       const deletedVid = result.rows[0];
-      console.log({ deletedVid });
       if (!deletedVid)
         return res.status(404).json({
           videoAddError: {
@@ -136,7 +111,7 @@ app.delete("/videos/:idp", (req, res) => {
             message: "Video could not be found",
           },
         });
-      //res.status(201).send("Created a new customer");
+
       res.json({ allVideoes: { info: " video deleted", videoId: `${idInPram}` } });
     })
     .catch((err) => {
@@ -186,12 +161,8 @@ app.put("/videos/:idp", (req, res) => {
       },
     });
   }
-
-  //const id = req.body.id;
   const id = req.params.idp;
-  console.log({ id });
   const rating = req.body.rating;
-  console.log({ rating });
 
   const query = `UPDATE videos SET rating = $1 WHERE id = $2 RETURNING *`;
 
@@ -199,8 +170,6 @@ app.put("/videos/:idp", (req, res) => {
     .query(query, [rating, id])
     .then((result) => {
       const newVid = result.rows[0];
-      console.log({ newVid });
-      //res.status(201).send("Created a new customer");
       res.json({
         updatedData: { info: "new video updated", uniqueId: `${id}` },
       });
