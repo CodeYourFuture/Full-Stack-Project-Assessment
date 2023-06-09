@@ -41,9 +41,24 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 // GET "/videos"
+// app.get("/videos", (req, res) => {
+//   res.json(videos);
+// });
+
 app.get("/videos", (req, res) => {
-  res.json(videos);
+  const orderParam = req.query.order;
+  let orderedVideos = [...videos];
+
+  const orderBy =
+    orderParam === "asc"
+      ? (a, b) => a.rating - b.rating
+      : (a, b) => b.rating - a.rating;
+  orderedVideos.sort(orderBy);
+
+  res.json(orderedVideos);
 });
+
+
 // POST "/videos"
 app.post("/videos", (req, res) => {
   const newVideo = req.body;
