@@ -2,16 +2,22 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import "./Cards.css";
 import TopBar from "./TopBar";
+
+
 const Cards = () => {
   const [cards, setCards] = useState([]);
+  const [order, setOrder] = useState("desc");
+
+
   useEffect(() => {
-    fetch("http://localhost:5000/videos")
+    fetch(`http://localhost:5000/videos?order=${order}`)
       .then((response) => response.json())
       .then((data) => setCards(data))
       .catch((error) => console.log(error));
-  }, []);
-  // Arrange the array of cards in ascending order based on the rating property:
-  const sortedCards = [...cards].sort((a, b) => b.rating - a.rating);
+  }, [order]);
+  
+
+  
   const handleDeleteCard = (id) => {
     // Send a DELETE request to the server
     fetch(`http://localhost:5000/videos/${id}`, {
@@ -19,7 +25,7 @@ const Cards = () => {
     })
       .then((response) => response.json())
       .then((deletedVideo) => {
-        // Exclude the deleted card from the existing cards.
+        
         const updatedCards = cards.filter(
           (card) => card.id !== deletedVideo[0].id
         );
@@ -30,11 +36,21 @@ const Cards = () => {
   const handleAddCard = (newCard) => {
     setCards((prevCards) => [...prevCards, newCard]);
   };
+  
+  const handleOrderChange = (newOrder) => {
+    setOrder(newOrder);
+  };
+
   return (
     <>
-      <TopBar onAddCard={handleAddCard} cards={cards} />
+      {/* <TopBar onAddCard={handleAddCard} cards={cards} /> */}
+      <TopBar
+        onAddCard={handleAddCard}
+        cards={cards}
+        onOrderChange={handleOrderChange}
+      />
       <div className="cards">
-        {sortedCards.map((card) => (
+        {cards.map((card) => (
           <Card
             key={card.id}
             id={card.id}

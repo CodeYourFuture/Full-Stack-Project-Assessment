@@ -8,33 +8,33 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
-let videos = [
-  {
-    "id": 442452,
-    "title": "Coding Adventure: Chess AI",
-    "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    "rating": 671
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "HerCR8bw_GE",
-    rating: 230,
-    date: "2023-05-15",
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-];
+// let videos = [
+//   {
+//     "id": 442452,
+//     "title": "Coding Adventure: Chess AI",
+//     "url": "https://www.youtube.com/watch?v=U4ogK0MIzqk",
+//     "rating": 671
+//   },
+//   {
+//     id: 523427,
+//     title: "The Coding Train",
+//     url: "HerCR8bw_GE",
+//     rating: 230,
+//     date: "2023-05-15",
+//   },
+//   {
+//     id: 323445,
+//     title: "Why the Tour de France is so brutal",
+//     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
+//     rating: 73,
+//   },
+//   {
+//     id: 536363,
+//     title: "Coding Adventure: Ant and Slime Simulations",
+//     url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
+//     rating: 76,
+//   },
+// ];
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
