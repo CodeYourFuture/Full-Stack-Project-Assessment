@@ -2,6 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
+const { pool } = require("pg");
+require("dotenv").config();
+const pool = new Pool({
+  connectionString: process.env.DB_URL,
+});
 app.use(cors());
 app.use(express.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -60,11 +65,24 @@ app.get("/videos", (req, res) => {
 
 
 // POST "/videos"
-app.post("/videos", (req, res) => {
-  const newVideo = req.body;
-  videos.push(newVideo);
-  res.status(201).json(newVideo);
-});
+// app.post("/videos", (req, res) => {
+//   const newVideo = req.body;
+//   videos.push(newVideo);
+//   res.status(201).json(newVideo);
+// });
+app.post("/videos", async (req, res) => {
+  
+    const { title, url, rating, date } = req.body;
+
+    const query =
+      "INSERT INTO videos (title, url, rating, date) VALUES ($1, $2, $3, $4) RETURNING *";
+    const values = [title, url, rating, date];
+    const result = await pool.query(query, values);
+    const newVideo = result.rows[0];
+
+    res.status(201).json(newVideo);
+  })
+
 // DELETE "/videos/:id"
 app.delete("/videos/:id", (req, res) => {
   const videoId = req.params.id;
