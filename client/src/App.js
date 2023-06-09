@@ -1,13 +1,14 @@
+import React from "react";
+import Header from "./components/Header";
+import Cards from "./components/Cards";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+    <div>
+      <Header /> 
+      <Cards />
     </div>
   );
-}
-
+};
 export default App;
