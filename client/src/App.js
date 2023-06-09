@@ -5,9 +5,17 @@ import "./App.css";
 function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc");
+   const [selectedGenre, setSelectedGenre] = useState("");
 
   const fetchVideos = () => {
-    fetch(`http://localhost:5000/videos?order=${order}`)
+    let url = `http://localhost:5000/videos?order=${order}`;
+
+    if (selectedGenre){
+      url += `&genre=${selectedGenre}`;
+    }
+
+
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
@@ -21,7 +29,7 @@ function App() {
   useEffect(() => {
     fetchVideos();
     // eslint-disable-next-line
-  }, []);
+  }, [selectedGenre, order]);
 
   function addNewVideo(video) {
     const newVideosAdded = videos.concat(video);
@@ -88,6 +96,22 @@ function App() {
           </button>
         </h3>
       </div>
+
+      {/* Add genre filter */}
+      <div className="genre-filter">
+        <h3>Filter by Genre:</h3>
+        <select
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="beauty">Beauty</option>
+          <option value="coding">Coding</option>
+          <option value="fashion">Fashion</option>
+        </select>
+      </div>
+
+
       <div className="video-grid">
         {sortedVideos.map((video) => (
           <div className="newvideos" key={video.id}>
@@ -104,10 +128,10 @@ function App() {
             <h4>Rating: {video.rating}</h4>
             <div className="vote-btns">
               <button id="vote-btn" onClick={() => voteUp(video.id)}>
-              Vote Up
+                Vote Up
               </button>
               <button id="vote-btn" onClick={() => voteDown(video.id)}>
-              Vote Down
+                Vote Down
               </button>
             </div>
             <div className="delete">

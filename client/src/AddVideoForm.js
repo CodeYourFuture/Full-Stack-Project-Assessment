@@ -56,14 +56,7 @@ function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
   function handleErrorMsgPopup() {
     setErrorMsgPopUp(false);
   }
-
-  // function renderVideos(){
-  //   return videos.map((video, index) => (
-  //     <p key={index}> 
-  //     {video.title} - {video.url}
-  //     </p>
-  //   ))
-  // }
+  
 
   return (
     <div>
@@ -118,16 +111,9 @@ function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
         </Modal.Footer>
       </Modal>
 
-      {/* Toggle button for hiding/showing videos */}
-      {/* <button onClick={handleToggleVideos}>
-        {showVideosOnLoad ? "Hide Videos" : "Show Videos"}
-      </button> */}
-
-      {/* Render videos if showVideos is true */}
       {showVideosOnLoad && (
         <div>
-          {/* Render your videos here
-          {renderVideos(setShowVideosOnLoad)} */}
+          {}
         </div>
       )}
     </div>

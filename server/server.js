@@ -13,12 +13,33 @@ app.use(
   })
 );
 
+/*Leaving this code snippet here for further clarification. please ignore for now*/
+// let sqlQuery = `SELECT * FROM videos`;
+// if (genre) {
+//   sqlQuery += ` WHERE genre = $1`;
+// }
+// sqlQuery += ` ORDER BY rating ${order}`;
+// const getAllVideos = await database.query(sqlQuery, [genre]);
+
+
 // GET "/videos"
 app.get("/videos", async function (request, response) {
   try {
     const order = request.query.order || "desc";
-    const sqlQuery = `SELECT * FROM videos ORDER BY rating ${order};`;
-    const getAllVideos = await database.query(sqlQuery);
+    const genre = request.query.genre || "";
+
+    let sqlQuery = `SELECT * FROM videos`;
+
+    const queryParameters = [];
+
+    if (genre) {
+      sqlQuery += ` WHERE genre = $1`;
+      queryParameters.push(genre);
+    }
+
+    sqlQuery += ` ORDER BY rating ${order}`;
+
+    const getAllVideos = await database.query(sqlQuery, queryParameters);
     console.log(getAllVideos.rows);
     const allVideos = getAllVideos.rows;
     return response.status(200).json(allVideos);
@@ -85,7 +106,7 @@ app.post("/videos/addnew", async function (request, response) {
 
     return response.json({ message: "Video successfully added" });
   } catch (error) {
-    return response.status(500).json({ error: "not a valid info" });
+    return response.status(500).json({ error: "Not a valid info" });
   }
 });
 
