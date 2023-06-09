@@ -1,0 +1,73 @@
+.add-video-form {
+  display: flex;
+  flex-direction: column; 
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #716e6e;
+}
+
+.add-video-form label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+
+.add-video-form input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #ffd700;
+  font-size: 16px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #ffd700;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.add-video-form button {
+  align-self: flex-end; 
+  padding: 12px 20px;
+  margin-top: 16px;
+  background-color: #ffd700;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 4px 8px rgba(52, 36, 112, 0.413);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.add-video-form button:hover {
+  transform: translateY(-2px);
+  filter: brightness(110%);
+}
+
+.add-video-form button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
