@@ -12,7 +12,7 @@ useEffect(()=>{
   fetch("http://localhost:5000/")
   .then(res => res.json())
   .then(data => setVideos(data))
-  .catch(Error => console.log("error"))
+  .catch(Error => console.log(Error))
 },[]);
 
   const onVideoDelete = (index) => {

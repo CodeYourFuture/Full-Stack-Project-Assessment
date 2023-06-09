@@ -4,6 +4,27 @@ import "../Style/Addvid.css";
 const AddVid = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const submitVid = () => {
+    // addVideo({ title, url });
+    // setTitle("");
+    // setUrl("");
+    const newCard = {
+      title: title.trim(),
+      url: url,
+    };
+  
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCard),})
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(Error => console.log(Error))
+  };
+  
+
   return (
     <form onSubmit={submitVid} className="form">
       <label>Title:</label>
@@ -20,10 +41,5 @@ const AddVid = () => {
     </form>
   );
 };
-const submitVid = (e) => {
-  e.preventDefault();
-  // addVideo({ title, url });
-  // setTitle("");
-  // setUrl("");
-};
+
 export default AddVid;
