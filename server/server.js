@@ -69,7 +69,7 @@ app.post("/video", (req, res) => {
       // console.log(res.rows);
     }
   });
-  // res.send("dataRecived");
+  res.json("dataRecived");
 });
 
 app.delete("/video/:id", (req, res) => {
