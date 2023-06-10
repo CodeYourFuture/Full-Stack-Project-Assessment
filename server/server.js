@@ -25,24 +25,35 @@ app.get("/videos", (req, res) => {
   const { ordering } = req.query;
   sqlQuery = "SELECT * FROM videos";
 
-  pool
-    .query(sqlQuery)
-    .then((result) => {
-      console.log("Connected to PostgreSQL database");
-      let videos = result.rows;
-      if (ordering === "asc") {
-        videos.sort((a, b) => a.rating - b.rating);
+  pool.query(sqlQuery, (err, result) => {
+
+    let videos = result.rows;
+    if (ordering === "asc") {
+    videos.sort((a, b) => a.rating - b.rating);
       } else {
-        videos.sort((a, b) => b.rating - a.rating);
-      }
+    videos.sort((a, b) => b.rating - a.rating);
+    }
       res.status(200).json(videos);
-    })
-    .catch((err) => {
-      console.error("Error executing query", err);
-      res
-        .status(500)
-        .json({ error: "An error occurred while fetching videos" });
-    });
+})
+
+  // pool
+  //   .query(sqlQuery)
+  //   .then((result) => {
+  //     console.log("Connected to PostgreSQL database");
+  //     let videos = result.rows;
+  //     if (ordering === "asc") {
+  //       videos.sort((a, b) => a.rating - b.rating);
+  //     } else {
+  //       videos.sort((a, b) => b.rating - a.rating);
+  //     }
+  //     res.status(200).json(videos);
+  //   })
+  //   .catch((err) => {
+  //     console.error("Error executing query", err);
+  //     res
+  //       .status(500)
+  //       .json({ error: "An error occurred while fetching videos" });
+  //   });
 });
 
 // Store and retrieve your videos from here
