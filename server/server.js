@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 // Use the pool to query the database
-app.get("/videos/", (req, res) => {
+app.get("/videos", (req, res) => {
   const { ordering } = req.query;
   sqlQuery = "SELECT * FROM videos";
 
@@ -65,11 +65,11 @@ app.post("/video", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.send("data inserted");
+      res.json("inserted");
       // console.log(res.rows);
     }
   });
-  res.send("dataRecived");
+  // res.send("dataRecived");
 });
 
 app.delete("/video/:id", (req, res) => {
@@ -81,7 +81,7 @@ app.delete("/video/:id", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.send("data deleted");
+      res.json("data deleted");
       // console.log(res.rows);
     }
   });
