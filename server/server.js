@@ -1,14 +1,16 @@
+require("dotenv").config();
+const config = require("config");
 const cors = require("cors");
 const { Pool } = require("pg");
 const express = require("express");
 const app = express();
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: "codeyourfuture",
-  password: process.env.db_password,
-  database: "cyf_sql_project"
+  host: config.get("db.host"),
+  port: config.get("db.port"),
+  user: config.get("db.user"),
+  password: config.get("db.password"),
+  database: config.get("db.database")
 });
 
 app.use(express.json());
@@ -90,5 +92,5 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}`));
