@@ -14,7 +14,7 @@ export default function AddVideo({ addVideo }) {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000", {
+    const res = await fetch("http://localhost:3001", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(input)

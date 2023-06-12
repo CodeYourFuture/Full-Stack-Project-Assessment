@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     async function getVideos() {
-      const res = await fetch("http://localhost:5000");
+      const res = await fetch("http://localhost:3001");
       const data = await res.json();
 
       setVideos([...data]);
@@ -23,7 +23,7 @@ function App() {
   }
 
   const deleteVideo = async (id) => {
-    const res = await fetch(`http://localhost:5000/${id}`, {
+    const res = await fetch(`http://localhost:3001/${id}`, {
       method: "DELETE"
     });
     await res.json();
@@ -32,7 +32,7 @@ function App() {
   }
 
   const incRating = async (id) => {
-    const res = await fetch(`http://localhost:5000/${id}/inc-rating`, {
+    const res = await fetch(`http://localhost:3001/${id}/inc-rating`, {
       method: "PATCH"
     });
     await res.json();
@@ -42,7 +42,7 @@ function App() {
 
   const decRating = async (id, rating) => {
     if (rating > 0) {
-      const res = await fetch(`http://localhost:5000/${id}/dec-rating`, {
+      const res = await fetch(`http://localhost:3001/${id}/dec-rating`, {
         method: "PATCH"
       });
       await res.json();
