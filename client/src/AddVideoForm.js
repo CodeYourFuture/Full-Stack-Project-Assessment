@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
+function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [genre, setGenre] = useState("");
   const [filledForm, setFilledForm] = useState(null);
   const [errorMsgPopUp, setErrorMsgPopUp] = useState(false);
   const [showVideosOnLoad, setShowVideosOnLoad] = useState(false);
- 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,66 +43,72 @@ function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
   };
 
   function handleInputChange(event) {
-    if (event.target.name === "genre") {
-      setGenre(event.target.value);
-    } else if (event.target.name === "title") {
-      setTitle(event.target.value);
-    } else if (event.target.name === "url") {
-      setUrl(event.target.value);
+    const { name, value } = event.target;
+    if (name === "genre") {
+      setGenre(value);
+    } else if (name === "title") {
+      setTitle(value);
+    } else if (name === "url") {
+      setUrl(value);
     }
   }
 
   function handleErrorMsgPopup() {
     setErrorMsgPopUp(false);
   }
-  
 
   return (
     <div>
-      {filledForm && <p>{filledForm}</p>}
+        {filledForm && <p>{filledForm}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Genre:
-          <input
-            type="text"
-            name="genre"
-            value={genre}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          URL:
-          <input
-            type="url"
-            name="url"
-            value={url}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <button type="submit" className="submit">
-          Add Video
-        </button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Genre:
+            <select name="genre" value={genre} onChange={handleInputChange}>
+              <option value="">Please Select Video Genre</option>
+              <option value="beauty">Beauty</option>
+              <option value="coding">Coding</option>
+              <option value="fashion">Fashion</option>
+            </select>
+          </label>
+
+          <br />
+          <label>
+            Title:
+            <input
+              type="text"
+              name="title"
+              value={title}
+              onChange={handleInputChange}
+            />
+          </label>
+
+          <br />
+          <label>
+            URL:
+            <input
+              type="url"
+              name="url"
+              value={url}
+              onChange={handleInputChange}
+            />
+          </label>
+          <br />
+          <button type="submit" className="submit">
+            Add Video
+          </button>
+        </form>
 
       {/* Modal form for displaying error message */}
-      <Modal show={errorMsgPopUp} onHide={handleErrorMsgPopup}>
-        <Modal.Header closeButton>
-          <Modal.Title>Error</Modal.Title>
+      <Modal
+        show={errorMsgPopUp}
+        onHide={handleErrorMsgPopup}
+        className="custom-modal"
+      >
+        <Modal.Header>
+          <Modal.Title>Error Submitting Video..!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Please fill in all required fields to proceed.</Modal.Body>
+        <Modal.Body>Please FILL in ALL required AREAS to proceed.</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleErrorMsgPopup}>
             Close
@@ -111,11 +116,7 @@ function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos}) {
         </Modal.Footer>
       </Modal>
 
-      {showVideosOnLoad && (
-        <div>
-          {}
-        </div>
-      )}
+      {showVideosOnLoad && <div>{}</div>}
     </div>
   );
 }

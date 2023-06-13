@@ -14,14 +14,8 @@
   background-color: rgb(203, 173, 196);
   margin-top: 0rem;
   color: rgb(255, 255, 255);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  /* background-image: url("https://bashooka.com/wp-content/uploads/2018/04/scg-canvas-background-animation-22.jpg"); */
-  /* background-image: url("https://cutewallpaper.org/21/after-effects-background/Memphis-Script-Create-random-shape-backgrounds-in-After-Effects.gif"); */
-  /* background-image: url("https://ak3.picdn.net/shutterstock/videos/1020410263/thumb/9.jpg?ip=x480"); */
-  background-image: url("https://c4.wallpaperflare.com/wallpaper/736/168/944/abstract-colorful-logo-triangle-wallpaper-preview.jpg");
+  background-image: url(https://img.freepik.com/free-vector/abstract-red-circle-black-background-technology_1142-9839.jpg);
+  /* background-image: url("https://c4.wallpaperflare.com/wallpaper/736/168/944/abstract-colorful-logo-triangle-wallpaper-preview.jpg"); */
 
 }
 
@@ -29,12 +23,39 @@ body {
   margin-top: 1rem;;
   background-color: rgb(45, 3, 29);
 }
+
+
+.video-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media(min-width: 740px){
+.video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(min-width: 1020px){
+  .video-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+
+
 h1{
   margin-top: 2rem;
   background-color: rgb(23, 3, 25);
   font-weight: 600; 
   color: azure;
 }
+
+h3{
+  margin-top: 1rem;
+}
+
 h4{
   margin-top: 2rem;
   font-style: normal;
@@ -43,7 +64,7 @@ h4{
 
 .newvideos {
   display: inline-block;
-  width: calc(32.33% - 10px);
+  width: 100%;
   /* Adjust the width as needed */
   margin-top: 3rem;
   /* margin: 5px; */
@@ -51,52 +72,43 @@ h4{
 }
 
 iframe{
+  
       border: 4px solid rgb(91, 1, 73);
       border-radius: 10px;
-      margin: 3px 4px 4px 4px;
+      margin: 4px auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-      width: 440px;
-      height: 320px;
+      aspect-ratio: 440/320;
       background-color: rgb(255, 245, 253);
       padding: 1rem;
       box-shadow: rgba(254, 254, 254, 0.4) -5px 5px, rgba(247, 245, 246, 0.3) -10px 10px, rgba(241, 241, 241, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(20, 0, 18, 0.05) -25px 25px;
     }
 
-
-@media screen and (max-width: 768px) {
-  .newvideos {
-    width: calc(50% + 10px);
-    /* Adjust the width for smaller screens */
-  }
-}
-
-@media screen and (max-width: 455px) {
-  .newvideos {
-    width: 100%;
-    /* Adjust the width for mobile screens */
-  }
-}
-
-.upNdownBtn{
-    height: 150px;
-      position: relative;
-      border: 3px solid rgb(52, 2, 32);
+.filterBtn{
+    height: 100px;
+    position: relative;
+    display: flex;
+    margin-top: 4rem;  
+    justify-content: center;
+    gap: 200px;
 }
 
 #AscDescBtn{
-  
-  margin-left: 36.6rem;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     background-color: rgb(37, 1, 30);
     color: rgb(244, 244, 244);
     border-color: aliceblue;
- 
+}
+
+.genre-filter{
+  background-color: rgb(255, 16, 16);
+}
+
+.asc-descBtn{
+  background-color: rgb(255, 0, 47);
+  color: black;
+  font-size: large;
 }
 
 
@@ -127,8 +139,14 @@ button{
 
 form{
   padding: 30px;
-  margin-top: 20px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid green;
 }
+
+
 form input :focus{
   height: 50px;
   width: 20em;
@@ -139,8 +157,16 @@ form input :focus{
 
 
 .submit {
-  display: flex;
-  justify-content: center;
   margin-top: 20px;
-  margin-left: 40rem;
+ 
 }
+
+.custom-modal {
+  background-color: #450339;
+  color: rgb(141, 1, 127);
+  font-weight: 700;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhszI0KVQ3cq_YsiFFjHUTI5V_o45HamWOJrCKYe8kBvGMmCuYydAaEXL59J4XLNcyEiM&usqp=CAU);
+  margin: 0rem 12rem 1rem 12rem;
+}
+
+

@@ -89,7 +89,7 @@ app.delete("/videos/:id", async function (request, response) {
 
 app.post("/videos/addnew", async function (request, response) {
   try {
-    const { genre, title, url } = request.body;
+    const {genre, title, url } = request.body;
     if (!genre || !title || !url) {
       return response
         .status(400)

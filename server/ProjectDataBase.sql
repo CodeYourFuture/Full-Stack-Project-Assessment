@@ -6,7 +6,6 @@ CREATE TABLE videos(
   url    VARCHAR(500) NOT NULL,
   rating INTEGER  NOT NULL
 );
--- INSERT INTO videos(title,url,rating) VALUES ('Never Gonna Give You Up','https://www.youtube.com/watch?v=dQw4w9WgXcQ',23);
 INSERT INTO videos(genre,title,url,rating) VALUES ('coding','The Coding Train','https://www.youtube.com/watch?v=HerCR8bw_GE',230);
 INSERT INTO videos(genre,title,url,rating) VALUES ('coding','Cracking Enigma in 2021 - Computerphile','https://www.youtube.com/watch?v=RzWB5jL5RX0',111);
 INSERT INTO videos(genre,title,url,rating) VALUES ('coding','Coding Adventure: Ant and Slime Simulations','https://www.youtube.com/watch?v=X-iSQQgOd1A',76);
@@ -21,4 +20,5 @@ INSERT INTO videos(genre,title,url,rating) VALUES ('fashion','Dress in plus-size
 INSERT INTO videos(genre,title,url,rating) VALUES ('fashion','Look Super-glam on a budget','https://www.youtube.com/watch?v=UcD8nTMzO0k', 4700);
 INSERT INTO videos(genre,title,url,rating) VALUES ('beauty','Naomi Campbell-Beauty Routine','https://www.youtube.com/watch?v=oCJFJMsZRRo', 26000);
 INSERT INTO videos(genre,title,url,rating) VALUES ('fashion','Top-5 Wardrobe Staples','https://www.youtube.com/watch?v=a7v0HpIeMDU', 10000);
-INSERT INTO videos(genre,title,url,rating) VALUES ('beauty', 'How to Perfect Brows', 'https://www.youtube.com/watch?v=kesCKoaCNkE')
+INSERT INTO videos(genre,title,url,rating) VALUES ('beauty', 'How to Perfect Brows', 'https://www.youtube.com/watch?v=kesCKoaCNkE', 289);
+INSERT INTO videos(genre,title,url,rating) VALUES ('beauty', 'How to Perfect Lipstick', 'https://www.youtube.com/watch?v=eAbC5uI9-Rw', 300);

@@ -5,15 +5,14 @@ import "./App.css";
 function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc");
-   const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const fetchVideos = () => {
     let url = `http://localhost:5000/videos?order=${order}`;
 
-    if (selectedGenre){
+    if (selectedGenre) {
       url += `&genre=${selectedGenre}`;
     }
-
 
     fetch(url)
       .then((response) => response.json())
@@ -84,41 +83,47 @@ function App() {
       <header className="App-header">
         <h1>The Pretty Coder</h1>
       </header>
-      <div className="upNdownBtn">
-        <p>
-          Click button to view videos in ascending or descending order by
-          ratings..
-        </p>
+      <h3> Navigating The Site:</h3>
+      <p>
+        Welcome to the Pretty coder video blog. Here you will find videos
+        teaching you how to code as well as videos on fashion and beauty hacks.
+        Because, pretty girl coders can also be fashionistas and beauty addicts
+        too! Select preffered filters to watch videos by genre or most popular
+        by rating. Happy Viewing!!
+      </p>
 
-        <h3>
-          <button id="AscDescBtn" onClick={toggleOrder}>
-            {order === "desc" ? "View Ascending" : "View Descending"}
-          </button>
-        </h3>
+      <div className="filterBtn">
+        {/* Filter by genre */}
+        <div className="genre-filter">
+          <h3>Filter by Genre:</h3>
+          <select
+            value={selectedGenre}
+            onChange={(e) => setSelectedGenre(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="beauty">Beauty</option>
+            <option value="coding">Coding</option>
+            <option value="fashion">Fashion</option>
+          </select>
+        </div>
+
+        <div className="asc-descBtn">
+          <p>View in ascending or descending order.</p>
+          <h3>
+            <button id="AscDescBtn" onClick={toggleOrder}>
+              {order === "desc" ? "View Ascending" : "View Descending"}
+            </button>
+          </h3>
+        </div>
       </div>
-
-      {/* Add genre filter */}
-      <div className="genre-filter">
-        <h3>Filter by Genre:</h3>
-        <select
-          value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
-        >
-          <option value="">All</option>
-          <option value="beauty">Beauty</option>
-          <option value="coding">Coding</option>
-          <option value="fashion">Fashion</option>
-        </select>
-      </div>
-
 
       <div className="video-grid">
         {sortedVideos.map((video) => (
           <div className="newvideos" key={video.id}>
             <h4> {video.title}</h4>
             <iframe
-              width="400"
-              height="250"
+              // width="400"
+              // height="250"
               src={`https://www.youtube.com/embed/${video.url.slice(32)}`}
               title={video.title}
               frameBorder="0"
