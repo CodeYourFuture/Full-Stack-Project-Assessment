@@ -33,7 +33,7 @@ export default function AddVideo({ addVideo }) {
         <label>
           Title
           <br />
-          <input id="title" type="text" name="title" value={input.title} onChange={handleChange} />
+          <input id="title" type="text" name="title" value={input.title} onChange={handleChange} required />
         </label>
       </div>
 
@@ -41,7 +41,7 @@ export default function AddVideo({ addVideo }) {
         <label>
           Url
           <br />
-          <input id="url" type="text" name="url" value={input.url} onChange={handleChange} />
+          <input id="url" type="text" name="url" value={input.url} onChange={handleChange} required />
         </label>
       </div>
 

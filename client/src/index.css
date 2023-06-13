@@ -42,6 +42,10 @@ label {
   margin-top: 20px;
 }
 
+.btn-submit:hover {
+  cursor: pointer;
+}
+
 input {
   border-radius: 5px;
   border: 2px solid #e9ecef;
