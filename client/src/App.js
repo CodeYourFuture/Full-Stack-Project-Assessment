@@ -1,9 +1,14 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "./App.css";
 import AddVideo from "./components/AddVideo";
 import VideosContainer from "./components/VideosContainer";
 
+export const AppContext = React.createContext();
+
 function App() {
+  const apiURL = (process.env.NODE_ENV === "production") ? "" : "http://localhost:3001";
+
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
