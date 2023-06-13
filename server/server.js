@@ -1,15 +1,16 @@
 const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const videoRouter = require("./videoRouter");
+
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+app.use("/api", videoRouter);
+
+const PORT = process.env.PORT ?? 5000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
