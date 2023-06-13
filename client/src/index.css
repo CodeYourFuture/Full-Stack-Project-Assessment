@@ -11,8 +11,13 @@ code {
     monospace;
 }
 
+h1 {
+  margin-bottom: 0px;
+}
+
 header {
   background-color: white;
+  padding: 50px 0px 50px 0px;
 }
 
 .container-videos {
