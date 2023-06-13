@@ -3,7 +3,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #2B6777;
+  background-color: #F6F9FC;
 }
 
 code {
@@ -22,10 +22,11 @@ h1 {
 
 form {
   width: 80%;
-  background-color: #C8D8E4;
+  background-color: white;
   margin: 50px auto 0px auto;
   border-radius: 20px;
   padding: 30px 0px 30px 0px;
+  border: 1px solid #e9ecef;
 }
 
 label {
@@ -33,7 +34,7 @@ label {
 }
 
 .btn-submit {
-  background-color: #2B6777;
+  background-color: #00acac;
   border: none;
   border-radius: 5px;
   color: white;
@@ -43,7 +44,7 @@ label {
 
 input {
   border-radius: 5px;
-  border: none;
+  border: 2px solid #e9ecef;
   outline: none;
   width: 100%;
 }
@@ -62,14 +63,19 @@ input {
 }
 
 .container-video {
-  background-color: #C8D8E4;
-  padding: 30px;
-  border-radius: 20px;
-  color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 400px;
+  background-color: white;
+  border: 1px solid #e9ecef;
+  color: black;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.youtube-frame {
+  border: 10px solid #e9ecef;
 }
 
 .container-buttons {
@@ -81,6 +87,7 @@ input {
 
 .container-buttons svg {
   font-size: 30px;
+  color: #00acac;
 }
 
 .container-ratings span {
