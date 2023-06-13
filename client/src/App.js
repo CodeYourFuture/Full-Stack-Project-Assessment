@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>YouTube Video Manager</h1>
       </header>
       <AddVideo addVideo={addVideo} />
       <VideosContainer videos={videos} deleteVideo={deleteVideo} incRating={incRating} decRating={decRating} />
