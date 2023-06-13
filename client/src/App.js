@@ -1,69 +1,27 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import AddVideo from "./components/AddVideo";
-import VideosContainer from "./components/VideosContainer";
+import ProtectedLogout from "./components/ProtectedLogout";
+import ProtectedLogin from "./components/ProtectedLogin";
+import Register from "./pages/Register";
+import Videos from "./pages/Videos";
 
 export const AppContext = React.createContext();
 
 function App() {
   const apiURL = (process.env.NODE_ENV === "production") ? "" : "http://localhost:3001";
 
-  const [videos, setVideos] = useState([]);
-
-  useEffect(() => {
-    async function getVideos() {
-      const res = await fetch("http://localhost:3001");
-      const data = await res.json();
-
-      setVideos([...data]);
-    }
-
-    getVideos();
-  }, []);
-
-  const addVideo = (video, id) => {
-    video.id = id;
-    setVideos([...videos, video]);
-  }
-
-  const deleteVideo = async (id) => {
-    const res = await fetch(`http://localhost:3001/${id}`, {
-      method: "DELETE"
-    });
-    await res.json();
-
-    setVideos(videos.filter(video => video.id !== id));
-  }
-
-  const incRating = async (id) => {
-    const res = await fetch(`http://localhost:3001/${id}/inc-rating`, {
-      method: "PATCH"
-    });
-    await res.json();
-
-    setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating + 1 }));
-  }
-
-  const decRating = async (id, rating) => {
-    if (rating > 0) {
-      const res = await fetch(`http://localhost:3001/${id}/dec-rating`, {
-        method: "PATCH"
-      });
-      await res.json();
-
-      setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating - 1 }));
-    }
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>YouTube Video Manager</h1>
-      </header>
-      <AddVideo addVideo={addVideo} />
-      <VideosContainer videos={videos} deleteVideo={deleteVideo} incRating={incRating} decRating={decRating} />
-    </div>
+    <AppContext.Provider value={apiURL}>
+      <BrowserRouter>
+        <header className="App-header">
+          <h1>YouTube Video Manager</h1>
+        </header>
+        <Routes>
+          <Route path="/" element={<ProtectedLogout><Register /></ProtectedLogout>} />
+          <Route path="/videos" element={<Videos />} />
+        </Routes>
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
 
