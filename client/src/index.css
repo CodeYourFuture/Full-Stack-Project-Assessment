@@ -11,13 +11,41 @@ code {
     monospace;
 }
 
+header {
+  background-color: white;
+  padding: 50px 0px 50px 0px;
+}
+
 h1 {
   margin-bottom: 0px;
 }
 
-header {
-  background-color: white;
-  padding: 50px 0px 50px 0px;
+form {
+  width: 80%;
+  background-color: #C8D8E4;
+  margin: 50px auto 0px auto;
+  border-radius: 20px;
+  padding: 30px 0px 30px 0px;
+}
+
+label {
+  text-align: left;
+}
+
+.btn-submit {
+  background-color: #2B6777;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+}
+
+input {
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 100%;
 }
 
 .container-videos {
@@ -73,32 +101,4 @@ header {
 
 .container-thumbs svg:hover {
   cursor: pointer;
-}
-
-form {
-  background-color: #C8D8E4;
-  margin: 50px auto 0px auto;
-  border-radius: 20px;
-  padding: 50px;
-  width: 60%;
-  font-size: 20px;
-}
-
-label {
-  text-align: left;
-}
-
-.btn-submit {
-  background-color: #2B6777;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  padding: 10px 20px 10px 20px;
-  margin-top: 20px;
-}
-
-input {
-  border-radius: 5px;
-  border: none;
-  outline: none;
 }
