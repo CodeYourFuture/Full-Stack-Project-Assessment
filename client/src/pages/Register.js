@@ -71,7 +71,7 @@ export default function Register() {
                 <label>
                     Password
                     <br />
-                    <input id="password" type="text" value={password} onChange={(e) => { setPassword(e.target.value); }} required />
+                    <input id="password" type="password" value={password} onChange={(e) => { setPassword(e.target.value); }} required />
                 </label>
             </div>
 
