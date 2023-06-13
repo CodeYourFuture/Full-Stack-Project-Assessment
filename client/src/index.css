@@ -102,3 +102,25 @@ input {
 .container-thumbs svg:hover {
   cursor: pointer;
 }
+
+@media (min-width: 576px) {
+  form {
+    width: 60%;
+  }
+
+  label {
+    width: 60%;
+  }
+}
+
+@media (min-width: 992px) {
+  form {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1400px) {
+  form {
+    width: 35%;
+  }
+}
