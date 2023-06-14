@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     const rs = await pool.query("SELECT * FROM videos");
 
     res.json(rs.rows);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const video = {
         title: req.body.title,
         url: req.body.url
@@ -28,7 +29,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.patch("/:id/inc-rating", async (req, res) => {
+router.patch("/:id/inc-rating", auth, async (req, res) => {
     const videoId = +req.params.id;
 
     try {
@@ -43,7 +44,7 @@ router.patch("/:id/inc-rating", async (req, res) => {
     }
 });
 
-router.patch("/:id/dec-rating", async (req, res) => {
+router.patch("/:id/dec-rating", auth, async (req, res) => {
     const videoId = +req.params.id;
 
     try {
@@ -58,7 +59,7 @@ router.patch("/:id/dec-rating", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     const videoId = +req.params.id;
 
     try {

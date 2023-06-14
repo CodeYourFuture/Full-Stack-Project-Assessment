@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ProtectedLogout><Register /></ProtectedLogout>} />
           <Route path="/login" element={<ProtectedLogout><Login /></ProtectedLogout>} />
-          <Route path="/videos" element={<Videos />} />
+          <Route path="/videos" element={<ProtectedLogin><Videos /></ProtectedLogin>} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
