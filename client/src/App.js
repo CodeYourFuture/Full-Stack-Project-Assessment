@@ -81,18 +81,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>The Pretty Coder</h1>
+        <h1>The Pretty Coder Blogger</h1>
       </header>
-      <h3> Navigating The Site:</h3>
-      <p>
-        Welcome to the Pretty coder video blog. Here you will find videos
-        teaching you how to code as well as videos on fashion and beauty hacks.
-        Because, pretty girl coders can also be fashionistas and beauty addicts
-        too! Select preffered filters to watch videos by genre or most popular
-        by rating. Happy Viewing!!
-      </p>
-
-      <div className="filterBtn">
+      <div className="welcome">
         {/* Filter by genre */}
         <div className="genre-filter">
           <h3>Filter by Genre:</h3>
@@ -106,9 +97,26 @@ function App() {
             <option value="fashion">Fashion</option>
           </select>
         </div>
+        <div className="welcome-text">
+          <h3> Hi:</h3>
+          <p>
+            Welcome to the Pretty coder video blog. <br></br>This site has been
+            created by a software developer traineee with a love for coding/
+            programming and a big fashion and beauty addict too! <br></br>
+            Use the buttons below to select videos by genres.
+            <br></br>
+            Don't forget to vote up your favourite videos as this will help
+            other viewers know which videos are a hit to watch.
+            <br></br>
+            And finally, you can also use the form below to add a new video that
+            you found instructive and interesting to help other users. <br></br>
+            So browse throuhgh and enjoy.Happy Viewing!!
+          </p>
+        </div>
 
+          {/* filter by asc or desc */}
         <div className="asc-descBtn">
-          <p>View in ascending or descending order.</p>
+          <p>Filter by:</p>
           <h3>
             <button id="AscDescBtn" onClick={toggleOrder}>
               {order === "desc" ? "View Ascending" : "View Descending"}
@@ -116,6 +124,8 @@ function App() {
           </h3>
         </div>
       </div>
+
+      <div className="filterBtn"></div>
 
       <div className="video-grid">
         {sortedVideos.map((video) => (
