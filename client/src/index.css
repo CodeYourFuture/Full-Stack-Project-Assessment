@@ -69,6 +69,7 @@ label {
   text-align: left;
   display: block;
   margin: 0 auto;
+  width: 75%;
 }
 
 .btn-submit {
@@ -156,26 +157,30 @@ input {
 
 @media (min-width: 576px) {
   form {
-    width: 60%;
+    width: 50%;
   }
 
   label {
-    width: 60%;
+    width: 65%;
   }
 }
 
 @media (min-width: 992px) {
   form {
-    width: 40%;
+    width: 30%;
+  }
+
+  label {
+    width: 70%;
   }
 }
 
 @media (min-width: 1400px) {
   form {
-    width: 30%;
+    width: 25%;
   }
 
   label {
-    width: 65%;
+    width: 75%;
   }
 }
