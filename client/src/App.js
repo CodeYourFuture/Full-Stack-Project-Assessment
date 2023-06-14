@@ -13,7 +13,7 @@ function App() {
   const [selectedGenre, setSelectedGenre] = useState("");
 
   const fetchVideos = () => {
-    let url = `http://localhost:5000/videos?order=${order}`;
+    let url = `https://pretty-coders-video-api.onrender.com/videos`;
 
     if (selectedGenre) {
       url += `&genre=${selectedGenre}`;

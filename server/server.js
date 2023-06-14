@@ -13,13 +13,6 @@ app.use(
   })
 );
 
-/*Leaving this code snippet here for further clarification. please ignore for now*/
-// let sqlQuery = `SELECT * FROM videos`;
-// if (genre) {
-//   sqlQuery += ` WHERE genre = $1`;
-// }
-// sqlQuery += ` ORDER BY rating ${order}`;
-// const getAllVideos = await database.query(sqlQuery, [genre]);
 
 
 // GET "/videos"
