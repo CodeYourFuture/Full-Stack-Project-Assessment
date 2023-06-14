@@ -22,6 +22,18 @@ h1 {
   font-weight: 300;
 }
 
+.notification {
+  width: 65%;
+  margin: 20px auto 0px auto;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+}
+
+.notification span {
+  color: white;
+}
+
 form {
   width: 80%;
   background-color: white;

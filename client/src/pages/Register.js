@@ -9,7 +9,7 @@ export default function Register() {
         message: "",
         display: false,
         bgColor: ""
-      });
+    });
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -78,10 +78,12 @@ export default function Register() {
             <div>
                 <button className="btn-submit" type="submit">Register</button>
             </div>
-            <Notification
-                message={notification.message}
-                bgColor={notification.bgColor}
-            />
+            {notification.display && (
+                <Notification
+                    message={notification.message}
+                    bgColor={notification.bgColor}
+                />
+            )}
         </form>
     );
 }
