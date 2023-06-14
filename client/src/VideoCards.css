@@ -19,7 +19,7 @@
     border-radius: 10px;
     width: 100%;
   }
-  .cardContainer h6 {
+  .cardContainer h2 {
     padding: 20px 0px;
     font-weight: bolder;
     color: #0f0f0f;
@@ -62,7 +62,7 @@
     .deleteButton {
       color: white;
       width: 100%;
-      background-color: red;
+      background-color: rgba(224, 6, 6, 0.944);
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       padding: 1%;
@@ -70,7 +70,7 @@
     }
   }
   /* end of delete btn*/
-  @media only screen and (max-width: 768px) {
+  @media only screen and (min-width: 768px) {
     .cardContainer {
       width: 45%;
     }

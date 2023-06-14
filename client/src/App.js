@@ -25,8 +25,7 @@ useEffect(() => {
     return res.json();
   })
   .then((data) => {
-    const sortedVideos = data.sort((a, b) => b.rating - a.rating);
-    setVideos(sortedVideos);
+    setVideos(data);
   })
   .catch((error) => {
     setError("Error", error);

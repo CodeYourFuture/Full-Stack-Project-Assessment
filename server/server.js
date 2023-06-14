@@ -3,10 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
-//const db = require('./db'); // Database connection module
 const bodyParser = require("body-parser");
 
-//db()
 dotenv.config();
 app.use(bodyParser.json())
 app.use(cors());
@@ -96,8 +94,6 @@ app.post("/rating", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
-  
+ 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

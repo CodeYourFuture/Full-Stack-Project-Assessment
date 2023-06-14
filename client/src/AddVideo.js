@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './AddVideo.css';
 
 function AddVideo({ videos, setVideos }) {
@@ -7,39 +7,34 @@ function AddVideo({ videos, setVideos }) {
     const[urlInput, setUrlInput] = useState("");
     
     const handleAddVideoButton = () => {
-        //clickAdd === false ? setClickAdd(true) : setClickAdd(false);
         setClickAdd(!clickAdd);
     };
 
     const handleTitleInputChange = (e) => {
-       // e.preventDefault();
         setTitleInput(e.target.value);
     };
 
     const handleUrlInputChange = (e) => {
-        //e.preventDefault();
         let url = e.target.value;
         if(url.includes('https://www.youtube.com/')){
           url = url.replace('watch?v=', 'embed/');
-            return setUrlInput(url);
+            setUrlInput(url);
         }else{
             alert('Invalid URL format. Please provide a YouTube URL!');
             setUrlInput('');
         }
     };
-
     
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // const videoId = Math.floor(Math.random() * 1000000);
-        // const videoRating = Math.floor(Math.random() * 10000);
-        let newVideo = {
-        // newVideo = {
-        //     id: videoId,
-        //     rating: videoRating,
+
+           let newVideo = {
+            id: Date.now(),
             title: titleInput,
             url: urlInput,
-        }
+            rating: 0,
+        };
+
         fetch("http://localhost:5000/",{
             method: "POST",
             headers: {
@@ -49,7 +44,7 @@ function AddVideo({ videos, setVideos }) {
         })
         .then((response) => response.json())
         .then((data) => {
-            setVideos((videos) => [...videos, data.video]);
+            setVideos((videos) => [...videos, newVideo]);
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -62,12 +57,9 @@ function AddVideo({ videos, setVideos }) {
   return (
     <div className="addVideoContainer">
        <button className="addVideo" 
-    //    href="#" 
-    //    alt="Add video button" 
        onClick={handleAddVideoButton}>
         Add video
         </button>
-      {/* {clickAdd === true ? ( */}
 
       {clickAdd && (
         <form onSubmit={handleFormSubmit}>
@@ -87,11 +79,10 @@ function AddVideo({ videos, setVideos }) {
             />
             <input id="submitBtn" type="submit" />
             </label>
-        </form>
-    //   ) : null }  
+        </form> 
       )}
       </div>
-  )
+  );
 } 
 
 export default AddVideo;

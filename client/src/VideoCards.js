@@ -20,43 +20,38 @@ const VideoCards = ({ videos, setVideos }) => {
         });
 };
 
-const increaseRating = (id) => {
-    let newData = [];
-    newData = videos.map((video) => 
-    video.id === id ? { ...video, rating: video.rating + 1 }: video);
-    fetch(`http://localhost:5000/rating`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id, increment: 1 }),
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
-    return setVideos(newData);
-}
-
-const decreaseRating = (id) => {
-    let newData = [];
-    newData = videos.map((video) => 
-    video.id === id ? {...video, rating: video.rating - 1 }: video);
-    fetch(`http://localhost:5000/rating`,{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id, increment: -1 }),
+const updateRating = (id, increment) => {
+    const updatedVideos = videos.map((video) =>
+      video.id === id ? { ...video, rating: video.rating + increment } : video
+    );
+  
+    fetch(`http://localhost:5000/rating`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, increment }),
     })
-    .catch((error) => {
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Rating updated:", data);
+        setVideos(updatedVideos);
+      })
+      .catch((error) => {
         console.error("Error:", error);
-    });
-    return setVideos(newData);
-}; 
-
+      });
+  };
+  const increaseRating = (id) => {
+    updateRating(id, 1);
+  };
+  const decreaseRating = (id) => {
+    updateRating(id, -1);
+  };
+  
 const Card = ({ video }) => {
   return (
     <div className='cardContainer' key={video.id}>
+       {video.url &&(
         <iframe
          height="315" 
          src={video.url.replace("watch?v=", "embed/")}
@@ -65,8 +60,9 @@ const Card = ({ video }) => {
          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
         allowFullScreen>
         </iframe>
+)}
 
-        <h6>{video.title}</h6>
+        <h2>{video.title}</h2>
         <span className='UpDownVote'>
             <i className='fa fa-thumbs-up' onClick={() => increaseRating(video.id)}>👍</i>
             {video.rating}
@@ -80,16 +76,14 @@ const Card = ({ video }) => {
   );
 };
 
-console.log("videos", videos);
-
 return(
         <div className="allCardsContainer"> 
-          {videos
+           {videos 
           .filter((video) => video.url)
           .map((video) => (
             <Card key={video.id} video={video} /> 
           ))}
         </div>
   );
-}
+};
 export default VideoCards;
