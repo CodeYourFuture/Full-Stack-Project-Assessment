@@ -5,19 +5,26 @@ import VideosContainer from "../components/VideosContainer";
 
 export default function Videos() {
     const apiURL = useContext(AppContext);
+    const token = localStorage.getItem("token");
 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         async function getVideos() {
-            const res = await fetch(`${apiURL}/api/videos`);
+            const res = await fetch(`${apiURL}/api/videos`, {
+                headers: { "x-auth-token": token }
+            });
             const data = await res.json();
 
-            setVideos(data);
+            if (data.message === "success") {
+                setVideos(data.videos);
+            } else {
+                alert(data.message);
+            }
         }
 
         getVideos();
-    }, [apiURL]);
+    }, [apiURL, token]);
 
     const addVideo = (video, id) => {
         video.id = id;
@@ -26,7 +33,8 @@ export default function Videos() {
 
     const deleteVideo = async (id) => {
         const res = await fetch(`${apiURL}/api/videos/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "x-auth-token": token }
         });
         await res.json();
 
@@ -35,7 +43,8 @@ export default function Videos() {
 
     const incRating = async (id) => {
         const res = await fetch(`${apiURL}/api/videos/${id}/inc-rating`, {
-            method: "PATCH"
+            method: "PATCH",
+            headers: { "x-auth-token": token }
         });
         await res.json();
 
@@ -45,7 +54,8 @@ export default function Videos() {
     const decRating = async (id, rating) => {
         if (rating > 0) {
             const res = await fetch(`${apiURL}/api/videos/${id}/dec-rating`, {
-                method: "PATCH"
+                method: "PATCH",
+                headers: { "x-auth-token": token }
             });
             await res.json();
 

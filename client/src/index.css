@@ -17,6 +17,10 @@ header {
   padding: 50px 0px 50px 0px;
 }
 
+.navbar {
+  background-color: #F6F9FC;
+}
+
 h1 {
   margin-bottom: 0px;
   font-weight: 300;
@@ -45,6 +49,8 @@ form {
 
 label {
   text-align: left;
+  display: block;
+  margin: 0 auto;
 }
 
 .btn-submit {
@@ -65,6 +71,7 @@ input {
   border: 2px solid #e9ecef;
   outline: none;
   width: 100%;
+  font-size: 16px;
 }
 
 .container-videos {

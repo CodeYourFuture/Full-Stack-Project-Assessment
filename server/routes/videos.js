@@ -5,8 +5,9 @@ const auth = require("../middleware/auth");
 
 router.get("/", auth, async (req, res) => {
     const rs = await pool.query("SELECT * FROM videos");
+    const videos = rs.rows;
 
-    res.json(rs.rows);
+    res.json({ message: "success", videos });
 });
 
 router.post("/", auth, async (req, res) => {

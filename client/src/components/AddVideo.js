@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { AppContext } from "../App";
+import { useState, useContext } from "react";
 
 export default function AddVideo({ addVideo }) {
+  const apiURL = useContext(AppContext);
+  const token = localStorage.getItem("token");
+
   const [input, setInput] = useState({
     title: "",
     url: "",
@@ -14,9 +18,9 @@ export default function AddVideo({ addVideo }) {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:3001", {
+    const res = await fetch(`${apiURL}/api/videos`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify(input)
     });
 
