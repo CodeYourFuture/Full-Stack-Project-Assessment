@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedLogout from "./components/ProtectedLogout";
 import ProtectedLogin from "./components/ProtectedLogin";
+import Header from "./components/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Videos from "./pages/Videos";
@@ -14,9 +15,7 @@ function App() {
   return (
     <AppContext.Provider value={apiURL}>
       <BrowserRouter>
-        <header className="App-header">
-          <h1>YouTube Video Manager</h1>
-        </header>
+        <Header />
         <Routes>
           <Route path="/" element={<ProtectedLogout><Register /></ProtectedLogout>} />
           <Route path="/login" element={<ProtectedLogout><Login /></ProtectedLogout>} />

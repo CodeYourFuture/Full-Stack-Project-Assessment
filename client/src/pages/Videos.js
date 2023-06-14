@@ -13,7 +13,7 @@ export default function Videos() {
             const res = await fetch(`${apiURL}/api/videos`);
             const data = await res.json();
 
-            setVideos([...data]);
+            setVideos(data);
         }
 
         getVideos();
