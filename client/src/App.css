@@ -11,7 +11,7 @@
 
 #root {
   border: 6px solid rgb(13, 3, 9);
-  background-color: rgb(203, 173, 196);
+  background-color: rgb(0, 0, 0);
   margin-top: 0rem;
   color: rgb(255, 255, 255);
   background-image: url(https://img.freepik.com/free-vector/abstract-red-circle-black-background-technology_1142-9839.jpg);
@@ -42,19 +42,33 @@ body {
 
 
 h1{
-  margin-top: 2rem;
+  margin: 2rem;
   font-weight: 800; 
   color: azure;
+  /* background-color: rgb(200, 3, 3); */
+  height: auto;
+  display: block;
+  justify-content: center;
+ align-content: center;
+  
+  
 }
 
 .welcome{
   border: 3px solid rgb(200, 3, 3);
         position: relative;
         display: flex;
-        margin-top: 4rem;
+        flex-direction: column;
+        margin: 3rem auto;
         justify-content: center;
-       
         
+        background-color: rgb(0, 0, 0);       
+}
+@media(min-width:740px){
+  .welcome{
+    flex-direction: row;
+    column-gap: 3rem;
+  }
 }
 
 
@@ -72,7 +86,7 @@ h4{
 .newvideos {
   display: inline-block;
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 1rem;
   vertical-align: bottom;
 }
 
@@ -91,16 +105,6 @@ iframe{
       box-shadow: rgba(254, 254, 254, 0.4) -5px 5px, rgba(247, 245, 246, 0.3) -10px 10px, rgba(241, 241, 241, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(20, 0, 18, 0.05) -25px 25px;
     }
 
-    /* code review. please ignore*/
-/* .filterBtn{
-    height: 100px;
-    position: relative;
-    display: flex;
-    margin-top: 4rem;  
-    justify-content: center;
-    gap: 200px;
-} */
-
 #AscDescBtn{
     background-color: rgb(0, 0, 0);
     color: rgb(244, 244, 244);
@@ -110,12 +114,22 @@ iframe{
 
 .genre-filter{
   background-color: rgb(0, 0, 0);
+  margin-top: 3rem;
 }
 
 .asc-descBtn{
   background-color: rgb(0, 0, 0);
-  margin: 1rem;
+  margin: 0rem;
   font-size: large;
+  margin-top: 3rem;
+  display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.asc-descBtn, p{
+  margin-bottom: 0;
 }
 
 
@@ -175,4 +189,19 @@ form input :focus{
   margin: 0rem 1rem 0rem 1rem;
 }
 
+.vote-icon {
+  cursor: pointer;
+  margin-top: 2rem;
+  width: 3rem;
+  padding: 1px;
+}
 
+.delete-btn{
+  cursor: pointer;
+  
+}
+
+.copyright{
+  margin-top: 5rem;
+  background-color: rgb(200, 3, 3);
+}

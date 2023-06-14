@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AddVideoForm from "./AddVideoForm";
 import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faHeartCrack } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
+
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -81,7 +86,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>The Pretty Coder Blogger</h1>
+        <h1>The Pretty Coders Blog</h1>
       </header>
       <div className="welcome">
         {/* Filter by genre */}
@@ -98,23 +103,22 @@ function App() {
           </select>
         </div>
         <div className="welcome-text">
-          <h3> Hi:</h3>
+          <h3> Hi,</h3>
           <p>
-            Welcome to the Pretty coder video blog. <br></br>This site has been
-            created by a software developer traineee with a love for coding/
-            programming and a big fashion and beauty addict too! <br></br>
-            Use the buttons below to select videos by genres.
+            Welcome to the Pretty coders video blog. <br></br>This site has been
+            created for software developers who love coding/ programming and
+            also enjoy fashion and beauty too! <br></br>
+            Use the buttons on either side to select and watch videos by genres
+            or popularity. <br></br>Vote up your favourite videos to help other
+            viewers know which videos are a hit to watch.
             <br></br>
-            Don't forget to vote up your favourite videos as this will help
-            other viewers know which videos are a hit to watch.
-            <br></br>
-            And finally, you can also use the form below to add a new video that
-            you found instructive and interesting to help other users. <br></br>
-            So browse throuhgh and enjoy.Happy Viewing!!
+            Use the form below to add any video you have to be found
+            instructive/interesting to help other users. <br></br>
+            Happy Viewing!!
           </p>
         </div>
 
-          {/* filter by asc or desc */}
+        {/* filter by asc or desc */}
         <div className="asc-descBtn">
           <p>Filter by:</p>
           <h3>
@@ -140,24 +144,40 @@ function App() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <h4>Rating: {video.rating}</h4>
             <div className="vote-btns">
-              <button id="vote-btn" onClick={() => voteUp(video.id)}>
-                Vote Up
-              </button>
-              <button id="vote-btn" onClick={() => voteDown(video.id)}>
-                Vote Down
-              </button>
+              <FontAwesomeIcon
+                icon={faHeart}
+                size="2x"
+                color="red"
+                onClick={() => voteUp(video.id)}
+                className="vote-icon"
+              />
+              <h4>Rating: {video.rating}</h4>
+
+              <FontAwesomeIcon
+                icon={faHeartCrack}
+                size="2x"
+                onClick={() => voteDown(video.id)}
+                className="vote-icon"
+              />
             </div>
             <div className="delete">
-              <button id="delete-btn" onClick={() => deleteVideo(video.id)}>
-                DELETE VIDEO
-              </button>
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                size="1.9x"
+                color="darkgreen"
+                onClick={() => deleteVideo(video.id)}
+                className="delete-btn"
+              />
             </div>
           </div>
         ))}
       </div>
       <AddVideoForm fetchVideos={fetchVideos} onAddVideo={addNewVideo} />
+
+      <div className="copyright">
+        @copyright: Gayle Thompson-Igwebike. Code Your Future: London Class9!
+      </div>
     </div>
   );
 }
