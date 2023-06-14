@@ -14,15 +14,33 @@ code {
 
 header {
   background-color: white;
-  padding: 50px 0px 50px 0px;
+  padding: 0px 0px 50px 0px;
 }
 
 .navbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
   background-color: #F6F9FC;
+  padding: 15px;
+}
+
+.btn-nav {
+  background-color: white;
+  width: 100px;
+  padding: 10px 0px 10px 0px;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+}
+
+.btn-nav:hover {
+  background-color:#00acac;
+  color: white;
+  cursor: pointer;
 }
 
 h1 {
-  margin-bottom: 0px;
+  margin: 50px 0px 0px 0px;
   font-weight: 300;
 }
 
