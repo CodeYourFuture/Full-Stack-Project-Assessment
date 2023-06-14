@@ -15,8 +15,6 @@
   margin-top: 0rem;
   color: rgb(255, 255, 255);
   background-image: url(https://img.freepik.com/free-vector/abstract-red-circle-black-background-technology_1142-9839.jpg);
-  /* background-image: url("https://c4.wallpaperflare.com/wallpaper/736/168/944/abstract-colorful-logo-triangle-wallpaper-preview.jpg"); */
-
 }
 
 body {
@@ -173,8 +171,8 @@ form input :focus{
   background-color: #450339;
   color: rgb(141, 1, 127);
   font-weight: 700;
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhszI0KVQ3cq_YsiFFjHUTI5V_o45HamWOJrCKYe8kBvGMmCuYydAaEXL59J4XLNcyEiM&usqp=CAU);
-  margin: 0rem 12rem 1rem 12rem;
+  background-image: url(https://img.freepik.com/free-vector/abstract-red-circle-black-background-technology_1142-9839.jpg);
+  margin: 0rem 1rem 0rem 1rem;
 }
 
 
