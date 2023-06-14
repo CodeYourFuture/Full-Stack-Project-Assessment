@@ -1,9 +1,11 @@
 import { AppContext } from "../App";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
 
-export default function Register() {
+export default function Login() {
     const apiURL = useContext(AppContext);
+    const navigate = useNavigate();
 
     const [notification, setNotification] = useState({
         message: "",

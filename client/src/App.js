@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedLogout from "./components/ProtectedLogout";
 import ProtectedLogin from "./components/ProtectedLogin";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 import Videos from "./pages/Videos";
 
 export const AppContext = React.createContext();
@@ -18,6 +19,7 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<ProtectedLogout><Register /></ProtectedLogout>} />
+          <Route path="/login" element={<ProtectedLogout><Login /></ProtectedLogout>} />
           <Route path="/videos" element={<Videos />} />
         </Routes>
       </BrowserRouter>
