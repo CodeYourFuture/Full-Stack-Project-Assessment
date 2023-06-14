@@ -74,13 +74,13 @@ h1{
 
 h3{
   margin-top: 1rem;
-  font-size: large;
+  font-size: medium;
 }
 
 h4{
   margin-top: 2rem;
-  font-style: normal;
-  font-weight: 600;
+  /* font-style: normal;
+  font-weight: ; */
 }
 
 .newvideos {

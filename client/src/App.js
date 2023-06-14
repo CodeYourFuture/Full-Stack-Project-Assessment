@@ -11,6 +11,7 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc");
   const [selectedGenre, setSelectedGenre] = useState("");
+  // const [deleteVideos, setDeleteVideos]
 
   const fetchVideos = () => {
     let url = `https://pretty-coders-video-api.onrender.com/videos`;
@@ -108,11 +109,11 @@ function App() {
             Welcome to the Pretty coders video blog. <br></br>This site has been
             created for software developers who love coding/ programming and
             also enjoy fashion and beauty too! <br></br>
-            Use the buttons on either side to select and watch videos by genres
+            You can select and watch videos by genres
             or popularity. <br></br>Vote up your favourite videos to help other
             viewers know which videos are a hit to watch.
             <br></br>
-            Use the form below to add any video you have to be found
+            Use the form below to add any video you have found to be
             instructive/interesting to help other users. <br></br>
             Happy Viewing!!
           </p>
