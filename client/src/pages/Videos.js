@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
+import { AppContext } from "../App";
+import { useState, useEffect, useContext } from "react";
 import AddVideo from "../components/AddVideo";
 import VideosContainer from "../components/VideosContainer";
 
 export default function Videos() {
+    const apiURL = useContext(AppContext);
+
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         async function getVideos() {
-            const res = await fetch("http://localhost:3001");
+            const res = await fetch(`${apiURL}/api/videos`);
             const data = await res.json();
 
             setVideos([...data]);
         }
 
         getVideos();
-    }, []);
+    }, [apiURL]);
 
     const addVideo = (video, id) => {
         video.id = id;
@@ -22,7 +25,7 @@ export default function Videos() {
     }
 
     const deleteVideo = async (id) => {
-        const res = await fetch(`http://localhost:3001/${id}`, {
+        const res = await fetch(`${apiURL}/api/videos/${id}`, {
             method: "DELETE"
         });
         await res.json();
@@ -31,7 +34,7 @@ export default function Videos() {
     }
 
     const incRating = async (id) => {
-        const res = await fetch(`http://localhost:3001/${id}/inc-rating`, {
+        const res = await fetch(`${apiURL}/api/videos/${id}/inc-rating`, {
             method: "PATCH"
         });
         await res.json();
@@ -41,7 +44,7 @@ export default function Videos() {
 
     const decRating = async (id, rating) => {
         if (rating > 0) {
-            const res = await fetch(`http://localhost:3001/${id}/dec-rating`, {
+            const res = await fetch(`${apiURL}/api/videos/${id}/dec-rating`, {
                 method: "PATCH"
             });
             await res.json();
