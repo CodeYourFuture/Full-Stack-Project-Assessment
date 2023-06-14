@@ -59,7 +59,7 @@ label {
   border-radius: 5px;
   color: white;
   padding: 10px 20px 10px 20px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .btn-submit:hover {
@@ -71,7 +71,9 @@ input {
   border: 2px solid #e9ecef;
   outline: none;
   width: 100%;
-  font-size: 16px;
+  font-size: 15px;
+  padding: 5px 0px 5px 0px;
+  margin: 5px 0px 10px 0px;
 }
 
 .container-videos {
