@@ -36,34 +36,61 @@ export default function Videos() {
     }
 
     const deleteVideo = async (id) => {
-        const res = await fetch(`${apiURL}/api/videos/${id}`, {
-            method: "DELETE",
-            headers: { "x-auth-token": token }
-        });
-        await res.json();
+        try {
+            const res = await fetch(`${apiURL}/api/videos/${id}`, {
+                method: "DELETE",
+                headers: { "x-auth-token": token }
+            });
 
-        setVideos(videos.filter(video => video.id !== id));
+            const data = await res.json();
+
+            if (res.status === 200) {
+                setVideos(videos.filter(video => video.id !== id));
+            } else {
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     const incRating = async (id) => {
-        const res = await fetch(`${apiURL}/api/videos/${id}/inc-rating`, {
-            method: "PATCH",
-            headers: { "x-auth-token": token }
-        });
-        await res.json();
+        try {
+            const res = await fetch(`${apiURL}/api/videos/${id}/inc-rating`, {
+                method: "PATCH",
+                headers: { "x-auth-token": token }
+            });
 
-        setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating + 1 }));
+            const data = await res.json();
+
+            if (res.status === 200) {
+                setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating + 1 }));
+            } else {
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     const decRating = async (id, rating) => {
         if (rating > 0) {
-            const res = await fetch(`${apiURL}/api/videos/${id}/dec-rating`, {
-                method: "PATCH",
-                headers: { "x-auth-token": token }
-            });
-            await res.json();
+            try {
+                const res = await fetch(`${apiURL}/api/videos/${id}/dec-rating`, {
+                    method: "PATCH",
+                    headers: { "x-auth-token": token }
+                });
 
-            setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating - 1 }));
+                const data = await res.json();
+
+                if (res.status === 200) {
+                    setVideos(videos.map(video => video.id !== id ? video : { ...video, rating: video.rating - 1 }));
+                } else {
+                    console.log(data);
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
         }
     }
 

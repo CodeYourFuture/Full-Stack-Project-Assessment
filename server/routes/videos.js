@@ -27,7 +27,6 @@ router.post("/", auth, async (req, res) => {
 
         res.json({ id: rs.rows[0].id });
     } catch (error) {
-        console.log(error.message);
         res.json({
             result: "failure",
             message: "Video could not be saved"
