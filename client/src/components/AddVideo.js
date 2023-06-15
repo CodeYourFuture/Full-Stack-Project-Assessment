@@ -1,5 +1,6 @@
 import { AppContext } from "../App";
 import { useState, useContext } from "react";
+import { motion } from "framer-motion";
 import jwt from "jwt-decode";
 
 export default function AddVideo({ addVideo }) {
@@ -20,6 +21,8 @@ export default function AddVideo({ addVideo }) {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    if (!input.url.includes("youtube.com/watch")) return;
+
     try {
       const res = await fetch(`${apiURL}/api/videos`, {
         method: "POST",
@@ -30,7 +33,7 @@ export default function AddVideo({ addVideo }) {
       const data = await res.json();
 
       if (res.status === 200) {
-        addVideo(input, data.id);
+        addVideo(data);
 
         setInput({ ...input, title: "", url: "" });
       } else {
@@ -42,26 +45,32 @@ export default function AddVideo({ addVideo }) {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>
-          Title
-          <br />
-          <input id="title" type="text" name="title" value={input.title} onChange={handleChange} required />
-        </label>
-      </div>
+    <motion.div
+      initial={{ opacity: 0, y: +50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ ease: "easeOut", duration: 1.5 }}
+    >
+      <form onSubmit={onSubmit}>
+        <div>
+          <label>
+            Title
+            <br />
+            <input id="title" type="text" name="title" value={input.title} onChange={handleChange} required />
+          </label>
+        </div>
 
-      <div>
-        <label>
-          Url
-          <br />
-          <input id="url" type="text" name="url" value={input.url} onChange={handleChange} required />
-        </label>
-      </div>
+        <div>
+          <label>
+            Url
+            <br />
+            <input id="url" type="text" name="url" value={input.url} onChange={handleChange} required />
+          </label>
+        </div>
 
-      <div>
-        <button className="btn-submit" type="submit">Add</button>
-      </div>
-    </form>
+        <div>
+          <button className="btn-submit" type="submit">Add</button>
+        </div>
+      </form>
+    </motion.div>
   );
 }

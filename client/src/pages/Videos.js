@@ -33,8 +33,8 @@ export default function Videos() {
         getVideos();
     }, [apiURL, token, uId]);
 
-    const addVideo = (video, id) => {
-        video.id = id;
+    const addVideo = (video) => {
+        console.log(video);
         setVideos([...videos, video]);
     }
 

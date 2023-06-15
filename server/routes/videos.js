@@ -22,10 +22,9 @@ router.post("/", auth, async (req, res) => {
     };
 
     try {
-        await pool.query("INSERT INTO videos (u_id, title, url) VALUES($1, $2, $3)", [video.userId, video.title, video.url]);
-        const rs = await pool.query("SELECT id from videos ORDER BY id DESC LIMIT 1");
+        const rs = await pool.query("INSERT INTO videos (u_id, title, url) VALUES($1, $2, $3) RETURNING *", [video.userId, video.title, video.url]);
 
-        res.json({ id: rs.rows[0].id });
+        res.json(rs.rows[0]);
     } catch (error) {
         res.json({
             result: "failure",
