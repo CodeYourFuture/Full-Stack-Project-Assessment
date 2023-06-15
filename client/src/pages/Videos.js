@@ -1,18 +1,21 @@
 import { AppContext } from "../App";
 import { useState, useEffect, useContext } from "react";
+import jwt from "jwt-decode";
 import AddVideo from "../components/AddVideo";
 import VideosContainer from "../components/VideosContainer";
 
 export default function Videos() {
     const apiURL = useContext(AppContext);
+
     const token = localStorage.getItem("token");
+  const { uId } = jwt(token);
 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         async function getVideos() {
             try {
-                const res = await fetch(`${apiURL}/api/videos`, {
+                const res = await fetch(`${apiURL}/api/videos/user/${uId}`, {
                     headers: { "x-auth-token": token }
                 });
                 const data = await res.json();
@@ -28,7 +31,7 @@ export default function Videos() {
         }
 
         getVideos();
-    }, [apiURL, token]);
+    }, [apiURL, token, uId]);
 
     const addVideo = (video, id) => {
         video.id = id;

@@ -4,8 +4,8 @@ const pool = require("../db/db");
 const validate = require("../validations/videos");
 const auth = require("../middleware/auth");
 
-router.get("/", auth, async (req, res) => {
-    const rs = await pool.query("SELECT * FROM videos");
+router.get("/user/:uId", auth, async (req, res) => {
+    const rs = await pool.query("SELECT * FROM videos WHERE u_id = $1", [req.params.uId]);
     const videos = rs.rows;
 
     res.json({ message: "success", videos });
