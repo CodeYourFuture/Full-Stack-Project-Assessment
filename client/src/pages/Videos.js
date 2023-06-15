@@ -11,15 +11,19 @@ export default function Videos() {
 
     useEffect(() => {
         async function getVideos() {
-            const res = await fetch(`${apiURL}/api/videos`, {
-                headers: { "x-auth-token": token }
-            });
-            const data = await res.json();
+            try {
+                const res = await fetch(`${apiURL}/api/videos`, {
+                    headers: { "x-auth-token": token }
+                });
+                const data = await res.json();
 
-            if (data.message === "success") {
-                setVideos(data.videos);
-            } else {
-                alert(data.message);
+                if (res.status === 200) {
+                    setVideos(data.videos);
+                } else {
+                    console.log(data);
+                }
+            } catch (error) {
+                console.log(error.message);
             }
         }
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
+const validate = require("../validations/videos");
 const auth = require("../middleware/auth");
 
 router.get("/", auth, async (req, res) => {
@@ -11,13 +12,17 @@ router.get("/", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
+    const { error } = validate(req.body);
+    if (error) return res.status(400).json({ message: error.message });
+
     const video = {
+        userId: req.body.userId,
         title: req.body.title,
         url: req.body.url
     };
 
     try {
-        await pool.query("INSERT INTO videos (title, url) VALUES($1, $2)", [video.title, video.url]);
+        await pool.query("INSERT INTO videos (u_id, title, url) VALUES($1, $2, $3)", [video.userId, video.title, video.url]);
         const rs = await pool.query("SELECT id from videos ORDER BY id DESC LIMIT 1");
 
         res.json({ id: rs.rows[0].id });
