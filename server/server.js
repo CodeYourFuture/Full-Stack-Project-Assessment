@@ -113,7 +113,7 @@ app.post("/videos", async (req, res) => {
     console.log(err.message);
   }
 });
-
+cd 
 app.get("/videos/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
