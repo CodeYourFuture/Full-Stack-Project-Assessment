@@ -7,8 +7,7 @@ const pool = new Pool({
     port: config.get("db.port"),
     user: config.get("db.user"),
     password: config.get("db.password"),
-    database: config.get("db.database"),
-    ssl: true
+    database: config.get("db.database")
 });
 
 module.exports = pool;
