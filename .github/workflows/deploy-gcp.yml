@@ -29,5 +29,6 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           deliverables: app.yaml
           env_vars: ${{ secrets.GCP_ENV }}
+          working-directory: server
       - name: Print to console
         run: echo "Deployed!"
