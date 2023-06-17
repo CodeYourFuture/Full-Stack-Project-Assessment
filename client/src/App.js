@@ -10,7 +10,7 @@ import Videos from "./pages/Videos";
 export const AppContext = React.createContext();
 
 function App() {
-  const apiURL = (process.env.NODE_ENV === "production") ? "" : "http://localhost:3001";
+  const apiURL = (process.env.NODE_ENV === "production") ? "https://portfolio-389920.nw.r.appspot.com" : "http://localhost:3001";
 
   return (
     <AppContext.Provider value={apiURL}>
