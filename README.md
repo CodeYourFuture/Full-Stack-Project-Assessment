@@ -22,6 +22,6 @@ HTML, CSS, JavaScript, React.js, Node.js, PostgreSQL, GCP App Engine, GCP Cloud 
 - PostgreSQL database deployed to AWS using AWS RDS.
 
 ## Deployment
-- Next.js front end deployed to Netlify.
+- React.js front end deployed to Netlify.
 - Node.js server deployed to GCP.
 - PostgreSQL database deployed to AWS.
