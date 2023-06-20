@@ -17,7 +17,7 @@ function App() {
     let url = `https://pretty-coders-video-api.onrender.com/videos`;
 
     if (selectedGenre) {
-      url += `&genre=${selectedGenre}`;
+      url += `genre=${selectedGenre}`;
     }
 
     fetch(url)
