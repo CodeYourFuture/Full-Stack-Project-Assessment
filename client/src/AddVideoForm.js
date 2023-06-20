@@ -17,7 +17,7 @@ function AddVideoForm({ onAddVideo, fetchVideos, handleToggleVideos }) {
       return;
     }
 
-    fetch("http://localhost:5000/videos/addnew", {
+    fetch("https://pretty-coders-video-api.onrender.com/videos/addnew", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
