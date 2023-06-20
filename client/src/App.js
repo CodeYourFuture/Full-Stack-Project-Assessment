@@ -14,7 +14,7 @@ function App() {
   // const [deleteVideos, setDeleteVideos]
 
   const fetchVideos = () => {
-    let url = `https://pretty-coders-video-api.onrender.com/videos`;
+    let url = `https://pretty-coders-video-api.onrender.com/videos/`;
 
     if (selectedGenre) {
       url += `genre=${selectedGenre}`;
