@@ -106,15 +106,15 @@ function App() {
         <div className="welcome-text">
           <h3> Hi,</h3>
           <p>
-            Welcome to the Pretty coders video blog. <br></br>This site has been
-            created for software developers who love coding/ programming and
-            also enjoy fashion and beauty too! <br></br>
-            You can select and watch videos by genres
-            or popularity. <br></br>Vote up your favourite videos to help other
+            Welcome to the Pretty coders video blog. <br></br>
+            Created for software developers who love coding, programming,
+            fashion and beauty! <br></br>
+            Select and watch videos by genres
+            or popularity. <br></br>Red-Heart up your favourite videos to help other
             viewers know which videos are a hit to watch.
             <br></br>
-            Use the form below to add any video you have found to be
-            instructive/interesting to help other users. <br></br>
+            Use the form below to add
+            instructive/interesting videos to the platform. <br></br>
             Happy Viewing!!
           </p>
         </div>
