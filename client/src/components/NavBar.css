@@ -1,0 +1,12 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;  
+    
+}
+
+.navbar-input {
+    border-radius: 10px;
+    border-color: red;
+}
