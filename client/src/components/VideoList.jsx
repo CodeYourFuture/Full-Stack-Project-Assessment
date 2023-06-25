@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Video from "./Video";
 import "./VideoList.css";
 import Data from "./exampleresponse.json";
 
 const VideoList = () => {
+
+      const [VideoList, setVideoList] = useState(Data);
+
+      const sortedVideoList = [...VideoList].sort(
+        (a, b) => b.rating - a.rating
+      );
+
+      const handleDeleteVideo = (id) => {
+        
+        const index = VideoList.findIndex((video) => video.id === id);
+        if (index !== -1) {
+         
+          const updatedVideoList = [...VideoList];
+          updatedVideoList.splice(index, 1);
+          setVideoList(updatedVideoList);
+        }
+      };
   return (
     <div className="VideoList">
-      {Data.map((item) => (
+      {sortedVideoList.map((video) => (
         <Video
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          url={item.url}
-          rating={item.rating}
+          key={video.id}
+          id={video.id}
+          title={video.title.trim() || "Untitled"}
+          url={video.url}
+          rating={video.rating}
+          onDelete={handleDeleteVideo}
         />
       ))}
     </div>

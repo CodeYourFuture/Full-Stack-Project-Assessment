@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Video.css";
 import { AiOutlineLike, AiOutlineDislike, AiOutlineDelete } from 'react-icons/ai';
 
-const Video = ({ id, title, url, rating }) => {
-
+const Video = ({ id, title, url, rating, onDelete }) => {
+  
+  const [LiveRating, setLiveRating] = useState(rating); 
+  
+  
   const handleLike = () => {
-    
+    if (id) {
+      setLiveRating(LiveRating + 1);
+    }
   };
 
   const handleDislike = () => {
-    
+    if (id && LiveRating > 0) {
+      setLiveRating(LiveRating - 1);
+    }
   };
 
   const handleDeleteVideo = () => {
-    
+     if (id) {
+       onDelete(id);
+     }
   };
 
   return (
@@ -28,7 +37,7 @@ const Video = ({ id, title, url, rating }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <p>Rate: {rating}</p>
+      <p>Rate: {LiveRating}</p>
       <div className="btn">
         <button className="like-btn" onClick={handleLike}>
           <AiOutlineLike size={24} />
