@@ -3,7 +3,7 @@ import "./Video.css";
 import { AiOutlineLike, AiOutlineDislike, AiOutlineDelete } from 'react-icons/ai';
 
 const Video = ({ id, title, url, rating }) => {
-    
+
   const handleLike = () => {
     
   };
@@ -17,7 +17,7 @@ const Video = ({ id, title, url, rating }) => {
   };
 
   return (
-    <div className="Video">
+    <div className="video">
       <h3>{title}</h3>
       <div className="video-container">
         <iframe
