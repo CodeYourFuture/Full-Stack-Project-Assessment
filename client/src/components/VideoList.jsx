@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Video from "./Video";
 import "./VideoList.css";
-import Data from "./exampleresponse.json";
+// import Data from "./exampleresponse.json";
 import NavBar from "./NavBar";
 
 const VideoList = () => {
@@ -10,7 +10,14 @@ const VideoList = () => {
           setVideoList((prevVideoList) => [...prevVideoList, newVideo]);
         };
 
-      const [VideoList, setVideoList] = useState(Data);
+      const [VideoList, setVideoList] = useState([]);
+      
+      useEffect(() => {
+        fetch("http://localhost:5000/videos")
+         .then((response) => response.json())
+         .then((data) => setVideoList(data))
+         .catch((error) => console.log(error));
+  }, []);
 
       const sortedVideoList = [...VideoList].sort(
         (a, b) => b.rating - a.rating
@@ -18,13 +25,18 @@ const VideoList = () => {
 
       const handleDeleteVideo = (id) => {
         
-      const index = VideoList.findIndex((video) => video.id === id);
-        if (index !== -1) {
-         
-      const updatedVideoList = [...VideoList];
-          updatedVideoList.splice(index, 1);
-          setVideoList(updatedVideoList);
-        }
+        fetch(`http://localhost:5000/videos/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((removedVideo) => {
+            
+            const updatedVideoList = VideoList.filter(
+              (video) => video.id !== removedVideo[0].id
+            );
+            setVideoList(updatedVideoList);
+          })
+          .catch((error) => console.log(error));
       };
   return (
     <>
