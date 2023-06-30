@@ -48,7 +48,7 @@ function NavBar({ onAddVideo, videoList }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        onAddVideo(newVideo);
+        onAddVideo(data);
         setTitle("");
         setUrl("");
         setError("");
