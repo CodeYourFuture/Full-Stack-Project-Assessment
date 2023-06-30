@@ -34,10 +34,8 @@ function NavBar({ onAddVideo, videoList }) {
           }
           const videoCode = url.split("v=")[1];
           const newVideo = {
-            id: Math.floor(Math.random() * 100000),
             title: title.trim(),
             url: videoCode,
-            rating: 0,
           };
 
 
