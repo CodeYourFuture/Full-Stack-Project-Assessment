@@ -19,9 +19,7 @@ const VideoList = () => {
           .catch((error) => console.log(error));
   }, []);
 
-      const sortedVideoList = [...VideoList].sort(
-        (a, b) => b.rating - a.rating
-      );
+      
 
       const handleDeleteVideo = (id) => {
         
@@ -42,7 +40,7 @@ const VideoList = () => {
       <NavBar onAddVideo={handleAddVideo} VideoList={VideoList} />
 
       <div className="VideoList">
-        {sortedVideoList.map((video) => (
+        {VideoList.map((video) => (
           <Video
             key={video.id}
             id={video.id}
