@@ -60,7 +60,7 @@ const Video = ({ id, title, url, rating, onDelete }) => {
         <button className="dislike-btn" onClick={handleDislike}>
           <AiOutlineDislike size={24} />
         </button>
-        <button className="delete-btn" onClick={handleDeleteVideo}>
+        <button className="delete-btn" onClick={()=>handleDeleteVideo()}>
           <AiOutlineDelete size={24} />
         </button>
       </div>
