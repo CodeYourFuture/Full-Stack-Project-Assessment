@@ -135,15 +135,20 @@ app.delete("/videos/:id", async (req, res) => {
   }
 });
 
-//   // PUT (Update Rating)
-// app.put("/videos/:id/rating", (req, res) => {
-//   const videoId = req.params.id;
-//   const { rating } = req.body;
-//   const VideoIndex = videos.findIndex((video) => video.id === parseInt(videoId));
-//   if (VideoIndex !== -1) {
-//     videos[VideoIndex].rating = rating;
-//     res.json({ message: "Rating updated" });
-//   } else {
-//     res.status(404).json({ message: "err" });
-//   }
-//})
+app.put("/videos/:id/rating", async (req, res) => {
+  try {
+    const videoId = req.params.id; 
+    const { rating } = req.body; 
+
+    const query = "UPDATE videos SET rating = $1 WHERE id = $2"; 
+    const values = [rating, videoId]; 
+    await pool.query(query, values); 
+
+    res.json({ message: "Rating Updated" }); 
+  } catch (error) {
+    console.error("Error updating rating:", error);
+    res
+      .status(500)
+      .json({ error: "Updating err" }); 
+  }
+});
