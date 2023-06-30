@@ -41,22 +41,21 @@ function NavBar({ onAddVideo, videoList }) {
           };
 
 
-    fetch("http://localhost:5000/videos", {
-       method: "POST",
-       headers: {
+    fetch("https://full-stack-server-8ry9.onrender.com/videos", {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-                },
-       body: JSON.stringify(newVideo),
-              })
-
-        .then((response) => response.json())
-        .then((data) => {    
-          onAddVideo(newVideo);
-          setTitle("");
-          setUrl("");
-          setError("");
-        })
-        .catch((error) => console.log(error));
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        onAddVideo(newVideo);
+        setTitle("");
+        setUrl("");
+        setError("");
+      })
+      .catch((error) => console.log(error));
     };
 
 

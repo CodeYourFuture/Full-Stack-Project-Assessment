@@ -13,10 +13,10 @@ const VideoList = () => {
       const [VideoList, setVideoList] = useState([]);
       
       useEffect(() => {
-        fetch("http://localhost:5000/videos")
-         .then((response) => response.json())
-         .then((data) => setVideoList(data))
-         .catch((error) => console.log(error));
+        fetch("https://full-stack-server-8ry9.onrender.com/videos")
+          .then((response) => response.json())
+          .then((data) => setVideoList(data))
+          .catch((error) => console.log(error));
   }, []);
 
       const sortedVideoList = [...VideoList].sort(
@@ -25,12 +25,11 @@ const VideoList = () => {
 
       const handleDeleteVideo = (id) => {
         
-        fetch(`http://localhost:5000/videos/${id}`, {
+        fetch(`https://full-stack-server-8ry9.onrender.com/videos/${id}`, {
           method: "DELETE",
         })
           .then((response) => response.json())
           .then((removedVideo) => {
-            
             const updatedVideoList = VideoList.filter(
               (video) => video.id !== removedVideo[0].id
             );
