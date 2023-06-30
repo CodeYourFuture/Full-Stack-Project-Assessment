@@ -10,12 +10,15 @@ const Video = ({ id, title, url, rating, onDelete }) => {
   const handleLike = () => {
     if (id) {
       setLiveRating(LiveRating + 1);
+      updateRating(LiveRating + 1);
+
     }
   };
 
   const handleDislike = () => {
     if (id && LiveRating > 0) {
       setLiveRating(LiveRating - 1);
+      updateRating(LiveRating - 1);
     }
   };
 
@@ -24,6 +27,18 @@ const Video = ({ id, title, url, rating, onDelete }) => {
        onDelete(id);
      }
   };
+   const updateRating = (id, newRating) => {
+     fetch(`https://full-stack-server-8ry9.onrender.com/videos/${id}/rating`, {
+       method: "PUT",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({ rating: newRating }),
+     })
+       .then((response) => response.json())
+       .then((data) => console.log(data))
+       .catch((error) => console.log(error));
+   };
 
   return (
     <div className="video">
