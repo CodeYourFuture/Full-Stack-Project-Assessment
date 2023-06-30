@@ -1,0 +1,9 @@
+          List of relations
+ Schema |    Name     | Type  | Owner 
+--------+-------------+-------+-------
+ public | products    | table | elahe
+ public | students    | table | elahe
+ public | users       | table | elahe
+ public | videostable | table | elahe
+(4 rows)
+
