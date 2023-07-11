@@ -11,33 +11,29 @@ const ValidInputCheck = (title, url) => {
   return hasCorrectTitle && hasCorrectUrl;
 };
 
-
 function NavBar({ onAddVideo, videoList }) {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
 
-      const [title, setTitle] = useState("");
-      const [url, setUrl] = useState("");
-      const [error, setError] = useState("");
+  const TitleClickHandeler = (event) => {
+    setTitle(event.target.value);
+  };
 
+  const UrlClickHandeler = (event) => {
+    setUrl(event.target.value);
+  };
 
-        const TitleClickHandeler = (event) => {
-          setTitle(event.target.value);
-        };
-
-        const UrlClickHandeler = (event) => {
-          setUrl(event.target.value);
-        };
-
-        const AddClickHandeler = () => {
-          if (!ValidInputCheck(title, url)) {
-            setError("Please enter a valid Title and Url.");
-            return;
-          }
-          const videoCode = url.split("v=")[1];
-          const newVideo = {
-            title: title.trim(),
-            url: videoCode,
-          };
-
+  const AddClickHandeler = () => {
+    if (!ValidInputCheck(title, url)) {
+      setError("Please enter a valid Title and Url.");
+      return;
+    }
+    const videoCode = url.split("v=")[1];
+    const newVideo = {
+      title: title.trim(),
+      url: videoCode,
+    };
 
     fetch("https://full-stack-server-8ry9.onrender.com/videos", {
       method: "POST",
@@ -54,8 +50,7 @@ function NavBar({ onAddVideo, videoList }) {
         setError("");
       })
       .catch((error) => console.log(error));
-    };
-
+  };
 
   return (
     <div className="navbar">
@@ -83,7 +78,9 @@ function NavBar({ onAddVideo, videoList }) {
         />
       </div>
 
-      <button className="addbtn" onClick={AddClickHandeler}>ADD</button>
+      <button className="addbtn" onClick={AddClickHandeler}>
+        ADD
+      </button>
 
       {error && <div>{error}</div>}
     </div>

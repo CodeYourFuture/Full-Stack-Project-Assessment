@@ -7,20 +7,37 @@ const Video = ({ id, title, url, rating, onDelete }) => {
   const [LiveRating, setLiveRating] = useState(rating); 
   
   
-  const handleLike = () => {
-    if (id) {
-      setLiveRating(LiveRating + 1);
-      updateRating(LiveRating + 1);
+  // const handleLike = () => {
+  //   if (id) {
+  //     setLiveRating(LiveRating + 1);
+  //     updateRating(LiveRating + 1);
 
-    }
-  };
+  //   }
+  // };
 
-  const handleDislike = () => {
-    if (id && LiveRating > 0) {
-      setLiveRating(LiveRating - 1);
-      updateRating(LiveRating - 1);
-    }
-  };
+  // const handleDislike = () => {
+  //   if (id && LiveRating > 0) {
+  //     setLiveRating(LiveRating - 1);
+  //     updateRating(LiveRating - 1);
+  //   }
+  // };
+
+
+const handleLike = () => {
+  if (id) {
+    const newRating = LiveRating + 1;
+    setLiveRating(newRating);
+    updateRating(id, newRating);
+  }
+};
+
+const handleDislike = () => {
+  if (id && LiveRating > 0) {
+    const newRating = LiveRating - 1;
+    setLiveRating(newRating);
+    updateRating(id, newRating);
+  }
+};
 
   const handleDeleteVideo = () => {
      if (id) {
