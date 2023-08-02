@@ -1,6 +1,8 @@
 
 
+import Counter from './Counter'
 import ReactPlayer from 'react-player'
+
 
 
 const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
@@ -21,14 +23,7 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
                         <img className="image-heart" src="https://www.svgrepo.com/show/439915/heart-fill.svg"></img>
                         <span>{video.rating}</span>
                     </div>
-                    <button className="up">
-                        <img className="tumb-up" src="https://icon-library.com/images/white-thumbs-up-icon/white-thumbs-up-icon-26.jpg">
-                        </img>{video.rating}</button>
-                    <button className="down">
-                        0
-                        <img className="tumb-down" src="https://icon-library.com/images/white-thumbs-up-icon/white-thumbs-up-icon-26.jpg"></img>
-
-                    </button>
+                    <Counter />
                 </div>
             </div >
         ))
