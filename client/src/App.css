@@ -86,6 +86,103 @@ h4 {
 .form-holder {
   width: 100%;
   height: 10rem;
-  background-color: rgb(100, 77, 133, 40%);
+  /* background-color: rgb(100, 77, 133, 40%); */
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  max-height: 10rem;
+  margin-top: 1rem;
+  display: flex;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.form-holder input {
+  width: 20rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+  border-radius: 2rem;
+  border: rgb(157, 139, 184) solid 1px;
+  background-color: rgb(255, 255, 255, 20%);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: white;
+}
+
+.form-holder ::placeholder {
+  color: rgb(255, 255, 255, 60%);
+  padding-left: 1rem;
+  font-size: 12px;
+}
+
+.form-holder input:hover {
+  background-color: rgb(255, 255, 255, 50%);
+}
+
+.form-holder input:focus {
+  background-color: rgb(255, 255, 255, 80%);
+  color: rgb(48, 48, 48);
+  outline-width: 0;
+  border-color: rgb(255, 255, 255);
+}
+
+.form-holder button {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  border: rgb(255, 255, 255, 60%) solid 1px;
+  color: white;
+  background: rgb(69, 48, 105);
+  background: linear-gradient(336deg, rgba(69, 48, 105, 1) 15%, rgba(132, 105, 181, 1) 100%);
+  box-shadow: rgba(0, 0, 0, 50%) 0px 3px 8px;
+}
+
+.form-holder button:hover {
+  background: rgb(118, 92, 163);
+  background: linear-gradient(336deg, rgba(118, 92, 163, 1) 15%, rgba(193, 152, 226, 1) 100%);
+}
+
+h3 {
+  color: white;
+  font-size: 18px;
+  width: 50%;
+}
+
+.main-button-to-add {
+  margin-bottom: 1.5rem;
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  border: rgb(255, 255, 255, 60%) solid 1px;
+  color: white;
+  background: rgb(69, 48, 105);
+  background: linear-gradient(336deg, rgba(69, 48, 105, 1) 15%, rgba(132, 105, 181, 1) 100%);
+  box-shadow: rgba(0, 0, 0, 50%) 0px 3px 8px;
+}
+
+.main-button-to-add:focus {
+  outline-width: 0;
+}
+
+.main-button-to-add:hover {
+  width: 10.2rem;
+  height: 2.6rem;
+}
+
+h1 {
+  font-size: 40px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: rgb(79, 64, 92);
 }

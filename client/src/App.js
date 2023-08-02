@@ -1,6 +1,6 @@
+import AddVideoButton from "./AddVideButton";
 import "./App.css";
 import CardHolder from "./CardHolder";
-import AddingVideo from "./AddingVideo";
 import allVideos from "./exampleresponse.json"
 import { useEffect, useState } from "react"
 
@@ -17,7 +17,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddingVideo />
+      <AddVideoButton />
       <CardHolder allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
     </div>
   );

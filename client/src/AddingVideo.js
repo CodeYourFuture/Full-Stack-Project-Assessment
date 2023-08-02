@@ -1,9 +1,11 @@
 const AddingVideo = () => {
     return (
+
         <div className="form-holder">
+            <h3>Add Your Favorite Video</h3>
             <form>
-                <input type="text" value=""></input>
-                <input tupe="url" value=""></input>
+                <input type="text" defaultValue="" placeholder="Type in the title of the video you like"></input>
+                <input tupe="url" defaultValue="" placeholder="Link for the video"></input>
                 <button className="submit-form-button">Add to the List</button>
             </form>
         </div>
