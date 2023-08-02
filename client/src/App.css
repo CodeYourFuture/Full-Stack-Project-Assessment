@@ -17,6 +17,7 @@
 .card {
   text-align: left;
   width: 32rem;
+  padding: 1rem;
   background: rgb(255, 255, 255);
   background: linear-gradient(336deg, rgba(255, 255, 255, 0.7161458333333333) 0%, rgba(255, 255, 255, 0.2399553571428571) 100%);
   border: 1px solid white;
@@ -24,18 +25,17 @@
 
 .video-holder {
   width: 30rem;
-  margin-left: 1rem;
+  position: relative;
+  padding-top: 56.25%;
+  /* 720 / 1280 = 0.5625 */
 }
 
 .text-holder {
-  margin-right: 1rem;
   margin-bottom: 1rem;
-  margin-top: 0.6rem;
   align-self: flex-end;
 }
 
 h4 {
-  margin-left: 1rem;
   margin-bottom: 0.6rem;
   margin-top: 1rem;
   color: white;
@@ -85,8 +85,7 @@ h4 {
 
 .form-holder {
   width: 100%;
-  height: 10rem;
-  /* background-color: rgb(100, 77, 133, 40%); */
+  min-height: 10rem;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
@@ -96,13 +95,12 @@ h4 {
 
 form {
   width: 100%;
-  max-height: 10rem;
+  min-height: 6rem;
   margin-top: 1rem;
   display: flex;
-
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
 
@@ -156,7 +154,7 @@ form {
 h3 {
   color: white;
   font-size: 18px;
-  width: 50%;
+  width: 80%;
 }
 
 .main-button-to-add {
@@ -185,4 +183,66 @@ h1 {
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: rgb(79, 64, 92);
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sorting-holder {
+  color: white;
+  width: 82%;
+  margin: 0 auto;
+  text-align: end;
+  font-size: 18px;
+}
+
+.sorting-ratings-button {
+  background-color: rgba(184, 184, 184, 59%);
+  padding: 0.5rem;
+  border-radius: 2rem;
+  width: 2rem;
+  border: none;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+
+}
+
+.sorting-ratings-button img {
+  width: 1rem;
+}
+
+
+@media only screen and (max-width: 844px) {
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+  }
+
+  .video-holder {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+    /* 720 / 1280 = 0.5625 */
+  }
+
+  .card {
+    width: 96%;
+    padding: 0.5rem;
+  }
+
+  form {
+    width: 100%;
+    min-height: 10rem;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+
 }

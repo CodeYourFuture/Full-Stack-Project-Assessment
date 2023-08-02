@@ -1,17 +1,20 @@
 
 
 import ReactPlayer from 'react-player'
-import { useRef } from 'react';
+
 
 const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
 
-    const playerRef = useRef(null);
     return (
         allMyVideos.map(video => (
             <div key={video.key} className="card">
                 <h4>{video.title}</h4>
                 <div className="video-holder">
-                    <ReactPlayer width={480} height={272} ref={playerRef} url={video.url} controls={true} fluid={false} />
+                    <ReactPlayer className="react-player"
+                        url={video.url}
+                        width="100%"
+                        height="100%"
+                        controls={false} />
                 </div>
                 <div className="text-holder">
                     <div className="rate">
