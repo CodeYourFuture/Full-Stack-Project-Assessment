@@ -1,3 +1,91 @@
 .App {
   text-align: center;
 }
+
+.image-heart {
+  width: 1.5rem;
+}
+
+.cards-holder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  text-align: left;
+  width: 32rem;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(336deg, rgba(255, 255, 255, 0.7161458333333333) 0%, rgba(255, 255, 255, 0.2399553571428571) 100%);
+  border: 1px solid white;
+}
+
+.video-holder {
+  width: 30rem;
+  margin-left: 1rem;
+}
+
+.text-holder {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 0.6rem;
+  align-self: flex-end;
+}
+
+h4 {
+  margin-left: 1rem;
+  margin-bottom: 0.6rem;
+  margin-top: 1rem;
+  color: white;
+}
+
+.up,
+.down {
+  border: none;
+  background-color: rgb(48, 13, 81, 60%);
+  height: 2rem;
+  margin-top: 0.5rem;
+  color: white;
+}
+
+.up {
+  border-radius: 1rem 0 0 1rem;
+  padding-left: 1rem;
+  border-right: 1px solid rgb(155, 132, 165);
+  border-top: solid 1px white;
+
+}
+
+.down {
+  border-radius: 0 1rem 1rem 0;
+  border-top: solid 1px white;
+}
+
+.tumb-up {
+  width: 1rem;
+  padding-bottom: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.rate {
+  text-align: right;
+}
+
+.tumb-down {
+  -moz-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  width: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.form-holder {
+  width: 100%;
+  height: 10rem;
+  background-color: rgb(100, 77, 133, 40%);
+  margin-bottom: 2rem;
+}
