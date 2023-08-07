@@ -1,0 +1,50 @@
+.video {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    width: calc(33.33% - 40px);
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+.video h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.video iframe {
+    border: 5px solid black;
+    width: 100%;
+
+
+
+}
+
+.video .vote {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.video .vote button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.video .vote span {
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+
+.video button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
