@@ -14,6 +14,8 @@
   gap: 2rem;
 }
 
+
+
 .card {
   text-align: left;
   width: 32rem;
@@ -31,8 +33,27 @@
 }
 
 .text-holder {
-  margin-bottom: 1rem;
   align-self: flex-end;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-button {
+  align-self: self-end;
+  border-radius: 2rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+  border: 1px solid white;
+  color: white;
+  background-color: rgb(225, 51, 51, 80%);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.delete-button:hover {
+  background-color: rgb(229, 12, 12);
 }
 
 h4 {

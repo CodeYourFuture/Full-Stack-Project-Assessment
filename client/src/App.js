@@ -1,7 +1,6 @@
 import AddVideoButton from "./AddVideButton";
 import "./App.css";
 import CardHolder from "./CardHolder";
-import allVideos from "./exampleresponse.json"
 import { useEffect, useState } from "react"
 
 
@@ -9,15 +8,20 @@ import { useEffect, useState } from "react"
 function App() {
   const [allMyVideos, setAllMyVideos] = useState([])
   useEffect(() => {
-    setAllMyVideos(allVideos)
-    console.log(allMyVideos)
+    fetch("https://youtube-video-server.onrender.com/videos")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setAllMyVideos(data)
+      })
   }, [])
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideoButton />
+      <AddVideoButton allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
       <CardHolder allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
     </div>
   );

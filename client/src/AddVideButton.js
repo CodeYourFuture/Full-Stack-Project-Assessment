@@ -2,7 +2,7 @@ import { useState } from "react"
 import AddingVideo from "./AddingVideo";
 
 
-const AddVideoButton = () => {
+const AddVideoButton = ({ allMyViveos, setAllMyVideos }) => {
     const [pressedButton, setPressedButton] = useState(false)
     const [buttonLable, setButtonLable] = useState("ADD YOUR VIDEO")
     const handleClick = () => {
@@ -17,7 +17,7 @@ const AddVideoButton = () => {
     return (
         <div>
             <button className="main-button-to-add" onClick={handleClick}>{buttonLable}</button>
-            {pressedButton && <AddingVideo />}
+            {pressedButton && <AddingVideo allMyViveos={allMyViveos} setAllMyVideos={setAllMyVideos} />}
         </div>
     )
 }
