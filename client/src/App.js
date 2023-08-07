@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./App.css";
+import "./styles.css";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 import videosData from "./exampleresponse.json";
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1 className="header-video">Video Recommendation</h1>
         {videos.map((video) => (
           <Video
             key={video.id}
