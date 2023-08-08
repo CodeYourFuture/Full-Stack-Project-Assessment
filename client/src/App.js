@@ -5,7 +5,9 @@ import AddVideo from "./AddVideo";
 import videosData from "./exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState(videosData);
+  const sortedVideos = [...videosData].sort((a, b) => b.votes - a.votes);
+
+  const [videos, setVideos] = useState(sortedVideos);
 
   const handleVote = (id, increment) => {
     setVideos((prevVideos) =>
@@ -21,7 +23,11 @@ function App() {
 
   const handleAddVideo = (newVideo) => {
     const id = videos.length + 1;
-    setVideos([...videos, { ...newVideo, id, votes: 0 }]);
+    const currentDate = new Date().toISOString();
+    setVideos([
+      ...videos,
+      { ...newVideo, id, votes: 0, uploadDate: currentDate },
+    ]);
   };
 
   return (

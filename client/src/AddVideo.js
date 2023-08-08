@@ -23,13 +23,13 @@ const AddVideo = ({ onAddVideo }) => {
           type="text"
           placeholder="Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)} required
         />
         <input
           type="text"
           placeholder="URL"
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => setUrl(e.target.value)} required
         />
         <button type="submit">Add Video</button>
       </form>
