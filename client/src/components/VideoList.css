@@ -1,0 +1,9 @@
+.VideoList{
+    display: flex;
+    gap: 15px;
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   
+}

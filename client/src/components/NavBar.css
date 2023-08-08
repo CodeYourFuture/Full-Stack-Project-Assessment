@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    text-align: center; 
+    gap: 20px;
+}
+
+.navbar-input input {
+    border-radius: 10px;
+    border-color: rgb(233, 9, 9);
+    padding: 10px;
+}
+.addbtn {
+    justify-content: center;
+    text-align: center;
+    border-color: rgb(250, 24, 8);
+    border-radius: 10px;
+}
