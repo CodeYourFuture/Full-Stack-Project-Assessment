@@ -1,11 +1,13 @@
 import "./App.css";
+import VideoCard from "./VideoCard.jsx"
+import Header from "./Header"
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <VideoCard />
     </div>
   );
 }
