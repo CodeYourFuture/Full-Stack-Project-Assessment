@@ -1,3 +1,57 @@
+body {
+  margin: 0;
+  padding: 4% 4%;
+  background-color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
+}
+
+.card {
+  margin: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.App .card.mt-3 {
+  flex: 0 0 calc(48% - 30px);
+  margin: 15px;
+}
+
+.add-video-card {
+  border: 0.5px solid #dbe3eb;
+  background-color: #eaf6f5;
+  width: 50%;
+  margin: 0 auto;
+}
+.App.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  background-color: #e3eeec;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(234, 7, 7, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08);
+
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 -15px;
+}
+
+.App.container :hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
