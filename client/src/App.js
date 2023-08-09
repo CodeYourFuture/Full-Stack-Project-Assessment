@@ -1,11 +1,25 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./component/Home";
+import Videos from "./component/Videos";
+import Create from "./component/Create";
+import Nav from "./component/Nav";
+import Login from "./component/Login";
+import SignUp from "./component/SignUp";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/videos' element={<Videos />}/>
+          <Route path='/create' element={<Create />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/signUp' element={<SignUp />}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
