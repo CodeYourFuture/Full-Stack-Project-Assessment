@@ -3,3 +3,23 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+.add-button {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px rgb(39, 121, 63) solid;
+  padding: 5px 10px;
+  background-color: rgb(225, 238, 225);
+}
+.add-button:focus {
+    outline: 3px black solid;
+}
+
+input{
+  background-color: rgb(249, 255, 207);
+  margin: 5px 10px;
+  border-radius: 10px;
+}
+input:focus {
+  background-color: rgb(255, 255, 255);
+}

@@ -18,13 +18,15 @@ function NewVideoContainer({ allMovies, setAllMovies }) {
 
   return (
     <div className="new-video-container">
-      <label>Title:</label>
+      <label htmlFor="newTitle">Title: </label>
       <input type="text" id="newTitle" name="newTitle" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></input>
       <br />
-      <label>URL:</label>
+      <label htmlFor="newURL">URL: </label>
       <input type="text" id="newURL" name="newURL" value={newURL} onChange={(e) => setNewURL(e.target.value)}></input>
       <br />
-      <button onClick={addNewVideo}>Add</button>
+      <button className="add-button" onClick={addNewVideo}>
+        Add Video
+      </button>
     </div>
   );
 }

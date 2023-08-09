@@ -18,12 +18,14 @@ function MovieCard(props) {
   return (
     <div className="movie-card">
       <p>{props.movie.title}</p>
-      <iframe width="340" src={movieSrc} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <iframe width="340" src={movieSrc} title={props.movie.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <i className="fa-solid fa-thumbs-up" onClick={upVote}></i>
       <span> Votes: {props.movie.rating} </span>
       <i className="fa-solid fa-thumbs-down" onClick={downVote}></i>
       <br></br>
-      <button onClick={deleteMovieCard}>Remove</button>
+      <button className="remove-button" onClick={deleteMovieCard}>
+        Remove Video
+      </button>
     </div>
   );
 }
