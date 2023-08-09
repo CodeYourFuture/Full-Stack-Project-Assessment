@@ -1,0 +1,9 @@
+.movie-card {
+    width: 350px;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0 auto;
+}
+
