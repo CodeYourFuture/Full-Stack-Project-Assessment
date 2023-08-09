@@ -1,0 +1,23 @@
+.cards-container {
+    padding-top: 1rem;
+}
+
+@media (min-width: 750px) 
+ {
+    .cards-container {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+    }
+ }
+
+ @media (min-width: 1150px) 
+ {
+    .cards-container {
+       
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+ }
+
+ 

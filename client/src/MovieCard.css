@@ -1,0 +1,20 @@
+.movie-card {
+    width: 350px;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0 auto;
+}
+
+.remove-button {
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px rgb(121, 50, 39) solid;
+  padding: 5px 10px;
+  background-color: rgb(245, 209, 207);
+}
+
+.remove-button:focus {
+    outline: 3px black solid;
+}
