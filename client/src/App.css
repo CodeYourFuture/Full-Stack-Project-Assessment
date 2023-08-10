@@ -1,5 +1,6 @@
 body {
   background: url(./img/1sss.jpeg) no-repeat center center fixed;
+  background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,9 +10,14 @@ body {
 
 .nav-continuer {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   padding: 25px;
+  position: fixed;
+  top: -7px;
+  overflow-x: hidden;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between
 }
 
 ul {
@@ -159,7 +165,7 @@ ul>li>a:hover {
 .create-div {
   text-align: center;
   color: snow;
-  margin-top: 60px;
+  margin-top: 160px;
 }
 
 .carousel-caption {
@@ -200,3 +206,41 @@ ul>li>a:hover {
 }
 
 /* End of footer styling  */
+
+/* styling Videos Component */
+.video-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: 3em;
+  border-radius: 30px;
+  background: #212121;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25),
+    -15px -15px 30px rgb(60, 60, 60);
+  width: 45em;
+  height: 25em;
+  margin-bottom: 60px;
+}
+
+.video-card:hover {
+  /* transform: translateY(-1.5rem); */
+  border: #949694 0.1em solid;
+  border-radius: 2.5rem 0 2.5rem 0;
+}
+
+.vid-div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 99px;
+  margin-top: 45px;
+}
+
+.vid-size {
+  width: 450px;
+}
+
+/* End Videos Component styling */
