@@ -5,6 +5,7 @@ import Create from "./component/Create";
 import Nav from "./component/Nav";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
+import FooterComponent from "./component/FooterComponent";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/signUp' element={<SignUp />}/>
         </Routes>
+        <FooterComponent />
       </BrowserRouter>
     </div>
   );

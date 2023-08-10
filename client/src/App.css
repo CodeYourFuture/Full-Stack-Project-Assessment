@@ -51,7 +51,7 @@ ul>li>a:hover {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 530px;
+  width: 500px;
   height: 490px;
   padding: 100px 40PX;
   transform: translate(-50%, -50%);
@@ -152,7 +152,11 @@ ul>li>a:hover {
 /* End sign up styling */
 
 
-.sing-div, .login-div, .home-div, .videos-div, .create-div {
+.sing-div,
+.login-div,
+.home-div,
+.videos-div,
+.create-div {
   text-align: center;
   color: snow;
   margin-top: 60px;
@@ -175,3 +179,51 @@ ul>li>a:hover {
   font-size: 18px;
   line-height: 1.9;
 }
+
+/* footer styling */
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+$timing : 265ms;
+$iconColor : #00B5F5;
+$accent : #002A8F;
+$bluefade : #0043E0;
+$gradient : #00B5F5;
+
+@mixin transformScale($size: 1) {
+  transform: scale($size);
+  -ms-transform: scale($size);
+  -webkit-transform: scale($size);
+}
+
+body {
+  background-color: rgba($iconColor, 0.05);
+}
+
+.social-container {
+  position: fixed;
+  bottom: 30px;
+  margin-left: 130px;
+}
+
+.social-icons>li>a:before {
+  @include transformScale();
+  content: " ";
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20;
+  list-style: none;
+  margin: 2em;
+}
+
+/* End of footer styling  */
