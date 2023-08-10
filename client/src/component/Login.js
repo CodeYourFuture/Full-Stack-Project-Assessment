@@ -10,7 +10,8 @@ const Login = () => {
   const clickHandler = (e) => setEmail(email);
 
   return (
-    <div className="login-div">
+    <div
+      className="login-div">
       <h1>Login</h1>
       <div className="login-box">
         <form>
@@ -19,7 +20,11 @@ const Login = () => {
             <label>Email</label>
           </div>
           <div className="user-box">
-            <input type="password" onChange={passwordHandler} value={password} />
+            <input
+              type="password"
+              onChange={passwordHandler}
+              value={password}
+            />
             <label>Password</label>
           </div>
           <center>

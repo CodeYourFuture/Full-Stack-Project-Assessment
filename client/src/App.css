@@ -1,5 +1,5 @@
 body {
-  background: url(./img/sebastiaan-stam-KuMHZq-o6Zw-unsplash.jpg) no-repeat center center fixed;
+  background: url(./img/1sss.jpeg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,7 +19,7 @@ ul {
 }
 
 ul>li>a {
-  font-size: 18px;
+  font-size: 24px;
   text-decoration: none;
   list-style-type: none;
   list-style: none;
@@ -94,7 +94,7 @@ ul>li>a:hover {
   top: -20px;
   left: 0;
   color: #bdb8b8;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .btn-submit {
@@ -184,34 +184,10 @@ ul>li>a:hover {
 
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
 
-$timing : 265ms;
-$iconColor : #00B5F5;
-$accent : #002A8F;
-$bluefade : #0043E0;
-$gradient : #00B5F5;
-
-@mixin transformScale($size: 1) {
-  transform: scale($size);
-  -ms-transform: scale($size);
-  -webkit-transform: scale($size);
-}
-
-body {
-  background-color: rgba($iconColor, 0.05);
-}
-
 .social-container {
   position: fixed;
-  bottom: 30px;
-  margin-left: 130px;
-}
-
-.social-icons>li>a:before {
-  @include transformScale();
-  content: " ";
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
+  bottom: 20px;
+  margin-left: 30px;
 }
 
 .social-icons {
@@ -220,10 +196,7 @@ body {
   align-items: center;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 15px;
-  padding: 20;
-  list-style: none;
-  margin: 2em;
+  gap: 20px;
 }
 
 /* End of footer styling  */
