@@ -1,6 +1,6 @@
 import React from "react";
 import videoData from "../exampleresponse.json";
-
+import ReactPlayer from "react-player/lazy";
 
 const Videos = () => {
 
@@ -10,9 +10,7 @@ const Videos = () => {
       <div className="vid-div">
         {videoData.map((video) => (
           <div key={video.id} className="video-card">
-            <video controls className="vid-size">
-              <source src={video.url} type="video/mp4" />
-            </video>
+            <ReactPlayer url={video.url} />
             <div>
               <h4>{video.title}</h4>
               <h4>{`Rating: ${video.rating}`}</h4>
@@ -25,10 +23,3 @@ const Videos = () => {
 };
 
 export default Videos;
-
-// <div class="card">
-//     <h2>{video.title}</h2>
-//     <div className="video">
-//       <ReactPlayer url={video.url} controls={true} />
-//     </div>
-//   </div>

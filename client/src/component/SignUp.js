@@ -23,18 +23,22 @@ const SignUp = () => {
             <label>Username</label>
           </div>
           <div className="user-box">
-            <input type="email" onChange={emailHandler} value={email} />
+            <input type="" onChange={emailHandler} value={email} />
             <label>Email</label>
           </div>
           <div className="user-box">
-            <input type="password" onChange={passwordHandler} value={password} />
+            <input
+              type="password"
+              onChange={passwordHandler}
+              value={password}
+            />
             <label>Password</label>
           </div>
           <center>
-              <button className="btn-submit" onCanPlay={clickHandler}>
-                  SUBMIT
+            <button className="btn-submit" onCanPlay={clickHandler}>
+              SUBMIT
               <span></span>
-              </button>
+            </button>
           </center>
         </form>
       </div>

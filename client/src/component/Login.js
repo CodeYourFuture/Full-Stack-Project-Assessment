@@ -16,7 +16,7 @@ const Login = () => {
       <div className="login-box">
         <form>
           <div className="user-box">
-            <input type="email" onChange={emailHandler} value={email} />
+            <input type="" onChange={emailHandler} value={email} />
             <label>Email</label>
           </div>
           <div className="user-box">
