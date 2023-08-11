@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function VideoCard() {
+function SingleVideoCard({ title, url }) {
   const [count, setCount] = useState(0);
 
   function minusCount() {
@@ -10,7 +10,11 @@ function VideoCard() {
   function plusCount() {
     setCount((prevCount) => prevCount + 1);
   }
+  if (!url) {
+    return <div>No video URL provided.</div>;
+  }
 
+  const videoId = url.split("v=")[1];
   return (
     <div className="card-container">
       <div className="card">
@@ -18,17 +22,17 @@ function VideoCard() {
           className="card-thumb"
           width="320"
           height="320"
-          src="https://www.youtube.com/embed/{DAOZJPquY_w}"
+          src={`https://www.youtube.com/embed/${videoId}`}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
         <div className="card-body">
           <button onClick={minusCount}>-</button>
           <span>{count}</span>
           <button onClick={plusCount}>+</button>
-          <h2>Video Title</h2>
+          <h2>{title}</h2>
           <p>Paragraph</p>
           <button className="btn btn-primary">Delete</button>
         </div>
@@ -36,4 +40,4 @@ function VideoCard() {
     </div>
   );
 }
-export default VideoCard;
+export default SingleVideoCard;
