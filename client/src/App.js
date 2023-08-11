@@ -1,7 +1,7 @@
 import "./App.css";
-import Search from "./Search.js";
-import VideoCards from "./VideoCards";
+import VideoCard from "./VideoCard";
 import AddVideo from "./AddVideo";
+import Search from "./Search.js";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       </header>
 
       <AddVideo />
-      <VideoCards />
+      <VideoCard />
       <Search />
     </div>
   );
