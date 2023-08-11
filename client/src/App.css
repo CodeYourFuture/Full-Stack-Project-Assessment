@@ -1,3 +1,88 @@
 .App {
   text-align: center;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+header h1 {
+  text-align: center;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.video-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-title {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.video-category {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.video-likes-dislikes {
+  font-size: 14px;
+  color: #888;
+}
+
+.like-button,
+.dislike-button {
+  cursor: pointer;
+  margin-right: 10px;
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.like-button:hover,
+.dislike-button:hover {
+  color: #3498db;
+}
+
+.genres-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.genre {
+  margin: 0 10px;
+  font-size: 16px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.genre:hover {
+  color: #3498db;
+}
