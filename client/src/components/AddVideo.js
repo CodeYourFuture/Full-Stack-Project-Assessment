@@ -1,67 +1,77 @@
 import React, { useState } from "react";
+import {
+  Button,
+  TextField,
+  Card,
+  CardHeader,
+  CardContent,
+} from "@material-ui/core";
 
 function AddVideo({ onAdd }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(true);
 
+  const isYoutubeUrl = (url) => {
+    return /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/i.test(url);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (title.trim() === "" || !isYoutubeUrl(url)) {
+      alert("Please enter a valid title and a valid YouTube URL.");
+      return;
+    }
     onAdd({ title, url, rating: 0 });
   };
 
   return (
-    <div className="card mt-5 mb-5 p-4 add-video-card">
-      {" "}
-      <div className="card-header">
-        Add a Video
-        <button
-          className="btn btn-primary ml-2"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-        >
-          {isCollapsed ? "Open" : "Close"}
-        </button>
-      </div>
+    <Card className="card mt-5 mb-5 p-4 add-video-card">
+      <CardHeader
+        title="Add a Video"
+        action={
+          <Button color="primary" onClick={() => setIsCollapsed(!isCollapsed)}>
+            {isCollapsed ? "Open" : "Close"}
+          </Button>
+        }
+      />
       {!isCollapsed && (
-        <div className="card-body pt-4">
+        <CardContent>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Title</label>
-              <input
-                type="text"
-                className="form-control"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
+            <TextField
+              label="Title"
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <TextField
+              label="URL"
+              fullWidth
+              type="url"
+              className="mt-3"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              required
+            />
+            <div className="mt-3">
+              <Button type="submit" color="primary" variant="contained">
+                Add Video
+              </Button>
+              <Button
+                className="ml-2"
+                onClick={() => {
+                  setTitle("");
+                  setUrl("");
+                }}
+              >
+                Cancel
+              </Button>
             </div>
-            <div className="form-group">
-              <label>URL</label>
-              <input
-                type="url"
-                className="form-control"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit" className="btn btn-primary mt-3">
-              Add Video
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary ml-2 mt-3"
-              onClick={() => {
-                setTitle("");
-                setUrl("");
-              }}
-            >
-              Cancel
-            </button>
           </form>
-        </div>
+        </CardContent>
       )}
-    </div>
+    </Card>
   );
 }
 
