@@ -5,7 +5,9 @@ import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
 
 function App() {
-  const [videos, setVideos] = useState(exampleData);
+  const [videos, setVideos] = useState(
+    exampleData.sort((a, b) => b.rating - a.rating)
+  );
 
   const handleDelete = (videoToDelete) => {
     setVideos((prevVideos) =>
