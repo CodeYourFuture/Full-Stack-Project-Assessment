@@ -1,3 +1,112 @@
 .App {
   text-align: center;
+  margin: 3rem;
+}
+
+h1 {
+  color: #e64a19; /* Warm orange color */
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.video {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: calc(50% - 20px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  background-color: #fff5e1; /* Warm beige background */
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.video:hover {
+  transform: translateY(-5px);
+}
+
+.video h2 {
+  margin-top: 0;
+  font-size: 1.5rem; /* Larger font size for headings */
+  font-family: "Georgia", serif;
+  color: #333;
+}
+
+.video iframe {
+  width: 100%;
+  height: 220px; /* Slightly taller iframe */
+  border: none;
+  border-radius: 10px;
+}
+
+.video p {
+  margin: 0.5rem 0;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.button-container button {
+  background-color: #e64a19; /* Warm orange button color */
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.button-container button:hover {
+  background-color: #c53900; /* Darker shade on hover */
+}
+
+.video-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.video-form input {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.video-form button {
+  background-color: #e64a19; /* Warm orange button color */
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.video-form button:hover {
+  background-color: #c53900; /* Darker shade on hover */
+}
+@media screen and (max-width: 768px) {
+  .video {
+    width: 100%; /* Full width for videos on mobile */
+    max-width: 100%; /* Avoid stretching on larger mobile screens */
+  }
+
+  .video iframe {
+    height: 180px; /* Adjust iframe height for mobile */
+  }
 }
