@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import exampleResponse from "./exampleResponse.json";
 
-function SingleVideoCard({ title, url, key }) {
+function SingleVideoCard({
+  videoId,
+  filterVideos,
+  setFilterVideos,
+  title,
+  url,
+}) {
   const [count, setCount] = useState(0);
-  const [filterVideos, setFilterVideos] = useState(exampleResponse);
 
   function minusCount() {
     setCount((prevCount) => prevCount - 1);
@@ -12,29 +17,12 @@ function SingleVideoCard({ title, url, key }) {
     setCount((prevCount) => prevCount + 1);
   }
 
-  // const deleteVideo = (key) => {
-  //   const videoToDelete = filterVideos[key]; // setting variable to video id
-  //   setFilterVideos((filterVideos) =>
-  //     filterVideos.filter((key) => key !== videoToDelete)
-  //   );
-  // };
-
-  const deleteVideo = () => {
-    const updatedVideos = filterVideos.filter((video) => video.id !== key);
+  const deleteVideo = (videoId) => {
+    const updatedVideos = filterVideos.filter((video) => video.id !== videoId);
     setFilterVideos(updatedVideos);
   };
 
-  // const initialState = [
-  //   { id: 1, name: "Banana", amount: 5 },
-  //   { id: 2, name: "Apple", amount: 6 },
-  // ];
-  // const removeSecond = () => {
-  //   setFruits((current) => current.filter((fruit) => fruit.id !== 2));
-  // };
-  // const [fruits, setFruits] = useState(initialState);
-
   const urlId = url.split("v=")[1].substring(0, 11);
-  console.log("Extracted Video ID:", urlId);
 
   return (
     <div className="card-container">
@@ -45,9 +33,9 @@ function SingleVideoCard({ title, url, key }) {
           height="320"
           src={`https://www.youtube.com/embed/${urlId}`}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
 
         <div className="card-body">
@@ -56,7 +44,10 @@ function SingleVideoCard({ title, url, key }) {
           <button onClick={plusCount}>+</button>
           <h2>{title}</h2>
           <p>Paragraph</p>
-          <button className="btn btn-primary" onClick={() => deleteVideo(key)}>
+          <button
+            className="btn btn-primary"
+            onClick={() => deleteVideo(videoId)}
+          >
             Delete
           </button>
         </div>

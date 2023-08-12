@@ -1,7 +1,5 @@
 import "./App.css";
-import AddVideo from "./AddVideo";
-import VideoCards from "./VideoCards";
-import Search from "./Search.js";
+import BodyContainer from "./BodyContainer";
 
 function App() {
   return (
@@ -9,10 +7,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-
-      <AddVideo />
-      <VideoCards />
-      <Search />
+      <BodyContainer />
     </div>
   );
 }
