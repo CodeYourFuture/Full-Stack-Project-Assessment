@@ -1,11 +1,11 @@
 import React from "react";
 
-import Clip from "./Clip";
+import Container from "./Container";
 
 const Main = () => {
   return (
     <div className="container">
-      <Clip></Clip>
+      <Container></Container>
     </div>
   );
 };
