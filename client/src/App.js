@@ -37,7 +37,7 @@ function App() {
       </header>
       <AddingItem addVideo = {addVideo} id={videos.length}/>
       <div className="video-container">
-        {videos.map((video) => (
+        {videos.sort((a, b) => b.rating - a.rating).map((video) => (
           <Videocard
             key={video.id}
             video={video}

@@ -75,6 +75,13 @@ body {
   margin-left: 3px;
 }
 
+.uploaded-time {
+  display: flex;
+  align-self: flex-end;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 .video-form {
   background-color: #162232;
   border-radius: 10px;

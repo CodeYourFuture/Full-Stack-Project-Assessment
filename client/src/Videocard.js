@@ -43,7 +43,9 @@ function Videocard({ video, onUpVote, onDownVote, onRemove }) {
           Remove
         </button>
         </div>
-        
+      </div>
+      <div className="uploaded-time">
+        Uploaded: {video.dateTime? video.dateTime : ""}
       </div>
     </div>
   );

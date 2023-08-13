@@ -19,13 +19,24 @@ export default function AddingItem({addVideo, id}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addVideo(newVideo);
-    setNewVideo({
-      id: id + 1, 
-      title: "",
-      url: "",
-      rating: 0,
-    });
+    const pattern =
+      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/;
+      const pattern2 =
+        /^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/;
+    //   https://www.youtube.com/embed/dQw4w9WgXcQ
+      if (pattern.test(newVideo.url) || pattern2.test(newVideo.url)) {
+        const time = new Date();
+    const formattedTime = time.toLocaleString();
+         addVideo({...newVideo, dateTime: formattedTime});
+         setNewVideo({
+           id: id + 1,
+           title: "",
+           url: "",
+           rating: 0,
+         });
+      } else {
+        alert("Not a valid YouTube URL");
+      }
   };
     return (
       <div className="adding-item">
@@ -43,6 +54,7 @@ export default function AddingItem({addVideo, id}) {
               <input
                 type="text"
                 name="title"
+                required
                 value={newVideo.title}
                 onChange={handleTitleChange}
               ></input>
