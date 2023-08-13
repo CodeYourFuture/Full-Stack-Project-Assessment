@@ -1,16 +1,18 @@
 import React from "react";
 
-const Modal = ({ closeModal, deleteFunc, bookingId }) => {
+import './Modal.css';
+
+const Modal = ({ closeModal, deleteFunc }) => {
   return (
     <div className="modal">
       <div className="modal__container">
-        <h3>Delete booking?</h3>
+        <h3>Delete video?</h3>
         <div>
           <button
             type="button"
             className="btn btn-secondary"
             onClick={() => {
-              closeModal(false);
+              closeModal();
             }}
           >
             CANCEL
@@ -18,7 +20,7 @@ const Modal = ({ closeModal, deleteFunc, bookingId }) => {
           <button
             className="btn btn-danger"
             onClick={() => {
-              deleteFunc(bookingId);
+              deleteFunc();
               closeModal(false);
             }}
           >

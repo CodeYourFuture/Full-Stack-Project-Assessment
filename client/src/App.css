@@ -21,8 +21,18 @@ header h1 {
   padding: 20px;
 }
 
-.container p {
+/* .container p {
   text-align: center;
+} */
+
+.video__header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2rem;
+}
+
+.video__header p {
+  margin-bottom: 0.5rem;
 }
 
 .video-card {
@@ -92,4 +102,21 @@ header h1 {
 
 .genre:hover {
   color: #3498db;
+}
+
+.close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }

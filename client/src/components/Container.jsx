@@ -5,7 +5,7 @@ import Clip from "./Clip";
 
 const Container = () => {
   const [videos, setVideos] = useState([]);
-  const [currentClip, setCurrentClip] = useState({ id: "", rating: "" });
+
   const { isLoading, sendRequest } = useHttpClient();
 
   const fetchVideos = async () => {
