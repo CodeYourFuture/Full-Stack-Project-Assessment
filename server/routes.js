@@ -15,15 +15,30 @@ router.get("/", async (req, res) => {
 });
 
 router.delete('/:pid', async (req,res) => {
-  const videoId = req.params.pid;
+  const videoIdToDelete = req.params.pid;
 
   try {
-    await Clip.deleteOne({id: videoId})
+    await Clip.deleteOne({id: videoIdToDelete})
     res.status(200).json({ message: "Video deleted." });
     console.log("Video deleted.");
   } catch (err) {
     console.error('Error deleting video:', err);
     res.status(500).json({ message: "An error occurred while deleting the video." });
+  }
+})
+
+router.patch('/:pid', async (req, res) => {
+  const videoIdToUpdate = req.params.pid;
+  const updatedRating = req.body.rating;
+  console.log(updatedRating);
+
+  try {
+    await Clip.updateOne({ id: videoIdToUpdate }, { $set: { rating: updatedRating } },)
+    res.status(200);
+    console.log("Video updated.");
+  } catch (err) {
+    console.error('Error updating video:', err);
+    res.status(500).json({ message: "An error occurred while updating the video." });
   }
 })
 

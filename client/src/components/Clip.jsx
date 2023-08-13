@@ -4,8 +4,7 @@ import ReactPlayer from "react-player";
 import { useHttpClient } from "../hooks/http-hook";
 import Modal from '../UIElements/Modal'
 
-const Clip = ({ id, title, url, rating, removeFunc, updateRating }) => {
-  const [currentClip, setCurrentClip] = useState({ id: "", rating: rating });
+const Clip = ({ id, title, url, rating, removeFunc, updateRating, updateRatingLocally, currentClip, setCurrentClip }) => {
   const {isLoading, sendRequest} = useHttpClient();
   const [modalActive, setModalActive] = useState(false);
 
@@ -26,10 +25,15 @@ const Clip = ({ id, title, url, rating, removeFunc, updateRating }) => {
   const changeRating = ({target}) => {
     if (target.className === "like-button") {
       setCurrentClip({...currentClip, rating: currentClip.rating + 1});
+      updateRating(currentClip.id, currentClip.rating + 1)
+      updateRatingLocally(currentClip.id, currentClip.rating + 1)
+
     } else {
       setCurrentClip({...currentClip, rating: currentClip.rating - 1});
+      updateRating(currentClip.id, currentClip.rating - 1);
+      updateRatingLocally(currentClip.id, currentClip.rating + 1);
     }
-    updateRating(currentClip.id, currentClip.rating)
+    
   }
 
   return (
@@ -47,7 +51,7 @@ const Clip = ({ id, title, url, rating, removeFunc, updateRating }) => {
         <div className="video-likes-dislikes">
           <span onClick={changeRating} className="like-button">👍</span>
           <span onClick={changeRating}  className="dislike-button">👎</span>
-          <span>{currentClip.rating }</span>
+          <span>{rating}</span>
         </div>
       </div>
       {modalActive && <Modal closeModal={setModalActive}

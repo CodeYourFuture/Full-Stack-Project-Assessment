@@ -4,6 +4,7 @@ import { useHttpClient } from "../hooks/http-hook";
 import Clip from "./Clip";
 
 const Container = () => {
+  const [currentClip, setCurrentClip] = useState({ id: '', rating: '' });
   const [videos, setVideos] = useState([]);
   const { isLoading, sendRequest } = useHttpClient();
 
@@ -13,6 +14,7 @@ const Container = () => {
       if (!isLoading) {
         setVideos(response);
       }
+      console.log("Fetch request sent");
     } catch (error) {}
   };
 
@@ -25,19 +27,33 @@ const Container = () => {
     setVideos(newVideos)
   }
 
-  const changeRating = (id, updatedRating) => {
+  const changeRating = async (id, updatedRating) => {
+    try {
+      const response = await sendRequest(`${process.env.REACT_APP_API_URL}/${id}`, 'PATCH', JSON.stringify({ rating: updatedRating }), {
+        'Content-Type': 'application/json',
+      });
+
+      console.log(id, updatedRating);
+      
+    } catch (error) {
+      console.log("Error updating rating", error)
+    }
+  }
+
+  const changeRatingLocally = (id, updatedRating) => {
+    console.log(isLoading);
     const updatedVideos = videos.map(video => {
       if (video.id === id) {
-        return { ...video, rating: updatedRating};
+        return { ...video, rating: updatedRating };
       }
       return video;
     });
-    setVideos(updatedVideos)
+    setVideos(updatedVideos);
   }
+  console.log(currentClip);
+  console.log(videos);
 
-  console.log(videos.length);
-
-  return videos && videos.map((video) => <Clip updateRating={changeRating} removeFunc={removeVideoLocally} key={video.id} {...video} />);
+  return videos && videos.map((video) => <Clip currentClip={currentClip} setCurrentClip={setCurrentClip} updateRating={changeRating} updateRatingLocally={changeRatingLocally} removeFunc={removeVideoLocally} key={video.id} {...video} />);
 };
 
 export default Container;
