@@ -1,4 +1,5 @@
 import React from "react";
+import '../home/home.css'
 
 const Home = () => {
   return (
@@ -6,9 +7,7 @@ const Home = () => {
       <h1>Home Component</h1>
       <div className="carousel-caption d-none d-md-block">
         <h5>Slider One Item</h5>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,</p>
       </div>
     </div>
   );

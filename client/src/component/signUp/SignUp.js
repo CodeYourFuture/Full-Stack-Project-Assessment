@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
+import "./signUp.css";
 
 const SignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const nameHandler = (e) => setName(e.target.value);
   const emailHandler = (e) => setEmail(e.target.value);
@@ -13,7 +13,7 @@ const SignUp = () => {
   const clickHandler = (e) => setEmail(email);
 
   return (
-    <div className="sing-div">
+    <div className="sign-div">
       <h1>Sign up</h1>
 
       <div className="login-box">
