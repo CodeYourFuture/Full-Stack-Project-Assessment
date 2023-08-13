@@ -1,3 +1,154 @@
+:root {
+--darkbackground: #051a2b;
+--blueheader: #037bc7;
+--whitetext: #f7f7f7;
+--redheader: #e01a27;
+--palelinks: #4e6877;
+}
+
+/* src/App.css */
+body {
+  background-color: #03045e;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+
 .App {
   text-align: center;
+  padding: 20px;
+}
+
+.header {
+  font-family: 'Caprasimo', cursive;
+  font-size: 64px;
+  margin: 20px;
+  color: var(--whitetext);
+  text-align: center;
+}
+
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.video-card {
+  background-color: #162232;
+  color: #fff;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.video-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.vote-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.vote-buttons p {
+  align-self: end;
+  margin-bottom: 0;
+  font-family: Arial, sans-serif;
+}
+
+.vote-buttons button {
+  margin-left: 3px;
+}
+
+.video-form {
+  background-color: #162232;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+}
+
+.video-form h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.video-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #0e1821;
+  border: 1px solid #283d50;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.video-form button {
+  background-color: #283d50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.adding-item {
+  margin-left: 30px;
+  /* width: 30%; */
+}
+
+.adding-item h3 {
+  margin-left: 5rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidable {
+  margin-top: 10px;
+  transition: opacity 0.3s, max-height 0.3s;
+  max-height: 300px;
+  opacity: 1;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+.button-container {
+  margin-left: 6rem;
+}
+.add-div-btn {
+  margin-left: 10px;
 }
