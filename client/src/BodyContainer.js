@@ -9,7 +9,7 @@ function BodyContainer() {
 
   return (
     <>
-      <AddVideo />
+      <AddVideo filterVideos={filterVideos} setFilterVideos={setFilterVideos} />
       <VideoCards
         filterVideos={filterVideos}
         setFilterVideos={setFilterVideos}

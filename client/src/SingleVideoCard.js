@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import exampleResponse from "./exampleResponse.json";
+// import exampleResponse from "./exampleResponse.json";
 
 function SingleVideoCard({
   videoId,
