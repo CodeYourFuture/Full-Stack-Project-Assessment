@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const videosData = require('./exampleresponse.json');
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -13,3 +14,7 @@ app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
+
+app.get('/videos/data', (req, res) => {
+  res.send(videosData);
+})
