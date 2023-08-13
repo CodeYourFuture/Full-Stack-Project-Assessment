@@ -5,7 +5,6 @@ import Clip from "./Clip";
 
 const Container = () => {
   const [videos, setVideos] = useState([]);
-
   const { isLoading, sendRequest } = useHttpClient();
 
   const fetchVideos = async () => {
@@ -21,7 +20,24 @@ const Container = () => {
     fetchVideos();
   }, []);
 
-  return videos && videos.map((video) => <Clip key={video.id} {...video} />);
+  const removeVideoLocally = (id) => {
+    const newVideos = videos.filter((video) => video.id !== id)
+    setVideos(newVideos)
+  }
+
+  const changeRating = (id, updatedRating) => {
+    const updatedVideos = videos.map(video => {
+      if (video.id === id) {
+        return { ...video, rating: updatedRating};
+      }
+      return video;
+    });
+    setVideos(updatedVideos)
+  }
+
+  console.log(videos.length);
+
+  return videos && videos.map((video) => <Clip updateRating={changeRating} removeFunc={removeVideoLocally} key={video.id} {...video} />);
 };
 
 export default Container;

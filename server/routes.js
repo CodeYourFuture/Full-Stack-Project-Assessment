@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
 router.delete('/:pid', async (req,res) => {
   const videoId = req.params.pid;
-console.log( videoId);
+
   try {
     await Clip.deleteOne({id: videoId})
     res.status(200).json({ message: "Video deleted." });
