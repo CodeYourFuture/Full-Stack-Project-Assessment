@@ -9,7 +9,17 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = [];
 
 // GET "/"
+// This endpoint is used to return all of the videos
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
+
+// POST "/"
+// This endpoint is used to add a video to the API.
+
+// GET "/{id}"
+// Returns the video with the ID contained within the { id } parameter
+
+// DELETE "/{id}"
+// Deletes the video with the ID container within the {id} parameter
