@@ -1,0 +1,46 @@
+.video_picker h1 {
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+}
+
+.selectors .selector_field {
+  margin-bottom: 20px;
+}
+
+/* video card */
+.video_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 10vw;
+}
+
+.info_msg {
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+  .selectors {
+    flex-direction: row;
+  }
+  .selectors .selector_field {
+    margin-right: 10px;
+    width: 250px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .video_cards {
+    justify-content: space-between;
+  }
+}
