@@ -14,3 +14,18 @@
     justify-content: center;
     gap: 20px;
 }
+
+.social-container ul>li>a {
+    font-size: 27px;
+    text-decoration: none;
+    list-style-type: none;
+    list-style: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.social-container ul>li>a:hover {
+    color: #03f40f;
+    text-decoration: none;
+    border-radius: 25px;
+}

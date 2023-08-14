@@ -23,7 +23,7 @@ const SignUp = () => {
             <label>Username</label>
           </div>
           <div className="user-box">
-            <input type="" onChange={emailHandler} value={email} />
+            <input type="email" onChange={emailHandler} value={email} />
             <label>Email</label>
           </div>
           <div className="user-box">

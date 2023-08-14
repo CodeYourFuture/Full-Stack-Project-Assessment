@@ -10,11 +10,11 @@
     justify-content: space-between
 }
 
-ul {
+.nav-continuer ul {
     list-style-type: none;
 }
 
-ul>li>a {
+.nav-continuer ul>li>a {
     font-size: 24px;
     text-decoration: none;
     list-style-type: none;
@@ -23,7 +23,7 @@ ul>li>a {
     color: #fff;
 }
 
-ul>li>a:hover {
+.nav-continuer ul>li>a:hover {
     color: #03f40f;
     text-decoration: none;
     border-radius: 25px;

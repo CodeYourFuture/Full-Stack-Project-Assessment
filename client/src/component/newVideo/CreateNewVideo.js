@@ -1,21 +1,29 @@
 import { React, useState } from "react";
-import DataVideos from "../../exampleresponse.json";
+import axios from "axios";
 
 const CreateNewVideo = () => {
-  const [videos, setVideos] = useState([...DataVideos]);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const titleHandler = (e) => setTitle(e.target.value);
-  const urlHandler = (e) => setUrl(e.target.value);
+  const urlForNewVideo = "http://127.0.0.1:5000/videos/data/create";
 
-  const clickHandler = () => {
-    const newVid = {};
-    newVid.id = videos.length + 1;
-    newVid.title = title;
-    newVid.url = url;
-
-    setVideos(videos.push(newVid));
+  const clickHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(urlForNewVideo, {
+        title,
+        url,
+      });
+      if (res.status === 201) {
+        alert("New Video has been add successfully");
+      } else {
+        alert("New Video does not add successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setTitle("");
+    setUrl("");
   };
 
   return (
@@ -24,15 +32,23 @@ const CreateNewVideo = () => {
       <div className="login-box">
         <form>
           <div className="user-box">
-            <input type="" onChange={titleHandler} value={title} />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <label>Video Title</label>
           </div>
           <div className="user-box">
-            <input type="" onChange={urlHandler} value={url} />
+            <input
+              type=""
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
             <label>Url</label>
           </div>
           <center>
-            <button className="btn-submit" onCanPlay={clickHandler}>
+            <button className="btn-submit" onClick={clickHandler}>
               SEND
               <span></span>
             </button>
