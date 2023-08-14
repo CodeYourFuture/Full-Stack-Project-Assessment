@@ -1,5 +1,5 @@
 const express = require("express");
-// const { body, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const fs = require("fs");
 const app = express();
 const videosData = JSON.parse(fs.readFileSync('./exampleresponse.json'));
@@ -14,26 +14,26 @@ app.use(cors());
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = videosData;
 
-// const validateData = [
-//   body("title").trim().notEmpty(),
-//   body("url").trim().notEmpty().isURL(),
-//   body("name")
-//     .trim()
-//     .notEmpty()
-//     .isLength({ min: 3 })
-//     .withMessage("First Name must be at less 3 characters"),
-//   body("email")
-//     .trim()
-//     .notEmpty()
-//     .isEmail()
-//     .toLowerCase()
-//     .normalizeEmail()
-//     .withMessage("Email must be a valid email"),
-//   body("password")
-//     .trim()
-//     .notEmpty()
-//     .withMessage("You must enter your password"),
-// ];
+const validateData = [
+  body("title").trim().notEmpty(),
+  body("url").trim().notEmpty().isURL(),
+  body("name")
+    .trim()
+    .notEmpty()
+    .isLength({ min: 3 })
+    .withMessage("First Name must be at less 3 characters"),
+  body("email")
+    .trim()
+    .notEmpty()
+    .isEmail()
+    .toLowerCase()
+    .normalizeEmail()
+    .withMessage("Email must be a valid email"),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("You must enter your password"),
+];
 
 // GET "/"
 app.get("/", (req, res) => {
@@ -51,7 +51,13 @@ app.get('/videos/data/:id', (req, res) => {
   res.status(200).send(getVideoByID);
 })
 
-app.post('/videos/data/create', (req, res) => {
+app.post('/videos/data/create', validateData, (req, res) => {
+
+  const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+  }
+
   const newId = videos[videos.length - 1].id + 1;
   const {title, url} = req.body;
 
