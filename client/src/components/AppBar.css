@@ -1,0 +1,58 @@
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.input {
+    min-width: 400px;
+    height: 60px;
+    position: relative;
+    border-radius: 3px;
+    background: #FEC8D8;
+}
+
+input {
+    content: "";
+    display: block;
+    position: absolute;
+    background: #C9E6C8;
+    inset: 7px;
+    border-radius: 7px;
+    z-index: 1;
+    border: none;
+    color: rgb(20, 19, 19);
+    font-size: 22px;
+    padding-left: 1.1rem;
+    margin: -3px;
+}
+
+input:focus {
+    outline: none;
+    background: #b2e4b0;
+}
+
+button {
+    min-width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #C9E6C8;
+    border: #FEC8D8 4px solid;
+    color: #444;
+    font-size: 20px;
+    transition: opacity 0.3s ease;
+}
+
+
+button:hover {
+    background: #b2e4b0;
+}
+
+
+.error-message {
+    color: rgb(85, 52, 80);
+    font-size: smaller;
+}

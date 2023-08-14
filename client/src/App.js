@@ -1,12 +1,13 @@
 import "./App.css";
+import AppHeader from "./components/AppHeader";
+import CardList from "./components/CardList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-    </div>
+    <>
+      <AppHeader />
+      <CardList />
+    </>
   );
 }
 
