@@ -1,0 +1,7 @@
+header {
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  background: #000;
+  color: white;
+}
