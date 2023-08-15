@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import axios from "axios";
 import "../videos/videos.css";
 
@@ -41,8 +40,6 @@ const Videos = () => {
             ></iframe>
             <div>{video.title}</div>
             <div>{video.rating}</div>
-            {/* <div>{videos[index].title}</div> */}
-            {/* <div>{videos[index].rating}</div> */}
           </div>
         ))}
       </div>
