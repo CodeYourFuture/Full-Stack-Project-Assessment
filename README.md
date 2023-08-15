@@ -2,7 +2,7 @@
 
 This project implements a full stack video recommendation web app using React, Node, Express and Postgresql.
 
-View the live app: https://yourname.netlify.app 
+View the live app: https://fp-videos-library-client.onrender.com/
 
 ## Key Features
 
