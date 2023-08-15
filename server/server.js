@@ -46,8 +46,8 @@ app.get('/videos/data', (req, res) => {
 })
 
 app.get('/videos/data/:id', (req, res) => {
-  const videoID = Number(req.params.id)
-  const getVideoByID = videos.find((video) => video.id === videoID)
+  const videoID = Number(req.params.id);
+  const getVideoByID = videos.find((video) => video.id === videoID);
   res.status(200).send(getVideoByID);
 })
 
@@ -74,5 +74,20 @@ app.post('/videos/data/create', validateData, (req, res) => {
   });
 });
 
+app.delete('/videos/data/:id', (req, res) => {
+  const videoID = Number(req.params.id);
+  const getVideoByID = videos.find((video) => video.id === videoID);
+  const index = videos.indexOf(getVideoByID);
+
+  videos.splice(index, 1);
+
+  fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
+    res.status(200).send({
+      videos: {
+        Message: "Video with id has been deleted successfully",
+      },
+    });
+  })
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
