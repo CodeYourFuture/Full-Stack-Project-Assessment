@@ -1,44 +1,37 @@
 import React, { useState } from "react";
 
-// React component that will add a Video.
-// It should include fields to add a
-// Title
-// Url
-// When a button is clicked the video should be added to the list
-
 function AddVideo({ filterVideos, setFilterVideos }) {
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addVideoUrl, setAddVideoUrl] = useState("");
 
-  function handleSubmitTitle(event) {
-    //////// HELP! I keep getting 'Uncaught TypeError: Cannot read properties of undefined (reading 'value')'
+  function handleTitleChange(event) {
     setAddVideoTitle(event.target.value);
-    // setAddVideoUrl(event.target.value);
   }
-  function handleSubmitUrl(event) {
-    //  setAddVideoTitle(event.target.value);
+
+  function handleUrlChange(event) {
     setAddVideoUrl(event.target.value);
   }
 
-  function addVideo() {
+  function addVideo(event) {
+    event.preventDefault();
     const addVideoObject = {};
-    // addVideoObject.id = addVideoId; //////// HELP! How can I find out highest ID and then add to that?
+    addVideoObject.id = getId();
     addVideoObject.title = addVideoTitle;
     addVideoObject.url = addVideoUrl;
     setFilterVideos((filterVideos) => [...filterVideos, addVideoObject]);
   }
 
+  function getId() {
+    const sortedVideoArray = filterVideos.sort(
+      (videoObjectA, videoObjectB) => videoObjectB.id - videoObjectA.id
+    );
+    return sortedVideoArray[0].id + 1;
+  }
+
   return (
     <div className="add-video">
       <h3>Add Video</h3>
-      <form
-        className="add-video-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSubmitTitle(addVideoTitle);
-          handleSubmitUrl(addVideoUrl);
-        }}
-      >
+      <form className="add-video-form">
         <div>
           <label>Title</label>
           <input
@@ -47,7 +40,7 @@ function AddVideo({ filterVideos, setFilterVideos }) {
             type="text"
             required=""
             value={addVideoTitle}
-            onChange={handleSubmitTitle}
+            onChange={handleTitleChange}
           ></input>
         </div>
         <div>
@@ -58,12 +51,12 @@ function AddVideo({ filterVideos, setFilterVideos }) {
             type="text"
             required=""
             value={addVideoUrl}
-            onChange={handleSubmitUrl}
+            onChange={handleUrlChange}
           ></input>
         </div>
         <div>
           <button type="cancel">Cancel</button>
-          <button type="submit" onClick={addVideo}>
+          <button type="submit" onClick={(event) => addVideo(event)}>
             Add
           </button>
         </div>

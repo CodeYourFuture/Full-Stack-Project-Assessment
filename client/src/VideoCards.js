@@ -1,6 +1,6 @@
 import React from "react";
 import SingleVideoCard from "./SingleVideoCard";
-import exampleResponse from "./exampleResponse.json";
+// import exampleResponse from "./exampleResponse.json";
 
 function VideoCards({ filterVideos, setFilterVideos }) {
   return (
