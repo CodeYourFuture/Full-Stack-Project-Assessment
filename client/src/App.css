@@ -6,3 +6,15 @@
   display: flex;
   justify-content: center;
 }
+
+.btn-delete {
+  background-color: #0051ad;
+  color: white;
+  border: solid 2px #0051ad;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+:focus {
+  outline: solid 2px lightskyblue;
+}

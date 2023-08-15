@@ -30,10 +30,10 @@ function AddVideo({ filterVideos, setFilterVideos }) {
 
   return (
     <div className="add-video">
-      <h3>Add Video</h3>
+      <h2>Add Video</h2>
       <form className="add-video-form">
         <div>
-          <label>Title</label>
+          <label for="video-title-input">Title</label>
           <input
             id="video-title-input"
             name="video-title"
@@ -44,7 +44,7 @@ function AddVideo({ filterVideos, setFilterVideos }) {
           ></input>
         </div>
         <div>
-          <label>URL</label>
+          <label for="video-url-input">URL</label>
           <input
             id="video-url-input"
             name="video-url"
