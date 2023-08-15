@@ -21,7 +21,7 @@ const validateData = [
     .trim()
     .notEmpty()
     .isLength({ min: 3 })
-    .withMessage("First Name must be at less 3 characters"),
+    .withMessage("Name must be at less 3 characters"),
   body("email")
     .trim()
     .notEmpty()

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 import axios from "axios";
 import "../videos/videos.css";
 
@@ -9,7 +10,8 @@ const Videos = () => {
   const fetchVideoData = async () => {
     try {
       const res = await axios.get(url);
-      setVideos(res.data);
+      const data = res.data;
+      setVideos(data);
     } catch (error) {
       console.log(error);
     }
@@ -17,29 +19,30 @@ const Videos = () => {
 
   useEffect(() => {
     fetchVideoData();
-  }, [...videos]);
+  }, []);
 
   
-  let videoIds = videos.map((vid) => vid.url.split("v=")[1]);
+  // let videoIds = videos.map((vid) => vid.url.split("v=")[1]);
 
 
   return (
     <div className="videos-div">
       <h1>Videos Component</h1>
       <div className="vid-div">
-        {videoIds.map((vid, index) => (
-          <div className="video-card" key={index}>
+        {videos.map((video) => (
+          <div className="video-card" key={video.id}>
             <iframe
-              width="420"
-              height="315"
-              src={`https://www.youtube.com/embed/${vid}`}
-              title={videos[index].title}
-              id={videos[index].id}
+              width="550"
+              height="280"
+              src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
+              title={video.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
-            <div>{videos[index].title}</div>
-            <div>{videos[index].rating}</div>
+            <div>{video.title}</div>
+            <div>{video.rating}</div>
+            {/* <div>{videos[index].title}</div> */}
+            {/* <div>{videos[index].rating}</div> */}
           </div>
         ))}
       </div>
