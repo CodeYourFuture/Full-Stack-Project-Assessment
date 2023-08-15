@@ -10,7 +10,6 @@ function App() {
 
   const addLocally = (data) => {
     videos.push(data);
-    console.log(data);
   };
 
   console.log(videos);
