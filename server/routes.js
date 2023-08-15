@@ -14,32 +14,56 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.delete('/:pid', async (req,res) => {
+router.delete("/:pid", async (req, res) => {
   const videoIdToDelete = req.params.pid;
 
   try {
-    await Clip.deleteOne({id: videoIdToDelete})
+    await Clip.deleteOne({ id: videoIdToDelete });
     res.status(200).json({ message: "Video deleted." });
     console.log("Video deleted.");
   } catch (err) {
-    console.error('Error deleting video:', err);
-    res.status(500).json({ message: "An error occurred while deleting the video." });
+    console.error("Error deleting video:", err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the video." });
   }
-})
+});
 
-router.patch('/:pid', async (req, res) => {
+router.patch("/:pid", async (req, res) => {
   const videoIdToUpdate = req.params.pid;
   const updatedRating = req.body.rating;
-  console.log(updatedRating);
 
   try {
-    await Clip.updateOne({ id: videoIdToUpdate }, { $set: { rating: updatedRating } },)
-    res.status(200);
+    await Clip.updateOne(
+      { id: videoIdToUpdate },
+      { $set: { rating: updatedRating } }
+    );
+    res.status(200).json({ message: "Video updated." });
     console.log("Video updated.");
   } catch (err) {
-    console.error('Error updating video:', err);
-    res.status(500).json({ message: "An error occurred while updating the video." });
+    console.error("Error updating video:", err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the video." });
   }
-})
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const newClip = new Clip({
+      id: req.body.id,
+      url: req.body.url,
+      title: req.body.title,
+      rating: req.body.rating,
+    });
+    const savedItem = await newClip.save();
+
+    res.status(201).json(savedItem);
+    console.log("Video added");
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+    console.log(error);
+  }
+});
 
 module.exports = router;

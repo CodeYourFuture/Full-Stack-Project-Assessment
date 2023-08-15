@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const clipSchema = new mongoose.Schema({
-  id: Number,
-  title: String,
-  url: String,
+  id: { type: String, required: true },
+  title: { type: String, required: true },
+  url: { type: String, required: true },
   rating: Number,
 });
 
