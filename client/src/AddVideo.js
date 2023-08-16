@@ -22,7 +22,8 @@ function AddVideo({ videos, setVideos }) {
   }
 
   function getId() {
-    const sortedVideoArray = videos.sort(
+    const sortedVideoArray = [...videos].sort(
+      // spread operator to sort new array and not OG
       (videoObjectA, videoObjectB) => videoObjectB.id - videoObjectA.id
     );
     return sortedVideoArray[0].id + 1;
