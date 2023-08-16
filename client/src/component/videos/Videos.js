@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../videos/videos.css";
+import DeleteComponent from "../delete/DeleteComponent";
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
@@ -20,26 +21,41 @@ const Videos = () => {
     fetchVideoData();
   }, []);
 
-  
-  // let videoIds = videos.map((vid) => vid.url.split("v=")[1]);
+  const onDeleteHandler = () => {
+    fetchVideoData();
+  };
 
+  // let videoIds = videos.map((vid) => vid.url.split("v=")[1])
 
   return (
-    <div className="videos-div">
-      <h1>Videos Component</h1>
-      <div className="vid-div">
+    <div className="container m-20">
+      <h1 className="video-div">Video Recommendation</h1>
+      <div className="row g-4">
         {videos.map((video) => (
-          <div className="video-card" key={video.id}>
-            <iframe
-              width="550"
-              height="280"
-              src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
-              title={video.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-            <div>{video.title}</div>
-            <div>{video.rating}</div>
+          <div className="col-12 col-md-6 col-lg-4" key={video.id}>
+            <div className="card m-2">
+              <div className="embed-responsive embed-responsive-16by9">
+                <iframe
+                  src={`https://www.youtube.com/embed/${
+                    video.url.split("v=")[1]
+                  }`}
+                  title={video.title}
+                  className="embed-responsive-item"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="card-body d-flex flex-column">
+                <h6 className="card-title">{video.title}</h6>
+                <span className="card-text">{video.rating}</span>
+              </div>
+              <div className="mt-auto">
+                <DeleteComponent
+                  id={video.id}
+                  onDeleteHandler={onDeleteHandler}
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -48,5 +64,3 @@ const Videos = () => {
 };
 
 export default Videos;
-
-  // const videoUrl = `https://www.youtube.com/embed/${videoId}`;

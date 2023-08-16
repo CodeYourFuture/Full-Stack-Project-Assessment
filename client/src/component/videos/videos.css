@@ -1,60 +1,15 @@
-.carousel-caption {
-    bottom: 470px;
+.card{
+    margin: 0px;
+    color: snow;
+    background-color: rgba(0, 0, 0, 0.292);
+}
+.container{
+    margin-top: 200px;
+    margin-right: 90px;
 }
 
-.carousel-caption h5 {
-    font-size: 45px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 25px;
-}
-
-.carousel-caption p {
-    width: 75%;
-    margin: auto;
-    font-size: 18px;
-    line-height: 1.9;
-}
-
-.video-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin-left: 10em;
-    border-radius: 30px;
-    background: #212121;
-    box-shadow: 15px 15px 30px rgb(25, 25, 25),
-        -15px -15px 30px rgb(60, 60, 60);
-    width: 55em;
-    height: 30em;
-    margin-bottom: 60px;
-    margin-top: 40px;
-}
-
-.video-card:hover {
-    /* transform: translateY(-1.5rem); */
-    border: #949694 0.1em solid;
-    border-radius: 2.5rem 0 2.5rem 0;
-}
-
-.vid-div {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    margin-left: 99px;
-    margin-top: 45px;
-
-}
-
-.videos-div {
+.video-div {
     text-align: center;
     color: snow;
-    margin-top: 90px;
-}
-
-.vid-size {
-    width: 450px;
+    margin-bottom: 70px;
 }
