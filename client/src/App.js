@@ -1,28 +1,42 @@
 import "./App.css";
 import React, { useState } from "react";
 
-import Search from "./components/Seacrh";
-import Selection from "./components/Selection";
+import UploadComponent from "./components/UploadComponent";
+import Search from "./components/Search";
 import Container from "./components/Container";
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
   const [videos, setVideos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const addLocally = (data) => {
-    videos.push(data);
+  const addLocally = (newData) => {
+    data.push(newData);
   };
 
-  console.log(videos);
+  const searchForVideo = () => {
+    const filteredVideos = data.filter((video) => {
+      return video.title.toLowerCase().includes(searchQuery);
+    });
+    console.log(filteredVideos);
+    setVideos(filteredVideos);
+    setSearchQuery("");
+  };
+
   return (
     <>
       <header>
         <h1>Video recommendation</h1>
       </header>
-      <Search addVideo={addLocally} />
-      <Selection />
-      <Container setVideos={setVideos} videos={videos} />
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchFunc={searchForVideo}
+      />
+      <UploadComponent addVideo={addLocally} />
+      <Container setVideos={setVideos} videos={videos} setData={setData} />
     </>
   );
-}
+};
 
 export default App;

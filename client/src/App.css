@@ -21,10 +21,6 @@ header h1 {
   padding: 20px;
 }
 
-/* .container p {
-  text-align: center;
-} */
-
 .video__header {
   display: flex;
   justify-content: space-between;
@@ -86,24 +82,6 @@ header h1 {
   color: #3498db;
 }
 
-.genres-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.genre {
-  margin: 0 10px;
-  font-size: 16px;
-  color: #888;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.genre:hover {
-  color: #3498db;
-}
-
 .close-button {
   display: inline-flex;
   align-items: center;
@@ -123,7 +101,7 @@ header h1 {
 
 .section-container {
   gap: 1rem;
-  padding: 20px;
+  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -158,4 +136,46 @@ header h1 {
 }
 .add-button {
   background-color: #4caf50;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 3rem;
+  padding-bottom: 0.5rem;
+}
+
+.search-bar {
+  position: relative;
+}
+
+input[type="text"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: width 0.3s ease-in-out;
+  width: 40px; /* Initial width for the magnifier */
+}
+
+.magnifier {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url("./icons/icons8-magnifier-50.png") no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out;
+}
+
+.search-bar.expanded input[type="text"] {
+  width: 300px; /* Expanded width for the input */
+  outline: none;
+}
+
+.search-bar.expanded .magnifier {
+  width: 0; /* Hide the magnifier icon when input is expanded */
 }

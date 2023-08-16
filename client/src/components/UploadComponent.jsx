@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useHttpClient } from "../hooks/http-hook";
 
-const Search = ({ addVideo }) => {
+const UploadComponent = ({ addVideo }) => {
   const randomId = uuidv4();
   const [videoData, setVideoData] = useState({
     id: randomId,
@@ -20,6 +20,9 @@ const Search = ({ addVideo }) => {
 
   const handleAdding = async () => {
     try {
+      if (!videoData.url.trim() && !videoData.title.trim()) {
+        throw new Error("Video URL and title are required.");
+      }
       const response = await sendRequest(
         `${process.env.REACT_APP_API_URL}/`,
         "POST",
@@ -42,7 +45,6 @@ const Search = ({ addVideo }) => {
     }
   };
 
-  console.log(videoData);
   return (
     <div className="section-container">
       <h3>Add Video</h3>
@@ -82,4 +84,4 @@ const Search = ({ addVideo }) => {
   );
 };
 
-export default Search;
+export default UploadComponent;

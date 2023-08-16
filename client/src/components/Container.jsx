@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHttpClient } from "../hooks/http-hook";
 import Clip from "./Clip";
 
-const Container = ({ videos, setVideos }) => {
+const Container = ({ videos, setVideos, setData }) => {
   const [currentClip, setCurrentClip] = useState({ id: "", rating: "" });
   const { isLoading, sendRequest, error } = useHttpClient();
 
@@ -12,6 +12,7 @@ const Container = ({ videos, setVideos }) => {
       const response = await sendRequest(`${process.env.REACT_APP_API_URL}/`);
       if (!isLoading) {
         setVideos(response);
+        setData(response);
       }
     } catch (error) {}
   };

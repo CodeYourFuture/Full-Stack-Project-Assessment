@@ -34,12 +34,13 @@ router.patch("/:pid", async (req, res) => {
   const updatedRating = req.body.rating;
 
   try {
-    await Clip.updateOne(
+    const updatedClip = await Clip.findOneAndUpdate(
       { id: videoIdToUpdate },
-      { $set: { rating: updatedRating } }
+      { $set: { rating: updatedRating } },
+      { new: true }
     );
     res.status(200).json({ message: "Video updated." });
-    console.log("Video updated.");
+    console.log("Video updated.", updatedClip);
   } catch (err) {
     console.error("Error updating video:", err);
     res
