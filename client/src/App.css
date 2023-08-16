@@ -16,4 +16,5 @@
 .thumbs--down {
   font-size: 25px;
   margin-inline: 1rem;
+  cursor: pointer;
 }
