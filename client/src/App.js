@@ -11,7 +11,7 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const addLocally = (newData) => {
-    data.push(newData);
+    videos.push(newData);
   };
 
   const searchForVideo = () => {
