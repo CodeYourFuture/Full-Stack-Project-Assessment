@@ -2,15 +2,15 @@ import React from "react";
 import SingleVideoCard from "./SingleVideoCard";
 // import exampleResponse from "./exampleResponse.json";
 
-function VideoCards({ filterVideos, setFilterVideos }) {
+function VideoCards({ videos, setVideos }) {
   return (
     <>
-      {filterVideos.map((video) => (
+      {videos.map((video) => (
         <SingleVideoCard
           key={video.id}
           videoId={video.id}
-          filterVideos={filterVideos}
-          setFilterVideos={setFilterVideos}
+          filterVideos={videos}
+          setFilterVideos={setVideos}
           title={video.title}
           url={video.url}
         />

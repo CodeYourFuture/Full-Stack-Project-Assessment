@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideo({ filterVideos, setFilterVideos }) {
+function AddVideo({ videos, setVideos }) {
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addVideoUrl, setAddVideoUrl] = useState("");
 
@@ -18,11 +18,11 @@ function AddVideo({ filterVideos, setFilterVideos }) {
     addVideoObject.id = getId();
     addVideoObject.title = addVideoTitle;
     addVideoObject.url = addVideoUrl;
-    setFilterVideos((filterVideos) => [...filterVideos, addVideoObject]);
+    setVideos((videos) => [...videos, addVideoObject]);
   }
 
   function getId() {
-    const sortedVideoArray = filterVideos.sort(
+    const sortedVideoArray = videos.sort(
       (videoObjectA, videoObjectB) => videoObjectB.id - videoObjectA.id
     );
     return sortedVideoArray[0].id + 1;
@@ -33,7 +33,7 @@ function AddVideo({ filterVideos, setFilterVideos }) {
       <h2>Add Video</h2>
       <form className="add-video-form">
         <div>
-          <label for="video-title-input">Title</label>
+          <label htmlFor="video-title-input">Title</label>
           <input
             id="video-title-input"
             name="video-title"
@@ -44,7 +44,7 @@ function AddVideo({ filterVideos, setFilterVideos }) {
           ></input>
         </div>
         <div>
-          <label for="video-url-input">URL</label>
+          <label htmlFor="video-url-input">URL</label>
           <input
             id="video-url-input"
             name="video-url"
