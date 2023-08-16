@@ -11,7 +11,9 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <VideoList videos={videos} />
+      <div className="video--container">
+        <VideoList videos={videos} />
+      </div>
     </div>
   );
 }
