@@ -11,3 +11,9 @@
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 1rem;
 }
+
+.thumbs--up,
+.thumbs--down {
+  font-size: 25px;
+  margin-inline: 1rem;
+}

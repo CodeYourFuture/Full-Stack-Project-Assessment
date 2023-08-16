@@ -18,7 +18,12 @@ export default function VideoCard(props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <p>{props.rating}</p>
+      <p>
+        <span className="thumbs--up">👍</span>
+        {props.rating}
+        <span className="thumbs--down">👎</span>
+      </p>
+      <button>Delete</button>
     </div>
   );
 }
