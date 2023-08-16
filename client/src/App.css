@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.video--card {
+  border: 1px palevioletred solid;
+}
