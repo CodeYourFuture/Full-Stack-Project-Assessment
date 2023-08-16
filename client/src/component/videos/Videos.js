@@ -34,13 +34,13 @@ const Videos = () => {
         {videos.map((video) => (
           <div className="col-12 col-md-6 col-lg-4" key={video.id}>
             <div className="card m-2">
-              <div className="embed-responsive embed-responsive-16by9">
+              <div className="embed-responsive  ">
                 <iframe
+                  className="embed-responsive-item"
                   src={`https://www.youtube.com/embed/${
                     video.url.split("v=")[1]
                   }`}
                   title={video.title}
-                  className="embed-responsive-item"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>

@@ -80,7 +80,7 @@ app.delete("/videos/data/:id", (req, res) => {
   if (!getVideoByID)
     return res
       .status(404)
-      .send(`message: booking for ID requested is not found`);
+      .send(`message: video for ID requested is not found`);
 
   videos.splice(index, 1);
 
