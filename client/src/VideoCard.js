@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 // add onClick for upvote and downvote
 export default function VideoCard(props) {
   const videoId = props.url.split("watch?v=")[1];
 
-  console.log(props.url.split("watch?v=")[1]);
+  const [voteCount, setVoteCount] = useState(props.voteCount);
+
+  function handleLike() {
+    setVoteCount((prevCount) => prevCount + 1);
+  }
+
+  function handleUnlike() {
+    setVoteCount((prevCount) => prevCount - 1);
+  }
 
   return (
-    <div className="video--card">
+    <div className="video--card" key={props.id}>
       <h2>{props.title}</h2>
       <iframe
         width="560"
@@ -19,9 +27,13 @@ export default function VideoCard(props) {
         allowFullScreen
       ></iframe>
       <p>
-        <span className="thumbs--up">👍</span>
-        {props.rating}
-        <span className="thumbs--down">👎</span>
+        <span onClick={handleLike} className="thumbs--up">
+          👍
+        </span>
+        Vote Score: {voteCount}
+        <span onClick={handleUnlike} className="thumbs--down">
+          👎
+        </span>
       </p>
       <button>Delete</button>
     </div>

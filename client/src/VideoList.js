@@ -9,7 +9,7 @@ export default function VideoList(props) {
           key={video.id}
           title={video.title}
           url={video.url}
-          rating={video.rating}
+          voteCount={video.rating}
         />
       </div>
     );
