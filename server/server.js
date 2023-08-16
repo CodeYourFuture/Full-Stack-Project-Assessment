@@ -1,15 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+app.use(cors());
 let videos = [];
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send(videos);
 });
 

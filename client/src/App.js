@@ -1,18 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import exampleData from "./exampleresponse.json";
 import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
 
 function App() {
-  const [videos, setVideos] = useState(
-    exampleData.sort((a, b) => b.rating - a.rating)
-  );
+  const [videos, setVideos] = useState([]);
 
-  const handleDelete = (videoToDelete) => {
-    setVideos((prevVideos) =>
-      prevVideos.filter((video) => video.id !== videoToDelete.id)
-    );
+  useEffect(() => {
+    async function fetchVideos() {
+      const response = await fetch("http://localhost:5000/");
+      if (response.ok) {
+        const data = await response.json();
+        setVideos(data);
+      } else {
+        console.error("Failed to fetch videos.");
+      }
+    }
+    fetchVideos();
+  }, []);
+
+  const handleDelete = async (videoToDelete) => {
+    const response = await fetch(`/${videoToDelete.id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      setVideos((prevVideos) =>
+        prevVideos.filter((video) => video.id !== videoToDelete.id)
+      );
+    } else {
+      console.error("Video could not be deleted.");
+    }
   };
 
   const handleUpVote = (videoToUpVote) => {

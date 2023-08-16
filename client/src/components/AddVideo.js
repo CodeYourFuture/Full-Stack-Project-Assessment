@@ -16,13 +16,29 @@ function AddVideo({ onAdd }) {
     return /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/i.test(url);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (title.trim() === "" || !isYoutubeUrl(url)) {
       alert("Please enter a valid title and a valid YouTube URL.");
       return;
     }
-    onAdd({ title, url, rating: 0 });
+
+    const response = await fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, url }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      onAdd({ id: data.id, title, url, rating: 0 });
+      setTitle("");
+      setUrl("");
+    } else {
+      console.error("Video could not be saved.");
+    }
   };
 
   return (
