@@ -1,5 +1,3 @@
-// Level 250 - https://www.codingthesmartway.com/how-to-fetch-api-data-with-react/
-
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import AddVideo from "./AddVideo";

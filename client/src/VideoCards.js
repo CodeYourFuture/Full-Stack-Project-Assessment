@@ -1,10 +1,9 @@
 import React from "react";
 import SingleVideoCard from "./SingleVideoCard";
-// import exampleResponse from "./exampleResponse.json";
 
 function VideoCards({ videos, setVideos }) {
   return (
-    <>
+    <div className="card-container">
       {videos.map((video) => (
         <SingleVideoCard
           key={video.id}
@@ -15,14 +14,7 @@ function VideoCards({ videos, setVideos }) {
           url={video.url}
         />
       ))}
-    </>
+    </div>
   );
 }
 export default VideoCards;
-
-// {
-//     "id": 523523,
-//     "title": "Never Gonna Give You Up",
-//     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-//     "rating": 23
-//   },

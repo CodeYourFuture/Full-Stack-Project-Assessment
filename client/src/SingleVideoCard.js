@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import exampleResponse from "./exampleResponse.json";
 
 function SingleVideoCard({
   videoId,
@@ -25,38 +24,27 @@ function SingleVideoCard({
   const urlId = url.split("v=")[1].substring(0, 11);
 
   return (
-    <div className="card-container">
-      <div className="card">
-        <iframe
-          className="card-thumb"
-          width="320"
-          height="320"
-          src={`https://www.youtube.com/embed/${urlId}`}
-          title={title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+    <div className="card">
+      <iframe
+        className="card-thumb"
+        width="320"
+        height="320"
+        src={`https://www.youtube.com/embed/${urlId}`}
+        title={title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
 
-        <div className="card-body">
-          <button onClick={minusCount}>-</button>
-          <span>{count}</span>
-          <button onClick={plusCount}>+</button>
-          <h3>{title}</h3>
-          <p>Paragraph</p>
-          <button className="btn-delete" onClick={() => deleteVideo(videoId)}>
-            Delete
-          </button>
-        </div>
+      <div className="card-body">
+        <button onClick={minusCount}>-</button>
+        <span>{count}</span>
+        <button onClick={plusCount}>+</button>
+        <h3>{title}</h3>
+        <p>Paragraph</p>
+        <button onClick={() => deleteVideo(videoId)}>Delete</button>
       </div>
     </div>
   );
 }
 export default SingleVideoCard;
-
-// {
-//     "id": 523523,
-//     "title": "Never Gonna Give You Up",
-//     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-//     "rating": 23
-//   },
