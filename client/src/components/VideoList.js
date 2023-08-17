@@ -6,10 +6,12 @@ export default function VideoList(props) {
     return (
       <div>
         <VideoCard
+          id={video.id}
           key={video.id}
           title={video.title}
           url={video.url}
           voteCount={video.rating}
+          changeVoteScore={props.changeVoteScore(video.id)}
         />
       </div>
     );

@@ -8,6 +8,21 @@ import Searchbar from "./components/Searchbar";
 function App() {
   const [videos, setVideos] = useState(videoData);
 
+  function changeVoteScore(id) {
+    return function (voteChoice) {
+      setVideos((videos) =>
+        videos.map((video) => {
+          const newVideo = { ...video };
+          if (video.id === id) {
+            newVideo.rating = video.rating + voteChoice;
+          }
+
+          return newVideo;
+        })
+      );
+    };
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +33,7 @@ function App() {
         <Searchbar />
       </div>
       <div className="video--container">
-        <VideoList videos={videos} />
+        <VideoList videos={videos} changeVoteScore={changeVoteScore} />
       </div>
     </div>
   );
