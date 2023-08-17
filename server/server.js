@@ -67,6 +67,15 @@ app.post("/videos/data/create", newVideoValidate, (req, res) => {
   const newId = videos[videos.length - 1].id + 1;
   const { title, url } = req.body;
 
+  if (
+    url.startsWith("https://www.youtube.com/embed/") ||
+    url.startsWith("https://www.youtube.com/watch?v=")
+  ) {
+    res.status(200).json({ message: "Valid YouTube URL" });
+  } else {
+    res.status(400).json({ message: "Invalid YouTube URL" });
+  }
+
   const newVideo = Object.assign({ id: newId }, req.body);
 
   videos.push(newVideo);

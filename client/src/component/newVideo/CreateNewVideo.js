@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import axios from "axios";
-import '../newVideo/create.css';
+import "../newVideo/create.css";
 
 const CreateNewVideo = () => {
   const [title, setTitle] = useState("");
@@ -11,6 +11,7 @@ const CreateNewVideo = () => {
 
   const clickHandler = async (e) => {
     e.preventDefault();
+
     if (!title || !url) {
       setError(true);
       return false;
@@ -42,6 +43,7 @@ const CreateNewVideo = () => {
             {error && !title && (
               <span className="error-msg">You Must Enter Video Title..!!</span>
             )}
+
             <input
               type="text"
               value={title}
@@ -49,12 +51,14 @@ const CreateNewVideo = () => {
             />
             <label>Video Title</label>
           </div>
+
           <div className="user-box">
             {error && !url && (
               <span className="error-msg">
-                Warning: YouTube URL Must be Provided as Embed...!!
+                YouTube URL Must be Provided as Embed...!!
               </span>
             )}
+
             <input
               type=""
               value={url}
@@ -62,6 +66,7 @@ const CreateNewVideo = () => {
             />
             <label>Url</label>
           </div>
+
           <center>
             <button className="btn-submit" onClick={clickHandler}>
               SEND
