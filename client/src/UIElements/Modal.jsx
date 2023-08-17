@@ -1,6 +1,6 @@
 import React from "react";
 
-import './Modal.css';
+import "./Modal.css";
 
 const Modal = ({ closeModal, deleteFunc }) => {
   return (
@@ -9,15 +9,6 @@ const Modal = ({ closeModal, deleteFunc }) => {
         <h3>Delete video?</h3>
         <div>
           <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              closeModal();
-            }}
-          >
-            CANCEL
-          </button>
-          <button
             className="btn btn-danger"
             onClick={() => {
               deleteFunc();
@@ -25,6 +16,15 @@ const Modal = ({ closeModal, deleteFunc }) => {
             }}
           >
             DELETE
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              closeModal();
+            }}
+          >
+            CANCEL
           </button>
         </div>
       </div>

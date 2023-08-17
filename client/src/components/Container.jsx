@@ -5,7 +5,6 @@ import Clip from "./Clip";
 
 const Container = ({ videos, setVideos, setData }) => {
   const [currentClip, setCurrentClip] = useState({ id: "", rating: "" });
-  const [sortOption, setSortOption] = useState("asc");
   const { isLoading, sendRequest, error } = useHttpClient();
 
   const fetchVideos = async () => {
@@ -37,7 +36,6 @@ const Container = ({ videos, setVideos, setData }) => {
           "Content-Type": "application/json",
         }
       );
-      console.log(response);
       const updatedVideos = videos.map((video) => {
         if (video.id === id) {
           return { ...video, rating: updatedRating };
@@ -62,7 +60,6 @@ const Container = ({ videos, setVideos, setData }) => {
         return b.title.localeCompare(a.title);
       }
     });
-    console.log(sortedVideos);
     setVideos(sortedVideos);
   };
 

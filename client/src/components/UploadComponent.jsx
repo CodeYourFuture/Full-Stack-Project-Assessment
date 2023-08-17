@@ -20,7 +20,7 @@ const UploadComponent = ({ addVideo }) => {
 
   const handleAdding = async () => {
     try {
-      if (!videoData.url.trim() && !videoData.title.trim()) {
+      if (!videoData.url.trim() && !videoData.title.trim() && !videoData.id) {
         throw new Error("Video URL and title are required.");
       }
       const response = await sendRequest(
@@ -33,14 +33,14 @@ const UploadComponent = ({ addVideo }) => {
       );
       addVideo(videoData);
       setVideoData({
-        id: "",
+        id: randomId,
         url: "",
         title: "",
         rating: 0,
       });
       console.log(response);
     } catch (err) {
-      console.log("Error adding video.", error);
+      console.log("Error adding video.", { error: err });
       console.log(err);
     }
   };
@@ -64,7 +64,7 @@ const UploadComponent = ({ addVideo }) => {
       />
       <div className="button-container">
         <button
-          className="cancel-button"
+          className="cancel-button btn-danger"
           onClick={() => {
             setVideoData({
               id: "",
@@ -76,7 +76,7 @@ const UploadComponent = ({ addVideo }) => {
         >
           Cancel
         </button>
-        <button className="add-button" onClick={handleAdding}>
+        <button className="add-button btn-primary" onClick={handleAdding}>
           ADD
         </button>
       </div>
