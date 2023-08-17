@@ -13,28 +13,36 @@ app.use(cors());
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = videosData;
 
-const validateData = [
+const newVideoValidate = [
   body("title").trim().notEmpty(),
-  body("url").trim().notEmpty().isURL(),
-  body("name")
+  body("url")
     .trim()
     .notEmpty()
-    .isLength({ min: 3 })
-    .withMessage("Name must be at less 3 characters"),
-  body("email")
-    .trim()
-    .notEmpty()
-    .isEmail()
-    .toLowerCase()
-    .normalizeEmail()
-    .withMessage("Email must be a valid email"),
-  body("password")
-    .trim()
-    .notEmpty()
-    .withMessage("You must enter your password"),
+    .isURL()
+    .isLength({ min: 30 })
+    .withMessage("Warning: YouTube URL Must be Provided as Embed"),
 ];
 
-// GET "/"
+// const validateData = [
+//   body("name")
+//     .trim()
+//     .notEmpty()
+//     .isLength({ min: 3 })
+//     .withMessage("Name must be at less 3 characters"),
+//   body("email")
+//     .trim()
+//     .notEmpty()
+//     .isEmail()
+//     .toLowerCase()
+//     .normalizeEmail()
+//     .withMessage("Email must be a valid email"),
+//   body("password")
+//     .trim()
+//     .notEmpty()
+//     .withMessage("You must enter your password"),
+// ];
+
+
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
@@ -50,7 +58,7 @@ app.get("/videos/data/:id", (req, res) => {
   res.status(200).send(getVideoByID);
 });
 
-app.post("/videos/data/create", validateData, (req, res) => {
+app.post("/videos/data/create", newVideoValidate, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

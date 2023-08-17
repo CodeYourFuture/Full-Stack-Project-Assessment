@@ -10,7 +10,7 @@ const DeleteComponent = ({ id, onDeleteHandler }) => {
     try {
       const res = await axios.delete(url);
       if (res.status === 200) {
-        alert("Video with id has been deleted successfully");
+        alert("This Video has been deleted successfully");
       } else {
         alert("Video for ID requested is not found");
       }

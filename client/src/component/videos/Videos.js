@@ -38,7 +38,7 @@ const Videos = () => {
                 <iframe
                   className="embed-responsive-item"
                   src={`https://www.youtube.com/embed/${
-                    video.url.split("=")[1]
+                    video.url.split("=")[1] || video.url.split("embed/")[1]
                   }`}
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -47,7 +47,7 @@ const Videos = () => {
               </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{video.title}</h5>
-                <div >{<LikeComponent />}</div>
+                <div>{<LikeComponent />}</div>
               </div>
               <div className="mt-auto">
                 <DeleteComponent
