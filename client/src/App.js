@@ -1,9 +1,9 @@
 import "./App.css";
 import React, { useState } from "react";
 import videoData from "./exampleresponse.json";
-import VideoList from "./VideoList";
-import AddVideoForm from "./AddVideoForm";
-import Searchbar from "./Searchbar";
+import VideoList from "./components/VideoList";
+import AddVideoForm from "./components/AddVideoForm";
+import Searchbar from "./components/Searchbar";
 
 function App() {
   const [videos, setVideos] = useState(videoData);
