@@ -53,7 +53,7 @@ const LikeComponent = () => {
           onClick={handleLike}
         >
           <ThumbUpIcon />
-          Like {likeCount}
+          / {likeCount}
         </button>
 
         <button
@@ -61,7 +61,7 @@ const LikeComponent = () => {
           onClick={handleDislike}
         >
             <ThumbDownIcon />
-          DisLike {dislikeCount}
+          / {dislikeCount}
         </button>
       </div>
     </div>

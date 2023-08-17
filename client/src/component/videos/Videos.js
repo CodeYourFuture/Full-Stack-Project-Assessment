@@ -30,10 +30,11 @@ const Videos = () => {
   return (
     <div className="container m-20">
       <h1 className="video-div">Video Recommendation</h1>
+      
       <div className="row g-4">
         {videos.map((video) => (
           <div className="col-12 col-md-6 col-lg-4" key={video.id}>
-            <div className="card m-2">
+            <div className="card m-2 border-secondary">
               <div className="embed-responsive embed-responsive-16by9">
                 <iframe
                   className="embed-responsive-item"
@@ -43,18 +44,21 @@ const Videos = () => {
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                ></iframe>
+                  >
+                </iframe>
               </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{video.title}</h5>
-                <div>{<LikeComponent />}</div>
+                <div className="flex column">{<LikeComponent />}</div>
               </div>
+
               <div className="mt-auto">
                 <DeleteComponent
                   id={video.id}
                   onDeleteHandler={onDeleteHandler}
                 />
               </div>
+
             </div>
           </div>
         ))}
