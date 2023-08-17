@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../videos/videos.css";
 import DeleteComponent from "../delete/DeleteComponent";
+import LikeComponent from "../likeAndDisLike/LikeComponent";
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
@@ -46,7 +47,7 @@ const Videos = () => {
               </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{video.title}</h5>
-                <span className="card-text">{video.rating}</span>
+                <div >{<LikeComponent />}</div>
               </div>
               <div className="mt-auto">
                 <DeleteComponent
