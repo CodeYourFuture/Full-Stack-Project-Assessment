@@ -1,4 +1,4 @@
-// update7
+// update9
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import VideoComponent from "./VideoComponent";
@@ -14,8 +14,9 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get("/videos"); // Make a GET request to fetch videos
-      setVideos(response.data);
+      const response = await axios.get("http://localhost:5000/videos");
+      const sortedVideos = response.data.sort((a, b) => b.rating - a.rating); // Order videos by most upvotes
+      setVideos(sortedVideos);
     } catch (error) {
       console.error("Error fetching videos:", error);
     }
@@ -23,7 +24,15 @@ const App = () => {
 
   const handleAddVideo = async (newVideo) => {
     try {
-      const response = await axios.post("/videos", newVideo); // Make a POST request to add a video
+      if (!newVideo.title || !isYouTubeUrlValid(newVideo.url)) {
+        alert("Please enter a valid title and YouTube URL.");
+        return;
+      }
+
+      const response = await axios.post("http://localhost:5000/videos", {
+        ...newVideo,
+        timestamp: new Date().toISOString(), // Store the current timestamp
+      });
       newVideo.id = response.data.id;
       setVideos([...videos, newVideo]);
     } catch (error) {
@@ -33,11 +42,11 @@ const App = () => {
 
   const handleUpVote = async (id) => {
     try {
-      await axios.post(`/videos/${id}/upvote`); // Make a POST request to upvote a video
+      await axios.post(`http://localhost:5000/videos/${id}/upvote`);
       const updatedVideos = videos.map((video) =>
         video.id === id ? { ...video, rating: video.rating + 1 } : video
       );
-      setVideos(updatedVideos);
+      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after upvote
     } catch (error) {
       console.error("Error upvoting video:", error);
     }
@@ -45,13 +54,13 @@ const App = () => {
 
   const handleDownVote = async (id) => {
     try {
-      await axios.post(`/videos/${id}/downvote`); // Make a POST request to downvote a video
+      await axios.post(`http://localhost:5000/videos/${id}/downvote`);
       const updatedVideos = videos.map((video) =>
         video.id === id
           ? { ...video, rating: Math.max(video.rating - 1, 0) }
           : video
       );
-      setVideos(updatedVideos);
+      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after downvote
     } catch (error) {
       console.error("Error downvoting video:", error);
     }
@@ -59,12 +68,18 @@ const App = () => {
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`/videos/${id}`); // Make a DELETE request to remove a video
+      await axios.delete(`http://localhost:5000/videos/${id}`);
       const updatedVideos = videos.filter((video) => video.id !== id);
       setVideos(updatedVideos);
     } catch (error) {
       console.error("Error deleting video:", error);
     }
+  };
+
+  const isYouTubeUrlValid = (url) => {
+    const youtubeUrlPattern =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+    return youtubeUrlPattern.test(url);
   };
 
   return (
@@ -82,14 +97,201 @@ const App = () => {
             />
           ))}
         </div>
-        <AddYoutubeVideo onAddVideo={handleAddVideo} />{" "}
-        {/* Use the updated component */}
+        <AddYoutubeVideo onAddVideo={handleAddVideo} />
       </header>
     </div>
   );
 };
 
 export default App;
+
+// update8
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+// import VideoComponent from "./VideoComponent";
+// import AddYoutubeVideo from "./AddYoutubeVideo";
+// import axios from "axios";
+
+// const App = () => {
+//   const [videos, setVideos] = useState([]);
+
+//   useEffect(() => {
+//     fetchVideos();
+//   }, []);
+
+//   const fetchVideos = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5000/videos"); // Updated the URL
+//       setVideos(response.data);
+//     } catch (error) {
+//       console.error("Error fetching videos:", error);
+//     }
+//   };
+
+//   const handleAddVideo = async (newVideo) => {
+//     try {
+//       const response = await axios.post(
+//         "http://localhost:5000/videos",
+//         newVideo
+//       ); // Updated the URL
+//       newVideo.id = response.data.id;
+//       setVideos([...videos, newVideo]);
+//     } catch (error) {
+//       console.error("Error adding video:", error);
+//     }
+//   };
+
+//   const handleUpVote = async (id) => {
+//     try {
+//       await axios.post(`http://localhost:5000/videos/${id}/upvote`); // Updated the URL
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id ? { ...video, rating: video.rating + 1 } : video
+//       );
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error upvoting video:", error);
+//     }
+//   };
+
+//   const handleDownVote = async (id) => {
+//     try {
+//       await axios.post(`http://localhost:5000/videos/${id}/downvote`); // Updated the URL
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id
+//           ? { ...video, rating: Math.max(video.rating - 1, 0) }
+//           : video
+//       );
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error downvoting video:", error);
+//     }
+//   };
+
+//   const handleRemove = async (id) => {
+//     try {
+//       await axios.delete(`http://localhost:5000/videos/${id}`); // Updated the URL
+//       const updatedVideos = videos.filter((video) => video.id !== id);
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>Video Recommendation</h1>
+//         <div className="video-list">
+//           {videos.map((video) => (
+//             <VideoComponent
+//               key={video.id}
+//               video={video}
+//               onUpVote={handleUpVote}
+//               onDownVote={handleDownVote}
+//               onRemove={handleRemove}
+//             />
+//           ))}
+//         </div>
+//         <AddYoutubeVideo onAddVideo={handleAddVideo} />
+//       </header>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+// update7
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+// import VideoComponent from "./VideoComponent";
+// import AddYoutubeVideo from "./AddYoutubeVideo";
+// import axios from "axios";
+
+// const App = () => {
+//   const [videos, setVideos] = useState([]);
+
+//   useEffect(() => {
+//     fetchVideos();
+//   }, []);
+
+//   const fetchVideos = async () => {
+//     try {
+//       const response = await axios.get("/localhost:5000/videos"); // Make a GET request to fetch videos
+//       setVideos(response.data);
+//     } catch (error) {
+//       console.error("Error fetching videos:", error);
+//     }
+//   };
+
+//   const handleAddVideo = async (newVideo) => {
+//     try {
+//       const response = await axios.post("/videos", newVideo); // Make a POST request to add a video
+//       newVideo.id = response.data.id;
+//       setVideos([...videos, newVideo]);
+//     } catch (error) {
+//       console.error("Error adding video:", error);
+//     }
+//   };
+
+//   const handleUpVote = async (id) => {
+//     try {
+//       await axios.post(`/videos/${id}/upvote`); // Make a POST request to upvote a video
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id ? { ...video, rating: video.rating + 1 } : video
+//       );
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error upvoting video:", error);
+//     }
+//   };
+
+//   const handleDownVote = async (id) => {
+//     try {
+//       await axios.post(`/videos/${id}/downvote`); // Make a POST request to downvote a video
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id
+//           ? { ...video, rating: Math.max(video.rating - 1, 0) }
+//           : video
+//       );
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error downvoting video:", error);
+//     }
+//   };
+
+//   const handleRemove = async (id) => {
+//     try {
+//       await axios.delete(`/videos/${id}`); // Make a DELETE request to remove a video
+//       const updatedVideos = videos.filter((video) => video.id !== id);
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>Video Recommendation</h1>
+//         <div className="video-list">
+//           {videos.map((video) => (
+//             <VideoComponent
+//               key={video.id}
+//               video={video}
+//               onUpVote={handleUpVote}
+//               onDownVote={handleDownVote}
+//               onRemove={handleRemove}
+//             />
+//           ))}
+//         </div>
+//         <AddYoutubeVideo onAddVideo={handleAddVideo} />{" "}
+//         {/* Use the updated component */}
+//       </header>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 // update6 - this version work with no axios
 // import React, { useState } from "react";
