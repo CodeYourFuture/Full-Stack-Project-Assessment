@@ -1,18 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import  React from "react";
 import ShowVideos from "./ShowVideos";
+
 function Videos(props) {
-    const[titleData,setTitleData]=useState();
+
+   const [loadData,setLoadData] = useState([]);
+    const[titleData,setTitleData] = useState();
     const [urlData, setUrlData] = useState();
 
+    useEffect(()=>{const getData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/videos");
+        if (!response.ok) {
+          throw new Error("something went wrong");
+        }
+        const data = await response.json();
+        return setLoadData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };getData()},[setLoadData])
+
+
     function cancelBtnHandler(e){
-        console.log("cancell....");
       e.preventDefault();
       props.setShow(false);
     }
 
+
     function addClickHandeler(e) {
+
       e.preventDefault();
+      const newVideo = {  title: titleData, url: urlData };
+fetch("http://localhost:3000/videos", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(newVideo),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    setLoadData((prevLoadData) => [...prevLoadData, newVideo]);
+    setTitleData("");
+    setUrlData("");
+  })
+  .catch((error) => {
+    console.error("Error adding video:", error);
+  });
 
     }
   return (
