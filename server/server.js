@@ -21,7 +21,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/info", (req, res) => {
-  console.log("got called info");
   res.json(videos);
 });
 
@@ -52,7 +51,6 @@ app.delete("/:id", function (req, res) {
 });
 
 app.put("/:id", function (req, res) {
-  console.log("put body", req.body);
   let searchId = Number(req.params.id);
   let putIndex = videos.findIndex((video) => video.id === searchId);
   if (putIndex >= 0) {
@@ -67,7 +65,6 @@ app.put("/:id", function (req, res) {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
   if (!req.body.title || !req.body.url) {
     res.status(400).json({
       result: "failure",
@@ -81,7 +78,6 @@ app.post("/", (req, res) => {
     url: req.body.url,
     rating: 0,
   };
-  console.log("new rec is ", newRec);
   videos.push(newRec);
   res.status(201).json({
     id: newRec.id,
