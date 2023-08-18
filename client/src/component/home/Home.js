@@ -6,6 +6,7 @@ import "../home/home.css";
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
 
   const url = "http://127.0.0.1:5000/videos/data";
 
@@ -29,16 +30,44 @@ const Home = () => {
     setSelectedVideo(getSelected);
   };
 
+  const searchHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const searchButtton = () => {
+    const searchVideo = videos.find((video) =>
+        video.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+        video.id === Number(searchInput)
+    );
+    
+    if (searchVideo) {
+      setSelectedVideo(searchVideo);
+    }
+  };
+
+
   return (
     <div className="home-div">
-      <h1>Home Component</h1>
+      <div className="header-div">
+        <h1>Beko Videos World</h1>
+        <span>Where You Can Share Your Favorite & Recommendation videos</span>
+      </div>
 
       <div className="mid-div">
         <input
-          onChange={selectHandler}
+          onChange={searchHandler}
+          value={searchInput}
           className="search-input"
           placeholder="Search for videos..."
         />
+        <button
+          onClick={searchButtton}
+          type="button"
+          className="btn btn-outline-secondary"
+        >
+          Search
+        </button>
+
         <select className="form-select" onChange={selectHandler}>
           <option value="">Select Your Video</option>
           {videos.map((video) => (
