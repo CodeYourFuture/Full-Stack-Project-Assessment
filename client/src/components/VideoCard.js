@@ -12,6 +12,10 @@ export default function VideoCard(props) {
     props.handleVote(props.id, -1);
   }
 
+  function handleDelete() {
+    props.handleDelete(props.id);
+  }
+
   return (
     <div className="video--card" key={props.id}>
       <h2>{props.title}</h2>
@@ -33,7 +37,7 @@ export default function VideoCard(props) {
           👎
         </span>
       </p>
-      <button>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }
