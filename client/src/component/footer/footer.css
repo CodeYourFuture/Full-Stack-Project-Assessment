@@ -12,6 +12,7 @@
     align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
+    list-style-type: none;
     gap: 20px;
 }
 
@@ -28,5 +29,5 @@
     color: #03f40f;
     text-decoration: none;
     border-radius: 25px;
-    list-style-type: none;
+    
 }
