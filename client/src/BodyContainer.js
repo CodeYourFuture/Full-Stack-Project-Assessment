@@ -12,11 +12,9 @@ function BodyContainer() {
     if (refreshVideos) {
       fetch("http://localhost:5000/")
         .then((res) => {
-          console.log("the result ", res);
           return res.json();
         })
         .then((data) => {
-          console.log("the data", data);
           setAllMovies(data);
         });
     }
