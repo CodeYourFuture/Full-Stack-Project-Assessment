@@ -23,6 +23,10 @@ function App() {
     );
   }
 
+  function deleteVideo(id) {
+    console.log(`deleting video with id of ${id}`);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,7 +37,11 @@ function App() {
         <Searchbar />
       </div>
       <div className="video--container">
-        <VideoList videos={videos} handleVote={changeVoteScore} />
+        <VideoList
+          videos={videos}
+          handleVote={changeVoteScore}
+          handleDelete={deleteVideo}
+        />
       </div>
     </div>
   );
