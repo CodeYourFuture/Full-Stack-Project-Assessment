@@ -1,3 +1,4 @@
+// version4
 import React from "react";
 
 const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
