@@ -35,7 +35,7 @@ const Home = () => {
     setSearchInput(e.target.value);
   };
 
-  const searchButtton = () => {
+  const searchButton = () => {
     const searchVideo = videos.find((video) =>
         video.title.toLowerCase().includes(searchInput.toLowerCase()) ||
         video.id === Number(searchInput)
@@ -62,7 +62,7 @@ const Home = () => {
           placeholder="Search for videos..."
         />
         <button
-          onClick={searchButtton}
+          onClick={searchButton}
           type="button"
           className="btn btn-outline-secondary"
         >
