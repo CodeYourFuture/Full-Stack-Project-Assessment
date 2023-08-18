@@ -24,7 +24,7 @@ function App() {
   }
 
   function deleteVideo(id) {
-    console.log(`deleting video with id of ${id}`);
+    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   }
 
   return (
