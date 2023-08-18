@@ -7,7 +7,8 @@ const CreateNewVideo = () => {
   const [url, setUrl] = useState("");
   const [error, setError] = useState(false);
 
-  const urlForNewVideo = "http://127.0.0.1:5000/videos/data/create";
+  const urlForNewVideo =
+    "https://beko-video-project-fs-assessment-backend.onrender.com/videos/data/create";
 
   const clickHandler = async (e) => {
     e.preventDefault();

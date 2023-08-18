@@ -6,7 +6,7 @@ const DeleteComponent = ({ id, onDeleteHandler }) => {
 
     
   const deleteVideo = async () => {
-    const url = `http://127.0.0.1:5000/videos/data/${id}`;
+    const url = `https://beko-video-project-fs-assessment-backend.onrender.com/videos/data/${id}`;
     try {
       const res = await axios.delete(url);
       if (res.status === 200) {

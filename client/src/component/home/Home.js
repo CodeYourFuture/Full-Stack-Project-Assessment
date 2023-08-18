@@ -8,7 +8,8 @@ const Home = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
-  const url = "http://127.0.0.1:5000/videos/data";
+  const url =
+    "https://beko-video-project-fs-assessment-backend.onrender.com/videos/data";
 
   const videoData = async () => {
     try {
