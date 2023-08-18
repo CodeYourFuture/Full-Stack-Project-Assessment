@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NewVideoContainer.css";
 
-function NewVideoContainer({ allMovies, setAllMovies }) {
+function NewVideoContainer({ allMovies, setRefreshVideos }) {
   const [newTitle, setNewTitle] = useState("");
   const [newURL, setNewURL] = useState("");
   function addNewVideo() {
@@ -13,7 +13,23 @@ function NewVideoContainer({ allMovies, setAllMovies }) {
     newRec.title = newTitle;
     newRec.url = newURL;
     newRec.rating = 0;
-    setAllMovies((oldArray) => [...oldArray, newRec]);
+
+    fetch("http://localhost:5000/", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: newTitle,
+        url: newURL,
+      }),
+    })
+      .then((res) => {
+        console.log("the result ", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("the data", data);
+        setRefreshVideos(true);
+      });
   }
 
   return (
