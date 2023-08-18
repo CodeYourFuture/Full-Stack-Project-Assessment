@@ -5,14 +5,56 @@ function MovieCard(props) {
   const movieSrc = "https://www.youtube.com/embed/" + movieName;
 
   function deleteMovieCard() {
-    props.setDeleteId(props.movie.id);
+    fetch("http://localhost:5000/" + props.movie.id, {
+      method: "delete",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        console.log("the result ", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("the data", data);
+        props.setRefreshVideos(true);
+      });
   }
 
   function upVote() {
-    props.setUpVoteId(props.movie.id);
+    let newVote = props.movie.rating + 1;
+    fetch("http://localhost:5000/" + props.movie.id, {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rating: newVote,
+      }),
+    })
+      .then((res) => {
+        console.log("the result ", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("the data", data);
+        props.setRefreshVideos(true);
+      });
   }
+
   function downVote() {
-    props.setDownVoteId(props.movie.id);
+    let newVote = props.movie.rating - 1;
+    fetch("http://localhost:5000/" + props.movie.id, {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rating: newVote,
+      }),
+    })
+      .then((res) => {
+        console.log("the result ", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("the data", data);
+        props.setRefreshVideos(true);
+      });
   }
 
   return (
