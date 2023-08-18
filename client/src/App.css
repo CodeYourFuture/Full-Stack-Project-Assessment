@@ -1,3 +1,250 @@
+:root {
+  --paper: #fffffa;
+  --coal: #1c1e21;
+  --cordovan: #e21818;
+  --font: "Quicksand", sans-serif;
+  --heading-font: "Bebas Neue", cursive;
+  --gap: 20px;
+  --width-block: clamp(300px, 75%, 1024px);
+}
+
 .App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--coal);
+  font-family: var(--font);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--paper);
+  font-family: var(--heading-font);
+}
+
+p,
+span {
+  color: var(--paper);
+}
+
+header h1 {
+  text-align: center;
+  font-size: 3.5rem;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.video__header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2rem;
+}
+
+.video__header p {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.video-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-title {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.video-category {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.like-button,
+.dislike-button {
+  cursor: pointer;
+  margin-right: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.like-button:hover,
+.dislike-button:hover {
+  opacity: 0.7;
+}
+
+.close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: var(--paper);
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.close-button:hover {
+  opacity: 0.3;
+}
+
+.section-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.section-container h3 {
+  margin: 0;
+}
+.input-field {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cancel-button,
+.add-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 3rem;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-bottom: 0.5rem;
+}
+
+.search-bar {
+  position: relative;
+}
+
+input[type="text"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: width 0.3s ease-in-out;
+  width: 40px; /* Initial width for the magnifier */
+}
+
+.magnifier {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url("./icons/icons8-magnifier-50.png") no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out;
+}
+
+.search-bar.expanded input[type="text"] {
+  width: 300px; /* Expanded width for the input */
+  outline: none;
+}
+
+.search-bar.expanded .magnifier {
+  width: 0; /* Hide the magnifier icon when input is expanded */
+}
+
+.sorting-container {
+  display: flex;
+  gap: 1rem;
+  padding-left: 2rem;
+  max-width: 1160px;
+  margin: 0 auto;
+  color: var(--paper);
+  margin-top: 1rem;
+}
+
+select {
+  background-color: var(--coal);
+  color: var(--paper);
+}
+
+.footer__wrap {
+  display: flex;
+  border-top: 1px solid var(--paper);
+  padding: 1rem 0 1rem;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.img__wrap {
+  height: 2rem;
+}
+
+.footer__img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+footer img {
+  height: 100%;
+  background-color: var(--paper);
+  border-radius: 2px;
+  transition: all 0.5s ease;
+}
+
+.footer__links {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.footer__logo {
   text-align: center;
 }

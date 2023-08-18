@@ -1,0 +1,40 @@
+:root {
+  --paper: #fffffa;
+  --coal: #1c1e21;
+  --cordovan: #e21818;
+  --font: "Quicksand", sans-serif;
+  --heading-font: "Bebas Neue", cursive;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--paper);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px;
+  width: 400px;
+  height: 200px;
+}
+
+.modal h3 {
+  text-align: center;
+  color: var(--coal);
+}
+
+.modal__container {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal__container div {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
