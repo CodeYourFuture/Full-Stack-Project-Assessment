@@ -8,19 +8,19 @@ import Searchbar from "./components/Searchbar";
 function App() {
   const [videos, setVideos] = useState(videoData);
 
-  function changeVoteScore(id) {
-    return function (voteChoice) {
-      setVideos((videos) =>
-        videos.map((video) => {
-          const newVideo = { ...video };
-          if (video.id === id) {
-            newVideo.rating = video.rating + voteChoice;
-          }
+  function changeVoteScore(id, voteChoice) {
+    setVideos((prevVideos) =>
+      prevVideos.map((video) => {
+        if (video.id === id) {
+          return {
+            ...video,
+            rating: video.rating + voteChoice,
+          };
+        }
 
-          return newVideo;
-        })
-      );
-    };
+        return video;
+      })
+    );
   }
 
   return (
@@ -33,7 +33,7 @@ function App() {
         <Searchbar />
       </div>
       <div className="video--container">
-        <VideoList videos={videos} changeVoteScore={changeVoteScore} />
+        <VideoList videos={videos} handleVote={changeVoteScore} />
       </div>
     </div>
   );

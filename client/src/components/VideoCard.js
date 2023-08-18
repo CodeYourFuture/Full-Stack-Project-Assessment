@@ -5,11 +5,11 @@ export default function VideoCard(props) {
   const videoId = props.url.split("watch?v=")[1];
 
   function handleUpVote() {
-    props.changeVoteScore(1);
+    props.handleVote(props.id, 1);
   }
 
   function handleDownVote() {
-    props.changeVoteScore(-1);
+    props.handleVote(props.id, -1);
   }
 
   return (

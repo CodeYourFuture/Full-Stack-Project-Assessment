@@ -11,7 +11,7 @@ export default function VideoList(props) {
           title={video.title}
           url={video.url}
           voteCount={video.rating}
-          changeVoteScore={props.changeVoteScore(video.id)}
+          handleVote={props.handleVote}
         />
       </div>
     );
