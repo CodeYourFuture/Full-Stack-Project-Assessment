@@ -1,4 +1,5 @@
 import React from "react";
+import Rating from "./Rating";
 
 export default function Video(props) {
   console.log(props.title);
@@ -15,7 +16,7 @@ export default function Video(props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
-      <div>Rating: {props.rating}</div>
+      <Rating rating={props.rating} />
       <button onClick={() => props.handleClick(props.id)}>Remove Video</button>
     </div>
   );
