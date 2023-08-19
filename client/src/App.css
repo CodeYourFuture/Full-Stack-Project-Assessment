@@ -1,3 +1,20 @@
 .App {
   text-align: center;
 }
+
+.video--card {
+  border: 1px palevioletred solid;
+}
+
+.video--container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.thumbs--up,
+.thumbs--down {
+  font-size: 25px;
+  margin-inline: 1rem;
+  cursor: pointer;
+}
