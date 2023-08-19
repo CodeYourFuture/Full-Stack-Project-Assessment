@@ -6,8 +6,7 @@ export default function AddVideoForm(props) {
   function handleAddVideo(event) {
     // stops page refresh
     event.preventDefault();
-    // props.handleAddVideo(formData);
-    console.log(formData);
+    props.handleAddVideo(formData);
   }
 
   function handleChange(event) {
