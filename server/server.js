@@ -13,3 +13,9 @@ const videos = require("./exampleresponse.json");
 app.get("/", (request, response) => {
   response.json(videos);
 });
+
+// Returns video with specific id
+app.get("/videos/:id", (request, response) => {
+  let id = Number(request.params.id);
+  response.json(videos.filter((video) => video.id === id));
+});
