@@ -27,12 +27,20 @@ function App() {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   }
 
-  function addVideo() {
-    // setVideos((prevVideos) => {
-    //   console.log("video added")
-    //   prevVideos.map((video) =>)
-    // });
-    console.log("video added");
+  function addVideo(formData) {
+    let maximumId = Math.max(...videos.map((video) => video.id));
+
+    setVideos((prevVideos) => {
+      return [
+        {
+          id: maximumId + 1,
+          title: formData.title,
+          url: formData.url,
+          rating: 0,
+        },
+        ...prevVideos,
+      ];
+    });
   }
 
   return (
