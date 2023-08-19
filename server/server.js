@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+// to parse incoming requests with JSON payloads
+app.use(express.json());
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -18,4 +21,29 @@ app.get("/", (request, response) => {
 app.get("/videos/:id", (request, response) => {
   let id = Number(request.params.id);
   response.json(videos.filter((video) => video.id === id));
+});
+
+// POST
+// This endpoint is used to add a video to the API.
+// Both fields - title and url - must be included and be valid for this to succeed.
+// **Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
+app.post("/", (request, response) => {
+  let titleText = request.body.title;
+  let urlText = request.body.url;
+
+  const calculateNewID = () => {
+    let newID = Math.max(...videos.map((video) => video.id)) + 1;
+    return newID;
+  };
+
+  const newVideo = {
+    id: calculateNewID(),
+    title: titleText,
+    url: urlText,
+    rating: 0,
+  };
+
+  videos.push(newVideo);
+
+  response.status(201).json(`"${titleText}" and ${urlText}`);
 });
