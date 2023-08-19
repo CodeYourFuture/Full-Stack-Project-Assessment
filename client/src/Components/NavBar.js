@@ -4,7 +4,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark ">
         <div className="container">
           <a href="#" className="navbar-brand">
-            Video World
+            VideoWorld
           </a>
           <button
             className="navbar-toggler"

@@ -1,4 +1,5 @@
 import "./App.css";
+import AddAndSearch from "./Components/AddAndSearch";
 import NavBar from "./Components/NavBar";
 import Welcome from "./Components/Welcome";
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <NavBar />
       <Welcome />
+      <AddAndSearch />
     </>
     /* <div className="App">
         <header className="App-header">
