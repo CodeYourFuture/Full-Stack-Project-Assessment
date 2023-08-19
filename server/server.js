@@ -4,15 +4,35 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json()); // needed to parse JSON data
 
+const { Pool } = require("pg");
+
+const db = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
 // Store and retrieve your videos from here
-// If you want, you can copy "exampleResponse.json" into here to have some data to work with
-let videos = require("./exampleResponse.json");
+// let videos = require("./exampleResponse.json"); // Get this from Render db?????
 let videoIdHighest = Math.max(...videos.map((video) => video.id));
 
 // GET "/"
 // This endpoint is used to return all of the videos
 app.get("/", function (request, response) {
   response.json(videos);
+});
+
+app.get("/videos", function (request, response) {
+  db.query("SELECT * FROM videos")
+    .then((videos) => {
+      response.json(videos.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+      response.status(500).json({ error: "Error" });
+    });
 });
 
 // POST "/"
