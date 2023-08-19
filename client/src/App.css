@@ -1,3 +1,113 @@
-.App {
+body {
+  background-color: darkgray;
   text-align: center;
 }
+
+.AddVideos {
+  margin: 1rem 0;
+}
+
+/* App.css */
+
+/* Overall layout */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #bfaaf2;
+}
+
+.card {
+  width: 300px;
+  height: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0c08f;
+}
+
+/* Video thumbnail */
+.thumbnail {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Video details */
+.details {
+  padding: 10px;
+}
+
+.vote {
+  display: flex;
+}
+
+button {
+  color: aqua;
+  background-color: #3d5b4f;
+  border-radius: 0.2rem;
+  margin: 1.5rem 0.4rem;
+}
+
+/*.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+ 
+import React from 'react';
+import './App.css';
+
+const videos = [
+  {
+    id: 1,
+    title: 'Video 1',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    thumbnail: 'https://example.com/thumbnail1.jpg',
+  },
+  {
+    id: 2,
+    title: 'Video 2',
+    description: 'Nullam blandit enim at erat facilisis, in feugiat odio posuere.',
+    thumbnail: 'https://example.com/thumbnail2.jpg',
+  },
+  // Add more videos as needed
+];
+
+const App = () => {
+  return (
+    <div className="container">
+      {videos.map((video) => (
+        <div key={video.id} className="card">
+          <div
+            className="thumbnail"
+            style={{ backgroundImage: `url(${video.thumbnail})` }}
+          ></div>
+          <div className="details">
+            <div className="title">{video.title}</div>
+            <div className="description">{video.description}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default App;
+ */
