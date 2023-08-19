@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import videoData from "./exampledata.json";
 import Video from "./components/Video";
+import Search from "./components/Search";
 
 function App() {
   const [videos, setVideos] = React.useState(videoData);
@@ -42,11 +43,17 @@ function App() {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert("submit Working");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <Search handleSubmit={handleSubmit} />
       <div className="allVideoContainer">{videoElements}</div>
     </div>
   );
