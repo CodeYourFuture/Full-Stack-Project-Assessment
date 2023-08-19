@@ -1,3 +1,46 @@
 .App {
   text-align: center;
 }
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-title {
+  text-align: center;
+  color: purple;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* VideoItem */
+.video-item {
+  background-color: #fde6e6;
+  padding: 20px;
+  border-radius: 8px;
+
+}
+
+.video-item h2 {
+  color: #ff7597;
+}
+
+.video-item p {
+  color: #ff4384;
+}
+
+.video-item button {
+  background-color: #c34cce;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin:2px ;
+}
+
+.video-item button:hover {
+  background-color: #bf8296;
+  border-radius:5px ;
+}

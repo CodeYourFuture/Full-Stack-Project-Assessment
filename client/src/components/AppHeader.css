@@ -1,0 +1,29 @@
+
+h1 {
+  text-align: center;
+  font-size: 6vmin;
+  letter-spacing: 8px;
+  color: #fff;
+  text-shadow: 0 0 10px #ae78ae, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  animation: pulseAnimation 2s ease-in-out infinite;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    text-shadow: 0 0 10px #a391a3, 0 0 20px #5edfdd, 0 0 30px #d043b4;
+  }
+  50% {
+    text-shadow: 0 0 20px #c177c1, 0 0 40px  #C9E6C8, 0 0 60px #3b430e;
+  }
+  100% {
+    text-shadow: 0 0 10px #C9E6C8, 0 0 20px #86af1e, 0 0 30px #e6ce31;
+  }
+}
+
+
+
+
+
+
+
+

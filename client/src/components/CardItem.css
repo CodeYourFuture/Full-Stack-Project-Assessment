@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: 350px;
+  text-align: center;
+  background-color:#96ae95;
+  color: #474141;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 18px;
+}
+
+.card:hover {
+ background-color: #FEC8D8;
+}
+
+h2{
+margin-top: 0;
+font-size: 20px;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.rate-btn,
+.delete-btn {
+  padding: 10px 10px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.up{
+background-color: #cacabc;
+} 
+
+ .down{
+ background-color: #cacabc;
+} 
+
+
+.delete-btn {
+  background-color: red ;
+} 
