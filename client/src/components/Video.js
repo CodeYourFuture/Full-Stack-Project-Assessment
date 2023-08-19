@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "./Rating";
 
 export default function Video(props) {
-  console.log(props.title);
+  //   console.log(props.title);
   const videoId = props.url.replace("https://www.youtube.com/watch?v=", "");
   return (
     <div className="videoContainer column">
@@ -16,8 +16,15 @@ export default function Video(props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
-      <Rating rating={props.rating} />
-      <button onClick={() => props.handleClick(props.id)}>Remove Video</button>
+      <Rating
+        rating={props.rating}
+        id={props.id}
+        handleClickAdd={props.handleClickAdd}
+        handleClickMinus={props.handleClickMinus}
+      />
+      <button onClick={() => props.handleClickDelete(props.id)}>
+        Remove Video
+      </button>
     </div>
   );
 }

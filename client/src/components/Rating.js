@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Rating(props) {
+  console.log(props);
   return (
     <div>
-      <button>Add</button>
+      <button onClick={() => props.handleClickAdd(props.id)}>Add</button>
       <span>Rating: {props.rating}</span>
-      <button>Remove</button>
+      <button onClick={() => props.handleClickMinus(props.id)}>Minus</button>
     </div>
   );
 }

@@ -12,7 +12,9 @@ function App() {
       url={video.url}
       rating={video.rating}
       id={video.id}
-      handleClick={deleteVideo}
+      handleClickDelete={deleteVideo}
+      handleClickAdd={ratingAdd}
+      handleClickMinus={ratingMinus}
     />
   ));
 
@@ -20,6 +22,22 @@ function App() {
     setVideos((prevVideos) => {
       return prevVideos.filter((video) => {
         return video.id !== id;
+      });
+    });
+  }
+
+  function ratingAdd(id) {
+    setVideos((prevVideos) => {
+      return prevVideos.map((video) => {
+        return video.id === id ? { ...video, rating: video.rating + 1 } : video;
+      });
+    });
+  }
+
+  function ratingMinus(id) {
+    setVideos((prevVideos) => {
+      return prevVideos.map((video) => {
+        return video.id === id ? { ...video, rating: video.rating - 1 } : video;
       });
     });
   }
