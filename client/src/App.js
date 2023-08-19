@@ -2,6 +2,7 @@ import "./App.css";
 import AddAndSearch from "./Components/AddAndSearch";
 import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
+import VideoList from "./Components/VideoList";
 import Welcome from "./Components/Welcome";
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <NavBar />
       <Welcome />
       <AddAndSearch />
+      <VideoList />
       <Footer />
     </>
     /* <div className="App">

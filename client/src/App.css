@@ -1,8 +1,15 @@
-.App {
-  text-align: center;
+
+body::before {
+  display: block;
+  content: '';
+  height: 40px;
 }
 @media(min-width: 768px){
   .news-input{
     width:50%
   }
+    iframe {
+      height: 13em;
+    }
+
 }

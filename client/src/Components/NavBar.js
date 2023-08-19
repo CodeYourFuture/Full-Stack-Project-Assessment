@@ -1,7 +1,7 @@
 const NavBar = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark ">
+      <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <div className="container">
           <a href="#" className="navbar-brand">
             VideoWorld
