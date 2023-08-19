@@ -1,3 +1,375 @@
+/* update6 */
 .App {
   text-align: center;
 }
+
+.App-header {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Header and Footer styling */
+header {
+  background-color: orange;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Override background image for body */
+.body {
+  background-image: none;
+  background-color: white; /* Set a background color for the body */
+}
+
+footer {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* update5 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: black;
+  padding: 20px;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Header and Footer styling */
+/* header {
+  background-color: orange;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
+
+footer {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+  margin: 0 10px;
+} */
+
+/* update4 */
+/* .video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+} */
+
+/* update3 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  margin: 20px 0;
+}
+
+.add-video-form {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.add-video-form h2 {
+  margin-bottom: 10px;
+}
+
+.add-video-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-video-form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.add-video-form button {
+  background-color: black;
+  color: orange;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-video-form button:hover {
+  background-color: orange;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+} */
+
+/* update2 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  margin: 20px 0;
+}
+
+.add-video-form {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.add-video-form h2 {
+  margin-bottom: 10px;
+}
+
+.add-video-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-video-form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.add-video-form button {
+  background-color: black;
+  color: orange;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-video-form button:hover {
+  background-color: orange;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+} */
+
+/* update 1 */
+/* .App {
+  text-align: center;
+} */
+
+/* Responsive layout styles */
+/* .video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+} */
+
+/* @media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: 1fr;
+  }
+} */
+
+/* original */
+/* .App {
+  text-align: center;
+} */

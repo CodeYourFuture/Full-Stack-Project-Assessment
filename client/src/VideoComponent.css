@@ -1,0 +1,245 @@
+/* version5 */
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+  flex: 0 0 calc(50% - 20px); /* Two videos per row with 20px gap */
+  max-width: calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-component iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    justify-content: flex-start;
+  }
+
+  .video-component {
+    flex: 0 0 calc(100% - 20px); /* One video per row with 20px gap */
+    max-width: calc(100% - 20px);
+  }
+}
+
+/* version4 here the videos have different size*/
+/* .video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-component {
+    margin-bottom: 20px;
+  }
+} */
+
+/* version3 */
+/* .video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 0 10px 20px 0;
+  width: calc(50% - 10px);
+  float: left;
+  clear: both;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.video-component button:hover {
+  background-color: orange;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .video-component {
+    width: 100%; 
+    margin-right: 0; 
+  }
+} */
+
+/* version2 */
+/* .video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 0 10px 20px 0; 
+  width: calc(50% - 10px); 
+  float: left; 
+  clear: both; 
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.video-component button:hover {
+  background-color: orange;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .video-component {
+    width: 100%; 
+    margin-right: 0; 
+  }
+} */
+
+/* version1 */
+/* .video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-component {
+    margin-bottom: 20px;
+  }
+} */

@@ -1,4 +1,4 @@
-// update9
+// update10
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import VideoComponent from "./VideoComponent";
@@ -15,7 +15,7 @@ const App = () => {
   const fetchVideos = async () => {
     try {
       const response = await axios.get("http://localhost:5000/videos");
-      const sortedVideos = response.data.sort((a, b) => b.rating - a.rating); // Order videos by most upvotes
+      const sortedVideos = response.data.sort((a, b) => b.rating - a.rating);
       setVideos(sortedVideos);
     } catch (error) {
       console.error("Error fetching videos:", error);
@@ -31,7 +31,7 @@ const App = () => {
 
       const response = await axios.post("http://localhost:5000/videos", {
         ...newVideo,
-        timestamp: new Date().toISOString(), // Store the current timestamp
+        timestamp: new Date().toISOString(),
       });
       newVideo.id = response.data.id;
       setVideos([...videos, newVideo]);
@@ -46,7 +46,7 @@ const App = () => {
       const updatedVideos = videos.map((video) =>
         video.id === id ? { ...video, rating: video.rating + 1 } : video
       );
-      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after upvote
+      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
     } catch (error) {
       console.error("Error upvoting video:", error);
     }
@@ -60,7 +60,7 @@ const App = () => {
           ? { ...video, rating: Math.max(video.rating - 1, 0) }
           : video
       );
-      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after downvote
+      setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
     } catch (error) {
       console.error("Error downvoting video:", error);
     }
@@ -104,6 +104,113 @@ const App = () => {
 };
 
 export default App;
+
+// update9 this code works when i had not started do any html and css updates
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+// import VideoComponent from "./VideoComponent";
+// import AddYoutubeVideo from "./AddYoutubeVideo";
+// import axios from "axios";
+
+// const App = () => {
+//   const [videos, setVideos] = useState([]);
+
+//   useEffect(() => {
+//     fetchVideos();
+//   }, []);
+
+//   const fetchVideos = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5000/videos");
+//       const sortedVideos = response.data.sort((a, b) => b.rating - a.rating); // Order videos by most upvotes
+//       setVideos(sortedVideos);
+//     } catch (error) {
+//       console.error("Error fetching videos:", error);
+//     }
+//   };
+
+//   const handleAddVideo = async (newVideo) => {
+//     try {
+//       if (!newVideo.title || !isYouTubeUrlValid(newVideo.url)) {
+//         alert("Please enter a valid title and YouTube URL.");
+//         return;
+//       }
+
+//       const response = await axios.post("http://localhost:5000/videos", {
+//         ...newVideo,
+//         timestamp: new Date().toISOString(), // Store the current timestamp
+//       });
+//       newVideo.id = response.data.id;
+//       setVideos([...videos, newVideo]);
+//     } catch (error) {
+//       console.error("Error adding video:", error);
+//     }
+//   };
+
+//   const handleUpVote = async (id) => {
+//     try {
+//       await axios.post(`http://localhost:5000/videos/${id}/upvote`);
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id ? { ...video, rating: video.rating + 1 } : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after upvote
+//     } catch (error) {
+//       console.error("Error upvoting video:", error);
+//     }
+//   };
+
+//   const handleDownVote = async (id) => {
+//     try {
+//       await axios.post(`http://localhost:5000/videos/${id}/downvote`);
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id
+//           ? { ...video, rating: Math.max(video.rating - 1, 0) }
+//           : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating)); // Reorder after downvote
+//     } catch (error) {
+//       console.error("Error downvoting video:", error);
+//     }
+//   };
+
+//   const handleRemove = async (id) => {
+//     try {
+//       await axios.delete(`http://localhost:5000/videos/${id}`);
+//       const updatedVideos = videos.filter((video) => video.id !== id);
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   const isYouTubeUrlValid = (url) => {
+//     const youtubeUrlPattern =
+//       /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+//     return youtubeUrlPattern.test(url);
+//   };
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>Video Recommendation</h1>
+//         <div className="video-list">
+//           {videos.map((video) => (
+//             <VideoComponent
+//               key={video.id}
+//               video={video}
+//               onUpVote={handleUpVote}
+//               onDownVote={handleDownVote}
+//               onRemove={handleRemove}
+//             />
+//           ))}
+//         </div>
+//         <AddYoutubeVideo onAddVideo={handleAddVideo} />
+//       </header>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 // update8
 // import React, { useState, useEffect } from "react";
