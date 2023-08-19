@@ -27,13 +27,21 @@ function App() {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   }
 
+  function addVideo() {
+    // setVideos((prevVideos) => {
+    //   console.log("video added")
+    //   prevVideos.map((video) =>)
+    // });
+    console.log("video added");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendations</h1>
       </header>
       <div>
-        <AddVideoForm />
+        <AddVideoForm handleAddVideo={addVideo} />
         <Searchbar />
       </div>
       <div className="video--container">

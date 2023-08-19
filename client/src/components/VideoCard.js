@@ -17,7 +17,7 @@ export default function VideoCard(props) {
   }
 
   return (
-    <div className="video--card" key={props.id}>
+    <div className="video--card">
       <h2>{props.title}</h2>
       <iframe
         width="560"
