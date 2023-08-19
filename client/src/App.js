@@ -1,5 +1,6 @@
 import "./App.css";
 import AddAndSearch from "./Components/AddAndSearch";
+import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 import Welcome from "./Components/Welcome";
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <NavBar />
       <Welcome />
       <AddAndSearch />
+      <Footer />
     </>
     /* <div className="App">
         <header className="App-header">
