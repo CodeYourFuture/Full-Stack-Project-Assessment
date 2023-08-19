@@ -12,7 +12,6 @@ export default function AddVideoForm(props) {
   function handleChange(event) {
     // stops refresh
     event.preventDefault();
-    console.log(event.target.name);
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
