@@ -5,7 +5,7 @@ import VideoForm from "./VideoForm";
 import exampleVideos from "./exampleresponse.json";
 
 const App = () => {
-  const [videos, setVideos] = useState(exampleVideos); // Your video data here
+  const [videos, setVideos] = useState(exampleVideos); 
 
   const handleVote = (id, type) => {
     setVideos((prevVideos) =>
