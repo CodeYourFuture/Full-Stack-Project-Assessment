@@ -28,22 +28,34 @@ app.get("/videos/:id", (request, response) => {
 // Both fields - title and url - must be included and be valid for this to succeed.
 // **Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
 app.post("/", (request, response) => {
-  let titleText = request.body.title;
-  let urlText = request.body.url;
+  const { id, title, url, rating } = request.body;
 
-  const calculateNewID = () => {
-    let newID = Math.max(...videos.map((video) => video.id)) + 1;
-    return newID;
-  };
+  if (!title || !url) {
+    return response.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  } else if (url.indexOf("youtube.com/watch?v=") === -1) {
+    return response.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  } else {
+    const calculateNewID = () => {
+      let newID = Math.max(...videos.map((video) => video.id)) + 1;
+      return newID;
+    };
 
-  const newVideo = {
-    id: calculateNewID(),
-    title: titleText,
-    url: urlText,
-    rating: 0,
-  };
-
-  videos.push(newVideo);
-
-  response.status(201).json(`"${titleText}" and ${urlText}`);
+    const newVideo = {
+      id: calculateNewID(),
+      title: title,
+      url: url,
+      rating: 0,
+    };
+    videos.push(newVideo);
+    response.status(201).json({
+      id: newVideo.id,
+      message: "Video was saved",
+    });
+  }
 });
