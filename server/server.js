@@ -1,13 +1,16 @@
-// update5
+// update6
 const express = require("express");
+const path = require("path"); // Import the 'path' module
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json()); // Parse JSON request bodies
+app.use(express.json());
 
 let videos = [
+  // Your existing video data
+  // ...
   {
     id: 523523,
     title: "Never Gonna Give You Up",
@@ -69,8 +72,6 @@ let videos = [
     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
     rating: 73,
   },
-
-  // ... (other videos)
 ];
 
 app.get("/", (req, res) => {
@@ -78,7 +79,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/videos", (req, res) => {
-  const order = req.query.order || "desc"; // Get the 'order' query parameter, default to 'desc'
+  const order = req.query.order || "desc";
 
   let orderedVideos = [...videos];
   if (order === "asc") {
@@ -131,7 +132,148 @@ app.delete("/videos/:id", (req, res) => {
   }
 });
 
+// New endpoint to render a page with links
+app.get("/links", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "links.html"));
+});
+
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, "public")));
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+// update5
+// const express = require("express");
+// const cors = require("cors");
+// const app = express();
+// const port = process.env.PORT || 5000;
+
+// app.use(cors());
+// app.use(express.json()); // Parse JSON request bodies
+
+// let videos = [
+//   {
+//     id: 523523,
+//     title: "Never Gonna Give You Up",
+//     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+//     rating: 23,
+//   },
+//   {
+//     id: 523427,
+//     title: "The Coding Train",
+//     url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
+//     rating: 230,
+//   },
+//   {
+//     id: 82653,
+//     title: "Mac & Cheese | Basics with Babish",
+//     url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
+//     rating: 2111,
+//   },
+//   {
+//     id: 858566,
+//     title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
+//     url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
+//     rating: 11,
+//   },
+//   {
+//     id: 453538,
+//     title:
+//       "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
+//     url: "https://www.youtube.com/watch?v=4As0e4de-rI",
+//     rating: 3211,
+//   },
+//   {
+//     id: 283634,
+//     title: "Learn Unity - Beginner's Game Development Course",
+//     url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
+//     rating: 211,
+//   },
+//   {
+//     id: 562824,
+//     title: "Cracking Enigma in 2021 - Computerphile",
+//     url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
+//     rating: 111,
+//   },
+//   {
+//     id: 442452,
+//     title: "Coding Adventure: Chess AI",
+//     url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
+//     rating: 671,
+//   },
+//   {
+//     id: 536363,
+//     title: "Coding Adventure: Ant and Slime Simulations",
+//     url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
+//     rating: 76,
+//   },
+//   {
+//     id: 323445,
+//     title: "Why the Tour de France is so brutal",
+//     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
+//     rating: 73,
+//   },
+// ];
+
+// app.get("/", (req, res) => {
+//   res.send({ express: "Your Backend Service is Running" });
+// });
+
+// app.get("/videos", (req, res) => {
+//   const order = req.query.order || "desc"; // Get the 'order' query parameter, default to 'desc'
+
+//   let orderedVideos = [...videos];
+//   if (order === "asc") {
+//     orderedVideos.sort((a, b) => a.rating - b.rating);
+//   } else {
+//     orderedVideos.sort((a, b) => b.rating - a.rating);
+//   }
+
+//   res.json(orderedVideos);
+// });
+
+// app.post("/videos", (req, res) => {
+//   const newVideo = req.body;
+//   newVideo.id = videos.length + 1;
+//   newVideo.uploadedDate = new Date().toISOString();
+//   videos.push(newVideo);
+//   res.json({ id: newVideo.id });
+// });
+
+// app.post("/videos/:id/upvote", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const video = videos.find((v) => v.id === id);
+//   if (video) {
+//     video.rating += 1;
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// app.post("/videos/:id/downvote", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const video = videos.find((v) => v.id === id);
+//   if (video) {
+//     video.rating = Math.max(video.rating - 1, 0);
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// app.delete("/videos/:id", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const initialLength = videos.length;
+//   videos = videos.filter((v) => v.id !== id);
+//   if (videos.length < initialLength) {
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// app.listen(port, () => console.log(`Listening on port ${port}`));
 
 //update4 - this code display html in front end and back end ok
 // const express = require("express");

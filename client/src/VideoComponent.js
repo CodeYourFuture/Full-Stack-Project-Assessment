@@ -5,7 +5,10 @@ import axios from "axios"; // Import axios
 const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
   const handleDelete = async () => {
     try {
-      await axios.delete(`/videos/${video.id}`); // Make a DELETE request to remove a video
+      // await axios.delete(`/videos/${video.id}`);
+      await axios.delete(
+        `https://back-end-full-stack-project-assessment.onrender.com/videos/${video.id}`
+      );
       onRemove(video.id);
     } catch (error) {
       console.error("Error deleting video:", error);

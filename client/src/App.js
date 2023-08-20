@@ -7,14 +7,17 @@ import axios from "axios";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
-
+  console.log(videos);
   useEffect(() => {
     fetchVideos();
   }, []);
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/videos");
+      // const response = await axios.get("http://localhost:5000/videos");
+      const response = await axios.get(
+        "https://back-end-full-stack-project-assessment.onrender.com/videos"
+      );
       const sortedVideos = response.data.sort((a, b) => b.rating - a.rating);
       setVideos(sortedVideos);
     } catch (error) {
@@ -29,10 +32,14 @@ const App = () => {
         return;
       }
 
-      const response = await axios.post("http://localhost:5000/videos", {
-        ...newVideo,
-        timestamp: new Date().toISOString(),
-      });
+      // const response = await axios.post("http://localhost:5000/videos", {
+      const response = await axios.post(
+        "https://back-end-full-stack-project-assessment.onrender.com/videos",
+        {
+          ...newVideo,
+          timestamp: new Date().toISOString(),
+        }
+      );
       newVideo.id = response.data.id;
       setVideos([...videos, newVideo]);
     } catch (error) {
@@ -42,7 +49,10 @@ const App = () => {
 
   const handleUpVote = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/videos/${id}/upvote`);
+      // await axios.post(`http://localhost:5000/videos/${id}/upvote`);
+      await axios.post(
+        `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/upvote`
+      );
       const updatedVideos = videos.map((video) =>
         video.id === id ? { ...video, rating: video.rating + 1 } : video
       );
@@ -54,7 +64,10 @@ const App = () => {
 
   const handleDownVote = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/videos/${id}/downvote`);
+      // await axios.post(`http://localhost:5000/videos/${id}/downvote`);
+      await axios.post(
+        `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/downvote`
+      );
       const updatedVideos = videos.map((video) =>
         video.id === id
           ? { ...video, rating: Math.max(video.rating - 1, 0) }
@@ -68,7 +81,10 @@ const App = () => {
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/videos/${id}`);
+      // await axios.delete(`http://localhost:5000/videos/${id}`);
+      await axios.delete(
+        `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}`
+      );
       const updatedVideos = videos.filter((video) => video.id !== id);
       setVideos(updatedVideos);
     } catch (error) {
