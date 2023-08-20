@@ -74,23 +74,32 @@ let videos = [
   },
 ];
 
-app.get("/", (req, res) => {
-  res.send({ express: "Your Backend Service is Running" });
-});
-
-app.get("/videos", (req, res) => {
-  const order = req.query.order || "desc";
-
-  let orderedVideos = [...videos];
-  if (order === "asc") {
-    orderedVideos.sort((a, b) => a.rating - b.rating);
-  } else {
-    orderedVideos.sort((a, b) => b.rating - a.rating);
+// app.get("/", (req, res) => {
+app.get(
+  "https://back-end-full-stack-project-assessment.onrender.com/",
+  (req, res) => {
+    res.send({ express: "Your Backend Service is Running" });
   }
+);
 
-  res.json(orderedVideos);
-});
+// app.get("/videos", (req, res) => {
+app.get(
+  "https://back-end-full-stack-project-assessment.onrender.com/videos",
+  (req, res) => {
+    const order = req.query.order || "desc";
 
+    let orderedVideos = [...videos];
+    if (order === "asc") {
+      orderedVideos.sort((a, b) => a.rating - b.rating);
+    } else {
+      orderedVideos.sort((a, b) => b.rating - a.rating);
+    }
+
+    res.json(orderedVideos);
+  }
+);
+
+// app.post("/videos", (req, res) => {
 app.post("/videos", (req, res) => {
   const newVideo = req.body;
   newVideo.id = videos.length + 1;
@@ -99,6 +108,7 @@ app.post("/videos", (req, res) => {
   res.json({ id: newVideo.id });
 });
 
+// app.post("/videos/:id/upvote", (req, res) => {
 app.post("/videos/:id/upvote", (req, res) => {
   const id = parseInt(req.params.id);
   const video = videos.find((v) => v.id === id);
@@ -110,6 +120,7 @@ app.post("/videos/:id/upvote", (req, res) => {
   }
 });
 
+// app.post("/videos/:id/downvote", (req, res) => {
 app.post("/videos/:id/downvote", (req, res) => {
   const id = parseInt(req.params.id);
   const video = videos.find((v) => v.id === id);
@@ -121,6 +132,7 @@ app.post("/videos/:id/downvote", (req, res) => {
   }
 });
 
+// app.delete("/videos/:id", (req, res) => {
 app.delete("/videos/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const initialLength = videos.length;
@@ -133,9 +145,13 @@ app.delete("/videos/:id", (req, res) => {
 });
 
 // New endpoint to render a page with links
-app.get("/links", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "links.html"));
-});
+// app.get("/links", (req, res) => {
+app.get(
+  "https://back-end-full-stack-project-assessment.onrender.com/video",
+  (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "links.html"));
+  }
+);
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, "public")));
