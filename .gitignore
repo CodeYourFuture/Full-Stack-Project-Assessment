@@ -1,0 +1,6 @@
+client/node_modules/
+server/routesToCreate.md
+server/node_modules/
+server/.env
+workingBranches.md
+notesForSql.md
