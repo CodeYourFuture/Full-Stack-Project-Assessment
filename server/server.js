@@ -70,6 +70,20 @@ let videos = [
 ];
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.json(videos);
+});
+
+app.use(express.json());
+
+app.post("/", (req, res) => {
+  console.log(req.body);
+  if (req.body.title && req.body.url) {
+    const newVideo = { ...req.body, id: videos.length + 1, rating: 0 };
+    videos.push(newVideo);
+    res.status(201).send({ id: newVideo.id });
+  } else {
+    res
+      .status(400)
+      .send({ result: "failure", message: "Video could not be saved" });
+  }
 });
