@@ -100,49 +100,61 @@ app.get(
 );
 
 // app.post("/videos", (req, res) => {
-app.post("/videos", (req, res) => {
-  const newVideo = req.body;
-  newVideo.id = videos.length + 1;
-  newVideo.uploadedDate = new Date().toISOString();
-  videos.push(newVideo);
-  res.json({ id: newVideo.id });
-});
+app.post(
+  "https://back-end-full-stack-project-assessment.onrender.com/videos",
+  (req, res) => {
+    const newVideo = req.body;
+    newVideo.id = videos.length + 1;
+    newVideo.uploadedDate = new Date().toISOString();
+    videos.push(newVideo);
+    res.json({ id: newVideo.id });
+  }
+);
 
 // app.post("/videos/:id/upvote", (req, res) => {
-app.post("/videos/:id/upvote", (req, res) => {
-  const id = parseInt(req.params.id);
-  const video = videos.find((v) => v.id === id);
-  if (video) {
-    video.rating += 1;
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+app.post(
+  "https://back-end-full-stack-project-assessment.onrender.com/videos/:id/upvote",
+  (req, res) => {
+    const id = parseInt(req.params.id);
+    const video = videos.find((v) => v.id === id);
+    if (video) {
+      video.rating += 1;
+      res.json({});
+    } else {
+      res.status(404).json({ result: "failure", message: "Video not found" });
+    }
   }
-});
+);
 
 // app.post("/videos/:id/downvote", (req, res) => {
-app.post("/videos/:id/downvote", (req, res) => {
-  const id = parseInt(req.params.id);
-  const video = videos.find((v) => v.id === id);
-  if (video) {
-    video.rating = Math.max(video.rating - 1, 0);
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+app.post(
+  "https://back-end-full-stack-project-assessment.onrender.com/videos/:id/downvote",
+  (req, res) => {
+    const id = parseInt(req.params.id);
+    const video = videos.find((v) => v.id === id);
+    if (video) {
+      video.rating = Math.max(video.rating - 1, 0);
+      res.json({});
+    } else {
+      res.status(404).json({ result: "failure", message: "Video not found" });
+    }
   }
-});
+);
 
 // app.delete("/videos/:id", (req, res) => {
-app.delete("/videos/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const initialLength = videos.length;
-  videos = videos.filter((v) => v.id !== id);
-  if (videos.length < initialLength) {
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+app.delete(
+  "https://back-end-full-stack-project-assessment.onrender.com/videos/:id",
+  (req, res) => {
+    const id = parseInt(req.params.id);
+    const initialLength = videos.length;
+    videos = videos.filter((v) => v.id !== id);
+    if (videos.length < initialLength) {
+      res.json({});
+    } else {
+      res.status(404).json({ result: "failure", message: "Video not found" });
+    }
   }
-});
+);
 
 // New endpoint to render a page with links
 // app.get("/links", (req, res) => {
