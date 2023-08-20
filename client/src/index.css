@@ -13,7 +13,8 @@ code {
 }
 
 .videoContainer {
-  border: 2px solid blue;
+  border: 20px solid blue;
+  border-radius: 100px;
   background-color: magenta;
 }
 

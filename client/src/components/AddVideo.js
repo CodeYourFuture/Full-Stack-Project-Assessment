@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Search(props) {
+export default function AddVideo(props) {
   return (
     <div>
       <form onSubmit={props.handleSubmit}>
@@ -10,6 +10,7 @@ export default function Search(props) {
           id="videoTitle"
           name="videoTitle"
           placeholder="Enter Title"
+          onChange={props.handleChange}
         />
         <label for="videoUrl">Video Url: </label>
         <input
@@ -17,6 +18,7 @@ export default function Search(props) {
           id="videoUrl"
           name="videoUrl"
           placeholder="Enter URL"
+          onChange={props.handleChange}
         />
         <input type="submit" value="Add" />
       </form>
