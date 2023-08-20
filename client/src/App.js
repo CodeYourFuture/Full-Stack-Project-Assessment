@@ -3,7 +3,7 @@ import "./App.css";
 import VideoList from "./VideoList";
 import VideoForm from "./VideoForm";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "http://127.0.0.1/5000";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
