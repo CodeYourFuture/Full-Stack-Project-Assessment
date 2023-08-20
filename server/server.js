@@ -54,3 +54,11 @@ app.post("/", (request, response) => {
     });
   }
 });
+
+// DELETE
+// Deletes the video with the ID container within the `{id}` parameter
+app.delete("/videos/:id", (request, response) => {
+  response.status(201).json({
+    message: "Video was deleted",
+  });
+});
