@@ -58,7 +58,24 @@ app.post("/", (request, response) => {
 // DELETE
 // Deletes the video with the ID container within the `{id}` parameter
 app.delete("/videos/:id", (request, response) => {
-  response.status(201).json({
-    message: "Video was deleted",
-  });
+  const id = Number(request.params.id);
+
+  const videoToDelete = videos.find((video) => video.id === id);
+
+  if (videoToDelete === undefined) {
+    response.status(401).json({
+      result: "failure",
+      message: "Video could not be found",
+    });
+  } else {
+    // get the index of the video object that we want to delete
+    const index = videos.indexOf(videoToDelete);
+
+    // use splice to delete -- video array will be mutated
+    videos.splice(index, 1);
+
+    response.status(201).json({
+      message: "Video was deleted",
+    });
+  }
 });
