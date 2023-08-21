@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+// cors
+let cors = require("cors");
+app.use(cors());
+
 // to parse incoming requests with JSON payloads
 app.use(express.json());
 
