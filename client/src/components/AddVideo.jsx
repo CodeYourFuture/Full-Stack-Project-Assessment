@@ -1,14 +1,9 @@
-
 import React, { useState } from "react";
 import "../index.css";
 
 const AddVideo = ({ onVidAdd }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-
-
-
-
 
   const titleChange = (event) => {
     setTitle(event.target.value);
@@ -28,17 +23,21 @@ const AddVideo = ({ onVidAdd }) => {
   //   newInput.rating = 0;
   // };
   const newVid = () => {
-
-    const newInput = {
-
-      title: title,
-      url: url,
-    };
-    onVidAdd(newInput);
-
-    setTitle("");
-    setUrl("");
+    const youtubeUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+(&\S+)?$/;
+  if (!title ||!youtubeUrlRegex.test(url)) {
+    alert("Please write the title or Invalid URL");
+    return;
+  }
+  const newInput = {
+    title: title,
+    url: url,
   };
+
+      onVidAdd(newInput);
+      setTitle("");
+      setUrl("");
+    }
+
 
   return (
     <form>
@@ -47,7 +46,10 @@ const AddVideo = ({ onVidAdd }) => {
           Title
         </label>
         <div className="col-sm-10">
-          <input type="text" value={title}  onChange={titleChange}
+          <input
+            type="text"
+            value={title}
+            onChange={titleChange}
             className="form-control form-control-sm"
             id="colFormLabelSm"
             placeholder="Title"
@@ -69,7 +71,10 @@ const AddVideo = ({ onVidAdd }) => {
           />
         </div>
       </div>
-      <button onClick={newVid} type="button" className="btn btn-success"> Add </button>
+      <button onClick={newVid} type="button" className="btn btn-success">
+        {" "}
+        Add{" "}
+      </button>
       <button type="button" className="btn btn-warning">
         Cancel
       </button>
