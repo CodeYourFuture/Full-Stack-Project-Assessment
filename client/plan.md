@@ -11,22 +11,22 @@
     - Log `exampleresponse.json` into app to check data is arriving into frontend. ✅
 
     - We will create a VideoCard component. This will contain a single videos data.✅
-    - Hardcode the VideoCard component with information from the object above.
+    - Hardcode the VideoCard component with information from the object above.✅
         * replace watch?v= with embed/;
         * data.url.replace("watch?v=", "embed/");
 
   **Notes** We will use props to send the data from exampleresponse.json file to our VideoList component
 
 2. For each video, display a React component that contains
-   - The videos title
-   - An embedded video
-   - The number of votes the video has
-   - A button that when clicked removes the video
+   - The videos title ✅
+   - An embedded video ✅
+   - The number of votes the video has ✅
+   - A button that when clicked removes the video ✅
 
-    - Create a VideoList component with videoList prop (which is state from app level)
-    - We need to map through each of the objects from the state that we are passing as a single prop to the VideoList component
-    - For each of these objects we are rendering a VideoCard component
-    - Each VideoCard component will take the props [id={id}, title={title}, url={url}, rating={rating}]
+    - Create a VideoList component with videoList prop (which is state from app level) ✅
+    - We need to map through each of the objects from the state that we are passing as a single prop to the VideoList component ✅
+    - For each of these objects we are rendering a VideoCard component ✅
+    - Each VideoCard component will take the props [id={id}, title={title}, url={url}, rating={rating}] ✅
 
 3. On each video submission there should be two buttons
   - "Up Vote" - This increases the vote score when clicked
@@ -39,6 +39,26 @@
      - Title
      - Url
    - When a button is clicked the video should be added to the list
+
+a. Create a VideoForm component ✅
+b. Create mock structure below ✅
+  ```html
+  <form>
+    <label for="title">
+      Please enter your video title below:
+      <input type="text" name="title" id="title" placeholder="Enter video title here" required/>
+    </label>
+    <label for="url">
+      Please enter your video url below:
+      <input type="url" name="url" id="url" placeholder="Enter video url here"/>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+  ```
+  notes: Check implementation above is correct
+
+
+
 5. Your website must follow accessibility guidelines (see below for more details)
 
 ==========================================================
@@ -72,3 +92,17 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
 Helpful related articles:
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+
+
+
+===========================================
+
+Make reusable button
+
+We will always need to hand down the following:
+
+- content (can be a text or icon; this goes between the button tags)
+- type attribute (eg. submit or delete)
+- onClickHandler
+- 
+
