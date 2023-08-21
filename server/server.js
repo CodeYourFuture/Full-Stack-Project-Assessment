@@ -87,3 +87,8 @@ app.post("/", (req, res) => {
       .send({ result: "failure", message: "Video could not be saved" });
   }
 });
+
+app.get("/:id", (req, res) => {
+  const video = videos.find((video) => video.id === Number(req.params.id));
+  res.status(200).send({ video });
+});
