@@ -19,19 +19,20 @@ function App() {
     fetchVideos();
   }, []);
 
-  const handleDelete = async (videoToDelete) => {
-    const response = await fetch(`/${videoToDelete.id}`, {
-      method: "DELETE",
-    });
+ const handleDelete = async (videoToDelete) => {
+   const response = await fetch(`http://localhost:5000/${videoToDelete.id}`, {
+     method: "DELETE",
+   });
 
-    if (response.ok) {
-      setVideos((prevVideos) =>
-        prevVideos.filter((video) => video.id !== videoToDelete.id)
-      );
-    } else {
-      console.error("Video could not be deleted.");
-    }
-  };
+   if (response.ok) {
+     setVideos((prevVideos) =>
+       prevVideos.filter((video) => video.id !== videoToDelete.id)
+     );
+   } else {
+     console.error("Video could not be deleted.");
+   }
+ };
+
 
   const handleUpVote = (videoToUpVote) => {
     setVideos((prevVideos) =>
