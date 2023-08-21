@@ -1,5 +1,7 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
+
 const port = process.env.PORT || 5000;
 
 app.use(express.json()); // needed to parse JSON data
@@ -12,27 +14,28 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
+  ssl: true,
 });
 
 // Store and retrieve your videos from here
 // let videos = require("./exampleResponse.json"); // Get this from Render db?????
 let videoIdHighest = Math.max(...videos.map((video) => video.id));
 
-// GET "/"
-// This endpoint is used to return all of the videos
-app.get("/", function (request, response) {
-  response.json(videos);
-});
-
 app.get("/videos", function (request, response) {
   db.query("SELECT * FROM videos")
-    .then((videos) => {
-      response.json(videos.rows);
+    .then((response) => {
+      response.json(response.rows);
     })
     .catch((error) => {
       console.log(error);
       response.status(500).json({ error: "Error" });
     });
+});
+
+// GET "/"
+// This endpoint is used to return all of the videos
+app.get("/", function (request, response) {
+  response.json(videos);
 });
 
 // POST "/"
