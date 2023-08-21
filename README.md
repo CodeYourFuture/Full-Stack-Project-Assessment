@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/59999f22-2f6c-4011-af67-8a40a64b3611/deploy-status)](https://app.netlify.com/sites/gleaming-chaja-20644f/deploys)
+
 # Video Recommendation App
 
 ## Background
