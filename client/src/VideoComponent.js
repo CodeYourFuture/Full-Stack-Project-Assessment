@@ -1,6 +1,6 @@
 // version5
 import React from "react";
-import axios from "axios"; // Import axios
+import axios from "axios";
 
 const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
   const handleDelete = async () => {

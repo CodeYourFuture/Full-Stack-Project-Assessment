@@ -1,4 +1,4 @@
-/* update6 */
+/* update7 */
 .App {
   text-align: center;
 }
@@ -79,8 +79,8 @@ header {
 }
 
 footer {
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: orange;
   text-align: center;
   padding: 20px;
 }
@@ -90,6 +90,136 @@ footer a {
   text-decoration: none;
   margin: 0 10px;
 }
+
+.widget-container {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.crypto-donation-widget {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30%; /* Adjust the width as needed */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.text-container {
+  margin-left: 35%; /* Adjust the margin as needed */
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+/* .crypto-donation-widget {
+  float: left; 
+  width: 50%; 
+  padding: 20px; 
+  box-sizing: border-box; 
+}
+
+
+.text-container {
+  float: right; 
+  width: 50%; 
+  padding: 20px; 
+  box-sizing: border-box; 
+  text-align: left; 
+} */
+
+/* update6 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 315px;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+header {
+  background-color: orange;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.body {
+  background-image: none;
+  background-color: white; /* Set a background color for the body */
+/* }
+
+footer {
+  background-color: black;
+  color: orange;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+  margin: 0 10px;
+}  */
 
 /* update5 */
 /* .App {

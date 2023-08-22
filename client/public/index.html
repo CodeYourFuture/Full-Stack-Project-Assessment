@@ -1,4 +1,3 @@
-<!-- update4 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,6 +12,8 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Video Recommendation</title>
   </head>
@@ -44,11 +45,9 @@
               current = p1;
             }
 
-            // Show the new <p> element
             current.style.display = "block";
           }
 
-          // Call the switchParagraphs() function every 5 seconds
           setInterval(switchParagraphs, 5000);
         </script>
       </section>
@@ -56,7 +55,80 @@
 
     <div id="root"></div>
 
-    <!-- Links Content -->
+    <footer>
+      <p>Jans Fullstack Project Assessment</p>
+
+      <!-- Links Content -->
+      <div id="links">
+        <a href="https://github.com/softacoder">GitHub</a>
+        <a href="https://frolicking-tiramisu-6a813b.netlify.app/">Portfolio</a>
+        <a href="https://www.linkedin.com/in/jan-softa-680a79b2/">LinkedIn</a>
+      </div>
+
+      <script src="link-scripts.js"></script>
+    </footer>
+  </body>
+</html>
+
+<!-- update4 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <title>Video Recommendation</title>
+  </head>
+  <body class="body">
+    
+
+    <header>
+      <section>
+        <p id="p1">
+          "Programming is like crafting magic spells with code, turning
+          imagination into reality and shaping the digital world with endless
+          possibilities."
+        </p>
+        <p id="p2">
+          Please donate crypto to a good cause to help people become coders
+        </p>
+        <script>
+          const p1 = document.getElementById("p1");
+          const p2 = document.getElementById("p2");
+
+          let current = p1;
+
+          function switchParagraphs() {
+            current.style.display = "none";
+
+            if (current === p1) {
+              current = p2;
+            } else {
+              current = p1;
+            }
+
+            
+            current.style.display = "block";
+          }
+
+          
+          setInterval(switchParagraphs, 5000);
+        </script>
+      </section>
+    </header>
+
+    <div id="root"></div>
+
+    
     <div id="links">
       <a href="https://github.com/your-github-link">GitHub</a>
       <a href="https://your-portfolio-link">Portfolio</a>
@@ -67,7 +139,7 @@
       <p>Jans Fullstack Project Assessment</p>
     </footer>
 
-    <!-- Script to add event listeners for links -->
+    
     <script>
       const linksDiv = document.getElementById("links");
       const githubLink = linksDiv.querySelector(
@@ -81,19 +153,19 @@
       );
 
       githubLink.addEventListener("click", () => {
-        // Code to handle GitHub link click
+        
       });
 
       portfolioLink.addEventListener("click", () => {
-        // Code to handle Portfolio link click
+        
       });
 
       linkedinLink.addEventListener("click", () => {
-        // Code to handle LinkedIn link click
+        
       });
     </script>
   </body>
-</html>
+</html> -->
 
 <!-- update3 -->
 <!-- <!DOCTYPE html>
