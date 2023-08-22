@@ -1,4 +1,5 @@
 import "./App.css";
+import Videos from "./Videos";
 
 function App() {
   return (
@@ -6,6 +7,9 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <div>
+        <Videos />
+      </div>
     </div>
   );
 }

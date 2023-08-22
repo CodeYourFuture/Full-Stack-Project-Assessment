@@ -1,3 +1,28 @@
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+}
+.videoContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
+  margin: 0 1em;
+}
+.rating {
+  display: flex;
+  justify-content: space-around;
+}
+
+.singleVideo {
+  border: 0.5px solid lightgray;
+  box-shadow: 1px 2px 5px 3px white;
+}
+h5 {
+  font-size: 1em;
+  padding: 0.5em;
+}
+.videoFrame {
+  width: 100%;
 }
