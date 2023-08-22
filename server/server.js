@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+let cors = require("cors");
+app.use(cors());
 app.use(express.json()); // before our routes definition
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -62,8 +64,8 @@ app.post("/:id", (req, res) => {
 // GET "/:id"
 app.get("/:id", (req, res) => {
   console.log("GET /:id", req.params.id)
-  const videoId = req.params.id; 
-  const video = videos.find(video => video.id == videoId);
+  const videoId = Number(req.params.id); 
+  const video = videos.find(video => video.id === videoId);
   
   if (!video) {
     return res.status(404).json({ 
@@ -75,13 +77,15 @@ app.get("/:id", (req, res) => {
 
 
 // Delete the video
-app.delete("/:id", (req, res) =>{
+app.delete("/:id", (req, res) => {
   console.log("Delete /:id", req.params.id);
-  const idToDelete = req.params.id;
-  const video = videos.filter(video => video.id == idToDelete);
-   
-  if(!video){
-    res.status(404).json({message: "Video not deleted"});
+  const id = Number(req.params.id);
+  const index = videos.findIndex((video) => video.id === id);
+  if (index === -1) {
+    res
+      .status(404)
+      .json({ result: "failure", message: "Video could not be deleted" });
   }
-  return res.status(204).json({video});
+  videos.splice(index, 1);
+  res.json({});
 })
