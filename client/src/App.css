@@ -1,3 +1,119 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-roboto: "Roboto Slab", serif;
+  --font-raleway: "Raleway", sans-serif;
+}
+
+body {
+  font-family: var(--font-roboto);
+  background-color: white;
+}
+
 .App {
   text-align: center;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: var(--font-raleway);
+  font-size: 3rem;
+  letter-spacing: 0.9px;
+  color: #0051ad;
+  width: fit-content;
+}
+
+h2 {
+  font-family: var(--font-raleway);
+  font-size: 2rem;
+  letter-spacing: 0.9px;
+  color: #0051ad;
+  width: fit-content;
+}
+
+h3 {
+  font-family: var(--font-raleway);
+  font-size: 1.2rem;
+  letter-spacing: 0.9px;
+  color: #0051ad;
+  text-align: center;
+}
+
+.card-container {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 310px;
+  height: 460px;
+  margin: 1.5rem;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+button {
+  background-color: #0051ad;
+  border: solid 2px #0051ad;
+  border-radius: 0.5rem;
+  padding: 5px 7px;
+  margin: 15px;
+  color: whitesmoke;
+  font-family: var(--font-raleway);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+:focus {
+  outline: solid 2px lightskyblue;
+}
+
+.add-video {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+}
+
+.add-video-form {
+  border: none;
+  font-size: 1.5rem;
+  font-family: var(--font-raleway);
+  font-weight: 500;
+  padding-right: 1rem;
+  outline: none;
+  color: #0051ad;
+}
+
+.add-video-form input {
+  box-shadow: 0px 5px 10px -8px rgba(0, 0, 0, 0.5);
+  border: solid 2px rgb(243, 242, 242);
+  border-radius: 0.5rem;
+}
+
+.add-video-form label {
+  padding-right: 0.75rem;
 }
