@@ -5,12 +5,14 @@ import CardsContainer from "./CardsContainer";
 import NewVideoContainer from "./NewVideoContainer";
 
 function BodyContainer() {
+  const fetchAddress = "https://full-stack-server-fofh.onrender.com/";
+
   const [allMovies, setAllMovies] = useState([]);
   const [refreshVideos, setRefreshVideos] = useState(true);
 
   useEffect(() => {
     if (refreshVideos) {
-      fetch("http://localhost:5000/")
+      fetch(fetchAddress)
         .then((res) => {
           return res.json();
         })

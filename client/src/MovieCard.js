@@ -1,7 +1,7 @@
 import React from "react";
 import "./MovieCard.css";
 function MovieCard(props) {
-  const fetchAddress = "http://localhost:5000/";
+  const fetchAddress = "https://full-stack-server-fofh.onrender.com/";
   const movieName = props.movie.url.split("watch?v=")[1];
   const movieSrc = "https://www.youtube.com/embed/" + movieName;
 
