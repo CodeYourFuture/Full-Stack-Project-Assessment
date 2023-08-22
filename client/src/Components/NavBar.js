@@ -18,7 +18,7 @@ const NavBar = () => {
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <a href="#video" className="nav-link">
-                  Video
+                  Home
                 </a>
               </li>
               <li className="nav-item">

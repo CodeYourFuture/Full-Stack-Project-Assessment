@@ -1,4 +1,4 @@
-import logo from "../logo.png";
+import cinema from "../cinema.png";
 const Welcome = () => {
   return (
     <>
@@ -17,7 +17,7 @@ const Welcome = () => {
             </div>
             <img
               className="img-fluid w-50 d-none d-sm-block"
-              src={logo}
+              src={cinema}
               alt=""
             />
           </div>
