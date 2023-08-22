@@ -1,11 +1,118 @@
-/* update7 */
+/* update8 */
 .App {
   text-align: center;
 }
 
 .App-header {
   background-color: orange;
+  color: orange;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  /* text-size-adjust: 0.58; */
+  padding: 20px;
+  margin-top: 30px;
+  /* width: 450px;
+  height: 450px; */
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-component iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.google-maps {
+  text-align: center;
+  margin-top: 20px;
+  color: orange;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+header {
+  background-color: orange;
   color: white;
+  text-align: center;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.body {
+  background-image: none;
+  background-color: white;
+}
+
+footer {
+  background-color: black;
+  color: orange;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: orange;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* update7 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: orange;
   padding: 20px;
   background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
   background-size: cover;
@@ -61,7 +168,6 @@
   }
 }
 
-/* Header and Footer styling */
 header {
   background-color: orange;
   color: white;
@@ -72,72 +178,32 @@ header {
   background-repeat: no-repeat;
 }
 
-/* Override background image for body */
 .body {
   background-image: none;
-  background-color: white; /* Set a background color for the body */
+  background-color: white;
 }
 
 footer {
-  background-color: black;
+  background-color: white;
   color: orange;
   text-align: center;
   padding: 20px;
 }
 
 footer a {
-  color: black;
+  color: white;
   text-decoration: none;
   margin: 0 10px;
-}
-
-.widget-container {
-  position: relative;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.crypto-donation-widget {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 30%; /* Adjust the width as needed */
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.text-container {
-  margin-left: 35%; /* Adjust the margin as needed */
-  padding: 20px;
-  box-sizing: border-box;
-  text-align: right;
-}
-
-/* .crypto-donation-widget {
-  float: left; 
-  width: 50%; 
-  padding: 20px; 
-  box-sizing: border-box; 
-}
-
-
-.text-container {
-  float: right; 
-  width: 50%; 
-  padding: 20px; 
-  box-sizing: border-box; 
-  text-align: left; 
 } */
 
-/* update6 */
+/* update6 rate text not visible but with background img, functioning header*/
 /* .App {
   text-align: center;
 }
 
 .App-header {
   background-color: orange;
-  color: white;
+  color: orange;
   padding: 20px;
   background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
   background-size: cover;
@@ -205,8 +271,8 @@ header {
 
 .body {
   background-image: none;
-  background-color: white; /* Set a background color for the body */
-/* }
+  background-color: white;
+}
 
 footer {
   background-color: black;
@@ -219,9 +285,10 @@ footer a {
   color: black;
   text-decoration: none;
   margin: 0 10px;
-}  */
+} */
 
-/* update5 */
+/* update5 rating visible but background orange and no header with img*/
+
 /* .App {
   text-align: center;
 }
@@ -281,8 +348,7 @@ footer a {
   }
 }
 
-/* Header and Footer styling */
-/* header {
+header {
   background-color: orange;
   color: black;
   text-align: center;

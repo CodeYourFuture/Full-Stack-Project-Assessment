@@ -1,9 +1,7 @@
-// update 11
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import VideoComponent from "./VideoComponent";
 import AddYoutubeVideo from "./AddYoutubeVideo";
-import CryptoDonationWidget from "./CryptoDonationWidget"; // Import the CryptoDonationWidget component
 import axios from "axios";
 
 const App = () => {
@@ -96,9 +94,57 @@ const App = () => {
 
   return (
     <div className="App">
-      <CryptoDonationWidget /> {/* Add the CryptoDonationWidget component */}
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1>Welcome to my fullstack project assessment webpage.</h1>
+        <div className="text-block">
+          <p>
+            In a digital age where technological skills are paramount, this NGO
+            are on a mission to make learning to code accessible to all. Our
+            initiative is not just about acquiring skills; it's about empowering
+            individuals to shape their futures through the art of programming.
+            We are raising funds for this transformative journey, enabling
+            people from diverse backgrounds to delve into the world of coding
+            and emerge as confident junior fullstack developers. <br />
+            <br />
+            At the heart lies the belief that education is the most potent tool
+            for positive change. We understand that learning to code might seem
+            intimidating at first, but our approach is designed to demystify
+            complexities and foster a genuine passion for programming. By
+            pooling resources and donations, we are able to provide learning
+            materials, and mentorship. In a digital age aspiring coders who
+            might not otherwise have the opportunity. <br /> <br /> This very
+            website stands as a testament to the impact of our cause. As you use
+            it, you're witnessing the tangible results of our commitment to
+            nurturing talent. Each element, from the sleek front-end design to
+            the robust back-end functionality, has been crafted by individuals
+            who embarked on the same journey you're now exploring. What started
+            as a desire to learn has evolved into a skillset that powers the
+            creation of dynamic web applications.
+            <br /> <br /> The metamorphosis from coding novice to junior
+            fullstack developer is nothing short of remarkable, and it's a
+            journey that embodies the spirit of our fundraising initiative.
+            Every line of code written, every bug fixed, and every project
+            completed represents technical prowess. As you navigate our skilled
+            junior fullstack developer, remember that your support and
+            engagement contribute directly to the transformation of lives.
+            <br /> <br /> Together, we're not just raising funds; we're raising
+            a community of learners who will shape the digital landscape for
+            years to come.
+          </p>
+          <a
+            href="https://nowpayments.io/donation?api_key=JZ235B1-80BMRV9-G22ZJ36-SA596AG&source=lk_donation&medium=referral"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://nowpayments.io/images/embeds/donation-button-black.svg"
+              alt="Crypto donation button by NOWPayments"
+            />
+          </a>
+        </div>
+        <br />
+        <br />
+        <h2>Video Recommendation</h2>
         <div className="video-list">
           {videos.map((video) => (
             <VideoComponent
@@ -117,6 +163,264 @@ const App = () => {
 };
 
 export default App;
+
+// update12 this has a widget for donation but is too big so it is changed to a button.
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+// import VideoComponent from "./VideoComponent";
+// import AddYoutubeVideo from "./AddYoutubeVideo";
+// import CryptoDonationWidget from "./CryptoDonationWidget";
+// import axios from "axios";
+
+// const App = () => {
+//   const [videos, setVideos] = useState([]);
+
+//   useEffect(() => {
+//     fetchVideos();
+//   }, []);
+
+//   const fetchVideos = async () => {
+//     try {
+//       const response = await axios.get(
+//         "https://back-end-full-stack-project-assessment.onrender.com/videos"
+//       );
+//       const sortedVideos = response.data.sort((a, b) => b.rating - a.rating);
+//       setVideos(sortedVideos);
+//     } catch (error) {
+//       console.error("Error fetching videos:", error);
+//     }
+//   };
+
+//   const handleAddVideo = async (newVideo) => {
+//     try {
+//       if (!newVideo.title || !isYouTubeUrlValid(newVideo.url)) {
+//         alert("Please enter a valid title and YouTube URL.");
+//         return;
+//       }
+
+//       const response = await axios.post(
+//         "https://back-end-full-stack-project-assessment.onrender.com/videos",
+//         {
+//           ...newVideo,
+//           timestamp: new Date().toISOString(),
+//         }
+//       );
+//       newVideo.id = response.data.id;
+//       setVideos([...videos, newVideo]);
+//     } catch (error) {
+//       console.error("Error adding video:", error);
+//     }
+//   };
+
+//   const handleUpVote = async (id) => {
+//     try {
+//       await axios.post(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/upvote`
+//       );
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id ? { ...video, rating: video.rating + 1 } : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
+//     } catch (error) {
+//       console.error("Error upvoting video:", error);
+//     }
+//   };
+
+//   const handleDownVote = async (id) => {
+//     try {
+//       await axios.post(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/downvote`
+//       );
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id
+//           ? { ...video, rating: Math.max(video.rating - 1, 0) }
+//           : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
+//     } catch (error) {
+//       console.error("Error downvoting video:", error);
+//     }
+//   };
+
+//   const handleRemove = async (id) => {
+//     try {
+//       await axios.delete(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}`
+//       );
+//       const updatedVideos = videos.filter((video) => video.id !== id);
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   const isYouTubeUrlValid = (url) => {
+//     const youtubeUrlPattern =
+//       /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+//     return youtubeUrlPattern.test(url);
+//   };
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>Video Recommendation</h1>
+//         <section className="text-block">
+//           <p>
+//             "Programming is like crafting magic spells with code, turning
+//             imagination into reality and shaping the digital world with endless
+//             possibilities. Please donate crypto to a good cause to help people
+//             become coders."
+//           </p>
+//           <a
+//             href="https://nowpayments.io/donation?api_key=JZ235B1-80BMRV9-G22ZJ36-SA596AG&source=lk_donation&medium=referral"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//           >
+//             <img
+//               src="https://nowpayments.io/images/embeds/donation-button-black.svg"
+//               alt="Crypto donation button by NOWPayments"
+//             />
+//           </a>
+//         </section>
+//         <div className="video-list">
+//           {videos.map((video) => (
+//             <VideoComponent
+//               key={video.id}
+//               video={video}
+//               onUpVote={handleUpVote}
+//               onDownVote={handleDownVote}
+//               onRemove={handleRemove}
+//             />
+//           ))}
+//         </div>
+//         <AddYoutubeVideo onAddVideo={handleAddVideo} />
+//         <CryptoDonationWidget />
+//       </header>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+// update 11
+// import React, { useState, useEffect } from "react";
+// import "./App.css";
+// import VideoComponent from "./VideoComponent";
+// import AddYoutubeVideo from "./AddYoutubeVideo";
+// import CryptoDonationWidget from "./CryptoDonationWidget"; // Import the CryptoDonationWidget component
+// import axios from "axios";
+
+// const App = () => {
+//   const [videos, setVideos] = useState([]);
+
+//   useEffect(() => {
+//     fetchVideos();
+//   }, []);
+
+//   const fetchVideos = async () => {
+//     try {
+//       const response = await axios.get(
+//         "https://back-end-full-stack-project-assessment.onrender.com/videos"
+//       );
+//       const sortedVideos = response.data.sort((a, b) => b.rating - a.rating);
+//       setVideos(sortedVideos);
+//     } catch (error) {
+//       console.error("Error fetching videos:", error);
+//     }
+//   };
+
+//   const handleAddVideo = async (newVideo) => {
+//     try {
+//       if (!newVideo.title || !isYouTubeUrlValid(newVideo.url)) {
+//         alert("Please enter a valid title and YouTube URL.");
+//         return;
+//       }
+
+//       const response = await axios.post(
+//         "https://back-end-full-stack-project-assessment.onrender.com/videos",
+//         {
+//           ...newVideo,
+//           timestamp: new Date().toISOString(),
+//         }
+//       );
+//       newVideo.id = response.data.id;
+//       setVideos([...videos, newVideo]);
+//     } catch (error) {
+//       console.error("Error adding video:", error);
+//     }
+//   };
+
+//   const handleUpVote = async (id) => {
+//     try {
+//       await axios.post(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/upvote`
+//       );
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id ? { ...video, rating: video.rating + 1 } : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
+//     } catch (error) {
+//       console.error("Error upvoting video:", error);
+//     }
+//   };
+
+//   const handleDownVote = async (id) => {
+//     try {
+//       await axios.post(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}/downvote`
+//       );
+//       const updatedVideos = videos.map((video) =>
+//         video.id === id
+//           ? { ...video, rating: Math.max(video.rating - 1, 0) }
+//           : video
+//       );
+//       setVideos(updatedVideos.sort((a, b) => b.rating - a.rating));
+//     } catch (error) {
+//       console.error("Error downvoting video:", error);
+//     }
+//   };
+
+//   const handleRemove = async (id) => {
+//     try {
+//       await axios.delete(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${id}`
+//       );
+//       const updatedVideos = videos.filter((video) => video.id !== id);
+//       setVideos(updatedVideos);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   const isYouTubeUrlValid = (url) => {
+//     const youtubeUrlPattern =
+//       /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+//     return youtubeUrlPattern.test(url);
+//   };
+
+//   return (
+//     <div className="App">
+//       <CryptoDonationWidget /> {/* Add the CryptoDonationWidget component */}
+//       <header className="App-header">
+//         <h1>Video Recommendation</h1>
+//         <div className="video-list">
+//           {videos.map((video) => (
+//             <VideoComponent
+//               key={video.id}
+//               video={video}
+//               onUpVote={handleUpVote}
+//               onDownVote={handleDownVote}
+//               onRemove={handleRemove}
+//             />
+//           ))}
+//         </div>
+//         <AddYoutubeVideo onAddVideo={handleAddVideo} />
+//       </header>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 // update10 this code works but does not have the crypto widget
 // import React, { useState, useEffect } from "react";

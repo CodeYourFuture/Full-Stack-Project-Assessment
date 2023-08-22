@@ -1,4 +1,16 @@
-/* version5 */
+/* .App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .video-list {
   display: flex;
   flex-wrap: wrap;
@@ -15,7 +27,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
   padding: 20px;
-  flex: 0 0 calc(50% - 20px); /* Two videos per row with 20px gap */
+  flex: 0 0 calc(50% - 20px);
   max-width: calc(50% - 20px);
   box-sizing: border-box;
 }
@@ -27,7 +39,154 @@
 .video-container {
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+}
+
+.video-component iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-component p {
+  margin: 10px 0;
+}
+
+.video-component .rating {
+  color: orange;
+}
+
+.video-component button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .video-list {
+    justify-content: flex-start;
+  }
+
+  .video-component {
+    flex: 0 0 calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+}
+
+.add-video-form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.add-video-form h2 {
+  margin: 0 0 10px;
+}
+
+.add-video-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.add-video-form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.add-video-form button {
+  background-color: black;
+  color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add-video-form button[type="submit"] {
+  background-color: orange;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .add-video-form {
+    margin-bottom: 10px;
+  }
+}
+
+
+header {
+  background-color: orange;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.body {
+  background-image: none;
+  background-color: white; 
+}
+
+footer {
+  background-color: white;
+  color: orange;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+} */
+
+/* version5 */
+/* .video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-component {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 20px;
+  flex: 0 0 calc(50% - 20px);
+  max-width: calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+.video-component h3 {
+  margin: 0 0 10px;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
 }
 
 .video-component iframe {
@@ -59,10 +218,10 @@
   }
 
   .video-component {
-    flex: 0 0 calc(100% - 20px); /* One video per row with 20px gap */
+    flex: 0 0 calc(100% - 20px);
     max-width: calc(100% - 20px);
   }
-}
+} */
 
 /* version4 here the videos have different size*/
 /* .video-component {
