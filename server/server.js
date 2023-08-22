@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -31,6 +32,12 @@ app.get("/videos", function (request, response) {
       response.status(500).json({ error: "Error" });
     });
 });
+
+app.use(cors());
+
+// Store and retrieve your videos from here
+// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+let videos = require("/home/coder/Desktop/CYF/Full-Stack-Project-Assessment/client/src/exampleResponse.json");
 
 // GET "/"
 // This endpoint is used to return all of the videos
@@ -85,5 +92,8 @@ app.delete("/:id", function (request, response) {
     });
   }
 });
+
+});
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
