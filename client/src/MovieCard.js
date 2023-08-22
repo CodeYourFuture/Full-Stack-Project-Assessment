@@ -1,11 +1,12 @@
 import React from "react";
 import "./MovieCard.css";
 function MovieCard(props) {
+  const fetchAddress = "http://localhost:5000/";
   const movieName = props.movie.url.split("watch?v=")[1];
   const movieSrc = "https://www.youtube.com/embed/" + movieName;
 
   function deleteMovieCard() {
-    fetch("http://localhost:5000/" + props.movie.id, {
+    fetch(fetchAddress + props.movie.id, {
       method: "delete",
       headers: { "Content-Type": "application/json" },
     })
@@ -19,7 +20,7 @@ function MovieCard(props) {
 
   function upVote() {
     let newVote = props.movie.rating + 1;
-    fetch("http://localhost:5000/" + props.movie.id, {
+    fetch(fetchAddress + props.movie.id, {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -36,7 +37,7 @@ function MovieCard(props) {
 
   function downVote() {
     let newVote = props.movie.rating - 1;
-    fetch("http://localhost:5000/" + props.movie.id, {
+    fetch(fetchAddress + props.movie.id, {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -26,13 +26,10 @@ const client = new Client({
 
 client.connect(function (err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("Connected to database");
 });
 
-let videos = require("./exampleresponse.json");
-
 // GET "/"
-
 app.get("/", (req, res) => {
   client.query(`SELECT * FROM videos ORDER BY title`, (error, response) => {
     if (!error) {
@@ -44,15 +41,12 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/info", (req, res) => {
-  res.json(videos);
-});
 
 app.get("/:id", function (req, res) {
   let searchId = Number(req.params.id);
-
   client
     .query("SELECT * FROM videos WHERE id = $1", [searchId])
+
     .then((result) => {
       if (result.rows.length > 0) {
         res.json(result.rows);
