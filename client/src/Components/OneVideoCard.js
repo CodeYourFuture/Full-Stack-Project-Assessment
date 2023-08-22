@@ -1,4 +1,14 @@
-const OneVideoCard = ({ id, title, url, rating }) => {
+import { useState } from "react";
+const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
+  const [videoRating, setVideoRating] = useState(rating);
+  const increase = () => {
+    setVideoRating(videoRating + 1);
+  };
+  const decrease = () => {
+    if (videoRating > 0) {
+      setVideoRating(videoRating - 1);
+    }
+  };
   return (
     <div key={id} className="card col col-md-6 col-lg-4 border-0  ">
       <iframe
@@ -11,11 +21,19 @@ const OneVideoCard = ({ id, title, url, rating }) => {
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <div className="d-flex align-items-center justify-content-between h1 mb-3 d">
-          <i className="bi bi-hand-thumbs-up-fill text-danger"></i>
-          <p className="mt-2">{rating} votes</p>
-          <i className="bi bi-hand-thumbs-down-fill text-danger"></i>
+          <i
+            onClick={increase}
+            className="bi bi-hand-thumbs-up-fill text-danger"
+          ></i>
+          <p className="mt-2">{videoRating} votes</p>
+          <i
+            onClick={decrease}
+            className="bi bi-hand-thumbs-down-fill text-danger"
+          ></i>
         </div>
-        <button className="btn btn-danger">Delete</button>
+        <button onClick={() => handleDelete(id)} className="btn btn-danger">
+          Delete
+        </button>
       </div>
     </div>
   );
