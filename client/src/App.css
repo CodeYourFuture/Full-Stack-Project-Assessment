@@ -1,3 +1,51 @@
 .App {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(55, 77, 166, 0.983);
+  color: white;
+}
+.Search.videos input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-weight: 800;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.form-group input {
+  border-radius: 8px;
+  font-size: inherit;
+}
+
+.btn {
+  border-radius: 8px;
+  margin: 1rem;
+}
+
+.Card-List,
+.Videos-List {
+  list-style: none;
+}
+
+.thumbs {
+  display: flex;
+  justify-content: center;
+}
+
+.Card-List {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px rgb(164, 164, 177) solid;
+  gap: 0.5rem;
+  border-radius: 8px;
+}
+
+.Videos-List {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
