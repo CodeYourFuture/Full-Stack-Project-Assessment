@@ -7,7 +7,14 @@ function Video(props) {
       <h5>{props.title}</h5>
       <p className="rating">
         <span>rating: {props.rating}</span>
-        <button className="btn">remove video</button>
+        <button
+          onClick={(e) => {
+            props.onclick(e.target.parentNode.parentNode.children[1].innerText);
+          }}
+          className="btn"
+        >
+          remove video
+        </button>
       </p>
     </div>
   );
