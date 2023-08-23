@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SingleVideoCard from "./SingleVideoCard";
-import exampleResponse from "./exampleResponse.json";
+import exampleResponse from "./exampleresponse.json";
 
 function VideoCards() {
   const [filterVideos, setFilterVideos] = useState(exampleResponse);
