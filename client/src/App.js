@@ -5,21 +5,27 @@ import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 import VideoList from "./Components/VideoList";
 import Welcome from "./Components/Welcome";
+import AddVideo from "./Components/AddVideo";
+import exampleresponse from "./exampleresponse.json";
 function App() {
   const [keyword, setKeyword] = useState("");
+
+  const [videoCards, setVideoCards] = useState(exampleresponse);
+
   return (
     <>
       <NavBar />
       <Welcome />
       <AddAndSearch setKeyword={setKeyword} />
-      <VideoList setKeyword={setKeyword} keyword={keyword} />
+      <AddVideo setVideoCards={setVideoCards} videoCards={videoCards} />
+      <VideoList
+        setKeyword={setKeyword}
+        keyword={keyword}
+        videoCards={videoCards}
+        setVideoCards={setVideoCards}
+      />
       <Footer />
     </>
-    /* <div className="App">
-        <header className="App-header">
-          <h1>Video Recommendation</h1>
-        </header>
-      </div> */
   );
 }
 

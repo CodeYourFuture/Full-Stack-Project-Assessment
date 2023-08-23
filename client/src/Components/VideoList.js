@@ -1,9 +1,5 @@
-import { useState } from "react";
-import exampleresponse from "../exampleresponse.json";
 import OneVideoCard from "./OneVideoCard";
-const VideoList = ({ keyword }) => {
-  const [videoCards, setVideoCards] = useState(exampleresponse);
-
+const VideoList = ({ keyword, videoCards, setVideoCards }) => {
   const handleDelete = (idVideo) => {
     setVideoCards(videoCards.filter((video) => video.id !== idVideo));
   };
@@ -29,7 +25,7 @@ const VideoList = ({ keyword }) => {
                   id={video.id}
                   title={video.title}
                   rating={video.rating}
-                  url={video.url.replace("watch?v=", "embed/")}
+                  url={video.url.substring(video.url.indexOf("=") + 1)}
                   handleDelete={handleDelete}
                 />
               ))}

@@ -11,9 +11,9 @@ const Search = ({ setKeyword }) => {
           setKeyword(e.target.value);
         }}
       />
-      <button className="btn btn-danger text-light" type="button">
+      {/* <button className="btn btn-danger text-light" type="button">
         Search
-      </button>
+      </button> */}
     </div>
   );
 };

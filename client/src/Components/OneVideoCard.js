@@ -10,10 +10,11 @@ const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
       setVideoRating(videoRating - 1);
     }
   };
+
   return (
     <div key={id} className="card col col-md-6 col-lg-4 border-0  ">
       <iframe
-        src={url}
+        src={"https://www.youtube.com/embed/" + url}
         title="YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

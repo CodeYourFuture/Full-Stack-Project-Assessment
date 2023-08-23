@@ -1,4 +1,3 @@
-import AddVideo from "./AddVideo";
 import Search from "./Search";
 const AddAndSearch = ({ setKeyword }) => {
   return (
@@ -17,7 +16,6 @@ const AddAndSearch = ({ setKeyword }) => {
           </div>
         </div>
       </section>
-      <AddVideo />
     </>
   );
 };
