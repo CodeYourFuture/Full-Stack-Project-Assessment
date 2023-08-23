@@ -99,3 +99,25 @@ app.post("/", (req, res) => {
     res.json(videos);
   }
 });
+app.get("/:id", (req, res) => {
+  if (Number.isInteger(Number(req.params.id))) {
+    const newVideo = videos.filter((vid) => vid.id === Number(req.params.id));
+    newVideo.length == 0 ? res.json(videos) : res.json(newVideo);
+  } else {
+    res.json({
+      result: "failure",
+      message: "ID is not valid",
+    });
+  }
+});
+app.delete("/:id", (req, res) => {
+  if (Number.isInteger(Number(req.params.id))) {
+    const newVideo = videos.filter((vid) => vid.id !== Number(req.params.id));
+    res.json(newVideo);
+  } else {
+    res.json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
