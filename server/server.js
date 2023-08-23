@@ -9,35 +9,6 @@ app.use(express.json()); // before our routes definition
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [ 
-{
-  "id": 523523,
-  "title": "Never Gonna Give You Up",
-  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "rating": 23
-},
-{
-  "id": 523427,
-  "title": "The Coding Train",
-  "url": "https://www.youtube.com/watch?v=HerCR8bw_GE",
-  "rating": 230
-},
-{
-  "id": 82653,
-  "title": "Mac & Cheese | Basics with Babish",
-  "url": "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-  "rating": 2111
-},
-{
-  "id": 858566,
-  "title": "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-  "url": "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-  "rating": 11
-}
-];
-
 // GET "/"
 app.get("/", (req, res) => {
   console.log("Get <----Getting all videos");
@@ -45,20 +16,33 @@ app.get("/", (req, res) => {
   });
 
 // Post "/:id"
+// app.post("/:id", (req, res) => {
+//   console.log("POST <---- add a new video route", req.body);
+//   const {title, url} = req.body;
+//   if(!title || !url){
+//   return res.status(404).json({
+//   result: "failure",
+//   message: "Video could not be saved"
+//   })
+//   }
+//   const id = Date.now();
+//   const video = {id, title, url, rating: 0 };
+//   videos.push(video);
+//   res.status(201).json({id});
+//   })
+
+// post/:id
 app.post("/:id", (req, res) => {
-  console.log("POST <---- add a new video route", req.body);
-  const {title, url} = req.body;
-  if(!title || !url){
-  return res.status(404).json({
-  result: "failure",
-  message: "Video could not be saved"
-  })
+  const { title, url } = req.body;
+  if (!title || !url) {
+    res
+      .status(400)
+      .json({ result: "failure", message: "Video could not be saved" });
   }
-  const id = Date.now();
-  const video = {id, title, url, rating: 0 };
-  videos.push(video);
-  res.status(201).json({id});
-  })
+  const id = Math.floor(Math.random() * 1000000);
+  videos.push({ id, title, url });
+  res.json({ id });
+});
 
 
 // GET "/:id"
@@ -108,3 +92,5 @@ app.delete("/:id", (req, res) => {
     res.json({});
   }
 });
+
+
