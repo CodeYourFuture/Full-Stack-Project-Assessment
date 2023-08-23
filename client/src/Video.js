@@ -3,7 +3,16 @@ function Video(props) {
   const [rating, setRating] = useState(props.rating);
   return (
     <div className="singleVideo">
-      <iframe title={props.title} src={props.url} className="videoFrame">
+      <iframe
+        title={props.title}
+        src={props.url}
+        className="videoFrame"
+        width="560"
+        height="315"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      >
         {" "}
       </iframe>
       <h5>{props.title}</h5>
