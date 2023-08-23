@@ -10,11 +10,15 @@ function App() {
   // An empty array [] to hold all the videos as our component loads them
   const [videos, setVideos] = useState([]);
 
+  console.log("component rendered");
+
+  // Empty dependecies array means the effect will only run on the very first render of component
+  // No dependencies to watch to trigger this effect again
   useEffect(function () {
     fetch("http://127.0.0.1:5000")
       .then((response) => response.json())
       .then((videoData) => {
-        console.log(videoData);
+        console.log("effect ran");
         setVideos(videoData);
       });
   }, []);
@@ -35,7 +39,16 @@ function App() {
   }
 
   function deleteVideo(id) {
-    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+    fetch(`http://127.0.0.1:5000/videos/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(
+        setVideos((prevVideos) => {
+          return prevVideos.filter((video) => video.id !== id);
+        })
+      )
+      .catch((error) => console.error(error));
   }
 
   function addVideo(formData) {
@@ -59,7 +72,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendations</h1>
       </header>
-      <div>
+      <div className="form--container">
         <AddVideoForm handleAddVideo={addVideo} />
         <Searchbar />
       </div>

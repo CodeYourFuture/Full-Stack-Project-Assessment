@@ -1,15 +1,25 @@
 .App {
   text-align: center;
+  /* display: grid; */
+  /* grid-template-columns: 100px auto 100px; */
 }
+
+/* .App-header {
+  grid-column: 2 / 3;
+} */
 
 .video--card {
   border: 1px palevioletred solid;
 }
 
+/* .form--container {
+  grid-column: 2 / 3;
+} */
+
 .video--container {
+  /* grid-column: 2 / 3; */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .thumbs--up,
