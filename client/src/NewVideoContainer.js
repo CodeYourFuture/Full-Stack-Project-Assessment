@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./NewVideoContainer.css";
 
 function NewVideoContainer({ allMovies, setRefreshVideos }) {
+  const fetchAddress = "https://full-stack-server-fofh.onrender.com/";
   const [newTitle, setNewTitle] = useState("");
   const [newURL, setNewURL] = useState("");
   function addNewVideo() {
@@ -14,7 +15,7 @@ function NewVideoContainer({ allMovies, setRefreshVideos }) {
     newRec.url = newURL;
     newRec.rating = 0;
 
-    fetch("http://localhost:5000/", {
+    fetch(fetchAddress, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
