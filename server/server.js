@@ -117,7 +117,7 @@ app.delete("/:id", (req, res) => {
   } else {
     res.json({
       result: "failure",
-      message: "Video could not be deleted",
+      message: "Video could not be deleted.",
     });
   }
 });
