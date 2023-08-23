@@ -4,7 +4,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
   const videoId = video.url.split("v=")[1];
 
   return (
-    <div className="video-item">
+    <div>
       <h3>{video.title}</h3>
       <iframe
         className="iframe"
@@ -16,8 +16,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture web-share"
         allowfullscreen
       ></iframe>
-
-      <p>Likes: {video.rating}</p>
+      <p className="likes">Likes: {video.rating}</p>
       <button>
         <i
           onClick={() => onVote(video.id, "up")}
@@ -35,8 +34,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
       <div>
         <button
           onClick={() => onDelete(video.id)}
-          type="button"
-          className="btn btn-danger"
+          
         >
           Remove
         </button>
