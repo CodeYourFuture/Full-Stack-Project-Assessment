@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import videosData from "../exampleresponse.json";
 import Card from "./Card";
+import Form from "./Form";
 
-function AllButtons({ video, onUpVote, onDownVote, onDelete }) {
+function AllButtons() {
   const [videos, setVideos] = useState(videosData);
 
   const handleVote = (id, type) => {
@@ -31,6 +32,7 @@ function AllButtons({ video, onUpVote, onDownVote, onDelete }) {
   };
   return (
     <div>
+      <Form onAdd={handleAdd} />
       <Card videos={videos} onVote={handleVote} onDelete={handleDelete} />
     </div>
   );
