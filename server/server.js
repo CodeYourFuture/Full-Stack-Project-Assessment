@@ -9,6 +9,8 @@ app.use(express.json()); // before our routes definition
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+let videos = require("./videosData");
+
 // GET "/"
 app.get("/", (req, res) => {
   console.log("Get <----Getting all videos");
