@@ -56,9 +56,27 @@ function Videos(props) {
       console.error("Error adding video:", error);
     });
   }
-function deleteBtnHandler() {
-  const deletData = 
-  
+function deleteBtnHandler(item) {
+  const deletevideo = {
+    id: item.id,
+    title: item.title,
+    url: item.url,
+  };
+
+  fetch(`http://localhost:3000/videos/${item.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(deletevideo),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setLoadData(data);
+    })
+    .catch((error) => {
+      console.error("Error deleting video:", error);
+    });
 }
   
   return (
@@ -99,13 +117,13 @@ function deleteBtnHandler() {
               height="315"
               src="https://www.youtube.com/embed/{VIDEO_ID_GOES_HERE}"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
 
             {/* <div className="showVideo">{item.url}</div> */}
-            <button onClick={deleteBtnHandler}>Delete</button>
+            <button onClick={()=>deleteBtnHandler(item)}>Delete</button>
           </div>
         ))
       ) : (
