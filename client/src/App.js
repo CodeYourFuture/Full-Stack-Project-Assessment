@@ -1,12 +1,23 @@
 import "./App.css";
-import React, { useState } from "react";
-import videoData from "./exampleresponse.json";
+import React, { useEffect, useState } from "react";
 import VideoList from "./components/VideoList";
 import AddVideoForm from "./components/AddVideoForm";
 import Searchbar from "./components/Searchbar";
 
+// fetch from here: http://127.0.0.1:5000/
+
 function App() {
-  const [videos, setVideos] = useState(videoData);
+  // An empty array [] to hold all the videos as our component loads them
+  const [videos, setVideos] = useState([]);
+
+  useEffect(function () {
+    fetch("http://127.0.0.1:5000")
+      .then((response) => response.json())
+      .then((videoData) => {
+        console.log(videoData);
+        setVideos(videoData);
+      });
+  }, []);
 
   function changeVoteScore(id, voteChoice) {
     setVideos((prevVideos) =>
