@@ -12,16 +12,20 @@
 }
 .rating {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
 }
 
 .singleVideo {
   border: 0.5px solid lightgray;
   box-shadow: 1px 2px 5px 3px white;
 }
-h5 {
+.singleVideo h5 {
   font-size: 1em;
   padding: 0.5em;
+}
+.singleVideo p {
+  display: flex;
+  justify-content: space-around;
 }
 .videoFrame {
   width: 100%;

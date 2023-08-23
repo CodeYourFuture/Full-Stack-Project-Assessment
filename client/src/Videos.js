@@ -7,7 +7,6 @@ function Videos() {
   const [videos, setVideos] = useState(exampleVideos);
   function handleOnclick(val) {
     const deletedOneVideo = videos.filter((vid) => vid.title !== val);
-    console.log(deletedOneVideo);
     setVideos(deletedOneVideo);
   }
   const displayVideos = videos.map((vid) => {
