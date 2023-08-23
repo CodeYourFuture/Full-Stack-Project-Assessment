@@ -2,8 +2,8 @@ import { useState } from "react";
 
 function AddVideo(props) {
   return (
-    <div>
-      <h3>Add a video</h3>
+    <div className="addVideo">
+      <h4>Add a video</h4>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -12,12 +12,13 @@ function AddVideo(props) {
           if (title !== "" && url !== "") {
             let uri = url.replace("watch?v=", "embed/");
             props.add(title, uri);
+            e.target.reset();
           }
         }}
       >
         <input type="text" placeholder="Enter title" />
         <input type="text" placeholder="Enter URL" />
-        <button>Add Video</button>
+        <button className="btn">Add Video</button>
       </form>
     </div>
   );

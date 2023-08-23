@@ -6,7 +6,7 @@ function Video(props) {
       <iframe
         title={props.title}
         src={props.url}
-        className="videoFrame"
+        className="videoFrame i-focus"
         width="560"
         height="315"
         frameBorder="0"
@@ -17,30 +17,26 @@ function Video(props) {
       </iframe>
       <h5>{props.title}</h5>
       <p>
-        <span>
-          rating: <span>{rating}</span>
-          <span className="rating">
-            <button
-              onClick={(e) => {
-                let x = e.target.parentNode.parentNode.children[0].innerText;
-                x++;
-                setRating(x);
-              }}
-            >
-              Up
-            </button>
-            <button
-              onClick={(e) => {
-                let x = e.target.parentNode.parentNode.children[0].innerText;
-                x--;
-
-                setRating(x);
-              }}
-            >
-              Down
-            </button>
-          </span>
+        <span className="rating">
+          <i
+            className="fa-solid fa-thumbs-up fa-lg t-up"
+            onClick={(e) => {
+              let x = e.target.parentNode.children[1].innerText;
+              x++;
+              setRating(x);
+            }}
+          ></i>{" "}
+          <span>{!rating ? 0 : rating}</span>
+          <i
+            className="fa-solid fa-thumbs-down fa-lg t-down"
+            onClick={(e) => {
+              let x = e.target.parentNode.children[1].innerText;
+              x--;
+              setRating(x);
+            }}
+          ></i>
         </span>
+
         <button
           onClick={(e) => {
             props.onclick(e.target.parentNode.parentNode.children[1].innerText);

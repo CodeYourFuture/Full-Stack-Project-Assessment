@@ -3,6 +3,12 @@
 }
 .App {
   text-align: center;
+  padding-bottom: 2em;
+}
+.App-header {
+  background-color: #ffcc00;
+  padding: 2em;
+  border: 1px solid black;
 }
 .videoContainer {
   display: grid;
@@ -12,12 +18,14 @@
 }
 .rating {
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-left: 0.3em;
 }
 
 .singleVideo {
   border: 0.5px solid lightgray;
-  box-shadow: 1px 2px 5px 3px white;
+  box-shadow: 5px 1px 15px 1px #ffcc00;
 }
 .singleVideo h5 {
   font-size: 1em;
@@ -26,7 +34,38 @@
 .singleVideo p {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+
+.singleVideo p button {
+  background-color: #c01c28;
+  color: white;
 }
 .videoFrame {
   width: 100%;
+}
+
+.i-focus:focus-within {
+  outline: 5px solid red;
+}
+
+.addVideo {
+  padding: 2em;
+}
+.addVideo input {
+  margin-right: 1em;
+}
+.addVideo input:focus {
+  outline: 2px solid #ffcc00;
+}
+.addVideo button {
+  background-color: #ffcc00;
+}
+.t-up {
+  color: #26a269;
+  cursor: pointer;
+}
+.t-down {
+  color: #c01c28;
+  cursor: pointer;
 }

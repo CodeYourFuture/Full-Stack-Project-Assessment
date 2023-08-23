@@ -12,7 +12,7 @@ function Videos() {
   }
   function add(title, url) {
     const addedVideos = videos.slice();
-    addedVideos.unshift({ title, url });
+    addedVideos.unshift({ title, url, date: new Date() });
     setVideos(addedVideos);
   }
   const displayVideos = videos.map((vid) => {
