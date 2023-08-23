@@ -1,4 +1,7 @@
 import "./App.css";
+import AddVideo from "./AddVideo";
+import VideoCards from "./VideoCards";
+import SearchBar from "./SearchBar.js";
 
 function App() {
   return (
@@ -6,6 +9,9 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <AddVideo />
+      <VideoCards />
+      <SearchBar />
     </div>
   );
 }
