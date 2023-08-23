@@ -92,3 +92,20 @@ app.get("/:id", (req, res) => {
   const video = videos.find((video) => video.id === Number(req.params.id));
   res.status(200).send({ video });
 });
+
+app.delete("/:id", (req, res) => {
+  const video = videos.find((video) => video.id === Number(req.params.id));
+  const videoIndex = videos.indexOf(video);
+  console.log(video);
+  if (video === undefined) {
+    res.status(400).send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  } else {
+    videos = videos
+      .slice(0, videoIndex)
+      .concat(videos.slice(videoIndex + 1, -1));
+    res.status(200).send({});
+  }
+});
