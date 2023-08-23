@@ -72,3 +72,21 @@
 .red-failure {
   color: #c01c28;
 }
+.search-add {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+.search input {
+  border: 0.2px solid gray;
+  margin-left: 0.5em;
+}
+.search input:focus {
+  outline: 2px solid #ffcc00;
+}
+.search button {
+  background-color: #ffcc00;
+}
+form {
+  display: flex;
+}
