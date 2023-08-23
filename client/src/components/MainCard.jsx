@@ -1,30 +1,48 @@
-import data from "../exampleresponse.json";
+import React from "react";
 
+const MainCard = ({ video, onDelete, onVote }) => {
+  const videoId = video.url.split("v=")[1];
 
-const MainCard = () => {
-    return(
-        <div>
-            <ul>
-             {data.map((video) => {
-                return(
-             <div>
-            <li key = {video.id} >
-            <p>{video.title}</p>
-            {<iframe width="560" height="315" src={video.url.replace("watch?v=", "embed/")} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>}
-           <p>{video.rating}</p>
-           <p>
-            <button><i class='fa fa-thumbs-up'></i></button>
-            <button><i class='fa fa-thumbs-down'></i></button></p>
-           
-          </li>
-             
-            
-             </div> 
-             )})}
-            </ul>
-        </div>
-    )
+  return (
+    <div className="video-item">
+      <h3>{video.title}</h3>
+      <iframe
+        className="iframe"
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture web-share"
+        allowfullscreen
+      ></iframe>
 
-}
+      <p>Likes: {video.rating}</p>
+      <button>
+        <i
+          onClick={() => onVote(video.id, "up")}
+          type="button"
+          class="fa fa-thumbs-up"
+        ></i>
+      </button>
+      <button>
+        <i
+          onClick={() => onVote(video.id, "down")}
+          type="button"
+          class="fa fa-thumbs-down"
+        ></i>
+      </button>
+      <div>
+        <button
+          onClick={() => onDelete(video.id)}
+          type="button"
+          className="btn btn-danger"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default MainCard;
