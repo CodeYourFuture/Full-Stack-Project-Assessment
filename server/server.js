@@ -77,15 +77,34 @@ app.get("/:id", (req, res) => {
 
 
 // Delete the video
+// app.delete("/:id", (req, res) => {
+//   console.log("Delete /:id", req.params.id);
+//   const id = Number(req.params.id);
+//   const index = videos.findIndex((video) => video.id === id);
+//   if (index === -1) {
+//     res.status(404).json({ 
+//   result: "failure", 
+//   message: "Video could not be deleted" });
+//   }
+//   videos.splice(index, 1);
+//   res.json({});
+// })
+
+// Delete the video
 app.delete("/:id", (req, res) => {
   console.log("Delete /:id", req.params.id);
-  const id = Number(req.params.id);
-  const index = videos.findIndex((video) => video.id === id);
-  if (index === -1) {
-    res
-      .status(404)
-      .json({ result: "failure", message: "Video could not be deleted" });
+  const idToDelete = Number(req.params.id);
+
+  const initialLength = videos.length;
+
+  videos = videos.filter((video) => video.id !== idToDelete);
+
+  if (videos.length === initialLength) {
+    res.status(404).json({ 
+      result: "failure", 
+      message: "Video could not be deleted"
+    });
+  } else {
+    res.json({});
   }
-  videos.splice(index, 1);
-  res.json({});
-})
+});
