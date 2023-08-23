@@ -1,6 +1,7 @@
 import { useState } from "react";
 const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
   const [videoRating, setVideoRating] = useState(rating);
+
   const increase = () => {
     setVideoRating(videoRating + 1);
   };

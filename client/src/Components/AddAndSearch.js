@@ -1,5 +1,6 @@
 import AddVideo from "./AddVideo";
-const AddAndSearch = () => {
+import Search from "./Search";
+const AddAndSearch = ({ setKeyword }) => {
   return (
     <>
       <section className="bg-secondary text-light p-4">
@@ -12,17 +13,7 @@ const AddAndSearch = () => {
             >
               Add Video
             </button>
-            <div className="input-group mb-3 news-input">
-              <input
-                type="text"
-                className="form-control "
-                placeholder="Search video by name..."
-                aria-label="Search video input"
-              />
-              <button className="btn btn-danger text-light" type="button">
-                Search
-              </button>
-            </div>
+            <Search setKeyword={setKeyword} />
           </div>
         </div>
       </section>
