@@ -6,10 +6,10 @@ async function scrape(videoId) {
 
     const $ = cheerio.load(html);
 
-    const pageTitle = $('title').text();
-    console.log(pageTitle);
+    const title = $('meta[name=title]').attr('content');
+    console.log(title);
 }
 
-scrape();
+scrape('iuarghqmi-4');
 
 module.exports.scrape = scrape;
