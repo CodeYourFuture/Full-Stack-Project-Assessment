@@ -122,13 +122,10 @@ app.put("/:id/rating", async (req, res) => {
   }
 });
 
-// Create a new
 app.post("/", (req, res) => {
   if (!req.body.title || !req.body.url) {
-    res.status(400).json({
-      result: "error",
-      message: "Video not saved",
-    });
+    res.status(400).json({ result: "error", message: "Video not saved" });
+    return;
   }
 
   client
@@ -136,31 +133,81 @@ app.post("/", (req, res) => {
     .then((result) => {
       let newId = result.rows[0].max + 1;
       let newTitle = req.body.title;
-      let newUrl = req.body.url;
+      let newUrl = req.body.url.split("=")[1];
       let newRating = 0;
 
-      client
-        .query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating])
-        .then((result) => {
-          res.status(201).json({
-            id: newId,
-          });
-        })
-        .catch((error) => {
-          console.log(error.message);
-          res.status(404).json({
-            result: "error",
-            message: "Video could not be added",
-          });
-        });
+      return client.query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating]);
+    })
+    .then((result) => {
+      res.status(201).json({ id: newId });
     })
     .catch((error) => {
       console.log(error.message);
-      res.status(404).json({
-        result: "error",
-        message: "Video could not be added",
-      });
-
+      res.status(404).json({ result: "error", message: "Video could not be added" });
       client.end;
     });
 });
+
+// Create a new
+// app.post("/", (req, res) => {
+//   if (!req.body.title || !req.body.url) {
+//     res.status(400).json({
+//       result: "error",
+//       message: "Video not saved",
+//     });
+//   }
+
+//   client.query("SELECT MAX(id) FROM videos").then((result) => {
+//     let newId = result.rows[0].max + 1;
+//     let newTitle = req.body.title;
+//     let newUrl = req.body.url.split("=")[1];
+//     let newRating = 0;
+
+//     client.query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating]).then((result) => {
+//       res.status(201).json({
+//         id: newId,
+//       });
+//     });
+//   });
+
+//   client.end;
+// });
+
+// app.post("/", (req, res) => {
+//   if (!req.body.title || !req.body.url) {
+//     res.status(400).json({ result: "error", message: "Video not saved" });
+//     return;
+//   }
+//   let videoId = req.body.url.split("=")[1];
+//   console.log("vediiiiiiiii id = " + videoId);
+//   // https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=9LCMuKtpnPE
+//   fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoId}`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const videoTitle = data.title;
+//       console.log("ttttttttttttile =  " + videoTitle);
+
+//       client
+//         .query("SELECT MAX(id) FROM videos")
+//         .then((result) => {
+//           let newId = result.rows[0].max + 1;
+//           let newTitle = videoTitle;
+//           let newUrl = videoId;
+//           let newRating = 0;
+
+//           return client.query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating]);
+//         })
+//         .then((result) => {
+//           res.status(201).json({ id: newId });
+//         })
+//         .catch((error) => {
+//           console.log(error.message);
+//           res.status(404).json({ result: "error", message: "Video could not be added" });
+//         });
+//     })
+//     .catch((error) => {
+//       console.log(error.message);
+//       res.status(404).json({ result: "error", message: "Video could not be added" });
+//       client.end;
+//     });
+// });
