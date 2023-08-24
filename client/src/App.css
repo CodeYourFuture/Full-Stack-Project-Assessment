@@ -1,3 +1,30 @@
 .App {
   text-align: center;
+  background-color: #6b705c;
+  color: white;
+}
+
+.card-container {
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.card {
+  border: 1px solid #80b918;
+  background-color: #80b918;
+  box-shadow: 17px -2px 24px -8px rgba(194, 224, 22, 1);
+  border-radius: 5px;
+  width: 500px;
+  margin: 0.5rem;
+}
+
+.card-thumb {
+  border: 1px solid #80b918;
+  width: 500px;
+  border-radius: 5px;
 }
