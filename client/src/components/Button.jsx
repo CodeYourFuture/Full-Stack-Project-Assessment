@@ -1,9 +1,7 @@
 import React from 'react'
 
-function Button({ deleteHandler }) {
-  return (
-    <button onClick={deleteHandler}>Delete</button>
-  )
+function Button({ onDelete, id }) {
+  return <button onClick={() => onDelete(id)}>Delete ❌</button>;
 }
 
-export default Button
+export default Button;

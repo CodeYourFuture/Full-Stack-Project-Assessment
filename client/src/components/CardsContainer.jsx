@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import VideoCard from "./VideoCard";
 
 // how to change a videoData to a useState variable
@@ -13,26 +13,28 @@ How do you delete a record from a useState array (answer might be spread operato
 */
 
 function CardsContainer( { videoData, setVideoData }) {
-  const [deleteId, setDeleteId] = useState(0);
 
-  useEffect(() => {
-    console.log(deleteId);
-    setVideoData(
-      videoData.filter((video) => {
-        return video.id !== deleteId
-      })
-    )
-    /*
-  - Get deleteId - DONE!
-  - Filter out the videoData object with the same id as deleteID
-  - Celebrate with a chocy
-  */
-  }, [deleteId]);
+function handleDelete(id) {
+  setVideoData(
+    videoData.filter((video) => {
+      return video.id !== id;
+    })
+  );
+}
 
   return (
     <div>
-      {videoData.map((video) => {
-        return <VideoCard key={video.id} videoData={video} setDeleteId={setDeleteId} />;
+      {videoData.sort((a, b) => b.rating - a.rating).map((singleVideo) => {
+        return (
+          <VideoCard
+            key={singleVideo.id}
+            videoData={videoData}
+            singleVideo={singleVideo}
+            onDelete={handleDelete}
+            setVideoData={setVideoData}
+
+          />
+        );
       })}
     </div>
   );

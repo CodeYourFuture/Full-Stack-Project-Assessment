@@ -29,16 +29,16 @@
     - Each VideoCard component will take the props [id={id}, title={title}, url={url}, rating={rating}] ✅
 
 3. On each video submission there should be two buttons
-  - "Up Vote" - This increases the vote score when clicked
-  - "Down Vote" - This decreases the vote score when clicked
+  - "Up Vote" - This increases the vote score when clicked ✅
+  - "Down Vote" - This decreases the vote score when clicked ✅
 
     - Hard code one button at time add state where necessary
    
 4. On the page there must be another React component that will add a Video.
    - It should include fields to add a
-     - Title
-     - Url
-   - When a button is clicked the video should be added to the list
+     - Title ✅
+     - Url ✅
+   - When a button is clicked the video should be added to the list ✅
 
 a. Create a VideoForm component ✅
 b. Create mock structure below ✅
@@ -105,4 +105,20 @@ We will always need to hand down the following:
 - type attribute (eg. submit or delete)
 - onClickHandler
 - 
+
+=============================================
+
+ Validate URL Workings:
+
+     function validateUrl(urlObject) {
+      console.log(urlObject);
+      if (urlObject.protocol !== "https:") {
+        throw new Error("Protocol must be https:");
+      }
+      return true;
+      // return either validated URL or an error
+    }
+    //   const unValidatedTitle = event.target.form.title.value;
+    const unValidatedUrl = new URL(event.target.form.url.value);
+    //   const isValidated = validateUrl(unValidatedUrl);
 
