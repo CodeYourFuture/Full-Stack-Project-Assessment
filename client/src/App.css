@@ -4,6 +4,9 @@
 .nav{
   margin-left: 50px;
 }
+.main{
+  width: 800px;
+}
 .formDiv {
   display: flex;
   flex-direction: column;
@@ -30,7 +33,24 @@
   margin-left: 5px;
 }
 .addCancelBtn button{
-  
   margin: 10px;
- 
+}
+.showVideo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.btnShowVideo{
+  margin: 10px;
+  border-radius: 5px;
+}
+.mainShowVideos{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+  
 }

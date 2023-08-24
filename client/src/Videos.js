@@ -35,7 +35,7 @@ function Videos(props) {
   function addClickHandeler(e) {
     e.preventDefault();
     const newVideo = { title: titleData, url: urlData };
-    
+    //adding video
     fetch("http://localhost:3000/videos", {
       method: "POST",
       headers: {
@@ -48,7 +48,8 @@ function Videos(props) {
       .then((data) => {
         console.log(data);
         setLoadData(data);
-        
+        console.log(titleData);
+        console.log(urlData);
         setTitleData("");
         setUrlData("");
       })
@@ -81,54 +82,66 @@ function deleteBtnHandler(item) {
   
   return (
     <>
-      {props.show && (
-        <form className="formDiv" onSubmit={addClickHandeler}>
-          <div className="input-group">
-            <label htmlFor="title">Title</label>
-            <input
-              id="title"
-              onChange={(e) => setTitleData(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="url">Url</label>
-            <input
-              id="url"
-              onChange={(e) => setUrlData(e.target.value)}
-              required
-            />
-          </div>
+      <div className="main">
+        {props.show && (
+          <form className="formDiv" onSubmit={addClickHandeler}>
+            <div className="input-group">
+              <label htmlFor="title">Title</label>
+              <input
+                id="title"
+                value={titleData}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setTitleData(e.target.value);
+                }}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="url">Url</label>
+              <input
+                id="url"
+                value={urlData}
+                onChange={(e) => setUrlData(e.target.value)}
+                required
+              />
+            </div>
 
-          <div className="addCancelBtn">
-            <button type="button" onClick={cancelBtnHandler}>
-              Cancel
-            </button>
-            <button type="submit">Add</button>
-          </div>
-        </form>
-      )}
-      {loadData.length > 0 ? (
-        loadData.map((item) => (
-          <div key={item.id}>
-            <p style={{ margin: 5 }}>{item.title}</p>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/{VIDEO_ID_GOES_HERE}"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-
-            {/* <div className="showVideo">{item.url}</div> */}
-            <button onClick={()=>deleteBtnHandler(item)}>Delete</button>
-          </div>
-        ))
-      ) : (
-        <p>No video yet.</p>
-      )}
+            <div className="addCancelBtn">
+              <button type="button" onClick={cancelBtnHandler}>
+                Cancel
+              </button>
+              <button type="submit">Add</button>
+            </div>
+          </form>
+        )}
+        <div className="mainShowVideos">
+          {loadData.length > 0 ? (
+            loadData.map((item) => (
+              <div key={item.id} className="showVideo">
+                <p style={{ margin: 5 }}>{item.title}</p>
+                <iframe
+                  width="350"
+                  height="200"
+                  src={`https://www.youtube.com/embed/${item.url}`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+                <button
+                  className="btnShowVideo"
+                  onClick={() => deleteBtnHandler(item)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No video yet.</p>
+          )}
+        </div>
+      </div>
     </>
   );
 }
