@@ -13,14 +13,23 @@
 }
 
 .video--h2 {
-  font-size: 24px;
-  min-height: 60px;
-  hyphens: auto;
+  font-size: 20px;
+  min-height: 3rem;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .form--container {
   grid-column: 2 / 3;
 }
+
+/* .form {
+  display: grid;
+} */
 
 .video--container {
   grid-column: 2 / 3;
@@ -29,6 +38,7 @@
   gap: 1rem;
 }
 
+/* This is the code that fixed my videos spilling over! */
 .video--container iframe {
   width: 100%;
 }

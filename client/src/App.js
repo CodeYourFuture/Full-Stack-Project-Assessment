@@ -9,13 +9,14 @@ import Searchbar from "./components/Searchbar";
 function App() {
   // An empty array [] to hold all the videos as our component loads them
   const [videos, setVideos] = useState([]);
+  const apiURL = "http://127.0.0.1:5000";
 
   console.log("component rendered");
 
   // Empty dependecies array means the effect will only run on the very first render of component
   // No dependencies to watch to trigger this effect again
   useEffect(function () {
-    fetch("http://127.0.0.1:5000")
+    fetch(apiURL)
       .then((response) => response.json())
       .then((videoData) => {
         console.log("effect ran");
@@ -39,7 +40,7 @@ function App() {
   }
 
   function deleteVideo(id) {
-    fetch(`http://127.0.0.1:5000/videos/${id}`, {
+    fetch(`${apiURL}/videos/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
