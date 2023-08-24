@@ -6,7 +6,6 @@ function NewVideoContainer({ allMovies, setRefreshVideos }) {
   const [newTitle, setNewTitle] = useState("");
   const [newURL, setNewURL] = useState("");
   function addNewVideo() {
-    console.log("button clicked");
     const newRec = {};
     let maxId = Math.max(...allMovies.map((movie) => movie.id));
     const newId = maxId + 1;
@@ -24,11 +23,9 @@ function NewVideoContainer({ allMovies, setRefreshVideos }) {
       }),
     })
       .then((res) => {
-        console.log("the result ", res);
         return res.json();
       })
       .then((data) => {
-        console.log("the data", data);
         setRefreshVideos(true);
       });
   }
