@@ -1,0 +1,8 @@
+@media (min-width: 1250px) 
+ {
+    .body-container {
+        width: 1250px;
+        margin: 0 auto;
+    }
+ }
+
