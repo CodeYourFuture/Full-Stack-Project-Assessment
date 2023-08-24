@@ -37,6 +37,3 @@ const VideoItem = ({ video, onDelete, onVote }) => {
 
 export default VideoItem;
 
-
-
-
