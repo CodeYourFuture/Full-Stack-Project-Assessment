@@ -63,7 +63,6 @@ app.post("/", (req, res) => {
         ]);
         const videos = await pool.query("SELECT * from videos");
 
-        //  console.log(videos.rows);
         res.json(videos.rows);
       } catch (err) {
         console.log(err);
@@ -72,10 +71,28 @@ app.post("/", (req, res) => {
     postVideos(newVideo);
   }
 });
+
+//GET by id
 app.get("/:id", (req, res) => {
   if (Number.isInteger(Number(req.params.id))) {
-    const newVideo = videos.filter((vid) => vid.id === Number(req.params.id));
-    newVideo.length == 0 ? res.json(videos) : res.json(newVideo);
+    const getVideoById = async (id) => {
+      try {
+        const videos = await pool.query("SELECT * from videos WHERE id = $1", [
+          id,
+        ]);
+        if (videos.rows.length === 0) {
+          res.json({
+            result: "failure",
+            message: "Video does not exist",
+          });
+        } else {
+          res.json(videos.rows);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getVideoById(Number(req.params.id));
   } else {
     res.json({
       result: "failure",
@@ -83,6 +100,8 @@ app.get("/:id", (req, res) => {
     });
   }
 });
+
+//DELETE by id
 app.delete("/:id", (req, res) => {
   if (Number.isInteger(Number(req.params.id))) {
     const newVideo = videos.filter((vid) => vid.id !== Number(req.params.id));
