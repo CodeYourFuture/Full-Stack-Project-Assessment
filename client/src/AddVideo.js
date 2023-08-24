@@ -30,7 +30,7 @@ function AddVideo(props) {
         </p>
       </div>
       <div className="search">
-        <h4>Search with ID</h4>
+        <h4>Search By ID</h4>
 
         <form
           onSubmit={(e) => {
