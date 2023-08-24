@@ -62,11 +62,16 @@ let mockVideos = [
   }
 ];
 
-export function MockGet() {
+export async function MockGet() {
+  // this delay is to pretend that we are waiting for backend
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   return mockVideos;
 }
 
-export function MockDelete(id) {
+export async function MockDelete(id) {
+  // this delay is to pretend that we are waiting for backend
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   const newVideos = mockVideos.filter((video) => {
     return video.id !== id;
   });

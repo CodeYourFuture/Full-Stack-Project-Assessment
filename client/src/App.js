@@ -7,34 +7,20 @@ function App() {
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    // eventually this should be factored out into a backend API call
-    /*
-    fetch("https://my-backend.com/")
-    .then(function (response) {
-      return response.json();
-    })
-    .then((responseVideos) => {
-      setVideos(responseVideos);
-    })
-    .catch((error) => console.log(error));
-    */
-    setTimeout(() => {
-      const videos = MockGet();
-      setVideos(videos); 
-    }, 1000);  // this delay is to pretend that we are waiting for backend
+    MockGet().then(videos => setVideos(videos));
   }, []);
 
   useEffect(() => {
     if (deleteId === null) {
       return;
     }
-    setTimeout(() => {
-      const response = MockDelete(deleteId);
+    MockDelete(deleteId).then(response => {
       if (response["result"] !== "failure") {
-        const videos = MockGet();
-        setVideos(videos);
+        MockGet().then(videos => setVideos(videos));
+      } else {
+        console.log("could not delete");
       }
-    }, 500);  // this delay is to pretend that we are waiting for backend
+    });
   }, [deleteId]);
 
   const recommendations = videos.length === 0
