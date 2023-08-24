@@ -1,11 +1,48 @@
-import "./App.css";
+import { useEffect, useState } from "react";
+import VideoForm from "./components/VideoForm";
+import VideoLists from "./components/VideoLists";
 
 function App() {
+  const [videoForm, setVideoForm] = useState(false);
+  const [allVideos, setAllVideos] = useState([]);
+
+  const getAllVideos = async () => {
+    try {
+      console.log(process.env.REACT_APP_SERVERURL);
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/`);
+      if (!response.status === 200) {
+        throw new Error("something went wrong!");
+      }
+      const data = await response.json();
+      setAllVideos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="app">
+      <header className="app-header">
         <h1>Video Recommendation</h1>
       </header>
+      <main>
+        <div style={{ textAlign: "center", margin: "1rem" }}>
+          <button className="new-btn" onClick={(e) => setVideoForm(true)}>
+            Add New video
+          </button>
+          {videoForm && (
+            <VideoForm
+              setVideoForm={setVideoForm}
+              getAllVideos={getAllVideos}
+            />
+          )}
+        </div>
+        <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />
+      </main>
     </div>
   );
 }

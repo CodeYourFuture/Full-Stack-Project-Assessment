@@ -1,13 +1,103 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+/* App */
+
+.app-header {
+  text-align: center;
+  background-color: rgb(135, 132, 129);
+  padding: 1.25rem;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.new-btn{
+  margin: 1rem 0;
+  padding: 10px 18px;;
+  border-radius: 10px;
+  background-color: rgb(137, 136, 141);
+}
+
+.new-btn:hover{
+  background-color: rgb(164, 164, 167);
+  border-color: none;
+}
+
+/* VideoForm */
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-form input {
+  width: 40%;
+  height: 40px;
+}
+
+.input-container {
+  margin: 0.5rem 0;
+}
+
+.input-container label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.form-buttons button {
+  margin: 1rem 0.5rem;
+}
+
+.cancel-btn {
+  margin: 1rem 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(244, 247, 85);
+}
+.cancel-btn:hover {
+  background-color: rgb(243, 249, 176);;
+}
+.add-btn {
+  margin: 1rem 0;
+  padding: 10px 18px;;
+  border-radius: 10px;
+  background-color: rgb(71, 118, 61);
+}
+.add-btn:hover{
+  background-color: rgb(125, 187, 118);
+}
+/* VideoLists */
+
+.video-lists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 1rem;
+}
+
+/* Video */
+
+.video {
+  background-color: rgb(201, 198, 193);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.vote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video .button{
+  margin: 1rem 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(223, 210, 192);
+}
+
+.video .button:hover{
+  background-color: rgb(209, 82, 82);
+  color:aliceblue
 }
