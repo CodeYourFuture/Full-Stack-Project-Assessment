@@ -7,6 +7,17 @@ function App() {
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
+    // eventually this should be factored out into a backend API call
+    /*
+    fetch("https://my-backend.com/")
+    .then(function (response) {
+      return response.json();
+    })
+    .then((responseVideos) => {
+      setVideos(responseVideos);
+    })
+    .catch((error) => console.log(error));
+    */
     setTimeout(() => {
       const videos = MockGet();
       setVideos(videos); 
