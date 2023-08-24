@@ -54,26 +54,31 @@ function App() {
     }
   };
 
-  const handleVote = async (videoId, value) => {
+  async function handleVote(videoId, voteType) {
     try {
-      const response = await fetch(`http://localhost:5000/${videoId}/vote`, {
+      const response = await fetch(`http://localhost:5000/${videoId}/rating?voteType=${voteType}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ value }),
+        body: JSON.stringify({ setVideos }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setVideos((prevVideos) => prevVideos.map((video) => (video.id === videoId ? data : video)));
-      } else {
-        console.error("Error updating vote count");
-      }
+      const updatedVideo = await response.json();
+
+      setVideos((prevVideos) => {
+        return prevVideos.map((video) => {
+          if (video.id === videoId) {
+            return updatedVideo;
+          } else {
+            return video;
+          }
+        });
+      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  };
+  }
 
   return (
     <div className="container mt-5">

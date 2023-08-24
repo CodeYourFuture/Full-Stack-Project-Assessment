@@ -21,7 +21,7 @@ const client = new Client({
 });
 
 client.connect((err) => {
-  if (err) throw err;
+  // if (err) throw err;
   console.log("Connected to database!");
 });
 
@@ -109,11 +109,12 @@ app.put("/:id", (req, res) => {
 });
 
 // UPDATE vote count
-app.put("/:id/vote", async (req, res) => {
+app.put("/:id/rating", async (req, res) => {
   try {
     const { id } = req.params;
-    const { value } = req.body;
-    const { rows } = await pool.query("UPDATE videos SET vote_count = vote_count + $1 WHERE id = $2 RETURNING *", [value, id]);
+    const voteType = req.query.voteType;
+    const increment = voteType === "up" ? 1 : -1;
+    const { rows } = await client.query("UPDATE videos SET rating = rating + $1 WHERE id = $2 RETURNING *", [increment, id]);
     res.json(rows[0]);
   } catch (error) {
     console.error(error);
