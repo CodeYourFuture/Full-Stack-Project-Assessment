@@ -1,25 +1,36 @@
 .App {
   text-align: center;
-  /* display: grid; */
-  /* grid-template-columns: 100px auto 100px; */
+  display: grid;
+  grid-template-columns: 100px auto 100px;
 }
 
-/* .App-header {
+.App-header {
   grid-column: 2 / 3;
-} */
+}
 
 .video--card {
   border: 1px palevioletred solid;
 }
 
-/* .form--container {
+.video--h2 {
+  font-size: 24px;
+  min-height: 60px;
+  hyphens: auto;
+}
+
+.form--container {
   grid-column: 2 / 3;
-} */
+}
 
 .video--container {
-  /* grid-column: 2 / 3; */
+  grid-column: 2 / 3;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.video--container iframe {
+  width: 100%;
 }
 
 .thumbs--up,

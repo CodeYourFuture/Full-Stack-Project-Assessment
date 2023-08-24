@@ -18,7 +18,7 @@ export default function VideoCard(props) {
 
   return (
     <div className="video--card">
-      <h2>{props.title}</h2>
+      <h2 className="video--h2">{props.title}</h2>
       <iframe
         width="560"
         height="315"
