@@ -5,10 +5,10 @@ const MainCard = ({ video, onDelete, onVote }) => {
 
   return (
     <div>
-      <h3>{video.title}</h3>
+      <h2>{video.title}</h2>
       <iframe
         className="iframe"
-        width="390"
+        width="400"
         height="315"
         src={`https://www.youtube.com/embed/${videoId}`}
         title="YouTube video player"
@@ -32,7 +32,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
         ></i>
       </button>
       <div>
-        <button
+        <button 
           onClick={() => onDelete(video.id)}
           
         >
