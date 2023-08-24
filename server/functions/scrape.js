@@ -11,10 +11,16 @@ async function scrape(videoId) {
 
     const viewsString = infoText.split('"viewCount":"')[1].split('"')[0];
     const views = +viewsString;
-    
-    console.log(number.toLocaleString('en-US'));
+
+    const uploadDate = infoText.split('"publishDate":"')[1].split('"')[0];
+
+    const author = infoText.split('"author":"')[1].split('"')[0];
+
+    const imageURL = infoText.split('","width":1920')[0].split('"height":188},{"url":"')[1];
+
+    console.log(imageURL);
 }
 
-scrape('iuarghqmi-4');
+scrape('PqLfEFC3XZQ');
 
 module.exports.scrape = scrape;
