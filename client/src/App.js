@@ -79,6 +79,18 @@ function App() {
       });
   }
 
+  function searchVideo(searchInput) {
+    fetch(apiURL)
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(
+          data.filter((video) =>
+            video.title.toLowerCase().includes(searchInput.toLowerCase())
+          )
+        );
+      });
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -86,7 +98,7 @@ function App() {
       </header>
       <div className="form--container">
         <AddVideoForm handleAddVideo={addVideo} />
-        <Searchbar />
+        <Searchbar handleSearchVideo={searchVideo} />
       </div>
       <div className="video--container">
         <VideoList
