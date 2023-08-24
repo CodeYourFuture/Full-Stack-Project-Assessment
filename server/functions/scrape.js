@@ -9,15 +9,13 @@ async function scrape(videoId) {
 
     const title = $('meta[name=title]').attr('content');
 
-    const views = Number(infoText.split('"viewCount":"')[1].split('"')[0]).toLocaleString('en-US');
+    const views = Number(infoText.split('"viewCount":"')[1].split('"')[0]);
 
     const uploadDate = infoText.split('"publishDate":"')[1].split('"')[0];
 
     const author = infoText.split('"author":"')[1].split('"')[0];
 
-    console.log(title, views, uploadDate, author);
+    return { title, views, uploadDate, author };
 }
-
-scrape('0wqE1LUITBY');
 
 module.exports.scrape = scrape;
