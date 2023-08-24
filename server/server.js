@@ -27,7 +27,6 @@ app.get("/", (req, res) => {
   const getVideos = async () => {
     try {
       const videos = await pool.query("SELECT * from videos");
-      console.log(videos.rows);
       res.json(videos.rows);
     } catch (err) {
       console.log(err);
@@ -50,9 +49,27 @@ app.post("/", (req, res) => {
       id: Number(urid(6, "num")),
       title: req.body.title,
       url: req.body.url,
+      rating: 0,
+      date_added: new Date(),
     };
-    videos.unshift(newVideo);
-    res.json(videos);
+    const postVideos = async (vid) => {
+      try {
+        await pool.query("INSERT INTO videos VALUES($1, $2, $3, $4, $5)", [
+          vid.id,
+          vid.title,
+          vid.url,
+          vid.rating,
+          vid.date_added,
+        ]);
+        const videos = await pool.query("SELECT * from videos");
+
+        //  console.log(videos.rows);
+        res.json(videos.rows);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    postVideos(newVideo);
   }
 });
 app.get("/:id", (req, res) => {
