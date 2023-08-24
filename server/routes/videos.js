@@ -15,11 +15,8 @@ router.post("/", auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).json({ message: error.message });
 
-    const video = {
-        userId: req.body.userId,
-        title: req.body.title,
-        url: req.body.url
-    };
+    const videoId = req.body.url.split('watch?v=')[1];
+    return res.send(videoId);
 
     try {
         const rs = await pool.query("INSERT INTO videos (u_id, title, url) VALUES($1, $2, $3) RETURNING *", [video.userId, video.title, video.url]);
