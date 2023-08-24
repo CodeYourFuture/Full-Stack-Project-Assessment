@@ -1,3 +1,92 @@
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+  padding-bottom: 2em;
+}
+.App-header {
+  background-color: #ffcc00;
+  padding: 2em;
+  border: 1px solid black;
+}
+.videoContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
+  margin: 0 1em;
+}
+.rating {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-left: 0.3em;
+}
+
+.singleVideo {
+  border: 0.5px solid lightgray;
+  box-shadow: 5px 1px 15px 1px #ffcc00;
+}
+.singleVideo h5 {
+  font-size: 1em;
+  padding: 0.5em;
+}
+.singleVideo p {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.singleVideo p button {
+  background-color: #c01c28;
+  color: white;
+}
+.videoFrame {
+  width: 100%;
+}
+
+.i-focus:focus-within {
+  outline: 5px solid red;
+}
+
+.addVideo {
+  padding: 2em;
+}
+.addVideo input {
+  margin-right: 1em;
+}
+.addVideo input:focus {
+  outline: 2px solid #ffcc00;
+}
+.addVideo button {
+  background-color: #ffcc00;
+}
+.t-up {
+  color: #26a269;
+  cursor: pointer;
+}
+.t-down {
+  color: #c01c28;
+  cursor: pointer;
+}
+.red-failure {
+  color: #c01c28;
+}
+.search-add {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+.search input {
+  border: 0.2px solid gray;
+  margin-left: 0.5em;
+}
+.search input:focus {
+  outline: 2px solid #ffcc00;
+}
+.search button {
+  background-color: #ffcc00;
+}
+form {
+  display: flex;
 }
