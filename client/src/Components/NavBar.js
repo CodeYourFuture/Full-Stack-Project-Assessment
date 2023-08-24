@@ -7,6 +7,7 @@ const NavBar = () => {
             VideoWorld
           </a>
           <button
+            aria-label="hamburger menu"
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -17,7 +18,7 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="nav-menu">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a href="#video" className="nav-link">
+                <a href="#" className="nav-link">
                   Home
                 </a>
               </li>
@@ -27,7 +28,7 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#Contact" className="nav-link">
+                <a href="#contact" className="nav-link">
                   Contact
                 </a>
               </li>

@@ -6,7 +6,7 @@ const VideoList = ({ keyword, videoCards, setVideoCards }) => {
   return (
     <>
       {/* <h1 className="blink_me">Loading.....</h1> */}
-      <section className="p-5">
+      <section className="p-5" id="recommendations">
         <div className="container">
           <div className="row row-cols-auto text-center custom-gap ">
             {videoCards
