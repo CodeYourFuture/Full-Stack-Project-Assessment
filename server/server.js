@@ -30,8 +30,6 @@ app.get("/", (req, res) => {
       res.json(videos.rows);
     } catch (err) {
       console.log(err);
-    } finally {
-      pool.end();
     }
   };
   getVideos();
