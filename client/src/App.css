@@ -6,6 +6,7 @@
   padding-bottom: 2em;
 }
 .App-header {
+  width: 100vw;
   background-color: #ffcc00;
   padding: 2em;
   border: 1px solid black;
@@ -89,4 +90,58 @@
 }
 form {
   display: flex;
+}
+@media screen and (max-width: 1240px) {
+  .videoContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    margin: 0 1em;
+  }
+  .search-add {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+  }
+}
+@media screen and (max-width: 900px) {
+  .videoContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    margin: 0 1em;
+  }
+  .search-add {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+  }
+}
+@media screen and (max-width: 640px) {
+  .videoContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    margin: 0 1em;
+  }
+  .search-add {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 520px) {
+  .videoContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1em;
+    margin: 0 1em;
+  }
+  .search-add {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 }

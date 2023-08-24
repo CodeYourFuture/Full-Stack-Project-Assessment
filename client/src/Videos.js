@@ -21,10 +21,7 @@ function Videos() {
     }
     fetchVideos();
   }, []);
-  //   function handleOnclick(val) {
-  //     const deletedOneVideo = videos.filter((vid) => vid.title !== val);
-  //     setVideos(deletedOneVideo);
-  //   }
+
   function add(title, url) {
     let data = new URLSearchParams();
     data.append("id", urid());
@@ -79,6 +76,7 @@ function Videos() {
       });
   }
 
+  // Loading videos
   const displayVideos = videos.map((vid) => {
     return (
       <Video

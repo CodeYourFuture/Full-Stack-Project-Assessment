@@ -1,6 +1,7 @@
 const express = require("express");
 const CORS = require("cors");
 const urid = require("urid");
+const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -11,75 +12,27 @@ app.use(express.json());
 app.use(CORS());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/embed/HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/embed/FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/embed/xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/embed/4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/embed/gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/embed/RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/embed/U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/embed/X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/embed/ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+// database connection
+const pool = new Pool({
+  user: "coder",
+  password: "glasgow321!",
+  host: "localhost",
+  database: "videos_storage",
+  port: 5432,
+});
+//
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  const getVideos = async () => {
+    try {
+      const videos = await pool.query("SELECT * from videos");
+      res.json(videos.rows);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getVideos();
 });
 
 // POST "/"
@@ -94,15 +47,50 @@ app.post("/", (req, res) => {
       id: Number(urid(6, "num")),
       title: req.body.title,
       url: req.body.url,
+      rating: 0,
+      date_added: new Date(),
     };
-    videos.unshift(newVideo);
-    res.json(videos);
+    const postVideos = async (vid) => {
+      try {
+        await pool.query("INSERT INTO videos VALUES($1, $2, $3, $4, $5)", [
+          vid.id,
+          vid.title,
+          vid.url,
+          vid.rating,
+          vid.date_added,
+        ]);
+        const videos = await pool.query("SELECT * from videos");
+
+        res.json(videos.rows);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    postVideos(newVideo);
   }
 });
+
+//GET by id
 app.get("/:id", (req, res) => {
   if (Number.isInteger(Number(req.params.id))) {
-    const newVideo = videos.filter((vid) => vid.id === Number(req.params.id));
-    newVideo.length == 0 ? res.json(videos) : res.json(newVideo);
+    const getVideoById = async (id) => {
+      try {
+        const videos = await pool.query("SELECT * from videos WHERE id = $1", [
+          id,
+        ]);
+        if (videos.rows.length === 0) {
+          res.json({
+            result: "failure",
+            message: "Video does not exist",
+          });
+        } else {
+          res.json(videos.rows);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getVideoById(Number(req.params.id));
   } else {
     res.json({
       result: "failure",
@@ -110,10 +98,31 @@ app.get("/:id", (req, res) => {
     });
   }
 });
+
+//DELETE by id
 app.delete("/:id", (req, res) => {
   if (Number.isInteger(Number(req.params.id))) {
-    const newVideo = videos.filter((vid) => vid.id !== Number(req.params.id));
-    res.json(newVideo);
+    const deleteVideoById = async (id) => {
+      try {
+        const videos = await pool.query("DELETE FROM videos WHERE id = $1", [
+          id,
+        ]);
+        if (videos.rowCount === 1) {
+          res.json({
+            result: "success",
+            message: "Video successfully deleted",
+          });
+        } else {
+          res.json({
+            result: "failure",
+            message: "ID does not match any video",
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    deleteVideoById(Number(req.params.id));
   } else {
     res.json({
       result: "failure",
