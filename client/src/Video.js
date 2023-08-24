@@ -39,7 +39,7 @@ function Video(props) {
 
         <button
           onClick={(e) => {
-            props.onclick(e.target.parentNode.parentNode.children[1].innerText);
+            props.delete(e.target.parentNode.parentNode.children[1].innerText);
           }}
           className="btn"
         >
