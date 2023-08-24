@@ -1,10 +1,70 @@
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import "./styles.css";
+import Video from "./Video";
+import AddVideo from "./AddVideo";
+// import videosData from "./exampleresponse.json";// I comment this line inoder to import data from the server//
 
 function App() {
+  const [videos, setVideos] = useState([]);
+  const [order, setOrder] = useState("desc"); //Order line desc or asc
+
+  useEffect(() => {
+    // Fetch data from the API when the component mounts
+    fetch("http://127.0.0.1:5000/videos")
+      .then((response) => response.json())
+      .then((data) => {
+        // Sort the data based on the order state
+        const sortedData =
+          order === "desc"
+            ? data.sort((a, b) => b.votes - a.votes)
+            : data.sort((a, b) => a.votes - b.votes);
+        setVideos(sortedData);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [order]);
+
+  const toggleOrder = () => {
+    setOrder(order === "desc" ? "asc" : "desc");
+  };
+
+  const handleVote = (id, increment) => {
+    setVideos((prevVideos) =>
+      prevVideos.map((video) =>
+        video.id === id ? { ...video, votes: video.votes + increment } : video
+      )
+    );
+  };
+
+  const handleRemove = (id) => {
+    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+  };
+
+  const handleAddVideo = (newVideo) => {
+    const id = videos.length + 1;
+    const currentDate = new Date().toISOString();
+    setVideos([
+      ...videos,
+      { ...newVideo, id, votes: 0, uploadDate: currentDate },
+    ]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendation</h1>
+        <h1 className="header-video">Video Recommendation</h1>
+        <button onClick={toggleOrder}>
+          {order === "desc" ? "Order Ascending" : "Order Descending"}
+        </button>
+        {videos.map((video) => (
+          <Video
+            key={video.id}
+            video={video}
+            onVoteUp={() => handleVote(video.id, 1)}
+            onVoteDown={() => handleVote(video.id, -1)}
+            onRemove={() => handleRemove(video.id)}
+          />
+        ))}
+        <AddVideo onAddVideo={handleAddVideo} />
       </header>
     </div>
   );
