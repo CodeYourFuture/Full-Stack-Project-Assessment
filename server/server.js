@@ -104,8 +104,27 @@ app.get("/:id", (req, res) => {
 //DELETE by id
 app.delete("/:id", (req, res) => {
   if (Number.isInteger(Number(req.params.id))) {
-    const newVideo = videos.filter((vid) => vid.id !== Number(req.params.id));
-    res.json(newVideo);
+    const deleteVideoById = async (id) => {
+      try {
+        const videos = await pool.query("DELETE FROM videos WHERE id = $1", [
+          id,
+        ]);
+        if (videos.rowCount === 1) {
+          res.json({
+            result: "success",
+            message: "Video successfully deleted",
+          });
+        } else {
+          res.json({
+            result: "failure",
+            message: "ID does not match any video",
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    deleteVideoById(Number(req.params.id));
   } else {
     res.json({
       result: "failure",
