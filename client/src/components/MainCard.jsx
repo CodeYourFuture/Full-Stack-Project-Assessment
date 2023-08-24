@@ -8,7 +8,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
       <h3>{video.title}</h3>
       <iframe
         className="iframe"
-        width="400"
+        width="390"
         height="315"
         src={`https://www.youtube.com/embed/${videoId}`}
         title="YouTube video player"
