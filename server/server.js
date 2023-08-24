@@ -54,6 +54,9 @@ app.post("/", (request, response) => {
     videos.push(newVideo);
     response.status(201).json({
       id: newVideo.id,
+      title: title,
+      url: url,
+      rating: 0,
       message: "Video was saved",
     });
   }

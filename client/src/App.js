@@ -53,19 +53,30 @@ function App() {
   }
 
   function addVideo(formData) {
-    let maximumId = Math.max(...videos.map((video) => video.id));
+    console.log(formData);
+    fetch(apiURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let maximumId = Math.max(...videos.map((video) => video.id));
 
-    setVideos((prevVideos) => {
-      return [
-        {
-          id: maximumId + 1,
-          title: formData.title,
-          url: formData.url,
-          rating: 0,
-        },
-        ...prevVideos,
-      ];
-    });
+        setVideos((prevVideos) => {
+          return [
+            {
+              id: maximumId + 1,
+              title: data.title,
+              url: data.url,
+              rating: 0,
+            },
+            ...prevVideos,
+          ];
+        });
+      });
   }
 
   return (
