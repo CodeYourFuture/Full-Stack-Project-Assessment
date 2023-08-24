@@ -1,0 +1,34 @@
+.add-video {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+
+.add-video h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+
+.add-video form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.add-video input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.add-video button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    align-self: flex-start;
+    cursor: pointer;
+}
