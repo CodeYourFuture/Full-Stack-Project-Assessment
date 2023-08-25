@@ -76,7 +76,6 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.post("/", (req, res) => {
-  console.log(req.body);
   if (req.body.title && req.body.url) {
     const newVideo = { ...req.body, id: videos.length + 1, rating: 0 };
     videos.push(newVideo);
@@ -96,7 +95,6 @@ app.get("/:id", (req, res) => {
 app.delete("/:id", (req, res) => {
   const video = videos.find((video) => video.id === Number(req.params.id));
   const videoIndex = videos.indexOf(video);
-  console.log(video);
   if (video === undefined) {
     res.status(400).send({
       result: "failure",

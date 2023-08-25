@@ -2,7 +2,6 @@ import React from "react";
 import Rating from "./Rating";
 
 export default function Video(props) {
-  //   console.log(props.title);
   const videoId = props.url.replace("https://www.youtube.com/watch?v=", "");
   return (
     <div className="videoContainer column">

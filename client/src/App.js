@@ -1,11 +1,17 @@
 import React from "react";
 import "./App.css";
-import videoData from "./exampledata.json";
 import Video from "./components/Video";
-import Search from "./components/AddVideo";
+import AddVideo from "./components/AddVideo";
 
 function App() {
-  const [videos, setVideos] = React.useState(videoData);
+  React.useEffect(function () {
+    console.log("Effect ran");
+    fetch("http://127.0.0.1:5000")
+      .then((res) => res.json())
+      .then((data) => setVideos(data));
+  }, []);
+
+  const [videos, setVideos] = React.useState([]);
   const videoElements = videos.map((video) => (
     <Video
       key={video.id}
@@ -75,7 +81,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <Search handleSubmit={handleSubmit} handleChange={handleChange} />
+      <AddVideo handleSubmit={handleSubmit} handleChange={handleChange} />
       <div className="allVideoContainer">{videoElements}</div>
     </div>
   );
