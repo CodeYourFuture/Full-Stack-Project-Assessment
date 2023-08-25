@@ -46,6 +46,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
       <button type="button" onClick={downVoteHandler}>
         Down Vote 👎
       </button>
+      <p>Time Uploaded: {singleVideo.timeSent}</p>
 
       {/* Put onDelete function on line below */}
 

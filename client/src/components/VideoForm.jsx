@@ -21,6 +21,7 @@ function VideoForm({ videoData, setVideoData }) {
       title: formTitle,
       url: formUrl,
       rating: 0,
+      timeSent: Date(),
     };
 
     try {
