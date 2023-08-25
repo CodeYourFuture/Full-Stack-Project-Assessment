@@ -6,10 +6,17 @@ function App() {
   const [videoForm, setVideoForm] = useState(false);
   const [allVideos, setAllVideos] = useState([]);
 
-  const getAllVideos = async () => {
+  const getAllVideos = async (MoviesOrder) => {
+    let order = "";
+    if (MoviesOrder === "" || MoviesOrder === "desc") {
+      order = "desc";
+    } else {
+      order = "asc";
+    }
     try {
-      console.log(process.env.REACT_APP_SERVERURL);
-      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/`);
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/?order=${order}`
+      );
       if (!response.status === 200) {
         throw new Error("something went wrong!");
       }

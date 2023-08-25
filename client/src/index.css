@@ -29,6 +29,7 @@
 .add-form input {
   width: 40%;
   height: 40px;
+  border-radius: 10px;
 }
 
 .input-container {
@@ -71,6 +72,28 @@
   row-gap: 10px;
   padding: 1rem;
 }
+.features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.features .search-videos,
+.features .order-videos {
+  font-weight: bold;
+  font-size: 18px;
+}
+.features .search-videos label,
+.features .order-videos label {
+  margin-right: 0.5rem;
+}
+
+.features .search-videos input,
+.features .order-videos select {
+  border-radius: 7px;
+  border-color: none;
+}
+
 
 /* Video */
 
