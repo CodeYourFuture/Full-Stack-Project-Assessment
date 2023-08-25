@@ -2,10 +2,14 @@ const express = require("express");
 const app = express();
 
 const cors = require("cors");
-//  make the url safe
+// //  production make the url safe
 const corsOptions = {
-  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", // frontend URI (ReactJS)
+  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app:3000", // frontend URI
 };
+//  local make the url safe
+// const corsOptions = {
+// origin: "http://localhost:3000", // frontend URI
+// };
 app.use(cors(corsOptions));
 
 app.use(express.json());

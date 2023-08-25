@@ -9,7 +9,11 @@ import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  // production server
   const serverUrl = "https://server-of-full-stack-project-assessment.onrender.com/";
+  // local server
+  // const serverUrl = "http://localhost:5000/";
+
   useEffect(() => {
     fetchVideos();
   }, []);
