@@ -13,14 +13,22 @@ let videos = [...jsonData];
 
 // Get all videos
 app.get("/", (req, res) => {
-  const {order} = req.query
-  let orderedVideos = [...videos]
-  if(order === "desc"){
-    orderedVideos.sort((a,b) => b.rating - a.rating)
-  } else {
-    orderedVideos.sort((a,b) => a.rating - b.rating)
+  const { order, search } = req.query;
+  let filteredVideos = [...videos];
+
+  // Apply search filter if search query is provided
+  if (search) {
+    filteredVideos = filteredVideos.filter((video) =>
+      video.title.toLowerCase().includes(search.toLowerCase())
+    );
   }
-  res.status(200).json(orderedVideos);
+
+  if (order === "desc") {
+    filteredVideos.sort((a, b) => b.rating - a.rating);
+  } else {
+    filteredVideos.sort((a, b) => a.rating - b.rating);
+  }
+  res.status(200).json(filteredVideos);
 });
 
 // Get a specific video
