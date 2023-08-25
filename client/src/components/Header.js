@@ -21,7 +21,7 @@ const Header = () => {
         }
         {token && <button className="btn btn-nav" onClick={logout}>Logout</button>}
       </nav>
-      <h1 className="heading">YouTube Video Manager</h1>
+      <h1 className="heading">YouTube Scraper Video Manager</h1>
     </header>
   );
 }
