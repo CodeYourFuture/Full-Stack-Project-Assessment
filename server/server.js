@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 // //  production make the url safe
 const corsOptions = {
-  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app:3000", // frontend URI
+  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", // frontend URI
 };
 //  local make the url safe
 // const corsOptions = {
