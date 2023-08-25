@@ -5,7 +5,7 @@ export default function Video({ video, deleteVideo, incRating, decRating }) {
   return (
     <div className="container-video">
       <span className="video-title">{video.title}</span>
-      
+      <img className='thumbnail' src={`https://i.ytimg.com/vi/${video['video_id']}/hqdefault.jpg`} alt={video.title} />
       <div className="container-buttons">
         <div className="container-ratings">
           <FontAwesomeIcon icon={faStar} />

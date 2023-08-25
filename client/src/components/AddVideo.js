@@ -1,10 +1,12 @@
 import { AppContext } from "../App";
-import { useContext } from "react";
-import { motion } from "framer-motion";
+import { useContext, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import jwt from "jwt-decode";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import Notification from "../components/Notification";
 
 const schema = yup.object({
   url: yup.string().min(3).max(100).required()
@@ -16,6 +18,12 @@ export default function AddVideo({ addVideo }) {
 
   const token = localStorage.getItem("token");
   const { uId } = jwt(token);
+
+  const [notification, setNotification] = useState({
+    message: "",
+    display: false,
+    bgColor: ""
+  });
 
   const {
     register,
@@ -38,12 +46,35 @@ export default function AddVideo({ addVideo }) {
 
       if (res.status === 200) {
         setValue('url', '');
+
         addVideo(data);
+
+        setNotification({
+          message: 'Video saved.',
+          display: true,
+          bgColor: "#009379"
+        });
       } else {
-        console.log(data);
+        setNotification({
+          message: 'There was a problem. Maybe the url is invalid.',
+          display: true,
+          bgColor: "#E2412E"
+        });
       }
     } catch (error) {
-      console.log(error.message);
+      setNotification({
+        message: 'There was a problem. Maybe the url is invalid.',
+        display: true,
+        bgColor: "#E2412E"
+      });
+    } finally {
+      setTimeout(() => {
+        setNotification({
+          message: "",
+          display: false,
+          bgColor: "#E2412E"
+        });
+      }, 3000);
     }
   }
 
@@ -75,6 +106,22 @@ export default function AddVideo({ addVideo }) {
         <div>
           <button className="btn-submit" type="submit">Add</button>
         </div>
+
+        <AnimatePresence>
+          {notification.display && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1.5 }}
+              exit={{ opacity: 0 }}
+            >
+              <Notification
+                message={notification.message}
+                bgColor={notification.bgColor}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </form>
     </motion.div>
   );

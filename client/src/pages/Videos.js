@@ -34,7 +34,6 @@ export default function Videos() {
     }, [apiURL, token, uId]);
 
     const addVideo = (video) => {
-        console.log(video);
         setVideos([...videos, video]);
     }
 
