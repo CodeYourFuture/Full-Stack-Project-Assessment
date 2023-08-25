@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     // Fetch data from the API when the component mounts
-    fetch("http://127.0.0.1:5000/videos")
+    fetch("https://full-stack-server-3nzy.onrender.com")
       .then((response) => response.json())
       .then((data) => {
         // Sort the data based on the order state
