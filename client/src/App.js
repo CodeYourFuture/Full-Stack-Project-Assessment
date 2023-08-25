@@ -9,14 +9,14 @@ import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [videos, setVideos] = useState([]);
-
+  const serverUrl = "https://server-of-full-stack-project-assessment.onrender.com/";
   useEffect(() => {
     fetchVideos();
   }, []);
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch("https://server-of-full-stack-project-assessment.onrender.com/"); // Update the endpoint
+      const response = await fetch(serverUrl); // Update the endpoint
       if (response.ok) {
         const data = await response.json();
         setVideos(data);
@@ -30,7 +30,7 @@ function App() {
 
   const handleAdd = async (video) => {
     try {
-      const response = await fetch("http://localhost:5000/", {
+      const response = await fetch(serverUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function App() {
 
   const handleDelete = async (videoId) => {
     try {
-      await fetch(`http://localhost:5000/${videoId}`, {
+      await fetch(`${serverUrl}${videoId}`, {
         method: "DELETE",
       });
 
@@ -61,7 +61,7 @@ function App() {
 
   const handleVote = async (videoId, voteType) => {
     try {
-      const response = await fetch(`http://localhost:5000/${videoId}/rating?voteType=${voteType}`, {
+      const response = await fetch(`${serverUrl}${videoId}/rating?voteType=${voteType}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
