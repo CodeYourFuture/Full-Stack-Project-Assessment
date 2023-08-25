@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
-
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +22,7 @@ app.post("/", (req, res) => {
     id: newId,
     title: req.body.title,
     url: req.body.url,
+    rating:0,
   };
   if (req.body.title && req.body.url) {
     videos.push(video);
@@ -64,9 +63,9 @@ app.delete("/:id", function (req, res) {
 
 app.put("/:id", function (req, res) {
   let id = Number(req.params.id);
-  let putIndex = videos.findIndex((video) => video.id === id);
-  if (putIndex >= 0) {
-    videos[putIndex].rating = Number(req.body.rating);
+  let videoIndex = videos.findIndex((video) => video.id === id);
+  if (videoIndex >= 0) {
+    videos[videoIndex].rating = Number(req.body.rating);
     res.status(200).json({});
   } else {
     res.status(404).json({
