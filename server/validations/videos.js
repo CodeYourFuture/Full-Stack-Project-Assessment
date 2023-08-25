@@ -5,7 +5,7 @@ function validate(video) {
         userId: Joi.number().required(),
         url: Joi.string().min(3).max(100).required()
             .custom((value, helpers) => {
-                if (value.includes('https://www.youtube.com/watch?v=') && !value.includes('&')) {
+                if (value.includes('youtube.com/watch?v=') && !value.includes('&')) {
                     return value;
                 }
                 
