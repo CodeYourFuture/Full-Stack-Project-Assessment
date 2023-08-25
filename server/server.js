@@ -25,8 +25,6 @@ client.connect((err) => {
   console.log("Connected to database!");
 });
 
-let videos = require("./exampleresponse.json");
-
 app.get("/", (req, res) => {
   client.query(`SELECT * FROM videos ORDER BY title`, (error, response) => {
     if (!error) {
@@ -36,10 +34,6 @@ app.get("/", (req, res) => {
     }
     client.end;
   });
-});
-
-app.get("/info", (req, res) => {
-  res.json(videos);
 });
 
 app.get("/:id", (req, res) => {
@@ -129,52 +123,53 @@ app.post("/", async (req, res) => {
       result: "error",
       message: "Video not saved",
     });
-  }
+  } else {
+    async function getVideoTitle(videoUrl) {
+      const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
 
-  async function getVideoTitle(videoUrl) {
-    const endpoint = `https://noembed.com/embed?url=${videoUrl}`;
-
-    return fetch(endpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        return data.title;
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
-  let videoTitle = await getVideoTitle(req.body.url);
-
-  client
-    .query("SELECT MAX(id) FROM videos")
-    .then((result) => {
-      let newId = result.rows[0].max + 1;
-      let newTitle = videoTitle; //req.body.title;
-      let newUrl = req.body.url.split("=")[1];
-      let newRating = 0;
-
-      return client
-        .query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating])
-        .then((result) => {
-          res.status(201).json({
-            id: newId,
-          });
+      return fetch(endpoint)
+        .then((response) => response.json())
+        .then((data) => {
+          return data.title;
         })
-        .catch((error) => {
-          console.log(error.message);
-          res.status(404).json({
-            result: "error",
-            message: "Video could not be added",
-          });
+        .catch((err) => {
+          throw err;
         });
-    })
-    .catch((error) => {
-      console.log(error.message);
-      res.status(404).json({
-        result: "error",
-        message: "Video could not be added",
-      });
+    }
+    let shortUrlCode = req.body.url.split("=")[1];
+    let videoTitle = await getVideoTitle(shortUrlCode);
 
-      client.end;
-    });
+    client
+      .query("SELECT MAX(id) FROM videos")
+      .then((result) => {
+        let newId = result.rows[0].max + 1;
+        let newTitle = videoTitle; //req.body.title;
+        let newUrl = shortUrlCode;
+        let newRating = 0;
+
+        return client
+          .query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating])
+          .then((result) => {
+            res.status(201).json({
+              id: newId,
+            });
+          })
+          .catch((error) => {
+            console.log(error.message);
+            res.status(404).json({
+              result: "error",
+              message: "Video could not be added",
+            });
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(404).json({
+          result: "error",
+          message: "Video could not be added",
+        });
+
+        client.end;
+      });
+  }
 });
