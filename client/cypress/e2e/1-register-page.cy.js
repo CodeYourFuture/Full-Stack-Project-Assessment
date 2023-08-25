@@ -44,3 +44,24 @@ describe('Form validation', () => {
       cy.contains('Password must be at most 15 characters').should('exist');
   })
 })
+
+describe('User registration', () => {
+  beforeEach(() => {
+      cy.task('seedDB');
+      cy.visit('/');
+  });
+
+  it('Registers user', () => {
+      cy.get('#email').type('haroon2@gmail.com');
+      cy.get('#password').type('password321');
+      cy.get('[type=submit]').click();
+      cy.contains('User registered.').should('exist');
+  })
+
+  it('Stops user duplication', () => {
+      cy.get('#email').type('haroon@gmail.com');
+      cy.get('#password').type('password321');
+      cy.get('[type=submit]').click();
+      cy.contains('User already registered.').should('exist');
+  })
+})
