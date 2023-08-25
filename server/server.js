@@ -35,16 +35,43 @@ app.post("/", (req, res) => {
     });
 });
 
-app.get("/:id", (req,res) => {
-const id = Number(req.params.id);
-const filteredVideos = videos.filter((video) => video.id === id);
-if (filteredVideos.length > 0) {
-  res.json(filteredVideos);
-}else{
-  res
-    .status(404)
-    .json({ 
-      result: "failure", 
-      message: "Video could not be found" });
-}
-})
+app.get("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const filteredVideos = videos.filter((video) => video.id === id);
+  if (filteredVideos.length > 0) {
+    res.status(200).json(filteredVideos);
+  } else {
+    res.status(404).json({
+      result: "failure",
+      message: "Video could not be found",
+    });
+  }
+});
+
+app.delete("/:id", function (req, res) {
+  let id = Number(req.params.id);
+  let deleteIndex = videos.findIndex((video) => video.id === id);
+  if (deleteIndex >= 0) {
+    videos.splice(deleteIndex, 1);
+    res.status(200).json({});
+  } else {
+    res.status(404).json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  }
+});
+
+app.put("/:id", function (req, res) {
+  let id = Number(req.params.id);
+  let putIndex = videos.findIndex((video) => video.id === id);
+  if (putIndex >= 0) {
+    videos[putIndex].rating = Number(req.body.rating);
+    res.status(200).json({});
+  } else {
+    res.status(404).json({
+      result: "failure",
+      message: "Video could not be updated",
+    });
+  }
+});
