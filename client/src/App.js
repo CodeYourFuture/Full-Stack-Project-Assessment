@@ -48,7 +48,7 @@ function App() {
       console.error(error);
     }
     // Refresh the video list after adding a new video
-    fetchVideos();
+    await fetchVideos();
   };
 
   const handleDelete = async (videoId) => {
