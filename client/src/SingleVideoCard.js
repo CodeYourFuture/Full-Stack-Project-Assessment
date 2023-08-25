@@ -16,31 +16,33 @@ function SingleVideoCard({ title, url, deleteVideo }) {
 
   const urlId = url.split("v=")[1];
   return (
-    <div className="card">
-      <iframe
-        className="card-thumb"
-        width="320"
-        height="320"
-        src={`https://www.youtube.com/embed/${urlId}`}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-      <div className="card-body">
-        <button className="counting" onClick={minusCount}>
-          -
-        </button>
-        <span>{count}</span>
-        <button className="counting" onClick={plusCount}>
-          +
-        </button>
-        <h5>{title}</h5>
+    <>
+      <div className="card">
+        <iframe
+          className="card-thumb"
+          width="320"
+          height="320"
+          src={`https://www.youtube.com/embed/${urlId}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+        <div className="card-body">
+          <button className="counting" onClick={minusCount}>
+            -
+          </button>
+          <span>{count}</span>
+          <button className="counting" onClick={plusCount}>
+            +
+          </button>
+          <h5>{title}</h5>
 
-        <button className="btn btn-primary" onClick={deleteVideo}>
-          Delete
-        </button>
+          <button className="btn btn-primary" onClick={deleteVideo}>
+            Delete
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 export default SingleVideoCard;
