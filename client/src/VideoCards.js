@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
+import AddVideoForm from "./AddVideoForm";
 import SingleVideoCard from "./SingleVideoCard";
 import exampleResponse from "./exampleresponse.json";
 
@@ -22,11 +23,13 @@ function VideoCards() {
   return (
     <>
       <SearchBar search={search} />
+      <AddVideoForm />
       {videos.map((video) => (
         <SingleVideoCard
           key={video.id}
           title={video.title}
           url={video.url}
+          rating={video.rating}
           deleteVideo={() => handleDelete(video.id)}
         />
       ))}

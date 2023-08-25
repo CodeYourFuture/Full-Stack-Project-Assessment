@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function SingleVideoCard({ title, url, deleteVideo }) {
-  const [count, setCount] = useState(0);
+function SingleVideoCard({ title, url, rating, deleteVideo }) {
+  const [count, setCount] = useState(rating);
 
   function minusCount() {
     setCount((prevCount) => prevCount - 1);
