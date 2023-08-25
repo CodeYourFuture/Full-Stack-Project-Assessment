@@ -93,7 +93,18 @@ input {
   width: 100%;
   font-size: 15px;
   padding: 5px 0px 5px 0px;
-  margin: 5px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
+}
+
+.cont-invalid {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.invalid-text {
+  color: #E2412E;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .container-videos {
