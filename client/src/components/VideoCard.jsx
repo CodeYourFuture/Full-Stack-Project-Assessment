@@ -30,7 +30,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
 
   return (
     <div>
-      <p>Video Title: {singleVideo.title}</p>
+      <p className="text-xl text-yellow-500 font-semibold text-center">Video Title: {singleVideo.title}</p>
       <iframe
         width="560"
         height="315"

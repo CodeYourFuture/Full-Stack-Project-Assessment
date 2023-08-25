@@ -6,7 +6,7 @@ const App = () => {
   
   return (
     <div className="text-left App">
-      <header className="App-header">
+      <header className="text-xl text-sky-700 font-semibold text-center">
         <h1>Video Recommendation</h1>
       </header>
       <MainContainer/>
