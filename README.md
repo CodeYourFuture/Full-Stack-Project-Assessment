@@ -27,4 +27,4 @@ HTML, CSS, JavaScript, React.js, Node.js, PostgreSQL, GCP App Engine, GCP Cloud 
 - PostgreSQL database deployed to AWS.
 
 ## Deployment Links
-- Deployed Front End: https://youtube-video-manager.netlify.app/
+- Deployed Front End: https://youtube-scraper-video-manager.netlify.app/
