@@ -23,7 +23,7 @@ function handleDelete(id) {
 }
 
   return (
-    <div>
+    <div className="grid justify-center gap-9">
       {videoData.sort((a, b) => b.rating - a.rating).map((singleVideo) => {
         return (
           <VideoCard

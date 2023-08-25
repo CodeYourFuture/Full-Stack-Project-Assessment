@@ -36,27 +36,35 @@ function VideoForm({ videoData, setVideoData }) {
   }
   return (
     <div>
-      <form>
-        <label htmlFor="title">
-          Please enter your video title below:
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Enter video title here"
-            required
-          />
-        </label>
-        <label htmlFor="url">
-          Please enter your YouTube video url below:
-          <input
-            type="url"
-            name="url"
-            id="url"
-            placeholder="Enter YouTube video url here"
-          />
-        </label>
-        <button onClick={addVideoHandler} type="submit">
+      <form className="border-2 p-4 m-5 flex items-center flex-col gap-7">
+        <div className="grid gap-7">
+            <div className="flex gap-3">
+            <label htmlFor="title">
+              Please enter your video title below: 
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter video title here"
+              required
+            />
+        </div>
+          <div className="flex gap-3">
+            <label htmlFor="url">
+              Please enter your YouTube video url below: 
+            </label>
+            <input
+              type="url"
+              name="url"
+              id="url"
+              placeholder="Enter YouTube video url here"
+            />
+          </div>
+        </div>
+        
+
+        <button onClick={addVideoHandler} type="submit" className="bg-indigo-500 p-2 rounded">
           Submit
         </button>
       </form>

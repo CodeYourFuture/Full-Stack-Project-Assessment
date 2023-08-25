@@ -30,22 +30,31 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
 
   return (
     <div>
-      <p className="text-xl text-yellow-500 font-semibold text-center">Video Title: {singleVideo.title}</p>
-      <iframe
-        width="560"
-        height="315"
-        src={singleVideo.url.replace("watch?v=", "embed/")}
-        title={singleVideo.title}
-        allowFullScreen
-      ></iframe>
-      <button type="button" onClick={upVoteHandler}>
-        Up Vote 👍
-      </button>
-      {/* <button type="button" onClick={downVoteHandler}>Down Vote</button> */}
-      <p>Rating: {singleVideo.rating}</p>
-      <button type="button" onClick={downVoteHandler}>
-        Down Vote 👎
-      </button>
+
+      <p className="text-xl text-yellow-500 font-semibold">Video Title: {singleVideo.title}</p>
+      <div className="w-fit">
+          <iframe
+            width="560"
+            height="315"
+            src={singleVideo.url.replace("watch?v=", "embed/")}
+            title={singleVideo.title}
+            allowFullScreen>
+          </iframe>
+
+    {/* Rating section below: */}
+          <div className="flex flex-row justify-between">
+            <button type="button" onClick={upVoteHandler}>
+              Up Vote 👍
+            </button>
+            {/* <button type="button" onClick={downVoteHandler}>Down Vote</button> */}
+            <p>Rating: {singleVideo.rating}</p>
+            <button type="button" onClick={downVoteHandler}>
+              Down Vote 👎
+            </button>
+          </div>
+      </div>
+      
+
       <p>Time Uploaded: {singleVideo.timeSent}</p>
 
       {/* Put onDelete function on line below */}
