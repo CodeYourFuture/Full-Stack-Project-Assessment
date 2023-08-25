@@ -19,6 +19,7 @@ export default function AddVideo({ addVideo }) {
   const token = localStorage.getItem("token");
   const { uId } = jwt(token);
 
+  const [reqInProcess, setReqInProcess] = useState(false);
   const [notification, setNotification] = useState({
     message: "",
     display: false,
@@ -35,6 +36,8 @@ export default function AddVideo({ addVideo }) {
   });
 
   const onSubmit = async (formData) => {
+    setReqInProcess(true);
+
     try {
       const res = await fetch(`${apiURL}/api/videos`, {
         method: "POST",
@@ -68,6 +71,8 @@ export default function AddVideo({ addVideo }) {
         bgColor: "#E2412E"
       });
     } finally {
+      setReqInProcess(false);
+
       setTimeout(() => {
         setNotification({
           message: "",
@@ -103,7 +108,11 @@ export default function AddVideo({ addVideo }) {
         </div>
 
         <div>
-          <button className="btn-submit" type="submit">Add</button>
+          <button
+            className={reqInProcess ? 'btn-submit btn-disabled' : 'btn-submit'}
+            type="submit"
+            disabled={reqInProcess}
+          >Add</button>
         </div>
 
         <AnimatePresence>
