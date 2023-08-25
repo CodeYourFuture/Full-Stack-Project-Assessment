@@ -36,7 +36,7 @@ router.post("/", auth, async (req, res) => {
 
         res.json(rs.rows[0]);
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: error.message
         });
@@ -51,7 +51,7 @@ router.patch("/:id/inc-rating", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });
@@ -66,7 +66,7 @@ router.patch("/:id/dec-rating", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });
@@ -81,7 +81,7 @@ router.delete("/:id", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });

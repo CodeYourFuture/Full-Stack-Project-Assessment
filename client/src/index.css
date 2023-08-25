@@ -120,11 +120,29 @@ input {
   font-size: 20px;
 }
 
+.video-author {
+  text-align: left;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.video-views {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.video-date {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
 .container-video {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 330px;
+  height: 408px;
   background-color: white;
   border: 1px solid #e9ecef;
   color: black;

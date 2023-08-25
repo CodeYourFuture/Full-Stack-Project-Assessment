@@ -92,7 +92,6 @@ export default function AddVideo({ addVideo }) {
             <input
               id="url"
               type="text"
-              placeholder="youtube.com/watch?v=w5i-x8QRCSg"
               {...register("url")}
             />
           </label>
