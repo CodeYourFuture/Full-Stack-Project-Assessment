@@ -16,7 +16,7 @@ function App() {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/"); // Update the endpoint
+      const response = await fetch("https://server-of-full-stack-project-assessment.onrender.com:5000/"); // Update the endpoint
       if (response.ok) {
         const data = await response.json();
         setVideos(data);
