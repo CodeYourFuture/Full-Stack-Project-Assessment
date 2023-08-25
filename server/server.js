@@ -145,8 +145,9 @@ app.post("/", async (req, res) => {
         });
     }
     let shortUrlCode = req.body.url.split("=")[1];
-    let videoTitle = await getVideoTitle(shortUrlCode);
+    // let videoTitle = await getVideoTitle(shortUrlCode);
 
+    let videoTitle = "jj";
     client
       .query("SELECT MAX(id) FROM videos")
       .then((result) => {
