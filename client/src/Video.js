@@ -1,13 +1,6 @@
 import React from "react";
 
 function Video(props) {
-  // const regex = /v=([^&]+)/;
-  // let movieSrc = null;
-
-  // const movieName = props.url.split("watch?v=")[1];
-  const videoSrc = "https://www.youtube.com/embed/" + props.url;
-  // const videoSrc = "https://www.youtube.com/embed/" + props.url;
-
   function handleUpVote() {
     props.onVote(props.id, "up");
   }
@@ -32,15 +25,7 @@ function Video(props) {
           </div>
         </div>
 
-        <iframe
-          width="100%"
-          height="315"
-          src={videoSrc}
-          title={props.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <iframe title={props.title} src={`https://www.youtube.com/embed/${props.url}`} frameBorder="5" width="100%" height="315" />
 
         <button className="btn btn-sm btn-outline-secondary" onClick={() => props.onDelete(props.id)}>
           Delete
