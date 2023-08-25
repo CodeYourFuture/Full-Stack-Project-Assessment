@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 
-// const cors = require("cors");
-// // //  production make the url safe
-// const corsOptions = {
-//   origin: ["https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", "https://noembed.com", "http://localhost:3000"],
-// };
-// app.use(cors(corsOptions));
+const cors = require("cors");
+// //  production make the url safe
+const corsOptions = {
+  origin: ["https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", "https://noembed.com"],
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
