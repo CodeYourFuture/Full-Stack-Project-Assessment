@@ -14,6 +14,27 @@
   margin-top: 50px;
 }
 
+.form {
+  text-align: center;
+  margin: 0vw;
+  padding: 1rem;
+}
+
+.form input {
+  margin: 10px;
+  border-radius: 5px;
+  border: #6b705c;
+}
+
+.top-components {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
 .card {
   border: 1px solid #80b918;
   background-color: #80b918;

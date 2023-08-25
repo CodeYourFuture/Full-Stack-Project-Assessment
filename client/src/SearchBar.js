@@ -9,15 +9,20 @@ function SearchBar(props) {
   }
 
   return (
-    <>
+    <div className="form">
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
-        <input type="search" value={inputValue} onChange={handleSearch}></input>
+        <input
+          type="search"
+          value={inputValue}
+          onChange={handleSearch}
+          placeholder="Search a video..."
+        ></input>
       </form>
-    </>
+    </div>
   );
 }
 

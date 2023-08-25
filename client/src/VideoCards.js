@@ -31,8 +31,11 @@ function VideoCards() {
 
   return (
     <>
-      <SearchBar search={search} />
-      <AddVideoForm addVideo={addVideo} />
+      <div className="top-components">
+        <AddVideoForm addVideo={addVideo} />
+        <SearchBar search={search} />
+      </div>
+
       {videos.map((video) => (
         <SingleVideoCard
           key={video.id}

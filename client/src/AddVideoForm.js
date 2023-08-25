@@ -19,7 +19,8 @@ function AddVideoForm({ addVideo }) {
   }
 
   return (
-    <>
+    <div className="form">
+      <span>Add your favorite video</span>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -35,9 +36,9 @@ function AddVideoForm({ addVideo }) {
           onChange={handleChange}
           value={formData.url}
         ></input>
-        <button>Add Video</button>
+        <button className="btn btn-primary">Add Video</button>
       </form>
-    </>
+    </div>
   );
 }
 
