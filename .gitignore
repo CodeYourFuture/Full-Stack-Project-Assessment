@@ -1,0 +1,6 @@
+
+*.pack
+client/node_modules/.cache/default-development/0.pack
+*.pack
+*.pack
+*.pack
