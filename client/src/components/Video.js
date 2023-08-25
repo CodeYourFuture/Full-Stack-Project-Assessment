@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRemove, faStar, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment';
 
 export default function Video({ video, deleteVideo, incRating, decRating }) {
   return (
@@ -10,7 +11,7 @@ export default function Video({ video, deleteVideo, incRating, decRating }) {
       
       <span className='video-author'>{video.author}</span>
       <span className='video-views'>{video.views.toLocaleString('en-US')} Views</span>
-      <span className='video-date'>Uploaded on {video['upload_date']}</span>
+      <span className='video-date'>Uploaded on {moment(video["upload_date"]).utcOffset("+0100").format("DD-MM-YYYY")}</span>
 
       <div className="container-buttons">
         <div className="container-ratings">
