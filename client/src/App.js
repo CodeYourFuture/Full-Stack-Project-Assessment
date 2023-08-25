@@ -6,7 +6,7 @@ function App() {
   const [videoForm, setVideoForm] = useState(false);
   const [allVideos, setAllVideos] = useState([]);
 
-  const getAllVideos = async (MoviesOrder) => {
+  const getAllVideos = async (searchText, MoviesOrder) => {
     console.log(MoviesOrder);
     let order = "";
     if (MoviesOrder === undefined || MoviesOrder === "desc") {
@@ -14,11 +14,13 @@ function App() {
     } else {
       order = "asc";
     }
-    console.log(order);
+   
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/?order=${order}`
-      );
+      let url = `${process.env.REACT_APP_SERVERURL}/?order=${order}`
+      if(searchText) {
+        url += `&search=${searchText}`
+      }
+      const response = await fetch(url)
       if (!response.status === 200) {
         throw new Error("something went wrong!");
       }

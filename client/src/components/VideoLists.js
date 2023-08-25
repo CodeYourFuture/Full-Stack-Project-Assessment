@@ -2,12 +2,19 @@ import { useState } from "react";
 import Video from "./Video";
 const VideoLists = ({ allVideos, getAllVideos }) => {
   const [order, setOrder] = useState("desc");
+  const [search, setSearch] = useState("")
 
-  const handleOrderChange = (e) => {
+  const orderHandle = (e) => {
     const newOrder = e.target.value;
     setOrder(newOrder);
-    getAllVideos(newOrder);
+    getAllVideos(search,newOrder);
   };
+
+  const searchHandle = async (e) => {
+    const searchText = e.target.value
+    setSearch(searchText)
+    getAllVideos(searchText, order)
+  }
 
   return (
     <>
@@ -17,12 +24,12 @@ const VideoLists = ({ allVideos, getAllVideos }) => {
           <input
             type="text"
             placeholder="Enter title..."
-            // onChange={(e) => handleSearch(e.target.value)}
+            onChange={searchHandle}
           />
         </div>
         <div className="order-videos">
-          <label>Order by votes:</label>
-          <select value={order} onChange={handleOrderChange}>
+          <label>Order by votes </label>
+          <select value={order} onChange={orderHandle}>
             <option value="desc">Desc</option>
             <option value="asc">Asce</option>
           </select>

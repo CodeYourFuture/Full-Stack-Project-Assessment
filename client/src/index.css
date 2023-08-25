@@ -51,9 +51,11 @@
   border-radius: 10px;
   background-color: rgb(244, 247, 85);
 }
+
 .cancel-btn:hover {
   background-color: rgb(243, 249, 176);;
 }
+
 .add-btn {
   margin: 1rem 0;
   padding: 10px 18px;;
@@ -72,6 +74,7 @@
   row-gap: 10px;
   padding: 1rem;
 }
+
 .features {
   display: flex;
   justify-content: space-around;
@@ -92,8 +95,8 @@
 .features .order-videos select {
   border-radius: 7px;
   border-color: none;
+  height: 35px;
 }
-
 
 /* Video */
 
