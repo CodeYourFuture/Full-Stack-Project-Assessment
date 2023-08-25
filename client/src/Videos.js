@@ -19,6 +19,7 @@ function Videos(props) {
           throw new Error("something went wrong");
         }
         const data = await response.json();
+        
         return setLoadData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -46,10 +47,10 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        
         setLoadData(data);
-        console.log(titleData);
-        console.log(urlData);
+       
+       
         setTitleData("");
         setUrlData("");
       })
@@ -63,7 +64,7 @@ function deleteBtnHandler(item) {
     title: item.title,
     url: item.url,
   };
-
+//deleting video
   fetch(`http://localhost:3000/videos/${item.id}`, {
     method: "DELETE",
     headers: {
@@ -117,18 +118,22 @@ function deleteBtnHandler(item) {
         )}
         <div className="mainShowVideos">
           {loadData.length > 0 ? (
-            loadData.map((item) => (
-              <div key={item.id} className="showVideo">
+            loadData.map((item) => {
+              const videoId = item.url.split("v=")[1];
+                
+             return <div key={item.id} className="showVideo">
+                {console.log(videoId)}
                 <p style={{ margin: 5 }}>{item.title}</p>
                 <iframe
                   width="350"
                   height="200"
-                  src={`https://www.youtube.com/embed/${item.url}`}
+                  src={`https://www.youtube.com/embed/${videoId}`}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
+                
                 <button
                   className="btnShowVideo"
                   onClick={() => deleteBtnHandler(item)}
@@ -136,7 +141,7 @@ function deleteBtnHandler(item) {
                   Delete
                 </button>
               </div>
-            ))
+})
           ) : (
             <p>No video yet.</p>
           )}
