@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 //  make the url safe
 const corsOptions = {
-  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app/", // frontend URI (ReactJS)
+  origin: "https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", // frontend URI (ReactJS)
 };
 app.use(cors(corsOptions));
 
