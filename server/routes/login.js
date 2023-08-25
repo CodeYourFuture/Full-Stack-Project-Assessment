@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 
     try {
         const rs = await pool.query("SELECT * FROM users WHERE email = $1", [req.body.email]);
-        if (rs.rowCount <= 0) return res.status(400).json({ message: "User already registered." });
+        if (rs.rowCount <= 0) return res.status(404).json({ message: "Invalid email or password." });
 
         const validPassword = await bcrypt.compare(req.body.password, rs.rows[0].password);
         if (!validPassword) return res.status(400).send({ message: "Invalid email or password." });

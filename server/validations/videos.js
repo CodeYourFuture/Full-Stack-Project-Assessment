@@ -3,8 +3,14 @@ const Joi = require("joi");
 function validate(video) {
     const schema = Joi.object({
         userId: Joi.number().required(),
-        title: Joi.string().min(3).max(100).required(),
         url: Joi.string().min(3).max(100).required()
+            .custom((value, helpers) => {
+                if (value.includes('youtube.com/watch?v=') && !value.includes('&')) {
+                    return value;
+                }
+                
+                return helpers.error('any.invalid');
+            }, 'Custom validation')
     });
 
     return schema.validate(video);

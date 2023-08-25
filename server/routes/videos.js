@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
+const { scrape } = require("../functions/scrape")
 const validate = require("../validations/videos");
 const auth = require("../middleware/auth");
 
@@ -15,20 +16,29 @@ router.post("/", auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).json({ message: error.message });
 
-    const video = {
-        userId: req.body.userId,
-        title: req.body.title,
-        url: req.body.url
-    };
+    const videoId = req.body.url.split('watch?v=')[1];
 
     try {
-        const rs = await pool.query("INSERT INTO videos (u_id, title, url) VALUES($1, $2, $3) RETURNING *", [video.userId, video.title, video.url]);
+        const videoDetails = await scrape(videoId);
+        if (!videoDetails.uploadDate) return res.status(404).json({
+            result: "failure",
+            message: "Video not found."
+        });
+
+        const rs = await pool.query("INSERT INTO videos (u_id, video_id, title, views, upload_date, author) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", [
+            req.body.userId,
+            videoId,
+            videoDetails.title,
+            videoDetails.views,
+            videoDetails.uploadDate,
+            videoDetails.author
+        ]);
 
         res.json(rs.rows[0]);
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
-            message: "Video could not be saved"
+            message: error.message
         });
     }
 });
@@ -41,7 +51,7 @@ router.patch("/:id/inc-rating", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });
@@ -56,7 +66,7 @@ router.patch("/:id/dec-rating", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });
@@ -71,7 +81,7 @@ router.delete("/:id", auth, async (req, res) => {
 
         res.json({});
     } catch (error) {
-        res.json({
+        res.status(500).json({
             result: "failure",
             message: "Video could not be deleted"
         });
