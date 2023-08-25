@@ -13,7 +13,14 @@ let videos = [...jsonData];
 
 // Get all videos
 app.get("/", (req, res) => {
-  res.status(200).json(videos);
+  const {order} = req.query
+  let orderedVideos = [...videos]
+  if(order === "desc"){
+    orderedVideos.sort((a,b) => b.rating - a.rating)
+  } else {
+    orderedVideos.sort((a,b) => a.rating - b.rating)
+  }
+  res.status(200).json(orderedVideos);
 });
 
 // Get a specific video

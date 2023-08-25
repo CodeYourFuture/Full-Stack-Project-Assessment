@@ -4,8 +4,9 @@ const VideoLists = ({ allVideos, getAllVideos }) => {
   const [order, setOrder] = useState("desc");
 
   const handleOrderChange = (e) => {
-    setOrder(e.target.value);
-    getAllVideos(order);
+    const newOrder = e.target.value;
+    setOrder(newOrder);
+    getAllVideos(newOrder);
   };
 
   return (

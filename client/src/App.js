@@ -7,12 +7,14 @@ function App() {
   const [allVideos, setAllVideos] = useState([]);
 
   const getAllVideos = async (MoviesOrder) => {
+    console.log(MoviesOrder);
     let order = "";
-    if (MoviesOrder === "" || MoviesOrder === "desc") {
+    if (MoviesOrder === undefined || MoviesOrder === "desc") {
       order = "desc";
     } else {
       order = "asc";
     }
+    console.log(order);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVERURL}/?order=${order}`
