@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideoForm() {
+function AddVideoForm({ addVideo }) {
   const [formData, setFormData] = useState({ title: "", url: "" });
 
   function handleChange(e) {
@@ -12,9 +12,15 @@ function AddVideoForm() {
     });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    addVideo(formData);
+    setFormData({ title: "", url: "" });
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="video title"

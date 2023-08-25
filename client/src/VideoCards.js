@@ -20,10 +20,19 @@ function VideoCards() {
     setVideos(filteredVideos);
   }
 
+  function addVideo(v) {
+    const videoId = v.url.match(
+      /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/
+    )[1]; //this piece of code extract the Youtube video id given from a Youtube url.
+    setVideos((currVideos) => {
+      return [...currVideos, { ...v, rating: 0, id: videoId }];
+    });
+  }
+
   return (
     <>
       <SearchBar search={search} />
-      <AddVideoForm />
+      <AddVideoForm addVideo={addVideo} />
       {videos.map((video) => (
         <SingleVideoCard
           key={video.id}
