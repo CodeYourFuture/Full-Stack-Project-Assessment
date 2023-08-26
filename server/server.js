@@ -134,18 +134,21 @@ app.post("/", async (req, res) => {
     let shortUrlCode = req.body.url.split("=")[1];
 
     // getting tile
-    async function getVideoTitle(videoUrl) {
-      const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
+    // async function getVideoTitle(videoUrl) {
+    //   const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
 
-      try {
-        const response = await fetch(endpoint, { mode: "no-cors" });
-        const data = await response.json();
-        return data.title;
-      } catch (err) {
-        throw err;
-      }
-    }
-    let videoTitle = await getVideoTitle(shortUrlCode);
+    //   try {
+    //     const response = await fetch(endpoint, { mode: "no-cors" });
+    //     const data = await response.json();
+    //     return data.title;
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // }
+    const response = await fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${shortUrlCode}`);
+    const data = await response.json();
+    console.log(data);
+    let videoTitle = data.title; //await getVideoTitle(shortUrlCode);
 
     // sending it to database
     try {
