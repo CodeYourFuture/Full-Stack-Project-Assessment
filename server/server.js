@@ -145,16 +145,16 @@ app.post("/", async (req, res) => {
     //     throw err;
     //   }
     // }
-    const response = await fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${shortUrlCode}`);
-    const data = await response.json();
-    console.log(data);
-    let videoTitle = data.title; //await getVideoTitle(shortUrlCode);
+    // const response = await fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${shortUrlCode}`);
+    // const data = await response.json();
+    // console.log(data);
+    // let videoTitle = data.title; //await getVideoTitle(shortUrlCode);
 
     // sending it to database
     try {
       const result = await client.query("SELECT MAX(id) FROM videos");
       let newId = result.rows[0].max + 1;
-      let newTitle = videoTitle;
+      let newTitle = data.title; //videoTitle;
       let newUrl = shortUrlCode;
       let newRating = 0;
 
