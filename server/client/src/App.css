@@ -1,0 +1,424 @@
+.App {
+  text-align: center;
+  background-color: rgb(148, 87, 87);
+  color:white;
+  width:100%;
+  padding: 30px;
+  position: relative;
+}
+
+
+.uploadVideo_btn{
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: rgb(148, 87, 87);
+  
+}
+.uploadVideo_btn a{
+  text-decoration: none;
+  color:white;
+}
+.uploadVideo_btn a:hover{
+  color:palevioletred;
+  
+}
+.searchVideo{
+  
+  padding: 12px 20px;
+  margin: 8px 0 0 10px;
+  display: inline-block;
+  border: 1px solid rgb(99, 53, 53);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.search{
+  display:flex;
+  justify-content:space-between ;
+  margin-top: 20px;
+  margin-left: 150px;
+  margin-right: 10px;
+  width: 70%;
+}
+.container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  margin-left: 0px;
+  margin-top: 30px;
+  position:relative;
+
+}
+input[type=text], select, textarea {
+  /* width: 100%; */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  margin-left: 10px;
+  resize: vertical;
+}
+.labelInput{
+  padding-left: 50px;
+}
+.videoDisplayContainer{
+  background-color:white;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-left: 50px;
+  margin-top: 30px; 
+   padding: 10px;
+  column-gap: 20px;
+  row-gap: 20px;
+  
+}
+h5{
+  margin-bottom: 30px;
+}
+.displayGrid{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+margin-top: 20px;
+  
+  
+}
+.formBtn{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+}
+.cancelBtn{
+  border: none;
+  border-radius: 3px;
+  color:#000000;
+  background-color: #ffc107;
+  margin: 0px 0px 16px 16px;
+  padding: 6px 12px;
+  
+}
+.uploadBtn{
+  color:#ffffff;
+  background-color: #dc3545;
+  margin: 0px 0px 16px 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 3px;
+}
+.deleteBtn{
+  color:#ffffff;
+  background-color: #dc3545;
+  margin-top: 30px;
+  padding: 10px;
+  width:70px;
+  border: none;
+  border-radius: 3px;
+  align-items: center;
+  
+}
+.aligndeletebutton{
+  display: flex;
+  justify-content: center;
+  margin-left: -50px;
+  
+}
+.likedislikeBtn{
+  
+  display:flex;
+  justify-content: space-around;
+  width:70%;
+  margin-top: 20px;
+  align-items: right;
+}
+@media only screen and (max-width: 400px) {
+  .App {
+    text-align: center;
+    background-color: rgb(148, 87, 87);
+    color:white;
+    width:100%;
+    padding: 30px;
+    position: relative;
+  }
+  
+  
+  .uploadVideo_btn{
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    margin-top: 7px;
+    padding: 15px;
+    background-color: rgb(148, 87, 87);
+    
+  }
+  .uploadVideo_btn a{
+    text-decoration: none;
+    color:white;
+  }
+  .uploadVideo_btn a:hover{
+    color:palevioletred;
+    
+  }
+  .searchVideo{
+    
+    padding: 6px 10px;
+    margin: 10px 0px 0px 12px;
+    display: inline-block;
+    border: 1px solid rgb(99, 53, 53);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .search{
+    display:flex;
+    justify-content:space-between ;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 10px;
+    width: 90%;
+  }
+  .container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    margin-left: 0px;
+    margin-top: 30px;
+    position:relative;
+  
+  }
+  input[type=text], select, textarea {
+    /* width: 100%; */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    resize: vertical;
+  }
+  .labelInput{
+    padding-left: 50px;
+  }
+  .videoDisplayContainer{
+    background-color:white;
+    display: grid;
+    grid-template-columns: auto;
+    margin-left: -10px;
+    margin-top: 30px; 
+     padding: 10px;
+    column-gap: 20px;
+    row-gap: 20px;
+    
+  }
+  h5{
+    margin-bottom: 30px;
+  }
+  .displayGrid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  margin-top: 20px;
+  margin-left: 0px;
+    
+    
+  }
+  .formBtn{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+  }
+  .cancelBtn{
+    border: none;
+    border-radius: 3px;
+    color:#000000;
+    background-color: #ffc107;
+    margin: 0px 0px 16px 16px;
+    padding: 6px 12px;
+    
+  }
+  .uploadBtn{
+    color:#ffffff;
+    background-color: #dc3545;
+    margin: 0px 0px 16px 16px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 3px;
+  }
+  .deleteBtn{
+    color:#ffffff;
+    background-color: #dc3545;
+    margin-top: 30px;
+    padding: 10px;
+    width:70px;
+    border: none;
+    border-radius: 3px;
+    align-items: center;
+    
+  }
+  .aligndeletebutton{
+    display: flex;
+    justify-content: center;
+    margin-left: -50px;
+    
+  }
+  .likedislikeBtn{
+    
+    display:flex;
+    justify-content: space-around;
+    width:70%;
+    margin-top: 20px;
+    align-items: right;
+  }
+  
+}
+@media only screen and (max-width: 750px) {
+  .App {
+    text-align: center;
+    background-color: rgb(148, 87, 87);
+    color:white;
+    width:100%;
+    padding: 30px;
+    position: relative;
+  }
+  
+  
+  .uploadVideo_btn{
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    margin-top: 7px;
+    padding: 15px;
+    background-color: rgb(148, 87, 87);
+    
+  }
+  .uploadVideo_btn a{
+    text-decoration: none;
+    color:white;
+  }
+  .uploadVideo_btn a:hover{
+    color:palevioletred;
+    
+  }
+  .searchVideo{
+    
+    padding: 6px 10px;
+    margin: 10px 0px 0px 12px;
+    display: inline-block;
+    border: 1px solid rgb(99, 53, 53);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .search{
+    display:flex;
+    justify-content:space-between ;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 10px;
+    width: 90%;
+  }
+  .container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    margin-left: 0px;
+    margin-top: 30px;
+    position:relative;
+  
+  }
+  input[type=text], select, textarea {
+    /* width: 100%; */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    resize: vertical;
+  }
+  .labelInput{
+    padding-left: 50px;
+  }
+  .videoDisplayContainer{
+    background-color:white;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: -10px;
+    margin-top: 30px; 
+     padding: 10px;
+    column-gap: 20px;
+    row-gap: 20px;
+    
+  }
+  h5{
+    margin-bottom: 30px;
+  }
+  .displayGrid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  margin-top: 20px;
+  margin-left: 0px;
+    
+    
+  }
+  .formBtn{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+  }
+  .cancelBtn{
+    border: none;
+    border-radius: 3px;
+    color:#000000;
+    background-color: #ffc107;
+    margin: 0px 0px 16px 16px;
+    padding: 6px 12px;
+    
+  }
+  .uploadBtn{
+    color:#ffffff;
+    background-color: #dc3545;
+    margin: 0px 0px 16px 16px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 3px;
+  }
+  .deleteBtn{
+    color:#ffffff;
+    background-color: #dc3545;
+    margin-top: 30px;
+    padding: 10px;
+    width:70px;
+    border: none;
+    border-radius: 3px;
+    align-items: center;
+    
+  }
+  .aligndeletebutton{
+    display: flex;
+    justify-content: center;
+    margin-left: -50px;
+    
+  }
+  .likedislikeBtn{
+    
+    display:flex;
+    justify-content: space-around;
+    width:70%;
+    margin-top: 20px;
+    align-items: right;
+  }
+  
+}
