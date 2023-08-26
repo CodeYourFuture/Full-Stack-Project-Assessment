@@ -17,14 +17,14 @@ app.get("/", (req, res) => {
 //POST "/" to post a new video
 
 app.post("/", (req, res) => {
-  const { title, url } = request.body;
+  const { title, url } = req.body;
   if (!title || !url) {
     return res.status(400).json({
       result: "failure",
       message: "Video could not be saved.",
     });
   } else {
-    const videoId = videos.url.match(
+    const videoId = url.match(
       /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/
     )[1];
     const newVideo = {
