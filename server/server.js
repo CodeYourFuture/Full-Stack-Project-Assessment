@@ -39,3 +39,21 @@ app.post("/", (req, res) => {
     });
   }
 });
+
+//DELETE "/{id}"
+
+app.delete("/:id", (req, res) => {
+  const videoId = req.params.id;
+  const deleteVideo = videos.findIndex((video) => video.id === videoId);
+  if (deleteVideo === -1) {
+    res.status(404).json({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+  } else {
+    videos.splice(deleteVideo, 1);
+    res.status(201).json({
+      message: "Video deleted",
+    });
+  }
+});
