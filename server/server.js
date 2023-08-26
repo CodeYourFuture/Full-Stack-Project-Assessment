@@ -138,14 +138,13 @@ app.post("/", async (req, res) => {
     async function getVideoTitle(videoUrl) {
       const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
 
-      return fetch(endpoint)
-        .then((response) => response.json())
-        .then((data) => {
-          return data.title;
-        })
-        .catch((err) => {
-          throw err;
-        });
+      try {
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        return data.title;
+      } catch (err) {
+        throw err;
+      }
     }
     let videoTitle = await getVideoTitle(shortUrlCode);
 
