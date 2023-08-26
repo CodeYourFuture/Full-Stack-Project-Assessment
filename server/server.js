@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -11,14 +12,36 @@ app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+// set up a connection to the database
+const { Pool } = require("pg");
+console.log(process.env);
+const db = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: true,
+});
+
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 const videos = require("./exampleresponse.json");
 
 // GET "/"
 // Returns all the videos
-app.get("/", (request, response) => {
-  response.json(videos);
+// app.get("/", (request, response) => {
+//   response.json(videos);
+// });
+
+app.get("/", function (request, response) {
+  db.query("SELECT * FROM videos")
+    .then((result) => {
+      response.json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 // Returns video with specific id
