@@ -134,12 +134,11 @@ app.post("/", async (req, res) => {
     let shortUrlCode = req.body.url.split("=")[1];
 
     // getting tile
-
     async function getVideoTitle(videoUrl) {
       const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
 
       try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, { mode: "no-cors" });
         const data = await response.json();
         return data.title;
       } catch (err) {
