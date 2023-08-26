@@ -14,7 +14,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // set up a connection to the database
 const { Pool } = require("pg");
-console.log(process.env);
 const db = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -30,10 +29,6 @@ const videos = require("./exampleresponse.json");
 
 // GET "/"
 // Returns all the videos
-// app.get("/", (request, response) => {
-//   response.json(videos);
-// });
-
 app.get("/", function (request, response) {
   db.query("SELECT * FROM videos")
     .then((result) => {
@@ -47,7 +42,13 @@ app.get("/", function (request, response) {
 // Returns video with specific id
 app.get("/videos/:id", (request, response) => {
   let id = Number(request.params.id);
-  response.json(videos.filter((video) => video.id === id));
+  db.query("SELECT * FROM videos WHERE id = $1", [id])
+    .then((result) => {
+      response.json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 // POST
