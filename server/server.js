@@ -10,6 +10,10 @@ app.use(cors());
 // to parse incoming requests with JSON payloads
 app.use(express.json());
 
+// body-parser
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // set up a connection to the database
