@@ -20,7 +20,7 @@ function App() {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch(serverUrl); // Update the endpoint
+      const response = await fetch(serverUrl);
       if (response.ok) {
         const data = await response.json();
         setVideos(data);
