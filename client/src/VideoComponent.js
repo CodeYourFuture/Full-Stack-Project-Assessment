@@ -1,6 +1,7 @@
-// version5
+// version6
 import React from "react";
 import axios from "axios";
+import ReactPlayer from "react-player"; // Import ReactPlayer
 import "./App.css";
 
 const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
@@ -19,14 +20,13 @@ const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
   return (
     <div className="video-component">
       <h3>{video.title}</h3>
-      <iframe
-        title={video.title}
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
+      {/* Replace the iframe tag with ReactPlayer */}
+      <ReactPlayer
+        url={`https://www.youtube.com/watch?v=${video.url.split("v=")[1]}`}
+        controls={true}
+        width="560px" // Adjust width as needed
+        height="315px" // Adjust height as needed
+      />
       <p>Rating: {video.rating}</p>
       <button onClick={() => onUpVote(video.id)}>Up Vote</button>
       <button onClick={() => onDownVote(video.id)}>Down Vote</button>
@@ -36,6 +36,44 @@ const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
 };
 
 export default VideoComponent;
+
+// version5 this works on all. but not same size youtube videos
+// import React from "react";
+// import axios from "axios";
+// import "./App.css";
+
+// const VideoComponent = ({ video, onUpVote, onDownVote, onRemove }) => {
+//   const handleDelete = async () => {
+//     try {
+//       await axios.delete(
+//         `https://back-end-full-stack-project-assessment.onrender.com/videos/${video.id}`
+//       );
+//       onRemove(video.id);
+//     } catch (error) {
+//       console.error("Error deleting video:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="video-component">
+//       <h3>{video.title}</h3>
+//       <iframe
+//         title={video.title}
+//         width="560"
+//         height="315"
+//         src={`https://www.youtube.com/embed/${video.url.split("v=")[1]}`}
+//         frameBorder="0"
+//         allowFullScreen
+//       ></iframe>
+//       <p>Rating: {video.rating}</p>
+//       <button onClick={() => onUpVote(video.id)}>Up Vote</button>
+//       <button onClick={() => onDownVote(video.id)}>Down Vote</button>
+//       <button onClick={handleDelete}>Remove</button> {/* Use handleDelete */}
+//     </div>
+//   );
+// };
+
+// export default VideoComponent;
 
 // version4
 // import React from "react";
