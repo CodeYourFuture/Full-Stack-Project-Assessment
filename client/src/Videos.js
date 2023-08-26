@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 function Videos(props) {
   const [loadData, setLoadData] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [urlData, setUrlData] = useState("");
-
+const [id,setId] = useState('');
   // fetch("http://localhost:3000/videos")
   //   .then((response) => response.json())
   //   .then((data) => {
@@ -79,7 +80,40 @@ function deleteBtnHandler(item) {
     .catch((error) => {
       console.error("Error deleting video:", error);
     });
+   }
+
+
+function thumbUpHandeler(item) {
+  console.log(item);
+ // ?????????
+  const newVideo = 
+  {
+    id:item.id,
+  title:item.title,
+  url:item.url,
+  rating:item.rating
+  //?????????
+  }
+fetch(`http://localhost:3000/videos/:${item.id}`,{
+  
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newVideo),
+      
+    })
+.then((promis)=>promis.json())
+.then((data)=>{
+  console.log();
+  console.log("increase");
+  setLoadData(data);
+})
 }
+
+function thumbDownHandeler() {}
+
+
   
   return (
     <>
@@ -119,28 +153,43 @@ function deleteBtnHandler(item) {
         <div className="mainShowVideos">
           {loadData.length > 0 ? (
             loadData.map((item) => {
-              const videoId = item.url.split("v=")[1];
-                
-             return <div key={item.id} className="showVideo">
-                {console.log(videoId)}
-                <p style={{ margin: 5 }}>{item.title}</p>
-                <iframe
-                  width="350"
-                  height="200"
-                  src={`https://www.youtube.com/embed/${videoId}`}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                
-                <button
-                  className="btnShowVideo"
-                  onClick={() => deleteBtnHandler(item)}
-                >
-                  Delete
-                </button>
-              </div>
+              const videoId = item.url.split("v=")[1]; 
+             return (
+               <div key={item.id} className="showVideo">
+                 <div style={{ display: "flex", marginBottom: 10 }}>
+                   <button
+                     className="thumbBtn"
+                     onClick={() => thumbUpHandeler(item)}
+                   >
+                     <ThumbUpIcon />
+                   </button>
+                   <p style={{ margin: 5 }}>{item.title}</p>
+                   <button
+                     className="thumbBtn"
+                     onClick={() => thumbDownHandeler(item.id)}
+                   >
+                     <ThumbDownIcon />
+                   </button>
+                 </div>
+                 <p>{item.rating}</p>
+                 <iframe
+                   width="350"
+                   height="200"
+                   src={`https://www.youtube.com/embed/${videoId}`}
+                   title="YouTube video player"
+                   frameBorder="0"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowFullScreen
+                 ></iframe>
+
+                 <button
+                   className="btnShowVideo"
+                   onClick={() => deleteBtnHandler(item)}
+                 >
+                   Delete
+                 </button>
+               </div>
+             );
 })
           ) : (
             <p>No video yet.</p>
