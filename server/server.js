@@ -1,5 +1,7 @@
 const express = require("express");
+const { Pool } = require("pg");
 const app = express();
+require("dotenv").config();
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -68,10 +70,32 @@ let videos = [
     rating: 73,
   },
 ];
-// GET "/"
-app.get("/", (req, res) => {
-  res.json(videos);
+
+console.log(process.env);
+
+const db = new Pool({
+  user: process.env.db_user,
+  host: process.env.db_host,
+  database: process.env.db_database,
+  password: process.env.db_password,
+  port: 5432,
+  ssl: true,
 });
+
+app.get("/", function (req, res) {
+  db.query("SELECT * FROM videos")
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// GET "/"
+// app.get("/", (req, res) => {
+//   res.json(videos);
+// });
 
 app.use(express.json());
 
