@@ -1,3 +1,71 @@
-.App {
+  .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background-color: lightskyblue;
+}
+
+.App-header {
+  background-color: orange;
+  color: black;
+  padding: 1rem 0;
+  width: 100%;
+  
+}
+
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px; 
+  justify-items: center;
+  margin-top: 2rem;
+}
+
+
+.video-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 1rem;
+  text-align: left;
+  width: 385px;
+ position: relative;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  height: 640px;
+  position: relative;
+  
+}
+
+button {
+  background-color: #007bff;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 4px;
+  padding: 6px 12px;
+  transition: background-color 0.2s;
+ }
+button:hover {
+  background-color: purple;
+}
+
+p {
+  font-size: 16px;
+  margin-top: 8px; 
+}
+
+  iframe {
+  width: 100%;
+  height: 60%;
+  
+} 
+.error-message {
+  color: red;
 }
