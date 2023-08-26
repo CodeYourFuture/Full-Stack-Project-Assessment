@@ -57,3 +57,17 @@ app.delete("/:id", (req, res) => {
     });
   }
 });
+
+//GET BY id "/{id}"
+
+app.get("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  const videoFound = videos.find((video) => video.id === videoId);
+  if (!videoFound) {
+    res.status(404).json({
+      message: "Video not found",
+    });
+  } else {
+    res.json(videoFound);
+  }
+});
