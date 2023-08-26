@@ -154,7 +154,7 @@ app.post("/", async (req, res) => {
     try {
       const result = await client.query("SELECT MAX(id) FROM videos");
       let newId = result.rows[0].max + 1;
-      let newTitle = data.title; //videoTitle;
+      let newTitle = req.body.title; //videoTitle;
       let newUrl = shortUrlCode;
       let newRating = 0;
 
