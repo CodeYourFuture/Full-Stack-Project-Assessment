@@ -2,10 +2,10 @@
 --
 
 CREATE TABLE videos (
-  id integer primary key,	-- always assigned a value
-  title varchar not null,	-- title of the video
-  url varchar not null,		-- url of the video
-  rating integer		-- video rating
+  id SERIAL primary key,	-- always assigned a value
+  title varchar not null,		-- title of the video
+  url varchar not null,			-- url of the video
+  rating integer DEFAULT 0			-- video rating
 );
 
 INSERT INTO videos VALUES(523523,'Never Gonna Give You Up','https://www.youtube.com/watch?v=dQw4w9WgXcQ',23);

@@ -27,10 +27,6 @@ const db = new Pool({
   ssl: true,
 });
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-const videos = require("./exampleresponse.json");
-
 // GET "/"
 // Returns all the videos
 app.get("/", function (request, response) {
@@ -58,36 +54,38 @@ app.get("/videos/:id", (request, response) => {
 // POST
 // This endpoint is used to add a video to the API.
 // Both fields - title and url - must be included and be valid for this to succeed.
-// **Note:** When a video is added, you must attach a unique ID to so that it can later be deleted
 app.post("/", (request, response) => {
-  const { title, url } = request.body;
+  const newTitle = request.body.title;
+  const newURL = request.body.url;
 
-  if (!title || !url) {
-    return response.status(400).json({
-      result: "failure",
-      message: "Video could not be saved, add a title or url",
-    });
-  } else {
-    const calculateNewID = () => {
-      let newID = Math.max(...videos.map((video) => video.id)) + 1;
-      return newID;
-    };
+  // RETURNING clause returns generated id and rating after INSERT
+  const query = `INSERT INTO videos (title, url)
+    VALUES ($1, $2) RETURNING *`;
 
-    const newVideo = {
-      id: calculateNewID(),
-      title: title,
-      url: url,
-      rating: 0,
-    };
-    videos.push(newVideo);
-    response.status(201).json({
-      id: newVideo.id,
-      title: title,
-      url: url,
-      rating: 0,
-      message: "Video was saved",
+  db.query(query, [newTitle, newURL])
+    .then((result) => {
+      console.log(result.rows);
+      const newID = result.rows.id;
+      const newRating = result.rows.rating;
+
+      response.status(201).json({
+        id: newID,
+        title: newTitle,
+        url: newURL,
+        rating: newRating,
+        message: "Video was saved",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  }
+
+  // if (!title || !url) {
+  //   return response.status(400).json({
+  //     result: "failure",
+  //     message: "Video could not be saved, add a title or url",
+  //   });
+  // }
 });
 
 // DELETE
