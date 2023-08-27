@@ -4,9 +4,12 @@ import React, { useState } from "react";
 const VideoComponent = ({ video, onRemove }) => {
   const [votes, setVotes] = useState(0);
 
-  // function handleRemove () {
-
-  // }
+  function handleUpVotes() {
+    setVotes(votes + 1);
+  }
+  function handleDownVotes() {
+    setVotes(votes - 1);
+  }
 
   return (
     <>
@@ -21,11 +24,19 @@ const VideoComponent = ({ video, onRemove }) => {
       </video>
       <p>Votes {votes}</p>
 
-      <button onClick={() => onRemove(video.id)}>Remove Video</button>
+      <button className="btn btn-outline-dark" onClick={handleUpVotes}>
+        Like
+      </button>
+      <button className="btn btn-outline-dark" onClick={handleDownVotes}>
+        Dislike
+      </button>
 
-      {/* <button onClick={handleVotes}>
-
-      </button> */}
+      <button
+        className="btn btn-outline-danger"
+        onClick={() => onRemove(video.id)}
+      >
+        Remove Video
+      </button>
 
       {/* <iframe
         width="560"
