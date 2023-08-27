@@ -1,11 +1,19 @@
+import React, { useState } from "react";
 import "./App.css";
+import videosData from "./exampleresponse.json";
+import VideoComponent from "./VideoComponent";
 
 function App() {
+  const [videos, setVideos] = useState(videosData);
+  const handleRemove = (videoId) => {
+    setVideos(videos.filter((video) => video.id !== videoId));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      {videos.map((video) => (
+        <VideoComponent key={video.id} video={video} onRemove={handleRemove} />
+      ))}
     </div>
   );
 }
