@@ -3,10 +3,12 @@ import "./App.css";
 import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
 
+const serverAddress = "http://127.0.0.1:5000";
+
 function App() {
   React.useEffect(function () {
     console.log("Effect ran");
-    fetch("http://127.0.0.1:5000")
+    fetch(serverAddress)
       .then((res) => res.json())
       .then((data) => setVideos(data));
   }, []);
@@ -26,8 +28,8 @@ function App() {
   ));
 
   const [formData, setFormData] = React.useState({
-    videoTitle: "",
-    videoUrl: "",
+    title: "",
+    url: "",
   });
 
   function handleChange(event) {
@@ -65,15 +67,20 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newVideoObject = {
-      id: videos.length + 1,
-      title: formData.videoTitle,
-      url: formData.videoUrl,
-      rating: Math.floor(Math.random() * 1000),
-    };
-    setVideos((prevVideos) => {
-      return [...prevVideos, newVideoObject];
-    });
+    // setVideos((prevVideos) => {
+    //   return [...prevVideos, newVideoObject];
+    // });
+    console.log(JSON.stringify(formData));
+    fetch(serverAddress, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   }
 
   return (

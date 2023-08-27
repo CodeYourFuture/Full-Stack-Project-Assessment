@@ -7,16 +7,16 @@ export default function AddVideo(props) {
         <label for="videoTitle">Video Title: </label>
         <input
           type="text"
-          id="videoTitle"
-          name="videoTitle"
+          id="title"
+          name="title"
           placeholder="Enter Title"
           onChange={props.handleChange}
         />
         <label for="videoUrl">Video Url: </label>
         <input
           type="text"
-          id="videoUrl"
-          name="videoUrl"
+          id="url"
+          name="url"
           placeholder="Enter URL"
           onChange={props.handleChange}
         />
