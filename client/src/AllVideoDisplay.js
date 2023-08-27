@@ -30,8 +30,6 @@ function VideoComponent({
         </button>
       </div>
 
-      
-      
       <div class="container">
         <div class="videoDisplayContainer">
           <VideoDisplay
@@ -57,13 +55,13 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
           <iframe
             width="330"
             height="200"
-            src={element.url}
             title={element.title}
             border="none"
             border-radius="103px"
             frameborder="0"
             allowfullscreen
             align="center"
+            src={element.url}
           ></iframe>
           <div class="likedislikeBtn">
             <button
