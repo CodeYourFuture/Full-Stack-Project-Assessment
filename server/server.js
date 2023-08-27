@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const pool = require("./db")
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 const jsonData = require("../exampleresponse.json");
@@ -107,5 +108,5 @@ app.delete("/:id", (req, res) => {
   }
 });
 
-const port = process.env.PORT;
+const port = process.env.SERVER_PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
