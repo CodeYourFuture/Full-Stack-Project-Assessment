@@ -7,7 +7,6 @@ function App() {
   const [allVideos, setAllVideos] = useState([]);
 
   const getAllVideos = async (searchText, MoviesOrder) => {
-    console.log(MoviesOrder);
     let order = "";
     if (MoviesOrder === undefined || MoviesOrder === "desc") {
       order = "desc";
