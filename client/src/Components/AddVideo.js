@@ -38,6 +38,9 @@ const AddVideo = ({ videos, setVideos }) => {
           type="url"
           name="url"
           placeholder="Add URL"
+          pattern="https://.*"
+          size="30"
+          required
           value={videoLink}
           onChange={handleInputChange}
         />
