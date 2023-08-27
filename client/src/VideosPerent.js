@@ -6,7 +6,9 @@ export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:4500/video");
+      const response = await fetch(
+        "https://kristinadudnyk-fullstack-project.onrender.com/video"
+      );
       const data = await response.json();
       console.log("fetchData in Videos", data);
 
