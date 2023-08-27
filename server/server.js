@@ -66,45 +66,46 @@ app.post("/", async (req, res) => {
 });
 
 //Update video rating
-// app.put("/:id", (req, res) => {
-//   const { id } = req.params;
-//   const { rating } = req.body;
-//   try {
-//     const video = videos.find((video) => video.id == id);
-//     if (!video) {
-//       res.status(404).json({
-//         result: "failure",
-//         message: "There is no vide with given data",
-//       });
-//     } else {
-//       videos = videos.map((video) => {
-//         if (video.id == id) {
-//           return { ...video, rating };
-//         }
-//         return video;
-//       });
-//     }
-//     res.status(200).json(videos);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
+app.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { rating } = req.body;
+  try {
+    const video = await pool.query(
+      "UPDATE videos SET rating = $1 WHERE id=$2",
+      [rating, id]
+    );
+    if (!video) {
+      res.status(404).json({
+        result: "failure",
+        message: "There is no vide with given data",
+      });
+    } else {
+      res.status(200).json(video);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 
-// //Delete a video
-// app.delete("/:id", (req, res) => {
-//   const id = req.params.id;
-//   const video = videos.find((video) => video.id == id);
-//   if (!video) {
-//     res.status(404).json({
-//       result: "failure",
-//       message: "There is no vide with given data",
-//     });
-//   } else {
-//     const index = videos.indexOf(video);
-//     videos.splice(index, 1);
-//     res.status(200).json(videos);
-//   }
-// });
+//Delete a video
+app.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedVideo = await pool.query("DELETE FROM videos WHERE id=$1", [
+      id,
+    ]);
+    if (!deletedVideo) {
+      res.status(404).json({
+        result: "failure",
+        message: "There is no vide with given data",
+      });
+    } else {
+      res.status(200).json(deletedVideo);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 const port = process.env.SERVER_PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
