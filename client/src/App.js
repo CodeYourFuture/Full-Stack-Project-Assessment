@@ -1,7 +1,6 @@
 import "./App.css";
 import Footer from "./Components/Footer";
-import NewVideo from "./Components/NewVideo";
-import Video from "./Components/Video";
+import Videos from "./Components/Videos";
 
 function App() {
   return (
@@ -9,8 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
         <div>
-          <NewVideo />
-          <Video />
+          <Videos />
         </div>
       </header>
       <Footer/>
