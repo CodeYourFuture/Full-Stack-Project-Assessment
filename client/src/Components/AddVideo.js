@@ -4,7 +4,11 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
   const [url, setUrl] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() && url.trim()) {
+    if (
+      title.trim() &&
+      url.trim() &&
+      url.startsWith("https://www.youtube.com/")
+    ) {
       const newVideo = {};
       newVideo.id = Math.floor(Math.random() * 10000);
       newVideo.title = title;
@@ -13,12 +17,12 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
       console.log(newVideo);
       const newList = [...videoCards, newVideo];
       setVideoCards(newList);
-      setUrl("");
-      setTitle("");
-      this.reset();
-    } else if (!title || !url) {
+    } else {
       alert("Please fill fields correctly");
     }
+    setUrl("");
+    setTitle("");
+    this.reset();
   };
   return (
     <div
@@ -56,6 +60,7 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
                   className="form-control"
                   id="videoTitle"
                   name="title"
+                  placeholder="Example Title..."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -70,6 +75,7 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
                   id="videoUrl"
                   name="url"
                   value={url}
+                  placeholder="https://www.youtube.com/watch?v=_example..."
                   onChange={(e) => setUrl(e.target.value)}
                 />
               </div>
