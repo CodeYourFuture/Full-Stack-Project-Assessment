@@ -17,7 +17,7 @@ export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
   };
 
   useEffect(() => {
-    fetchData(setVideos);
+    fetchData();
   }, [refreshVideos]);
 
   return (
