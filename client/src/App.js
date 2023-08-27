@@ -1,11 +1,19 @@
+import { useState } from "react";
 import "./App.css";
+import Header from "./Header";
+import VideosPerent from "./VideosPerent";
+import NewVivdeo from "./NewVideo";
 
 function App() {
+  const [refreshVideos, setRefreshVideos] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Header />
+      <NewVivdeo setRefreshVideos={setRefreshVideos} />
+      <VideosPerent
+        setRefreshVideos={setRefreshVideos}
+        refreshVideos={refreshVideos}
+      />
     </div>
   );
 }
