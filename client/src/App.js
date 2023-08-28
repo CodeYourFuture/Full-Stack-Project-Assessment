@@ -8,9 +8,11 @@ function App() {
   const [videos, setVideos] = useState(exampleresponse);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
+    <div className="container-fluid">
+      <header className="row">
+        <h1 className="text-center mt-2 mb-5 pb-5 pt-5 font">
+          Video Recommendation
+        </h1>
       </header>
       <AddVideo setVideos={setVideos} videos={videos} />
       <AllVideos videos={videos} setVideos={setVideos} />

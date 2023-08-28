@@ -1,7 +1,7 @@
-.App {
+/* .App {
   text-align: center;
-}
-.new-video {
+} */
+/* .new-video {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -15,4 +15,10 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+} */
+
+.font {
+font-family: 'Quicksand', sans-serif;
+background-color: rgb(8, 115, 160);
+color: white;
 }

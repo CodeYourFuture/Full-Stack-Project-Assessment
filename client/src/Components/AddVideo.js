@@ -26,11 +26,13 @@ const AddVideo = ({ videos, setVideos }) => {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <div className="new-video">
+      <div className="d-flex flex-column align-items-center gap-2">
         <input
+          className="form-control w-25"
           type="text"
           name="name"
           placeholder="Add a video name"
+          size="30"
           value={videoName}
           onChange={handleInputChange}
         />
@@ -39,12 +41,17 @@ const AddVideo = ({ videos, setVideos }) => {
           name="url"
           placeholder="Add URL"
           pattern="https://.*"
+          className="form-control w-25"
           size="30"
           required
           value={videoLink}
           onChange={handleInputChange}
         />
-        <button type="submit" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="btn btn-secondary btn-lg btn-block w-25 p-1"
+          onClick={handleSubmit}
+        >
           Add Video
         </button>
       </div>
