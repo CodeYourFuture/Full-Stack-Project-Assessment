@@ -25,12 +25,15 @@ function VideoCards() {
     fetch(`${urlAPI}/${id}`, {
       method: "DELETE",
     })
-      .then((response) => response.json())
-      .then(
+      .then((response) => {
+        console.log("Response Status:", response.status);
+        response.json();
+      })
+      .then(() => {
         setVideos((prevVideos) => {
           return prevVideos.filter((video) => video.id !== id);
-        })
-      )
+        });
+      })
       .catch((error) => console.error(error));
   }
 

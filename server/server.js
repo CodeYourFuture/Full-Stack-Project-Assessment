@@ -47,7 +47,7 @@ app.post("/", (req, res) => {
 app.delete("/:id", (req, res) => {
   const videoId = req.params.id;
   const deleteVideo = videos.findIndex((video) => video.id === videoId);
-  if (deleteVideo === -1) {
+  if (deleteVideo === undefined) {
     res.status(404).json({
       result: "failure",
       message: "Video could not be deleted",
