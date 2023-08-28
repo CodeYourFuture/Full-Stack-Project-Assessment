@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-function Video({ video, onRemove}) {
-    const [votes, setVotes] = useState(video.rating);
-}
+function Video({ video, onRemove }) {
+  const [votes, setVotes] = useState(video.rating);
 
-const handleVote = () => {
+  const handleVote = () => {
     setVotes(prevVotes => prevVotes + 1);
   };
 
