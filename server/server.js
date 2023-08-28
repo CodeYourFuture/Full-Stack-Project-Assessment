@@ -94,3 +94,11 @@ app.post("/", (req, res) => {
   videos.push(newVideo);
   res.status(201).send({ id: newVideo.id });
 });
+
+app.get("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+
+  const video = videos.find((video) => video.id === videoId);
+
+  res.status(200).send({ video });
+});
