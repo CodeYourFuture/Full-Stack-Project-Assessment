@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
@@ -62,12 +62,22 @@ function App() {
   }
 
   function ratingAdd(id) {
-    setVideos((prevVideos) => {
-      return prevVideos.map((video) => {
-        return video.id === id ? { ...video, rating: video.rating + 1 } : video;
-      });
+    fetch(`${serverAddress}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ modifier: "+1" }),
     });
+    setCount((prevCount) => prevCount + 1);
+    console.log(count);
   }
+  // setVideos((prevVideos) => {
+  //   return prevVideos.map((video) => {
+  //     return video.id === id ? { ...video, rating: video.rating + 1 } : video;
+  //   });
+  // });
+  // }
 
   function ratingMinus(id) {
     setVideos((prevVideos) => {
