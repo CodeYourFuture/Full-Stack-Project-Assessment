@@ -4,6 +4,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(cors());
+const { v4: uuidv4 } = require("uuid");
+
 const videos = require("./exampleresponse.json")
 
 app.use(express.json());
@@ -18,7 +20,23 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.send("success You have made a post request");
+  const { title, url } = req.body;
+  if (!title || !url || !url.startsWith("https://www.youtube.com")) {
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  } else {
+    const id = uuidv4().slice(0, 7);
+    const newVideo = {
+      id,
+      title,
+      url,
+      rating: 0
+    }
+    videos.push(newVideo);
+    res.status(201).json({id});
+  }
 });
 
 
