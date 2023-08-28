@@ -68,6 +68,7 @@ function Uploadvideo() {
   const handleCancelButtonClick = () => {
     if (showForm) {
       setShowForm(false);
+      setSubmissionStatus(null);
     }
   };
 
