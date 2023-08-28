@@ -102,3 +102,18 @@ app.get("/:id", (req, res) => {
 
   res.status(200).send({ video });
 });
+
+app.delete("/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+
+  const videoIndex = videos.findIndex((video) => video.id === videoId);
+
+  if (videoIndex !== -1) {
+    videos.splice(videoIndex, 1);
+    return res.status(200).json({});
+  } else {
+    return res
+      .status(400)
+      .json({ result: "failure", message: "Video could not be deleted" });
+  }
+});
