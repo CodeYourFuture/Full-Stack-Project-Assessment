@@ -82,14 +82,15 @@ app.post("/", (req, res) => {
   const url = req.body.url;
 
   if (!title || !url) {
-    res.status(400).json({ error: "Both title and URL are required." });
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
   }
   const id = videos.length + 1;
 
   const newVideo = { id, ...req.body, rating: 0 };
   console.log(req.body);
   videos.push(newVideo);
-  res.status(201).send({ newVideo });
-
-  //need validation
+  res.status(201).send({ id: newVideo.id });
 });
