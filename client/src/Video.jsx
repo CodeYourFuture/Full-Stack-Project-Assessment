@@ -18,3 +18,5 @@ const handleVote = () => {
     </div>
   );
 }
+
+export default Video;
