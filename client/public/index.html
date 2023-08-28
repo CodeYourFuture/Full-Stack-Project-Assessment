@@ -47,5 +47,35 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      const videosData = [
+        // Paste the content of exampleresponse.json here
+        // Alternatively, you can load the JSON data using an AJAX request
+      ];
+    
+      // Function to generate HTML for each video
+      function generateVideoHTML(video) {
+        return `
+          <div class="video">
+            <h2>${video.title}</h2>
+            <iframe width="560" height="315" src="${video.url}" frameborder="0" allowfullscreen></iframe>
+            <p>Rating: ${video.rating}</p>
+          </div>
+        `;
+      }
+    
+      // Function to render videos
+      function renderVideos() {
+        const videosContainer = document.getElementById('videos');
+        videosData.forEach(video => {
+          const videoHTML = generateVideoHTML(video);
+          videosContainer.innerHTML += videoHTML;
+        });
+      }
+    
+      // Call the renderVideos function when the page loads
+      window.onload = renderVideos;
+    </script>
+    
   </body>
 </html>
