@@ -51,4 +51,21 @@ app.get("/:id", (req, res) => {
   }
 })
 
+app.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const matchingVideo = videos.find((video) => { 
+    return (video.id === id);
+  })
+  if (!matchingVideo) {
+    res.status(400).json({
+      "result": "failure",
+      "message": "Video could not be deleted"
+    })} else {
+      const videoIndexToBeDeleted = videos.indexOf(matchingVideo);
+      const deletedVideo = videos.splice(videoIndexToBeDeleted, 1);
+      res.status(200).json({})
+    }
+  }
+);
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
