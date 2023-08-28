@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import "./App.css";
 import Video from './Video'; 
-
+import AddVideo from './AddVideo';
 
 const videosData = [
   [
@@ -71,7 +71,12 @@ const videosData = [
 ];
 
 function App() {
-  const [videos, setVideos] = useState(videosData[0]); // Access the first array in the nested structure
+  const [videos, setVideos] = useState(videosData); // Access the first array in the nested structure
+
+
+  const handleAdd = (newVideo) => {
+    setVideos([...videos, newVideo]);
+  };
 
   const handleRemove = (videoId) => {
     const updatedVideos = videos.filter(video => video.id !== videoId);
@@ -81,8 +86,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendations</h1>
+        <h1>BEKIR's Video Recommendations</h1>
       </header>
+      <AddVideo onAdd={handleAdd} />
       {videos.map(video => (
         <Video key={video.id} video={video} onRemove={handleRemove} />
       ))}

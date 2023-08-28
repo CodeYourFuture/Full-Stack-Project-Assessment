@@ -1,0 +1,44 @@
+.add-video-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 400px; /* Set a maximum width */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%; /* Width still 100% within the container */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: block; /* Make the button a block element for centering */
+    margin: 10px auto; /* Center the button horizontally */
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
