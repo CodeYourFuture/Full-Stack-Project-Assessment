@@ -1,127 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 
 function VideoForm({ videoData, setVideoData }) {
+  const [errorMessage, setErrorMessage] = useState("");
+
   function addVideoHandler(event) {
     /**
      We are creating a new video object and adding to state 
      */
+    function validateUrl(urlObject) {
+      console.log("urlObject --->", urlObject);
+      if (!urlObject.startsWith("https://www.youtube.com")) {
+        return false;
+      }
+      return true;
+      // return either validated URL or an error
+    }
 
     event.preventDefault();
 
-    console.log("reportValidity part --->", event.target.form.reportValidity());
-    if (!event.target.form.reportValidity()) {
-      return;
-    }
-
     const formTitle = event.target.form.title.value;
     const formUrl = event.target.form.url.value;
+    console.log(formUrl);
 
-    const newData = {
-      id: parseInt(Math.random() * 1000),
-      title: formTitle,
-      url: formUrl,
-      rating: 0,
-      timeSent: Date(),
-    };
+    if (validateUrl(formUrl) && formTitle !== "") {
+      const newData = {
+        id: parseInt(Math.random() * 1000),
+        title: formTitle,
+        url: formUrl,
+        rating: 0,
+        timeSent: Date(),
+      };
 
-    try {
-      // validateUrl(unValidatedUrl);
+      // const errorMessageUrl = "Please enter a valid YouTube URL"
+
       setVideoData([...videoData, newData]);
-      console.log("Video Data from VideoForm--> ", videoData);
-    } catch (e) {
-      console.log(e);
+      setErrorMessage("");
+    } else if (formTitle === "" && !validateUrl(formUrl)) {
+      setErrorMessage("Add a title and a valid URL");
+    } else if (formTitle === "") {
+      setErrorMessage("Add a title");
+    } else {
+      setErrorMessage("Add a valid URL");
     }
-    event.target.form.reset();
 
+    event.target.form.reset();
   }
   return (
     <div>
-      <form className="border-2 p-4 m-5 flex items-center flex-col gap-7">
-        <div className="grid gap-7">
-            <div className="flex gap-3">
-            <label htmlFor="title">
-              Please enter your video title below: 
-            </label>
+      <form className="m-5 flex flex-col items-center gap-7 pb-3 text-lg">
+        <div className="p-2 text-center text-4xl font-bold">
+          <h2>Add your YouTube video</h2>
+        </div>
+
+        <div className="grid gap-7 text-xl font-extrabold">
+          <div className="flex gap-3">
+            <label htmlFor="title">Please enter your title:</label>
             <input
               type="text"
               name="title"
               id="title"
-              placeholder="Enter video title here"
+              placeholder="Video title"
               required
+              className="h-15 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
             />
-        </div>
+          </div>
           <div className="flex gap-3">
-            <label htmlFor="url">
-              Please enter your YouTube video url below: 
-            </label>
+            <label htmlFor="url">Please enter your YouTube video url:</label>
             <input
               type="url"
               name="url"
               id="url"
-              placeholder="Enter YouTube video url here"
+              placeholder="YouTube video URL"
+              required
+              className="h-15 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
             />
           </div>
         </div>
-        
 
-        <button onClick={addVideoHandler} type="submit" className="bg-indigo-500 p-2 rounded">
-          Submit
+        <button
+          onClick={addVideoHandler}
+          type="submit"
+          className="m-2 rounded bg-black px-5 py-3 text-white"
+        >
+          Add
         </button>
+
+        <p>{errorMessage}</p>
       </form>
     </div>
   );
 }
 
 export default VideoForm;
-
-/*   
-https://www.youtube.com/watch?v=4Zyr5a3m0Fc&t=8s
-    Using the URL above we will supply it along with a title to be submitted
-    When the query is submitted  we will update State with the URL as it is and the title
-    Later we will generate  a unique ID and a rating as zero;
-*/
-
-/*
-    Check the protocol ✅
-        - the title can be any string- 200 characters
-
-        urls we will accept:
-         - embed url
-         (if embed, then load directly into the object source)
-         - watch url
-         (if watch, then use regex to create valid embed url before adding to object source)
-         - https//
-         - www.
-         - https://www.youtube.com/watch?v=
-         - https://www.youtube.com/embed/
-         - https://m.youtube.com/watch?app=
-         - https://m.youtube.com/embed/
-
-hash: ""
-host:"www.youtube.com"
-hostname:"www.youtube.com"
-href:"https://www.youtube.com/watch?v=oEjZk15SXaU"
-origin:"https://www.youtube.com"
-password: ""
-pathname: "/watch"
-port: ""
-protocol: "https:"
-search: "?v=oEjZk15SXaU"
-searchParams: URLSearchParams {size: 1}
-username:""
-
-https://www.youtube.com/embed/dQw4w9WgXcQ
-hash:""
-host: "www.youtube.com"
-hostname: "www.youtube.com"
-href: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-origin: "https://www.youtube.com"
-password: ""
-pathname:"/embed/dQw4w9WgXcQ"
-port: ""
-protocol: "https:"
-search: ""
-searchParams:URLSearchParams {size: 0}
-username:""
-
-*/
