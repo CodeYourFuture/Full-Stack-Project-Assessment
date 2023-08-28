@@ -30,9 +30,7 @@ function VideoForm({ videoData, setVideoData }) {
         rating: 0,
         timeSent: Date(),
       };
-
-      // const errorMessageUrl = "Please enter a valid YouTube URL"
-
+      
       setVideoData([...videoData, newData]);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {
