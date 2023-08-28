@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
@@ -6,12 +6,16 @@ import AddVideo from "./components/AddVideo";
 const serverAddress = "http://127.0.0.1:5000";
 
 function App() {
-  React.useEffect(function () {
-    console.log("Effect ran");
-    fetch(serverAddress)
-      .then((res) => res.json())
-      .then((data) => setVideos(data));
-  }, []);
+  const [count, setCount] = React.useState(0);
+  React.useEffect(
+    function () {
+      console.log("Effect ran");
+      fetch(serverAddress)
+        .then((res) => res.json())
+        .then((data) => setVideos(data));
+    },
+    [count]
+  );
 
   const [videos, setVideos] = React.useState([]);
   const videoElements = videos.map((video) => (
@@ -67,10 +71,6 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // setVideos((prevVideos) => {
-    //   return [...prevVideos, newVideoObject];
-    // });
-    console.log(JSON.stringify(formData));
     fetch(serverAddress, {
       method: "POST",
       headers: {
@@ -81,6 +81,8 @@ function App() {
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+    setCount((prevCount) => prevCount + 1);
+    console.log(count);
   }
 
   return (
