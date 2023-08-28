@@ -65,9 +65,19 @@ app.post("/", (req, res) => {
 // });
 
 app.get("/:id", (req, res) => {
-  const video = videos.find((video) => video.id === Number(req.params.id));
-  res.status(200).send({ video });
+  const videoId = req.params.id;
+  db.query(`select * from videos where id=${videoId}`)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
+
+// const video = videos.find((video) => video.id === Number(req.params.id));
+// res.status(200).send({ video });
+// });
 
 app.delete("/:id", (req, res) => {
   const video = videos.find((video) => video.id === Number(req.params.id));
