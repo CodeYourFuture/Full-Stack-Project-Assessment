@@ -66,7 +66,7 @@ app.post("/", (req, res) => {
 
 app.get("/:id", (req, res) => {
   const videoId = req.params.id;
-  db.query(`select * from videos where id=${videoId}`)
+  db.query(`SELECT * FROM videos WHERE id=${videoId}`)
     .then((result) => {
       res.json(result.rows);
     })
@@ -102,4 +102,18 @@ app.delete("/:id", (req, res) => {
   //     .concat(videos.slice(videoIndex + 1, -1));
   //   res.status(200).send({});
   // }
+});
+
+app.put("/:id", (req, res) => {
+  const videoId = req.params.id;
+  const ratingModifier = req.body.modifier;
+  console.log(ratingModifier);
+  db.query(
+    `UPDATE videos SET rating=rating${ratingModifier} WHERE id=${videoId}`
+  )
+    .then(() => res.send(`video updated!`))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err });
+    });
 });
