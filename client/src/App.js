@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import videosData from "./exampleresponse.json";
+// import videosData from "./exampleresponse.json";
 import VideoComponent from "./VideoComponent";
 import AddVideo from "./AddVideo";
 
 function App() {
-  const [videos, setVideos] = useState(videosData);
+  const VideosData = () => {
+    // const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+      fetch("http://127.0.0.1:5000")
+        .then((response) => response.json())
+        .then((data) => setVideos(data))
+        .catch((error) => console.error("Error fetching data:", error));
+    }, []);
+
+    // ...
+  };
+
+  const [videos, setVideos] = useState("");
   const [newVideoUrl, setNewVideoUrl] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
 
