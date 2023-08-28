@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './AddVideo.css'; 
-
+import './AddVideo.css';
 
 function AddVideo({ onAdd }) {
   const [title, setTitle] = useState('');
@@ -10,11 +9,15 @@ function AddVideo({ onAdd }) {
     event.preventDefault();
 
     if (title && url) {
+      // Convert the URL to an embed URL
+      const videoId = url.match(/(?:\?v=|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9_\-]+)/)[1];
+      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
       const newVideo = {
-        id: Date.now(), // A simple way to generate a unique ID
+        id: Date.now(),
         title,
-        url,
-        rating: 0, // Set an initial rating
+        url: embedUrl, // Use the embed URL
+        rating: 0,
       };
 
       onAdd(newVideo);
@@ -40,13 +43,15 @@ function AddVideo({ onAdd }) {
         <div className="form-group">
           <label>URL:</label>
           <input
-           className="form-control"
+            className="form-control"
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
         </div>
-        <button className="btn" type="submit">Add Video</button>
+        <button className="btn" type="submit">
+          Add Video
+        </button>
       </form>
     </div>
   );
