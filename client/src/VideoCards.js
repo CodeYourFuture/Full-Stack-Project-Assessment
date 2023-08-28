@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import AddVideoForm from "./AddVideoForm";
 import SingleVideoCard from "./SingleVideoCard";
-import exampleResponse from "./exampleresponse.json";
+//import exampleResponse from "./exampleresponse.json";
 
 function VideoCards() {
-  const [videos, setVideos] = useState(exampleResponse);
+  //const [videos, setVideos] = useState(exampleResponse);
+  const [videos, setVideos] = useState([]);
+  const urlAPI = "http://127.0.0.1:5000";
+
+  //fetching the videos from local API
+
+  useEffect(() => {
+    fetchVideo();
+  }, []);
+
+  async function fetchVideo() {
+    const response = await fetch(urlAPI);
+    const jsonResonse = await response.json();
+    setVideos(jsonResonse);
+  }
 
   function handleDelete(id) {
     setVideos((prevVideo) => {
@@ -14,7 +28,7 @@ function VideoCards() {
   }
 
   function search(searchValue) {
-    const filteredVideos = exampleResponse.filter((item) =>
+    const filteredVideos = videos.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
     setVideos(filteredVideos);
