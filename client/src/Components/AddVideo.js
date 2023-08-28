@@ -10,19 +10,28 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
       url.startsWith("https://www.youtube.com/")
     ) {
       const newVideo = {};
-      newVideo.id = Math.floor(Math.random() * 10000);
+      // newVideo.id = Math.floor(Math.random() * 10000);
       newVideo.title = title;
       newVideo.url = url;
-      newVideo.rating = Math.floor(Math.random() * 100);
       console.log(newVideo);
-      const newList = [...videoCards, newVideo];
-      setVideoCards(newList);
+      // newVideo.rating = Math.floor(Math.random() * 100);
+      fetch("https://video-recomendations-server.onrender.com/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setVideoCards(data);
+        })
+        .catch((error) => console.log(error));
     } else {
       alert("Please fill fields correctly");
     }
     setUrl("");
     setTitle("");
-    this.reset();
   };
   return (
     <div

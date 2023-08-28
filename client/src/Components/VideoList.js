@@ -1,11 +1,26 @@
 import OneVideoCard from "./OneVideoCard";
 const VideoList = ({ keyword, videoCards, setVideoCards }) => {
-  const handleDelete = (idVideo) => {
-    setVideoCards(videoCards.filter((video) => video.id !== idVideo));
+  // const handleDelete = (idVideo) => {
+  //   setVideoCards(videoCards.filter((video) => video.id !== idVideo));
+  // };
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `https://video-recomendations-server.onrender.com/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Video not found!");
+      }
+      setVideoCards(videoCards.filter((video) => video.id !== id));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <>
-      {/* <h1 className="blink_me">Loading.....</h1> */}
       <section className="p-5" id="recommendations">
         <div className="container">
           <div className="row row-cols-auto text-center custom-gap ">

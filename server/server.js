@@ -73,7 +73,7 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json({ videos });
+  res.json(videos);
 });
 
 app.post("/", function (req, res) {
