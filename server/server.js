@@ -39,5 +39,16 @@ app.post("/", (req, res) => {
   }
 });
 
+app.get("/:id", (req, res) => {
+  const id = Number(req.params.id); 
+  const matchingVideo = videos.find((video) => { 
+    return (video.id === id);
+  })
+  if (!matchingVideo) {
+    res.status(400).send("No matching video with this ID exists.")
+  } else {
+    res.status(200).json({ matchingVideo });
+  }
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
