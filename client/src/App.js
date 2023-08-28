@@ -46,11 +46,19 @@ function App() {
   }
 
   function deleteVideo(id) {
-    setVideos((prevVideos) => {
-      return prevVideos.filter((video) => {
-        return video.id !== id;
-      });
-    });
+    fetch(`${serverAddress}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    setCount((prevCount) => prevCount + 1);
+    console.log(count);
+    // setVideos((prevVideos) => {
+    //   return prevVideos.filter((video) => {
+    //     return video.id !== id;
+    //   });
+    // });
   }
 
   function ratingAdd(id) {
