@@ -22,9 +22,16 @@ function VideoCards() {
   }
 
   function handleDelete(id) {
-    setVideos((prevVideo) => {
-      return prevVideo.filter((v) => v.id !== id);
-    });
+    fetch(`${urlAPI}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(
+        setVideos((prevVideos) => {
+          return prevVideos.filter((video) => video.id !== id);
+        })
+      )
+      .catch((error) => console.error(error));
   }
 
   function search(searchValue) {
