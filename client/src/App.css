@@ -1,3 +1,18 @@
 .App {
   text-align: center;
 }
+
+.video-cards {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+  grid-row-gap: 100px;
+  height: 900px;
+  margin-top: 400px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.card{
+  border: 1px solid grey;
+}
