@@ -80,17 +80,26 @@ app.get("/:id", (req, res) => {
 // });
 
 app.delete("/:id", (req, res) => {
-  const video = videos.find((video) => video.id === Number(req.params.id));
-  const videoIndex = videos.indexOf(video);
-  if (video === undefined) {
-    res.status(400).send({
-      result: "failure",
-      message: "Video could not be deleted",
+  const videoId = req.params.id;
+  db.query(`DELETE FROM videos WHERE id=${videoId}`)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  } else {
-    videos = videos
-      .slice(0, videoIndex)
-      .concat(videos.slice(videoIndex + 1, -1));
-    res.status(200).send({});
-  }
+
+  // const video = videos.find((video) => video.id === Number(req.params.id));
+  // const videoIndex = videos.indexOf(video);
+  // if (video === undefined) {
+  //   res.status(400).send({
+  //     result: "failure",
+  //     message: "Video could not be deleted",
+  //   });
+  // } else {
+  //   videos = videos
+  //     .slice(0, videoIndex)
+  //     .concat(videos.slice(videoIndex + 1, -1));
+  //   res.status(200).send({});
+  // }
 });
