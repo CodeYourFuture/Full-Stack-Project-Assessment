@@ -18,10 +18,20 @@ const VideoComponent = ({ video, onRemove }) => {
           <div className="col-md-8"> */}
       <h1 className="text-center">{video.title}</h1>
       {/* {/* <div className="embed-responsive embed-responsive-16by9"> */}
-      <video className="embed-responsive-item" controls>
+      {/* <video className="embed-responsive-item" controls>
         <source src={video.url} type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
+
+      <iframe
+        width="560"
+        height="315"
+        src={"https://www.youtube.com/embed/${video.id}"}
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
 
       {/* <iframe
         width="560"
