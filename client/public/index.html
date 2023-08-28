@@ -48,10 +48,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      const videosData = [
-        // Paste the content of exampleresponse.json here
-        // Alternatively, you can load the JSON data using an AJAX request
-      ];
+      let videosData;
     
       // Function to generate HTML for each video
       function generateVideoHTML(video) {
@@ -73,9 +70,18 @@
         });
       }
     
-      // Call the renderVideos function when the page loads
-      window.onload = renderVideos;
+      // Load JSON data using an AJAX request
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'exampleresponse.json', true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          videosData = JSON.parse(xhr.responseText);
+          renderVideos();
+        }
+      };
+      xhr.send();
     </script>
+    
     <div id="videos"></div>
   </body>
 </html>
