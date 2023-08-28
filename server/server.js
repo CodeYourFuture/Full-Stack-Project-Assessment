@@ -70,17 +70,29 @@ let videos = [
   },
 ];
 
+app.use(express.json());
+
 // GET "/"
 app.get("/", (req, res) => {
   res.json(videos);
 });
 
 app.post("/", (req, res) => {
+  // console.log(req.body);
   const { title, url } = req.body;
+  // const title = "temp title";
+  // const url = "temp url";
+
   if (!title || !url) {
     res.status(400).json({ error: "Both title and URL are required." });
   }
   const id = videos.length + 1;
+
+  const newVideo = { ...req.body, id, rating: 0 };
+  console.log(req.body);
+  videos.push(newVideo);
+  // res.status(201).send({ id: newVideo.id });
+  res.status(201).send({ newVideo });
 
   //id ?
 });
