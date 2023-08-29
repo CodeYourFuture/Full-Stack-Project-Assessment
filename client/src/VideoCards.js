@@ -17,9 +17,11 @@ function VideoCards() {
 
   async function fetchVideo() {
     const response = await fetch(urlAPI);
-    const jsonResonse = await response.json();
-    setVideos(jsonResonse);
+    const jsonResponse = await response.json();
+    setVideos(jsonResponse);
   }
+
+  //Deleting from API. Help with response in console
 
   function handleDelete(id) {
     fetch(`${urlAPI}/${id}`, {
@@ -37,11 +39,24 @@ function VideoCards() {
       .catch((error) => console.error(error));
   }
 
+  // function search(searchValue) {
+  //   const filteredVideos = videos.filter((item) =>
+  //     item.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+  //   setVideos(filteredVideos);
+  // }
+
+  //Searching from API
+
   function search(searchValue) {
     const filteredVideos = videos.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setVideos(filteredVideos);
+    if (searchValue.trim() === "") {
+      fetchVideo();
+    } else {
+      setVideos(filteredVideos);
+    }
   }
 
   function addVideo(v) {
