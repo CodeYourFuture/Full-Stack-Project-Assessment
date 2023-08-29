@@ -36,8 +36,8 @@
 }
 
 .card {
-  border: 1px solid #80b918;
-  background-color: #80b918;
+  border: 1px solid #588157;
+  background-color: #588157;
   box-shadow: 17px -2px 24px -8px rgba(194, 224, 22, 1);
   border-radius: 5px;
   width: 500px;
@@ -45,7 +45,7 @@
 }
 
 .card-thumb {
-  border: 1px solid #80b918;
+  border: 1px solid #588157;
   width: 500px;
   border-radius: 5px;
 }
