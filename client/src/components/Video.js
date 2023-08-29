@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
-const Video = ({ id, title, url, rating, getAllVideos }) => {
+const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
   const videoId = url.split("v=")[1];
 
   const deleteHandler = async () => {
@@ -12,6 +12,8 @@ const Video = ({ id, title, url, rating, getAllVideos }) => {
       if (response.status !== 200) {
         throw new Error("Something went wrong!");
       }
+      const data = await response.json();
+      getDeleteMessage(data.message);
       getAllVideos();
     } catch (error) {
       console.error(error);

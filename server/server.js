@@ -3,7 +3,6 @@ const cors = require("cors");
 const pool = require("./db");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
-// const jsonData = require("../exampleresponse.json");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -13,7 +12,6 @@ app.get("/", async (req, res) => {
   const { order, search } = req.query;
   try {
     const allVideos = await pool.query("SELECT * FROM videos");
-    console.log(allVideos);
     let filteredVideos = [...allVideos.rows];
     // Apply search filter if search query is provided
     if (search) {
@@ -29,23 +27,11 @@ app.get("/", async (req, res) => {
     }
     res.status(200).json(filteredVideos);
   } catch (error) {
-    res.status(404).json(error);
+    res.status(404).json({
+      message: "something went wrong!",
+    });
   }
 });
-
-// Get a specific video
-// app.get("/:id", (req, res) => {
-//   const { id } = req.params;
-//   const video = videos.find((video) => video.id == id);
-//   if (!video) {
-//     res.status(404).json({
-//       result: "failure",
-//       message: "There is no vide with given data",
-//     });
-//   } else {
-//     res.status(200).json(video);
-//   }
-// });
 
 // Post a video
 app.post("/", async (req, res) => {
@@ -56,11 +42,13 @@ app.post("/", async (req, res) => {
       "INSERT INTO videos(id, date, title, url, rating) VALUES($1, $2, $3, $4, $5)",
       [id, date, title, url, rating]
     );
-    res.status(201).json(addVideos);
+    res.status(201).json({
+      message: "New video added successfully",
+      isPositive: true,
+    });
   } catch (error) {
     res.status(404).json({
-      result: "failure",
-      message: "Video could not be saved",
+      message: "something went wrong!",
     });
   }
 });
@@ -76,14 +64,18 @@ app.put("/:id", async (req, res) => {
     );
     if (!video) {
       res.status(404).json({
-        result: "failure",
-        message: "There is no vide with given data",
+        message: "There is no video with given data!",
       });
     } else {
-      res.status(200).json(video);
+      res.status(200).json({
+        message: "ok",
+        isPositive: true,
+      });
     }
   } catch (error) {
-    console.error(error);
+    res.status(404).json({
+      message: "something went wrong!",
+    });
   }
 });
 
@@ -96,14 +88,18 @@ app.delete("/:id", async (req, res) => {
     ]);
     if (!deletedVideo) {
       res.status(404).json({
-        result: "failure",
-        message: "There is no vide with given data",
+        message: "There is no video with given data!",
       });
     } else {
-      res.status(200).json(deletedVideo);
+      res.status(200).json({
+        message: "Video removed successfully",
+        isPositive: true,
+      });
     }
   } catch (err) {
-    console.log(err);
+    res.status(404).json({
+      message: "something went wrong!",
+    });
   }
 });
 

@@ -13,13 +13,13 @@ function App() {
     } else {
       order = "asc";
     }
-   
+
     try {
-      let url = `${process.env.REACT_APP_SERVERURL}/?order=${order}`
-      if(searchText) {
-        url += `&search=${searchText}`
+      let url = `${process.env.REACT_APP_SERVERURL}/?order=${order}`;
+      if (searchText) {
+        url += `&search=${searchText}`;
       }
-      const response = await fetch(url)
+      const response = await fetch(url);
       if (!response.status === 200) {
         throw new Error("something went wrong!");
       }
