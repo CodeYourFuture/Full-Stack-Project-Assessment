@@ -5,22 +5,18 @@ import VideoComponent from "./VideoComponent";
 import AddVideo from "./AddVideo";
 
 function App() {
-  const VideosData = () => {
-    // const [videos, setVideos] = useState([]);
+  // const [videos, setVideos] = useState([]);
 
-    useEffect(() => {
-      fetch("http://127.0.0.1:5000")
-        .then((response) => response.json())
-        .then((data) => setVideos(data))
-        .catch((error) => console.error("Error fetching data:", error));
-    }, []);
-
-    // ...
-  };
-
-  const [videos, setVideos] = useState("");
+  const [videos, setVideos] = useState([]);
   const [newVideoUrl, setNewVideoUrl] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000")
+      .then((response) => response.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
   const handleRemove = (videoId) => {
     setVideos(videos.filter((video) => video.id !== videoId));
