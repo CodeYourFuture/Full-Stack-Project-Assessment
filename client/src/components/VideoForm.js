@@ -35,6 +35,9 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
         const errorData = await response.json();
         const validationErrors = errorData.errors;
         setErrorMessage(validationErrors.map((error) => error.msg).join(", "));
+      } else if (response.status === 422) {
+        const existingError = await response.json();
+        setErrorMessage(existingError.message);
       } else if (response.status !== 201) {
         throw new Error("Something went wrong!");
       } else {

@@ -9,7 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 // Get all videos
 app.get("/", async (req, res) => {
   const { order, search } = req.query;
@@ -35,7 +34,6 @@ app.get("/", async (req, res) => {
     });
   }
 });
-
 
 // Post a video
 app.post(
@@ -65,14 +63,26 @@ app.post(
     }
 
     const { title, url, rating, date } = req.body;
-    const id = uuidv4();
+
     try {
+      // Check if a video with the same URL already exists
+      const existingURL = await pool.query(
+        "SELECT * FROM videos WHERE url=$1",
+        [url]
+      );
+      if (existingURL.rows.length > 0) {
+        return res.status(422).json({
+          message: "A video with this URL already exists.",
+        });
+      }
+      const id = uuidv4();
+      // If not, insert a new one
       const addVideos = await pool.query(
         "INSERT INTO videos(id, date, title, url, rating) VALUES($1, $2, $3, $4, $5)",
         [id, date, title, url, rating]
       );
       res.status(201).json({
-        message: "New video added successfully",
+        message: "New video added successfully.",
       });
     } catch (error) {
       res.status(404).json({
@@ -81,7 +91,6 @@ app.post(
     }
   }
 );
-
 
 //Update video rating
 app.put("/:id", async (req, res) => {
@@ -108,7 +117,6 @@ app.put("/:id", async (req, res) => {
     });
   }
 });
-
 
 //Delete a video
 app.delete("/:id", async (req, res) => {
