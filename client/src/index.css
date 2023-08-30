@@ -11,3 +11,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.video {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.video h3 {
+  margin-top: 0;
+}
+
+.video iframe {
+  width: 100%;
+  height: 250px;
+  margin: 10px 0;
+}
+
+.video p {
+  font-size: 18px;
+}
+
+.video button {
+  margin: 5px;
+}
+
+
+.add-video {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.add-video h3 {
+  margin-top: 0;
+}
+
+.add-video input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.add-video button {
+  margin: 5px;
+}
+
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
