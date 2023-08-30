@@ -37,13 +37,15 @@ function Video({ video, onRemove }) {
       <h2>{video.title}</h2>
       
       <div className="video-embed">
-        <iframe
+        {/* <iframe
           width="100%"
           height="315"
           // src={`https://www.youtube.com/embed/${new URL(video.url).searchParams.get('v')}`}
+          
           title={video.title}
           allowFullScreen
-        />
+        /> */}
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${new URL(video.url)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       
       <p>Rating: {rating}</p> 
