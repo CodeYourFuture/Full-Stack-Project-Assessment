@@ -1,7 +1,7 @@
 function Header() {
   return (
     <nav className="navbar navbar-light bg-light justify-content-between">
-      <a className="navbar-brand">Video Recommendations</a>
+      <a className="navbar-brand">Video Recommendation</a>
       <form className="form-inline">
         <input
           className="form-control mr-sm-2"
