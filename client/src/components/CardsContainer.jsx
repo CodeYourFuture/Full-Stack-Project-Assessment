@@ -24,7 +24,7 @@ function handleDelete(id) {
 
   return (
     <div className="grid justify-center gap-9">
-      {videoData.sort((a, b) => b.rating - a.rating).map((singleVideo) => {
+      {videoData?.sort((a, b) => b.rating - a.rating).map((singleVideo) => {
         return (
           <VideoCard
             key={singleVideo.id}
@@ -32,7 +32,6 @@ function handleDelete(id) {
             singleVideo={singleVideo}
             onDelete={handleDelete}
             setVideoData={setVideoData}
-
           />
         );
       })}

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardsContainer from "./CardsContainer";
 import VideoForm from "./VideoForm";
-import fullData from "../exampleresponse.json";
 
 function MainContainer() {
-    const [videoData, setVideoData] = useState(fullData);
+    const [videoData, setVideoData] = useState();
+
+    useEffect(() => {
+        fetch("http://localhost:5000/")
+        .then(response => response.json())
+        .then(data => setVideoData(data))
+    }, [])
     
     console.log("Video Data from MainContainer---> ", videoData);
     return (
