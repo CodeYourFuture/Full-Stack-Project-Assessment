@@ -63,7 +63,7 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
           <FontAwesomeIcon
             icon={faThumbsUp}
             size="2x"
-            style={{ color: "red" }}
+            style={{ color: "#fd5d5d" }}
           />
         </button>
         <p>{rating}</p>
@@ -75,14 +75,14 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
           <FontAwesomeIcon
             icon={faThumbsDown}
             size="2x"
-            style={{ color: "red" }}
+            style={{ color: "#fd5d5d" }}
           />
         </button>
       </div>
       <div>
         <iframe
-          width="460"
-          height="300"
+          // width="460"
+          // height="300"
           src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
           frameBorder="5"

@@ -78,7 +78,7 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
           />
         </div>
         <div className="form-buttons">
-          <button className="cancel-btn" onClick={() => setVideoForm(false)}>
+          <button className="button" onClick={() => setVideoForm(false)}>
             Cancel
           </button>
           <button className="add-btn" type="submit">
