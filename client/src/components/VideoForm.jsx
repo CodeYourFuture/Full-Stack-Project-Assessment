@@ -31,6 +31,16 @@ function VideoForm({ videoData, setVideoData }) {
         timeSent: Date(),
       };
       
+      fetch("http://localhost:5000/", {
+        method: "post",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newData),
+      });
+
+      
       setVideoData([...videoData, newData]);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {
