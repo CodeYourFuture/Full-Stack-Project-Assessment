@@ -30,12 +30,10 @@ function Video({ video, onRemove }) {
       <iframe
   width="100%"
   height="315"
-  src={`https://www.youtube.com/embed/${video.url.split('v=')[1]}`}
+  // src={`https://www.youtube.com/embed/${video.url.split('v=')[1]}`}
   title={video.title}
-  frameBorder="0"
-  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
-></iframe>
+/>
 
       </div>
       <p>Rating: {video.rating}</p>

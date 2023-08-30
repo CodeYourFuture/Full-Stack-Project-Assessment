@@ -9,14 +9,14 @@ function AddVideo({ onAdd }) {
     event.preventDefault();
 
     if (title && url) {
-      // Convert the URL to an embed URL
+    
       const videoId = url.match(/(?:\?v=|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9_\-]+)/)[1];
       const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
       const newVideo = {
         id: Date.now(),
         title,
-        url: embedUrl, // Use the embed URL
+        url: embedUrl, 
         rating: 0,
       };
 

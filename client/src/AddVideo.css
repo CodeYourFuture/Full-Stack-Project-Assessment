@@ -4,8 +4,8 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    max-width: 400px; /* Set a maximum width */
-    margin: 0 auto; /* Center the container horizontally */
+    max-width: 400px;
+    margin: 0 auto; 
   }
   
   .form-group {
@@ -19,7 +19,7 @@
   }
   
   .form-control {
-    width: 100%; /* Width still 100% within the container */
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -34,8 +34,8 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    display: block; /* Make the button a block element for centering */
-    margin: 10px auto; /* Center the button horizontally */
+    display: block; 
+    margin: 10px auto; 
   }
   
   .btn:hover {

@@ -1,10 +1,10 @@
-/* Reset some default styles */
+Reset some default styles
 body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
 }
 
-/* Set up the overall layout and background color */
+
 .App {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ body, h1, h2, h3, p, ul, li {
   font-family: Arial, sans-serif;
 }
 
-/* Style the header */
+
 .App-header {
   background-color: #007bff;
 text-align: center;
@@ -24,13 +24,13 @@ text-align: center;
   width: 100%;
 }
 
-/* Style the title */
+
 .App-header h1 {
   font-size: 24px;
   margin: 0;
 }
 
-/* Style the video container */
+
 .Video-container {
   background-color: white;
   padding: 20px;
@@ -42,7 +42,7 @@ text-align: center;
   text-align: left;
 }
 
-/* Style the add video form */
+
 .add-video-container {
   background-color: white;
   padding: 20px;
@@ -54,7 +54,6 @@ text-align: center;
   text-align: left;
 }
 
-/* Style form elements */
 .form-group {
   margin-bottom: 10px;
 }
