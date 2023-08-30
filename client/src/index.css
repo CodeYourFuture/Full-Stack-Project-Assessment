@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+form{
+margin: 20px;
+max-width: 400px;
+}
+
+
+
+
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+  }
+.buttons{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+.card{
+  border: 2px solid gray;
+  border-radius: 5px;
+}
