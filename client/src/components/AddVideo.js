@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function AddVideo({ onAddVideo }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [Error, setError] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -11,10 +12,20 @@ function AddVideo({ onAddVideo }) {
   const handleUrlChange = (event) => {
     setUrl(event.target.value);
   };
+  const validUrl = (inputUrl) => {
+    return inputUrl.match(
+      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+(&\S+)?$/
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (title && url) {
+
+    if (!title.trim()) {
+      setError("Please enter a title"); //title error handling
+    } else if (!validUrl(url)) {
+      setError("Please enter a valid YouTube URL"); //url error handling
+    } else {
       onAddVideo({ title, url });
       setTitle("");
       setUrl("");
@@ -70,6 +81,7 @@ function AddVideo({ onAddVideo }) {
           </div>
         </form>
       </div>
+      {Error && <div className="text-center text-danger">{Error}</div>}
     </>
   );
 }

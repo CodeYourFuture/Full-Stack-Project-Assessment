@@ -1,13 +1,22 @@
-function Header() {
+import React from "react";
+
+function Header({ search, onSearch }) {
+  const handleSearch = (event) => {
+    const newSearch = event.target.value;
+    onSearch(newSearch);
+  };
+
   return (
     <nav className="navbar navbar-light bg-light justify-content-between">
-      <a className="navbar-brand">Video Recommendation</a>
+      <span className="navbar-brand">Video Recommendation</span>
       <form className="form-inline">
         <input
           className="form-control mr-sm-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
+          value={search}
+          onChange={handleSearch}
         />
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search

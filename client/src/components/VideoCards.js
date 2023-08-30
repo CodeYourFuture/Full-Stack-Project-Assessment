@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -42,10 +42,14 @@ function VideoCard({ title, url, rating, onRemove }) {
   );
 }
 
-function VideoCards({ videos, onRemove }) {
+function VideoCards({ videos, onRemove, search }) {
+  const filteredVideos = videos
+    .filter((video) => video.title.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => b.rating - a.rating); // sorting by highest rating
+
   return (
     <div className="video-grid">
-      {videos.map((video) => (
+      {filteredVideos.map((video) => (
         <VideoCard
           key={video.id}
           title={video.title}

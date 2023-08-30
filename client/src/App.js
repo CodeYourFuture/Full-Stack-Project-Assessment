@@ -6,6 +6,7 @@ import VideoCards from "./components/VideoCards";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [search, setNewSearch] = useState("");
 
   useEffect(() => {
     fetch("/data.json")
@@ -13,6 +14,7 @@ function App() {
       .then((data) => setVideos(data))
       .catch((error) => console.error("Error fetching videos:", error));
   }, []);
+
   const handleAddVideo = (newVideo) => {
     setVideos([newVideo, ...videos]);
   };
@@ -21,12 +23,19 @@ function App() {
     const updatedVideos = videos.filter((video) => video.title !== title);
     setVideos(updatedVideos);
   };
+  const handleSearch = (event) => {
+    const newSearch = event.target.value;
+    setNewSearch(newSearch);
+  };
 
   return (
     <div className="App">
-      <Header />
+      <Header
+        search={search}
+        onSearch={(newSearch) => setNewSearch(newSearch)}
+      />
       <AddVideo onAddVideo={handleAddVideo} />
-      <VideoCards videos={videos} onRemove={handleRemove} />
+      <VideoCards videos={videos} onRemove={handleRemove} search={search} />
     </div>
   );
 }
