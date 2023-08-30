@@ -1,7 +1,6 @@
 import "./App.css";
 
-import VideoPlay from "./components/VideoPlay";
-
+import VideosList from "./components/VideosList";
 
 function App() {
   return (
@@ -10,13 +9,9 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
 
-      <VideoPlay/>
+      <VideosList />
     </div>
   );
 }
 
 export default App;
-
-
-
-
