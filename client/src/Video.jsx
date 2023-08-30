@@ -18,27 +18,48 @@
 //   );
 // }
 
-// export default Video;
-
-import React from 'react';
+import React, { useState } from 'react';
 
 function Video({ video, onRemove }) {
+
+  const [rating, setRating] = useState(video.rating); 
+
+  const handleUpVote = () => {
+    setRating(rating + 1); 
+  };
+
+  const handleDownVote = () => {
+    setRating(rating - 1); 
+  };
+
   return (
     <div className="Video-container">
       <h2>{video.title}</h2>
+      
       <div className="video-embed">
-      <iframe
-  width="100%"
-  height="315"
-  // src={`https://www.youtube.com/embed/${video.url.split('v=')[1]}`}
-  title={video.title}
-  allowFullScreen
-/>
-
+        <iframe
+          width="100%"
+          height="315"
+          // src={`https://www.youtube.com/embed/${new URL(video.url).searchParams.get('v')}`}
+          title={video.title}
+          allowFullScreen
+        />
       </div>
-      <p>Rating: {video.rating}</p>
+      
+      <p>Rating: {rating}</p> 
+      
       <button className="btn" onClick={() => onRemove(video.id)}>
         Remove Video
+      </button>
+      
+     
+      <button className="btn" onClick={handleUpVote}>
+        Up Vote
+      </button>
+      
+  
+      <button className="btn" onClick={handleDownVote}>
+        Down Vote
       </button>
     </div>
   );
