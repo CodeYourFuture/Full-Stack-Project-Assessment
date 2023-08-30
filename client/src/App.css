@@ -28,3 +28,12 @@ h2 {
   width: 350px;
   height: 200px;
 }
+.vote-buttons button {
+  display: inline-flex;
+
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}

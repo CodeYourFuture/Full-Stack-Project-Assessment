@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-function AddVideo() {
+function AddVideo({ onAddVideo }) {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleUrlChange = (event) => {
+    setUrl(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (title && url) {
+      onAddVideo({ title, url });
+      setTitle("");
+      setUrl("");
+    }
+  };
+
   return (
     <>
       <div className="text-center">
@@ -10,7 +30,7 @@ function AddVideo() {
         className="d-flex justify-content-center align-items-center"
         style={{ minHeight: "20vh" }}
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form form-row align-items-center">
             <div className="col-auto">
               <label className="sr-only" htmlFor="title">
@@ -21,6 +41,8 @@ function AddVideo() {
                 className="form-control mb-2"
                 id="title"
                 placeholder="Enter a title"
+                value={title}
+                onChange={handleTitleChange}
               />
             </div>
             <div className="col-auto">
@@ -36,6 +58,7 @@ function AddVideo() {
                   className="form-control"
                   id="url"
                   placeholder="Video URL"
+                  onChange={handleUrlChange}
                 />
               </div>
             </div>
