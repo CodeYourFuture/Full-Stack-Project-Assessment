@@ -23,7 +23,7 @@ const VideoLists = ({ allVideos, getAllVideos }) => {
 
   setTimeout(() => {
     setBackDeleteMessage("");
-  }, 3000);
+  }, 4000);
 
   return (
     <>

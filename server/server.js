@@ -2,10 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 const { v4: uuidv4 } = require("uuid");
+const { body, validationResult } = require("express-validator");
 require("dotenv").config();
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 // Get all videos
 app.get("/", async (req, res) => {
@@ -33,25 +36,52 @@ app.get("/", async (req, res) => {
   }
 });
 
+
 // Post a video
-app.post("/", async (req, res) => {
-  const { title, url, rating, date } = req.body;
-  const id = uuidv4();
-  try {
-    const addVideos = await pool.query(
-      "INSERT INTO videos(id, date, title, url, rating) VALUES($1, $2, $3, $4, $5)",
-      [id, date, title, url, rating]
-    );
-    res.status(201).json({
-      message: "New video added successfully",
-      isPositive: true,
-    });
-  } catch (error) {
-    res.status(404).json({
-      message: "something went wrong!",
-    });
+app.post(
+  "/",
+  [
+    body("title").notEmpty().withMessage("Title is required."),
+    body("url")
+      .notEmpty()
+      .withMessage("URL is required.")
+      .isURL({ require_protocol: true })
+      .withMessage("Please provide a valid URL.")
+      .custom((value) => {
+        // Custom validation: Check if URL is a YouTube URL
+        const youtubeRegExp =
+          /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/;
+        if (!youtubeRegExp.test(value)) {
+          throw new Error("URL must be a valid YouTube URL.");
+        }
+        return true;
+      }),
+  ],
+  async (req, res) => {
+    // Check there is any errors or not
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, url, rating, date } = req.body;
+    const id = uuidv4();
+    try {
+      const addVideos = await pool.query(
+        "INSERT INTO videos(id, date, title, url, rating) VALUES($1, $2, $3, $4, $5)",
+        [id, date, title, url, rating]
+      );
+      res.status(201).json({
+        message: "New video added successfully",
+      });
+    } catch (error) {
+      res.status(404).json({
+        message: "something went wrong!",
+      });
+    }
   }
-});
+);
+
 
 //Update video rating
 app.put("/:id", async (req, res) => {
@@ -78,6 +108,7 @@ app.put("/:id", async (req, res) => {
     });
   }
 });
+
 
 //Delete a video
 app.delete("/:id", async (req, res) => {

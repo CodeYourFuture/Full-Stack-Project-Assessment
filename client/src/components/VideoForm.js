@@ -3,9 +3,22 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [backendMessage, setBackendMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (!title.trim() || !url.trim()) {
+      setErrorMessage("Title and URL are required.");
+      return;
+    }
+    const youtubeRegExp =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    if (!youtubeRegExp.test(url)) {
+      setErrorMessage("Please enter a valid YouTube URL.");
+      return;
+    }
+
+    // Perform the API call
     const newVideo = {
       title,
       url,
@@ -18,7 +31,11 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newVideo),
       });
-      if (response.status !== 201) {
+      if (response.status === 400) {
+        const errorData = await response.json();
+        const validationErrors = errorData.errors;
+        setErrorMessage(validationErrors.map((error) => error.msg).join(", "));
+      } else if (response.status !== 201) {
         throw new Error("Something went wrong!");
       } else {
         const data = await response.json();
@@ -26,16 +43,16 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
         getAllVideos();
         setTitle("");
         setUrl("");
+        setErrorMessage("");
       }
     } catch (error) {
-      console.log("err");
       console.error(error);
     }
   };
 
   setTimeout(() => {
     setBackendMessage("");
-  }, 3000);
+  }, 4000);
 
   return (
     <>
@@ -69,6 +86,13 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
           </button>
         </div>
       </form>
+
+      {errorMessage && (
+        <div className="error-message">
+          <h3>{errorMessage}</h3>
+        </div>
+      )}
+
       {backendMessage && (
         <div className="add-message">
           <h3>{backendMessage}</h3>
