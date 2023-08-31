@@ -5,30 +5,28 @@ const baseUrl = "http://localhost:5001";
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const [fetchCounter, setFetchCounter] = useState(0);
-  const [deleteId, setDeleteId] = useState(null);
 
-  useEffect(() => {
+  function getVideos() {
     fetch(`${baseUrl}/`)
       .then(response => response.json())
       .then(videos => setVideos(videos))
       .catch(error => console.log(error));
-  }, [fetchCounter]);
-
-  useEffect(() => {
-    if (deleteId === null) {
-      return;
-    }
-    fetch(`${baseUrl}/${deleteId}`, {method: "DELETE"})
+  }
+  function deleteVideo(id) {
+    fetch(`${baseUrl}/${id}`, {method: "DELETE"})
       .then(response => response.json())
       .then(result => {
         if (result["result"] !== "failure") {
-          setFetchCounter(counter => counter+1);
+          getVideos();
         } else {
           console.log("could not delete");
         }
-    });
-  }, [deleteId]);
+      });
+  }
+
+  useEffect(() => {
+    getVideos();
+  }, []);
 
   const recommendations = videos.length === 0
     ? <div>initialising</div>
@@ -40,7 +38,7 @@ function App() {
             <h3>{video.title}</h3>
             <iframe width="560" height="315" src={embedUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             <div>rating: {video.rating}</div>
-            <button onClick={() => setDeleteId(video.id)}>delete</button>
+            <button onClick={() => deleteVideo(video.id)}>delete</button>
           </div>
         );
       });
