@@ -2,8 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
+const { Pool } = require("pg");
+require("dotenv").config();
 app.use(express.json());
 app.use(cors());
+
+const db = new Pool({
+  user: process.env.db_user,
+  host: process.env.db_host,
+  database: process.env.db_name,
+  password: process.env.db_password,
+  port: process.env.db_port,
+  ssl: true,
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -13,7 +24,13 @@ const videos = require("./exampleresponse.json");
 
 // GET "/" to get all the videos
 app.get("/", (req, res) => {
-  res.json(videos);
+  db.query("SELECT * FROM videos")
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //POST "/" to post a new video
