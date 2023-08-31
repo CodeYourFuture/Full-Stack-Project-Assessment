@@ -1,25 +1,32 @@
 import "./App.css";
 import { useState, useEffect } from 'react';
-import { MockGet, MockDelete } from './MockBackend';
+
+const baseUrl = "http://localhost:5001";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [fetchCounter, setFetchCounter] = useState(0);
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    MockGet().then(videos => setVideos(videos));
-  }, []);
+    fetch(`${baseUrl}/`)
+      .then(response => response.json())
+      .then(videos => setVideos(videos))
+      .catch(error => console.log(error));
+  }, [fetchCounter]);
 
   useEffect(() => {
     if (deleteId === null) {
       return;
     }
-    MockDelete(deleteId).then(response => {
-      if (response["result"] !== "failure") {
-        MockGet().then(videos => setVideos(videos));
-      } else {
-        console.log("could not delete");
-      }
+    fetch(`${baseUrl}/${deleteId}`, {method: "DELETE"})
+      .then(response => response.json())
+      .then(result => {
+        if (result["result"] !== "failure") {
+          setFetchCounter(counter => counter+1);
+        } else {
+          console.log("could not delete");
+        }
     });
   }, [deleteId]);
 
