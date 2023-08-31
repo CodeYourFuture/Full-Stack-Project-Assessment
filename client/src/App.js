@@ -1,13 +1,12 @@
 import "./App.css";
-//import AllButtons from "./components/AllButtons";
-import ShowVideos from "./components/Card";
+import AllButtons from "./components/AllButtons";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
-        <ShowVideos />
+        <AllButtons />
       </header>
     </div>
   );
