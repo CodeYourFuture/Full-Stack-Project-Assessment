@@ -3,9 +3,10 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 
 app.use(express.json()); // needed to parse JSON data
+app.use(cors());
 
 const { Pool } = require("pg");
 
@@ -17,6 +18,15 @@ const db = new Pool({
   port: process.env.DB_PORT,
   ssl: true,
 });
+
+db.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected to database");
+});
+
+// Store and retrieve your videos from here
+// If you want, you can copy "exampleResponse.json" into here to have some data to work with
+let videos = require("/home/coder/Desktop/CYF/Full-Stack-Project-Assessment/server/exampleResponse.json");
 
 // Store and retrieve your videos from here
 // let videos = require("./exampleResponse.json"); // Get this from Render db?????
@@ -32,12 +42,6 @@ app.get("/videos", function (request, response) {
       response.status(500).json({ error: "Error" });
     });
 });
-
-app.use(cors());
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = require("/home/coder/Desktop/CYF/Full-Stack-Project-Assessment/client/src/exampleResponse.json");
 
 // GET "/"
 // This endpoint is used to return all of the videos
@@ -92,8 +96,5 @@ app.delete("/:id", function (request, response) {
     });
   }
 });
-
-});
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
