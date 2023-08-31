@@ -51,7 +51,7 @@ function App() {
             />
           )}
         </div>
-        <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />
+        {allVideos && <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />}
       </main>
     </div>
   );
