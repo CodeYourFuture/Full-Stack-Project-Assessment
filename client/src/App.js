@@ -24,6 +24,29 @@ function App() {
         }
       });
   }
+  function newVideo(event) {
+    event.preventDefault();
+    const fetchParams = {
+      method: "POST",
+      body: JSON.stringify({
+        title: event.target.title.value,
+        url: event.target.url.value
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    };
+
+    fetch(`${baseUrl}/`, fetchParams)
+      .then(response => response.json())
+      .then(result => {
+        if (result["result"] !== "failure") {
+          getVideos();
+        } else {
+          console.log("could not delete");
+        }
+      });
+  }
 
   useEffect(() => {
     getVideos();
@@ -33,6 +56,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
+        <form id='newVideo' onSubmit={newVideo}>
+          <input name='title' type='text'/>
+          <input name='url' type='text'/>
+          <input type='submit'/>
+        </form>
         {
           videos.length === 0
             ? <div>initialising</div>

@@ -1,9 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors())
+app.use(cors());
+app.use(bodyParser.json());
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
@@ -93,4 +96,32 @@ app.delete("/:id", (req, res) => {
       "message": "Video could not be deleted"
     });
   }
+});
+
+app.post("/", (req, res) => {
+  const {title, url} = req.body;
+  if (!url.match(/^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+(&\S+)?$/)) {
+    res.send({
+      "result": "failure",
+      "message": "Video could not be saved"
+    });
+  }
+
+  let newId = 0;
+  while (videos.some((video => video.id === newId))) {
+    newId += 1;
+  }
+
+  videos = [
+    {
+      id: newId,
+      title: title,
+      url: url,
+      rating: 0
+    },
+    ...videos
+  ];
+  res.send({
+    id: newId
+  });
 });
