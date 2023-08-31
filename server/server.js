@@ -4,9 +4,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(cors());
-const { v4: uuidv4 } = require("uuid");
 
-const videos = require("./exampleresponse.json")
+const videos = require("./exampleresponse.json");
 
 app.use(express.json());
 
@@ -19,6 +18,12 @@ app.get("/", (req, res) => {
   res.status(200).json(videos);
 });
 
+/*
+  1. post updates videData state
+  2. we create a new video entry with a CUSTOM id
+  3. 
+*/
+
 app.post("/", (req, res) => {
   const { title, url } = req.body;
   if (!title || !url || !url.startsWith("https://www.youtube.com")) {
@@ -27,45 +32,56 @@ app.post("/", (req, res) => {
       message: "Video could not be saved",
     });
   } else {
-    const id = uuidv4().slice(0, 7);
+    const idList = videos.map((video) => video.id);
+    const id = Math.max(...idList) + 1;
     const newVideo = {
       id,
       title,
       url,
-      rating: 0
-    }
+      rating: 0,
+    };
     videos.push(newVideo);
-    res.status(201).json({id});
+    res.status(201).json({ id });
   }
 });
 
 app.get("/:id", (req, res) => {
-  const id = Number(req.params.id); 
-  const matchingVideo = videos.find((video) => { 
-    return (video.id === id);
-  })
+  const id = Number(req.params.id);
+  const matchingVideo = videos.find((video) => {
+    return video.id === id;
+  });
   if (!matchingVideo) {
-    res.status(400).send("No matching video with this ID exists.")
+    res.status(400).send("No matching video with this ID exists.");
   } else {
     res.status(200).json({ matchingVideo });
   }
-})
+});
 
 app.delete("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const matchingVideo = videos.find((video) => { 
-    return (video.id === id);
-  })
+  let id = Number(req.params.id);
+  console.log("deletedVideoId --->", id);
+
+  const matchingVideo = videos.find((video) => {
+    console.log("video.id --->", video.id);
+    console.log("type of video.id --->", typeof video.id);
+    console.log("id --->", id);
+    console.log("type of id --->", typeof id);
+    return video.id === id;
+  });
+  console.log("matchingVideo", matchingVideo);
+
   if (!matchingVideo) {
     res.status(400).json({
-      "result": "failure",
-      "message": "Video could not be deleted"
-    })} else {
-      const videoIndexToBeDeleted = videos.indexOf(matchingVideo);
-      const deletedVideo = videos.splice(videoIndexToBeDeleted, 1);
-      res.status(200).json({})
-    }
+      result: "failure",
+      message: "Video could not be deleted",
+      id: id,
+    });
+  } else {
+    const videoIndexToBeDeleted = videos.indexOf(matchingVideo);
+    videos.splice(videoIndexToBeDeleted, 1);
+    res.status(200).json({});
   }
-);
+});
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

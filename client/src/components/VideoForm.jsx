@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function VideoForm({ videoData, setVideoData }) {
+function VideoForm({ videoData, setVideoData, setFetchData}) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function addVideoHandler(event) {
@@ -41,7 +41,8 @@ function VideoForm({ videoData, setVideoData }) {
       });
 
       
-      setVideoData([...videoData, newData]);
+      setFetchData(true)
+      // setVideoData([...videoData, newData]);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {
       setErrorMessage("Add a title and a valid URL");

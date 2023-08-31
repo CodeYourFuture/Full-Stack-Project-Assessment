@@ -12,29 +12,32 @@ We turn the videoData into a useState to delete the video with a specific data.
 How do you delete a record from a useState array (answer might be spread operator, perhaps .map?)
 */
 
-function CardsContainer( { videoData, setVideoData }) {
-
-function handleDelete(id) {
-  setVideoData(
-    videoData.filter((video) => {
-      return video.id !== id;
+function CardsContainer({ videoData, setVideoData, setFetchData }) {
+  async function handleDelete(id) {
+    fetch(`http://localhost:5000/${id}`, {
+      method: "delete",
     })
-  );
-}
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    setFetchData(true);
+  }
 
   return (
     <div className="grid justify-center gap-9">
-      {videoData?.sort((a, b) => b.rating - a.rating).map((singleVideo) => {
-        return (
-          <VideoCard
-            key={singleVideo.id}
-            videoData={videoData}
-            singleVideo={singleVideo}
-            onDelete={handleDelete}
-            setVideoData={setVideoData}
-          />
-        );
-      })}
+      {videoData
+        ?.sort((a, b) => b.rating - a.rating)
+        .map((singleVideo) => {
+          return (
+            <VideoCard
+              key={singleVideo.id}
+              videoData={videoData}
+              singleVideo={singleVideo}
+              onDelete={handleDelete}
+              setVideoData={setVideoData}
+            />
+          );
+        })}
     </div>
   );
 }
