@@ -4,7 +4,7 @@ const MainCard = ({ video, onDelete, onVote }) => {
   const videoId = video.url.split("v=")[1];
 
   return (
-    <div>
+    <div id="recomendation">
       <h2>{video.title}</h2>
       <iframe
         className="iframe"
