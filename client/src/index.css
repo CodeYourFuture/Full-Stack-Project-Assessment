@@ -276,9 +276,9 @@ iframe {
   .features {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     gap: 1rem;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0.5rem 1.5rem;
   }
   .features .search-videos input,
   .features .order-videos select {
@@ -298,6 +298,16 @@ iframe {
   }
   .add-message h3 {
     font-size: 12px;
+  }
+  /* Video form  */
+  .form-buttons {
+    margin-left: 1rem;
+  }
+  .form-buttons button {
+    margin: 1rem 0rem;
+  }
+  .add-form {
+    margin-left: -1rem;
   }
   /* Videos */
   iframe {
