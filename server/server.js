@@ -5,8 +5,8 @@ const app = express();
 
 // const port = process.env.PORT || 5000;
 
-app.use(express.json()); // needed to parse JSON data
 app.use(cors());
+app.use(express.json()); // needed to parse JSON data
 
 const { Pool } = require("pg");
 
@@ -15,7 +15,7 @@ const db = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: process.env.DB_PORT || 5000,
   ssl: true,
 });
 
