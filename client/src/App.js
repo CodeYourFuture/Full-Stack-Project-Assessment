@@ -9,21 +9,34 @@ import Searchbar from "./components/Searchbar";
 function App() {
   // An empty array [] to hold all the videos as our component loads them
   const [videos, setVideos] = useState([]);
+
+  const [count, setCount] = useState(0);
+
+  // backend
   const apiURL = "http://127.0.0.1:5000";
+
+  const [formData, setFormData] = useState({
+    title: "",
+    url: "",
+  });
 
   console.log("component rendered");
 
   // Empty dependecies array means the effect will only run on the very first render of component
-  // No dependencies to watch to trigger this effect again
-  useEffect(function () {
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((videoData) => {
-        console.log("effect ran");
-        setVideos(videoData);
-      });
-  }, []);
 
+  useEffect(
+    function () {
+      fetch(apiURL)
+        .then((response) => response.json())
+        .then((videoData) => {
+          console.log("effect ran");
+          setVideos(videoData);
+        });
+    },
+    [count]
+  );
+
+  // need to add some code to update database
   function changeVoteScore(id, voteChoice) {
     setVideos((prevVideos) =>
       prevVideos.map((video) => {
@@ -44,14 +57,12 @@ function App() {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then(
-        setVideos((prevVideos) => {
-          return prevVideos.filter((video) => video.id !== id);
-        })
-      )
-      .catch((error) => console.error(error));
+      .then((data) => console.log(data));
+    // .catch((error) => console.error(error));
+    setCount((prevCount) => prevCount + 1);
   }
 
+  ///// ADD VIDEO
   function addVideo(formData) {
     console.log(formData);
     fetch(apiURL, {
@@ -63,20 +74,10 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        let maximumId = Math.max(...videos.map((video) => video.id));
-
-        setVideos((prevVideos) => {
-          return [
-            {
-              id: maximumId + 1,
-              title: data.title,
-              url: data.url,
-              rating: 0,
-            },
-            ...prevVideos,
-          ];
-        });
+        console.log(data);
       });
+
+    setCount((prevCount) => prevCount + 1);
   }
 
   function searchVideo(searchInput) {
@@ -97,7 +98,11 @@ function App() {
         <h1>Video Recommendations</h1>
       </header>
       <div className="form--container">
-        <AddVideoForm handleAddVideo={addVideo} />
+        <AddVideoForm
+          formData={formData}
+          setFormData={setFormData}
+          handleAddVideo={addVideo}
+        />
         <Searchbar handleSearchVideo={searchVideo} />
       </div>
       <div className="video--container">

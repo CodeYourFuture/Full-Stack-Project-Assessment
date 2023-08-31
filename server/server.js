@@ -3,16 +3,16 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// body-parser
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 // cors
 let cors = require("cors");
 app.use(cors());
 
 // to parse incoming requests with JSON payloads
 app.use(express.json());
-
-// body-parser
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -30,7 +30,7 @@ const db = new Pool({
 // GET "/"
 // Returns all the videos
 app.get("/", function (request, response) {
-  db.query("SELECT * FROM videos")
+  db.query(`SELECT * FROM videos ORDER BY title`)
     .then((result) => {
       response.json(result.rows);
     })
@@ -58,7 +58,16 @@ app.post("/", (request, response) => {
   const newTitle = request.body.title;
   const newURL = request.body.url;
 
-  // RETURNING clause returns generated id and rating after INSERT
+  console.log(request.body);
+  // need to write code for validation
+  // if (!newTitle || !newURL) {
+  //   return response.status(400).send({
+  //     result: "failure",
+  //     message: "Video could not be saved, add a title or url",
+  //   });
+  // }
+
+  // RETURNING clause returns values after INSERT
   const query = `INSERT INTO videos (title, url)
     VALUES ($1, $2) RETURNING *`;
 
@@ -67,48 +76,23 @@ app.post("/", (request, response) => {
       console.log(result.rows);
       const newID = result.rows.id;
       const newRating = result.rows.rating;
-
       response.status(201).json({
         id: newID,
         title: newTitle,
         url: newURL,
         rating: newRating,
-        message: "Video was saved",
+        message: "Video was SAVED",
       });
     })
     .catch((err) => {
       console.log(err);
     });
-
-  // if (!title || !url) {
-  //   return response.status(400).json({
-  //     result: "failure",
-  //     message: "Video could not be saved, add a title or url",
-  //   });
-  // }
 });
 
 // DELETE
 // Deletes the video with the ID container within the `{id}` parameter
 app.delete("/videos/:id", (request, response) => {
-  const id = Number(request.params.id);
+  const idToDelete = Number(request.params.id);
 
-  const videoToDelete = videos.find((video) => video.id === id);
-
-  if (videoToDelete === undefined) {
-    response.status(401).json({
-      result: "failure",
-      message: "Video could not be found",
-    });
-  } else {
-    // get the index of the video object that we want to delete
-    const index = videos.indexOf(videoToDelete);
-
-    // use splice to delete -- video array will be mutated
-    videos.splice(index, 1);
-
-    response.status(201).json({
-      message: "Video was deleted",
-    });
-  }
+  db.query("DELETE FROM videos WHERE id = $1", [idToDelete]);
 });

@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function AddVideoForm(props) {
-  const [formData, setFormData] = useState({ title: "", url: "" });
-
   function handleAddVideo(event) {
-    // stops page refresh
     event.preventDefault();
-    props.handleAddVideo(formData);
+    props.handleAddVideo(props.formData);
   }
 
   function handleChange(event) {
-    // stops refresh
     event.preventDefault();
-    setFormData((prevFormData) => {
+    props.setFormData((prevFormData) => {
       return {
         ...prevFormData,
         [event.target.name]: event.target.value,
@@ -26,7 +22,7 @@ export default function AddVideoForm(props) {
         onChange={handleChange}
         type="text"
         name="title"
-        value={formData.title}
+        value={props.formData.title}
         placeholder="Title"
         className="form--input"
       />
@@ -34,7 +30,7 @@ export default function AddVideoForm(props) {
         onChange={handleChange}
         type="text"
         name="url"
-        value={formData.url}
+        value={props.formData.url}
         placeholder="url"
         className="form--input"
       />
