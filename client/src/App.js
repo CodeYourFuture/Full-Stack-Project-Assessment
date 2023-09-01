@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import VideoForm from "./components/VideoForm";
 import VideoLists from "./components/VideoLists";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   const [videoForm, setVideoForm] = useState(false);
   const [allVideos, setAllVideos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllVideos = async (searchText, MoviesOrder) => {
     let order = "";
@@ -25,8 +28,10 @@ function App() {
       }
       const data = await response.json();
       setAllVideos(data);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -51,7 +56,11 @@ function App() {
             />
           )}
         </div>
-        {allVideos && <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />}
+        {isLoading ? (<div className="spinner">
+        <FontAwesomeIcon icon={faSpinner} spin />
+            <p>Loading...</p>
+        </div>) : (
+          allVideos && <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />)}
       </main>
     </div>
   );

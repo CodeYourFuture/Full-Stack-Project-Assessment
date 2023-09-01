@@ -47,6 +47,9 @@ select {
   border-color: none;
   color: #f1ebeb;
 }
+.spinner{
+  text-align: center;
+}
 
 /* VideoForm */
 
