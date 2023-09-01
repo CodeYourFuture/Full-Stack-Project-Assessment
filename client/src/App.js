@@ -4,12 +4,18 @@ import AddVideo from "./AddVideo";
 import VideoCards from "./VideoCards";
 import Search from "./Search.js";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL; // we are telling front end where to access back end (see .env in client folder)
+console.log(`REACT_APP_BACKEND_URL = ${backendUrl}`);
+if (!backendUrl) {
+  throw new Error("REACT_APP_BACKEND_URL not defined");
+}
+
 function App() {
   const [videos, setVideos] = useState([]);
 
   const fetchVideos = () => {
     console.log("some text, some more text");
-    fetch("http://localhost:5000/")
+    fetch(backendUrl)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
