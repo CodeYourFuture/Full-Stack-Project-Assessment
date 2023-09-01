@@ -11,13 +11,13 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = require("./videosData.json")
 
 // GET "/"
-app.get("/videos", (req, res) => {
+app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.json({ videos });
 });
 
 //GET BY ID
-app.get("/videos/:id", (req, res) => {
+app.get("/:id", (req, res) => {
   console.log("res.json <----Get by ID")
   const idToFind = Number(req.params.id);
   const video = videos.find((v) => v.id === idToFind);
@@ -25,7 +25,7 @@ app.get("/videos/:id", (req, res) => {
 })
 
 // Delete BY ID
-app.delete('/videos/:id', (req, res) => {
+app.delete('/:id', (req, res) => {
   console.log(req.params.id, "Delete by ID")
   const deletedVideo = Number(req.params.id);
   const videoToDelete = videos.find((v) => v.id === deletedVideo);
@@ -40,7 +40,7 @@ app.delete('/videos/:id', (req, res) => {
 });
 
 // POST A VIDEO TO THE API
-app.post('/videos/:id', (req, res) => {
+app.post('/:id', (req, res) => {
   console.log(req.body, " <---- Add a new video to the API");
   const {title, url} = req.body;
   if(!title || !url){
