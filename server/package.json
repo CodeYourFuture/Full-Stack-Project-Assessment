@@ -12,11 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.17.1",
     "pg": "^8.11.3"
   },
   "repository": {
-    "url": "wss://https://wandering-cooing-velociraptor.glitch.me/"
+    "url": "http://localhost:3000/"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

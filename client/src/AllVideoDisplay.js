@@ -30,8 +30,8 @@ function VideoComponent({
         </button>
       </div>
 
-      <div class="container">
-        <div class="videoDisplayContainer">
+      <div className="container">
+        <div className="videoDisplayContainer">
           <VideoDisplay
             elements={elements}
             onLike={onLike}
@@ -46,7 +46,7 @@ function VideoComponent({
 
 function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
   return (
-    <div class="videoDisplayContainer">
+    <div className="videoDisplayContainer">
       {" "}
       {elements.map((element) => (
         <div key={element.id} class="displayGrid">
@@ -63,9 +63,9 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
             align="center"
             src={element.url}
           ></iframe>
-          <div class="likedislikeBtn">
+          <div className="likedislikeBtn">
             <button
-              class="btn btn-light customBackground5"
+              className="btn btn-light customBackground5"
               onClick={() => onLike(element.id)}
             >
               Like
@@ -73,14 +73,14 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
             <span>Votes:&nbsp;{element.rating}</span>
 
             <button
-              class="btn btn-light customBackground5"
+              className="btn btn-light customBackground5"
               onClick={() => onDislike(element.id)}
             >
               Dislike
             </button>
           </div>
           <button
-            class="btn btn-light deleteBtn"
+            className="btn btn-light deleteBtn"
             onClick={() => onDelete(element.id)}
           >
             Delete

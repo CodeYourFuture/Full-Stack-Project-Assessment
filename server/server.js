@@ -4,28 +4,38 @@ const cors = require("cors");
 const express = require("express");
 const { Pool } = require("pg");
 const app = express();
-app.use(cors({origin:[],method:["POST","GET","UPDATE","DELETE"],credentials:true}));
+app.use(
+  cors({
+    origin: [],
+    method: ["POST", "GET", "UPDATE", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 const port = process.env.PORT || 5000;
 const fs = require("fs/promises");
 const path = require("path");
 app.use(express.static(path.join(__dirname, "../client/build")));
+const dotenv = require("dotenv");
+dotenv.config();
+const itemsPool = require("./DBConfig");
+
 // Configure the database connection
-const pool = new Pool({
-  user: "mele",
-  host: "localhost",
-  database: "cyf_hotels",
-  password: "Meleubuntu12",
-  port: 5432,
-});
-pool
+// const pool = new Pool({
+//   user: "mele",
+//   host: "localhost",
+//   database: "cyf_hotels",
+//   password: "Meleubuntu12",
+//   port: 5432,
+// });
+itemsPool
   .connect()
   .then(() => console.log("Connected to the database"))
   .catch((err) => console.error("Database connection error", err));
 // // //GET "/videos"
 app.get("/videos", async (request, response) => {
   try {
-    const updatedData = await pool.query("SELECT * FROM video");
+    const updatedData = await itemsPool.query("SELECT * FROM video");
 
     response.json(updatedData.rows);
   } catch (error) {
@@ -38,7 +48,7 @@ app.post("/videos", async (request, response) => {
   const formData = request.body;
   try {
     console.log("Received form data:", formData);
-    await pool.query(
+    await itemsPool.query(
       "INSERT INTO video (title, url, rating) VALUES ($1, $2, $3)",
       [formData.title, formData.url, formData.rating]
     );
@@ -55,7 +65,7 @@ app.get("/videos/:id", async (request, response) => {
     let id = parseInt(request.params.id);
     console.log(id);
     const query = "SELECT * FROM video WHERE id = $1}";
-    const result = await pool.query(query, [id]);
+    const result = await itemsPool.query(query, [id]);
 
     response.json(result.rows);
   } catch (error) {
@@ -68,7 +78,7 @@ app.delete("/videos/:id", async (request, response) => {
 
   try {
     const query = "DELETE FROM video WHERE id = $1";
-    await pool.query(query, [id]);
+    await itemsPool.query(query, [id]);
 
     response.status(200).json({ message: "Video deleted successfully" });
   } catch (error) {
@@ -81,9 +91,10 @@ app.post("/videos/:id/like", async (request, response) => {
   const videoId = parseInt(request.params.id);
 
   try {
-    await pool.query("UPDATE video SET rating = rating + 1 WHERE id = $1", [
-      videoId,
-    ]);
+    await itemsPool.query(
+      "UPDATE video SET rating = rating + 1 WHERE id = $1",
+      [videoId]
+    );
     response.json({ message: "Vote updated successfully." });
   } catch (error) {
     console.error("Error updating vote:", error);
@@ -95,7 +106,7 @@ app.post("/videos/:id/dislike", async (request, response) => {
   const videoId = parseInt(request.params.id);
 
   try {
-    const result = await pool.query(
+    const result = await itemsPool.query(
       "UPDATE video SET rating = GREATEST(rating - 1, 0) WHERE id = $1 RETURNING *",
       [videoId]
     );

@@ -73,15 +73,15 @@ function Uploadvideo() {
   };
 
   return (
-    <div class="alignUpload">
+    <div className="alignUpload">
       <button
-        class="btn btn-light customBackground2"
+        className="btn btn-light customBackground2"
         onClick={handleButtonClick}
       >
         Upload Video
       </button>
       {showForm && (
-        <div class="container">
+        <div className="container">
           {submissionStatus === "success" && (
             <p>Form submitted successfully!</p>
           )}
@@ -96,7 +96,7 @@ function Uploadvideo() {
                 id="title"
                 type="text"
                 value={title}
-                class="input"
+                className="input"
                 name="title"
                 onChange={(e) => setTitle(e.target.value)}
                 required
@@ -107,21 +107,21 @@ function Uploadvideo() {
               <input
                 id="url"
                 value={url}
-                class="input"
+                className="input"
                 type="text"
                 name="url"
                 onChange={(e) => setURL(e.target.value)}
                 required
               ></input>
             </div>
-            <div class="formBtn">
+            <div className="formBtn">
               <button
-                class="btn btn-light cancelBtn"
+                className="btn btn-light cancelBtn"
                 onClick={handleCancelButtonClick}
               >
                 Cancel
               </button>
-              <button class="btn btn-light uploadBtn" type="submit">
+              <button className="btn btn-light uploadBtn" type="submit">
                 Upload
               </button>
             </div>
@@ -133,12 +133,12 @@ function Uploadvideo() {
 }
 function Searchvideo() {
   return (
-    <div class = "searchAlign" >
-      <label for="searchid">Search:</label>
+    <div className = "searchAlign" >
+      <label htmlFor="searchid">Search:</label>
       <input
         id="searchid"
         type="text"
-        class="searchVideo"
+        className="searchVideo"
         name="search"
       ></input>
     </div>
@@ -147,7 +147,7 @@ function Searchvideo() {
 
 export default function Search() {
   return (
-    <div class="search">
+    <div className="search">
       <Uploadvideo />
       <Searchvideo />
     </div>
