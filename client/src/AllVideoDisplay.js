@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function VideoComponent({
-  
   elements,
   onLike,
   onDislike,
@@ -49,7 +48,6 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
   return (
     <div className="videoDisplayContainer">
       {" "}
-      
       {elements.map((element) => (
         <div key={element.id} class="displayGrid">
           <h5>{element.title}</h5>
@@ -98,7 +96,11 @@ export default function AllVideoDisplay() {
   const [sortOrder, setSortOrder] = useState("descending");
 
   useEffect(() => {
-    fetch("/videos")
+    AllVideoDisplay();
+  }, []);
+
+  useEffect(() => {
+    fetch("https://cyfmelefull.onrender.com/videos")
       .then((response) => response.json())
       .then((updatedData) => {
         setVideoData(updatedData);
@@ -128,7 +130,7 @@ export default function AllVideoDisplay() {
     });
     setVideoData(updatedVideos);
 
-    fetch(`/videos/${videoId}/like`, { method: "POST" });
+    fetch(`https://cyfmelefull.onrender.com/videos/${videoId}/like`, { method: "POST" });
   };
 
   const handleDislike = (videoId) => {
@@ -140,12 +142,12 @@ export default function AllVideoDisplay() {
     });
     setVideoData(updatedVideos);
 
-    fetch(`/videos/${videoId}/dislike`, { method: "POST" });
+    fetch(`https://cyfmelefull.onrender.com//videos/${videoId}/dislike`, { method: "POST" });
   };
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/videos/${id}`, { method: "DELETE" });
+      const response = await fetch(`https://cyfmelefull.onrender.com/videos/${id}`, { method: "DELETE" });
       if (response.ok) {
         setVideoData((videoData) =>
           videoData.filter((element) => element.id !== id)
