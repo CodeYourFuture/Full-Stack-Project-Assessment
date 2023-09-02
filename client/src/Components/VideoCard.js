@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-function VideoCard({ video, handleDelete }) {
+
+function VideoCard(props) {
+
+  const {video, handleDelete} = props
   const [rating, setRating] = useState(video.rating);
 
   function like() {
@@ -11,30 +14,37 @@ function VideoCard({ video, handleDelete }) {
     setRating(rating - 1);
   }
 
-  return (
-
-    <div key={video.id}>
-      <p>{video.title}</p>
-      <iframe
-        width="850"
-        height="400"
-        src={video.url.replace("watch?v=", "embed/")}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        title="Youtube Videos"
-        allowFullScreen/>
-      <p>
-        RATINGS: {rating}
-      </p>
+    return (
       <div>
-        <button onClick={like} className="like">Like 👍🏼 </button>
-        <button onClick={dislike} className="dislike">Dislike 👎🏻 </button>
-      <button className="btn-del" onClick={() => handleDelete(video.id)}>
-        Delete 🗑️
-      </button>
+        
+        <div></div>
+        <div key={video.id}>
+          <p>{video.title}</p>
+          <iframe
+            width="600"
+            height="400"
+            src={video.url.replace("watch?v=", "embed/")}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            title="Youtube Videos"
+            allowFullScreen
+          />
+          <p>RATINGS: {rating}</p>
+          <div>
+            <button onClick={like} className="like">
+              Like 👍🏼{" "}
+            </button>
+            <button onClick={dislike} className="dislike">
+              Dislike 👎🏻{" "}
+            </button>
+            <button className="btn-del" onClick={() => handleDelete(video.id)}>
+              Delete 🗑️
+            </button>
+          </div>
+          <hr></hr>
+        </div>
       </div>
-      <hr></hr>
-    </div>
-  );
-}
+    );
+  }
+
 
 export default VideoCard;
