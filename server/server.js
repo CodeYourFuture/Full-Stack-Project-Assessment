@@ -46,7 +46,7 @@ app.get("/videos", async function (request, response) {
 
 // POST "/"
 // This endpoint is used to add a video to the API.
-app.post("/videos", async function (request, response) {
+app.post("/", async function (request, response) {
   try {
     let newVideo = request.body;
 
@@ -55,46 +55,49 @@ app.post("/videos", async function (request, response) {
         result: "Failure",
         message: "Video could not be saved",
       });
-    } else {
-      const addNewVideoQuery =
-        "INSERT INTO videos (title, url, rating)" +
-        "VALUES ($1, $2, $3) RETURNING id";
-      const dbResult = await db.query(addNewVideoQuery, [
-        newVideo.title,
-        newVideo.url,
-        123, /// TO CHANGE!! ///
-      ]);
-      response.status(201).json(dbResult);
     }
+    const addNewVideoQuery =
+      "INSERT INTO videos (title, url, rating)" +
+      "VALUES ($1, $2, $3) RETURNING id";
+    const dbResult = await db.query(addNewVideoQuery, [
+      newVideo.title,
+      newVideo.url,
+      123, /// TO CHANGE!! ///
+    ]);
+    return response.status(201).json(dbResult.rows[0]);
   } catch (error) {
     console.log("Error adding video:", error);
-    response.status(500).json({ error: "Error" });
+    return response.status(500).json({ error: "Error" });
   }
 });
 
 // GET "/{id}"
 // Returns the video with the ID contained within the {id} parameter
-app.get("/videos/:id", function (request, response) {
+app.get("/videos/:id", async function (request, response) {
   // HELP!! app.get("/videos/:id", etc... & const fetchVideos = () => {fetch(`${backendUrl}/videos`) -> I have/need 'videos' twice?
-  let videoId = parseInt(request.params.id);
-  db.query("SELECT * FROM videos WHERE id = $1", [videoId])
-    .then((result) => {
-      response.status(200).json(result.rows);
-    })
-    .catch((error) => {
-      response.status(400).json(error);
-    });
+  try {
+    let videoId = parseInt(request.params.id);
+
+    const dbResult = await db.query("SELECT * FROM videos WHERE id = $1", [
+      videoId,
+    ]);
+    response.status(200).json(dbResult.rows);
+  } catch (error) {
+    response.status(400).json(error);
+  }
 });
 
 // DELETE "/{id}"
 // Deletes the video with the ID container within the {id} parameter
-app.delete("/videos/:id", function (request, response) {
-  let videoIdDelete = Number(request.params.id);
-  const videoIndex = videos.findIndex(({ id }) => id === videoIdDelete);
-  if (videoIndex >= 0) {
-    videos.splice(videoIndex, 1);
-    response.json({});
-  } else {
+app.delete("/videos/:id", async function (request, response) {
+  try {
+    let videoIdDelete = Number(request.params.id);
+
+    const dbResult = await db.query("DELETE FROM videos WHERE id = $1", [
+      videoIdDelete,
+    ]);
+    response.status(200).json({});
+  } catch (error) {
     response.status(404).json({
       result: "Failure",
       message: "Video could not be deleted",
