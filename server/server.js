@@ -10,21 +10,21 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
-// const itemsPool = require("./DBConfig");
+const pool = require("./DBConfig");
 
-const { Pool } = require("pg");
-const pool = new Pool({
-  user: process.env.DBUSER,
-  host: process.env.DBHOST,
-  database: process.env.DBDATABASE,
-  password: process.env.DBPASSWORD,
-  port: 5432,
-  ssl: true,
-});
-pool.connect(function (err) {
-  if (err) throw err;
-  console.log("connected to database!");
-});
+// const { Pool } = require("pg");
+// const pool = new Pool({
+//   user: process.env.DBUSER,
+//   host: process.env.DBHOST,
+//   database: process.env.DBDATABASE,
+//   password: process.env.DBPASSWORD,
+//   port: 5432,
+//   ssl: true,
+// });
+// pool.connect(function (err) {
+//   if (err) throw err;
+//   console.log("connected to database!");
+// });
 
 app.get("/", function (req, res) {
   pool.query("SELECT * FROM videos", (error, result) => {
@@ -91,66 +91,3 @@ app.post("/", function (req, res) {
     }
   );
 });
-
-// app.post("/", (req, res) => {
-//   const newTitle = req.body.title;
-//   const newUrl = req.body.url;
-//   const query = `INSERT INTO videos (title, url) VALUES ($1, $2)`;
-//   pool
-//     .query(query, [newTitle, newUrl])
-//     .then(() => {
-//       res.status(201).send();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res
-//         .status(400)
-//         .send({ result: "failure", message: "Video could not be saved" });
-//     });
-// });
-
-// app.delete("/:id", (req, res) => {
-//   const videoId = req.params.id;
-//   pool
-//     .query(`DELETE FROM videos WHERE id=${videoId}`)
-//     .then((result) => {
-//       res.json(result.rows);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
-// app.get("/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const video = videos.find((v) => v.id === id);
-//   if (!video) {
-//     res.status(404).json({ result: "failure", message: "Video not found" });
-//     return;
-//   }
-//   res.json(video);
-// });
-
-// app.delete("/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const index = videos.findIndex((v) => v.id === id);
-//   if (index === -1) {
-//     res
-//       .status(404)
-//       .json({ result: "failure", message: "Video could not be deleted" });
-//     return;
-//   }
-//   videos.splice(index, 1);
-//   res.json({});
-// });
-// app.post("/", (req, res) => {
-//   const { title, url } = req.body;
-//   if (!title || !url) {
-//     res
-//       .status(400)
-//       .json({ result: "failure", message: "Video could not be saved" });
-//     return;
-//   }
-//   const id = Math.floor(Math.random() * 1000000);
-//   videos.push({ id, title, url });
-//   res.json({ id });
-// });
