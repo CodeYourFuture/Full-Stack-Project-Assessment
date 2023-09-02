@@ -10,21 +10,20 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
-const pool = require("./DBConfig");
 
-// const { Pool } = require("pg");
-// const pool = new Pool({
-//   user: process.env.DBUSER,
-//   host: process.env.DBHOST,
-//   database: process.env.DBDATABASE,
-//   password: process.env.DBPASSWORD,
-//   port: 5432,
-//   ssl: true,
-// });
-// pool.connect(function (err) {
-//   if (err) throw err;
-//   console.log("connected to database!");
-// });
+const { Pool } = require("pg");
+const pool = new Pool({
+  user: process.env.DBUSER,
+  host: process.env.DBHOST,
+  database: process.env.DBDATABASE,
+  password: process.env.DBPASSWORD,
+  port: 5432,
+  ssl: true,
+});
+pool.connect(function (err) {
+  if (err) throw err;
+  console.log("connected to database!");
+});
 
 app.get("/", function (req, res) {
   pool.query("SELECT * FROM videos", (error, result) => {
