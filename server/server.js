@@ -31,6 +31,7 @@ client.connect((err) => {
   console.log("Connected to database!");
 });
 
+// ##
 app.get("/", (req, res) => {
   client.query(`SELECT * FROM videos ORDER BY title`, (error, response) => {
     if (!error) {
