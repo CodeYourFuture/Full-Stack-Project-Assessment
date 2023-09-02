@@ -21,7 +21,7 @@ dotenv.config();
 const itemsPool = require("./DBConfig");
 
 // Configure the database connection
-// const pool = new Pool({
+// const itemsPool = new Pool({
 //   user: "mele",
 //   host: "localhost",
 //   database: "cyf_hotels",

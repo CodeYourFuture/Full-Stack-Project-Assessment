@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function VideoComponent({
+  
   elements,
   onLike,
   onDislike,
@@ -48,6 +49,7 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
   return (
     <div className="videoDisplayContainer">
       {" "}
+      
       {elements.map((element) => (
         <div key={element.id} class="displayGrid">
           <h5>{element.title}</h5>

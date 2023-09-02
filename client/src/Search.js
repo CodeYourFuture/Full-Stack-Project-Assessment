@@ -132,20 +132,24 @@ function Uploadvideo() {
   );
 }
 function Searchvideo() {
+  
+ 
   return (
-    <div className = "searchAlign" >
+    <div className="searchAlign">
       <label htmlFor="searchid">Search:</label>
       <input
         id="searchid"
         type="text"
         className="searchVideo"
+        
+        placeholder="Search for video..."
         name="search"
       ></input>
     </div>
   );
 }
 
-export default function Search() {
+export default function Search(inputValue) {
   return (
     <div className="search">
       <Uploadvideo />

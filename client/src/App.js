@@ -3,11 +3,12 @@ import Header from "./Header.js";
 import Search from "./Search.js";
 
 function App() {
+  
   return (
     <div>
     <Header />
     <Search />
-    <AllVideoDisplay />
+    <AllVideoDisplay  />
     </div>
     
   );
