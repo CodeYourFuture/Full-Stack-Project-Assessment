@@ -12,7 +12,10 @@ class VideoContainer extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.title && this.state.url) {
-      this.props.onAdd({ title: this.state.title, url: this.state.url });
+      this.props.handleAddVideo({
+        title: this.state.title,
+        url: this.state.url,
+      });
       this.setState({
         title: "",
         url: "",
