@@ -29,51 +29,44 @@ db.connect(function (err) {
   console.log("Connected to database");
 });
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleResponse.json" into here to have some data to work with
-let videos = require("/home/coder/Desktop/CYF/Full-Stack-Project-Assessment/server/exampleResponse.json");
-
-// Store and retrieve your videos from here
-// let videos = require("./exampleResponse.json"); // Get this from Render db?????
-let videoIdHighest = Math.max(...videos.map((video) => video.id));
-
-app.get("/videos", function (request, response) {
-  db.query("SELECT * FROM videos")
-    .then((response) => {
-      response.json(response.rows);
-    })
-    .catch((error) => {
-      console.log(error);
-      response.status(500).json({ error: "Error" });
-    });
-});
-
 // GET "/"
 // This endpoint is used to return all of the videos
-app.get("/", function (request, response) {
-  response.json(videos);
+app.get("/videos", async function (request, response) {
+  // response is an empty object as of now
+  try {
+    const dbResult = await db.query("SELECT * FROM videos"); // we are going to fill the response object with the database query result
+    response.json(dbResult.rows);
+  } catch (error) {
+    console.log("Error fetching data from the database:", error);
+    response.status(500).json({ error: "Error" });
+  }
 });
 
 // POST "/"
 // This endpoint is used to add a video to the API.
-app.post("/", function (request, response) {
-  let newVideo = request.body;
-  newVideo.id = videoIdHighest + 1;
+app.post("/videos", async function (request, response) {
+  try {
+    let newVideo = request.body;
 
-  if (!newVideo.title || !newVideo.url) {
-    response.status(400).json({
-      result: "Failure",
-      message: "Video could not be saved",
-    });
-  } else {
-    videos.push({
-      id: newVideo.id,
-      title: newVideo.title,
-      url: newVideo.url,
-    });
-    response.status(201).json({
-      id: newVideo.id,
-    });
+    if (!newVideo.title || !newVideo.url) {
+      response.status(400).json({
+        result: "Failure",
+        message: "Video could not be saved",
+      });
+    } else {
+      const addNewVideoQuery =
+        "INSERT INTO videos (title, url, rating)" +
+        "VALUES ($1, $2, $3) RETURNING id";
+      const dbResult = await db.query(addNewVideoQuery, [
+        newVideo.title,
+        newVideo.url,
+        123, /// TO CHANGE!! ///
+      ]);
+      response.status(201).json(dbResult);
+    }
+  } catch (error) {
+    console.log("Error adding video:", error);
+    response.status(500).json({ error: "Error" });
   }
 });
 
