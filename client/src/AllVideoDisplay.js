@@ -100,7 +100,7 @@ export default function AllVideoDisplay() {
   }, []);
 
   useEffect(() => {
-    fetch("https://cyfmelefull.onrender.com/videos")
+    fetch("/videos")
       .then((response) => response.json())
       .then((updatedData) => {
         setVideoData(updatedData);
@@ -130,7 +130,7 @@ export default function AllVideoDisplay() {
     });
     setVideoData(updatedVideos);
 
-    fetch(`https://cyfmelefull.onrender.com/videos/${videoId}/like`, { method: "POST" });
+    fetch(`/videos/${videoId}/like`, { method: "POST" });
   };
 
   const handleDislike = (videoId) => {
@@ -142,12 +142,12 @@ export default function AllVideoDisplay() {
     });
     setVideoData(updatedVideos);
 
-    fetch(`https://cyfmelefull.onrender.com//videos/${videoId}/dislike`, { method: "POST" });
+    fetch(`/videos/${videoId}/dislike`, { method: "POST" });
   };
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://cyfmelefull.onrender.com/videos/${id}`, { method: "DELETE" });
+      const response = await fetch(`/videos/${id}`, { method: "DELETE" });
       if (response.ok) {
         setVideoData((videoData) =>
           videoData.filter((element) => element.id !== id)
