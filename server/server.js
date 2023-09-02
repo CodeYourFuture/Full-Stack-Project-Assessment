@@ -5,7 +5,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-console.log(`DB_NAME = ${process.env.DB_NAME}`);
+console.log(`DB_NAME = ${process.env.DB_NAME}`); // to make sure db credentials saved in .env can/are being accessed
 if (!process.env.DB_NAME) {
   throw new Error("DB_NAME not defined");
 }
@@ -16,6 +16,7 @@ app.use(express.json()); // needed to parse JSON data
 const { Pool } = require("pg");
 
 const db = new Pool({
+  // getting db credentials in order to connect
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
@@ -25,6 +26,7 @@ const db = new Pool({
 });
 
 db.connect(function (err) {
+  // we are telling server to connect to db
   if (err) throw err;
   console.log("Connected to database");
 });
@@ -72,16 +74,21 @@ app.post("/videos", async function (request, response) {
 
 // GET "/{id}"
 // Returns the video with the ID contained within the {id} parameter
-app.get("/:id", function (request, response) {
-  let selectedVideo = videos.filter(
-    (video) => video.id === Number(request.params.id)
-  );
-  response.status(404).json(selectedVideo);
+app.get("/videos/:id", function (request, response) {
+  // HELP!! app.get("/videos/:id", etc... & const fetchVideos = () => {fetch(`${backendUrl}/videos`) -> I have/need 'videos' twice?
+  let videoId = parseInt(request.params.id);
+  db.query("SELECT * FROM videos WHERE id = $1", [videoId])
+    .then((result) => {
+      response.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      response.status(400).json(error);
+    });
 });
 
 // DELETE "/{id}"
 // Deletes the video with the ID container within the {id} parameter
-app.delete("/:id", function (request, response) {
+app.delete("/videos/:id", function (request, response) {
   let videoIdDelete = Number(request.params.id);
   const videoIndex = videos.findIndex(({ id }) => id === videoIdDelete);
   if (videoIndex >= 0) {

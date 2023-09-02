@@ -14,7 +14,7 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   const fetchVideos = () => {
-    console.log("fetch function");
+    console.log("front end fetch function");
     fetch(`${backendUrl}/videos`)
       .then((response) => response.json())
       .then((data) => {
