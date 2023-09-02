@@ -44,6 +44,10 @@ app.get("/videos", async function (request, response) {
   }
 });
 
+//////////////////////////// HELP!! BUG WITH POST!! //////////////////////////////
+// Adding video through the frontend and Postman but they don't seem to be communicating with each other (eg. vid added from front end but doesn't show in database or vid added from Postman but doesn't show in frontend). frontend & backend not properly syncing ???
+////////////////////////////////////////////////////////////////////////
+
 // POST "/"
 // This endpoint is used to add a video to the API.
 app.post("/", async function (request, response) {
