@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import videosData from "../exampleresponse.json";
-import Card from "./Card";
+//import Card from "./Card";
 import Form from "./Form";
 
 function AllButtons() {
@@ -33,7 +33,7 @@ function AllButtons() {
   return (
     <div>
       <Form onAdd={handleAdd} />
-      <Card videos={videos} onVote={handleVote} onDelete={handleDelete} />
+    
     </div>
   );
 }

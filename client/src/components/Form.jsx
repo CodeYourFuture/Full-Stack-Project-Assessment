@@ -4,17 +4,31 @@ const Form = ({ onAdd }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title && url) {
-      onAdd({ title, url });
-      setTitle("");
-      setUrl("");
-    }
-  };
+  const newVideo = {
+    title,
+    url,
+  }
+
+  fetch("https://junita-full-stack-project-assessment.onrender.com/",{
+     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newVideo),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+    onAdd(data);
+    setTitle("");
+    setUrl("");
+    
+   })
+    
+
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" >
       <input
         type="text"
         placeholder="Title"
