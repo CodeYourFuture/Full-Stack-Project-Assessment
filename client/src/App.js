@@ -3,7 +3,7 @@ import "./App.css";
 import VideoList from "./VideoList";
 import VideoForm from "./VideoForm";
 
-const API_URL = "https://videolist.onrender.com";
+const API_URL = "https://full-stack-project-bulj.onrender.com";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
