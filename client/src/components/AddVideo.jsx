@@ -13,31 +13,27 @@ const AddVideo = ({ onVidAdd }) => {
     setUrl(event.target.value);
   };
 
-  // const newVid = () => {
-  //   const newInput = {};
-  //   onVidAdd(newInput);
-  //   let newId = newInput.length + 1;
-  //   newInput.id = newId;
-  //   newInput.title = title;
-  //   newInput.url = getVideoIdFromUrl();
-  //   newInput.rating = 0;
-  // };
   const newVid = () => {
-    const youtubeUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+(&\S+)?$/;
-  if (!title ||!youtubeUrlRegex.test(url)) {
-    alert("Please write the title or Invalid URL");
-    return;
-  }
-  const newInput = {
-    title: title,
-    url: url,
-  };
+    if (title !== "" && url !== "") {
+      let embedUrl = url.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+      console.log("Original URL:", url);
+      console.log("Embed URL:", embedUrl);
+
+      const newInput = {
+        title: title,
+        url: embedUrl,
+        rating: 0,
+      };
 
       onVidAdd(newInput);
+
       setTitle("");
       setUrl("");
+    } else {
+      alert("Please fill in all fields");
     }
-
+  };
+  
 
   return (
     <form>
@@ -72,8 +68,7 @@ const AddVideo = ({ onVidAdd }) => {
         </div>
       </div>
       <button onClick={newVid} type="button" className="btn btn-success">
-        {" "}
-        Add{" "}
+        Add
       </button>
       <button type="button" className="btn btn-warning">
         Cancel
