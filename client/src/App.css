@@ -9,6 +9,9 @@
 .alignUpload button {
   margin-top: 10px;
 }
+#root{
+  overflow-x: hidden;
+}
 .customBackground1 {
   background-color: rgb(73, 73, 238);
   color: #000000;
