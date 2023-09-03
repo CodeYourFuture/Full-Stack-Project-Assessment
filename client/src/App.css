@@ -9,7 +9,7 @@
 .alignUpload button {
   margin-top: 10px;
 }
-#root{
+#root {
   overflow-x: hidden;
 }
 .customBackground1 {
@@ -203,6 +203,8 @@ h5 {
     display: grid;
     grid-template-columns: auto;
     margin-top: 0px;
+    margin-right: 40px;
+    margin-left: 50px;
     padding: 10px;
     column-gap: 20px;
     row-gap: 20px;
@@ -243,8 +245,10 @@ h5 {
   .container {
     border-radius: 5px;
     background-color: white;
-    padding: 20px;
-    margin-left: 0px;
+    padding: 0px;
+    margin-left: -20px;
+    margin-right: -20px;
+    
     margin-top: 0px;
     position: relative;
   }
