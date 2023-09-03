@@ -56,7 +56,7 @@ function VideoDisplay({ inputValue, elements, onLike, onDislike, onDelete }) {
           <h5>{element.title}</h5>
 
           <iframe
-            width="330"
+            width="270"
             height="200"
             title={element.title}
             border="none"
