@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-export default function AddingItem({addVideo, id}) {
+export default function AddingItem({addVideo}) {
     const [isHidden, setIsHidden] = useState(true);
     const [newVideo, setNewVideo] = useState({
-    id: id+1,
     title: "",
     url: "",
     rating: 0
@@ -29,7 +28,6 @@ export default function AddingItem({addVideo, id}) {
     const formattedTime = time.toLocaleString();
          addVideo({...newVideo, dateTime: formattedTime});
          setNewVideo({
-           id: id + 1,
            title: "",
            url: "",
            rating: 0,

@@ -28,6 +28,12 @@ body {
   text-align: center;
 }
 
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3em 2em 0;
+  align-items: flex-start;
+}
 
 .video-container {
   display: flex;
