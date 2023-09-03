@@ -16,18 +16,18 @@ const port = process.env.PORT || 5000;
 const fs = require("fs/promises");
 const path = require("path");
 app.use(express.static(path.join(__dirname, "../client/build")));
-const dotenv = require("dotenv");
-dotenv.config();
-const itemsPool = require("./DBConfig");
+//const dotenv = require("dotenv");
+//dotenv.config();
+//const itemsPool = require("./DBConfig");
 
 // Configure the database connection
-// const itemsPool = new Pool({
-//   user: "mele",
-//   host: "localhost",
-//   database: "cyf_hotels",
-//   password: "Meleubuntu12",
-//   port: 5432,
-// });
+const itemsPool = new Pool({
+  user: "mele",
+  host: "localhost",
+  database: "cyf_hotels",
+  password: "Meleubuntu12",
+  port: 5432,
+});
 itemsPool
   .connect()
   .then(() => console.log("Connected to the database"))

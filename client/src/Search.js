@@ -47,6 +47,11 @@ function Uploadvideo() {
         });
         if (response.ok) {
           console.log("Form data submitted successfully");
+          window.location.reload();
+
+          setTitle("");
+          setURL("");
+          setShowForm(false);
         } else {
           console.error("Form data submission failed");
         }
@@ -131,9 +136,13 @@ function Uploadvideo() {
     </div>
   );
 }
-function Searchvideo() {
+function Searchvideo({inputValue,onInputChange}) {
   
- 
+  const handleChange = (event) => {
+    const newValue = (event.target.value);
+    onInputChange(newValue)
+   };
+
   return (
     <div className="searchAlign">
       <label htmlFor="searchid">Search:</label>
@@ -141,7 +150,8 @@ function Searchvideo() {
         id="searchid"
         type="text"
         className="searchVideo"
-        
+        value={inputValue}
+        onChange={handleChange}
         placeholder="Search for video..."
         name="search"
       ></input>
@@ -149,11 +159,14 @@ function Searchvideo() {
   );
 }
 
-export default function Search(inputValue) {
+export default function Search({inputValue,onInputChange}) {
   return (
     <div className="search">
       <Uploadvideo />
-      <Searchvideo />
+      <Searchvideo
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+      />
     </div>
   );
 }

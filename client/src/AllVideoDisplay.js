@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function VideoComponent({
+  inputValue,
   elements,
   onLike,
   onDislike,
@@ -33,6 +34,7 @@ function VideoComponent({
       <div className="container">
         <div className="videoDisplayContainer">
           <VideoDisplay
+            inputValue={inputValue}
             elements={elements}
             onLike={onLike}
             onDislike={onDislike}
@@ -43,9 +45,10 @@ function VideoComponent({
     </div>
   );
 }
-
-function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
-  return (
+function VideoDisplay({ inputValue, elements, onLike, onDislike, onDelete }) {
+  let inputValues = (inputValue.inputValue)
+ 
+  return inputValues === "" ? (
     <div className="videoDisplayContainer">
       {" "}
       {elements.map((element) => (
@@ -88,16 +91,50 @@ function VideoDisplay({ elements, onLike, onDislike, onDelete }) {
         </div>
       ))}
     </div>
+  ) : (
+    <div className="videoDisplayContainer">
+      {elements
+        .filter((element) => element.title.includes(inputValues))
+        .map((element) => (
+          <div key={element.id} className="displayGrid">
+            <h5>{element.title}</h5>
+            <iframe
+              width="330"
+              height="200"
+              title={element.title}
+              allowFullScreen
+              src={element.url}
+            ></iframe>
+            <div className="likedislikeBtn">
+              <button
+                className="btn btn-light customBackground5"
+                onClick={() => onLike(element.id)}
+              >
+                Like
+              </button>
+              <span>Votes:&nbsp;{element.rating}</span>
+              <button
+                className="btn btn-light customBackground5"
+                onClick={() => onDislike(element.id)}
+              >
+                Dislike
+              </button>
+            </div>
+            <button
+              className="btn btn-light deleteBtn"
+              onClick={() => onDelete(element.id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+    </div>
   );
 }
 
-export default function AllVideoDisplay() {
+export default function AllVideoDisplay(inputValue) {
   const [videoData, setVideoData] = useState([]);
   const [sortOrder, setSortOrder] = useState("descending");
-
-  useEffect(() => {
-    AllVideoDisplay();
-  }, []);
 
   useEffect(() => {
     fetch("/videos")
@@ -162,6 +199,7 @@ export default function AllVideoDisplay() {
 
   return (
     <VideoComponent
+      inputValue={inputValue}
       elements={sortVideoData()}
       sortOrder={sortOrder}
       setOrder={setSortOrder}
