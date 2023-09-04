@@ -76,7 +76,15 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  const { order } = req.query;
+  let orderedVideos = [...videos];
+  if (order === "asc") {
+    orderedVideos.sort((a, b) => a.rating - b.rating);
+  } else {
+    orderedVideos.sort((a, b) => b.rating - a.rating);
+  }
+
+  res.json(orderedVideos);
 });
 
 // GET "/{id}"

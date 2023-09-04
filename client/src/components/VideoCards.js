@@ -43,22 +43,37 @@ function VideoCard({ title, url, rating, onRemove }) {
 }
 
 function VideoCards({ videos, onRemove, search }) {
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc"); // Toggle sorting order
+  };
   const filteredVideos = videos
     .filter((video) => video.title.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => b.rating - a.rating); // sorting by highest rating
-
+    .sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.rating - b.rating; // Ascending order
+      } else {
+        return b.rating - a.rating; // Descending order
+      }
+    });
   return (
-    <div className="video-grid">
-      {filteredVideos.map((video) => (
-        <VideoCard
-          key={video.id}
-          title={video.title}
-          url={video.url}
-          rating={video.rating}
-          onRemove={onRemove}
-        />
-      ))}
-    </div>
+    <>
+      <button onClick={toggleSortOrder} className="btn btn-secondar">
+        Sort {sortOrder === "asc" ? "Ascending" : "Descending"}
+      </button>
+      <div className="video-grid">
+        {filteredVideos.map((video) => (
+          <VideoCard
+            key={video.id}
+            title={video.title}
+            url={video.url}
+            rating={video.rating}
+            onRemove={onRemove}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
