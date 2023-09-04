@@ -13,7 +13,7 @@ app.use(express.json());
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.status(200).json(videos);
 });
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   3. 
 */
 
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   const { title, url } = req.body;
   if (!title || !url || !url.startsWith("https://www.youtube.com")) {
     res.status(400).json({
@@ -45,7 +45,7 @@ app.post("/", (req, res) => {
   }
 });
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const id = Number(req.params.id);
   const matchingVideo = videos.find((video) => {
     return video.id === id;
@@ -57,15 +57,9 @@ app.get("/:id", (req, res) => {
   }
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   let id = Number(req.params.id);
-  console.log("deletedVideoId --->", id);
-
   const matchingVideo = videos.find((video) => {
-    console.log("video.id --->", video.id);
-    console.log("type of video.id --->", typeof video.id);
-    console.log("id --->", id);
-    console.log("type of id --->", typeof id);
     return video.id === id;
   });
   console.log("matchingVideo", matchingVideo);
@@ -83,5 +77,18 @@ app.delete("/:id", (req, res) => {
   }
 });
 
+app.put("/videos/:id", (req, res) => {
+  const newVideo = { ...req.body, ...req.params };
+  let id = Number(req.params.id);
+  const videoIndex = videos.findIndex((video) => {
+      console.log("video.id --->", video.id);
+      console.log("type of video.id --->", typeof video.id);
+      console.log("id --->", id);
+      console.log("type of id --->", typeof id);
+    return video.id === id
+  });
+  videos.splice(videoIndex, 1, newVideo)
+  res.status(200).send({ newVideo })
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

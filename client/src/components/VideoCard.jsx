@@ -11,6 +11,13 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
     const likeRating = videoData.map((video) => {
       if (video.id === singleVideo.id) {
         video.rating += 1;
+        fetch(`http://localhost:5000/videos/${video.id}`, {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(video),
+        });
       }
       return video;
     });
@@ -21,6 +28,13 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
     const dislikeRating = videoData.map((video) => {
       if (video.id === singleVideo.id) {
         video.rating -= 1;
+        fetch(`http://localhost:5000/videos/${video.id}`, {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(video),
+        });
       }
       return video;
     });

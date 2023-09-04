@@ -14,7 +14,7 @@ How do you delete a record from a useState array (answer might be spread operato
 
 function CardsContainer({ videoData, setVideoData, setFetchData }) {
   async function handleDelete(id) {
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`http://localhost:5000/videos/${id}`, {
       method: "delete",
     })
       .then((response) => response.json())

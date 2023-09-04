@@ -31,7 +31,7 @@ function VideoForm({ videoData, setVideoData, setFetchData}) {
         timeSent: Date(),
       };
       
-      fetch("http://localhost:5000/", {
+      fetch("http://localhost:5000/videos", {
         method: "post",
         mode: "cors",
         headers: {
