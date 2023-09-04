@@ -8,11 +8,19 @@
   justify-content: space-between;
   grid-row-gap: 100px;
   height: 900px;
-  margin-top: 400px;
+  margin-top: 150px;
   margin-left: 100px;
   margin-right: 100px;
 }
 
 .card{
   border: 1px solid grey;
+}
+
+.add-video{
+  border: 1px solid grey;
+  width: 300px;
+  margin-top: 40px;
+  margin-left: 485px;
+  padding: 20px;
 }
