@@ -45,7 +45,8 @@ function VideoCard(props) {
               }
             }}
           >
-            {like === 1 ? up : upA} 
+            {like === 1 ? up : upA}
+            <br></br>Like
           </button>
           <button
             onClick={() => {
@@ -60,8 +61,10 @@ function VideoCard(props) {
             }}
           >
             {dislike === 1 ? down : downA}
+            <br></br>Disike
           </button>
-          <button onClick={props.delete}>{deleteIcon}</button>
+          <button onClick={props.delete}>{deleteIcon}
+           <br></br>Delete</button>
         </li>
         <li className="list-group-item">{rate}</li>
       </ul>
