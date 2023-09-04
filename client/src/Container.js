@@ -17,9 +17,6 @@ const Container = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  // const handleRemove = (id) => {
-  //   setVideos((updatedVideo) => updatedVideo.filter((v) => v.id !== id));
-  // };
 
 const handleRemove = (id) => {
 fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
@@ -35,13 +32,6 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
 };
 
 
-  // let idCounter = 1;
-  // const handleAddVideo = (video) => {
-  //   setVideos((updatedVideos) => {
-  //     const newVideo = { ...video, id: idCounter++, rating: 0 };
-  //     return [...updatedVideos, newVideo];
-  //   });
-  // };
 
   const handleAddVideo = (video) => {
     fetch(`http://localhost:5000/`, {
@@ -59,20 +49,6 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
       })
       .catch((error) => console.log(error));
       };
-
-  // const handleUpVote = (id) => {
-  //   setVideos((updatedVideo) =>
-  //     updatedVideo.map((video) => {
-  //       if (video.id === id) {
-  //         return {
-  //           ...video,
-  //           rating: video.rating + 1,
-  //         };
-  //       }
-  //       return video;
-  //     })
-  //   );
-  // };
 
   const handleUpVote = (video) => {
     video.rating = video.rating+1;
@@ -92,22 +68,6 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
       })
       .catch((error) => console.log(error));
   }
-
-  
-
-  // const handleDownVote = (id) => {
-  //   setVideos((updatedVideo) =>
-  //     updatedVideo.map((video) => {
-  //       if (video.id === id) {
-  //         return {
-  //           ...video,
-  //           rating: video.rating - 1,
-  //         };
-  //       }
-  //       return video;
-  //     })
-  //   );
-  // };
 
     const handleDownVote = (video) => {
     video.rating = video.rating-1;
