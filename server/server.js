@@ -40,3 +40,16 @@ app.get("/:id", (req, res) => {
   }
   res.json(video);
 });
+
+app.delete("/:id", (req, res) => {
+  const video = videos.find((video) => video.id === parseInt(req.params.id));
+  if (!video) {
+    res.status(404).send({
+      result: "failure",
+      message: "Video could not be deleted",
+    });
+    return;
+  }
+  videos.splice(videos.indexOf(video), 1);
+  res.json({ message: "Video deleted" });
+});
