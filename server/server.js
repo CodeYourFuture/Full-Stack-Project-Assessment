@@ -2,12 +2,32 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
 const app = express();
+const { Pool } = require("pg");
 const videosData = JSON.parse(fs.readFileSync("./exampleresponse.json"));
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+const db = new Pool({
+  user: "bekomeigag",
+  host: "localhost",
+  database: "videoData",
+  password: "",
+  port: 5432,
+});
+
+
+app.get("/testBd", (req, res) => {
+  db.query("select * from videos")
+    .then((result) => {
+      res.status(200).json({ videos: result.rows });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -41,7 +61,6 @@ const newVideoValidate = [
 //     .notEmpty()
 //     .withMessage("You must enter your password"),
 // ];
-
 
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
@@ -95,9 +114,7 @@ app.delete("/videos/data/:id", (req, res) => {
   const index = videos.indexOf(getVideoByID);
 
   if (!getVideoByID)
-    return res
-      .status(404)
-      .send(`message: video for ID requested is not found`);
+    return res.status(404).send(`message: video for ID requested is not found`);
 
   videos.splice(index, 1);
 
