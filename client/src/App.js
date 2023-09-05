@@ -3,6 +3,9 @@ import { useState } from "react";
 import exampleresponse from "./exampleresponse.json";
 import VideoCard from "./components/VideoCard";
 import AddVideo from "./components/AddVideo";
+import BubbleSort from "./functions/BubbleSort";
+
+BubbleSort(exampleresponse);
 
 function App() {
   const [data, setData] = useState(exampleresponse);
@@ -26,6 +29,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
+      </header>
+      <body>
         <AddVideo addVideo={addVideo} />
         <div className="video-cards">
           {data.map((video) => (
@@ -38,7 +43,7 @@ function App() {
             />
           ))}
         </div>
-      </header>
+      </body>
     </div>
   );
 }
