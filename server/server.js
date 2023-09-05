@@ -31,3 +31,12 @@ app.post("/", (req, res) => {
   videos.push(newVideo);
   res.json(videos);
 });
+
+app.get("/:id", (req, res) => {
+  const video = videos.find((video) => video.id === parseInt(req.params.id));
+  if (!video) {
+    res.status(404).send("Video not found");
+    return;
+  }
+  res.json(video);
+});
