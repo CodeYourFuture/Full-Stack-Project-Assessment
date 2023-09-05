@@ -1,11 +1,28 @@
 .App {
   text-align: center;
 }
+
 .nav{
-  margin-left: 50px;
+  background-color: rgb(225, 213, 52);
 }
 .main{
   width: 800px;
+}
+div{
+  background-color: lightgray;
+}
+p{
+  background-color: lightgray;
+}
+button{
+  background-color: gray;
+  border-radius: 5px;
+  border-style: none;
+  color:rgb(195, 188, 87) ;
+}
+iframe{
+  border-radius: 5px;
+  height: 100%;
 }
 .formDiv {
   display: flex;

@@ -7,17 +7,11 @@ import Videos from "./Videos.js";
 function App() {
   
   const [showVideos, setShowVideos] = useState(false);
- 
-  
-
-
-     
-  
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Video Recommendation</h1>
+          <h1 style={{background:"#ccc"}}>Video Recommendation</h1>
         </header>
         <nav className="nav">
           
