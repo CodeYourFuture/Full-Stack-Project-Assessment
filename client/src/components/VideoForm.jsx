@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import validUrl from "valid-url";
 
 function VideoForm({ videoData, setVideoData, setFetchData }) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -9,11 +10,13 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
      */
     function validateUrl(urlObject) {
       console.log("urlObject --->", urlObject);
-      if (!urlObject.startsWith("https://www.youtube.com")) {
-        return false;
-      }
-      return true;
-      // return either validated URL or an error
+      return (
+        validUrl.isUri(urlObject) &&
+        (urlObject.startsWith("https://www.youtube.com") ||
+          urlObject.startsWith("https://youtu.be") ||
+          urlObject.startsWith("https://m.youtube.com") ||
+          urlObject.startsWith("https://youtube.com/"))
+      );
     }
 
     event.preventDefault();
@@ -22,11 +25,13 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
     const formUrl = event.target.form.url.value;
     console.log(formUrl);
 
+    const cleanedUrl = formUrl.includes("&") ? formUrl.split("&")[0] : formUrl;
+
     if (validateUrl(formUrl) && formTitle !== "") {
       const newData = {
         id: parseInt(Math.random() * 1000),
         title: formTitle,
-        url: formUrl,
+        url: cleanedUrl,
         rating: 0,
         timeSent: Date(),
       };
