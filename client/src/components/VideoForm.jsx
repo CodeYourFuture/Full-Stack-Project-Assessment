@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function VideoForm({ videoData, setVideoData, setFetchData}) {
+function VideoForm({ videoData, setVideoData, setFetchData }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function addVideoHandler(event) {
@@ -30,7 +30,7 @@ function VideoForm({ videoData, setVideoData, setFetchData}) {
         rating: 0,
         timeSent: Date(),
       };
-      
+
       fetch("http://localhost:5000/videos", {
         method: "post",
         mode: "cors",
@@ -40,8 +40,7 @@ function VideoForm({ videoData, setVideoData, setFetchData}) {
         body: JSON.stringify(newData),
       });
 
-      
-      setFetchData(true)
+      setFetchData(true);
       // setVideoData([...videoData, newData]);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {

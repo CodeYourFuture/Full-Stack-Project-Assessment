@@ -78,17 +78,21 @@ app.delete("/videos/:id", (req, res) => {
 });
 
 app.put("/videos/:id", (req, res) => {
-  const newVideo = { ...req.body, ...req.params };
+  const newVideo = req.body;
   let id = Number(req.params.id);
   const videoIndex = videos.findIndex((video) => {
-      console.log("video.id --->", video.id);
-      console.log("type of video.id --->", typeof video.id);
-      console.log("id --->", id);
-      console.log("type of id --->", typeof id);
-    return video.id === id
+    console.log("video.id --->", video.id);
+    console.log("type of video.id --->", typeof video.id);
+    console.log("id --->", id);
+    console.log("type of id --->", typeof id);
+    return video.id === id;
   });
-  videos.splice(videoIndex, 1, newVideo)
-  res.status(200).send({ newVideo })
+  if (videoIndex === -1) {
+    res.status(404).send("Video not found");
+  } else {
+    videos.splice(videoIndex, 1, newVideo);
+    res.status(200).send({ newVideo });
+  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
