@@ -7,7 +7,6 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
    */
 
   function upVoteHandler() {
-    console.log("videoData--->", videoData);
     const likeRating = videoData.map((video) => {
       if (video.id === singleVideo.id) {
         video.rating += 1;
@@ -62,12 +61,10 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
 
           <p>Rating: {singleVideo.rating}</p>
 
-          {/* <button type="button" onClick={downVoteHandler}>Down Vote</button> */}
           <button type="button" onClick={downVoteHandler}>
             Down Vote 👎
           </button>
         </div>
-        {/* Put onDelete function on line below */}
 
         <Button onDelete={onDelete} id={singleVideo.id} />
       </div>

@@ -12,12 +12,9 @@ function MainContainer() {
         .then((response) => response.json())
         .then((data) => setVideoData(data));
     }
-    console.log(videoData);
     setFetchData(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchData]);
+  }, [fetchData, videoData]);
 
-  console.log("Video Data from MainContainer---> ", videoData);
   return (
     <div>
       <VideoForm

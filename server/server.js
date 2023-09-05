@@ -9,20 +9,10 @@ const videos = require("./exampleresponse.json");
 
 app.use(express.json());
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-
 // GET "/"
 app.get("/videos", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.status(200).json(videos);
 });
-
-/*
-  1. post updates videData state
-  2. we create a new video entry with a CUSTOM id
-  3. 
-*/
 
 app.post("/videos", (req, res) => {
   const { title, url } = req.body;
@@ -62,7 +52,6 @@ app.delete("/videos/:id", (req, res) => {
   const matchingVideo = videos.find((video) => {
     return video.id === id;
   });
-  console.log("matchingVideo", matchingVideo);
 
   if (!matchingVideo) {
     res.status(400).json({
@@ -81,10 +70,6 @@ app.put("/videos/:id", (req, res) => {
   const newVideo = req.body;
   let id = Number(req.params.id);
   const videoIndex = videos.findIndex((video) => {
-    console.log("video.id --->", video.id);
-    console.log("type of video.id --->", typeof video.id);
-    console.log("id --->", id);
-    console.log("type of id --->", typeof id);
     return video.id === id;
   });
   if (videoIndex === -1) {

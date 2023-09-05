@@ -5,11 +5,8 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function addVideoHandler(event) {
-    /**
-     We are creating a new video object and adding to state 
-     */
+    event.preventDefault();
     function validateUrl(urlObject) {
-      console.log("urlObject --->", urlObject);
       return (
         validUrl.isUri(urlObject) &&
         (urlObject.startsWith("https://www.youtube.com") ||
@@ -19,11 +16,8 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
       );
     }
 
-    event.preventDefault();
-
     const formTitle = event.target.form.title.value;
     const formUrl = event.target.form.url.value;
-    console.log(formUrl);
 
     const cleanedUrl = formUrl.includes("&") ? formUrl.split("&")[0] : formUrl;
 
@@ -46,7 +40,6 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
       });
 
       setFetchData(true);
-      // setVideoData([...videoData, newData]);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {
       setErrorMessage("Add a title and a valid URL");
