@@ -1,37 +1,45 @@
 import React, { useState } from "react";
+import validUrl from "valid-url";
 
-function VideoForm({ videoData, setVideoData }) {
+function VideoForm({ videoData, setVideoData, setFetchData }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function addVideoHandler(event) {
-    /**
-     We are creating a new video object and adding to state 
-     */
-    function validateUrl(urlObject) {
-      console.log("urlObject --->", urlObject);
-      if (!urlObject.startsWith("https://www.youtube.com")) {
-        return false;
-      }
-      return true;
-      // return either validated URL or an error
-    }
-
     event.preventDefault();
+    function validateUrl(urlObject) {
+      return (
+        validUrl.isUri(urlObject) &&
+        (urlObject.startsWith("https://www.youtube.com") ||
+          urlObject.startsWith("https://youtu.be") ||
+          urlObject.startsWith("https://m.youtube.com") ||
+          urlObject.startsWith("https://youtube.com/"))
+      );
+    }
 
     const formTitle = event.target.form.title.value;
     const formUrl = event.target.form.url.value;
-    console.log(formUrl);
+
+    const cleanedUrl = formUrl.includes("&") ? formUrl.split("&")[0] : formUrl;
 
     if (validateUrl(formUrl) && formTitle !== "") {
       const newData = {
         id: parseInt(Math.random() * 1000),
         title: formTitle,
-        url: formUrl,
+        url: cleanedUrl,
         rating: 0,
         timeSent: Date(),
       };
-      
-      setVideoData([...videoData, newData]);
+
+      fetch("http://localhost:5000/videos", {
+        method: "post",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newData),
+      });
+
+      setFetchData(true);
       setErrorMessage("");
     } else if (formTitle === "" && !validateUrl(formUrl)) {
       setErrorMessage("Add a title and a valid URL");
