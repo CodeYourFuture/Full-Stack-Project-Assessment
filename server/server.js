@@ -18,7 +18,6 @@ const db = new Pool({
   port: 5432,
 });
 
-
 app.get("/testBd", (req, res) => {
   db.query("select * from videos")
     .then((result) => {
@@ -68,7 +67,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/videos/data", (req, res) => {
-  res.send(videos);
+  // res.send(videos);
+  db.query("select * from videos")
+    .then((result) => {
+      res.status(200).json({ videos: result.rows });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/videos/data/:id", (req, res) => {
