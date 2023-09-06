@@ -1,11 +1,10 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddVideo from "./components/AddVideo";
 import VideosList from "./components/VideosList";
-import data from "./exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState([]);
 
   function handleDelete(id) {
     const updatedVideos = videos.filter((video) => video.id !== id);
@@ -21,6 +20,15 @@ function App() {
     };
     setVideos([...videos, newVideo]);
   }
+
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className='App'>
