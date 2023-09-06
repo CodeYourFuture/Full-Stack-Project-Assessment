@@ -61,16 +61,26 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
+// app.get("/videos/data", (req, res) => {
+//   // res.send(videos);
+//   pool.query("select * from videos")
+//     .then((result) => {
+//       res.status(200).json({ videos: result.rows });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
 app.get("/videos/data", (req, res) => {
-  // res.send(videos);
-  pool.query("select * from videos")
-    .then((result) => {
-      res.status(200).json({ videos: result.rows });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  pool.query(`Select * from videos`, (err, result) => {
+    if (!err) {
+      res.send(result.rows);
+    }
+  });
+  pool.end;
 });
+pool.connect();
 
 app.get("/videos/data/:id", (req, res) => {
   const videoID = Number(req.params.id);
