@@ -1,4 +1,5 @@
 //https://www.geeksforgeeks.org/bubble-sort-algorithms-by-using-javascript/
+//https://www.geeksforgeeks.org/bubble-sort/
 
 export default function BubbleSort(data) {
   let swapped;

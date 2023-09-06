@@ -11,10 +11,27 @@ function AddVideo(props) {
     setUrl(event.target.value);
   };
 
-  const handleSubmit = () => {
-    props.addVideo(title, url);
-    setTitle("");
-    setUrl("");
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = {};
+    if (!title.trim()) {
+      validationErrors.title = "Video title required!";
+    }
+    if (!url) {
+      validationErrors.url = "Video url required!";
+    }
+    if (!url.includes("youtube.com")) {
+      validationErrors.url = "Video url is not valid youtube link!";
+    }
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      props.addVideo(title, url);
+      setTitle("");
+      setUrl("");
+    }
   };
 
   return (
@@ -30,6 +47,7 @@ function AddVideo(props) {
             onChange={changeTitle}
             required
           />
+          {errors.title && <span>{errors.title}</span>}
         </div>
         <div class="form-group">
           <label for="url">Video URL</label>
@@ -41,6 +59,7 @@ function AddVideo(props) {
             onChange={changeUrl}
             required
           />
+          {errors.url && <span>{errors.url}</span>}
         </div>
 
         <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
