@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-const pool = myData;
+const Pool = myData;
 
 app.get("/testBd", (req, res) => {
   pool
@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
 
 app.get("/videos/data", (req, res) => {
   // res.send(videos);
-  pool.query("select * from videos")
+  Pool.query("select * from videos")
     .then((result) => {
       res.status(200).json({ videos: result.rows });
     })
