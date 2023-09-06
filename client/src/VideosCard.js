@@ -1,4 +1,7 @@
-export default function videossCard({ videos }) {
+import { useState } from "react";
+
+export default function VideossCard({ videos }) {
+  const [counter, setCounter] = useState(videos.rating);
   return (
     <>
       {videos.map((video) => (
@@ -11,7 +14,15 @@ export default function videossCard({ videos }) {
             height="281"
           />
           <div>
-            <button>video.rating</button>
+            <button onClick={() => setCounter(counter + 1)}>
+              video.rating +
+            </button>
+            <h3>{counter}</h3>
+            <button onClick={() => setCounter(counter - 1)}>
+              video.rating -
+            </button>
+          </div>
+          <div>
             <button>delete</button>
           </div>
         </div>
