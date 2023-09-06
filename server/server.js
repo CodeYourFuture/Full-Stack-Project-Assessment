@@ -1,10 +1,27 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+const { Client } = require("pg");
+const client = new Client({
+  host: "dpg-cjpi438jbais739i9cu0-a.frankfurt-postgres.render.com",
+  user: "yesna",
+  port: 5432,
+  password: "bQKZH3lJNeXjDQ3gTORoUbEv4rUZGsaL",
+  database: "videosdb_qitc",
+  ssl: true,
+});
+
+client.connect(function (error) {
+  if (error) {
+    throw error;
+  }
+  console.log("connected to database");
+});
 
 let videos = [
   {
@@ -72,30 +89,59 @@ let videos = [
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos);
+  client.query("select * from videos", (error, result) => {
+    if (!error) {
+      res.json(result.rows);
+    } else {
+      console.log(error.message);
+    }
+  });
+  client.end;
 });
-
 
 //post"/"
+// app.post("/", (req, res) => {
+//   // client.query('select * from videos', (error,result)=>{}
+//   const { title, url } = req.body;
+//   if (!title || !url) {
+//     return res.status(400).json({
+//       result: "failure",
+//       message: "Video could not be saved",
+//     });
+//   }
+//   const nextId = videos.length + 1;
+//   const newVideo = {
+//     id: nextId,
+//     title,
+//     url,
+//     rating: 0,
+//   };
+//   videos.push(newVideo);
+//   res.status(201).json({ id: newVideo.id });
+// });
+
+// post"/"
 app.post("/", (req, res) => {
-  
   const { title, url } = req.body;
-    if (!title || !url) {
-      return res.status(400).json({
-        result: "failure",
-        message: "Video could not be saved",
-      });
-  }
-  const nextId = videos.length + 1;
-  const newVideo = {
-      id: nextId,
-      title,
-      url,
-      rating: 0 
-  };
-  videos.push(newVideo);
-  res.status(201).json({ id: newVideo.id });
-});
+  client.query(`INSERT INTO videos (title, url, rating VALUES (${title},${url},0)`),
+  (error,result)=>{
+    if (!error) {
+      res.status(201);
+    } else {
+      console.log(error.message);
+    }
+}});
+
+// app.post("/", (req, res) => {
+//   client.query('select * from videos', (error,result)=>{
+//         if (!error) {
+//           res.json(result.rows);
+//         } else {
+//           console.log(error.message);
+//         }
+//   })
+//   client.end;
+// });
 
 app.get("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
@@ -107,7 +153,9 @@ app.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const videoIndex = videos.findIndex((video) => video.id === id);
   if (videoIndex === -1) {
-    res.status(404).json({ result: "failure", message: "Video could not be deleted" });
+    res
+      .status(404)
+      .json({ result: "failure", message: "Video could not be deleted" });
   }
   videos.splice(videoIndex, 1);
   res.json({});
@@ -124,13 +172,13 @@ app.put("/:id", (req, res) => {
   }
   let myRating = Number(req.body.video.rating);
 
-  console.log(`this is my req.body`,req.body)
+  console.log(`this is my req.body`, req.body);
 
   if (typeof myRating === "number") {
     videos[videoIndex].rating = myRating;
     console.log(`fix it`, videos[videoIndex].rating);
-    console.log(`All videos`,videos);
-    res.json({video: videos[videoIndex]});
+    console.log(`All videos`, videos);
+    res.json({ video: videos[videoIndex] });
   } else {
     return res.status(401).json({ error: "Invalid rating count" });
   }
