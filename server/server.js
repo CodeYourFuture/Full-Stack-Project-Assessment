@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+const cors = require('cors'); 
+app.use(cors()); 
 app.use(express.json()); 
 
-
 let videos = [];
-
 
 function generateVideoId() {
   return Math.floor(Math.random() * 1000000000000); 
@@ -20,9 +20,7 @@ app.get("/", (req, res) => {
 // POST 
 app.post("/", (req, res) => {
   const { title, url } = req.body;
-
- 
-  if (!title || !url) {
+ if (!title || !url) {
     return res.status(400).json({
       result: "failure",
       message: "Both title and URL must be provided",

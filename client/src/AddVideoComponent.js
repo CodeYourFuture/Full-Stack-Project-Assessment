@@ -1,4 +1,4 @@
-// AddVideoComponent.js
+
 import React, { useState } from 'react';
 
 const AddVideoComponent = ({ addVideo }) => {
@@ -6,20 +6,33 @@ const AddVideoComponent = ({ addVideo }) => {
   const [url, setUrl] = useState('');
 
   const handleAddVideo = () => {
-    if (title && url) {
-      const newVideo = {
-        id: Date.now(),
-        title,
-        url,
-        votes: 0,
-      };
-
-      addVideo(newVideo);
-
+    const newVideo = {
+      title:title,
+      url:url,
+     };
+     fetch('/api/videos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newVideo),
+    })
+     .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to add video');
+      }
+      return response.json();
+     })
+    .then((data) => {
+      console.log('New video added with ID:', data.id);
       setTitle('');
       setUrl('');
-    }
-  };
+      addVideo({ ...newVideo, id: data.id }); 
+    })
+    .catch((error) => {
+      console.error('Error adding video:', error);
+    });
+};
 
   return (
     <div className='add-video'>
