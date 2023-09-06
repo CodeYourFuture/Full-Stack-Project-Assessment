@@ -50,7 +50,7 @@ app.get("/videos", async function (request, response) {
 
 // POST "/"
 // This endpoint is used to add a video to the API.
-app.post("/", async function (request, response) {
+app.post("/videos", async function (request, response) {
   try {
     let newVideo = request.body;
 

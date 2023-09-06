@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideo({ videos, setVideos }) {
+function AddVideo({ setVideos }) {
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addVideoUrl, setAddVideoUrl] = useState("");
 
@@ -12,21 +12,38 @@ function AddVideo({ videos, setVideos }) {
     setAddVideoUrl(event.target.value);
   }
 
-  function addVideo(event) {
+  async function addVideo(event) {
     event.preventDefault();
-    const addVideoObject = {};
-    addVideoObject.id = getId();
-    addVideoObject.title = addVideoTitle;
-    addVideoObject.url = addVideoUrl;
-    setVideos((videos) => [...videos, addVideoObject]);
-  }
 
-  function getId() {
-    const sortedVideoArray = [...videos].sort(
-      // spread operator to sort new array and not OG
-      (videoObjectA, videoObjectB) => videoObjectB.id - videoObjectA.id
-    );
-    return sortedVideoArray[0].id + 1;
+    const newVideo = {
+      title: addVideoTitle,
+      url: addVideoUrl,
+    };
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/videos`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newVideo),
+        }
+      );
+
+      if (response.ok) {
+        const addedVideo = await response.json();
+        setVideos((videos) => [...videos, addedVideo]);
+        // empty input fields after video added
+        setAddVideoTitle("");
+        setAddVideoUrl("");
+      } else {
+        console.error("Failed to add video");
+      }
+    } catch (error) {
+      console.error("Error adding video:", error);
+    }
   }
 
   return (
@@ -42,7 +59,7 @@ function AddVideo({ videos, setVideos }) {
             required=""
             value={addVideoTitle}
             onChange={handleTitleChange}
-          ></input>
+          />
         </div>
         <div>
           <label htmlFor="video-url-input">URL</label>
@@ -53,11 +70,13 @@ function AddVideo({ videos, setVideos }) {
             required=""
             value={addVideoUrl}
             onChange={handleUrlChange}
-          ></input>
+          />
         </div>
         <div>
-          <button type="cancel">Cancel</button>
-          <button type="submit" onClick={(event) => addVideo(event)}>
+          <button type="button" onClick={() => setAddVideoTitle("")}>
+            Cancel
+          </button>
+          <button type="submit" onClick={addVideo}>
             Add
           </button>
         </div>
