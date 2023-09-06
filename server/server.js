@@ -3,15 +3,14 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
 const app = express();
-const myData = require("./db");
+const pool = require("./db");
 // const videosData = JSON.parse(fs.readFileSync("./exampleresponse.json"));
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
-
-const Pool = myData;
+// pool.connect();
 
 app.get("/testBd", (req, res) => {
   pool
@@ -64,7 +63,7 @@ app.get("/", (req, res) => {
 
 app.get("/videos/data", (req, res) => {
   // res.send(videos);
-  Pool.query("select * from videos")
+  pool.query("select * from videos")
     .then((result) => {
       res.status(200).json({ videos: result.rows });
     })
