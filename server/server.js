@@ -27,16 +27,16 @@ app.get("/videos/data", async (req, res) => {
   }
 });
 
-// app.get("/testBd", (req, res) => {
-//   pool
-//     .query("select * from videos")
-//     .then((result) => {
-//       res.status(200).json(result.rows );
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+app.get("/testBd", (req, res) => {
+  pool
+    .query("select * from videos")
+    .then((result) => {
+      res.status(200).json(result.rows );
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
