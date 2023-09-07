@@ -5,12 +5,17 @@ import Videocard from "./components/Videocard";
 console.log(videoData);
 
 function App() {
+
+  const videoElements = videoData.map((video) => {
+    return <Videocard />;
+  })
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <Videocard />
+      <div>{videoElements}</div>
+      
     </div>
   );
 }
