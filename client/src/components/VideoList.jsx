@@ -5,12 +5,8 @@ import AddVideo from './AddVideo';
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
 
-  const handleAddVideo = (newVideo) => {
-    // Add the new video to the list
-    setVideos([...videos, newVideo]);
-  };
 
-    const handleUpVote = (videoId) => {
+  const handleUpVote = (videoId) => {
     const updatedVideos = videos.map((video) =>
       video.id === videoId ? { ...video, votes: video.votes + 1 } : video
     );
@@ -24,17 +20,27 @@ const VideoList = () => {
     setVideos(updatedVideos);
   };
 
+  const handleAddVideo = (newVideo) => {
+    // Add the new video to the list with the current timestamp
+    const updatedVideos = [...videos, { ...newVideo, uploadDate: new Date() }];
+    setVideos(updatedVideos);
+  };
+
+  // Order the videos by the number of upvotes (descending order)
+  const orderedVideos = [...videos].sort((a, b) => b.votes - a.votes);
+
   return (
     <div>
       <AddVideo onAddVideo={handleAddVideo} />
+
       <h2>List of Videos</h2>
-      {videos.map((video) => (
+      {orderedVideos.map((video) => (
         <div key={video.id}>
           <h3>{video.title}</h3>
-          
+          <p>Uploaded on: {video.uploadDate.toLocaleString()}</p>
           <YouTubeVideo videoId={video.youtubeVideoId} />
           <p>Votes: {video.votes}</p>
-        <button onClick={() => handleUpVote(video.id)}>Up Vote</button>
+           <button onClick={() => handleUpVote(video.id)}>Up Vote</button>
           <button onClick={() => handleDownVote(video.id)}>Down Vote</button>
         </div>
       ))}
