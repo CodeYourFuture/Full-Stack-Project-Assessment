@@ -18,20 +18,22 @@ export default function AddVideoForm(props) {
 
   return (
     <form onSubmit={handleAddVideo} className="form">
+      <label htmlFor="title">Title</label>
       <input
         onChange={handleChange}
         type="text"
+        id="title"
         name="title"
         value={props.formData.title}
-        placeholder="Title"
         className="form--input"
       />
+      <label htmlFor="url">URL</label>
       <input
         onChange={handleChange}
         type="text"
+        id="url"
         name="url"
         value={props.formData.url}
-        placeholder="url"
         className="form--input"
       />
       <button className="form--button">Add New Video</button>

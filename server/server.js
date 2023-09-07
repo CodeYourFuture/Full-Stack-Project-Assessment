@@ -2,19 +2,14 @@ const express = require("express");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
-
-// body-parser
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+const { check, validationResult } = require("express-validator");
+const cors = require("cors");
 
-// cors
-let cors = require("cors");
 app.use(cors());
-
-// to parse incoming requests with JSON payloads
 app.use(express.json());
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // set up a connection to the database
 const { Pool } = require("pg");
@@ -41,7 +36,7 @@ app.get("/", function (request, response) {
 
 // Returns video with specific id
 app.get("/videos/:id", (request, response) => {
-  let id = Number(request.params.id);
+  let id = parseInt(request.params.id);
   db.query("SELECT * FROM videos WHERE id = $1", [id])
     .then((result) => {
       response.json(result.rows);
@@ -54,45 +49,52 @@ app.get("/videos/:id", (request, response) => {
 // POST
 // This endpoint is used to add a video to the API.
 // Both fields - title and url - must be included and be valid for this to succeed.
-app.post("/", (request, response) => {
-  const newTitle = request.body.title;
-  const newURL = request.body.url;
+app.post(
+  "/",
+  check("title")
+    .notEmpty()
+    .withMessage("Video could not be saved. Enter a title"),
+  check("url")
+    .isURL()
+    .contains("watch?v=")
+    .withMessage("Video could not be saved. Enter a valid Youtube URL"),
+  (request, response) => {
+    const result = validationResult(request);
+    if (!result.isEmpty()) {
+      return response.status(400).json(result.array());
+    }
 
-  console.log(request.body);
-  // need to write code for validation
-  // if (!newTitle || !newURL) {
-  //   return response.status(400).send({
-  //     result: "failure",
-  //     message: "Video could not be saved, add a title or url",
-  //   });
-  // }
+    const newTitle = request.body.title;
+    const newURL = request.body.url;
 
-  // RETURNING clause returns values after INSERT
-  const query = `INSERT INTO videos (title, url)
+    // RETURNING clause returns values after INSERT
+    const query = `INSERT INTO videos (title, url)
     VALUES ($1, $2) RETURNING *`;
 
-  db.query(query, [newTitle, newURL])
-    .then((result) => {
-      console.log(result.rows);
-      const newID = result.rows.id;
-      const newRating = result.rows.rating;
-      response.status(201).json({
-        id: newID,
-        title: newTitle,
-        url: newURL,
-        rating: newRating,
-        message: "Video was SAVED",
+    db.query(query, [newTitle, newURL])
+      .then((result) => {
+        console.log(result.rows);
+        const newID = result.rows.id;
+        const newRating = result.rows.rating;
+        response.status(201).json({
+          id: newID,
+          title: newTitle,
+          url: newURL,
+          rating: newRating,
+          message: "Video was SAVED",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+  }
+);
 
 // DELETE
-// Deletes the video with the ID container within the `{id}` parameter
 app.delete("/videos/:id", (request, response) => {
   const idToDelete = Number(request.params.id);
 
   db.query("DELETE FROM videos WHERE id = $1", [idToDelete]);
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
