@@ -22,7 +22,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("https://full-stack-assessment-server-zpuo.onrender.com")
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
