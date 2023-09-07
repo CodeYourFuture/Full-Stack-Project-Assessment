@@ -7,8 +7,19 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   function handleDelete(id) {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
+    fetch(`https://full-stack-assessment-server-zpuo.onrender.com/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const updatedVideos = videos.filter((video) => video.id !== id);
+        setVideos(updatedVideos);
+      })
+      .catch((error) => {
+        console.error("Error deleting video:", error);
+      });
   }
 
   function addVideo(title, url) {
