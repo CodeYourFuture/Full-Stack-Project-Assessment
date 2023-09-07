@@ -79,16 +79,6 @@ app.get("/videos/data", (req, res) => {
     });
 });
 
-// app.get("/videos/data", (req, res) => {
-//   pool.query(`Select * from videos`, (err, result) => {
-//     if (!err) {
-//       res.send({ videos: result.rows });
-//     }
-//   });
-//   pool.end;
-// });
-// pool.connect();
-
 app.get("/videos/data/:id", (req, res) => {
   const videoID = Number(req.params.id);
   const getVideoByID = videos.find((video) => video.id === videoID);
