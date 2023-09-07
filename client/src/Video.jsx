@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
 
+
+function convertWatchToEmbedLink(watchLink) {
+  const watchPattern = /https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/;
+  const match = watchLink.match(watchPattern);
+  if (match && match.length === 2) {
+    const videoId = match[1];
+    const embedLink = `https://www.youtube.com/embed/${videoId}`;
+    return embedLink;
+  } else {
+    return watchLink;
+  }
+}
+
 function Video({ video, onRemove }) {
   const [rating, setRating] = useState(video.rating);
 
@@ -11,11 +24,14 @@ function Video({ video, onRemove }) {
     setRating(rating - 1);
   };
 
-  // Extract the video ID from the YouTube URL
-  const videoId = video.url.split('/embed/')[1];
 
-  // Construct the embedded URL with the extracted video ID
-  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  const videoUrl = video.url.startsWith('https://www.youtube.com/watch?v=')
+    ? convertWatchToEmbedLink(video.url)
+    : video.url;
+
+  const uploadDate = new Date(
+    Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
+  );
 
   return (
     <div className="Video-container">
@@ -24,7 +40,7 @@ function Video({ video, onRemove }) {
         <iframe
           width="560"
           height="315"
-          src={embedUrl}
+          src={videoUrl}
           title={video.title}
           allowFullScreen
         />
@@ -39,6 +55,7 @@ function Video({ video, onRemove }) {
       <button className="btn" onClick={handleDownVote}>
         Down Vote
       </button>
+      <p>Uploaded: {uploadDate.toLocaleString()}</p>
     </div>
   );
 }

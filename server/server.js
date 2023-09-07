@@ -19,9 +19,16 @@ try {
 } catch (error) {
   console.error('Error loading exampleresponse.json:', error.message);
 }
-
 app.get("/", (req, res) => {
-  res.json(videos);
+  // Get the 'order' query parameter from the request
+  const order = req.query.order;
+
+  // Sort videos based on the 'order' parameter (default to descending if not provided)
+  const sortedVideos = order === 'asc'
+    ? [...videos].sort((a, b) => a.rating - b.rating)
+    : [...videos].sort((a, b) => b.rating - a.rating);
+
+  res.json(sortedVideos);
 });
 
 app.post("/", (req, res) => {
