@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const randomIntFromInterval = require("./utils/randomIntFromInterval");
+const { Client } = require("pg");
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(
@@ -14,14 +17,30 @@ app.use(
   })
 );
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const client = new Client({
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database,
+  port: process.env.port,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = require("../client/src/exampleresponse.json");
+client.connect();
 
 app.get("/", (req, res) => {
-  res.json(videos);
+  client
+    .query(`select * from videos`)
+    .then((result) => {
+      const videos = result.rows;
+      res.json(videos);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 app.post("/", (req, res) => {
@@ -30,34 +49,79 @@ app.post("/", (req, res) => {
     return;
   }
 
-  const newVideo = {
-    id: randomIntFromInterval(10, videos[videos.length - 1].id),
-    title: req.body.title,
-    url: req.body.url,
-    rating: 0,
-  };
-  videos.push(newVideo);
-  res.json(videos);
+  client
+    .query(`select max(id) from videos`)
+    .then((result) => {
+      const maxId = result.rows[0].max;
+      const newVideo = {
+        id: randomIntFromInterval(maxId + 1, maxId + 10),
+        title: req.body.title,
+        url: req.body.url,
+        rating: 0,
+      };
+      client
+        .query(
+          `insert into videos (id, title, url, rating) values ($1, $2, $3, $4)`,
+          [newVideo.id, newVideo.title, newVideo.url, newVideo.rating]
+        )
+        .then(() => {
+          res.json(newVideo);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          res.status(500).send("Internal Server Error");
+        });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 app.get("/:id", (req, res) => {
-  const video = videos.find((video) => video.id === parseInt(req.params.id));
-  if (!video) {
-    res.status(404).send("Video not found");
-    return;
-  }
-  res.json(video);
+  const id = parseInt(req.params.id);
+  client
+    .query(`select * from videos where id = $1`, [id])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).send("Video not found");
+      } else {
+        const video = result.rows[0];
+        res.json(video);
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 app.delete("/:id", (req, res) => {
-  const video = videos.find((video) => video.id === parseInt(req.params.id));
-  if (!video) {
-    res.status(404).send({
-      result: "failure",
-      message: "Video could not be deleted",
+  const id = parseInt(req.params.id);
+  client
+    .query(`delete from videos where id = $1`, [id])
+    .then((result) => {
+      if (result.rowCount === 0) {
+        res.status(404).send({
+          result: "failure",
+          message: "Video could not be deleted",
+        });
+      } else {
+        res.json({ message: "Video deleted" });
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.status(500).send("Internal Server Error");
     });
-    return;
-  }
-  videos.splice(videos.indexOf(video), 1);
-  res.json({ message: "Video deleted" });
+});
+
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
+
+process.on("SIGINT", () => {
+  console.log("Shutting down server");
+  server.close(() => {
+    console.log("Server shut down");
+    client.end();
+  });
 });
