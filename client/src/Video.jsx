@@ -45,10 +45,10 @@ function Video({ video, onRemove }) {
           title={video.title}
           allowFullScreen
         /> */}
-        <iframe
+       <iframe
   width="560"
   height="315"
-  src={`https://www.youtube.com/embed/${new URL(video.url).searchParams.get('v')}`}
+  src={video.url}
   title={video.title}
   allowFullScreen
 />
