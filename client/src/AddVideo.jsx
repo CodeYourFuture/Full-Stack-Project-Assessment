@@ -10,8 +10,9 @@ function AddVideo({ onAdd }) {
 
     if (title && url) {
     
-      const videoId = url.match(/(?:\?v=|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9_\-]+)/)[1];
-      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      const videoIdMatch = url.match(/(?:\?v=|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9_-]+)/);
+
+      const embedUrl = `https://www.youtube.com/embed/${videoIdMatch}`;
 
       const newVideo = {
         id: Date.now(),

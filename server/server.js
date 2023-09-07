@@ -1,23 +1,27 @@
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
-// app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
+const corsOptions = {
+  origin: "http://localhost:3005", // Update with your React app's URL
+};
+
+app.use(cors(corsOptions));
 
 let videos;
 
 try {
-  const jsonData = fs.readFileSync(`../exampleresponse.json`, 'utf-8');
+  const jsonData = fs.readFileSync('../exampleresponse.json', 'utf-8');
   videos = JSON.parse(jsonData);
-} catch(error) {
-  console.error(`Error loading exampleresponse.json:`, error.message);
+} catch (error) {
+  console.error('Error loading exampleresponse.json:', error.message);
 }
 
-
 app.get("/", (req, res) => {
-  res.send(videos);
+  res.json(videos);
 });
 
 app.post("/", (req, res) => {
