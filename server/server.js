@@ -1,14 +1,21 @@
 const express = require("express");
+const fs = require("fs");
 const app = express();
 const port = process.env.PORT || 5000;
 
 // app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.json());
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
 
-// GET "/"
+let videos;
+
+try {
+  const jsonData = fs.readFileSync(`../exampleresponse.json`, 'utf-8');
+  videos = JSON.parse(jsonData);
+} catch(error) {
+  console.error(`Error loading exampleresponse.json:`, error.message);
+}
+
+
 app.get("/", (req, res) => {
   res.send(videos);
 });
