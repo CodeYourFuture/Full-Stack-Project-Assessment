@@ -1,24 +1,40 @@
-// src/components/Video.js
 import React from "react";
 import Rating from "../rating/rating";
 
-const Video = ({ video, handleVote, handleRemove }) => {
+// Function to convert YouTube watch link to embed link
+function convertWatchToEmbedLink(watchLink) {
+  const watchPattern = /https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/;
+  const match = watchLink.match(watchPattern);
 
+  if (match && match.length === 2) {
+    const videoId = match[1];
+    const embedLink = `https://www.youtube.com/embed/${videoId}`;
+    return embedLink;
+  } else {
+    return watchLink;
+  }
+}
+
+const Video = ({ video, handleVote, handleRemove }) => {
   const uploadDate = new Date(
     Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
   );
+
+  // Convert the video URL to an embed link if it's a watch link
+  const videoUrl = video.url.startsWith("https://www.youtube.com/watch?v=")
+    ? convertWatchToEmbedLink(video.url)
+    : video.url;
+
   return (
     <div className="video">
       <h2>{video.title}</h2>
-      <iframe
-        title={video.title}
-        width="560"
-        height="315"
-        src={video.url}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+      <div className="anything">
+        <iframe
+          src={videoUrl}
+          title={video.title}
+          allowFullScreen
+        />
+      </div>
 
       <Rating
         video={video}
@@ -26,7 +42,7 @@ const Video = ({ video, handleVote, handleRemove }) => {
         handleRemove={handleRemove}
       />
 
-<p>Uploaded: {uploadDate.toLocaleString()}</p>
+      <p>Uploaded: {uploadDate.toLocaleString()}</p>
     </div>
   );
 };

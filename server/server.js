@@ -1,17 +1,39 @@
 const express = require("express");
+const fs = require("fs"); // Node.js built-in module for file operations
 const app = express();
 const port = process.env.PORT || 5000;
+const cors = require("cors"); // Import the cors package
 
+//bodypas
 // Middleware to parse JSON data
 app.use(express.json());
+app.use(cors());
 
-// Store and retrieve your videos from here
-let videos = [];
+let videos; // Declare the variable first
+
+try {
+  const jsonData = fs.readFileSync('../exampleresponse.json', 'utf-8');
+  videos = JSON.parse(jsonData);
+} catch (error) {
+  console.error('Error loading exampleresponse.json:', error.message);
+}
 
 // GET "/"
+// Modify your GET "/" endpoint
 app.get("/", (req, res) => {
+  const { order } = req.query;
+  
+  // Sort videos based on the "order" parameter
+  if (order === "asc") {
+    videos.sort((a, b) => a.rating - b.rating);
+  } else {
+    // Default to descending order (highest votes first)
+    videos.sort((a, b) => b.rating - a.rating);
+  }
+
   res.send(videos);
 });
+
 
 // POST "/"
 app.post("/", (req, res) => {

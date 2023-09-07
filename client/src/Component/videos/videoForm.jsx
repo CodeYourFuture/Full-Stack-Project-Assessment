@@ -7,9 +7,11 @@ const VideoForm = ({ handleAddVideo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form submitted");
     if (title.trim() === "" || !isValidUrl(url)) {
       return;
     }
+    
     handleAddVideo({ title, url });
     setTitle("");
     setUrl("");
