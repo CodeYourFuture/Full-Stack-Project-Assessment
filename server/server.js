@@ -99,49 +99,22 @@ app.get("/", (req, res) => {
   client.end;
 });
 
-//post"/"
-// app.post("/", (req, res) => {
-//   // client.query('select * from videos', (error,result)=>{}
-//   const { title, url } = req.body;
-//   if (!title || !url) {
-//     return res.status(400).json({
-//       result: "failure",
-//       message: "Video could not be saved",
-//     });
-//   }
-//   const nextId = videos.length + 1;
-//   const newVideo = {
-//     id: nextId,
-//     title,
-//     url,
-//     rating: 0,
-//   };
-//   videos.push(newVideo);
-//   res.status(201).json({ id: newVideo.id });
-// });
-
 // post"/"
 app.post("/", (req, res) => {
   const { title, url } = req.body;
-  client.query(`INSERT INTO videos (title, url, rating VALUES (${title},${url},0)`),
-  (error,result)=>{
+  client.query(
+  "INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0)",
+  [title, url],
+  (error, result) => {
     if (!error) {
-      res.status(201);
+      res.status(201).send("success");
     } else {
       console.log(error.message);
+      res.status(500).send("Internal Server Error");
     }
-}});
-
-// app.post("/", (req, res) => {
-//   client.query('select * from videos', (error,result)=>{
-//         if (!error) {
-//           res.json(result.rows);
-//         } else {
-//           console.log(error.message);
-//         }
-//   })
-//   client.end;
-// });
+}
+)
+});
 
 app.get("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
@@ -149,16 +122,20 @@ app.get("/:id", (req, res) => {
   res.status(200).send({ video });
 });
 
+
 app.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const videoIndex = videos.findIndex((video) => video.id === id);
-  if (videoIndex === -1) {
-    res
-      .status(404)
-      .json({ result: "failure", message: "Video could not be deleted" });
-  }
-  videos.splice(videoIndex, 1);
-  res.json({});
+  const idFromInput = parseInt(req.params.id);
+    client.query(
+      "DELETE FROM videos WHERE id=($1)",[idFromInput],
+      (error, result) => {
+        if (!error) {
+          res.status(201).send("success");
+        } else {
+          console.log(error.message);
+          res.status(500).send("Internal Server Error");
+        }
+      }
+    );
 });
 
 app.put("/:id", (req, res) => {

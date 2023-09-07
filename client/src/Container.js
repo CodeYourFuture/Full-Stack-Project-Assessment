@@ -4,7 +4,6 @@ import VideoContainer from "./VideoContainer";
 
 const Container = () => {
   let videoData = [];
-  console.log("just before useState", videoData);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
 };
 
 
-  const handleAddVideo = (video) => {
+  function handleAddVideo (video)  {
     fetch(`http://localhost:5000/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -47,8 +46,8 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
             setVideos(videoData);
           });
       })
-      .catch((error) => console.log(error));
-      };
+  };
+
 
   const handleUpVote = (video) => {
     video.rating = video.rating+1;
