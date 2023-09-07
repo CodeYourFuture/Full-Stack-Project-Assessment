@@ -26,10 +26,27 @@ function App() {
     const newVideo = {
       title: title,
       url: url,
-      id: Math.random().toString(),
       rating: 0,
     };
-    setVideos([...videos, newVideo]);
+    fetch("https://full-stack-assessment-server-zpuo.onrender.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setVideos([...videos, data]);
+      })
+      .catch((error) => {
+        console.error("Error adding video:", error);
+      });
   }
 
   useEffect(() => {
