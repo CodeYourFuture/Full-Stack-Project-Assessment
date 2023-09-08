@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/videos/data", async (req, res) => {
+app.get("/videos", async (req, res) => {
   // res.send(videos);
   try {
     const videos = await pool
@@ -97,7 +97,7 @@ app.post("/videos/data/create", newVideoValidate, (req, res) => {
   }
   
   const query = `INSERT INTO videos(title, url)` +
-    `VALUES VALUES ($1, $2)`;
+    `VALUES ($1, $2)`;
   
   pool.query(query, [newTitle, newUrl])
       .then(result => {
