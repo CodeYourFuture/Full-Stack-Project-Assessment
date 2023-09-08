@@ -15,7 +15,7 @@ function VideoCard(props) {
 
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
-  const [rate, setRate] = useState(props.rating)
+  const [rate, setRate] = useState(props.rating);
 
   return (
     <div className="card" style={{ width: "330px", height: "350px" }}>
@@ -29,6 +29,8 @@ function VideoCard(props) {
         allowfullscreen
       ></iframe>
       <div className="card-body">
+        <p>{props.uploadTime}</p>
+        <br></br>
         <p className="card-text">{props.title}</p>
       </div>
       <ul className="list-group list-group-flush">
@@ -63,8 +65,10 @@ function VideoCard(props) {
             {dislike === 1 ? down : downA}
             <br></br>Disike
           </button>
-          <button onClick={props.delete}>{deleteIcon}
-           <br></br>Delete</button>
+          <button onClick={props.delete}>
+            {deleteIcon}
+            <br></br>Delete
+          </button>
         </li>
         <li className="list-group-item">{rate}</li>
       </ul>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 
 function AddVideo(props) {
   const [title, setTitle] = useState("");
@@ -21,14 +22,14 @@ function AddVideo(props) {
     }
     if (!url) {
       validationErrors.url = "Video url required!";
-    }
-    if (!url.includes("youtube.com")) {
+    } else if (!url.includes("youtube.com")) {
       validationErrors.url = "Video url is not valid youtube link!";
     }
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      props.addVideo(title, url);
+      let uploadTime = moment().format("ll");
+      props.addVideo(title, url, uploadTime);
       setTitle("");
       setUrl("");
     }

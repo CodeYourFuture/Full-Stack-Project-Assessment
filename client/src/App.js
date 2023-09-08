@@ -15,12 +15,13 @@ function App() {
     setData(updatedData);
   };
 
-  const addVideo = (title, url) => {
+  const addVideo = (title, url, uploadTime) => {
     const newVideo = {
       id: data.length + 1,
       title: title,
       url: url,
       rating: 0,
+      uploadTime: uploadTime,
     };
     setData([...data, newVideo]);
   };
@@ -39,6 +40,7 @@ function App() {
               url={video.url}
               title={video.title}
               rating={video.rating}
+              uploadTime={video.uploadTime}
               delete={() => deleteHandle(video.id)}
             />
           ))}
