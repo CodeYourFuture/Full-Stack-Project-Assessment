@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/videos", async (req, res) => {
+app.get("/videos/data", async (req, res) => {
   // res.send(videos);
   try {
     const videos = await pool
