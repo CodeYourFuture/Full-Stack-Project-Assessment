@@ -82,29 +82,36 @@ app.post("/videos/data/create", newVideoValidate, (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const newId = videos[videos.length - 1].id + 1;
-  const { title, url } = req.body;
+  // const newId = videos[videos.length - 1].id + 1;
+  // const { title, url } = req.body;
+   const newTitle = req.body.title;
+   const newUrl = req.body.url;
 
   if (
-    url.startsWith("https://www.youtube.com/embed/") ||
-    url.startsWith("https://www.youtube.com/watch?v=")
+    newUrl.startsWith("https://www.youtube.com/embed/") ||
+    newUrl.startsWith("https://www.youtube.com/watch?v=")
   ) {
     res.status(200).json({ message: "Valid YouTube URL" });
   } else {
     res.status(400).json({ message: "Invalid YouTube URL" });
   }
+  
+  const query = `INSERT INTO videos(title, url)
+          VALUES VALUES ($1, $2)`;
+  pool.query(`INSERT INTO videos(title, url)
+          VALUES VALUES ($1, $2)`, [newTitle, newUrl]);
 
-  const newVideo = Object.assign({ id: newId }, req.body);
+  // const newVideo = Object.assign({ id: newId }, req.body);
 
-  videos.push(newVideo);
+  // videos.push(newVideo);
 
-  fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
-    res.status(201).send({
-      videos: {
-        newVideo,
-      },
-    });
-  });
+  // fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
+  //   res.status(201).send({
+  //     videos: {
+  //       newVideo,
+  //     },
+  //   });
+  // });
 });
 
 app.delete("/videos/data/:id", (req, res) => {
