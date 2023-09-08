@@ -96,10 +96,16 @@ app.post("/videos/data/create", newVideoValidate, (req, res) => {
     res.status(400).json({ message: "Invalid YouTube URL" });
   }
   
-  const query = `INSERT INTO videos(title, url)
-          VALUES VALUES ($1, $2)`;
-  pool.query(`INSERT INTO videos(title, url)
-          VALUES VALUES ($1, $2)`, [newTitle, newUrl]);
+  const query = `INSERT INTO videos(title, url)` +
+    `VALUES VALUES ($1, $2)`;
+  
+  pool.query(query, [newTitle, newUrl])
+      .then(result => {
+      res.status(200).json({result});
+    })
+    .catch(err => {
+      res.status(500).json({ error: err });
+    })
 
   // const newVideo = Object.assign({ id: newId }, req.body);
 
