@@ -16,12 +16,32 @@ function SingleVideoCard({
     setCount((prevCount) => prevCount + 1);
   }
 
-  const deleteVideo = (videoId) => {
-    const updatedVideos = filterVideos.filter((video) => video.id !== videoId);
-    setFilterVideos(updatedVideos);
-  };
+  async function deleteVideo(event) {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/videos/${videoId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  const urlId = url.split("v=")[1].substring(0, 11);
+      if (response.ok) {
+        const updatedVideos = filterVideos.filter(
+          (video) => video.id !== videoId
+        );
+        setFilterVideos(updatedVideos);
+      } else {
+        console.error("Failed to delete video.");
+      }
+    } catch (error) {
+      console.error("Error deleting video:", error);
+    }
+  }
+
+  const urlId = url.includes("v=") ? url.split("v=")[1].substring(0, 11) : "";
 
   return (
     <div className="card">
