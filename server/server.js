@@ -24,7 +24,7 @@ const db = new Pool({
 });
 
 app.get("/", function (req, res) {
-  db.query("SELECT * FROM videos")
+  db.query("SELECT * FROM videos ORDER BY id ASC")
     .then((result) => {
       res.json(result.rows);
     })
