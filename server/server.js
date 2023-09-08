@@ -56,7 +56,6 @@ const newVideoValidate = [
 //     .withMessage("You must enter your password"),
 // ];
 
-
 // app.get("/", (req, res) => {
 //   Delete this line after you've confirmed your server is running
 //   res.send({ express: "Your Backend Service is Running" });
@@ -65,11 +64,9 @@ const newVideoValidate = [
 app.get("/videos/data", async (req, res) => {
   // res.send(videos);
   try {
-    const videos = await pool
-      .query("select * from videos")
-      .then((result) => {
-        res.status(200).json(result.rows);
-      });
+    const videos = await pool.query("select * from videos").then((result) => {
+      res.status(200).json(result.rows);
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
@@ -82,48 +79,32 @@ app.get("/videos/data/:id", (req, res) => {
   res.status(200).send(getVideoByID);
 });
 
-app.post("/videos/data/create", newVideoValidate, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+app.post("/videos/data/create", newVideoValidate, async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const newTitle = req.body.title;
+    const newUrl = req.body.url;
+
+    if (
+      newUrl.startsWith("https://www.youtube.com/embed/") ||
+      newUrl.startsWith("https://www.youtube.com/watch?v=")
+    ) {
+      res.status(200).json({ message: "Valid YouTube URL" });
+    } else {
+      res.status(400).json({ message: "Invalid YouTube URL" });
+    }
+
+    const query = `INSERT INTO videos(title, url)` + `VALUES ($1, $2)`;
+    const result = pool.query(query, [newTitle, newUrl]);
+    res.status(200).json(result);
+
+  } catch (error) {
+    res.status(500).json({ error: err });
   }
-
-  // const newId = videos[videos.length - 1].id + 1;
-  // const { title, url } = req.body;
-   const newTitle = req.body.title;
-   const newUrl = req.body.url;
-
-  if (
-    newUrl.startsWith("https://www.youtube.com/embed/") ||
-    newUrl.startsWith("https://www.youtube.com/watch?v=")
-  ) {
-    res.status(200).json({ message: "Valid YouTube URL" });
-  } else {
-    res.status(400).json({ message: "Invalid YouTube URL" });
-  }
-  
-  const query = `INSERT INTO videos(title, url)` +
-    `VALUES ($1, $2)`;
-  
-  pool.query(query, [newTitle, newUrl])
-      .then(result => {
-      res.status(200).json({result});
-    })
-    .catch(err => {
-      res.status(500).json({ error: err });
-    })
-
-  // const newVideo = Object.assign({ id: newId }, req.body);
-
-  // videos.push(newVideo);
-
-  // fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
-  //   res.status(201).send({
-  //     videos: {
-  //       newVideo,
-  //     },
-  //   });
-  // });
 });
 
 app.delete("/videos/data/:id", (req, res) => {
@@ -144,6 +125,5 @@ app.delete("/videos/data/:id", (req, res) => {
     });
   });
 });
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
