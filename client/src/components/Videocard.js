@@ -3,7 +3,7 @@ function Videocard (props) {
 return (
     <div>
     <h1>{props.name}</h1>
-    <p>This is to show that this is working</p>
+    <p>{props.link}</p>
     </div>
 )
 }

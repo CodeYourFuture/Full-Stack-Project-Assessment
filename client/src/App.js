@@ -1,19 +1,19 @@
 import "./App.css";
 import videoData from "./exampleresponse.json";
 import Videocard from "./components/Videocard";
-import UrlLinks from "./components/url";
+
 
 console.log(videoData);
 
 function App() {
 
   const videoElements = videoData.map((video) => {
-    return <Videocard name={video.title} />;
+    return <Videocard name={video.title} link={video.url} />;
   })
 
-const youTubeLinks = videoData.map((video) => {
-  return <url link={links.url} />
-})
+// const youTubeLinks = videoData.map((video) => {
+//   return <url link={links.url} />
+// })
 
   return (
     <div className="App">
