@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
 const bodyParser = require("body-parser");
@@ -13,10 +14,14 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 pool.connect();
+app.use(express.static(path.join(__dirname, "build")));
 
 // app.use(express.json());
 // pool.connect();
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -139,9 +144,5 @@ app.delete("/videos/data/:id", (req, res) => {
   });
 });
 
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
