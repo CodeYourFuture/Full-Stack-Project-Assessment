@@ -53,12 +53,13 @@ app.post(
   "/",
   check("title")
     .notEmpty()
-    .withMessage("Video could not be saved. Enter a title"),
+    .withMessage("Video could not be saved. Enter a title."),
   check("url")
     .isURL()
     .contains("watch?v=")
-    .withMessage("Video could not be saved. Enter a valid Youtube URL"),
+    .withMessage("Video could not be saved. Enter a valid Youtube URL."),
   (request, response) => {
+    console.log(request.body);
     const result = validationResult(request);
     if (!result.isEmpty()) {
       return response.status(400).json(result.array());
@@ -95,6 +96,15 @@ app.delete("/videos/:id", (request, response) => {
   const idToDelete = Number(request.params.id);
 
   db.query("DELETE FROM videos WHERE id = $1", [idToDelete]);
+});
+
+// PUT
+app.put("/videos/:id", (request, response) => {
+  console.log(request.params.id);
+  console.log(request.body.vote);
+  const vote = request.body.vote;
+  const idToUpdate = request.params.id;
+  return response.send("hello");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

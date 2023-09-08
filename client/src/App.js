@@ -38,18 +38,29 @@ function App() {
 
   // need to add some code to update database
   function changeVoteScore(id, voteChoice) {
-    setVideos((prevVideos) =>
-      prevVideos.map((video) => {
-        if (video.id === id) {
-          return {
-            ...video,
-            rating: video.rating + voteChoice,
-          };
-        }
+    fetch(`${apiURL}/videos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vote: voteChoice }),
+    });
+    // .then((response) => response.json())
+    // .then((data) => console.log(data));
+    // .catch((error) => console.error(error));
+    setCount((prevCount) => prevCount + 1);
+    // setVideos((prevVideos) =>
+    //   prevVideos.map((video) => {
+    //     if (video.id === id) {
+    //       return {
+    //         ...video,
+    //         rating: video.rating + voteChoice,
+    //       };
+    //     }
 
-        return video;
-      })
-    );
+    //     return video;
+    //   })
+    // );
   }
 
   function deleteVideo(id) {
