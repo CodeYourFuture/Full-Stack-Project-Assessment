@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import "./App.css";
-import Video from './Video'; 
+import './App.css';
+import Video from './Video';
 import AddVideo from './AddVideo';
-import axios from 'axios'; 
+import axios from 'axios';
 
 function App() {
-  const [videos, setVideos] = useState([]); 
-  const [order, setOrder] = useState('desc'); // Initialize order state
+  const [videos, setVideos] = useState([]);
+  const [order, setOrder] = useState('desc');
 
   useEffect(() => {
-    // Use Axios to make the GET request with the 'order' parameter
-    axios.get(`http://localhost:4000/?order=${order}`)
-      .then((response) => {
-        setVideos(response.data); 
-      })
-      .catch((error) => {
-        console.error("Error fetching data from the server:", error);
-      });
-  }, [order]); // Update the videos when 'order' changes
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/?order=${order}`);
+        setVideos(response.data);
+      } catch (error) {
+        console.error('Error fetching data from the server:', error);
+      }
+    };
+
+    fetchData();
+  }, [order]);
 
   const handleAdd = (newVideo) => {
-    setVideos([...videos, newVideo]);
+    setVideos((prevVideos) => [...prevVideos, newVideo]);
   };
 
   const handleRemove = (videoId) => {
-    const updatedVideos = videos.filter(video => video.id !== videoId);
-    setVideos(updatedVideos);
+    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== videoId));
   };
 
-  // Function to toggle the order when the button is clicked
   const toggleOrder = () => {
     setOrder(order === 'asc' ? 'desc' : 'asc');
   };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -42,11 +41,16 @@ function App() {
         Toggle Order: {order === 'asc' ? 'Ascending' : 'Descending'}
       </button>
       <AddVideo onAdd={handleAdd} />
-      {videos.map(video => (
-        <Video key={video.id} video={video} onRemove={handleRemove} />
-      ))}
+
+    
+      <div className="row">
+        {videos.map((video) => (
+          <div className="col-lg-4 col-md-6 col-sm-12" key={video.id}>
+            <Video video={video} onRemove={handleRemove} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
 export default App;

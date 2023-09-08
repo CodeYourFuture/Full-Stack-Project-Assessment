@@ -1,37 +1,43 @@
 const express = require("express");
-const fs = require("fs");
+// const fs = require("fs");
 const cors = require("cors");
 const app = express();
+const db = require("./config/db");
 const port = process.env.PORT || 4000;
 
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:3005", // Update with your React app's URL
+  origin: "http://localhost:3005", 
 };
 
 app.use(cors(corsOptions));
 
 let videos;
 
-try {
-  const jsonData = fs.readFileSync('../exampleresponse.json', 'utf-8');
-  videos = JSON.parse(jsonData);
-} catch (error) {
-  console.error('Error loading exampleresponse.json:', error.message);
-}
-app.get("/", (req, res) => {
-  // Get the 'order' query parameter from the request
-  const order = req.query.order;
+app.get("/", async (req, res) => {
+  const { order } = req.query;
 
-  // Sort videos based on the 'order' parameter (default to descending if not provided)
-  const sortedVideos = order === 'asc'
-    ? [...videos].sort((a, b) => a.rating - b.rating)
-    : [...videos].sort((a, b) => b.rating - a.rating);
+  try {
+    let orderBy = 'DESC'; 
 
-  res.json(sortedVideos);
+    if (order === 'asc') {
+      orderBy = 'ASC';
+    }
+
+    const queryText = `SELECT * FROM ytvideos ORDER BY ratings ${orderBy}`;
+    const queryResult = await db.query(queryText);
+    const videos = queryResult.rows;
+
+    console.log("Fetched videos from the database:", videos);
+
+    res.json(videos);
+  } catch (error) {
+    console.error("Error fetching data from the database", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   const { title, url } = req.body;
   if (!title || !url) {
     return res.status(400).json({
@@ -40,10 +46,22 @@ app.post("/", (req, res) => {
     });
   }
 
-  const id = Date.now();
-  videos.push({ id, title, url });
-  res.status(201).json({ id });
+  try {
+    // Insert the new video data into your PostgreSQL database
+    const queryText = "INSERT INTO ytvideos (title, url, ratings) VALUES ($1, $2, $3) RETURNING id";
+    const queryValues = [title, url, 7]; 
+    const result = await db.query(queryText, queryValues);
+
+    const id = result.rows[0].id;
+
+    // Return the ID of the newly added video
+    res.status(201).json({ id });
+  } catch (error) {
+    console.error("Error adding video to the database", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
+
 
 
 app.get("/:id", (req, res) => {
@@ -70,4 +88,6 @@ app.delete("/:id", (req, res) => {
   videos.splice(index, 1);
   res.json({});
 });
+
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

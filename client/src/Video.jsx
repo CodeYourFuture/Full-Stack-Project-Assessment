@@ -25,9 +25,9 @@ function Video({ video, onRemove }) {
   };
 
 
-  const videoUrl = video.url.startsWith('https://www.youtube.com/watch?v=')
-    ? convertWatchToEmbedLink(video.url)
-    : video.url;
+  const videoUrl = video.url && video.url.startsWith('https://www.youtube.com/watch?v=')
+  ? convertWatchToEmbedLink(video.url)
+  : video.url;
 
   const uploadDate = new Date(
     Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
