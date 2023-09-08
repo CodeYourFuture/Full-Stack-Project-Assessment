@@ -23,7 +23,7 @@ const db = new Pool({
   ssl: true,
 });
 
-app.get("/", function (req, res) {
+app.get("/videos", function (req, res) {
   db.query("SELECT * FROM videos ORDER BY id ASC")
     .then((result) => {
       res.json(result.rows);
@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
 //   res.json(videos);
 // });
 
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   const newTitle = req.body.title;
   const newUrl = req.body.url;
   const query = `INSERT INTO videos (title, url) VALUES ($1, $2)`;
@@ -64,7 +64,7 @@ app.post("/", (req, res) => {
 //   }
 // });
 
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const videoId = req.params.id;
   db.query(`SELECT * FROM videos WHERE id=${videoId}`)
     .then((result) => {
@@ -79,7 +79,7 @@ app.get("/:id", (req, res) => {
 // res.status(200).send({ video });
 // });
 
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const videoId = req.params.id;
   db.query(`DELETE FROM videos WHERE id=${videoId}`)
     .then((result) => {
@@ -104,7 +104,7 @@ app.delete("/:id", (req, res) => {
   // }
 });
 
-app.put("/:id", (req, res) => {
+app.put("/videos/:id", (req, res) => {
   const videoId = req.params.id;
   const ratingModifier = req.body.modifier;
   console.log(ratingModifier);

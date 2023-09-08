@@ -3,7 +3,8 @@ import "./App.css";
 import Video from "./components/Video";
 import AddVideo from "./components/AddVideo";
 
-const serverAddress = "https://mss-backend-deployment-test.onrender.com/";
+const serverAddress =
+  "https://mss-backend-deployment-test.onrender.com/videos/";
 
 function App() {
   const [count, setCount] = React.useState(0);
