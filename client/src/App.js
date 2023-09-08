@@ -8,7 +8,7 @@ console.log(videoData);
 function App() {
 
   const videoElements = videoData.map((video) => {
-    return <Videocard name={video.title} link={video.url} />;
+    return <Videocard name={video.title} link={video.url} rating={video.rating}/>;
   })
 
 // const youTubeLinks = videoData.map((video) => {
