@@ -4,7 +4,7 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
 const bodyParser = require("body-parser");
-// const videosData = JSON.parse(fs.readFileSync("./exampleresponse.json"));
+
 const cors = require("cors");
 const pool = require("./db");
 
@@ -16,16 +16,10 @@ app.use(cors());
 pool.connect();
 // app.use(express.static(path.join(__dirname, "build")));
 
-// app.use(express.json());
-// pool.connect();
-
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "build", "index.html"));
 // });
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = videosData;
 
 const newVideoValidate = [
   body("title").trim().notEmpty(),
@@ -93,14 +87,14 @@ app.post("/videos/data/create", newVideoValidate, async (req, res) => {
       newUrl.startsWith("https://www.youtube.com/embed/") ||
       newUrl.startsWith("https://www.youtube.com/watch?v=")
     ) {
-      res.status(200).json({ message: "Valid YouTube URL" });
+      res.status(201).json({ message: "Valid YouTube URL" });
     } else {
       res.status(400).json({ message: "Invalid YouTube URL" });
     }
 
     const query = `INSERT INTO videos(title, url)` + `VALUES ($1, $2)`;
     const result = pool.query(query, [newTitle, newUrl]);
-    res.status(200).json(result);
+    res.status(201).json(result);
 
   } catch (error) {
     res.status(500).json({ error: err });

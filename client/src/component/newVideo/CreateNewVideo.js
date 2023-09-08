@@ -23,7 +23,7 @@ const CreateNewVideo = () => {
         title,
         url,
       });
-      if (res.status === 201) {
+      if (res.status === 200) {
         alert("New Video has been add successfully");
       } else {
         alert("New Video does not add successfully");
