@@ -1,28 +1,39 @@
-// src/components/AddVideoForm.js
 import React, { useState } from "react";
 
 const VideoForm = ({ handleAddVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted");
     if (title.trim() === "" || !isValidUrl(url)) {
       return;
     }
-    
-    handleAddVideo({ title, url });
-    setTitle("");
-    setUrl("");
+
+    try {
+      const response = await fetch("http://localhost:5000/", { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, url }),
+      });
+
+      if (response.ok) {
+        setTitle("");
+        setUrl("");
+      } else {
+        console.error("Error adding video:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding video:", error);
+    }
   };
 
   const isValidUrl = (url) => {
-    // You can implement your YouTube URL validation logic here
-    // For simplicity, we'll assume any non-empty URL is valid
     return url.trim() !== "";
   };
-
 
   return (
     <div className="add-video-form">

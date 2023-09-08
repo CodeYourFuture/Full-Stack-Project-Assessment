@@ -1,7 +1,6 @@
 import React from "react";
 import Rating from "../rating/rating";
 
-// Function to convert YouTube watch link to embed link
 function convertWatchToEmbedLink(watchLink) {
   const watchPattern = /https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/;
   const match = watchLink.match(watchPattern);
@@ -20,7 +19,6 @@ const Video = ({ video, handleVote, handleRemove }) => {
     Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
   );
 
-  // Convert the video URL to an embed link if it's a watch link
   const videoUrl = video.url.startsWith("https://www.youtube.com/watch?v=")
     ? convertWatchToEmbedLink(video.url)
     : video.url;
