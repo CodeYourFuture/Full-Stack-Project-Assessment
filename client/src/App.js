@@ -46,7 +46,7 @@ function App() {
   }
 
   function deleteVideo(id) {
-    fetch(`${serverAddress}/${id}`, {
+    fetch(`${serverAddress}${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -62,7 +62,7 @@ function App() {
   }
 
   function ratingAdd(id) {
-    fetch(`${serverAddress}/${id}`, {
+    fetch(`${serverAddress}${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function App() {
   // }
 
   function ratingMinus(id) {
-    fetch(`${serverAddress}/${id}`, {
+    fetch(`${serverAddress}${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
