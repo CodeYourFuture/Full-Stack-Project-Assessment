@@ -69,9 +69,24 @@ let videos = [
   }
 ]
 ;
-
+app.use(express.json());
 // GET "/"
 app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send(videos);
 });
+
+app.post("/", (req, res) => {
+  console.log(req.body);
+  const title = req.body.title;
+  console.log(title);
+  const url = req.body.url;
+  console.log(url);
+const newVideo = {id: videos.length + 1,
+title: title,
+url: url,
+Rating: 0}
+videos.push(newVideo);
+res.send(videos);
+})
+
