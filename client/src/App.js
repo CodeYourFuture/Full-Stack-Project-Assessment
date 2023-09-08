@@ -13,14 +13,16 @@ if (!backendUrl) {
 function App() {
   const [videos, setVideos] = useState([]);
 
-  const fetchVideos = () => {
-    console.log("front end fetch function");
-    fetch(`${backendUrl}/videos`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVideos(data);
-      })
-      .catch((error) => console.error(error));
+  const fetchVideos = async () => {
+    try {
+      console.log("front end fetch function");
+      const response = await fetch(`${backendUrl}/videos`);
+      const data = await response.json();
+      console.log({ data });
+      setVideos(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
