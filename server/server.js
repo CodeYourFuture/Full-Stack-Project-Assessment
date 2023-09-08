@@ -102,9 +102,13 @@ app.delete("/videos/:id", (request, response) => {
 app.put("/videos/:id", (request, response) => {
   console.log(request.params.id);
   console.log(request.body.vote);
-  const vote = request.body.vote;
-  const idToUpdate = request.params.id;
-  return response.send("hello");
+  const vote = parseInt(request.body.vote);
+  const idToUpdate = parseInt(request.params.id);
+
+  db.query("UPDATE videos SET rating = rating + $2 WHERE id=$1", [
+    idToUpdate,
+    vote,
+  ]);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
