@@ -139,4 +139,9 @@ app.delete("/videos/data/:id", (req, res) => {
   });
 });
 
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
