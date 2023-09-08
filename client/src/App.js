@@ -1,4 +1,6 @@
+import React from 'react';
 import "./App.css";
+import Container from './Container';
 
 function App() {
   return (
@@ -6,6 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <Container/>
     </div>
   );
 }
