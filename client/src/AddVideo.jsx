@@ -19,7 +19,7 @@ function AddVideo({ onAdd }) {
         };
   
         // Make a POST request to your server to add the video to the database
-        const response = await axios.post('http://localhost:4000/', newVideo);
+        const response = await axios.post('http://localhost:7000/', newVideo);
   
         console.log("Server response:", response.data); // Debugging line
   

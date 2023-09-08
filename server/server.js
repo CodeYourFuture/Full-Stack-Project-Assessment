@@ -3,11 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const db = require("./config/db");
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 7000;
 
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:3005", 
+  origin: "http://localhost:3006", 
 };
 
 app.use(cors(corsOptions));

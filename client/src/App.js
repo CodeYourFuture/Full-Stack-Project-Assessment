@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/?order=${order}`);
+        const response = await axios.get(`http://localhost:7000/?order=${order}`);
         setVideos(response.data);
       } catch (error) {
         console.error('Error fetching data from the server:', error);
