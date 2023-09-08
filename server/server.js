@@ -17,26 +17,6 @@ pool.connect();
 // app.use(express.json());
 // pool.connect();
 
-app.get("/videos/data", async (req, res) => {
-  try {
-    const allVideos = await pool.query("SELECT * FROM videos");
-    res.json({ allVideos });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-});
-
-app.get("/testBd", (req, res) => {
-  pool
-    .query("select * from videos")
-    .then((result) => {
-      res.status(200).json(result.rows );
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -76,17 +56,18 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/videos/data", (req, res) => {
+app.get("/videos/data", async (req, res) => {
   // res.send(videos);
-  pool
-    .query("select * from videos")
-    .then((result) => {
-      res.status(200).json({ videos: result.rows });
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
+  try {
+    const videos = await pool
+      .query("select * from videos")
+      .then((result) => {
+        res.status(200).json(result.rows);
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
 app.get("/videos/data/:id", (req, res) => {
