@@ -35,9 +35,34 @@ function App() {
     );
   };
 
-  const handleRemove = (id) => {
-    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-  };
+  // const handleRemove = (id) => {
+  //   setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+  // };
+
+    const handleRemove = (id) => {
+      // Remove the video from the React state
+      setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
+
+      // Send a DELETE request to the server to delete the video
+      fetch(`https://full-stack-server-3nzy.onrender.com/videos/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log(
+              `Video with ID ${id} deleted successfully on the server`
+            );
+          } else {
+            console.error(`Error deleting video with ID ${id} on the server`);
+          }
+        })
+        .catch((error) =>
+          console.error("Error deleting video on the server:", error)
+        );
+    };
+
+
+
 
   // const handleAddVideo = (newVideo) => {
   //   const id = videos.length + 1;
