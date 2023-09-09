@@ -99,33 +99,70 @@ function App() {
   //   ]);
   // };
 
-   const handleAddVideo = (newVideo) => {
-     // Send a POST request to add the new video
-     fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify(newVideo),
-     })
-       .then((response) => response.json())
-       .then((data) => {
-         // Include the generated ID in the new video
-         const updatedVideo = {
-           ...newVideo,
-           id: data.id,
-           votes: 0,
-           uploadDate: data.uploadDate,
-         };
+  //  const handleAddVideo = (newVideo) => {
+  //    // Send a POST request to add the new video
+  //    fetch("https://full-stack-server-3nzy.onrender.com/videos", {
+  //      method: "POST",
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //      },
+  //      body: JSON.stringify(newVideo),
+  //    })
+  //      .then((response) => response.json())
+  //      .then((data) => {
+  //        // Include the generated ID in the new video
+  //        const updatedVideo = {
+  //          ...newVideo,
+  //          id: data.id,
+  //          votes: 0,
+  //          uploadDate: data.uploadDate,
+  //        };
 
-         // Add the new video to the list of videos
-         // setVideos([...videos, updatedVideo]);
-         // Clear the existing videos state and add the new video
-         setVideos([updatedVideo]);
-       })
-       .catch((error) => console.error("Error adding video:", error));
-   };
+  //        // Add the new video to the list of videos
+  //        // setVideos([...videos, updatedVideo]);
+  //        // Clear the existing videos state and add the new video
+  //        setVideos([updatedVideo]);
+  //      })
+  //      .catch((error) => console.error("Error adding video:", error));
+  //  };
     
+  const handleAddVideo = (newVideo) => {
+    // Send a POST request to add the new video
+    fetch("https://full-stack-server-3nzy.onrender.com/videos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Check if the video with the same ID already exists
+        const existingVideoIndex = videos.findIndex(
+          (video) => video.id === data.id
+        );
+
+        if (existingVideoIndex !== -1) {
+          // If it exists, update the existing video
+          const updatedVideos = [...videos];
+          updatedVideos[existingVideoIndex] = {
+            ...newVideo,
+            id: data.id,
+            votes: 0,
+            uploadDate: data.uploadDate,
+          };
+          setVideos(updatedVideos);
+        } else {
+          // If it doesn't exist, add the new video
+          setVideos((prevVideos) => [
+            ...prevVideos,
+            { ...newVideo, id: data.id, votes: 0, uploadDate: data.uploadDate },
+          ]);
+        }
+      })
+      .catch((error) => console.error("Error adding video:", error));
+  };
+
 
   return (
     <div className="App">
