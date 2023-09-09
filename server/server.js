@@ -20,7 +20,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-const videos = require("./exampleresponse.json");
+//const videos = require("./exampleresponse.json");
 
 // GET "/" to get all the videos
 app.get("/", (req, res) => {
@@ -35,27 +35,51 @@ app.get("/", (req, res) => {
 
 //POST "/" to post a new video
 
-app.post("/", (req, res) => {
-  const { title, url } = req.body;
-  if (!title || !url) {
-    return res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved.",
-    });
-  } else {
-    const videoId = url.match(
-      /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/
-    )[1];
-    const newVideo = {
-      id: videoId,
-      title: title,
-      url: url,
-      rating: 0,
-    };
-    videos.push(newVideo);
-    res.status(201).json({
-      id: newVideo.id,
-    });
+// app.post("/", (req, res) => {
+//   const { title, url } = req.body;
+//   if (!title || !url) {
+//     return res.status(400).json({
+//       result: "failure",
+//       message: "Video could not be saved.",
+//     });
+//   } else {
+//     const videoId = url.match(
+//       /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/
+//     )[1];
+//     const newVideo = {
+//       id: videoId,
+//       title: title,
+//       url: url,
+//       rating: 0,
+//     };
+//     videos.push(newVideo);
+//     res.status(201).json({
+//       id: newVideo.id,
+//     });
+//   }
+// });
+
+app.get("/text", (req, res) => {
+  res.status(200).send("hi");
+});
+
+app.post("/", async function (req, res) {
+  try {
+    const { title, url } = req.body;
+    if (!title || !url) {
+      return res.status(400).json({
+        result: "failure",
+        message: "Video could not be saved.",
+      });
+    }
+    const addNewVideoQuery =
+      "INSERT INTO videos (title, url, rating)" +
+      "VALUES ($1, $2, $3) RETURNING id";
+    const dbResult = await db.query(addNewVideoQuery, [title, url, 0]);
+    return res.status(201).json(dbResult.rows[0]);
+  } catch (err) {
+    console.log("Error adding video");
+    return res.status(500).json({ err: "error" });
   }
 });
 

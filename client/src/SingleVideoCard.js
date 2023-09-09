@@ -14,7 +14,7 @@ function SingleVideoCard({ title, url, rating, deleteVideo }) {
     return <div>No video URL provided.</div>;
   }
 
-  const urlId = url.split("v=")[1];
+  const urlId = url.includes("v=") ? url.split("v=")[1].substring(0, 11) : "";
   return (
     <>
       <div className="card">

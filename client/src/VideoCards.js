@@ -7,7 +7,7 @@ import SingleVideoCard from "./SingleVideoCard";
 function VideoCards() {
   //const [videos, setVideos] = useState(exampleResponse);
   const [videos, setVideos] = useState([]);
-  const urlAPI = "http://127.0.0.1:5000";
+  const urlAPI = "https://irianni-video-server.onrender.com";
 
   //fetching the videos from local API
 
@@ -70,23 +70,29 @@ function VideoCards() {
 
   //Posting the form
 
-  function addVideo(v) {
-    fetch(urlAPI, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(v),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const videoId = v.url.match(
-          /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/
-        )[1]; //this piece of code extract the Youtube video id given from a Youtube url.
-        setVideos((currVideos) => {
-          return [...currVideos, { ...v, rating: 0, id: videoId }];
-        });
+  async function addVideo(v) {
+    const newVideo = { title: v.title, url: v.url };
+    try {
+      const response = await fetch(`${urlAPI}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
       });
+      console.log("response:");
+      console.log(response);
+      if (response.ok) {
+        const addedVideo = await response.json();
+        console.log("added video");
+        console.log(addedVideo);
+        setVideos((currVideos) => [...currVideos, addedVideo]);
+      } else {
+        console.error("failed adding video");
+      }
+    } catch (error) {
+      console.error("Error adding video:", error);
+    }
   }
 
   return (

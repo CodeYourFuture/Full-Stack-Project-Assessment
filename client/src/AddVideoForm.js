@@ -17,7 +17,7 @@ function AddVideoForm({ addVideo }) {
     addVideo(formData);
     setFormData({ title: "", url: "" });
   }
-
+  //added video but only visible after refreshing the page
   return (
     <div className="form">
       <span>Add your favorite video</span>
