@@ -124,12 +124,8 @@ app.put("/:id", (req, res) => {
   }
   let myRating = Number(req.body.video.rating);
 
-  console.log(`this is my req.body`,req.body)
-
   if (typeof myRating === "number") {
     videos[videoIndex].rating = myRating;
-    console.log(`fix it`, videos[videoIndex].rating);
-    console.log(`All videos`,videos);
     res.json({video: videos[videoIndex]});
   } else {
     return res.status(401).json({ error: "Invalid rating count" });
