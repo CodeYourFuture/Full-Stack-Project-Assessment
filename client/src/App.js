@@ -8,20 +8,44 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc"); //Order line desc or asc
 
+  // useEffect(() => {
+  //   // Fetch data from the API when the component mounts
+  //   fetch("https://full-stack-server-3nzy.onrender.com/videos")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Sort the data based on the order state
+  //       const sortedData =
+  //         order === "desc"
+  //           ? data.sort((a, b) => b.votes - a.votes)
+  //           : data.sort((a, b) => a.votes - b.votes);
+  //       setVideos(sortedData);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, [order]);
+
   useEffect(() => {
-    // Fetch data from the API when the component mounts
-    fetch("https://full-stack-server-3nzy.onrender.com/videos")
-      .then((response) => response.json())
-      .then((data) => {
-        // Sort the data based on the order state
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://full-stack-server-3nzy.onrender.com/videos"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch data from the server");
+        }
+        const data = await response.json();
         const sortedData =
           order === "desc"
             ? data.sort((a, b) => b.votes - a.votes)
             : data.sort((a, b) => a.votes - b.votes);
         setVideos(sortedData);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData(); 
   }, [order]);
+
 
   const toggleOrder = () => {
     setOrder(order === "desc" ? "asc" : "desc");
