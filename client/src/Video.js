@@ -4,14 +4,19 @@ import {Card,CardHeader,CardContent,Typography,Button,} from "@mui/material";
 
 const Video = ({ video, onVoteUp, onVoteDown, onRemove }) => {
   const videoId = extractVideoIdFromUrl(video.url);
+  const uploadDate = video.uploadDate
+    ? new Date(video.uploadDate).toLocaleString()
+    : "N/A";
+  console.log("uploadDate:", uploadDate); // Add this line
 
   return (
     <Card className="video">
       <CardHeader
         title={video.title}
-        subheader={`Uploaded on: ${new Date(
-          video.uploadDate
-        ).toLocaleString()}`}
+        // subheader={`Uploaded on: ${new Date(
+        //   video.uploadDate
+        // ).toLocaleString()}`}
+        subheader={`Uploaded on: ${uploadDate}`}
       />
       <CardContent>
         <iframe

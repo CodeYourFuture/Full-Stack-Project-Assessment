@@ -26,11 +26,33 @@ app.get("/", (req, res) => {
 });
 
 //Get all videos
+// app.get("/videos", (req, res) => {
+//   pool
+//     .query("SELECT id, title, url, rating FROM videos")
+//     .then((result) => {
+//       res.json(result.rows);
+//     })
+//     .catch((error) => {
+//       console.error("Error retrieving videos:", error);
+//       res.status(500).json({
+//         result: "failure",
+//         message: "Error retrieving videos from the database",
+//       });
+//     });
+// });
+
 app.get("/videos", (req, res) => {
   pool
-    .query("SELECT id, title, url, rating FROM videos")
+    .query("SELECT id, title, url, rating, upload_date FROM videos") // Include upload_date
     .then((result) => {
-      res.json(result.rows);
+      const videosWithUploadDate = result.rows.map((row) => ({
+        id: row.id,
+        title: row.title,
+        url: row.url,
+        rating: row.rating,
+        uploadDate: row.upload_date, // Include upload_date
+      }));
+      res.json(videosWithUploadDate);
     })
     .catch((error) => {
       console.error("Error retrieving videos:", error);
@@ -65,7 +87,7 @@ app.get("/videos/:id", (req, res) => {
     });
 });
 
-
+// Create a new video
 app.post("/videos", (req, res) => {
   const { title, url, rating } = req.body;
 
@@ -76,15 +98,21 @@ app.post("/videos", (req, res) => {
     });
   }
 
+  // const insertQuery =
+  //   "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id";
+  // const values = [title, url, rating];
+
   const insertQuery =
-    "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id";
+    "INSERT INTO videos (title, url, rating, upload_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, upload_date";
   const values = [title, url, rating];
 
   pool
     .query(insertQuery, values)
     .then((result) => {
       const newVideoId = result.rows[0].id;
-      res.json({ id: newVideoId });
+      // res.json({ id: newVideoId });
+      const uploadDate = result.rows[0].upload_date;
+      res.json({ id: newVideoId, uploadDate }); 
     })
     .catch((error) => {
       console.error(error);
