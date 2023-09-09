@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
@@ -8,11 +9,11 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const { Client } = require("pg");
 const client = new Client({
-  host: "dpg-cjpi438jbais739i9cu0-a.frankfurt-postgres.render.com",
-  user: "yesna",
-  port: 5432,
-  password: "bQKZH3lJNeXjDQ3gTORoUbEv4rUZGsaL",
-  database: "videosdb_qitc",
+  host: process.env.MYHOST,
+  user: process.env.MYUSER,
+  port: process.env.MYPORT,
+  password: process.env.MYPASSWORD,
+  database: process.env.MYDATABASE,
   ssl: true,
 });
 

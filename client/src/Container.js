@@ -51,7 +51,6 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
 
   const handleUpVote = (video) => {
     video.rating = video.rating+1;
-    console.log(`my video data`,video);
     fetch(`http://localhost:5000/${video.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -71,7 +70,6 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
   
     const handleDownVote = (video) => {
     video.rating = video.rating-1;
-    console.log(`my video data`, video);
     fetch(`http://localhost:5000/${video.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
