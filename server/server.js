@@ -111,7 +111,7 @@ app.put("/videos/:id", (req, res) => {
   db.query(
     `UPDATE videos SET rating=rating${ratingModifier} WHERE id=${videoId}`
   )
-    .then(() => res.send(`video updated!`))
+    .then(() => res.status(204).send(`video updated!`))
     .catch((err) => {
       console.error(err);
       res.status(500).json({ error: err });
