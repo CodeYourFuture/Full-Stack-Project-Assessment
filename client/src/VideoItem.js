@@ -14,8 +14,8 @@ const VideoItem = ({ video, upVote,downVote,removeVideo }) => {
       ></iframe>
       <h3>Video Rate: {video.rating}</h3>
       <div>
-        <button onClick={() => upVote(video.id)} >Like</button>
-        <button onClick={() => downVote(video.id)}>Dislike</button>
+        <button onClick={() => upVote(video)} >Like</button>
+        <button onClick={() => downVote(video)}>Dislike</button>
         <button onClick={() => removeVideo(video.id)}>Delete</button>
       </div>
     </div>

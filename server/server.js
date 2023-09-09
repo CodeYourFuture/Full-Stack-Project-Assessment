@@ -77,23 +77,24 @@ res.json(videos);
 });
 
 app.post("/", (req, res) => {
-  const {title, url} = req.body;
-  if (!title || !url){
-    return res.status(400).json({
-      result:"failure",
-      message: "Video could not be saved"
-    })
+  
+  const { title, url } = req.body;
+    if (!title || !url) {
+      return res.status(400).json({
+        result: "failure",
+        message: "Video could not be saved",
+      });
   }
-  const nextId = videos.length +1;
+  const nextId = videos.length + 1;
   const newVideo = {
-    id : nextId,
-    title,
-    url,
-    rating : 0
-  }
+      id: nextId,
+      title,
+      url,
+      rating: 0 
+  };
   videos.push(newVideo);
-  res.status(201).json({id : newVideo.id})
-  });
+  res.status(201).json({ id: newVideo.id });
+});
 
   
 
@@ -134,7 +135,7 @@ app.post("/", (req, res) => {
       message: "Video could not be found"})
     }
     let myRating = Number(req.body.video.rating);
-    if(typeof myRating === "Number"){
+    if(typeof myRating === "number"){
       videos[videoIndex].rating = myRating;
       res.json({video: videos[videoIndex]})
       } else {

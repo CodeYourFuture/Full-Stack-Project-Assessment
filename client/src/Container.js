@@ -1,55 +1,92 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import VideoSection from "./VideoSection";
 import VideoContainer from "./VideoContainer";
-import videoData from "./exampleresponse.json";
+
 
 const Container = () => {
-  const [videos, setVideos] = useState(videoData);
+    let videoData = [];
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+    videoData = [...data]
+    setVideos(videoData)
+    }).catch((error) => console.log(error));
+    }, []);
+  
 
   const handleRemove = (id) => {
-    setVideos((updatedVideo) => updatedVideo.filter((v) => v.id !== id));
+    fetch(`http://127.0.0.1:5000/${id}`,{method:"DELETE"})
+    .then(() => {
+        fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+    videoData = [...data];
+    setVideos(videoData);
+    })
+   }).catch((error) => console.log(error));
   };
 
-  let idCounter = 1;
+ 
   const handleAddVideo = (video) => {
-    setVideos((updatedVideos) => {
-      const newVideo = { ...video, id: idCounter++, rating: 0 };
-      return [...updatedVideos, newVideo];
+    fetch(`http://127.0.0.1:5000/`, {
+    method:"POST" ,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(video)
+    })
+    .then(() => {
+        fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+    videoData = [...data];
+    setVideos(videoData);
     });
+   }).catch((error) => console.log(error));
+
   };
 
-  const handleUpVote = (id) => {
-    setVideos((updatedVideo) =>
-      updatedVideo.map((video) => {
-        if (video.id === id) {
-          return {
-            ...video,
-            rating: video.rating + 1,
-          };
-        }
-        return video;
-      })
-    );
+  const handleUpVote = (video) => {
+    video.rating = video.rating+1;
+    fetch(`http://127.0.0.1:5000/${video.id}`,{
+    method:"PUT" ,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({video})
+    })
+    .then(() => {
+        fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+    videoData = [...data];
+    setVideos(videoData);
+    })
+   }).catch((error) => console.log(error));
+
   };
 
-  const handleDownVote = (id) => {
-    setVideos((updatedVideo) =>
-      updatedVideo.map((video) => {
-        if (video.id === id) {
-          return {
-            ...video,
-            rating: video.rating - 1,
-          };
-        }
-        return video;
-      })
-    );
+  const handleDownVote = (video) => {
+    video.rating = video.rating-1;
+    fetch(`http://127.0.0.1:5000/${video.id}`,{
+    method:"PUT" ,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({video})
+    })
+    .then(() => {
+        fetch("http://127.0.0.1:5000/")
+    .then((response) => response.json())
+    .then((data) => {
+    videoData = [...data];
+    setVideos(videoData);
+    })
+   }).catch((error) => console.log(error));
+
   };
 
 
   return (
     <div>
-      <VideoContainer onAdd={handleAddVideo} />
+      <VideoContainer handleAddVideo={handleAddVideo} />
       <VideoSection
         videos={videos}
         upVote={handleUpVote}
