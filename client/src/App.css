@@ -11,10 +11,10 @@
 
 #root {
   border: 6px solid rgb(13, 3, 9);
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(110, 185, 235);
   margin-top: 0rem;
-  color: rgb(255, 255, 255);
-  background-image: url(https://img.freepik.com/free-vector/abstract-red-circle-black-background-technology_1142-9839.jpg);
+  color: rgb(0, 0, 0);
+  
 }
 
 body {
@@ -70,7 +70,9 @@ h1{
     column-gap: 3rem;
   }
 }
-
+ .welcome-text, p{
+  color: aliceblue;
+ }
 
 h3{
   margin-top: 1rem;
@@ -99,10 +101,12 @@ iframe{
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-      aspect-ratio: 440/320;
+      height: 360px;
+      width: 340px;
+      /* aspect-ratio: 440/320; */
       background-color: rgb(255, 245, 253);
-      padding: 1rem;
-      box-shadow: rgba(254, 254, 254, 0.4) -5px 5px, rgba(247, 245, 246, 0.3) -10px 10px, rgba(241, 241, 241, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(20, 0, 18, 0.05) -25px 25px;
+      padding: 0.5rem;
+      /* box-shadow: rgba(254, 254, 254, 0.4) -5px 5px, rgba(247, 245, 246, 0.3) -10px 10px, rgba(241, 241, 241, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(20, 0, 18, 0.05) -25px 25px; */
     }
 
 #AscDescBtn{
@@ -115,6 +119,7 @@ iframe{
 .genre-filter{
   background-color: rgb(0, 0, 0);
   margin-top: 3rem;
+  color: aliceblue;
 }
 
 .asc-descBtn{

@@ -148,7 +148,7 @@ function App() {
             <div className="vote-btns">
               <FontAwesomeIcon
                 icon={faHeart}
-                size="2x"
+                size="1x"
                 color="red"
                 onClick={() => voteUp(video.id)}
                 className="vote-icon"
@@ -157,7 +157,7 @@ function App() {
 
               <FontAwesomeIcon
                 icon={faHeartCrack}
-                size="2x"
+                size="1x"
                 onClick={() => voteDown(video.id)}
                 className="vote-icon"
               />
