@@ -11,6 +11,7 @@ if (!backendUrl) {
 }
 
 function App() {
+  const [count, setCount] = useState(0); // creating counter to tell react to rebuild component every time there was a change in the db
   const [videos, setVideos] = useState([]);
 
   const fetchVideos = async () => {
@@ -27,7 +28,7 @@ function App() {
 
   useEffect(() => {
     fetchVideos();
-  }, []);
+  }, [count]);
 
   return (
     <div className="App">
@@ -35,7 +36,7 @@ function App() {
         <h1>Video Recommendation</h1>
       </header>
 
-      <AddVideo videos={videos} setVideos={setVideos} />
+      <AddVideo videos={videos} setVideos={setVideos} setCount={setCount} />
       <VideoCards videos={videos} setVideos={setVideos} />
       <Search />
     </div>

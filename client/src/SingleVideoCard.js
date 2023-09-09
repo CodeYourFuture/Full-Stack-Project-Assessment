@@ -41,7 +41,9 @@ function SingleVideoCard({
     }
   }
 
-  const urlId = url.includes("v=") ? url.split("v=")[1].substring(0, 11) : "";
+  const urlId = url.split("v=")[1].substring(0, 11);
+  console.log(urlId);
+  const urlFull = `https://www.youtube.com/embed/${urlId}`;
 
   return (
     <div className="card">
@@ -49,7 +51,7 @@ function SingleVideoCard({
         className="card-thumb"
         width="320"
         height="320"
-        src={`https://www.youtube.com/embed/${urlId}`}
+        src={urlFull}
         title={title}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

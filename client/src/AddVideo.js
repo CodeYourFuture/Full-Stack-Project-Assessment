@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddVideo({ setVideos }) {
+function AddVideo({ setVideos, setCount }) {
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addVideoUrl, setAddVideoUrl] = useState("");
 
@@ -33,9 +33,12 @@ function AddVideo({ setVideos }) {
       );
 
       if (response.ok) {
-        const addedVideo = await response.json();
-        setVideos((videos) => [...videos, addedVideo]);
+        const { id: newVideoId } = await response.json();
+        setVideos((videos) => [...videos, { id: newVideoId, ...newVideo }]);
+        setCount((prevCount) => prevCount + 1); // count to change when button clicked to let react know to rebuild
         // empty input fields after video added
+        console.log(newVideo);
+        console.log(addVideoTitle, addVideoUrl);
         setAddVideoTitle("");
         setAddVideoUrl("");
       } else {
