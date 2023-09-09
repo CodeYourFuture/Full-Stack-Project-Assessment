@@ -75,8 +75,10 @@ app.post("/", async function (req, res) {
     const addNewVideoQuery =
       "INSERT INTO videos (title, url, rating)" +
       "VALUES ($1, $2, $3) RETURNING id";
+    const showVideo = "SELECT * FROM videos WHERE id = $1";
     const dbResult = await db.query(addNewVideoQuery, [title, url, 0]);
-    return res.status(201).json(dbResult.rows[0]);
+    const videoResult = await db.query(showVideo, [dbResult.rows[0].id]);
+    return res.status(201).json(videoResult.rows[0]);
   } catch (err) {
     console.log("Error adding video");
     return res.status(500).json({ err: "error" });
