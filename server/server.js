@@ -13,8 +13,8 @@ const pool = new Pool({
   user: process.env.DBUSER,
   host: process.env.DBHOST,
   database: process.env.DBDATABASE,
-  password: process.env.DBPASSWORD, // Replace with your PostgreSQL password
-  port: process.env.DBPORT, // Default PostgreSQL port
+  password: process.env.DBPASSWORD, 
+  port: process.env.DBPORT, 
   ssl: true,
 });
 
@@ -24,22 +24,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to My Youtube Videos" });
 });
-
-//Get all videos
-// app.get("/videos", (req, res) => {
-//   pool
-//     .query("SELECT id, title, url, rating FROM videos")
-//     .then((result) => {
-//       res.json(result.rows);
-//     })
-//     .catch((error) => {
-//       console.error("Error retrieving videos:", error);
-//       res.status(500).json({
-//         result: "failure",
-//         message: "Error retrieving videos from the database",
-//       });
-//     });
-// });
 
 app.get("/videos", (req, res) => {
   pool
@@ -98,10 +82,6 @@ app.post("/videos", (req, res) => {
     });
   }
 
-  // const insertQuery =
-  //   "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id";
-  // const values = [title, url, rating];
-
   const insertQuery =
     "INSERT INTO videos (title, url, rating, upload_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, upload_date";
   const values = [title, url, rating];
@@ -112,13 +92,15 @@ app.post("/videos", (req, res) => {
       const newVideoId = result.rows[0].id;
       // res.json({ id: newVideoId });
       const uploadDate = result.rows[0].upload_date;
-      res.json({ id: newVideoId, uploadDate }); 
+       console.log("New video uploaded with upload date:", uploadDate);
+      res.json({ id: newVideoId, uploadDate });
     })
     .catch((error) => {
-      console.error(error);
+      console.error("Error inserting video into the database:", error);
       res.status(500).json({
         result: "failure",
         message: "Error inserting video into the database",
+        error: error.message,
       });
     });
 });

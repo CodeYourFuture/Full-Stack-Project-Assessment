@@ -8,21 +8,6 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc"); //Order line desc or asc
 
-  // useEffect(() => {
-  //   // Fetch data from the API when the component mounts
-  //   fetch("https://full-stack-server-3nzy.onrender.com/videos")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Sort the data based on the order state
-  //       const sortedData =
-  //         order === "desc"
-  //           ? data.sort((a, b) => b.votes - a.votes)
-  //           : data.sort((a, b) => a.votes - b.votes);
-  //       setVideos(sortedData);
-  //     })
-  //     .catch((error) => console.error("Error fetching data:", error));
-  // }, [order]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,12 +44,7 @@ function App() {
     );
   };
 
-
-  // const handleRemove = (id) => {
-  //   setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-  // };
-
-    const handleRemove = (id) => {
+   const handleRemove = (id) => {
       // Remove the video from the React state
       setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
 
@@ -86,126 +66,8 @@ function App() {
         );
     };
 
-
-
-
-  // const handleAddVideo = (newVideo) => {
-  //   const id = videos.length + 1;
-  //   // const currentDate = new Date().toISOString();
-  //   setVideos([
-  //     ...videos,
-  //     // { ...newVideo, id, votes: 0, uploadDate: currentDate },
-  //     { ...newVideo, id, votes: 0 },
-  //   ]);
-  // };
-
-  //  const handleAddVideo = (newVideo) => {
-  //    // Send a POST request to add the new video
-  //    fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-  //      method: "POST",
-  //      headers: {
-  //        "Content-Type": "application/json",
-  //      },
-  //      body: JSON.stringify(newVideo),
-  //    })
-  //      .then((response) => response.json())
-  //      .then((data) => {
-  //        // Include the generated ID in the new video
-  //        const updatedVideo = {
-  //          ...newVideo,
-  //          id: data.id,
-  //          votes: 0,
-  //          uploadDate: data.uploadDate,
-  //        };
-
-  //        // Add the new video to the list of videos
-  //        // setVideos([...videos, updatedVideo]);
-  //        // Clear the existing videos state and add the new video
-  //        setVideos([updatedVideo]);
-  //      })
-  //      .catch((error) => console.error("Error adding video:", error));
-  //  };
-    
-  // const handleAddVideo = (newVideo) => {
-  //   console.log("Adding video:", newVideo); // Add this line
-  //   // Send a POST request to add the new video
-  //   fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newVideo),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Check if the video with the same ID already exists
-  //       const existingVideoIndex = videos.findIndex(
-  //         (video) => video.id === data.id
-  //       );
-
-  //       if (existingVideoIndex !== -1) {
-  //         // If it exists, update the existing video
-  //         const updatedVideos = [...videos];
-  //         updatedVideos[existingVideoIndex] = {
-  //           ...newVideo,
-  //           id: data.id,
-  //           votes: 0,
-  //           uploadDate: data.uploadDate,
-  //         };
-  //         setVideos(updatedVideos);
-  //       } else {
-  //         // If it doesn't exist, add the new video
-  //         setVideos((prevVideos) => [
-  //           ...prevVideos,
-  //           { ...newVideo, id: data.id, votes: 0, uploadDate: data.uploadDate },
-  //         ]);
-  //       }
-  //     })
-  //     .catch((error) => console.error("Error adding video:", error));
-  //   console.log("Updated videos:", videos); // Add this line
-  // };
-
-
-  // const handleAddVideo = (newVideo) => {
-  //   // Send a POST request to add the new video
-  //   fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newVideo),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Failed to add video");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // Check if the video with the same ID already exists
-  //       const existingVideoIndex = videos.findIndex(
-  //         (video) => video.id === data.id
-  //       );
-
-  //       if (existingVideoIndex !== -1) {
-  //         // If it exists, show an error message to the user
-  //         alert("A video with the same URL already exists.");
-  //       } else {
-  //         // If it doesn't exist, add the new video
-  //         setVideos((prevVideos) => [
-  //           ...prevVideos,
-  //           { ...newVideo, id: data.id, votes: 0, uploadDate: data.uploadDate },
-  //         ]);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error adding video:", error);
-  //     });
-  // };
-
-
-
   const handleAddVideo = (newVideo) => {
+    // console.log("Adding video:", newVideo); 
     // Send a POST request to add the new video
     fetch("https://full-stack-server-3nzy.onrender.com/videos", {
       method: "POST",
@@ -214,24 +76,34 @@ function App() {
       },
       body: JSON.stringify(newVideo),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add video");
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        // Update the state immediately upon successful response
-        setVideos((prevVideos) => [
-          ...prevVideos,
-          { ...newVideo, id: data.id, votes: 0, uploadDate: data.uploadDate },
-        ]);
-      })
-      .catch((error) => {
-        console.error("Error adding video:", error);
-      });
-  };
+        // Check if the video with the same ID already exists
+        const existingVideoIndex = videos.findIndex(
+          (video) => video.id === data.id
+        );
 
+        if (existingVideoIndex !== -1) {
+          // If it exists, update the existing video
+          const updatedVideos = [...videos];
+          updatedVideos[existingVideoIndex] = {
+            ...newVideo,
+            id: data.id,
+            votes: 0,
+            uploadDate: data.uploadDate,
+          };
+          setVideos(updatedVideos);
+        } else {
+          // If it doesn't exist, add the new video
+          setVideos((prevVideos) => [
+            ...prevVideos,
+            { ...newVideo, id: data.id, votes: 0, uploadDate: data.uploadDate },
+          ]);
+        }
+      })
+      .catch((error) => console.error("Error adding video:", error));
+    console.log("Updated videos:", videos); 
+  };
 
   return (
     <div className="App">

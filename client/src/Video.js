@@ -13,9 +13,6 @@ const Video = ({ video, onVoteUp, onVoteDown, onRemove }) => {
     <Card className="video">
       <CardHeader
         title={video.title}
-        // subheader={`Uploaded on: ${new Date(
-        //   video.uploadDate
-        // ).toLocaleString()}`}
         subheader={`Uploaded on: ${uploadDate}`}
       />
       <CardContent>
