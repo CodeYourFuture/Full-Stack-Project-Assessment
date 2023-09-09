@@ -8,6 +8,5 @@ router.get("/", videoController.getVideos);
 router.post("/", videoController.createVideo);
 router.get("/:id", videoController.getVideoById);
 router.delete("/:id", videoController.deleteVideo);
-app.post('/api/videos', videoController.createVideo);
 
 module.exports = router;
