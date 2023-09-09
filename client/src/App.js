@@ -79,7 +79,10 @@ function App() {
       .then((data) => {
         console.log(data);
       });
-
+    setFormData({
+      title: "",
+      url: "",
+    });
     setCount((prevCount) => prevCount + 1);
   }
 

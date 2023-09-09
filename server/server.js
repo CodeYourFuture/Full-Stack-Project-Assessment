@@ -25,7 +25,7 @@ const db = new Pool({
 // GET "/"
 // Returns all the videos
 app.get("/", function (request, response) {
-  db.query(`SELECT * FROM videos ORDER BY title`)
+  db.query(`SELECT * FROM videos ORDER BY rating ASC`)
     .then((result) => {
       response.json(result.rows);
     })
@@ -96,7 +96,7 @@ app.post(
 
 // DELETE
 app.delete("/videos/:id", (request, response) => {
-  const idToDelete = Number(request.params.id);
+  const idToDelete = parseInt(request.params.id);
 
   db.query("DELETE FROM videos WHERE id = $1", [idToDelete]);
 });
@@ -112,7 +112,7 @@ app.put("/videos/:id", (request, response) => {
     idToUpdate,
     vote,
   ]);
-  // if you don't add a response the broswer will keep waiting for one and then give up. add a response!
+  // if you don't add a response the browser will keep waiting for one and then give up. add a response!
   response.status(204).end();
 });
 
