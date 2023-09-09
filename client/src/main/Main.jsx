@@ -3,7 +3,7 @@ import VideoForm from "../Component/videos/videoForm";
 import Video from "../Component/videos/Video";
 import "./main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {backEndApi } from "../../config/config.js";
+import {backEndApi } from "../config/config.js";
 
 function Main() {
   const [videos, setVideos] = useState([]);
