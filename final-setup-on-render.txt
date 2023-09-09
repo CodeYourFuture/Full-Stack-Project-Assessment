@@ -1,0 +1,14 @@
+
+
+https://www.youtube.com/watch?v=ScVd8Pr80aA
+
+
+https://dev.to/kunalukey/how-to-setup-and-deploy-a-mern-stack-project-for-free-5acl
+
+
+back end link
+https://dashboard.render.com/web/srv-cjjjck6phtvs73fe8os0/deploys/dep-cjjjkjuphtvs73ffgii0
+
+frontend link
+
+database link

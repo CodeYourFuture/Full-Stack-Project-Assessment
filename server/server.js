@@ -1,15 +1,182 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// const fetch = require("node-fetch");
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const cors = require("cors");
+// //  production make the url safe
+// const corsOptions = {
+//   origin: ["https://ali-nasir-ali-full-stak-projct-assesm.netlify.app", "https://noembed.com"],
+// };
+app.use(cors());
 
-// GET "/"
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+const serverPort = process.env.PORT || 5000;
+
+app.listen(serverPort, () => console.log(`Server running on port ${serverPort}`));
+
+const { Client } = require("pg");
+const client = new Client({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
+  ssl: process.env.ssl,
+});
+
+client.connect((err) => {
+  // if (err) throw err;
+  console.log("Connected to database!");
+});
+
+// ##
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  client.query(`SELECT * FROM videos ORDER BY title`, (error, response) => {
+    if (!error) {
+      res.json(response.rows);
+    } else {
+      console.log(error.message);
+    }
+    client.end;
+  });
+});
+
+app.get("/:id", (req, res) => {
+  let searchId = Number(req.params.id);
+
+  client
+    .query("SELECT * FROM videos WHERE id = $1", [searchId])
+    .then((result) => {
+      if (result.rows.length > 0) {
+        res.json(result.rows);
+      } else {
+        res.status(404).json({
+          result: "error",
+          message: "Video not found",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(404).json({
+        result: "error",
+        message: "Video not found",
+      });
+
+      client.end;
+    });
+});
+
+app.delete("/:id", (req, res) => {
+  let searchId = Number(req.params.id);
+
+  client
+    .query("DELETE FROM videos WHERE id = $1", [searchId])
+    .then((result) => {
+      res.status(200).json({});
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(404).json({
+        result: "error",
+        message: "Video could not be removed",
+      });
+
+      client.end;
+    });
+});
+
+//
+app.put("/:id", (req, res) => {
+  let searchId = Number(req.params.id);
+  let inputRating = Number(req.body.rating);
+
+  client
+    .query("UPDATE videos SET rating = $2 WHERE id = $1", [searchId, inputRating])
+    .then((result) => {
+      res.status(200).json({});
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(404).json({
+        result: "error",
+        message: "Video rating could not be updated",
+      });
+
+      client.end;
+    });
+});
+
+// UPDATE vote count
+app.put("/:id/rating", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const voteType = req.query.voteType;
+    const increment = voteType === "up" ? 1 : -1;
+    const { rows } = await client.query("UPDATE videos SET rating = rating + $1 WHERE id = $2 RETURNING *", [increment, id]);
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+// // Create a new row in database
+
+app.post("/", async (req, res) => {
+  if (!req.body.url) {
+    res.status(400).json({
+      result: "error",
+      message: "Video not saved",
+    });
+  } else {
+    let shortUrlCode = req.body.url.split("=")[1];
+
+    // getting tile
+    // async function getVideoTitle(videoUrl) {
+    //   const endpoint = `https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoUrl}`;
+
+    //   try {
+    //     const response = await fetch(endpoint, { mode: "no-cors" });
+    //     const data = await response.json();
+    //     return data.title;
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // }
+    // const response = await fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${shortUrlCode}`);
+    // const data = await response.json();
+    // console.log(data);
+    // let videoTitle = data.title; //await getVideoTitle(shortUrlCode);
+
+    // sending it to database
+    try {
+      const result = await client.query("SELECT MAX(id) FROM videos");
+      let newId = result.rows[0].max + 1;
+      let newTitle = req.body.title; //videoTitle;
+      let newUrl = shortUrlCode;
+      let newRating = 0;
+
+      try {
+        await client.query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating]);
+        res.status(201).json({
+          id: newId,
+        });
+      } catch (error) {
+        console.log(error.message);
+        res.status(404).json({
+          result: "error",
+          message: "Video could not be added",
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+      res.status(404).json({
+        result: "error",
+        message: "Video could not be added",
+      });
+    }
+  }
 });
