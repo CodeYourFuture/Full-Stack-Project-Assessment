@@ -1,10 +1,9 @@
 const fs = require("fs");
 const { Pool } = require('pg');
 
-const connectionString = 'postgres://uctaebxn:oudAX4SA7PGAK9xvC0sormh1aZ4jvUd1@tai.db.elephantsql.com/uctaebxn';
 
 const pool = new Pool({
-  connectionString: connectionString,
+  connectionString: process.env.connectionString,
 });
 
 pool.query('SELECT NOW()', (err, res) => {

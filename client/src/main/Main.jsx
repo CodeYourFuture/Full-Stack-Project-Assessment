@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import VideoForm from "../Component/videos/videoForm";
 import Video from "../Component/videos/Video";
 import "./main.css";
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import "bootstrap/dist/css/bootstrap.min.css";
+import {backEndApi } from "../../config/config.js";
 
 function Main() {
   const [videos, setVideos] = useState([]);
-  const [order, setOrder] = useState("desc"); 
+  const [order, setOrder] = useState("desc");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/?order=${order}`)
+    fetch(`${backEndApi}/?order=${order}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data);
@@ -17,7 +18,7 @@ function Main() {
       .catch((error) => {
         console.error("Error fetching data from the server:", error);
       });
-  }, [order]); 
+  }, [order]);
 
   const handleVote = (id, value) => {
     setVideos((prevVideos) =>
@@ -35,7 +36,7 @@ function Main() {
     setVideos((prevVideos) => [
       ...prevVideos,
       { ...newVideo, id: Date.now(), votes: 0, uploadDate: new Date() },
-    ].sort((a, b) => b.votes - a.votes)); 
+    ].sort((a, b) => b.votes - a.votes));
   };
 
   const toggleOrder = () => {

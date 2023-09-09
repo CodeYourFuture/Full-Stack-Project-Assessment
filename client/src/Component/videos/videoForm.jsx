@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import {backEndApi } from "../../config/config.js";
 
 const VideoForm = ({ handleAddVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,7 +14,7 @@ const VideoForm = ({ handleAddVideo }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/", { 
+      const response = await fetch(`${backEndApi}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
