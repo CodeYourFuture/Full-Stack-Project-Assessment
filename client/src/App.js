@@ -60,33 +60,6 @@ function App() {
   };
 
 
-  const handleAddVideo = (newVideo) => {
-    // Send a POST request to add the new video
-    fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newVideo),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Include the generated ID in the new video
-        const updatedVideo = {
-          ...newVideo,
-          id: data.id,
-          votes: 0,
-          uploadDate: data.uploadDate,
-        };
-
-        // Add the new video to the list of videos
-        // setVideos([...videos, updatedVideo]);
-        // Clear the existing videos state and add the new video
-        setVideos([updatedVideo]);
-      })
-      .catch((error) => console.error("Error adding video:", error));
-  };
-
   // const handleRemove = (id) => {
   //   setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
   // };
@@ -125,10 +98,34 @@ function App() {
   //     { ...newVideo, id, votes: 0 },
   //   ]);
   // };
+
+   const handleAddVideo = (newVideo) => {
+     // Send a POST request to add the new video
+     fetch("https://full-stack-server-3nzy.onrender.com/videos", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(newVideo),
+     })
+       .then((response) => response.json())
+       .then((data) => {
+         // Include the generated ID in the new video
+         const updatedVideo = {
+           ...newVideo,
+           id: data.id,
+           votes: 0,
+           uploadDate: data.uploadDate,
+         };
+
+         // Add the new video to the list of videos
+         // setVideos([...videos, updatedVideo]);
+         // Clear the existing videos state and add the new video
+         setVideos([updatedVideo]);
+       })
+       .catch((error) => console.error("Error adding video:", error));
+   };
     
-
-
-
 
   return (
     <div className="App">
