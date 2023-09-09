@@ -5,9 +5,11 @@ import VideoContainer from "./VideoContainer";
 const Container = () => {
   let videoData = [];
   const [videos, setVideos] = useState([]);
+  const myLink =
+    "https://full-stack-project-assessment-server-jpku.onrender.com/";
 
   useEffect(() => {
-    fetch("http://localhost:5000/")
+    fetch(myLink)
       .then((response) => response.json())
       .then((data) => {
         videoData = [...data];
@@ -19,9 +21,9 @@ const Container = () => {
 
 
 const handleRemove = (id) => {
-fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
+fetch(`${myLink}${id}`, { method: "DELETE" })
   .then(() => {
-    fetch("http://localhost:5000/")
+    fetch(myLink)
       .then((response) => response.json())
       .then((data) => {
         videoData = [...data];
@@ -33,13 +35,13 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
 
 
   function handleAddVideo (video)  {
-    fetch(`http://localhost:5000/`, {
+    fetch(myLink, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(video),
     })
       .then(() => {
-        fetch("http://localhost:5000/")
+        fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
             videoData = [...data];
@@ -51,13 +53,13 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
 
   const handleUpVote = (video) => {
     video.rating = video.rating+1;
-    fetch(`http://localhost:5000/${video.id}`, {
+    fetch(`${myLink}${video.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({video})
     })
       .then(() => {
-        fetch(`http://localhost:5000/`)
+        fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
             videoData = [...data];
@@ -70,13 +72,13 @@ fetch(`http://localhost:5000/${id}`, { method: "DELETE" })
   
     const handleDownVote = (video) => {
     video.rating = video.rating-1;
-    fetch(`http://localhost:5000/${video.id}`, {
+    fetch(`${myLink}${video.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ video }),
     })
       .then(() => {
-        fetch(`http://localhost:5000/`)
+        fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
             videoData = [...data];
