@@ -18,12 +18,12 @@ app.listen(serverPort, () => console.log(`Server running on port ${serverPort}`)
 
 const { Client } = require("pg");
 const client = new Client({
-  host: "dpg-cjhmebd1a6cs73e76a30-a.oregon-postgres.render.com",
-  user: "ali_nair_full_stack_assesment_database_user",
-  port: 5432,
-  password: "vGaZHMUG6MePFCc3pix7qG9MzDYsxa21",
-  database: "ali_nair_full_stack_assesment_database",
-  ssl: true,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
+  ssl: process.env.ssl,
 });
 
 client.connect((err) => {
