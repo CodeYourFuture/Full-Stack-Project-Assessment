@@ -85,11 +85,14 @@ app.post(
           message: "Video was SAVED",
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
+        response.status(500).json({ message: error });
       });
   }
 );
+
+// 500 internal server error
 
 // DELETE
 app.delete("/videos/:id", (request, response) => {
@@ -109,6 +112,8 @@ app.put("/videos/:id", (request, response) => {
     idToUpdate,
     vote,
   ]);
+  // if you don't add a response the broswer will keep waiting for one and then give up. add a response!
+  response.status(204).end();
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

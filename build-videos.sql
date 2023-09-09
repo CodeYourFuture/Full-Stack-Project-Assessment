@@ -2,7 +2,7 @@
 --
 
 CREATE TABLE videos (
-  id SERIAL primary key,	-- always assigned a value
+  id SERIAL primary key,	-- always assigned a value of id automatically with serial
   title varchar not null,		-- title of the video
   url varchar not null,			-- url of the video
   rating integer DEFAULT 0			-- video rating

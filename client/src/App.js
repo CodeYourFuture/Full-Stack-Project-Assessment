@@ -26,18 +26,24 @@ function App() {
 
   useEffect(
     function () {
+      console.log("Run Effect");
       fetch(apiURL)
-        .then((response) => response.json())
+        .then((response) => {
+          console.log("Got Response");
+          return response.json();
+        })
         .then((videoData) => {
           console.log("effect ran");
           setVideos(videoData);
-        });
+        })
+        .catch((error) => console.error(error));
     },
     [count]
   );
 
   // need to add some code to update database
   function changeVoteScore(id, voteChoice) {
+    console.log("Vote Score Changed");
     fetch(`${apiURL}/videos/${id}`, {
       method: "PUT",
       headers: {
@@ -45,22 +51,8 @@ function App() {
       },
       body: JSON.stringify({ vote: voteChoice }),
     });
-    // .then((response) => response.json())
-    // .then((data) => console.log(data));
     // .catch((error) => console.error(error));
     setCount((prevCount) => prevCount + 1);
-    // setVideos((prevVideos) =>
-    //   prevVideos.map((video) => {
-    //     if (video.id === id) {
-    //       return {
-    //         ...video,
-    //         rating: video.rating + voteChoice,
-    //       };
-    //     }
-
-    //     return video;
-    //   })
-    // );
   }
 
   function deleteVideo(id) {
