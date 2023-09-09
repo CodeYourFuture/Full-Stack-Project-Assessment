@@ -84,13 +84,12 @@ app.post("/videos/data/create", newVideoValidate, async (req, res) => {
     const newUrl = req.body.url;
 
     if (
-      newUrl.startsWith("https://www.youtube.com/embed/") ||
-      newUrl.startsWith("https://www.youtube.com/watch?v=")
+      !newUrl.startsWith("https://www.youtube.com/embed/") &&
+      !newUrl.startsWith("https://www.youtube.com/watch?v=")
     ) {
-      res.status(201).json({ message: "Valid YouTube URL" });
-    } else {
       res.status(400).json({ message: "Invalid YouTube URL" });
-    }
+      // res.status(201).json({ message: "Valid YouTube URL" });
+    } 
 
     const query = `INSERT INTO videos(title, url)` + `VALUES ($1, $2)`;
     const result = pool.query(query, [newTitle, newUrl]);
