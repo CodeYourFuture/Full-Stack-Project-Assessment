@@ -6,7 +6,6 @@ import NavBar from "./Components/NavBar";
 import VideoList from "./Components/VideoList";
 import Welcome from "./Components/Welcome";
 import AddVideo from "./Components/AddVideo";
-// import exampleresponse from "./exampleresponse.json";
 function App() {
   const [keyword, setKeyword] = useState("");
   const [videoCards, setVideoCards] = useState([]);
