@@ -50,11 +50,12 @@ app.post("/videos", (req, res) => {
 });
 
 
-// app.delete("/videos/:id", (req, res) => {
-//   let videoId = req.params.id
+app.delete("/videos/:id", (req, res) => {
+  let videoId = req.params.id
 
-//   res.send(deleteVideoByID(videos, videoId))
-// })
+  res.send(deleteVideoByID(videos, videoId))
+})
+//installed pg module
 
 
 app.get("/videos", (req, res) => {
@@ -67,25 +68,25 @@ app.get("/videos", (req, res) => {
     });
 })
 
-// app.get("/videos/:id", (req, res) => {
-//   let id = req.params.id
-//   res.send(findVideoByID(id))
-// })
+app.get("/videos/:id", (req, res) => {
+  let id = req.params.id
+  res.send(findVideoByID(id))
+})
 
 
 
-// const findVideoByID = (id) => {
-//   return videos.filter(video => {
-//     return video.id == id
-//   })
-// }
+const findVideoByID = (id) => {
+  return videos.filter(video => {
+    return video.id == id
+  })
+}
 
 
-// const deleteVideoByID = (videos, id) => {
-//   let videoI = videos.findIndex((video) => video.id == id);
-//   if (videoI > -1) {
-//     videos.splice(videoI, 1)
-//   }
-//   return videos
+const deleteVideoByID = (videos, id) => {
+  let videoI = videos.findIndex((video) => video.id == id);
+  if (videoI > -1) {
+    videos.splice(videoI, 1)
+  }
+  return videos
 
-// }
+}
