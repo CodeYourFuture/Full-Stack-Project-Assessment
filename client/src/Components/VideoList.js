@@ -6,7 +6,7 @@ const VideoList = ({ keyword, videoCards, setVideoCards }) => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `https://video-recomendations-server.onrender.com/${id}`,
+        `https://video-recomendations-server.onrender.com/videos/${id}`,
         {
           method: "DELETE",
         }

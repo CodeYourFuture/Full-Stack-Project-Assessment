@@ -10,12 +10,10 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
       url.startsWith("https://www.youtube.com/")
     ) {
       const newVideo = {};
-      // newVideo.id = Math.floor(Math.random() * 10000);
       newVideo.title = title;
       newVideo.url = url;
       console.log(newVideo);
-      // newVideo.rating = Math.floor(Math.random() * 100);
-      fetch("https://video-recomendations-server.onrender.com/", {
+      fetch("https://video-recomendations-server.onrender.com/videos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

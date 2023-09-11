@@ -13,12 +13,11 @@ function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchVideos();
-  }, []);
-
+  }, [videoCards]);
   const fetchVideos = async () => {
     try {
       const response = await fetch(
-        "https://video-recomendations-server.onrender.com/"
+        "https://video-recomendations-server.onrender.com/videos"
       );
       if (!response.ok) {
         throw Error(
