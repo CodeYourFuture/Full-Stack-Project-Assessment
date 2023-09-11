@@ -71,7 +71,7 @@ app.post(
         [url]
       );
       if (existingURL.rows.length > 0) {
-        return res.status(422).json({
+        return res.status(409).json({
           message: "A video with this URL already exists.",
         });
       }
@@ -85,7 +85,7 @@ app.post(
         message: "New video added successfully.",
       });
     } catch (error) {
-      res.status(404).json({
+      res.status(500).json({
         message: "something went wrong!",
       });
     }

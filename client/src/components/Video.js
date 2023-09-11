@@ -81,8 +81,6 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
       </div>
       <div>
         <iframe
-          // width="460"
-          // height="300"
           src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
           frameBorder="5"

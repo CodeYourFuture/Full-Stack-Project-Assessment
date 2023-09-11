@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
-import VideoForm from "./components/VideoForm";
-import VideoLists from "./components/VideoLists";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import SearchPage from "./pages/SearchPage";
+import AllVideosPage from "./pages/AllVideosPage";
+import AddVideoPage from "./pages/AddVideoPage";
 
-function App() {
-  const [videoForm, setVideoForm] = useState(false);
+const App = () => {
   const [allVideos, setAllVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [order, setOrder] = useState("desc");
 
-  const getAllVideos = async (searchText, MoviesOrder) => {
-    let order = "";
-    if (MoviesOrder === undefined || MoviesOrder === "desc") {
-      order = "desc";
-    } else {
-      order = "asc";
-    }
-
+  const getAllVideos = async (order, searchText) => {
     try {
       let url = `${process.env.REACT_APP_SERVERURL}/?order=${order}`;
       if (searchText) {
@@ -36,34 +30,42 @@ function App() {
   };
 
   useEffect(() => {
-    getAllVideos();
-  }, []);
+    getAllVideos(order);
+  }, [order]);
 
   return (
-    <div className="app">
+    <>
       <header className="app-header">
         <h1>Video Recommendation</h1>
       </header>
-      <main>
-        <div style={{ textAlign: "center", margin: "1rem" }}>
-          <button className="new-btn" onClick={(e) => setVideoForm(true)}>
-            Add New video
-          </button>
-          {videoForm && (
-            <VideoForm
-              setVideoForm={setVideoForm}
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AllVideosPage
+              allVideos={allVideos}
               getAllVideos={getAllVideos}
+              isLoading={isLoading}
+              order={order}
+              setOrder={setOrder}
             />
-          )}
-        </div>
-        {isLoading ? (<div className="spinner">
-        <FontAwesomeIcon icon={faSpinner} spin />
-            <p>Loading...</p>
-        </div>) : (
-          allVideos && <VideoLists allVideos={allVideos} getAllVideos={getAllVideos} />)}
-      </main>
-    </div>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <SearchPage
+              allVideos={allVideos}
+              getAllVideos={getAllVideos}
+              order={order}
+            />
+          }
+        />
+        <Route path="/add-video" element={<AddVideoPage />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
