@@ -56,9 +56,10 @@ app.post("/video", (req, res) => {
   }
 
   const objData = getConvertedDataFromBookingsJSON();
-
   objData.push({
-    id: req.body.id,
+    ///////////////////////////////////////////////
+    id: req.body.url.split("=")[1],
+    ///////////////////////////////////////////////
     title: req.body.title,
     url: req.body.url,
     rating: req.body.rating,

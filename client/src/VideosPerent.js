@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import VideosCard from "./VideosCard";
+import VideoCard from "./VideoCard";
 
 export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
   const [videos, setVideos] = useState([]);
@@ -26,7 +26,9 @@ export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
 
   return (
     <div className="videos-container">
-      <VideosCard videos={videos} rating={rating} setRating={setRating} />
+      {videos.map((video) => (
+        <VideoCard video={video} rating={rating} setRating={setRating} />
+      ))}
     </div>
   );
 }

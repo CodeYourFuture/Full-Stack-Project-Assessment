@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export default function NewVivdeo({ setRefreshVideos }) {
-  const rundomId = uuidv4();
   const [formData, setFormData] = useState({
-    id: rundomId,
+    id: "",
     title: "",
     url: "",
     rating: 0,
@@ -14,14 +12,6 @@ export default function NewVivdeo({ setRefreshVideos }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // const formData = new FormData(event.target);
-
-    // const newData = {
-    //   from: formData.get("from"),
-    //   text: formData.get("text"),
-    // };
-    // console.log("handleSubmit newData:", newData);
-    //http://localhost:4000/bookings
     try {
       setIsSubmitting(true);
 
