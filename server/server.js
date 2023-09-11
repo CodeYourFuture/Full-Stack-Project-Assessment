@@ -10,6 +10,11 @@ const translator = short("12345")
 app.use(express.json());
 app.use(cors());
 
+// DATABASE_URL='postgres://video_database_z8i8_user:Cb40PN7YyjskjDQ8DQU1T3cQaBLLG1kl@dpg-cjr4vggjbais73ao5mug-a.frankfurt-postgres.render.com/video_database_z8i8';
+// const parseDbUrl = require("parse-database-url");
+// const dbConfig = parseDbUrl(process.env.DATABASE_URL);
+
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
