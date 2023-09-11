@@ -1,11 +1,11 @@
 import { useState } from "react";
-const VideoForm = ({ getAllVideos, getBackDeleteMessage }) => {
+const VideoForm = ({ getAllVideos }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [backendMessage, setBackendMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const submitHandler = async (e) => {
+  const addHandler = async (e) => {
     e.preventDefault();
     if (!title.trim() || !url.trim()) {
       setErrorMessage("Title and URL are required.");
@@ -35,7 +35,7 @@ const VideoForm = ({ getAllVideos, getBackDeleteMessage }) => {
         const errorData = await response.json();
         const validationErrors = errorData.errors;
         setErrorMessage(validationErrors.map((error) => error.msg).join(", "));
-      } else if (response.status === 422) {
+      } else if (response.status === 409) {
         const existingError = await response.json();
         setErrorMessage(existingError.message);
       } else if (response.status !== 201) {
@@ -55,11 +55,12 @@ const VideoForm = ({ getAllVideos, getBackDeleteMessage }) => {
 
   setTimeout(() => {
     setBackendMessage("");
+    setErrorMessage("");
   }, 4000);
 
   return (
     <>
-      <form className="add-form" onSubmit={submitHandler}>
+      <form className="add-form" onSubmit={addHandler}>
         <div className="input-container">
           <label htmlFor="title">Title</label>
           <input

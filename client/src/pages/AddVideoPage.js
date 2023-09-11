@@ -1,9 +1,9 @@
 import VideoForm from "../components/VideoForm";
-const AddVideoPage = () => {
+const AddVideoPage = ({ getAllVideos }) => {
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <VideoForm />
+        <VideoForm getAllVideos={getAllVideos} />
       </div>
     </>
   );

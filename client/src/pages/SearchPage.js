@@ -4,33 +4,43 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
   const [search, setSearch] = useState("");
   const [videoSearch, setVideoSearch] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
 
   const searchHandle = (e) => {
     const searchText = e.target.value;
     if (searchText === "") {
+      setSearch("");
       setVideoSearch([]);
-      return;
     } else {
       setSearch(searchText);
+      setSelectedValue("");
     }
   };
 
   useEffect(() => {
-    const filteredVideos = allVideos.filter((video) => {
-      return video.title.toLowerCase().includes(search.toLowerCase());
-    });
-    setVideoSearch(filteredVideos);
+    if (search === "") {
+      return;
+    } else {
+      const filteredVideos = allVideos.filter((video) => {
+        return video.title.toLowerCase().includes(search.toLowerCase());
+      });
+      setVideoSearch(filteredVideos);
+    }
   }, [search]);
 
   const selectChangeHandler = (e) => {
     const selectedTitle = e.target.value;
     if (e.target.value === "") {
       setSelectedVideo([]);
+      setSelectedValue("");
+      setSearch("");
     } else {
       const selectedVideo = allVideos.find((video) => {
         return video.title === selectedTitle;
       });
       setSelectedVideo([selectedVideo]);
+      setSelectedValue(selectedTitle);
+      setSearch("");
     }
   };
 
@@ -47,14 +57,12 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
             type="text"
             placeholder="Enter title..."
             onChange={searchHandle}
+            value={search}
           />
         </div>
-        <div class="select-video">
+        <div className="select-video">
           <label>Select a video </label>
-          <select
-            onChange={selectChangeHandler}
-            value={selectedVideo ? selectedVideo.title : ""}
-          >
+          <select onChange={selectChangeHandler} value={selectedValue}>
             <option value="">Select </option>
             {allVideos.map((video) => (
               <option value={video.title} key={video.id}>

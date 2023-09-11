@@ -18,7 +18,7 @@ const AllVideos = ({ allVideos, getAllVideos, isLoading, order, setOrder }) => {
         </div>
       ) : (
         allVideos && (
-          <div>
+          <div className="videos">
             <div className="order-videos">
               <label>Order by votes </label>
               <select value={order} onChange={orderHandle}>

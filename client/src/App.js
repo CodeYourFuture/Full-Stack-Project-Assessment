@@ -10,7 +10,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [order, setOrder] = useState("desc");
 
-  const getAllVideos = async (order, searchText) => {
+  const getAllVideos = async (order = "desc", searchText = "") => {
     try {
       let url = `${process.env.REACT_APP_SERVERURL}/?order=${order}`;
       if (searchText) {
@@ -62,7 +62,10 @@ const App = () => {
             />
           }
         />
-        <Route path="/add-video" element={<AddVideoPage />} />
+        <Route
+          path="/add-video"
+          element={<AddVideoPage getAllVideos={getAllVideos} />}
+        />
       </Routes>
     </>
   );
