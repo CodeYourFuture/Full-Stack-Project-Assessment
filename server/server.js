@@ -1,5 +1,5 @@
 const express = require("express");
-const itemsPool = require("./dbConfig");
+
 var isUrl = require("is-url");
 const app = express();
 const port = process.env.PORT || 4000;
