@@ -18,7 +18,7 @@ const DeleteComponent = ({ id, onDeleteHandler }) => {
     }
     onDeleteHandler();
   };
-  console.log(deleteVideo);
+  
   const authorization = () => {
     alert(
       '"Ooops" you do not have the authorization to delete this video please contact with "Beko"...!! Thank you '
