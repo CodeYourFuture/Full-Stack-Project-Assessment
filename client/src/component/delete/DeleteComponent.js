@@ -18,10 +18,16 @@ const DeleteComponent = ({ id, onDeleteHandler }) => {
     }
     onDeleteHandler();
   };
+  console.log(deleteVideo);
+  const authorization = () => {
+    alert(
+      '"Ooops" you do not have the authorization to delete this video please contact with "Beko"...!! Thank you '
+    );
+  };
 
   return (
     <div>
-      <button className="btn-delete" onClick={deleteVideo}>
+      <button className="btn-delete" onClick={authorization}>
         Delete Video
         <span></span>
       </button>
