@@ -61,7 +61,7 @@ app.delete("/videos/:id", (req, res) => {
 app.get("/videos", (req, res) => {
   db.query("SELECT * FROM videos")
     .then((result) => {
-      res.status(200).json({ videos: result.rows });
+      res.status(200).json(result.rows);
     })
     .catch((error) => {
       console.log(error);
