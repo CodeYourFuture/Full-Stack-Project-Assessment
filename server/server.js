@@ -8,10 +8,10 @@ const translator = short("12345")
 
 const { Pool } = require("pg");
 const db = new Pool({
-  user: "olha25", // replace with you username
+  user: "Mac@192", // replace with you username
   host: "localhost",
   database: "videos",
-  password: "videos",
+  password: "",
   port: 5432,
 });
 
@@ -26,10 +26,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // let videos = AllVideos;
 
 // GET "/"
-// app.get("/", (req, res) => {
-//   // Delete this line after you've confirmed your server is running
-//   res.send({ express: "Your Backend Service is Running" });
-// });
+app.get("/", (req, res) => {
+  // Delete this line after you've confirmed your server is running
+  res.send({ express: "Your Backend Service is Running" });
+});
 
 
 
@@ -61,7 +61,7 @@ app.delete("/videos/:id", (req, res) => {
 app.get("/videos", (req, res) => {
   db.query("SELECT * FROM videos")
     .then((result) => {
-      res.status(200).json(result.rows);
+      res.send(200).json({ videos: result.rows });
     })
     .catch((error) => {
       console.log(error);
