@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import AddVideo from "./Components/AddVideo";
 import AllVideos from "./Components/AllVideos";
-import exampleresponse from "./Components/exampleresponse.json";
+// import exampleresponse from "./Components/exampleresponse.json";
 
 function App() {
-  const [videos, setVideos] = useState(exampleresponse);
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      });
+  }, []);
 
   return (
     <div className="container-fluid">
