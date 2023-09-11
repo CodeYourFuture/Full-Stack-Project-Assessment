@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 const port = process.env.PORT || 5001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -10,5 +12,20 @@ let videos = require("./exampleresponse.json");
 
 // GET "/"
 app.get("/", (req, res) => {
-  res.json(videos)
+  res.json(videos);
+});
+
+//POST "/"
+app.post("/", (req, res) => {
+  const title = req.body.title;
+  const url = req.body.url;
+  const newVideo = { id: 0,title: title, url: url, rating: 0 };
+
+  if (newVideo.title && newVideo.url) {
+    newVideo.id = videos.length+1;
+    videos.push(newVideo);
+  } else {
+    res.status(400).json({ result: "failure", message: "Video could not be saved" });
+  }
+  res.status(200).json(videos);
 });
