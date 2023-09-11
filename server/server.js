@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const history = require("connect-history-api-fallback");
 const path = require("path");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
@@ -15,11 +14,7 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname, "build")));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(history());
 pool.connect();
-
-
-
 
 const newVideoValidate = [
   body("title").trim().notEmpty(),
@@ -56,21 +51,13 @@ const newVideoValidate = [
 // });
 
 app.get("/videos/data", async (req, res) => {
-  // res.send(videos);
   try {
-    const videos = await pool.query("select * from videos").then((result) => {
-      res.status(200).json(result.rows);
-    });
+    const videos = await pool.query("select * from videos")
+      res.status(200).json(videos.rows);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
-});
-
-app.get("/videos/data/:id", (req, res) => {
-  const videoID = Number(req.params.id);
-  const getVideoByID = videos.find((video) => video.id === videoID);
-  res.status(200).send(getVideoByID);
 });
 
 app.post("/videos/data/create", newVideoValidate, async (req, res) => {
@@ -89,36 +76,44 @@ app.post("/videos/data/create", newVideoValidate, async (req, res) => {
     ) {
       res.status(400).json({ message: "Invalid YouTube URL" });
       // res.status(201).json({ message: "Valid YouTube URL" });
-    } 
+    }
 
     const query = `INSERT INTO videos(title, url)` + `VALUES ($1, $2)`;
-    const result = pool.query(query, [newTitle, newUrl]);
+    const result = await pool.query(query, [newTitle, newUrl]);
     res.status(201).json(result);
-
   } catch (error) {
     res.status(500).json({ error: err });
   }
 });
 
-app.delete("/videos/data/:id", (req, res) => {
-  const videoID = Number(req.params.id);
-  const getVideoByID = videos.find((video) => video.id === videoID);
-  const index = videos.indexOf(getVideoByID);
+app.delete("/videos/data/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const query = "DELETE FROM videos WHERE id=$1";
+    const deleteVideo = await pool.query(query, [id]);
+    
+      if (deleteVideo.rowCount === 0) {
+        return res.status(404).send(`message: video for ID requested is not found`);
+    }
+    return res.status(200).send({ message: "Video has been deleted successfully" });
 
-  if (!getVideoByID)
-    return res.status(404).send(`message: video for ID requested is not found`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "An error occurred while deleting the video" });
+  }
 
-  videos.splice(index, 1);
 
-  fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
-    res.status(200).send({
-      videos: {
-        Message: "Video with id has been deleted successfully",
-      },
-    });
-  });
+  // const getVideoByID = videos.find((video) => video.id === videoID);
+  // const index = videos.indexOf(getVideoByID);
+  // videos.splice(index, 1)
+  // fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
+  //   res.status(200).send({
+  //     videos: {
+  //       Message: "Video with id has been deleted successfully",
+  //     },
+  //   });
+  // });
 });
-
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));

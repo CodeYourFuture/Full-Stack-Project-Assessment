@@ -9,7 +9,6 @@ const Videos = () => {
   const url =
     "https://beko-video-project-fs-assessment-backend.onrender.com/videos/data";
 
-  //https: console.log(videos);
   
   const fetchVideoData = async () => {
     try {
