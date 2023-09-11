@@ -1,31 +1,35 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-const AllVideos = require("../client/src/exampleresponse.json")
+// const AllVideos = require("")
 const cors = require("cors");
 const short = require('short-uuid');
 const translator = short("12345")
 
+const { Pool } = require("pg");
+const db = new Pool({
+  user: "olha25", // replace with you username
+  host: "localhost",
+  database: "videos",
+  password: "videos",
+  port: 5432,
+});
 
 app.use(express.json());
 app.use(cors());
-
-// DATABASE_URL='postgres://video_database_z8i8_user:Cb40PN7YyjskjDQ8DQU1T3cQaBLLG1kl@dpg-cjr4vggjbais73ao5mug-a.frankfurt-postgres.render.com/video_database_z8i8';
-// const parseDbUrl = require("parse-database-url");
-// const dbConfig = parseDbUrl(process.env.DATABASE_URL);
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = AllVideos;
+// let videos = AllVideos;
 
 // GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+// app.get("/", (req, res) => {
+//   // Delete this line after you've confirmed your server is running
+//   res.send({ express: "Your Backend Service is Running" });
+// });
 
 
 
@@ -46,36 +50,42 @@ app.post("/videos", (req, res) => {
 });
 
 
-app.delete("/videos/:id", (req, res) => {
-  let videoId = req.params.id
+// app.delete("/videos/:id", (req, res) => {
+//   let videoId = req.params.id
 
-  res.send(deleteVideoByID(videos, videoId))
-})
+//   res.send(deleteVideoByID(videos, videoId))
+// })
 
 
 app.get("/videos", (req, res) => {
-  res.send(videos)
+  db.query("SELECT * FROM videos")
+    .then((result) => {
+      res.status(200).json({ videos: result.rows });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 })
 
-app.get("/videos/:id", (req, res) => {
-  let id = req.params.id
-  res.send(findVideoByID(id))
-})
+// app.get("/videos/:id", (req, res) => {
+//   let id = req.params.id
+//   res.send(findVideoByID(id))
+// })
 
 
 
-const findVideoByID = (id) => {
-  return videos.filter(video => {
-    return video.id == id
-  })
-}
+// const findVideoByID = (id) => {
+//   return videos.filter(video => {
+//     return video.id == id
+//   })
+// }
 
 
-const deleteVideoByID = (videos, id) => {
-  let videoI = videos.findIndex((video) => video.id == id);
-  if (videoI > -1) {
-    videos.splice(videoI, 1)
-  }
-  return videos
+// const deleteVideoByID = (videos, id) => {
+//   let videoI = videos.findIndex((video) => video.id == id);
+//   if (videoI > -1) {
+//     videos.splice(videoI, 1)
+//   }
+//   return videos
 
-}
+// }

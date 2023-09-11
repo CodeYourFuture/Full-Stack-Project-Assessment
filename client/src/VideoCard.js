@@ -30,10 +30,6 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
                 <div className='card-buttons'>
                     <button className='delete-button' onClick={() => { handleDelete(video.id) }}>Delete</button>
                     <div className="text-holder">
-                        <div className="rate">
-                            <img alt="heart" className="image-heart" src="https://www.svgrepo.com/show/439915/heart-fill.svg"></img>
-                            <span>{video.rating}</span>
-                        </div>
                         <Counter />
                     </div>
                 </div>
