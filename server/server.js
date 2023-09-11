@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const history = require("connect-history-api-fallback");
 const path = require("path");
 const { body, validationResult } = require("express-validator");
 const fs = require("fs");
@@ -14,6 +15,7 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname, "build")));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(history());
 pool.connect();
 
 
