@@ -7,7 +7,7 @@ const Nav = () => {
     <div className='nav-continuer'>
       <ul className='left-ul'>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/videos/data"> Videos </Link></li>
+        <li><Link to="/videos"> Videos </Link></li>
         <li><Link to="/create"> Create </Link></li>
       </ul>
       <ul className='right-ul'>
