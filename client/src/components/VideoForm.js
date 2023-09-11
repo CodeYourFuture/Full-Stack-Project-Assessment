@@ -1,5 +1,5 @@
 import { useState } from "react";
-const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
+const VideoForm = ({ getAllVideos, getBackDeleteMessage }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [backendMessage, setBackendMessage] = useState("");
@@ -81,9 +81,6 @@ const VideoForm = ({ setVideoForm, getAllVideos, getBackDeleteMessage }) => {
           />
         </div>
         <div className="form-buttons">
-          <button className="button" onClick={() => setVideoForm(false)}>
-            Cancel
-          </button>
           <button className="add-btn" type="submit">
             Add
           </button>
