@@ -52,7 +52,6 @@ select {
 .navbar {
   background-color: #182e32;
   font-weight: bold;
-  padding: 15px 0;
   display: block;
   margin: 1rem 0;
 }
@@ -69,23 +68,23 @@ select {
   margin: 0 15px;
 }
 .navbar li a {
-  background-color: #d81959;
+  background-color: rgb(222, 101, 101);
   color: #f1ebeb;
   text-decoration: none;
   border-radius: 10px;
   padding: 1rem;
 }
-.navbar li a:hover {
+/* .navbar li a:hover {
   background-color: #f3eeee;
   color: #bb4343;
   text-decoration: none;
   border-radius: 10px;
   padding: 1.15rem;
-}
+} */
 
 .navbar .active {
-  background-color: rgb(211, 211, 86);
-  color: #182e32;
+  background-color:#f3eeee;
+  color: #bb4343;
   font-weight: bold;
 }
 
@@ -158,6 +157,7 @@ select {
 .features {
   display: flex;
   justify-content: space-around;
+  gap: 0.75rem;
   align-items: center;
   margin: 2rem 0 1rem 0;
 }
@@ -180,6 +180,7 @@ select {
 }
 .order-videos {
   display: inline;
+  margin: 0 1rem;
 }
 
 .features .search-videos label,
@@ -430,6 +431,9 @@ iframe {
     align-items: center;
   }
   .navbar li {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
+  }
+  .features {
+    margin-left: 0.25rem;
   }
 }
