@@ -27,10 +27,25 @@
     width: 300px;
     height: 40px;
     background-color: black;
-    color: #b3b3b3;
+    color: #e3dddd;
     border-radius: 20px;
     padding-left: 10px;
-    border: 1px solid rgb(51, 50, 50);
+    border: 1px solid rgb(36, 34, 34);
+}
+
+.search-btn {
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #313132;
+    font-weight: bolder;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin: 0 10px;
+    border: 1px solid #bec1be;
+    cursor: pointer;
 }
 
 .form-select {

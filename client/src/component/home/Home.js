@@ -64,7 +64,7 @@ const Home = () => {
         <button
           onClick={searchButton}
           type="button"
-          className="btn btn-outline-secondary"
+          className="search-btn btn-primary"
         >
           Search
         </button>
