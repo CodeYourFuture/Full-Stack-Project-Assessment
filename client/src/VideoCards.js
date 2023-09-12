@@ -61,14 +61,29 @@ function VideoCards() {
 
   //Searching from API
 
-  function search(searchValue) {
-    const filteredVideos = videos.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    if (searchValue.trim() === "") {
-      fetchVideo();
-    } else {
-      setVideos(filteredVideos);
+  // function search(searchValue) {
+  //   const filteredVideos = videos.filter((item) =>
+  //     item.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+  //   if (searchValue.trim() === "") {
+  //     fetchVideo();
+  //   } else {
+  //     setVideos(filteredVideos);
+  //   }
+  // }
+
+  //searching from server
+  async function search(searchValue) {
+    try {
+      const response = await fetch(urlAPI);
+      const jsonResponse = await response.json();
+      setVideos(
+        jsonResponse.filter((item) =>
+          item.title.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      );
+    } catch (error) {
+      console.error(error);
     }
   }
 

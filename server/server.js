@@ -97,15 +97,24 @@ app.delete("/:id", async function (req, res) {
   } catch (error) {
     res.status(404).json({
       result: "failure",
-      message: "Video could not be deleted",
+      error: "Video could not be deleted",
     });
   }
 });
 
 //GET BY id "/{id}"
 
-app.get("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
+app.get("/:id", async function (req, res) {
+  try {
+    const videoId = parseInt(req.params.id);
+    const videoById = await db.query("SELECT * FROM videos WHERE id = $1", [
+      videoId,
+    ]);
+    res.status(202).json(videoById.rows);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+
   const videoFound = videos.find((video) => video.id === videoId);
   if (!videoFound) {
     res.status(404).json({
