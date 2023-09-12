@@ -88,7 +88,7 @@ app.post("/", async function (req, res) {
 app.delete("/:id", async function (req, res) {
   try {
     const videoId = Number(req.params.id);
-    const deletedVideo = await db.query("DELETE * FROM videos WHERE id = $1", [
+    const deletedVideo = await db.query("DELETE FROM videos WHERE id = $1", [
       videoId,
     ]);
     res.status(201).json({
