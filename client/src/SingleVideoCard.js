@@ -19,7 +19,7 @@ function SingleVideoCard({
   async function deleteVideo(event) {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}${videoId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/${videoId}`,
         {
           method: "DELETE",
           headers: {
