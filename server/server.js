@@ -114,13 +114,4 @@ app.get("/:id", async function (req, res) {
   } catch (error) {
     res.status(400).json(error);
   }
-
-  const videoFound = videos.find((video) => video.id === videoId);
-  if (!videoFound) {
-    res.status(404).json({
-      message: "Video not found",
-    });
-  } else {
-    res.json(videoFound);
-  }
 });
