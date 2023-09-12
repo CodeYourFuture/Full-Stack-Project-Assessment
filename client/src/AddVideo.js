@@ -37,8 +37,6 @@ function AddVideo({ setVideos, setCount }) {
         setVideos((videos) => [...videos, { id: newVideoId, ...newVideo }]);
         setCount((prevCount) => prevCount + 1); // count to change when button clicked to let react know to rebuild
         // empty input fields after video added
-        console.log(newVideo);
-        console.log(addVideoTitle, addVideoUrl);
         setAddVideoTitle("");
         setAddVideoUrl("");
       } else {

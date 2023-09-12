@@ -42,7 +42,6 @@ function SingleVideoCard({
   }
 
   const urlId = url.split("v=")[1].substring(0, 11);
-  console.log(urlId);
   const urlFull = `https://www.youtube.com/embed/${urlId}`;
 
   return (
