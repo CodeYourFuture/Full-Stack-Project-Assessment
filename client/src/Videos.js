@@ -49,8 +49,8 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        
-        const updatedData = [...loadData, newVideo];
+      
+        const updatedData = [...loadData, data];
         
         setLoadData(updatedData);
 

@@ -99,12 +99,15 @@ app.post(
     const newUrl = req.body.url;
     const newRating = req.body.rating;
 
-    const query = "INSERT INTO videos (title, url, rating) VALUES($1, $2, $3)";
-    db.query(query, [newTitle, newUrl, newRating], (err) => {
+    const query =
+      //// Include "RETURNING *" to return the newly created row
+      "INSERT INTO videos (title, url, rating) VALUES($1, $2, $3) RETURNING *";
+    db.query(query, [newTitle, newUrl, newRating], (err,result) => {
       if (err) {
         res.status(500).send("Internal Server Error");
       } else {
-        res.send("video Created ");
+        const createdVideo = result.rows[0];
+        res.status(201).json(createdVideo);
       }
     });
   }
