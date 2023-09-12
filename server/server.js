@@ -11,7 +11,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 let videos = require("./exampleresponse.json");
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   res.json(videos);
 });
 
@@ -19,25 +19,40 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   const title = req.body.title;
   const url = req.body.url;
-  const newVideo = { id: 0,title: title, url: url, rating: 0 };
+  const newVideo = { id: 0, title: title, url: url, rating: 0 };
 
   if (newVideo.title && newVideo.url) {
-    newVideo.id = videos.length+1;
+    newVideo.id = videos.length + 1;
     videos.push(newVideo);
   } else {
-    res.status(400).json({ result: "failure", message: "Video could not be saved" });
+    res
+      .status(400)
+      .json({ result: "failure", message: "Video could not be saved" });
   }
   res.status(200).json(videos);
 });
 
 //GET "/{id}"
-app.get("/:id", (req, res) => {
+app.get("/videos/:id", (req, res) => {
   const id = req.params.id;
-  const video = videos.find(v => v.id == id);
-  
-  if(!video){
-    res.status(400).json(`There is no video with id ${id}`)
+  const video = videos.find((v) => v.id == id);
+
+  if (!video) {
+    res.status(400).json(`There is no video with id ${id}`);
   }
 
-  res.status(200).json(video)
-})
+  res.status(200).json(video);
+});
+
+//DELETE "/{id}"
+app.delete("/videos/:id", (req, res) => {
+  const id = req.params.id;
+  const deletedVideoIndex = videos.findIndex((v) => v.id == id);
+
+  if (deletedVideoIndex == -1) {
+    res.status(404).json(`There is no video with id ${id}`);
+  }
+
+  videos.splice(deletedVideoIndex, 1);
+  res.sendStatus(200).end()
+});
