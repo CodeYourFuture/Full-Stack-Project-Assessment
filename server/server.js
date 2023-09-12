@@ -8,7 +8,7 @@ const translator = short("12345")
 
 const { Pool } = require("pg");
 const db = new Pool({
-  user: "Mac@192", // replace with you username
+  user: "Mac", // replace with you username
   host: "localhost",
   database: "videos",
   password: "",
@@ -18,6 +18,8 @@ const db = new Pool({
 app.use(express.json());
 app.use(cors());
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -34,35 +36,43 @@ app.get("/", (req, res) => {
 
 
 app.post("/videos", (req, res) => {
-  let newVideo = req.body
-  console.log(req.body)
+  let newVideoTitle = req.body.title
+  let newVideoURL = req.body.url
+  let newVideoRating = 0
 
-  if (!newVideo.title || !newVideo.url || newVideo.title === "" || newVideo.url === "") {
+  if (!newVideoTitle || !newVideoURL || newVideoTitle === "" || newVideoURL === "") {
     res.status(400).send("Fill in the missing fields")
   } else {
-    newVideo.title = req.body.title
-    newVideo.url = req.body.url
-    newVideo.id = (translator.generate()).slice(4, 10)
-    videos.push(newVideo)
-    res.send(videos)
+    const query =
+      `INSERT INTO videos (title, url, rating)
+    VALUES ($1, $2, $3)`;
+    db.query(query, [newVideoTitle, newVideoURL, newVideoRating])
+      .then((result) => {
+        res.status(201).send("new video created");
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    // newVideo.id = (translator.generate()).slice(4, 10)
+    // videos.push(newVideo)
+    // res.send(videos)
   }
 
 });
 
 
 app.delete("/videos/:id", (req, res) => {
-  let videoId = req.params.id
-
-  res.send(deleteVideoByID(videos, videoId))
+  let videoId = parseInt(req.params.id)
+  db.query("DELETE FROM videos WHERE id=$1", [videoId])
+    .then(() => res.send(`Customer ${videoId} deleted!`))
+    .catch((err) => console.error(err));
 })
-//installed pg module
 
 
 app.get("/videos", (req, res) => {
   db.query("SELECT * FROM videos")
     .then((result) => {
-      res.status(200).json({ videos: result.rows });
-      res.send(result.rows)
+      res.status(200).json(result.rows);
     })
     .catch((error) => {
       console.log(error);
@@ -70,24 +80,22 @@ app.get("/videos", (req, res) => {
 })
 
 app.get("/videos/:id", (req, res) => {
-  let id = req.params.id
-  res.send(findVideoByID(id))
+  let videoId = parseInt(req.params.id)
+  db.query("SELECT * FROM videos WHERE id = $1", [videoId])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 })
 
+// const deleteVideoByID = (videos, id) => {
+//   let videoI = videos.findIndex((video) => video.id == id);
+//   if (videoI > -1) {
+//     videos.splice(videoI, 1)
+//   }
+//   return videos
 
-
-const findVideoByID = (id) => {
-  return videos.filter(video => {
-    return video.id == id
-  })
-}
-
-
-const deleteVideoByID = (videos, id) => {
-  let videoI = videos.findIndex((video) => video.id == id);
-  if (videoI > -1) {
-    videos.splice(videoI, 1)
-  }
-  return videos
-
-}
+// }
