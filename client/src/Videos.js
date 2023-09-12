@@ -20,7 +20,8 @@ function Videos(props) {
           throw new Error("something went wrong");
         }
         const data = await response.json();
-
+        //desending acording to the rating
+        data.sort((a,b)=>b.rating-a.rating)
         return setLoadData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -35,7 +36,8 @@ function Videos(props) {
 
   function addClickHandeler(e) {
     e.preventDefault();
-    const newVideo = { title: titleData, url: urlData};
+    //const newVideo = { title: titleData, url: urlData};
+    const newVideo = { title: titleData, url: urlData, rating:0 };
 
     //adding video
     fetch("http://localhost:3000/videos", {
@@ -47,13 +49,16 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        setLoadData(data);
+        
+        const updatedData = [...loadData, newVideo];
+        
+        setLoadData(updatedData);
 
         setTitleData("");
         setUrlData("");
       })
-      .catch((error) => {
-        console.error("Error adding video:", error);
+      .catch((err) => {
+        console.error("Error adding video:", err);
       });
   }
 
@@ -174,10 +179,16 @@ console.log(updatedData);
             </div>
 
             <div className="addCancelBtn">
-              <button  style={{borderRadius:5}} type="button" onClick={cancelBtnHandler}>
+              <button
+                style={{ borderRadius: 5 }}
+                type="button"
+                onClick={cancelBtnHandler}
+              >
                 Cancel
               </button>
-              <button type="submit">Add</button>
+              <button style={{ borderRadius: 5 }} type="submit">
+                Add
+              </button>
             </div>
           </form>
         )}
@@ -202,7 +213,9 @@ console.log(updatedData);
                       <ThumbDownIcon />
                     </button>
                   </div>
-                  <p style={{ color: "gray",textDecoration:"underline" }}>{item.rating}</p>
+                  <p style={{ color: "gray", textDecoration: "underline" }}>
+                    {item.rating}
+                  </p>
 
                   <iframe
                     width="350"
