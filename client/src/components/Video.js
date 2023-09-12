@@ -89,7 +89,8 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
         ></iframe>
       </div>
       <button className="button" onClick={deleteHandler}>
-        Delete
+        <span className="btn-text-one">Delete</span>
+        <span className="btn-text-two">Are you sure?</span>
       </button>
     </div>
   );

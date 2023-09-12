@@ -60,6 +60,7 @@ const VideoForm = ({ getAllVideos }) => {
 
   return (
     <>
+      <h3 className="add-video-header">Add New Video</h3>
       <form className="add-form" onSubmit={addHandler}>
         <div className="input-container">
           <label htmlFor="title">Title</label>

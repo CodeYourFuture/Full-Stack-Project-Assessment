@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import VideoLists from "../components/VideoLists";
 const SearchPage = ({ allVideos, getAllVideos, order }) => {
   const [search, setSearch] = useState("");
@@ -50,6 +52,17 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
 
   return (
     <>
+      <div className="search-icon">
+        <FontAwesomeIcon
+          icon={faSearch}
+          size="2x"
+          style={{
+            padding: "1rem",
+            backgroundColor: "#fd5d5d",
+            borderRadius: "50px",
+          }}
+        />
+      </div>
       <div className="features">
         <div className="search-videos">
           <label>Search by title </label>
