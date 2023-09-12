@@ -7,7 +7,7 @@ import AllVideos from "./Components/AllVideos";
 function App() {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/`)
+    fetch(`https://paulina-full-stack-project-server.onrender.com/`)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);

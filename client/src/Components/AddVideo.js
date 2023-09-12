@@ -17,7 +17,7 @@ const AddVideo = ({ videos, setVideos }) => {
       title: videoName,
       url: videoLink,
     };
-    fetch(`http://localhost:5000/`, {
+    fetch(`https://paulina-full-stack-project-server.onrender.com/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
