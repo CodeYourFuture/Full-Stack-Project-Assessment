@@ -17,7 +17,7 @@ function App() {
   const fetchVideos = async () => {
     try {
       console.log("front end fetch function");
-      const response = await fetch(`${backendUrl}/videos`);
+      const response = await fetch(`${backendUrl}`);
       const data = await response.json();
       console.log({ data });
       setVideos(data);
