@@ -23,9 +23,9 @@ app.get("/", async (req, res) => {
     }
     //Apply order filter
     if (order === "desc") {
-      filteredVideos.sort((a, b) => b.rating - a.rating);
+      filteredVideos.sort((a, b) => b.ratingup - a.ratingup);
     } else {
-      filteredVideos.sort((a, b) => a.rating - b.rating);
+      filteredVideos.sort((a, b) => a.ratingup - b.ratingup);
     }
     res.status(200).json(filteredVideos);
   } catch (error) {
@@ -62,7 +62,7 @@ app.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, url, rating, date } = req.body;
+    const { title, url, ratingup, ratingdown, date } = req.body;
 
     try {
       // Check if a video with the same URL already exists
@@ -78,8 +78,8 @@ app.post(
       const id = uuidv4();
       // If not, insert a new one
       const addVideos = await pool.query(
-        "INSERT INTO videos(id, date, title, url, rating) VALUES($1, $2, $3, $4, $5)",
-        [id, date, title, url, rating]
+        "INSERT INTO videos(id, date, title, url, ratingup, ratingdown) VALUES($1, $2, $3, $4, $5, $6)",
+        [id, date, title, url, ratingup, ratingdown]
       );
       res.status(201).json({
         message: "New video added successfully.",
@@ -92,14 +92,13 @@ app.post(
   }
 );
 
-//Update video rating
-app.put("/:id", async (req, res) => {
+// Update video rating by incrementing votes_up
+app.put("/ratingup/:id", async (req, res) => {
   const { id } = req.params;
-  const { rating } = req.body;
   try {
     const video = await pool.query(
-      "UPDATE videos SET rating = $1 WHERE id=$2",
-      [rating, id]
+      "UPDATE videos SET ratingup = ratingup + 1 WHERE id=$1",
+      [id]
     );
     if (!video) {
       res.status(404).json({
@@ -107,8 +106,33 @@ app.put("/:id", async (req, res) => {
       });
     } else {
       res.status(200).json({
-        message: "ok",
+        message: "Vote Up successful",
         isPositive: true,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      message: "something went wrong!",
+    });
+  }
+});
+
+// Update video rating by incrementing votes_down
+app.put("/ratingdown/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const video = await pool.query(
+      "UPDATE videos SET ratingdown = ratingdown + 1 WHERE id=$1",
+      [id]
+    );
+    if (!video) {
+      res.status(404).json({
+        message: "There is no video with given data!",
+      });
+    } else {
+      res.status(200).json({
+        message: "Vote Down successful",
+        isPositive: false,
       });
     }
   } catch (error) {

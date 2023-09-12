@@ -53,19 +53,6 @@ body {
   top: 50%;
 }
 
-/* .button {
-  margin: 1rem 0;
-  padding: 10px;
-  border-radius: 10px;
-  border-color: none;
-  background-color: rgb(223, 210, 192);
-}
-
-.button:hover {
-  background-color: rgb(209, 82, 82);
-  color: aliceblue;
-} */
-
 input,
 select {
   background-color: #f1ebeb;
@@ -79,9 +66,6 @@ select {
   padding: 1.25rem;
   color: #fd5d5d;
 }
-/* .app-header h1 {
-  text-shadow: 1px 1px 1px white;
-} */
 
 .new-btn:hover,
 .new-btn:active {
@@ -158,16 +142,6 @@ select {
   margin: 1rem 0.5rem;
 }
 
-/* .add-btn {
-  margin: 1rem 0;
-  padding: 10px 18px;
-  border-radius: 10px;
-  background-color: rgb(223, 210, 192);
-}
-.add-btn:hover {
-  background-color: rgb(18, 66, 80);
-  color: #f1ebeb;
-} */
 .add-btn {
   background-color: transparent;
   color: #ffffff;
@@ -319,17 +293,25 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 iframe {
   width: 400px;
   height: 300px;
 }
 
-/* Search PAge */
+/* Search Page */
 .search-icon {
   text-align: center;
   margin-top: 2rem;
   border-radius: 50%;
+}
+.rate{
+  margin-left: 0.5rem;
+}
+.btn-link{
+  background-color: #090b0b;
+  border-radius: 10px;
 }
 
 /* Medaia */

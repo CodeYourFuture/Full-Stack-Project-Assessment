@@ -22,7 +22,8 @@ const VideoForm = ({ getAllVideos }) => {
     const newVideo = {
       title,
       url,
-      rating: 0,
+      ratingup: 0,
+      ratingdown: 0,
       date: new Date().getTime(),
     };
     try {

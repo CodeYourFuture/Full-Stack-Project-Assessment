@@ -1,7 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
-const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
+const Video = ({
+  id,
+  title,
+  url,
+  ratingUp,
+  ratingDown,
+  getAllVideos,
+  getDeleteMessage,
+}) => {
   const videoId = url.split("v=")[1];
 
   const deleteHandler = async () => {
@@ -20,65 +28,42 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
     }
   };
 
-  const ratingHandler = async () => {
-    const updatedMovie = {
-      rating,
-      id,
-    };
+  const voteUpHandler = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedMovie),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/ratingup/${id}`,
+        {
+          method: "PUT",
+        }
+      );
       if (response.status !== 200) {
         throw new Error("Something went wrong!");
-      } else {
-        getAllVideos();
       }
+      getAllVideos();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const voteUpHandler = () => {
-    rating += 1;
-    ratingHandler();
-  };
-
-  const voteDownHandler = () => {
-    rating -= 1;
-    ratingHandler();
+  const voteDownHandler = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/ratingdown/${id}`,
+        {
+          method: "PUT",
+        }
+      );
+      if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+      }
+      getAllVideos();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="video">
-      <h4>{title}</h4>
-      <div className="vote">
-        <button
-          className="btn btn-link"
-          title="Vote Up"
-          onClick={voteUpHandler}
-        >
-          <FontAwesomeIcon
-            icon={faThumbsUp}
-            size="2x"
-            style={{ color: "#fd5d5d" }}
-          />
-        </button>
-        <p>{rating}</p>
-        <button
-          className="btn btn-link"
-          title="Vote Down"
-          onClick={voteDownHandler}
-        >
-          <FontAwesomeIcon
-            icon={faThumbsDown}
-            size="2x"
-            style={{ color: "#fd5d5d" }}
-          />
-        </button>
-      </div>
       <div>
         <iframe
           src={`https://www.youtube.com/embed/${videoId}`}
@@ -88,6 +73,34 @@ const Video = ({ id, title, url, rating, getAllVideos, getDeleteMessage }) => {
           allowFullScreen
         ></iframe>
       </div>
+      <h4>{title}</h4>
+      <div className="vote">
+        <button
+          className="btn btn-link"
+          title="Vote Up"
+          onClick={voteUpHandler}
+        >
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            size="1x"
+            style={{ color: "#fd5d5d" }}
+          />
+          <span className="rate">{ratingUp}</span>
+        </button>
+        <button
+          className="btn btn-link"
+          title="Vote Down"
+          onClick={voteDownHandler}
+        >
+          <FontAwesomeIcon
+            icon={faThumbsDown}
+            size="1x"
+            style={{ color: "#fd5d5d" }}
+          />
+          <span className="rate">{ratingDown}</span>
+        </button>
+      </div>
+
       <button className="button" onClick={deleteHandler}>
         <span className="btn-text-one">Delete</span>
         <span className="btn-text-two">Are you sure?</span>

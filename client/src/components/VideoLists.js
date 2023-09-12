@@ -23,7 +23,8 @@ const VideoLists = ({ allVideos, getAllVideos }) => {
           <Video
             key={video.id}
             id={video.id}
-            rating={video.rating}
+            ratingUp={video.ratingup}
+            ratingDown={video.ratingdown}
             title={video.title}
             url={video.url}
             getAllVideos={getAllVideos}
