@@ -85,18 +85,19 @@ app.post("/", async function (req, res) {
 
 //DELETE "/{id}"
 
-app.delete("/:id", (req, res) => {
-  const videoId = req.params.id;
-  const deleteVideo = videos.findIndex((video) => video.id === videoId);
-  if (deleteVideo === undefined) {
+app.delete("/:id", async function (req, res) {
+  try {
+    const videoId = Number(req.params.id);
+    const deletedVideo = await db.query("DELETE * FROM videos WHERE id = $1", [
+      videoId,
+    ]);
+    res.status(201).json({
+      message: "Video deleted",
+    });
+  } catch (error) {
     res.status(404).json({
       result: "failure",
       message: "Video could not be deleted",
-    });
-  } else {
-    videos.splice(deleteVideo, 1);
-    res.status(201).json({
-      message: "Video deleted",
     });
   }
 });

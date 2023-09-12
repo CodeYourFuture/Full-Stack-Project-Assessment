@@ -21,7 +21,7 @@ function VideoCards() {
     }
   }, [urlAPI]);
 
-  //fetching the videos from local API
+  //fetching the videos from server
 
   useEffect(() => {
     fetchVideo();
