@@ -22,7 +22,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 //const videos = require("./exampleresponse.json");
 
-// GET "/" to get all the videos
+// GET "/" to get all the videos from online server and db
 app.get("/", (req, res) => {
   db.query("SELECT * FROM videos")
     .then((result) => {
@@ -59,9 +59,7 @@ app.get("/", (req, res) => {
 //   }
 // });
 
-app.get("/text", (req, res) => {
-  res.status(200).send("hi");
-});
+//POST to online server and db
 
 app.post("/", async function (req, res) {
   try {

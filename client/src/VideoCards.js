@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchBar from "./SearchBar";
 import AddVideoForm from "./AddVideoForm";
 import SingleVideoCard from "./SingleVideoCard";
@@ -7,19 +7,32 @@ import SingleVideoCard from "./SingleVideoCard";
 function VideoCards() {
   //const [videos, setVideos] = useState(exampleResponse);
   const [videos, setVideos] = useState([]);
-  const urlAPI = "https://irianni-video-server.onrender.com";
+  const urlAPI = process.env.REACT_APP_BACKEND_URL;
+
+  //wrapping fetchVideo in useCallback to fix rendering problem on dependency array
+
+  const fetchVideo = useCallback(async () => {
+    try {
+      const response = await fetch(urlAPI);
+      const jsonResponse = await response.json();
+      setVideos(jsonResponse);
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    }
+  }, [urlAPI]);
 
   //fetching the videos from local API
 
   useEffect(() => {
     fetchVideo();
-  }, []);
+  }, [fetchVideo]);
 
-  async function fetchVideo() {
-    const response = await fetch(urlAPI);
-    const jsonResponse = await response.json();
-    setVideos(jsonResponse);
-  }
+  // //old fetchVideo function
+  // async function fetchVideo() {
+  //   const response = await fetch(urlAPI);
+  //   const jsonResponse = await response.json();
+  //   setVideos(jsonResponse);
+  // }
 
   //Deleting from API. Help with response in console
 
