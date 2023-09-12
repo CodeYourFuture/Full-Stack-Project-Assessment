@@ -10,7 +10,9 @@ function App() {
   useEffect(() => {
     const fetchVideosData  = async () => {
       try {
-       const res = await fetch('https://full-stack-front-end.onrender.com');
+
+       const apiKey = process.env.REACT_APP_API_KEY;
+       const res = await fetch('https://full-stack-back-end.onrender.com/');
        const data = await res.json();
        setVideos(data); 
       }
@@ -30,7 +32,7 @@ function App() {
       <div key={video.id}>
         <h5>{video.title}</h5>
         <p>{video.url}</p>
-        <p>{`rating: video.rating`}</p>
+        <p>Rating: {video.rating}</p>
       </div>
     ))}
       <Handlers />
