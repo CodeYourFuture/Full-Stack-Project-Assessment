@@ -1,14 +1,24 @@
 import "./App.css";
-import { useState } from "react";
-import exampleresponse from "./exampleresponse.json";
+import { useEffect, useState } from "react";
 import VideoCard from "./components/VideoCard";
 import AddVideo from "./components/AddVideo";
 import BubbleSort from "./functions/BubbleSort";
 
-BubbleSort(exampleresponse);
-
 function App() {
-  const [data, setData] = useState(exampleresponse);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      await fetch("http://127.0.0.1:5001/videos")
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+        });
+    };
+    dataFetch();
+  }, []);
+
+  BubbleSort(data);
 
   const deleteHandle = (id) => {
     const updatedData = data.filter((video) => video.id !== id);

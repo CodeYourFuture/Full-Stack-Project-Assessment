@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
+const cors = require("cors");
 const port = process.env.PORT || 5001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(cors());
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -54,5 +56,5 @@ app.delete("/videos/:id", (req, res) => {
   }
 
   videos.splice(deletedVideoIndex, 1);
-  res.sendStatus(200).end()
+  res.sendStatus(200).end();
 });
