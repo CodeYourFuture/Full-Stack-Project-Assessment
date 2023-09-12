@@ -1,7 +1,12 @@
 import React from "react";
 
-const Video = ({ video, onUpVote, onDownVote, onRemove }) => {
+const Video = ({ video }) => {
   let videoID = video.url.split("=")[1];
+  const handleUpVote = (video) => {};
+
+  const handleDownVote = (video) => {};
+
+  const handleRemoveVideo = (video) => {};
   return (
     <div className="video">
       <h3>{video.title}</h3>
@@ -16,9 +21,9 @@ const Video = ({ video, onUpVote, onDownVote, onRemove }) => {
       ></iframe>
 
       <p>Votes: {video.votes}</p>
-      <button onClick={() => onUpVote(video)}>Up Vote</button>
-      <button onClick={() => onDownVote(video)}>Down Vote</button>
-      <button onClick={() => onRemove(video)}>Remove</button>
+      <button onClick={handleUpVote}>Up Vote</button>
+      <button onClick={handleDownVote}>Down Vote</button>
+      <button onClick={handleRemoveVideo}>Remove</button>
     </div>
   );
 };

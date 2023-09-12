@@ -1,17 +1,12 @@
 import "./App.css";
 import React, { useState } from "react";
-import { videosData } from "./Data";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 
 const App = () => {
   const [videos, setVideos] = useState(videosData);
 
-  const handleUpVote = (video) => {};
-
-  const handleDownVote = (video) => {};
-
-  const handleRemoveVideo = (video) => {};
+  ;
 
   const handleAddVideo = (newVideo) => {};
 
@@ -24,9 +19,9 @@ const App = () => {
         <Video
           key={video.id}
           video={video}
-          onUpVote={handleUpVote}
-          onDownVote={handleDownVote}
-          onRemove={handleRemoveVideo}
+          //onUpVote={handleUpVote}
+          //onDownVote={handleDownVote}
+          //onRemove={handleRemoveVideo}
         />
       ))}
       <AddVideo onAddVideo={handleAddVideo} />
