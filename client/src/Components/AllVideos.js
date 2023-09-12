@@ -1,8 +1,13 @@
 import VideoCard from "./VideoCard";
 
 const AllVideos = ({ videos, setVideos }) => {
-  const removeVideo = (video) =>
-    setVideos(videos.filter((oneVideo) => oneVideo !== video));
+  const removeVideo = (video) => {
+    fetch(`http://localhost:5000/${video.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setVideos(videos.filter((oneVideo) => oneVideo !== video));
+    });
+  };
   return (
     <div className="row">
       {videos.map((video) => (

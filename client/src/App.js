@@ -12,7 +12,7 @@ function App() {
       .then((data) => {
         setVideos(data);
       });
-  }, []);
+  }, [videos]);
 
   return (
     <div className="container-fluid">

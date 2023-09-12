@@ -14,15 +14,20 @@ const AddVideo = ({ videos, setVideos }) => {
   function handleSubmit(event) {
     event.preventDefault();
     let video = {
-      id: Math.floor(Math.random() * 10000),
       title: videoName,
       url: videoLink,
-      rating: Math.floor(Math.random() * 100),
     };
-    console.log(video);
-    const newVideoList = [...videos, video];
-    setVideos(newVideoList);
-    console.log(videos);
+    fetch(`http://localhost:5000/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(video),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      });
   }
   return (
     <form onSubmit={handleSubmit}>
