@@ -7,9 +7,10 @@ const videosPool = require("./DBConfig");
 const dotenv = require("dotenv");
 dotenv.config();
 
-app.use(express.json());
+
 app.use(cors());
 app.use(express.json());
+
 
 //const videosList = require("../exampleresponse.json");
 
@@ -80,7 +81,6 @@ app.get("/videos/:search", async (req, res) => {
 
 app.delete("/videos/:id", async (req, res) => {
   const vidId = req.params.id * 1;
-
   try {
     const result = await videosPool.query("DELETE FROM videos WHERE id = $1 RETURNING *", [vidId]);
 
