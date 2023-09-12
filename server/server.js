@@ -33,7 +33,7 @@ db.connect(function (err) {
 
 // GET "/"
 // This endpoint is used to return all of the videos
-app.get("/videos", async function (request, response) {
+app.get("/", async function (request, response) {
   // response is an empty object as of now
   try {
     const dbResult = await db.query("SELECT * FROM videos"); // we are going to fill the response object with the database query result
@@ -46,7 +46,7 @@ app.get("/videos", async function (request, response) {
 
 // POST "/"
 // This endpoint is used to add a video to the API.
-app.post("/videos", async function (request, response) {
+app.post("/", async function (request, response) {
   try {
     let newVideo = request.body;
 
@@ -73,7 +73,7 @@ app.post("/videos", async function (request, response) {
 
 // GET "/{id}"
 // Returns the video with the ID contained within the {id} parameter
-app.get("/videos/:id", async function (request, response) {
+app.get("/:id", async function (request, response) {
   // HELP!! app.get("/videos/:id", etc... & const fetchVideos = () => {fetch(`${backendUrl}/videos`) -> I have/need 'videos' twice?
   try {
     let videoId = parseInt(request.params.id);
@@ -89,7 +89,7 @@ app.get("/videos/:id", async function (request, response) {
 
 // DELETE "/{id}"
 // Deletes the video with the ID container within the {id} parameter
-app.delete("/videos/:id", async function (request, response) {
+app.delete("/:id", async function (request, response) {
   try {
     let videoIdDelete = Number(request.params.id);
 
