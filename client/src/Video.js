@@ -1,10 +1,8 @@
 import React from "react";
+import CountVotes from "./CountVotes.js";
 
 const Video = ({ video }) => {
   let videoID = video.url.split("=")[1];
-  const handleUpVote = (video) => {};
-
-  const handleDownVote = (video) => {};
 
   const handleRemoveVideo = (video) => {};
   return (
@@ -21,8 +19,7 @@ const Video = ({ video }) => {
       ></iframe>
 
       <p>Votes: {video.votes}</p>
-      <button onClick={handleUpVote}>Up Vote</button>
-      <button onClick={handleDownVote}>Down Vote</button>
+      <CountVotes />
       <button onClick={handleRemoveVideo}>Remove</button>
     </div>
   );
