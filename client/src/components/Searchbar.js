@@ -18,7 +18,7 @@ export default function Searchbar(props) {
   }
 
   return (
-    <>
+    <div>
       <input
         onChange={handleChange}
         type="text"
@@ -26,6 +26,6 @@ export default function Searchbar(props) {
         name="search"
       ></input>
       <button onClick={handleSearchVideo}>Search</button>
-    </>
+    </div>
   );
 }

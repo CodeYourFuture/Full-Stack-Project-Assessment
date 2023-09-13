@@ -25,12 +25,13 @@ const db = new Pool({
 // GET "/"
 // Returns all the videos
 app.get("/", function (request, response) {
-  db.query(`SELECT * FROM videos ORDER BY rating ASC`)
+  db.query(`SELECT * FROM videos ORDER BY id`)
     .then((result) => {
       response.json(result.rows);
     })
     .catch((error) => {
       console.log(error);
+      response.status(500).json({ message: error });
     });
 });
 
@@ -43,6 +44,7 @@ app.get("/videos/:id", (request, response) => {
     })
     .catch((error) => {
       console.log(error);
+      response.status(500).json({ message: error });
     });
 });
 
@@ -99,6 +101,7 @@ app.delete("/videos/:id", (request, response) => {
   const idToDelete = parseInt(request.params.id);
 
   db.query("DELETE FROM videos WHERE id = $1", [idToDelete]);
+  response.status(204).end();
 });
 
 // PUT

@@ -101,7 +101,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Video Recommendations</h1>
+        <h1>Videos</h1>
+        <Searchbar handleSearchVideo={searchVideo} />
       </header>
       <div className="form--container">
         <AddVideoForm
@@ -109,7 +110,6 @@ function App() {
           setFormData={setFormData}
           handleAddVideo={addVideo}
         />
-        <Searchbar handleSearchVideo={searchVideo} />
       </div>
       <div className="video--container">
         <VideoList

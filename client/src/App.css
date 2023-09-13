@@ -1,11 +1,13 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   display: grid;
   grid-template-columns: 100px auto 100px;
 }
 
 .App-header {
   grid-column: 2 / 3;
+  display: flex;
+  justify-content: space-between;
 }
 
 .video--card {
@@ -27,9 +29,14 @@
   grid-column: 2 / 3;
 }
 
-/* .form {
-  display: grid;
-} */
+.input {
+  margin-bottom: 15px;
+  height: 30px;
+  text-indent: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: block;
+}
 
 .video--container {
   grid-column: 2 / 3;
