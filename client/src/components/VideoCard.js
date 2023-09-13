@@ -18,7 +18,6 @@ export default function VideoCard(props) {
 
   return (
     <div className="video--card">
-      <h2 className="video--h2">{props.title}</h2>
       <iframe
         width="560"
         height="315"
@@ -28,16 +27,19 @@ export default function VideoCard(props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <p>
-        <span onClick={handleUpVote} className="thumbs--up">
-          👍
-        </span>
-        Vote Score: {props.voteCount}
-        <span onClick={handleDownVote} className="thumbs--down">
-          👎
-        </span>
-      </p>
-      <button onClick={handleDelete}>Delete</button>
+      <h2 className="video--h2">{props.title}</h2>
+      <div className="video--buttons">
+        <div className="video--votes">
+          <span onClick={handleUpVote} className="thumbs--up">
+            👍
+          </span>
+          Likes: {props.voteCount}
+          <span onClick={handleDownVote} className="thumbs--down">
+            👎
+          </span>
+        </div>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </div>
   );
 }

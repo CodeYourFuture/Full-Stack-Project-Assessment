@@ -8,11 +8,13 @@
   grid-column: 2 / 3;
   display: flex;
   justify-content: space-between;
+  background-color: blue;
+  padding: 1rem;
 }
 
-.video--card {
+/* .video--card {
   border: 1px palevioletred solid;
-}
+} */
 
 .video--h2 {
   font-size: 20px;
@@ -27,6 +29,8 @@
 
 .form--container {
   grid-column: 2 / 3;
+  background-color: greenyellow;
+  padding: 1rem;
 }
 
 .input {
@@ -39,10 +43,12 @@
 }
 
 .video--container {
+  text-align: left;
   grid-column: 2 / 3;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 4rem;
+  padding: 1rem;
 }
 
 /* This is the code that fixed my videos spilling over! */
@@ -50,10 +56,18 @@
   width: 100%;
   border-radius: 10px;
 }
+.video--buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video--votes {
+  display: flex;
+  gap: 2rem;
+}
 
 .thumbs--up,
 .thumbs--down {
   font-size: 25px;
-  margin-inline: 1rem;
   cursor: pointer;
 }
