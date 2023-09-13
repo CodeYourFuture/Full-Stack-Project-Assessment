@@ -10,6 +10,9 @@ function App() {
 
   const [count, setCount] = useState(0);
 
+  // local
+  // const apiURL = "http://127.0.0.1:5000";
+
   // backend
   const apiURL = "https://full-stack-video-app-backend.onrender.com";
 
