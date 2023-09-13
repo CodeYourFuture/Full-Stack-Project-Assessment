@@ -3,7 +3,6 @@ import VideoSection from "./VideoSection";
 import VideoContainer from "./VideoContainer";
 
 const Container = () => {
-  let videoData = [];
   const [videos, setVideos] = useState([]);
   const myLink =
     "https://full-stack-project-assessment-server-jpku.onrender.com/";
@@ -12,8 +11,7 @@ const Container = () => {
     fetch(myLink)
       .then((response) => response.json())
       .then((data) => {
-        videoData = [...data];
-        setVideos(videoData);
+        setVideos([...data]);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -26,8 +24,7 @@ fetch(`${myLink}${id}`, { method: "DELETE" })
     fetch(myLink)
       .then((response) => response.json())
       .then((data) => {
-        videoData = [...data];
-        setVideos(videoData);
+        setVideos([...data]);
       });
   })
   .catch((error) => console.log(error));
@@ -44,8 +41,7 @@ fetch(`${myLink}${id}`, { method: "DELETE" })
         fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
-            videoData = [...data];
-            setVideos(videoData);
+        setVideos([...data]);
           });
       })
   };
@@ -62,8 +58,7 @@ fetch(`${myLink}${id}`, { method: "DELETE" })
         fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
-            videoData = [...data];
-            setVideos(videoData);
+        setVideos([...data]);
           });
       })
       .catch((error) => console.log(error));
@@ -81,8 +76,7 @@ fetch(`${myLink}${id}`, { method: "DELETE" })
         fetch(myLink)
           .then((response) => response.json())
           .then((data) => {
-            videoData = [...data];
-            setVideos(videoData);
+            setVideos([...data]);
           });
       })
       .catch((error) => console.log(error));
