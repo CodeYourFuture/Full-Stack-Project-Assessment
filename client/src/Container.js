@@ -4,44 +4,41 @@ import VideoContainer from "./VideoContainer";
 
 
 const Container = () => {
-    let videoData = [];
     const [videos, setVideos] = useState([]);
+    const myLink = "https://full-stack-project-assessment-server-1p0c.onrender.com";
 
     useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
+    fetch(myLink)
     .then((response) => response.json())
     .then((data) => {
-    videoData = [...data]
-    setVideos(videoData)
+    setVideos([...data])
     }).catch((error) => console.log(error));
     }, []);
   
 
   const handleRemove = (id) => {
-    fetch(`http://127.0.0.1:5000/${id}`,{method:"DELETE"})
+    fetch(`${myLink}${id}`,{method:"DELETE"})
     .then(() => {
-        fetch("http://127.0.0.1:5000/")
+        fetch(myLink)
     .then((response) => response.json())
     .then((data) => {
-    videoData = [...data];
-    setVideos(videoData);
+      setVideos([...data])
     })
    }).catch((error) => console.log(error));
   };
 
  
   const handleAddVideo = (video) => {
-    fetch(`http://127.0.0.1:5000/`, {
+    fetch(myLink, {
     method:"POST" ,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(video)
     })
     .then(() => {
-        fetch("http://127.0.0.1:5000/")
+        fetch(myLink)
     .then((response) => response.json())
     .then((data) => {
-    videoData = [...data];
-    setVideos(videoData);
+      setVideos([...data])
     });
    }).catch((error) => console.log(error));
 
@@ -49,17 +46,16 @@ const Container = () => {
 
   const handleUpVote = (video) => {
     video.rating = video.rating+1;
-    fetch(`http://127.0.0.1:5000/${video.id}`,{
+    fetch(`${myLink}${video.id}`,{
     method:"PUT" ,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({video})
     })
     .then(() => {
-        fetch("http://127.0.0.1:5000/")
+        fetch(myLink)
     .then((response) => response.json())
     .then((data) => {
-    videoData = [...data];
-    setVideos(videoData);
+      setVideos([...data])
     })
    }).catch((error) => console.log(error));
 
@@ -67,17 +63,16 @@ const Container = () => {
 
   const handleDownVote = (video) => {
     video.rating = video.rating-1;
-    fetch(`http://127.0.0.1:5000/${video.id}`,{
+    fetch(`${myLink}${video.id}`,{
     method:"PUT" ,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({video})
     })
     .then(() => {
-        fetch("http://127.0.0.1:5000/")
+        fetch(myLink)
     .then((response) => response.json())
     .then((data) => {
-    videoData = [...data];
-    setVideos(videoData);
+      setVideos([...data])
     })
    }).catch((error) => console.log(error));
 
