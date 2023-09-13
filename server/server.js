@@ -6,7 +6,8 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const short = require('short-uuid');
 const translator = short("12345")
-
+app.use(express.json());
+app.use(cors());
 
 const { Pool } = require("pg");
 const db = new Pool({
@@ -22,11 +23,10 @@ db.connect(function (err) {
   if (err) {
     return console.error('error: ' + err.message);
   }
-  console.log('Connected to the MySQL server.');
+  console.log('Connected to the postgresSQL server.');
 });
 
-app.use(express.json());
-app.use(cors());
+
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -74,7 +74,7 @@ app.delete("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id)
   db.query("DELETE FROM videos WHERE id=$1", [videoId])
     .then(() => res.send(`Customer ${videoId} deleted!`))
-    .catch((err) => console.error(err));
+    .catch((err) => console.error(err).status(500));
 })
 
 
@@ -85,6 +85,7 @@ app.get("/videos", (req, res) => {
     })
     .catch((error) => {
       console.log(error);
+      res.status(500)
     });
 })
 
