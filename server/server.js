@@ -164,14 +164,31 @@ app.put("/videos/:id", function (req, res) {
 });
 
 //delete video
-app.delete("/videos/:id", function (req, res) {
-  const video = videos.find((m) => m.id == req.params.id);
-  if (!video) {
-    res.status(404).json("This id doesn't exist");
+// app.delete("/videos/:id", function (req, res) {
+//   const video = videos.find((m) => m.id == req.params.id);
+//   if (!video) {
+//     res.status(404).json("This id doesn't exist");
+//   }
+//   const index = videos.indexOf(video);
+//   videos.splice(index, 1);
+//   res.json(videos);
+// });
+
+//deleting video
+app.delete("/videos/:id", async function (req, res) {
+  const videoId = req.params.id;
+  try {
+    const result = await db.query("DELETE FROM videos WHERE id=$1", [videoId]);
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json( `Video with id ${videoId} not found`);
+    }
+    res.json(`Video with id ${videoId} deleted`);
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  const index = videos.indexOf(video);
-  videos.splice(index, 1);
-  res.json(videos);
 });
 
 

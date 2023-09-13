@@ -21,7 +21,7 @@ function Videos(props) {
         }
         const data = await response.json();
         //desending acording to the rating
-        data.sort((a,b)=>b.rating-a.rating)
+        data.sort((a, b) => b.rating - a.rating);
         return setLoadData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,7 +37,7 @@ function Videos(props) {
   function addClickHandeler(e) {
     e.preventDefault();
     //const newVideo = { title: titleData, url: urlData};
-    const newVideo = { title: titleData, url: urlData, rating:0 };
+    const newVideo = { title: titleData, url: urlData, rating: 0 };
 
     //adding video
     fetch("http://localhost:3000/videos", {
@@ -49,9 +49,8 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-      
         const updatedData = [...loadData, data];
-        
+
         setLoadData(updatedData);
 
         setTitleData("");
@@ -62,23 +61,47 @@ function Videos(props) {
       });
   }
 
+  // //deleting video
+  // function deleteBtnHandler(item) {
+  //   const deletevideo = {
+  //     id: item.id,
+  //     title: item.title,
+  //     url: item.url,
+  //   };
+
+  //   fetch(`http://localhost:3000/videos/${item.id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(deletevideo),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const updatedData = loadData.filter((video) => video.id !== item.id);
+  //       setLoadData(updatedData);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting video:", error);
+  //     });
+  // }
+
   //deleting video
   function deleteBtnHandler(item) {
-    const deletevideo = {
-      id: item.id,
-      title: item.title,
-      url: item.url,
-    };
-
     fetch(`http://localhost:3000/videos/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(deletevideo),
+      body: JSON.stringify(item),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete video");
+        }
+        return response.json();
+      })
+      .then(() => {
         const updatedData = loadData.filter((video) => video.id !== item.id);
         setLoadData(updatedData);
       })
@@ -86,6 +109,7 @@ function Videos(props) {
         console.error("Error deleting video:", error);
       });
   }
+
 
   function thumbUpHandeler(item) {
     const newRating = item.rating + 1; // Increment the rating locally
@@ -106,21 +130,19 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        
         const updatedData = loadData.map((video) => {
           if (video.id === item.id) {
-            return { ...video, rating: newRating }; 
+            return { ...video, rating: newRating };
           }
           return video;
         });
-console.log(updatedData);
-        setLoadData(updatedData); 
+        console.log(updatedData);
+        setLoadData(updatedData);
       })
       .catch((error) => {
         console.error("Error updating video:", error);
       });
   }
-
 
   function thumbDownHandeler(item) {
     const newRating = item.rating - 1;
@@ -130,7 +152,7 @@ console.log(updatedData);
       url: item.url,
       rating: newRating,
     };
-    
+
     fetch(`http://localhost:3000/videos/${item.id}`, {
       method: "PUT",
       headers: {
@@ -140,12 +162,12 @@ console.log(updatedData);
     })
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = loadData.map((video)=>{
-          if(video.id===item.id){
-            return {...video,rating:newRating}
+        const updatedData = loadData.map((video) => {
+          if (video.id === item.id) {
+            return { ...video, rating: newRating };
           }
           return video;
-        })
+        });
         setLoadData(updatedData);
       });
   }
