@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("/Users/elenabarker/Desktop/CYF Elena/Untitled/Full-Stack-Project-Assessment/client/src/purple_bg.jpeg");
+  color: #fff;
 }
 
 code {
@@ -26,7 +28,7 @@ code {
 
 .video iframe {
   width: 100%;
-  height: 250px;
+  height: 400px;
   margin: 10px 0;
 }
 
@@ -60,7 +62,15 @@ code {
 }
 
 .add-video button {
-  margin: 5px;
+  border: none;
+  color: #fff;
+  font-size: 1.0rem;
+  align-items: center;
+  gap: 6px;
+  background-color: #bdc0c5;
+  border-radius: 4px;
+  padding: 6px 15px;
+  margin: 0 10px;
 }
 
 .App {
@@ -74,3 +84,47 @@ code {
   margin-bottom: 20px;
 }
 
+ * {
+   font-family: "Poppins", sans-serif;
+   padding: 0;
+   margin: 0;
+ }
+
+.main-container {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;   
+}
+
+.button-container {
+  display: flex;
+  flex-direction: 'row';
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 50px;
+  border-radius: 12px;
+}
+.button {
+  border: none;
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #bdc0c5;
+  border-radius: 4px;
+  padding: 6px 15px;
+  margin: 0 10px;
+}
+
+.like-active {
+  background-color: #8c45e2;
+}
+
+.dislike-active {
+  background-color: #394350;
+}

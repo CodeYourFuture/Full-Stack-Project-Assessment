@@ -3,8 +3,6 @@ import CountVotes from "./CountVotes.js";
 
 const Video = ({ video }) => {
   let videoID = video.url.split("=")[1];
-
-  const handleRemoveVideo = (video) => {};
   return (
     <div className="video">
       <h3>{video.title}</h3>
@@ -18,9 +16,9 @@ const Video = ({ video }) => {
         allowfullscreen
       ></iframe>
 
-      <p>Votes: {video.votes}</p>
+      <p> {video.votes}</p>
       <CountVotes />
-      <button onClick={handleRemoveVideo}>Remove</button>
+    
     </div>
   );
 };
