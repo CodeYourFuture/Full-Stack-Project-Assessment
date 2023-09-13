@@ -11,28 +11,32 @@ function App() {
   const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/")
-    .then(response => response.json())
-    .then(data => {setVideos(data); setLoading(false); console.log(data)})
-    .catch(error => console.log(error));
+    fetch("https://videos-1rb3.onrender.com/")
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
   }, [updated]);
 
   const addVideo = (newVideo) => {
-    fetch("http://127.0.0.1:5000/", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newVideo)
-})
-.then(response => response.json())
-.then(data => {
-    console.log("Response:", data);
-    setUpdated(!updated)
-})
-.catch(error => {
-    console.error("Error:", error);
-});
+    fetch("https://videos-1rb3.onrender.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response:", data);
+        setUpdated(!updated);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const upVote = (video) => {
@@ -41,13 +45,16 @@ function App() {
     );
     setVideos(updatedVideos);
     
-    fetch(`http://127.0.0.1:5000/update_rating`, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({id: video.id, rating: video.rating+1})}).then(response => response.json()).then(data => console.log(data))
-    .catch(error => console.log("Error: ", error));
+    fetch(`https://videos-1rb3.onrender.com/update_rating`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: video.id, rating: video.rating + 1 }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log("Error: ", error));
   }
 
   const downVote = (video) => {
@@ -55,7 +62,7 @@ function App() {
       v === video ? { ...v, rating: v.rating - 1 } : v
     );
     setVideos(updatedVideos);
-    fetch(`http://127.0.0.1:5000/update_rating`, {
+    fetch(`https://videos-1rb3.onrender.com/update_rating`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,16 +75,16 @@ function App() {
   };
 
   const removeVideo = (video) => {
-    fetch(`http://127.0.0.1:5000/${video.id}`, {
+    fetch(`https://videos-1rb3.onrender.com/${video.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     })
       .then((response) => response.json())
-      .then((data) => { 
+      .then((data) => {
         console.log("Response:", data);
-        setUpdated(!updated)
+        setUpdated(!updated);
       })
       .catch((error) => {
         console.error("Error:", error);

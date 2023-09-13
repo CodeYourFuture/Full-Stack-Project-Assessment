@@ -10,12 +10,20 @@ app.use(bodyParser.json());
 
 const { Pool } = require("pg");
 
+// const db = new Pool({
+//   user: process.env.USERNAME,
+//   host: process.env.HOSTNAME,
+//   database: process.env.DATABASE_NAME,
+//   password: process.env.PASSWORD,
+//   port: process.env.DB_PORT,
+// });
+
 const db = new Pool({
-  user: process.env.USERNAME,
-  host: process.env.HOSTNAME,
-  database: process.env.DATABASE_NAME,
-  password: process.env.PASSWORD,
-  port: process.env.DB_PORT,
+  user: "annafyz",
+  host: "dpg-ck0dh6b6fquc73d3phsg-a",
+  database: "dbvideos_5x69",
+  password: "CHUKBrp4IRKJdvgJ4RCE9WDPJepHy4Jf",
+  port: 5432,
 });
 
 
