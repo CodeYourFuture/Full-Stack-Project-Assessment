@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 // const AllVideos = require("")
 const cors = require("cors");
 const short = require('short-uuid');
@@ -8,11 +8,11 @@ const translator = short("12345")
 
 const { Pool } = require("pg");
 const db = new Pool({
-  user: "Mac", // replace with you username
-  host: "localhost",
-  database: "videos",
-  password: "",
-  port: 5432,
+  user: process.env.DB_USER, // replace with you username
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 app.use(express.json());
@@ -47,7 +47,7 @@ app.post("/videos", (req, res) => {
       `INSERT INTO videos (title, url, rating)
     VALUES ($1, $2, $3)`;
     db.query(query, [newVideoTitle, newVideoURL, newVideoRating])
-      .then((result) => {
+      .then(() => {
         res.status(201).send("new video created");
       })
       .catch(err => {
