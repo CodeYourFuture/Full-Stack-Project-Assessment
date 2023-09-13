@@ -25,7 +25,7 @@ const db = new Pool({
 // GET "/"
 // Returns all the videos
 app.get("/", function (request, response) {
-  db.query(`SELECT * FROM videos ORDER BY id`)
+  db.query(`SELECT * FROM videos ORDER BY id DESC`)
     .then((result) => {
       response.json(result.rows);
     })
