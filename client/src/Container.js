@@ -5,7 +5,7 @@ import VideoContainer from "./VideoContainer";
 
 const Container = () => {
     const [videos, setVideos] = useState([]);
-    const myLink = "https://full-stack-project-assessment-server-1p0c.onrender.com";
+    const myLink = "https://full-stack-project-assessment-k6ed.onrender.com";
 
     useEffect(() => {
     fetch(myLink)

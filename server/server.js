@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+const {Client} =require("pg");
 const client = new Client({
   host: process.env.MYHOST,
   user: process.env.MYUSER,
