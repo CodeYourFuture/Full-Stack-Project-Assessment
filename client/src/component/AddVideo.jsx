@@ -12,7 +12,12 @@ function Addvideo() {
 
   const addVideo = () => {
     if (newVideo.title && newVideo.url) {
-      const videoToAdd = { ...newVideo, rating: 0, id: idCounter };
+      const videoToAdd = {
+        ...newVideo,
+        rating: 0,
+        id: idCounter,
+        timestamp: new Date().toISOString(),
+      };
       setVideos([...videos, videoToAdd]);
       setNewVideo({ title: "", url: "" });
       setIdCounter(idCounter + 1);
@@ -74,7 +79,7 @@ function Addvideo() {
           {videos.map((video) => (
             <div className="videos" key={video.id}>
               <li>
-                <p>{video.title}</p>
+                <h3>{video.title}</h3>
                 <div className="buttons">
                   <i
                     className="fa-solid fa-thumbs-up"
@@ -97,6 +102,8 @@ function Addvideo() {
                   frameBorder="0"
                   allowFullScreen
                 ></iframe>
+                <p>Posted at: {new Date(video.timestamp).toLocaleString()}</p>
+
                 <button onClick={() => removeVideo(video.id)}>Delete</button>
               </li>
             </div>
