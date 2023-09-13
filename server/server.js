@@ -5,7 +5,11 @@ const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 require('dotenv').config();
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://videosfront.onrender.com",
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());  
 
 const { Pool } = require("pg");
