@@ -1,14 +1,16 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT;
+require('dotenv').config()
+const port = process.env.PORT || 5000;
 // const AllVideos = require("")
 const cors = require("cors");
 const short = require('short-uuid');
 const translator = short("12345")
 
+
 const { Pool } = require("pg");
 const db = new Pool({
-  user: process.env.DB_USER, // replace with you username
+  user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
@@ -57,7 +59,6 @@ app.post("/videos", (req, res) => {
     // videos.push(newVideo)
     // res.send(videos)
   }
-
 });
 
 
