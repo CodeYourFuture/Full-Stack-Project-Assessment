@@ -5,7 +5,7 @@ import AddingItem from "./AddingItem";
 import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
-  const [videos, setVideos] = useState({});
+  const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updated, setUpdated] = useState(true);
   const [sortOrder, setSortOrder] = useState("desc");
@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
     .then(response => response.json())
-    .then(data => {setVideos(data); setLoading(false)})
+    .then(data => {setVideos(data); setLoading(false); console.log(data)})
     .catch(error => console.log(error));
   }, [updated]);
 
@@ -102,8 +102,8 @@ function App() {
       <ErrorBoundary
         fallback={<div>Could not connect to the server, sorry....</div>}
       >
-        {loading && "Loading......"}
-        {!loading && (
+        {loading && "Loading..."}
+        {!loading && Array.isArray(videos) && videos.length > 0 ? (
           <div className="video-container">
             {videos
               .slice()
@@ -120,6 +120,8 @@ function App() {
                 />
               ))}
           </div>
+        ) : (
+          <div>No videos available.</div>
         )}
       </ErrorBoundary>
     </div>
