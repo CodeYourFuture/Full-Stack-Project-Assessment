@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .nav{
@@ -24,17 +25,23 @@ iframe{
   border-radius: 5px;
   height: 100%;
 }
+
 .formDiv {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: start;
+  align-items: center; 
+  justify-content: center;
+  width: 100vh; 
+  height: 30vh; 
 }
+
 
 .input-group {
   display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin: 10px;
+ 
+background-color: rgb(225, 213, 52);
 }
 
 .input-group label {
@@ -47,7 +54,7 @@ iframe{
   border-radius: 3px;
   width: 100px;
   align-items: center;
-  margin-left: 5px;
+  
 }
 .addCancelBtn button{
   margin: 10px;
@@ -66,10 +73,12 @@ iframe{
 }
 .mainShowVideos{
   display: grid;
+  width: 100 vh;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: auto;
   gap: 20px;
-  
+  margin-left: auto;
+  margin-right: auto;
 }
 .thumbBtn{
   background-color: transparent;

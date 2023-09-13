@@ -11,13 +11,26 @@ const { body, validationResult } = require("express-validator");
 const port = process.env.PORT || 3000;
 const { Pool } = require("pg");
 
+// const db = new Pool({
+//   user: "shadifakhri", 
+//   host: "localhost",
+//   database: "database",
+//   password: "",
+//   port: 5432,
+// });
+
 const db = new Pool({
-  user: "shadifakhri", 
-  host: "localhost",
-  database: "database",
-  password: "",
+  user: "shadi_user",
+  host: "dpg-cjs7s5dv2qks738v6ltg-a.oregon-postgres.render.com",
+  database: "shadi",
+  password: "j7lLUQoGj3mMw7Q7gH66Nz3ygDizGews",
   port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
+
 // app.get("/videos", function (req, res) {
 //   if (videos.length === 0) {
 //     return res.status(404).json({ error: "no videos found" });
