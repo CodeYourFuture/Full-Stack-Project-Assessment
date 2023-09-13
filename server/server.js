@@ -1,15 +1,87 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
-
+const cors = require("cors");
+app.use(express.json());
+app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const { Client } = require("pg");
+const client = new Client({
+  host: process.env.MYHOST,
+  user: process.env.MYUSER,
+  port: process.env.MYPORT,
+  password: process.env.MYPASSWORD,
+  database: process.env.MYDATABASE,
+  ssl: true,
+});
+
+client.connect(function (error) {
+  if (error) {
+    throw error;
+  }
+  console.log("connected to database");
+});
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  client.query("select * from youtubevideos ORDER BY title", (error, result) => {
+    if (!error) {
+      res.json(result.rows);
+    } else {
+      console.log(error.message);
+    }
+  });
+  client.end;
+});
+
+// post"/"
+app.post("/", (req, res) => {
+  const { title, url } = req.body;
+  client.query(
+  "INSERT INTO youtubevideos (title, url, rating) VALUES ($1, $2, 0)",
+  [title, url],
+  (error, result) => {
+    if (!error) {
+      res.status(201).send("success");
+    } else {
+      console.log(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+}
+)
+});
+
+
+app.delete("/:id", (req, res) => {
+  const idFromInput = parseInt(req.params.id);
+    client.query(
+      "DELETE FROM youtubevideos WHERE id=($1)",[idFromInput],
+      (error, result) => {
+        if (!error) {
+          res.status(201).send("success");
+        } else {
+          console.log(error.message);
+          res.status(500).send("Internal Server Error");
+        }
+      }
+    );
+});
+
+app.put("/:id", (req, res) => {
+  const idFromInput = parseInt(req.params.id);
+  let myRating = Number(req.body.video.rating);
+    client.query(
+      "UPDATE youtubevideos SET rating = ($2) WHERE id = ($1)",
+      [idFromInput, myRating],
+      (error, result) => {
+        if (!error) {
+          res.status(201).send("success");
+        } else {
+          console.log(error.message);
+          res.status(500).send("Internal Server Error");
+        }
+      }
+    );
 });
