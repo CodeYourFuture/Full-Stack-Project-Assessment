@@ -11,9 +11,15 @@ app.use(cors());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = require("./exampleresponse.json");
-
+const { BubbleSort } = require("./functions/BubbleSort");
+const { BubbleSortReverse } = require("./functions/BubbleSortReverse");
 // GET "/"
 app.get("/videos", (req, res) => {
+  const { order } = req.query;
+  BubbleSort(videos);
+  if (order === "asc") {
+    BubbleSortReverse(videos);
+  }
   res.json(videos);
 });
 
@@ -58,3 +64,17 @@ app.delete("/videos/:id", (req, res) => {
   videos.splice(deletedVideoIndex, 1);
   res.sendStatus(200).end();
 });
+
+///?order=asc
+
+/* app.get("/videos/search", (req, res) => {
+  const searchTerm = req.query.order;
+  if (searchTerm == "desc") {
+    BubbleSort(videos);
+    console.log("bubledorted")
+  } 
+
+  res.json(videos);
+}); */
+
+//else if (searchTerm == "asc")
