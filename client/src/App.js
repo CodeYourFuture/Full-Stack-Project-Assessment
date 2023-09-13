@@ -16,8 +16,7 @@ function App() {
       .then((data) => {
         setVideos(data);
         setLoading(false);
-        console.log(data);
-      })
+    })
       .catch((error) => console.log(error));
   }, [updated]);
 
