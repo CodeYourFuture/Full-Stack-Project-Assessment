@@ -4,8 +4,6 @@ import VideoList from "./components/VideoList";
 import AddVideoForm from "./components/AddVideoForm";
 import Searchbar from "./components/Searchbar";
 
-// fetch from here: http://127.0.0.1:5000/
-
 function App() {
   // An empty array [] to hold all the videos as our component loads them
   const [videos, setVideos] = useState([]);
@@ -13,7 +11,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   // backend
-  const apiURL = "http://127.0.0.1:5000";
+  const apiURL = "https://full-stack-video-app-backend.onrender.com";
 
   const [formData, setFormData] = useState({
     title: "",
