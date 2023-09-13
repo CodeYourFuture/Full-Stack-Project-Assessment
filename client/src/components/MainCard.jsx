@@ -1,55 +1,26 @@
-import { useEffect, useState } from "react";
+import React from "react";
 
-const MainCard = () => {
-  const [videos, setvideos] = useState([]);
-
-  useEffect(() => {
-    fetch("https://junita-full-stack-project-assessment.onrender.com/")
-      .then((res) => res.json())
-      .then((data) => {
-        setvideos(data);
-      })
-      .catch((error) => console.error("Error fetching videos", error));
-  }, []);
+const MainCard = ({ video, onVote, onDelete }) => {
+  const videoId = video.url.split("v=")[1];
 
   return (
-    <div>
-      {videos.map((video) => {
-        const videoId = video.url.split("v=")[1];
-        return (
-          <div>
-            <h2>{video.title}</h2>
-            <iframe
-              className="iframe"
-              width="400"
-              height="315"
-              src={`https://www.youtube.com/embed/${videoId}`}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture web-share"
-              allowfullscreen
-            ></iframe>
-            <p className="likes">Likes: {video.rating}</p>
-            <button>
-              <i
-                //onClick={() => onVote(video.id, "up")}
-                type="button"
-                class="fa fa-thumbs-up"
-              ></i>
-            </button>
-            <button>
-              <i
-                //onClick={() => onVote(video.id, "down")}
-                type="button"
-                class="fa fa-thumbs-down"
-              ></i>
-            </button>
-            <div>
-              <button>Remove</button>
-            </div>
-          </div>
-        );
-      })}
+    <div className="video">
+      <h2>{video.title}</h2>
+      <iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <p>Vote Score: {video.rating}</p>
+      <div className="button-container">
+        <button onClick={() => onVote(video.id, "up")}>Up Vote</button>
+        <button onClick={() => onVote(video.id, "down")}>Down Vote</button>
+        <button onClick={() => onDelete(video.id)}>Delete</button>
+      </div>
     </div>
   );
 };
