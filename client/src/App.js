@@ -10,12 +10,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h1 style={{background:"#ccc"}}>Video Recommendation</h1>
+        <header className="appHeader">
+          <h1 style={{background:"#97CAEF"}}>Video Recommendation</h1>
         </header>
         <nav className="nav">
           
-          <Link to="/videos" onClick={() => setShowVideos(true)}>
+          <Link to="/videos" style={{color:"black" ,marginLeft:20}} onClick={() => setShowVideos(true)}>
             Videos
           </Link>
         </nav>
