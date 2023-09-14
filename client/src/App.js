@@ -2,6 +2,10 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
+<<<<<<< HEAD
+=======
+//import { videosData } from "./Data";
+>>>>>>> 6c24e33e (installed CORS, made Fetch for all videos)
 
 const App = () => {
   const [videos, setVideos] = useState([]);
@@ -9,6 +13,7 @@ const App = () => {
   useEffect(() => {
     fetchAllVideos();
   }, []);
+<<<<<<< HEAD
   const fetchAllVideos = async () => {
     try {
       const response = await fetch("http://localhost:5000/");
@@ -50,6 +55,25 @@ const App = () => {
       console.log(error.message);
     }
   };
+=======
+const fetchAllVideos = async () => {
+    try {
+      const response = await fetch(
+        "https://full-stack-project-video-reccomendations.onrender.com"
+      );
+      if (!response.ok) {
+        throw Error(
+          `The fetching of videos was not successful. Error: ${response.status}`
+        );
+      }
+      const data = await response.json();
+      setVideos (data);
+    } catch (error) {
+    }
+  };
+  
+  //const handleAddVideo = (newVideo) => {};
+>>>>>>> 6c24e33e (installed CORS, made Fetch for all videos)
 
   return (
     <div className="App">
@@ -59,7 +83,7 @@ const App = () => {
       {videos.map((video) => (
         <Video key={video.id} video={video} onDeleteVideo = {handleDeleteVideo} />
       ))}
-      <AddVideo onAddVideo={handleAddVideo} />
+      {/* <AddVideo onAddVideo={handleAddVideo} /> */}
     </div>
   );
 };
