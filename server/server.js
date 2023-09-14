@@ -1,17 +1,34 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const itemsPool = require("./dbConfig");
+const itemsPool = require("./DBConfig");
 
 app.use(cors());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(3000, function () {
+  console.log("Server is listening on port 3000. Ready to accept requests!");
+});
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
+app.get("/videos", (req, res) => {
+  itemsPool.query("SELECT * FROM videos", (error, results) => {
+    if (error) {
+      console.error("Error executing the database query:", error);
+      res.status(500).json({ error: "Database error" });
+    } else {
+      res.json(results.rows);
+    }
+  });
+});
+
+// app.get("/videos", (req, res) => {
+//   itemsPool.query("SELECT * FROM videos", (error, results) => {
+//     res.json(results.rows);
+//   });
+// });
+
 let videos = [
   {
     id: 523523,
@@ -79,57 +96,57 @@ let videos = [
 app.use(express.json());
 
 // GET "/"
-app.get("/", (req, res) => {
-  res.json(videos);
-});
+// app.get("/", (req, res) => {
+//   res.json(videos);
+// });
 
-app.get("/api/items", async (req, res) => {
-  try {
-    const allItems = await itemsPool.query("SELECT * FROM items");
-    res.json({ allItems });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-});
+// app.get("/api/items", async (req, res) => {
+//   try {
+//     const allItems = await itemsPool.query("SELECT * FROM items");
+//     res.json({ allItems });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error.message);
+//   }
+// });
 
-app.post("/", (req, res) => {
-  const title = req.body.title;
-  const url = req.body.url;
+// app.post("/", (req, res) => {
+//   const title = req.body.title;
+//   const url = req.body.url;
 
-  if (!title || !url) {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
-  }
-  const id = videos.length + 1;
+//   if (!title || !url) {
+//     res.status(400).json({
+//       result: "failure",
+//       message: "Video could not be saved",
+//     });
+//   }
+//   const id = videos.length + 1;
 
-  const newVideo = { id, ...req.body, rating: 0 };
-  console.log(req.body);
-  videos.push(newVideo);
-  res.status(201).send({ id: newVideo.id });
-});
+//   const newVideo = { id, ...req.body, rating: 0 };
+//   console.log(req.body);
+//   videos.push(newVideo);
+//   res.status(201).send({ id: newVideo.id });
+// });
 
-app.get("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
+// app.get("/:id", (req, res) => {
+//   const videoId = parseInt(req.params.id);
 
-  const video = videos.find((video) => video.id === videoId);
+//   const video = videos.find((video) => video.id === videoId);
 
-  res.status(200).send({ video });
-});
+//   res.status(200).send({ video });
+// });
 
-app.delete("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
+// app.delete("/:id", (req, res) => {
+//   const videoId = parseInt(req.params.id);
 
-  const videoIndex = videos.findIndex((video) => video.id === videoId);
+//   const videoIndex = videos.findIndex((video) => video.id === videoId);
 
-  if (videoIndex !== -1) {
-    videos.splice(videoIndex, 1);
-    return res.status(200).json({});
-  } else {
-    return res
-      .status(400)
-      .json({ result: "failure", message: "Video could not be deleted" });
-  }
-});
+//   if (videoIndex !== -1) {
+//     videos.splice(videoIndex, 1);
+//     return res.status(200).json({});
+//   } else {
+//     return res
+//       .status(400)
+//       .json({ result: "failure", message: "Video could not be deleted" });
+//   }
+// });
