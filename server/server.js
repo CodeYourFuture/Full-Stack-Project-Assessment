@@ -1,18 +1,24 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
-const cors = require("cors");
-app.use(cors());
 const { Pool } = require("pg");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 
-const videos = require("./exampleresponse.json");
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// const videos = require("./exampleresponse.json");
 
 app.use(express.json());
 
+// credentials for database
 const db = new Pool({
-  user: process.env.POSTGRES_USER,
+  user: process.env.POSTGRES_USERNAME,
   host: process.env.POSTGRES_HOST,
   database: process.env.POSTGRES_DATABASE,
   password: process.env.POSTGRES_PASSWORD,
@@ -26,6 +32,7 @@ app.get("/videos", (req, res) => {
   res.status(200).json(videos);
 });
 
+// Connecting to database
 db.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
@@ -34,6 +41,7 @@ db.connect(function (err) {
 // friend's idea to get all the videos:
 
 app.get("/", (req, res) => {
+  // getting data from videos table
   db.query(`SELECT * FROM videos ORDER BY title`, (error, result) => {
     // using callback function to catch the error; later on we can use .then promises
     if (!error) {
