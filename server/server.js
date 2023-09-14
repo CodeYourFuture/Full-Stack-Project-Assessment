@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+const itemsPool = require("./dbConfig");
 
 app.use(cors());
 
@@ -78,6 +81,16 @@ app.use(express.json());
 // GET "/"
 app.get("/", (req, res) => {
   res.json(videos);
+});
+
+app.get("/api/items", async (req, res) => {
+  try {
+    const allItems = await itemsPool.query("SELECT * FROM items");
+    res.json({ allItems });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
 app.post("/", (req, res) => {
