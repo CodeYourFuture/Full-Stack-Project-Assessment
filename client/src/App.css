@@ -1,3 +1,10 @@
+
 .App {
   text-align: center;
 }
+body {
+  background: #f5f5f5;
+  background-image: url('./footbal.jpg');
+}
+
+

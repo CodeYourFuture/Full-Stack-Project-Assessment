@@ -2,7 +2,17 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const exampledata = require('../exampleresponse.json')
+const {Pool} = require('pg');
+const cors = require ('cors')
+require('dotenv').config({path:'./.env'})
 
+const db = new Pool({
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
 
 app.use(express.json()); 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -13,8 +23,17 @@ let videos = exampledata;
 
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.json(videos);
+  const order = req.query.order || "desc";
+
+  // Sort videos based on the 'order' parameter
+  let sortedVideos = videos;
+  if (order === "asc") {
+    sortedVideos = videos.slice().sort((a, b) => a.votes - b.votes);
+  } else if (order === "desc") {
+    sortedVideos = videos.slice().sort((a, b) => b.votes - a.votes);
+  }
+
+  res.json(sortedVideos);
 });
 
 app.post("/", (req, res) => {

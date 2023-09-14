@@ -57,8 +57,8 @@ const AddVideo = ({ onAddVideo }) => {
   };
 
   return (
-    <div>
-      <h2>Add a New Video</h2>
+    <div className='addContainer'>
+      <h2>Add your video</h2>
       <label>
         Title:
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
