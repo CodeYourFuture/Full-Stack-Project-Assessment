@@ -8,10 +8,19 @@ function App() {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     fetch(`https://paulina-full-stack-project-server.onrender.com/`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) {
+          return res.json();
+        } else {
+          throw new Error(
+            `Encountered something unexpected: ${res.status} ${res.statusText}`
+          );
+        }
+      })
       .then((data) => {
         setVideos(data);
-      });
+      })
+      .catch((Error) => console.log(Error));
   }, [videos]);
 
   return (

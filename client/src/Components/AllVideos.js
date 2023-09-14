@@ -7,9 +7,11 @@ const AllVideos = ({ videos, setVideos }) => {
       {
         method: "DELETE",
       }
-    ).then(() => {
-      setVideos(videos.filter((oneVideo) => oneVideo !== video));
-    });
+    )
+      .then(() => {
+        setVideos(videos.filter((oneVideo) => oneVideo !== video));
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="row">

@@ -27,7 +27,8 @@ const AddVideo = ({ videos, setVideos }) => {
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
-      });
+      })
+      .catch((error) => console.log(error));
   }
   return (
     <form onSubmit={handleSubmit}>

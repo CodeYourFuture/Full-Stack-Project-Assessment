@@ -1,9 +1,16 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3005;
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(express.json());
 app.use(cors());
+const { Pool } = require("pg");
+const db = new Pool({
+  connectionString: process.env.DB_URL,
+  ssl: { rejectUnauthorized: false },
+});
 
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
@@ -72,8 +79,15 @@ let videos = [
 ];
 
 // GET "/"
-app.get("/", (req, res) => {
-  res.json(videos);
+app.get("/videos", async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM videos");
+    const videos = result.rows;
+    res.status(200).json(videos);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: "failed to fetch videos" });
+  }
 });
 
 app.get("/:id", function (req, res) {
