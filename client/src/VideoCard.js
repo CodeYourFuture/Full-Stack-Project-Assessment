@@ -16,6 +16,24 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
             .catch(error => console.log(error))
     }
 
+    // const handleDelete = async (id) => {
+    //     try {
+    //         const res = await fetch(`https://youtube-video-server.onrender.com/videos/${id}`, {
+    //             method: "DELETE"
+    //         });
+
+    //         if (!res.ok) {
+    //             throw new Error(`Failed to delete video (${res.status})`);
+    //         }
+
+    //         const data = await res.json();
+    //         setAllMyVideos(data);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // }
+
+
     return (
         allMyVideos.map(video => (
             <div key={video.key} className="card">
@@ -30,7 +48,7 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
                 <div className='card-buttons'>
                     <button className='delete-button' onClick={() => { handleDelete(video.id) }}>Delete</button>
                     <div className="text-holder">
-                        <Counter />
+                        <Counter videoId={video.id} allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
                     </div>
                 </div>
 

@@ -21,7 +21,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideoButton allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
+      <AddVideoButton setAllMyVideos={setAllMyVideos} />
       <CardHolder allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
     </div>
   );

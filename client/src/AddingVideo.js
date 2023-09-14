@@ -1,43 +1,48 @@
 import { useState } from "react"
 
-const AddingVideo = ({ allMyVideos, setAllMyVideos }) => {
+const AddingVideo = ({ setAllMyVideos }) => {
     const [title, setTitle] = useState("")
     const [url, setUrl] = useState("")
 
-    async function handleAddButton(event) {
-        event.preventDefault()
+    async function handleAddButton(e) {
+        e.preventDefault();
         const newVideo = {
-            title, url
-        }
-        let res = await fetch("https://youtube-video-server.onrender.com/videos", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newVideo)
-        })
+            title,
+            url
+        };
 
-        if (res.ok) {
-            let video = await res.json()
-            video && fetch("https://youtube-video-server.onrender.com/videos")
-                .then((response) => {
-                    if (!response.ok) {
-                        console.log(response.status)
-                        setAllMyVideos(response.status)
-                        throw new Error(response.status)
-                    } else {
-                        return response.json()
-                    }
+        try {
+            // Add the new video
+            const res = await fetch("https://youtube-video-server.onrender.com/videos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newVideo)
+            });
 
-                })
-                .then((data) => {
-                    data && setAllMyVideos(data)
-                })
+            if (!res.ok) {
+                throw new Error(`Failed to add video (${res.status})`);
+            }
+
+            // Fetch the updated video list
+            const response = await fetch("https://youtube-video-server.onrender.com/videos");
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch video list (${response.status})`);
+            }
+
+            const data = await response.json();
+            setAllMyVideos(data);
+
+            // Reset the input fields
+            setTitle("");
+            setUrl("");
+
+        } catch (error) {
+            console.error("Error:", error);
         }
-        setTitle("")
-        setUrl("")
     }
 
     return (
-
         <div className="form-holder">
             <h3>Add Your Favorite Video</h3>
             <form onSubmit={handleAddButton}>
