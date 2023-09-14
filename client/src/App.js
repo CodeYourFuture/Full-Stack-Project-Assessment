@@ -1,12 +1,32 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
-import { videosData } from "./Data";
+//import { videosData } from "./Data";
 
 const App = () => {
-  const [videos, setVideos] = useState(videosData);
-  const handleAddVideo = (newVideo) => {};
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetchAllVideos();
+  }, []);
+const fetchAllVideos = async () => {
+    try {
+      const response = await fetch(
+        "https://full-stack-project-video-reccomendations.onrender.com"
+      );
+      if (!response.ok) {
+        throw Error(
+          `The fetching of videos was not successful. Error: ${response.status}`
+        );
+      }
+      const data = await response.json();
+      setVideos (data);
+    } catch (error) {
+    }
+  };
+  
+  //const handleAddVideo = (newVideo) => {};
 
   return (
     <div className="App">
@@ -19,7 +39,7 @@ const App = () => {
           video={video}
           />
       ))}
-      <AddVideo onAddVideo={handleAddVideo} />
+      {/* <AddVideo onAddVideo={handleAddVideo} /> */}
     </div>
   );
 };
