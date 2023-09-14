@@ -9,12 +9,3 @@ const itemsPool = new Pool({
 });
 
 module.exports = itemsPool;
-
-// // Example query
-// pool.query("SELECT * FROM your_table", (err, res) => {
-//   if (err) {
-//     console.error("Error executing query:", err);
-//   } else {
-//     console.log("Query result:", res.rows);
-//   }
-// });
