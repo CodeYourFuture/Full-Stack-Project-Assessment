@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.put("/rating/:id", async (req, res) => {
+app.put("/videos/:id", async (req, res) => {
   const videoID = req.params.id;
   try {
     const video = await query(
