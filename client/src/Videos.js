@@ -15,7 +15,9 @@ function Videos(props) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/videos");
+        const response = await fetch(
+          "https://web-server-5nme.onrender.com/videos"
+        );
         if (!response.ok) {
           throw new Error("something went wrong");
         }
@@ -40,7 +42,7 @@ function Videos(props) {
     const newVideo = { title: titleData, url: urlData, rating: 0 };
 
     //adding video
-    fetch("http://localhost:3000/videos", {
+    fetch("https://web-server-5nme.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +90,7 @@ function Videos(props) {
 
   //deleting video
   function deleteBtnHandler(item) {
-    fetch(`http://localhost:3000/videos/${item.id}`, {
+    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +123,7 @@ function Videos(props) {
       rating: newRating, // Use the updated rating
     };
 
-    fetch(`http://localhost:3000/videos/${item.id}`, {
+    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +155,7 @@ function Videos(props) {
       rating: newRating,
     };
 
-    fetch(`http://localhost:3000/videos/${item.id}`, {
+    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -174,9 +176,13 @@ function Videos(props) {
 
   return (
     <>
-      <div className="main">
+      <div className="main" style={{ width: "100vw" }}>
         {props.show && (
-          <form className="formDiv" onSubmit={addClickHandeler}>
+          <form
+            className="formDiv"
+            style={{ width: "100vw" }}
+            onSubmit={addClickHandeler}
+          >
             <div className="input-group">
               <label htmlFor="title">Title</label>
               <input
