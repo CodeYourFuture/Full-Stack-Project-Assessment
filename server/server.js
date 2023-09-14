@@ -59,7 +59,6 @@ app.delete("/:id", (req, res) => {
 
   res.json({ message: "The item has been deleted" });
 });
-// <----------------------------------------->
-// app starting ----------->
+// <------------------> app starting ----------->
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
