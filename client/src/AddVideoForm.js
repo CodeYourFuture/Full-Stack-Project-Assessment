@@ -7,7 +7,7 @@ function AddVideoForm({ addVideo }) {
     setFormData((currentData) => {
       return {
         ...currentData,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value, //"catching the value of what is typed"
       };
     });
   }
