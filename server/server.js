@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -5,21 +6,23 @@ const port = process.env.PORT || 5000;
 const cors = require('cors'); 
 app.use(cors()); 
 app.use(express.json()); 
-
-const dotenv = require('dotenv');
-dotenv.config();
-
-const itemsPool = require('./DBConfig');
-
-
+require('dotenv').config();
+const { Pool } = require('pg');
+const pool = new Pool({
+ 
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: true,
+});
 
 // GET
-app.get("/api/videos", async (req, res) => {
+app.get("/videos", async (req, res) => {
   try {
-    const client = await pool.connect();
-    const result = await client.query("SELECT * FROM videos");
+    const result = await pool.query("SELECT * FROM videos");
     const videos = result.rows;
-    client.release();
     res.json(videos);
   } catch (error) {
     console.error("Error fetching videos:", error);
@@ -28,7 +31,7 @@ app.get("/api/videos", async (req, res) => {
 });
 
 // POST 
-app.post("/api/videos",async (req, res) => {
+app.post("/videos",async (req, res) => {
   const { title, url } = req.body;
  if (!title || !url) {
     return res.status(400).json({
@@ -38,13 +41,11 @@ app.post("/api/videos",async (req, res) => {
   }
 
   try {
-    const client = await pool.connect();
-    const result = await client.query(
-      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id",
+    const result = await pool.query(
+   " INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id",
       [title, url, 0] 
     );
     const videoId = result.rows[0].id;
-    client.release();
     res.status(201).json({ id: videoId });
   } catch (error) {
     console.error("Error adding a video:", error);
@@ -54,12 +55,11 @@ app.post("/api/videos",async (req, res) => {
 
 
 // GET "/:id"
-app.get("/api/videos/:id",async (req, res) => {
+app.get("/videos/:id",async (req, res) => {
   const id = parseInt(req.params.id);
 
   try {
-    const client = await pool.connect();
-    const result = await client.query("SELECT * FROM videos WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
     const video = result.rows[0];
 
   if (!video) {
@@ -68,7 +68,6 @@ app.get("/api/videos/:id",async (req, res) => {
       message: "Video not found",
     });
   }
-  client.release();
   res.json(video);
 } catch (error) {
   console.error("Error fetching a video:", error);
@@ -77,12 +76,11 @@ app.get("/api/videos/:id",async (req, res) => {
 });
 
 // DELETE
-app.delete("/api/videos/:id", async (req, res) => {
+app.delete("/videos/:id", async (req, res) => {
   const id = parseInt(req.params.id);
 
   try {
-    const client = await pool.connect();
-    const result = await client.query("DELETE FROM videos WHERE id = $1", [id]);
+   const result = await pool.query("DELETE FROM videos WHERE id = $1", [id]);
 
   if (result.rowCount === -1) {
     return res.status(404).json({
@@ -90,8 +88,6 @@ app.delete("/api/videos/:id", async (req, res) => {
       message: "Video not found",
     });
   }
-
-  client.release();
   res.json({});
 } catch (error) {
   console.error("Error deleting a video:", error);

@@ -10,7 +10,7 @@ const AddVideoComponent = ({ addVideo }) => {
       title:title,
       url:url,
      };
-     fetch('/api/videos', {
+     fetch('/videos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

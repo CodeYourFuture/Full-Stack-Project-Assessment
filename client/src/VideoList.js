@@ -8,7 +8,7 @@ const VideoList = () => {
     useEffect(() => {
      const fetchVideos = async () => {
         try {
-          const response = await fetch('/api/videos');
+          const response = await fetch('/videos');
           if (!response.ok) {
             throw new Error('Failed to fetch videos');
           }

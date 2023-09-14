@@ -5,7 +5,7 @@ const VideoComponent = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url, rating } = video;
   
   const handleUpVote = () => {
-   fetch(`/api/videos/${video.id}/upvote`, {
+   fetch(`/videos/${video.id}/upvote`, {
       method: 'POST',
     })
       .then((response) => {
