@@ -10,17 +10,31 @@ function Addvideo() {
     setNewVideo({ ...newVideo, [name]: value });
   };
 
+  const getYouTubeVideoId = (url) => {
+    const videoIdMatch = url.match(/(?:\/|v=)([A-Za-z0-9_-]{11})(?=&|$)/);
+    if (videoIdMatch) {
+      return videoIdMatch[1];
+    }
+    return alert("link is not valid");
+  };
+
   const addVideo = () => {
     if (newVideo.title && newVideo.url) {
-      const videoToAdd = {
-        ...newVideo,
-        rating: 0,
-        id: idCounter,
-        timestamp: new Date().toISOString(),
-      };
-      setVideos([...videos, videoToAdd]);
-      setNewVideo({ title: "", url: "" });
-      setIdCounter(idCounter + 1);
+      const videoId = getYouTubeVideoId(newVideo.url);
+
+      if (videoId) {
+        const videoToAdd = {
+          ...newVideo,
+          rating: 0,
+          id: idCounter,
+          timestamp: new Date().toISOString(),
+        };
+        setVideos([...videos, videoToAdd]);
+        setNewVideo({ title: "", url: "" });
+        setIdCounter(idCounter + 1);
+      } else {
+        alert("Invalid YouTube URL. Please enter a valid YouTube video URL.");
+      }
     }
   };
 
@@ -43,14 +57,6 @@ function Addvideo() {
   const removeVideo = (id) => {
     const updatedVideos = videos.filter((video) => video.id !== id);
     setVideos(updatedVideos);
-  };
-
-  const getYouTubeVideoId = (url) => {
-    const videoIdMatch = url.match(/(?:\/|v=)([A-Za-z0-9_-]{11})(?=&|$)/);
-    if (videoIdMatch) {
-      return videoIdMatch[1];
-    }
-    return "";
   };
 
   return (

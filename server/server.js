@@ -2,12 +2,23 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const videos = require("../client/src/Data/exampleresponse.json");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 // <-------------------get------------------->
 app.get("/", (req, res) => {
-  res.json(videos);
+  let orderedVideos = [...videos];
+  const order = req.query.order;
+
+  if (order === "asc") {
+    orderedVideos.sort((a, b) => a.rating - b.rating);
+  } else {
+    orderedVideos.sort((a, b) => b.rating - a.rating);
+  }
+
+  res.json(orderedVideos);
 });
 // <----------------------------------------->
 // <---------------get By ID----------------->
@@ -59,7 +70,6 @@ app.delete("/:id", (req, res) => {
 
   res.json({ message: "The item has been deleted" });
 });
-// <----------------------------------------->
-// app starting ----------->
+// <------------------ app starting ----------->
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

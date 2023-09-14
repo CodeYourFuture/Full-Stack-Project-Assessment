@@ -1,37 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function ShowingVideos(props) {
-  const [videos, setVideos] = useState(props.result);
+function ShowingVideos() {
+  const [videos, setVideos] = useState([]);
+  const [orderBy, setOrderBy] = useState("desc");
 
-  function convertToEmbedUrl(url) {
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000/?order=${orderBy}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setVideos(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [orderBy]);
+
+  const toggleOrder = () => {
+    setOrderBy(orderBy === "asc" ? "desc" : "asc");
+  };
+
+  const convertToEmbedUrl = (url) => {
     const videoId = url.split("v=")[1];
     return `https://www.youtube.com/embed/${videoId}`;
-  }
+  };
 
-  function deleteVideo(id) {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
-  }
+  const deleteVideo = (id) => {
+    fetch(`http://127.0.0.1:5000/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        response.json();
+        setVideos((prevVideos) =>
+          prevVideos.filter((video) => video.id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting video:", error);
+      });
+  };
 
-  function handleRating(id, type) {
-    const updatedVideos = videos.map((video) => {
-      if (video.id === id) {
-        if (type === "thumbs-up") {
-          return { ...video, rating: video.rating + 1 };
-        } else if (type === "thumbs-down") {
-          return { ...video, rating: video.rating - 1 };
-        }
-      }
-      return video;
-    });
+  const handleRating = (id, type) => {
+    fetch(`http://127.0.0.1:5000/rate/${id}/${type}`, {
+      method: "PUT",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((updatedVideo) => {
+        setVideos((prevVideos) =>
+          prevVideos.map((video) => {
+            if (video.id === id) {
+              return { ...video, rating: updatedVideo.rating };
+            }
+            return video;
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("Error updating rating:", error);
+      });
+  };
 
-    setVideos(updatedVideos);
-  }
-
-  const sortedVideos = [...videos].sort((a, b) => b.rating - a.rating);
+  const sortedVideos = [...videos].sort((a, b) => {
+    if (orderBy === "asc") {
+      return a.rating - b.rating;
+    } else {
+      return b.rating - a.rating;
+    }
+  });
 
   return (
     <div className="ShowingVideos">
+      <button onClick={toggleOrder} className="Ordes">
+        {orderBy === "asc" ? "Order Ascending" : "Order Descending"}
+      </button>
+
       {sortedVideos.map((video) => (
         <div className="videos" key={video.id}>
           <p>{video.title}</p>
