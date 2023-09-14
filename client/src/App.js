@@ -7,7 +7,7 @@ import AllVideos from "./Components/AllVideos";
 function App() {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetch(`https://paulina-full-stack-project-server.onrender.com/`)
+    fetch(`https://paulina-full-stack-project-server.onrender.com/videos`)
       .then((res) => {
         if (res.status >= 200 && res.status <= 299) {
           return res.json();
