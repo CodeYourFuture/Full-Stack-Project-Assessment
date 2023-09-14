@@ -1,14 +1,4 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
-const cors = require("cors");
-app.use(cors());
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
+export const videosData = [
   {
     id: 523523,
     title: "Never Gonna Give You Up",
@@ -71,53 +61,3 @@ let videos = [
     rating: 73,
   },
 ];
-
-// GET "/"
-app.get("/", (req, res) => {
-  res.status(200).json(videos);
-});
-
-// POST "/"
-app.post("/", (req, res) => {
-  const { title, url } = req.body;
-  if (!title || !url) {
-    return res.status(400).json({
-      result: "Failure",
-      message: "Video could not be saved",
-    });
-  } else {
-    let nextVideoId = 1;
-    const newAddedVideo = {
-      id: nextVideoId++,
-      title,
-      url,
-    };
-    videos.push(newAddedVideo);
-    res.status(201).json({ id: newAddedVideo.id });
-  }
-});
-
-// GET "/{id}"
-app.get("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-  const video = videos.find((singleVideo) => singleVideo.id === videoId);
-  if (!video) {
-    return res.status(404).json({
-      result: "Failure",
-      message: "Video not found",
-    });
-  } else {
-    res.status(200).json(video);
-  }
-});
-
-// DELETE "/{id}"
-
-app.delete("/:id", (req, res) => {
-  const videoId = parseInt(request.params.id);
-  const singleVideo = videos.find((singleVideo) => singleVideo.id === videoId);
-  if (singleVideo) {
-    videos.splice(singleVideo, 1);
-  }
-  res.json(videos);
-});
