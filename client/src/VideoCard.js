@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player'
 
 
 
-const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
+const VideoCard = ({ allMyVideos, setAllMyVideos, rating, setRating }) => {
 
     const handleDelete = (id) => {
         fetch(`https://youtube-video-server.onrender.com/videos/${id}`, {
@@ -48,7 +48,7 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
                 <div className='card-buttons'>
                     <button className='delete-button' onClick={() => { handleDelete(video.id) }}>Delete</button>
                     <div className="text-holder">
-                        <Counter videoId={video.id} allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
+                        <Counter rating={rating} setRating={setRating} videoId={video.id} allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
                     </div>
                 </div>
 

@@ -16,7 +16,7 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-
+  // ssl: true
 });
 
 db.connect(function (err) {
@@ -43,22 +43,41 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.put("/videos/:id", async (req, res) => {
-  const videoID = req.params.id;
-  try {
-    const video = await db.query("UPDATE videos SET rating = rating + 1 WHERE id=$1", [videoID]);
 
-    if (!video) {
-      res.status(404).send("Video not found");
-      console.log("There is no video with this ID!");
-    } else {
-      res.status(200).send("Video updated");
-    }
+
+app.put("/videos/:id/rating", async (req, res) => {
+  const videoId = req.params.id;
+  const { rating } = req.body;
+
+  try {
+    const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
+    const updateValues = [rating, videoId];
+    await db.query(updateQuery, updateValues);
+
+    res.status(200).send("Rating updated");
   } catch (error) {
-    console.error("Error updating video:", error);
-    res.status(500).json({ error: "Internal server error", message: error.message });
+    console.error("Error updating rating:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
+
+// app.put("/videos/:id", async (req, res) => {
+//   const videoID = req.params.id;
+//   try {
+//     const video = await db.query("UPDATE videos SET rating = rating + 1 WHERE id=$1", [videoID]);
+//     if (!video) {
+//       res.status(404).send("Video not found");
+//       console.log("There is no video with this ID!");
+//     } else {
+//       res.status(200).send("Video updated");
+//     }
+//   } catch (error) {
+//     console.error("Error updating video:", error);
+//     res.status(500).json({ error: "Internal server error", message: error.message });
+//   }
+// });
 
 
 app.post("/videos", (req, res) => {

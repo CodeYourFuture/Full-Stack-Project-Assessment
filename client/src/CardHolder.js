@@ -2,7 +2,7 @@ import { useState } from "react"
 import VideoCard from "./VideoCard"
 
 
-const CardHolder = ({ allMyVideos, setAllMyVideos }) => {
+const CardHolder = ({ allMyVideos, setAllMyVideos, rating, setRating }) => {
     const [sorting, setSorting] = useState("asc")
 
     const handleSortingButton = () => {
@@ -31,7 +31,7 @@ const CardHolder = ({ allMyVideos, setAllMyVideos }) => {
                 </button>
             </div>
             <div className="cards-holder">
-                <VideoCard allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
+                <VideoCard rating={rating} setRating={setRating} allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
             </div>
         </div>
 
