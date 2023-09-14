@@ -2,10 +2,12 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import VideoCard from "./components/VideoCard";
 import AddVideo from "./components/AddVideo";
-import BubbleSort from "./functions/BubbleSort";
+import SortButton from "./components/SortButton";
+import BubbleSortReverse from "./functions/BubbleSortReverse";
 
 function App() {
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState("Up");
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -17,8 +19,6 @@ function App() {
     };
     dataFetch();
   }, []);
-
-  BubbleSort(data);
 
   const deleteHandle = (id) => {
     const updatedData = data.filter((video) => video.id !== id);
@@ -36,6 +36,10 @@ function App() {
     setData([...data, newVideo]);
   };
 
+  if (sort === "Down") {
+    BubbleSortReverse(data);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -43,6 +47,7 @@ function App() {
       </header>
       <body>
         <AddVideo addVideo={addVideo} />
+        <SortButton sort={sort} setSort={setSort} />
         <div className="video-cards">
           {data.map((video) => (
             <VideoCard
