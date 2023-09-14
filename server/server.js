@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 
 
 
-app.put("/videos/:id/rating", async (req, res) => {
+app.put("/videos/:id", async (req, res) => {
   const videoId = req.params.id;
   const { rating } = req.body;
 
