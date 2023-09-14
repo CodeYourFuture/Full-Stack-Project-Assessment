@@ -11,3 +11,61 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.video-page {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.video-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.video {
+  max-width: 100%;
+  height: auto;
+}
+
+.rating-votes {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.rating {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.vote-button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.vote-button:hover {
+  background-color: #0056b3;
+}
+
+
+.votes-count {
+  font-size: 16px;
+  font-weight: bold;
+}

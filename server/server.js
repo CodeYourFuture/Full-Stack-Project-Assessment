@@ -13,3 +13,6 @@ app.get("/", (req, res) => {
   // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
+app.get("/", (req, res) => {
+  res.send("GET request to the homepage");
+});
