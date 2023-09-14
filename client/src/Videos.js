@@ -186,7 +186,7 @@ function Videos(props) {
             <div className="input-group">
               <label htmlFor="title">Title</label>
               <input
-                style={{ marginLeft: 10, borderRadius: 5 }}
+                className="lineInput"
                 id="title"
                 value={titleData}
                 onChange={(e) => {
@@ -198,7 +198,7 @@ function Videos(props) {
             <div className="input-group">
               <label htmlFor="url">Url</label>
               <input
-                style={{ marginLeft: 10, borderRadius: 5 }}
+                className="lineInput"
                 id="url"
                 value={urlData}
                 onChange={(e) => setUrlData(e.target.value)}

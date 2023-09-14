@@ -2,21 +2,22 @@
   text-align: center;
   width: 100%;
 }
-
-.nav{
-  background-color: rgb(225, 213, 52);
+.App-header{
+  background-color: rgb(217, 232, 180);
+}
+.nav{ background-color: rgb(217, 232, 180);
 }
 .main{
   width: 800px;
 }
 div{
-  background-color: lightgray;
+  background-color: white;
 }
 p{
-  background-color: lightgray;
+  background-color: white;
 }
 button{
-  background-color: gray;
+  background-color: lightgray;
   border-radius: 5px;
   border-style: none;
   color:rgb(195, 188, 87) ;
@@ -40,24 +41,38 @@ iframe{
   display: flex;
   justify-content: center;
   margin: 10px;
- 
-background-color: rgb(225, 213, 52);
+background-color: lightgray;
+}
+
+#url.lineInput{
+ margin-left: 10px;
+ background-color:lightgray ;                 
+ border: none;
+ border-bottom: 1px solid gray; 
+ outline: none;
+ padding: 5px;
+}
+#title.lineInput{
+ margin-left: 10px;
+ background-color:lightgray ;                 
+ border: none;
+ border-bottom: 1px solid gray; 
+ outline: none;
+ padding: 5px;
+
 }
 
 .input-group label {
   margin-bottom: 5px;
-}
-
-.input-group input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 100px;
-  align-items: center;
+  color: gray;
   
 }
+.addCancelBtn{
+  display: flex;
+  justify-content: space-between;
+}
 .addCancelBtn button{
-  margin: 10px;
+  margin: 20px;
 }
 .showVideo{
   display: flex;
