@@ -3,6 +3,7 @@ const Counter = ({ allMyVideos, setAllMyVideos, videoId }) => {
     const [counterDown, setCounterDown] = useState(0)
     const [counterUp, setCounterUp] = useState(0)
     const [rating, setRating] = useState(0)
+
     const handleCounterDown = () => {
         setCounterDown(counterDown + 1)
         if (rating <= 0) {
