@@ -42,7 +42,24 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-
+app.put("/rating/:id", async (req, res) => {
+  const videoID = req.params.id;
+  try {
+    const video = await query(
+      "UPDATE videos SET rating = rating + 1 WHERE id=$1",
+      [videoID]
+    );
+    if (!video) {
+      res.status(404)
+      console.log("There is no video with this ID!")
+    } else {
+      res.status(200);
+      res.send("Video updated")
+    }
+  } catch (error) {
+    res.status(404).json(res.message);
+  }
+});
 
 app.post("/videos", (req, res) => {
   let newVideoTitle = req.body.title
@@ -68,23 +85,7 @@ app.post("/videos", (req, res) => {
   }
 });
 
-app.put("/rating/:id", async (req, res) => {
-  const videoID = req.params.id;
-  try {
-    const video = await query(
-      "UPDATE videos SET rating = rating + 1 WHERE id=$1",
-      [videoID]
-    );
-    if (!video) {
-      res.status(404)
-      console.log("There is no video with this ID!")
-    } else {
-      res.status(200).json(res.rows);
-    }
-  } catch (error) {
-    res.status(404).json(res.message);
-  }
-});
+
 
 
 app.delete("/videos/:id", (req, res) => {
