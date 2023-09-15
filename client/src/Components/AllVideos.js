@@ -3,7 +3,7 @@ import VideoCard from "./VideoCard";
 const AllVideos = ({ videos, setVideos }) => {
   const removeVideo = (video) => {
     fetch(
-      `https://paulina-full-stack-project-server.onrender.com/${video.id}`,
+      `https://paulina-full-stack-project-server.onrender.com/videos/${video.id}`,
       {
         method: "DELETE",
       }

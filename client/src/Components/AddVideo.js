@@ -17,18 +17,22 @@ const AddVideo = ({ videos, setVideos }) => {
       title: videoName,
       url: videoLink,
     };
-    fetch(`https://paulina-full-stack-project-server.onrender.com/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(video),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
+    if (video.url.startsWith("https://www.youtube.com/")) {
+      fetch(`https://paulina-full-stack-project-server.onrender.com/videos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(video),
       })
-      .catch((error) => console.log(error));
+        .then((res) => res.json())
+        .then((data) => {
+          setVideos(data);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      alert("Please ensure fields are filled in correctly");
+    }
   }
   return (
     <form onSubmit={handleSubmit}>

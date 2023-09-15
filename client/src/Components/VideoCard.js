@@ -36,7 +36,7 @@ const VideoCard = ({ video, removeVideo }) => {
         </button>
       </div>
       <button
-        class="btn btn-danger btn-lg btn-block mt-2 p-1"
+        className="btn btn-danger btn-lg btn-block mt-2 p-1"
         onClick={() => removeVideo(video)}
       >
         Remove video

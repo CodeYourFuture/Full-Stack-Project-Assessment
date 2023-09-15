@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3006;
 const cors = require("cors");
-const dotenv = require("dotenv");
-dotenv.config();
 app.use(express.json());
 app.use(cors());
+const isUrl = require("is-url");
+const dotenv = require("dotenv");
+dotenv.config();
 const { Pool } = require("pg");
 const db = new Pool({
   connectionString: process.env.DB_URL,
@@ -82,49 +83,61 @@ let videos = [
 app.get("/videos", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM videos");
-    const videos = result.rows;
-    res.status(200).json(videos);
+    res.status(200).json(result.rows);
   } catch (error) {
     console.log(error);
     res.status(404).json({ error: "failed to fetch videos" });
   }
 });
 
-app.get("/:id", function (req, res) {
+app.get("/videos/:id", function (req, res) {
   let id = Number(req.params.id);
-  let video = videos.find((video) => video.id === id);
-  if (video) {
-    res.json(video);
-  } else res.status(404).send("Video with this id does not exist");
-});
-app.post("/", function (req, res) {
-  let id = videos[videos.length - 1].id + 1;
-  let newVideo = {
-    id: id,
-    title: req.body.title,
-    url: req.body.url,
-    rating: Math.floor(Math.random() * 100),
-  };
-  if (req.body.title && req.body.url) {
-    videos.push(newVideo);
-    res.json(videos);
-  } else
-    res.status(404).send({
-      result: "failure",
-      message: "Video could not be saved",
+  db.query("SELECT * FROM videos WHERE id = $1", [id])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
     });
+});
+app.post("/videos", function (req, res) {
+  const newTitle = req.body.title;
+  const newUrl = req.body.url;
+  const newRating = 0;
+
+  const query = `INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)`;
+  if (req.body.title && req.body.url && isUrl(req.body.url)) {
+    db.query(query, [newTitle, newUrl, newRating])
+      .then(() => {
+        res.status(201).send("Created a new video");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(404).send({
+          result: "failure",
+          message: "Video could not be saved",
+        });
+      });
+  } else {
+    res
+      .status(404)
+      .send("Please check the fields have been correctly filled in");
+  }
 });
 
-app.delete("/:id", function (req, res) {
-  let id = Number(req.params.id);
-  let IndexOfVideo = videos.findIndex((video) => video.id === id);
-  if (IndexOfVideo >= 0) {
-    res.json(videos.splice(IndexOfVideo, 1));
-  } else
-    res.status(404).send({
-      result: "failure",
-      message: "Video could not be deleted",
-    });
+app.delete("/videos/:id", function (req, res) {
+  let VideoId = Number(req.params.id);
+  db.query("DELETE FROM videos WHERE id=$1", [VideoId])
+    .then(() => {
+      return db.query("DELETE FROM videos WHERE id=$1", [VideoId]);
+    })
+    .then(() => res.send(`Video ${customerId} deleted!`))
+    .catch((e) => console.error(e));
+  res.status(404).send({
+    result: "failure",
+    message: "Video could not be deleted",
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
