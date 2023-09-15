@@ -33,7 +33,6 @@ const AddVideo = ({ onVidAdd }) => {
       alert("Please fill in all fields");
     }
   };
-  
 
   return (
     <form>

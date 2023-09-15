@@ -6,7 +6,7 @@ function Video({ videoObj, deleteVideo }) {
 
   const voteIncrease = () => {
     const newRating = videoObj.rating + 1;
-    fetch(`http://127.0.0.1:5050/videos/${videoObj.id}`, {
+    fetch(`https://node-server-full-stack.onrender.com/videos/${videoObj.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ function Video({ videoObj, deleteVideo }) {
 
   const voteDecrease = () => {
     const newRating = videoObj.rating - 1;
-    fetch(`http://127.0.0.1:5050/videos/${videoObj.id}`, {
+    fetch(`https://node-server-full-stack.onrender.com/videos/${videoObj.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

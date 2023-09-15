@@ -10,7 +10,7 @@ function VideosList() {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5050/videos")
+    fetch("https://node-server-full-stack.onrender.com/videos")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -25,7 +25,7 @@ function VideosList() {
   const newVideo = (newInput) => {
     newInput.id = videos.length + 1;
     newInput.rating = 0;
-    fetch("http://127.0.0.1:5050/videos", {
+    fetch("https://node-server-full-stack.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
@@ -48,7 +48,7 @@ function VideosList() {
   };
 
   const deleteVideoItem = (videoId) => {
-    fetch(`http://127.0.0.1:5050/videos/${videoId}`, {
+    fetch(`https://node-server-full-stack.onrender.com/videos/${videoId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/JSON",
@@ -60,7 +60,7 @@ function VideosList() {
   };
 
   const fetchVideos = () => {
-    fetch("http://127.0.0.1:5050/videos")
+    fetch("https://node-server-full-stack.onrender.com/videos")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
@@ -71,7 +71,7 @@ function VideosList() {
       });
   };
   const searchByName = (search) => {
-    fetch(`http://127.0.0.1:5050/videos/${search}`, {
+    fetch(`https://node-server-full-stack.onrender.com/videos/${search}`, {
       method: "GET",
       headers: { "content-type": "application/JSON" },
     })
