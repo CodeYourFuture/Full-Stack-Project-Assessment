@@ -47,10 +47,10 @@ app.get("/videos", async function (req, res) {
   res.json(result.rows);
 });
 
-//??????????????????????????
 
 
-//ordering by assending and dessending for example /videos/?order=asc
+
+//ordering by assending and dessending for example /videos?order=asc
 // app.get("/videos", function (req, res) {
 //   if (videos.length === 0) {
 //     return res.status(404).json({ error: "no videos found" });
@@ -67,20 +67,17 @@ app.get("/videos", async function (req, res) {
 
 //   return res.json(orderVideos);
 // });
-
+//ordering by assending and dessending for example /videos?order=asc
 app.get("/videos", async function (req, res) {
   const result = await db.query("SELECT * FROM videos");
-console.log(result.rows);
   if (result.rows.length === 0) {
     return res.status(404).json({ error: "no videos found" });
   }
-
   const order = req.query.order;
-
   let orderVideos;
-
+  console.log("Order:", order);
+  console.log("Before Sorting:", result.rows);
   if (order === "asc") {
-    
     orderVideos = result.rows.sort((a, b) => a.rating - b.rating);
   } else if (order === "desc") {
     orderVideos = result.rows.sort((a, b) => b.rating - a.rating);

@@ -47,7 +47,7 @@ async function descClickHandler(e) {
     <Router>
       <div className="App">
         <header className="appHeader">
-          <h1 style={{ background: "#97CAEF", color: "aliceblue" }}>
+          <h1 style={{ background: "#97CAEF", color: "black" }}>
             Video Recommendation
           </h1>
         </header>

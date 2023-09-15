@@ -243,7 +243,7 @@ function Videos(props) {
                       <ThumbDownIcon />
                     </button>
                   </div>
-                  <p style={{ color: "gray", textDecoration: "underline" }}>
+                  <p style={{ color: "black"}}>
                     {item.rating}
                   </p>
 
