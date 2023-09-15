@@ -50,7 +50,7 @@ app.get("/videos", async function (req, res) {
 //??????????????????????????
 
 
-//ordering by assending and dessending for example /video/?order=asc
+//ordering by assending and dessending for example /videos/?order=asc
 // app.get("/videos", function (req, res) {
 //   if (videos.length === 0) {
 //     return res.status(404).json({ error: "no videos found" });
@@ -67,6 +67,30 @@ app.get("/videos", async function (req, res) {
 
 //   return res.json(orderVideos);
 // });
+
+app.get("/videos", async function (req, res) {
+  const result = await db.query("SELECT * FROM videos");
+console.log(result.rows);
+  if (result.rows.length === 0) {
+    return res.status(404).json({ error: "no videos found" });
+  }
+
+  const order = req.query.order;
+
+  let orderVideos;
+
+  if (order === "asc") {
+    
+    orderVideos = result.rows.sort((a, b) => a.rating - b.rating);
+  } else if (order === "desc") {
+    orderVideos = result.rows.sort((a, b) => b.rating - a.rating);
+  } else {
+    return res.status(400).json({ error: "Invalid order parameter" });
+  }
+  return res.status(200).json(orderVideos);
+});
+
+
 
 //adding new video
 // app.post(

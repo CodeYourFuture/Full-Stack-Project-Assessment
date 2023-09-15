@@ -1,12 +1,38 @@
 .App {
   text-align: center;
   width: 100%;
+  background-color: #55BCC9;
 }
 
 .nav{
+  display: flex;
+  justify-content: space-around;
   background-color: #97CAEF;
-  height: 30px;
+  height: 40px;
   margin-top: 10px;
+}
+.orderBtn{
+  display: flex;
+  background-color: transparent;
+  margin: 5px;
+  font-weight: bold;
+  
+}
+.orderBtn p{
+  background-color: transparent;
+  color: #FC4445;
+}
+.orderBtn button{
+  background-color:  transparent;
+  border-radius: 5px;
+  border-style: none;
+  color:aliceblue ;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.orderBtn button:active {
+  color: black;
 }
 .main{
   width: 800px;

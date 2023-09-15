@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 function Videos(props) {
-  const [loadData, setLoadData] = useState([]);
+  const {loadData,setLoadData}=props;
+  // const [loadData, setLoadData] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [urlData, setUrlData] = useState("");
 
@@ -184,6 +185,7 @@ function Videos(props) {
             onSubmit={addClickHandeler}
           >
             <div className="input-group">
+              
               <label htmlFor="title">Title</label>
               <input
                 className="lineInput"
