@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Addvideo() {
   const [videos, setVideos] = useState([]);
   const [newVideo, setNewVideo] = useState({ title: "", url: "" });
   const [idCounter, setIdCounter] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -15,10 +16,16 @@ function Addvideo() {
     if (videoIdMatch) {
       return videoIdMatch[1];
     }
-    return alert("link is not valid");
+
+    const playlistIdMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/);
+    if (playlistIdMatch) {
+      return playlistIdMatch[1];
+    }
+
+    return null;
   };
 
-  const addVideo = () => {
+  const addVideo = async () => {
     if (newVideo.title && newVideo.url) {
       const videoId = getYouTubeVideoId(newVideo.url);
 
@@ -28,95 +35,85 @@ function Addvideo() {
           rating: 0,
           id: idCounter,
           timestamp: new Date().toISOString(),
+          url: `https://www.youtube.com/watch?v=${videoId}`,
         };
-        setVideos([...videos, videoToAdd]);
-        setNewVideo({ title: "", url: "" });
-        setIdCounter(idCounter + 1);
+
+        try {
+          const response = await fetch("/videos", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(videoToAdd),
+          });
+
+          if (response.ok) {
+            const newVideoFromServer = await response.json();
+            setVideos([...videos, newVideoFromServer.video]);
+            setNewVideo({ title: "", url: "" });
+            setIdCounter(idCounter + 1);
+            setErrorMessage("");
+          } else {
+            const errorData = await response.json();
+            setErrorMessage(
+              errorData.error || "Failed to add video. Please try again."
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          setErrorMessage("An error occurred while adding the video.");
+        }
       } else {
-        alert("Invalid YouTube URL. Please enter a valid YouTube video URL.");
+        setErrorMessage(
+          "Invalid YouTube URL. Please enter a valid YouTube video URL."
+        );
       }
+    } else {
+      setErrorMessage("Please fill in both title and URL fields.");
     }
   };
 
-  const upvoteVideo = (id) => {
-    const updatedVideos = videos.map((video) =>
-      video.id === id ? { ...video, rating: video.rating + 1 } : video
-    );
-    setVideos(updatedVideos);
-  };
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const response = await fetch("/videos");
+        if (response.ok) {
+          const videoList = await response.json();
+          setVideos(videoList);
+        } else {
+          console.error("Failed to fetch videos");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-  const downvoteVideo = (id) => {
-    const updatedVideos = videos.map((video) =>
-      video.id === id && video.rating > 0
-        ? { ...video, rating: video.rating - 1 }
-        : video
-    );
-    setVideos(updatedVideos);
-  };
-
-  const removeVideo = (id) => {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
-  };
+    fetchVideos();
+  }, []);
 
   return (
-    <>
-      <div>
-        <h2>Add a Video</h2>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={newVideo.title}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="url"
-          placeholder="URL"
-          value={newVideo.url}
-          onChange={handleInputChange}
-        />
-        <button onClick={addVideo}>Add Video</button>
-      </div>
-      <div>
-        <h2>Videos</h2>
-        <ul className="ShowingVideos">
-          {videos.map((video) => (
-            <div className="videos" key={video.id}>
-              <li>
-                <h3>{video.title}</h3>
-                <div className="buttons">
-                  <i
-                    className="fa-solid fa-thumbs-up"
-                    onClick={() => upvoteVideo(video.id)}
-                  ></i>
-                  <h4>{video.rating}</h4>
-                  <i
-                    className="fa-solid fa-thumbs-down"
-                    onClick={() => downvoteVideo(video.id)}
-                  ></i>
-                </div>
-                <iframe
-                  className="allVideos"
-                  title={video.title}
-                  width="560"
-                  height="315"
-                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-                    video.url
-                  )}`}
-                  frameBorder="0"
-                  allowFullScreen
-                ></iframe>
-                <p>Posted at: {new Date(video.timestamp).toLocaleString()}</p>
+    <div>
+      <h2>Add a Video</h2>
+      <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        value={newVideo.title}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="url"
+        placeholder="URL"
+        value={newVideo.url}
+        onChange={handleInputChange}
+      />
+      <button onClick={addVideo}>Add Video</button>
 
-                <button onClick={() => removeVideo(video.id)}>Delete</button>
-              </li>
-            </div>
-          ))}
-        </ul>
-      </div>
-    </>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <h2>Videos</h2>
+    </div>
   );
 }
 
