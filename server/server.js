@@ -11,9 +11,9 @@ const port = process.env.PORT || 8080; // Setting the port to either the one spe
 // Database configuration
 const pool = new Pool({
   connectionString: process.env.DB_URL, // Connection URL for connecting to the PostgreSQL database
-  // ssl: {
-  //   rejectUnauthorized: false, // Disabling SSL/TLS certificate verification (for development purposes only)
-  // },
+  ssl: {
+    rejectUnauthorized: false, // Disabling SSL/TLS certificate verification (for development purposes only)
+  },
 });
 
 app.use(cors()); // Allowing Cross-Origin requests
