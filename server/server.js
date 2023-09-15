@@ -4,8 +4,9 @@ const port = process.env.PORT || 5050;
 const cors = require("cors");
 const videosPool = require("./DBConfig");
 
-const dotenv = require("dotenv");
-dotenv.config();
+
+require("dotenv").config();
+
 
 
 app.use(cors());
