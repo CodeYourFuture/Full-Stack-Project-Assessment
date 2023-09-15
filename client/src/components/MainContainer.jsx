@@ -8,7 +8,8 @@ function MainContainer() {
 
   useEffect(() => {
     if (fetchData) {
-      fetch("http://localhost:5000/videos")
+      fetch("https://afsha-full-stack-video-storage-app.onrender.com") // prod
+      // fetch("http://localhost:5000/videos") // dev
         .then((response) => response.json())
         .then((data) => setVideoData(data));
     }
