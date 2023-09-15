@@ -53,14 +53,6 @@ app.post("/", (req, res) => {
 )
 });
 
-//this is no longer used because we always bring all videos back 
-app.get("/:id", (req, res) => {
-  const videoId = parseInt(req.params.id);
-  const video = videos.find((video) => video.id === videoId);
-  res.status(200).send({ video });
-});
-
-
 app.delete("/:id", (req, res) => {
   const idFromInput = parseInt(req.params.id);
     client.query(
