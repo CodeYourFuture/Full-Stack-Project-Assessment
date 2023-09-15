@@ -4,6 +4,7 @@ import VideoCard from "./components/VideoCard";
 import AddVideo from "./components/AddVideo";
 import SortButton from "./components/SortButton";
 import BubbleSortReverse from "./functions/BubbleSortReverse";
+import BubbleSort from "./functions/BubbleSort"
 
 function App() {
   const [data, setData] = useState([]);
@@ -11,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const dataFetch = async () => {
-      await fetch("http://127.0.0.1:5001/videos")
+      await fetch("https://fs-assesment-server.onrender.com/videos")
         .then((response) => response.json())
         .then((data) => {
           setData(data);
@@ -38,6 +39,8 @@ function App() {
 
   if (sort === "Down") {
     BubbleSortReverse(data);
+  } else {
+    BubbleSort(data)
   }
 
   return (
