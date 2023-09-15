@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState} from "react";
 
 function Video({ videoObj, deleteVideo }) {
   const videoId = getVideoIdFromUrl(videoObj.url);
   const [vote, setVote] = useState(videoObj.rating);
+  
 
   const voteIncrease = () => {
     const newRating = videoObj.rating + 1;
@@ -36,6 +37,8 @@ function Video({ videoObj, deleteVideo }) {
     console.log(newRating);
   };
 
+
+
   const date = new Date().toDateString();
 
   return (
@@ -53,9 +56,11 @@ function Video({ videoObj, deleteVideo }) {
         <p className="card-text">Requested At: {date}</p>
         <div className="buttons">
           <button onClick={voteIncrease} className="btn btn-primary">
+
             &#128077;
           </button>
-          <p>{vote}</p>
+          <p> {vote}</p>
+
           <button onClick={voteDecrease} className="btn btn-warning">
             &#128078;
           </button>
@@ -78,3 +83,4 @@ function getVideoIdFromUrl(url) {
     return null;
   }
 }
+
