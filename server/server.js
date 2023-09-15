@@ -16,7 +16,7 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-  ssl: true
+  // ssl: true
 });
 
 db.connect(function (err) {
@@ -111,7 +111,6 @@ app.delete("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id);
   db.query("DELETE FROM videos WHERE id=$1", [videoId])
     .then(() => {
-      // Optionally, you can fetch the updated list of videos and send it as a response
       db.query("SELECT * FROM videos")
         .then((result) => res.json(result.rows))
         .catch((err) => {
