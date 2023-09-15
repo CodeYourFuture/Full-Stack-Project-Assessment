@@ -1,8 +1,9 @@
 import React from "react";
 import CountVotes from "./CountVotes.js";
 
-const Video = ({ video }) => {
+const Video = ({ video, handleDeleteVideo }) => {
   let videoID = video.url.split("=")[1];
+
   return (
     <div className="video">
       <h3>{video.title}</h3>
@@ -18,7 +19,9 @@ const Video = ({ video }) => {
 
       <p> {video.votes}</p>
       <CountVotes />
-    
+      <button className="button" onClick={() => handleDeleteVideo(videoID)}>
+        Delete
+      </button>
     </div>
   );
 };

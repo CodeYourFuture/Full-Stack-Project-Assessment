@@ -78,25 +78,30 @@ app.get("/", (req, res) => {
   res.status(200).json(videos);
 });
 
-// POST "/"
+//POST "/"
 app.post("/", (req, res) => {
-  const { title, url } = req.body;
+  //const { title, url } = req.body;
+  const title = req.body.title;
+  const url = req.body.url;
   if (!title || !url) {
     return res.status(400).json({
       result: "Failure",
       message: "Video could not be saved",
     });
   } else {
-    let nextVideoId = 1;
+    let nextVideoId = videos[videos.length - 1].id + 1;
     const newAddedVideo = {
-      id: nextVideoId++,
-      title,
-      url,
+      id: nextVideoId,
+      title: title,
+      url: url,
     };
+    console.log(newAddedVideo);
     videos.push(newAddedVideo);
-    res.status(201).json({ id: newAddedVideo.id });
+    res.status(201).json(videos);
   }
 });
+
+
 
 // GET "/{id}"
 app.get("/:id", (req, res) => {

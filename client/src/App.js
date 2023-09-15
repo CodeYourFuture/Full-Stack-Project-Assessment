@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
-//import { videosData } from "./Data";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
@@ -10,23 +9,47 @@ const App = () => {
   useEffect(() => {
     fetchAllVideos();
   }, []);
-const fetchAllVideos = async () => {
+  const fetchAllVideos = async () => {
     try {
-      const response = await fetch(
-        "https://full-stack-project-video-reccomendations.onrender.com"
-      );
+      const response = await fetch("http://localhost:5000/");
       if (!response.ok) {
-        throw Error(
-          `The fetching of videos was not successful. Error: ${response.status}`
-        );
+        throw Error(`Failed to fetch. Error: ${response.status}`);
       }
       const data = await response.json();
-      setVideos (data);
+      setVideos(data);
+    } catch (error) {}
+  };
+
+  const handleAddVideo = async (newVideo) => {
+    try {
+      const response = await fetch("http://localhost:5000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      });
+      if (!response.ok) {
+        throw Error(`Failed to add video. Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setVideos([...videos, { ...newVideo, id: data.id }]);
+    } catch (error) {}
+  };
+
+  const handleDeleteVideo = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Video not found!");
+      }
+      setVideos(videos.filter((video) => video.id !== id));
     } catch (error) {
+      console.log(error.message);
     }
   };
-  
-  //const handleAddVideo = (newVideo) => {};
 
   return (
     <div className="App">
@@ -34,12 +57,9 @@ const fetchAllVideos = async () => {
         <h1>Video Recommendation</h1>
       </header>
       {videos.map((video) => (
-        <Video
-          key={video.id}
-          video={video}
-          />
+        <Video key={video.id} video={video} onDeleteVideo = {handleDeleteVideo} />
       ))}
-      {/* <AddVideo onAddVideo={handleAddVideo} /> */}
+      <AddVideo onAddVideo={handleAddVideo} />
     </div>
   );
 };

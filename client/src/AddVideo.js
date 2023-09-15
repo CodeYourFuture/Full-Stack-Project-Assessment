@@ -1,6 +1,4 @@
-
 import React, { useState } from "react";
-
 
 const AddVideo = ({ onAddVideo }) => {
   const [title, setTitle] = useState("");
