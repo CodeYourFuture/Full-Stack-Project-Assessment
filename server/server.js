@@ -16,7 +16,7 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-  // ssl: true
+  ssl: true
 });
 
 db.connect(function (err) {
@@ -45,21 +45,38 @@ app.get("/", (req, res) => {
 
 
 
+// app.put("/videos/:id", async (req, res) => {
+//   const videoId = req.params.id;
+//   const { rating } = req.body;
+
+//   try {
+//     const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
+//     const updateValues = [rating, videoId];
+//     await db.query(updateQuery, updateValues);
+
+//     res.status(200).send("sent");
+//   } catch (error) {
+//     console.error("Error updating rating:", error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+
 app.put("/videos/:id", async (req, res) => {
   const videoId = req.params.id;
   const { rating } = req.body;
 
   try {
-    const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
-    const updateValues = [rating, videoId];
-    await db.query(updateQuery, updateValues);
 
-    res.status(200).send("Rating updated");
+    await db.query("UPDATE videos SET rating = $1 WHERE id = $2", [rating, videoId]);
+    const updatedVideo = await db.query("SELECT * FROM videos WHERE id = $1", [videoId]);
+    res.status(200).json(updatedVideo.rows[0]);
+
   } catch (error) {
     console.error("Error updating rating:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 
 
