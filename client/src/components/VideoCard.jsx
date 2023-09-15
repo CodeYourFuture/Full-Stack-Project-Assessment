@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import { baseUrl } from "../config";
 
 const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
   /**
@@ -10,16 +11,13 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
     const likeRating = videoData.map((video) => {
       if (video.id === singleVideo.id) {
         video.rating += 1;
-        fetch(
-          `https://afsha-full-stack-video-storage-app.onrender.com/videos/${video.id}`,
-          {
-            method: "put",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(video),
+        fetch(`${baseUrl}/videos/${video.id}`, {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify(video),
+        });
       }
       return video;
     });
@@ -30,16 +28,13 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
     const dislikeRating = videoData.map((video) => {
       if (video.id === singleVideo.id) {
         video.rating -= 1;
-        fetch(
-          `https://afsha-full-stack-video-storage-app.onrender.com/${video.id}`,
-          {
-            method: "put",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(video),
+        fetch(`${baseUrl}/videos/${video.id}`, {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify(video),
+        });
       }
       return video;
     });

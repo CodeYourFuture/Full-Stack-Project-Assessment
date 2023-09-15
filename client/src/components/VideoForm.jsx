@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import validUrl from "valid-url";
+import { baseUrl } from "../config";
 
 function VideoForm({ videoData, setVideoData, setFetchData }) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +31,8 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
         timeSent: Date(),
       };
 
-      fetch("https://afsha-full-stack-video-storage-app.onrender.com", {
+      fetch(`${baseUrl}/videos`, {
+        // fetch("http://localhost:5000/videos", { // dev
         method: "post",
         mode: "cors",
         headers: {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "./CardsContainer";
 import VideoForm from "./VideoForm";
+import { baseUrl } from "../config";
+
 
 function MainContainer() {
   const [videoData, setVideoData] = useState();
@@ -8,8 +10,8 @@ function MainContainer() {
 
   useEffect(() => {
     if (fetchData) {
-      fetch("https://afsha-full-stack-video-storage-app.onrender.com/videos") // prod
-      // fetch("http://localhost:5000/videos") // dev
+      fetch(`${baseUrl}/videos`) // prod
+
         .then((response) => response.json())
         .then((data) => setVideoData(data));
     }
