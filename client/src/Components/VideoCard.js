@@ -5,11 +5,9 @@ const VideoCard = ({ video, removeVideo }) => {
 
   const addVote = () => {
     setRating(rating + 1);
-    console.log(rating);
   };
   const deleteVote = () => {
     setRating(rating - 1);
-    console.log(rating);
   };
 
   let url = video.url.substring(video.url.indexOf("=") + 1);
