@@ -11,27 +11,20 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
         fetch(`https://youtube-video-server.onrender.com/videos/${id}`, {
             method: "DELETE"
         })
-            .then(res => res.json())
-            .then(data => setAllMyVideos(data))
-            .catch(error => console.log(error))
-    }
-
-    // const handleDelete = async (id) => {
-    //     try {
-    //         const res = await fetch(`https://youtube-video-server.onrender.com/videos/${id}`, {
-    //             method: "DELETE"
-    //         });
-
-    //         if (!res.ok) {
-    //             throw new Error(`Failed to delete video (${res.status})`);
-    //         }
-
-    //         const data = await res.json();
-    //         setAllMyVideos(data);
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //     }
-    // }
+            .then((res) => {
+                if (!res.ok) {
+                    console.error(`Failed to delete video (Status: ${res.status})`);
+                    throw new Error(`Failed to delete video (Status: ${res.status})`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setAllMyVideos(data);
+            })
+            .catch((error) => {
+                console.error("Error deleting video:", error);
+            });
+    };
 
 
     return (

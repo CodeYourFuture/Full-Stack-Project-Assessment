@@ -110,7 +110,7 @@ app.post("/videos", (req, res) => {
 app.delete("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id)
   db.query("DELETE FROM videos WHERE id=$1", [videoId])
-    .then(() => res.send(`Customer ${videoId} deleted!`))
+    .then(() => res.send(videos.rows))
     .catch((err) => console.error(err).status(500));
 })
 
