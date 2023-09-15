@@ -16,7 +16,7 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-  // ssl: true
+  ssl: true
 });
 
 db.connect(function (err) {
@@ -108,11 +108,22 @@ app.post("/videos", (req, res) => {
 
 
 app.delete("/videos/:id", (req, res) => {
-  let videoId = parseInt(req.params.id)
+  let videoId = parseInt(req.params.id);
   db.query("DELETE FROM videos WHERE id=$1", [videoId])
-    .then(() => res.send(videos.rows))
-    .catch((err) => console.error(err).status(500));
-})
+    .then(() => {
+      // Optionally, you can fetch the updated list of videos and send it as a response
+      db.query("SELECT * FROM videos")
+        .then((result) => res.json(result.rows))
+        .catch((err) => {
+          console.error("Error fetching videos:", err);
+          res.status(500).json({ error: "Internal server error" });
+        });
+    })
+    .catch((err) => {
+      console.error("Error deleting video:", err);
+      res.status(500).json({ error: "Internal server error" });
+    });
+});
 
 
 app.get("/videos", (req, res) => {
