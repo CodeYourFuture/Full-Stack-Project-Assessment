@@ -4,7 +4,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url, rating } = video;
   
   const handleUpVote = () => {
-   fetch(`/videos/${video.id}/upvote`, {
+   fetch(`${process.env.REACT_APP_BACKEND_URL}/videos/${video.id}/upvote`, {
       method: 'POST',
     })
       .then((response) => {
@@ -19,7 +19,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   };
 
   const handleDownVote = () => {
-    fetch(`/api/videos/${video.id}/downvote`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/videos/${video.id}/downvote`, {
       method: 'POST',
     })
       .then((response) => {

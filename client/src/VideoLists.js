@@ -1,14 +1,15 @@
 
 import React, { useEffect, useState } from 'react';
-import VideoComponent from './VideoCard';
-import AddVideoComponent from './AddVideo';
+import AddVideo from './AddVideo';
+import Videocard from './VideoCard';
 
 const VideoLists = () => {
     const [videos, setVideos] = useState([]);
     useEffect(() => {
-     const fetchVideos = async () => {
+     const fetchVideos = 
+      async () => {
         try {
-          const response = await fetch('/videos');
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/videos`);
           if (!response.ok) {
             throw new Error('Failed to fetch videos');
           }
@@ -53,7 +54,7 @@ const VideoLists = () => {
     return (
       <div>
         {videos.map(video => (
-          <VideoComponent
+          <Videocard
             key={video.id}
             video={video}
             removeVideo={removeVideo}
@@ -61,7 +62,7 @@ const VideoLists = () => {
             downVote={downVote}
           />
         ))}
-        <AddVideoComponent addVideo={addVideo} />
+        <AddVideo addVideo={addVideo} />
       </div>
     );
   };
