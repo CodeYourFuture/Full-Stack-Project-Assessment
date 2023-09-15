@@ -3,6 +3,20 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 
+const dotenv = require("dotenv");
+dotenv.config();
+const { Pool } = require("pg");
+const pool = new Pool({
+  connectionString: process.env.DB_URL,
+  ssl: { rejectUnauthorized: false },
+});
+const bodyParser = require("body-parser");
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
 app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -74,13 +88,21 @@ let videos = [
 ];
 
 // GET "/"
-app.get("/", (req, res) => {
-  res.status(200).json(videos);
+app.get("/videos", async (req, res) => {
+  try {
+    const query = "SELECT * FROM videos";
+    const result = await pool.query(query);
+    const videos = result.rows;
+    res.status(200).json(videos);
+  } catch (error) {
+    res.status(404).json({ error: "Fetch" });
+  }
 });
 
 //POST "/"
-app.post("/", (req, res) => {
+app.post("/videos", (req, res) => {
   //const { title, url } = req.body;
+  console.log(req);
   const title = req.body.title;
   const url = req.body.url;
   if (!title || !url) {
@@ -101,8 +123,6 @@ app.post("/", (req, res) => {
   }
 });
 
-
-
 // GET "/{id}"
 app.get("/:id", (req, res) => {
   const videoId = parseInt(req.params.id);
@@ -119,7 +139,7 @@ app.get("/:id", (req, res) => {
 
 // DELETE "/{id}"
 
-app.delete("/:id", (req, res) => {
+app.delete("/videos/:id", (req, res) => {
   const videoId = parseInt(request.params.id);
   const singleVideo = videos.find((singleVideo) => singleVideo.id === videoId);
   if (singleVideo) {

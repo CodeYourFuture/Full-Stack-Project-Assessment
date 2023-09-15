@@ -11,7 +11,7 @@ const App = () => {
   }, []);
   const fetchAllVideos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/");
+      const response = await fetch("http://localhost:5000/videos");
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -21,8 +21,9 @@ const App = () => {
   };
 
   const handleAddVideo = async (newVideo) => {
+    console.log(JSON.stringify(newVideo));
     try {
-      const response = await fetch("http://localhost:5000/", {
+      const response = await fetch("http://localhost:5000/videos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +40,7 @@ const App = () => {
 
   const handleDeleteVideo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/${id}`, {
+      const response = await fetch(`http://localhost:5000/videos/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -57,7 +58,7 @@ const App = () => {
         <h1>Video Recommendation</h1>
       </header>
       {videos.map((video) => (
-        <Video key={video.id} video={video} onDeleteVideo = {handleDeleteVideo} />
+        <Video key={video.id} video={video} onDeleteVideo={handleDeleteVideo} />
       ))}
       <AddVideo onAddVideo={handleAddVideo} />
     </div>
