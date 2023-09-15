@@ -74,7 +74,6 @@
 // // <------------------ app starting ----------->
 
 // app.listen(port, () => console.log(`Listening on port ${port}`));
-
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -89,11 +88,11 @@ app.use(cors());
 // <-------------------GET all items------------------->
 app.get("/videos", async (req, res) => {
   try {
-    const allVideos = await videosPool.query("SELECT * FROM items");
-    res.json({ allVideos });
+    const allVideos = await videosPool.query("SELECT * FROM videos");
+    res.json({ allVideos: allVideos.rows });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 // <---------------------------------------------------->
@@ -102,17 +101,18 @@ app.get("/videos", async (req, res) => {
 app.get("/videos/:id", async (req, res) => {
   const videoId = req.params.id;
   try {
-    const item = await videosPool.query("SELECT * FROM items WHERE id = $1", [
+    const item = await videosPool.query("SELECT * FROM videos WHERE id = $1", [
       videoId,
     ]);
+
     if (item.rows.length === 0) {
-      res.status(404).json({ message: "Item not found" });
+      res.status(404).json({ message: "Video not found" });
     } else {
       res.json(item.rows[0]);
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 // <---------------------------------------------------->
@@ -122,39 +122,41 @@ app.post("/videos", async (req, res) => {
   const { description } = req.body;
   try {
     const newVideos = await videosPool.query(
-      "INSERT INTO items (description) VALUES ($1) RETURNING *",
+      "INSERT INTO videos (description) VALUES ($1) RETURNING *",
       [description]
     );
+
     res.json({
-      message: "New item added!",
-      item: newVideos.rows,
+      message: "New video added!",
+      video: newVideos.rows[0],
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 // <---------------------------------------------------->
 
 // <-------------------DELETE item------------------->
 app.delete("/videos/:id", async (req, res) => {
-  const videosID = req.params.id;
+  const videoId = req.params.id;
   try {
-    const deletedVideos = await videosPool.query(
-      "DELETE FROM items WHERE id = $1 RETURNING *",
-      [videosID]
+    const deletedVideo = await videosPool.query(
+      "DELETE FROM videos WHERE id = $1 RETURNING *",
+      [videoId]
     );
-    if (deletedVideos.rows.length === 0) {
-      res.status(404).json({ message: "Item not found" });
+
+    if (deletedVideo.rows.length === 0) {
+      res.status(404).json({ message: "Video not found" });
     } else {
       res.json({
-        message: "Item deleted",
-        deletedVideos: deletedVideos.rows[0],
+        message: "Video deleted",
+        deletedVideo: deletedVideo.rows[0],
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 // <---------------------------------------------------->
