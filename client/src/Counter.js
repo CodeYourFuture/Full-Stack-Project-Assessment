@@ -16,6 +16,7 @@ const Counter = ({ setAllMyVideos, videoId, videoRating }) => {
     const handleCounterUp = () => {
         setRating(rating + 1)
         handleRatingChange(rating)
+        getAllNewVideos()
     }
 
 
