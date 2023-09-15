@@ -27,10 +27,6 @@ const db = new Pool({
 });
 
 // GET "/"
-// This endpoint is used to get all the videos
-app.get("/videos", (req, res) => {
-  res.status(200).json(videos);
-});
 
 // Connecting to database
 db.connect(function (err) {
@@ -38,9 +34,10 @@ db.connect(function (err) {
   console.log("Connected!");
 });
 
-// friend's idea to get all the videos:
 
-app.get("/", (req, res) => {
+// This endpoint is used to get all the videos using SQL queries
+
+app.get("/videos", (req, res) => {
   // getting data from videos table
   db.query(`SELECT * FROM videos ORDER BY title`, (error, result) => {
     // using callback function to catch the error; later on we can use .then promises
@@ -53,8 +50,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// get one particular video using the ID
-app.get("/:id", function (req, res) {
+// get one particular video using the ID using SQL queries
+app.get("/videos/:id", function (req, res) {
   const searchId = Number(req.params.id);
 
   db.query("SELECT * FROM videos WHERE id = $1", [searchId])
