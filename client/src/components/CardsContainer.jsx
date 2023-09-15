@@ -3,9 +3,12 @@ import VideoCard from "./VideoCard";
 
 function CardsContainer({ videoData, setVideoData, setFetchData }) {
   async function handleDelete(id) {
-    fetch(`http://localhost:5000/videos/${id}`, {
-      method: "delete",
-    })
+    fetch(
+      `https://afsha-full-stack-video-storage-app.onrender.com/videos/${id}`,
+      {
+        method: "delete",
+      },
+    )
       .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

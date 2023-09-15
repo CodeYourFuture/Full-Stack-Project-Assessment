@@ -30,7 +30,7 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
         timeSent: Date(),
       };
 
-      fetch("http://localhost:5000/videos", {
+      fetch("https://afsha-full-stack-video-storage-app.onrender.com", {
         method: "post",
         mode: "cors",
         headers: {
