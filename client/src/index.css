@@ -1,13 +1,151 @@
+/* Global Styles */
 body {
-  background-color: #ddd; 
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 0;
 }
-.video-lists {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+h1,
+h2 {
+  font-weight: bold;
+}
+
+/* Layout */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Add Video */
+.add-video {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Center the Add Video button horizontally */
+  margin-top: 20px; /* Add space at the top */
+  text-align: center; /* Center button text */
+}
+
+.add-video h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.add-video input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.add-video button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-video button:hover {
+  background-color: #0062cc;
+}
+
+/* Video List */
+.videos {
+  display: flex; /* Use flexbox to arrange videos */
+  flex-wrap: wrap; /* Allow videos to wrap to the next row */
+  justify-content: center; /* Center videos horizontally */
+  align-content: center; /* Center videos vertically */
+  margin-top: 20px;
 }
 
 .video {
-  width: 30%;
+  width: 20%; /* Adjusted to be 20% width */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center; /* Center video content */
 }
+
+.video h2 {
+  font-size: 18px; /* Reduce font size for video titles */
+  margin-top: 0;
+  max-height: 40px;
+  overflow: hidden;
+}
+
+.video iframe {
+  width: 100%;
+  height: 150px; /* Adjusted to make videos smaller */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Vote Buttons */
+.vote-buttons button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.vote-buttons button:hover {
+  background-color: #e9ecef;
+}
+
+.upvote-button:after {
+  content: "👍";
+}
+
+.downvote-button:after {
+  content: "👎";
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .videos {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .videos {
+    flex-direction: column; /* Display videos in a single column on small screens */
+    align-items: center; /* Center videos vertically */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
