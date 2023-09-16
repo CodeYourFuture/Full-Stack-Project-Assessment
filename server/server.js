@@ -123,7 +123,7 @@ app.put("/:id", async function (req, res) {
     const videoId = parseInt(req.params.id);
     const videoRating = parseInt(req.params.rating);
     const updateVideo = await db.query(
-      "UPDATE videos SET rating = $4 WHERE id = $1"[(videoId, videoRating)]
+      "UPDATE videos SET rating = $2 WHERE id = $1"[(videoRating, videoId)]
     );
     res.status(202).json(updateVideo.rows[0]);
   } catch (error) {
