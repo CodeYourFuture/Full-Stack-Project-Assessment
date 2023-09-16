@@ -89,3 +89,9 @@ button:hover {
 .Ordes {
   width: 100px;
 }
+
+.footer-background {
+  background-color: rgb(8, 8, 90);
+  color: #fff;
+  font-size: 20px;
+}
