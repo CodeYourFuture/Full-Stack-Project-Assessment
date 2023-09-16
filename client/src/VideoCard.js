@@ -1,5 +1,4 @@
 import React from 'react';
-
 const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url, rating } = video;
 
@@ -35,7 +34,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
 
   return (
     <div className="video"> 
-      <div className="video-container"> 
+     
         <h2>{title}</h2>
         <iframe width="100" height="100" src={url} title={title} allowFullScreen></iframe>
         <p className="video-rating">Votes: {rating}</p>
@@ -43,7 +42,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
         <button className="downvote-button" onClick={handleDownVote}></button>
         <button onClick={() => removeVideo(id)}>Remove Video</button>
       </div>
-    </div>
+ 
   );
 };
 
