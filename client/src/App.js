@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 // import videoData from "./exampleresponse.json";
 import Videocard from "./components/Videocard";
+import Addvideo from "./components/Addvideo";
 
 
 // console.log(videoData);
@@ -28,6 +29,7 @@ function plusRating() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <Addvideo />
       <div>{videoElements}</div>
       
     </div>
