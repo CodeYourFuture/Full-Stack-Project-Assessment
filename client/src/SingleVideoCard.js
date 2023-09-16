@@ -61,11 +61,11 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
           allowFullScreen
         ></iframe>
         <div className="card-body">
-          <button className="counting" onClick={minusCount}>
+          <button className="counting" onClick={() => minusCount(videoId)}>
             -
           </button>
           <span>{count}</span>
-          <button className="counting" onClick={plusCount}>
+          <button className="counting" onClick={() => plusCount(videoId)}>
             +
           </button>
           <h5>{title}</h5>
