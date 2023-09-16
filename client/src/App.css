@@ -1,3 +1,9 @@
-.App {
-  text-align: center;
+:root {
+    --primary: '#fa8c16';
 }
+
+main {
+    flex-grow: 1;
+}
+
+

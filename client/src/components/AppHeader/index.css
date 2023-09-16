@@ -1,0 +1,16 @@
+.header {
+    text-align: center;
+    color: white;
+    line-height: 64px;
+    background-color: #120338;
+    padding: 16px;
+    height: auto;
+}
+
+.header_title {
+    text-align: center;
+    color: whitesmoke !important;
+    margin-bottom: 0 !important;
+}
+
+
