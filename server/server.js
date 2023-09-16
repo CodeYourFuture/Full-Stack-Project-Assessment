@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to My Youtube Videos" });
 });
 
+//Get all videos
 app.get("/videos", (req, res) => {
   pool
     .query("SELECT id, title, url, rating, upload_date FROM videos") // Include upload_date
