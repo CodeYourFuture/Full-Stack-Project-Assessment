@@ -1,13 +1,19 @@
+import React from "react";
 import "./App.css";
-import videoData from "./exampleresponse.json";
+// import videoData from "./exampleresponse.json";
 import Videocard from "./components/Videocard";
 
 
-console.log(videoData);
+// console.log(videoData);
 
 function App() {
+const[videos, setVideos] = React.useState ([])
 
-  const videoElements = videoData.map((video) => {
+fetch("http://127.0.0.1:5000/")
+.then((response) => response.json())
+.then(data => {setVideos(data)});
+
+const videoElements = videos.map((video) => {
     return <Videocard name={video.title} link={video.url} rating={video.rating}/>;
   })
 
