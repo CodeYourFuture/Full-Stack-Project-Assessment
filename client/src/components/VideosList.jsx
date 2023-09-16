@@ -54,9 +54,12 @@ function VideosList() {
         "Content-Type": "application/JSON",
       },
     }).then((res) => {
+      if (!res.ok) {
+          throw new Error('Network response was not ok');
+      }
       const videoDeleted = videos.filter((el) => el.id !== videoId);
-      res.setVideos(videoDeleted);
-    });
+      setVideos(videoDeleted);
+  })
   };
 
   const fetchVideos = () => {
