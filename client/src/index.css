@@ -29,10 +29,23 @@ max-width: 400px;
   grid-row-gap: 20px;
 
   }
-.buttons{
- display: flex;
- align-items: center;
- justify-content: space-between;
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px;
+}
+
+.fa-solid {
+  font-size: 30px;
+  cursor: pointer;
+  color: #e74c3c;
+  text-align: center;
+  padding: 0px 30px 0px 50px;
+}
+.fa-solid:hover {
+  color: #c0392b;
 }
 .card{
   border: 2px solid gray;

@@ -1,41 +1,35 @@
-import { useState} from "react";
+import { useState } from "react";
 
 function Video({ videoObj, deleteVideo }) {
   const videoId = getVideoIdFromUrl(videoObj.url);
   const [vote, setVote] = useState(videoObj.rating);
-  
 
-  const voteIncrease = () => {
-    const newRating = videoObj.rating + 1;
-    fetch(`https://node-server-full-stack.onrender.com/videos/${videoObj.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ newRating }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        setVote(vote + 1);
-      });
-    console.log(newRating);
-  };
 
-  const voteDecrease = () => {
-    const newRating = videoObj.rating - 1;
+
+  const updateVote = (increment) => {
+    const newRating = videoObj.rating + increment;
+
     fetch(`https://node-server-full-stack.onrender.com/videos/${videoObj.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ newRating }),
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newRating }),
     })
-      .then((res) => res.json())
-      .then(() => {
-        setVote(() => (vote > 0 ? vote - 1 : 0));
-      });
-    console.log(newRating);
-  };
+    .then((res) => {
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+    })
+    .then(() => {
+        if (increment === 1) {
+            setVote(vote + 1);
+        } else if (increment === -1 && vote > 0) {
+            setVote(vote - 1);
+        }
+    })
+    .catch((error) => console.error("Error updating vote:", error));
+};
+
 
 
 
@@ -55,15 +49,9 @@ function Video({ videoObj, deleteVideo }) {
         <h5 className="card-title">{videoObj.title}</h5>
         <p className="card-text">Requested At: {date}</p>
         <div className="buttons">
-          <button onClick={voteIncrease} className="btn btn-primary">
-
-            &#128077;
-          </button>
-          <p> {vote}</p>
-
-          <button onClick={voteDecrease} className="btn btn-warning">
-            &#128078;
-          </button>
+          <i className="fa-solid fa-thumbs-up" onClick={()=>updateVote(1)}></i>
+          <p>{vote}</p>
+          <i className="fa-solid fa-thumbs-down" onClick={()=>updateVote(-1)}></i>
           <button onClick={() => deleteVideo(videoObj.id)} className="btn btn-danger">
             <i className="fa fa-trash-o"></i>
           </button>
@@ -77,10 +65,7 @@ export default Video;
 
 function getVideoIdFromUrl(url) {
   if (url && typeof url === "string" && url.includes("v=")) {
-    const videoId = url.split("v=")[1];
-    return videoId;
-  } else {
-    return null;
+    return url.split("v=")[1];
   }
+  return null;
 }
-

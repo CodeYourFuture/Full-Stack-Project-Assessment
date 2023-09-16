@@ -4,11 +4,7 @@ const port = process.env.PORT || 5050;
 const cors = require("cors");
 const videosPool = require("./DBConfig");
 
-
 require("dotenv").config();
-
-
-
 app.use(cors());
 app.use(express.json());
 
@@ -56,7 +52,7 @@ app.put("/videos/:id", async (req, res) => {
   const searchId = req.params.id;
   const newRating = req.body.newRating;
   try {
-    const ratingUp = await videosPool.query("UPDATE videos SET rating = $2 WHERE id = $1", [searchId, newRating]);
+     videosPool.query("UPDATE videos SET rating = $2 WHERE id = $1", [searchId, newRating]);
     res.json({
       message: "Vote updated successfully",
     });
@@ -65,6 +61,9 @@ app.put("/videos/:id", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
+
+
 
 app.get("/videos/:search", async (req, res) => {
   const searchQuery = req.params.search;
