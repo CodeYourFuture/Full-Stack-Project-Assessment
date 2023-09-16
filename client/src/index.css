@@ -1,4 +1,13 @@
 body {
   background-color: #ddd; 
 }
+.video-lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.video {
+  width: 30%;
+}
 
