@@ -11,7 +11,9 @@ function Videos() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const getVideos = await fetch("http://localhost:5000/");
+        const getVideos = await fetch(
+          "https://appolinfotso-fullstack-app.glitch.me/"
+        );
         const data = await getVideos.json();
 
         setVideos(data);
@@ -27,7 +29,7 @@ function Videos() {
     data.append("id", urid());
     data.append("title", title);
     data.append("url", url);
-    fetch("http://localhost:5000/", {
+    fetch("https://appolinfotso-fullstack-app.glitch.me/", {
       method: "POST",
       body: data,
     })
@@ -44,7 +46,7 @@ function Videos() {
       });
   }
   function search(id) {
-    fetch(`http://localhost:5000/${id}`)
+    fetch(`https://appolinfotso-fullstack-app.glitch.me/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
@@ -62,7 +64,10 @@ function Videos() {
     const idToDel = newVideo[0].id;
     let data = new URLSearchParams();
     data.append("id", idToDel);
-    fetch(`http://localhost:5000/${idToDel}`, { method: "DELETE", body: data })
+    fetch(`https://appolinfotso-fullstack-app.glitch.me/${idToDel}`, {
+      method: "DELETE",
+      body: data,
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.result) {
