@@ -1,6 +1,6 @@
 const express = require("express");
 const CORS = require("cors");
-const urid = require("urid");
+// const urid = require("urid");
 const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 
@@ -41,7 +41,7 @@ app.post("/", (req, res) => {
     });
   } else {
     const newVideo = {
-      id: Number(urid(6, "num")),
+      id: Math.round((Math.random() + 1) * 100000),
       title: req.body.title,
       url: req.body.url,
       rating: 0,
