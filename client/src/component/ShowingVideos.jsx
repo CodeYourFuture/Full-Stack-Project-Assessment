@@ -8,12 +8,14 @@ function ShowingVideos() {
     fetch("https://node-js-full-stack-project-assessment.onrender.com/videos")
       .then((response) => response.json())
       .then((data) => {
+        // setVideos([])
         setVideos(data);
+        console.log("lin 12,", data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [videos]);
 
   const toggleOrder = () => {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
@@ -60,6 +62,7 @@ function ShowingVideos() {
             if (video.id === id) {
               return { ...video, rating: updatedRating.rating };
             }
+            console.log("lin 65", video);
             return video;
           })
         );
@@ -76,6 +79,10 @@ function ShowingVideos() {
       return b.rating - a.rating;
     }
   });
+  /////////////////////////////////
+  console.log("line 79", videos);
+  console.log("lin 80", sortedVideos);
+  ///////////////////////////////////
 
   return (
     <div className="ShowingVideos">
@@ -85,6 +92,8 @@ function ShowingVideos() {
 
       {sortedVideos.map((video) => (
         <div className="videos" key={video.id}>
+          {/* ///////////////////// */}
+          <p>{console.log("line 93", video)}</p>
           <p>{video.title}</p>
           <div className="buttons">
             <i

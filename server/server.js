@@ -55,13 +55,13 @@ app.post("/videos", async (req, res) => {
         .json({ error: "Please provide both title and URL" });
     }
 
-    const videoId = getYouTubeVideoId(url);
+    // const videoId = getYouTubeVideoId(url);
 
-    if (!videoId) {
-      return res.status(400).json({
-        error: "Invalid YouTube URL. Please enter a valid YouTube video URL.",
-      });
-    }
+    // if (!videoId) {
+    //   return res.status(400).json({
+    //     error: "Invalid YouTube URL. Please enter a valid YouTube video URL.",
+    //   });
+    // }
 
     const newVideo = {
       title,
