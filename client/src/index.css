@@ -44,11 +44,11 @@ body {
   margin-bottom: 10px;
 }
 
-.video p {
+.video p.video-rating {
   font-size: 14px;
   margin: 0;
   margin-top: 10px;
-  color:aquamarine; 
+  color: red;
 }
 
 .video button {
@@ -60,17 +60,20 @@ body {
   cursor: pointer;
   margin-right: 5px;
 }
+
 .video .upvote-button::before {
-  content: '👍';}
+  content: '👍';
+}
 
 .video .downvote-button::before {
-  content: '👎'; }
+  content: '👎';
+}
 
-  .video button:hover {
+.video button:hover {
   background-color: #0056b3;
 }
 
-/*  add video  */
+/* Add video */
 .add-video {
   background-color: white;
   padding: 20px;

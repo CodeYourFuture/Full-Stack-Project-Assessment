@@ -2,16 +2,16 @@ import React from 'react';
 
 const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url, rating } = video;
-  
+
   const handleUpVote = () => {
-   fetch(`${process.env.REACT_APP_BACKEND_URL}/videos/${video.id}/upvote`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/videos/${video.id}/upvote`, {
       method: 'POST',
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to upvote video');
         }
-       upVote(video.id);
+        upVote(video.id);
       })
       .catch((error) => {
         console.error('Error upvoting video:', error);
@@ -26,7 +26,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
         if (!response.ok) {
           throw new Error('Failed to downvote video');
         }
-       downVote(video.id);
+        downVote(video.id);
       })
       .catch((error) => {
         console.error('Error downvoting video:', error);
@@ -34,15 +34,20 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   };
 
   return (
-    <div className="video">
-  <h2>{title}</h2>
-  <iframe width="100" height="100" src={url} title={title} allowFullScreen></iframe>
-  <p>Votes: {rating}</p>
-  <button className="upvote-button" onClick={handleUpVote}></button>
-  <button className="downvote-button" onClick={handleDownVote}></button>
-  <button onClick={() => removeVideo(id)}>Remove Video</button>
-</div>
+    <div className="video"> 
+      <div className="video-container"> 
+        <h2>{title}</h2>
+        <iframe width="100" height="100" src={url} title={title} allowFullScreen></iframe>
+        <p className="video-rating">Votes: {rating}</p>
+        <button className="upvote-button" onClick={handleUpVote}></button>
+        <button className="downvote-button" onClick={handleDownVote}></button>
+        <button onClick={() => removeVideo(id)}>Remove Video</button>
+      </div>
+    </div>
   );
 };
 
 export default Videocard;
+
+
+
