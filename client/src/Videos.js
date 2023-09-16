@@ -31,6 +31,7 @@ function Videos() {
     data.append("id", urid());
     data.append("title", title);
     data.append("url", url);
+    console.log(data["id"]);
     fetch("https://appolinfotso-fullstack-app.glitch.me/", {
       method: "POST",
       body: data,
@@ -40,7 +41,7 @@ function Videos() {
         if (data.result) {
           setFailure(data);
         } else {
-          setVideos(data);
+          fetchVideos();
         }
       })
       .catch((err) => {

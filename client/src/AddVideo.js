@@ -10,6 +10,7 @@ function AddVideo(props) {
             let url = e.target.children[1].value;
             if (title !== "" || url !== "") {
               let uri = url.replace("watch?v=", "embed/");
+              console.log(uri, title);
               props.add(title, uri);
               e.target.reset();
             } else {
