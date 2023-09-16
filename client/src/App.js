@@ -5,10 +5,13 @@ import Videocard from "./components/Videocard";
 import Addvideo from "./components/Addvideo";
 
 
+
 // console.log(videoData);
 
 function App() {
 const[videos, setVideos] = React.useState ([])
+const [enterTitle, setEnterTitle] = React.useState("");
+
 
 fetch("http://127.0.0.1:5000/")
 .then((response) => response.json())
