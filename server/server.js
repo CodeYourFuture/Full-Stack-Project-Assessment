@@ -14,11 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // database connection
 const pool = new Pool({
-  user: "coder",
-  password: "glasgow321!",
-  host: "localhost",
-  database: "videos_storage",
-  port: 5432,
+  connectionString:
+    "postgres://appolin:krn5mrsbGuKjW25WGht2fw1ze3zlfFik@dpg-cjsvp3thtt0c73b3j850-a/videos_storage",
 });
 //
 
