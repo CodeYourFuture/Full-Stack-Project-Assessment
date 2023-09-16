@@ -6,15 +6,13 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const { Pool } = require("pg");
-const pool = new Pool({
+
+const db = new Pool({
   connectionString: process.env.DB_URL,
   ssl: { rejectUnauthorized: false },
 });
 const bodyParser = require("body-parser");
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
 app.use(bodyParser.json());
 
 app.use(cors());
@@ -90,8 +88,8 @@ let videos = [
 // GET "/"
 app.get("/videos", async (req, res) => {
   try {
-    const query = "SELECT * FROM videos";
-    const result = await pool.query(query);
+    const query = `SELECT * FROM videos`;
+    const result = await db.query(query);
     const videos = result.rows;
     res.status(200).json(videos);
   } catch (error) {
@@ -102,25 +100,36 @@ app.get("/videos", async (req, res) => {
 //POST "/"
 app.post("/videos", (req, res) => {
   //const { title, url } = req.body;
-  console.log(req);
+  // const title = req.body.title;
+  // const url = req.body.url;
+  // if (!title || !url) {
+  //   return res.status(400).json({
+  //     result: "Failure",
+  //     message: "Video could not be saved",
+  //   });
+  // } else {
+  //   let nextVideoId = videos[videos.length - 1].id + 1;
+  //   const newAddedVideo = {
+  //     id: nextVideoId,
+  //     title: title,
+  //     url: url,
+  //   };
+  //   console.log(newAddedVideo);
+  //   videos.push(newAddedVideo);
+  //   res.status(201).json(videos);
+  // }
   const title = req.body.title;
   const url = req.body.url;
-  if (!title || !url) {
-    return res.status(400).json({
-      result: "Failure",
-      message: "Video could not be saved",
+  const rating = req.body.rating;
+  const query = `INSERT INTO videos (title, url, rating)
+VALUES (1$, 2$, 3$)`;
+  db.query(query, [title, url, rating])
+    .then(() => {
+      res.status(201).send("New video succesfully added!");
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  } else {
-    let nextVideoId = videos[videos.length - 1].id + 1;
-    const newAddedVideo = {
-      id: nextVideoId,
-      title: title,
-      url: url,
-    };
-    console.log(newAddedVideo);
-    videos.push(newAddedVideo);
-    res.status(201).json(videos);
-  }
 });
 
 // GET "/{id}"
