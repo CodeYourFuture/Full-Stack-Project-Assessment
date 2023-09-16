@@ -25,11 +25,11 @@ const db = new Pool({
   ssl: true,
 });
 
-db.connect(function (err) {
-  // we are telling server to connect to db
-  if (err) throw err;
-  console.log("Connected to database");
-});
+// db.connect(function (err) {
+//   // we are telling server to connect to db
+//   if (err) throw err;
+//   console.log("Connected to database");
+// });
 
 // GET "/"
 // This endpoint is used to return all of the videos
