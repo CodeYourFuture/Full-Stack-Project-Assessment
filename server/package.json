@@ -2,7 +2,8 @@
   "name": "to-do-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
     "server": "node server.js"
@@ -11,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
