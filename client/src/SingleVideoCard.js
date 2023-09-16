@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SingleVideoCard({ title, url, rating, deleteVideo }) {
+function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
   const [count, setCount] = useState(rating);
   const urlAPI = process.env.REACT_APP_BACKEND_URL;
 
