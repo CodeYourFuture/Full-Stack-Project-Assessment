@@ -122,7 +122,7 @@ app.post("/videos", (req, res) => {
   const url = req.body.url;
   const rating = req.body.rating;
   const query = `INSERT INTO videos (title, url, rating)
-VALUES (1$, 2$, 3$)`;
+VALUES ($1, $2, $3)`;
   db.query(query, [title, url, rating])
     .then(() => {
       res.status(201).send("New video succesfully added!");
