@@ -133,6 +133,7 @@ function VideoCards() {
       {videos.map((video) => (
         <SingleVideoCard
           key={video.id}
+          id={video.id}
           title={video.title}
           url={video.url}
           rating={video.rating}

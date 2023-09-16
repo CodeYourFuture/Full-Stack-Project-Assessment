@@ -121,12 +121,14 @@ app.get("/:id", async function (req, res) {
 app.put("/:id", async function (req, res) {
   try {
     const videoId = parseInt(req.params.id);
-    const videoRating = parseInt(req.params.rating);
+    const videoRating = parseInt(req.body.rating);
     const updateVideo = await db.query(
-      "UPDATE videos SET rating = $1 WHERE id = $2"[(videoRating, videoId)]
+      "UPDATE videos SET rating = $1 WHERE id = $2",
+      [videoRating, videoId]
     );
-    res.status(202).json(updateVideo.rows[0]);
+    res.status(204).end();
   } catch (error) {
+    console.error(error);
     res.status(400).json(error);
   }
 });

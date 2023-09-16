@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
+function SingleVideoCard({ id, title, url, rating, deleteVideo }) {
   const [count, setCount] = useState(rating);
   const urlAPI = process.env.REACT_APP_BACKEND_URL;
 
@@ -12,19 +12,19 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
   //   setCount((prevCount) => prevCount + 1);
   // }
 
-  async function updateRating(newRating, id) {
+  async function updateRating(newRating, videoId) {
     try {
-      const response = await fetch(`${urlAPI}/${id}`, {
+      const response = await fetch(`${urlAPI}/${videoId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ rating: newRating }),
       });
+      console.log(newRating, videoId);
 
       if (response.ok) {
-        const updatedVideo = await response.json();
-        setCount(updatedVideo.rating); // Update the local rating state
+        setCount(newRating); // Update the local rating state
       } else {
         console.error("Error updating rating:", response.statusText);
       }
@@ -33,12 +33,13 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
     }
   }
 
-  function minusCount() {
+  function minusCount(videoId) {
     const newRating = count - 1;
     updateRating(newRating, videoId);
+    console.log(videoId);
   }
 
-  function plusCount() {
+  function plusCount(videoId) {
     const newRating = count + 1;
     updateRating(newRating, videoId);
   }
@@ -61,11 +62,11 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
           allowFullScreen
         ></iframe>
         <div className="card-body">
-          <button className="counting" onClick={() => minusCount(videoId)}>
+          <button className="counting" onClick={() => minusCount(id)}>
             -
           </button>
           <span>{count}</span>
-          <button className="counting" onClick={() => plusCount(videoId)}>
+          <button className="counting" onClick={() => plusCount(id)}>
             +
           </button>
           <h5>{title}</h5>
