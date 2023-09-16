@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
+  color: #333;
 }
-
 .App {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,23 +17,22 @@ body {
   font-size: 2rem;
   margin-bottom: 20px;
 }
-
-/* Video */
-.VideoList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 20px;
+/* VideoLists  */
+.video-lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
 }
 
-/* Video Component */
+/* VideoCard */
 .video {
-  background-color: white;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 48%;
+  margin-bottom: 20px;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 20px; 
 }
 
 .video h2 {
@@ -47,58 +46,69 @@ body {
   margin-bottom: 10px;
 }
 
-.video p.video-rating {
-  font-size: 14px;
-  margin: 0;
-  margin-top: 10px;
-  color: red;
+.video-rating {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
-.video button {
-  background-color: #007bff;
-  color: white;
+.upvote-button,
+.downvote-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.upvote-button::before {
+  content: '\25B2';
+  color: #0074D9;
+}
+
+.downvote-button::before {
+  content: '\25BC';
+  color: #0074D9;
+}
+
+.remove-button {
+  background-color: #ff4136;
+  color: #fff;
   border: none;
   padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
-  margin-right: 5px;
-}
-
-.video .upvote-button::before {
-  content: '👍';
-}
-
-.video .downvote-button::before {
-  content: '👎';
-}
-
-.video button:hover {
-  background-color: #0056b3;
-}
-
-/* Add video */
-.add-video {
-  background-color: white;
-  padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  display: inline-block;
-  width: 100%; 
+}
+
+/* AddVideo */
+.add-video {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-video h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .add-video input {
   display: block;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .add-video button {
-  background-color: #28a745;
-  color: white;
+  background-color: #0074D9;
+  color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
+  float: right;
+  border-radius: 5px;
 }
+
