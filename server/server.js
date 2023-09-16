@@ -73,7 +73,7 @@ let videos = [
 app.use(express.json());
 // GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
+  //fetch video data from database and store in videos array
   res.send(videos);
 });
 
