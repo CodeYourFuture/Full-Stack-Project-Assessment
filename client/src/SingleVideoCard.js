@@ -12,9 +12,9 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
   //   setCount((prevCount) => prevCount + 1);
   // }
 
-  async function updateRating(newRating) {
+  async function updateRating(newRating, id) {
     try {
-      const response = await fetch(`${urlAPI}/${videoId}`, {
+      const response = await fetch(`${urlAPI}/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -35,12 +35,12 @@ function SingleVideoCard({ videoId, title, url, rating, deleteVideo }) {
 
   function minusCount() {
     const newRating = count - 1;
-    updateRating(newRating);
+    updateRating(newRating, videoId);
   }
 
   function plusCount() {
     const newRating = count + 1;
-    updateRating(newRating);
+    updateRating(newRating, videoId);
   }
 
   if (!url) {
