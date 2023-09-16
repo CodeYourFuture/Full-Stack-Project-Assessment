@@ -8,19 +8,21 @@ function Videos() {
   const [videos, setVideos] = useState([]);
   const [failure, setFailure] = useState({});
   const [searchId, setSearchId] = useState({});
-  useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const getVideos = await fetch(
-          "https://appolinfotso-fullstack-app.glitch.me/"
-        );
-        const data = await getVideos.json();
+  //
+  async function fetchVideos() {
+    try {
+      const getVideos = await fetch(
+        "https://appolinfotso-fullstack-app.glitch.me/"
+      );
+      const data = await getVideos.json();
 
-        setVideos(data);
-      } catch (err) {
-        console.log(err);
-      }
+      setVideos(data);
+    } catch (err) {
+      console.log(err);
     }
+  }
+  //
+  useEffect(() => {
     fetchVideos();
   }, []);
 
@@ -63,6 +65,7 @@ function Videos() {
     const newVideo = videos.filter((vid) => vid.title === title);
     const idToDel = newVideo[0].id;
     let data = new URLSearchParams();
+    console.log(idToDel);
     data.append("id", idToDel);
     fetch(`https://appolinfotso-fullstack-app.glitch.me/${idToDel}`, {
       method: "DELETE",
@@ -72,8 +75,7 @@ function Videos() {
       .then((data) => {
         if (data.result) {
           setSearchId(data);
-        } else {
-          setVideos(data);
+          fetchVideos();
         }
       })
       .catch((err) => {
