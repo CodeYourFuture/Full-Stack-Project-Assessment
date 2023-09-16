@@ -115,3 +115,18 @@ app.get("/:id", async function (req, res) {
     res.status(400).json(error);
   }
 });
+
+//PUT method
+
+app.put("/:id", async function (req, res) {
+  try {
+    const videoId = parseInt(req.params.id);
+    const videoRating = parseInt(req.params.rating);
+    const updateVideo = await db.query(
+      "UPDATE videos SET rating = $4 WHERE id = $1"[(videoId, videoRating)]
+    );
+    res.status(202).json(updateVideo.rows[0]);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});

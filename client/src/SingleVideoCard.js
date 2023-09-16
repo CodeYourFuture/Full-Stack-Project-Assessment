@@ -2,14 +2,47 @@ import React, { useState } from "react";
 
 function SingleVideoCard({ title, url, rating, deleteVideo }) {
   const [count, setCount] = useState(rating);
+  const urlAPI = process.env.REACT_APP_BACKEND_URL;
+
+  // function minusCount() {
+  //   setCount((prevCount) => prevCount - 1);
+  // }
+
+  // function plusCount() {
+  //   setCount((prevCount) => prevCount + 1);
+  // }
+
+  async function updateRating(newRating) {
+    try {
+      const response = await fetch(`${urlAPI}/${videoId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: newRating }),
+      });
+
+      if (response.ok) {
+        const updatedVideo = await response.json();
+        setCount(updatedVideo.rating); // Update the local rating state
+      } else {
+        console.error("Error updating rating:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating rating:", error);
+    }
+  }
 
   function minusCount() {
-    setCount((prevCount) => prevCount - 1);
+    const newRating = count - 1;
+    updateRating(newRating);
   }
 
   function plusCount() {
-    setCount((prevCount) => prevCount + 1);
+    const newRating = count + 1;
+    updateRating(newRating);
   }
+
   if (!url) {
     return <div>No video URL provided.</div>;
   }
