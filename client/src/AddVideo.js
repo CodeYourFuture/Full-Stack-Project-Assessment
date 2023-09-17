@@ -16,7 +16,7 @@ const AddVideo = ({ onAddVideo }) => {
       };
      onAddVideo(newVideo); // Pass the new video data to the parent component
       setTitle(""); // Clear input fields
-      https://www.youtube.com/watch?v=hexfXc7-SsUsetUrl("");
+      setUrl("");
     } else {
       // Handle the case where either title or URL is not provided
       alert("Both title and URL must be provided.");
