@@ -1,63 +1,71 @@
-import cors from "cors";
-import express from "express";
-import {videos} from './data.js';
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+dotenv.config();
 
-const port = 3001;
+const port = process.env.PORT || 5070;
 const app = express();
-
+const videosPool = require('./dbConfig')
 app.use(cors());
 app.use(express.json());
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 
-app.get("/", function (req, res) {
-    res.status(200).json({videos});
+app.get('/', async (req, res) => {
+    try {
+        const videoItems = await videosPool.query(
+            'SELECT * FROM videos'
+        );
+        res.status(200).json({videos: videoItems.rows});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message)
+    }
 });
 
-app.get('/:id', function (req, res) {
-    const id = req.params.id;
-    res.status(200).json({videos: videos.filter(video => String(video.id) === id)});
-});
 
-app.post('/', function (req, res) {
-    if (req.body.title && req.body.url) {
-        const newVideo = {
-            id: Date.now(),
-            title: req.body.title,
-            url: req.body.url,
-            rating: 0,
-            timestamp: new Date(),
-        }
-        videos.push(newVideo);
-        res.status(201).json({newVideo})
-    } else {
-        res.status(400).json({
+app.post('/', async (req, res) => {
+    try {
+        const {title, url} = req.body;
+        const newItem = await videosPool.query(
+            'INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0) RETURNING *',
+            [title, url]
+        );
+        res.status(201).json({
+            message: "New item added!",
+            item: newItem.rows
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
             error: {
                 "result": "failure",
-                "message": "Video could not be saved"
+                "message": "Video could not be added"
             }
         });
     }
 });
 
-app.delete('/:id', function (req, res) {
+app.delete('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    // Find the item index in the array
-    const videoIndex = videos.findIndex((video) => video.id === id);
 
-    if (videoIndex === -1) {
-        // Item not found
-        res.status(404).json({
-            error: {
-                "result": "failure",
-                "message": "Video could not be deleted"
-            }
-        });
-    } else {
-        // Remove the item from the array
-        videos.splice(videoIndex, 1);
-        res.status(200).json({success: true});
+    try {
+        const query = 'DELETE FROM videos WHERE id = $1';
+        const result = await videosPool.query(query, [id]);
+
+        if (result.rowCount === 1) {
+            res.status(200).json({success: true});
+        } else {
+            res.status(404).json({
+                error: {
+                    "result": "failure",
+                    "message": "Video could not be deleted"
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error deleting record:', error);
+        res.status(500).json({error: 'An error occurred while deleting the record'});
     }
 });
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
