@@ -7,18 +7,20 @@ import FormAddVideo from "./components/FormAddVideo";
 import VideoList from "./components/VideoList";
 import {getSortedVideos} from "./helpers/getSortedVideos";
 
+export const API_URL = 'https://video-recomendations-7q29.onrender.com';
+
 function App() {
     const [videos, setVideos] = useState([]);
     const {Content} = Layout;
 
     useEffect(() => {
-        fetch("http://localhost:3001/").then(res => res.json()).then(({videos}) => setVideos(getSortedVideos(videos)));
+        fetch(API_URL).then(res => res.json()).then(({videos}) => setVideos(getSortedVideos(videos)));
     }, [])
 
 
     const handleDeleteVideo = async (id) => {
         try {
-            await fetch(`http://localhost:3001/${id}`, {
+            await fetch(`${API_URL}/${id}`, {
                 method: "DELETE", // или 'PUT'
                 body: JSON.stringify({id}), // данные могут быть 'строкой' или {объектом}!
                 headers: {
@@ -35,7 +37,7 @@ function App() {
     const handleAddVideo = async ({title, url}) => {
         if (title && url) {
             try {
-                await fetch("http://localhost:3001", {
+                await fetch(API_URL, {
                     method: "POST", // или 'PUT'
                     body: JSON.stringify({title, url}), // данные могут быть 'строкой' или {объектом}!
                     headers: {
