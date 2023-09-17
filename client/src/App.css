@@ -4,13 +4,23 @@
 }
 
 .App-header {
-  background-color: orange;
+  /* changes made to get a hamburger menu */
+  /* background-color: orange; */
   color: orange;
   padding: 20px;
   background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+/* this one is implemented to get a hamburger menu */
+/* Apply background color to the body */
+.body {
+  background-color: #fa6900;
+  overflow-x: hidden;
+}
+
+/* Rest of your existing styles remain the same */
 
 .video-list {
   display: grid;
@@ -74,7 +84,7 @@
 
 header {
   background-color: orange;
-  color: white;
+  color: orange;
   text-align: center;
   padding: 20px;
   background-image: url("https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_1280.jpg");

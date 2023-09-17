@@ -1,7 +1,10 @@
+// update13 all works but no hamburger menu
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Navbar from "./navbar";
 import VideoComponent from "./VideoComponent";
 import AddYoutubeVideo from "./AddYoutubeVideo";
+
 import axios from "axios";
 
 const App = () => {
@@ -94,6 +97,8 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* line below is newly implemented navbar */}
+      <Navbar />
       <header className="App-header">
         <h1>Welcome to my fullstack project assessment webpage.</h1>
         <div className="text-block">

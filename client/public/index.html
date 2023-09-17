@@ -1,3 +1,4 @@
+<!-- update 7 on this also ToA, FAQ works -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,9 +18,270 @@
 
     <title>Video Recommendation</title>
   </head>
-  <body class="body">
-    <!-- Apply the .body class to the body element -->
+  <body class="body" id="body">
+    <header>
+      <section>
+        <p id="p1">
+          "Programming is like crafting magic spells with code, turning
+          imagination into reality and shaping the digital world with endless
+          possibilities."
+        </p>
+        <p id="p2">
+          Please donate crypto to a good cause to help people become coders
+        </p>
+        <script>
+          const p1 = document.getElementById("p1");
+          const p2 = document.getElementById("p2");
 
+          let current = p1;
+
+          function switchParagraphs() {
+            current.style.display = "none";
+
+            if (current === p1) {
+              current = p2;
+            } else {
+              current = p1;
+            }
+
+            current.style.display = "block";
+          }
+
+          setInterval(switchParagraphs, 5000);
+        </script>
+      </section>
+    </header>
+
+    <div id="root"></div>
+
+    <section class="google-maps" id="google-maps">
+      <h3>Welcome to our office</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.525154228447!2d-0.08728092358008124!3d51.521927071816656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cae4559fae1%3A0x9fb24acfc1d97d80!2s69%20Wilson%20St%2C%20London%20EC2A%202BB!5e0!3m2!1sen!2suk!4v1692718673648!5m2!1sen!2suk"
+        width="100%"
+        height="400"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        --
+      >
+        referrerpolicy="no-referrer-when-downgrade"></iframe
+      >
+    </section>
+
+    <footer class="footer" id="footer">
+      <p>Jans Fullstack Project Assessment</p>
+
+      <div id="links">
+        <a href="https://github.com/softacoder">GitHub</a>
+        <a href="https://frolicking-tiramisu-6a813b.netlify.app/">Portfolio</a>
+        <a href="https://www.linkedin.com/in/jan-softa-680a79b2/">LinkedIn</a>
+
+        <!-- Add a link to the FAQ section -->
+        <a href="#" id="faq-link">FAQ</a>
+        <a href="#" id="toaLink">ToA</a>
+
+      </div>
+    </footer>
+
+<div id="faq" style="display: none;">
+  <h4>Frequently Asked Questions</h4>
+  <div class="faq-item">
+      <h5>Question 1?</h5>
+      <p>Answer 1.</p>
+  </div>
+  <div class="faq-item">
+      <h5>Question 2?</h5>
+      <p>Answer 2.</p>
+  </div>
+  <!-- Add more FAQ items as needed -->
+</div>
+
+<script>
+  // Function to toggle the FAQ section when the FAQ link is clicked
+  const faqSection = document.getElementById('faq');
+  const faqLink = document.getElementById('faq-link');
+
+  faqLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (faqSection.style.display === 'none' || faqSection.style.display === '') {
+          faqSection.style.display = 'block';
+      } else {
+          faqSection.style.display = 'none';
+      }
+  });
+</script>
+
+
+      <!-- Add a container for the Terms of Use content (initially hidden) -->
+      <div id="termsOfUseContainer" style="display: none">
+        <!-- Your Terms of Use content goes here -->Terms of Use Agreement
+        Effective Date: [Date] 1. Acceptance of Terms By accessing or using
+        [Your Website/Application] (the "Service"), you agree to comply with and
+        be bound by these Terms of Use. If you do not agree to these terms,
+        please do not use the Service. 2. Changes to Terms We reserve the right
+        to modify or revise these Terms of Use at any time. Any changes will be
+        effective immediately upon posting the updated terms on the Service. It
+        is your responsibility to review these terms periodically for any
+        changes. 3. User Responsibilities You agree to: a. Provide accurate and
+        complete information when using the Service. b. Respect the intellectual
+        property rights of others. c. Comply with all applicable laws and
+        regulations. 4. Prohibited Activities You are prohibited from: a.
+        Violating any laws or regulations. b. Using the Service for any unlawful
+        or harmful purpose. c. Attempting to gain unauthorized access to the
+        Service. d. Distributing spam, viruses, or other harmful content. e.
+        Interfering with the security or functionality of the Service. 5.
+        Intellectual Property All content, trademarks, logos, and other
+        intellectual property on the Service are the property of [Your Company]
+        unless otherwise stated. You may not use, reproduce, or distribute any
+        content from the Service without permission. 6. Privacy Policy Your use
+        of the Service is also governed by our Privacy Policy, which can be
+        found [link to Privacy Policy]. 7. Termination We may terminate or
+        suspend your access to the Service at our discretion without notice,
+        including if you violate these Terms of Use. 8. Disclaimer of Warranties
+        The Service is provided "as is" without warranties of any kind, either
+        expressed or implied. We do not guarantee the accuracy, reliability, or
+        availability of the Service. 9. Limitation of Liability In no event
+        shall [Your Company] be liable for any damages, including but not
+        limited to, direct, indirect, incidental, or consequential damages
+        arising out of your use of the Service. 10. Governing Law These Terms of
+        Use are governed by and construed in accordance with the laws of [Your
+        Jurisdiction]. 11. Contact Information If you have any questions or
+        concerns regarding these Terms of Use, please contact us at [Contact
+        Email]. By using the Service, you acknowledge that you have read,
+        understood, and agree to be bound by these Terms of Use. [Your Company]
+        [Address] [City, State, ZIP] [Contact Email]
+      </div>
+
+      <script src="link-scripts.js"></script>
+      <script>
+        // JavaScript to toggle the visibility of the Terms of Use container
+        const toaLink = document.getElementById("toaLink");
+        const termsOfUseContainer = document.getElementById(
+          "termsOfUseContainer"
+        );
+
+        toaLink.addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent the link from navigating
+
+          // Toggle the visibility of the Terms of Use container
+          if (termsOfUseContainer.style.display === "block") {
+            termsOfUseContainer.style.display = "none";
+          } else {
+            termsOfUseContainer.style.display = "block";
+          }
+        });
+      </script>
+    </footer>
+  </body>
+</html>
+
+<!-- update 6 all works, including hamburger menu but no ToA, etc -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Video Recommendation</title>
+  </head>
+  <body class="body" id="body">
+    <header>
+      <section>
+        <p id="p1">
+          "Programming is like crafting magic spells with code, turning
+          imagination into reality and shaping the digital world with endless
+          possibilities."
+        </p>
+        <p id="p2">
+          Please donate crypto to a good cause to help people become coders
+        </p>
+        <script>
+          const p1 = document.getElementById("p1");
+          const p2 = document.getElementById("p2");
+
+          let current = p1;
+
+          function switchParagraphs() {
+            current.style.display = "none";
+
+            if (current === p1) {
+              current = p2;
+            } else {
+              current = p1;
+            }
+
+            current.style.display = "block";
+          }
+
+          setInterval(switchParagraphs, 5000);
+        </script>
+      </section>
+    </header>
+
+    <div id="root"></div>
+
+    <section class="google-maps" id="google-maps">
+      <h3>Welcome to our office</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.525154228447!2d-0.08728092358008124!3d51.521927071816656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cae4559fae1%3A0x9fb24acfc1d97d80!2s69%20Wilson%20St%2C%20London%20EC2A%202BB!5e0!3m2!1sen!2suk!4v1692718673648!5m2!1sen!2suk"
+        width="100%"
+        height="400"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        --
+      >
+        referrerpolicy="no-referrer-when-downgrade"></iframe
+      >
+    </section>
+
+    <footer class="footer" id="footer">
+      <p>Jans Fullstack Project Assessment</p>
+
+      <div id="links">
+        <a href="https://github.com/softacoder">GitHub</a>
+        <a href="https://frolicking-tiramisu-6a813b.netlify.app/">Portfolio</a>
+        <a href="https://www.linkedin.com/in/jan-softa-680a79b2/">LinkedIn</a>
+      </div>
+
+      <script src="link-scripts.js"></script>
+    </footer>
+  </body>
+</html> -->
+
+<!-- update 5 this one is working but the ham menu-->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Video Recommendation</title>
+  </head>
+  <body class="body">
     <header>
       <section>
         <p id="p1">
@@ -73,7 +335,6 @@
     <footer>
       <p>Jans Fullstack Project Assessment</p>
 
-      <!-- Links Content -->
       <div id="links">
         <a href="https://github.com/softacoder">GitHub</a>
         <a href="https://frolicking-tiramisu-6a813b.netlify.app/">Portfolio</a>
@@ -83,7 +344,7 @@
       <script src="link-scripts.js"></script>
     </footer>
   </body>
-</html>
+</html> -->
 
 <!-- update4 -->
 <!-- <!DOCTYPE html>
