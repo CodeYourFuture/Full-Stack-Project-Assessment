@@ -1,11 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const videosPool = require('./dbConfig.js');
 dotenv.config();
 
 const port = process.env.PORT || 5070;
 const app = express();
-const videosPool = require('./dbConfig')
 app.use(cors());
 app.use(express.json());
 
