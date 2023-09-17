@@ -14,6 +14,7 @@ const AddVideo = ({ onAddVideo }) => {
         url,
         rating: 0, // You can set the initial rating as needed
       };
+
      onAddVideo(newVideo); // Pass the new video data to the parent component
       setTitle(""); // Clear input fields
       setUrl("");
@@ -23,9 +24,7 @@ const AddVideo = ({ onAddVideo }) => {
     }
   };
 
-
-
-  return (
+return (
     <div className="add-video">
       <h2 className="add-video-header">Add Video</h2>
       <form onSubmit={handleSubmit}>
