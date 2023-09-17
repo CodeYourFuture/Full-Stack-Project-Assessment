@@ -25,13 +25,13 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
     try {
         const {title, url} = req.body;
-        const newItem = await videosPool.query(
+        const newVideo = await videosPool.query(
             'INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0) RETURNING *',
             [title, url]
         );
         res.status(201).json({
             message: "New item added!",
-            item: newItem.rows
+            newVideo: newVideo.rows
         });
     } catch (error) {
         console.log(error);
