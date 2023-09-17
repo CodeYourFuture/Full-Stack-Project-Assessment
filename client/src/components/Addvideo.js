@@ -13,8 +13,24 @@ function Addvideo(props) {
   }
 
   function submitInfo(event) {
-    event.preventDefault(); 
 
+    event.preventDefault();
+    console.log("My List", enterTitle, videoLink); 
+    fetch("http://127.0.0.1:5000/", {
+    
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: enterTitle,
+        url: videoLink,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("insert succesfull");
+      });
     
     setEnterTitle("");
     setVideoLink("");

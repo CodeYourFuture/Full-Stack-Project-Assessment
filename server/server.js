@@ -2,11 +2,34 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
+require("dotenv").config();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(cors());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
+const { Client } = require("pg");
+const client = new Client({
+  
+  host: "dpg-ck31ogr6fquc73828ej0-a.frankfurt-postgres.render.com",
+  user: "joe",
+  port: 5432,
+  password: "LIAxxNzzIlg0obnmYNez96WAtZ7qKkIS",
+  database: "videos_i4qz",
+  host: process.env.DBHOST,
+  user: process.env.DBUSER,
+  port: process.env.DBPORT,
+  password: process.env.DBPASSWORD,
+  database: process.env.DBDATABASE,
+  ssl: true,
+});
+client.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected to database");
+});
 let videos = [
   {
     "id": 523523,
@@ -73,21 +96,37 @@ let videos = [
 app.use(express.json());
 // GET "/"
 app.get("/", (req, res) => {
-  //fetch video data from database and store in videos array
-  res.send(videos);
+  client.query(`SELECT * FROM videos ORDER BY title`, (error, response) => {
+    if (!error) {
+      res.json(response.rows);
+    } else {
+      console.log(error.message);
+    }
+    client.end;
+  });
+  
+  // res.send(videos);
 });
+// app.post("/", (req, res) => {
+//   if (!req.body.field1 || !req.body.field2) {
+//     res.status(400).json({
+//       result: "failure",
+//       message: "Video could not be saved",
+//     });
+//   }
+
 
 app.post("/", (req, res) => {
   console.log(req.body);
-  const title = req.body.title;
-  console.log(title);
-  const url = req.body.url;
-  console.log(url);
-const newVideo = {id: videos.length + 1,
-title: title,
-url: url,
-Rating: 0}
-videos.push(newVideo);
-res.send(videos);
-})
+  const postedTitle = req.body.title;
+  console.log(postedTitle);
+  const postedUrl = req.body.url;
+  console.log(postedUrl);
 
+  client.query("INSERT INTO videos (title, url, rating) VALUES ($1, $2, 0)", [postedTitle, postedUrl])
+  .then((result) => {
+    res.status(201).json({
+      result: "success",
+    });
+  });
+});
