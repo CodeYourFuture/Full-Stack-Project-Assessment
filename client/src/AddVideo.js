@@ -15,24 +15,17 @@ const AddVideo = ({ onAddVideo }) => {
         rating: 0, // You can set the initial rating as needed
       };
 
-      // Send a POST request to the server to save the new video
-      fetch("https://full-stack-server-3nzy.onrender.com/videos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVideo),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Call the parent component's callback to add the new video
-          onAddVideo({ ...newVideo, id: data.id }); // Include the generated ID
-          setTitle("");
-          setUrl("");
-        })
-        .catch((error) => console.error("Error adding video:", error));
+      
+      onAddVideo(newVideo); // Pass the new video data to the parent component
+      setTitle(""); // Clear input fields
+      setUrl("");
+    } else {
+      // Handle the case where either title or URL is not provided
+      alert("Both title and URL must be provided.");
     }
   };
+
+
 
   return (
     <div className="add-video">

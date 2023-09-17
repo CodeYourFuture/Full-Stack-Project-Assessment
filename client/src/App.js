@@ -8,33 +8,49 @@ function App() {
   const [videos, setVideos] = useState([]);
   const [order, setOrder] = useState("desc"); //Order line desc or asc
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://full-stack-server-3nzy.onrender.com/videos"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch data from the server");
-        }
-        const data = await response.json();
-        const sortedData =
-          order === "desc"
-            ? data.sort((a, b) => b.votes - a.votes)
-            : data.sort((a, b) => a.votes - b.votes);
-        setVideos(sortedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://full-stack-server-3nzy.onrender.com/videos"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch data from the server");
       }
-    };
-
-    fetchData(); 
-  }, [order]);
-
-
-  const toggleOrder = () => {
-    setOrder(order === "desc" ? "asc" : "desc");
+      const data = await response.json();
+      const sortedData =
+        order === "desc"
+          ? data.sort((a, b) => a.title.localeCompare(b.title))
+          : data.sort((a, b) => b.title.localeCompare(a.title));
+      setVideos(sortedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
+  fetchData();
+}, [order]);
+
+const toggleOrder = () => {
+  const newOrder = order === "desc" ? "asc" : "desc";
+  setOrder(newOrder);
+
+  // Update the videos list based on the new order
+  const sortedData = [...videos].sort((a, b) => {
+    if (newOrder === "asc") {
+      return a.title.localeCompare(b.title);
+    } else {
+      return b.title.localeCompare(a.title);
+    }
+  });
+
+  setVideos(sortedData);
+};
+
+
+
 
   const handleVote = (id, increment) => {
     setVideos((prevVideos) =>
@@ -44,7 +60,9 @@ function App() {
     );
   };
 
-   const handleRemove = (id) => {
+
+
+const handleRemove = (id) => {
       // Remove the video from the React state
       setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
 

@@ -43,10 +43,17 @@ const Video = ({ video, onVoteUp, onVoteDown, onRemove }) => {
   );
 };
 
+
+
 function extractVideoIdFromUrl(url) {
-  const regex = /[?&]v=([^?&]+)/;
-  const match = url.match(regex);
-  return match ? match[1] : "";
+  if (url) {
+    const regex = /[?&]v=([^?&]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : "";
+  } else {
+    // Handle the case where 'url' is undefined or falsy
+    return "";
+  }
 }
 
 export default Video;
