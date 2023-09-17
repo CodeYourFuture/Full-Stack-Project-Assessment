@@ -51,7 +51,6 @@ function extractVideoIdFromUrl(url) {
     const match = url.match(regex);
     return match ? match[1] : "";
   } else {
-    // Handle the case where 'url' is undefined or falsy
     return "";
   }
 }

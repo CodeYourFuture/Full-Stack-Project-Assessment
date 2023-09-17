@@ -49,9 +49,6 @@ const toggleOrder = () => {
   setVideos(sortedData);
 };
 
-
-
-
   const handleVote = (id, increment) => {
     setVideos((prevVideos) =>
       prevVideos.map((video) =>
@@ -60,13 +57,8 @@ const toggleOrder = () => {
     );
   };
 
-
-
 const handleRemove = (id) => {
-      // Remove the video from the React state
-      setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-
-      // Send a DELETE request to the server to delete the video
+    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
       fetch(`https://full-stack-server-3nzy.onrender.com/videos/${id}`, {
         method: "DELETE",
       })
@@ -86,7 +78,7 @@ const handleRemove = (id) => {
 
   const handleAddVideo = (newVideo) => {
     // console.log("Adding video:", newVideo); 
-    // Send a POST request to add the new video
+    
     fetch("https://full-stack-server-3nzy.onrender.com/videos", {
       method: "POST",
       headers: {
@@ -102,7 +94,6 @@ const handleRemove = (id) => {
         );
 
         if (existingVideoIndex !== -1) {
-          // If it exists, update the existing video
           const updatedVideos = [...videos];
           updatedVideos[existingVideoIndex] = {
             ...newVideo,

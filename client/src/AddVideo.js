@@ -14,11 +14,9 @@ const AddVideo = ({ onAddVideo }) => {
         url,
         rating: 0, // You can set the initial rating as needed
       };
-
-      
-      onAddVideo(newVideo); // Pass the new video data to the parent component
+     onAddVideo(newVideo); // Pass the new video data to the parent component
       setTitle(""); // Clear input fields
-      setUrl("");
+      https://www.youtube.com/watch?v=hexfXc7-SsUsetUrl("");
     } else {
       // Handle the case where either title or URL is not provided
       alert("Both title and URL must be provided.");
