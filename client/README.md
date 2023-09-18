@@ -1,9 +1,3 @@
-## Demo
-
-### frontend (React) [https://video-recomendation.onrender.com/](https://video-recomendation.onrender.com/)
-
-### api (NodeJS + PostgreSQL) [https://video-recomendations-7q29.onrender.com/](https://video-recomendations-7q29.onrender.com/)
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
