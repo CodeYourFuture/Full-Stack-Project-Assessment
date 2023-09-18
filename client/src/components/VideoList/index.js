@@ -1,6 +1,5 @@
 import React from "react";
 import Video from "../Video";
-import "./antd-overrides.css";
 import styles from "./index.module.css";
 
 const VideoList = (props) => {

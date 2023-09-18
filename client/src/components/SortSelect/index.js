@@ -6,9 +6,9 @@ const SortSelect = (props) => {
 
 
     return (
-        <Form.Item label="Sort by rating: ">
+        <Form.Item label="Sort by rating: " name='order'>
             <Select
-                defaultValue="asc"
+                defaultValue="desc"
                 style={{width: 80}}
                 onChange={handleOrderChange}
                 options={[

@@ -1,5 +1,6 @@
 import {Button, Form, Input, Space, Typography} from 'antd';
 import React from 'react';
+import '../../antd-overrides.css'
 import {isValidYouTubeURL} from "../../helpers/isValidYoutubeURL";
 import styles from './index.module.css';
 
@@ -20,9 +21,11 @@ const FormAddVideo = (props) => {
                 name="ADD_VIDEO"
                 onFinish={onSubmit}
                 autoComplete="off"
+                requiredMark={false}
+                className='form_add-video'
             >
                 <Form.Item
-                    label="title"
+                    label="title:"
                     name="title"
                     rules={[
                         {
@@ -35,7 +38,7 @@ const FormAddVideo = (props) => {
                 </Form.Item>
 
                 <Form.Item
-                    label="URL"
+                    label="URL:"
                     name="url"
                     rules={[
                         {

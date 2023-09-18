@@ -1,8 +1,10 @@
-import {ConfigProvider, Divider, Layout, Spin, Typography} from "antd";
+import {ConfigProvider, Divider, Spin, Typography} from "antd";
 import {useEffect, useState} from "react";
+import "./antd-overrides.css";
 import {myTheme} from "./antd-theme-overrides";
 import "./App.css";
 import AppHeader from "./components/AppHeader";
+import ContentContainer from "./components/ContentContainer";
 import FormAddVideo from "./components/FormAddVideo";
 import SortSelect from "./components/SortSelect";
 import VideoList from "./components/VideoList";
@@ -18,9 +20,8 @@ const getAllVideos = (order, setVideos, setLoading) => {
 
 function App() {
     const [videos, setVideos] = useState([]);
-    const [order, setOrder] = useState('asc');
+    const [order, setOrder] = useState('desc');
     const [loading, setLoading] = useState(false);
-    const {Content} = Layout;
 
     useEffect(() => {
         getAllVideos(order, setVideos, setLoading);
@@ -71,11 +72,7 @@ function App() {
         <ConfigProvider theme={myTheme}>
             <div className="App">
                 <AppHeader/>
-                <Content style={{
-                    padding: '0 24px',
-                    maxWidth: '1440px',
-                    margin: '0 auto',
-                }}>
+                <ContentContainer>
                     <FormAddVideo handleAddVideo={handleAddVideo}/>
                     <Divider/>
                     <div className='sort-select'>
@@ -90,7 +87,8 @@ function App() {
                                 yet.<br/>Please add
                                 yours</Typography.Paragraph>}
                     </Spin>
-                </Content>
+                </ContentContainer>
+
             </div>
         </ConfigProvider>
     );

@@ -10,4 +10,9 @@ main {
     flex-grow: 1;
 }
 
+.sort-select {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
