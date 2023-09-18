@@ -37,14 +37,12 @@ function Video(props) {
           ></i>
         </span>
 
-        <button
+        <i
           onClick={(e) => {
             props.delete(e.target.parentNode.parentNode.children[1].innerText);
           }}
-          className="btn"
-        >
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
+          class="fa-solid fa-trash-can trash"
+        ></i>
       </p>
     </div>
   );

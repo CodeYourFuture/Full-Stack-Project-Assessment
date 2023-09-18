@@ -38,9 +38,9 @@
   align-items: center;
 }
 
-.singleVideo p button {
-  background-color: #c01c28;
-  color: white;
+.trash {
+  color: red;
+  cursor: pointer;
 }
 .videoFrame {
   width: 100%;
