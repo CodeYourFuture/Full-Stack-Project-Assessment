@@ -43,7 +43,7 @@ function Video(props) {
           }}
           className="btn"
         >
-          remove video
+          <i class="fa-solid fa-trash-can"></i>
         </button>
       </p>
     </div>
