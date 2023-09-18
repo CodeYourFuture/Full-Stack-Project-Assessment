@@ -3,7 +3,7 @@ const CORS = require("cors");
 // const urid = require("urid");
 const { Pool } = require("pg");
 const bodyParser = require("body-parser");
-
+require("dotenv").config({ path: "./development.env" });
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -13,10 +13,7 @@ app.use(CORS());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // database connection
-const pool = new Pool({
-  connectionString:
-    "postgres://appolin:krn5mrsbGuKjW25WGht2fw1ze3zlfFik@dpg-cjsvp3thtt0c73b3j850-a/videos_storage",
-});
+const pool = new Pool();
 //
 
 // GET "/"
