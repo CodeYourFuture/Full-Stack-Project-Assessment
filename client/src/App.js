@@ -1,11 +1,22 @@
 import "./App.css";
+import Heading from "./Heading";
+import VideosList from "./VideosList";
+import Form from "./Form";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    fetch("/videos")
+      .then((response) => response.json())
+      .then((data) => setVideos(data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+      <Heading />
+      <Form setVideos={setVideos} />
+      <VideosList videoData={videos} setVideoData={setVideos}/>
     </div>
   );
 }

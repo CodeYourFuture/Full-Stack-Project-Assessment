@@ -1,15 +1,143 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+app.use(express.json());
+const port = process.env.PORT || 3001;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const path = require("path");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
+app.use(bodyParser.json());
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+const { Pool } = require("pg");
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+// const cors = require("cors");
+// app.use(cors);
+
+
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 6000,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+
+
+function matchYoutubeUrl(url) {
+  var p =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if (url.match(p)) {
+    return url.match(p)[1];
+  }
+  return false;
+}
 
 // GET "/"
+
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+  res.send("Server is listening");
+  
 });
+
+app.get("/videos", async (req, res) => {
+  const query = "select * from videos";
+  try {
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+app.get("/videos/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    res.sendStatus(400);
+    return;
+  }
+  
+  const query = `select * from videos where id = ${id}`;
+  try {
+    const result = await pool.query(query);
+    if (!result.rowCount) {
+      res.sendStatus(404);
+      return;
+    }
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// POST
+
+app.post("/videos", (req, res) => {
+  const compulsoryFields = ["title", "url", "rating"];
+  if (!compulsoryFields.every((cf) => req.body.hasOwnProperty(cf))) {
+    res.status(401).send("not all compulsory fields supplied");
+  }
+  
+  let title = req.body.title;
+  let url = req.body.url;
+  let rating = req.body.rating;
+
+  if (!req.body.title) {
+    res.status(400).send("Please enter a valid title");
+    return;
+  }
+
+  if (matchYoutubeUrl(req.body.url) === false) {
+    res.status(400).send("Please enter a full valid YouTube url");
+    return;
+  }
+
+  if (isNaN(req.body.rating) || !req.body.rating) {
+    res.status(400).send("Please enter a valid number as rating");
+    return;
+  }
+
+  const insertQuery =
+    "INSERT INTO videos(title, url, rating) VALUES($1, $2, $3)";
+  // you can use async try catch or below code
+  pool
+    .query(insertQuery, [title, url, rating])
+    .then(() => {
+      res.status(201).json({
+        message: "Your video is successfully uploaded",
+      });
+    })
+    .catch((error) => console.error(error));
+});
+
+// Delete
+
+app.delete("/videos/:id", (req, res) => {
+  const videoId = parseInt(req.params.id);
+  if (isNaN(videoId)) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const deleteQuery = `DELETE FROM videos WHERE id=$1`;
+  const findVideo = `SELECT * FROM videos WHERE id=$1`;
+  pool.query(findVideo, [videoId]).then((result) => {
+    if (!result.rowCount) {
+      res.sendStatus(404);
+      return;
+    }
+    pool
+      .query(deleteQuery, [videoId])
+      .then((result) => {
+        console.log(result);
+        res.json({ message: `Video by ID ${videoId} has been deleted` });
+      })
+      .catch((error) => console.error(error));
+  });
+});
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
