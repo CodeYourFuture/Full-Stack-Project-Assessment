@@ -6,8 +6,7 @@ import AppHeader from "./components/AppHeader";
 import FormAddVideo from "./components/FormAddVideo";
 import VideoList from "./components/VideoList";
 
-export const API_URL = 'https://video-recomendations-7q29.onrender.com/api';
-
+export const API_URL = 'https://video-recomendations-7q29.onrender.com';
 
 
 function App() {
