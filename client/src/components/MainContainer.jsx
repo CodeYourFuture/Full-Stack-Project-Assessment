@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "./CardsContainer";
 import VideoForm from "./VideoForm";
+import { baseUrl } from "../config";
 
 function MainContainer() {
   const [videoData, setVideoData] = useState();
@@ -8,7 +9,8 @@ function MainContainer() {
 
   useEffect(() => {
     if (fetchData) {
-      fetch("http://localhost:5000/videos")
+      fetch(`${baseUrl}/videos`) // prod
+
         .then((response) => response.json())
         .then((data) => setVideoData(data));
     }
@@ -27,6 +29,7 @@ function MainContainer() {
         videoData={videoData}
         setVideoData={setVideoData}
       />
+
     </div>
   );
 }
