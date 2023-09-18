@@ -24,15 +24,11 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
 
     if (validateUrl(formUrl) && formTitle !== "") {
       const newData = {
-        id: parseInt(Math.random() * 1000),
         title: formTitle,
         url: cleanedUrl,
-        rating: 0,
-        timeSent: Date(),
       };
 
       fetch(`${baseUrl}/videos`, {
-        // fetch("http://localhost:5000/videos", { // dev
         method: "post",
         mode: "cors",
         headers: {
