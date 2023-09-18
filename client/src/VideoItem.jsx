@@ -7,14 +7,13 @@ const VideoItem = ({ video, onDelete, onVote }) => {
   return (
     <div className="video-item">
       <iframe
-        className='iframe'
         width="560"
         height="315"
         src={`https://www.youtube.com/embed/${videoId}`}
         title="YouTube video player"
-        frameborder="0"
+        // frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture web-share"
-        allowfullscreen
+        // allowfullscreen
       ></iframe>
 
       <h5>{video.title}</h5>
@@ -36,4 +35,3 @@ const VideoItem = ({ video, onDelete, onVote }) => {
 };
 
 export default VideoItem;
-

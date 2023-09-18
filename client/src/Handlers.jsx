@@ -40,3 +40,4 @@ function Handlers({ video, onUpVote, onDownVote, onDelete }) {
 }
 
 export default Handlers;
+

@@ -1,143 +1,113 @@
-const { response } = require("express");
+const bodyParser = require("body-parser");
 const express = require("express");
+const { Pool } = require("pg");
+const cors = require("cors");
 require("dotenv").config();
-const bodyParser = require('body-parser')
 const app = express();
 
-let cors = require("cors");
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
+
 const port = process.env.PORT || 5000;
-
-// Middleware to parse JSON request bodies
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(express.urlencoded({extended: false}));
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// let videos = require("./videosData.json");
-
-const { Pool } = require("pg");
+// Middleware to parse JSON request bodies
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors(corsOptions));
 
 const db = new Pool({
-  host: process.env.DBHOST,
-  port: process.env.DBPORT,
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWORD,
-  database: process.env.DBDATABASE,
-  ssl: true // Make sure this is set appropriately based on your database configuration
+  port: process.env.DB_PORT,
+  host: process.env.DB_HOSTNAME,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DBDATABASE_NAME,
+  server_url: process.env.SERVER_URL,
+  ssl: true
 });
 
 db.connect(function (err){
   if (err) throw err;
-  console.log("Connect to database");
+  console.log("Connected to the database");
 });
 
-
-// Example route to fetch data and return it as JSON
 app.get("/", (req, res) => {
- 
-  db.query(`SELECT * FROM videos`)
-  .then((result)=>{
-    res.json(result.rows);
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
-
-});
-
-
-//GET BY ID
-app.get("/:id", (req, res) => {
-  const searchId = Number(req.params.id);
-  db.query("SELECT * FROM videos WHERE id = $1", [searchId])
+  db.query("SELECT * FROM videos")
     .then((result) => {
-      if (result.rows.length > 0) {
-        res.json(result.rows);
-      } else {
-        res.status(404).json({
-          message: "Video not found",
-        });
-      }
+      res.status(200).json({ videos: result.rows });
     })
     .catch((error) => {
-      console.error(error.message);
-      res.status(500).json({
-        message: "Internal server error",
-      });
+      console.log(error);
     });
 });
 
-// Delete BY ID
-app.delete('/:id', (req, res) => {
-  let searchId = Number(req.params.id);
-
-  db.query("DELETE FROM videos WHERE id = $1", [searchId])
-    .then((result) => {
-      res.status(200).json({});
-    })
-    .catch((error) => {
-      console.log(error.message);
-      res.status(404).json({
-        message: "Video could not be deleted",
-      });
-    });
- 
+app.get("/:id", async(req, res) => {
+  try {
+    const query = Number(req.params.id);  
+    const videoId = await db.query(`SELECT * FROM videos WHERE id=$1`, [query])
+    res.status(200).json(videoId.rows[0]);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-app.put('/:id', (req, res) => {
-  let searchId = Number(req.params.id);
-  let inputRating = Number(req.body.rating);
-
-  db
-    .query("UPDATE videos SET rating = $2 WHERE id = $1", [searchId, inputRating])
-    .then((result) => {
-      res.status(200).json({});
-    })
-    .catch((error) => {
-      console.log(error.message);
-      res.status(404).json({
-        result: "failure",
-        message: "Video could not be updated",
-      });
-    });
-})
-
-// POST A VIDEO TO THE API
-app.post('/:id', (req, res) => {
-  if (!req.body.title || !req.body.url) {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
+ // POST a request
+app.post("/", async (req, res) => {
+  try {
+    console.log("hello"); 
+    const {id, title, url, rating } = req.body;
+      if (!id || !title || !url || rating === undefined){
+        return res.status(400).json({ result: "failure", message: "Invalid request data" });
+      } 
+      const newVideo = await db.query("INSERT INTO videos (id, title, url, rating) RETURNING row", [id, title, url, rating]);
+      res.status(201).json(newVideo.rows[0].id);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ result: "failure", message: "Video could not be saved" });
   }
 
-  db.query("SELECT MAX(id) FROM videos")
-    .then((result) => {
-      let newId = result.rows[0].max + 1;
-      let newTitle = req.body.title;
-      let newUrl = req.body.url;
-      let newRating = 0;
+  // PUT update video
+  app.put("/update_rating", async (req, res) => {
+    try {
+      const {id, rating} = req.body;
+      const updateVideo = await db.query('UPDATE videos set rating = $1 WHERE id = $2', [rating, id]);
+      res.status(204).json()
+    } catch (error) {
+          console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+    }
+});
 
-      db.query("INSERT INTO videos (id, title, url, rating) VALUES ($1, $2, $3, $4)", [newId, newTitle, newUrl, newRating])
-        .then((result) => {
-          res.status(201).json({
-            id: newId,
-          });
-        })
-        .catch((error) => {
-          console.log(error.message);
-          res.status(404).json({
-            result: "failure",
-            message: "Video could not be inserted",
-          });
-        });
-    })
-    .catch((error) => {
-      console.log(error.message);
-      res.status(404).json({
-        result: "failure",
-        message: "Video could not be inserted",
-      });
-    });
-})
+});
+
+// GET endpoint to fetch all videos
+app.get('/', async(req, res) => {
+  try {
+    const videos = result.rows;
+    const videoByDate = db
+    .query('SELECT * FROM videos ORDER BY date DESC', [videos])
+      res.status(200).json({ result: 'success', videoByDate });  
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ result: 'failure', message: 'Failed to fetch videos' });
+  }
+});
+
+app.delete("/:id", async(req, res) => {
+  try {
+    console.log("hi")
+    const idToDelete = Number(req.params.id);
+    const videoDeleted = db.query(`DELETE FROM videos WHERE id=$1`, [idToDelete])
+   
+      res.status(200).json({result: {}, videoDeleted}) 
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({result: 'failure', message: 'Failed to delete video'})
+  }
+
+}) 
+
+
+
