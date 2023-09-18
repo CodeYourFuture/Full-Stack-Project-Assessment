@@ -12,7 +12,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// const videos = require("./exampleresponse.json");
 
 app.use(express.json());
 
@@ -34,23 +33,18 @@ db.connect(function (err) {
   console.log("Connected!");
 });
 
-
 // This endpoint is used to get all the videos using SQL queries
 
 app.get("/videos", (req, res) => {
-  // getting data from videos table
-  db.query(`SELECT * FROM videos ORDER BY title`, (error, result) => {
-    // using callback function to catch the error; later on we can use .then promises
-    if (!error) {
-      res.json(result.rows);
-    } else {
+  db.query(`SELECT * FROM videos ORDER BY title`)
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
       console.log(error.message);
-    }
-    db.end;
-  });
+      res.status(500).send("Database Error");
+    });
 });
 
-// get one particular video using the ID using SQL queries
+// get one single video using the ID using SQL queries
 app.get("/videos/:id", function (req, res) {
   const searchId = Number(req.params.id);
 
@@ -67,23 +61,14 @@ app.get("/videos/:id", function (req, res) {
     })
     .catch((error) => {
       console.log(error.message);
-      res.status(404).json({
+      res.status(500).json({
         result: "failure",
-        message: "Video could not be found",
+        message: "Database Error",
       });
     });
 });
 
-// app.get("/videos", (req, res) => {
-//   db.query("SELECT * FROM videos").then((result) => {
-//   response.json( result.rows );
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
-// });
-
-// This endpoint is used to create new videos
+// This endpoint is used to add a new video
 app.post("/videos", (req, res) => {
   const { title, url } = req.body;
   if (!title || !url || !url.startsWith("https://www.youtube.com")) {
@@ -92,16 +77,17 @@ app.post("/videos", (req, res) => {
       message: "Video could not be saved",
     });
   } else {
-    const idList = videos.map((video) => video.id);
-    const id = Math.max(...idList) + 1;
-    const newVideo = {
-      id,
-      title,
-      url,
-      rating: 0,
-    };
-    videos.push(newVideo);
-    res.status(201).json({ id });
+    const query = `INSERT INTO videos (title, url, rating, createdAt)
+    VALUES ($1, $2, 0, now())`;
+
+    db.query(query, [title, url])
+      .then(() => {
+        res.status(201).send("Added a new video");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("Database error");
+      });
   }
 });
 
@@ -120,37 +106,40 @@ app.get("/videos/:id", (req, res) => {
 
 // This endpoint is used to delete a single video with a given ID
 app.delete("/videos/:id", (req, res) => {
-  let id = Number(req.params.id);
-  const matchingVideo = videos.find((video) => {
-    return video.id === id;
-  });
-
-  if (!matchingVideo) {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be deleted",
-      id: id,
-    });
-  } else {
-    const videoIndexToBeDeleted = videos.indexOf(matchingVideo);
-    videos.splice(videoIndexToBeDeleted, 1);
-    res.status(200).json({});
-  }
+  const id = Number(req.params.id);
+  db.query("DELETE FROM videos WHERE id=$1", [id])
+    .then(() => res.send(`Video ${id} deleted!`))
+    .catch((err) => console.error(err));
 });
 
-// This endpoint is used to update an existing video with a given ID
-app.put("/videos/:id", (req, res) => {
-  const newVideo = req.body;
-  let id = Number(req.params.id);
-  const videoIndex = videos.findIndex((video) => {
-    return video.id === id;
-  });
-  if (videoIndex === -1) {
-    res.status(404).send("Video not found");
-  } else {
-    videos.splice(videoIndex, 1, newVideo);
-    res.status(200).send({ newVideo });
-  }
+// This endpoint is used to update the rating by adding 1 to an existing video rating with a given ID when UpVote icon/button is clicked
+
+app.put("/videos/:id/upvote", (req, res) => {
+  const id = Number(req.params.id);
+  db.query(
+    "UPDATE videos SET rating = rating + 1 WHERE id = $1 RETURNING rating",
+    [id]
+  )
+    .then((result) => res.send(result.rows[0]))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+});
+
+// This endpoint is used to update the rating by subtracting 1 from an existing video rating with a given ID when downVote icon/button is clicked
+
+app.put("/videos/:id/downvote", (req, res) => {
+  const id = Number(req.params.id);
+  db.query(
+    "UPDATE videos SET rating = rating - 1 WHERE id = $1 RETURNING rating",
+    [id]
+  )
+    .then((result) => res.send(result.rows[0]))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
