@@ -9,7 +9,7 @@ const AddVideo = ({ addVideo }) => {
     const newVideo = {
       title:title,
       url:url,
-      votes: 0,
+      rating: 0,
      };
      fetch(`${process.env.REACT_APP_BACKEND_URL}/videos`, {
       method: 'POST',
