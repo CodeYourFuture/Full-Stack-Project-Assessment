@@ -1,3 +1,59 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  display: block;
+  margin: auto -16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-style: oblique;
+  padding: 2rem 50px 10px 50px;
+}
+
+.App-header h1 {
+  color: rgb(236, 77, 77);
+  font-family: "McLaren", cursive;
+  font-weight: 200;
+}
+
+body {
+  background: #eee;
+  background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+  padding: 0 16px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.container {
+
+  justify-content: center;
+  font-size: 2rem;
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+}
+
+button {
+  background-color: rgb(241, 10, 10);
+}
+
+footer {
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+
+}
+
+footer p {
+  color: rgb(22, 21, 21);
+  font-size: 1.5rem;
+  margin: 50px;
+  font-weight: bold;
+}
