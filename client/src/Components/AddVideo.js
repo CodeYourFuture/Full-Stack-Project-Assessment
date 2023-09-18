@@ -1,5 +1,5 @@
 import { useState } from "react";
-const AddVideo = ({ videoCards, setVideoCards }) => {
+const AddVideo = ({ setRebuild, setVideoCards }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const handleSubmit = (e) => {
@@ -23,6 +23,7 @@ const AddVideo = ({ videoCards, setVideoCards }) => {
         .then((res) => res.json())
         .then((data) => {
           setVideoCards(data);
+          setRebuild((rebuild) => rebuild + 1);
         })
         .catch((error) => console.log(error));
     } else {

@@ -2,13 +2,33 @@ import { useState } from "react";
 const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
   const [videoRating, setVideoRating] = useState(rating);
 
-  const increase = () => {
+  const increase = async () => {
     setVideoRating(videoRating + 1);
+    fetch(`https://video-recomendations-server.onrender.com/videos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: videoRating + 1 }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
   const decrease = () => {
     if (videoRating > 0) {
       setVideoRating(videoRating - 1);
     }
+    fetch(`http://localhost:4000/videos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: videoRating - 1 }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (

@@ -11,9 +11,10 @@ function App() {
   const [videoCards, setVideoCards] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [rebuild, setRebuild] = useState(0);
   useEffect(() => {
     fetchVideos();
-  }, [videoCards]);
+  }, [rebuild]);
   const fetchVideos = async () => {
     try {
       const response = await fetch(
@@ -39,7 +40,7 @@ function App() {
       <NavBar />
       <Welcome />
       <AddAndSearch setKeyword={setKeyword} />
-      <AddVideo setVideoCards={setVideoCards} videoCards={videoCards} />
+      <AddVideo setVideoCards={setVideoCards} setRebuild={setRebuild} />
       {error ? (
         <h1 className="error-msg "> {error}</h1>
       ) : !loading ? (
