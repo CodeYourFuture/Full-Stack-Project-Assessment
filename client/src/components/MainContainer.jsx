@@ -3,7 +3,6 @@ import CardsContainer from "./CardsContainer";
 import VideoForm from "./VideoForm";
 import { baseUrl } from "../config";
 
-
 function MainContainer() {
   const [videoData, setVideoData] = useState();
   const [fetchData, setFetchData] = useState(true);
@@ -11,7 +10,6 @@ function MainContainer() {
   useEffect(() => {
     if (fetchData) {
       fetch(`${baseUrl}/videos`) // prod
-
         .then((response) => response.json())
         .then((data) => setVideoData(data));
     }

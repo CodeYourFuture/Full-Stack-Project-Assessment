@@ -50,33 +50,33 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
     event.target.form.reset();
   }
   return (
-    <div>
-      <form className="m-5 flex flex-col items-center gap-7 pb-3 text-lg">
-        <div className="p-2 text-center text-4xl font-bold">
-          <h2>Add your YouTube video</h2>
+    <div className="sm:mx-auto sm:w-4/5">
+      <form className="sm:w-500 mx-5 mb-3 mt-1 flex flex-col gap-2 pb-1 text-lg sm:mx-9 sm:px-9  sm:text-2xl">
+        <div className="p-1 font-bold">
+          <h2>Add a YouTube video to your vault</h2>
         </div>
 
-        <div className="grid gap-7 text-xl font-extrabold">
-          <div className="flex gap-3">
-            <label htmlFor="title">Please enter your title:</label>
+        <div className="grid gap-2">
+          <div className="flex flex-col">
+            <label htmlFor="title">Please enter a title:</label>
             <input
               type="text"
               name="title"
               id="title"
               placeholder="Video title"
               required
-              className="h-15 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
+              className="h-8 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
             />
           </div>
-          <div className="flex gap-3">
-            <label htmlFor="url">Please enter your YouTube video url:</label>
+          <div className="flex flex-col">
+            <label htmlFor="url">Please enter a YouTube video url:</label>
             <input
               type="url"
               name="url"
               id="url"
               placeholder="YouTube video URL"
               required
-              className="h-15 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
+              className="h-8 w-full rounded bg-gray-200 p-2 pl-4 pr-4"
             />
           </div>
         </div>
@@ -84,7 +84,7 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
         <button
           onClick={addVideoHandler}
           type="submit"
-          className="m-2 rounded bg-black px-5 py-3 text-white"
+          className="m-2 rounded bg-black px-4 py-2 font-bold text-white transition-colors duration-200 hover:bg-red-300 active:bg-red-700 sm:rounded-lg sm:px-3 sm:py-6"
         >
           Add
         </button>

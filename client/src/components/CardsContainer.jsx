@@ -14,7 +14,7 @@ function CardsContainer({ videoData, setVideoData, setFetchData }) {
   }
 
   return (
-    <div className="grid justify-center gap-9">
+    <div className="grid grid-cols-1 gap-8 sm:mx-10 sm:my-3 sm:grid-cols-2 md:grid-cols-2 lg:mr-24 lg:grid-cols-3 xl:ml-24 xl:grid-cols-3 2xl:grid-cols-4">
       {videoData
         ?.sort((a, b) => b.rating - a.rating)
         .map((singleVideo) => {

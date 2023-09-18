@@ -35,20 +35,22 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
   }
 
   return (
-    <div className="grid gap-5">
-      <p className="text-left text-2xl font-bold">{singleVideo.title}</p>
+    <div className="w-400 grid-col mx-4 grid sm:mx-3 sm:my-3 sm:w-72">
+      <p className="text-left text-lg font-bold lg:text-2xl">
+        {singleVideo.title}
+      </p>
 
-      <div className="grid-col grid w-fit gap-5">
+      <div className="grid-col grid w-fit gap-2">
         <iframe
-          width="560"
-          height="315"
+          width="100%"
+          height="120"
           src={singleVideo.url.replace("watch?v=", "embed/")}
           title={singleVideo.title}
           allowFullScreen
         ></iframe>
 
         {/* Rating section below: */}
-        <div className="flex flex-row justify-between text-lg font-bold">
+        <div className="flex flex-row justify-between space-x-5 text-lg sm:space-x-7 lg:text-2xl">
           <button type="button" onClick={upVoteHandler}>
             Up Vote 👍
           </button>
@@ -63,7 +65,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
         <Button onDelete={onDelete} id={singleVideo.id} />
       </div>
 
-      <p className="text-lg font-bold">
+      <p className="text-lg">
         Time Uploaded: {new Date(singleVideo.createdat).toLocaleString()}
       </p>
     </div>
