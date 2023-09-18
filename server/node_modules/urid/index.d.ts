@@ -1,0 +1,1 @@
+export function urid(size?: number, charset?: string): string;
