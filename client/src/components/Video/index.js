@@ -1,5 +1,6 @@
 import {Button, Typography} from 'antd';
-import React from "react";
+import React, {useEffect} from "react";
+import {API_URL} from "../../App";
 import styles from "./index.module.css";
 
 const {Text} = Typography;
@@ -15,6 +16,21 @@ const Video = (props) => {
     const handleDownVote = () => {
         setRating(rating - 1);
     }
+
+    useEffect(() => {
+        try {
+            fetch(`${API_URL}/${id}`, {
+                method: "PUT", // или 'PUT'
+                body: JSON.stringify({id, rating}), // данные могут быть 'строкой' или {объектом}!
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+        } catch (error) {
+            console.error({error});
+        }
+    }, [rating])
 
     return (
         <div className={styles.container}>
