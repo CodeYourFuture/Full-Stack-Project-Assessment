@@ -14,11 +14,7 @@ app.use(cors());
 const { Client } = require("pg");
 const client = new Client({
   
-  host: "dpg-ck31ogr6fquc73828ej0-a.frankfurt-postgres.render.com",
-  user: "joe",
-  port: 5432,
-  password: "LIAxxNzzIlg0obnmYNez96WAtZ7qKkIS",
-  database: "videos_i4qz",
+  
   host: process.env.DBHOST,
   user: process.env.DBUSER,
   port: process.env.DBPORT,
