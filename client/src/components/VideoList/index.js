@@ -8,9 +8,9 @@ const VideoList = (props) => {
 
     return (
         <div className={styles.container}>
-            {videos.map((video) => (
-                <Video video={video} key={video.id} handleDeleteVideo={handleDeleteVideo}/>
-            ))}
+            {videos.map(video => {
+                return <Video video={video} key={video.id} handleDeleteVideo={handleDeleteVideo}/>
+            })}
         </div>
     );
 }

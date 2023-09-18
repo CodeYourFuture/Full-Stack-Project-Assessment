@@ -1,26 +1,31 @@
-import {ConfigProvider, Layout} from "antd";
+import {ConfigProvider, Layout, Spin} from "antd";
 import {useEffect, useState} from "react";
 import {myTheme} from "./antd-theme-overrides";
 import "./App.css";
 import AppHeader from "./components/AppHeader";
 import FormAddVideo from "./components/FormAddVideo";
 import VideoList from "./components/VideoList";
-import {getSortedVideos} from "./helpers/getSortedVideos";
 
-export const API_URL = 'https://video-recomendations-7q29.onrender.com';
+export const API_URL = 'https://video-recomendations-7q29.onrender.com/api';
+
 
 function App() {
     const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(false);
     const {Content} = Layout;
 
     useEffect(() => {
-        fetch(API_URL).then(res => res.json()).then(({videos}) => setVideos(getSortedVideos(videos)));
+        setLoading(true);
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(({videos}) => setVideos(videos))
+            .finally(() => setLoading(false));
     }, [])
 
 
-    const handleDeleteVideo = async (id) => {
+    const handleDeleteVideo = (id) => {
         try {
-            await fetch(`${API_URL}/${id}`, {
+            fetch(`${API_URL}/${id}`, {
                 method: "DELETE", // или 'PUT'
                 body: JSON.stringify({id}), // данные могут быть 'строкой' или {объектом}!
                 headers: {
@@ -34,10 +39,10 @@ function App() {
         }
     }
 
-    const handleAddVideo = async ({title, url}) => {
+    const handleAddVideo = ({title, url}) => {
         if (title && url) {
             try {
-                await fetch(API_URL, {
+                fetch(API_URL, {
                     method: "POST", // или 'PUT'
                     body: JSON.stringify({title, url}), // данные могут быть 'строкой' или {объектом}!
                     headers: {
@@ -45,7 +50,13 @@ function App() {
                     },
                 })
                     .then((response) => response.json())
-                    .then(({newVideo}) => setVideos([...videos, {...newVideo}]));
+                    .then(() => {
+                        setLoading(true);
+                        fetch(API_URL)
+                            .then(res => res.json())
+                            .then(({videos}) => setVideos(videos))
+                            .finally(() => setLoading(false));
+                    });
             } catch (error) {
                 console.error({error});
             }
@@ -53,13 +64,16 @@ function App() {
     };
     return (
         <ConfigProvider theme={myTheme}>
-            <Layout className="App">
+            <div className="App">
                 <AppHeader/>
                 <Content>
                     <FormAddVideo handleAddVideo={handleAddVideo}/>
-                    <VideoList videos={videos} handleDeleteVideo={handleDeleteVideo}/>
+                    <Spin tip="Loading" size="large" spinning={loading}>
+                        {!loading && !!videos.length &&
+                            <VideoList videos={videos} handleDeleteVideo={handleDeleteVideo}/>}
+                    </Spin>
                 </Content>
-            </Layout>
+            </div>
         </ConfigProvider>
     );
 }

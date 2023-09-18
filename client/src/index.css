@@ -5,7 +5,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /*background-color: black;*/
+    background-color: #f5f5f5;
 }
 
 html, body {
@@ -13,6 +13,10 @@ html, body {
 }
 
 #root {
+    height: 100%;
+}
+
+.App {
     height: 100%;
 }
 

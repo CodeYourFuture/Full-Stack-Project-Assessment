@@ -2,6 +2,10 @@
     --primary: '#fa8c16';
 }
 
+.App {
+    height: 100%;
+}
+
 main {
     flex-grow: 1;
 }
