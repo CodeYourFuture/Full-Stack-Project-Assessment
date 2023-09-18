@@ -14,6 +14,26 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
       return url;
     }
   }
+
+  async function handleRemoveVideo() {
+    try {
+      const response = await fetch(`process.env.REACT_APP_BACKEND_URL/videos/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.status === 200) {
+        
+        removeVideo(id); 
+      } else if (response.status === 404) {
+        console.error('Video not found on the backend.');
+      } else {
+        console.error('Error deleting the video from the backend.');
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the video:', error);
+    }
+  }
+  
     
    function handleUpVote() {
     setRating(rating + 1);
@@ -23,6 +43,8 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
     setRating(rating - 1);
   }
 
+
+
    return (
     <div className="video"> 
      
@@ -31,7 +53,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
         <p className="video-rating">Votes: {rating}</p>
         <button className="upvote-button" onClick={handleUpVote}></button>
         <button className="downvote-button" onClick={handleDownVote}></button>
-        <button onClick={() => removeVideo(id)}>Remove Video</button>
+        <button onClick={handleRemoveVideo}>Remove Video</button>
       </div>
  
   );
