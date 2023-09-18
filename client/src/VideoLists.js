@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AddVideo from './AddVideo';
 import Videocard from './VideoCard';
 
-// In your component file
+
 import config from './config';
 
-// Access the backend URL
+
 const backendUrl = config.REACT_APP_BACKEND_URL;
 
 console.log('REACT_APP_BACKEND_URL:', `${backendUrl}/videos`);
