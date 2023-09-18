@@ -7,38 +7,31 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
     On the return statement of the map, for the when the condition is true, I need to create the appropriate value that will replace the original value. When the condition is false I can return the video.
    */
 
-  function upVoteHandler() {
-    const likeRating = videoData.map((video) => {
-      if (video.id === singleVideo.id) {
-        video.rating += 1;
-        fetch(`${baseUrl}/videos/${video.id}`, {
-          method: "put",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(video),
+  function vote(voteType) {
+    fetch(`${baseUrl}/videos/${singleVideo.id}/${voteType}`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const likeRating = videoData.map((video) => {
+          if (video.id === singleVideo.id) {
+            video.rating = data.rating;
+          }
+          return video;
         });
-      }
-      return video;
-    });
-    setVideoData(likeRating);
+        setVideoData(likeRating);
+      });
+  }
+
+  function upVoteHandler() {
+    vote("upvote");
   }
 
   function downVoteHandler() {
-    const dislikeRating = videoData.map((video) => {
-      if (video.id === singleVideo.id) {
-        video.rating -= 1;
-        fetch(`${baseUrl}/videos/${video.id}`, {
-          method: "put",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(video),
-        });
-      }
-      return video;
-    });
-    setVideoData(dislikeRating);
+    vote("downvote");
   }
 
   return (
@@ -70,7 +63,9 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
         <Button onDelete={onDelete} id={singleVideo.id} />
       </div>
 
-      <p className="text-lg font-bold">Time Uploaded: {singleVideo.timeSent}</p>
+      <p className="text-lg font-bold">
+        Time Uploaded: {new Date(singleVideo.createdat).toLocaleString()}
+      </p>
     </div>
   );
 };
