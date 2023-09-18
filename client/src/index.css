@@ -1,4 +1,4 @@
-/* Global Styles */
+
 body {
   font-family: Arial, sans-serif;
   color: #333;
@@ -12,7 +12,7 @@ h2 {
   font-weight: bold;
 }
 
-/* Layout */
+
 .app {
   max-width: 1200px;
   margin: 0 auto;
@@ -30,9 +30,9 @@ h2 {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Center the Add Video button horizontally */
-  margin-top: 20px; /* Add space at the top */
-  text-align: center; /* Center button text */
+  margin: 0 auto;
+  margin-top: 20px; 
+  text-align: center; 
 }
 
 .add-video h2 {
@@ -67,25 +67,25 @@ h2 {
 
 /* Video List */
 .videos {
-  display: flex; /* Use flexbox to arrange videos */
-  flex-wrap: wrap; /* Allow videos to wrap to the next row */
-  justify-content: center; /* Center videos horizontally */
-  align-content: center; /* Center videos vertically */
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  align-content: center; 
   margin-top: 20px;
 }
 
 .video {
-  width: 20%; /* Adjusted to be 20% width */
+  width: 20%; 
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
-  text-align: center; /* Center video content */
+  text-align: center; 
 }
 
 .video h2 {
-  font-size: 18px; /* Reduce font size for video titles */
+  font-size: 18px; 
   margin-top: 0;
   max-height: 40px;
   overflow: hidden;
@@ -93,7 +93,7 @@ h2 {
 
 .video iframe {
   width: 100%;
-  height: 150px; /* Adjusted to make videos smaller */
+  height: 150px; 
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -122,21 +122,6 @@ h2 {
   content: "👎";
 }
 
-/* Responsive */
-@media (max-width: 1000px) {
-  .videos {
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .videos {
-    flex-direction: column; /* Display videos in a single column on small screens */
-    align-items: center; /* Center videos vertically */
-  }
-}
 
 
 
