@@ -11,8 +11,14 @@ app.use(express.json());
 
 app.get('/', async (req, res) => {
     try {
+        const order = req.query.order || 'asc';
+        let orderBy = 'rating ASC'; // Default order (ascending)
+
+        if (order === 'desc') {
+            orderBy = 'rating DESC'; // Descending order
+        }
         const videoItems = await db.query(
-            'SELECT * FROM videos'
+            `SELECT * FROM videos ORDER BY ${orderBy}`
         );
         res.status(200).json({videos: videoItems.rows});
     } catch (error) {

@@ -1,26 +1,30 @@
-import {ConfigProvider, Layout, Spin} from "antd";
+import {ConfigProvider, Divider, Layout, Spin, Typography} from "antd";
 import {useEffect, useState} from "react";
 import {myTheme} from "./antd-theme-overrides";
 import "./App.css";
 import AppHeader from "./components/AppHeader";
 import FormAddVideo from "./components/FormAddVideo";
+import SortSelect from "./components/SortSelect";
 import VideoList from "./components/VideoList";
 
 export const API_URL = 'https://video-recomendations-7q29.onrender.com';
-
+const getAllVideos = (order, setVideos, setLoading) => {
+    setLoading(true);
+    fetch(`${API_URL}?order=${order}`)
+        .then(res => res.json())
+        .then(({videos}) => setVideos(videos))
+        .finally(() => setLoading(false));
+}
 
 function App() {
     const [videos, setVideos] = useState([]);
+    const [order, setOrder] = useState('asc');
     const [loading, setLoading] = useState(false);
     const {Content} = Layout;
 
     useEffect(() => {
-        setLoading(true);
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(({videos}) => setVideos(videos))
-            .finally(() => setLoading(false));
-    }, [])
+        getAllVideos(order, setVideos, setLoading);
+    }, [order])
 
 
     const handleDeleteVideo = (id) => {
@@ -51,26 +55,40 @@ function App() {
                 })
                     .then((response) => response.json())
                     .then(() => {
-                        setLoading(true);
-                        fetch(API_URL)
-                            .then(res => res.json())
-                            .then(({videos}) => setVideos(videos))
-                            .finally(() => setLoading(false));
+                        getAllVideos(order, setVideos, setLoading);
                     });
             } catch (error) {
                 console.error({error});
             }
         }
     };
+
+    const handleOrderChange = (value) => {
+        setOrder(value);
+    }
+
     return (
         <ConfigProvider theme={myTheme}>
             <div className="App">
                 <AppHeader/>
-                <Content>
+                <Content style={{
+                    padding: '0 24px',
+                    maxWidth: '1440px',
+                    margin: '0 auto',
+                }}>
                     <FormAddVideo handleAddVideo={handleAddVideo}/>
+                    <Divider/>
+                    <div className='sort-select'>
+                        <SortSelect handleOrderChange={handleOrderChange}/>
+                    </div>
                     <Spin tip="Loading" size="large" spinning={loading}>
                         {!loading && !!videos.length &&
-                            <VideoList videos={videos} handleDeleteVideo={handleDeleteVideo}/>}
+                            <VideoList videos={videos} handleDeleteVideo={handleDeleteVideo}/>
+                        }
+                        {!loading && !videos.length &&
+                            <Typography.Paragraph italic style={{textAlign: 'center'}}>There are no videos to recommend
+                                yet.<br/>Please add
+                                yours</Typography.Paragraph>}
                     </Spin>
                 </Content>
             </div>

@@ -7,19 +7,18 @@ import styles from './index.module.css';
 const FormAddVideo = (props) => {
     const {handleAddVideo} = props;
     const [form] = Form.useForm();
+
+    const onSubmit = () => {
+        handleAddVideo(form.getFieldsValue());
+        form.resetFields();
+    }
     return (
         <div className={styles.container}>
             <Typography.Title level={2} style={{textAlign: 'center'}}>Add your favourite video</Typography.Title>
             <Form
                 form={form}
                 name="ADD_VIDEO"
-                labelCol={{
-                    span: 5,
-                }}
-                wrapperCol={{
-                    span: 19,
-                }}
-                onFinish={handleAddVideo}
+                onFinish={onSubmit}
                 autoComplete="off"
             >
                 <Form.Item

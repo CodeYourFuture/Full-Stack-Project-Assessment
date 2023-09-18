@@ -9,6 +9,7 @@ const Video = (props) => {
     const [rating, setRating] = React.useState(videoRating);
 
     const videoId = url.split("v=")[1].substring(0, 11);
+    const videoLoadingDate = new Date(timestamp).toLocaleString("en-US");
 
     const handleUpVote = () => {
         setRating(rating + 1);
@@ -56,7 +57,7 @@ const Video = (props) => {
                     >
                 </iframe>
             </div>
-            {timestamp && <Text type="secondary">Uploaded on: {timestamp.toLocaleString()}</Text>}
+            {videoLoadingDate && <Text type="secondary">Uploaded on: {videoLoadingDate}</Text>}
         </div>
     );
 }
