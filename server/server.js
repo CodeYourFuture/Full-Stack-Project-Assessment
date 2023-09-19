@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-const exampledata = require('../exampleresponse.json')
-const {Pool} = require('pg');
-const cors = require ('cors')
-require('dotenv').config({path:'./.env'})
+const cors = require("cors");
+const { Pool } = require("pg");
+require("dotenv").config({ path: "./.env" });
+
+app.use(cors());
+app.use(express.json());
 
 const db = new Pool({
   user: process.env.DB_USERNAME,
@@ -14,85 +16,98 @@ const db = new Pool({
   port: process.env.DB_PORT,
 });
 
-app.use(express.json()); 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = exampledata;
+let videos = [];
 
-// GET "/"
-app.get("/", (req, res) => {
-  const order = req.query.order || "desc";
-
-  // Sort videos based on the 'order' parameter
-  let sortedVideos = videos;
-  if (order === "asc") {
-    sortedVideos = videos.slice().sort((a, b) => a.votes - b.votes);
-  } else if (order === "desc") {
-    sortedVideos = videos.slice().sort((a, b) => b.votes - a.votes);
+const getVideosFromDatabase = async () => {
+  try {
+    const query = "SELECT * FROM videos";
+    const { rows } = await db.query(query);
+    return rows;
+  } catch (error) {
+    console.error("Verileri getirirken hata oluştu:", error);
+    throw error;
   }
+};
 
-  res.json(sortedVideos);
+const refreshVideos = async () => {
+  try {
+    const rows = await getVideosFromDatabase();
+    videos = rows;
+  } catch (error) {
+    console.error("Verileri güncellerken hata oluştu:", error);
+  }
+};
+
+app.get("/videos", async (req, res) => {
+  try {
+    await refreshVideos();
+    res.json(videos);
+  } catch (error) {
+    res.status(500).json({ error: "Verileri getirirken hata oluştu." });
+  }
 });
 
-app.post("/", (req, res) => {
-  const { title, url } = req.body;
+app.post("/videos", async (req, res) => {
+  const { title, youtubeVideoId } = req.body;
 
-  // Validate title and URL
-  if (!title || !url) {
-    return res.status(400).json({ result: "failure", message: "Title and URL are required." });
+  try {
+    const query =
+      "INSERT INTO videos (title, youtubeVideoId) VALUES ($1, $2) RETURNING *";
+    const values = [title, youtubeVideoId];
+    const { rows } = await db.query(query, values);
+    const newVideo = rows[0];
+
+    videos.push(newVideo);
+
+    res.status(201).json(newVideo);
+  } catch (error) {
+    console.error("Video eklenirken hata oluştu:", error);
+    res.status(500).json({ error: "Video eklenirken hata oluştu." });
   }
-
-  // Generate a unique ID for the new video
-  const id = nextVideoId++;
-
-  // Create a new video object
-  const newVideo = {
-    id,
-    title,
-    url,
-  };
-
-  // Add the new video to the list
-  videos.push(newVideo);
-
-  // Respond with the generated ID
-  res.json({ id });
 });
 
-
-
-// get by id"
-app.get("/:id", (req, res) => {
+app.post("/videos/:id/upvote", async (req, res) => {
   const videoId = parseInt(req.params.id);
 
-  // Find the video by ID in the videos array
-  const video = videos.find((v) => v.id === videoId);
+  try {
+    const query =
+      "UPDATE videos SET votes = votes + 1 WHERE id = $1 RETURNING *";
+    const values = [videoId];
+    const { rows } = await db.query(query, values);
+    const updatedVideo = rows[0];
 
-  if (!video) {
-    return res.status(404).json({ result: "failure", message: "Video not found." });
+    const index = videos.findIndex((video) => video.id === videoId);
+    if (index !== -1) {
+      videos[index] = updatedVideo;
+    }
+
+    res.status(200).json(updatedVideo);
+  } catch (error) {
+    console.error("Oy verirken hata oluştu:", error);
+    res.status(500).json({ error: "Oy verirken hata oluştu." });
   }
-
-  res.json(video);
 });
 
-// delete by id"
-app.delete("/:id", (req, res) => {
+app.post("/videos/:id/downvote", async (req, res) => {
   const videoId = parseInt(req.params.id);
 
-  // Find the index of the video to be deleted
-  const index = videos.findIndex((v) => v.id === videoId);
+  try {
+    const query =
+      "UPDATE videos SET votes = GREATEST(votes - 1, 0) WHERE id = $1 RETURNING *";
+    const values = [videoId];
+    const { rows } = await db.query(query, values);
+    const updatedVideo = rows[0];
 
-  if (index === -1) {
-    return res.status(404).json({ result: "failure", message: "Video not found." });
+    const index = videos.findIndex((video) => video.id === videoId);
+    if (index !== -1) {
+      videos[index] = updatedVideo;
+    }
+
+    res.status(200).json(updatedVideo);
+  } catch (error) {
+    console.error("Oy verirken hata oluştu:", error);
+    res.status(500).json({ error: "Oy verirken hata oluştu." });
   }
-
-  // Remove the video from the videos array
-  videos.splice(index, 1);
-
-  res.json({});
 });
-
-
-

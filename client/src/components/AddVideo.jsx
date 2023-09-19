@@ -1,64 +1,70 @@
 import React, { useState } from 'react';
 
+const baseUrl = 'http://localhost:5000';
+const videosEndpoint = `${baseUrl}/videos`;
+
+const getYouTubeVideoIdFromUrl = (url) => {
+  const patterns = [
+    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+    /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]+)/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match && match[1]) {
+      return match[1]; 
+    }
+  }
+
+  return null;
+};
+
 const AddVideo = ({ onAddVideo }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
 
-  const getYouTubeVideoIdFromUrl = (url) => {
-    // Define patterns for different YouTube URL formats
-    const patterns = [
-      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
-      /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]+)/,
-    ];
-
-    // Iterate through patterns and try to match with the given URL
-    for (const pattern of patterns) {
-      const match = url.match(pattern);
-      if (match && match[1]) {
-        return match[1]; // Return the video ID
-      }
-    }
-
-    // If no match is found, return null
-    return null;
-  };
-
   const handleAddVideo = () => {
     if (title.trim() === '' || !isValidYouTubeUrl(url)) {
-      alert('Please enter a valid title and a valid YouTube URL.');
+      alert('invalid');
       return;
     }
 
-    // Validate if the URL is a YouTube video URL and extract the video ID
-    const videoId = getYouTubeVideoIdFromUrl(url);
+    fetch(videosEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        youtubeVideoId: getYouTubeVideoIdFromUrl(url),
+      }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          return response.json();
+        } else {
+          throw new Error('error');
+        }
+      })
+      .then((data) => {
+        onAddVideo(data);
 
-    // Generate a unique ID using the current timestamp
-    const newVideo = {
-      id: Date.now(),
-      title,
-      youtubeVideoId: videoId,
-      votes: 0,
-      uploadDate: new Date(),
-    };
-
-    // Call the parent component's function to add the video
-    onAddVideo(newVideo);
-
-    // Reset the input fields
-    setTitle('');
-    setUrl('');
+        setTitle('');
+        setUrl('');
+      })
+      .catch((error) => {
+        console.error('error', error);
+        alert('error');
+      });
   };
 
-  // Function to check if a string is a valid YouTube URL
   const isValidYouTubeUrl = (url) => {
-    // Add your validation logic here
-    // For a simple example, you can check if the URL includes 'youtube.com'
     return url.includes('youtube.com');
   };
 
   return (
     <div className='addContainer'>
-      <h2>Add your video</h2>
+      <h2>Video ekleyin</h2>
       <label>
         Title:
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -67,7 +73,7 @@ const AddVideo = ({ onAddVideo }) => {
         YouTube URL:
         <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
       </label>
-      <button onClick={handleAddVideo}>Add Video</button>
+      <button onClick={handleAddVideo}>Video Ekle</button>
     </div>
   );
 };
