@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 
-
 const App = () => {
   const [videos, setVideos] = useState([]);
 
@@ -13,7 +12,9 @@ const App = () => {
 
   const fetchAllVideos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/videos");
+      const response = await fetch(
+        "https://full-stack-project-video-reccomendations.onrender.com/videos"
+      );
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -25,13 +26,16 @@ const App = () => {
   const handleAddVideo = async (newVideo) => {
     console.log(JSON.stringify(newVideo));
     try {
-      const response = await fetch("http://localhost:5000/videos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVideo),
-      });
+      const response = await fetch(
+        "https://full-stack-project-video-reccomendations.onrender.com/videos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newVideo),
+        }
+      );
       if (!response.ok) {
         throw Error(`Failed to add video. Error: ${response.status}`);
       }
@@ -42,9 +46,12 @@ const App = () => {
 
   const handleDeleteVideo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/videos/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://full-stack-project-video-reccomendations.onrender.com/videos/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error("Video not found!");
       }
@@ -53,7 +60,6 @@ const App = () => {
       console.log(error.message);
     }
   };
-
 
   return (
     <div className="App">
