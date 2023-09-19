@@ -16,8 +16,10 @@ const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
       .catch((error) => console.log(error));
   };
   const decrease = () => {
-    if (videoRating > 0) {
+    if (videoRating > 1) {
       setVideoRating(videoRating - 1);
+    } else {
+      setVideoRating(0);
     }
     fetch(`https://video-recomendations-server.onrender.com/videos/${id}`, {
       method: "PUT",
