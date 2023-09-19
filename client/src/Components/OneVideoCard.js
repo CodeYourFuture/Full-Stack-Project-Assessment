@@ -19,7 +19,7 @@ const OneVideoCard = ({ id, title, url, rating, handleDelete }) => {
     if (videoRating > 0) {
       setVideoRating(videoRating - 1);
     }
-    fetch(`http://localhost:4000/videos/${id}`, {
+    fetch(`https://video-recomendations-server.onrender.com/videos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
