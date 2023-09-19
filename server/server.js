@@ -86,7 +86,7 @@ app.get("/videos", async (req, res) => {
     res.status(200).json(result.rows);
   } catch (error) {
     console.log(error);
-    res.status(404).json({ error: "failed to fetch videos" });
+    res.status(500).json({ error: "failed to fetch videos" });
   }
 });
 
@@ -121,7 +121,7 @@ app.post("/videos", function (req, res) {
       });
   } else {
     res
-      .status(404)
+      .status(400)
       .send("Please check the fields have been correctly filled in");
   }
 });
@@ -134,7 +134,7 @@ app.delete("/videos/:id", function (req, res) {
     })
     .then(() => res.send(`Video ${customerId} deleted!`))
     .catch((e) => console.error(e));
-  res.status(404).send({
+  res.status(500).send({
     result: "failure",
     message: "Video could not be deleted",
   });

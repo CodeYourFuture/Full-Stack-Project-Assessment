@@ -10,7 +10,7 @@ const VideoCard = ({ video, removeVideo }) => {
     setRating(rating - 1);
   };
 
-  let url = video.url.substring(video.url.indexOf("=") + 1);
+  let url = video.url.replace("watch?v=", "embed/");
   return (
     <div className=" col-lg-4 col-sm-12 text-center mt-5">
       <h4>{video.title}</h4>
@@ -18,7 +18,7 @@ const VideoCard = ({ video, removeVideo }) => {
       <iframe
         width="370"
         height="200"
-        src={"https://www.youtube.com/embed/" + url}
+        src={url}
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -44,5 +44,3 @@ const VideoCard = ({ video, removeVideo }) => {
 };
 
 export default VideoCard;
-
-// link.substring(link.indexOf("=") + 1, link.indexOf("&"));
