@@ -99,6 +99,7 @@ app.get("/videos/:id", function (req, res) {
     })
     .catch((error) => {
       console.log(error);
+      res.status(500).json({ error: "Failed to fetch video by ID" });
     });
 });
 app.post("/videos", function (req, res) {
@@ -114,7 +115,7 @@ app.post("/videos", function (req, res) {
       })
       .catch((err) => {
         console.log(err);
-        res.status(404).send({
+        res.status(500).send({
           result: "failure",
           message: "Video could not be saved",
         });
