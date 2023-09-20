@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto]">
-      <header className="flex flex-row pt-8 pb-8 text-3xl sm:px-8 sm:pt-8 sm:text-4xl sm:font-bold sm:tracking-wider lg:text-6xl">
+      <header className="flex flex-row pb-8 pt-8 text-3xl sm:px-8 sm:pt-8 sm:text-4xl sm:font-bold sm:tracking-wider lg:text-6xl">
         <img
           src={youtubeLogo}
           alt="Logo"

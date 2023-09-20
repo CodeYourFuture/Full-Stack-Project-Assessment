@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "./Button";
 import { baseUrl } from "../config";
+import DeleteButton from "./DeleteButton";
 
-const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
+const VideoCard = ({ videoData, setVideoData, singleVideo, handleDelete }) => {
   /**
     On the return statement of the map, for the when the condition is true, I need to create the appropriate value that will replace the original value. When the condition is false I can return the video.
    */
@@ -35,7 +35,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
   }
 
   return (
-    <div className="w-400 sm:w-72 mx-4 sm:mx-3 sm:my-3 grid grid-col">
+    <div className="w-400 grid-col mx-4 grid sm:mx-3 sm:my-3 sm:w-72">
       <p className="text-left text-lg font-bold lg:text-2xl">
         {singleVideo.title}
       </p>
@@ -50,7 +50,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
         ></iframe>
 
         {/* Rating section below: */}
-        <div className="flex flex-row justify-between space-x-5 text-lg lg:text-2xl sm:space-x-7">
+        <div className="flex flex-row justify-between space-x-5 text-lg sm:space-x-7 lg:text-2xl">
           <button type="button" onClick={upVoteHandler}>
             Up Vote 👍
           </button>
@@ -62,7 +62,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
           </button>
         </div>
 
-        <Button onDelete={onDelete} id={singleVideo.id} />
+        <DeleteButton handleDelete={handleDelete} id={singleVideo.id} />
       </div>
 
       <p className="text-lg">

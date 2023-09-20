@@ -4,32 +4,40 @@ import VideoForm from "./VideoForm";
 import { baseUrl } from "../config";
 
 function MainContainer() {
+  const [loading, setLoading] = useState(true);
   const [videoData, setVideoData] = useState();
-  const [fetchData, setFetchData] = useState(true);
+  const [videoAdded, setVideoAdded] = useState(false);
 
   useEffect(() => {
-    if (fetchData) {
       fetch(`${baseUrl}/videos`) // prod
-
         .then((response) => response.json())
-        .then((data) => setVideoData(data));
-    }
-    setFetchData(false);
-  }, [fetchData, videoData]);
+        .then((data) => {
+          setVideoData(data);
+          setLoading(false); // set setLoading to false after data is fetched
+          setVideoAdded(false);
+        })
+        .catch((error) => {
+          console.log("Error fetching data:", error); // log any errors
+        });
+  }, [videoAdded]);
 
   return (
     <div>
       <VideoForm
-        setFetchData={setFetchData}
         videoData={videoData}
-        setVideoData={setVideoData}
+        setVideoAdded={setVideoAdded}
       />
-      <CardsContainer
-        setFetchData={setFetchData}
-        videoData={videoData}
-        setVideoData={setVideoData}
-      />
-
+      {loading ? (
+        <div className="flex items-center justify-center text-center  text-lg sm:text-4xl xl:m-9 xl:p-9 xl:text-5xl ">
+          <h2>Page loading...</h2>
+          <div className="mx-9 h-12 w-12 animate-spin rounded-full border-b-4 border-t-4 border-gray-600"></div>
+        </div>
+      ) : (
+        <CardsContainer
+          videoData={videoData}
+          setVideoData={setVideoData}
+        />
+      )}
     </div>
   );
 }

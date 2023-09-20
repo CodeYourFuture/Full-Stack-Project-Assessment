@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import validUrl from "valid-url";
 import { baseUrl } from "../config";
 
-function VideoForm({ videoData, setVideoData, setFetchData }) {
+function VideoForm({ videoData, setVideoAdded }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function addVideoHandler(event) {
     event.preventDefault();
+
+    // Validate the form inputs
     function validateUrl(urlObject) {
       return (
         validUrl.isUri(urlObject) &&
@@ -19,7 +21,7 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
 
     const formTitle = event.target.form.title.value;
     const formUrl = event.target.form.url.value;
-
+    // cleaning up the YouTube url with timestamp or other paths eg: https://www.youtube.com/watch?v=Pmx2cbLGzzo&t=2908s
     const cleanedUrl = formUrl.includes("&") ? formUrl.split("&")[0] : formUrl;
 
     if (validateUrl(formUrl) && formTitle !== "") {
@@ -35,10 +37,17 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newData),
-      });
+      })
+        .then((response) => {
+          setVideoAdded(true);
 
-      setFetchData(true);
-      setErrorMessage("");
+          // Reset the form and clear the error message
+          event.target.form.reset();
+          setErrorMessage("");
+        })
+        .catch((error) => {
+          console.log("Error adding video", error);
+        });
     } else if (formTitle === "" && !validateUrl(formUrl)) {
       setErrorMessage("Add a title and a valid URL");
     } else if (formTitle === "") {
@@ -46,13 +55,11 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
     } else {
       setErrorMessage("Add a valid URL");
     }
-
-    event.target.form.reset();
   }
   return (
     <div className="sm:mx-auto sm:w-4/5">
       <form className="sm:w-500 mx-5 mb-3 mt-1 flex flex-col gap-2 pb-1 text-lg sm:mx-9 sm:px-9  sm:text-2xl">
-        <div className="font-bold p-1">
+        <div className="p-1 font-bold">
           <h2>Add a YouTube video to your vault</h2>
         </div>
 
@@ -84,7 +91,7 @@ function VideoForm({ videoData, setVideoData, setFetchData }) {
         <button
           onClick={addVideoHandler}
           type="submit"
-          className="m-2 rounded bg-black px-4 py-2 font-bold text-white sm:rounded-lg sm:px-3 sm:py-6"
+          className="m-2 rounded bg-black px-4 py-2 font-bold text-white transition-colors duration-200 hover:bg-red-300 active:bg-red-700 sm:rounded-lg sm:px-3 sm:py-6"
         >
           Add
         </button>
