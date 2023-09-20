@@ -72,7 +72,7 @@ app.get("/videos/:id", function (req, res) {
 // This endpoint is used to add a new video
 app.post("/videos", (req, res) => {
   const { title, url } = req.body;
-  if (!title || !url || !url.startsWith("https://www.youtube.com")) {
+  if (!title || !url || !url.startsWith("https://www.youtube.com"|| urlObject.startsWith("https://youtu.be") || urlObject.startsWith("https://m.youtube.com") || urlObject.startsWith("https://youtube.com/"))) {
     res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
@@ -93,6 +93,7 @@ app.post("/videos", (req, res) => {
 });
 
 // This endpoint is used to get a single video with a given ID
+
 app.get("/videos/:id", (req, res) => {
   const id = Number(req.params.id);
   const matchingVideo = videos.find((video) => {
