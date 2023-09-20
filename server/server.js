@@ -1,11 +1,19 @@
-const PORT = 4500;
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
-const fs = require("fs");
-// const fs = require("fs").promises;
+require("dotenv").config();
+
+const { Pool } = require("pg");
+
+const db = new Pool({
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -14,27 +22,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = [];
-
-function getConvertedDataFromBookingsJSON() {
-  const rawData = fs.readFileSync("./videos.json");
-  const objData = JSON.parse(rawData);
-  return objData;
-}
-
-function writeUpdateDataToJsonFile(data) {
-  const jsonFile = "./videos.json";
-  const newData = JSON.stringify(data);
-  fs.writeFile(jsonFile, newData, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("File written successfully.");
-    }
-  });
-}
+//$ npm run dev
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any domain
@@ -45,29 +33,92 @@ app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/video", (req, res) => {
-  return res.status(200).send(getConvertedDataFromBookingsJSON());
+app.get("/video", async (req, res) => {
+  try {
+    const order = req.query.order === "asc" ? "ASC" : "DESC";
+    const query = `
+    SELECT * FROM videos ORDER BY rating ${order}`;
+
+    const request = await db.query(query);
+    const response = request.rows;
+    res.status(200).json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
-app.post("/video", (req, res) => {
+app.post("/video", async (req, res) => {
   const { title, url } = req.body;
+  // console.log("post video req.body", req.body);
+  const id = url.split("embed/")[1];
+  // console.log("post video id", id);
   if (!title && !url) {
-    res.status(400).json({ error: "One or several filds wasn't filed" });
+    return res.status(404).json({ error: "One or several filds wasn't filed" });
   }
 
-  const objData = getConvertedDataFromBookingsJSON();
-  objData.push({
-    ///////////////////////////////////////////////
-    id: req.body.url.split("=")[1],
-    ///////////////////////////////////////////////
-    title: req.body.title,
-    url: req.body.url,
-    rating: req.body.rating,
-  });
-  writeUpdateDataToJsonFile(objData);
-  return res.status(201).send(objData);
+  try {
+    const query = `
+    INSERT INTO videos (title, url, id)
+    VALUES ($1, $2, $3)
+    `;
+    const request = await db.query(query, [title, url, id]);
+    const result = request.rows;
+    return res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
-const listener = app.listen(PORT, function () {
-  console.log("Your app is listening on port " + PORT);
+app.delete("/video/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const query = "DELETE FROM videos WHERE id = $1";
+    const result = await db.query(query, [id]);
+
+    if (result.rowCount === 1) {
+      return res.status(201).json({ success: true });
+    } else {
+      return res.status(404).json({
+        error: {
+          result: "failure",
+          message: "Video could not be deleted",
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error deleting record:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting the record" });
+  }
 });
+
+app.patch("/video/:id", async (req, res) => {
+  const id = req.params.id;
+  const rating = parseInt(req.body.rating);
+
+  try {
+    const query = `
+    UPDATE videos
+    SET rating = $1
+    WHERE id = $2;
+    `;
+
+    const request = await db.query(query, [rating, id]);
+    const result = request.rows;
+    // console.log(result);
+    return res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`App is listening on ${process.env.SERVER_PORT}`);
+});
+
+module.exports = app;

@@ -10,7 +10,9 @@ export default function ToggleOrderOfVideos({ refreshVideos, setVideos }) {
     try {
       const orderQuery = order ? "asc" : "desc";
       const response = await fetch(
-        `http://localhost:4500/video?order=${orderQuery}`
+        `https://kristinadudnyk-fullstack-project.onrender.com/video?order=${orderQuery}`
+
+        // `http://localhost:4500/video?order=${orderQuery}`
       );
       const data = await response.json();
       console.log("handleToggleOrder in ToggleOrderOfVideos", data);

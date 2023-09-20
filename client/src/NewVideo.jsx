@@ -27,13 +27,17 @@ export default function NewVivdeo({ setRefreshVideos }) {
     try {
       setIsSubmitting(true);
 
-      const response = await fetch("http://localhost:4500/video", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Set the content type to JSON
-        },
-        body: JSON.stringify(formDataUrlChanged),
-      });
+      const response = await fetch(
+        `https://kristinadudnyk-fullstack-project.onrender.com/video`,
+        // "http://localhost:4500/video"
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Set the content type to JSON
+          },
+          body: JSON.stringify(formDataUrlChanged),
+        }
+      );
       console.log("handleSubmit response:", response);
 
       const json = await response.json();

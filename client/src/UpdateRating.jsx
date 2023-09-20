@@ -5,13 +5,18 @@ export default function UpdateRating({ video }) {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:4500/video/${video.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ rating: counter }),
-      });
+      const response = await fetch(
+        `https://kristinadudnyk-fullstack-project.onrender.com/${video.id}`,
+
+        // `http://localhost:4500/video/${video.id}`
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ rating: counter }),
+        }
+      );
       // console.log("handleSubmit response:", response);
 
       // const json = await response.json();

@@ -11,9 +11,13 @@ export default function DeleteVideo({ video, setRefreshVideos }) {
     try {
       console.log(videoId);
 
-      const response = await fetch(`http://localhost:4500/video/${videoId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://kristinadudnyk-fullstack-project.onrender.com/video/${videoId}`,
+        // `http://localhost:4500/video/${videoId}`
+        {
+          method: "DELETE",
+        }
+      );
       console.log(`http://localhost:4500/video/${videoId}`);
 
       console.log("handleDelete response:", response);

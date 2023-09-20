@@ -8,8 +8,8 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        // "https://kristinadudnyk-fullstack-project.onrender.com/video"
-        "http://localhost:4500/video"
+        `https://kristinadudnyk-fullstack-project.onrender.com/video`
+        // "http://localhost:4500/video"
       );
       const data = await response.json();
       console.log("fetchData in Videos", data);
