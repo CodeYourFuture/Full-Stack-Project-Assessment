@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import VideoCard from "./VideoCard";
+import CardVideo from "./CardVideo";
+import ToggleOrderOfVideos from "./ToggleOrderOfVideos";
 
-export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
+export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
   const [videos, setVideos] = useState([]);
-  const [rating, setRating] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -13,10 +13,9 @@ export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
       );
       const data = await response.json();
       console.log("fetchData in Videos", data);
-
       setVideos(data);
     } catch (error) {
-      console.log("The ERROR occured in fetchData in Videos:", error);
+      console.log("The ERROR occured in fetchData in DisplayVideos:", error);
     }
   };
 
@@ -26,8 +25,16 @@ export default function VideosPerent({ refreshVideos, setRefreshVideos }) {
 
   return (
     <div className="videos-container">
+      <ToggleOrderOfVideos
+        refreshVideos={refreshVideos}
+        setVideos={setVideos}
+      />
       {videos.map((video) => (
-        <VideoCard video={video} rating={rating} setRating={setRating} />
+        <CardVideo
+          key={video.id}
+          video={video}
+          setRefreshVideos={setRefreshVideos}
+        />
       ))}
     </div>
   );

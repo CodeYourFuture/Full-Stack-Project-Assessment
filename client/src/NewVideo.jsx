@@ -2,15 +2,27 @@ import { useState } from "react";
 
 export default function NewVivdeo({ setRefreshVideos }) {
   const [formData, setFormData] = useState({
-    id: "",
     title: "",
     url: "",
-    rating: 0,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (formData.title.trim() === "" || formData.url.trim() === "") {
+      alert("Title and URL cannot be empty");
+      return;
+    }
+
+    const formDataUrlChanged = {
+      title: formData.title,
+      url: `https://www.youtube-nocookie.com/embed/${
+        formData.url.match(/v=([a-zA-Z0-9_-]{11})/)[1]
+      }`,
+    };
+    // console.log(formDataUrlChanged);
 
     try {
       setIsSubmitting(true);
@@ -20,7 +32,7 @@ export default function NewVivdeo({ setRefreshVideos }) {
         headers: {
           "Content-Type": "application/json", // Set the content type to JSON
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataUrlChanged),
       });
       console.log("handleSubmit response:", response);
 
@@ -29,7 +41,7 @@ export default function NewVivdeo({ setRefreshVideos }) {
 
       event.target.reset();
 
-      setRefreshVideos((prevRefreshMessages) => !prevRefreshMessages);
+      setRefreshVideos((prevRefreshVideos) => !prevRefreshVideos);
     } catch (error) {
       console.log("handleSubmit error:", error);
     } finally {

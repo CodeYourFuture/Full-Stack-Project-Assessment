@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Header from "./Header";
-import VideosPerent from "./VideosPerent";
+import DisplayVideos from "./DisplayVideos";
 import NewVivdeo from "./NewVideo";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Header />
       <NewVivdeo setRefreshVideos={setRefreshVideos} />
-      <VideosPerent
+      <DisplayVideos
         setRefreshVideos={setRefreshVideos}
         refreshVideos={refreshVideos}
       />

@@ -1,3 +1,66 @@
 .App {
   text-align: center;
 }
+
+body {
+  background-color: rgb(199, 199, 199);
+}
+
+.toggle_container {
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.checkbox {
+  display: inline-block;
+}
+
+.checkbox_inp {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  appearance: none;
+}
+
+.checkbox_span {
+  display: inline-block;
+  position: relative;
+  font-size: 18px;
+  padding: 8px 8px 8px 74px;
+}
+
+.checkbox_span::before {
+  content: "";
+  width: 60px;
+  height: 36px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 18px;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s;
+}
+
+.checkbox_span::after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: rgb(86, 206, 30);
+  left: 3px;
+  top: 3px;
+  transition: background-color 0.3s, left 0.3s;
+}
+
+.checkbox_inp:checked + .checkbox_span::before {
+  background-color: rgb(86, 206, 30);
+}
+
+.checkbox_inp:checked + .checkbox_span::after {
+  background-color: rgb(255, 255, 255);
+  left: 27px;
+}
