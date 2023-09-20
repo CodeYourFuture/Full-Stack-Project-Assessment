@@ -6,8 +6,7 @@ export default function UpdateRating({ video }) {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `https://kristinadudnyk-fullstack-project.onrender.com/${video.id}`,
-
+        `https://kristinadudnyk-fullstack-project.onrender.com/video/${video.id}`,
         // `http://localhost:4500/video/${video.id}`
         {
           method: "PATCH",
