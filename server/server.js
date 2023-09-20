@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
-require("dotenv").config();
 
 const { Pool } = require("pg");
 
@@ -13,7 +14,11 @@ const db = new Pool({
   database: process.env.DB_DATABASE,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 });
+// console.log(db);
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -36,11 +41,10 @@ app.get("/", (req, res) => {
 app.get("/video", async (req, res) => {
   try {
     const order = req.query.order === "asc" ? "ASC" : "DESC";
-    const query = `
-    SELECT * FROM videos ORDER BY rating ${order}`;
-
+    const query = `SELECT * FROM videos ORDER BY rating ${order}`;
     const request = await db.query(query);
     const response = request.rows;
+    console.log(response);
     res.status(200).json(response);
   } catch (err) {
     console.error(err);
