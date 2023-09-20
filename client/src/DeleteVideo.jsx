@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function DeleteVideo({ video, setRefreshVideos }) {
-  const [videoId, setVideoID] = useState(video.id);
+  const [videoId] = useState(video.id);
 
   console.log(videoId);
 
@@ -18,7 +18,7 @@ export default function DeleteVideo({ video, setRefreshVideos }) {
           method: "DELETE",
         }
       );
-      console.log(`http://localhost:4500/video/${videoId}`);
+      // console.log(`http://localhost:4500/video/${videoId}`);
 
       console.log("handleDelete response:", response);
 
