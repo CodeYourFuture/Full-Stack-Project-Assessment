@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "./Button";
 import { baseUrl } from "../config";
+import DeleteButton from "./DeleteButton";
 
-const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
+const VideoCard = ({ videoData, setVideoData, singleVideo, handleDelete }) => {
   /**
     On the return statement of the map, for the when the condition is true, I need to create the appropriate value that will replace the original value. When the condition is false I can return the video.
    */
@@ -62,7 +62,7 @@ const VideoCard = ({ videoData, setVideoData, singleVideo, onDelete }) => {
           </button>
         </div>
 
-        <Button onDelete={onDelete} id={singleVideo.id} />
+        <DeleteButton handleDelete={handleDelete} id={singleVideo.id} />
       </div>
 
       <p className="text-lg">

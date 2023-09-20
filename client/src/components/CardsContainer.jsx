@@ -2,15 +2,21 @@ import React from "react";
 import VideoCard from "./VideoCard";
 import { baseUrl } from "../config";
 
-function CardsContainer({ videoData, setVideoData, setFetchData }) {
-  async function handleDelete(id) {
+function CardsContainer({ videoData, setVideoData }) {
+  function handleDelete(id) {
+    // Sending the delete request
     fetch(`${baseUrl}/videos/${id}`, {
       method: "delete",
     })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-    setFetchData(true);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete video");
+        }
+        // Remove the deleted video from the state
+        const updatedVideoData = videoData.filter((video) => video.id !== id);
+        setVideoData(updatedVideoData);
+      })
+      .catch((error) => console.log("Error deleting video", error));
   }
 
   return (
@@ -23,7 +29,7 @@ function CardsContainer({ videoData, setVideoData, setFetchData }) {
               key={singleVideo.id}
               videoData={videoData}
               singleVideo={singleVideo}
-              onDelete={handleDelete}
+              handleDelete={handleDelete}
               setVideoData={setVideoData}
             />
           );
