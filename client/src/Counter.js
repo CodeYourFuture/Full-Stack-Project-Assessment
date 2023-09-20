@@ -1,21 +1,24 @@
 import { useState } from "react"
 const Counter = ({ setAllMyVideos, videoId, videoRating }) => {
-    const [rating, setRating] = useState(0)
-
+    const [rating, setRating] = useState(videoRating)
+    let newRating
     const handleCounterDown = () => {
-
         if (rating <= 0) {
-            setRating(0)
-            handleRatingChange(rating)
+            newRating = 0
+            setRating(newRating)
+            handleRatingChange(newRating)
             getAllNewVideos()
         } else {
-            setRating(rating - 1)
-            handleRatingChange(rating)
+            newRating = rating - 1
+            setRating(newRating)
+            handleRatingChange(newRating)
+            getAllNewVideos()
         }
     }
     const handleCounterUp = () => {
-        setRating(rating + 1)
-        handleRatingChange(rating)
+        newRating = rating + 1
+        setRating(newRating)
+        handleRatingChange(newRating)
         getAllNewVideos()
     }
 
