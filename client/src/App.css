@@ -7,20 +7,34 @@
   grid-template-columns: auto auto auto;
   justify-content: space-between;
   grid-row-gap: 100px;
-  height: 900px;
+  height: 200px;
   margin-top: 150px;
   margin-left: 100px;
   margin-right: 100px;
 }
 
 .card{
-  border: 1px solid grey;
+  border: 1px solid rgb(56, 53, 53);
 }
 
 .add-video{
-  border: 1px solid grey;
+  border: 2px solid rgb(48, 48, 48);
   width: 300px;
   margin-top: 40px;
-  margin-left: 485px;
+  margin-left: 520px;
   padding: 20px;
+}
+
+.title{
+  background-color: rgb(207, 104, 151);
+  height: 140px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100px;
+}
+
+.sort-button{
+ margin-right: 100px;
+ margin-top: 20px;
 }

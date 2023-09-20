@@ -28,8 +28,8 @@ function AddVideo(props) {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      let uploadTime = moment().format("ll");
-      props.addVideo(title, url, uploadTime);
+      let date = moment().format("ll");
+      props.addVideo(title, url, date);
       setTitle("");
       setUrl("");
     }
@@ -37,12 +37,12 @@ function AddVideo(props) {
 
   return (
     <div className="add-video">
-      <form>
-        <div class="form-group">
-          <label for="title">Video Title</label>
+      <form id={title}>
+        <div className="form-group">
+          <label htmlFor="title">Video Title</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="title"
             value={title}
             onChange={changeTitle}
@@ -50,11 +50,11 @@ function AddVideo(props) {
           />
           {errors.title && <span>{errors.title}</span>}
         </div>
-        <div class="form-group">
-          <label for="url">Video URL</label>
+        <div className="form-group">
+          <label htmlFor="url">Video URL</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="url"
             value={url}
             onChange={changeUrl}
@@ -63,7 +63,11 @@ function AddVideo(props) {
           {errors.url && <span>{errors.url}</span>}
         </div>
 
-        <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </form>

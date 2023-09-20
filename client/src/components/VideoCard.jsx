@@ -16,20 +16,18 @@ function VideoCard(props) {
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [rate, setRate] = useState(props.rating);
-
   return (
     <div className="card" style={{ width: "330px", height: "350px" }}>
       <iframe
         width="auto"
         height="315"
-        src={`https://www.youtube.com/embed/${props.url.slice(-11)}`}
+        src={`https://www.youtube.com/embed/${props?.url?.slice(-11)}`}
         title="YouTube video player"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <div className="card-body">
-        <p>{props.uploadTime}</p>
+        <p>{props.date}</p>
         <br></br>
         <p className="card-text">{props.title}</p>
       </div>
@@ -56,7 +54,7 @@ function VideoCard(props) {
                 setDislike(0);
                 setRate(rate + 1);
               }
-              if (dislike === 0) {
+              if (dislike === 0 && props.rating !== 0) {
                 setDislike(1);
                 setRate(rate - 1);
               }

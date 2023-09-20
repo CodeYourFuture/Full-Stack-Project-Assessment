@@ -1,12 +1,12 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const pool = require("./DBConfig");
 const app = express();
 
 app.use(express.json());
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 dotenv.config();
 
 const port = process.env.PORT || 5001;
@@ -15,18 +15,9 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(cors());
 
 // Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-//let videos = require("./exampleresponse.json");
-const { BubbleSort } = require("./functions/BubbleSort");
-const { BubbleSortReverse } = require("./functions/BubbleSortReverse");
+
 // GET "/"
 app.get("/videos", async (req, res) => {
-  // const { order } = req.query;
-  // BubbleSort(videos);
-  // if (order === "asc") {
-  //   BubbleSortReverse(videos);
-  // }
-  // res.json(videos);
   try {
     const allVideos = await pool.query("SELECT * FROM videos");
     res.json({ videos: allVideos.rows });
@@ -38,24 +29,12 @@ app.get("/videos", async (req, res) => {
 
 //POST "/"
 app.post("/videos", async (req, res) => {
-  // const title = req.body.title;
-  // const url = req.body.url;
-  // const newVideo = { id: 0, title: title, url: url, rating: 0 };
-
-  // if (newVideo.title && newVideo.url) {
-  //   newVideo.id = videos.length + 1;
-  //   videos.push(newVideo);
-  // } else {
-  //   res
-  //     .status(400)
-  //     .json({ result: "failure", message: "Video could not be saved" });
-  // }
-  // res.status(200).json(videos);
-  const { title, url } = req.body;
+  const { title, url, rating, date } = req.body;
+  const ratingValue = typeof rating === "undefined" ? 0 : rating;
   try {
     const newItem = await pool.query(
-      "INSERT INTO videos (title, url) VALUES ($1, $2) RETURNING *",
-      [title, url]
+      "INSERT INTO videos (title, url, rating, date) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, url, rating, date]
     );
     res.status(201).json({
       message: "New item added!",
@@ -80,14 +59,19 @@ app.get("/videos/:id", (req, res) => {
 });
 
 //DELETE "/{id}"
-app.delete("/videos/:id", (req, res) => {
+app.delete("/videos/:id", async (req, res) => {
   const id = req.params.id;
-  const deletedVideoIndex = videos.findIndex((v) => v.id == id);
-
-  if (deletedVideoIndex == -1) {
-    res.status(404).json(`There is no video with id ${id}`);
+  try {
+    const deletedItem = await pool.query("DELETE FROM videos WHERE id = $1", [
+      id,
+    ]);
+    if (deletedItem.rowCount === 0) {
+      res.status(404).json({ message: "Video not found" });
+    } else {
+      res.status(204).json({ message: "The video is deleted" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
   }
-
-  videos.splice(deletedVideoIndex, 1);
-  res.sendStatus(200).end();
 });
