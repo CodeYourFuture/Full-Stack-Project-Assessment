@@ -32,9 +32,13 @@ export default function UpdateRating({ video }) {
 
   return (
     <div>
-      <button onClick={() => setCounter(counter + 1)}>Increment</button>
+      <button onClick={() => setCounter((prevCounter) => prevCounter + 1)}>
+        Increment
+      </button>
       <h3>{counter}</h3>
-      <button onClick={() => setCounter(counter - 1)}>Decrement</button>
+      <button onClick={() => setCounter((prevCounter) => prevCounter - 1)}>
+        Decrement
+      </button>
       <button onClick={handleUpdate}>Update Rating</button>
     </div>
   );
