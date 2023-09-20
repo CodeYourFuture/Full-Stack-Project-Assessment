@@ -44,7 +44,7 @@ app.get("/video", async (req, res) => {
     const query = `SELECT * FROM videos ORDER BY rating ${order}`;
     const request = await db.query(query);
     const response = request.rows;
-    console.log(response);
+    // console.log(response);
     res.status(200).json(response);
   } catch (err) {
     console.error(err);

@@ -9,7 +9,7 @@ export default function DeleteVideo({ video, setRefreshVideos }) {
     // event.preventDefault();
 
     try {
-      console.log(videoId);
+      // console.log(videoId);
 
       const response = await fetch(
         `https://kristinadudnyk-fullstack-project.onrender.com/video/${videoId}`,
