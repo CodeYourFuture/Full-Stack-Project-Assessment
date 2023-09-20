@@ -31,7 +31,9 @@ const AddVideo = ({ videos, setVideos }) => {
         })
         .catch((error) => console.log(error));
     } else {
-      alert(`Expected video URL to start with 'https://www.youtube.com/' but you provided '${video.url}' - please ensure fields are filled in correctly`);
+      alert(
+        `Expected video URL to start with 'https://www.youtube.com/' but you provided '${video.url}' - please ensure fields are filled in correctly`
+      );
     }
   }
   return (

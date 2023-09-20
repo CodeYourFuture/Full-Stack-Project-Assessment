@@ -21,7 +21,7 @@ function App() {
         setVideos(data);
       })
       .catch((Error) => console.log(Error));
-  }, [videos]);
+  }, []);
 
   return (
     <div className="container-fluid">

@@ -82,7 +82,7 @@ let videos = [
 // GET "/"
 app.get("/videos", async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM videos");
+    const result = await db.query("SELECT * FROM videos ORDER BY id");
     res.status(200).json(result.rows);
   } catch (error) {
     console.log(error);
@@ -94,14 +94,26 @@ app.get("/videos/:id", function (req, res) {
   let id = Number(req.params.id);
   db.query("SELECT * FROM videos WHERE id = $1", [id])
     .then((result) => {
-      console.log(result.rows);
-      res.send(result.rows);
+      console.log(result.rows[0]);
+      res.send(result.rows[0]);
     })
     .catch((error) => {
       console.log(error);
       res.status(500).json({ error: "Failed to fetch video by ID" });
     });
 });
+app.put("/videos/:id", function (req, res) {
+  let id = Number(req.params.id);
+  let rating = req.body.rating;
+
+  db.query("UPDATE videos SET rating = $1 WHERE id = $2", [rating, id])
+    .then(() => res.send(`Video rating has been updated!`))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err });
+    });
+});
+
 app.post("/videos", function (req, res) {
   const newTitle = req.body.title;
   const newUrl = req.body.url;

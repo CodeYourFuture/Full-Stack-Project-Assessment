@@ -5,9 +5,29 @@ const VideoCard = ({ video, removeVideo }) => {
 
   const addVote = () => {
     setRating(rating + 1);
+    fetch(`http://localhost:3006/videos/${video.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: rating + 1 }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
   const deleteVote = () => {
     setRating(rating - 1);
+    fetch(`http://localhost:3006/videos/${video.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: rating - 1 }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   let url = video.url.replace("watch?v=", "embed/");
@@ -20,7 +40,7 @@ const VideoCard = ({ video, removeVideo }) => {
         height="200"
         src={url}
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
