@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
       const dataFetch = async () => {
-        await fetch("http://localhost:5001/videos")
+        await fetch("https://fs-assesment-server.onrender.com/videos")
           .then((response) => response.json())
           .then((newdata) => {
             if (sort) {
@@ -29,13 +29,13 @@ function App() {
   }, [data]);
 
   const deleteHandle = (id) => {
-    fetch(`http://localhost:5001/videos/${id}`, {
+    fetch(`https://fs-assesment-server.onrender.com/videos/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then(() => {
-              const updatedData = data.filter((video) => video.id !== id);
-              setData(updatedData);
+        const updatedData = data.filter((video) => video.id !== id);
+        setData(updatedData);
       })
       .catch((error) => {
         console.error("Error deleting video:", error);
@@ -51,7 +51,7 @@ function App() {
       date: date,
     };
 
-    fetch("http://localhost:5001/videos", {
+    fetch("https://fs-assesment-server.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
