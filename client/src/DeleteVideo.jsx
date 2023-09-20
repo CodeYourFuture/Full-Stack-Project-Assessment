@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function DeleteVideo({ video, setRefreshVideos }) {
   const [videoId] = useState(video.id);
 
-  console.log(videoId);
+  // console.log(videoId);
 
   async function handleDelete(event) {
     // event.preventDefault();
