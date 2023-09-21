@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 function Videos(props) {
-  const {loadData,setLoadData}=props;
+  const { loadVideo,setLoadVideo}=props;
   // const [loadData, setLoadData] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [urlData, setUrlData] = useState("");
@@ -25,7 +25,7 @@ function Videos(props) {
         const data = await response.json();
         //desending acording to the rating
         data.sort((a, b) => b.rating - a.rating);
-        return setLoadData(data);
+        return setLoadVideo(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -52,9 +52,9 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = [...loadData, data];
+        const updatedData = [...loadVideo, data];
 
-        setLoadData(updatedData);
+        setLoadVideo(updatedData);
 
         setTitleData("");
         setUrlData("");
@@ -105,8 +105,8 @@ function Videos(props) {
         return response.json();
       })
       .then(() => {
-        const updatedData = loadData.filter((video) => video.id !== item.id);
-        setLoadData(updatedData);
+        const updatedData = loadVideo.filter((video) => video.id !== item.id);
+        setLoadVideo(updatedData);
       })
       .catch((error) => {
         console.error("Error deleting video:", error);
@@ -133,14 +133,14 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = loadData.map((video) => {
+        const updatedData = loadVideo.map((video) => {
           if (video.id === item.id) {
             return { ...video, rating: newRating };
           }
           return video;
         });
         console.log(updatedData);
-        setLoadData(updatedData);
+        setLoadVideo(updatedData);
       })
       .catch((error) => {
         console.error("Error updating video:", error);
@@ -165,13 +165,13 @@ function Videos(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = loadData.map((video) => {
+        const updatedData = loadVideo.map((video) => {
           if (video.id === item.id) {
             return { ...video, rating: newRating };
           }
           return video;
         });
-        setLoadData(updatedData);
+        setLoadVideo(updatedData);
       });
   }
 
@@ -223,8 +223,8 @@ function Videos(props) {
           </form>
         )}
         <div className="mainShowVideos">
-          {loadData.length > 0 ? (
-            loadData.map((item, index) => {
+          {loadVideo.length > 0 ? (
+            loadVideo.map((item, index) => {
               const videoId = item.url.split("v=")[1];
               return (
                 <div key={index} className="showVideo">

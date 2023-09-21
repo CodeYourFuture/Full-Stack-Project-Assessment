@@ -7,9 +7,10 @@ import Videos from "./Videos.js";
 function App() {
   
   const [showVideos, setShowVideos] = useState(false);
-   const [loadData, setLoadData] = useState([]);
+  const [loadVideo, setLoadVideo] = useState([]);
+  const [order,setOrder]=useState("ase");
 
-  async function aseClickHandler(e) {
+  async function orderClickHandler(e,newOrder) {
      e.preventDefault();
       try {
         const response = await fetch(
@@ -19,29 +20,20 @@ function App() {
           throw new Error("something went wrong");
         }
         const data = await response.json();
-        //asending acording to the rating
-        data.sort((a, b) => a.rating - b.rating);
-        return setLoadData(data);
+        // Sort based on the order
+        if (newOrder === "asc") {
+          data.sort((a, b) => a.rating - b.rating);
+        } else {
+          data.sort((a, b) => b.rating - a.rating);
+        }
+        setLoadVideo(data);
+        setOrder(newOrder);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
   }
 
-async function descClickHandler(e) {
-  e.preventDefault();
-  try {
-    const response = await fetch("https://web-server-5nme.onrender.com/videos");
-    if (!response.ok) {
-      throw new Error("something went wrong");
-    }
-    const data = await response.json();
-    //asending acording to the rating
-    data.sort((a, b) => b.rating - a.rating);
-    return setLoadData(data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
+
 
   return (
     <Router>
@@ -54,8 +46,9 @@ async function descClickHandler(e) {
         <nav className="nav">
           <div className="orderBtn">
             <p>order by rate : </p>
-            <button onClick={aseClickHandler}>ase</button>
-            <button onClick={descClickHandler}>desc</button>
+            <button onClick={(e) => orderClickHandler(e, "asc")} disabled={order === "asc"}>Ase</button>
+            
+            <button onClick={(e)=>orderClickHandler(e,"desc")} disabled={order==="desc"}>Desc</button>
           </div>
           <div style={{ backgroundColor: "#55BCC9" }}></div>
           <Link
@@ -79,8 +72,8 @@ async function descClickHandler(e) {
               <Videos
                 show={showVideos}
                 setShow={setShowVideos}
-                loadData={loadData}
-                setLoadData={setLoadData}
+                loadVideo={loadVideo}
+                setLoadVideo={setLoadVideo}
               />
             }
           />
