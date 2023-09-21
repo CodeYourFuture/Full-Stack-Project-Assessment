@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState,useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"; 
 
 import "./App.css";
@@ -10,8 +10,8 @@ function App() {
   const [loadVideo, setLoadVideo] = useState([]);
   const [order,setOrder]=useState("ase");
 
-  async function orderClickHandler(e,newOrder) {
-     e.preventDefault();
+  useEffect(() => {
+    const getData = async () => {
       try {
         const response = await fetch(
           "https://web-server-5nme.onrender.com/videos"
@@ -20,20 +20,28 @@ function App() {
           throw new Error("something went wrong");
         }
         const data = await response.json();
-        // Sort based on the order
-        if (newOrder === "asc") {
-          data.sort((a, b) => a.rating - b.rating);
-        } else {
-          data.sort((a, b) => b.rating - a.rating);
-        }
-        setLoadVideo(data);
-        setOrder(newOrder);
+        //desending acording to the rating
+        data.sort((a, b) => b.rating - a.rating);
+        return setLoadVideo(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-  }
+    };
+    getData();
+  }, []);
 
 
+  function orderClickHandler(e, newOrder) {
+    e.preventDefault();
+  
+    if (newOrder === "asc") {
+      loadVideo.sort((a, b) => a.rating - b.rating);
+    } else {
+      loadVideo.sort((a, b) => b.rating - a.rating);
+    }
+    setLoadVideo(loadVideo);
+    setOrder(newOrder);
+}
 
   return (
     <Router>

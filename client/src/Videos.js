@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 function Videos(props) {
   const { loadVideo,setLoadVideo}=props;
-  // const [loadData, setLoadData] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [urlData, setUrlData] = useState("");
 
@@ -13,26 +12,7 @@ function Videos(props) {
   //     return setLoadData(data);
   //   });
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await fetch(
-          "https://web-server-5nme.onrender.com/videos"
-        );
-        if (!response.ok) {
-          throw new Error("something went wrong");
-        }
-        const data = await response.json();
-        //desending acording to the rating
-        data.sort((a, b) => b.rating - a.rating);
-        return setLoadVideo(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    getData();
-  }, []);
-
+  
   function cancelBtnHandler(e) {
     props.setShow(false);
   }
