@@ -1,7 +1,10 @@
 
 const express = require("express");
 const app = express();
-const cors = require ("cors");
+ const cors = require ("cors");
+const corsOptions = {
+  origin: "http://localhost:3000"
+};
 app.use(cors());
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
@@ -180,22 +183,34 @@ app.get("/videos/:id", async function (req, res) {
   res.json(result.rows);
 });
 
+// //updating video with id
+// app.put("/videos/:id", function (req, res) {
+//   const video = videos.find((m) => m.id == req.params.id);
+//   if (!video) {
+//     return res.status(404).json({
+//       error: "This id doesn't exist",
+//     });
+//   }
+//   const newVideos = videos.map((video) => {
+//     if (video.id == req.params.id) {
+//       return { ...video, ...req.body };
+//     }
+//     return video;
+//   });
+//   res.json({ data: newVideos });
+// });
+
 //updating video with id
-app.put("/videos/:id", function (req, res) {
-  const video = videos.find((m) => m.id == req.params.id);
-  if (!video) {
-    return res.status(404).json({
-      error: "This id doesn't exist",
-    });
-  }
-  const newVideos = videos.map((video) => {
-    if (video.id == req.params.id) {
-      return { ...video, ...req.body };
-    }
-    return video;
-  });
-  res.json({ data: newVideos });
-});
+app.put("/videos/:id",async function (req,res) {
+  const newId = req.params.id;
+  const newRating= req.body.rating;
+  try{const result = db.query("UPDATE videos SET rating=$2 WHERE id=$1",[newId,newRating])
+res.json(`video with id:${newId} updated`)}
+catch(error){
+  res.status(500).json({ error: "Internal Server Error" });
+}
+
+})
 
 //delete video
 // app.delete("/videos/:id", function (req, res) {
