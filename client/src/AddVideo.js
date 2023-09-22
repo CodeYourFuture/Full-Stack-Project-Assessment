@@ -24,9 +24,11 @@ function AddVideo({ setVideos, setCount }) {
       return;
     }
 
+    // add validation to check if URL is valid youtube URL or not
+
     const newVideo = {
-      title: addVideoTitle,
-      url: addVideoUrl,
+      title: trimmedTitle,
+      url: trimmedUrl,
     };
 
     try {
