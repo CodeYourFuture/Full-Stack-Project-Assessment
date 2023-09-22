@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function NewVideo(props) {
-  // const { newVideos, handleNewVideo, handleSubmit} = props
+ 
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -10,14 +10,14 @@ function NewVideo(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && url) {
-      // console.log("title and url", title, url);
+  
       let updatedValue = {
         title: title,
         url: url,
         id: Date.now(),
         rating: 0,
       };
-      // console.log("updated value", updatedValue);
+     
       props.onAddNewVideo(updatedValue)
       setTitle("")
       setUrl("")
