@@ -92,7 +92,7 @@ app.get("/videos", (req, res) => {
 app.post("/videos", (req, res) => {
   try {
     let newVideo = {
-      id: 0,
+      id: 0, // should add new id to video 5 digit...need to fix this
       title: req.body.title,
       url: req.body.url,
       rating: 0
