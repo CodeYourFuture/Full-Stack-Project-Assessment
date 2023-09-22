@@ -1,10 +1,30 @@
-import React, { useState } from "react";
-import videosData from "./exampleresponse.json";
+import React, { useState, useEffect } from "react";
+// import videosData from "./exampleresponse.json";
 import VideoCard from "./VideoCard";
 import NewVideo from "./NewVideo";
 
 function Videos({ newVideos, handleSubmit }) {
-  const [videos, setVideos] = useState(videosData);
+  const [videos, setVideos] = useState([]);
+
+  const url = "https://fullstack-backend-qwia.onrender.com/videos";
+
+    const getTheVideos = async () => {
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            setVideos(data);
+
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    useEffect(() => {
+        getTheVideos();
+    }, [])
+
+
+console.log(videos)
 
   const handleDelete = (id) => {
     setVideos((prevVideosData) =>

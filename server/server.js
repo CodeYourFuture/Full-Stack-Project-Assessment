@@ -30,16 +30,16 @@ app.get("/videos", async (req, res) => {
 
 
 
-// GET "/" ....confirms server is running
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
-});
+// // GET "/" ....confirms server is running
+// app.get("/", (req, res) => {
+//   // Delete this line after you've confirmed your server is running
+//   res.send({ express: "Your Backend Service is Running" });
+// });
 
-// This endpoint is used to return all of the videos
-app.get("/videos", (req, res) => {
-  res.status(200).json({ videos });
-});
+// // This endpoint is used to return all of the videos
+// app.get("/videos", (req, res) => {
+//   res.status(200).json({ videos });
+// });
 
 // This endpoint is used to add a video to the API.
 app.post("/videos", (req, res) => {
