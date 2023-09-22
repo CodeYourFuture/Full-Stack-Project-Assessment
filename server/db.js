@@ -10,4 +10,12 @@ const db = new Pool({
   ssl: true,
 });
 
+db.connect()
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((error) => {
+    console.error("Error connecting to database:", error);
+  });
+
 module.exports = db;

@@ -8,7 +8,7 @@ const db = require("./db");
 
 app.use(cors());
 app.use(bodyParser.json());
-db.connect;
+// db.connect;
 
 app.get("/videos", async (req, res) => {
   try {
@@ -33,7 +33,7 @@ app.get("/videos", async (req, res) => {
 // });
 
 // This endpoint is used to add a video to the API.
-app.post("/videos", (req, res) => {
+app.post("/videos", async (req, res) => {
   
   try {
     let newVideo = {
@@ -52,7 +52,7 @@ app.post("/videos", (req, res) => {
       });
     } else {
       console.log(req.body);
-      const result = db.one(
+      const result = await db.one(
         "INSERT INTO videos (title, url) VALUES ($1, $2) RETURNING *",
         [title, url]
       );
@@ -68,16 +68,21 @@ console.log(result);
 
 // Returns the video with the ID contained within the {id} parameter.
 
-app.get("/videos/:id", (req, res) => {
+app.get("/videos/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const matchingVideo = videos.find((video) => {
-    return video.id === id;
-  });
-  if (!matchingVideo) {
-    res.status(400).send("No matching video with this ID exists.");
-  } else {
-    res.status(200).json({ matchingVideo });
+  try {
+    const query = `SELECT * from videos WHERE id=${id}`;
+    const video = await db.query(query);
+    if (!video.rows.length) {
+      res.status(400).send("No matching video with this ID exists.")
+    } else {
+     res.status(200).json(video.rows);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
   }
+  
 });
 
 //Deletes the video with the ID container within the {id} parameter
