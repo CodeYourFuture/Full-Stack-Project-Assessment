@@ -50,9 +50,6 @@ app.get("/videos", async function (req, res) {
   res.json(result.rows);
 });
 
-
-
-
 //ordering by assending and dessending for example /videos?order=asc
 // app.get("/videos", function (req, res) {
 //   if (videos.length === 0) {
@@ -70,25 +67,46 @@ app.get("/videos", async function (req, res) {
 
 //   return res.json(orderVideos);
 // });
+
+//ordering by assending and dessending for example /videos?order=asc
+// app.get("/videos", async function (req, res) {
+//   const result = await db.query("SELECT * FROM videos");
+//   if (result.rows.length === 0) {
+//     return res.status(404).json({ error: "no videos found" });
+//   }
+//   const order = req.query.order;
+//   let orderVideos;
+  
+//   if (order === "asc") {
+//     orderVideos = result.rows.sort((a, b) => a.rating - b.rating);
+//   } else if (order === "desc") {
+//     orderVideos = result.rows.sort((a, b) => b.rating - a.rating);
+//   } else {
+//     return res.status(400).json({ error: "Invalid order parameter" });
+//   }
+//   return res.status(200).json(orderVideos);
+//});
+
+
 //ordering by assending and dessending for example /videos?order=asc
 app.get("/videos", async function (req, res) {
-  const result = await db.query("SELECT * FROM videos");
-  if (result.rows.length === 0) {
-    return res.status(404).json({ error: "no videos found" });
+  try {
+    if (order !== "asc" && order !== "desc") {
+      return res.status(400).json({ error: "Invalid order parameter" });
+    }
+    const order = req.query.order;
+    let result;
+    if (order === "asc") {
+      result = await db.query("SELECT * FROM videos ORDER BY rating ASC");
+    } else {
+      result = await db.query("SELECT * FROM videos ORDER BY rating DESC");
+    }
+    return res.json(result.rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
   }
-  const order = req.query.order;
-  let orderVideos;
-  console.log("Order:", order);
-  console.log("Before Sorting:", result.rows);
-  if (order === "asc") {
-    orderVideos = result.rows.sort((a, b) => a.rating - b.rating);
-  } else if (order === "desc") {
-    orderVideos = result.rows.sort((a, b) => b.rating - a.rating);
-  } else {
-    return res.status(400).json({ error: "Invalid order parameter" });
-  }
-  return res.status(200).json(orderVideos);
 });
+
 
 
 
@@ -135,7 +153,6 @@ app.post(
     const newTitle = req.body.title;
     const newUrl = req.body.url;
     const newRating = req.body.rating;
-
     const query =
       //// Include "RETURNING *" to return the newly created row
       "INSERT INTO videos (title, url, rating) VALUES($1, $2, $3) RETURNING *";
@@ -209,7 +226,6 @@ res.json(`video with id:${newId} updated`)}
 catch(error){
   res.status(500).json({ error: "Internal Server Error" });
 }
-
 })
 
 //delete video

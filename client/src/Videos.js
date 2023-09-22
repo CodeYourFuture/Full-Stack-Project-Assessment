@@ -3,8 +3,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 function Videos(props) {
   const { loadVideo,setLoadVideo}=props;
-  const [titleData, setTitleData] = useState("");
-  const [urlData, setUrlData] = useState("");
+  const [title, setTitleData] = useState("");
+  const [url, setUrlData] = useState("");
 
   // fetch("http://localhost:3000/videos")
   //   .then((response) => response.json())
@@ -20,7 +20,7 @@ function Videos(props) {
   function addClickHandeler(e) {
     e.preventDefault();
     //const newVideo = { title: titleData, url: urlData};
-    const newVideo = { title: titleData, url: urlData, rating: 0 };
+    const newVideo = { title: title, url: url, rating: 0 };
 
     //adding video
     fetch("https://web-server-5nme.onrender.com/videos", {
@@ -170,7 +170,7 @@ function Videos(props) {
               <input
                 className="lineInput"
                 id="title"
-                value={titleData}
+                value={title}
                 onChange={(e) => {
                   setTitleData(e.target.value);
                 }}
@@ -182,7 +182,7 @@ function Videos(props) {
               <input
                 className="lineInput"
                 id="url"
-                value={urlData}
+                value={url}
                 onChange={(e) => setUrlData(e.target.value)}
                 required
               />
