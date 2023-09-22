@@ -1,3 +1,89 @@
 .App {
+  font-family: Arial, sans-serif;
   text-align: center;
+}
+
+h1 {
+  padding: 20px;
+  font-size: 36px;
+  margin-bottom: 20px;
+  background-color: rgb(215, 27, 27);
+  color: #fff;
+}
+h2 {
+  margin-top: 20px;
+}
+
+.ShowingVideos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style: none;
+}
+
+.videos {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(33.33% - 40px);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  background-color: #fff;
+}
+
+.videos:hover {
+  transform: scale(1.05);
+}
+
+.videos p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.fa-solid {
+  font-size: 30px;
+  cursor: pointer;
+  color: #e74c3c;
+  text-align: center;
+  padding: 0px 60px 0px 50px;
+}
+.fa-solid:hover {
+  color: #c0392b;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 20px;
+}
+
+button {
+  background-color: #161313;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #fa1a01;
+}
+
+
+
+.allVideos {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
 }
