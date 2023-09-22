@@ -45,7 +45,7 @@ const db = new Pool({
 app.get("/videos", async function (req, res) {
   const result = await db.query("SELECT * FROM videos");
   if (result.rows.length === 0) {
-    return res.status(404).json({ error: "no videos found" });
+    return res.status(404).json([]);
   }
   res.json(result.rows);
 });
@@ -106,9 +106,6 @@ app.get("/videos", async function (req, res) {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
-
 
 //adding new video
 // app.post(
