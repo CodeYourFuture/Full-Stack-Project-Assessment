@@ -56,7 +56,7 @@ function Addvideo() {
   return (
     <>
       <div>
-        <h2>Add a Video</h2>
+        <h2>Add Your Favorite Youtube Videos</h2>
         <input
           type="text"
           name="title"
@@ -71,10 +71,10 @@ function Addvideo() {
           value={newVideo.url}
           onChange={handleInputChange}
         />
-        <button onClick={addVideo}>Add Video</button>
+        <button onClick={addVideo}>Add Youtube Video</button>
       </div>
       <div>
-        <h2>Videos</h2>
+        <h2>Favorite Videos</h2>
         <ul className="ShowingVideos">
           {videos.map((video) => (
             <div className="videos" key={video.id}>

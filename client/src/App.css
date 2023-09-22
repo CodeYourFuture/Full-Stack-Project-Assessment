@@ -6,9 +6,11 @@
 h1 {
   padding: 20px;
   font-size: 36px;
+  
   margin-bottom: 20px;
   background-color: rgb(215, 27, 27);
   color: #fff;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 h2 {
   margin-top: 20px;
