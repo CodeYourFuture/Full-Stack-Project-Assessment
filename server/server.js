@@ -6,6 +6,7 @@ const corsOptions = {
   origin: "http://localhost:3000"
 };
 app.use(cors());
+require('dotenv').config(); // Load environment variables from .env file
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 const videos = require("../exampleresponse.json"); 
@@ -22,15 +23,26 @@ const { Pool } = require("pg");
 //   port: 5432,
 // });
 
+// const db = new Pool({
+//   user: "shadi_user",
+//   host: "dpg-cjs7s5dv2qks738v6ltg-a.oregon-postgres.render.com",
+//   database: "shadi",
+//   password: "j7lLUQoGj3mMw7Q7gH66Nz3ygDizGews",
+//   port: 5432,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
 const db = new Pool({
-  user: "shadi_user",
-  host: "dpg-cjs7s5dv2qks738v6ltg-a.oregon-postgres.render.com",
-  database: "shadi",
-  password: "j7lLUQoGj3mMw7Q7gH66Nz3ygDizGews",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 
@@ -45,7 +57,7 @@ const db = new Pool({
 app.get("/videos", async function (req, res) {
   const result = await db.query("SELECT * FROM videos");
   if (result.rows.length === 0) {
-    return res.status(404).json([]);
+    return res.json([]);
   }
   res.json(result.rows);
 });

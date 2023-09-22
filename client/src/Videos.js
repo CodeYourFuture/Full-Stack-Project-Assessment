@@ -247,7 +247,7 @@ function Videos(props) {
               );
             })
           ) : (
-            <p>No video yet.</p>
+            <p style={{fontWeight:"bold",color:"white"}}>Loading . . .</p>
           )}
         </div>
       </div>
