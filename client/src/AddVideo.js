@@ -15,6 +15,15 @@ function AddVideo({ setVideos, setCount }) {
   async function addVideo(event) {
     event.preventDefault();
 
+    // basic validation for title and URL
+    const trimmedTitle = addVideoTitle.trim();
+    const trimmedUrl = addVideoUrl.trim();
+    // checking if input is empty after trimming when add is clicked ---> Don't understand the double trimming??
+    if (!trimmedTitle || !trimmedUrl) {
+      alert("Title and URL are required");
+      return;
+    }
+
     const newVideo = {
       title: addVideoTitle,
       url: addVideoUrl,
