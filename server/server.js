@@ -4,8 +4,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
-const db = require("./db")
-
+const db = require("./db");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -14,21 +13,13 @@ db.connect;
 app.get("/videos", async (req, res) => {
   try {
     const query = "select * from videos";
-    const todo = await db.query(query);
-    res.status(200).json(todo.rows);
+    const videos = await db.query(query);
+    res.status(200).json(videos.rows);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
 });
-
-
-
-
-
-
-
-
 
 // // GET "/" ....confirms server is running
 // app.get("/", (req, res) => {
@@ -43,12 +34,11 @@ app.get("/videos", async (req, res) => {
 
 // This endpoint is used to add a video to the API.
 app.post("/videos", (req, res) => {
+  
   try {
     let newVideo = {
-      id: 0, // should add new id to video 5 digit...need to fix this
       title: req.body.title,
       url: req.body.url,
-      rating: 0,
     };
 
     if (
@@ -61,16 +51,17 @@ app.post("/videos", (req, res) => {
         message: "Video could not be saved",
       });
     } else {
-      const videoid = videos.map((video) => video.id);
-      const id = Math.max(...videoid) + 1;
+      console.log(req.body);
+      const result = db.one(
+        "INSERT INTO videos (title, url) VALUES ($1, $2) RETURNING *",
+        [title, url]
+      );
+console.log(result);
+      res.status(201).send({
 
-      videos.push(newVideo);
-      res
-        .status(201)
-        .send({
-          message: "Video saved successfully",
-        })
-        .json({ newVideo });
+        message: "Video saved successfully",
+        result,
+      });
     }
   } catch (error) {}
 });
