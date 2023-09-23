@@ -1,26 +1,81 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Addvideo() {
   const [videos, setVideos] = useState([]);
   const [newVideo, setNewVideo] = useState({ title: "", url: "" });
   const [idCounter, setIdCounter] = useState(1);
 
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch(
+        "https://node-server-full-stack.onrender.com/videos"
+      );
+      if (response.ok) {
+        // const data = await response.json();
+        // setVideos(data);
+      } else {
+        console.error("Failed to fetch videos:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    }
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewVideo({ ...newVideo, [name]: value });
   };
 
-  const addVideo = () => {
+  const getYouTubeVideoId = (url) => {
+    const videoIdMatch = url.match(/(?:\/|v=)([A-Za-z0-9_-]{11})(?=&|$)/);
+    if (videoIdMatch) {
+      return videoIdMatch[1];
+    }
+    return null;
+  };
+
+  const addVideo = async () => {
     if (newVideo.title && newVideo.url) {
-      const videoToAdd = {
-        ...newVideo,
-        rating: 0,
-        id: idCounter,
-        timestamp: new Date().toISOString(),
-      };
-      setVideos([...videos, videoToAdd]);
-      setNewVideo({ title: "", url: "" });
-      setIdCounter(idCounter + 1);
+      const videoId = getYouTubeVideoId(newVideo.url);
+
+      if (videoId) {
+        const videoToAdd = {
+          ...newVideo,
+          rating: 0,
+          id: idCounter,
+          timestamp: new Date().toISOString(),
+        };
+
+        try {
+          const response = await fetch(
+            "https://node-server-full-stack.onrender.com/videos",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(videoToAdd),
+            }
+          );
+
+          if (response.ok) {
+            // const responseData = await response.json();
+            // setVideos([...videos, responseData]);
+            setNewVideo({ title: "", url: "" });
+            setIdCounter(idCounter + 1);
+          } else {
+            console.error("Failed to add video:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error adding video:", error);
+        }
+      } else {
+        alert("Invalid YouTube URL. Please enter a valid YouTube video URL.");
+      }
     }
   };
 
@@ -29,6 +84,7 @@ function Addvideo() {
       video.id === id ? { ...video, rating: video.rating + 1 } : video
     );
     setVideos(updatedVideos);
+    <p>{console.log("line 211", updatedVideos)}</p>;
   };
 
   const downvoteVideo = (id) => {
@@ -37,6 +93,8 @@ function Addvideo() {
         ? { ...video, rating: video.rating - 1 }
         : video
     );
+    <p>{console.log("line 220", updatedVideos)}</p>;
+
     setVideos(updatedVideos);
   };
 
@@ -45,18 +103,10 @@ function Addvideo() {
     setVideos(updatedVideos);
   };
 
-  const getYouTubeVideoId = (url) => {
-    const videoIdMatch = url.match(/(?:\/|v=)([A-Za-z0-9_-]{11})(?=&|$)/);
-    if (videoIdMatch) {
-      return videoIdMatch[1];
-    }
-    return "";
-  };
-
   return (
     <>
       <div>
-        <h2>Add Your Favorite Youtube Videos</h2>
+        <h2>Add a Video</h2>
         <input
           type="text"
           name="title"
@@ -71,10 +121,10 @@ function Addvideo() {
           value={newVideo.url}
           onChange={handleInputChange}
         />
-        <button onClick={addVideo}>Add Youtube Video</button>
+        <button onClick={addVideo}>Add Video</button>
       </div>
       <div>
-        <h2>Favorite Videos</h2>
+        <h2>Videos</h2>
         <ul className="ShowingVideos">
           {videos.map((video) => (
             <div className="videos" key={video.id}>
@@ -103,7 +153,6 @@ function Addvideo() {
                   allowFullScreen
                 ></iframe>
                 <p>Posted at: {new Date(video.timestamp).toLocaleString()}</p>
-
                 <button onClick={() => removeVideo(video.id)}>Delete</button>
               </li>
             </div>
