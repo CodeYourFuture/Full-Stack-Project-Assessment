@@ -1,48 +1,82 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-// import videoData from "./exampleresponse.json";
 import Videocard from "./components/Videocard";
 import Addvideo from "./components/Addvideo";
 
-
-
-// console.log(videoData);
-
 function App() {
-const[videos, setVideos] = useState ([])
-const [enterTitle, setEnterTitle] = useState("");
+  const [videos, setVideos] = useState([]);
+  // const [enterTitle, setEnterTitle] = useState("");
 
-useEffect(() => {
-  fetch("http://127.0.0.1:5000/")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setVideos(data);
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setVideos(data);
+      });
+  }, []);
+
+  const videoElements = videos.map((video) => {
+    return (
+      <Videocard
+        key={video.id} // Assuming video has a unique id property
+        name={video.title}
+        link={video.url}
+        rating={video.rating}
+        plusRating={plusRating}
+        subtractRating={subtractRating}
+      />
+    );
+  });
+
+  function addNewVideo(newVideo) {
+    setVideos([...videos, newVideo]);
+  }
+
+  function plusRating(videoTitle, currentRating) {
+    // Find the video in the videos array by its title
+    const updatedVideos = videos.map((video) => {
+      if (video.title === videoTitle) {
+        return { ...video, rating: currentRating + 1 };
+      }
+      return video;
     });
-}, []);
 
-// fetch("http://127.0.0.1:5000/")
-// .then((response) => response.json())
-// .then(data => {setVideos(data)});
+    // Update the state with the new videos array
+    setVideos(updatedVideos);
+    fetch(`http://127.0.0.1:5000/${videoTitle}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ rating: currentRating + 1}),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to update rating');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      // Handle the error, e.g., display an error message to the user
+    });
+  }
 
-const videoElements = videos.map((video) => {
-    return <Videocard name={video.title} link={video.url} rating={video.rating}/>;
-  })
+  function subtractRating(videoTitle) {
+    // Find the video in the videos array by its title
+    const updatedVideos = videos.map((video) => {
+      if (video.title === videoTitle) {
+        // Make sure the rating doesn't go below 0
+        return { ...video, rating: Math.max(0, video.rating - 1) };
+      }
+      return video;
+    });
 
-// const youTubeLinks = videoData.map((video) => {
-//   return <url link={links.url} />
-// })
-function plusRating(videoTitle) {
-  
-}
-function subtractRating(videoTitle) {
+    // Update the state with the new videos array
+    setVideos(updatedVideos);
+  }
 
-}
-
-function addNewVideo(newVideo) {
-  setVideos([...videos, newVideo]);
-}
   return (
     <div className="App">
       <header className="App-header">
@@ -50,7 +84,6 @@ function addNewVideo(newVideo) {
       </header>
       <Addvideo addVideo={addNewVideo} />
       <div>{videoElements}</div>
-      
     </div>
   );
 }

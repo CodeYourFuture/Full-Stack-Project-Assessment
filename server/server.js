@@ -126,3 +126,22 @@ app.post("/", (req, res) => {
     });
   });
 });
+
+
+app.put("/:videoTitle", (req, res) => {
+  const videoTitle = req.params.videoTitle;
+  const newRating = req.body.rating;
+
+  if (newRating === null) {
+    return res.status(400).json({ message: "Rating cannot be null" });
+  }
+
+  client.query("UPDATE videos SET rating = $1 WHERE title = $2", [newRating, videoTitle])
+    .then((result) => {
+      res.status(200).json({ message: "Rating updated successfully" });
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
