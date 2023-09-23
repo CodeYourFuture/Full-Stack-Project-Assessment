@@ -1,35 +1,41 @@
 import React, { useState } from 'react';
 import './AddVideo.css';
-import axios from 'axios';
 
-function AddVideo({ onAdd }) {
-  const [title, setTitle] = useState('');
-  const [url, setUrl] = useState('');
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (title && url) {
+function AddVideo({ handleAddVideo }) {
+    const [title, setTitle] = useState("");
+    const [url, setUrl] = useState("");
+  
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log("Form submitted");
+      if (title.trim() === "" || !isValidUrl(url)) {
+        return;
+      }
+  
       try {
-        const newVideo = {
-          title,
-          url,
-        };
-
-        const response = await axios.post('http://localhost:7000/', newVideo);
-
-        if (response.status === 201) {
-          onAdd(response.data);
-          setTitle('');
-          setUrl('');
+        const response = await fetch(`http://localhost:5000/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, url }),
+        });
+  
+        if (response.ok) {
+          setTitle("");
+          setUrl("");
         } else {
-          console.error('Failed to add video');
+          console.error("Error adding video:", response.statusText);
         }
       } catch (error) {
-        console.error('Error adding video:', error);
+        console.error("Error adding video:", error);
       }
-    }
-  };
+    };
+  
+    const isValidUrl = (url) => {
+      return url.trim() !== "";
+    };
 
   return (
     <div className="add-video-container">

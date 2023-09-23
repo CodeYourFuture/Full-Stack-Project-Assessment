@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import AddVideo from './AddVideo';
-import ModifiedVideo from './ModifiedVideo'; 
 import axios from 'axios';
+import VideoTable from './VideoTable';
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:7000/?order=${order}`);
+        const response = await axios.get('http://localhost:5000/');
         setVideos(response.data);
       } catch (error) {
         console.error('Error fetching data from the server:', error);
@@ -19,14 +19,10 @@ function App() {
     };
 
     fetchData();
-  }, [order]);
+  }, []);
 
   const handleAdd = (newVideo) => {
     setVideos((prevVideos) => [...prevVideos, newVideo]);
-  };
-
-  const handleRemove = (videoId) => {
-    setVideos((prevVideos) => prevVideos.filter((video) => video.id !== videoId));
   };
 
   const toggleOrder = () => {
@@ -41,11 +37,9 @@ function App() {
       <button className="toggle-button" onClick={toggleOrder}>
         Toggle Order: {order === 'asc' ? 'Ascending' : 'Descending'}
       </button>
-      <AddVideo onAdd={handleAdd} />
+      <AddVideo onAdd={handleAdd} setVideos={setVideos} />
       <div className="video-list">
-        {videos.map((video) => (
-          <ModifiedVideo video={video} onRemove={handleRemove} key={video.id} /> // Updated component name
-        ))}
+        <VideoTable videos={videos} />
       </div>
     </div>
   );
