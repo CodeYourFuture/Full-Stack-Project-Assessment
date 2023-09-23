@@ -145,3 +145,22 @@ app.put("/:videoTitle", (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 });
+
+app.delete("/:videoTitle", (req, res) => {
+  const videoTitle = req.params.videoTitle;
+
+  // Remove the video from your database or data source
+  client.query("DELETE FROM videos WHERE title = $1", [videoTitle])
+    .then((result) => {
+      if (result.rowCount === 0) {
+        // If no rows were affected, the video was not found
+        res.status(404).json({ message: "Video not found" });
+      } else {
+        res.status(204).json(); // Return a 204 status for successful deletion
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).json({ message: "Internal server error" });
+    });
+});

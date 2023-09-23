@@ -26,6 +26,7 @@ function App() {
         rating={video.rating}
         plusRating={plusRating}
         subtractRating={subtractRating}
+        deleteVideo={deleteVideo}
       />
     );
   });
@@ -62,6 +63,34 @@ function App() {
       // Handle the error, e.g., display an error message to the user
     });
   }
+
+
+  function deleteVideo(videoTitle) {
+    // Filter out the video with the specified title and update the state
+    const updatedVideos = videos.filter((video) => video.title !== videoTitle);
+    setVideos(updatedVideos);
+  
+    // Send a DELETE request to your server to remove the video
+    fetch(`http://127.0.0.1:5000/${videoTitle}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete the video');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle the error, e.g., display an error message to the user
+      });
+  }
+  
+
+
+
+
+
+
 
   function subtractRating(videoTitle) {
     // Find the video in the videos array by its title

@@ -11,7 +11,11 @@ function Videocard(props) {
   const handlePlusRating = () => {
     props.plusRating(props.name, props.rating); // Pass the video title to the plusRating function
   };
-
+  const handleDelete = () => {
+    // Call a function to delete the video
+    props.deleteVideo(props.name);
+  };
+  
   const handleSubtractRating = () => {
     props.subtractRating(props.name); // Pass the video title to the subtractRating function
   };
@@ -33,6 +37,7 @@ function Videocard(props) {
         <button onClick={handlePlusRating}>Add</button>
         <span> Rating: {props.rating} </span>
         <button onClick={handleSubtractRating}>Minus</button>
+        <button onClick={handleDelete}>Delete Video</button>
       </div>
     </div>
   );
