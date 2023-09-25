@@ -4,5 +4,9 @@
 /server/node_modules
  
 /server/.env
- 
- 
+.env
+/client/package-lock.json
+client/package-lock.json
+server/package-lock.json
+.vscode/
+client/yarn.lock

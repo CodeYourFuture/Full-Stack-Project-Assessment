@@ -3,15 +3,16 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 const { Pool } = require("pg");
 
 const isProduction = process.env.NODE_ENV === "production";
-const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
+// const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
+const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
   connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
@@ -29,16 +30,12 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
-
 app.get("/videos", (req, res) => {
   const orderBy = req.query.order;
-  const query =
-    orderBy === "desc"
-      ? `SELECT * FROM videos ORDER BY rating desc`
-      : `SELECT * FROM videos ORDER BY rating`;
+  const query = "SELECT * FROM videos";
+  // orderBy === "desc"
+  //   ? `SELECT * FROM videos ORDER BY rating desc`
+  //   : `SELECT * FROM videos ORDER BY rating`;
   pool.query(query).then((result) => res.status(200).json(result.rows));
 });
 
@@ -104,96 +101,9 @@ app.put("/videos/:id", (req, res) => {
   const updateId = req.params.id;
   const newRating = req.body.rating;
   pool
-    .query("UPDATE example SET rating=$1 WHERE id=$2", [updateId, newRating])
-    .then(() => res.status(200).send("Rating has been updated"))
+    .query("UPDATE videos SET rating=$1 WHERE id=$2", [newRating, updateId])
+    .then(() => res.status(201).send({ sucess: "Rating has been updated" }))
     .catch((error) => console.log(error));
 });
-
-//////
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = [];
-// const videos = require("./exampleresponse.json");
-// // const { response } = require("express");
-
-// const videoId = Date.now();
-// // let rating = Math.floor(Math.random() * 10000);
-
-// // GET "/"
-// // app.get("/", (req, res) => {
-// //   // Delete this line after you've confirmed your server is running
-// //   res.send({ express: "Your Backend Service is Running" });
-// // });
-// // Get//
-// app.get("/videos", (req, res) => {
-//   res.json(videos);
-// });
-
-// // SEARCH //
-// app.get("/videos/search", (req, res) => {
-//   const videoSearch = req.query.term;
-//   const videoResult = videos.filter((video) =>
-//     video.title.toLowerCase().includes(videoSearch.toLowerCase())
-//   );
-//   if (!videoResult.length) {
-//     res.status(404).json({ msg: "Video not found!" });
-//     return;
-//   }
-//   res.send(videoResult);
-// });
-
-// get all sorted videos
-// app.get("/videos", (req, res) => {
-//   if (req.query.order === "asc") {
-//     videos.sort((a, b) => a.rating - b.rating);
-//   } else {
-//     videos.sort((a, b) => b.rating - a.rating);
-//   }
-//   res.send(videos);
-// });
-
-// function validateYouTubeUrl(url) {
-//   let regExp =
-//     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-
-//   return url.match(regExp);
-// }
-// // POST //
-// app.post("/videos", (req, res) => {
-//   if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
-//     res.status(400).json({ msg: "Please make sure to include  title and valid url" });
-//     return;
-//   }
-
-//   const newVideos = {
-//     id: videoId,
-//     timeAdded: new Date().toLocaleDateString(),
-//     title: req.body.title,
-//     url: req.body.url,
-//     rating: 0
-//   };
-//   videos.push(newVideos);
-//   res.json(videos);
-// });
-
-// app.get("/videos/:id", (req, res) => {
-//   let foundVideo = videos.find((video) => video.id == req.params.id);
-//   res.send(foundVideo);
-// });
-
-// // DELETE //
-// app.delete("/videos/:id", (req, res) => {
-//   const deleteVideoId = parseInt(req.params.id);
-//   const foundVideoIndex = videos.findIndex(
-//     (video) => video.id === deleteVideoId
-//   );
-//   if (foundVideoIndex < 0) {
-//     res.sendStatus(404);
-//     return;
-//   }
-//   videos.splice(foundVideoIndex, 1);
-//   res.send(`video with the id ${deleteVideoId} Has been deleted`);
-// });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

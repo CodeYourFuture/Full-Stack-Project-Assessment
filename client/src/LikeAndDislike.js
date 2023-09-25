@@ -3,6 +3,18 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const LikeAndDislike = ({ video, data, setData }) => {
   const handleLike = (id) => {
+    const updatedRating = { rating: video.rating + 1 }
+    fetch(`/videos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedRating),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+    
     setData(
       data.map((video) => {
         if (video.id === id) {
@@ -13,6 +25,18 @@ const LikeAndDislike = ({ video, data, setData }) => {
     );
   };
   const handleDislike = (id) => {
+    const updatedRating = { rating: video.rating - 1 };
+    fetch(`/videos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedRating),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+    
     setData(
       data.map((video) => {
         if (video.id === id && video.rating !== 0) {

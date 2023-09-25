@@ -7,7 +7,7 @@ const AscDesc = ({ handleClick, isAscending }) => {
         onClick={handleClick}
         className="btn btn-secondary  mt-3 mb-4 shadow rounded"
       >
-        {isAscending ? "Ascending" : "Descending"}
+        {isAscending ? "Descending" : "Ascending"}
       </button>
     </div>
   );
