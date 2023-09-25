@@ -1,144 +1,265 @@
+// update8.this version has databse connection and in videotable.sql sql code.
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
-
+const { Pool } = require("pg");
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+// PostgreSQL database connection
+const db = new Pool({
+  user: process.env.USERNAME,
+  host: process.env.HOSTNAME,
+  database: process.env.DATABASE_NAME,
+  password: process.env.PASSWORD,
+  port: 5432,
+});
+
+db.connect()
+  .then(() => {
+    console.log("Connected to PostgreSQL database");
+  })
+  .catch((err) => {
+    console.error("Error connecting to PostgreSQL database:", err);
+  });
 
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/videos", (req, res) => {
-  const order = req.query.order || "desc";
+app.get("/videos", async (req, res) => {
+  try {
+    const order = req.query.order || "desc";
 
-  let orderedVideos = [...videos];
-  if (order === "asc") {
-    orderedVideos.sort((a, b) => a.rating - b.rating);
-  } else {
-    orderedVideos.sort((a, b) => b.rating - a.rating);
-  }
+    let query = "SELECT * FROM videos";
+    if (order === "asc") {
+      query += " ORDER BY rating ASC";
+    } else {
+      query += " ORDER BY rating DESC";
+    }
 
-  res.json(orderedVideos);
-});
-
-app.post("/videos", (req, res) => {
-  const newVideo = req.body;
-  newVideo.id = videos.length + 1;
-  newVideo.uploadedDate = new Date().toISOString();
-  videos.push(newVideo);
-  res.json({ id: newVideo.id });
-});
-
-app.post("/videos/:id/upvote", (req, res) => {
-  const id = parseInt(req.params.id);
-  const video = videos.find((v) => v.id === id);
-  if (video) {
-    video.rating += 1;
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+    const result = await db.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-app.post("/videos/:id/downvote", (req, res) => {
-  const id = parseInt(req.params.id);
-  const video = videos.find((v) => v.id === id);
-  if (video) {
-    video.rating = Math.max(video.rating - 1, 0);
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+app.post("/videos", async (req, res) => {
+  try {
+    const newVideo = req.body;
+    const timestamp = new Date().toISOString();
+
+    const query =
+      "INSERT INTO videos (title, url, rating, timestamp) VALUES ($1, $2, $3, $4) RETURNING id";
+    const values = [newVideo.title, newVideo.url, 0, timestamp];
+
+    const result = await db.query(query, values);
+    const insertedVideoId = result.rows[0].id;
+
+    res.json({ id: insertedVideoId });
+  } catch (error) {
+    console.error("Error adding video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-app.delete("/videos/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const initialLength = videos.length;
-  videos = videos.filter((v) => v.id !== id);
-  if (videos.length < initialLength) {
-    res.json({});
-  } else {
-    res.status(404).json({ result: "failure", message: "Video not found" });
+app.post("/videos/:id/upvote", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const query = "UPDATE videos SET rating = rating + 1 WHERE id = $1";
+    const values = [id];
+
+    await db.query(query, values);
+    res.json({ message: "Upvoted successfully" });
+  } catch (error) {
+    console.error("Error upvoting video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Serve static files from the 'build' folder (React frontend)
-app.use(express.static(path.join(__dirname, "build")));
+app.post("/videos/:id/downvote", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
 
-// Serve the index.html file as the default route
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+    const query =
+      "UPDATE videos SET rating = GREATEST(rating - 1, 0) WHERE id = $1";
+    const values = [id];
+
+    await db.query(query, values);
+    res.json({ message: "Downvoted successfully" });
+  } catch (error) {
+    console.error("Error downvoting video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.delete("/videos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const query = "DELETE FROM videos WHERE id = $1";
+    const values = [id];
+
+    await db.query(query, values);
+    res.json({ message: "Video deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+//update 7. here is all working but not connected to postgresql and has a hardcopy
+// const express = require("express");
+// const cors = require("cors");
+// const path = require("path");
+
+// const app = express();
+// const port = process.env.PORT || 5000;
+
+// app.use(cors());
+// app.use(express.json());
+
+// let videos = [
+//   {
+//     id: 523523,
+//     title: "Never Gonna Give You Up",
+//     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+//     rating: 23,
+//   },
+//   {
+//     id: 523427,
+//     title: "The Coding Train",
+//     url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
+//     rating: 230,
+//   },
+//   {
+//     id: 82653,
+//     title: "Mac & Cheese | Basics with Babish",
+//     url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
+//     rating: 2111,
+//   },
+//   {
+//     id: 858566,
+//     title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
+//     url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
+//     rating: 11,
+//   },
+//   {
+//     id: 453538,
+//     title:
+//       "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
+//     url: "https://www.youtube.com/watch?v=4As0e4de-rI",
+//     rating: 3211,
+//   },
+//   {
+//     id: 283634,
+//     title: "Learn Unity - Beginner's Game Development Course",
+//     url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
+//     rating: 211,
+//   },
+//   {
+//     id: 562824,
+//     title: "Cracking Enigma in 2021 - Computerphile",
+//     url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
+//     rating: 111,
+//   },
+//   {
+//     id: 442452,
+//     title: "Coding Adventure: Chess AI",
+//     url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
+//     rating: 671,
+//   },
+//   {
+//     id: 536363,
+//     title: "Coding Adventure: Ant and Slime Simulations",
+//     url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
+//     rating: 76,
+//   },
+//   {
+//     id: 323445,
+//     title: "Why the Tour de France is so brutal",
+//     url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
+//     rating: 73,
+//   },
+// ];
+
+// app.get("/", (req, res) => {
+//   res.send({ express: "Your Backend Service is Running" });
+// });
+
+// app.get("/videos", (req, res) => {
+//   const order = req.query.order || "desc";
+
+//   let orderedVideos = [...videos];
+//   if (order === "asc") {
+//     orderedVideos.sort((a, b) => a.rating - b.rating);
+//   } else {
+//     orderedVideos.sort((a, b) => b.rating - a.rating);
+//   }
+
+//   res.json(orderedVideos);
+// });
+
+// app.post("/videos", (req, res) => {
+//   const newVideo = req.body;
+//   newVideo.id = videos.length + 1;
+//   newVideo.uploadedDate = new Date().toISOString();
+//   videos.push(newVideo);
+//   res.json({ id: newVideo.id });
+// });
+
+// app.post("/videos/:id/upvote", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const video = videos.find((v) => v.id === id);
+//   if (video) {
+//     video.rating += 1;
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// app.post("/videos/:id/downvote", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const video = videos.find((v) => v.id === id);
+//   if (video) {
+//     video.rating = Math.max(video.rating - 1, 0);
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// app.delete("/videos/:id", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const initialLength = videos.length;
+//   videos = videos.filter((v) => v.id !== id);
+//   if (videos.length < initialLength) {
+//     res.json({});
+//   } else {
+//     res.status(404).json({ result: "failure", message: "Video not found" });
+//   }
+// });
+
+// // Serve static files from the 'build' folder (React frontend)
+// app.use(express.static(path.join(__dirname, "build")));
+
+// // Serve the index.html file as the default route
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
+
+// app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // update6
 // const express = require("express");
