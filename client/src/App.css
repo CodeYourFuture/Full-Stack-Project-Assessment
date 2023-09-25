@@ -1,3 +1,40 @@
 .App {
+  
   text-align: center;
+  background-color: rgb(9, 12, 15);
+  color: azure;
+}
+h1{
+  font-family: fantasy;
+}
+
+.video-container{
+  padding: 150px auto;
+  margin: 50px;
+  font-family:fantasy;
+}
+.btn-del{
+  background-color: #f44336;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+.like, .dislike{
+ background-color: #555555;
+  color: white;
+  padding: 15px 32px;
+  margin:10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.footer{
+  color: orange;
+  font-size:small;
+  padding-bottom: 5px;
 }
