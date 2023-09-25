@@ -19,12 +19,12 @@ const db = new Pool({
   // ssl: true
 });
 
-db.connect(function (err) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
-  console.log('Connected to the postgresSQL server.');
-});
+// db.connect(function (err) {
+//   if (err) {
+//     return console.error('error: ' + err.message);
+//   }
+//   console.log('Connected to the postgresSQL server.');
+// });
 
 
 
