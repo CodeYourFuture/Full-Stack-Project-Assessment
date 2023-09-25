@@ -13,25 +13,30 @@ function Addvideo(props) {
   }
 
   function submitInfo(event) {
-
     event.preventDefault();
-    console.log("My List", enterTitle, videoLink); 
+    
+    const newVideo = {
+      title: enterTitle,
+      url: videoLink,
+    };
+
     fetch("http://127.0.0.1:5000/", {
-    
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: enterTitle,
-        url: videoLink,
-      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVideo),
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
-        console.log("insert succesfull");
+        console.log("Insert successful");
+        // Update the video list in the parent component
+        props.addVideo(newVideo);
+      })
+      .catch((error) => {
+        console.error("Insert failed:", error);
       });
-    
+
     setEnterTitle("");
     setVideoLink("");
   }
