@@ -5,7 +5,7 @@ function NewVideo(props) {
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [newVideo, SetNewVideo] = useState({ title: "", url: "" });
+  // const [newVideo, SetNewVideo] = useState({ title: "", url: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();

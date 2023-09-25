@@ -18,13 +18,12 @@ function Videos({ newVideos, handleSubmit }) {
             console.error(err.message);
         }
     }
-
     useEffect(() => {
         getTheVideos();
     }, [])
 
 
-console.log(videos)
+
 
   const handleDelete = (id) => {
     setVideos((prevVideosData) =>

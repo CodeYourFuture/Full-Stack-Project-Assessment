@@ -8,7 +8,7 @@ const db = require("./db");
 
 app.use(cors());
 app.use(bodyParser.json());
-// db.connect;
+db.connect;
 
 app.get("/videos", async (req, res) => {
   try {
@@ -33,37 +33,51 @@ app.get("/videos", async (req, res) => {
 // });
 
 // This endpoint is used to add a video to the API.
+// app.post("/videos", async (req, res) => {
+  
+//   try {
+//     let newVideo = {
+//       title: req.body.title,
+//       url: req.body.url,
+//     };
+// console.log("new video ...>",newVideo)
+//     if (
+//       !newVideo.title ||
+//       !newVideo.url ||
+//       !newVideo.url.startsWith("https://www.youtube.com")
+//     ){
+//       console.log("Hello there", req.body)
+//       res.status(404).send({
+//         result: "failure",
+//         message: "Video could not be saved",
+//       });
+//     } else {
+//       console.log(req.body);
+//       const query = 'INSERT INTO videos (title, url) VALUES (${newVideo.title}, ${newVideo.url})';
+//       const result = await db.query(query);
+// console.log("result", result);
+//       res.status(201).send({
+
+//         message: "Video saved successfully",
+//         result,
+//       });
+//     }
+//   } catch (error) {}
+// });
+
+
 app.post("/videos", async (req, res) => {
   
-  try {
-    let newVideo = {
-      title: req.body.title,
-      url: req.body.url,
-    };
-
-    if (
-      !newVideo.title ||
-      !newVideo.url ||
-      !newVideo.url.startsWith("https://www.youtube.com")
-    ) {
-      res.status(404).send({
-        result: "failure",
-        message: "Video could not be saved",
-      });
-    } else {
-      console.log(req.body);
-      const result = await db.one(
-        "INSERT INTO videos (title, url) VALUES ($1, $2) RETURNING *",
-        [title, url]
-      );
-console.log(result);
+  console.log(req.body)
+  const title = String(req.body.title);
+  const url = String(req.body.url);
+ 
+const query = "INSERT INTO videos(title, url) VALUES ('" + title + "', '" + url + "')";
+  const result = await db.query(query);
       res.status(201).send({
-
         message: "Video saved successfully",
         result,
       });
-    }
-  } catch (error) {}
 });
 
 // Returns the video with the ID contained within the {id} parameter.
@@ -107,6 +121,6 @@ app.delete("/videos/:id", (req, res) => {
       message: "Video deleted successfully!",
     });
   }
-});
+ });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
