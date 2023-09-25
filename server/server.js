@@ -85,8 +85,12 @@ app.post("/videos", (req, res) => {
   let newVideoURL = req.body.url
   let newVideoRating = 0
 
-  if (!newVideoTitle || !newVideoURL || newVideoTitle === "" || newVideoURL === "") {
-    res.status(400).send("Fill in the missing fields")
+  if (!newVideoTitle) {
+    res.status(400).send("Title field is missing");
+  } else if (!newVideoURL) {
+    res.status(400).send("URL field is missing");
+  } else if (!newVideoTitle && !newVideoURL) {
+    res.status(400).send("Both title and URL fields are missing");
   } else {
     const query =
       `INSERT INTO videos (title, url, rating)
