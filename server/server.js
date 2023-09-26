@@ -15,7 +15,8 @@ const db = new Pool({
   host: process.env.HOSTNAME,
   database: process.env.DATABASE_NAME,
   password: process.env.PASSWORD,
-  port: 5432,
+  port: process.env.DB_PORT, // test to add
+  // port: 5432,
 });
 
 db.connect()
