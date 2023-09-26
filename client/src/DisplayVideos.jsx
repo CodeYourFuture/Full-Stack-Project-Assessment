@@ -24,18 +24,22 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
   }, [refreshVideos]);
 
   return (
-    <div className="videos-container">
-      <ToggleOrderOfVideos
-        refreshVideos={refreshVideos}
-        setVideos={setVideos}
-      />
-      {videos.map((video) => (
-        <CardVideo
-          key={video.id}
-          video={video}
-          setRefreshVideos={setRefreshVideos}
+    <>
+      <div>
+        <ToggleOrderOfVideos
+          refreshVideos={refreshVideos}
+          setVideos={setVideos}
         />
-      ))}
-    </div>
+        <div className="dispay-video-container">
+          {videos.map((video) => (
+            <CardVideo
+              key={video.id}
+              video={video}
+              setRefreshVideos={setRefreshVideos}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }

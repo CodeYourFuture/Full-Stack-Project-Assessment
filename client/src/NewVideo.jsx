@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function NewVivdeo({ setRefreshVideos }) {
+export default function NewVivdeo({ showForm, toggleForm, setRefreshVideos }) {
   const [formData, setFormData] = useState({
     title: "",
     url: "",
@@ -62,28 +62,43 @@ export default function NewVivdeo({ setRefreshVideos }) {
   };
 
   return (
-    <div className="new-video-container">
-      <form className="form-for-new-video" onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-          required
-        />
-        <label>URL:</label>
-        <input
-          type="text"
-          name="url"
-          value={formData.url}
-          onChange={handleInputChange}
-          required
-        />
-        <button className="submit-button" type="submit" disabled={isSubmitting}>
-          Submit
-        </button>
-      </form>
-    </div>
+    showForm && (
+      <div className="new-video-form-container" onClick={toggleForm}>
+        <form
+          onClick={(e) => e.stopPropagation()}
+          className="new-video-form "
+          onSubmit={handleSubmit}
+        >
+          <legend>New Video</legend>
+          <div className="form_fild">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form_fild">
+            <label htmlFor="url">URL:</label>
+            <input
+              type="text"
+              name="url"
+              value={formData.url}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <button
+            className="submit-form-button  btn box with-drop-shadow"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            ADD
+          </button>
+        </form>
+      </div>
+    )
   );
 }

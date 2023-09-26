@@ -6,10 +6,20 @@ import NewVivdeo from "./NewVideo";
 
 function App() {
   const [refreshVideos, setRefreshVideos] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <div className="App">
-      <Header />
-      <NewVivdeo setRefreshVideos={setRefreshVideos} />
+      <Header toggleForm={toggleForm} />
+      <NewVivdeo
+        showForm={showForm}
+        toggleForm={toggleForm}
+        setRefreshVideos={setRefreshVideos}
+      />
       <DisplayVideos
         setRefreshVideos={setRefreshVideos}
         refreshVideos={refreshVideos}

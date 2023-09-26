@@ -31,15 +31,26 @@ export default function UpdateRating({ video }) {
   };
 
   return (
-    <div>
-      <button onClick={() => setCounter((prevCounter) => prevCounter + 1)}>
-        Increment
+    <div className="rating-container">
+      <div className="rating-values">
+        <button
+          onClick={() => setCounter((prevCounter) => prevCounter + 1)}
+          className="rating-button box"
+        >
+          👍
+        </button>
+        <h3>{counter}</h3>
+        <button
+          onClick={() => setCounter((prevCounter) => prevCounter - 1)}
+          className="rating-button box"
+        >
+          👎
+        </button>
+      </div>
+
+      <button onClick={handleUpdate} className="header-add-btn btn box">
+        Update Rating
       </button>
-      <h3>{counter}</h3>
-      <button onClick={() => setCounter((prevCounter) => prevCounter - 1)}>
-        Decrement
-      </button>
-      <button onClick={handleUpdate}>Update Rating</button>
     </div>
   );
 }
