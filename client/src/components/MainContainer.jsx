@@ -9,7 +9,7 @@ function MainContainer() {
   const [videoAdded, setVideoAdded] = useState(false);
 
   useEffect(() => {
-    fetch(`${baseUrl}/videos`) // prod
+    fetch(`${baseUrl}/videos`)
       .then((response) => response.json())
       .then((data) => {
         setVideoData(data);

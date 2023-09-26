@@ -1,5 +1,4 @@
 import React from "react";
-import youtubeLogo from "./components/images/youtubeLogo.png";
 import MainContainer from "./components/MainContainer";
 import Footer from "./components/Footer";
 import Header from "./components/Header";

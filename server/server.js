@@ -4,7 +4,6 @@ const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const nocache = require("nocache");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,7 +11,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(nocache());
 
 app.use(express.json());
 
@@ -72,7 +70,16 @@ app.get("/videos/:id", function (req, res) {
 // This endpoint is used to add a new video
 app.post("/videos", (req, res) => {
   const { title, url } = req.body;
-  if (!title || !url || !url.startsWith("https://www.youtube.com"|| urlObject.startsWith("https://youtu.be") || urlObject.startsWith("https://m.youtube.com") || urlObject.startsWith("https://youtube.com/"))) {
+  if (
+    !title ||
+    !url ||
+    !url.startsWith(
+      "https://www.youtube.com" ||
+        urlObject.startsWith("https://youtu.be") ||
+        urlObject.startsWith("https://m.youtube.com") ||
+        urlObject.startsWith("https://youtube.com/")
+    )
+  ) {
     res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
