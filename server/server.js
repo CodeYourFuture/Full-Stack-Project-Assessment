@@ -10,22 +10,27 @@ app.use(cors());
 app.use(express.json());
 
 // PostgreSQL database connection
+// const db = new Pool({
+//   user: process.env.USERNAME,
+//   host: process.env.HOSTNAME,
+//   database: process.env.DATABASE_NAME,
+//   password: process.env.PASSWORD,
+//   port: process.env.DB_PORT, // test to add
+//   // port: 5432,
+// });
+
 const db = new Pool({
-  user: process.env.USERNAME,
-  host: process.env.HOSTNAME,
-  database: process.env.DATABASE_NAME,
-  password: process.env.PASSWORD,
-  port: process.env.DB_PORT, // test to add
-  // port: 5432,
+  connectionString: process.env.DB_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
-db.connect()
-  .then(() => {
-    console.log("Connected to PostgreSQL database");
-  })
-  .catch((err) => {
-    console.error("Error connecting to PostgreSQL database:", err);
-  });
+// db.connect()
+//   .then(() => {
+//     console.log("Connected to PostgreSQL database");
+//   })
+//   .catch((err) => {
+//     console.error("Error connecting to PostgreSQL database:", err);
+//   });
 
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
@@ -51,13 +56,18 @@ app.get("/videos", async (req, res) => {
 });
 
 app.post("/videos", async (req, res) => {
+  // console.log("hello");
   try {
-    const newVideo = req.body;
+    const newVideo = req.body.video;
+    // const newVideo = req.body;
+    console.log(newVideo);
     const timestamp = new Date().toISOString();
 
     const query =
-      "INSERT INTO videos (title, url, rating, timestamp) VALUES ($1, $2, $3, $4) RETURNING id";
-    const values = [newVideo.title, newVideo.url, 0, timestamp];
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id";
+    const values = [newVideo.title, newVideo.url, 0];
+    // "INSERT INTO videos (title, url, rating, timestamp) VALUES ($1, $2, $3, $4) RETURNING id";
+    // const values = [newVideo.title, newVideo.url, 0, timestamp];
 
     const result = await db.query(query, values);
     const insertedVideoId = result.rows[0].id;

@@ -32,11 +32,13 @@ const App = () => {
         alert("Please enter a valid title and YouTube URL.");
         return;
       }
-
+      console.log(newVideo);
       const response = await axios.post(
-        "https://back-end-full-stack-project-assessment.onrender.com/videos",
+        "http://localhost:5000/videos",
+        //"https://back-end-full-stack-project-assessment.onrender.com/videos",
         {
-          ...newVideo,
+          // ...newVideo,
+          video: newVideo,
           timestamp: new Date().toISOString(),
         }
       );
