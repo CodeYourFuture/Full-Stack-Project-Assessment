@@ -1,49 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function ShowingVideos(props) {
-  const [videos, setVideos] = useState(props.result);
+function ShowingVideos() {
+  const [videos, setVideos] = useState([]);
+  const [orderBy, setOrderBy] = useState("desc");
 
-  function convertToEmbedUrl(url) {
+  useEffect(() => {
+    fetch("https://node-js-full-stack-project-assessment.onrender.com/videos")
+      .then((response) => response.json())
+      .then((data) => {
+        // setVideos([])
+        setVideos(data);
+        console.log("lin 12,", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [videos]);
+
+  const toggleOrder = () => {
+    setOrderBy(orderBy === "asc" ? "desc" : "asc");
+  };
+
+  const convertToEmbedUrl = (url) => {
     const videoId = url.split("v=")[1];
     return `https://www.youtube.com/embed/${videoId}`;
-  }
+  };
 
-  function deleteVideo(id) {
-    const updatedVideos = videos.filter((video) => video.id !== id);
-    setVideos(updatedVideos);
-  }
-
-  function handleRating(id, type) {
-    const updatedVideos = videos.map((video) => {
-      if (video.id === id) {
-        if (type === "thumbs-up") {
-          return { ...video, rating: video.rating + 1 };
-        } else if (type === "thumbs-down") {
-          return { ...video, rating: video.rating - 1 };
-        }
+  const deleteVideo = (id) => {
+    fetch(
+      `https://node-js-full-stack-project-assessment.onrender.com/videos/${id}`,
+      {
+        method: "DELETE",
       }
-      return video;
-    });
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        setVideos((prevVideos) =>
+          prevVideos.filter((video) => video.id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting video:", error);
+      });
+  };
 
-    setVideos(updatedVideos);
-  }
+  const handleRating = (id, type) => {
+    fetch(
+      `https://node-js-full-stack-project-assessment.onrender.com/rate/${id}/${type}`,
+      {
+        method: "PUT",
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((updatedRating) => {
+        setVideos((prevVideos) =>
+          prevVideos.map((video) => {
+            if (video.id === id) {
+              return { ...video, rating: updatedRating.rating };
+            }
+            console.log("lin 65", video);
+            return video;
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("Error updating rating:", error);
+      });
+  };
 
-  const sortedVideos = [...videos].sort((a, b) => b.rating - a.rating);
+  const sortedVideos = [...videos].sort((a, b) => {
+    if (orderBy === "asc") {
+      return a.rating - b.rating;
+    } else {
+      return b.rating - a.rating;
+    }
+  });
+  /////////////////////////////////
+  console.log("line 79", videos);
+  console.log("lin 80", sortedVideos);
+  ///////////////////////////////////
 
   return (
     <div className="ShowingVideos">
+      <button onClick={toggleOrder} className="Ordes">
+        {orderBy === "asc" ? "Order Ascending" : "Order Descending"}
+      </button>
+
       {sortedVideos.map((video) => (
         <div className="videos" key={video.id}>
+          {/* ///////////////////// */}
+          <p>{console.log("line 93", video)}</p>
           <p>{video.title}</p>
           <div className="buttons">
             <i
               className="fa-solid fa-thumbs-up"
-              onClick={() => handleRating(video.id)}
+              onClick={() => handleRating(video.id, "up")}
             ></i>
             <h4>{video.rating}</h4>
             <i
               className="fa-solid fa-thumbs-down"
-              onClick={() => handleRating(video.id)}
+              onClick={() => handleRating(video.id, "down")}
             ></i>
           </div>
 

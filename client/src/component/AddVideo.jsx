@@ -46,8 +46,7 @@ function Addvideo() {
         const videoToAdd = {
           ...newVideo,
           rating: 0,
-          id: idCounter,
-          timestamp: new Date().toISOString(),
+          timestamp: new Date().toISOString()
         };
 
         try {
@@ -63,10 +62,7 @@ function Addvideo() {
           );
 
           if (response.ok) {
-            // const responseData = await response.json();
-            // setVideos([...videos, responseData]);
-            setNewVideo({ title: "", url: "" });
-            setIdCounter(idCounter + 1);
+            console.log("Video added.");
           } else {
             console.error("Failed to add video:", response.statusText);
           }
