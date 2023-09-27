@@ -341,12 +341,12 @@ iframe {
 /* DeleteVideo */
 .delete-button {
   background-color: var(--purple);
-  font-size: 13px;
+  font-size: 7px;
   color: var(--yelloweesh);
 }
 
 @media (max-width: 800px) {
   .delete-button {
-    /* font-size: 7px; */
+    font-size: 7px;
   }
 }

@@ -47,7 +47,7 @@ export default function UpdateRating({ video, setRefreshVideos }) {
       <button onClick={handleUpdate} className="update-button box btn">
         Update Rating
       </button>
-      {/* <DeleteVideo setRefreshVideos={setRefreshVideos} video={video} /> */}
+      <DeleteVideo setRefreshVideos={setRefreshVideos} video={video} />
     </div>
   );
 }
