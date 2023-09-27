@@ -33,15 +33,17 @@ function App() {
 
   function orderClickHandler(e, newOrder) {
     e.preventDefault();
-  
+
     if (newOrder === "asc") {
-      loadVideo.sort((a, b) => a.rating - b.rating);
+      const sortedVideos = [...loadVideo].sort((a, b) => a.rating - b.rating);
+      setLoadVideo(sortedVideos);
+      setOrder("asc");
     } else {
-      loadVideo.sort((a, b) => b.rating - a.rating);
+      const sortedVideos = [...loadVideo].sort((a, b) => b.rating - a.rating);
+      setLoadVideo(sortedVideos);
+      setOrder("desc");
     }
-    setLoadVideo(loadVideo);
-    setOrder(newOrder);
-}
+  }
 
   return (
     <Router>
