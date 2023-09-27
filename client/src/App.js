@@ -34,8 +34,8 @@ const App = () => {
       }
       console.log(newVideo);
       const response = await axios.post(
-        "http://localhost:5000/videos",
-        //"https://back-end-full-stack-project-assessment.onrender.com/videos",
+        // "http://localhost:5000/videos",
+        "https://back-end-full-stack-project-assessment.onrender.com/videos",
         {
           // ...newVideo,
           video: newVideo,
