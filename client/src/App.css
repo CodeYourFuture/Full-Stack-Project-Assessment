@@ -333,7 +333,7 @@ iframe {
 
   .update-button {
     background-color: var(--fresh-green);
-    /* font-size: 7px; */
+    font-size: 7px;
     color: var(--dark-purple);
   }
 }
@@ -341,7 +341,7 @@ iframe {
 /* DeleteVideo */
 .delete-button {
   background-color: var(--purple);
-  font-size: 7px;
+  font-size: 13px;
   color: var(--yelloweesh);
 }
 
