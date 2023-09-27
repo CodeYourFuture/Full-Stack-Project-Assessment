@@ -40,9 +40,12 @@ const db = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-  ssl: false
+  ssl: process.env.DB_SSL
 });
 
+app.get("/", function (req, res) {
+  res.status(200).json("wellcome");
+});
 
 // app.get("/videos", function (req, res) {
 //   if (videos.length === 0) {
@@ -50,6 +53,7 @@ const db = new Pool({
 //   }
 //   res.json(videos);
 // });
+
 
 // GET "/videos"
 app.get("/videos", async function (req, res) {
