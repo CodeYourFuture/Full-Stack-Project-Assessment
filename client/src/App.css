@@ -15,11 +15,14 @@
 }
 .App {
   text-align: center;
+  width: 100%;
 }
 
 body {
   background-color: var(--dark-purple);
   color: var(--whity);
+  width: 100%;
+
   /* padding: none;
   margin: none; */
 }
@@ -259,6 +262,7 @@ input:focus {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto, 600px);
   gap: 70px;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
@@ -272,12 +276,13 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 100%;
   border-top: 3px solid var(--green);
   border-bottom: 3px solid var(--green);
 }
 
 iframe {
-  width: 100%;
+  /* width: 100%; */
 }
 
 .videos-functions {

@@ -8,7 +8,6 @@ export default function UpdateRating({ video, setRefreshVideos }) {
     try {
       const response = await fetch(
         `https://kristinadudnyk-fullstack-project.onrender.com/video/${video.id}`,
-        // `http://localhost:4500/video/${video.id}`
         {
           method: "PATCH",
           headers: {
@@ -17,10 +16,6 @@ export default function UpdateRating({ video, setRefreshVideos }) {
           body: JSON.stringify({ rating: counter }),
         }
       );
-      // console.log("handleSubmit response:", response);
-
-      // const json = await response.json();
-      // console.log("handleSubmit json:", json);
       if (response.ok) {
         console.log("Resource updated successfully");
       } else {

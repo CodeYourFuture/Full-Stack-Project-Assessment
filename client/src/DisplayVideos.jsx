@@ -9,7 +9,6 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
     try {
       const response = await fetch(
         `https://kristinadudnyk-fullstack-project.onrender.com/video`
-        // "http://localhost:4500/video"
       );
       const data = await response.json();
       console.log("fetchData in Videos", data);
@@ -24,22 +23,20 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
   }, [refreshVideos]);
 
   return (
-    <>
-      <div>
-        <ToggleOrderOfVideos
-          refreshVideos={refreshVideos}
-          setVideos={setVideos}
-        />
-        <div className="dispay-video-container">
-          {videos.map((video) => (
-            <CardVideo
-              key={video.id}
-              video={video}
-              setRefreshVideos={setRefreshVideos}
-            />
-          ))}
-        </div>
+    <div>
+      <ToggleOrderOfVideos
+        refreshVideos={refreshVideos}
+        setVideos={setVideos}
+      />
+      <div className="dispay-video-container">
+        {videos.map((video) => (
+          <CardVideo
+            key={video.id}
+            video={video}
+            setRefreshVideos={setRefreshVideos}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 }

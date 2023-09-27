@@ -22,14 +22,11 @@ export default function NewVivdeo({ showForm, toggleForm, setRefreshVideos }) {
         formData.url.match(/v=([a-zA-Z0-9_-]{11})/)[1]
       }`,
     };
-    // console.log(formDataUrlChanged);
-
     try {
       setIsSubmitting(true);
 
       const response = await fetch(
         `https://kristinadudnyk-fullstack-project.onrender.com/video`,
-        // "http://localhost:4500/video"
         {
           method: "POST",
           headers: {
