@@ -35,7 +35,7 @@ export default function DeleteVideo({ video, setRefreshVideos }) {
 
   return (
     <div>
-      <button className="submit-button" onClick={handleDelete}>
+      <button className="delete-button box btn" onClick={handleDelete}>
         DELETE
       </button>
     </div>

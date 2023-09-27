@@ -1,6 +1,7 @@
 import { useState } from "react";
+import DeleteVideo from "./DeleteVideo";
 
-export default function UpdateRating({ video }) {
+export default function UpdateRating({ video, setRefreshVideos }) {
   const [counter, setCounter] = useState(video.rating);
 
   const handleUpdate = async () => {
@@ -48,9 +49,10 @@ export default function UpdateRating({ video }) {
         </button>
       </div>
 
-      <button onClick={handleUpdate} className="header-add-btn btn box">
+      <button onClick={handleUpdate} className="update-button box btn">
         Update Rating
       </button>
+      <DeleteVideo setRefreshVideos={setRefreshVideos} video={video} />
     </div>
   );
 }

@@ -1,14 +1,15 @@
 :root {
-  --dark-purple: #300042;
+  --dark-purple: #2d013d;
   --purple: #b51ff0;
   --dark-green: #7aa808;
   --green: #bdff19;
   --fresh-green: #aaf000;
   --whity: #f1f7ff;
+  --yelloweesh: #f9ffac;
 }
 
 * {
-  /* border: none; */
+  border: none;
   text-decoration: none;
   border-style: none;
 }
@@ -44,20 +45,28 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 10px;
   background-color: var(--dark-green);
   font-family: "Nabla", cursive;
 }
 
-.nn {
-  font-size: 120px;
-}
 .header h1 {
-  font-size: xx-large;
+  font-size: 100px;
 }
 
 .header-add-btn {
-  background-color: chartreuse;
+  background-color: var(--purple);
+  font-size: 30px;
+}
+@media (max-width: 800px) {
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .header-add-btn {
+    background-color: var(--purple);
+    font-size: 20px;
+  }
 }
 
 /* NewVideo */
@@ -96,11 +105,6 @@ body {
   transition: opacity 300ms;
 }
 
-.submit-form-button {
-  background-color: var(--purple);
-  width: 80px;
-}
-
 .new-video-form {
   display: flex;
   flex-direction: column;
@@ -108,6 +112,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: var(--dark-green);
+  font-family: "Nabla", cursive;
   padding: 30px;
   border-radius: 30px;
   padding-bottom: 15px;
@@ -115,17 +120,76 @@ body {
   filter: drop-shadow(1px 2px 4px hsl(0, 0%, 100%));
 }
 
+.new-video-form legend {
+  font-size: 70px;
+}
+
 .form_fild {
   display: flex;
   gap: 20px;
+  width: 80%;
 }
 
 label {
+  font-family: "Nabla", cursive;
+  width: 80px;
+  font-size: 30px;
 }
 
 input {
   border-radius: 30px;
-  filter: drop-shadow(1px 2px 4px hsl(51, 100%, 74%));
+  /* filter: drop-shadow(1px 2px 4px hsl(51, 100%, 74%)); */
+  width: 100%;
+}
+
+input:hover {
+  border: 3px solid var(--purple);
+}
+
+input:focus {
+  /* border-color: ; */
+  border: 3px solid var(--purple);
+  outline: none;
+}
+
+.submit-form-button {
+  background-color: var(--purple);
+  font-size: 30px;
+  padding: 8px 40px;
+}
+
+@media (max-width: 800px) {
+  .new-video-form {
+    width: 100%;
+  }
+
+  .new-video-form legend {
+    font-size: 50px;
+  }
+
+  .form_fild {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  label {
+    font-family: "Nabla", cursive;
+    width: 80px;
+    font-size: 30px;
+  }
+
+  input {
+    border-radius: 30px;
+    /* filter: drop-shadow(1px 2px 4px hsl(51, 100%, 74%)); */
+    width: 100%;
+  }
+
+  .submit-form-button {
+    background-color: var(--purple);
+    font-size: 25px;
+    padding: 5px 40px;
+  }
 }
 /* ToggleOrderOfVideos */
 
@@ -173,14 +237,14 @@ input {
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background-color: rgb(86, 206, 30);
+  background-color: var(--fresh-green);
   left: 3px;
   top: 3px;
   transition: background-color 0.3s, left 0.3s;
 }
 
 .checkbox_inp:checked + .checkbox_span::before {
-  background-color: rgb(86, 206, 30);
+  background-color: var(--fresh-green);
 }
 
 .checkbox_inp:checked + .checkbox_span::after {
@@ -190,24 +254,25 @@ input {
 /* DisplayVideos */
 
 .dispay-video-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-/* .dispay-video-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-} */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto, 600px);
+  gap: 70px;
+}
+
+@media (max-width: 800px) {
+  .dispay-video-container {
+    grid-template-columns: 1fr;
+  }
+}
 /* CardVideo */
 
 .video-container {
   display: flex;
   flex-direction: column;
   gap: 30px;
-
-  border: 3px solid var(--green);
-  /* border-radius: 30px; */
-  /* background-color: #1f1f1f; */
+  border-top: 3px solid var(--green);
+  border-bottom: 3px solid var(--green);
 }
 
 iframe {
@@ -215,8 +280,14 @@ iframe {
 }
 
 .videos-functions {
+  /* border-top: 3px solid var(--dark-green); */
 }
 
+@media (max-width: 800px) {
+  .video-container {
+    border-top: none;
+  }
+}
 /* UpdateRating */
 
 .rating-container {
@@ -237,4 +308,17 @@ iframe {
   border: none;
   cursor: pointer;
   font-size: 40px;
+}
+
+.update-button {
+  background-color: var(--fresh-green);
+  font-size: 13px;
+  color: var(--dark-purple);
+}
+
+/* DeleteVideo */
+.delete-button {
+  background-color: var(--purple);
+  font-size: 13px;
+  color: var(--yelloweesh);
 }
