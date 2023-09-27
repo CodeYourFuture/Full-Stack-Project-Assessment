@@ -64,12 +64,12 @@ body {
 }
 @media (max-width: 800px) {
   .header h1 {
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .header-add-btn {
     background-color: var(--purple);
-    font-size: 20px;
+    font-size: 10px;
   }
 }
 
@@ -322,9 +322,31 @@ iframe {
   color: var(--dark-purple);
 }
 
+@media (max-width: 800px) {
+  .rating-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+  }
+
+  .update-button {
+    background-color: var(--fresh-green);
+    /* font-size: 7px; */
+    color: var(--dark-purple);
+  }
+}
+
 /* DeleteVideo */
 .delete-button {
   background-color: var(--purple);
   font-size: 13px;
   color: var(--yelloweesh);
+}
+
+@media (max-width: 800px) {
+  .delete-button {
+    /* font-size: 7px; */
+  }
 }
