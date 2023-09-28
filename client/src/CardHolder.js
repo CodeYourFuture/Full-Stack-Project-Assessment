@@ -26,7 +26,7 @@ const CardHolder = ({ allMyVideos, setAllMyVideos }) => {
             <div className="sorting-holder">
                 Sort
                 <button className="sorting-ratings-button" onClick={handleSortingButton}>
-                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/sort-arrows-icon.png">
+                    <img alt="arrowImage" src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/sort-arrows-icon.png">
                     </img>
                 </button>
             </div>

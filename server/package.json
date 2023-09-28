@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "server": "node server.js",
-    "start": "nodemon node server.js"
+    "start": "nodemon node server.js",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "env": "^0.0.2",
     "express": "^4.17.1",
     "pg": "^8.11.3",
+    "react-scripts": "^5.0.1",
     "short-uuid": "^4.2.2"
   },
   "devDependencies": {
