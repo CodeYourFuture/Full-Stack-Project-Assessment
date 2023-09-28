@@ -12,6 +12,10 @@ function Video (props) {
     props.downRating(props.name);
   };
 
+  const handleDelete = () => {
+    props.deleteVideo(props.name);
+  };
+
   return (
     <div>
       <h1>{props.name}</h1>
@@ -21,6 +25,7 @@ function Video (props) {
         <button onClick={handleAddRating}>Plus</button>
         <span> Rating: {props.rating} </span>
         <button onClick={handleDownRating}>Minus</button>
+        <button onClick={handleDelete}>Delete Video</button>
       </div>
     </div>
   );

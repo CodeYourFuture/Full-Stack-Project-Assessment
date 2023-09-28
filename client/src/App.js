@@ -30,6 +30,7 @@ function App() {
         rating={video.rating}
         plusRating={AddRating}
         subtractRating={minusRating}
+        deleteVideo={deleteVideo}
       />
     );
   });
@@ -62,6 +63,24 @@ function App() {
       console.error(error);
     });
 }
+
+function deleteVideo(videoTitle) {
+  const updatedVideos = videos.filter((video) => video.title !== videoTitle);
+  setVideos(updatedVideos);
+
+  fetch(`http://127.0.0.1:5000/${videoTitle}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to delete');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
  function minusRating (videoTitle) {
   const updatedVid = videos.map((video) => {
     if (video.title === videoTitle) {

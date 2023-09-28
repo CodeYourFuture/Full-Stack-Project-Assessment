@@ -91,3 +91,40 @@ const newVideo = {id: videos.length + 1,
   videos.push(newVideo);
   res.send(videos);
 })
+
+app.put("/:videoTitle", (req, res) => {
+  const videoTitle = req.params.videoTitle;
+  const newRating = req.body.rating;
+
+  if (newRating === null) {
+    return res.status(400).json({ message: "Rating cannot be null" });
+  }
+
+  client.query("UPDATE SET rating = $1 WHERE title = $2", [newRating, videoTitle])
+    .then((result) => {
+      res.status(200).json({ message: "updated successfully" });
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).json({ message: "server error" });
+    });
+});
+
+app.delete("/:videoTitle", (req, res) => {
+  const videoTitle = req.params.videoTitle;
+
+  // Remove the video from your database or data source
+  client.query("DELETE VIDEO WHERE title = $1", [videoTitle])
+    .then((result) => {
+      if (result.rowCount === 0) {
+        // If no rows were affected, the video was not found
+        res.status(404).json({ message: "Video not found" });
+      } else {
+        res.status(204).json(); // Return a 204 status for successful deletion
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).json({ message: "server error" });
+    });
+});
