@@ -23,16 +23,7 @@ const { Pool } = require("pg");
 //   port: 5432,
 // });
 
-// const db = new Pool({
-//   user: "shadi_user",
-//   host: "dpg-cjs7s5dv2qks738v6ltg-a.oregon-postgres.render.com",
-//   database: "shadi",
-//   password: "j7lLUQoGj3mMw7Q7gH66Nz3ygDizGews",
-//   port: 5432,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+
 
 const db = new Pool({
   user: process.env.DB_USER,
