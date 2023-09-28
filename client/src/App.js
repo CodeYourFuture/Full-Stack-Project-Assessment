@@ -15,6 +15,10 @@ function App() {
     return <Links link={video.url}/>
   });
 
+  function AddRating() {
+    
+  }
+
   return (
     <div className="App">
       <header className="App-header">
