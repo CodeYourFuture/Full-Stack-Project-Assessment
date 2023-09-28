@@ -8,7 +8,7 @@ import Links from "./components/Links";
 function App() {
 
   const videoEl = videoData.map((video) => {
-    return <Video name = {video.title}/>;
+    return <Video name = {video.title} link = {video.url} rating = {video.rating}/>;
   });
 
   const youTubeLinks = videoData.map((video) => {
