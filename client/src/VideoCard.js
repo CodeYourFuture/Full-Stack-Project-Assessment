@@ -29,7 +29,7 @@ const VideoCard = ({ allMyVideos, setAllMyVideos }) => {
 
     return (
         allMyVideos.map(video => (
-            <div key={video.key} className="card">
+            <div key={video.id} className="card">
                 <h4>{video.title}</h4>
                 <div className="video-holder">
                     <ReactPlayer className="react-player"
