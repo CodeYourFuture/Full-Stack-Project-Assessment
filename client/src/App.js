@@ -3,11 +3,18 @@ import './App.css';
 import videoData from "./components/exampleresponse.json";
 import Video from "./components/Video";
 import Links from "./components/Links";
+import AddVideo from './components/AddVideo';
 
 
 function App() {
 
-  const videoEl = videoData.map((video) => {
+  const [videos, setVideos] = React.useState ([]);
+
+  fetch("http://127.0.0.1:5000/")
+  .then((response) => response.json())
+  .then(data => {setVideos(data)});
+
+  const videoEl = videos.map((video) => {
     return <Video name = {video.title} link = {video.url} rating = {video.rating}/>;
   });
 
@@ -16,7 +23,7 @@ function App() {
   });
 
   function AddRating() {
-    
+
   }
 
   return (
@@ -24,6 +31,7 @@ function App() {
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+      <AddVideo />
       <div>{videoEl}</div>
       <div>{youTubeLinks}</div>
     </div>

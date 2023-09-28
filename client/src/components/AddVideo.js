@@ -1,42 +1,18 @@
 import React, { useState } from 'react';
 
-const AddVideo = () => {
-    const [title, setTitle] = useState('');
-    const [url, setUrl] = useState('');
-    setTitle('');
-    setUrl('');
+function AddVideo (props) {
 
-const handleSubmit = e => {
-    e.preventDefault();
-    AddVideo({ title,url });
-    setTitle('');
-    setUrl('');
-};    
-
-    
-    return (
-        <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>URL:</label>
-        <input
-          type="text"
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Add Video</button>
-    </form>
-    )
-};
+  return(
+    <div>
+      <form>
+      <label for="Video title">Video Title</label>
+            <input id="Video title" type="text"/>
+            <label for="Video link">Video link</label>
+            <input id="Video link" type="text"/>
+            <input id="Submit" type="submit"/>
+      </form>
+    </div>
+  )
+}
 
 export default AddVideo;
