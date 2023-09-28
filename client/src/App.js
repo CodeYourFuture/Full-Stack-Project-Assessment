@@ -1,34 +1,27 @@
 import React, { useState } from 'react';
 import './App.css';
-//import VideosList from './VideosList';
-import AddVideo from './AddVideo';
+import videoData from "./components/exampleresponse.json";
+import Video from "./components/Video";
+import Links from "./components/Links";
 
-const App = () => {
-  const [videos, setVideos] = useState([]); 
 
-  const handleVote = (id, direction) => {
-    
-  };
+function App() {
 
-  const handleRemove = id => {
-    
-  };
+  const videoEl = videoData.map((video) => {
+    return <Video name = {video.title}/>;
+  });
 
-  const handleAddVideo = newVideo => {
-   
-  };
+  const youTubeLinks = videoData.map((video) => {
+    return <Links link={video.url}/>
+  });
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
-      <AddVideo handleAddVideo={handleAddVideo} />
-      <VideosList
-        videos={videos}
-        handleVote={handleVote}
-        handleRemove={handleRemove}
-      />
+      <div>{videoEl}</div>
+      <div>{youTubeLinks}</div>
     </div>
   );
 };
