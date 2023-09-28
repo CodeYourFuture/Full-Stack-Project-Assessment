@@ -9,7 +9,7 @@ import AddVideo from './components/AddVideo';
 function App() {
 
   const [videos, setVideos] = useState ([]);
-  const [enterTitle, setEnterTitle] = useState("");
+  //const [enterTitle, setEnterTitle] = useState("");
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/")
@@ -22,21 +22,58 @@ function App() {
   }, []);
 
   const videoEl = videos.map((video) => {
-    return <Video name = {video.title} link = {video.url} rating = {video.rating}/>;
+    return (
+      <Video
+        key={video.id} 
+        name={video.title}
+        link={video.url}
+        rating={video.rating}
+        plusRating={AddRating}
+        subtractRating={minusRating}
+      />
+    );
   });
 
   const youTubeLinks = videoData.map((video) => {
     return <Links link={video.url}/>
   });
 
-  function AddRating (videoTitle) {
-
+  function AddRating (videoTitle, currentRating) {
+    const updatedVid = videos.map((video) => {
+      if (video.title === videoTitle) {
+        return {...video, rating: currentRating + 1}
+      }
+      return video;
+    });
+    setVideos(updatedVid);
+    fetch(`http://127.0.0.1:5000/${videoTitle}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ rating: currentRating + 1}),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
  function minusRating (videoTitle) {
-
+  const updatedVid = videos.map((video) => {
+    if (video.title === videoTitle) {
+      return {...video, rating: Math.max(0, video.rating - 1)};
+    }
+    return video;
+  });
+  setVideos(updatedVid);
 }
- function addNewVideo (newVideo) {
-  setVideos([...videos, newVideo])
+
+function addNewVideo(newVideo) {
+  setVideos([...videos, newVideo]);
 }
 
   return (
