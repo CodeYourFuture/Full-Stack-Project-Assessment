@@ -18,6 +18,7 @@ function Addvideo(props) {
     const newVideo = {
       title: enterTitle,
       url: videoLink,
+      rating: 0,
     };
 
     fetch("http://127.0.0.1:5000/", {
