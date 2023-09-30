@@ -12,7 +12,7 @@ const Videos = () => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("http://localhost:8080")
       .then((res) => res.json())
       .then((data) => setVideosData(data))
       .catch((err) => console.error(err));
@@ -47,7 +47,19 @@ const Videos = () => {
         rating: 0,
       };
 
+      console.log('newVideoObj at client')
+      console.log(newVideoObj)
+
       setVideosData([...videosData, newVideoObj]);
+      fetch("http://localhost:8080", 
+      { method: 'POST'
+      , headers: new Headers({ 'content-type': 'application/json' })
+      , body: JSON.stringify({ title: title, url: url }) }
+      )
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+
     } else {
       setShowError(true);
     }

@@ -3,7 +3,7 @@ const cors = require("cors");
 const Joi = require("joi");
 const videosData = require("./exampleresponse.json");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
@@ -28,6 +28,9 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+  console.log("req.body")
+
+  console.log(req.body)
   // validate the req
   const schema = Joi.object({
     title: Joi.string().min(2).required(),
@@ -60,6 +63,9 @@ app.post("/", (req, res) => {
     rating: 0,
   };
 
+  console.log('newVideoObj at SERVER')
+  console.log(newVideoObj)
+
   videos.push(newVideoObj);
   res.status(200).send(newVideoObj);
 });
@@ -82,5 +88,33 @@ app.delete("/:id", (req, res) => {
     });
   }
 });
+
+app.put("/:id", (req, res) => {
+
+  const videoID = Number(req.params.id);
+
+  console.log("req.body")
+
+  console.log(req.body)
+  // validate the req
+  const schema = Joi.object({
+    rating: Joi.number().required()
+  });
+
+  const result = schema.validate(req.body);
+  console.log(result)
+  const foundVideo = videos.find((booking) => {
+    return booking.id === videoID;
+    // returns element || undefined
+  });
+
+
+  // update the vote count of this object
+  foundVideo.rating = result.value.rating
+
+  foundVideo !== undefined
+    ? res.status(200).send(foundVideo)
+    : res.status(404).send(`There is no video with id ${videoID}`);
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
