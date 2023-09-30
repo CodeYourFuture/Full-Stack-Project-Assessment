@@ -69,6 +69,7 @@ const Videos = () => {
       <Search handleSearch={handleSearch} searchValue={searchValue} />
       <section className="videos">
         {filteredVideos.map((video) => {
+    
           return (
             <SingleVideo
               video={video}

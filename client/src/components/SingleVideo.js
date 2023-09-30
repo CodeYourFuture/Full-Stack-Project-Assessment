@@ -8,13 +8,14 @@ const SingleVideo = ({ video, handleDeleteVideoClick }) => {
   const iconSize = 30;
 
   const handleUpVote = () => {
-    setVotes(1);
+    setVotes((prev)=>prev+=1);
   };
 
   const handleDownVote = () => {
-    setVotes(-1);
+    setVotes((prev)=>prev-=1);
+  
   };
-
+console.log(rating,votes)
   return (
     <div className="video-card">
       <h3>{title}</h3>
