@@ -15,7 +15,7 @@ const SingleVideo = ({ video, handleDeleteVideoClick }) => {
     setVotes((prev)=>prev-=1);
   
   };
-console.log(rating,votes)
+
   return (
     <div className="video-card">
       <h3>{title}</h3>
