@@ -13,7 +13,6 @@ const AddingVideo = ({ setAllMyVideos }) => {
         };
 
         try {
-            // Add the new video
             const res = await fetch("https://youtube-video-server.onrender.com/videos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -33,7 +32,6 @@ const AddingVideo = ({ setAllMyVideos }) => {
                 setErrorMessage("")
             }
 
-            // Fetch the updated video list
             const response = await fetch("https://youtube-video-server.onrender.com/videos");
 
             if (!response.ok) {
@@ -41,8 +39,6 @@ const AddingVideo = ({ setAllMyVideos }) => {
             }
             const data = await response.json();
             setAllMyVideos(data);
-
-            // Reset the input fields
 
             setTitle("");
             setUrl("");
@@ -55,7 +51,7 @@ const AddingVideo = ({ setAllMyVideos }) => {
     return (
         <div className="form-holder">
             <h3>Add Your Favorite Video</h3>
-            <p>{errorMessage}</p>
+            <p style={{ color: "red" }}>{errorMessage}</p>
             <form onSubmit={handleAddButton}>
 
                 <input type="text" defaultValue="" placeholder="Type in the title of the video you like" value={title} onChange={(e) => setTitle(e.target.value)}></input>

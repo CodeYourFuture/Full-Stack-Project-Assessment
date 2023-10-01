@@ -4,8 +4,8 @@ require('dotenv').config()
 const port = process.env.PORT || 5000;
 // const AllVideos = require("")
 const cors = require("cors");
-const short = require('short-uuid');
-const translator = short("12345")
+// const short = require('short-uuid');
+// const translator = short("12345")
 app.use(express.json());
 app.use(cors());
 
