@@ -26,8 +26,6 @@ const db = new Pool({
 //   console.log('Connected to the postgresSQL server.');
 // });
 
-
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 

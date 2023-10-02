@@ -27,7 +27,7 @@ const Counter = ({ setAllMyVideos, videoId, videoRating }) => {
     const handleRatingChange = async (newRating) => {
         // PUT request to update the rating in the database
         try {
-            const response = await fetch(`https://youtube-video-server.onrender.com/videos/${videoId}`, {
+            await fetch(`https://youtube-video-server.onrender.com/videos/${videoId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,9 +35,6 @@ const Counter = ({ setAllMyVideos, videoId, videoRating }) => {
                 body: JSON.stringify({ rating: newRating }),
             });
 
-            if (!response.ok) {
-                console.error("Failed to update rating");
-            }
         } catch (error) {
             console.error("Error updating rating:", error);
         }
