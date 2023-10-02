@@ -60,24 +60,6 @@ app.put("/videos/:id", async (req, res) => {
 });
 
 
-
-// app.put("/videos/:id", async (req, res) => {
-//   const videoID = req.params.id;
-//   try {
-//     const video = await db.query("UPDATE videos SET rating = rating + 1 WHERE id=$1", [videoID]);
-//     if (!video) {
-//       res.status(404).send("Video not found");
-//       console.log("There is no video with this ID!");
-//     } else {
-//       res.status(200).send("Video updated");
-//     }
-//   } catch (error) {
-//     console.error("Error updating video:", error);
-//     res.status(500).json({ error: "Internal server error", message: error.message });
-//   }
-// });
-
-
 app.post("/videos", (req, res) => {
   let newVideoTitle = req.body.title
   let newVideoURL = req.body.url
