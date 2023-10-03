@@ -1,13 +1,12 @@
 const Embeded = ({ url }) => {
-  //   console.log(typeof url)
-  if (url.includes('watch?v=')) {
-    url = url.replace('watch?v=', 'embed/')
+  if (url.includes("watch?v=")) {
+    url = url.replace("watch?v=", "embed/");
   }
   return (
     <div>
       <iframe
-        width="560"
-        height="315"
+        // width="560"
+        // height="315"
         src={url}
         title="YouTube video player"
         frameBorder="0"
@@ -15,7 +14,7 @@ const Embeded = ({ url }) => {
         allowFullScreen
       ></iframe>
     </div>
-  )
-}
+  );
+};
 
-export default Embeded
+export default Embeded;

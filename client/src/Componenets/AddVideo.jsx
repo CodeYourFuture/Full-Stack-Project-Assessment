@@ -1,56 +1,67 @@
-import React, { useState } from 'react'
-import OrderButton from './OrderButton'
+import React, { useState } from "react";
+import { FormInput } from "./FormInputText";
 
-const AddVideo = ({ update, setUpdate, videos, setVideos }) => {
-  const [newTitle, setTitle] = useState('')
-  const [newUrl, setUrl] = useState('')
+const AddVideo = ({ update, setUpdate }) => {
+  const [newTitle, setTitle] = useState("");
+  const [newUrl, setUrl] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [urlError, setUrlError] = useState("");
 
-  const handleTitle = (e) => {
-    setTitle(e.target.value)
-  }
-
-  const handleUrl = (e) => {
-    setUrl(e.target.value)
-  }
-
-  const addVideo = () => {
-    newUrl.includes('youtube.com/') &&
-      fetch('https://michellejanay-cyf-video-app.onrender.com/videos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+  const addVideo = (e) => {
+    e.preventDefault();
+    if (newTitle === "") {
+      e.preventDefault();
+      setTitleError("Please input a valid title");
+    } else if (newUrl === "" || !newUrl.includes("youtube.com/")) {
+      e.preventDefault();
+      setUrlError("Please input a valid url");
+    } else {
+      fetch("https://michellejanay-cyf-video-app.onrender.com/videos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: newTitle, url: newUrl }),
       })
         .then((res) => res.json())
-        .then(setUpdate(videos))
-        .catch((err) => console.log(err))
-  }
+        .then(() => {
+          setTitle("");
+          setUrl("");
+        })
+        .then(() => {
+          setUpdate(update + 1);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
-    <div>
+    <div className="add-card">
       <div className="add-video-card">
         <form onSubmit={addVideo}>
-          <label htmlFor="title">Title: </label>
-          <input
+          <FormInput
+            htmlFor="title"
             type="text"
-            id="input-title"
-            name="title"
-            onChange={handleTitle}
-            required
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setTitleError("");
+            }}
+            value={newTitle}
+            error={titleError}
           />
-          <label htmlFor="url">Url:</label>
-          <input
+          <FormInput
+            htmlFor="url"
             type="text"
-            id="input-url"
-            name="url"
-            onChange={handleUrl}
-            required
+            onChange={(e) => {
+              setUrl(e.target.value);
+              setUrlError("");
+            }}
+            value={newUrl}
+            error={urlError}
           />
           <button className="btn">Submit</button>
         </form>
-        <OrderButton videos={videos} setVideos={setVideos} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddVideo
+export default AddVideo;

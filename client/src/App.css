@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -6,47 +7,63 @@
   background-color: lavender;
 }
 
-.add-video-card {
+.add-card {
+  background-color: rgb(16, 16, 36);
   display: flex;
-  background-color: black;
   justify-content: center;
+  align-content: flex-end;
 }
 
-.add-video-card form {
-  background-color: black;
+.add-video-card {
+  background-color: rgb(16, 16, 36);
+  align-content: flex-end;
+}
+
+form{
+  margin: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.form-input {
   color: white;
-  padding: 1.5em;
+  display:flex;
+  flex-direction: column;
 }
 
 .add-video-card form label {
-  margin: 0 1em;
+  padding: 0 1em;
 }
 
-.add-video-card button {
+.add-video-card form button {
   background-color: blueviolet;
   color: white;
-  margin: 0 1em;
+  width: 10em;
+  height: 2.5em;
+  margin-left: auto;
 }
 
 .add-video-card button:hover {
-  background-color: white;
-  color: black;
+  background-color: rgb(16, 16, 36);
+  color: white;
+  border: white 1px solid;
 }
 
 .order-buttons {
-  background-color: black;
-  color: white;
-  display: flex;
-  align-self: center;
   font-size: 2em;
   cursor: pointer;
+  display:flex;
+  justify-content: flex-end;
+  margin-right: 4em;
 }
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 2em 0;
+  padding:0 0 2em 0;
 }
 
 .video-card {
@@ -63,16 +80,30 @@
 .video-buttons {
   display: flex;
   padding-top: 0.5em;
+  align-items: center;
 }
 
 .video-buttons span,
 .video-buttons i,
 .video-buttons button {
-  padding: 0 0.3em;
+  margin: 0 0.3em;
 }
 
 .video-buttons button {
   margin-left: auto;
+}
+.btn-delete{
+  background-color:rgb(164, 55, 164);
+  color: white;
+  width: 8em;
+  height: 2.25em
+}
+
+.btn-delete:hover{
+  background-color:rgb(164, 55, 75);
+  color: white;
+  width: 10em;
+  height: 2.5em
 }
 
 .video-buttons i:hover {
