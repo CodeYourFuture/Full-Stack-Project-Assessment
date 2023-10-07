@@ -4,7 +4,6 @@ import AddVideoForm from "./AddVideoForm";
 import Search from "./Search";
 import SingleVideo from "./SingleVideo";
 import "./Videos.css";
-import data from "../exampleresponse.json"
 
 const Videos = () => {
   const [videosData, setVideosData] = useState([]);
@@ -12,7 +11,7 @@ const Videos = () => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080")
+    fetch("http://localhost:8080/videos")
       .then((res) => res.json())
       .then((data) => setVideosData(data))
       .catch((err) => console.error(err));
@@ -38,32 +37,32 @@ const Videos = () => {
     return false;
   };
 
-  const handleAddVideo = (title, url) => {
+  const handleAddVideo = async (title, url) => {
     if (title !== "" && url !== "" && matchYoutubeUrl(url)) {
-      const newVideoObj = {
-        id: Date.now(),
-        title,
-        url,
-        rating: 0,
-      };
-
-      console.log('newVideoObj at client')
-      console.log(newVideoObj)
-
-      setVideosData([...videosData, newVideoObj]);
-      fetch("http://localhost:8080", 
-      { method: 'POST'
-      , headers: new Headers({ 'content-type': 'application/json' })
-      , body: JSON.stringify({ title: title, url: url }) }
-      )
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.error(err));
-
+      try {
+        const response = await fetch("http://localhost:8080/addVideos", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title, url }),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setVideosData([...videosData, data]);
+        } else {
+          console.error('Failed to add video:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error adding video:', error);
+      }
     } else {
       setShowError(true);
     }
   };
+  
 
   // filter by user input (for Search)
   const filteredVideos = videosData.filter((data) => {
