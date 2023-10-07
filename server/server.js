@@ -1,17 +1,30 @@
 const express = require("express");
 const cors = require("cors");
 const Joi = require("joi");
-const videosData = require("./exampleresponse.json");
+const db = require("./db")
 const app = express();
+const bodyParser = require("body-parser"); 
+
+
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
 
-let videos = videosData;
 
-app.get("/", (req, res) => {
-  res.send(videos);
+// app.get("/", (req, res) => {
+//   res.send(videos); 
+// });
+
+app.get("/videos", async (req, res) => {
+  try {
+    const query = "SELECT * FROM videos";
+    const result = await db.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error retrieving data from the database:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.get("/:id", (req, res) => {
@@ -27,48 +40,29 @@ app.get("/:id", (req, res) => {
     : res.status(404).send(`There is no video with id ${videoID}`);
 });
 
-app.post("/", (req, res) => {
-  console.log("req.body")
-
-  console.log(req.body)
-  // validate the req
-  const schema = Joi.object({
-    title: Joi.string().min(2).required(),
-    url: Joi.string().max(100).required(),
-  });
-
-  const result = schema.validate(req.body);
-
-  // if error - send details in the response and stop code execution
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message, {
-      result: "failure",
-      message: "Video could not be saved",
-    }); // ???????
-    return;
-  }
-
+app.post("/addVideos", async (req, res) => {
   const { title, url } = req.body;
-  // check if the link is valid
-  if (!url.includes("https://www.youtube.com/watch?v=")) {
-    res.status(400).send("YouTube url is not valid");
-    return;
+
+  if (!title || !url) {
+    return res.status(400).json({
+      result: "failure",
+      message: "Both title and url must be provided",
+    });
   }
+  console.log(title + url)
+  try {
+    const queryText = 'INSERT INTO videos (title, url) VALUES ($1, $2) RETURNING *';
+    const values = [title, url];
 
-  // create new obj and push it to the videos array
-  const newVideoObj = {
-    id: Date.now(),
-    title,
-    url,
-    rating: 0,
-  };
+    const result = await db.query(queryText, values);
 
-  console.log('newVideoObj at SERVER')
-  console.log(newVideoObj)
-
-  videos.push(newVideoObj);
-  res.status(200).send(newVideoObj);
+    res.status(201).json(result.rows[0]); 
+  } catch (error) {
+    console.error('Error creating video:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
+
 
 app.delete("/:id", (req, res) => {
   const videoID = Number(req.params.id);
