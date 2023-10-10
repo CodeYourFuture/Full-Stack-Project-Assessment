@@ -166,5 +166,5 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-const port = 3001;
+const port = process.env.SERVER_PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
