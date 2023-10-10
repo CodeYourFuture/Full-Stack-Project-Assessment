@@ -27,7 +27,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Server Dependencies
-        run: npm ci
+        run: npm i
         working-directory: server  
 
       - name: Create .env File
