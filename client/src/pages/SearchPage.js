@@ -28,7 +28,7 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
       });
       setVideoSearch(filteredVideos);
     }
-  }, [search]);
+  }, [search, allVideos]);
 
   const selectChangeHandler = (e) => {
     const selectedTitle = e.target.value;
@@ -48,7 +48,7 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
 
   useEffect(() => {
     setVideoSearch(selectedVideo);
-  }, [selectedVideo, allVideos]);
+  }, [selectedVideo]);
 
   return (
     <>
