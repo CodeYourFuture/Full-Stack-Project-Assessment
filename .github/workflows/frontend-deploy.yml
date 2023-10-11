@@ -41,7 +41,7 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./client/build s3://video-recommendation  
-      - name: Create .env File
-        run: |
-          touch ./client/.env
-          echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
+      # - name: Create .env File
+      #   run: |
+      #     touch ./client/.env
+      #     echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
