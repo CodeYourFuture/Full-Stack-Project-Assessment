@@ -48,7 +48,7 @@ const SearchPage = ({ allVideos, getAllVideos, order }) => {
 
   useEffect(() => {
     setVideoSearch(selectedVideo);
-  }, [selectedVideo]);
+  }, [selectedVideo, allVideos]);
 
   return (
     <>
