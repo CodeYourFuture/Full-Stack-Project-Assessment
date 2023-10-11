@@ -24,11 +24,11 @@ const App = () => {
       setAllVideos(data);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setIsLoading(false);
     }
   };
-
+  console.log(process.env.REACT_APP_SERVERURL);
   useEffect(() => {
     getAllVideos(order);
   }, [order]);
