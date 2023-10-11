@@ -15,6 +15,10 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
 
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./client
+
       - name: Create .env File
         run: |
           touch ./client/.env
@@ -24,10 +28,6 @@ jobs:
         run: |
           cat ./client/.env
         # Add this step to log the content of the .env file
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./client
 
       - name: Build static files
         run: npm run build
