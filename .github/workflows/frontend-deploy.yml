@@ -1,3 +1,4 @@
+
 name: Deploy Frontend CICD
 
 on:
@@ -28,9 +29,14 @@ jobs:
           touch ./client/.env
           echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
 
+      # - name: Log .env File Content
+      #   run: |
+      #     cat ./client/.env
+      #   # Add this step to log the content of the .env file
+
       - name: Build static files
         run: npm run build
-        working-directory: ./client
+        working-directory: ./client  
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -41,3 +47,4 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./client/build s3://video-recommendation
+      
