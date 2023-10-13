@@ -15,6 +15,11 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
 
+      - name: Create .env File
+        run: |
+          touch ./client/.env
+          echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
+
       - name: Install dependencies
         run: npm install
         working-directory: ./client  
@@ -23,26 +28,13 @@ jobs:
         run: npm run build
         working-directory: ./client  
 
-      # - name: Cache client dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ./client/node_modules
-      #     key: node-modules-${{ runner.os }}-${{ hashFiles('client/package-lock.json') }}
-      #     restore-keys: |
-      #               node-modules-${{ runner.os }}-
-      #               node-modules-
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
-          
-      - name: Create .env File
-        run: |
-          touch ./client/.env
-          echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
+
 
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./client/build s3://video-recommendation  
