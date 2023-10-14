@@ -1,0 +1,30 @@
+DROP TABLE IF EXISTS video;
+
+CREATE TABLE IF NOT EXISTS video (
+    id SERIAL PRIMARY KEY,
+    title text,
+    url text
+);
+
+INSERT INTO video(title, url) values('Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+
+INSERT INTO video(title, url) values('The Coding Train', 'https://www.youtube.com/watch?v=HerCR8bw_GE');
+
+INSERT INTO video(title, url) values('Mac & Cheese | Basics with Babish', 'https://www.youtube.com/watch?v=FUeyrEN14Rk');
+
+INSERT INTO video(title, url) values('Videos for Cats to Watch - 8 Hour Bird Bonanza', 'https://www.youtube.com/watch?v=xbs7FT7dXYc');
+ 
+INSERT INTO video(title, url) values('The Complete London 2012 Opening Ceremony | London 2012 Olympic Games', 'https://www.youtube.com/watch?v=4As0e4de-rI');
+ 
+
+INSERT INTO video(title, url) values('Cracking Enigma in 2021 - Computerphile', 'https://www.youtube.com/watch?v=RzWB5jL5RX0');
+
+INSERT INTO video(title, url) values('Coding Adventure: Chess AI', 'https://www.youtube.com/watch?v=U4ogK0MIzqk');
+
+INSERT INTO video(title, url) values('Coding Adventure: Ant and Slime Simulations', 'https://www.youtube.com/watch?v=X-iSQQgOd1A');
+
+INSERT INTO video(title, url) values('Why the Tour de France is so brutal', 'https://www.youtube.com/watch?v=ZacOS8NBK6U');
+
+
+
+
