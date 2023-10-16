@@ -40,6 +40,7 @@ jobs:
       - name: Handle Errors
         if: steps.install-dependencies.outcome != 'success' || steps.create-env-file.outcome != 'success' || steps.start-server.outcome != 'success'
         run: echo "::set-output name=workflow-error::true"
+        
 
 # name: Node.js CI/CD 
 
