@@ -25,7 +25,7 @@ export default function AddingItem({addVideo}) {
     //   https://www.youtube.com/embed/dQw4w9WgXcQ
       if (pattern.test(newVideo.url) || pattern2.test(newVideo.url)) {
         const time = new Date();
-    const formattedTime = time.toLocaleString();
+        const formattedTime = time.toISOString(); 
          addVideo({...newVideo, dateTime: formattedTime});
          setNewVideo({
            title: "",
