@@ -26,6 +26,24 @@ const db = new Pool({
 //   connectionString: process.env.DB_CONNECTION_STRING,
 // });
 
+// Add this code to create the "videos" table if it doesn't exist
+db.query(
+  `CREATE TABLE IF NOT EXISTS videos (
+     id SERIAL PRIMARY KEY,
+     title VARCHAR(255) NOT NULL,
+     url TEXT NOT NULL,
+     uploaddate TIMESTAMP NOT NULL,
+     rating INT NOT NULL
+  )`,
+  (err, result) => {
+    if (err) {
+      console.error("Error creating the 'videos' table:", err);
+    } else {
+      console.log("Table 'videos' created or already exists.");
+    }
+  }
+);
+
 let videos = [];
 
 // Store and retrieve videos
@@ -75,13 +93,16 @@ app.post("/videos", async (req, res) => {
 
   if (title && url) {
     try {
-      const result = await db.query(
+      const insertQuery = await db.query(
         "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, CURRENT_TIMESTAMP, 0 ) RETURNING id",
         [title, url]
       );
+      const result = await db.query(insertQuery, [title, url]);
       const id = result.rows[0].id;
+
       const video = { id, title, url, rating: 0, date: new Date() };
       videos.push(video);
+
       res.json({ id });
     } catch (error) {
       console.error("Error adding video:", error.message);
