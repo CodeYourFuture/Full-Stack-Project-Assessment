@@ -143,3 +143,61 @@ The application can be deployed to a hosting platform of your choice. Here are t
    - Deploy the backend code to a hosting platform like Heroku, AWS EC2, or DigitalOcean.
 
 Make sure to update the frontend API endpoint in the frontend code (`src/services/api.js`) to match the deployed backend URL.
+Installation
+Follow these simple steps to get your local environment set up:
+
+Obtain a free API Key from https://example.com.
+Clone the repository:
+sh
+Copy code
+git clone https://github.com/your_username/repo_name.git
+Install NPM packages:
+sh
+Copy code
+npm install
+Enter your API key in the config.js file:
+js
+Copy code
+const API_KEY = "ENTER YOUR API";
+Usage
+Use this space to showcase examples of how to use your project effectively. Feel free to include screenshots, code snippets, and additional demos to demonstrate its functionality. You may also link to the project's documentation for more information.
+
+For more examples, please refer to the Documentation
+
+Roadmap
+Add Changelog
+Add back to top links
+Add Additional Templates with Examples
+Include a "components" document for easy section copying and pasting in the README
+Implement multi-language support, including Chinese and Spanish
+To see the full list of proposed features and known issues, visit the open issues on the project's GitHub repository.
+
+Contributing
+Contributions are essential to the open-source community, making it a fantastic place to learn, inspire, and create. We greatly appreciate any contributions you make.
+
+If you have suggestions or improvements, you can either fork the repository and create a pull request, or open an issue tagged as "enhancement." Don't forget to star the project if you find it helpful!
+
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+License
+Distributed under the MIT License. See LICENSE.txt for more information.
+
+Contact
+Your Name - @your_twitter - email@example.com
+
+Project Link: https://github.com/your_username/repo_name
+
+Acknowledgments
+Here's a space to acknowledge helpful resources and individuals. We're starting off with a few of our favorites:
+
+Choose an Open Source License
+GitHub Emoji Cheat Sheet
+Malven's Flexbox Cheatsheet
+Malven's Grid Cheatsheet
+Img Shields
+GitHub Pages
+Font Awesome
+React Icons
