@@ -107,7 +107,7 @@ function App() {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to update rating!");
+        throw new Error(`Failed to upvote video (ID: ${id})`);
       }
       setVideos((prevVideos) =>
         prevVideos.map((video) => {
@@ -119,7 +119,7 @@ function App() {
       );
       setVotedVideos((prevVotedVideos) => [...prevVotedVideos, id]);
     } catch (error) {
-      setError(error.message);
+      console.error("Upvote Error:", error);
     }
   };
 
@@ -141,7 +141,7 @@ function App() {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to update rating!");
+        throw new Error(`Failed to downvote video (ID: ${id})`);
       }
       setVideos((prevVideos) =>
         prevVideos.map((video) => {
@@ -153,7 +153,7 @@ function App() {
       );
       setVotedVideos((prevVotedVideos) => [...prevVotedVideos, id]);
     } catch (error) {
-      setError(error.message);
+      console.error("Downvote Error:", error);
     }
   };
 
