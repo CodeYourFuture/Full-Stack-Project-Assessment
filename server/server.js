@@ -22,49 +22,75 @@ const db = new Pool({
   },
 });
 
-// const db = new Pool({
-//   connectionString: process.env.DB_CONNECTION_STRING,
-// });
+// Define the videos table structure with date and rate columns
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS videos (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    url TEXT NOT NULL,
+    uploaddate TIMESTAMP NOT NULL,
+    rating INT NOT NULL
+  )`;
 
 // Add this code to create the "videos" table if it doesn't exist
-db.query(
-  `CREATE TABLE IF NOT EXISTS videos (
-     id SERIAL PRIMARY KEY,
-     title VARCHAR(255) NOT NULL,
-     url TEXT NOT NULL,
-     uploaddate TIMESTAMP NOT NULL,
-     rating INT NOT NULL
-  )`,
-  (err, result) => {
-    if (err) {
-      console.error("Error creating the 'videos' table:", err);
-    } else {
-      console.log("Table 'videos' created or already exists.");
-    }
+db.query(createTableQuery, (err, result) => {
+  if (err) {
+    console.error("Error creating the 'videos' table:", err);
+  } else {
+    console.log("Table 'videos' created or already exists.");
+    // Check if the table is empty; if so, populate it from exampleresponse.json
+    db.query("SELECT COUNT(*) FROM videos", (countErr, countResult) => {
+      if (!countErr && countResult.rows[0].count === "0") {
+        populateTableFromJson();
+      }
+    });
   }
-);
+});
+
+// Function to populate the table from exampleresponse.json
+function populateTableFromJson() {
+  fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading example response file:", err);
+    } else {
+      try {
+        const videos = JSON.parse(data);
+        // Insert each video into the database
+        videos.forEach(async (video) => {
+          await db.query(
+            "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, $3, $4)",
+            [video.title, video.url, new Date(), video.rating]
+          );
+        });
+        console.log("Populated 'videos' table from exampleresponse.json");
+      } catch (parseError) {
+        console.error("Error parsing example response:", parseError);
+      }
+    }
+  });
+}
 
 let videos = [];
 
-// Store and retrieve videos
-fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
-  if (err) {
-    console.error("Error reading example response file:", err);
-  } else {
-    try {
-      videos = JSON.parse(data);
-      // console.log("Example response loaded:", videos);
-    } catch (parseError) {
-      console.error("Error parsing example response:", parseError);
-    }
-  }
-});
+// // Store and retrieve videos
+// fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
+//   if (err) {
+//     console.error("Error reading example response file:", err);
+//   } else {
+//     try {
+//       videos = JSON.parse(data);
+//       // console.log("Example response loaded:", videos);
+//     } catch (parseError) {
+//       console.error("Error parsing example response:", parseError);
+//     }
+//   }
+// });
 
 // GET "/" from the json file
 app.get("/", async (req, res) => {
   try {
-    const jsonVideos = [...videos];
-    console.log("connection successful");
+    const jsonVideos = [...dbVideos]; // Use dbVideos instead of videos
+    console.log("Connection successful");
     res.json(jsonVideos);
   } catch (error) {
     console.error("Error fetching videos:", error);

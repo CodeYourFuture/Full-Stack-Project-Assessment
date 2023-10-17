@@ -22,7 +22,7 @@ function App() {
   const fetchVideos = async () => {
     try {
       const response = await fetch(
-        "http://vr-server-env.eu-west-2.elasticbeanstalk.com/"
+        "https://full-stack-project-jcr4.onrender.com/videos"
       );
 
       if (!response.ok) {
@@ -52,7 +52,7 @@ function App() {
   const addVideo = async (video) => {
     try {
       const response = await fetch(
-        "http://vr-server-env.eu-west-2.elasticbeanstalk.com/",
+        "https://full-stack-project-jcr4.onrender.com/videos",
         {
           method: "POST",
           headers: {
@@ -75,7 +75,7 @@ function App() {
   const removeVideo = async (id) => {
     try {
       const response = await fetch(
-        `http://vr-server-env.eu-west-2.elasticbeanstalk.com/${id}`,
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}`,
         {
           method: "DELETE",
         }
@@ -97,7 +97,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `http://vr-server-env.eu-west-2.elasticbeanstalk.com/${id}/rating`,
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}/rating`,
         {
           method: "POST",
           headers: {
@@ -131,7 +131,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `http://vr-server-env.eu-west-2.elasticbeanstalk.com/${id}/rating`,
+        `https://full-stack-project-jcr4.onrender.com/videos/${id}/rating`,
         {
           method: "POST",
           headers: {
