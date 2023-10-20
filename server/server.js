@@ -86,7 +86,7 @@ app.post("/videos", (req, res) => {
     });
   } else {
     const query = `INSERT INTO videos (title, url, rating, createdAt)
-    VALUES ($1, $2, 0, now())`;
+                      VALUES ($1, $2, 0, now());`;
 
     db.query(query, [title, url])
       .then(() => {
