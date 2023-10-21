@@ -101,17 +101,21 @@ const App = () => {
     <div className="app">
       <Header />
       <AddVideoForm onAddVideo={handleAddVideo} />
-      {videos.map((video) => (
-        <Video
-          key={video.id}
-          title={video.title}
-          url={video.url}
-          rating={video.rating}
-          onUpVote={() => handleUpVote(video.id)}
-          onDownVote={() => handleDownVote(video.id)}
-          onRemove={() => handleRemoveVideo(video.id)}
-        />
-      ))}
+      {videos.length > 0 ? (
+        videos.map((video) => (
+          <Video
+            key={video.id}
+            title={video.title}
+            url={video.url}
+            rating={video.rating}
+            onUpVote={() => handleUpVote(video.id)}
+            onDownVote={() => handleDownVote(video.id)}
+            onRemove={() => handleRemoveVideo(video.id)}
+          />
+        ))
+      ) : (
+        <p>Loading videos...</p>
+      )}
     </div>
   );
 };
