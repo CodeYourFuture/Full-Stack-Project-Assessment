@@ -2,22 +2,29 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5050;
-const { Pool } = require("pg");
+const { Client } = require("@vercel/postgres");
 require("dotenv").config();
 
-const pool = new Pool({
+const client = new Client({
   connectionString: process.env.DB_URL,
   ssl: { rejectUnauthorized: false },
 });
 
 app.use(cors());
 app.use(express.json());
+async function connectToDatabase() {
+  try {
+    await client.connect();
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+  }
+}
 
 //  Get all of the videos
 app.get("/videos", async (req, res) => {
   try {
     const query = "SELECT * FROM videos";
-    const result = await pool.query(query);
+    const result = await client.query(query);
     const videos = result.rows;
     res.status(200).json(videos);
   } catch (error) {
@@ -34,7 +41,7 @@ app.post("/videos", async (req, res) => {
     const query =
       "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING *";
     const values = [title, url, rating];
-    const result = await pool.query(query, values);
+    const result = await client.query(query, values);
     const newVideo = result.rows[0];
     res.status(201).json(newVideo);
   } catch (error) {
@@ -62,7 +69,7 @@ app.delete("/videos/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     const query = "DELETE FROM videos WHERE id = $1";
     const values = [id];
-    await pool.query(query, values);
+    await client.query(query, values);
     res.json({ result: "success", message: "Video deleted" });
   } catch (error) {
     console.error(error);
@@ -79,7 +86,7 @@ app.put("/videos/:id/upvote", async (req, res) => {
     const query =
       "UPDATE videos SET rating = rating + 1 WHERE id = $1 RETURNING *";
     const values = [id];
-    const result = await pool.query(query, values);
+    const result = await client.query(query, values);
     const updatedVideo = result.rows[0];
     res.json(updatedVideo);
   } catch (error) {
@@ -97,7 +104,7 @@ app.put("/videos/:id/downvote", async (req, res) => {
     const query =
       "UPDATE videos SET rating = rating - 1 WHERE id = $1 RETURNING *";
     const values = [id];
-    const result = await pool.query(query, values);
+    const result = await client.query(query, values);
     const updatedVideo = result.rows[0];
     res.json(updatedVideo);
   } catch (error) {
