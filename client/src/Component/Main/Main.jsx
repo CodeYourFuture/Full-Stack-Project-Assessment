@@ -8,14 +8,16 @@ const Videos = () => {
 
   function isValidYouTubeUrl(url) {
     let youtubePattern =
-      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{10}[A-Z]$/;
+      /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{11}$/;
     return youtubePattern.test(url);
   }
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:5000");
+        const response = await fetch(
+          "https://boshram-full-stack-assessment.onrender.com/"
+        );
         const data = await response.json();
         setVideoData(data.video);
       } catch (error) {
@@ -28,13 +30,16 @@ const Videos = () => {
 
   const addVideo = async (input) => {
     try {
-      const response = await fetch("http://localhost:5000", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(input),
-      });
+      const response = await fetch(
+        "https://boshram-full-stack-assessment.onrender.com/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(input),
+        }
+      );
 
       const data = await response.json();
 
@@ -47,7 +52,7 @@ const Videos = () => {
 
   const deleteHandler = (videoID) => {
     console.log(videoID);
-    fetch(`http://localhost:5000/${videoID}`, {
+    fetch(`https://boshram-full-stack-assessment.onrender.com/${videoID}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
