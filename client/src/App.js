@@ -15,7 +15,9 @@ const App = () => {
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch("https://video-server-tumg.onrender.com/videos");
+      const res = await fetch(
+        "https://full-stack-project-assessment-bice.vercel.app/videos"
+      );
       const data = await res.json();
       setVideos(data);
     } catch (err) {
@@ -26,7 +28,7 @@ const App = () => {
   const handleAddVideo = async (newVideo) => {
     try {
       const res = await fetch(
-        "https://video-server-tumg.onrender.com/videos",
+        "https://full-stack-project-assessment-bice.vercel.app/videos",
         {
           method: "POST",
           headers: {
@@ -45,7 +47,7 @@ const App = () => {
   const handleUpVote = async (videoId) => {
     try {
       await fetch(
-        `https://video-server-tumg.onrender.com/videos/${videoId}/upvote`,
+        `https://full-stack-project-assessment-bice.vercel.app/videos/${videoId}/upvote`,
         {
           method: "PUT",
           headers: {
@@ -66,7 +68,7 @@ const App = () => {
   const handleDownVote = async (videoId) => {
     try {
       await fetch(
-        `https://video-server-tumg.onrender.com/videos/${videoId}/downvote`,
+        `https://full-stack-project-assessment-bice.vercel.app/videos/${videoId}/downvote`,
         {
           method: "PUT",
           headers: {
@@ -86,9 +88,12 @@ const App = () => {
 
   const handleRemoveVideo = async (videoId) => {
     try {
-      await fetch(`https://video-server-tumg.onrender.com/videos/${videoId}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://full-stack-project-assessment-bice.vercel.app/videos/${videoId}`,
+        {
+          method: "DELETE",
+        }
+      );
       setVideos((prevVideos) =>
         prevVideos.filter((video) => video.id !== videoId)
       );
