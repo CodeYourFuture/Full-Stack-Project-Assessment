@@ -1,3 +1,19 @@
-.App {
+.app {
+  display: flex;
   text-align: center;
+  flex-direction: column;
 }
+
+.app-header h1 {
+  border-bottom: 4mm ridge rgba(225, 0, 0);
+}
+@media screen and (width > 400px) {
+  .app {
+    background-color: #ececec;
+  }
+  .app-header h1 {
+    border-bottom: 2mm ridge rgba(225, 0, 0);
+    width: 100%;
+  }
+}
+
