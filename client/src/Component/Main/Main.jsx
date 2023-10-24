@@ -16,7 +16,7 @@ const Videos = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://boshram-full-stack-assessment.onrender.com/"
+          "https://boshram-fullstack-assessment.onrender.com/"
         );
         const data = await response.json();
         setVideoData(data.video);
@@ -31,7 +31,7 @@ const Videos = () => {
   const addVideo = async (input) => {
     try {
       const response = await fetch(
-        "https://boshram-full-stack-assessment.onrender.com/",
+        "https://boshram-fullstack-assessment.onrender.com/",
         {
           method: "POST",
           headers: {
@@ -52,7 +52,7 @@ const Videos = () => {
 
   const deleteHandler = (videoID) => {
     console.log(videoID);
-    fetch(`https://boshram-full-stack-assessment.onrender.com/${videoID}`, {
+    fetch(`https://boshram-fullstack-assessment.onrender.com/${videoID}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
