@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import AddVideo from "./components/AddVideo";
 import VideoCards from "./components/VideoCards";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://video-recommendation-hr7c.onrender.com";
 
 function App() {
   const [videos, setVideos] = useState([]);
