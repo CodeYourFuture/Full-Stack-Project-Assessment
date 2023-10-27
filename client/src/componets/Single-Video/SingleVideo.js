@@ -1,17 +1,31 @@
 import { React, useState } from "react";
 import LikeDislikeButton from "../Like-Dislike-Buttons/LikeDislikeButton";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
+
+
 
 function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
   const [rating, SetRating] = useState(ratingData);
-
+  
+  const updateVideoRating = async (id, rating) => {
+    try {
+      const response = await axios.patch(`/videos/${id}`, { rating });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+ 
   function handleIncrement() {
     SetRating((prev) => prev + 1);
+    updateVideoRating(id, rating + 1);
   }
 
   function handleDecrement() {
     if (rating !== 0) {
       SetRating((prev) => prev - 1);
+      updateVideoRating(id, rating - 1);
     }
   }
 

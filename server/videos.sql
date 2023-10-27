@@ -17,3 +17,7 @@ INSERT INTO videos (title, url, rating) VALUES ('Cracking Enigma in 2021 - Compu
 INSERT INTO videos (title, url, rating) VALUES ('Coding Adventure: Chess AI', 'https://www.youtube.com/watch?v=U4ogK0MIzqk', 671);
 INSERT INTO videos (title, url, rating) VALUES ('Coding Adventure: Ant and Slime Simulations', 'https://www.youtube.com/watch?v=X-iSQQgOd1A', 76);
 INSERT INTO videos (title, url, rating) VALUES ('Why the Tour de France is so brutal', 'https://www.youtube.com/watch?v=ZacOS8NBK6U', 73);
+
+
+
+

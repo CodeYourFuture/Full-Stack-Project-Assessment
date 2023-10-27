@@ -21,14 +21,14 @@ const AddVideo = ({ setVideos }) => {
     return false;
   }
 
-  const VideoAdder = (e) => {
-    // e.preventDefault();
+  const VideoAdder = (event) => {
+    // event.preventDefault();
 
     const newVideo = {
       title: title,
       url: url,
       rating: 0,
-      timeSent: new Date().toLocaleDateString(),
+  
     };
     if (matchYoutubeUrl(url)) {
       setTitle("");
@@ -107,3 +107,6 @@ const AddVideo = ({ setVideos }) => {
 };
 
 export default AddVideo;
+
+
+

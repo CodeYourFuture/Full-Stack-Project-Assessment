@@ -96,6 +96,18 @@ app.delete("/videos/:id", (req, res) => {
     });
 });
 
+app.patch("/videos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const rating = req.body.rating || 0;
+    await pool.query("UPDATE videos SET rating = $1 WHERE id = $2", [
+      rating,
+      id,
+    ]);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 
 
