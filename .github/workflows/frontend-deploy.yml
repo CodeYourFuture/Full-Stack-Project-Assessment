@@ -27,11 +27,6 @@ jobs:
       - name: Build static files
         run: npm run build
         working-directory: ./client  
-      
-      - name: Create .env File
-        run: |
-          touch ./client/.env
-          echo "${{ secrets.FRONT_ENV_FILE }}" > ./client/.env
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
