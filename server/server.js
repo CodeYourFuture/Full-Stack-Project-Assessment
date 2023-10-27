@@ -100,15 +100,12 @@ app.patch("/videos/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const rating = req.body.rating || 0;
-    await pool.query("UPDATE videos SET rating = $1 WHERE id = $2", [
-      rating,
-      id,
-    ]);
+    await pool.query("UPDATE videos SET rating = $1 WHERE id = $2", [rating, id]);
+    res.status(200).send("Video updated");
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
