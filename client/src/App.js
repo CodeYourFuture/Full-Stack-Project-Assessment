@@ -28,7 +28,7 @@ const App = () => {
       setIsLoading(false);
     }
   };
-  console.log(process.env.REACT_APP_SERVERURL);
+  
   useEffect(() => {
     getAllVideos(order);
   }, [order]);
