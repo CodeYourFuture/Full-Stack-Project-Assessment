@@ -5,6 +5,7 @@ import AddVideo from "./AddVideo";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
+  const [newVideo, setNewVideo] = useState({ title: "", url: "", rating: 0 });
 
   useEffect(() => {
     fetchAllVideos();
@@ -20,11 +21,12 @@ const App = () => {
       }
       const data = await response.json();
       setVideos(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleAddVideo = async (newVideo) => {
-    console.log(JSON.stringify(newVideo));
+  const handleAddVideo = async () => {
     try {
       const response = await fetch(
         "https://full-stack-project-video-reccomendations.onrender.com/videos",
@@ -39,9 +41,11 @@ const App = () => {
       if (!response.ok) {
         throw Error(`Failed to add video. Error: ${response.status}`);
       }
-      const data = await response.json();
-      setVideos([...videos, { ...newVideo, id: data.id }]);
-    } catch (error) {}
+      await fetchAllVideos();
+      setNewVideo({ title: "", url: "", rating: 0 });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDeleteVideo = async (id) => {
@@ -55,10 +59,13 @@ const App = () => {
       if (!response.ok) {
         throw new Error("Video not found!");
       }
-      setVideos(videos.filter((video) => video.id !== id));
+      await fetchAllVideos();
     } catch (error) {
       console.log(error.message);
     }
+  };
+  const handleInputChange = (e) => {
+    setNewVideo({ ...newVideo, [e.target.name]: e.target.value });
   };
 
   return (
@@ -69,7 +76,12 @@ const App = () => {
       {videos.map((video) => (
         <Video key={video.id} video={video} onDeleteVideo={handleDeleteVideo} />
       ))}
-      <AddVideo onAddVideo={handleAddVideo} />
+
+      <AddVideo
+        newVideo={newVideo}
+        onAddVideo={handleAddVideo}
+        onInputChange={handleInputChange}
+      />
     </div>
   );
 };
