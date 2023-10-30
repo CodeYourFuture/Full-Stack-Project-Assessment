@@ -1,0 +1,81 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Server Dependencies
+        id: install-dependencies
+        run: npm ci
+        working-directory: ./server
+        continue-on-error: false
+
+      - name: Create .env File
+        id: create-env-file
+        run: |
+          touch ./server/.env
+          echo "${{ secrets.PROD_ENV_FILE }}" > ./server/.env
+        continue-on-error: false
+
+      - name: Run Tests
+        run: echo "No tests are available for this project."
+
+      - name: Start Server/Run Application
+        id: start-server
+        run: pm2 restart BackendAPI
+        working-directory: ./server
+        continue-on-error: false
+
+      - name: Handle Errors
+        if: steps.install-dependencies.outcome != 'success' || steps.create-env-file.outcome != 'success' || steps.start-server.outcome != 'success'
+        run: echo "::set-output name=workflow-error::true"
+        
+
+# name: Node.js CI/CD 
+
+# on:
+#   push:
+#     branches: ["main"]
+      
+
+# jobs:
+#   build:
+#     runs-on: self-hosted
+#     strategy:
+#       matrix:
+#         node-version: [16.x]
+
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'npm'
+#           cache-dependency-path: './server/package-lock.json'
+
+#       - name: Install Server Dependencies
+#         run: npm ci
+#         working-directory: ./server  
+
+#       - name: Create .env File
+#         run: |
+#           touch ./server/.env
+#           echo "${{ secrets.PROD_ENV_FILE }}" > ./server/.env
+
+#       - name: Restart PM2
+#         run: pm2 restart BackendAPI
+#         working-directory: ./server
