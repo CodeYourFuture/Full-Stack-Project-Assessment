@@ -5,7 +5,6 @@ import AddVideo from "./AddVideo";
 
 const App = () => {
   const [videos, setVideos] = useState([]);
-  const [newVideo, setNewVideo] = useState({ title: "", url: "", rating: 0 });
 
   useEffect(() => {
     fetchAllVideos();
@@ -26,7 +25,7 @@ const App = () => {
     }
   };
 
-  const handleAddVideo = async () => {
+  const handleAddVideo = async (title, url, clearForm) => {
     try {
       const response = await fetch(
         "https://full-stack-project-video-reccomendations.onrender.com/videos",
@@ -35,14 +34,14 @@ const App = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newVideo),
+          body: JSON.stringify({ title, url, rating: 0 }),
         }
       );
       if (!response.ok) {
         throw Error(`Failed to add video. Error: ${response.status}`);
       }
       await fetchAllVideos();
-      setNewVideo({ title: "", url: "", rating: 0 });
+      clearForm();
     } catch (error) {
       console.error(error);
     }
@@ -64,9 +63,6 @@ const App = () => {
       console.log(error.message);
     }
   };
-  const handleInputChange = (e) => {
-    setNewVideo({ ...newVideo, [e.target.name]: e.target.value });
-  };
 
   return (
     <div className="App">
@@ -77,11 +73,7 @@ const App = () => {
         <Video key={video.id} video={video} onDeleteVideo={handleDeleteVideo} />
       ))}
 
-      <AddVideo
-        newVideo={newVideo}
-        onAddVideo={handleAddVideo}
-        onInputChange={handleInputChange}
-      />
+      <AddVideo onAddVideo={handleAddVideo} />
     </div>
   );
 };
