@@ -1,75 +1,28 @@
 # Video Recommendation App
+The Video Recommendation App is a full-stack application that enables users to manage their favorite YouTube videos. Users can perform the following actions:
 
-## Background
+# User stories:
+1 - Add Favorite Videos: As a user, I want to be able to add my favorite YouTube videos to the app by providing the video URL.<br />
+2 - Like/Unlike Videos: As a user, I want to be able to like or unlike videos to express my preference.<br />
+3 - Search Videos: As a user, I want to be able to search for specific videos by entering keywords or tags.<br />
+4 - Remove Videos: As a user, I want to be able to remove videos from my list of favorites whenever I want.<br />
 
-Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
+# Deployment: 
+The app is deployed using GitHub Actions, which is configured to automatically apply new changes to the AWS resources with each commit.
 
-This means that we need to be sure that you can create a Full Stack app.
+# Technologies Used:
+**Frontend**: The frontend is built using React, a popular JavaScript library for creating user interfaces. React hooks such as useState, useEffect, and react-router are employed for efficient state management and routing. The frontend is hosted on Render and AWS S3, ensuring reliable and scalable hosting.
 
-## Challenge
+**Backend**: The backend is powered by Node.js and Express, a web application framework for Node.js that simplifies server-side development. Express-validator middleware is used for straightforward and customizable validation of user input. The backend is hosted on Render and AWS EC2, ensuring high availability and scalability.
 
-In this project you will be building a project that fulfills the following User Stories
+**Database**: The app utilizes PostgreSQL, a powerful open-source relational database management system, to store and manage video data. The PostgreSQL database is hosted on Render and AWS RDS for reliable and scalable database hosting.
 
-- As a user, I want to be able to view a list of all YouTube videos posted on the site
-- As a user, I want to be able to post videos that I like from YouTube to my website.
-- As a user, I want to be able to delete videos from the website that I no longer like.
-- As a user, I want to be able to watch the videos embedded in the website.
-- As a user, I want to be able to "Up Vote" a video if I like it.
-- As a user, I want to be able to "Down Vote" a video if I dislike.
+# **Demo:**
 
-You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+https://github.com/seyyednavid/Video-recommendation-app/assets/100324062/f135a89a-db50-44fd-bacb-2ffd594f9565
 
-## Levels
+This video demonstrates the functionality of the Video Recommendation App running on AWS resources. In the demo, you'll see how to add favorite YouTube videos, like or unlike them, search for specific videos, and remove videos from your list of favorites. The application is hosted on AWS, and changes are automatically applied to AWS resources with the help of GitHub Actions.
 
-This project is split into several levels that you should complete each week of the three week project.
-
-You can find each of the levels split into separate files, linked below.
-
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
-
-### Week 1 - Front End
-
-- [Level 100](./100.md)
-  - A core version of the React front end of the app
-- [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
-
-### Week 2 - Back End (without Database)
-
-- [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
-- [Level 250](./250.md)
-  - Connect your Front End and Back End together
-- [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
-
-### Week 3 - Back End (with Database)
-
-- [Level 300](./300.md)
-  - Integrate the back end with a database
-- [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
-- [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
-
-## Sample Solution
-
-Here is an example solution of the Front End:
-
-https://vid-rec2.netlify.app/
-
-**Note:** You can design the website to look however you like.
-
-Here is an example solution for the Back End:
-
-https://video-rec.herokuapp.com
-
-## Design
-
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
-
-## Getting Started
-
-Fork this repository and then clone it to your computer.
-
-Progress to Level 100 when you are ready.
+**Additionally** <br />
+1 - you can view our GitHub Actions workflows [here](https://github.com/seyyednavid/Video-recommendation-app/actions), which automate the deployment process. For each commit, two workflows are triggered: one for the frontend and one for the backend, ensuring that both are run and updated after every commit.<br />
+2 - If you're eager to experience the Video Recommendation App in action, simply click [here](https://videos-recommendation.onrender.com/), to access it on Render.
