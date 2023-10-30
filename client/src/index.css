@@ -62,15 +62,20 @@ code {
 }
 
 .add-video button {
-  border: none;
+  background-color: #FF9130;
   color: #fff;
-  font-size: 1.0rem;
-  align-items: center;
-  gap: 6px;
-  background-color: #bdc0c5;
+  border: none;
   border-radius: 4px;
-  padding: 6px 15px;
+  padding: 10px 20px;
   margin: 0 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  align-items: center;
+}
+
+.add-video button:hover {
+  background-color: #FECDA6;
 }
 
 .App {
@@ -108,23 +113,33 @@ code {
   padding: 30px 50px;
   border-radius: 12px;
 }
+
 .button {
-  border: none;
+  background-color: #FF9130;
   color: #fff;
-  font-size: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
   display: flex;
   align-items: center;
   gap: 6px;
-  background-color: #bdc0c5;
-  border-radius: 4px;
-  padding: 6px 15px;
-  margin: 0 10px;
+}
+
+.button:hover {
+  background-color: #FECDA6;
 }
 
 .like-active {
-  background-color: #8c45e2;
+  background-color: #FF5B22;
 }
 
 .dislike-active {
   background-color: #394350;
 }
+
+
+
