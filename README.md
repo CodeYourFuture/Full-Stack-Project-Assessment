@@ -19,10 +19,10 @@ The app is deployed using GitHub Actions, which is configured to automatically a
 
 # **Demo:**
 
-
 https://github.com/seyyednavid/Video-recommendation-app/assets/100324062/f135a89a-db50-44fd-bacb-2ffd594f9565
-
 
 This video demonstrates the functionality of the Video Recommendation App running on AWS resources. In the demo, you'll see how to add favorite YouTube videos, like or unlike them, search for specific videos, and remove videos from your list of favorites. The application is hosted on AWS, and changes are automatically applied to AWS resources with the help of GitHub Actions.
 
-**Additionally**, you can view our GitHub Actions workflows [here](https://github.com/seyyednavid/Video-recommendation-app/actions), which automate the deployment process. For each commit, two workflows are triggered: one for the frontend and one for the backend, ensuring that both are run and updated after every commit.
+**Additionally**
+1 - you can view our GitHub Actions workflows [here](https://github.com/seyyednavid/Video-recommendation-app/actions), which automate the deployment process. For each commit, two workflows are triggered: one for the frontend and one for the backend, ensuring that both are run and updated after every commit.
+2 - If you're eager to experience the Video Recommendation App in action, simply click [here](https://videos-recommendation.onrender.com/), to access it on Render.
