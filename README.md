@@ -2,10 +2,10 @@
 The Video Recommendation App is a full-stack application that enables users to manage their favorite YouTube videos. Users can perform the following actions:
 
 # User stories:
-1 - Add Favorite Videos: As a user, I want to be able to add my favorite YouTube videos to the app by providing the video URL.
-2 - Like/Unlike Videos: As a user, I want to be able to like or unlike videos to express my preference.
-3 - Search Videos: As a user, I want to be able to search for specific videos by entering keywords or tags.
-4 - Remove Videos: As a user, I want to be able to remove videos from my list of favorites whenever I want.
+1 - Add Favorite Videos: As a user, I want to be able to add my favorite YouTube videos to the app by providing the video URL.<br />
+2 - Like/Unlike Videos: As a user, I want to be able to like or unlike videos to express my preference.<br />
+3 - Search Videos: As a user, I want to be able to search for specific videos by entering keywords or tags.<br />
+4 - Remove Videos: As a user, I want to be able to remove videos from my list of favorites whenever I want.<br />
 
 # Deployment: 
 The app is deployed using GitHub Actions, which is configured to automatically apply new changes to the AWS resources with each commit.
@@ -19,7 +19,9 @@ The app is deployed using GitHub Actions, which is configured to automatically a
 
 # **Demo:**
 
-[Watch the Video Demo](https://www.youtube.com/yourvideolink)
+
+https://github.com/seyyednavid/Video-recommendation-app/assets/100324062/f135a89a-db50-44fd-bacb-2ffd594f9565
+
 
 This video demonstrates the functionality of the Video Recommendation App running on AWS resources. In the demo, you'll see how to add favorite YouTube videos, like or unlike them, search for specific videos, and remove videos from your list of favorites. The application is hosted on AWS, and changes are automatically applied to AWS resources with the help of GitHub Actions.
 
