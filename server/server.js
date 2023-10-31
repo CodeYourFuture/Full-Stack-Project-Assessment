@@ -32,7 +32,7 @@ db.connect(function (err) {
   console.log("Connected!");
 });
 
-// This endpoint is used to get all the videos using SQL queries
+// This endpoint is used to get all the videos
 
 app.get("/videos", (req, res) => {
   db.query(`SELECT * FROM videos ORDER BY title`)
@@ -43,7 +43,8 @@ app.get("/videos", (req, res) => {
     });
 });
 
-// get one single video using the ID using SQL queries
+// get one single video using the ID
+
 app.get("/videos/:id", function (req, res) {
   const searchId = Number(req.params.id);
 
@@ -73,13 +74,14 @@ app.post("/videos", (req, res) => {
   if (
     !title ||
     !url ||
-    !url.startsWith(
-      "https://www.youtube.com" ||
-        urlObject.startsWith("https://youtu.be") ||
-        urlObject.startsWith("https://m.youtube.com") ||
-        urlObject.startsWith("https://youtube.com/")
-    )
+    (!url.startsWith("https://www.youtube.com") &&
+      !url.startsWith("https://youtu.be") &&
+      !url.startsWith("https://m.youtube.com") &&
+      !url.startsWith("https://youtube.com/"))
   ) {
+    console.log({ url });
+    // https://youtu.be/n3JNtfi4Vb0?si=dRx5CJJctB6P_yVR
+    // https://www.youtube.com/watch?v=n3JNtfi4Vb0
     res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
@@ -88,7 +90,14 @@ app.post("/videos", (req, res) => {
     const query = `INSERT INTO videos (title, url, rating, createdAt)
                       VALUES ($1, $2, 0, now());`;
 
-    db.query(query, [title, url])
+    let formattedUrl;
+    if (url.startsWith("https://youtu.be")) {
+      const [_, rest] = url.split("https://youtu.be/");
+      const [id] = rest.split("?");
+      formattedUrl = `https://www.youtube.com/watch?v=${id}`;
+    }
+
+    db.query(query, [title, formattedUrl || url])
       .then(() => {
         res.status(201).send("Added a new video");
       })
@@ -114,6 +123,7 @@ app.get("/videos/:id", (req, res) => {
 });
 
 // This endpoint is used to delete a single video with a given ID
+
 app.delete("/videos/:id", (req, res) => {
   const id = Number(req.params.id);
   db.query("DELETE FROM videos WHERE id=$1", [id])
