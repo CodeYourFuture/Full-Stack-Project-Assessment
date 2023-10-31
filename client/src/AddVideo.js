@@ -9,9 +9,20 @@ const AddVideo = ({ onAddVideo }) => {
     setUrl("");
   };
 
+  const isYouTubeURL = (inputURL) => {
+    const youTubePattern = /^https:\/\/www.youtube.com\/watch\?v=.+$/;
+    return youTubePattern.test(inputURL);
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    onAddVideo(title, url, clearForm);
+    e.preventDefault();
+
+    if (isYouTubeURL(url)) {
+      onAddVideo(title, url, clearForm);
+    } else {
+      alert("Please enter a valid YouTube URL");
+      clearForm();
+    }
   };
 
   return (
@@ -35,5 +46,6 @@ const AddVideo = ({ onAddVideo }) => {
     </div>
   );
 };
+
 
 export default AddVideo;
