@@ -8,6 +8,7 @@
     justify-content: center;
   }
 }
+
 .form_container {
   width: 350px;
   justify-content: center;
@@ -50,8 +51,5 @@
 @media screen and (min-width: 650px) {
   .form_container {
     width: 400px;
-  }
-
-  .videos_container {
   }
 }
