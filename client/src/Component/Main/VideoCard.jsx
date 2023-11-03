@@ -17,8 +17,10 @@ const VideoCard = ({ video, deleteHandler }) => {
     <div className="card_container flex">
       <h3 className="video_title">{video.title}</h3>
       <iframe
-        src={video.link.replace("watch?v=", "embed/")}
-        title="video.title"
+        src={video.link
+          .replace("watch?v=", "embed/")
+          .replace("youtube.com", "youtube-nocookie.com")}
+        title={video.title}
       ></iframe>
       <div className="flex">
         <span onClick={increseRating}>
