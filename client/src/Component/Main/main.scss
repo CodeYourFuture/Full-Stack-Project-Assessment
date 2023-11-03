@@ -3,6 +3,9 @@
   row-gap: 50px;
   .videos_container {
     row-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+    align-items: end;
+    justify-content: center;
   }
 }
 .form_container {
@@ -16,7 +19,7 @@
   color: var(--whiteColor);
   font-weight: 600;
   background-color: var(--SecondaryColor);
-  box-shadow: 0 4px 4px var(--blackColor);
+  box-shadow: 0 4px 4px var(--whiteColor);
   border-radius: 15px;
   .btn {
     justify-self: center;
@@ -33,7 +36,7 @@
   justify-content: center;
   background-color: var(--PrimaryColor);
   border-radius: 10px;
-  box-shadow: 0 2px 4px #495057;
+  box-shadow: 0 2px 4px var(--whiteColor);
   margin: 1rem 3rem;
   flex-direction: column;
   .video_title {
@@ -50,6 +53,5 @@
   }
 
   .videos_container {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
