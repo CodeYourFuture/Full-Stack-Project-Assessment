@@ -4,7 +4,7 @@
 
 Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
 
-This means that we need to be sure that you can create a Full Stack app.
+This means that we need to be sure that you can create and deploy Full Stack application.
 
 ## Challenge
 
@@ -59,10 +59,6 @@ Here is an example solution of the Front End:
 https://vid-rec2.netlify.app/
 
 **Note:** You can design the website to look however you like.
-
-Here is an example solution for the Back End:
-
-https://video-rec.herokuapp.com
 
 ## Design
 
