@@ -12,9 +12,7 @@ const App = () => {
 
   const fetchAllVideos = async () => {
     try {
-      const response = await fetch(
-        "https://full-stack-project-video-reccomendations.onrender.com/videos"
-      );
+      const response = await fetch("https://elena-videos.raccoon.space/videos");
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -28,7 +26,7 @@ const App = () => {
   const handleAddVideo = async (title, url, clearForm) => {
     try {
       const response = await fetch(
-        "https://full-stack-project-video-reccomendations.onrender.com/videos",
+        "https://elena-videos.raccoon.space/videos",
         {
           method: "POST",
           headers: {
@@ -50,7 +48,7 @@ const App = () => {
   const handleDeleteVideo = async (id) => {
     try {
       const response = await fetch(
-        `https://full-stack-project-video-reccomendations.onrender.com/videos/${id}`,
+        `https://elena-videos.raccoon.space/videos/${id}`,
         {
           method: "DELETE",
         }
