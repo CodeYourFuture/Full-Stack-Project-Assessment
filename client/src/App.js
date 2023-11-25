@@ -1,13 +1,9 @@
-import "./App.css";
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<>
+			<h1>Video Recommendations</h1>
+		</>
+	);
+};
 
 export default App;

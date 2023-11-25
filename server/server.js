@@ -1,15 +1,40 @@
-const express = require("express");
+import "dotenv/config";
+
+import http from "node:http";
+import { connectDb, disconnectDb } from "./db";
+import express from "express";
+import apiRouter from "./api";
+import path from "path";
+
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// api calls are all under /api and are handled in api.js
+app.use("/api", apiRouter);
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+// healthcheck call will help during deployment determine if the system has been deployed successfully
+app.use("/health", (_, res) => res.sendStatus(200));
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+// everything that is not an API call is likely the frontend react app, so make sure we route the frontend app there.
+// This will allow us to access the React frontend on the same link as the backend.
+const staticDir = path.join(__dirname, "static");
+app.use(express.static(staticDir));
+app.use((req, res, next) => {
+	if (req.method === "GET" && !req.url.startsWith("/api")) {
+		return res.sendFile(path.join(staticDir, "index.html"));
+	}
+	next();
 });
+
+// after configuring the routes we can now create the node server and start it up
+const server = http.createServer(app);
+const port = parseInt(process.env.PORT ?? "3000", 10)
+
+server.on("listening", () => {
+	const addr = server.address();
+	const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+	console.log(`listening on: ${bind}`);
+});
+
+process.on("SIGTERM", () => server.close(() => disconnectDb()));
+
+connectDb().then(() => server.listen(port));

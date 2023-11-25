@@ -1,0 +1,13 @@
+{
+	"extends": "../.babelrc",
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": 18
+				}
+			}
+		]
+	]
+}
