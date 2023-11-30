@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS videos;
 CREATE TABLE videos(
    id     INTEGER  NOT NULL PRIMARY KEY 
-  ,title  VARCHAR(29) NOT NULL
-  ,url    VARCHAR(43) NOT NULL
+  ,title  VARCHAR(300) NOT NULL
+  ,url    VARCHAR(100) NOT NULL
   ,rating INTEGER  NOT NULL
-  ,date   VARCHAR(20) NOT NULL
+  ,date   VARCHAR(100) NOT NULL
 );
 INSERT INTO videos(id,title,url,rating,date) VALUES (523523,'Unforgettable','https://www.youtube.com/watch?v=CTFtOOh47oo',3500,'20/05/2023, 10:14:23');
 INSERT INTO videos(id,title,url,rating,date) VALUES (523427,'Boomerang','https://www.youtube.com/watch?v=k2R5FNOEEGw',230,'20/05/2023, 10:15:23');
