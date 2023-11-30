@@ -1,3 +1,283 @@
 .App {
   text-align: center;
 }
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5em 0.5em;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 7em;
+  color: #e1e1e103;
+  background-image: url("https://images.unsplash.com/photo-1676816823266-a8bb9a998de7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80");
+  background-repeat: repeat;
+  background-clip: text;
+  animation: animate 20s ease-in-out infinite;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    background-position: left top;
+  }
+  25% {
+    background-position: right bottom;
+  }
+  50% {
+    background-position: left bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+}
+
+.navbar {
+  display: flex;
+  column-gap: 1em;
+}
+
+.click-btn {
+  padding: 0.5em 1em;
+  color: whitesmoke;
+}
+
+.click-btn h3 {
+  margin-bottom: 0;
+  font-family: "Acme", sans-serif;
+}
+
+.btn {
+  background: #322f37;
+  border-bottom: 2px solid #0aaf70;
+  border-left: 2px solid #0aaf70;
+  border-radius: 5px;
+  border-top: 0.5px solid #0aaf70;
+  border-right: 0.5px solid #0aaf70;
+}
+
+.click-btn:hover {
+  text-decoration: none;
+  box-shadow: 6px 9px 7px #f5f9cd;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.page-body {
+  font-family: "Acme", sans-serif;
+  margin: 0.5em;
+  padding: 1em;
+}
+
+.info {
+  margin-bottom: 3em;
+}
+
+.landing-section {
+  border: #0aaf70 solid 2px;
+  margin-bottom: 3em;
+  border-radius: 11px;
+  padding: 1em;
+  box-shadow: 6px 9px 7px #f5f9cd;
+}
+
+.eachVideo {
+  margin: 1em 1em 3em 1em;
+}
+
+input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#switch-btn {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 5em;
+  height: 2.5em;
+  background: #05a5db;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  margin-bottom: 0;
+  margin-right: 0.3em;
+  margin-left: 0.3em;
+}
+
+#switch-btn:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 2em;
+  height: 2em;
+  background: #faea5b;
+  border-radius: 90px;
+  transition: 0.1s;
+}
+
+input:checked + #switch-btn {
+  background: #11c367;
+}
+
+input:checked + #switch-btn:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+#switch-btn:active:after {
+  width: 130px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+}
+
+.order-name {
+  margin-bottom: 0;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  margin: 2em auto 0 auto;
+}
+
+.ins-points {
+  padding: 0;
+  text-align: left;
+}
+
+.instructions {
+  list-style: none;
+}
+
+.instructions span {
+  margin-left: 2em;
+}
+
+.submit {
+  margin-top: 2em;
+}
+
+.title-url {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5em;
+}
+
+.vote-btn {
+  border: none;
+  background: #322f37;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.icon-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-btn span {
+  font-size: 1.1em;
+}
+
+.icon-btn aside {
+  display: flex;
+  gap: 0.8em;
+}
+
+.submit-msg {
+  font-size: 1.5em;
+  text-transform: capitalize;
+  color: red;
+}
+
+.submit-success {
+  font-size: 1.5em;
+  color: #05a5db;
+  text-transform: capitalize;
+}
+
+.about {
+  grid-area: about;
+}
+.add-video {
+  grid-area: add-vid;
+}
+
+.landing-area {
+  display: grid;
+  grid-template-areas:
+    "about"
+    "add-vid";
+}
+
+@media screen and (min-width: 700px) {
+  .landing-area {
+    grid-template-columns: 47% auto;
+    column-gap: 3em;
+    grid-template-areas:
+      "about add-vid"
+      "about add-vid";
+  }
+
+  iframe {
+    width: 32em;
+    height: 22em;
+  }
+
+  .icon-btn {
+    padding: 0 3.5em;
+  }
+
+  .about {
+    max-height: 24em;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .landing-area {
+    grid-template-columns: 28em auto;
+    grid-template-areas: "about add-vid";
+    column-gap: 2em;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about {
+    max-height: 19em;
+  }
+
+  .video-heading {
+    margin-bottom: 7em;
+  }
+
+  iframe {
+    width: 25em;
+    height: 18em;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+  }
+}
