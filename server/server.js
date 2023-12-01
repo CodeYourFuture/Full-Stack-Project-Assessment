@@ -26,16 +26,21 @@ app.use((req, res, next) => {
 	next();
 });
 
-// after configuring the routes we can now create the node server and start it up
-const server = http.createServer(app);
-const port = parseInt(process.env.PORT ?? "3000", 10)
+export default app;
 
-server.on("listening", () => {
-	const addr = server.address();
-	const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-	console.log(`listening on: ${bind}`);
-});
+// don't start the server up if we're running the tests
+if (process.env.NODE_ENV !== "test") {
+	// after configuring the routes we can now create the node server and start it up
+	const server = http.createServer(app);
+	const port = parseInt(process.env.PORT ?? "3000", 10)
 
-process.on("SIGTERM", () => server.close(() => disconnectDb()));
+	server.on("listening", () => {
+		const addr = server.address();
+		const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+		console.log(`listening on: ${bind}`);
+	});
 
-connectDb().then(() => server.listen(port));
+	process.on("SIGTERM", () => server.close(() => disconnectDb()));
+
+	connectDb().then(() => server.listen(port));
+}
