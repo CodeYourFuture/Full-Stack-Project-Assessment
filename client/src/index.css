@@ -1,0 +1,144 @@
+html, body {
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.message {
+    width: auto;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color:lightsalmon;
+}
+
+#videos {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 10px;
+    row-gap: 10px;
+    margin: 0;
+    padding: 1em;
+}
+
+.video {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    list-style-type: none;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    background-color: antiquewhite;
+
+    transition: background-color 1s, border-radius 1s;
+}
+
+.video:hover {
+    background-color: bisque;
+    border-radius: 0px;
+}
+
+.video h2 {
+    flex-grow: 1;
+}
+
+.video iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.video h2 a {
+    color: darkblue;
+    text-decoration: none;
+}
+
+.video h2 a:visited {
+    color:black;
+}
+
+.video h2 a:hover {
+    color:blue;
+}
+
+.video h2 a:focus {
+    text-decoration:underline;
+}
+
+.video .rating:before {
+    content: '❤️ ';
+}
+
+.video .rating {
+    max-width: fit-content;
+    padding: 0.5em;
+
+    display: block;
+    font-size: 2em;
+
+    margin: 0.5em auto;
+
+    border: 1px solid black;
+    border-radius: 10%;
+
+    background-color: bisque;
+}
+
+.video h3 {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.controls {
+    display: grid;
+    column-gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.control-message {
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    border: 1px solid red;
+}
+
+#submit-video {
+    text-align: center;
+    width: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em;
+    background-color: antiquewhite;
+}
+
+#submit-video form {
+    display: grid;
+    row-gap: 1em;
+    column-gap: 1em;
+    max-width: 500px;
+    grid-template-columns: 100px auto;
+    margin: auto;
+}
+
+#submit-video form label {
+    text-align: right;
+}
+
+#submit-video button {
+    grid-column: span 2;
+}
+
+input.invalid {
+    background-color:lightpink;
+    border: 1px solid red;
+}

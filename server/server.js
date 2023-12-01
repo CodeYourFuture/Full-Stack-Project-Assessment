@@ -8,6 +8,7 @@ import path from "path";
 
 const app = express();
 
+app.use(express.json());
 // api calls are all under /api and are handled in api.js
 app.use("/api", apiRouter);
 
