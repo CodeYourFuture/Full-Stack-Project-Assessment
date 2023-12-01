@@ -15,7 +15,10 @@
 		"dev:client": "webpack serve --config client/webpack/dev.config.js",
 		"dev:server": "cross-env LOG_LEVEL=debug PORT=3100 babel-node server/server.js",
 		"start": "node dist/server.js",
-		"test": "jest"
+		"test": "jest --selectProjects client server",
+		"test:client": "jest --selectProjects client",
+		"test:server": "jest --selectProjects server",
+		"test:features": "jest --selectProjects features"
 	},
 	"author": "Code Your Future <mail@codeyourfuture.io>",
 	"license": "ISC",
@@ -84,6 +87,14 @@
 					"^.*\\.png$": "<rootDir>/test/RelativeImageStub.js",
 					"^.*\\.css$": "<rootDir>/test/RelativeImageStub.js"
 				}
+			},
+			{
+				"displayName": "features",
+				"testMatch": ["**/features/**/*.test.js"],
+				"setupFilesAfterEnv": [
+					"<rootDir>/features/utils/driverSetup.js"
+				],
+				"maxWorkers": "1"
 			}
 		]
 	}

@@ -1,12 +1,12 @@
 import request from "supertest";
-import server from "./server";
+import app from "./app";
 import db from "./db";
 
 describe("/api", () => {
 	describe("/videos", () => {
 		describe("GET", () => {
             it("Returns the list of videos", async () => {
-                const response = await request(server).get("/api/videos");
+                const response = await request(app).get("/api/videos");
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body.data.length).toBe(10);
@@ -19,7 +19,7 @@ describe("/api", () => {
 
         describe("POST", () => {
             it("Creates a new video for valid input", async() => {
-                const response = await request(server).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJK"});
+                const response = await request(app).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJK"});
 
                 expect(response.statusCode).toBe(201);
                 expect(response.body.success).toBe(true);
@@ -29,7 +29,7 @@ describe("/api", () => {
             });
 
             it("Adds the new video to the database", async() => {
-                await request(server).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJK"});
+                await request(app).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJK"});
 
                 const dbResponse = await db.query("SELECT * FROM videos ORDER BY id DESC LIMIT 1");
 
@@ -38,7 +38,7 @@ describe("/api", () => {
             });
 
             it("Does not create a video for invalid urls", async() => {
-                const response = await request(server).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJ"});
+                const response = await request(app).post("/api/videos").send({title: "New Title", url: "https://www.youtube.com/watch?v=ABCDEFGHIJ"});
 
                 expect(response.statusCode).toBe(422);
                 expect(response.body.success).toBe(false);
@@ -48,7 +48,7 @@ describe("/api", () => {
         describe("/:id", () => {
             describe("GET", () => {
                 it("Gets the video from the database if the id exists", async() => {
-                    const response = await request(server).get("/api/videos/1");
+                    const response = await request(app).get("/api/videos/1");
 
                     expect(response.statusCode).toBe(200);
                     expect(response.body.success).toBe(true);
@@ -58,7 +58,7 @@ describe("/api", () => {
                 });
 
                 it("Returns 404 if the id doesn't exist", async() => {
-                    const response = await request(server).get("/api/videos/999999");
+                    const response = await request(app).get("/api/videos/999999");
 
                     expect(response.statusCode).toBe(404);
                     expect(response.body.success).toBe(false);
@@ -67,21 +67,21 @@ describe("/api", () => {
 
             describe("DELETE", () => {
                 it("Returns a successful response if the id exists", async() => {
-                    const response = await request(server).delete("/api/videos/1");
+                    const response = await request(app).delete("/api/videos/1");
 
                     expect(response.statusCode).toBe(200);
                     expect(response.body.success).toBe(true);
                 });
 
                 it("Deletes the video from the database if the id exists", async() => {
-                    await request(server).delete("/api/videos/1");
+                    await request(app).delete("/api/videos/1");
 
                     const dbResponse = await db.query("SELECT * FROM videos WHERE id = $1",[1]);
                     expect(dbResponse.rows.length).toBe(0);
                 });
 
                 it("Returns 404 if the id doesn't exist", async() => {
-                    const response = await request(server).delete("/api/videos/999999");
+                    const response = await request(app).delete("/api/videos/999999");
 
                     expect(response.statusCode).toBe(404);
                     expect(response.body.success).toBe(false);
@@ -91,7 +91,7 @@ describe("/api", () => {
             describe("/:action", () => {
                 describe("POST", () => {
                     it("Updates the rating up", async() => {
-                        const response = await request(server).post("/api/videos/1/up");
+                        const response = await request(app).post("/api/videos/1/up");
 
                         expect(response.statusCode).toBe(200);
                         expect(response.body.success).toBe(true);
@@ -99,7 +99,7 @@ describe("/api", () => {
                     });
 
                     it("Updates the rating down", async() => {
-                        const response = await request(server).post("/api/videos/1/down");
+                        const response = await request(app).post("/api/videos/1/down");
 
                         expect(response.statusCode).toBe(200);
                         expect(response.body.success).toBe(true);
@@ -107,7 +107,7 @@ describe("/api", () => {
                     });
 
                     it("Updates the rating in the database", async() => {
-                        await request(server).post("/api/videos/1/up");
+                        await request(app).post("/api/videos/1/up");
 
                         const dbResponse = await db.query("SELECT * FROM videos WHERE id = $1",[1]);
 
@@ -115,14 +115,14 @@ describe("/api", () => {
                     });
 
                     it("Returns 422 if the action is invalid", async() => {
-                        const response = await request(server).post("/api/videos/1/left");
+                        const response = await request(app).post("/api/videos/1/left");
 
                         expect(response.statusCode).toBe(422);
                         expect(response.body.success).toBe(false);
                     });
 
                     it("Returns 404 if the id doesn't exist", async() => {
-                        const response = await request(server).post("/api/videos/999999/up");
+                        const response = await request(app).post("/api/videos/999999/up");
 
                         expect(response.statusCode).toBe(404);
                         expect(response.body.success).toBe(false);
