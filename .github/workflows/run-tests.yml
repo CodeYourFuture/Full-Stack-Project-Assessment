@@ -4,7 +4,7 @@ run-name: Enforce tests pass on committed files
 
 on:
   workflow_dispatch:
-  # pull_request:
+  pull_request:
 
 jobs:
   run-tests:
