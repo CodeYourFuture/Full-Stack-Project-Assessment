@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import AddVideo from './compnents/addvideo/AddVideo';
+import AddVideo from './components/addvideo/AddVideo';
 import axios from 'axios';
-import VideoTable from './compnents/videotable/VideoTable';
+import VideoTable from './components/videotable/VideoTable';
 
 function App() {
   const [videos, setVideos] = useState([]);
