@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl https://video-storage.onrender.com/videos

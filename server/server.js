@@ -79,7 +79,6 @@ app.post("/videos", (req, res) => {
       !url.startsWith("https://m.youtube.com") &&
       !url.startsWith("https://youtube.com/"))
   ) {
-
     res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
@@ -88,7 +87,7 @@ app.post("/videos", (req, res) => {
     const query = `INSERT INTO videos (title, url, rating, createdAt)
                       VALUES ($1, $2, 0, now());`;
 
-// converting  mobile YouTube links like this https://youtu.be/n3JNtfi4Vb0?si=dRx5CJJctB6P_yVR to this https://www.youtube.com/watch?v=n3JNtfi4Vb0
+    // converting  mobile YouTube links like this https://youtu.be/n3JNtfi4Vb0?si=dRx5CJJctB6P_yVR to this https://www.youtube.com/watch?v=n3JNtfi4Vb0
 
     let formattedUrl;
     if (url.startsWith("https://youtu.be")) {
