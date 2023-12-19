@@ -8,13 +8,17 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin: 2em;
-  padding: 2em;
+  margin: 1rem;
 }
-
+.video-rating {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 .video-card {
   border: 1px solid #ccc;
   padding: 10px;
+  width: 25rem;
 }
 
 .video-content {
@@ -30,10 +34,91 @@ h2 {
 }
 .vote-buttons button {
   display: inline-flex;
-
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 0.5rem;
+}
+
+.remove-button {
+  /* margin-top: 0.5rem; */
+  margin-bottom: 0.5rem;
+}
+
+.video-title {
+  height: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .video-card {
+    width: 95%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .video-content iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .navbar {
+    width: 100%;
+  }
+  .form-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: 6rem;
+    gap: 0.5em;
+  }
+  .nav-form {
+    width: 60%;
+  }
+  .form-row {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  .video-card {
+    width: 95%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .video-content iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1rem;
+  }
+  .navbar {
+    width: 100%;
+  }
+
+  .form-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: 3rem;
+    gap: 0.5em;
+  }
+
+  .nav-form {
+    width: 60%;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+  }
 }

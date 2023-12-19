@@ -11,7 +11,7 @@ function Header({ search, onSearch }) {
       <span className="navbar-brand">Video Recommendation</span>
       <form className="form-inline">
         <input
-          className="form-control mr-sm-2"
+          className="form-control mr-sm-2 nav-form"
           type="search"
           placeholder="Search"
           aria-label="Search"

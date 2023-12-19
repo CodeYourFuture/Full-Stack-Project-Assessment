@@ -17,7 +17,7 @@ function VideoCard({ title, url, rating, onRemove }) {
   return (
     <div className="video-card">
       <div className="video-content">
-        <h3>{title}</h3>
+        <h3 className="video-title">{title}</h3>
         <div className="video-container">
           <iframe
             src={`https://www.youtube.com/embed/${videoId}`}
@@ -27,16 +27,25 @@ function VideoCard({ title, url, rating, onRemove }) {
             allowFullScreen
           ></iframe>
         </div>
-        <p>Rating: {votes}</p>
-        <div className="vote-buttons">
-          <button onClick={handleUpVote}>
-            <FontAwesomeIcon icon={faThumbsUp} />
-          </button>
-          <button onClick={handleDownVote}>
-            <FontAwesomeIcon icon={faThumbsDown} />
-          </button>
+        <div className="video-rating">
+          <p>Rating: {votes}</p>
+          <div className="vote-buttons">
+            <button onClick={handleUpVote}>
+              <FontAwesomeIcon icon={faThumbsUp} />
+            </button>
+            <button onClick={handleDownVote}>
+              <FontAwesomeIcon icon={faThumbsDown} />
+            </button>
+          </div>
         </div>
-        <button onClick={() => onRemove(title)}>Remove</button>
+
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm remove-button"
+          onClick={() => onRemove(title)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );
