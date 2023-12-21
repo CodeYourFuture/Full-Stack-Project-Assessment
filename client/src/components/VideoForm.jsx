@@ -8,11 +8,11 @@ function VideoForm({ videoData, setVideoAdded }) {
   function addVideoHandler(event) {
     event.preventDefault();
 
-    // Validate the form inputs
+    // Validate the form inputs 
     function validateUrl(urlObject) {
       return (
         validUrl.isUri(urlObject) &&
-        (urlObject.startsWith("https://www.youtube.com") ||
+        (urlObject.startsWith("https://www.youtube.com/") ||
           urlObject.startsWith("https://youtu.be") ||
           urlObject.startsWith("https://m.youtube.com") ||
           urlObject.startsWith("https://youtube.com/"))
@@ -21,7 +21,7 @@ function VideoForm({ videoData, setVideoAdded }) {
 
     const formTitle = event.target.form.title.value;
     const formUrl = event.target.form.url.value;
-    // cleaning up the YouTube url with timestamp or other paths eg: https://www.youtube.com/watch?v=Pmx2cbLGzzo&t=2908s
+    // cleaning up the YouTube url with timestamp or other paths so that I get to display the thumbnails of the YouTube videos in my app. For eg: https://www.youtube.com/watch?v=Pmx2cbLGzzo&t=2908s
     const cleanedUrl = formUrl.includes("&") ? formUrl.split("&")[0] : formUrl;
 
     if (validateUrl(formUrl) && formTitle !== "") {
@@ -49,11 +49,11 @@ function VideoForm({ videoData, setVideoAdded }) {
           console.log("Error adding video", error);
         });
     } else if (formTitle === "" && !validateUrl(formUrl)) {
-      setErrorMessage("Add a title and a valid URL");
+      setErrorMessage("Add a title and a valid YouTube video URL");
     } else if (formTitle === "") {
       setErrorMessage("Add a title");
     } else {
-      setErrorMessage("Add a valid URL");
+      setErrorMessage("Add a valid YouTube video URL");
     }
   }
   return (
@@ -96,7 +96,7 @@ function VideoForm({ videoData, setVideoAdded }) {
           Add
         </button>
 
-        <p>{errorMessage}</p>
+        <p className="text-red-700">{errorMessage}</p>
       </form>
     </div>
   );

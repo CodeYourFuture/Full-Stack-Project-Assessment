@@ -4,7 +4,6 @@ const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const nocache = require("nocache");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,7 +11,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(nocache());
 
 app.use(express.json());
 
@@ -34,7 +32,7 @@ db.connect(function (err) {
   console.log("Connected!");
 });
 
-// This endpoint is used to get all the videos using SQL queries
+// This endpoint is used to get all the videos
 
 app.get("/videos", (req, res) => {
   db.query(`SELECT * FROM videos ORDER BY title`)
@@ -45,7 +43,8 @@ app.get("/videos", (req, res) => {
     });
 });
 
-// get one single video using the ID using SQL queries
+// get one single video using the ID
+
 app.get("/videos/:id", function (req, res) {
   const searchId = Number(req.params.id);
 
@@ -72,16 +71,32 @@ app.get("/videos/:id", function (req, res) {
 // This endpoint is used to add a new video
 app.post("/videos", (req, res) => {
   const { title, url } = req.body;
-  if (!title || !url || !url.startsWith("https://www.youtube.com"|| urlObject.startsWith("https://youtu.be") || urlObject.startsWith("https://m.youtube.com") || urlObject.startsWith("https://youtube.com/"))) {
+  if (
+    !title ||
+    !url ||
+    (!url.startsWith("https://www.youtube.com") &&
+      !url.startsWith("https://youtu.be") &&
+      !url.startsWith("https://m.youtube.com") &&
+      !url.startsWith("https://youtube.com/"))
+  ) {
     res.status(400).json({
       result: "failure",
       message: "Video could not be saved",
     });
   } else {
     const query = `INSERT INTO videos (title, url, rating, createdAt)
-    VALUES ($1, $2, 0, now())`;
+                      VALUES ($1, $2, 0, now());`;
 
-    db.query(query, [title, url])
+    // converting  mobile YouTube links like this https://youtu.be/n3JNtfi4Vb0?si=dRx5CJJctB6P_yVR to this https://www.youtube.com/watch?v=n3JNtfi4Vb0
+
+    let formattedUrl;
+    if (url.startsWith("https://youtu.be")) {
+      const [_, rest] = url.split("https://youtu.be/");
+      const [videoId] = rest.split("?");
+      formattedUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    }
+
+    db.query(query, [title, formattedUrl || url])
       .then(() => {
         res.status(201).send("Added a new video");
       })
@@ -107,6 +122,7 @@ app.get("/videos/:id", (req, res) => {
 });
 
 // This endpoint is used to delete a single video with a given ID
+
 app.delete("/videos/:id", (req, res) => {
   const id = Number(req.params.id);
   db.query("DELETE FROM videos WHERE id=$1", [id])
