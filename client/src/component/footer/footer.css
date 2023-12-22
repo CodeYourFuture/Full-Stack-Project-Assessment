@@ -1,0 +1,33 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+.social-container {
+    position: fixed;
+    bottom: 20px;
+    margin-left: 30px;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    list-style-type: none;
+    gap: 20px;
+}
+
+.social-container ul>li>a {
+    font-size: 27px;
+    text-decoration: none;
+    list-style-type: none;
+    list-style: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.social-container ul>li>a:hover {
+    color: #03f40f;
+    text-decoration: none;
+    border-radius: 25px;
+    
+}

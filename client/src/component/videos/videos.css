@@ -1,0 +1,21 @@
+.card {
+    margin: 0px;
+    color: snow;
+    background-color: rgba(34, 33, 33, 0.82);
+    /* color: black; */
+}
+
+.container-div {
+    margin-top: 190px;
+    margin-right: 90px;
+}
+
+.video-div {
+    text-align: center;
+    color: snow;
+    margin-bottom: 70px;
+}
+
+.card-title{
+    margin-bottom: 25px;
+}
