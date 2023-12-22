@@ -26,29 +26,6 @@ const newVideoValidate = [
     .withMessage("Warning: YouTube URL Must be Provided as Embed"),
 ];
 
-// const validateData = [
-//   body("name")
-//     .trim()
-//     .notEmpty()
-//     .isLength({ min: 3 })
-//     .withMessage("Name must be at less 3 characters"),
-//   body("email")
-//     .trim()
-//     .notEmpty()
-//     .isEmail()
-//     .toLowerCase()
-//     .normalizeEmail()
-//     .withMessage("Email must be a valid email"),
-//   body("password")
-//     .trim()
-//     .notEmpty()
-//     .withMessage("You must enter your password"),
-// ];
-
-// app.get("/", (req, res) => {
-//   Delete this line after you've confirmed your server is running
-//   res.send({ express: "Your Backend Service is Running" });
-// });
 
 app.get("/videos/data", async (req, res) => {
   try {
@@ -75,7 +52,6 @@ app.post("/videos/data/create", newVideoValidate, async (req, res) => {
       !newUrl.startsWith("https://www.youtube.com/watch?v=")
     ) {
       res.status(400).json({ message: "Invalid YouTube URL" });
-      // res.status(201).json({ message: "Valid YouTube URL" });
     }
 
     const query = `INSERT INTO videos(title, url)` + `VALUES ($1, $2)`;
@@ -102,21 +78,7 @@ app.delete("/videos/data/:id", async (req, res) => {
     res.status(500).send({ message: "An error occurred while deleting the video" });
   }
 
-
-  // const getVideoByID = videos.find((video) => video.id === videoID);
-  // const index = videos.indexOf(getVideoByID);
-  // videos.splice(index, 1)
-  // fs.writeFile("./exampleresponse.json", JSON.stringify(videos), () => {
-  //   res.status(200).send({
-  //     videos: {
-  //       Message: "Video with id has been deleted successfully",
-  //     },
-  //   });
-  // });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
