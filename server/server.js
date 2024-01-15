@@ -2,23 +2,17 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 4000;
 const cors = require("cors");
-const { Pool } = require("pg");
 
 app.use(express.json());
 app.use(cors());
-
+const dotenv = require("dotenv");
+dotenv.config();
+const { Pool } = require("pg");
 const db = new Pool({
   connectionString: process.env.DB_URL,
-  // ssl: { rejectUnauthorized: false },
 });
 
-db.connect((err, client, done) => {
-  if (err) {
-    console.error("error connecting to the database", err)
-  } else {
-    console.log("connected to the db")
-  }
-})
+console.log("db", db.connectionString)
 
 
 const bodyParser = require("body-parser");
@@ -97,7 +91,7 @@ app.delete("/videos/:id", (req, res) => {
 
 
 app.get("/videos", (req, res) => {
-  db.query("SELECT * FROM videos")
+  db.connectionString.query("SELECT * FROM videos")
     .then((result) => {
       res.status(200).json(result.rows);
     })
