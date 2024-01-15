@@ -91,7 +91,7 @@ app.delete("/videos/:id", (req, res) => {
 
 
 app.get("/videos", (req, res) => {
-  db.connectionString.query("SELECT * FROM videos")
+  db.query("SELECT * FROM videos")
     .then((result) => {
       res.status(200).json(result.rows);
     })
