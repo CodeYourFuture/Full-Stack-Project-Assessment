@@ -8,12 +8,20 @@ app.use(cors());
 const dotenv = require("dotenv");
 dotenv.config();
 const { Pool } = require("pg");
-const db = new Pool({
+
+const pool = new Pool({
   connectionString: process.env.DB_URL,
 });
 
-console.log("db", db.connectionString)
+console.log("DB Connection String:", process.env.DB_URL);
 
+pool.connect((err, client, done) => {
+  if (err) {
+    console.error("Error connecting to the database:", err);
+  } else {
+    console.log("Connected to the database");
+  }
+});
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -33,7 +41,7 @@ app.put("/videos/:id", async (req, res) => {
   try {
     const updateQuery = "UPDATE videos SET rating = $1 WHERE id = $2";
     const updateValues = [rating, videoId];
-    await db.query(updateQuery, updateValues);
+    await pool.query(updateQuery, updateValues);
 
     res.status(200).send("sent");
   } catch (error) {
@@ -58,7 +66,7 @@ app.post("/videos", (req, res) => {
     const query =
       `INSERT INTO videos (title, url, rating)
     VALUES ($1, $2, $3)`;
-    db.query(query, [newVideoTitle, newVideoURL, newVideoRating])
+    pool.query(query, [newVideoTitle, newVideoURL, newVideoRating])
       .then(() => {
         res.status(201).send("new video created");
       })
@@ -74,9 +82,9 @@ app.post("/videos", (req, res) => {
 
 app.delete("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id);
-  db.query("DELETE FROM videos WHERE id=$1", [videoId])
+  pool.query("DELETE FROM videos WHERE id=$1", [videoId])
     .then(() => {
-      db.query("SELECT * FROM videos")
+      pool.query("SELECT * FROM videos")
         .then((result) => res.json(result.rows))
         .catch((err) => {
           console.error("Error fetching videos:", err);
@@ -91,9 +99,10 @@ app.delete("/videos/:id", (req, res) => {
 
 
 app.get("/videos", (req, res) => {
-  db.query("SELECT * FROM videos")
+  pool.query("SELECT * FROM videos")
     .then((result) => {
       res.status(200).json(result.rows);
+      console.log(result.rows)
     })
     .catch((error) => {
       console.log(error);
@@ -103,7 +112,7 @@ app.get("/videos", (req, res) => {
 
 app.get("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id)
-  db.query("SELECT * FROM videos WHERE id = $1", [videoId])
+  pool.query("SELECT * FROM videos WHERE id = $1", [videoId])
     .then((result) => {
       console.log(result.rows);
       res.send(result.rows)
