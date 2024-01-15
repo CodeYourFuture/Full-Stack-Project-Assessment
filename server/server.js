@@ -13,25 +13,13 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-// db.connect(function (err) {
-//   if (err) {
-//     return console.error('error: ' + err.message);
-//   }
-//   console.log('Connected to the postgresSQL server.');
-// });
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-// let videos = AllVideos;
-
-// GET "/"
 app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
   res.send({ express: "Your Backend Service is Running" });
 });
 
@@ -76,9 +64,7 @@ app.post("/videos", (req, res) => {
       .catch(err => {
         console.log(err);
       })
-    // newVideo.id = (translator.generate()).slice(4, 10)
-    // videos.push(newVideo)
-    // res.send(videos)
+
   }
 });
 
