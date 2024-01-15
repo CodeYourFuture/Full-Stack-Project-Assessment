@@ -2,22 +2,16 @@ const express = require("express");
 const app = express();
 require('dotenv').config()
 const port = process.env.PORT || 5000;
-// const AllVideos = require("")
 const cors = require("cors");
-// const short = require('short-uuid');
-// const translator = short("12345")
 app.use(express.json());
 app.use(cors());
 
 const { Pool } = require("pg");
 const db = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  // ssl: true
+  connectionString: process.env.DB_URL,
+  ssl: { rejectUnauthorized: false },
 });
+
 
 // db.connect(function (err) {
 //   if (err) {
