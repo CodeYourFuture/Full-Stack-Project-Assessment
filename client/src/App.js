@@ -20,11 +20,14 @@ function App() {
   }, [])
   return (
     <div className="App">
+      <div className="background"></div>
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
       <AddVideoButton setAllMyVideos={setAllMyVideos} />
-      <CardHolder allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
+      <div style={{ width: "98%" }}>
+        <CardHolder allMyVideos={allMyVideos} setAllMyVideos={setAllMyVideos} />
+      </div>
     </div>
   );
 }

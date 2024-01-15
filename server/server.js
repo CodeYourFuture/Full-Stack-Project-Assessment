@@ -13,7 +13,7 @@ const pool = new Pool({
   connectionString: process.env.DB_URL,
 });
 
-console.log("DB Connection String:", process.env.DB_URL);
+console.log("DB Connection String:", pool);
 
 pool.connect((err, client, done) => {
   if (err) {
