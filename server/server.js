@@ -9,8 +9,16 @@ app.use(cors());
 
 const db = new Pool({
   connectionString: process.env.DB_URL,
-  ssl: { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
 });
+
+db.connect((err, client, done) => {
+  if (err) {
+    console.error("error connecting to the database", err)
+  } else {
+    console.log("connected to the db")
+  }
+})
 
 
 const bodyParser = require("body-parser");
