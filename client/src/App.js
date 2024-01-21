@@ -19,13 +19,15 @@ function App() {
 
  
   const toggleButton = () => {
-    setIsAsc(!isAsc);
-    console.log(isAsc)
+    setIsAsc((prevIsAsc) => !prevIsAsc);
   };
   
+  
   useEffect(() => {
-    console.log("data working");
-    fetch(`/videos?order=${isAsc ? "asc" : "desc"}`)
+    const fetchURL = `http://localhost:5000/videos?order=${isAsc ? "asc" : "desc"}`;
+    console.log("Fetch URL:", fetchURL);
+  
+    fetch(fetchURL)
       .then((res) => {
         if (res.status === 500) {
           throw new Error(res.status);
@@ -41,7 +43,7 @@ function App() {
       })
       .catch((error) => setError(true));
   }, [isAsc]);
-
+  
   const removeVideo = (id) => {
     axios.delete(`videos/${id}`).then((res) => {
       if (res.status === 200) {

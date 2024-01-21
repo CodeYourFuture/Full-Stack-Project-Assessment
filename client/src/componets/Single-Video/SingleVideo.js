@@ -10,12 +10,13 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
   
   const updateVideoRating = async (id, rating) => {
     try {
-      const response = await axios.patch(`/videos/${id}`, { rating });
+      const response = await axios.put(`/videos/${id}`, { rating });
       return response.data;
     } catch (error) {
       throw error;
     }
   };
+  
  
   function handleIncrement() {
     SetRating((prev) => prev + 1);

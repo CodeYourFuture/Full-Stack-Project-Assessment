@@ -1,111 +1,124 @@
 const express = require("express");
-const app = express();
-require("dotenv").config();
+const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { Pool } = require("pg");
-const port = process.env.PORT || 5000;
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+const dotenv = require("dotenv");
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
-app.use(bodyParser.json());
-// const videos = require("./movieData.json");
+const app = express();
+const port = process.env.PORT || 5000;
+
+const { Pool } = require("pg");
+
+// const isProduction = process.env.NODE_ENV === "production";
+// // const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
+// const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
- connectionString: process.env.DATABASE_URL,
- connectionTimeoutMillis : 6000,
- ssl: {
-  rejectUnauthorized : false
- }
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+app.get("/", (req, res) => {
+  res.send("Hello from the Server!");
+});
 
 app.get("/videos", (req, res) => {
-  const orderBy = req.query.order; 
-  console.log(orderBy)
+  const orderBy = req.query.order;
+  let query;
 
-  const query =
-    orderBy === "desc"
-      ? `SELECT * FROM videos ORDER BY rating desc`
-      : `SELECT * FROM videos ORDER BY rating`;
+  if (orderBy === "desc") {
+    query = "SELECT * FROM videos ORDER BY rating DESC";
+  } else {
+    query = "SELECT * FROM videos ORDER BY rating ASC";
+  }
 
-  pool.query(query).then((result) => res.status(200).json(result.rows));
+  pool
+    .query(query)
+    .then((result) => res.status(200).json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 });
 
-// Post videos
+// Search a video by title
+app.get("/videos/:videoTitle", function (req, res) {
+  const videoTitle = req.params.videoTitle;
+  pool
+    .query("SELECT * FROM videos WHERE id=$1", [videoTitle])
+    .then((result) => res.json(result.rows))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+
+// Add a new video
+// const videoId = Date.now();
 
 function validateYouTubeUrl(url) {
   let regExp =
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
   return url.match(regExp);
 }
+
 app.post("/videos", function (req, res) {
+  // const newVideoId = videoId
   const newtTitle = req.body.title;
   const newUrl = req.body.url;
-  const newRating = req.body.rating;
+  const newRating = 0;
+
   const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
+
   if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
     res
       .status(400)
       .json({ msg: "Please make sure to include  title and valid url" });
     return;
   }
+
   pool
     .query(query, [newtTitle, newUrl, newRating])
     .then(() => res.send("Video added!"))
     .catch((error) => {
       console.error(error);
-      res.status(500).json(error);
     });
 });
-// getting videos by id
-app.get("/videos/:id", (req, res) => {
-  const id = req.params.id;
+
+// Delete video
+app.delete("/videos/:videosId", function (req, res) {
+  const videosId = req.params.videosId;
+
+  // Assuming you have the necessary variables for the query
+  const query = "DELETE FROM videos WHERE id = $1";
 
   pool
-    .query("SELECT * FROM videos WHERE  id=$1", [id])
-    .then((result) => {
-      if (result.rows.length === 0) res.status(404).send("Id not found");
-      else res.status(200).json(result.rows);
-    })
+    .query(query, [videosId]) // Use the correct variable
+    .then(() => res.status(200).send("Video deleted!"))
     .catch((error) => {
+      console.error(error);
       res.status(500).json(error);
     });
 });
 
-// deleting by id
-app.delete("/videos/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-
+app.put("/videos/:id", (req, res) => {
+  const updateId = req.params.id;
+  const newRating = req.body.rating;
   pool
-    .query("SELECT * FROM videos WHERE id= $1", [id])
-    .then((result) => {
-      if (result.rows === 0) res.status(404).send("Video doesn't exist");
-      else {
-        pool
-          .query("DELETE FROM videos WHERE id= $1", [id])
-          .then((result) => {
-            res.status(200).send("video deleted");
-          })
-          .catch((error) => {
-            res.status(500).json(error);
-          });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json(error);
-    });
+    .query("UPDATE videos SET rating=$1 WHERE id=$2", [newRating, updateId])
+    .then(() => res.status(201).send({ success: "Rating has been updated" }))
+    .catch((error) => console.log(error));
 });
-
-app.patch("/videos/:id", async (req, res) => {
-  try {
-    const id = parseInt(req.params.id);
-    const rating = req.body.rating || 0;
-    await pool.query("UPDATE videos SET rating = $1 WHERE id = $2", [rating, id]);
-    res.status(200).send("Video updated");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
