@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import config from './config.js';
 
 const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url } = video;
-  const [rating, setRating] = useState(video.rating)
-  
+
   function embedVideos(url) {
     if (url.includes("watch?v=")) {
       const videoId = url.split("watch?v=")[1];
-
       return `https://www.youtube.com/embed/${videoId}`;
     } else {
-
       return url;
     }
   }
@@ -23,7 +20,6 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
       });
   
       if (response.status === 200) {
-        
         removeVideo(id); 
       } else if (response.status === 404) {
         console.error('Video not found on the backend.');
@@ -34,31 +30,23 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
       console.error('An error occurred while deleting the video:', error);
     }
   }
-  
-    
-   function handleUpVote() {
-    setRating(rating + 1);
-  }
-  
-    function handleDownVote() {
-    setRating(rating - 1);
-  }
 
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title">{video.title}</h5>
+        <h5 className="card-title">{title}</h5>
         <p className="card-text">Upvotes: {video.upVotes} | Downvotes: {video.downVotes}</p>
-        <a href={video.url} className="btn btn-primary">Watch Video</a>
+        <a href={embedVideos(url)} className="btn btn-primary">Watch Video</a>
         <button onClick={() => upVote(video.id)} className="btn btn-success mx-2">Upvote</button>
         <button onClick={() => downVote(video.id)} className="btn btn-danger">Downvote</button>
-        <button onClick={() => removeVideo(video.id)} className="btn btn-secondary mx-2">Remove</button>
+        <button onClick={handleRemoveVideo} className="btn btn-secondary mx-2">Remove</button>
       </div>
     </div>
   );
 }
 
 export default Videocard;
+
 
 
 
