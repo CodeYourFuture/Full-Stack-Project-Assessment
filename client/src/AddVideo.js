@@ -36,24 +36,35 @@ const AddVideo = ({ addVideo }) => {
     });
 };
 
-  return (
-    <div className='add-video'>
-      <h2>Add a New Video</h2>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <button onClick={handleAddVideo}>Add Video</button>
-    </div>
-  );
-};
+return (
+  <div className="mb-3">
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label htmlFor="title" className="form-label">Video Title</label>
+        <input
+          type="text"
+          className="form-control"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="url" className="form-label">Video URL</label>
+        <input
+          type="url"
+          className="form-control"
+          id="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">Add Video</button>
+    </form>
+  </div>
+);
+}
 
 export default AddVideo;
