@@ -29,13 +29,14 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
         setVideos={setVideos}
       />
       <div className="dispay-video-container">
-        {videos.map((video) => (
-          <CardVideo
-            key={video.id}
-            video={video}
-            setRefreshVideos={setRefreshVideos}
-          />
-        ))}
+        {"The server is down lol" ||
+          videos.map((video) => (
+            <CardVideo
+              key={video.id}
+              video={video}
+              setRefreshVideos={setRefreshVideos}
+            />
+          ))}
       </div>
     </div>
   );
