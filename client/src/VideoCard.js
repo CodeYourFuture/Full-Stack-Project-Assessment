@@ -2,7 +2,7 @@ import React from 'react';
 import config from './config.js';
 
 const Videocard = ({ video, removeVideo, upVote, downVote }) => {
-  const { id, title, url } = video;
+  const { id, title, url, upVotes, downVotes } = video;
 
   function embedVideos(url) {
     if (url.includes("watch?v=")) {
@@ -35,10 +35,10 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
-        <p className="card-text">Upvotes: {video.upVotes} | Downvotes: {video.downVotes}</p>
-        <a href={embedVideos(url)} className="btn btn-primary">Watch Video</a>
-        <button onClick={() => upVote(video.id)} className="btn btn-success mx-2">Upvote</button>
-        <button onClick={() => downVote(video.id)} className="btn btn-danger">Downvote</button>
+        <iframe src={embedVideos(url)} title={title} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
+        <p className="card-text">Upvotes: {upVotes} | Downvotes: {downVotes}</p>
+        <button onClick={() => upVote(id)} className="btn btn-success mx-2">Upvote</button>
+        <button onClick={() => downVote(id)} className="btn btn-danger">Downvote</button>
         <button onClick={handleRemoveVideo} className="btn btn-secondary mx-2">Remove</button>
       </div>
     </div>
