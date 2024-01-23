@@ -94,4 +94,25 @@ app.delete("/videos/:id", async (req, res) => {
 }
 });
 
+// POST a vote
+app.post("/vote", async (req, res) => {
+  const { video_id, vote_type } = req.body;
+  try {
+    await pool.query("BEGIN");
+    const voteQuery = "INSERT INTO votes (video_id, vote_type) VALUES ($1, $2)";
+    await pool.query(voteQuery, [video_id, vote_type]);
+
+    const updateRating = (vote_type === 'upvote') ? 
+                         "UPDATE videos SET rating = rating + 1 WHERE id = $1" :
+                         "UPDATE videos SET rating = rating - 1 WHERE id = $1";
+    await pool.query(updateRating, [video_id]);
+    
+    await pool.query("COMMIT");
+    res.json({ message: "Vote recorded" });
+  } catch (error) {
+    await pool.query("ROLLBACK");
+    res.status(500).json({ error: "An error occurred while processing your vote" });
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
