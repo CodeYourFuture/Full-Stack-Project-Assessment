@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import config from './config.js';
 
 const Videocard = ({ video, removeVideo, upVote, downVote }) => {
   const { id, title, url } = video;
@@ -17,7 +18,7 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
 
   async function handleRemoveVideo() {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/videos/${id}`, {
+      const response = await fetch(`${config.REACT_APP_BACKEND_URL}/videos/${id}`, {
         method: 'DELETE',
       });
   

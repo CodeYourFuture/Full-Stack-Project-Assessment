@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import config from './config.js';
 
 
 const AddVideo = ({ addVideo }) => {
@@ -11,7 +12,7 @@ const AddVideo = ({ addVideo }) => {
       url:url,
       rating: 0,
      };
-     fetch(`${process.env.REACT_APP_BACKEND_URL}/videos`, {
+     fetch(`${config.REACT_APP_BACKEND_URL}/videos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

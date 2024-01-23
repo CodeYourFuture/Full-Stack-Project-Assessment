@@ -16,7 +16,7 @@ const VideoLists = () => {
      const fetchVideos = 
       async () => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/videos`);
+          const response = await fetch(`${config.REACT_APP_BACKEND_URL}/videos`);
           if (!response.ok) {
             throw new Error('Failed to fetch videos');
           }
