@@ -15,18 +15,12 @@ const { body, validationResult } = require("express-validator");
 const port = process.env.PORT || 3000;
 const { Pool } = require("pg");
 
-// const db = new Pool({
-//   user: "shadifakhri", 
-//   host: "localhost",
-//   database: "database",
-//   password: "",
-//   port: 5432,
-// });
+
 
 
 
 const db = new Pool({
-  connectionString: process.env.DB_URL 
+   connectionString: process.env.DB_URL 
   // user: process.env.DB_USER,
   // host: process.env.DB_HOST,
   // database: process.env.DB_NAME,
