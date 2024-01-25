@@ -19,26 +19,17 @@ const { Pool } = require("pg");
 
 
 
-// const db = new Pool({
+const db = new Pool({
    
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   database: process.env.DB_NAME,
-//   password: process.env.DB_PASSWORD,
-//   port: process.env.DB_PORT,
-//     ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : false
-// });
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+    ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : false
+});
 
-// const db = new Pool({
-//   user: "postgres",
-//   host: "databasefullstackaws.cp24g8440hok.eu-north-1.rds.amazonaws.com",
-//   password: "0991shadI",
-//   port: 5432,
-//   ssl: {
-//     rejectUnauthorized: false,
-//     require:true,
-//   },
-// });
+
 
 app.get("/", function (req, res) {
   res.status(200).json("wellcome");
