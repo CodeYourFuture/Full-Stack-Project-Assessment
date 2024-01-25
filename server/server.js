@@ -35,7 +35,9 @@ const db = new Pool({
   password: "0991shadI",
   port: 5432,
   ssl: {
-    rejectUnauthorized: false, },
+    rejectUnauthorized: false,
+    require:true,
+  },
 });
 
 app.get("/", function (req, res) {
