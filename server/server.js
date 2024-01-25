@@ -29,16 +29,16 @@ const { Pool } = require("pg");
 //     ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : false
 // });
 
-const db = new Pool({
-  user: "postgres",
-  host: "databasefullstackaws.cp24g8440hok.eu-north-1.rds.amazonaws.com",
-  password: "0991shadI",
-  port: 5432,
-  ssl: {
-    rejectUnauthorized: false,
-    require:true,
-  },
-});
+// const db = new Pool({
+//   user: "postgres",
+//   host: "databasefullstackaws.cp24g8440hok.eu-north-1.rds.amazonaws.com",
+//   password: "0991shadI",
+//   port: 5432,
+//   ssl: {
+//     rejectUnauthorized: false,
+//     require:true,
+//   },
+// });
 
 app.get("/", function (req, res) {
   res.status(200).json("wellcome");
