@@ -5,6 +5,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ConvertToEmbedUrl from "../functions/Embed"
 
 function VideoCard(props) {
   const deleteIcon = <DeleteForeverIcon />;
@@ -16,12 +17,13 @@ function VideoCard(props) {
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [rate, setRate] = useState(props.rating);
+  const embedUrl = ConvertToEmbedUrl(props.url)
   return (
     <div className="card" style={{ width: "330px", height: "350px" }}>
       <iframe
         width="auto"
         height="315"
-        src={`https://www.youtube.com/embed/${props?.url?.slice(-11)}`}
+        src={`https://www.youtube.com/embed/${embedUrl}`}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

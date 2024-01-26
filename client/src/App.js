@@ -8,28 +8,27 @@ function App() {
   const [sort, setSort] = useState(true); // true up , false down
 
   useEffect(() => {
-      const dataFetch = async () => {
-        await fetch("https://fs-assesment-server.onrender.com/videos")
-          .then((response) => response.json())
-          .then((newdata) => {
-            if (sort) {
-              newdata.videos.sort((r1, r2) => {
-                return r2.rating - r1.rating;
-              });
-            } else {
-              newdata.videos.sort((r1, r2) => {
-                return r1.rating - r2.rating;
-              });
-            }
-            setData(newdata);
-          });
-      };
+    const dataFetch = async () => {
+      await fetch("http://localhost:5001")
+        .then((response) => response.json())
+        .then((newdata) => {
+          let sortedData = [...newdata]; // Create a copy of the array to avoid mutating the original array
+
+          if (sort) {
+            sortedData.sort((r1, r2) => r2.rating - r1.rating);
+          } else {
+            sortedData.sort((r1, r2) => r1.rating - r2.rating);
+          }
+          console.log(sortedData)
+          setData(sortedData);
+        });
+    };
+
     dataFetch();
-    console.log("data is fetched");
-  }, [data]);
+  }, []);
 
   const deleteHandle = (id) => {
-    fetch(`https://fs-assesment-server.onrender.com/videos/${id}`, {
+    fetch(`http://localhost:5001/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -51,7 +50,7 @@ function App() {
       date: date,
     };
 
-    fetch("https://fs-assesment-server.onrender.com/videos", {
+    fetch("http://localhost:5001", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,8 +91,8 @@ function App() {
         <button onClick={sortVideos}>{sort ? "Down" : "Up"}</button>
       </div>
       <div className="video-cards">
-        {data.videos &&
-          data.videos.map((video) => (
+        {data &&
+          data.map((video) => (
             <VideoCard
               key={video.id}
               url={video.url}
