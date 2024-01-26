@@ -1,32 +1,27 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5050;
-const cors = require("cors");
 const videosPool = require("./DBConfig");
 
 require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-
-//const videosList = require("../exampleresponse.json");
-
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-//let videos = [...videosList];
-
-// GET "/"
-app.get("/", (req, res) => {
+app.get("/", () => {
   res.send({ express: "Your Backend Service is Running" });
 });
 
-app.get("/videos", async (req, res) => {
-  const allVideos = await videosPool.query("SELECT * FROM videos");
-  console.log(allVideos.rows);
-  res.json(allVideos.rows);
-});
+app.get("/videos", async  (req, res) =>{
+    const allVideos = await videosPool
+    .query("SELECT * FROM videos");
+
+    res.json(allVideos.rows);
+  });
+
+
 
 app.post("/videos", async (req, res) => {
   const { title, url } = req.body;

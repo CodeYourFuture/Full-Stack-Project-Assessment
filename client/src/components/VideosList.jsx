@@ -5,27 +5,35 @@ import "../index.css";
 import Search from "./Search";
 
 function VideosList() {
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchResult, setSearchResult] = useState([]);
+  const [ videos, setVideos ] = useState([]);
+  const [ loading, setLoading ] = useState(true);
+  const [ searchResult, setSearchResult ] = useState([]);
+
+  const fetchVideosUrl = 'https://node-videos-service.onrender.com';
+
+  //const fetchVideosUrl = 'http://localhost:5050';
 
   useEffect(() => {
-    fetch("https://node-server-full-stack.onrender.com/videos")
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = () => {
+    fetch(`${fetchVideosUrl}/videos`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setVideos(data);
+        setSearchResult(data);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  };
 
   const newVideo = (newInput) => {
     newInput.id = videos.length + 1;
     newInput.rating = 0;
-    fetch("https://node-server-full-stack.onrender.com/videos", {
+    fetch(`${fetchVideosUrl}/videos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
@@ -33,12 +41,10 @@ function VideosList() {
       body: JSON.stringify(newInput),
     })
       .then((res) => {
-        fetchVideos();
-        return res.json();
-      })
-      .then((data) => {
-        if (data && data.message === "Video stored successfully") {
-          setVideos([...videos, newInput]);
+        if (res.ok) {
+          setVideos([ ...videos, newInput ]);
+        } else {
+          throw new Error('Network response was not ok');
         }
       })
       .catch((error) => {
@@ -48,54 +54,67 @@ function VideosList() {
   };
 
   const deleteVideoItem = (videoId) => {
-    fetch(`https://node-server-full-stack.onrender.com/videos/${videoId}`, {
+    fetch(`${fetchVideosUrl}/videos/${videoId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/JSON",
       },
-    }).then((res) => {
-      if (!res.ok) {
+    })
+      .then((res) => {
+        if (res.ok) {
+          const videoDeleted = videos.filter((el) => el.id !== videoId);
+          setVideos(videoDeleted);
+        } else {
           throw new Error('Network response was not ok');
-      }
-      const videoDeleted = videos.filter((el) => el.id !== videoId);
-      setVideos(videoDeleted);
-  })
-  };
-
-  const fetchVideos = () => {
-    fetch("https://node-server-full-stack.onrender.com/videos")
-      .then((res) => res.json())
-      .then((data) => {
-        setVideos(data);
-        searchResult(data);
+        }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error:", error);
+        alert("Something went wrong");
       });
   };
+
   const searchByName = (search) => {
-    fetch(`https://node-server-full-stack.onrender.com/videos/${search}`, {
+    fetch(`${fetchVideosUrl}/videos?search=${search}`, {
       method: "GET",
-      headers: { "content-type": "application/JSON" },
+      headers: { "Content-Type": "application/JSON" },
     })
       .then((res) => res.json())
       .then((data) => {
         setSearchResult(data);
-        console.log(data)
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Something went wrong");
       });
   };
-  const sortedVideos = [...videos].sort((a, b) => b.rating - a.rating);
+
+  const sortedVideos = [ ...videos ].sort((a, b) => b.rating - a.rating);
+
   return (
     <>
       <Search onSearch={searchByName} />
       <AddVideo onVidAdd={newVideo} />
       <div className="container mt-5">
         {searchResult.length > 0 ? (
-          searchResult.map((video) => <Video videoObj={video} key={video.id} deleteVideo={deleteVideoItem} />)
+          searchResult.map((video) => (
+            <Video
+              videoObj={video}
+              key={video.id}
+              deleteVideo={deleteVideoItem}
+            />
+          ))
         ) : loading ? (
           <p>Loading...</p>
         ) : (
-          sortedVideos.map((video) => <Video videoObj={video} key={video.id} deleteVideo={deleteVideoItem} />)
+          sortedVideos.map((video) => (
+            <Video
+              videoObj={video}
+              key={video.id}
+              deleteVideo={deleteVideoItem}
+            />
+          ))
         )}
       </div>
     </>
