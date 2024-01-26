@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 
-const port = process.env.PORT || 5001;
+//const port = process.env.PORT || 5001;
 
 app.use(cors());
 
@@ -56,4 +56,6 @@ app.get("/:id", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+//app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;
