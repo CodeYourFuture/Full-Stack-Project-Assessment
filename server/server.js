@@ -7,13 +7,22 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors());
 
+// const db = new Pool({
+//   user: process.env.db_user,
+//   host: process.env.db_host,
+//   database: process.env.db_name,
+//   password: process.env.db_password,
+//   port: process.env.db_port,
+//   ssl: true,
+// });
+
 const db = new Pool({
-  user: process.env.db_user,
-  host: process.env.db_host,
-  database: process.env.db_name,
-  password: process.env.db_password,
-  port: process.env.db_port,
-  ssl: true,
+  user: "cyf",
+  host: "localhost",
+  database: "build-videodb",
+  password: "glasgow321!",
+  port: 5432,
+  //ssl: true,
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
