@@ -1,15 +1,20 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
+import "dotenv/config";
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+import http from "node:http";
+import { connectDb, disconnectDb } from "./db.js";
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [];
+import app from "./app.js";
 
-// GET "/"
-app.get("/", (req, res) => {
-  // Delete this line after you've confirmed your server is running
-  res.send({ express: "Your Backend Service is Running" });
+// after configuring the routes we can now create the node server and start it up
+const server = http.createServer(app);
+const port = parseInt(process.env.PORT ?? "3000", 10);
+
+server.on("listening", () => {
+	const addr = server.address();
+	const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+	console.log(`listening on: ${bind}`);
 });
+
+process.on("SIGTERM", () => server.close(() => disconnectDb()));
+
+connectDb().then(() => server.listen(port));
