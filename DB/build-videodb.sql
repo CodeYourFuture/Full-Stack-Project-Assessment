@@ -20,5 +20,7 @@ INSERT INTO videos VALUES(858566,'Videos for Cats to Watch - 8 Hour Bird Bonanza
 
 INSERT INTO videos VALUES(283634,'Learn Unity - Beginner''s Game Development Course','https://www.youtube.com/watch?v=gB1F9G0JXOo',211);
 
+INSERT INTO videos VALUES(787878,'Neo Soul Lofi','https://www.youtube.com/watch?v=WJktfqMP7yY',300);
+
 
 
