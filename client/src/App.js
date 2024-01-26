@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const dataFetch = async () => {
-      await fetch("http://localhost:5001")
+      await fetch("https://full-stack-aws-server.vercel.app/")
         .then((response) => response.json())
         .then((newdata) => {
           let sortedData = [...newdata]; // Create a copy of the array to avoid mutating the original array
@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   const deleteHandle = (id) => {
-    fetch(`http://localhost:5001/${id}`, {
+    fetch(`https://full-stack-aws-server.vercel.app//${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -50,7 +50,7 @@ function App() {
       date: date,
     };
 
-    fetch("http://localhost:5001", {
+    fetch("https://full-stack-aws-server.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
