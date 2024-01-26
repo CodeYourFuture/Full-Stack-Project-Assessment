@@ -25,7 +25,7 @@ function App() {
     };
 
     dataFetch();
-  }, []);
+  }, [sort]);
 
   const deleteHandle = (id) => {
     fetch(`https://full-stack-aws-server.vercel.app/${id}`, {
@@ -47,7 +47,6 @@ function App() {
       title: title,
       url: url,
       rating: randomRate,
-      date: date,
     };
 
     fetch("https://full-stack-aws-server.vercel.app/", {
@@ -59,7 +58,7 @@ function App() {
     })
       .then((response) => response.json())
       .then(() => {
-        setData([...data, data.item[0]]);
+        setData([...data, newVideo]);
       })
       .catch((error) => {
         console.error("Error adding video:", error);
