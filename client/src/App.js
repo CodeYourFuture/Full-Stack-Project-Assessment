@@ -3,14 +3,16 @@ import "./App.css";
 import Header from "./components/Header";
 import AddVideo from "./components/AddVideo";
 import VideoCards from "./components/VideoCards";
+import config from "./config";
 
-const baseUrl = "https://video-recommendation-hr7c.onrender.com";
+const baseUrl = config.REACT_APP_BACKEND_URL;
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [search, setNewSearch] = useState("");
 
   useEffect(() => {
+    console.log(baseUrl);
     fetch(`${baseUrl}`)
       .then((response) => response.json())
       .then((data) => setVideos(data))
@@ -18,7 +20,7 @@ function App() {
   }, []);
 
   const handleAddVideo = (newVideo) => {
-    fetch(`${baseUrl}/`, {
+    fetch(`${baseUrl}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,21 +35,22 @@ function App() {
       .catch((error) => console.error("Error adding video:", error));
   };
 
-  const handleRemove = (title) => {
-    const updatedVideos = videos.filter((video) => video.title !== title);
+  const handleRemove = (id) => {
+    const updatedVideos = videos.filter((video) => video.id !== id);
     setVideos(updatedVideos);
 
-    fetch(`${title}`, {
+    fetch(`${baseUrl}/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then((result) => {
         if (result["result"] !== "failure") {
-          handleAddVideo();
+          console.log("Video deleted successfully with ID:", id);
         } else {
-          console.log("could not delete");
+          console.log("Could not delete video");
         }
-      });
+      })
+      .catch((error) => console.error("Error deleting video:", error));
   };
 
   const handleSearch = (event) => {

@@ -1,111 +1,83 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const { Pool } = require("pg");
+require("dotenv").config();
+
 const app = express();
-const port = 80;
+const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// Store and retrieve your videos from here
-// If you want, you can copy "exampleresponse.json" into here to have some data to work with
-let videos = [
-  {
-    id: 523523,
-    title: "Never Gonna Give You Up",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    rating: 23,
-  },
-  {
-    id: 523427,
-    title: "The Coding Train",
-    url: "https://www.youtube.com/watch?v=HerCR8bw_GE",
-    rating: 230,
-  },
-  {
-    id: 82653,
-    title: "Mac & Cheese | Basics with Babish",
-    url: "https://www.youtube.com/watch?v=FUeyrEN14Rk",
-    rating: 2111,
-  },
-  {
-    id: 858566,
-    title: "Videos for Cats to Watch - 8 Hour Bird Bonanza",
-    url: "https://www.youtube.com/watch?v=xbs7FT7dXYc",
-    rating: 11,
-  },
-  {
-    id: 453538,
-    title:
-      "The Complete London 2012 Opening Ceremony | London 2012 Olympic Games",
-    url: "https://www.youtube.com/watch?v=4As0e4de-rI",
-    rating: 3211,
-  },
-  {
-    id: 283634,
-    title: "Learn Unity - Beginner's Game Development Course",
-    url: "https://www.youtube.com/watch?v=gB1F9G0JXOo",
-    rating: 211,
-  },
-  {
-    id: 562824,
-    title: "Cracking Enigma in 2021 - Computerphile",
-    url: "https://www.youtube.com/watch?v=RzWB5jL5RX0",
-    rating: 111,
-  },
-  {
-    id: 442452,
-    title: "Coding Adventure: Chess AI",
-    url: "https://www.youtube.com/watch?v=U4ogK0MIzqk",
-    rating: 671,
-  },
-  {
-    id: 536363,
-    title: "Coding Adventure: Ant and Slime Simulations",
-    url: "https://www.youtube.com/watch?v=X-iSQQgOd1A",
-    rating: 76,
-  },
-  {
-    id: 323445,
-    title: "Why the Tour de France is so brutal",
-    url: "https://www.youtube.com/watch?v=ZacOS8NBK6U",
-    rating: 73,
-  },
-];
+// PostgreSQL connection pool
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app
+  .listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  })
+  .on("error", (err) => {
+    console.error("Server error:", err);
+  });
 
 // GET "/"
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const { order } = req.query;
-  let orderedVideos = [...videos];
+  let orderBy = "rating DESC";
+
   if (order === "asc") {
-    orderedVideos.sort((a, b) => a.rating - b.rating);
-  } else {
-    orderedVideos.sort((a, b) => b.rating - a.rating);
+    orderBy = "rating ASC";
   }
 
-  res.json(orderedVideos);
+  try {
+    const result = await pool.query(`SELECT * FROM videos ORDER BY ${orderBy}`);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // GET "/{id}"
-app.get("/:id", (req, res) => {
+app.get("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
-
-  const video = videos.find((v) => v.id === id);
-
-  if (!video) {
-    res.status(404).json({
+  if (isNaN(id)) {
+    res.status(400).json({
       result: "failure",
-      message: "Video not found",
+      message: "Invalid video ID",
     });
     return;
   }
 
-  res.json(video);
+  try {
+    const result = await pool.query("SELECT * FROM videos WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        result: "failure",
+        message: "Video not found",
+      });
+    } else {
+      res.json(result.rows[0]);
+    }
+  } catch (error) {
+    console.error("Error fetching video by ID:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.post("/", (req, res) => {
-  // adding the checks here after suggested by Jonathan so front-end can be cleaner
+// POST "/"
+app.post("/", async (req, res) => {
   const { title, url } = req.body;
 
   if (
@@ -119,39 +91,43 @@ app.post("/", (req, res) => {
     });
   }
 
-  let newId = 0;
-  while (videos.some((video) => video.id === newId)) {
-    newId += 1;
-  }
+  try {
+    const result = await pool.query(
+      "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3) RETURNING id",
+      [title, url, 0]
+    );
+    const newId = result.rows[0].id;
 
-  videos = [
-    {
-      id: newId,
-      title: title,
-      url: url,
-      rating: 0,
-    },
-    ...videos,
-  ];
-  return res.status(201).json({
-    id: newId,
-  });
+    res.status(201).json({ id: newId });
+  } catch (error) {
+    console.error("Error inserting new video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
 // DELETE "/{id}"
-app.delete("/:id", (req, res) => {
+app.delete("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
+  console.log(`Received DELETE request for video with ID: ${id}`);
 
-  const index = videos.findIndex((v) => v.id === id);
+  try {
+    const result = await pool.query(
+      "DELETE FROM videos WHERE id = $1 RETURNING id",
+      [id]
+    );
 
-  if (index === -1) {
-    res.status(404).json({
-      result: "failure",
-      message: "Video not found",
-    });
-    return;
+    if (result.rows.length === 0) {
+      console.log(`Video with ID ${id} not found`);
+      res.status(404).json({
+        result: "failure",
+        message: "Video not found",
+      });
+    } else {
+      console.log(`Video with ID ${id} deleted successfully`);
+      res.status(204).send();
+    }
+  } catch (error) {
+    console.error("Error deleting video by ID:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-
-  videos.splice(index, 1);
-
-  res.status(204).send();
 });

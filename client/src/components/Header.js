@@ -7,7 +7,10 @@ function Header({ search, onSearch }) {
   };
 
   return (
-    <nav className="navbar navbar-light bg-light justify-content-between">
+    <nav
+      className="navbar navbar-light  justify-content-between"
+      style={{ backgroundColor: "#3F647F" }}
+    >
       <span className="navbar-brand">Video Recommendation</span>
       <form className="form-inline">
         <input
