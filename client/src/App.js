@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   const deleteHandle = (id) => {
-    fetch(`https://full-stack-aws-server.vercel.app//${id}`, {
+    fetch(`https://full-stack-aws-server.vercel.app/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

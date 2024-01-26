@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 
-//const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5001;
 
 app.use(cors());
 
@@ -56,6 +56,48 @@ app.get("/:id", async (req, res) => {
   }
 });
 
-//app.listen(port, () => console.log(`Listening on port ${port}`));
+// Delete video by ID
+app.delete("/:id", async (req, res) => {
+  const id = req.params.id;
 
-module.exports = app;
+  try {
+    const { error } = await supabase.from("allinone").delete().eq("id", id);
+
+    if (error) {
+      console.error("Supabase error:", error.message);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    res.status(200).json({ message: `Video with id ${id} deleted successfully` });
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Add new video
+app.post("/", async (req, res) => {
+  const { title, url, rating } = req.body;
+
+  try {
+    const { data, error } = await supabase
+      .from("allinone")
+      .insert([{ title, url, rating }]);
+
+    if (error) {
+      console.error("Supabase error:", error.message);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    res.status(201).json(data);
+  } catch (error) {
+    console.error("Error adding video:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+//module.exports = app;
