@@ -15,12 +15,10 @@ const { Pool } = require("pg");
 // const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL,
 });
+
+// ...
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(bodyParser.json());
@@ -53,10 +51,13 @@ app.get("/videos", (req, res) => {
 });
 
 // Search a video by title
+// Search a video by title
 app.get("/videos/:videoTitle", function (req, res) {
   const videoTitle = req.params.videoTitle;
+
+  // Use the correct column name (title) in the WHERE clause
   pool
-    .query("SELECT * FROM videos WHERE id=$1", [videoTitle])
+    .query("SELECT * FROM videos WHERE title=$1", [videoTitle])
     .then((result) => res.json(result.rows))
     .catch((error) => {
       console.error(error);
