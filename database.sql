@@ -19,9 +19,6 @@ INSERT INTO videos (title,url,rating)
 VALUES('Videos for Cats to Watch - 8 Hour Bird Bonanza','https://www.youtube.com/watch?v=xbs7FT7dXYc',11);
 
 INSERT INTO videos (title,url,rating)
-VALUES('The Complete London 2012 Opening Ceremony | London 2012 Olympic Games','https://www.youtube.com/watch?v=4As0e4de-rI',3211);
-
-INSERT INTO videos (title,url,rating)
 VALUES('Learn Unity - Beginners Game Development Course','https://www.youtube.com/watch?v=gB1F9G0JXOo',211);
 
 INSERT INTO videos (title,url,rating)

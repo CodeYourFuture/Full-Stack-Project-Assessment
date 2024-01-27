@@ -14,7 +14,7 @@ function App() {
     const getData = async () => {
       try {
         const response = await fetch(
-          "https://web-server-5nme.onrender.com/videos"
+          "https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos"
         );
         if (!response.ok) {
           throw new Error("something went wrong");

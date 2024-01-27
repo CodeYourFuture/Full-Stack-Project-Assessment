@@ -23,13 +23,16 @@ function Videos(props) {
     const newVideo = { title: title, url: url, rating: 0 };
 
     //adding video
-    fetch("https://web-server-5nme.onrender.com/videos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newVideo),
-    })
+    fetch(
+      "https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         const updatedData = [...loadVideo, data];
@@ -71,13 +74,16 @@ function Videos(props) {
 
   //deleting video
   function deleteBtnHandler(item) {
-    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    })
+    fetch(
+      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to delete video");
@@ -104,13 +110,16 @@ function Videos(props) {
       rating: newRating, // Use the updated rating
     };
 
-    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newVideo),
-    })
+    fetch(
+      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         const updatedData = loadVideo.map((video) => {
@@ -136,13 +145,16 @@ function Videos(props) {
       rating: newRating,
     };
 
-    fetch(`https://web-server-5nme.onrender.com/videos/${item.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newVideo),
-    })
+    fetch(
+      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVideo),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         const updatedData = loadVideo.map((video) => {
