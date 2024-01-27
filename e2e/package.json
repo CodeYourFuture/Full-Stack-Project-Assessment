@@ -1,0 +1,21 @@
+{
+	"name": "@video-recommendations/e2e",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Playwright end-to-end tests",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"test": "cross-env NODE_ENV=test playwright test",
+		"test:ui": "cross-env NODE_ENV=test playwright test --ui",
+		"test:headed": "cross-env NODE_ENV=test playwright test --headed"
+	},
+	"keywords": [],
+	"author": "Code Your Future <mail@codeyourfuture.io>",
+	"license": "ISC",
+	"devDependencies": {
+		"@playwright/test": "^1.41.1",
+		"eslint-plugin-playwright": "^0.22.1",
+		"playwright": "^1.40.1"
+	}
+}

@@ -4,20 +4,11 @@
 
 Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
 
-This means that we need to be sure that you can create a Full Stack app.
+This means that we need to be sure that you can create and deploy Full Stack application.
 
 ## Challenge
 
-In this project you will be building a project that fulfills the following User Stories
-
-- As a user, I want to be able to view a list of all YouTube videos posted on the site
-- As a user, I want to be able to post videos that I like from YouTube to my website.
-- As a user, I want to be able to delete videos from the website that I no longer like.
-- As a user, I want to be able to watch the videos embedded in the website.
-- As a user, I want to be able to "Up Vote" a video if I like it.
-- As a user, I want to be able to "Down Vote" a video if I dislike.
-
-You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+In this project you will be building up a small project that allows you to share your favourite Youtube videos with the world. We will be starting up with a very small MVP (Minimal Viable Product), and built on top of it to make it nicer and more useful.
 
 ## Levels
 
@@ -25,51 +16,67 @@ This project is split into several levels that you should complete each week of 
 
 You can find each of the levels split into separate files, linked below.
 
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+**Note:** Some of the levels are optional which means that you can build a working project without them. However, to make something really impressive you will need to complete as much as you can.
 
-### Week 1 - Front End
+### Week 1 - Minimal Viable Product
 
-- [Level 100](./100.md)
-  - A core version of the React front end of the app
-- [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+- [Level 100](./exercises/100.md)
+  - Setting up the project
+- [Level 110](./exercises/110.md)
+  - Building up the data model
+- [Level 120](./exercises/120.md)
+  - Implementing the API
+- [Level 130](./exercises/130.md)
+  - Implementing the frontend
+- [Level 150](./exercises/150.md)
+  - Checking MVP adheres to the acceptance criteria
+- [Level 199](./exercises/199.md) (Optional)
+  - Implementing code quality improvements
 
-### Week 2 - Back End (without Database)
+### Week 2 - Additional features
 
-- [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
-- [Level 250](./250.md)
-  - Connect your Front End and Back End together
-- [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
+- [Level 200](./exercises/200.md)
+  - UX Improvements
+- [Level 210](./exercises/210.md)
+  - Allowing adding videos
+- [Level 220](./exercises/220.md)
+  - Allowing the removal of videos
+- [Level 299](./exercises/299.md) (Optional)
+  - Implementing optional new features
 
-### Week 3 - Back End (with Database)
+### Week 3 - Finalizing project
 
-- [Level 300](./300.md)
-  - Integrate the back end with a database
-- [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
-- [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
+- [Level 300](./exercises/300.md)
+  - Allowing rating of videos
+- [Level 350](./exercises/350.md)
+  - Submitting solution for evaluation
+- [Level 399](./exercises/399.md) (Optional)
+  - Making project viable as a portfolio piece
 
-## Sample Solution
+### Week 4 - Stretch goals
 
-Here is an example solution of the Front End:
-
-https://vid-rec2.netlify.app/
-
-**Note:** You can design the website to look however you like.
-
-Here is an example solution for the Back End:
-
-https://video-rec.herokuapp.com
-
-## Design
-
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
+- Use this week as an extra time to implement missing required and optional features from previous weeks.
+- [Level 499](./exercises/499.md) (Optional)
+  - Additional stretch goals to make your project really stand out
 
 ## Getting Started
 
 Fork this repository and then clone it to your computer.
 
-Progress to Level 100 when you are ready.
+Progress to [Level 100](./exercises/100.md) when you are ready.
+
+## Sample Solution
+
+Here is an example solution for both frontend and backend, including all optional features:
+
+https://cyf-fsa-solution.netlify.app/
+
+**Note:** You can design the website to look however you like.
+
+## Using this project for the launch project and other portfolio pieces
+
+While you are free to use this codebase for your future projects we recommend against it. This project is set up in a way to make it easy to understand, but lacks a lot of features that would be otherwise helpful.
+
+For launch projects and future portfolio pieces we recommend that you take a look at the [Code Your Future Starter Kit](https://github.com/CodeYourFuture/cyf-final-project-starter-kit). This assessment project is a simplified version of the starter kit, with a lot of the features removed to keep it light and more understandable. In fact, some of the challenges that we ask you is to re-add these features yourself, like support for linting.
+
+Since these features will already be present in the starter kit, hence it will be a much better starting point for you to work with. And since it uses the same libraries and setup that you will learn here, we believe you will feel immediately familiar with it as well.
