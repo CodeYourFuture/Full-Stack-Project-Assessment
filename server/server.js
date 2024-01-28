@@ -1,7 +1,6 @@
 const express = require("express");
 require("dotenv").config();
 const { Pool } = require("pg");
-
 const cors = require("cors");
 
 const app = express();
@@ -16,10 +15,11 @@ const pool = new Pool({
   ssl: true,
 });
 
-app.use(cors());
+// app.use(cors()); 
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/videos", (req, res) => {
   res.json({ message: "Welcome to My Youtube Videos" });
 });
 

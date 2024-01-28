@@ -3,7 +3,6 @@ import "./styles.css";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 
-const apiUrl = "https://full-stack-videos.onrender.com" || "http://localhost:5000";
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -13,8 +12,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        // "https://full-stack-videos.onrender.com/videos"
-        (`${apiUrl}/videos`)
+        "https://full-stack-videos-project.onrender.com/videos"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data from the server");
@@ -59,9 +57,7 @@ const toggleOrder = () => {
 
 const handleRemove = (id) => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-      fetch(
-      // (`https://full-stack-videos.onrender.com/videos/${id}`
-      (`${apiUrl}/videos/${id}`), {
+      fetch(`https://full-stack-videos-project.onrender.com/videos/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
@@ -80,9 +76,7 @@ const handleRemove = (id) => {
 
   const handleAddVideo = (newVideo) => {
      
-    fetch(
-    // ("https://full-stack-videos.onrender.com/videos",
-    (`${apiUrl}/videos`),{
+    fetch("https://full-stack-videos-project.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,6 +85,7 @@ const handleRemove = (id) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("Video added successfully:", data);
         // Check if the video with the same ID already exists
         const existingVideoIndex = videos.findIndex(
           (video) => video.id === data.id
