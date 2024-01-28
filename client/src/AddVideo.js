@@ -12,7 +12,7 @@ const AddVideo = ({ onAddVideo }) => {
       const newVideo = {
         title,
         url,
-        rating: 0, // You can set the initial rating as needed
+        rating: 0, 
       };
 
      onAddVideo(newVideo); // Pass the new video data to the parent component

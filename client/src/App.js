@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
-// import videosData from "./exampleresponse.json";// I comment this line inoder to import data from the server//
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -12,7 +11,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://full-stack-server-3nzy.onrender.com/videos"
+        "https://full-stack-videos.onrender.com/videos"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data from the server");
@@ -57,7 +56,7 @@ const toggleOrder = () => {
 
 const handleRemove = (id) => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-      fetch(`https://full-stack-server-3nzy.onrender.com/videos/${id}`, {
+      fetch(`https://full-stack-videos.onrender.com/videos/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
@@ -75,9 +74,8 @@ const handleRemove = (id) => {
     };
 
   const handleAddVideo = (newVideo) => {
-    // console.log("Adding video:", newVideo); 
-    
-    fetch("https://full-stack-server-3nzy.onrender.com/videos", {
+     
+    fetch("https://full-stack-videos.onrender.com/videos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
