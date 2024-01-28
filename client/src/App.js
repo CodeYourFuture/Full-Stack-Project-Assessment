@@ -3,6 +3,11 @@ import "./styles.css";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
 
+const apiUrl = process.env.NODE_ENV === "production"
+  ? "https://full-stack-videos-project.onrender.com"
+  : "http://localhost:5000";
+
+
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -11,9 +16,10 @@ function App() {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://full-stack-videos-project.onrender.com/videos"
-      );
+      // const response = await fetch(
+      //   "https://full-stack-videos-project.onrender.com/videos"
+      // );
+      const response = await fetch(`${apiUrl}/videos`);
       if (!response.ok) {
         throw new Error("Failed to fetch data from the server");
       }
@@ -57,7 +63,8 @@ const toggleOrder = () => {
 
 const handleRemove = (id) => {
     setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id));
-      fetch(`https://full-stack-videos-project.onrender.com/videos/${id}`, {
+      // fetch(`https://full-stack-videos-project.onrender.com/videos/${id}`, {
+        fetch(`${apiUrl}/videos/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
@@ -76,7 +83,8 @@ const handleRemove = (id) => {
 
   const handleAddVideo = (newVideo) => {
      
-    fetch("https://full-stack-videos-project.onrender.com/videos", {
+    // fetch("https://full-stack-videos-project.onrender.com/videos", {
+      fetch(`${apiUrl}/videos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

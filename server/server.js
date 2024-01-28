@@ -19,7 +19,7 @@ const pool = new Pool({
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
-app.get("/videos", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "Welcome to My Youtube Videos" });
 });
 
