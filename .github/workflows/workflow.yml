@@ -14,15 +14,24 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
+      
+      - name: Clear npm cache
+        run: npm cache clean -f
 
       - name: Install dependencies
         run: npm install
       
       - name: Copy client JSON file
         run: cp client/package.json ./build/package.json
-
+      
+      - name: Debug
+        run: |
+          ls -la
+          npm run build
+          
       - name: Build Website
         run: npm run build
+
 
       - name: Set AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
