@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      working-directory: ./client
       uses: actions/checkout@v3
+      working-directory: ./client
 
     - name: Install dependencies and build app
       run: |
