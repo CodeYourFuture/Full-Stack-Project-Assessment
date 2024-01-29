@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Change working directory to client
-        run: cd client
+        run: cd ../client
 
       - name: Create build directory
         run: npm run build
