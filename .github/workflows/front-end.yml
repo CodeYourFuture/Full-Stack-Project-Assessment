@@ -9,3 +9,9 @@ jobs:
     - name: Checkout code
       working-directory: ./client
       uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm install 
+
+    - name: Build app
+      run: npm run build 
