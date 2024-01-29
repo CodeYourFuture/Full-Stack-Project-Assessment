@@ -17,6 +17,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+      
+      - name: Copy client JSON file
+        run: cp client/package.json ./build/package.json
 
       - name: Build Website
         run: npm run build
