@@ -21,10 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create build directory in client
-        run: mkdir -p client/build
-
-        - name: Debug
+      - name: Debug
         run: |
           ls -la
           npm run build
@@ -40,4 +37,4 @@ jobs:
           aws-region: eu-west-2
 
       - name: Copy to S3
-        run: aws s3 sync client/build/ s3://video-recommendations
+        run: aws s3 sync build/ s3://video-recommendations
