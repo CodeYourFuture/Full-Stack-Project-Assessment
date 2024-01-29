@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,10 +27,10 @@ jobs:
 
       - name: Build Website
         run: |
-          npx cross-env CI=false cd client && npm run build
+          npx cross-env CI=false npm run build
 
       - name: Debug
-        run: ls -la client/build
+        run: ls -la build
 
       - name: Set AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
