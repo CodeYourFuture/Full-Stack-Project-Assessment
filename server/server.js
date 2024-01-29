@@ -17,13 +17,6 @@ const pool = new Pool({
 
 // app.use(cors()); 
 app.use(cors({ origin: "http://localhost:3000" }));
-// app.use(
-//   cors({
-//     origin: process.env.CORS_ORIGIN || "http://localhost:3000",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true,
-//   })
-// );
 
 app.use(express.json());
 
