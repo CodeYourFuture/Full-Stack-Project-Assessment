@@ -24,7 +24,7 @@ function Videos(props) {
 
     //adding video
     fetch(
-      "https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos",
+      "http://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos",
       {
         method: "POST",
         headers: {
@@ -75,7 +75,7 @@ function Videos(props) {
   //deleting video
   function deleteBtnHandler(item) {
     fetch(
-      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      `http://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
       {
         method: "DELETE",
         headers: {
@@ -111,7 +111,7 @@ function Videos(props) {
     };
 
     fetch(
-      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      `http://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
       {
         method: "PUT",
         headers: {
@@ -146,7 +146,7 @@ function Videos(props) {
     };
 
     fetch(
-      `https://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
+      `http://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos/${item.id}`,
       {
         method: "PUT",
         headers: {
