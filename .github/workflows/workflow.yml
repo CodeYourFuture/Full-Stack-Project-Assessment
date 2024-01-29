@@ -24,10 +24,7 @@ jobs:
       - name: Create build directory in client
         run: mkdir -p client/build
 
-      - name: Copy client JSON file
-        run: cp client/package.json client/build/package.json
-
-      - name: Debug
+        - name: Debug
         run: |
           ls -la
           npm run build
