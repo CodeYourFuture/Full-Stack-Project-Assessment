@@ -1,38 +1,34 @@
-name: Push-to-EC2
+name: Deploy
 
-# Trigger deployment only on push to main branch
 on:
   push:
-    branches:
-      - main
+    branches: main
 
 jobs:
-  deploy:
-    name: Deploy to EC2 on master branch push
+  Deploy:
+    name: Deploy to EC2
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2 
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
+      - name: Build & Deploy
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-
-      - name: Executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            sudo apt-get -y update
-            sudo apt-get install -y apache2
-            sudo systemctl start apache2
-            sudo systemctl enable apache2
-            cd server
-            sudo mv * /var/www/html
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{ secrets.HOST_DNS }}
+          USER_NAME: ${{ secrets.USERNAME }}
+      
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+              # Now we have got the access of EC2 and we will start the deploy.
+              cd /home/ubuntu/.video-app &&
+              sudo npm i &&
+              sudo npm run build &&
+              sudo systemctl daemon-reload &&
+              sudo systemctl enable myapp.service &&
+              sudo systemctl start myapp.service
+          '
