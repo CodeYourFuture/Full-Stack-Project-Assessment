@@ -3,5 +3,8 @@
     "mysql": "^2.18.1",
     "parse-database-url": "^0.3.0",
     "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "build": "npm-run-build"
   }
 }
