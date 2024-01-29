@@ -1,0 +1,29 @@
+{
+  "name": "to-do-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "server": "node server.js",
+    "start": "nodemon node server.js",
+    "build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "db": "^4.0.1",
+    "dotenv": "^16.3.1",
+    "env": "^0.0.2",
+    "express": "^4.17.1",
+    "pg": "^8.11.3",
+    "react-scripts": "^5.0.1",
+    "short-uuid": "^4.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

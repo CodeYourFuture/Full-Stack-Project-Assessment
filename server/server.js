@@ -1,38 +1,46 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
+
 const dotenv = require("dotenv");
 dotenv.config();
+
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  connectionString: process.env.DB_URL,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false,
+    require: true,
+  },
 });
-
-console.log("DB Connection String:", pool);
 
 pool.connect((err, client, done) => {
   if (err) {
     console.error("Error connecting to the database:", err);
   } else {
-    console.log("Connected to the database");
+    client.release();
   }
+});
+
+pool.on("error", (err, client) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
 });
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
-
-
 
 app.put("/videos/:id", async (req, res) => {
   const videoId = req.params.id;
@@ -50,11 +58,10 @@ app.put("/videos/:id", async (req, res) => {
   }
 });
 
-
 app.post("/videos", (req, res) => {
-  let newVideoTitle = req.body.title
-  let newVideoURL = req.body.url
-  let newVideoRating = 0
+  let newVideoTitle = req.body.title;
+  let newVideoURL = req.body.url;
+  let newVideoRating = 0;
 
   if (!newVideoTitle) {
     res.status(400).send("Title field is missing");
@@ -63,22 +70,16 @@ app.post("/videos", (req, res) => {
   } else if (!newVideoTitle && !newVideoURL) {
     res.status(400).send("Both title and URL fields are missing");
   } else {
-    const query =
-      `INSERT INTO videos (title, url, rating)
-    VALUES ($1, $2, $3)`;
+    const query = `INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)`;
     pool.query(query, [newVideoTitle, newVideoURL, newVideoRating])
       .then(() => {
         res.status(201).send("new video created");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-
+      });
   }
 });
-
-
-
 
 app.delete("/videos/:id", (req, res) => {
   let videoId = parseInt(req.params.id);
@@ -97,36 +98,29 @@ app.delete("/videos/:id", (req, res) => {
     });
 });
 
-
 app.get("/videos", (req, res) => {
   pool.query("SELECT * FROM videos")
     .then((result) => {
       res.status(200).json(result.rows);
-      console.log(result.rows)
+      console.log(result.rows);
     })
     .catch((error) => {
       console.log(error);
-      res.status(500)
+      res.status(500).send("Internal server error");
     });
-})
+});
 
 app.get("/videos/:id", (req, res) => {
-  let videoId = parseInt(req.params.id)
+  let videoId = parseInt(req.params.id);
   pool.query("SELECT * FROM videos WHERE id = $1", [videoId])
     .then((result) => {
       console.log(result.rows);
-      res.send(result.rows)
+      res.send(result.rows);
     })
     .catch((error) => {
       console.log(error);
+      res.status(500).send("Internal server error");
     });
-})
+});
 
-// const deleteVideoByID = (videos, id) => {
-//   let videoI = videos.findIndex((video) => video.id == id);
-//   if (videoI > -1) {
-//     videos.splice(videoI, 1)
-//   }
-//   return videos
-
-// }
+app.listen(port, () => console.log(`Listening on port ${port}`));
