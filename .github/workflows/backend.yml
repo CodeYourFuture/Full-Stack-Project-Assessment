@@ -30,9 +30,8 @@ jobs:
           
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
               # Now we have got the access of EC2 and we will start the deploy.
-              cd /home/ubuntu/client/public &&
+              cd /home/ubuntu/video-app
               sudo npm i &&
-              sudo npm run build &&
               sudo systemctl daemon-reload &&
               sudo systemctl enable myapp.service &&
               sudo systemctl start myapp.service
