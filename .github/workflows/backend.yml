@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -29,12 +29,12 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      -name: rsync deployments
+      - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --delete
           path: OlhaDanylevska/Full-Stack-Project-Assessment
           REMOTE_USER: ${{ secrets.USERNAME }}
-            SERVER: ${{ secrets.AWS_HOST }}
-            REMOTE_PATH: /home/ubuntu
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER: ${{ secrets.AWS_HOST }}
+          REMOTE_PATH: /home/ubuntu
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
