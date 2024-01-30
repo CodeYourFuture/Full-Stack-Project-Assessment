@@ -22,14 +22,9 @@ jobs:
         run: |
           npm install
             
-      - name: Debug SSH Key and Directory
+      - name: Debug SSH Connection
         run: |
-          echo "SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}"
-          mkdir -p $HOME/.ssh/
-          echo "SSH key content: ${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
-          chmod 600 $HOME/.ssh/id_rsa
-          ls -l $HOME/.ssh/
-          cat $HOME/.ssh/id_rsa
+          ssh -i $HOME/.ssh/id_rsa -vvv ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com 'echo Connection successful!'
 
 
       - name: Rsync to EC2
