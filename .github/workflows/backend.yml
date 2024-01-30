@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -29,16 +29,23 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Debug SSH Key
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
-
-
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@6.0.0
-        with:
-          switches: -avzr --delete
-          path: OlhaDanylevska/Full-Stack-Project-Assessment
+      - name: Deploy using rsync
+        run: |
+          rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
+          -e "ssh -i ${{ secrets.SSH_PRIVATE_KEY }}" \
+          . ${{ secrets.SERVER }}:${{ secrets.REMOTE_PATH }}/video-app
+        env:
           REMOTE_USER: ${{ secrets.USERNAME }}
+          SERVER: ${{ secrets.AWS_HOST }}
+          REMOTE_PATH: /home/ubuntu
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+ name: rsync deployments
+      uses: burnett01/rsync-deployments@6.0.0
+      with:
+        switches: -avzr --delete
+        path: OlhaDanylevska/Full-Stack-Project-Assessment
+        REMOTE_USER: ${{ secrets.USERNAME }}
           SERVER: ${{ secrets.AWS_HOST }}
           REMOTE_PATH: /home/ubuntu
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
