@@ -13,6 +13,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2 
 
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19.x'
+
       - name: Build & Deploy
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -25,7 +30,7 @@ jobs:
           
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
               # Now we have got the access of EC2 and we will start the deploy.
-              cd /home/ubuntu/.video-app &&
+              cd /home/ubuntu/client/public &&
               sudo npm i &&
               sudo npm run build &&
               sudo systemctl daemon-reload &&
