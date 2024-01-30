@@ -29,9 +29,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
-
       - name: Deploy using rsync
         run: ./.github/actions/deploy-script.sh
         env:
