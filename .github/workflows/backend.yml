@@ -32,7 +32,9 @@ jobs:
           cat $HOME/.ssh/id_rsa
 
       - name: Update Known Hosts
-        run: echo "ec2-13-42-39-111.eu-west-2.compute.amazonaws.com ssh-ed25519 SHA256:LvVo2ku91W1TQnD+29cnFEGhS3fY7tKyz3ptQssv26A" >> $HOME/.ssh/known_hosts
+        run: |
+          ssh-keyscan -t rsa,ed25519 ec2-13-42-39-111.eu-west-2.compute.amazonaws.com >> $HOME/.ssh/known_hosts
+
 
       - name: Rsync to EC2
         run: |
