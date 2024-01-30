@@ -34,9 +34,9 @@ jobs:
 
       - name: Deploy using rsync
         run: ./.github/actions/deploy-script.sh
-        with:
-          switches: -avzr --delete
-          remote_path: /home/ubuntu
-          server: ${{ secrets.AWS_HOST }}
-          remote_user: ${{ secrets.USERNAME }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          SWITCHES: -avzr --delete
+          REMOTE_PATH: /home/ubuntu
+          SERVER: ${{ secrets.AWS_HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
