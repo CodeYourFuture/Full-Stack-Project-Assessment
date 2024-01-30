@@ -22,16 +22,23 @@ jobs:
         run: |
           npm install
             
-      - name: Debug SSH Connection
+     - name: Debug SSH Key and Directory
         run: |
-          ssh -i $HOME/.ssh/id_rsa -vvv ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com 'echo Connection successful!'
+          echo "SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}"
+          mkdir -p $HOME/.ssh/
+          echo "SSH key content: ${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
+          chmod 600 $HOME/.ssh/id_rsa
+          ls -l $HOME/.ssh/
+          cat $HOME/.ssh/id_rsa
 
+     - name: Update Known Hosts
+        run: echo "ec2-13-42-39-111.eu-west-2.compute.amazonaws.com ssh-ed25519 SHA256:LvVo2ku91W1TQnD+29cnFEGhS3fY7tKyz3ptQssv26A" >> $HOME/.ssh/known_hosts
 
-      - name: Rsync to EC2
+    - name: Rsync to EC2
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-            -e "ssh -i ~/.ssh/${{ secrets.SSH_PRIVATE_KEY }}" \
-            . ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:~/video-app
+        -e "ssh -i $HOME/.ssh/id_rsa" \
+        /path/to/source ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:/path/to/destination
 
 
       - name: Build
