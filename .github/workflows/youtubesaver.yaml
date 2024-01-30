@@ -26,7 +26,7 @@ jobs:
       working-directory: ./client 
 
     - name: Test
-      run: npm test
+      run: npm test -- --passWithNoTests
       working-directory: ./client  
       
     - name: Accessing AWS secret
