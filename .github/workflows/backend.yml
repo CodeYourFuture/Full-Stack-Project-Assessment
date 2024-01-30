@@ -21,8 +21,8 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-            
-     - name: Debug SSH Key and Directory
+
+      - name: Debug SSH Key and Directory
         run: |
           echo "SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}"
           mkdir -p $HOME/.ssh/
@@ -31,15 +31,14 @@ jobs:
           ls -l $HOME/.ssh/
           cat $HOME/.ssh/id_rsa
 
-     - name: Update Known Hosts
+      - name: Update Known Hosts
         run: echo "ec2-13-42-39-111.eu-west-2.compute.amazonaws.com ssh-ed25519 SHA256:LvVo2ku91W1TQnD+29cnFEGhS3fY7tKyz3ptQssv26A" >> $HOME/.ssh/known_hosts
 
-    - name: Rsync to EC2
+      - name: Rsync to EC2
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-        -e "ssh -i $HOME/.ssh/id_rsa" \
-        /path/to/source ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:/path/to/destination
-
+            -e "ssh -i $HOME/.ssh/id_rsa" \
+            /path/to/source ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:/path/to/destination
 
       - name: Build
         run: |
@@ -54,5 +53,5 @@ jobs:
       - name: Run systemd
         run: |
           sudo systemctl daemon-reload
-          sudo systemctl enable myapp.service  # Replace with your service name
-          sudo systemctl start myapp.service   # Replace with your service name
+          sudo systemctl enable myapp.service  
+          sudo systemctl start myapp.service   
