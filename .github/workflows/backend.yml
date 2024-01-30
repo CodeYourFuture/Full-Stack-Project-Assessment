@@ -24,11 +24,11 @@ jobs:
             
       - name: Debug SSH Key
         run: echo "$SSH_PRIVATE_KEY"
-        
+
       - name: Rsync to EC2
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-            -e "ssh -i ~/.ssh/${secrets.SSH_PRIVATE_KEY}" \
+            -e "ssh -i ~/.ssh/${{ secrets.SSH_PRIVATE_KEY }}" \
             . ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:~/video-app
 
 
