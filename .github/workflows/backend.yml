@@ -29,23 +29,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Deploy using rsync
-        run: |
-          rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-          -e "ssh -i ${{ secrets.SSH_PRIVATE_KEY }}" \
-          . ${{ secrets.SERVER }}:${{ secrets.REMOTE_PATH }}/video-app
-        env:
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          SERVER: ${{ secrets.AWS_HOST }}
-          REMOTE_PATH: /home/ubuntu
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
- name: rsync deployments
-      uses: burnett01/rsync-deployments@6.0.0
-      with:
-        switches: -avzr --delete
-        path: OlhaDanylevska/Full-Stack-Project-Assessment
-        REMOTE_USER: ${{ secrets.USERNAME }}
-          SERVER: ${{ secrets.AWS_HOST }}
-          REMOTE_PATH: /home/ubuntu
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --delete
+          path: src/
+          remote_path: /home/ubuntu
+          remote_host: ${{  secrets.AWS_HOST }}
+          remote_port: 22
+          remote_user: ${{ secrets.USERNAME}}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+     
