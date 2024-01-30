@@ -29,6 +29,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Debug SSH Key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+
+
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
