@@ -29,12 +29,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Deploy using rsync
+    - name: Deploy using rsync
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
             -e "ssh -i $HOME/.ssh/${{ secrets.SSH_PRIVATE_KEY }}" \
-            . ${{ secrets.USERNAME }}@${{ secrets.AWS_HOST }}:${{ secrets.REMOTE_PATH }}/video-app
-
+            . ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER }}:${{ secrets.REMOTE_PATH }}/video-app
         env:
           SWITCHES: -avzr --delete
           REMOTE_PATH: /home/ubuntu
