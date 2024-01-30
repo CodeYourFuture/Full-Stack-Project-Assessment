@@ -10,7 +10,7 @@ function VideoList() {
   const [toggleRate, setToggleRate] = useState("desc");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/videos")
+    fetch("https://127.0.0.1:5000/videos")
       .then((res) => {
         if (res.ok) {
           return res.json();
