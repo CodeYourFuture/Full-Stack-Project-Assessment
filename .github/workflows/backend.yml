@@ -1,38 +1,45 @@
-name: Deploy
+name: Build and Deploy
 
 on:
   push:
-    branches: main
+    branches:
+      - main
 
 jobs:
-  Deploy:
-    name: Deploy to EC2
+  build_and_deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2 
+        uses: actions/checkout@v2
 
-      - name: Install Node.js
+      - name: Setup Node.js and npm
         uses: actions/setup-node@v3
         with:
-          node-version: '19.x'
+          node-version: '14'
 
-      - name: Build & Deploy
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOSTNAME: ${{ secrets.HOST_DNS }}
-          USER_NAME: ${{ secrets.USERNAME }}
-      
+      - name: Install Dependencies
         run: |
-          echo "$PRIVATE_KEY" > private_key
-          chmod 600 private_key
-          
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-              # Now we have got the access of EC2 and we will start the deploy.
-              cd ~/.video-app
-              sudo npm i &&
-              sudo systemctl daemon-reload &&
-              sudo systemctl enable myapp.service &&
-              sudo systemctl start myapp.service
-          '
+          npm install
+
+      - name: Rsync to EC2
+        run: |
+          rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
+            -e "ssh -i ~/.ssh/video-server.pem" \
+            . ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:~/video-app
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Install systemd
+        run: |
+          sudo systemctl daemon-reload
+          sudo systemctl enable myapp.service
+          sudo systemctl start myapp.service
+
+      - name: Run systemd
+        run: |
+          sudo systemctl daemon-reload
+          sudo systemctl enable myapp.service  # Replace with your service name
+          sudo systemctl start myapp.service   # Replace with your service name
