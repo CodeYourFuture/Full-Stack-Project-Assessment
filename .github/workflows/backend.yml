@@ -32,11 +32,10 @@ jobs:
       - name: Deploy using rsync
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-            -e "ssh -i ~/.ssh/${{ secrets.SSH_PRIVATE_KEY }}" \
-            . ${{ secrets.SERVER}}:~/video-app
-        env:
-          SWITCHES: -avzr --delete
-          REMOTE_PATH: /home/ubuntu
-          SERVER: ${{ secrets.AWS_HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          -e "ssh -i ${HOME}/.ssh/${{ secrets.SSH_PRIVATE_KEY }}" \
+          . ${{ secrets.REMOTE_USER }}@${{ secrets.SERVER }}:${{ secrets.REMOTE_PATH }}/video-app
+  env:
+    REMOTE_USER: ${{ secrets.USERNAME }}
+    SERVER: ${{ secrets.AWS_HOST }}
+    REMOTE_PATH: /home/ubuntu
+    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
