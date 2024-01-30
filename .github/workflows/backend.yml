@@ -33,7 +33,7 @@ jobs:
         run: npm run build
 
       - name: Deploy using rsync
-        uses: burnett01/rsync-deployment@5.1
+        uses: OlhaDanylevska/rsync-deployment@5.1
         with:
           switches: -avzr --delete
           remote_path: /home/ubuntu
