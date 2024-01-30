@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Node.js Deployment
 
 on:
   push:
@@ -6,54 +6,37 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js and npm
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: 12
+
+      - name: Check Existing Directory
+        run: |
+          if [ -d "$HOME/.video-app" ]; then
+            echo "Directory already exists."
+          else
+            mkdir $HOME/.video-app
+          fi
 
       - name: Install Dependencies
-        run: |
-          npm install
-
-      - name: Debug SSH Key and Directory
-        run: |
-          echo "SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}"
-          mkdir -p $HOME/.ssh/
-          echo "SSH key content: ${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
-          chmod 600 $HOME/.ssh/id_rsa
-          ls -l $HOME/.ssh/
-          cat $HOME/.ssh/id_rsa
-
-      - name: Update Known Hosts
-        run: |
-          ssh-keyscan -t rsa,ed25519 ec2-13-42-39-111.eu-west-2.compute.amazonaws.com >> $HOME/.ssh/known_hosts
-
-
-      - name: Rsync to EC2
-        run: |
-          rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
-            -e "ssh -i $HOME/.ssh/id_rsa" \
-            /path/to/source ubuntu@ec2-13-42-39-111.eu-west-2.compute.amazonaws.com:/path/to/destination
+        run: npm install
 
       - name: Build
-        run: |
-          npm run build
+        run: npm run build
 
-      - name: Install systemd
-        run: |
-          sudo systemctl daemon-reload
-          sudo systemctl enable myapp.service
-          sudo systemctl start myapp.service
-
-      - name: Run systemd
-        run: |
-          sudo systemctl daemon-reload
-          sudo systemctl enable myapp.service  
-          sudo systemctl start myapp.service   
+      - name: Deploy using rsync
+        uses: burnett01/rsync-deployment@5.1
+        with:
+          switches: -avzr --delete
+          remote_path: /home/ubuntu
+          server: ${{ secrets.AWS_HOST }}
+          remote_user: ${{ secrets.USERNAME }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
