@@ -33,7 +33,7 @@ jobs:
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --delete
-          path: OlhaDanylevska/Full-Stack-Project-Assessment/server
+          path: ./server
           remote_path: /home/ubuntu
           remote_host: ${{  secrets.AWS_HOST }}
           remote_port: 22
