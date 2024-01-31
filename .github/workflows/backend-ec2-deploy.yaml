@@ -19,12 +19,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./Full-Stack-Project-Assessment/server
+      working-directory: ./server
 
  
     - name: Run tests
       run: npm test -- --passWithNoTests
-      working-directory: ./Full-Stack-Project-Assessment/server
+      working-directory: ./server
 
    
     - name: Set up .env file on EC2
@@ -63,6 +63,6 @@ jobs:
         port: 22
         script: |
           cd /home/ubuntu/Full-Stack-Project-Assessment/server
-          npm install --production
-          pm2 restart all  # Restart the application using PM2
+          npm install 
+          pm2 restart all  
  
