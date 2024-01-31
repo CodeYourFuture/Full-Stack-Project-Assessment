@@ -29,11 +29,12 @@ jobs:
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --delete
-          path: ./
-          remote_path: /home/ubuntu/.video-app
-          remote_host: ${{  secrets.AWS_HOST }}
+          switches: -avzr --delete --exclude 'node_modules/'
+          path: ./server/
+          remote_path: /home/ubuntu/.video-app/
+          remote_host: ${{ secrets.AWS_HOST }}
           remote_port: 22
           remote_user: ${{ secrets.USERNAME}}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
      
