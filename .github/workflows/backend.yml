@@ -32,7 +32,7 @@ jobs:
         with:
           switches: -avzr --exclude=node_modules --delete
           path: ./video-app/
-          remote_path: /home/ubuntu/
+          remote_path: ~/.video-app/
           remote_host: ${{ secrets.AWS_HOST }}
           remote_port: 22
           remote_user: ${{ secrets.USERNAME }}
