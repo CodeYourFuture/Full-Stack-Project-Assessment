@@ -30,7 +30,7 @@ jobs:
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --delete
-          path: ./server
+          path: ./
           remote_path: /home/ubuntu/.video-app
           remote_host: ${{  secrets.AWS_HOST }}
           remote_port: 22
