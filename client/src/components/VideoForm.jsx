@@ -8,7 +8,7 @@ function VideoForm({ videoData, setVideoAdded }) {
   function addVideoHandler(event) {
     event.preventDefault();
 
-    // Validate the form inputs 
+    // Validate the form inputs
     function validateUrl(urlObject) {
       return (
         validUrl.isUri(urlObject) &&
@@ -93,7 +93,7 @@ function VideoForm({ videoData, setVideoAdded }) {
           type="submit"
           className="m-2 rounded bg-black px-4 py-2 font-bold text-white transition-colors duration-200 hover:bg-red-300 active:bg-red-700 sm:rounded-lg sm:px-3 sm:py-6"
         >
-          Add
+          Add Video
         </button>
 
         <p className="text-red-700">{errorMessage}</p>

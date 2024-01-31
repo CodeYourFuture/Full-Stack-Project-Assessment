@@ -4,7 +4,6 @@ on:
   pull_request:
 
 jobs:
-
   check-diff:
     name: Check diff size
     runs-on: ubuntu-latest
@@ -28,4 +27,4 @@ jobs:
             echo "The diff looks nice and small - good work! 😎"
             exit 0
           fi
-           
+
