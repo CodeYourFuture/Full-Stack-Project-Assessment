@@ -26,19 +26,18 @@ jobs:
 
       - name: Install Dependencies
         run: |
-         cd ~/.video-app
          npm install
 
     
-      - name: rsync deployments
+    - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --delete
-          path: ./server/
-          remote_path: /home/ubuntu/.video-app/
+          switches: -avzr --exclude=node_modules --delete
+          path: ./video-app/
+          remote_path: /home/ubuntu/
           remote_host: ${{ secrets.AWS_HOST }}
           remote_port: 22
-          remote_user: ${{ secrets.USERNAME}}
+          remote_user: ${{ secrets.USERNAME }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
      
