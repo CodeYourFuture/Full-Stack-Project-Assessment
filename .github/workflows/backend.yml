@@ -18,14 +18,6 @@ jobs:
         with:
           node-version: 12
 
-      - name: Check Existing Directory
-        run: |
-          if [ -d "$HOME/.video-app" ]; then
-            echo "Directory already exists."
-          else
-            mkdir $HOME/.video-app
-          fi
-
       - name: Install Dependencies
         run: npm install
 
@@ -39,7 +31,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: ./server
-          remote_path: /home/ubuntu
+          remote_path: /home/ubuntu/.video-app
           remote_host: ${{  secrets.AWS_HOST }}
           remote_port: 22
           remote_user: ${{ secrets.USERNAME}}
