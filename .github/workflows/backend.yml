@@ -25,7 +25,9 @@ jobs:
           node-version: 12
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+         cd ~/.video-app
+         npm install
 
     
       - name: rsync deployments
