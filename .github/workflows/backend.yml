@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
+
+      - name: Update and Upgrade EC2 inst
+        run: |
+          sudo apt update
+          sudo apt upgrade -y
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -21,15 +27,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Update and Upgrade EC2 inst
-        run: |
-          sudo apt update
-          sudo apt upgrade -y
-
+    
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --delete --exclude 'node_modules/'
+          switches: -avzr --delete
           path: ./server/
           remote_path: /home/ubuntu/.video-app/
           remote_host: ${{ secrets.AWS_HOST }}
