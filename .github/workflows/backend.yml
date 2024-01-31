@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-
       - name: Update and Upgrade EC2 inst
         run: |
           sudo apt update
@@ -26,10 +25,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
-         npm install
+          npm install
 
-    
-    - name: rsync deployments
+      - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --exclude=node_modules --delete
@@ -39,5 +37,3 @@ jobs:
           remote_port: 22
           remote_user: ${{ secrets.USERNAME }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-     
