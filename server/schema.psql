@@ -1,0 +1,42 @@
+DROP TABLE IF EXISTS videos;
+
+CREATE TABLE videos(
+  id serial PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  url varchar(100) NOT NULL,
+  rating integer NOT NULL,
+  createdAt timestamp NOT NULL
+);
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Aldous Harding - Fixture Picture (Official Video)', 'https://www.youtube.com/watch?v=qPB6iPXhkdI', 3335, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Hania Rani live at Invalides, in Paris, France for Cercle', 'https://www.youtube.com/watch?v=J5oZ80Daduc', 2111, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('The Most Important Video you''ll Ever See', 'https://www.youtube.com/watch?v=O133ppiVnWY', 99, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Lana Del Rey - Summertime Sadness (Official Music Video)', 'https://www.youtube.com/watch?v=TdrL3QxjyVw', 111, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Tracy Chapman - Fast Car [Wembley 1988]', 'https://www.youtube.com/watch?v=teZsA_ci-7E', 7991, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Patrick Watson performing "Good Morning Mr. Wolf" Live', 'https://www.youtube.com/watch?v=0CnsTrX2kzY', 3337, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Mazzy Star - Fade Into You (Official International Video)', 'https://www.youtube.com/watch?v=nTxqxqUd1wo', 3337, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Sinéad O''Connor - Nothing Compares 2 U (Official Music Video) [HD]', 'https://www.youtube.com/watch?v=0-EF60neguk', 3337, now());
+
+INSERT INTO videos(title, url, rating, createdAt)
+  VALUES ('Constellation', 'https://www.youtube.com/watch?v=jFOUHH5vDI0', 3337, now());
+
+SELECT
+  *
+FROM
+  videos;
+
