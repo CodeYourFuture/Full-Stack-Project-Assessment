@@ -2,36 +2,29 @@ import { useState } from "react";
 
 function Video({ videoObj, deleteVideo }) {
   const videoId = getVideoIdFromUrl(videoObj.url);
-  const [vote, setVote] = useState(videoObj.rating);
+  const [ vote, setVote ] = useState(videoObj.rating);
 
-
+  const fetchVideosUrl = 'http://13.53.198.163:5050';
 
   const updateVote = (increment) => {
-    const newRating = videoObj.rating + increment;
+    const newRating = vote + increment;
 
-    fetch(`https://node-server-full-stack.onrender.com/videos/${videoObj.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newRating }),
+    fetch(`${fetchVideosUrl}/videos/${videoObj.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newRating }),
     })
-    .then((res) => {
+      .then((res) => {
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
-    })
-    .then(() => {
-        if (increment === 1) {
-            setVote(vote + 1);
-        } else if (increment === -1 && vote > 0) {
-            setVote(vote - 1);
-        }
-    })
-    .catch((error) => console.error("Error updating vote:", error));
-};
-
-
-
+      })
+      .then(() => {
+        setVote(vote + increment);
+      })
+      .catch((error) => console.error("Error updating vote:", error));
+  };
 
   const date = new Date().toDateString();
 
@@ -49,10 +42,10 @@ function Video({ videoObj, deleteVideo }) {
         <h5 className="card-title">{videoObj.title}</h5>
         <p className="card-text">Requested At: {date}</p>
         <div className="buttons">
-          <i className="fa-solid fa-thumbs-up" onClick={()=>updateVote(1)}></i>
+          <i className="fa-solid fa-thumbs-up" onClick={() => updateVote(1)}></i>
           <p>{vote}</p>
-          <i className="fa-solid fa-thumbs-down" onClick={()=>updateVote(-1)}></i>
-          <button onClick={() => deleteVideo(videoObj.id)} className="btn btn-danger">
+          <i className="fa-solid fa-thumbs-down" onClick={() => updateVote(-1)}></i>
+          <button onClick={() => deleteVideo(videoObj.id)} className=" btn-danger">
             <i className="fa fa-trash-o"></i>
           </button>
         </div>
@@ -64,8 +57,6 @@ function Video({ videoObj, deleteVideo }) {
 export default Video;
 
 function getVideoIdFromUrl(url) {
-  if (url && typeof url === "string" && url.includes("v=")) {
-    return url.split("v=")[1];
-  }
-  return null;
+  const videoIdIndex = url.indexOf("v=");
+  return videoIdIndex !== -1 ? url.substring(videoIdIndex + 2) : null;
 }

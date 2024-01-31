@@ -1,0 +1,171 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+
+
+
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, max-content);
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  margin: 20px;
+
+  &__form {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1rem;
+    margin: 2rem 3rem;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+
+    &--title {
+      width: 60%;
+      margin-left: 35%;
+
+
+
+      &--input {
+        padding: 1rem 2rem;
+        width: 100%;
+        border-radius: 2rem;
+      }
+    }
+
+    &--url {
+      width: 60%;
+      margin-left: -4rem;
+
+
+
+      &--input {
+        width: 100%;
+        border-radius: 2rem;
+        padding: 1rem 2rem;
+      }
+    }
+  }
+
+  .search {
+    grid-column: 1 / -1;
+    width: 90%;
+    margin: 0 auto;
+
+
+    &__input {
+      width: 70%;
+      padding: 1rem 2rem;
+      border: 1px solid #ccc;
+      border-radius: 2rem;
+      font-size: 1.6rem;
+      margin-right: -6rem;
+    }
+  }
+
+
+}
+
+.btn {
+  margin: 2rem;
+  padding: 1rem 4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  padding: 2rem 2rem;
+  grid-gap: 6rem;
+
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, min-content);
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0px;
+}
+
+.fa-solid {
+  font-size: 30px;
+  cursor: pointer;
+  color: #e74c3c;
+  text-align: center;
+  background-color: none;
+  border: none;
+}
+
+.fa-solid:hover {}
+
+.fa-trash-o {
+  font-size: 30px;
+  cursor: pointer;
+  fill: #e74c3c;
+  background-color: none;
+
+
+}
+
+.card {
+  border: 2px solid gray;
+  border-radius: 5px;
+}

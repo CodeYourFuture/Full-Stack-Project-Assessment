@@ -8,9 +8,14 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
+
+
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get("/", () => {
+
+
+app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
 });
 

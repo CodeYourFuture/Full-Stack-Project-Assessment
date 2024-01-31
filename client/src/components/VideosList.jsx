@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Video from "./Video";
 import AddVideo from "./AddVideo";
-import "../index.css";
 import Search from "./Search";
 
 function VideosList() {
@@ -9,9 +8,7 @@ function VideosList() {
   const [ loading, setLoading ] = useState(true);
   const [ searchResult, setSearchResult ] = useState([]);
 
-  const fetchVideosUrl = 'https://node-videos-service.onrender.com';
-
-  //const fetchVideosUrl = 'http://localhost:5050';
+  const fetchVideosUrl = 'http://13.53.198.163:5050';
 
   useEffect(() => {
     fetchVideos();
@@ -94,8 +91,10 @@ function VideosList() {
 
   return (
     <>
-      <Search onSearch={searchByName} />
-      <AddVideo onVidAdd={newVideo} />
+      <div className="header">
+        <Search onSearch={searchByName} />
+        <AddVideo onVidAdd={newVideo} />
+      </div>
       <div className="container mt-5">
         {searchResult.length > 0 ? (
           searchResult.map((video) => (

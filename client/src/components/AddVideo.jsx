@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "../index.css";
 
 const AddVideo = ({ onVidAdd }) => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
+  const [ title, setTitle ] = useState("");
+  const [ url, setUrl ] = useState("");
 
   const titleChange = (event) => {
     setTitle(event.target.value);
@@ -35,36 +34,30 @@ const AddVideo = ({ onVidAdd }) => {
   };
 
   return (
-    <form>
-      <div className="form-group row">
-        <label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
-          Title
-        </label>
-        <div className="col-sm-10">
-          <input
-            type="text"
-            value={title}
-            onChange={titleChange}
-            className="form-control form-control-sm"
-            id="colFormLabelSm"
-            placeholder="Title"
-          />
-        </div>
+    <form className="header__form">
+      <div className="header__form--title">
+
+        <input
+          type="text"
+          value={title}
+          onChange={titleChange}
+          className="header__form--title--input"
+          id="colFormLabelSm"
+          placeholder="insert title"
+        />
       </div>
-      <div className="form-group row">
-        <label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
-          URL
-        </label>
-        <div className="col-sm-10">
-          <input
-            type="text"
-            value={url}
-            onChange={urlChange}
-            className="form-control form-control-sm"
-            id="colFormLabelSm"
-            placeholder="URL"
-          />
-        </div>
+      <div className="header__form--url">
+
+
+        <input
+          type="text"
+          value={url}
+          onChange={urlChange}
+          className="header__form--url--input"
+          id="colFormLabelSm"
+          placeholder="insert valid URL"
+        />
+
       </div>
       <button onClick={newVid} type="button" className="btn btn-success">
         Add

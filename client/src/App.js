@@ -1,4 +1,5 @@
 import "./App.css";
+import "./index.scss";
 
 import VideosList from "./components/VideosList";
 

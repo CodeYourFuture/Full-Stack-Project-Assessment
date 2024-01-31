@@ -1,8 +1,13 @@
 const { Pool } = require("pg");
 const videosPool = new Pool({
-  connectionString: "postgres://full_stack_database_aeds_user:k6g9lDKrb8oJ6sAzwQHd0kAtSynN38cn@dpg-cmptg1icn0vc73cq1ugg-a.oregon-postgres.render.com/full_stack_database_aeds",
-  ssl: {
-    rejectUnauthorized: false,
-  },
+    user:'postgres',
+    host:'videosdb.cf4a0ma6uvcb.eu-north-1.rds.amazonaws.com',
+    database:'postgres',
+    password:'admin12345',
+    port: '5432',
+    ssl: {
+        rejectUnauthorized: false
+    }
+
 });
 module.exports = videosPool;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Search({ onSearch }) {
-  const [search, setSearch] = useState();
+  const [ search, setSearch ] = useState();
   const handleSearch = () => {
     if (search) {
       onSearch(search);
@@ -11,8 +11,8 @@ function Search({ onSearch }) {
   };
 
   return (
-    <div>
-      <input onChange={(e) => setSearch(e.target.value)}></input>
+    <div className="search">
+      <input className="search__input" onChange={(e) => setSearch(e.target.value)}></input>
       <button onClick={handleSearch}>Search</button>
     </div>
   );
