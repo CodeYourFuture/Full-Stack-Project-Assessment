@@ -22,12 +22,11 @@ jobs:
       working-directory: ./server
 
  
-    - name: Run tests
+    - name: Test
       run: npm test -- --passWithNoTests
-     working-directory: ./server
+      working-directory: ./server
 
 
-   
     - name: Set up .env file on EC2
       uses: appleboy/ssh-action@master
       with:
