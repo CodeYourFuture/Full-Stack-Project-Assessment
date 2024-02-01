@@ -28,7 +28,7 @@ jobs:
           echo "EC2_HOST=${{ secrets.EC2_HOST }}" >> ./server/.env
           echo "EC2_SSH_KEY=${{ secrets.EC2_SSH_KEY }}" >> ./server/.env
           echo "EC2_USERNAME=${{ secrets.EC2_USERNAME }}" >> ./server/.env
-          continue-on-error: false
+        continue-on-error: false
       
       - name: Run Tests
         run: echo "No tests are available for this project."
