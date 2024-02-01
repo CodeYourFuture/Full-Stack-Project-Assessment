@@ -39,7 +39,7 @@ function Video({ videoObj, deleteVideo }) {
         height="300px"
       ></iframe>
       <div className="card-body">
-        <h5 className="card-title">{videoObj.title}</h5>
+        <h3 className="card-title">{videoObj.title}</h3>
         <p className="card-text">Requested At: {date}</p>
         <div className="buttons">
           <i className="fa-solid fa-thumbs-up" onClick={() => updateVote(1)}></i>
