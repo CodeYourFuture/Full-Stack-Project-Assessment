@@ -50,7 +50,7 @@ jobs:
         username: ${{ secrets.EC2_SSH_USERNAME }}
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
-        source: "./Full-Stack-Project-Assessment/server"
+        source: "./server/*"
         target: "/home/ubuntu/Full-Stack-Project-Assessment/server"
 
     - name: Deploy
