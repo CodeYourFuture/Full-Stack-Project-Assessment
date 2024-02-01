@@ -12,6 +12,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: List directory contents
+      run: ls -alh
+
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -21,11 +24,9 @@ jobs:
       run: npm install
       working-directory: ./server
 
- 
     - name: Test
       run: npm test -- --passWithNoTests
       working-directory: ./server
-
 
     - name: Set up .env file on EC2
       uses: appleboy/ssh-action@master
@@ -41,8 +42,7 @@ jobs:
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          
-    
+
     - name: Copy files to EC2
       uses: appleboy/scp-action@master
       with:
@@ -53,8 +53,7 @@ jobs:
         source: "./Full-Stack-Project-Assessment/server"
         target: "/home/ubuntu/Full-Stack-Project-Assessment/server"
 
-   
-    - name: deploy
+    - name: Deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -63,6 +62,5 @@ jobs:
         port: 22
         script: |
           cd /home/ubuntu/Full-Stack-Project-Assessment/server
-          npm install 
-          pm2 restart all  
- 
+          npm install
+          pm2 restart all
