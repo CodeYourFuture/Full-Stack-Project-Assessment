@@ -24,7 +24,7 @@ jobs:
  
     - name: Run tests
       run: npm test -- --passWithNoTests
-      working-directory: ./server
+
 
    
     - name: Set up .env file on EC2
