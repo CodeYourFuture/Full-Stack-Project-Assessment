@@ -61,6 +61,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          source ~/.nvm/nvm.sh
           cd /home/ubuntu/Full-Stack-Project-Assessment/server
           npm install
           pm2 restart all
