@@ -3,7 +3,7 @@ name: Deploy to S3 AWS
 on:
   push:
     branches:
-      - Full-Stack-Project-mesgna-woldeab
+      - "*"
 
 jobs:
   deploy:
@@ -20,9 +20,10 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.REGION }}
-
+          aws-access-key-id: ${{ secrets.MY_SECRET_ACCESS_ID_KEY }}
+          aws-secret-access-key: ${{ secrets.MY_SECRET_ACCESS_KEY }}
+          aws-region: ${{secrets.REGION}}
+        
+          
       - name: Sync client/build to S3 bucket
         run: aws s3 sync ~/OneDrive/Documents/CFY/Full-Stack-Project-Assessment/client/build/ s3://video-recommendation-2024
