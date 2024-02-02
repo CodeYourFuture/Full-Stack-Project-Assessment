@@ -1,12 +1,14 @@
 name: Deploy frontend S3
- on:[push]
-  jobs:
-   build:
-   -run-on:ubuntu-latest
-   steps:
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      jobs:
+      
+
   test:
     runs-on: ubuntu-latest
     steps:
