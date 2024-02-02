@@ -13,9 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get install -y awscli
+      - name: Use Node.js 16
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -23,7 +24,6 @@ jobs:
           aws-access-key-id: ${{ secrets.MY_SECRET_ACCESS_ID_KEY }}
           aws-secret-access-key: ${{ secrets.MY_SECRET_ACCESS_KEY }}
           aws-region: ${{secrets.REGION}}
-        
           
       - name: Sync client/build to S3 bucket
         run: aws s3 sync ~/OneDrive/Documents/CFY/Full-Stack-Project-Assessment/client/build/ s3://video-recommendation-2024
