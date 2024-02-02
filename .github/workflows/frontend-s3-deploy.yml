@@ -6,14 +6,16 @@ on:
       - Level--300
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/setup-node@v1
-  with:
-    node-version: 12
-    -run: npm ci
-    -run:npm run build
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
 
       
