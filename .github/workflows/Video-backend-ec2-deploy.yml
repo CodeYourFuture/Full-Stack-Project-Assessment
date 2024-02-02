@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            cd /Full-Stack-Project-Assessment
+            cd /github/workspace
             git pull origin main
             npm install
             pm2 restart video-server
