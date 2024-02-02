@@ -15,7 +15,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y node
+          sudo apt-get install -y node.js
 
       - name: SSH into EC2 and Deploy
         uses: appleboy/ssh-action@master
