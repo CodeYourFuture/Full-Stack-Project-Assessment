@@ -1,13 +1,18 @@
-import "./App.css";
+import React from "react";
+import MainContainer from "./components/MainContainer";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Video Recommendation</h1>
-      </header>
+    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
+      <Header />
+      <main className="overflow-scroll">
+        <MainContainer />
+      </main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
