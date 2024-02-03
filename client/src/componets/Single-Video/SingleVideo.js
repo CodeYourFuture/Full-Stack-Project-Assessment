@@ -33,7 +33,7 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
   return (
     <div
       key={id}
-      className="single-vid ml-4 shadow p-3 mb-5 bg-white rounded rounded"
+      className="single-vid ml-4 shadow p-4 mb-5 bg-white rounded rounded"
     >
       <p> {title}</p>
 
