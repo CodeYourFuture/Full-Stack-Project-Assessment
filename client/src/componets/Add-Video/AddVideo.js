@@ -34,9 +34,9 @@ const AddVideo = ({ setVideos }) => {
       setTitle("");
       setUrl("");
 
-      axios.post("/videos", newVideo).then((res) => {
+      axios.post("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos", newVideo).then((res) => {
         if (res.status === 201) {
-          axios.get("/videos").then((res) => {
+          axios.get("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos").then((res) => {
             setVideos(res.data);
           });
         }
