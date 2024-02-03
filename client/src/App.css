@@ -155,7 +155,7 @@
   padding: 80px;
   justify-content: center;
   align-items: center;
-  color: aliceblue;
+  color: rgb(222, 69, 18);
   font-weight: 900;
   font-size: 6em;
   -webkit-animation: text-flicker-in-glow 4s linear both;
