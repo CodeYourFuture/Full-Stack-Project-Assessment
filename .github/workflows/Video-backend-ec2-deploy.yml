@@ -26,7 +26,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             pwd
-            cd ./server
+            cd server
             git pull origin main
             npm install
             pm2 restart video-server
