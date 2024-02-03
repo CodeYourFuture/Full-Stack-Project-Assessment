@@ -12,10 +12,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y node.js
+          sudo apt-get install -y nodejs npm
 
       - name: SSH into EC2 and Deploy
         uses: appleboy/ssh-action@master
