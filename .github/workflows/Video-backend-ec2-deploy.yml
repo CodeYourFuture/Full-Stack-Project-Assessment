@@ -18,16 +18,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y nodejs npm
 
-      - name: SSH into EC2 and Deploy
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            pwd
-            cd server
-            git pull origin main
-            npm install
-            pm2 restart video-server
-
+            cd /github/workspace  
+            pwd  
+            ./deploy-script.sh
