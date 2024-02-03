@@ -19,7 +19,7 @@ testConnection()
     console.error("Error setting up database:", error);
   });
   
-// app.use("/", jsonEndpoints);
+app.use("/videos", jsonEndpoints);
 app.use("/", dbEndpoints(db));
 
 const server = app.listen(port, () => {
