@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
 
-      - - name: Install dependencies
+      - name: Install dependencies
         run: |
           cd client  # Adjust the path accordingly
           npm install
@@ -27,10 +27,9 @@ jobs:
       - name: Set AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-      
           aws-access-key-id: ${{ secrets.MY_SECRET_ACCESS_ID_KEY }}
           aws-secret-access-key: ${{ secrets.MY_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
-          
+
       - name: Sync client/build to S3 bucket
-        run: aws s3 sync ~/OneDrive/Documents/CFY/Full-Stack-Project-Assessment/client/build/ s3://video-recommendation-2024
+        run: aws s3 sync client/build/ s3://video-recommendation-2024
