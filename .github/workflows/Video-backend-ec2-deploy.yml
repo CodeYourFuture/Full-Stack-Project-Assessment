@@ -25,6 +25,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            cd /github/workspace  
-            pwd  
-            ./deploy-script.sh
+            echo "Current directory: $(pwd)"
+            ls -la
+            
