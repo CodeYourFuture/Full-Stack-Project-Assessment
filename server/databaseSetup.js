@@ -1,4 +1,5 @@
 const { Pool } = require("pg");
+const fs = require("fs");
 
 require("dotenv").config();
 
@@ -14,7 +15,16 @@ const db = new Pool({
   },
 });
 
-let videos = [];
+// Function to test the database connection
+const testConnection = async () => {
+  try {
+    const result = await db.query("SELECT NOW()");
+    console.log("Database connection successful:", result.rows[0].now);
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    throw error;
+  }
+};
 
 // Function to create the "videos" table if it doesn't exist
 const createTable = async () => {
@@ -39,22 +49,34 @@ const createTable = async () => {
 
 // Function to populate the table from videos
 const populateTable = async () => {
-  videos.forEach(async (video) => {
+  const jsonFilePath = "./exampleResponse.json";
+  const jsonVideos = JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
+
+  for (const video of jsonVideos) {
     try {
-      await db.query(
-        "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, $3, $4)",
-        [video.title, video.url, new Date(), video.rating]
-      );
+      const existingVideo = await db.query("SELECT id FROM videos WHERE url = $1", [video.url]);
+
+      if (existingVideo.rows.length === 0) {
+        // Insert the video into the database only if it doesn't exist
+        await db.query(
+          "INSERT INTO videos (title, url, uploadDate, rating) VALUES ($1, $2, $3, $4)",
+          [video.title, video.url, new Date(), video.rating]
+        );
+        console.log(`Inserted video: ${video.title}`);
+      } else {
+        console.log(`Video already exists: ${video.title}`);
+      }
     } catch (error) {
       console.error("Error inserting video into the database:", error);
       throw error;
     }
-  });
+  }
 
-  console.log("Populated 'videos' table from exampleresponse.json");
+  console.log("Populated 'videos' table from exampleResponse.json");
 };
 
 module.exports = {
   createTable,
   populateTable,
+  testConnection,
 };

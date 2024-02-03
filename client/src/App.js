@@ -35,7 +35,7 @@ function App() {
       const sortedVideos = data.sort((a, b) => b.id - a.id);
 
       const updatedVideos = sortedVideos.map((video) => {
-        if (!video.uploaddate) {
+        if (!video.uploadDate) {
           return { ...video, uploadedDate: "2021-01-01T00:00:00.000Z" };
         }
         return video;
