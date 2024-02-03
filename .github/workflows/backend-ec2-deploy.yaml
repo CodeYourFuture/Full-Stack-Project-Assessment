@@ -1,0 +1,67 @@
+name: EC2 Deployment
+
+on:
+  push:
+    branches: [ backup ]
+
+jobs:
+  deploy-to-ec2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: List directory contents
+      run: ls -alh
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./server
+
+    - name: Test
+      run: npm test -- --passWithNoTests
+      working-directory: ./server
+
+    - name: Set up .env file on EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_SSH_USERNAME }}
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/ubuntu/Full-Stack-Project-Assessment/server
+          echo "DB_USER=${{ secrets.DB_USER }}" > .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+
+    - name: Copy files to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_SSH_USERNAME }}
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: 22
+        source: "./server/*"
+        target: "/home/ubuntu/Full-Stack-Project-Assessment/server"
+
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_SSH_USERNAME }}
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          source ~/.nvm/nvm.sh
+          cd /home/ubuntu/Full-Stack-Project-Assessment/server
+          npm install
+          pm2 restart all
