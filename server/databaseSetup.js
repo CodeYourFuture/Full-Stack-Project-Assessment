@@ -1,5 +1,3 @@
-// databaseSetup.js
-const fs = require("fs");
 const { Pool } = require("pg");
 
 require("dotenv").config();
@@ -16,9 +14,7 @@ const db = new Pool({
   },
 });
 
-// Read data from the JSON file
-const jsonFilePath = "./exampleresponse.json";
-const dbVideos = JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
+let videos = [];
 
 // Function to create the "videos" table if it doesn't exist
 const createTable = async () => {
@@ -27,7 +23,7 @@ const createTable = async () => {
       id SERIAL PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
       url TEXT NOT NULL,
-      uploaddate TIMESTAMP NOT NULL,
+      uploadDate TIMESTAMP NOT NULL,
       rating INT NOT NULL
     )`;
 
@@ -41,9 +37,9 @@ const createTable = async () => {
   }
 };
 
-// Function to populate the table from dbVideos
+// Function to populate the table from videos
 const populateTable = async () => {
-  dbVideos.forEach(async (video) => {
+  videos.forEach(async (video) => {
     try {
       await db.query(
         "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, $3, $4)",
