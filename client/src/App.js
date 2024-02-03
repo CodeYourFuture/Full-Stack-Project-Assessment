@@ -22,7 +22,7 @@ function App() {
   const fetchVideos = async () => {
     try {
       const response = await fetch(
-        "https://full-stack-project-jcr4.onrender.com"
+        "https://full-stack-project-jcr4.onrender.com/"
       );
 
       if (!response.ok) {
