@@ -3,88 +3,18 @@ const fs = require("fs");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5001;
-const { Pool } = require("pg");
+const { createTable, populateTable } = require("./databaseSetup");
 
 require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
 
-// Create a PostgreSQL pool
-const db = new Pool({
-  user: process.env.DB_USERNAME,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
-  password: process.env.DB_PASSWORD,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-// Define the videos table structure with date and rate columns
-const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS videos (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    url TEXT NOT NULL,
-    uploaddate TIMESTAMP NOT NULL,
-    rating INT NOT NULL
-  )`;
-
-// Add this code to create the "videos" table if it doesn't exist
-db.query(createTableQuery, (err, result) => {
-  if (err) {
-    console.error("Error creating the 'videos' table:", err);
-  } else {
-    console.log("Table 'videos' created or already exists.");
-    // Check if the table is empty; if so, populate it from exampleresponse.json
-    db.query("SELECT COUNT(*) FROM videos", (countErr, countResult) => {
-      if (!countErr && countResult.rows[0].count === "0") {
-        populateTableFromJson();
-      }
-    });
-  }
-});
-
-// Function to populate the table from exampleresponse.json
-function populateTableFromJson() {
-  fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading example response file:", err);
-    } else {
-      try {
-        const videos = JSON.parse(data);
-        // Insert each video into the database
-        videos.forEach(async (video) => {
-          await db.query(
-            "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, $3, $4)",
-            [video.title, video.url, new Date(), video.rating]
-          );
-        });
-        console.log("Populated 'videos' table from exampleresponse.json");
-      } catch (parseError) {
-        console.error("Error parsing example response:", parseError);
-      }
-    }
-  });
-}
+// Read data from the JSON file
+const jsonFilePath = "./exampleresponse.json";
+const dbVideos = JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
 
 let videos = [];
-
-// // Store and retrieve videos
-// fs.readFile("./exampleresponse.json", "utf8", (err, data) => {
-//   if (err) {
-//     console.error("Error reading example response file:", err);
-//   } else {
-//     try {
-//       videos = JSON.parse(data);
-//       // console.log("Example response loaded:", videos);
-//     } catch (parseError) {
-//       console.error("Error parsing example response:", parseError);
-//     }
-//   }
-// });
 
 // GET "/" from the json file
 app.get("/", async (req, res) => {
@@ -120,7 +50,7 @@ app.post("/videos", async (req, res) => {
   if (title && url) {
     try {
       const insertQuery = await db.query(
-        "INSERT INTO videos (title, url, uploaddate, rating) VALUES ($1, $2, CURRENT_TIMESTAMP, 0 ) RETURNING id",
+        "INSERT INTO videos (title, url, uploadDate, rating) VALUES ($1, $2, CURRENT_TIMESTAMP, 0 ) RETURNING id",
         [title, url]
       );
       const result = await db.query(insertQuery, [title, url]);
@@ -202,4 +132,4 @@ app.post("/videos/:videoId/rating", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Listening on port {port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));
