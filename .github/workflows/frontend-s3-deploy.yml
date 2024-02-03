@@ -38,7 +38,7 @@ jobs:
           cd client 
           npm install
           npm run build
-          aws s3 sync dist/ s3://cyf-videos --delete
+          aws s3 sync build/ s3://cyf-videos --delete
           
       
       
