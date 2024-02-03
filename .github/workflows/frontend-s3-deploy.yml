@@ -18,6 +18,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
+  test:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test 
 
       - name: Install AWS CLI
         run: |
@@ -41,16 +50,7 @@ jobs:
           aws s3 sync build/ s3://cyf-videos --delete
 
           
-  test:
-     runs-on: ubuntu-latest
-     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Run test
-        run: | 
-          cd client
-          npm install
-          npm test
+   
       
     
       
