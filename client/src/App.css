@@ -1,3 +1,282 @@
 .App {
   text-align: center;
 }
+
+.background {
+  background: linear-gradient(336deg, rgba(34, 12, 73, 1) 0%, rgba(6, 0, 17, 1) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.image-heart {
+  width: 1.5rem;
+}
+
+.cards-holder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  border: "solid white 2px";
+  margin-bottom: 3rem;
+}
+
+
+
+.card {
+  text-align: left;
+  width: 32rem;
+  padding: 1rem;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(336deg, rgba(255, 255, 255, 0.7161458333333333) 0%, rgba(255, 255, 255, 0.2399553571428571) 100%);
+  border: 1px solid white;
+}
+
+.video-holder {
+  width: 30rem;
+  position: relative;
+  padding-top: 56.25%;
+  /* 720 / 1280 = 0.5625 */
+}
+
+.text-holder {
+  align-self: flex-end;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-button {
+  align-self: self-end;
+  border-radius: 2rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+  border: 1px solid white;
+  color: white;
+  background-color: rgb(225, 51, 51, 80%);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.delete-button:hover {
+  background-color: rgb(229, 12, 12);
+}
+
+h4 {
+  margin-bottom: 0.6rem;
+  margin-top: 1rem;
+  color: white;
+}
+
+.up,
+.down {
+  border: none;
+  background-color: rgb(48, 13, 81, 60%);
+  height: 2rem;
+  margin-top: 0.5rem;
+  color: white;
+}
+
+.up {
+  border-radius: 1rem 0 0 1rem;
+  padding-left: 1rem;
+  border-right: 1px solid rgb(155, 132, 165);
+  border-top: solid 1px white;
+
+}
+
+.down {
+  border-radius: 0 1rem 1rem 0;
+  border-top: solid 1px white;
+}
+
+.tumb-up {
+  width: 1rem;
+  padding-bottom: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.rate {
+  text-align: right;
+}
+
+.tumb-down {
+  -moz-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  width: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.form-holder {
+  width: 100%;
+  min-height: 10rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  min-height: 6rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.form-holder input {
+  width: 20rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+  border-radius: 2rem;
+  border: rgb(157, 139, 184) solid 1px;
+  background-color: rgb(255, 255, 255, 20%);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: white;
+}
+
+.form-holder ::placeholder {
+  color: rgb(255, 255, 255, 60%);
+  padding-left: 1rem;
+  font-size: 12px;
+}
+
+.form-holder input:hover {
+  background-color: rgb(255, 255, 255, 50%);
+}
+
+.form-holder input:focus {
+  background-color: rgb(255, 255, 255, 80%);
+  color: rgb(48, 48, 48);
+  outline-width: 0;
+  border-color: rgb(255, 255, 255);
+}
+
+.form-holder button {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  border: rgb(255, 255, 255, 60%) solid 1px;
+  color: white;
+  background: rgb(69, 48, 105);
+  background: linear-gradient(336deg, rgba(69, 48, 105, 1) 15%, rgba(132, 105, 181, 1) 100%);
+  box-shadow: rgba(0, 0, 0, 50%) 0px 3px 8px;
+}
+
+.form-holder button:hover {
+  background: rgb(118, 92, 163);
+  background: linear-gradient(336deg, rgba(118, 92, 163, 1) 15%, rgba(193, 152, 226, 1) 100%);
+}
+
+h3 {
+  color: white;
+  font-size: 18px;
+  width: 80%;
+}
+
+.main-button-to-add {
+  margin-bottom: 1.5rem;
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  border: rgb(255, 255, 255, 60%) solid 1px;
+  color: white;
+  background: rgb(69, 48, 105);
+  background: linear-gradient(336deg, rgba(69, 48, 105, 1) 15%, rgba(132, 105, 181, 1) 100%);
+  box-shadow: rgba(0, 0, 0, 50%) 0px 3px 8px;
+}
+
+.main-button-to-add:focus {
+  outline-width: 0;
+}
+
+.main-button-to-add:hover {
+  width: 10.2rem;
+  height: 2.6rem;
+}
+
+h1 {
+  font-size: 40px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: rgb(79, 64, 92);
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sorting-holder {
+  color: white;
+  width: 82%;
+  margin: 0 auto;
+  text-align: end;
+  font-size: 18px;
+}
+
+.sorting-ratings-button {
+  background-color: rgba(184, 184, 184, 59%);
+  padding: 0.3rem;
+  padding-top: 0.1rem;
+  border-radius: 0.4rem;
+  width: 2rem;
+  border: none;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+
+}
+
+.sorting-ratings-button img {
+  width: 1rem;
+}
+
+
+@media only screen and (max-width: 844px) {
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+  }
+
+  .video-holder {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+    /* 720 / 1280 = 0.5625 */
+  }
+
+  .card {
+    width: 96%;
+    padding: 0.5rem;
+  }
+
+  form {
+    width: 100%;
+    min-height: 10rem;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+
+}
