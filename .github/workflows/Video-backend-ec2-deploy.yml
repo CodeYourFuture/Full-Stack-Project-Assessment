@@ -25,6 +25,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            echo "Current directory: $(pwd)"
-            ls -la
-            
+            cd /home/runner/work/Full-Stack-Project-Assessment/Full-Stack-Project-Assessment
+            git pull origin main
+            npm install
+            pm2 restart video-server
