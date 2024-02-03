@@ -33,7 +33,11 @@ const AddVideo = ({ setVideos }) => {
       setTitle("");
       setUrl("");
 
-      axios.post("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos", newVideo)
+      axios.post("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos", newVideo, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
         .then((res) => {
           if (res.status === 201) {
             // Video added successfully, fetch the updated list
