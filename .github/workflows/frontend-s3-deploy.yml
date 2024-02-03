@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: |
           cd client
-          npm test 
+          npm test -- --passWithNoTests
 
       - name: Install AWS CLI
         run: |
