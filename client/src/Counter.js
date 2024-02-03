@@ -27,7 +27,7 @@ const Counter = ({ setAllMyVideos, videoId, videoRating }) => {
     const handleRatingChange = async (newRating) => {
         // PUT request to update the rating in the database
         try {
-            await fetch(`http://ec2-13-42-39-111.eu-west-2.compute.amazonaws.com/videos/${videoId}`, {
+            await fetch(`http://ec2-13-43-94-172.eu-west-2.compute.amazonaws.com/videos/${videoId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

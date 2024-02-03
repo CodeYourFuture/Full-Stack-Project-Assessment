@@ -10,7 +10,7 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://ec2-13-42-39-111.eu-west-2.compute.amazonaws.com/videos")
+    fetch("http://ec2-13-43-94-172.eu-west-2.compute.amazonaws.com/videos")
       .then(response => {
         return response.json()
       })
