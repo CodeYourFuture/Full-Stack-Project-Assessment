@@ -1,4 +1,4 @@
-name: Deploy Backend to EC2
+name: EC2 Deployment
 
 on:
   push:
@@ -18,21 +18,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openssh-client
 
-      - name: Set up private key
+      - name: Set up SSH
         run: |
-          echo "${{ secrets.EC2_PRIVATE_KEY_BASE64 }}" | base64 --decode > private-key.pem
-          chmod 600 private-key.pem
+          mkdir -p ~/.ssh
+          echo "$EC2_PRIVATE_KEY" > ~/.ssh/private-key.pem
+          chmod 600 ~/.ssh/private-key.pem
 
       - name: Deploy to EC2
         run: |
-          EC2_HOST="${{ secrets.EC2_HOST }}"
-          EC2_USERNAME="${{ secrets.EC2_USERNAME }}"
-          
-          LOCAL_BACKEND_PATH="./server"
-          REMOTE_BACKEND_PATH="/path/to/remote/server"
-
-          # Use scp with the decoded private key file
-          scp -i private-key.pem -o StrictHostKeyChecking=no -r "$LOCAL_BACKEND_PATH" "$EC2_USERNAME@$EC2_HOST:$REMOTE_BACKEND_PATH"
-
-    env:
-      EC2_PRIVATE_KEY: private-key.pem
+          scp -i ~/.ssh/private-key.pem -o StrictHostKeyChecking=no -r "$LOCAL_BACKEND_PATH" "$EC2_USERNAME@$EC2_HOST:$REMOTE_BACKEND_PATH"
