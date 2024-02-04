@@ -98,7 +98,7 @@ app.post("/videos", function (req, res) {
     });
 });
 
-// Delete video
+
 app.delete("/videos/:videosId", function (req, res) {
   const videosId = req.params.videosId;
 
