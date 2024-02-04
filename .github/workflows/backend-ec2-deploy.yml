@@ -10,10 +10,10 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_NAME }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/YOUR/TARGET/DIR
+            cd server
             npm install
             npm build
             npm i serve
