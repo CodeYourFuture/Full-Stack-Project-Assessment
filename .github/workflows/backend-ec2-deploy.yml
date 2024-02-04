@@ -20,5 +20,6 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > video-key && chmod 600 video-key
           ssh -o StrictHostKeyChecking=no -i video-key -vvv ${USERNAME}@${HOST_NAME} bash sync.sh
+          ssh -i "video-key.pem" ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com
 
        
