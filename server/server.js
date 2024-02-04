@@ -102,7 +102,7 @@ app.post("/videos", function (req, res) {
 app.delete("/videos/:videosId", function (req, res) {
   const videosId = req.params.videosId;
 
-  // Assuming you have the necessary variables for the query
+ 
   const query = "DELETE FROM videos WHERE id = $1";
 
   pool
