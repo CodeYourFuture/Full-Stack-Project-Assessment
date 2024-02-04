@@ -106,7 +106,7 @@ app.delete("/videos/:videosId", function (req, res) {
   const query = "DELETE FROM videos WHERE id = $1";
 
   pool
-    .query(query, [videosId]) // Use the correct variable
+    .query(query, [videosId]) 
     .then(() => res.status(200).send("Video deleted!"))
     .catch((error) => {
       console.error(error);
