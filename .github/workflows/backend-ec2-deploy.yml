@@ -18,7 +18,7 @@ jobs:
             HOST_NAME : ${{ secrets.HOST_DNS }}
             USERNAME : ${{ secrets.USERNAME  }}
         run: |
-          
-          ssh -o StrictHostKeyChecking=no -i video-key  ${USERNAME}@${HOST_NAME} bash sync.sh
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key  ${USERNAME}@${HOST_NAME} bash sync.sh
 
        
