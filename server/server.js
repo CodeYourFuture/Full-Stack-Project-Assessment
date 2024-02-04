@@ -12,7 +12,7 @@ const { Pool } = require("pg");
 
 // const isProduction = process.env.NODE_ENV === "production";
 // // const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
-// const connectionString = process.env.DATABASE_URL;
+
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
