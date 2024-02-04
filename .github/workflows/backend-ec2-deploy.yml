@@ -18,6 +18,6 @@ jobs:
             HOSTNAME : ${{ secrets.HOST_DNS }}
             USER_NAME : ${{ secrets.USERNAME  }}
         run: |
-          echo "$PRIVATE_KEY" > video-key && chmod 600 private_key
+          echo "$SSH_KEY" > video-key && chmod 600 video-key
           ssh -o StrictHostKeyChecking=no -i video-key ${USERNAME}@${HOST_NAME} '
        
