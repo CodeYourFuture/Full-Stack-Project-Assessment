@@ -9,26 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2 
-      - name: Build & Deploy
-        env:
-            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            HOSTNAME: ${{secrets.HOST_NAME}}
-            USER_NAME: ${{secrets.USER_NAME}}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-            run: |
-              echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-              ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-                
-              # Now we have got the access of EC2 and we will start the deploy .
-              cd /home/ubuntu/<PROJECT_DIRECTORY> &&
-              git checkout dev &&
-              git fetch --all &&
-              git reset --hard origin/dev &&
-              git pull origin dev &&
-              sudo npm i &&
-              sudo npm run build &&
-              sudo pm2 stop ./dist/index.js &&
-              sudo pm2 start ./dist/index.js
-  
+      - name: SSH into EC2 Instance
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com << EOF
+            # Commands to pull the latest code and restart your backend service
+            cd server
+            git pull origin main
+            systemctl restart your-backend-service
+          EOF
+              
  
