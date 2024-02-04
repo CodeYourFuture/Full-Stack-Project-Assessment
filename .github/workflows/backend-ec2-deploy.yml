@@ -2,8 +2,10 @@ name: Deploy to EC2
 
 on:
   push:
+    paths:
+      - "server/**"
     branches:
-      - main
+      - "*"
 
 jobs:
   deploy:
