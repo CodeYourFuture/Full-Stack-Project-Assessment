@@ -13,9 +13,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create private key
+        mkdir ~/.ssh/
         run: echo "${{ secrets.MY_SECRET_SSH_KEY}}" > secretKey.pem
+            chmod 400 ~/.ssh/secretKey.pem
 
       - name: Connect to EC2
         run: |
          - name: Rsync files to EC2
-  run: rsync -avz --exclude=node_modules --exclude=.env -e "ssh -i secretKey.pem -o StrictHostKeyChecking=no" ./ ec2-user@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/
+  run: rsync -avz --exclude=node_modules --exclude=.env -e ssh -i "~/.ssh/secretKey.pem" -o StrictHostKeyChecking=no ec2-user@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/
