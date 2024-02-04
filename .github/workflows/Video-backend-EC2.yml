@@ -1,0 +1,33 @@
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client
+
+      - name: Deploy to EC2
+        run: |
+          # Replace the following with your EC2 instance details
+          EC2_HOST="${{ secrets.EC2_HOST }}"
+          EC2_USERNAME="${{ secrets.EC2_USERNAME }}"
+          EC2_PRIVATE_KEY="${{ secrets.EC2_PRIVATE_KEY }}"
+          
+          LOCAL_BACKEND_PATH="./server"
+      
+          REMOTE_BACKEND_PATH="/path/to/remote/server"
+      
+          scp -i "$EC2_PRIVATE_KEY" -r "$LOCAL_BACKEND_PATH" "$EC2_USERNAME@$EC2_HOST:$REMOTE_BACKEND_PATH"
+
