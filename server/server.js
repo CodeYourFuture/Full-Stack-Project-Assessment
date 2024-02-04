@@ -18,8 +18,6 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-
-
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(bodyParser.json());
 app.use(
