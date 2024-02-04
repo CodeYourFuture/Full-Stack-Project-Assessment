@@ -1,28 +1,22 @@
 name: Deploy backend to EC2
 on:
- push:
-  branches: Level--300 
-  
+ [push]
 jobs:
- Deploy:
-    name: Deploy to EC2
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Install SSH Key
-        uses: webfactory/ssh-agent@v0.5
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: SSH into EC2 Instance
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com << EOF
-            # Commands to pull the latest code and restart your backend service
-            cd server
-            git pull origin main
-            systemctl restart your-backend-service
-          EOF
+          host: ${{ secrets.HOST_NAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/YOUR/TARGET/DIR
+            npm install
+            npm build
+            npm i serve
+            serve -p 3000 build
               
  
