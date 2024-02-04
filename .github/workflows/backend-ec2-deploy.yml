@@ -11,20 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Debug SSH Key
-        run: echo "${{ secrets.EC2_SSH_KEY }}"
-
-      - name: Debug SSH Connection
-        run: ssh -v -i "${{ secrets.EC2_SSH_KEY }}" ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com "echo Hello"
-
-      - name: Deploy to EC2
+      - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ec2-13-53-198-163.eu-north-1.compute.amazonaws.com
-          username: ubuntu
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd server
