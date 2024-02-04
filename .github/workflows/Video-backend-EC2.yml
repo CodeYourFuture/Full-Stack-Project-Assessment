@@ -18,16 +18,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openssh-client
 
+      - name: Set up private key
+        run: echo "${{ secrets.EC2_PRIVATE_KEY }}" > private-key.pem
+
       - name: Deploy to EC2
         run: |
-          # Replace the following with your EC2 instance details
           EC2_HOST="${{ secrets.EC2_HOST }}"
           EC2_USERNAME="${{ secrets.EC2_USERNAME }}"
-          EC2_PRIVATE_KEY="${{ secrets.EC2_PRIVATE_KEY }}"
           
           LOCAL_BACKEND_PATH="./server"
-      
           REMOTE_BACKEND_PATH="/path/to/remote/server"
-      
-          scp -i "$EC2_PRIVATE_KEY" -r "$LOCAL_BACKEND_PATH" "$EC2_USERNAME@$EC2_HOST:$REMOTE_BACKEND_PATH"
 
+          scp -i private-key.pem -o StrictHostKeyChecking=no -r "$LOCAL_BACKEND_PATH" "$EC2_USERNAME@$EC2_HOST:$REMOTE_BACKEND_PATH"
+
+        env:
+          EC2_PRIVATE_KEY: private-key.pem
