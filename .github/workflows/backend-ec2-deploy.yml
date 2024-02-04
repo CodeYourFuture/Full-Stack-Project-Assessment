@@ -19,10 +19,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd server
-            sudo apt-get -y update
-            sudo apt-get install -y apache2
-            sudo systemctl start apache2
-            sudo systemctl enable apache2
+              cd ~/YOUR/TARGET/DIR
+              npm install
+              npm build
+              npm i serve
+              serve -p 3000 build/
            
             
 
