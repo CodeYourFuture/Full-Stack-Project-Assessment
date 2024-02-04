@@ -15,10 +15,10 @@ jobs:
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY}}
-            HOSTNAME : ${{ secrets.HOST_DNS }}
-            USER_NAME : ${{ secrets.USERNAME  }}
+            HOST_NAME : ${{ secrets.HOST_DNS }}
+            USERNAME : ${{ secrets.USERNAME  }}
         run: |
-          echo "$SSH_KEY" > video-key && chmod 600 video-key
+          echo "$PRIVATE_KEY" > video-key && chmod 600 video-key
           ssh -o StrictHostKeyChecking=no -i video-key -vvv ${USERNAME}@${HOST_NAME} bash sync.sh
 
        
