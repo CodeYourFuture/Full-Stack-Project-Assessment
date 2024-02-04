@@ -65,9 +65,6 @@ app.get("/videos/:videoTitle", function (req, res) {
     });
 });
 
-// Add a new video
-// const videoId = Date.now();
-
 function validateYouTubeUrl(url) {
   let regExp =
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -98,15 +95,13 @@ app.post("/videos", function (req, res) {
     });
 });
 
-
 app.delete("/videos/:videosId", function (req, res) {
   const videosId = req.params.videosId;
 
- 
   const query = "DELETE FROM videos WHERE id = $1";
 
   pool
-    .query(query, [videosId]) 
+    .query(query, [videosId])
     .then(() => res.status(200).send("Video deleted!"))
     .catch((error) => {
       console.error(error);
