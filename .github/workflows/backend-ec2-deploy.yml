@@ -21,7 +21,7 @@ jobs:
 
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws ec2-instance-connect@v1
         with:
            host: ${{ secrets.HOST_DNS }}
            username: ${{ secrets.USERNAME }}
@@ -33,7 +33,8 @@ jobs:
           npm install
           npm run build
           npm i serve
-          serve -p 5050 build/
+        
+          sudo systemctl restart
          
 
     # steps:
