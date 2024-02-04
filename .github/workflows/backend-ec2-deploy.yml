@@ -1,28 +1,33 @@
 name: Deploy backend to EC2
+
 on:
- [push]
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
     steps:
-      - name: Executing remote ssh commands using ssh key
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Debug SSH Key
+        run: echo "${{ secrets.EC2_SSH_KEY }}"
+
+      - name: Debug SSH Connection
+        run: ssh -v -i "${{ secrets.EC2_SSH_KEY }}" ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com "echo Hello"
+
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
-          - name: Debug SSH Key
-            run: echo "${{ secrets.EC2_SSH_KEY }}"
-          - name: Debug SSH Connection
-            run: ssh -v -i "${{ secrets.EC2_SSH_KEY}}" user@hostname
-          - name: SSH into Server
-            run: ssh -i "${{ secrets.EC2_SSH_KEY }}" ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com "echo Hello"
-
-
-            script: |
-             cd server
-             npm install
-             npm build
+          host: ec2-13-53-198-163.eu-north-1.compute.amazonaws.com
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Add commands to deploy your backend here
+            cd server
             
-            npm i serve
-            serve -p 3000 build
-              
- 
+
