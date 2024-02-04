@@ -6,9 +6,6 @@ on:
       - "server/**"
     branches:
       - "*"
-      defaults:
-  run:
-    working-directory: "server"
 
 jobs:
   deploy:
