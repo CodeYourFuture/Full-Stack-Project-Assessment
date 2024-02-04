@@ -9,13 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Create private key
-        mkdir ~/.ssh/
-        run: echo "${{ secrets.MY_SECRET_SSH_KEY}}" > secretKey.pem
-            chmod 400 ~/.ssh/secretKey.pem
+        run: |
+         mkdir ~/.ssh/
+         echo "${{ secrets.MY_SECRET_SSH_KEY}}" > secretKey.pem
+         chmod 400 ~/.ssh/secretKey.pem
 
       - name: Connect to EC2
         run: |
