@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - "*"
-    paths:
-      - "server/**"
-
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
