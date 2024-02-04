@@ -3,27 +3,53 @@ name: Deploy backend to EC2
 on:
   push:
     branches:
-      - main
+      - Level--300
 
 jobs:
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Node.js
+     
+        uses: actions/setup-node@v3
         with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd server
-              cd ~/YOUR/TARGET/DIR
-              npm install
-              npm build
-              npm i serve
-              serve -p 3000 build/
+          node-version: 14
+
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+           host: ${{ secrets.HOST_DNS }}
+           username: ${{ secrets.USERNAME }}
+           key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name : build and deploy
+        run: |
+          cd server 
+          npm install
+          npm run build
+          npm i serve
+          serve -p 5050 build/
+         
+
+    # steps:
+    #   - name: Executing remote ssh commands using ssh key
+    #     uses: appleboy/ssh-action@master
+    #     with:
+    #       host: ${{ secrets.HOST_DNS }}
+    #       username: ${{ secrets.USERNAME }}
+    #       key: ${{ secrets.EC2_SSH_KEY }}
+    #       script: |
+    #         cd server
+    #           cd ~/YOUR/TARGET/DIR
+    #           npm install
+    #           npm build
+    #           npm i serve
+    #           serve -p 3000 build/
            
             
 
