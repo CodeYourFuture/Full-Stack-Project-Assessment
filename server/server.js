@@ -73,7 +73,6 @@ function validateYouTubeUrl(url) {
 }
 
 app.post("/videos", function (req, res) {
-  // const newVideoId = videoId
   const newtTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = 0;
