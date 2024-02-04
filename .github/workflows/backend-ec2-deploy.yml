@@ -9,13 +9,19 @@ jobs:
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd server
-            npm install
-            npm build
+          - name: Debug SSH Key
+            run: echo "${{ secrets.EC2_SSH_KEY }}"
+          - name: Debug SSH Connection
+            run: ssh -v -i "${{ secrets.EC2_SSH_KEY}}" user@hostname
+          - name: SSH into Server
+            run: ssh -i "${{ secrets.EC2_SSH_KEY }}" ubuntu@ec2-13-53-198-163.eu-north-1.compute.amazonaws.com "echo Hello"
+
+
+            script: |
+             cd server
+             npm install
+             npm build
+            
             npm i serve
             serve -p 3000 build
               
