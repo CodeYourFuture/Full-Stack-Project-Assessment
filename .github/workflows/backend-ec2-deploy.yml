@@ -19,5 +19,5 @@ jobs:
             USER_NAME : ${{ secrets.USERNAME  }}
         run: |
           echo "$SSH_KEY" > video-key && chmod 600 video-key
-          ssh -o StrictHostKeyChecking=no -i video-key ${USERNAME}@${HOST_NAME} '
+          ssh -o StrictHostKeyChecking=no -i video-key ${USERNAME}@${HOST_NAME} bash sync.sh
        
