@@ -100,7 +100,7 @@ function App() {
         </Container>
       </main>
       <footer >
-    <h4 > Designed by Mesgna Mehari Woldeab</h4>
+    <h4 > Designed by Mesgna Mehari Woldaab</h4>
       </footer>
     </div>
   );
