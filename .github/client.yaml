@@ -1,0 +1,27 @@
+name: Frontend S3 Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build app
+        working-directory: ./client
+        run: npm install && npm run build
+  
+      - name: Deploy the site 
+        run: aws s3 sync ./client/build s3://cap-cloud.s3-website.eu-west-2.amazonaws.com
