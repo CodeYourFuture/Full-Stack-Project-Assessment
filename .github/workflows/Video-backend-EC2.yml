@@ -23,6 +23,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "$EC2_PRIVATE_KEY" > ~/.ssh/private-key.pem
           chmod 600 ~/.ssh/private-key.pem
+          ssh-keyscan -t rsa $EC2_HOST >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
