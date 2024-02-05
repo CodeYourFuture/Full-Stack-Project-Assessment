@@ -1,24 +1,30 @@
-name: Push-to-EC2
+name: Deploy to EC2
 
-# Trigger deployment only on push to Level--300 branch
 on:
-  push:
+ push:
     branches:
       - Level--300
 
 jobs:
-  deploy:
-    name: Deploy to EC2 on Level--300 branch push
+ deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy in EC2
-        env:
-            PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY}}
-            HOST_NAME : ${{ secrets.HOST_DNS }}
-            USERNAME : ${{ secrets.USERNAME  }}
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key  ${USERNAME}@${HOST_NAME} bash sync.sh
 
-       
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+    - name: Execute remote commands via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_DNS }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd server
+          git pull 
+          sudo systemctl restart your-backend-service
