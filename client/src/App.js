@@ -53,7 +53,7 @@ function App() {
   const addVideo = async (video) => {
     try {
       const response = await fetch(
-        "https://full-stack-project-jcr4.onrender.com",
+        "http://18.133.225.232:5001/",
         {
           method: "POST",
           headers: {
@@ -76,7 +76,7 @@ function App() {
   const removeVideo = async (id) => {
     try {
       const response = await fetch(
-        `https://full-stack-project-jcr4.onrender.com/${id}`,
+        `http://18.133.225.232:5001/${id}`,
         {
           method: "DELETE",
         }
@@ -98,7 +98,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://full-stack-project-jcr4.onrender.com/${id}/rating`,
+        `http://18.133.225.232:5001/${id}/rating`,
         {
           method: "POST",
           headers: {
@@ -132,7 +132,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://full-stack-project-jcr4.onrender.com/${id}/rating`,
+        `http://18.133.225.232:5001/${id}/rating`,
         {
           method: "POST",
           headers: {

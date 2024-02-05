@@ -26,6 +26,9 @@ const dbEndpoints = (db) => {
           [title, url]
         );
 
+        console.log("Result of database query:", result.rows);
+
+
         const id = result.rows[0].id;
 
         res.status(201).json({ id }); // Use 201 Created status for successful creation
