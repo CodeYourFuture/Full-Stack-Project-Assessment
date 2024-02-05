@@ -1,4 +1,4 @@
-name: EC2 Deployment
+name: Deploy to EC2
 
 on:
   push:
@@ -8,6 +8,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
+      LOCAL_BACKEND_PATH: "./server"
+      REMOTE_BACKEND_PATH: "/home/ubuntu/Full-Stack-Project-Assessment/server"
 
     steps:
       - name: Checkout Repository
