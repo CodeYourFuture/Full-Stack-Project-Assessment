@@ -56,41 +56,33 @@ const dbEndpoints = (db) => {
   router.post("/:videoId/rating", async (req, res) => {
     const videoId = req.params.videoId;
     const { like, dislike } = req.body;
-
+  
     try {
       let query = "";
       let queryParams = [];
-
+  
       if (like) {
-        query = "UPDATE videos SET likes = likes + 1";
+        query = "UPDATE videos SET rating = rating + 1";
         queryParams.push(videoId);
       }
-
+  
       if (dislike) {
-        query = "UPDATE videos SET dislikes = dislikes + 1";
+        query = "UPDATE videos SET rating = rating - 1";
         queryParams.push(videoId);
       }
-
+  
       if (like || dislike) {
-        // Update the likes or dislikes columns in the videos table
+        // Update the rating column in the videos table
         await db.query(`${query} WHERE id = $1`, queryParams);
       }
-
-      // Recalculate the rating based on likes and dislikes
-      const ratingQuery = `
-        UPDATE videos
-        SET rating = COALESCE((SELECT SUM(likes) - SUM(dislikes) FROM videos WHERE id = $1), 0)
-        WHERE id = $1
-      `;
-
-      await db.query(ratingQuery, [videoId]);
-
+  
       res.status(200).json({ message: "Rating updated successfully" });
     } catch (error) {
       console.error("Error updating rating:", error);
       res.status(500).json({ error: "Failed to update rating" });
     }
   });
+  
 
   return router;
 };
