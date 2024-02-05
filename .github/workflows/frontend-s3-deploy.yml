@@ -1,47 +1,27 @@
 name: Frontend S3 Deploy
-
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Check npm version
-        run: npm --version
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: 20.3.1
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Install Dependencies
-        run: 
-          cd client
-          npm install
-
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get install -y python3-pip
-          pip3 install awscli
-
-      - name: Configure AWS Credentials
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region your-aws-region
-
-      - name: Build and Deploy to S3
-        run: |
-          cd client
-          npm run build
-          aws s3 sync build/ s3://cap-cloud.s3-website.eu-west-2.amazonaws.com
-
-
-          
+      - name: Build app
+        working-directory: ./client
+        run: npm install && npm run build
+  
+      - name: Deploy the site 
+        run: aws s3 sync ./client/build s3://cap-cloud.s3-website.eu-west-2.amazonaws.com
