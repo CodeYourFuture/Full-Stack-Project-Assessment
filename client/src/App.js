@@ -66,8 +66,13 @@ function App() {
         throw new Error("Failed to add video!");
       }
       const data = await response.json();
-      const videoWithDate = { ...video, id: data.id, rating: 0 };
-      setVideos([videoWithDate, ...videos]);
+
+      if (data && data.id !== undefined) {
+        const videoWithDate = { ...video, id: data.id, rating: 0 };
+        setVideos([videoWithDate, ...videos]);
+      } else {
+        throw new Error("Invalid response from the server");
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -218,7 +223,7 @@ function App() {
                     removeVideo={removeVideo}
                     upVote={upVote}
                     downVote={downVote}
-                    votedVideos={votedVideos} // Make sure to pass the votedVideos prop here
+                    votedVideos={votedVideos}
                   />
                 ))}
               </div>
