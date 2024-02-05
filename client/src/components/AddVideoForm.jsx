@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 import ExtractVideoId from "../utils/ExtractVideoId";
 import "../styles/AddVideoForm.css";
 
@@ -7,6 +7,8 @@ const AddVideoForm = ({ onAddVideo }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -25,19 +27,29 @@ const AddVideoForm = ({ onAddVideo }) => {
 
   const handleAddVideoClick = () => {
     setShowForm((prevShowForm) => !prevShowForm); // Toggle the value of showForm
+    setErrorMessage("")
   };
 
-  const handleAddVideo = () => {
-    const videoID = ExtractVideoId(url); // Corrected function name
+  const handleAddVideo = (event) => {
+    event.preventDefault();
+
+    const videoID = ExtractVideoId(url);
+
+    const youtubeUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+
+    if (!youtubeUrlRegex.test(url)) {
+      setErrorMessage("Invalid YouTube URL. Please provide a valid YouTube link.");
+      return;
+    }
+
     const video = {
-      // id: Math.floor(Math.random() * 1000000),
       title: title,
       url: `https://www.youtube.com/watch?v=${videoID}`,
-      // rating: 0,
     };
     onAddVideo(video);
     setTitle("");
     setUrl("");
+    setErrorMessage("");
   };
 
   return (
@@ -61,12 +73,19 @@ const AddVideoForm = ({ onAddVideo }) => {
             <label htmlFor="url">URL</label>
             <TextField
               id="url"
-              placeholder="Video Url"
+              placeholder="Youtube Video Url"
               value={url}
               onChange={handleUrlChange}
               required
             />
           </div>
+          
+          {errorMessage && (
+            <Typography variant="body2" color="error">
+              {errorMessage}
+            </Typography>
+          )}
+
           <Button variant="contained" type="submit" onClick={handleAddVideo}>
             Add
           </Button>
