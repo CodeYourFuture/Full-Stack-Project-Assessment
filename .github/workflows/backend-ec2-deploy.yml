@@ -25,6 +25,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd server
+         
           git pull 
           sudo systemctl restart your-backend-service
