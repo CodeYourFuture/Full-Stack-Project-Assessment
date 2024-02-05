@@ -28,4 +28,4 @@ jobs:
           cd home/ubuntu/server
         
           git pull 
-          sudo systemctl restart your-backend-service
+          sudo systemctl restart server.js
