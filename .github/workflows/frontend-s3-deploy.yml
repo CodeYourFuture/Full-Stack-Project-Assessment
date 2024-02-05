@@ -13,13 +13,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Check npm version
+        run: npm --version
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 20.3.1
 
       - name: Install Dependencies
-        run: npm install
+        run: 
+          cd client
+          npm install
 
       - name: Install AWS CLI
         run: |
@@ -32,8 +37,8 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region your-aws-region
 
-      - name: Deploy to S3
+      - name: Build and Deploy to S3
         run: |
+          cd client
           npm run build
           aws s3 sync build/ s3://cap-cloud.s3-website.eu-west-2.amazonaws.com
-
