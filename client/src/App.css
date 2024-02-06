@@ -1,3 +1,7 @@
-.App {
-  text-align: center;
+
+
+.font {
+font-family: 'Quicksand', sans-serif;
+background-color: rgb(8, 115, 160);
+color: white;
 }
