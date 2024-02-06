@@ -12,7 +12,10 @@ const VideoCard = ({ video, removeVideo }) => {
       },
       body: JSON.stringify({ rating: rating + 1 }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };

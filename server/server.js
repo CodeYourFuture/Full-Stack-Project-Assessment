@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3006;
 const cors = require("cors");
-app.use(express.json());
+
 app.use(cors());
 const isUrl = require("is-url");
 const dotenv = require("dotenv");
@@ -12,7 +12,7 @@ const db = new Pool({
   connectionString: process.env.DB_URL,
   ssl: { rejectUnauthorized: false },
 });
-
+app.use(express.json());
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 let videos = [
@@ -127,7 +127,7 @@ app.post("/videos", function (req, res) {
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send({
+        res.status(500).json({
           result: "failure",
           message: "Video could not be saved",
         });
@@ -145,12 +145,14 @@ app.delete("/videos/:id", function (req, res) {
     .then(() => {
       return db.query("DELETE FROM videos WHERE id=$1", [VideoId]);
     })
-    .then(() => res.send(`Video ${customerId} deleted!`))
-    .catch((e) => console.error(e));
-  res.status(500).send({
-    result: "failure",
-    message: "Video could not be deleted",
-  });
+    .then(() => res.send(`Video ${VideoId} deleted!`))
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send({
+        result: "failure",
+        message: "Video could not be deleted",
+      });
+    });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

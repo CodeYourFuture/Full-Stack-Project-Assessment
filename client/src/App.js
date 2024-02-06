@@ -6,6 +6,7 @@ import AllVideos from "./Components/AllVideos";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [refreshPage, setRefreshPage] = useState(0);
   useEffect(() => {
     fetch(`https://paulina-full-stack-project-server.onrender.com/videos`)
       .then((res) => {
@@ -21,7 +22,7 @@ function App() {
         setVideos(data);
       })
       .catch((Error) => console.log(Error));
-  }, []);
+  }, [refreshPage]);
 
   return (
     <div className="container-fluid">
@@ -30,7 +31,12 @@ function App() {
           Video Recommendation
         </h1>
       </header>
-      <AddVideo setVideos={setVideos} videos={videos} />
+      <AddVideo
+        setVideos={setVideos}
+        videos={videos}
+        refreshPage={refreshPage}
+        setRefreshPage={setRefreshPage}
+      />
       <AllVideos videos={videos} setVideos={setVideos} />
     </div>
   );

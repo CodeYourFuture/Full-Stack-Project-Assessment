@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-const AddVideo = ({ videos, setVideos }) => {
+const AddVideo = ({ videos, setVideos, refreshPage, setRefreshPage }) => {
   const [videoName, setVideoName] = useState("");
   const [videoLink, setVideoLink] = useState("");
+
   function handleInputChange(event) {
     if (event.target.name === "name") {
       setVideoName(event.target.value);
@@ -17,6 +18,8 @@ const AddVideo = ({ videos, setVideos }) => {
       title: videoName,
       url: videoLink,
     };
+    console.log("before", refreshPage);
+
     if (video.url.startsWith("https://www.youtube.com/")) {
       fetch(`https://paulina-full-stack-project-server.onrender.com/videos`, {
         method: "POST",
@@ -27,7 +30,11 @@ const AddVideo = ({ videos, setVideos }) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log("bef", refreshPage);
+
+          console.log("afte", refreshPage);
           setVideos(data);
+          setRefreshPage((count) => count + 1);
         })
         .catch((error) => console.log(error));
     } else {
