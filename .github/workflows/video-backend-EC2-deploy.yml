@@ -1,1 +1,30 @@
 
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install  
+
+      - name: Deploy Backend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}  
+          username: ${{ secrets.EC2_USERNAME }} 
+          key: ${{ secrets.EC2_PRIVATE_KEY }} 
+          script: |
+            cd /Full-Stack-Project-Assessment/server
+            git pull origin main  
+            
+
