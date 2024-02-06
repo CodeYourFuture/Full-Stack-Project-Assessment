@@ -4,20 +4,28 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    env:
-      EC2_HOST: ${{ secrets.EC2_HOST }}
-      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
-      EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+  build:
+    runs-on: self-hosted
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Deploy Backend
-      run: |
-        scp -i ~/.ssh/private-key.pem -o StrictHostKeyChecking=no -r ./server $EC2_USERNAME@$EC2_HOST:/path/to/remote/server
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build --if-present
+
+      - name: Restart PM2 Process
+        run: sudo pm2 restart server
