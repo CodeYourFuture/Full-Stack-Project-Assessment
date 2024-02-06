@@ -23,7 +23,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
         REMOTE_PORT: 22
-        REMOTE_SCRIPT: 'rm -rf /home/ubuntu/'
+        REMOTE_SCRIPT: 'rm -rf /home/ubuntu/server'
         
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
