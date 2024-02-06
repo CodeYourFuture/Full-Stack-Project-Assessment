@@ -1,10 +1,9 @@
 name: Deploy to EC2
 
 on:
-  push:
+ push:
     branches:
       - Level--300
-
 jobs:
   deploy:
     name: Deploy to EC2
@@ -16,27 +15,24 @@ jobs:
 
     - name: Build and Test
       run: |
-        # Add your build and test commands here
-
+       
     - name: Remove Previous Deployment
       uses: easingthemes/ssh-deploy@main
-      with:
-        REMOTE_HOST: ${{ secrets.HOST_DNS }}
-        REMOTE_USER: ${{ secrets.USERNAME }}
-        REMOTE_PORT:  22
-        ARGS: "-avz --delete"
-        
-        
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-
+        REMOTE_HOST: ${{ secrets.HOST_DNS }}
+        REMOTE_USER: ${{ secrets.USERNAME }}
+        REMOTE_PORT: 22
+        REMOTE_SCRIPT: 'rm -rf /home/ubuntu'
+        
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
       with:
-        local-path: server
-        ARGS: "-avz"
-        TARGET: "/home/ubuntu"
+       local-path: server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
+      
+       
+         
