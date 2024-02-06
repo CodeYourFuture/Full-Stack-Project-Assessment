@@ -152,8 +152,8 @@ function App() {
       setVideos((prevVideos) =>
         prevVideos.map((video) => {
           if (video.id === id) {
-          const newRating = Math.max(0, video.rating - 1);
-          return { ...video, rating: newRating };
+            const newRating = Math.max(0, video.rating - 1);
+            return { ...video, rating: newRating };
           }
           return video;
         })
@@ -188,7 +188,7 @@ function App() {
 
   const searchVideos = (searchTerm) => {
     const filtered = videos.filter((video) =>
-      video.title.toLowerCase().includes(searchTerm.toLowerCase())
+    video.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredVideos(filtered);
   };
