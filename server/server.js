@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3006;
+const port = process.env.PORT || 3010;
 const cors = require("cors");
 
 app.use(cors());
@@ -121,12 +121,10 @@ app.post("/videos", function (req, res) {
 
   const query = `INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)`;
   if (req.body.title && req.body.url && isUrl(req.body.url)) {
-    db.query(query, [newTitle, newUrl, newRating])
+    const result = db
+      .query(query, [newTitle, newUrl, newRating])
       .then(() => {
-        res.status(201).json({
-          result: "success",
-          message: "Created a new video",
-        });
+        res.status(201).json(result.rows);
       })
       .catch((err) => {
         console.log(err);

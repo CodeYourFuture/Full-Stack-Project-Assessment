@@ -18,7 +18,6 @@ const AddVideo = ({ videos, setVideos, refreshPage, setRefreshPage }) => {
       title: videoName,
       url: videoLink,
     };
-    console.log("before", refreshPage);
 
     if (video.url.startsWith("https://www.youtube.com/")) {
       fetch(`https://paulina-full-stack-project-server.onrender.com/videos`, {
@@ -30,11 +29,9 @@ const AddVideo = ({ videos, setVideos, refreshPage, setRefreshPage }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("bef", refreshPage);
-
-          console.log("afte", refreshPage);
-          setVideos(data);
+          console.log(data);
           setRefreshPage((count) => count + 1);
+          setVideos(data);
         })
         .catch((error) => console.log(error));
     } else {
