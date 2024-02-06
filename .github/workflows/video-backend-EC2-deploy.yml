@@ -1,27 +1,23 @@
-
 name: Deploy Backend to EC2
 
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
+      EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Deploy Backend
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}  
-          username: ${{ secrets.EC2_USERNAME }} 
-          key: ${{ secrets.EC2_PRIVATE_KEY }} 
-          script: |
-            cd /Full-Stack-Project-Assessment/server
-            git pull origin main  
-            
-
+    - name: Deploy Backend
+      run: |
+        scp -i ~/.ssh/private-key.pem -o StrictHostKeyChecking=no -r ./server $EC2_USERNAME@$EC2_HOST:/path/to/remote/server
