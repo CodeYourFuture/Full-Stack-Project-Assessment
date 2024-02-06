@@ -15,10 +15,12 @@ jobs:
 
     - name: Build and Test
       run: |
-        # Add commands to build and test your application here
+       
 
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
+      with:
+       local-path: server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
