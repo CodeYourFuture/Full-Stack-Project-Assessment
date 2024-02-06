@@ -14,7 +14,7 @@ INSERT INTO videos (title, url, rating) VALUES ('Videos for Cats to Watch - 8 Ho
 INSERT INTO videos (title, url, rating) VALUES ('100+ JavaScript Concepts you Need to Know', 'https://www.youtube.com/watch?v=lkIFF4maKMU', 3211);
 INSERT INTO videos (title, url, rating) VALUES ('Learn Unity - Beginner`s Game Development Course', 'https://www.youtube.com/watch?v=gB1F9G0JXOo', 211);
 INSERT INTO videos (title, url, rating) VALUES ('Cracking Enigma in 2021 - Computerphile', 'https://www.youtube.com/watch?v=RzWB5jL5RX0', 111);
-INSERT INTO videos (title, url, rating) VALUES ('Coding Adventure: Chess AI', 'https://www.youtube.com/watch?v=U4ogK0MIzqk', 671);
+INSERT INTO videos (title, url, rating) VALUES ('Coding Adventure: Chess AI', 'https://www.youtube.com/watch?v=U4ogK0MIzqk', 673);
 INSERT INTO videos (title, url, rating) VALUES ('Coding Adventuree: Ant and Slime Simulations', 'https://www.youtube.com/watch?v=X-iSQQgOd1A', 76);
 INSERT INTO videos (title, url, rating) VALUES ('Why the Tour de France is so brutal', 'https://www.youtube.com/watch?v=ZacOS8NBK6U', 80);
 
