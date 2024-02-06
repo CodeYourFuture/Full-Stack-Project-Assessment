@@ -123,7 +123,10 @@ app.post("/videos", function (req, res) {
   if (req.body.title && req.body.url && isUrl(req.body.url)) {
     db.query(query, [newTitle, newUrl, newRating])
       .then(() => {
-        res.status(201).send("Created a new video");
+        res.status(201).json({
+          result: "success",
+          message: "Created a new video",
+        });
       })
       .catch((err) => {
         console.log(err);
