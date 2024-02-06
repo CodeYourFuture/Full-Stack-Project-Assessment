@@ -19,4 +19,4 @@ jobs:
 
     - name: Connect to EC2
       run: |
-        rsync -avz --exclude=node_modules --exclude=.env -e ssh -i "~/.ssh/secretKey.pem" -o StrictHostKeyChecking=no  ubuntu@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/
+        rsync -avz --exclude=node_modules --exclude=.env -e "ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no"  ubuntu@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/

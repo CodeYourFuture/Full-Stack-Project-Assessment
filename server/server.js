@@ -53,7 +53,7 @@ app.get("/videos", (req, res) => {
 app.get("/videos/:videoTitle", function (req, res) {
   const videoTitle = req.params.videoTitle;
 
-  // Use the correct column name (title) in the WHERE clause
+  
   pool
     .query("SELECT * FROM videos WHERE title=$1", [videoTitle])
     .then((result) => res.json(result.rows))
