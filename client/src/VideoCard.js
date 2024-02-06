@@ -35,18 +35,19 @@ const Videocard = ({ video, removeVideo, upVote, downVote }) => {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
-        <iframe src={embedVideos(url)} title={title} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
-        <p className="card-text">Upvotes: {upVotes} | Downvotes: {downVotes}</p>
-        <button onClick={() => upVote(id)} className="btn btn-success mx-2">Upvote</button>
-        <button onClick={() => downVote(id)} className="btn btn-danger">Downvote</button>
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={embedVideos(url)} title={title} allowFullScreen></iframe>
+        </div>
+        <p className="card-text">Rating: {video.rating}</p>
+        <button onClick={() => upVote(id)} className="btn btn-outline-success mx-2">
+          👍 {upVotes} 
+        </button>
+        <button onClick={() => downVote(id)} className="btn btn-outline-danger">
+          👎 {downVotes} 
+        </button>
         <button onClick={handleRemoveVideo} className="btn btn-secondary mx-2">Remove</button>
       </div>
     </div>
   );
 }
-
 export default Videocard;
-
-
-
-
