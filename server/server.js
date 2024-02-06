@@ -121,9 +121,8 @@ app.post("/videos", function (req, res) {
 
   const query = `INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)`;
   if (req.body.title && req.body.url && isUrl(req.body.url)) {
-    const result = db
-      .query(query, [newTitle, newUrl, newRating])
-      .then(() => {
+    db.query(query, [newTitle, newUrl, newRating])
+      .then((result) => {
         res.status(201).json(result.rows);
       })
       .catch((err) => {
