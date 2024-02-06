@@ -152,7 +152,8 @@ function App() {
       setVideos((prevVideos) =>
         prevVideos.map((video) => {
           if (video.id === id) {
-            return { ...video, rating: video.rating - 1 };
+          const newRating = Math.max(0, video.rating - 1);
+          return { ...video, rating: newRating };
           }
           return video;
         })
