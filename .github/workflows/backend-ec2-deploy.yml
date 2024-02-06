@@ -25,14 +25,14 @@ jobs:
         REMOTE_PORT: 22
         REMOTE_SCRIPT: 'rm -rf /home/ubuntu'
         
-    - name: Deploy to EC2
-      uses: easingthemes/ssh-deploy@main
-      with:
-       local-path: server
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.HOST_DNS }}
-        REMOTE_USER: ${{ secrets.USERNAME }}
+    # - name: Deploy to EC2
+    #   uses: easingthemes/ssh-deploy@main
+    #   with:
+    #    local-path: server
+    #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+    #     REMOTE_HOST: ${{ secrets.HOST_DNS }}
+    #     REMOTE_USER: ${{ secrets.USERNAME }}
       
        
          
