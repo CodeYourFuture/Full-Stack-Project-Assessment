@@ -10,22 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-
-    - name: Execute remote commands via SSH
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST_DNS }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{ secrets.HOST_DNS }}
+         username: ${{ secrets.USERNAME }}
+         key: ${{ secrets.EC2_SSH_KEY }}
+         script: |
           cd server
-        
-          git pull 
+          git pull origin master
           sudo systemctl restart server.js
+       
+         
