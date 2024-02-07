@@ -21,6 +21,7 @@ jobs:
     - name: Deploy to EC2
       with:
           run: |
+            cd server
             rsync -avz -e "ssh -i $HOME/.ssh/your_pem_key.pem" \
             --exclude='.git*' \
             --exclude='node_modules' \
