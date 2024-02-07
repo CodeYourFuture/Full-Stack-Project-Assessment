@@ -16,15 +16,17 @@ jobs:
     - name: Build and Test
       run: |
        cd server
+       
       
     - name: Deploy to EC2
+      with:
+          run: |
+           cd server
+
       uses: easingthemes/ssh-deploy@main
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
-      with:
-          run: |
-           cd server
-
+      
