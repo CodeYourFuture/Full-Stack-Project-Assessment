@@ -1,9 +1,10 @@
 name: Deploy to EC2
 
 on:
- push:
+  push:
     branches:
       - Level--300
+
 jobs:
   deploy:
     name: Deploy to EC2
@@ -15,22 +16,17 @@ jobs:
 
     - name: Build and Test
       run: |
-       cd server
-       
-      
+        cd server
+        # Add your build and test commands here
+
     - name: Deploy to EC2
-      with:
-          run: |
-            cd server
-            rsync -avz -e "ssh -i $HOME/.ssh/your_pem_key.pem" \
-            --exclude='.git*' \
-            --exclude='node_modules' \
-            /home/runner/work/Full-Stack-Project-Assessment/server \
-  
       uses: easingthemes/ssh-deploy@main
+      with:
+        local-path: server
+        ARGS: "-avz"
+        TARGET: "/home/ubuntu/server"
       env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
-      
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.HOST_DNS }}
+        REMOTE_USER: ${{ secrets.USERNAME }}
+        SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
