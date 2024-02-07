@@ -21,8 +21,11 @@ jobs:
     - name: Deploy to EC2
       with:
           run: |
-           cd server
-
+            rsync -avz -e "ssh -i $HOME/.ssh/your_pem_key.pem" \
+            --exclude='.git*' \
+            --exclude='node_modules' \
+            /home/runner/work/Full-Stack-Project-Assessment/server \
+  
       uses: easingthemes/ssh-deploy@main
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
