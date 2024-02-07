@@ -7,26 +7,18 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the files
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build and Test
-      run: |
-        cd server
-        # Add your build and test commands here
-
     - name: Deploy to EC2
-      uses: easingthemes/ssh-deploy@main
+      uses: easingthemes/ssh-deploy@v2.1.4
       with:
-        local-path: server
-        ARGS: "-avz"
-        TARGET: "/home/ubuntu/server"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+        ARGS: "-avz --delete"
+        SOURCE: "server/"
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
-        SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
+        TARGET: "/home/ubuntu/server"
