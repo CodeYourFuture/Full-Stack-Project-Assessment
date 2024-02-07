@@ -8,7 +8,7 @@ function VideosList() {
   const [ loading, setLoading ] = useState(true);
   const [ searchResult, setSearchResult ] = useState([]);
 
-  const fetchVideosUrl = 'http://13.53.198.163:5050';
+  const fetchVideosUrl = 'http://16.171.21.156:5050';
 
   useEffect(() => {
     fetchVideos();
