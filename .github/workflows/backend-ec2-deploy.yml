@@ -19,12 +19,12 @@ jobs:
       
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
-      with:
-       run: |
-        cd server
-        env:
+      env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
+      with:
+          run: |
+           cd server
 
