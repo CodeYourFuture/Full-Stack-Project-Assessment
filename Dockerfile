@@ -1,6 +1,5 @@
-FROM node:19.0.0-bullseye
+FROM node:20-alpine
 WORKDIR /video-app/server
-COPY package.json /video-app/
 COPY server /video-app/
 WORKDIR /video-app
 EXPOSE 3000
