@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup and run tests
-        working-directory: ./app
+        working-directory: ./client
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
