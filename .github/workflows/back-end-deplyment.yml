@@ -27,7 +27,7 @@ jobs:
         run: docker push momahboobian/vr-server:latest
 
       - name: SSH into Your EC2 Instance
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
