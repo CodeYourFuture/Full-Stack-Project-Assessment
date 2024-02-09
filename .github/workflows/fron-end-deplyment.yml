@@ -1,0 +1,27 @@
+name: CI/CD = Deploy Client Docker to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy Backend to S3 Bucket
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build Docker Image
+        run: docker build -t momahboobian/vr-client:latest ./client
+
+      - name: Push Docker Image to DockerHub
+        run: docker push momahboobian/vr-client:latest
