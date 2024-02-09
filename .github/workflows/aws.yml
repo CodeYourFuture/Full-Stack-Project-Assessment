@@ -42,5 +42,5 @@ jobs:
           aws s3 cp \
           --recursive \
           --acl public-read \
-          --region ap-southeast-2 \
-          ./build s3://example
+          --region eu-west-2 \
+          ./build s3://my-youtube-site
