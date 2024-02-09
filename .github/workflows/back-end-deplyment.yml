@@ -1,4 +1,4 @@
-name: CI = Deploy Server EC2
+name: CI/CD = Deploy Server Docker to EC2
 
 on:
   push:
@@ -7,37 +7,21 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Backend to EC2 Instance
+    name: Build and Deploy Backend to EC2 Instance
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Create SSH Private Key File
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_private_key.pem
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Set Permissions for SSH Private Key
-        run: chmod 600 ssh_private_key.pem
+      - name: Build Docker Image
+        run: docker build -t momahboobian/vr-server:latest .
 
-      - name: Create .env Configuration File
-        run: |
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" > .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          cat .env
-
-      - name: Copy Server Files to EC2 Instance
-        run: |
-          scp -o StrictHostKeyChecking=no -i ssh_private_key.pem -r ./server/* ec2-user@ec2-18.133.225.232.eu-west-2.compute.amazonaws.com:/home/ec2-user
-          scp -o StrictHostKeyChecking=no -i ssh_private_key.pem ./.env ec2-user@ec2-18.133.225.232.eu-west-2.compute.amazonaws.com:/home/ec2-user
-
-      - name: Verify Copied Files on EC2 Instance
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ec2-user@ec2-18.133.225.232.eu-west-2.compute.amazonaws.com 'ls -al /home/ec2-user'
-
-      - name: SSH into EC2 and Restart Backend Server
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ec2-user@ec2-18.133.225.232.eu-west-2.compute.amazonaws.com 'cd /home/ec2-user && pm2 restart server'
+      - name: Push Docker Image to DockerHub
+        run: docker push momahboobian/vr-server:latest .
