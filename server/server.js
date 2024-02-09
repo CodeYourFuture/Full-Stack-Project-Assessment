@@ -14,8 +14,14 @@ const { Pool } = require("pg");
 // // const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
 
 
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+ssl: { rejectUnauthorized: false },
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
