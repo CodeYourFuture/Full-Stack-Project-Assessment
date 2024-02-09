@@ -23,16 +23,21 @@ jobs:
         env:
          CI: false
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: client/build/
+
   deploy:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Download Artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v3
         with:
-          name: build
+          name: build-artifact
           path: client/build
       - name: Deploy to S3
         env:
@@ -43,4 +48,4 @@ jobs:
           --recursive \
           --acl public-read \
           --region eu-west-2 \
-          ./build s3://my-youtube-site
+          client/build s3://my-youtube-site
