@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker buildx build -t momahboobian/vr-server:latest ./server --platform linux/amd64,linux/arm64 --push
+          sudo docker buildx build -t momahboobian/vr-server:latest ./server --platform linux/amd64,linux/arm64 --push
 
       - name: Grant access to Docker socket
         run: sudo chmod 666 /var/run/docker.sock
@@ -41,4 +41,4 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 'docker pull momahboobian/vr-server:latest'
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 'sudo docker pull momahboobian/vr-server:latest'
