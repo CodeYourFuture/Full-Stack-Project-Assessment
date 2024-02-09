@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t momahboobian/vr-server:latest .
+        run: docker build -t momahboobian/vr-server:latest ./server
 
       - name: Push Docker Image to DockerHub
         run: docker push momahboobian/vr-server:latest .
