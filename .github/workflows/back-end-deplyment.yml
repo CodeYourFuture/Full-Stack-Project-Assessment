@@ -27,13 +27,11 @@ jobs:
         run: docker push momahboobian/vr-server:latest
 
       - name: SSH into Your EC2 Instance
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          script: |
-            docker pull your-dockerhub-username/your-image-name:latest
-            docker stop your-container-name || true
-            docker rm your-container-name || true
-            docker run -d --name your-container-name -p 5001:5001 your-dockerhub-username/your-image-name:latest
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{ secrets.EC2_HOST }}
+          USER_NAME: ${{ secrets.EC2_USERNAME }}
+
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
