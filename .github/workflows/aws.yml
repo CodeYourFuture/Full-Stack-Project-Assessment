@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-          path: build
+          path: client/build
       - name: Deploy to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
