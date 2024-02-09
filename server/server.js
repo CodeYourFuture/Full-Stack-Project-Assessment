@@ -10,18 +10,13 @@ const port = process.env.PORT || 5000;
 
 const { Pool } = require("pg");
 
-
-// // const connectionString = `postgresql://${process.env.user}:${process.env.PASSWORD}@${process.env.host}:${process.env.port}/${process.env.database}`;
-
-
-
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false },
 });
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
@@ -59,7 +54,6 @@ app.get("/videos", (req, res) => {
 app.get("/videos/:videoTitle", function (req, res) {
   const videoTitle = req.params.videoTitle;
 
-  
   pool
     .query("SELECT * FROM videos WHERE title=$1", [videoTitle])
     .then((result) => res.json(result.rows))
