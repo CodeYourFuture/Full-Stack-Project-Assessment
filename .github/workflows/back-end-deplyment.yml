@@ -27,6 +27,9 @@ jobs:
         run: |
           docker buildx build -t momahboobian/vr-server:latest ./server --platform linux/amd64,linux/arm64 --push
 
+      - name: Grant access to Docker socket
+        run: sudo chmod 666 /var/run/docker.sock
+
       - name: SSH into Your EC2 Instance
         env:
           PRIVATE_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
