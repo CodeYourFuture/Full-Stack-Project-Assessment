@@ -25,3 +25,15 @@ jobs:
 
       - name: Push Docker Image to DockerHub
         run: docker push momahboobian/vr-server:latest
+
+      - name: SSH into Your EC2 Instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            docker pull your-dockerhub-username/your-image-name:latest
+            docker stop your-container-name || true
+            docker rm your-container-name || true
+            docker run -d --name your-container-name -p 5001:5001 your-dockerhub-username/your-image-name:latest
