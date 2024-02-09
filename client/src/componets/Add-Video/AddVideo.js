@@ -104,7 +104,7 @@ const AddVideo = ({ setVideos }) => {
 
                 <Button
                   onClick={VideoAdder}
-                  className=" mt-2 mr-2 mb-3"
+                  className=" mt-2 mr-2 mb-2"
                   variant="primary"
                   type="submit"
                 >
