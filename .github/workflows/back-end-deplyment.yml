@@ -30,6 +30,9 @@ jobs:
       - name: Grant access to Docker socket
         run: sudo chmod 666 /var/run/docker.sock
 
+      - name: Add GitHub Actions runner to docker group
+        run: sudo usermod -aG docker $USER
+
       - name: SSH into Your EC2 Instance
         env:
           PRIVATE_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
