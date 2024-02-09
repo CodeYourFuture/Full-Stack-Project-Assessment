@@ -28,7 +28,7 @@ jobs:
 
       - name: SSH into Your EC2 Instance
         env:
-          PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
           HOSTNAME: ${{ secrets.EC2_HOST }}
           USER_NAME: ${{ secrets.EC2_USERNAME }}
 
