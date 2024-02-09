@@ -188,7 +188,7 @@ function App() {
 
   const searchVideos = (searchTerm) => {
     const filtered = videos.filter((video) =>
-    video.title.toLowerCase().includes(searchTerm.toLowerCase())
+      video.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredVideos(filtered);
   };
