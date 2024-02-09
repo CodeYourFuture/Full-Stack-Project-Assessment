@@ -14,7 +14,7 @@ const Search = ({ videos, setVideos, originalState }) => {
   };
 
   return (
-    <div className="input-group mt-10">
+    <div className="input-group mt-9">
       <input
         type="search"
         className="form-control rounded"
