@@ -15,6 +15,7 @@ jobs:
       # Build the Docker image
       - name: Build Docker image
         run: |
+          cd client
           docker build -t momahboobian/vr-client:latest ./client
           docker save -o vr-client.tar momahboobian/vr-client:latest
 
