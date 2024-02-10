@@ -83,4 +83,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }} .
+            docker run -d -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
