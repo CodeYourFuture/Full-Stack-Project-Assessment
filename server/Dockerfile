@@ -3,7 +3,7 @@ FROM node:20-alpine
 
 WORKDIR /video-docker/
 
-COPY . /video-docker/
+COPY ./server /video-docker/
 
 RUN npm install
 

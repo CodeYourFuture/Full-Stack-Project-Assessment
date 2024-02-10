@@ -39,7 +39,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send({ express: "Your Backend Service is Running Wow" });
+  res.send({ express: "Your Backend Service is Running" });
 });
 
 app.put("/videos/:id", async (req, res) => {
