@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9755cf0-5473-433c-9dad-d9dce28c007e" name="Changes" comment="" />
+    <list default="true" id="f9755cf0-5473-433c-9dad-d9dce28c007e" name="Changes" comment="update vercel.json" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,11 +44,23 @@
       <option name="presentableId" value="Default" />
       <updated>1707512312502</updated>
       <workItem from="1707512313696" duration="5400000" />
-      <workItem from="1707553634142" duration="1776000" />
+      <workItem from="1707553634142" duration="2451000" />
     </task>
+    <task id="LOCAL-00001" summary="update vercel.json">
+      <created>1707555841029</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707555841029</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update vercel.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="update vercel.json" />
   </component>
 </project>
