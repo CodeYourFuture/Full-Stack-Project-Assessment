@@ -13,15 +13,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create tag
+        id: create_tag
         run: |
           TAG=$(date +'%Y%m%d%H%M%S')
-          docker tag olhadanylevska/video-server:latest olhadanylevska/video-server:${TAG}
           echo "::set-output name=tag::$TAG"
 
       - name: Build Docker image
         run: |
           cd server
-          docker build -t olhadanylevska/video-server:${TAG} .
+          docker build -t olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }} .
           cd ..
 
       - name: Log in to Docker Hub
@@ -32,7 +32,7 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push olhadanylevska/video-server:${TAG}
+          docker push olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
       - name: SSH to VM server and pull image
         uses: appleboy/ssh-action@master
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull olhadanylevska/video-server:${TAG}
+            docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
       - name: Run container on VM server
         uses: appleboy/ssh-action@master
@@ -50,5 +50,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d -p 80:3000 olhadanylevska/video-server:${TAG} User
-
+            docker run -d -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }} User
