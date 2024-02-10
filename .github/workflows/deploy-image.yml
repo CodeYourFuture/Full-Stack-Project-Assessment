@@ -14,9 +14,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd server
           docker build -t olhadanylevska/video-server:latest .
-          cd ..
 
       - name: Create tag
         run: |
@@ -32,20 +30,19 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push olhadanylevska/video-server:latest
           docker push olhadanylevska/video-server:$TAG
 
       - name: SSH to VM server and pull image
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v2
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull olhadanylevska/video-server:latest
+            docker pull olhadanylevska/video-server:$TAG
 
       - name: Run container on VM server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v2
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.USERNAME }}
