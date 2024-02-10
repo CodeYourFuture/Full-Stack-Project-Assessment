@@ -88,19 +88,19 @@ app.post("/videos", function (req, res) {
     });
 });
 
-app.delete("/videos/:videosId", function (req, res) {
-  const videosId = req.params.videosId;
+// app.delete("/videos/:videosId", function (req, res) {
+//   const videosId = req.params.videosId;
 
-  const query = "DELETE FROM videos WHERE id = $1";
+//   const query = "DELETE FROM videos WHERE id = $1";
 
-  pool
-    .query(query, [videosId])
-    .then(() => res.status(200).send("Video deleted!"))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json(error);
-    });
-});
+//   pool
+//     .query(query, [videosId])
+//     .then(() => res.status(200).send("Video deleted!"))
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).json(error);
+//     });
+// });
 
 app.put("/videos/:id", (req, res) => {
   const updateId = req.params.id;
