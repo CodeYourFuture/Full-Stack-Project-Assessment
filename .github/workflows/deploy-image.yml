@@ -43,6 +43,19 @@ jobs:
           script: |
             docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
+      - name: Identify and stop previous container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            CONTAINER_ID=$(docker ps -q --filter ancestor=olhadanylevska/video-server)
+            if [ ! -z "$CONTAINER_ID" ]; then
+              docker stop $CONTAINER_ID
+              docker rm $CONTAINER_ID
+            fi
+
       - name: Run container on VM server
         uses: appleboy/ssh-action@master
         with:
