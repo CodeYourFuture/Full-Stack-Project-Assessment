@@ -1,0 +1,37 @@
+name: Deploy to S3 AWS
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Build website
+        run: |
+          cd client
+          npm run build
+
+      - name: Set AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.1
+        with:
+          aws-access-key-id: ${{ secrets.MY_SECRET_ACCESS_ID_KEY }}
+          aws-secret-access-key: ${{ secrets.MY_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.REGION }}
+
+      - name: Sync client/build to S3 bucket
+        run: aws s3 sync client/build/ s3://video-recommendation-2024

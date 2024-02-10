@@ -1,0 +1,6 @@
+body {
+  background: lightblue;
+  animation: color 9s infinite linear;
+  text-align: center;
+  padding: 6em;
+}

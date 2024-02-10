@@ -1,0 +1,18 @@
+.like-dislike {
+  display: flex;
+  flex-flow: row wrap;
+
+  justify-content: space-evenly;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.like {
+  color: blue;
+}
+.icon {
+  font-size: 35px;
+  cursor: pointer;
+}
+.dislike {
+  color: red;
+}
