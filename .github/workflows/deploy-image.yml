@@ -65,4 +65,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d DB_USER=${{ secrets.RDS_DB_USER }} DB_HOST=${{ secrets.RDS_DB_HOST }} DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }} DB_PORT=${{ secrets.RDS_DB_PORT }} -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
+            docker run -d \
+              -e DB_USER=${{ secrets.RDS_DB_USER }} \
+              -e DB_HOST=${{ secrets.RDS_DB_HOST }} \
+              -e DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }} \
+              -e DB_PORT=${{ secrets.RDS_DB_PORT }} \
+              -p 80:3000 \
+              olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
