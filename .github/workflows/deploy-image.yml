@@ -32,8 +32,8 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/video-server:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/video-server:$TAG
+          docker push olhadanylevska/video-server:latest
+          docker push olhadanylevska/video-server:$TAG
 
       - name: SSH to VM server and pull image
         uses: appleboy/ssh-action@master
@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/video-server:latest
+            docker pull olhadanylevska/video-server:latest
 
       - name: Run container on VM server
         uses: appleboy/ssh-action@master
@@ -51,4 +51,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/video-server:latest User
+            docker run -d -p 80:3000 olhadanylevska/video-server:latest User
