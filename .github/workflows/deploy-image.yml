@@ -36,7 +36,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/video-server:$TAG
 
       - name: SSH to VM server and pull image
-        uses: appleboy/ssh-action@v2
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.USERNAME }}
