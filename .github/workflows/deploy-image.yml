@@ -55,6 +55,8 @@ jobs:
             if [ ! -z "$CONTAINER_ID" ]; then
               docker stop $CONTAINER_ID
               docker rm $CONTAINER_ID
+            fi
+
 
       - name: Run container on VM server
         uses: appleboy/ssh-action@master
