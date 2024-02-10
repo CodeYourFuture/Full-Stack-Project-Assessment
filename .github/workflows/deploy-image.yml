@@ -14,15 +14,15 @@ jobs:
 
       - name: Create Environment File
         run: |
-          echo "DB_HOST=${{ secrets.RDS_DB_HOST }}" > video.env
-          echo "DB_USER=${{ secrets.RDS_DB_USER }}" >> video.env
-          echo "DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}" >> video.env
-          echo "DB_PORT=${{ secrets.RDS_DB_NAME }}" >> video.env
+          echo "DB_HOST=${{ secrets.RDS_DB_HOST }}" > .env
+          echo "DB_USER=${{ secrets.RDS_DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}" >> .env
+          echo "DB_PORT=${{ secrets.RDS_DB_NAME }}" >> .env
 
       - name: Display Environment File
         run: |
           mkdir -p /tmp/context     
-          cp video.env /tmp/context
+          cp .env /tmp/context
 
       - name: Create tag
         id: create_tag
