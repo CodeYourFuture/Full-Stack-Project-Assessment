@@ -12,14 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create Environment File
-        run: |
-          echo "DB_HOST=${{ secrets.RDS_DB_HOST }}" > .env
-          echo "DB_USER=${{ secrets.RDS_DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}" >> .env
-          echo "DB_PORT=${{ secrets.RDS_DB_NAME }}" >> .env
-
-      - name: Create tag
+      - name: Create tag for image
         id: create_tag
         run: |
           TAG=$(date +'%Y%m%d%H%M%S')
@@ -40,22 +33,15 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
-               
-      - name: clean images
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: docker system prune -a -f
 
-      - name: Pull image
+      - name: Clear images and pull new image
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            docker system prune -a -f
             docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
 
@@ -79,4 +65,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d --env-file .env -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
+            docker run -d DB_USER=${{ secrets.RDS_DB_USER }} DB_HOST=${{ secrets.RDS_DB_HOST }} DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }} DB_PORT=${{ secrets.RDS_DB_PORT }} -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
