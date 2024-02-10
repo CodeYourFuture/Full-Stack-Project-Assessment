@@ -31,8 +31,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: |
-          docker push olhadanylevska/video-server:$TAG
+          run: |
+            docker push olhadanylevska/video-server:${TAG}
+
 
       - name: SSH to VM server and pull image
         uses: appleboy/ssh-action@master
