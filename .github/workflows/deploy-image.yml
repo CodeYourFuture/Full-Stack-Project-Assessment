@@ -53,7 +53,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             docker system prune -a -f
-            docker pull olhadanylevska/video-server:${{ steps.create_tag outputs.tag }}
+            docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
+
 
       - name: Identify and stop previous container
         uses: appleboy/ssh-action@master
