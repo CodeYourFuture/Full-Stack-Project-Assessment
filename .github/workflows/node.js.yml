@@ -23,7 +23,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
-
+      - name: Create package.json
+        run: npm init
+        
       - name: Install Dependencies
         run: npm install
   
