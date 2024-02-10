@@ -17,6 +17,6 @@ jobs:
         echo "${{ secrets.MY_SECRET_SSH_KEY }}" > ~/.ssh/secretKey.pem
         chmod 400 ~/.ssh/secretKey.pem
 
-    - name: Connect to EC2
-      run: |
-        rsync -avzr --exclude=node_modules --exclude=.env -e "ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no"  ubuntu@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/
+    - name: Connect to EC2 and transfer files
+  run: |
+    rsync -avzr --exclude=node_modules --exclude=.env -e "ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no" ~/OneDrive/Documents/CFY/Full-Stack-Project-Assessment/server/ ubuntu@ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:~/project/Full-Stack-Project-Assessment/server/
