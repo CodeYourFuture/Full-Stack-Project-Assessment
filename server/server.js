@@ -45,8 +45,7 @@ app.get("/videos", (req, res) => {
     });
 });
 
-// Search a video by title
-// Search a video by title
+/
 app.get("/videos/:videoTitle", function (req, res) {
   const videoTitle = req.params.videoTitle;
 
