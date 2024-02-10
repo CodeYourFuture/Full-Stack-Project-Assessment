@@ -11,6 +11,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Create Environment File
+        run: |
+          echo "DB_HOST=${{ secrets.RDS_DB_HOST }}" > video.env
+          echo "DB_USER=${{ secrets.RDS_DB_USER }}" >> video.env
+          echo "DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}" >> video.env
+          echo "DB_PORT=${{ secrets.RDS_DB_NAME }}" >> video.env
+
+      - name: Display Environment File
+        run: |
+        mkdir -p /tmp/context     
+        cp video.env /tmp/context
 
       - name: Create tag
         id: create_tag
@@ -33,7 +44,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
-
+   
       - name: SSH to VM server and pull image
         uses: appleboy/ssh-action@master
         with:
@@ -41,6 +52,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            docker system prune -a -f
             docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
       - name: Identify and stop previous container
