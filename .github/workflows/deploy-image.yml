@@ -20,8 +20,8 @@ jobs:
 
       - name: Display Environment File
         run: |
-        mkdir -p /tmp/context     
-        cp video.env /tmp/context
+          mkdir -p /tmp/context     
+          cp video.env /tmp/context
 
       - name: Create tag
         id: create_tag
