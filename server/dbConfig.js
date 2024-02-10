@@ -1,9 +1,7 @@
 const {Pool} = require('pg');
-const itemsPool = new Pool({
-    connectionString: process.env.DBConfigLink,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
 
-module.exports = itemsPool;
+const pool = new Pool({
+    connectionString: process.env.POSTGRES_URL ,
+})
+
+module.exports = pool;
