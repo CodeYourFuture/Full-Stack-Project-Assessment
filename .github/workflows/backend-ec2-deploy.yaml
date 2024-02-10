@@ -7,7 +7,8 @@ on:
 jobs:
   deploy-to-ec2:
     runs-on: ubuntu-latest
-
+    env:
+      AWS_REGION: eu-north-1
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -21,7 +22,6 @@ jobs:
     - name: Build, Tag, and Push Docker image to ECR
       run: |
         export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-north-1.amazonaws.com/backend.docker
-        export AWS_REGION=eu-north-1
         export IMAGE_TAG=latest  # Using 'latest' as a static tag for every build
         docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
         docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
@@ -36,7 +36,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          export AWS_REGION=eu-north-1
           export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-north-1.amazonaws.com/backend.docker
           export IMAGE_TAG=latest 
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
