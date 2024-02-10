@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@vercel/postgres": "^0.7.2"
+  }
+}

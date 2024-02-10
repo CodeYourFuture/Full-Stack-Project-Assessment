@@ -1,5 +1,11 @@
 # Video Recommendation App
 
+## My app demo:
+
+### frontend (React):  [https://video-recomendation.onrender.com/](https://video-recomendation.onrender.com/)
+
+### api (NodeJS + PostgreSQL): [https://video-recomendations-7q29.onrender.com/](https://video-recomendations-7q29.onrender.com/)
+
 ## Background
 
 Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
@@ -25,32 +31,33 @@ This project is split into several levels that you should complete each week of 
 
 You can find each of the levels split into separate files, linked below.
 
-**Note:** Some of the levels are optional which means that you will build a working project without them. However, to make something really impressive you will need to complete as much as you can.
+**Note:** Some of the levels are optional which means that you will build a working project without them. However, to
+make something really impressive you will need to complete as much as you can.
 
 ### Week 1 - Front End
 
 - [Level 100](./100.md)
-  - A core version of the React front end of the app
+    - A core version of the React front end of the app
 - [Level 199](./199.md) (Optional)
-  - Stretch goals for the front end if you have time
+    - Stretch goals for the front end if you have time
 
 ### Week 2 - Back End (without Database)
 
 - [Level 200](./200.md)
-  - A core version of the Node + Express back end of the app
+    - A core version of the Node + Express back end of the app
 - [Level 250](./250.md)
-  - Connect your Front End and Back End together
+    - Connect your Front End and Back End together
 - [Level 299](./299.md) (Optional)
-  - Stretch goals for the back end if you have time
+    - Stretch goals for the back end if you have time
 
 ### Week 3 - Back End (with Database)
 
 - [Level 300](./300.md)
-  - Integrate the back end with a database
+    - Integrate the back end with a database
 - [Level 399](./399.md) (Optional)
-  - Stretch goals for the database if you have time
+    - Stretch goals for the database if you have time
 - [Level 999](./999.md) (Optional)
-  - More optional goals for if you have time
+    - More optional goals for if you have time
 
 ## Sample Solution
 
@@ -66,7 +73,8 @@ https://video-rec.herokuapp.com
 
 ## Design
 
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
+You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design
+framework to help you build this app.
 
 ## Getting Started
 

@@ -1,0 +1,24 @@
+.form_add-video .ant-row {
+    flex-wrap: nowrap;
+}
+
+.form_add-video .ant-form-item {
+    margin-bottom: 10px !important;
+}
+
+.form_add-video .ant-form-item-label {
+    width: auto;
+    flex: 0 0 auto !important;
+    max-width: initial !important;
+}
+
+.form_add-video .ant-form-item-control {
+    flex: 1 0 auto !important;
+    max-width: 100% !important;
+}
+
+button:focus {
+    outline: none;
+}
+
+
