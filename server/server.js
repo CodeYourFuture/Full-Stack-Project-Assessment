@@ -21,11 +21,7 @@ const pool = new Pool({
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello from the Server!");
 });
