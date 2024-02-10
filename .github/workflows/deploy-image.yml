@@ -30,6 +30,7 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
+          docker push olhadanylevska/video-server:latest
           docker push olhadanylevska/video-server:$TAG
 
       - name: SSH to VM server and pull image
