@@ -45,7 +45,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/video-server:latest
 
       - name: Run container on VM server
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.USERNAME }}
