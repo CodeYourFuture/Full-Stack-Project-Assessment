@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Create Environment File
         run: |
           echo "DB_HOST=${{ secrets.RDS_DB_HOST }}" > video.env
@@ -83,4 +84,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -d -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
+            docker run -d --env-file video.env -p 80:3000 olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
