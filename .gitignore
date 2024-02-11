@@ -1,0 +1,9 @@
+/client/node_modules
+/server/node_modules
+.DS_Store
+thumbs.db
+*.swp
+*.swo
+*.sublime*
+.vscode/
+.env
