@@ -7,6 +7,9 @@ on:
 jobs:
   deploy-to-ec2:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     env:
       AWS_REGION: eu-north-1
     steps:
@@ -16,13 +19,20 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/githubactionsECRAccess
+        role-session-name: GitHubActionsSession
+
     - name: Log in to AWS ECR
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, Tag, and Push Docker image to ECR
       run: |
-        export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-north-1.amazonaws.com/backend.docker
-        export IMAGE_TAG=latest  # Using 'latest' as a static tag for every build
+        export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        export IMAGE_TAG=latest 
         docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
         docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REPOSITORY:$IMAGE_TAG
@@ -36,9 +46,9 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-north-1.amazonaws.com/backend.docker
+          export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
           export IMAGE_TAG=latest 
-          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REPOSITORY
           docker pull $ECR_REPOSITORY:$IMAGE_TAG
           docker stop my-container || true && docker rm my-container || true
           docker run -d --name my-container -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
