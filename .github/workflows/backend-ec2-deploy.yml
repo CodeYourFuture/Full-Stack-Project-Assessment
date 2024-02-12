@@ -16,20 +16,10 @@ jobs:
         env:
             PRIVATE_KEY: ${{ secrets.SSH_EC2_SECRET }}
             HOSTNAME: ${{secrets.SSH_HOST}}
-            USER_NAME: ${{secrets.USER_NAME}}
+            USER_NAME: ${{secrets.SSH_USERNAME}}
       
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-
-              # Now we have got the access of EC2 and we will start the deploy .
-              cd /home/ubuntu/<PROJECT_DIRECTORY> &&
-              git checkout dev &&
-              git fetch --all &&
-              git reset --hard origin/dev &&
-              git pull origin dev &&
-              sudo npm i &&
-              sudo npm run build &&
-              sudo pm2 stop ./dist/index.js &&
-              sudo pm2 start ./dist/index.js
-              '
+          cd Full-Stack-Project-Assessment/
+              
