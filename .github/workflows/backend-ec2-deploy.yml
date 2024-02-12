@@ -17,7 +17,7 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_EC2_SECRET }}
           ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
+          SOURCE: "server/"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         
