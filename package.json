@@ -1,5 +1,18 @@
 {
   "dependencies": {
-    "dotenv": "^16.3.1"
-  }
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.3",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "pg": "^8.11.3"
+  },
+  "name": "full-stack-project-assessment",
+  "description": "## Background",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

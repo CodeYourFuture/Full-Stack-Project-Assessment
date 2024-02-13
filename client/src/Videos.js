@@ -6,12 +6,7 @@ function Videos(props) {
   const [title, setTitleData] = useState("");
   const [url, setUrlData] = useState("");
 
-  // fetch("http://localhost:3000/videos")
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     return setLoadData(data);
-  //   });
-
+  
   
   function cancelBtnHandler(e) {
     props.setShow(false);
