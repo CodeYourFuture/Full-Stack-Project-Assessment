@@ -42,7 +42,7 @@ jobs:
     - name: Set permissions for private key
       
       run: |
-        echo "${{ env.EC2_SSH_KEY }}" > serveraws.pem
+        echo "${{ secrets.EC2_SSH_KEY }}" > serveraws.pem
         chmod 600 serveraws.pem
     - name: Pull Docker image
       run: |
