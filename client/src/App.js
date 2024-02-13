@@ -13,7 +13,7 @@ const App = () => {
   const fetchAllVideos = async () => {
     try {
       const response = await fetch(
-        "https://full-stack-project-video-reccomendations-9vs4.onrender.com/videos"
+        "https://full-stack-project-video-reccomendations.onrender.com/videos"
       );
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
@@ -28,7 +28,7 @@ const App = () => {
   const handleAddVideo = async (title, url, clearForm) => {
     try {
       const response = await fetch(
-        "https://full-stack-project-video-reccomendations-9vs4.onrender.com/videos",
+        "https://full-stack-project-video-reccomendations.onrender.com/videos",
         {
           method: "POST",
           headers: {
@@ -50,7 +50,7 @@ const App = () => {
   const handleDeleteVideo = async (id) => {
     try {
       const response = await fetch(
-        `https://full-stack-project-video-reccomendations-9vs4.onrender.com/videos/${id}`,
+        `https://full-stack-project-video-reccomendations.onrender.com/videos/${id}`,
         {
           method: "DELETE",
         }
