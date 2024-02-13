@@ -7,7 +7,7 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  AWS_PRIVATE_KEY: ${{ AWS_SECRET_ACCESS_KEY }}
+  AWS_PRIVATE_KEY: ${{ EC2_SSH_KEY }}
 jobs:
   build:
     runs-on: ubuntu-latest
