@@ -23,7 +23,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: docker.io/harounalarabi/server
+        tags:  harounalarabi/server:latest
 
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@v2.1.4
