@@ -22,7 +22,7 @@ jobs:
       run: |
          cd server
          docker build -t harounalarabi/server .
-         docker push harounalarabi/server:tagname
+         docker push harounalarabi/server:latest
 
 
       
