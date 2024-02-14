@@ -1,7 +1,7 @@
-FROM node:19.7.0
+FROM harounalarabi/server:latest
 WORKDIR /server
 COPY . .
 RUN npm install
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
 EXPOSE 5050
 
