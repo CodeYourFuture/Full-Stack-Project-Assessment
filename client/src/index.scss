@@ -114,22 +114,9 @@ code {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   padding: 2rem 2rem;
   grid-gap: 6rem;
 

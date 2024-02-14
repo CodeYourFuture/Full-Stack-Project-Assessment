@@ -4,7 +4,7 @@ function Video({ videoObj, deleteVideo }) {
   const videoId = getVideoIdFromUrl(videoObj.url);
   const [ vote, setVote ] = useState(videoObj.rating);
 
-  const fetchVideosUrl = 'http://13.53.198.163:5050';
+  const fetchVideosUrl = 'http://16.171.21.156:5050';
 
   const updateVote = (increment) => {
     const newRating = vote + increment;
