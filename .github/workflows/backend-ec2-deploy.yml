@@ -20,8 +20,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t harounalarabi/server .
-        docker push harounalarabi/server:tagname
+         docker build -t harounalarabi/server .
+         docker push harounalarabi/server:tagname
 
 
       
