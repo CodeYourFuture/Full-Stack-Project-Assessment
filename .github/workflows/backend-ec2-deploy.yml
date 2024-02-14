@@ -19,14 +19,12 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push docker image  
-      uses: docker/build-push-action@v2
+      uses: docker/push-action@v2
       with:
         context: .
-        run:
-          docker build
+        run: docker build
         push: true
-        tags:  harounalarabi/server:latest
-
+        tags:  harounalarabi/server
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@v2.1.4
       with:
