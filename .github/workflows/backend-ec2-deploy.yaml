@@ -51,16 +51,18 @@ jobs:
         docker push $ECR_REPOSITORY:$IMAGE_TAG
       working-directory: ./server
 
-    - name: Debug Environment
+    - name: Deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_SSH_USERNAME }}
+        username: root  
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-         echo "Executing as user:"
-         whoami
-         echo "AWS CLI version:"
-         aws --version
+           export ECR_REPOSITORY=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+           export IMAGE_TAG=latest 
+           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REPOSITORY
+           docker pull $ECR_REPOSITORY:$IMAGE_TAG
+           docker stop my-container || true && docker rm my-container || true
+           docker run -d --name my-container -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
          
