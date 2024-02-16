@@ -1,0 +1,26 @@
+
+name: Deploy
+
+on:
+  push:
+    branches: [ fullstack-final ]
+
+jobs:
+  Deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls
+      - name: SSH into EC2 and run commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 13.40.127.171
+          username: ubuntu
+          key: ${{ secrets.SSH_EC2_SECRET }}
+          script: |
+            echo "Hello, EC2!"
+            ls
+
+        
