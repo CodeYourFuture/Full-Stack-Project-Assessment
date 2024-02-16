@@ -59,6 +59,8 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          whoami
-          aws sts get-caller-identity
-          docker --version
+         echo "Executing as user:"
+         whoami
+         echo "AWS CLI version:"
+         aws --version
+         
