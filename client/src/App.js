@@ -11,23 +11,21 @@ function App() {
   const [videos, setVideos] = useState([]);
 
   const getVideos = async () => {
-    let res = await axios.get("http://localhost:8000/");
+    let res = await axios.get("http://13.40.127.171:8000/");
     setVideos(res.data);
   };
 
-    const deleteVideo = async (id)=>{
-      let res = await axios.delete(`http://localhost:8000/${id}`);
-      setVideos(res.data)
-    }
+  const deleteVideo = async (id) => {
+    let res = await axios.delete(`http://13.40.127.171:8000/${id}`);
+    setVideos(res.data);
+  };
   useEffect(() => {
     getVideos();
   }, []);
 
   const addVideo = async (video) => {
-    
-    let res = await axios.post("http://localhost:8000/",video)
+    let res = await axios.post("http://13.40.127.171:8000/", video);
     setVideos([res.data, ...videos]);
-
   };
 
   const upVote = (id) => {
@@ -58,7 +56,12 @@ function App() {
         <Search />
       </div>
 
-      <Cards videos={videos} upVote={upVote} downVote={downVote} deleteVideo={deleteVideo}/>
+      <Cards
+        videos={videos}
+        upVote={upVote}
+        downVote={downVote}
+        deleteVideo={deleteVideo}
+      />
 
       {/* <header className="App-header"></header> */}
     </div>
