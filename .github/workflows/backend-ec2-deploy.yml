@@ -22,5 +22,9 @@ jobs:
           script: |
             echo "Hello, EC2!"
             ls
+            cd Full-Stack-Project-Assessment/
+            git pull
+            cd server/
+            node server.js
 
         
