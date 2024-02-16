@@ -51,12 +51,14 @@ jobs:
         docker push $ECR_REPOSITORY:$IMAGE_TAG
       working-directory: ./server
 
-    - name: Deploy - AWS ECR Login
+    - name: Debug Environment
       uses: appleboy/ssh-action@master
       with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_SSH_USERNAME }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin 058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_SSH_USERNAME }}
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          whoami
+          aws sts get-caller-identity
+          docker --version
