@@ -1,3 +1,4 @@
+
 name: EC2 Deployment
 
 on:
@@ -7,36 +8,48 @@ on:
 jobs:
   deploy-to-ec2:
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_REGION: eu-north-1
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: List directory contents
-      run: ls -alh
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        node-version: '20'
+        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: arn:aws:iam::058264451725:role/githutactionsECRAcess
+        role-session-name: GitHubActionsSession
 
-    - name: Install dependencies
-      run: npm install
+    - name: Log in to AWS ECR
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build Docker image
+      run: |
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
+        docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
       working-directory: ./server
 
-    - name: Test
-      run: npm test -- --passWithNoTests
+    - name: Tag Docker image
+      run: |
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
+        docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
       working-directory: ./server
 
-    - name: Copy files to EC2
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_SSH_USERNAME }}
-        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-        port: 22
-        source: "./server/*"
-        target: "/home/ubuntu/Full-Stack-Project-Assessment/server"
+    - name: Push Docker image to ECR
+      run: |
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
+        docker push $ECR_REPOSITORY:$IMAGE_TAG
+      working-directory: ./server
 
     - name: Deploy
       uses: appleboy/ssh-action@master
@@ -46,7 +59,9 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          source ~/.nvm/nvm.sh
-          cd /home/ubuntu/Full-Stack-Project-Assessment/server
-          npm install
-          pm2 restart all
+          export ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+          export IMAGE_TAG=latest 
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REPOSITORY
+          docker pull $ECR_REPOSITORY:$IMAGE_TAG
+          docker stop my-container || true && docker rm my-container || true
+          docker run -d --name my-container -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
