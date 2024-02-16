@@ -30,12 +30,24 @@ jobs:
     - name: Log in to AWS ECR
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, Tag, and Push Docker image to ECR
+    - name: Build Docker image
       run: |
-        export ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
-        export IMAGE_TAG=latest 
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
         docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+      working-directory: ./server
+
+    - name: Tag Docker image
+      run: |
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
         docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
+      working-directory: ./server
+
+    - name: Push Docker image to ECR
+      run: |
+        ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
+        IMAGE_TAG=latest
         docker push $ECR_REPOSITORY:$IMAGE_TAG
       working-directory: ./server
 
