@@ -1,14 +1,6 @@
 # Video Recommendation App
 
-## Background
-
-Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.
-
-This means that we need to be sure that you can create a Full Stack app.
-
-## Challenge
-
-In this project you will be building a project that fulfills the following User Stories
+ I built a project that fulfills the following User Stories
 
 - As a user, I want to be able to view a list of all YouTube videos posted on the site
 - As a user, I want to be able to post videos that I like from YouTube to my website.
@@ -18,6 +10,13 @@ In this project you will be building a project that fulfills the following User 
 - As a user, I want to be able to "Down Vote" a video if I dislike.
 
 You don't need to worry about storing the video content itself - we'll rely on YouTube for this.
+
+
+
+
+
+
+
 
 ## Levels
 
@@ -58,18 +57,10 @@ Here is an example solution of the Front End:
 
 https://vid-rec2.netlify.app/
 
-**Note:** You can design the website to look however you like.
+
 
 Here is an example solution for the Back End:
 
 https://video-rec.herokuapp.com
 
-## Design
 
-You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) or any other design framework to help you build this app.
-
-## Getting Started
-
-Fork this repository and then clone it to your computer.
-
-Progress to Level 100 when you are ready.
