@@ -73,3 +73,45 @@ You are welcome to use [Bootstrap](https://getbootstrap.com/docs/4.0/getting-sta
 Fork this repository and then clone it to your computer.
 
 Progress to Level 100 when you are ready.
+
+
+
+name: Node.js Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Update and Upgrade EC2 inst
+        run: |
+          sudo apt update
+          sudo apt upgrade -y
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --exclude=node_modules --delete
+          path: ./server/
+          remote_path: ~/.video-app/
+          remote_host: ${{ secrets.AWS_HOST }}
+          remote_port: 22
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
