@@ -1,11 +1,9 @@
-name: "Depoloy on VM"
-
+name: Deploy to VM
 
 on:
   push:
     branches:
       - main
-
 
 jobs:
   deploy:
@@ -13,16 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            sudo apt-get update
-            sudo apt-get install -y docker.io
 
       - name: Create tag for image
         id: create_tag
@@ -68,6 +56,7 @@ jobs:
               docker stop $CONTAINER_ID
               docker rm $CONTAINER_ID
             fi
+
 
       - name: Run container on VM server
         uses: appleboy/ssh-action@master
