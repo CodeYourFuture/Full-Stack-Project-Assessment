@@ -1,7 +1,11 @@
+name: "Depoloy on VM"
+
+
 on:
   push:
     branches:
       - main
+
 
 jobs:
   deploy:
