@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
 
-      - name: Set AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_EC2_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_EC2_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2
+      # - name: Set AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_EC2_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_EC2_SECRET_ACCESS_KEY }}
+      #     aws-region: eu-west-2
 
       - name: Check SSH Connection
         run: |
-          ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=10 ${{ secrets.USERNAME }}@${{ secrets.AWS_HOST }} exit
+          ssh -i ${{secrets.SSH_PRIVATE_KEY}} -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=10 ${{ secrets.USERNAME }}@${{ secrets.AWS_HOST }} exit
           
       - name: Checkout code
         uses: actions/checkout@v2
