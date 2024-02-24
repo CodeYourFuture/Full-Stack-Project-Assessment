@@ -46,6 +46,43 @@ jobs:
         run: |
           docker push olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # # Install Docker
+      # - name: Install Docker
+      # with:
+      #     host: ${{ secrets.AWS_HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y docker.io
+      #     sudo usermod -aG docker $USER
+      #     sudo systemctl restart docker
+
+      - name: Install Docker on remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo usermod -aG docker $USER
+            sudo systemctl restart docker
+
+
+      - name: Check Docker daemon on remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker info
+
       - name: Clear images and pull new image
         uses: appleboy/ssh-action@master
         with:
