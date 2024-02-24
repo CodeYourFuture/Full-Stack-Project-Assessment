@@ -1,1 +1,30 @@
 
+name: Build and Push Docker image to Docker Hub
+
+on:
+  push:
+    branches: [ fullstack-final ]
+
+jobs:
+  Deploy:
+    name: Build and Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls
+      - name: SSH into EC2 and run commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 13.40.127.171
+          username: ubuntu
+          key: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          name: Build and push Docker Hub
+          uses: docker/build-push-action@v4
+          with:
+            context: DockerFileFolder
+            push: true
+            tags: ansuj9/github 
+
+        
