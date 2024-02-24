@@ -1,7 +1,7 @@
 provider "aws" {
-    region = "eu-west-2"
-    access_key = var.access_key
-    secret_key = var.secret_key
+  region     = "eu-west-2"
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 # Define variables
@@ -27,6 +27,21 @@ resource "aws_s3_bucket_public_access_block" "video-app-olha" {
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_policy" "static_website_policy" {
+  bucket = aws_s3_bucket.video-app-olha.bucket
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Sid       = "PublicReadGetObject",
+      Effect    = "Allow",
+      Principal = "*",
+      Action    = "s3:GetObject",
+      Resource  = "${aws_s3_bucket.video-app-olha.arn}/*"
+    }]
+  })
 }
 
 resource "aws_s3_bucket_acl" "video-app-olha" {

@@ -32,6 +32,14 @@ resource "aws_security_group" "video_web_sg" {
     cidr_blocks = ["${var.my_ip}/32"]
   }
 
+  ingress {
+    description = "allow HTTP from my computer"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "HTTP"
+    cidr_blocks = ["${var.my_ip}/32"]
+  }
+
   egress {
     description = "Allow all outbound traffic"
     from_port   = 0
