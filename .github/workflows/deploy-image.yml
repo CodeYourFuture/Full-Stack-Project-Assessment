@@ -54,7 +54,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             sudo apt-get update
-            sudo apt-get install -y docker.io
+            sudo install docker -y
+            sudo systemctl start docker
+            sudo systemctl enable docker
             docker system prune -a -f
             docker pull olhadanylevska/video-server:${{ steps.create_tag.outputs.tag }}
 
