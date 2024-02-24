@@ -14,7 +14,7 @@ const AddingVideo = ({ setAllMyVideos }) => {
 
         try {
             const res = await fetch(
-                "http://ec2-13-43-94-172.eu-west-2.compute.amazonaws.com/videos",
+                "http://ec2-13-41-184-74.eu-west-2.compute.amazonaws.com/videos",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ const AddingVideo = ({ setAllMyVideos }) => {
             }
 
             const response = await fetch(
-                "http://ec2-13-43-94-172.eu-west-2.compute.amazonaws.com/videos"
+                "http://ec2-13-41-184-74.eu-west-2.compute.amazonaws.com/videos"
             );
 
             if (!response.ok) {
