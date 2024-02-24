@@ -1,13 +1,126 @@
-body {
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ background: #c7ddee;
+ color: rgba(34, 34, 34, 0.527);
+  
+}
+
+/* header css */
+
+
+.App h4{
+  color:#fff;
+  font-style: oblique;
+  
+  background-color: #254e70;
+  padding: 2rem 0;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* .search h5{
+  color: rgb(65, 65, 180);
+  margin-top: 80px;
+  margin-left: 10px;
+} */
+.search input[type=text]  {
+ 
+  padding: 6px;
+  border:1px solid #ccc;
+ 
+
+}
+.title{
+  
+  border:1px solid #ccc;
+
+}
+.url{
+ 
+  border:1px solid #ccc;
+  
+  margin-top: 10px;
+ 
+}
+.form-container{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+#form-input{
+  display: flex;
+  flex-direction: column;
+}
+.btn-container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.btn-container > button{
+ display: flex;
+ background-color: yellow;
+  
+
+}
+.btn-container > button:nth-child(2){
+  background-color: green;
+}
+.btn-add{
+background-color: green;
+}
+  
+/* video icons and containers */
+
+.video-icons {
+  color: rgb(15, 203, 9);
+}
+
+.video-icons > .downVote{
+  color: red;
+}
+
+.videos-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.video{
+  width: 300px;
+  box-shadow: 3px 1px 5px rgba(0,0,0,0.2);
+
+}
+.video >h3{
+  font-size: 20px;
+}
+.video-icons{
+  display: flex;
+  gap: 20px;
+  margin-bottom: 5px;
+
+}
+
+/*  container for removing videos*/
+.remove-container{
+display: flex;
+  
+  
+}
+.remove-container > button{
+  display: inline;
+  align-content: center;
+  background-color: rgb(245, 107, 107);
+
+
 }
