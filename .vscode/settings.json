@@ -1,3 +1,5 @@
 {
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "editor.defaultFormatter": "vscode.css-language-features",
+  "editor.defaultFoldingRangeProvider": "ms-azuretools.vscode-azureterraform"
 }
