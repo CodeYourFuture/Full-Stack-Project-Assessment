@@ -55,13 +55,15 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_SSH_USERNAME }}
+        username:  ${{ secrets.EC2_SSH_USERNAME }}  
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          sudo su - root <<'EOF'
+          echo "Switching to root user to perform tasks"
           export ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
           export IMAGE_TAG=latest 
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REPOSITORY
-          docker pull $ECR_REPOSITORY:$IMAGE_TAG
-          docker stop my-container || true && docker rm my-container || true
-          docker run -d --name my-container -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
+          docker stop unruffled_mcnulty || true && docker rm unruffled_mcnulty || true
+          docker run -d -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
+          EOF
