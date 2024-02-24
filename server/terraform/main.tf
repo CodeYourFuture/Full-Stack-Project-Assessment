@@ -47,7 +47,7 @@ resource "aws_security_group" "video_web_sg" {
 
 
 resource "aws_instance" "video_web" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = "ami-0e5f882be1900e43b"
   instance_type = var.settings.web-app.instance_type
   key_name      = "video-pair-new"
   tags = {
