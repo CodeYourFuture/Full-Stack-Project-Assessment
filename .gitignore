@@ -1,0 +1,13 @@
+
+Infrastructure/EC2/.terraform.lock.hcl
+Infrastructure/EC2/.terraform/providers/registry.terraform.io/hashicorp/aws/5.37.0/windows_386/terraform-provider-aws_v5.37.0_x5.exe
+Infrastructure/EC2/terraform.tfstate
+Infrastructure/EC2/terraform.tfstate.backup
+Infrastructure/RDS/.terraform.lock.hcl
+Infrastructure/RDS/.terraform/providers/registry.terraform.io/hashicorp/aws/5.37.0/windows_386/terraform-provider-aws_v5.37.0_x5.exe
+Infrastructure/RDS/terraform.tfstate
+Infrastructure/RDS/terraform.tfstate.backup
+Infrastructure/S3/.terraform.lock.hcl
+Infrastructure/S3/.terraform/providers/registry.terraform.io/hashicorp/aws/5.37.0/windows_386/terraform-provider-aws_v5.37.0_x5.exe
+Infrastructure/S3/terraform.tfstate
+Infrastructure/S3/terraform.tfstate.backup
