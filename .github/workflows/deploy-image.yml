@@ -54,7 +54,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             sudo apt-get update
-            sudo install docker -y
+            sudo apt-get install -y docker.io
             sudo systemctl start docker
             sudo systemctl enable docker
             docker system prune -a -f
