@@ -64,6 +64,6 @@ jobs:
           export ECR_REPOSITORY=058264451725.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/backend.docker
           export IMAGE_TAG=latest 
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REPOSITORY
-          docker stop unruffled_mcnulty || true && docker rm unruffled_mcnulty || true
+          docker stop sharp_zhukovsky || true && docker rm sharp_zhukovsky || true
           docker run -d -p 5000:5000 --env-file /root/.env $ECR_REPOSITORY:$IMAGE_TAG
           EOF
