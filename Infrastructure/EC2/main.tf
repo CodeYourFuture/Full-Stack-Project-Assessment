@@ -8,7 +8,7 @@ resource "aws_instance" "backend" {
   key_name               = "youtubesaver-nf"
   iam_instance_profile   = "s3toec2"
   subnet_id              = "subnet-08b756f6517a09fbe"
-  vpc_security_group_ids = ["sg-09c5dd40586ee7079"]
+  vpc_security_group_ids  = ["sg-09c5dd40586ee7079"]
 
   root_block_device {
     volume_type = "gp2"

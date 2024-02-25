@@ -18,7 +18,7 @@ resource "aws_db_instance" "default" {
   engine_version          = "15.5"
   instance_class          = "db.t3.micro"
   identifier              = "database-terraform"
-  db_subnet_group_name    = var.db_subnet_group_name  # Consistency with subnet group name
+  db_subnet_group_name    = var.db_subnet_group_name 
   vpc_security_group_ids  = ["sg-09c5dd40586ee7079"]
 
   username                = "postgres"
