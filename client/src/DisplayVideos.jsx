@@ -8,6 +8,7 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
   const fetchData = async () => {
     try {
       const response = await fetch(
+        // `http://localhost:4500/video`
         `https://kristinadudnyk-fullstack-project.onrender.com/video`
       );
       const data = await response.json();
@@ -29,14 +30,13 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
         setVideos={setVideos}
       />
       <div className="dispay-video-container">
-        {"The server is down lol" ||
-          videos.map((video) => (
-            <CardVideo
-              key={video.id}
-              video={video}
-              setRefreshVideos={setRefreshVideos}
-            />
-          ))}
+        {videos.map((video) => (
+          <CardVideo
+            key={video.id}
+            video={video}
+            setRefreshVideos={setRefreshVideos}
+          />
+        ))}
       </div>
     </div>
   );

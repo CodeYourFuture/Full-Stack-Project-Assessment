@@ -26,6 +26,7 @@ export default function NewVivdeo({ showForm, toggleForm, setRefreshVideos }) {
       setIsSubmitting(true);
 
       const response = await fetch(
+        // `http://localhost:4500/video`,
         `https://kristinadudnyk-fullstack-project.onrender.com/video`,
         {
           method: "POST",

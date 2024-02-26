@@ -20,7 +20,6 @@ const db = new Pool({
     rejectUnauthorized: false,
   },
 });
-// console.log(db);
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -30,11 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //$ npm run dev
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any domain
-//   next();
-// });
 
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
