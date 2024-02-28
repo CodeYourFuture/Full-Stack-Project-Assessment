@@ -33,8 +33,9 @@ app.use(express.urlencoded({ extended: true }));
 //   res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any domain
 //   next();
 // });
-
 app.get("/", (req, res) => {
+  console.log(process.env.DB_PASSWORD);
+
   res.send({ express: "Your Backend Service is Running" });
 });
 
