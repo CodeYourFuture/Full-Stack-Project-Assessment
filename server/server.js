@@ -9,17 +9,16 @@ const app = express();
 const { Pool } = require("pg");
 
 const db = new Pool({
-  // user: process.env.DB_USERNAME,
-  // host: process.env.DB_HOST,
-  // database: process.env.DB_DATABASE,
-  // password: process.env.DB_PASSWORD,
-  // port: process.env.DB_PORT,
-  connectionString: process.env.DB_URL,
-
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   ssl: {
     rejectUnauthorized: false,
   },
 });
+// console.log(db);
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -29,6 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //$ npm run dev
+
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any domain
+//   next();
+// });
 
 app.get("/", (req, res) => {
   res.send({ express: "Your Backend Service is Running" });
