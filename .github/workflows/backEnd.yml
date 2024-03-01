@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{ EC2_HOST }}"
+          ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{secrets.EC2_HOST}}"
               cd Full-Stack-Project-Assessment
               git pull
               cd server
