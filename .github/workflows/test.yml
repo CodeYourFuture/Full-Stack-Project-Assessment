@@ -1,9 +1,9 @@
-name: firstWorkflow
+name: test2
 
 on:
   push:
     branches:
-      - Feature-deploy-in-AWS
+      - main
     paths:
       - "client/**"
 
