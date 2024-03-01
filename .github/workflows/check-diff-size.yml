@@ -4,13 +4,12 @@ on:
   pull_request:
 
 jobs:
-
   check-diff:
     name: Check diff size
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -28,4 +27,4 @@ jobs:
             echo "The diff looks nice and small - good work! 😎"
             exit 0
           fi
-           
+
