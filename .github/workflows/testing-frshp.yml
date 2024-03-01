@@ -2,7 +2,8 @@ name: Testing
 
 on:
   pull_request:
-    - main
+    branches:
+      - main
 
 jobs:
   test_pull_request:
