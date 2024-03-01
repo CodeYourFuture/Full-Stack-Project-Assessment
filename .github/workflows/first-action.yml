@@ -6,7 +6,9 @@ on:
       - main
     paths:
       - "client/**"
-
+defaults:
+  run:
+    working-directory: "client"
 jobs:
   test:
     runs-on: ubuntu-latest
