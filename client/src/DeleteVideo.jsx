@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { backEndLink } from "./config/config";
 
 export default function DeleteVideo({ video, setRefreshVideos }) {
   const [videoId] = useState(video.id);
@@ -11,12 +12,9 @@ export default function DeleteVideo({ video, setRefreshVideos }) {
     try {
       // console.log(videoId);
 
-      const response = await fetch(
-        `https://kristinadudnyk-fullstack-project.onrender.com/video/${videoId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${backEndLink}/${videoId}`, {
+        method: "DELETE",
+      });
       console.log("handleDelete response:", response);
 
       const json = await response.json();

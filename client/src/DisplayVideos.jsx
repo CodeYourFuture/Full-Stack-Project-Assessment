@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { backEndLink } from "./config/config";
 import CardVideo from "./CardVideo";
 import ToggleOrderOfVideos from "./ToggleOrderOfVideos";
 
@@ -7,10 +8,7 @@ export default function DisplayVideos({ refreshVideos, setRefreshVideos }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        // `http://localhost:4500/video`
-        `https://kristinadudnyk-fullstack-project.onrender.com/video`
-      );
+      const response = await fetch(backEndLink);
       const data = await response.json();
       console.log("fetchData in Videos", data);
       setVideos(data);

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { backEndLink } from "./config/config";
+
 export default function ToggleOrderOfVideos({ refreshVideos, setVideos }) {
   const [order, setOrder] = useState(true);
 
@@ -10,7 +12,8 @@ export default function ToggleOrderOfVideos({ refreshVideos, setVideos }) {
     try {
       const orderQuery = order ? "asc" : "desc";
       const response = await fetch(
-        `https://kristinadudnyk-fullstack-project.onrender.com/video?order=${orderQuery}`
+        `${backEndLink}?order=${orderQuery}`
+        // `https://kristinadudnyk-fullstack-project.onrender.com/video?order=${orderQuery}`
       );
       const data = await response.json();
       console.log("handleToggleOrder in ToggleOrderOfVideos", data);

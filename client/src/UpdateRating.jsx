@@ -1,21 +1,19 @@
 import { useState } from "react";
 import DeleteVideo from "./DeleteVideo";
+import { backEndLink } from "./config/config";
 
 export default function UpdateRating({ video, setRefreshVideos }) {
   const [counter, setCounter] = useState(video.rating);
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(
-        `https://kristinadudnyk-fullstack-project.onrender.com/video/${video.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ rating: counter }),
-        }
-      );
+      const response = await fetch(`${backEndLink}/${video.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: counter }),
+      });
       if (response.ok) {
         console.log("Resource updated successfully");
       } else {

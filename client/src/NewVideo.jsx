@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { backEndLink } from "./config/config";
 
 export default function NewVivdeo({ showForm, toggleForm, setRefreshVideos }) {
   const [formData, setFormData] = useState({
@@ -25,17 +26,13 @@ export default function NewVivdeo({ showForm, toggleForm, setRefreshVideos }) {
     try {
       setIsSubmitting(true);
 
-      const response = await fetch(
-        // `http://localhost:4500/video`,
-        `https://kristinadudnyk-fullstack-project.onrender.com/video`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json", // Set the content type to JSON
-          },
-          body: JSON.stringify(formDataUrlChanged),
-        }
-      );
+      const response = await fetch(backEndLink, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type to JSON
+        },
+        body: JSON.stringify(formDataUrlChanged),
+      });
       console.log("handleSubmit response:", response);
 
       const json = await response.json();
