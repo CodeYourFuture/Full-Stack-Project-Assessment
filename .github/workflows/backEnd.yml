@@ -1,4 +1,4 @@
-name: Deploying to S3
+name: Deploying to EC2
 
 on:
   push:
@@ -13,23 +13,11 @@ jobs:
       - name: Checkout repository//download the source code repository
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials// AWS credentials are configuring
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
-
-      - name: Use Node.js 16
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-
       - name: Install dependencies and build
         run: |
-          cd client
-          npm ci
-          npm run build
-
-      - name: Sync to S3
-        run: aws s3 sync client/build s3://videos-recomendation-project --delete
+          ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{ EC2_HOST }}"
+              cd Full-Stack-Project-Assessment
+              git pull
+              cd server
+              npm install
+              pm2 restart server.js
