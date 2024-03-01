@@ -5,5 +5,5 @@ thumbs.db
 *.swp
 *.swo
 *.sublime*
-.vscode/
+.vscode
 .env

@@ -1,0 +1,35 @@
+name: Deploying to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository//download the source code repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials// AWS credentials are configuring
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Install dependencies and build
+        run: |
+          cd client
+          npm ci
+          npm run build
+
+      - name: Sync to S3
+        run: aws s3 sync client/build s3://videos-recomendation-project --delete
