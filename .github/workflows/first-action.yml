@@ -1,6 +1,11 @@
 name: firstWorkflow
 
-on: push
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "client/**"
 
 jobs:
   test:
