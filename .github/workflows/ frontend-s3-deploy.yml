@@ -1,36 +1,28 @@
 name: Frontend deployments to S3
-
 on:
   push:
-    branches: [ main ]
-
+    branches:
+      - main
 defaults:
   run:
     working-directory: ./client
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Setup NodeJS
         uses: actions/setup-node@v2
-
       - name: Install Dependencies
-      run: npm install
-
+        run: npm install
       - name: Build Frontend
         run: npm run build
-
       - name: Configure AWS credentials
-       uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{AWS_SECRET_KEY}}
           aws-region: eu-west-2
-
-      - name: Sync build folder to S3 bucket 
+      - name: Sync build folder to S3 bucket
         run: aws s3 sync ./build s3://doris-video-recommendation-app
