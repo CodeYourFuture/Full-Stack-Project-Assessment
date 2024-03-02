@@ -24,5 +24,12 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          echo "$PEM" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${HOST_NAME}@${AWS_HOST}
+          echo "$PEM" > private_key 
+          chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${HOST_NAME}@${AWS_HOST} '
+              cd Full-Stack-Project-Assessment &&
+              git pull &&
+              cd server &&
+              npm install &&
+              pm2 restart server.js
+              '
