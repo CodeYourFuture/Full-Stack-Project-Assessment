@@ -13,6 +13,13 @@ jobs:
       - name: Checkout repository//download the source code repository
         uses: actions/checkout@v2
 
+      - name: Configure AWS credentials// AWS credentials are configuring
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1d
+
       - name: Install dependencies and build
         run: |
           ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{secrets.EC2_HOST}}"
