@@ -24,11 +24,11 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          echo ${HOST_NAME}@${AWS_HOST}
+          echo ${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}
           echo "$PEM" > private_key 
           echo private_key 
           chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${HOST_NAME}@${AWS_HOST} '
+          ssh -o StrictHostKeyChecking=no -i private_key ${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}} '
               cd Full-Stack-Project-Assessment &&
               git pull &&
               cd server &&
