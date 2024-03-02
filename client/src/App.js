@@ -8,7 +8,7 @@ function App() {
   let [videos, setVideos] = useState([]);
 
   useEffect(function () {
-    fetch("http://localhost:5000")
+    fetch("http://52.56.239.192:5004")
       .then((res) => res.json())
       .then((data) => {
         setVideos(data);
