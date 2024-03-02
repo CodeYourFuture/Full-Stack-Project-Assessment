@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout repository//download the source code repository
         uses: actions/checkout@v2
+        env:
+          HOST_NAME: ${{secrets.AWS_HOST_NAME}}
+          AWS_HOST: ${{secrets.AWS_HOST}}
+          PEM: ${{secrets.AWS_PEM}}
 
       - name: Use Node.js 16
         uses: actions/setup-node@v4
@@ -20,8 +24,8 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          echo ${{secrets.AWS_PEM}} > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}} '
+          echo "$PEM" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${HOST_NAME}@${AWS_HOST} '
               cd Full-Stack-Project-Assessment
               git pull
               cd server
