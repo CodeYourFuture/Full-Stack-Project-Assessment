@@ -22,6 +22,7 @@ jobs:
               pwd &&
               git pull &&
               cd server &&
+              echo $PATH &&
               npm install &&
               pm2 restart server.js
               '
