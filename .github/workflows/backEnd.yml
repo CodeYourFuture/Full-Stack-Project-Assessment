@@ -13,6 +13,11 @@ jobs:
       - name: Checkout repository//download the source code repository
         uses: actions/checkout@v2
 
+      - name: Use Node.js 16
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
       - name: Configure AWS credentials// AWS credentials are configuring
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -22,7 +27,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{secrets.EC2_HOST}}"
+          ssh -o StrictHostKeyChecking=no -i "${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}"
               cd Full-Stack-Project-Assessment
               git pull
               cd server
