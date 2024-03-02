@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{secret.AWS_PEM}} "${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}"
+          ssh -o StrictHostKeyChecking=no -i ${{secrets.AWS_PEM}} "${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}"
               cd Full-Stack-Project-Assessment
               git pull
               cd server
