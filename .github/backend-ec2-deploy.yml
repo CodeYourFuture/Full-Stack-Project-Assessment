@@ -1,0 +1,28 @@
+name: Backend deployments to EC2
+on:
+  push:
+    branches:
+      - main
+defaults:
+  run:
+    working-directory: ./server
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Add SSH key to agent
+        run: 
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-keygen -i /dev/stdin -f id_rsa
+          chmod 600 id_rsa
+          ssh-add id_rsa
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH into EC2 instance and deploy 
+        run: 
+          ssh -i id_rsa ubuntu@$EC2_DNS "bash -c 'cd /server.js && git pull && npm install && pm2 start server.js'"  
+        env:
+          EC2_DNS: ${{ secrets.EC2_DNS }}
+     
