@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -12,11 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const db = new Pool({
-  user: "codeyourfuture", // replace with you username
-  host: "localhost",
-  database: "cyf_videos",
-  password: "cyf123",
-  port: 5432,
+  user: process.env.DB_USER, // replace with you username
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: 5432
 });
 
 // Store and retrieve your videos from here
@@ -84,10 +85,11 @@ const db = new Pool({
 //     rating: 73,
 //   },
 // ];
-
 // GET "/"
 app.get("/", (req, res) => {
+  
   db.query("SELECT * FROM videos", (error, result) => {
+    console.log(error);
     res.json(result.rows);
   });
 });
