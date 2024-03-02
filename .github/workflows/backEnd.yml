@@ -23,6 +23,6 @@ jobs:
               git pull &&
               cd server &&
               echo $PATH &&
-              npm install &&
+              /home/ubuntu/.nvm/versions/node/v20.11.1/bin/npm install &&
               pm2 restart server.js
               '
