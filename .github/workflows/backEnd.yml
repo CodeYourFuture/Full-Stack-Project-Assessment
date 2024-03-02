@@ -18,16 +18,10 @@ jobs:
         with:
           node-version: 16
 
-      - name: Configure AWS credentials// AWS credentials are configuring
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
       - name: Install dependencies and build
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{secrets.AWS_PEM}} "${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}"
+          echo ${{secrets.AWS_PEM}} > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key "${{secrets.AWS_HOST_NAME}}@${{secrets.AWS_HOST}}"
               cd Full-Stack-Project-Assessment
               git pull
               cd server
