@@ -25,7 +25,7 @@ jobs:
           chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
               cd Full-Stack-Project-Assessment &&
-              whoami &&
+              pwd &&
               git pull &&
               cd server &&
               npm install &&
