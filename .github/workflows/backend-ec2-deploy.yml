@@ -1,0 +1,27 @@
+name: Backend deployments to EC2
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "server/**"
+defaults:
+  run:
+    working-directory: ./server
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Add SSH key to agent
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > backend-ec2.pem
+          chmod 400 backend-ec2.pem
+         
+      - name: SSH into EC2 instance and deploy 
+        run: | 
+          cat backend-ec2.pem
+          ssh -i backend-ec2.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_DNS }} "bash -c 'cd server && git pull && npm install && pm2 start server.js'"  
+
+     
