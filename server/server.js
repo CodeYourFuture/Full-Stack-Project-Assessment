@@ -20,6 +20,70 @@ const db = new Pool({
   port: 5432
 });
 
+//test11
+app.get("/", (req, res) => {
+  res.json("hi");
+
+  db.query("SELECT * FROM videos", (error, result) => {
+    console.log(error);
+    res.json(result.rows);
+  });
+});
+
+// POST "/"
+let idCount = 1;
+app.post("/", function (req, res) {
+  const newVideo = req.body;
+
+  const video = {
+    id: idCount++,
+    title: newVideo.title,
+    url: newVideo.url,
+  };
+
+  if (!newVideo.title || !newVideo.url) {
+    res.status(400).json({
+      result: "failure",
+      message: "Video could not be saved",
+    });
+  } else {
+    const query =
+      "INSERT INTO videos (id, title, url) " + "VALUES ($1, $2, $3)";
+
+    db.query(query, [video.id, video.title, video.url], (err, result) => {
+      res.status(201).json({ id: video.id });
+    });
+  }
+});
+
+//GET "/{id}"
+app.get("/:vId", function (req, res) {
+  const idToFind = Number(req.params.vId);
+  db.query(
+    "SELECT * FROM videos where id = $1",
+    [idToFind],
+    (error, result) => {
+      res.status(200).json(result.rows);
+    }
+  );
+});
+
+//DELETE "/{id}"
+app.delete("/:vId", function (req, res) {
+  const idToDel = Number(req.params.vId);
+  db.query("DELETE FROM videos WHERE id=$1", [idToDel])
+    .then(() => {
+      res.status(200).send({});
+    })
+    .catch((e) =>
+      res.status(400).json({
+        result: "failure",
+        message: "Video could not be deleted",
+      })
+    );
+});
+
+
 // Store and retrieve your videos from here
 // If you want, you can copy "exampleresponse.json" into here to have some data to work with
 // let videos = [
@@ -86,64 +150,3 @@ const db = new Pool({
 //   },
 // ];
 // GET "/"
-//test11
-app.get("/", (req, res) => {
-  
-  db.query("SELECT * FROM videos", (error, result) => {
-    console.log(error);
-    res.json(result.rows);
-  });
-});
-
-// POST "/"
-let idCount = 1;
-app.post("/", function (req, res) {
-  const newVideo = req.body;
-
-  const video = {
-    id: idCount++,
-    title: newVideo.title,
-    url: newVideo.url,
-  };
-
-  if (!newVideo.title || !newVideo.url) {
-    res.status(400).json({
-      result: "failure",
-      message: "Video could not be saved",
-    });
-  } else {
-    const query =
-      "INSERT INTO videos (id, title, url) " + "VALUES ($1, $2, $3)";
-
-    db.query(query, [video.id, video.title, video.url], (err, result) => {
-      res.status(201).json({ id: video.id });
-    });
-  }
-});
-
-//GET "/{id}"
-app.get("/:vId", function (req, res) {
-  const idToFind = Number(req.params.vId);
-  db.query(
-    "SELECT * FROM videos where id = $1",
-    [idToFind],
-    (error, result) => {
-      res.status(200).json(result.rows);
-    }
-  );
-});
-
-//DELETE "/{id}"
-app.delete("/:vId", function (req, res) {
-  const idToDel = Number(req.params.vId);
-  db.query("DELETE FROM videos WHERE id=$1", [idToDel])
-    .then(() => {
-      res.status(200).send({});
-    })
-    .catch((e) =>
-      res.status(400).json({
-        result: "failure",
-        message: "Video could not be deleted",
-      })
-    );
-});
