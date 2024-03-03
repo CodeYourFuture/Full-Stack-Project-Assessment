@@ -86,7 +86,7 @@ const db = new Pool({
 //   },
 // ];
 // GET "/"
-//test9
+//test10
 app.get("/", (req, res) => {
   
   db.query("SELECT * FROM videos", (error, result) => {

@@ -22,6 +22,6 @@ jobs:
       - name: SSH into EC2 instance and deploy 
         run: | 
           cat backend-ec2.pem
-          ssh -i backend-ec2.pem ec2-user@${{ secrets.EC2_DNS }} "bash -c 'cd /server.js && git pull && npm install && pm2 start server.js'"  
+          ssh -i backend-ec2.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_DNS }} "bash -c 'cd /server.js && git pull && npm install && pm2 start server.js'"  
 
      
