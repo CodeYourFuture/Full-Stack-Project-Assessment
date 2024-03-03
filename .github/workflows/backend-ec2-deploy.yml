@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Add SSH key to agent
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > id_rsa_tmp
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > id_rsa_tmp
           chmod 600 id_rsa_tmp
           ssh-keygen -i id_rsa_tmp -f id_rsa
           rm id_rsa_tmp
