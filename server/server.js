@@ -1,35 +1,30 @@
-
 const express = require("express");
 const app = express();
- const cors = require ("cors");
+const cors = require("cors");
 const corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://localhost:3000",
 };
 app.use(cors());
-require('dotenv').config(); // Load environment variables from .env file
-const bodyParser = require("body-parser")
-app.use(bodyParser.json())
- 
+require("dotenv").config(); // Load environment variables from .env file
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 app.use(express.json());
 const { body, validationResult } = require("express-validator");
 const port = process.env.PORT || 3000;
 const { Pool } = require("pg");
 
-
-
-
-
 const db = new Pool({
-  connectionString:process.env.DB_URL
+  connectionString: process.env.DB_URL,
   // user: process.env.DB_USER,
   // host: process.env.DB_HOST,
   // database: process.env.DB_NAME,
   // password: process.env.DB_PASSWORD,
   // port: process.env.DB_PORT,
-//   ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : false
- });
+  //   ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : false
+});
 
-// 
+//
 app.get("/", function (req, res) {
   res.status(200).json("wellcome");
 });
@@ -40,7 +35,6 @@ app.get("/", function (req, res) {
 //   }
 //   res.json(videos);
 // });
-
 
 // GET "/videos"
 app.get("/videos", async function (req, res) {
@@ -77,7 +71,7 @@ app.get("/videos", async function (req, res) {
 //   }
 //   const order = req.query.order;
 //   let orderVideos;
-  
+
 //   if (order === "asc") {
 //     orderVideos = result.rows.sort((a, b) => a.rating - b.rating);
 //   } else if (order === "desc") {
@@ -87,7 +81,6 @@ app.get("/videos", async function (req, res) {
 //   }
 //   return res.status(200).json(orderVideos);
 //});
-
 
 //ordering by assending and dessending for example /videos?order=asc
 app.get("/videos", async function (req, res) {
@@ -154,7 +147,7 @@ app.post(
     const query =
       //// Include "RETURNING *" to return the newly created row
       "INSERT INTO videos (title, url, rating) VALUES($1, $2, $3) RETURNING *";
-    db.query(query, [newTitle, newUrl, newRating], (err,result) => {
+    db.query(query, [newTitle, newUrl, newRating], (err, result) => {
       if (err) {
         res.status(500).send("Internal Server Error");
       } else {
@@ -177,8 +170,7 @@ app.get("/videos/search", function (req, res) {
   res.json(filteredVideo);
 });
 
-
- //search video by id for example/videos/:id
+//search video by id for example/videos/:id
 // app.get("/videos/:id", function (req, res) {
 //   const videoId = parseInt(req.params.id);
 //   const video = videos.find((m) => m.id === videoId);
@@ -190,8 +182,8 @@ app.get("/videos/search", function (req, res) {
 
 //search video by id for example/videos/:id
 app.get("/videos/:id", async function (req, res) {
-  const videoId=req.params.id;
-  const result = await db.query('SELECT * FROM videos where id=$1',[videoId]);
+  const videoId = req.params.id;
+  const result = await db.query("SELECT * FROM videos where id=$1", [videoId]);
   if (result.rows.length === 0) {
     return res.status(404).json({ error: "no videos found" });
   }
@@ -216,15 +208,19 @@ app.get("/videos/:id", async function (req, res) {
 // });
 
 //updating video with id
-app.put("/videos/:id",async function (req,res) {
+app.put("/videos/:id", async function (req, res) {
   const newId = req.params.id;
-  const newRating= req.body.rating;
-  try{const result = db.query("UPDATE videos SET rating=$2 WHERE id=$1",[newId,newRating])
-res.json(`video with id:${newId} updated`)}
-catch(error){
-  res.status(500).json({ error: "Internal Server Error" });
-}
-})
+  const newRating = req.body.rating;
+  try {
+    const result = db.query("UPDATE videos SET rating=$2 WHERE id=$1", [
+      newId,
+      newRating,
+    ]);
+    res.json(`video with id:${newId} updated`);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //delete video
 // app.delete("/videos/:id", function (req, res) {
@@ -243,9 +239,7 @@ app.delete("/videos/:id", async function (req, res) {
   try {
     const result = await db.query("DELETE FROM videos WHERE id=$1", [videoId]);
     if (result.rowCount === 0) {
-      return res
-        .status(404)
-        .json( `Video with id ${videoId} not found`);
+      return res.status(404).json(`Video with id ${videoId} not found`);
     }
     res.json(`Video with id ${videoId} deleted`);
   } catch (error) {
@@ -253,6 +247,5 @@ app.delete("/videos/:id", async function (req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

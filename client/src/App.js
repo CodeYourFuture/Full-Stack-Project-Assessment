@@ -1,20 +1,19 @@
-import React, {useState,useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"; 
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import "./App.css";
 import Videos from "./Videos.js";
 
 function App() {
-  
   const [showVideos, setShowVideos] = useState(false);
   const [loadVideo, setLoadVideo] = useState([]);
-  const [order,setOrder]=useState("ase");
+  const [order, setOrder] = useState("ase");
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(
-          "http://ec2-16-171-32-223.eu-north-1.compute.amazonaws.com:3000/videos"
+          "http://ec2-13-49-244-227.eu-north-1.compute.amazonaws.com:3000/videos"
         );
         if (!response.ok) {
           throw new Error("something went wrong");
@@ -29,7 +28,6 @@ function App() {
     };
     getData();
   }, []);
-
 
   function orderClickHandler(e, newOrder) {
     e.preventDefault();
@@ -56,9 +54,19 @@ function App() {
         <nav className="nav">
           <div className="orderBtn">
             <p>order by rate : </p>
-            <button onClick={(e) => orderClickHandler(e, "asc")} disabled={order === "asc"}>Ase</button>
-            
-            <button onClick={(e)=>orderClickHandler(e,"desc")} disabled={order==="desc"}>Desc</button>
+            <button
+              onClick={(e) => orderClickHandler(e, "asc")}
+              disabled={order === "asc"}
+            >
+              Ase
+            </button>
+
+            <button
+              onClick={(e) => orderClickHandler(e, "desc")}
+              disabled={order === "desc"}
+            >
+              Desc
+            </button>
           </div>
           <div style={{ backgroundColor: "#55BCC9" }}></div>
           <Link
