@@ -9,7 +9,7 @@ const app = express();
 const { Pool } = require("pg");
 
 const db = new Pool({
-  connectionString: DB_URL,
+  connectionString: process.env.DB_URL,
   // user: process.env.DB_USERNAME,
   // host: process.env.DB_HOST,
   // database: process.env.DB_DATABASE,
