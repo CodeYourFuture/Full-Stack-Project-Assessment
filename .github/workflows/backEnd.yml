@@ -15,9 +15,15 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          ssh -i ec2-key-pair-videos.pem -o StrictHostKeyChecking=no "${{secrets.EC2_HOST}}"
-              cd Full-Stack-Project-Assessment
-              git pull
-              cd server
-              npm install
+          echo "${{secrets.AWS_PEM}}" > private_key 
+          chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
+              source .bashrc
+              cd Full-Stack-Project-Assessment &&
+              pwd &&
+              git pull &&
+              cd server &&
+              echo $PATH &&
+              /home/ubuntu/.nvm/versions/node/v20.11.1/bin/npm install &&
               pm2 restart server.js
+              '
