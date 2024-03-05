@@ -17,6 +17,13 @@ const pool = new Pool({
   ssl:  { rejectUnauthorized: false },
 });
 
+
+// Health Check Endpoint
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "success", message: "Health check passed" });
+});
+
+
 // GET
 app.get("/videos", async (req, res) => {
   try {
