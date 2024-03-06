@@ -11,19 +11,21 @@ jobs:
 
     steps:
       - name: Checkout repository//download the source code repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Create private key
+        run: echo "${{ secrets.AWS_PEM}}" > myPlayList-key-pair.pem
 
       - name: Install dependencies and build
         run: |
-          echo "${{secrets.AWS_PEM}}" > private_key 
-          chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
+          chmod 400 myPlayList-key-pair.pem
+          echo "${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}}"
+          cat myPlayList-key-pair.pem
+          ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
               source .bashrc
               cd Full-Stack-Project-Assessment &&
               pwd &&
               git pull &&
               cd server &&
-              echo $PATH &&
-              /home/ubuntu/.nvm/versions/node/v20.11.1/bin/npm install &&
               pm2 restart server.js
               '
