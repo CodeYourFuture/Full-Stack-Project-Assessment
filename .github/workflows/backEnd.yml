@@ -21,9 +21,8 @@ jobs:
       - name: Install dependencies and build
         run:
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
-          cd Full-Stack-Project-Assessment/server/ &&
+          cd Full-Stack-Project-Assessment/server &&
           git pull &&
-          cd server &&
           node -v &&
           npm -v &&
           pm2 -v
