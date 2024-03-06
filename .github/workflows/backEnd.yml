@@ -13,22 +13,18 @@ jobs:
       - name: Checkout repository//download the source code repository
         uses: actions/checkout@v3
 
-      - name: Create private key
-        run: echo "${{ secrets.AWS_PEM}}" > myPlayList-key-pair.pem
-
-      - name: Update PATH
+      - name: Create private key file and change permissions to read-only
         run: |
-          set PATH=$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin/
+          echo "${{ secrets.AWS_PEM}}" > myPlayList-key-pair.pem
+          chmod 400 myPlayList-key-pair.pem
 
       - name: Install dependencies and build
-        run: |
-          chmod 400 myPlayList-key-pair.pem
-          echo "${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}}"
-          cat myPlayList-key-pair.pem
+        run:
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
-              cd Full-Stack-Project-Assessment &&
-              pwd &&
-              git pull &&
-              cd server &&
-              pm2 -v
-              '
+          cd Full-Stack-Project-Assessment/server/ &&
+          git pull &&
+          cd server &&
+          node -v &&
+          npm -v &&
+          pm2 -v
+          '
