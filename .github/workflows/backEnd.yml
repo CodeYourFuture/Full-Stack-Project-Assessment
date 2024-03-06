@@ -21,6 +21,10 @@ jobs:
       - name: Install dependencies and build
         run:
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
+          echo "env BEFORE" &&
+          env &&
+          export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
+          echo "env AFTER" &&
           env &&
           cd Full-Stack-Project-Assessment/server &&
           git pull &&
