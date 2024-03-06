@@ -26,10 +26,9 @@ jobs:
           echo "${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}}"
           cat myPlayList-key-pair.pem
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} '
-              source .bashrc
               cd Full-Stack-Project-Assessment &&
               pwd &&
               git pull &&
               cd server &&
-              pm2 restart server.js
+              pm2 -v
               '
