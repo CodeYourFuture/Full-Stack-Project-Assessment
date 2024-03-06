@@ -18,20 +18,20 @@ jobs:
           echo "${{ secrets.AWS_PEM}}" > myPlayList-key-pair.pem
           chmod 400 myPlayList-key-pair.pem
 
-          - name: Install dependencies and build
-          run: |
-            ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} <<-'SSH_SCRIPT'
-            export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
-            cd Full-Stack-Project-Assessment/server &&
-            git pull &&
-            if pm2 list | grep -q fullstackproject; then
-              echo "fullstack project process found" &&
-              echo "stopping the process" &&
-              pm2 stop fullstackproject &&
-              echo "deleting the process" &&
-              pm2 delete fullstackproject
-            fi
-            echo "starting the process" &&
-            pm2 start server.js --name fullstackproject &&
-            pm2 ls
-            SSH_SCRIPT
+      - name: Install dependencies and build
+        run: |
+          ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} <<-'SSH_SCRIPT'
+          export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
+          cd Full-Stack-Project-Assessment/server &&
+          git pull &&
+          if pm2 list | grep -q fullstackproject; then
+            echo "fullstack project process found" &&
+            echo "stopping the process" &&
+            pm2 stop fullstackproject &&
+            echo "deleting the process" &&
+            pm2 delete fullstackproject
+          fi
+          echo "starting the process" &&
+          pm2 start server.js --name fullstackproject &&
+          pm2 ls
+          SSH_SCRIPT
