@@ -25,7 +25,7 @@ jobs:
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} <<-'SSH_SCRIPT'
           export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
           export SERVER_PORT=${{vars.SERVER_PORT }} &&
-          export DB_URL=$${{secrets.DB_URL}} &&
+          export DB_URL=${{secrets.DB_URL}} &&
           cd Full-Stack-Project-Assessment/server &&
           git pull &&
           if pm2 list | grep -q fullstackproject; then
