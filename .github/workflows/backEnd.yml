@@ -24,5 +24,8 @@ jobs:
           export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
           cd Full-Stack-Project-Assessment/server &&
           git pull &&
-          pm2 start server.js
+          pm2 stop all &&
+          pm2 delete all &&
+          pm2 start server.js --name fullstackproject &&
+          pm2 ls
           '
