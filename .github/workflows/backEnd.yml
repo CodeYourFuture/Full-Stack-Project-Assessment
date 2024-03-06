@@ -24,8 +24,14 @@ jobs:
           export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
           cd Full-Stack-Project-Assessment/server &&
           git pull &&
-          pm2 stop all &&
-          pm2 delete all &&
+          if pm2 list | grep -q fullstackproject; then
+          echo "fullstack project process found" &&
+          echo "stopping the process" &&
+          pm2 stop fullstackproject &&
+          echo "deleting the process" &&
+          pm2 delete fullstackproject &&
+          fi
+          echo "starting the process" &&
           pm2 start server.js --name fullstackproject &&
           pm2 ls
           '
