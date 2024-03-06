@@ -33,5 +33,4 @@ jobs:
           fi
           echo "starting the process" &&
           pm2 start server.js --name fullstackproject &&
-          pm2 ls
           SSH_SCRIPT
