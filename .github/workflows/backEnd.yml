@@ -32,5 +32,5 @@ jobs:
             pm2 delete fullstackproject
           fi
           echo "starting the process" &&
-          pm2 start server.js --name fullstackproject &&
+          pm2 start server.js --name fullstackproject
           SSH_SCRIPT
