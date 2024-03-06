@@ -19,6 +19,8 @@ jobs:
           chmod 400 myPlayList-key-pair.pem
 
       - name: Install dependencies and build
+        # multi-line bash script inside single quotes ' ' can't read indentation for the if block etc.
+        # <<- denotes a HERE Document which can accept a multi-line correctly indented/formatted script
         run: |
           ssh -i myPlayList-key-pair.pem -o StrictHostKeyChecking=no ${{vars.AWS_HOST_NAME}}@${{vars.AWS_HOST}} <<-'SSH_SCRIPT'
           export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v20.11.1/bin" &&
