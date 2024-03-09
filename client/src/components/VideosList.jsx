@@ -8,7 +8,8 @@ function VideosList() {
   const [ loading, setLoading ] = useState(true);
   const [ searchResult, setSearchResult ] = useState([]);
 
-  const fetchVideosUrl = 'http:/ec2-3-10-215-23.eu-west-2.compute.amazonaws.com:5050';
+  const fetchVideosUrl = ' http://ec2-3-10-215-23.eu-west-2.compute.amazonaws.com:5050';
+
   
 
   useEffect(() => {
