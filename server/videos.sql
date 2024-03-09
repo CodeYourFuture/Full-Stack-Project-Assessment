@@ -8,7 +8,7 @@ CREATE TABLE videos (
 );
 
 
-INSERT INTO videos (title, url, rating) VALUES ('The Coding Train', 'https://www.youtube.com/watch?v=HerCR8bw_GE', 230);
+INSERT INTO videos (title, url, rating) VALUES ('The Coding Trainw', 'https://www.youtube.com/watch?v=HerCR8bw_GE', 230);
 INSERT INTO videos (title, url, rating) VALUES ('Mac & Cheese | Basics with Babish', 'https://www.youtube.com/watch?v=FUeyrEN14Rk', 2110);
 INSERT INTO videos (title, url, rating) VALUES ('Videos for Cats to Watch - 8 Hour Bird Bonanza', 'https://www.youtube.com/watch?v=xbs7FT7dXYc', 11);
 INSERT INTO videos (title, url, rating) VALUES ('100+ JavaScript Concepts you Need to Know', 'https://www.youtube.com/watch?v=lkIFF4maKMU', 3211);
