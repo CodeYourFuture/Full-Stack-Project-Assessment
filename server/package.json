@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "server": "node server.js"
+    "server": "nodemon server.js",
+    "start": "nodemon server.js "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "aws-sdk": "^2.1545.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.17.1",
+    "pg": "^8.11.3",
+    "pg-pool": "^3.6.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.22"
   }
 }
