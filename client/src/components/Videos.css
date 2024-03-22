@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .videos {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }

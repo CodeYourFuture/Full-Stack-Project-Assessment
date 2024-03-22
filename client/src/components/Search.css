@@ -1,0 +1,9 @@
+.wrapper {
+    margin: 4rem auto;
+    /* border: 4px solid green; */
+}
+
+.label {
+    font-size: large;
+    font-weight: bold;
+}
