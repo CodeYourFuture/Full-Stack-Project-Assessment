@@ -1,0 +1,15 @@
+{
+  "name": "full-stack-project-assessment",
+  "version": "1.0.0",
+  "description": "Before you continue to final projects we have to make sure that you can meaningfully contribute to a technical project.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "cd client && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
