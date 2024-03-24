@@ -66,26 +66,35 @@ function validateYouTubeUrl(url) {
 }
 
 app.post("/videos", function (req, res) {
-  const newtTitle = req.body.title;
+  const newTitle = req.body.title;
   const newUrl = req.body.url;
   const newRating = 0;
 
   const query = "INSERT INTO videos (title, url, rating) VALUES ($1, $2, $3)";
 
-  if (!req.body.title || !validateYouTubeUrl(req.body.url)) {
-    res
-      .status(400)
-      .json({ msg: "Please make sure to include  title and valid url!!!" });
-    return;
+  // Validate request body
+  if (!newTitle || !newUrl) {
+    return res.status(400).json({ msg: "Please include a title and URL!" });
   }
 
-  pool
-    .query(query, [newtTitle, newUrl, newRating])
-    .then(() => res.send("Video added!"))
+  // Validate YouTube URL
+  if (!validateYouTubeUrl(newUrl)) {
+    return res.status(400).json({ msg: "Please include a valid YouTube URL!" });
+  }
+
+  // Execute SQL query to insert video data into the database
+  pool.query(query, [newTitle, newUrl, newRating])
+    .then(() => {
+      // Send success response to the client
+      res.status(201).json({ msg: "Video added successfully!" });
+    })
     .catch((error) => {
-      console.error(error);
+      // Log and handle errors
+      console.error("Error adding video:", error);
+      res.status(500).json({ msg: "An error occurred while adding the video." });
     });
 });
+
 
 app.delete("/videos/:videosId", function (req, res) {
   const videosId = req.params.videosId;
