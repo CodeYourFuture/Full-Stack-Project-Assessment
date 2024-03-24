@@ -24,7 +24,7 @@ function App() {
   
   
   useEffect(() => {
-    const fetchURL = `http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos?order=${isAsc ? "asc" : "desc"}`;
+    const fetchURL = `http:/ec2-35-176-144-41.eu-west-2.compute.amazonaws.com:5000/videos?order=${isAsc ? "asc" : "desc"}`;
     console.log("Fetch URL:", fetchURL);
   
     fetch(fetchURL)
