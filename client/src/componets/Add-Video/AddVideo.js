@@ -33,22 +33,16 @@ const AddVideo = ({ setVideos }) => {
       setTitle("");
       setUrl("");
 
-      axios.post("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos", newVideo, {
+      axios.post("http://ec2-35-176-144-41.eu-west-2.compute.amazonaws.com:5000/videos", newVideo, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
         .then((res) => {
           if (res.status === 201) {
-            // Video added successfully, fetch the updated list
-            axios.get("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos")
-              .then((res) => {
-                setVideos(res.data);
-                handleClose(); // Close the modal after successful addition
-              })
-              .catch((error) => {
-                console.error("Error fetching videos:", error);
-              });
+            // Video added successfully, update the videos list with the new video
+            setVideos(prevVideos => [...prevVideos, newVideo]);
+            handleClose(); // Close the modal after successful addition
           } else {
             console.error("Unexpected response status:", res.status);
           }
