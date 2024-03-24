@@ -45,9 +45,9 @@ function App() {
   }, [isAsc]);
   
   const removeVideo = (id) => {
-    axios.delete(`http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos/${id}`).then((res) => {
+    axios.delete(`http://ec2-35-176-144-41.eu-west-2.compute.amazonaws.com:5000/videos/${id}`).then((res) => {
       if (res.status === 200) {
-        axios.get("http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos").then((res) => {
+        axios.get(`http://ec2-35-176-144-41.eu-west-2.compute.amazonaws.com:5000/videos`).then((res) => {
           setVideos(res.data);
         });
       }

@@ -10,7 +10,7 @@ function SingleVideo({ id, title, url, ratingData, deleteVideo }) {
   
   const updateVideoRating = async (id, rating) => {
     try {
-      const response = await axios.put(`http://ec2-18-171-148-184.eu-west-2.compute.amazonaws.com:5000/videos/${id}`, { rating });
+      const response = await axios.put(`http://ec2-35-176-144-41.eu-west-2.compute.amazonaws.com:5000/videos/${id}`, { rating });
       return response.data;
     } catch (error) {
       throw error;
