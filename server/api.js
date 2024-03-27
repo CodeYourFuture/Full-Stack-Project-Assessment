@@ -5,7 +5,7 @@ const router = Router();
 router.get("/videos", async (_, res) => {
 	const result = await db.query("SELECT * FROM videos;");
 	console.log(result);
-	res.json({ msg: result.rows });
+	res.json({ videos: result.rows });
 });
 
 export default router;
