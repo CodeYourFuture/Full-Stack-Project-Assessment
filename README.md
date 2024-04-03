@@ -12,7 +12,7 @@ In this project you will be building up a small project that allows you to share
 
 ## Levels
 
-This project is split into several levels that you should complete each week of the three week project.
+The project requirements are split into several levels that you should complete during each week of this project.
 
 You can find each of the levels split into separate files, linked below.
 
@@ -20,50 +20,52 @@ You can find each of the levels split into separate files, linked below.
 
 ### Week 1 - Minimal Viable Product
 
-- [Level 100](./exercises/100.md)
+- [Level 100](./requirements/100.md)
+  - Defining requirements
+- [Level 105](./requirements/105.md)
   - Setting up the project
-- [Level 110](./exercises/110.md)
+- [Level 110](./requirements/110.md)
   - Building up the data model
-- [Level 120](./exercises/120.md)
+- [Level 120](./requirements/120.md)
   - Implementing the API
-- [Level 130](./exercises/130.md)
+- [Level 130](./requirements/130.md)
   - Implementing the frontend
-- [Level 150](./exercises/150.md)
+- [Level 150](./requirements/150.md)
   - Checking MVP adheres to the acceptance criteria
-- [Level 199](./exercises/199.md) (Optional)
+- [Level 199](./requirements/199.md) (Optional)
   - Implementing code quality improvements
 
 ### Week 2 - Additional features
 
-- [Level 200](./exercises/200.md)
+- [Level 200](./requirements/200.md)
   - UX Improvements
-- [Level 210](./exercises/210.md)
+- [Level 210](./requirements/210.md)
   - Allowing adding videos
-- [Level 220](./exercises/220.md)
+- [Level 220](./requirements/220.md)
   - Allowing the removal of videos
-- [Level 299](./exercises/299.md) (Optional)
+- [Level 299](./requirements/299.md) (Optional)
   - Implementing optional new features
 
 ### Week 3 - Finalizing project
 
-- [Level 300](./exercises/300.md)
+- [Level 300](./requirements/300.md)
   - Allowing rating of videos
-- [Level 350](./exercises/350.md)
+- [Level 350](./requirements/350.md)
   - Submitting solution for evaluation
-- [Level 399](./exercises/399.md) (Optional)
+- [Level 399](./requirements/399.md) (Optional)
   - Making project viable as a portfolio piece
 
 ### Week 4 - Stretch goals
 
 - Use this week as an extra time to implement missing required and optional features from previous weeks.
-- [Level 499](./exercises/499.md) (Optional)
+- [Level 499](./requirements/499.md) (Optional)
   - Additional stretch goals to make your project really stand out
 
 ## Getting Started
 
 Fork this repository and then clone it to your computer.
 
-Progress to [Level 100](./exercises/100.md) when you are ready.
+Progress to [Level 100](./requirements/100.md) when you are ready.
 
 ## Sample Solution
 
