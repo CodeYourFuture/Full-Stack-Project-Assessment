@@ -1,10 +1,10 @@
 name: Test
 
 on:
+  workflow_dispatch:
   pull_request:
 
 jobs:
-
   check-diff:
     name: Check diff size
     runs-on: ubuntu-latest
@@ -20,12 +20,11 @@ jobs:
         run: |
           FILES_CHANGED=$(gh pr diff ${{github.event.pull_request.number}} --name-only | wc -l)
           echo "Number of files changed in this PR: ${FILES_CHANGED}"
-          if [ $FILES_CHANGED -gt 10 ]
+          if [ $FILES_CHANGED -gt 20 ]
           then
             echo "The diff is too large. You've changed ${FILES_CHANGED} in this PR!"
             exit 1
-          else 
+          else
             echo "The diff looks nice and small - good work! 😎"
             exit 0
           fi
-           

@@ -1,0 +1,14 @@
+name: Reset Server
+run-name: Reset deployed application occasionally
+on:
+  workflow_dispatch:
+  #schedule:
+  #  - cron: "*/30 * * * *"
+
+jobs:
+  pingServer:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'curl --request POST https://<your_project_name>.netlify.app/api/videos/reset -H "Content-Type: application/json" --data "{\"code\":\"$RESET_CODE\"}" || true'
+        env:
+          RESET_CODE: ${{ secrets.RESET_CODE }}

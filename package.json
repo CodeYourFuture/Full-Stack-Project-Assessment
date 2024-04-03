@@ -1,0 +1,35 @@
+{
+	"name": "video-recommendations",
+	"version": "1.0.0",
+	"description": "Video Recommendations",
+	"private": true,
+	"scripts": {
+		"build": "npm --workspace client run build",
+		"dev": "concurrently --kill-others \"npm:dev:*\"",
+		"dev:client": "cross-env PORT=3000 npm --workspace client run dev",
+		"dev:server": "cross-env LOG_LEVEL=debug PORT=3100 npm --workspace server run dev",
+		"start": "npm --workspace server start",
+		"test": "npm  --workspace server --workspace client test",
+		"test:client": "npm --workspace client test",
+		"test:server": "npm --workspace server test",
+		"test:e2e": "npm --workspace e2e test",
+		"test:e2e:ui": "npm --workspace e2e run test:ui",
+		"test:e2e:headed": "npm --workspace e2e run test:headed"
+	},
+	"author": "Code Your Future <mail@codeyourfuture.io>",
+	"license": "ISC",
+	"devDependencies": {
+		"@codeyourfuture/eslint-config-standard": "^4.0.3",
+		"concurrently": "^8.2.2",
+		"cross-env": "^7.0.3"
+	},
+	"workspaces": [
+		"client",
+		"server",
+		"e2e"
+	],
+	"engines": {
+		"node": "^20.6",
+		"npm": ">=10"
+	}
+}
