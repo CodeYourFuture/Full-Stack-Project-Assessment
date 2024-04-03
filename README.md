@@ -40,9 +40,9 @@ You can find each of the levels split into separate files, linked below.
 - [Level 200](./requirements/200.md)
   - UX Improvements
 - [Level 210](./requirements/210.md)
-  - Allowing adding videos
+  - Support for adding videos
 - [Level 220](./requirements/220.md)
-  - Allowing the removal of videos
+  - Support for the removal of videos
 - [Level 299](./requirements/299.md) (Optional)
   - Implementing optional new features
 
