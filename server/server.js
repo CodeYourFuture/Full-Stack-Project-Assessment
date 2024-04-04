@@ -23,6 +23,7 @@ app.get('/', async (req, res) => {
     }
     console.log(data)
     res.json(data);
+    console.log(data)
   } catch (error) {
     console.error('Error fetching data:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
