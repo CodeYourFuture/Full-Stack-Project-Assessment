@@ -15,7 +15,7 @@ app.use(cors());
 
 app.get('/', async (req, res) => {
   try {
-    const { data, error } = await supabase.from("allinone").select("*");
+    const { data, error } = await supabase.from("mainpagevideos").select("*");
 
     if (error) {
       console.error('Supabase error:', error.message);
@@ -34,7 +34,7 @@ app.get("/:id", async (req, res) => {
 
   try {
     const { data: allData, error: allError } = await supabase
-      .from("allinone")
+      .from("mainpagevideos")
       .select("*");
 
     if (allError) {
@@ -61,7 +61,7 @@ app.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const { error } = await supabase.from("allinone").delete().eq("id", id);
+    const { error } = await supabase.from("mainpagevideos").delete().eq("id", id);
 
     if (error) {
       console.error("Supabase error:", error.message);
@@ -82,7 +82,7 @@ app.post("/", async (req, res) => {
 
   try {
     const { data, error } = await supabase
-      .from("allinone")
+      .from("mainpagevideos")
       .insert([{ title, url, rating }]);
 
     if (error) {
