@@ -18,6 +18,16 @@ function VideoCard(props) {
   const [dislike, setDislike] = useState(0);
   const [rate, setRate] = useState(props.rating);
   const embedUrl = ConvertToEmbedUrl(props.url)
+
+  const dateString = props.date;
+  const date = new Date(dateString);
+
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear().toString();
+
+  const formattedDate = `${day}.${month}.${year}`;
+
   return (
     <div className="card" style={{ width: "330px", height: "350px" }}>
       <iframe
@@ -29,9 +39,9 @@ function VideoCard(props) {
         allowFullScreen
       ></iframe>
       <div className="card-body">
-        <p>{props.date}</p>
-        <br></br>
         <p className="card-text">{props.title}</p>
+        <br></br>
+        <p>Added on {formattedDate}</p>
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item">
