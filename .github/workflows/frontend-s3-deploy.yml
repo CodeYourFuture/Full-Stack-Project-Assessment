@@ -24,4 +24,4 @@ jobs:
         run: npm install && npm run build
   
       - name: Deploy the site 
-        run: aws s3 sync ./client/build s3://cap-cloud
+        run: aws s3 sync ./client/build s3://cap-videorec
