@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,4 +24,4 @@ jobs:
         run: npm install && npm run build
   
       - name: Deploy the site 
-        run: aws s3 sync ./client/build arn:aws:s3:::cap-videorec
+        run: aws s3 sync ./client/build s3://cap-videorec
