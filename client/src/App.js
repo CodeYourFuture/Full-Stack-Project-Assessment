@@ -83,7 +83,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="title">Video Recommendation - AWS</h1>
+        <h1 className="title">Video Recommendation - AWS - Test</h1>
       </header>
       <AddVideo addVideo={addVideo} />
       <div className="sort-button">
