@@ -20,5 +20,5 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          chmod 400 videorec-server-key.pem
-          ssh -o StrictHostKeyChecking=no -i videorec-server-key.pem ec2-user@ec2-35-179-92-205.eu-west-2.compute.amazonaws.com 'bash -s' < deploy.sh
+          chmod 400 beko.pem
+          ssh -o StrictHostKeyChecking=no -i beko.pem ec2-user@ec2-35-179-92-205.eu-west-2.compute.amazonaws.com 'bash -s' < deploy.sh
