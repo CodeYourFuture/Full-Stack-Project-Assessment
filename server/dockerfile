@@ -1,0 +1,12 @@
+FROM node:14
+
+WORKDIR /Users/saim/Documents/GitHub/Full-Stack-Project-Assessment/server
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["npm", "start"]

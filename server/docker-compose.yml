@@ -1,0 +1,10 @@
+version: '1'
+
+services:
+  app:
+    image: nsaimk/Full-Stack-Project-Assessment:latest 
+    container_name: my-backend-image
+    restart: always
+    ports:
+      - "8080:8080"
+   
