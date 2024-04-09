@@ -42,6 +42,16 @@ OK
 
 Read this [article on .gitignore](https://sabe.io/blog/git-ignore-node_modules). We have set up a basic `.gitignore` file for you.
 
+## Frontend setup
+
+Since we are using a monorepo, you can launch the frontend the same way you launch the backend. Run the following command in the root of your repo:
+
+```sh
+npm run dev
+```
+
+The code you put under `client/src` will then be accessible on http://localhost:3000
+
 ## Monorepo
 
 The project is set up to run as a monorepo, where both the [`client`](../../client/) and [`server`](../../server/) source code live in the same git repository and are linked together. When using monorepos, there is some boilerplate code required to make sure both the frontend and the backend application can work at the same time and are accessible on the same URL. To kickstart your development we have set up this boilerplate code for you already. Feel free to look at the code, but generally you won't need to edit them if you follow the proposals in this guide.
