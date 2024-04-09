@@ -62,15 +62,15 @@ Based on the existing tests in the system you could try and create one that chec
 
 Similar to the backend unit tests we can create tests that verify that the frontend is working as expected in an automated way.
 
-### Setup
+### Setting up frontend unit tests ⚙️
 
-To setup frontend tests we have helped you get started by adding a couple tests to `client/test/App.test.js`. These would check that the page, after loading, contains enough `<iframe>` blocks, as well as whether the `Remove video` button works as expected, by decreasing the number of `<iframe>`s on the page. To run these tests type in the following command:
+To setup the frontend tests we have helped you get started by adding a couple tests to `client/test/App.test.js`. These would check that the page, after loading, contains enough `<iframe>` blocks, as well as whether the `Remove video` button works as expected, by decreasing the number of `<iframe>`s on the page. To run these tests type in the following command:
 
 ```sh
 npm run test:client
 ```
 
-Check the response, it will tell you if the tests have succeeded or not. You will likely need to update the test to cater for how you have implemented your website. For example, if you don't have a button that says `Remove video` but for example opted to put a little trashcan icon instead, you will need to change the sections where the code presses the `Remove video` button to instead find and press your trash icon on the page.
+Check the response, it will tell you if the tests have succeeded or not. You will likely need to update the test to cater to how you have implemented your website. For example, if you don't have a button that says `Remove video` but for example opted to put a little trashcan icon instead, you will need to change the sections where the code presses the `Remove video` button to find and press your trash icon on the page.
 
 ### Enable PR tests
 
