@@ -34,7 +34,7 @@ Check the response, it will tell you if the tests have succeeded or not. It is p
 
 ### Transactional tests
 
-The test runner above is set up to have transactional tests. What this means is that whenever you start the testing session, the code will reset your (test) database using the `initdb.sql` you have created in [level 110](./110.md). Afterwards it will run each test in a database transaction, rolling it back at the end of the test. Database transactions are a feature of most relational databases that allows you to run SQL commands in a temporary environment first, and only if you are happy with the results will they be saved to the database. It's a bit like editing a file and not saving it until you are happy with the result.
+The test runner above is set up to have transactional tests. What this means is that whenever you start the testing session, the code will reset your (test) database using `initdb.sql`. Afterwards it will run each test in a database transaction, rolling it back at the end of the test. Database transactions are a feature of most relational databases that allows you to run SQL commands in a temporary environment first, and only if you are happy with the results will they be saved to the database. It's a bit like editing a file and not saving it until you are happy with the result.
 
 We use this feature during test runs. We effectively ask the database to never save our changes at the end of the tests. This allows each test case to start with the exact same, initial database as every other test. For example when testing the video removal features, during the test the video will be removed, but once the tests are run, the database is reset, and subsequent tests will still be able to access the deleted video.
 
