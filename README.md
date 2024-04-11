@@ -8,7 +8,7 @@ This means that we need to be sure that you can create and deploy Full Stack app
 
 ## Challenge
 
-In this project, you will be building up a small project that allows you to share your favourite Youtube videos with the world. We will be starting up with a very small MVP (Minimal Viable Product), and built on top of it to make it nicer and more useful.
+In this project, you will be building up a small project that allows you to share your favourite YouTube videos with the world. We will be starting up with a very small MVP (Minimal Viable Product), and build on top of it to make it nicer and more useful.
 
 ## User stories 👩🏽‍💻
 
