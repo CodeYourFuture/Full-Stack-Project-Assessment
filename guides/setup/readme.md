@@ -60,7 +60,3 @@ If you are interested you can read more about what they do in the following plac
 
 - [Client vite settings](../client/vite.config.js)
 - [Server frontend middleware](../server/app.js)
-
-## Next Level
-
-Once finished you can go to [Level 110](./110.md)

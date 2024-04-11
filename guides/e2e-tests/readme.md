@@ -12,7 +12,7 @@ For example you can write Playwright code that opens up your application, then c
 
 Just with the other tests, we have helped you get started by setting up a test runner for your feature tests, and adding a couple tests to `e2e/tests/features.test.js`. These tests would go through the website and check that you can do all of the required features.
 
-**Note:** for this to work you need to make sure you have done the [level 299](./299.md) setup for the test backend database. If you haven't done so please refer to that section to set up your test database first.
+**Note:** for this to work you need to make sure you have setup the test backend database. If you haven't done so please refer to that section to set up your test database first.
 
 To run your end-to-end tests there are three steps you need to do:
 

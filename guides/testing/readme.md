@@ -56,7 +56,7 @@ This will allow GitHub to run the defined action on each pull request, and you c
 
 ### Adding additional tests
 
-Based on the existing tests in the system you could try and create one that checks the add video functionality we added during [level 210](./210.md) as well. It should verify that videos are added if the request is formatted properly, but fail if the request is missing the title, or the URL is incorrect.
+Based on the existing tests in the system you could try and create one that checks the add video functionality. It should verify that videos are added if the request is formatted properly, but fail if the request is missing the title, or the URL is incorrect.
 
 ## 2) Frontend unit tests
 
@@ -84,7 +84,3 @@ You might want to add some new test cases. Here are some examples:
 
 - Verify that the create video button works
 - Verify that the user cannot create videos with invalid URLs (if you have implemented this on the frontend as well)
-
-## Next Level
-
-Once finished you can go to [Level 300](./300.md)

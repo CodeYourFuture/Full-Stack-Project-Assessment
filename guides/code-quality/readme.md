@@ -104,7 +104,3 @@ on:
 ```
 
 **Note:** Make sure to have a full read of this file and try to figure out what it does.
-
-## Next Level
-
-Once finished you can go to [Level 200](./200.md)
