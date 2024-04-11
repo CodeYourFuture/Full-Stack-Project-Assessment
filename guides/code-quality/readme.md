@@ -18,7 +18,7 @@ Here is an example response:
 {"success":true,"videos":[(...)]}
 ```
 
-Once you do this on the backend you should also change your frontend, to make sure it handles errors that are received. For example if your frontend receives an error like above it might show a message like `"Could not connect to the database, please reload the page at a later time"`.
+Once you do this on the backend you should also change your frontend, to make sure it handles errors that are received. For example if your frontend receives an error like above it might show a message like `"Could not connect to the database, please reload the page at a later time"`. Remember, real users don't look in the console, so you'll need to work how where you want to display this error to the users so they see it.
 
 **Note:** Once you add this feature, make sure you keep handling errors properly during the week 2 and week 3 requirements as well.
 
