@@ -10,16 +10,15 @@ Use the `createdb` command to create a new database called `videorec`:
 createdb videorec
 ```
 
-### Initial Data Load
+### Create tables and load data
 
-Populate the database with initial data:
+Create tables and load the database with initial data:
 
 ```bash
 psql -d videorec < db/initdb.sql
 ```
 
-<details>
-<summary>Let's just parse that command clearly:</summary>
+#### Summary
 
 1. `psql` : Use the PostgreSQL command-line interface.
 2. `-d` : This flag marks the next argument as the database name.
@@ -27,22 +26,13 @@ psql -d videorec < db/initdb.sql
 4. `<` : The following file will be used as input.
 5. `db/initdb.sql` : The path to the SQL file to populate the database.
 
-</details>
-<!-- {{</note>}}>-->
-<hr/>
-<!--{{<note type="tip" title="Connectivity">}}-->
-
 Depending how postgresql was installed for you, you might need to add some connectivity details to both createdb and psql: `psql -h localhost -U username -d videorec < db/initdb.sql` In this example you ask postgres to connect to your local database through localhost and use username as the user.
 
 ##### Check 📝
 
 Double-check the command you just used was successful. What should you expect to see in your local database after running this command.
 
-<!--{{</note>}}>-->
-
 ### Backup your database
-
-<!--{{<note type="activity" title="Backup">}}-->
 
 Now, let's create a compressed archive of your database for safekeeping. Use the `pg_dump` command with the following options:
 
@@ -74,8 +64,6 @@ pg_dump -h localhost -U username videorec > backups/videorec_backup_$(date +"%Y-
 
 - This command incorporates the current date in the filename for easy identification and versioning.
 </details>
-
-<!--{{</note>}}>-->
 
 ### Removing, Re-initializing, and Restoring
 
