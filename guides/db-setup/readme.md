@@ -1,6 +1,6 @@
 # Local database setup ⚙️
 
-## Initiating the Database
+## Initialising the Database
 
 ### Create a local database
 
@@ -40,8 +40,7 @@ Now, let's create a compressed archive of your database for safekeeping. Use the
 pg_dump -h localhost -U username videorec > videorec_backup.sql.gz
 ```
 
-<details>
-<summary>Explanation:</summary>
+##### Explanation
 
 - `pg_dump`: This command is designed specifically for creating PostgreSQL database backups.
 - `-h localhost` (Optional): Specify the host (`localhost` in most cases) if your PostgreSQL installation differs.
@@ -49,12 +48,9 @@ pg_dump -h localhost -U username videorec > videorec_backup.sql.gz
 - `videorec`: This is the name of the database you want to back up.
 - `> videorec_backup.sql.gz`:\*\* This defines the filename and format for the backup. The `>` redirects the output to a file, and `.sql.gz` indicates a gzipped SQL archive.
 
-</details>
-
 **Verification:** Check your terminal or file explorer to confirm the existence of the backup file (`videorec_backup.sql.gz`).
 
-<details>
-<summary>Stretch: Customize Backup Location</summary>
+#### Stretch: Customize Backup Location
 
 - You can modify the output filename and location to suit your preference. For example:
 
@@ -63,7 +59,6 @@ pg_dump -h localhost -U username videorec > backups/videorec_backup_$(date +"%Y-
 ```
 
 - This command incorporates the current date in the filename for easy identification and versioning.
-</details>
 
 ### Removing, Re-initializing, and Restoring
 
