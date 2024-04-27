@@ -4,7 +4,7 @@ const router = Router();
 
 router.get("/videos", async (_, res) => {
 	const result = await db.query("SELECT * FROM videos");
-	console.log(result.rows, "result in api.js----------");
+	console.log(result);
 	res.json(result.rows);
 });
 
