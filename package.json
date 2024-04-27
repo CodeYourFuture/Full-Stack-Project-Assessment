@@ -33,6 +33,7 @@
 		"npm": ">=10"
 	},
 	"dependencies": {
+		"localforage": "^1.10.0",
 		"serverless-http": "^3.2.0"
 	}
 }
