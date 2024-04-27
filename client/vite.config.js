@@ -8,10 +8,6 @@ const serverPort = process.env.SERVER_PORT ?? "3100";
 export default defineConfig({
 	build: {
 		outDir: "../server/static",
-		// adding this by netlify suggestion AI to resolve th deploying error
-		rollupOptions: {
-			external: ["localforage"],
-		},
 	},
 	plugins: [react()],
 	server: {
