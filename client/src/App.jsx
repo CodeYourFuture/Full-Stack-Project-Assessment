@@ -1,5 +1,6 @@
 import { key } from "localforage";
 import { useState, useEffect } from "react";
+import NewVideoForm from "./NewVideoForm";
 
 const App = () => {
 	const [recomVids, setRecomVids] = useState([]);
@@ -29,6 +30,13 @@ const App = () => {
 								{vidObject.title}
 							</a>
 						</p>
+						<iframe
+							width="560"
+							height="315"
+							src={vidObject.src}
+							frameborder="0"
+							allowFullScreen
+						></iframe>
 					</li>
 				))}
 			</ul>
@@ -37,7 +45,17 @@ const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
-
+			<NewVideoForm />
+			<iframe
+				width="560"
+				height="315"
+				src="https://www.youtube.com/embed/DB8vro4PDao?si=kLFTI_UrMOrYQdQL"
+				title="YouTube video player"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allowfullscreen
+			></iframe>
 			<div>{videoDisplayer(recomVids)}</div>
 		</>
 	);
