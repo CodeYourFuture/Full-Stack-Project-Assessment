@@ -23,8 +23,8 @@ const App = () => {
 	const videoDisplayer = (arr) => {
 		return (
 			<ul>
-				{arr.map((vidObject, index) => (
-					<li key={index}>
+				{arr.map((vidObject) => (
+					<li key={vidObject.id}>
 						<p>
 							<a href={vidObject.src} target="_blank">
 								{vidObject.title}
