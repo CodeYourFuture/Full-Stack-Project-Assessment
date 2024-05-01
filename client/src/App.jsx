@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
 
 const App = () => {
-	const [recomVids, setRecomVids] = useState([]);
+	const [recommendedVids, setRecomVids] = useState([]);
 	useEffect(() => {
 		fetchRecommendedVids();
 	}, []);
@@ -31,11 +31,14 @@ const App = () => {
 							</a>
 						</p>
 						<iframe
-							width="560"
+							width="400"
 							height="315"
 							src={vidObject.src}
+							title={vidObject.title}
 							frameborder="0"
-							allowFullScreen
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
 						></iframe>
 					</li>
 				))}
@@ -45,18 +48,14 @@ const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
+
 			<NewVideoForm />
-			<iframe
-				width="560"
-				height="315"
-				src="https://www.youtube.com/embed/DB8vro4PDao?si=kLFTI_UrMOrYQdQL"
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				referrerpolicy="strict-origin-when-cross-origin"
-				allowfullscreen
-			></iframe>
+			
 			<div>{videoDisplayer(recomVids)}</div>
+
+
+			<div>{videoDisplayer(recommendedVids)}</div>
+
 		</>
 	);
 };
