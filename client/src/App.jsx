@@ -2,7 +2,7 @@ import { key } from "localforage";
 import { useState, useEffect } from "react";
 
 const App = () => {
-	const [recomVids, setRecomVids] = useState([]);
+	const [recommendedVids, setRecomVids] = useState([]);
 	useEffect(() => {
 		fetchRecommendedVids();
 	}, []);
@@ -29,6 +29,16 @@ const App = () => {
 								{vidObject.title}
 							</a>
 						</p>
+						<iframe
+							width="400"
+							height="315"
+							src={vidObject.src}
+							title={vidObject.title}
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
 					</li>
 				))}
 			</ul>
@@ -38,7 +48,7 @@ const App = () => {
 		<>
 			<h1>Video Recommendations</h1>
 
-			<div>{videoDisplayer(recomVids)}</div>
+			<div>{videoDisplayer(recommendedVids)}</div>
 		</>
 	);
 };
