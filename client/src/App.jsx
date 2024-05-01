@@ -50,12 +50,7 @@ const App = () => {
 			<h1>Video Recommendations</h1>
 
 			<NewVideoForm />
-			
-			<div>{videoDisplayer(recomVids)}</div>
-
-
 			<div>{videoDisplayer(recommendedVids)}</div>
-
 		</>
 	);
 };
