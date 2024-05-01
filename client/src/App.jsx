@@ -1,5 +1,6 @@
 import { key } from "localforage";
 import { useState, useEffect } from "react";
+import NewVideoForm from "./NewVideoForm";
 
 const App = () => {
 	const [recommendedVids, setRecomVids] = useState([]);
@@ -22,8 +23,8 @@ const App = () => {
 	const videoDisplayer = (arr) => {
 		return (
 			<ul>
-				{arr.map((vidObject, index) => (
-					<li key={index}>
+				{arr.map((vidObject) => (
+					<li key={vidObject.id}>
 						<p>
 							<a href={vidObject.src} target="_blank">
 								{vidObject.title}
@@ -48,7 +49,13 @@ const App = () => {
 		<>
 			<h1>Video Recommendations</h1>
 
+			<NewVideoForm />
+			
+			<div>{videoDisplayer(recomVids)}</div>
+
+
 			<div>{videoDisplayer(recommendedVids)}</div>
+
 		</>
 	);
 };
