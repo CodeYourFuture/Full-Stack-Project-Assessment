@@ -9,7 +9,6 @@ const DeleteVideobutton = ({ idToDelete, fetchRecommendedVids }) => {
 				method: "DELETE",
 			});
 			if (response.ok) {
-				console.log(response, "this is response");
 				setdeletionstatus("Deleted!");
 				fetchRecommendedVids();
 			}

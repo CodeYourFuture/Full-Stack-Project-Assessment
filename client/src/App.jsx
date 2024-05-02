@@ -51,10 +51,6 @@ const App = () => {
 							idToDelete={vidObject.id}
 							fetchRecommendedVids={fetchRecommendedVids}
 						/>
-						{console.log(
-							recommendedVids,
-							"this is recomVids inside the componenet"
-						)}
 					</li>
 				))}
 			</ul>

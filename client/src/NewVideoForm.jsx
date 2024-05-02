@@ -6,7 +6,6 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 
 	// Example POST method implementation:
 	async function PostNewVideo(url = "", postedVideo = {}) {
-		console.log({ titleFromInput, srcFromInput }, "object to be fetched");
 		try {
 			const response = await fetch(url, {
 				method: "POST",
@@ -25,7 +24,6 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 				addNewVideoToRecommended(postedVideo);
 				setSrcFromInput("");
 				setTitleFromInput("");
-				console.log("successful!");
 			} else {
 				// Handle other response statuses
 				console.error("Failed to insert new video:", response.statusText);
@@ -75,7 +73,6 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 				></input>
 				<button type="submit">Add it!</button>
 			</form>
-			{console.log(titleFromInput, srcFromInput, "<------titel and src")}
 		</>
 	);
 }
