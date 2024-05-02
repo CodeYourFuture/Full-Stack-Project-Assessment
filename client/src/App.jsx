@@ -1,6 +1,7 @@
 import { key } from "localforage";
 import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
+import DeleteVideobutton from "./DeleteVideoButton";
 
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
@@ -13,7 +14,7 @@ const App = () => {
 		try {
 			const response = await fetch("/api/videos");
 			const data = await response.json();
-			console.log(data, "<---------data");
+
 			setRecommendedVids(data);
 		} catch (error) {
 			console.error(error, "For fetch of vids");
@@ -40,6 +41,15 @@ const App = () => {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
+
+						<DeleteVideobutton
+							idToDelete={vidObject.id}
+							fetchRecommendedVids={fetchRecommendedVids}
+						/>
+						{console.log(
+							recommendedVids,
+							"this is recomVids inside the componenet"
+						)}
 					</li>
 				))}
 			</ul>
