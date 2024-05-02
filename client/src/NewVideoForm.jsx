@@ -37,7 +37,7 @@ function NewVideoForm() {
 		//This line will return the id of utube link
 		const id = url.split("?v=")[1];
 		//Link for being embded
-		return "http://www.youtube.com/embed/" + id;
+		return "https://www.youtube.com/embed/" + id;
 	}
 
 	const handleSubmit = (e) => {
