@@ -21,6 +21,11 @@ const App = () => {
 		}
 	};
 
+	// This function should update recommendedVids with the new video Posted through fetch in NewVideoForm Comp
+	const addNewVideoToRecommended = (newVideo) => {
+		setRecommendedVids([...recommendedVids, newVideo]);
+	};
+
 	const videoDisplayer = (arr) => {
 		return (
 			<ul>
@@ -58,7 +63,7 @@ const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
-			<NewVideoForm />
+			<NewVideoForm addNewVideoToRecommended={addNewVideoToRecommended} />
 			<div>{videoDisplayer(recommendedVids)}</div>
 		</>
 	);
