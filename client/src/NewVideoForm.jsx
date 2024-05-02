@@ -23,6 +23,8 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 
 			if (response.ok) {
 				addNewVideoToRecommended(postedVideo);
+				setSrcFromInput("");
+				setTitleFromInput("");
 				console.log("successful!");
 			} else {
 				// Handle other response statuses
