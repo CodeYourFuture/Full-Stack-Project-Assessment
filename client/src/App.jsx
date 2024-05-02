@@ -24,7 +24,7 @@ const App = () => {
 		return (
 			<ul>
 				{arr.map((vidObject) => (
-					<li key={vidObject.Id}>
+					<li key={vidObject.id}>
 						<p>
 							<a href={vidObject.src} target="_blank">
 								{vidObject.title}
