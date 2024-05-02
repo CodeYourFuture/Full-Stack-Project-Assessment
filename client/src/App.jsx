@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
 
 const App = () => {
-	const [recommendedVids, setRecomVids] = useState([]);
+	const [recommendedVids, setRecommendedVids] = useState([]);
 	useEffect(() => {
 		fetchRecommendedVids();
 	}, []);
@@ -14,7 +14,7 @@ const App = () => {
 			const response = await fetch("/api/videos");
 			const data = await response.json();
 			console.log(data, "<---------data");
-			setRecomVids(data);
+			setRecommendedVids(data);
 		} catch (error) {
 			console.error(error, "For fetch of vids");
 		}
@@ -24,7 +24,7 @@ const App = () => {
 		return (
 			<ul>
 				{arr.map((vidObject) => (
-					<li key={vidObject.id}>
+					<li key={vidObject.Id}>
 						<p>
 							<a href={vidObject.src} target="_blank">
 								{vidObject.title}
@@ -35,10 +35,10 @@ const App = () => {
 							height="315"
 							src={vidObject.src}
 							title={vidObject.title}
-							frameborder="0"
+							frameBorder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							referrerpolicy="strict-origin-when-cross-origin"
-							allowfullscreen
+							referrerPolicy="strict-origin-when-cross-origin"
+							allowFullScreen
 						></iframe>
 					</li>
 				))}
@@ -48,9 +48,7 @@ const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
-
 			<NewVideoForm />
-
 			<div>{videoDisplayer(recommendedVids)}</div>
 		</>
 	);
