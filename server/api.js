@@ -3,8 +3,15 @@ import db from "./db.js";
 const router = Router();
 
 router.get("/videos", async (_, res) => {
-	const result = await db.query("SELECT * FROM videos");
-	res.json(result.rows);
+	try {
+		const result = await db.query("SELECT * FROM videos");
+		res.json(result.rows);
+	} catch (error) {
+		console.error("Error happened while getting videos: " + error);
+		res
+			.status(500)
+			.json({ success: false, error: "Could not connect to the database" });
+	}
 });
 
 router.post("/videos", async (req, res) => {
