@@ -52,7 +52,6 @@ const App = () => {
 			<NewVideoForm />
 
 			<div>{videoDisplayer(recommendedVids)}</div>
-
 		</>
 	);
 };
