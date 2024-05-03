@@ -18,10 +18,12 @@ router.post("/videos", async (req, res) => {
 	try {
 		const { title, src } = req.body;
 		const newVideo = await db.query(
-			"INSERT INTO videos (title, src) VALUES ($1, $2)",
+			"INSERT INTO videos (title, src) VALUES ($1, $2) RETURNING *",
 			[title, src]
 		);
-		res.status(200).send("New Video Inserted Successfully");
+		const insertedVideo = newVideo.rows[0];
+
+		res.status(200).json(insertedVideo);
 	} catch (error) {
 		console.error("Error during insertion into DB:", error.message);
 		res.status(500).send("Error during insertion: " + error.message);

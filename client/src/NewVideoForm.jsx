@@ -1,12 +1,11 @@
 import { React, useState, useEffect } from "react";
 
-function NewVideoForm() {
+function NewVideoForm({ addNewVideoToRecommended }) {
 	const [titleFromInput, setTitleFromInput] = useState("");
 	const [srcFromInput, setSrcFromInput] = useState("");
 
 	// Example POST method implementation:
-	async function PostNewVideo(url = "", data = {}) {
-		console.log({ titleFromInput, srcFromInput }, "object to be fetched");
+	async function PostNewVideo(url = "", postedVideo = {}) {
 		try {
 			const response = await fetch(url, {
 				method: "POST",
@@ -18,11 +17,14 @@ function NewVideoForm() {
 				},
 				redirect: "follow",
 				referrerPolicy: "no-referrer",
-				body: JSON.stringify(data),
+				body: JSON.stringify(postedVideo),
 			});
 
 			if (response.ok) {
-				console.log("successful!");
+				const data = await response.json();
+				addNewVideoToRecommended(data);
+				setSrcFromInput("");
+				setTitleFromInput("");
 			} else {
 				// Handle other response statuses
 				console.error("Failed to insert new video:", response.statusText);
@@ -72,7 +74,6 @@ function NewVideoForm() {
 				></input>
 				<button type="submit">Add it!</button>
 			</form>
-			{console.log(titleFromInput, srcFromInput, "<------titel and src")}
 		</>
 	);
 }
