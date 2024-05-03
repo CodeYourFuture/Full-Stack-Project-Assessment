@@ -21,7 +21,9 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 			});
 
 			if (response.ok) {
-				addNewVideoToRecommended(postedVideo);
+				const data = await response.json();
+				console.log(data, "this is data for new video");
+				addNewVideoToRecommended(data);
 				setSrcFromInput("");
 				setTitleFromInput("");
 			} else {
