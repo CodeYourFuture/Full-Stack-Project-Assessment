@@ -1,11 +1,7 @@
-[build]
-  publish = "server/static"
-  command = "npm run build"
 [functions]
   directory = "server/functions"
   external_node_modules = ["express"]
   node_bundler = "esbuild"
-  included_files = ["db/initdb.sql"]
 [[redirects]]
   force = true
   from = "/api/*"
