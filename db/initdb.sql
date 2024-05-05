@@ -19,3 +19,6 @@ INSERT INTO videos (title, src) VALUES ('Coding Adventure: Ant and Slime Simulat
 INSERT INTO videos (title, src) VALUES ('Why the Tour de France is so brutal', 'https://www.youtube.com/watch?v=ZacOS8NBK6U');
 
 -- you can insert more rows using example data from the example_data.csv file
+--postgres://postgres.eileyhpjamfueembksor:[Full-Stack-Project-Assessment]@aws-0-us-west-1.pooler.supabase.com:5432/postgres
+--psql -h aws-0-us-west-1.pooler.supabase.com -U postgres.eileyhpjamfueembksor postgres
+--password:Full-Stack-Project-Assessment
