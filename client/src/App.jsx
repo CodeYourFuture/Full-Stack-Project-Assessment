@@ -1,9 +1,63 @@
+import React from 'react';
+
 const App = () => {
-	return (
-		<>
-			<h1>Video Recommendations</h1>
-		</>
-	);
+    const videoRecommendations = [
+        {
+            title: 'Never Gonna Give You Up',
+            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        },
+        {
+            title: 'The Coding Train',
+            url: 'https://www.youtube.com/user/shiffman',
+        },
+        {
+            title: 'Mac & Cheese | Basics with Babish',
+            url: 'https://www.youtube.com/watch?v=8QczZFekHWM',
+        },
+        {
+            title: 'Videos for Cats to Watch - 8 Hour Bird Bonanza',
+            url: 'https://www.youtube.com/watch?v=XmfVuiVe5Ag',
+        },
+        {
+            title: 'The Complete London 2012 Opening Ceremony | London 2012 Olympic Games',
+            url: 'https://www.youtube.com/watch?v=CW839LDfWyo',
+        },
+        {
+            title: 'Learn Unity - Beginner\'s Game Development Course',
+            url: 'https://www.youtube.com/watch?v=gB1F9G0JXOc',
+        },
+        {
+            title: 'Cracking Enigma in 2021 - Computerphile',
+            url: 'https://www.youtube.com/watch?v=G2_Q9FoD-oQ',
+        },
+        {
+            title: 'Coding Adventure: Chess AI',
+            url: 'https://www.youtube.com/watch?v=U4ogK0MIzqk',
+        },
+        {
+            title: 'Coding Adventure: Ant and Slime Simulations',
+            url: 'https://www.youtube.com/watch?v=X-iSQQgOd1A',
+        },
+        {
+            title: 'Why the Tour de France is so brutal',
+            url: 'https://www.youtube.com/watch?v=jdKgvRwEh2M',
+        },
+    ];
+
+    return (
+        <>
+            <h1>Video Recommendations</h1>
+            <ul>
+                {videoRecommendations.map((recommendation, index) => (
+                    <li key={index}>
+                        <a href={recommendation.url} target="_blank" rel="noopener noreferrer">
+                            {recommendation.title}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
 };
 
 export default App;
