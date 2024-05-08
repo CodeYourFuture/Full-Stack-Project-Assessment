@@ -7,4 +7,8 @@ router.get("/videos", async (_, res) => {
 	res.json(result.rows[0]);
 });
 
+router.get("/health", (_, res) => {
+	res.json({ status: "ok" });
+})
+
 export default router;
