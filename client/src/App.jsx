@@ -12,19 +12,19 @@ const App = () => {
         },
         {
             title: 'Mac & Cheese | Basics with Babish',
-            url: 'https://www.youtube.com/watch?v=8QczZFekHWM',
+            url: 'https://youtu.be/FUeyrEN14Rk?si=UmIISITXWdBW2IY7',
         },
         {
             title: 'Videos for Cats to Watch - 8 Hour Bird Bonanza',
-            url: 'https://www.youtube.com/watch?v=XmfVuiVe5Ag',
+            url: 'https://youtu.be/xbs7FT7dXYc?si=j4zmi_NG69fKWO8O',
         },
         {
             title: 'The Complete London 2012 Opening Ceremony | London 2012 Olympic Games',
-            url: 'https://www.youtube.com/watch?v=CW839LDfWyo',
+            url: 'https://www.youtube.com/live/4As0e4de-rI?si=B5vtQi29ckN7PK95',
         },
         {
             title: 'Learn Unity - Beginner\'s Game Development Course',
-            url: 'https://www.youtube.com/watch?v=gB1F9G0JXOc',
+            url: 'https://youtu.be/gB1F9G0JXOo?si=xfnEQ1_3lIjvxx6c',
         },
         {
             title: 'Cracking Enigma in 2021 - Computerphile',
@@ -40,7 +40,7 @@ const App = () => {
         },
         {
             title: 'Why the Tour de France is so brutal',
-            url: 'https://www.youtube.com/watch?v=jdKgvRwEh2M',
+            url: 'https://youtu.be/ZacOS8NBK6U?si=5zoBp8L-FN9-0FBt',
         },
     ];
 
