@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/api", apiRouter);
 
 // health-check call will help during deployment determine if the system has been deployed successfully
-app.use("/health", (_, res) => res.sendStatus(200));
+app.use("/api/health", (_, res) => res.sendStatus(200));
 
 // everything that is not an API call is likely the frontend react app, so make sure we route the frontend app there.
 // This will allow us to access the React frontend on the same link as the backend.
