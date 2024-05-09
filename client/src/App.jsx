@@ -2,6 +2,7 @@ import { key } from "localforage";
 import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
 import DeleteVideobutton from "./DeleteVideoButton";
+import "./style.css";
 
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
@@ -28,14 +29,14 @@ const App = () => {
 
 	const videoDisplayer = (arr) => {
 		return (
-			<ul>
+			<ul id="videos">
 				{arr.map((vidObject) => (
-					<li key={vidObject.id}>
-						<p>
+					<li key={vidObject.id} className="video">
+						<h2>
 							<a href={vidObject.src} target="_blank">
 								{vidObject.title}
 							</a>
-						</p>
+						</h2>
 						<iframe
 							width="400"
 							height="315"
