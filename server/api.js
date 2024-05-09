@@ -38,10 +38,10 @@ router.delete("/videos/:id", async (req, res) => {
 		]);
 		if (deletedVideo.rowCount === 0) {
 			console.log("not found to delete");
-			res.status(404).json({ success: false, error: "Video not found" });
+			res.status(404).json({ success: false, status: "Video not found" });
 		} else {
 			console.log("succ. deleted");
-			res.status(204).send();
+			res.status(200).json();
 		}
 	} catch (error) {
 		console.error("This is the error happened: " + error);
