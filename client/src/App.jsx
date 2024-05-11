@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
 import DeleteVideobutton from "./DeleteVideoButton";
 import "./style.css";
-
+import VotingButtons from "./VotingButtons";
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
+
+	//setting this state to counts likes
+	const [likeCounter, setlikeCounter] = useState(0);
+
 	useEffect(() => {
 		fetchRecommendedVids();
 	}, []);
@@ -47,11 +51,13 @@ const App = () => {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
-
-						<DeleteVideobutton
-							idToDelete={vidObject.id}
-							fetchRecommendedVids={fetchRecommendedVids}
-						/>
+						<div>
+							<DeleteVideobutton
+								idToDelete={vidObject.id}
+								fetchRecommendedVids={fetchRecommendedVids}
+							/>
+							<VotingButtons />
+						</div>
 					</li>
 				))}
 			</ul>
