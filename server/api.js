@@ -4,7 +4,7 @@ const router = Router();
 
 router.get("/videos", async (_, res) => {
 	const result = await db.query("SELECT * FROM videos");
-	res.json(result.rows[0]);
+	res.json(result.rows);
 });
 
 router.get("/health", (_, res) => {
