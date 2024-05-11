@@ -1,7 +1,7 @@
 const App = () => {
 	return (
 		<>
-			<h1>Video Recommendations Changed</h1>
+			<h1>Video Recommendations</h1>
 		</>
 	);
 };
