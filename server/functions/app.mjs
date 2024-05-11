@@ -14,10 +14,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/", apiRouter);
 
 app.get("/health", (req, res) => {
 	res.status(200).send("OK");
 });
+
+app.use("/api/", apiRouter);
 
 export const handler = serverless(app);
