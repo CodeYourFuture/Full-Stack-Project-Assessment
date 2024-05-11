@@ -16,4 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/", apiRouter);
 
+app.get("/health", (req, res) => {
+	res.status(200).send("OK");
+});
+
 export const handler = serverless(app);
