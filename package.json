@@ -46,6 +46,7 @@
 		"npm": ">=10"
 	},
 	"dependencies": {
+		"cors": "^2.8.5",
 		"serverless-http": "^3.2.0"
 	}
 }
