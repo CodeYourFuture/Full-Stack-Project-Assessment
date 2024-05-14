@@ -15,4 +15,4 @@
   force = true
   from = "/health/*"
   status = 200
-  to = "/.netlify/functions/health-check/:splat/"
+  to = "/.netlify/functions/app/:splat"
