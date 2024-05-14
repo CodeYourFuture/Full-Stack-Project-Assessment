@@ -8,6 +8,7 @@
 import express from "express";
 import serverless from "serverless-http";
 import apiRouter from "../api.js";
+import healthCheckRouter from "./healthCheck.mjs";
 import cors from "cors";
 
 const app = express();
@@ -15,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", (_, res) => res.sendStatus(200));
+app.use("/health", healthCheckRouter);
 
 app.use("/api/", apiRouter);
 
