@@ -21,6 +21,7 @@
 	"devDependencies": {
 		"dotenv": "16.3.2",
 		"jest": "^29.7.0",
+		"nodemon": "^3.1.0",
 		"pg-transactional-tests": "^1.0.8",
 		"supertest": "^6.3.3"
 	},
