@@ -33,7 +33,7 @@
 		"eslint-plugin-react-hooks": "^4.6.2",
 		"eslint-plugin-react-refresh": "^0.4.7",
 		"eslint-plugin-testing-library": "^6.2.2",
-		"eslint-plugin-vitest": "^0.5.4",
+		"eslint-plugin-vitest": "^v0.4.1",
 		"prettier": "^3.2.5"
 	},
 	"workspaces": [
