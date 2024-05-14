@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/health", (_, res) => res.sendStatus(200));
+app.get("/health", (_, res) => res.sendStatus(200));
 
 app.use("/api/", apiRouter);
 
