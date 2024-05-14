@@ -13,6 +13,6 @@
   to = "/.netlify/functions/app/:splat"
 [[redirects]]
   force = true
-  from = "/health"
+  from = "/health/*"
   status = 200
-  to = "/.netlify/functions/app/"
+  to = "/.netlify/functions/health-check/:splat/"
