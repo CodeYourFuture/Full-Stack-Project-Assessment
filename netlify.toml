@@ -8,11 +8,11 @@
   included_files = ["db/initdb.sql"]
 [[redirects]]
   force = true
-  from = "/api/*"
+  from = "/health/*"
   status = 200
   to = "/.netlify/functions/app/:splat"
 [[redirects]]
   force = true
-  from = "/health/*"
+  from = "/api/*"
   status = 200
   to = "/.netlify/functions/app/:splat"
