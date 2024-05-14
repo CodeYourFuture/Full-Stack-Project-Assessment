@@ -11,8 +11,3 @@
   from = "/health/*"
   status = 200
   to = "/.netlify/functions/app/:splat"
-[[redirects]]
-  force = true
-  from = "/api/*"
-  status = 200
-  to = "/.netlify/functions/app/:splat"
