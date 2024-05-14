@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/status", (_, res) => {
+router.get("/status", async (_, res) => {
 	res.status(200).send("ok");
 });
 
