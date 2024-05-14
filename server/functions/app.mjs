@@ -8,7 +8,7 @@
 import express from "express";
 import serverless from "serverless-http";
 import apiRouter from "../api.js";
-import healthCheckRouter from "../health-check.js";
+import healthCheckRouter from "../health.js";
 import cors from "cors";
 
 const app = express();
