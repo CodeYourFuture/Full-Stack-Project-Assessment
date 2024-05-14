@@ -2,9 +2,8 @@ import { Router } from "express";
 
 const router = Router();
 
-// Health check route
 router.get("/status", (_, res) => {
-	res.sendStatus(200);
+	res.status(200).send("ok");
 });
 
 export default router;
