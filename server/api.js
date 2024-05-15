@@ -25,11 +25,10 @@ router.get("/videos", async (_, res) => {
 router.post("/videos", async (req, res) => {
 	const { title, url } = req.body;
 	const addVideoInDatabase = await db.query("INSERT INTO videos (title, src) VALUES ($1, $2) RETURNING *", [title, url]);
-	const videoAdded = await db.query("SELECT * FROM videos WHERE src = $1", [url]);
 	res.json({
 		success: true,
 		status: 201,
-		data: videoAdded.rows[0],
+		data: addVideoInDatabase.rows[0],
 	});
 })
 
