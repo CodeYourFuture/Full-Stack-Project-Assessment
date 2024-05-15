@@ -6,7 +6,7 @@
 	"type": "module",
 	"main": "server.js",
 	"scripts": {
-		"dev": "node server.js",
+		"dev": "node --watch server.js",
 		"test": "NODE_OPTIONS='--experimental-vm-modules' jest"
 	},
 	"keywords": [],
