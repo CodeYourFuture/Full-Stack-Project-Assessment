@@ -13,10 +13,6 @@ router.get("/videos", async (_, res) => {
 	}
 });
 
-router.get("/health", async (_, res) => {
-	res.sendStatus(200);
-});
-
 router.post("/videos", async (req, res) => {
 	if (!req.body.title) {
 		return res.status(422).json({ message: "Title field is required" });

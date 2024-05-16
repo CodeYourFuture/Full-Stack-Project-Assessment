@@ -6,9 +6,12 @@ import { fileURLToPath } from "node:url";
 const app = express();
 
 app.use(express.json());
+
 // api calls are all under /api and are handled in api.js
 app.use("/api", apiRouter);
-
+app.use("/health", async (_, res) => {
+	res.sendStatus(200);
+});
 // everything that is not an API call is likely the frontend react app, so make sure we route the frontend app there.
 // This will allow us to access the React frontend on the same link as the backend.
 
