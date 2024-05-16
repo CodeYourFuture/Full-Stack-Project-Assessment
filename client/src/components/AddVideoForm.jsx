@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./AddVideoForm.css";
 
 export function AddVideoForm() {
 	const [isAddingVideo, setIsAddingVideo] = useState(false);
@@ -36,7 +37,12 @@ export function AddVideoForm() {
 		<form onSubmit={addVideoHandler}>
 			<input type="text" name="title" placeholder="Title" />
 			<input type="text" name="url" placeholder="URL" />
-			<button type="submit">
+			<button
+				id="addVideoButton"
+				type="submit"
+				className={isAddingVideo ? "adding-video" : ""}
+				disabled={isAddingVideo}
+			>
 				{isAddingVideo ? "Adding Video..." : "Add Video"}
 			</button>
 		</form>
