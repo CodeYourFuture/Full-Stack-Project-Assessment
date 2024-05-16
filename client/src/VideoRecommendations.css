@@ -1,0 +1,29 @@
+:root {
+	max-width: 95%;
+	margin: auto;
+}
+
+.video-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 20px;
+}
+
+.video {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	font-family: Arial, sans-serif;
+}
+
+a {
+	color: #007bff;
+	text-decoration: none;
+	font-family: Arial, sans-serif;
+	margin-bottom: 20px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
