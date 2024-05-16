@@ -2,16 +2,16 @@
 	{
 		"id": 1,
 		"title": "Never Gonna Give You Up",
-		"url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+		"src": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 	},
 	{
 		"id": 2,
 		"title": "The Coding Train",
-		"url": "https://www.youtube.com/watch?v=HerCR8bw_GE"
+		"src": "https://www.youtube.com/watch?v=HerCR8bw_GE"
 	},
 	{
 		"id": 3,
 		"title": "Mac & Cheese | Basics with Babish",
-		"url": "https://www.youtube.com/watch?v=FUeyrEN14Rk"
+		"src": "https://www.youtube.com/watch?v=FUeyrEN14Rk"
 	}
 ]
