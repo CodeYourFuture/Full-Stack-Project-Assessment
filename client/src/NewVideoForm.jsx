@@ -1,3 +1,4 @@
+import "./NewVideoForm.css";
 const NewVideoForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
