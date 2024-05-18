@@ -1,11 +1,12 @@
-import React from "react";
 import NewVideoForm from "./NewVideoForm.jsx";
+import VideoList from "./VideoRecommendations";
 
 const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
-			<NewVideoForm />
+    	<VideoList />
+       <NewVideoForm />
 		</>
 	);
 };
