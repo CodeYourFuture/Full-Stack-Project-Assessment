@@ -31,5 +31,8 @@
 	"engines": {
 		"node": "^20.6",
 		"npm": ">=10"
+	},
+	"dependencies": {
+		"serverless-http": "^3.2.0"
 	}
 }
