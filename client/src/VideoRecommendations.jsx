@@ -26,8 +26,14 @@ const VideoList = () => {
 			{videos.map((videoData, i) => (
 				<div className="video" data-testid="video" key={i}>
 					<div>
-						{/* <a>{videoData.title}</a> */}
-						<a href={videoData.src}>{videoData.title}</a>
+						<iframe
+							title={videoData.title}
+							width="560"
+							height="315"
+							src={`https://www.youtube.com/embed/${videoData.src}`}
+							frameBorder="0"
+							allowFullScreen
+						></iframe>
 					</div>
 				</div>
 			))}
