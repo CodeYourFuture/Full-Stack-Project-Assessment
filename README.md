@@ -51,4 +51,4 @@ While you are free to use this codebase for your future projects we recommend ag
 
 For launch projects and future portfolio pieces, look at the [Code Your Future Starter Kit](https://github.com/CodeYourFuture/cyf-final-project-starter-kit). This assessment project is a simplified version of the starter kit, with a lot of the features removed to keep it light and more understandable. In fact, some of the challenges in this project are to re-add these features yourself, like support for linting.
 
-Since these features will already be present in the starter kit, it will be a much better starting point. And since it uses the same libraries and setup that you will learn here, you should feel immediately familiar with it. 
+Since these features will already be present in the starter kit, it will be a much better starting point. And since it uses the same libraries and setup that you will learn here, you should feel immediately familiar with it.

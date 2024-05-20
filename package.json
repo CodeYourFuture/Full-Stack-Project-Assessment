@@ -14,14 +14,28 @@
 		"test:server": "npm --workspace server test",
 		"test:e2e": "npm --workspace e2e test",
 		"test:e2e:ui": "npm --workspace e2e run test:ui",
-		"test:e2e:headed": "npm --workspace e2e run test:headed"
+		"test:e2e:headed": "npm --workspace e2e run test:headed",
+		"prettier": "prettier --write .",
+		"eslint": "npm exec eslint ."
 	},
 	"author": "Code Your Future <mail@codeyourfuture.io>",
 	"license": "ISC",
 	"devDependencies": {
 		"@codeyourfuture/eslint-config-standard": "^4.0.3",
 		"concurrently": "^8.2.2",
-		"cross-env": "^7.0.3"
+		"cross-env": "^7.0.3",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-jest": "^28.5.0",
+		"eslint-plugin-jest-dom": "^5.4.0",
+		"eslint-plugin-jsx-a11y": "^6.8.0",
+		"eslint-plugin-n": "^17.7.0",
+		"eslint-plugin-react": "^7.34.1",
+		"eslint-plugin-react-hooks": "^4.6.2",
+		"eslint-plugin-react-refresh": "^0.4.7",
+		"eslint-plugin-testing-library": "^6.2.2",
+		"eslint-plugin-vitest": "^0.4.1",
+		"prettier": "^3.2.5"
 	},
 	"workspaces": [
 		"client",
