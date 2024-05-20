@@ -1,6 +1,6 @@
 /* CSS for NewVideoForm component */
 div {
-	max-width: 500px;
+	max-width: fit-content;
 	margin: 0 auto;
 	padding: 20px;
 	border: 1px solid #ccc;
@@ -17,13 +17,12 @@ h2 {
 
 form {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	gap: 15px;
 }
 
 div > div {
-	display: flex;
-	flex-direction: column;
+	flex-grow: 1; /* Allow elements to grow equally to fit the container */
 }
 
 label {
@@ -33,6 +32,7 @@ label {
 }
 
 input {
+	width: 100%; /* Make inputs fill the available space */
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -40,6 +40,7 @@ input {
 }
 
 button {
+	width: 100%; /* Make button fill the available space */
 	padding: 10px 20px;
 	border: none;
 	border-radius: 5px;
