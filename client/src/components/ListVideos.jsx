@@ -22,7 +22,7 @@ function ListVideos() {
 			<ul>
 				{videos.map((video, index) => (
 					<li key={index}>
-						<a href={video.src}>{video.title}</a>
+						<a href={video.url}>{video.title}</a>
 					</li>
 				))}
 			</ul>
