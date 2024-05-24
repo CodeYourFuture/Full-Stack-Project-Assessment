@@ -14,7 +14,7 @@ export default defineConfig({
 		port: process.env.PORT,
 		proxy: {
 			"/api": `http://localhost:${serverPort}`,
-			"/healthz": `http://localhost:${serverPort}`,
+			"/health": `http://localhost:${serverPort}`,
 		},
 	},
 	test: {
