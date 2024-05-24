@@ -1,44 +1,60 @@
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 60vw;
-  max-width: 650px;
-  min-width: 450px;
-  margin: 0 auto;
+:root {
+	--addVideoButton-clr: #0c6901;
+	--addVideoButton-clr-hover: #1ab31f;
+	--addVideoButton-clr-loading: #8dc0ad;
 
-  background-color: #e0e0e0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+	--form-background: #e0e0e0;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 60vw;
+	max-width: 650px;
+	min-width: 450px;
+	margin: 0 auto;
+
+	background-color: var(--form-background);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 input {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 #addVideoButton {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #00b106;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--addVideoButton-clr);
+	color: white;
+	cursor: pointer;
+	font-size: 1rem;
+
+	transition: all 0.1s ease-in-out;
 }
 
-#addVideoButton:hover, button:active {
-  background-color: #00cd07;
+#addVideoButton:hover,
+#addVideoButton:active,
+#addVideoButton:focus {
+	background-color: var(--addVideoButton-clr-hover);
+	transform: scale(1.02);
+	transition: all 0.1s ease-in-out;
 }
 
 #addVideoButton.adding-video {
-  background-color: #8dc0ad;
-  cursor: not-allowed;
+	background-color: var(--addVideoButton-clr-loading);
+	cursor: not-allowed;
 }
 
-#addVideoButton.adding-video:hover, button.adding-video:active {
-  background-color: #8dc0ad;
+#addVideoButton.adding-video:hover,
+#addVideoButton.adding-video:active,
+#addVideoButton.adding-video:focus {
+	background-color: var(--addVideoButton-clr-loading);
 }
