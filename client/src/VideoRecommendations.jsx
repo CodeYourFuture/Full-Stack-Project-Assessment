@@ -21,24 +21,35 @@ const VideoList = () => {
 			});
 	}, []);
 
+	function changeYTLinkToEmbed(watchLink) {
+		const embedLink = watchLink.replace("watch?v=", "embed/");
+		return embedLink;
+	}
+
 	return (
 		<div className="video-list">
-			{videos.map((videoData, i) => (
-				<div className="video" data-testid="video" key={i}>
-					<div>
-						<iframe
-							title={videoData.title}
-							width="560"
-							height="315"
-							src={`https://www.youtube.com/embed/${videoData.src}`}
-							frameBorder="0"
-							allowFullScreen
-						></iframe>
+			{videos.map((videoData, i) => {
+				const embededLink = changeYTLinkToEmbed(videoData.src);
+				return (
+					<div className="video" data-testid="video" key={i}>
+						<div>
+							<iframe
+								title={videoData.title}
+								width="560"
+								height="315"
+								src={embededLink}
+								frameBorder="0"
+								allowFullScreen
+							></iframe>
+						</div>
 					</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
+	() => {
+		return askxjsnj;
+	};
 };
 
 export default VideoList;
