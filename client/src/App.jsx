@@ -31,6 +31,33 @@ const App = () => {
 		setRecommendedVids([...recommendedVids, newVideo]);
 	};
 
+	const updateVideoVotes = async (videoId, vote) => {
+		try {
+			const response = await fetch(`/api/videos/${videoId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ vote }),
+			});
+
+			if (response.ok) {
+				const updatedVideo = await response.json();
+				console.log(updatedVideo, "data back from server");
+
+				setRecommendedVids((prevVids) =>
+					prevVids.map((vid) =>
+						vid.id === videoId ? { ...vid, votes: updatedVideo.votes } : vid
+					)
+				);
+			} else {
+				console.error("Failed to update votes");
+			}
+		} catch (error) {
+			console.error("Error updating votes:", error);
+		}
+	};
+
 	const videoDisplayer = (arr) => {
 		return (
 			<ul id="videos">
@@ -56,13 +83,18 @@ const App = () => {
 								idToDelete={vidObject.id}
 								fetchRecommendedVids={fetchRecommendedVids}
 							/>
-							<VotingButtons />
+							<VotingButtons
+								videoId={vidObject.id}
+								updateVideoVotes={updateVideoVotes}
+								votes={vidObject.votes}
+							/>
 						</div>
 					</li>
 				))}
 			</ul>
 		);
 	};
+
 	return (
 		<>
 			<h1>Video Recommendations</h1>

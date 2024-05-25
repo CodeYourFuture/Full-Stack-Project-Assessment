@@ -1,13 +1,21 @@
 import React from "react";
-import { useEffect, useState } from "react";
 
-function VotingButtons() {
+const VotingButtons = ({ videoId, updateVideoVotes, votes }) => {
+	const handleVoteUp = () => {
+		updateVideoVotes(videoId, 1);
+	};
+
+	const handleVoteDown = () => {
+		updateVideoVotes(videoId, -1);
+	};
+
 	return (
 		<>
-			<button>Vote Up</button>
-			<button>Vote Down</button>
+			<button onClick={handleVoteUp}>Vote Up</button>
+			<button onClick={handleVoteDown}>Vote Down</button>
+			<p>Votes: {votes}</p>
 		</>
 	);
-}
+};
 
 export default VotingButtons;
