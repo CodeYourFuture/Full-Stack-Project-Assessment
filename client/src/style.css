@@ -29,3 +29,37 @@ li>button{
     margin-top: .5rem;
     height: 2rem;
 }
+
+#like-holder{
+    font-size: 2rem;
+}
+
+
+#heart-icon{
+    
+    color: red;
+}
+
+
+
+.vote-button-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.vote-button {
+    font-size: 40px;
+    /* Adjust size as needed */
+    margin: 0 10px;
+    /* Adjust spacing as needed */
+    cursor: pointer;
+    /* Makes the cursor a pointer on hover */
+    color: rgb(0, 4, 67);
+}
+
+.vote-button:hover {
+    color: #0050a6;
+    /* Change color on hover if desired */
+}

@@ -68,6 +68,10 @@ const App = () => {
 								{vidObject.title}
 							</a>
 						</h2>
+						<DeleteVideobutton
+							idToDelete={vidObject.id}
+							fetchRecommendedVids={fetchRecommendedVids}
+						/>
 						<iframe
 							width="400"
 							height="315"
@@ -79,10 +83,6 @@ const App = () => {
 							allowFullScreen
 						></iframe>
 						<div>
-							<DeleteVideobutton
-								idToDelete={vidObject.id}
-								fetchRecommendedVids={fetchRecommendedVids}
-							/>
 							<VotingButtons
 								videoId={vidObject.id}
 								updateVideoVotes={updateVideoVotes}
