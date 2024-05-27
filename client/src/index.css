@@ -1,8 +1,51 @@
 html,
 body {
 	margin: 0;
+	background-color: #dee2ff;
 }
 
 h1 {
 	text-align: center;
+}
+
+.list-videos {
+	display: grid;
+	grid-template-columns: 32% 32% 32%;
+	gap: 10px;
+}
+
+.list-videos li {
+	border: 1px solid black;
+	list-style-type: none;
+	border-radius: 20px;
+	background-color: #eaeaea;
+	padding: 20px;
+}
+
+.video-title {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.5rem;
+	color: white;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+	font-weight: bold;
+	background-color: #4d9fcc;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-title:hover {
+	background-color: #1a71a0;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.youtube-frame {
+	display: block;
+	margin: 0 auto;
+	border: none;
+	border-radius: 10px;
 }
