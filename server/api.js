@@ -37,15 +37,48 @@ router.delete("/videos/:id", async (req, res) => {
 			idOfVideo,
 		]);
 		if (deletedVideo.rowCount === 0) {
-			console.log("not found to delete");
 			res.status(404).json({ success: false, status: "Video not found" });
 		} else {
-			console.log("succ. deleted");
 			res.status(200).json();
 		}
 	} catch (error) {
 		console.error("This is the error happened: " + error);
 		res.status(500).json({ success: false, error: "Internal server error" });
+	}
+});
+
+router.put("/videos/:id", async (req, res) => {
+	const videoId = req.params.id;
+	const voteChange = req.body.vote;
+	console.log(videoId, voteChange, "video id and voteChange");
+
+	// Validate input
+	if (!videoId || (voteChange !== 1 && voteChange !== -1)) {
+		return res.status(400).json({ message: "Invalid request parameters" });
+	}
+
+	try {
+		const selectSql = `SELECT votes FROM videos WHERE id = $1`;
+		const selectResult = await db.query(selectSql, [videoId]);
+
+		if (selectResult.rows.length === 0) {
+			return res.status(404).json({ message: "Video not found" });
+		}
+
+		const currentVotes = selectResult.rows[0].votes;
+
+		// Calculate the new vote
+		const newVotes = currentVotes + voteChange;
+
+		// Update the vote in the database
+		const updateSql = `UPDATE videos SET votes = $1 WHERE id = $2 RETURNING *`;
+		const updateResult = await db.query(updateSql, [newVotes, videoId]);
+
+		// Return the updated row
+		res.status(200).json(updateResult.rows[0]);
+	} catch (error) {
+		console.error("Error updating video votes:", error);
+		res.status(500).json({ message: "Internal server error" });
 	}
 });
 

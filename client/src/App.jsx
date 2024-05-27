@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import NewVideoForm from "./NewVideoForm";
 import DeleteVideobutton from "./DeleteVideoButton";
 import "./style.css";
-
+import VotingButtons from "./VotingButtons";
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
+
+	//setting this state to counts likes
+	const [likeCounter, setlikeCounter] = useState(0);
+
 	useEffect(() => {
 		fetchRecommendedVids();
 	}, []);
@@ -27,6 +31,33 @@ const App = () => {
 		setRecommendedVids([...recommendedVids, newVideo]);
 	};
 
+	const updateVideoVotes = async (videoId, vote) => {
+		try {
+			const response = await fetch(`/api/videos/${videoId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ vote }),
+			});
+
+			if (response.ok) {
+				const updatedVideo = await response.json();
+				console.log(updatedVideo, "data back from server");
+
+				setRecommendedVids((prevVids) =>
+					prevVids.map((vid) =>
+						vid.id === videoId ? { ...vid, votes: updatedVideo.votes } : vid
+					)
+				);
+			} else {
+				console.error("Failed to update votes");
+			}
+		} catch (error) {
+			console.error("Error updating votes:", error);
+		}
+	};
+
 	const videoDisplayer = (arr) => {
 		return (
 			<ul id="videos">
@@ -37,6 +68,7 @@ const App = () => {
 								{vidObject.title}
 							</a>
 						</h2>
+
 						<iframe
 							width="400"
 							height="315"
@@ -47,16 +79,27 @@ const App = () => {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
-
-						<DeleteVideobutton
-							idToDelete={vidObject.id}
-							fetchRecommendedVids={fetchRecommendedVids}
-						/>
+						<div id="button-container">
+							<div>
+								<VotingButtons
+									videoId={vidObject.id}
+									updateVideoVotes={updateVideoVotes}
+									votes={vidObject.votes}
+								/>
+							</div>
+							<div>
+								<DeleteVideobutton
+									idToDelete={vidObject.id}
+									fetchRecommendedVids={fetchRecommendedVids}
+								/>
+							</div>
+						</div>
 					</li>
 				))}
 			</ul>
 		);
 	};
+
 	return (
 		<>
 			<h1>Video Recommendations</h1>
