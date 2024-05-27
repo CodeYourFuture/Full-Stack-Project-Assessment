@@ -68,10 +68,7 @@ const App = () => {
 								{vidObject.title}
 							</a>
 						</h2>
-						<DeleteVideobutton
-							idToDelete={vidObject.id}
-							fetchRecommendedVids={fetchRecommendedVids}
-						/>
+
 						<iframe
 							width="400"
 							height="315"
@@ -82,12 +79,20 @@ const App = () => {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
-						<div>
-							<VotingButtons
-								videoId={vidObject.id}
-								updateVideoVotes={updateVideoVotes}
-								votes={vidObject.votes}
-							/>
+						<div id="button-container">
+							<div>
+								<VotingButtons
+									videoId={vidObject.id}
+									updateVideoVotes={updateVideoVotes}
+									votes={vidObject.votes}
+								/>
+							</div>
+							<div>
+								<DeleteVideobutton
+									idToDelete={vidObject.id}
+									fetchRecommendedVids={fetchRecommendedVids}
+								/>
+							</div>
 						</div>
 					</li>
 				))}

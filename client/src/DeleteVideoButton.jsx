@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const DeleteVideobutton = ({ idToDelete, fetchRecommendedVids }) => {
 	const [deletionstatus, setdeletionstatus] = useState(null);
@@ -22,7 +24,11 @@ const DeleteVideobutton = ({ idToDelete, fetchRecommendedVids }) => {
 	};
 	return (
 		<>
-			<button onClick={() => handleClickDelete()}>Remove Video</button>
+			<FontAwesomeIcon
+				icon={faTrashCan}
+				onClick={() => handleClickDelete()}
+				className="button-icon"
+			/>
 		</>
 	);
 };

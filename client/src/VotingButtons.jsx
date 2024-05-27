@@ -22,12 +22,12 @@ const VotingButtons = ({ videoId, updateVideoVotes, votes }) => {
 				<FontAwesomeIcon
 					icon={faThumbsDown}
 					onClick={handleVoteDown}
-					className="vote-button"
+					className="button-icon"
 				/>
 				<FontAwesomeIcon
 					icon={faThumbsUp}
 					onClick={handleVoteUp}
-					className="vote-button"
+					className="button-icon"
 				/>
 			</div>
 		</>
