@@ -137,16 +137,16 @@ li>button {
 /* //styling adding video feComponentTransfe */
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
     background-color: #589400;
     padding: 1.5em;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 2em;
-    max-width: 550px;
-    margin: 0 auto;
+    max-width: 50%;
+    /* margin: 0 auto; */
 }
 
 form label {
@@ -177,4 +177,10 @@ form button {
 
 form button:hover {
     background-color: #003e85;
+}
+
+#form-and-sort-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
 }
