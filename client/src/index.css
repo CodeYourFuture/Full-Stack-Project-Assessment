@@ -49,3 +49,24 @@ h1 {
 	border: none;
 	border-radius: 10px;
 }
+.delete-video {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+}
+.delete-video button {
+	padding: 10px 20px;
+	border-radius: 10px;
+	background-color: #dee2ff;
+	font-size: 1.5rem;
+	border: none;
+}
+.delete-video button:hover {
+	background-color: #a9b1f1;
+}
