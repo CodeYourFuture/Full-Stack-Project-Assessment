@@ -17,13 +17,19 @@ const router = Router();
 router.post("/videos", async (req, res) => {
 	try {
 		const { title, src } = req.body;
-		const newVideo = await db.query(
-			"INSERT INTO videos (title, src) VALUES ($1, $2) RETURNING *",
-			[title, src]
-		);
-		const insertedVideo = newVideo.rows[0];
+		if (title && src) {
+			const newVideo = await db.query(
+				"INSERT INTO videos (title, src) VALUES ($1, $2) RETURNING *",
+				[title, src]
+			);
+			const insertedVideo = newVideo.rows[0];
 
-		res.status(200).json(insertedVideo);
+			res.status(200).json(insertedVideo);
+		} else {
+			res
+				.status(400)
+				.json({ error: "bad request! video title or src is not valid" });
+		}
 	} catch (error) {
 		console.error("Error during insertion into DB:", error.message);
 		res.status(500).send("Error during insertion: " + error.message);
@@ -80,26 +86,6 @@ router.put("/videos/:id", async (req, res) => {
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
-
-// router.get("/videos?order=choice", async (req, res) => {
-// 	const order = req.query.order;
-// 	console.log(order, "this is order");
-// 	try {
-// 		if (order === "asc") {
-// 			const result = await db.query("SELECT * FROM videos ORDER BY votes ASC");
-// 			res.status(200).json(result.rows);
-// 		} else if (order === "desc") {
-// 			const result = await db.query("SELECT * FROM videos ORDER BY votes DESC");
-// 			res.status(200).json(result.rows);
-// 		} else {
-// 			const result = await db.query("SELECT * FROM videos");
-// 			res.status(200).json(result.rows);
-// 		}
-// 	} catch (error) {
-// 		console.error("Error: ", error);
-// 		res.status(500).json({ error: "Internal server error" });
-// 	}
-// });
 
 router.get("/videos", async (req, res) => {
 	const order = req.query.order;
