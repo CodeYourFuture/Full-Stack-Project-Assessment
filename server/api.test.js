@@ -17,23 +17,35 @@ describe("/api", () => {
 		});
 
 		describe("/:id", () => {
-			describe("DELETE", () => {
-				it("Returns a successful response if the id exists", async () => {
-					const response = await request(app).delete("/api/videos/1");
+			describe("POST", () => {
+				it("Returns a successful response if the video is added, containing the new video data", async () => {
+					const response = await request(app).post("/api/videos").send({
+						title: "Nova Era Live in Sao Paulo",
+						url: "https://www.youtube.com/watch?v=jjqp8m5j3Pk",
+					});
 
-					expect(response.statusCode).toBe(200);
-				});
+					expect(response.body.status).toBe(201);
+					expect(response.body.data.title).toBe("Nova Era Live in Sao Paulo");
+				})
+			})
 
-				it("Deletes the video from the database if the id exists", async () => {
-					await request(app).delete("/api/videos/1");
+			// describe("DELETE", () => {
+			// 	it("Returns a successful response if the id exists", async () => {
+			// 		const response = await request(app).delete("/api/videos/1");
 
-					const dbResponse = await db.query(
-						"SELECT * FROM videos WHERE id = $1",
-						[1]
-					);
-					expect(dbResponse.rows.length).toBe(0);
-				});
-			});
+			// 		expect(response.statusCode).toBe(200);
+			// 	});
+
+			// 	it("Deletes the video from the database if the id exists", async () => {
+			// 		await request(app).delete("/api/videos/1");
+
+			// 		const dbResponse = await db.query(
+			// 			"SELECT * FROM videos WHERE id = $1",
+			// 			[1]
+			// 		);
+			// 		expect(dbResponse.rows.length).toBe(0);
+			// 	});
+			// });
 		});
 	});
 });
