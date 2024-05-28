@@ -4,23 +4,27 @@ import NewVideoForm from "./NewVideoForm";
 import DeleteVideobutton from "./DeleteVideoButton";
 import "./style.css";
 import VotingButtons from "./VotingButtons";
+import SortVideos from "./SortVideos";
+
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
+	const [url, setUrl] = useState("/api/videos");
 
 	//setting this state to counts likes
 	const [likeCounter, setlikeCounter] = useState(0);
 
 	useEffect(() => {
-		fetchRecommendedVids();
-	}, []);
+		fetchRecommendedVids(url);
+	}, [url]);
 
 	// fetching data from api.js file to render in the page
-	const fetchRecommendedVids = async () => {
+	const fetchRecommendedVids = async (fetchUrl) => {
 		try {
-			const response = await fetch("/api/videos");
+			const response = await fetch(fetchUrl);
 			const data = await response.json();
 
 			setRecommendedVids(data);
+			console.log(recommendedVids, url, "this is recommeneded vids");
 		} catch (error) {
 			console.error(error, "For fetch of vids");
 		}
@@ -58,6 +62,16 @@ const App = () => {
 		}
 	};
 
+	const handleSortChange = (order) => {
+		if (order === "asc") {
+			setUrl("/api/videos?order=asc");
+		} else if (order === "desc") {
+			setUrl("/api/videos?order=desc");
+		} else {
+			setUrl("/api/videos");
+		}
+	};
+
 	const videoDisplayer = (arr) => {
 		return (
 			<ul id="videos">
@@ -90,7 +104,7 @@ const App = () => {
 							<div>
 								<DeleteVideobutton
 									idToDelete={vidObject.id}
-									fetchRecommendedVids={fetchRecommendedVids}
+									fetchRecommendedVids={() => fetchRecommendedVids(url)}
 								/>
 							</div>
 						</div>
@@ -103,7 +117,10 @@ const App = () => {
 	return (
 		<>
 			<h1>Video Recommendations</h1>
-			<NewVideoForm addNewVideoToRecommended={addNewVideoToRecommended} />
+			<div id="form-and-sort-container">
+				<SortVideos onSortChange={handleSortChange} />
+				<NewVideoForm addNewVideoToRecommended={addNewVideoToRecommended} />
+			</div>
 			<div>{videoDisplayer(recommendedVids)}</div>
 		</>
 	);

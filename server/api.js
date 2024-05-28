@@ -2,17 +2,17 @@ import { Router } from "express";
 import db from "./db.js";
 const router = Router();
 
-router.get("/videos", async (_, res) => {
-	try {
-		const result = await db.query("SELECT * FROM videos");
-		res.json(result.rows);
-	} catch (error) {
-		console.error("Error happened while getting videos: " + error);
-		res
-			.status(500)
-			.json({ success: false, error: "Could not connect to the database" });
-	}
-});
+// router.get("/videos", async (_, res) => {
+// 	try {
+// 		const result = await db.query("SELECT * FROM videos");
+// 		res.json(result.rows);
+// 	} catch (error) {
+// 		console.error("Error happened while getting videos: " + error);
+// 		res
+// 			.status(500)
+// 			.json({ success: false, error: "Could not connect to the database" });
+// 	}
+// });
 
 router.post("/videos", async (req, res) => {
 	try {
@@ -50,7 +50,6 @@ router.delete("/videos/:id", async (req, res) => {
 router.put("/videos/:id", async (req, res) => {
 	const videoId = req.params.id;
 	const voteChange = req.body.vote;
-	console.log(videoId, voteChange, "video id and voteChange");
 
 	// Validate input
 	if (!videoId || (voteChange !== 1 && voteChange !== -1)) {
@@ -79,6 +78,47 @@ router.put("/videos/:id", async (req, res) => {
 	} catch (error) {
 		console.error("Error updating video votes:", error);
 		res.status(500).json({ message: "Internal server error" });
+	}
+});
+
+// router.get("/videos?order=choice", async (req, res) => {
+// 	const order = req.query.order;
+// 	console.log(order, "this is order");
+// 	try {
+// 		if (order === "asc") {
+// 			const result = await db.query("SELECT * FROM videos ORDER BY votes ASC");
+// 			res.status(200).json(result.rows);
+// 		} else if (order === "desc") {
+// 			const result = await db.query("SELECT * FROM videos ORDER BY votes DESC");
+// 			res.status(200).json(result.rows);
+// 		} else {
+// 			const result = await db.query("SELECT * FROM videos");
+// 			res.status(200).json(result.rows);
+// 		}
+// 	} catch (error) {
+// 		console.error("Error: ", error);
+// 		res.status(500).json({ error: "Internal server error" });
+// 	}
+// });
+
+router.get("/videos", async (req, res) => {
+	const order = req.query.order;
+
+	try {
+		if (order === "asc") {
+			const result = await db.query("SELECT * FROM videos ORDER BY votes ASC");
+			res.status(200).json(result.rows);
+		} else if (order === "desc") {
+			const result = await db.query("SELECT * FROM videos ORDER BY votes DESC");
+			res.status(200).json(result.rows);
+		} else {
+			const result = await db.query("SELECT * FROM videos");
+
+			res.status(200).json(result.rows);
+		}
+	} catch (error) {
+		console.error("Error: ", error);
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
