@@ -60,19 +60,23 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 	return (
 		<>
 			<form onSubmit={(e) => handleSubmit(e)}>
-				<label>Enter Videos Title:</label>
+				<label htmlFor="video-title">Enter Videos Title:</label>
 				<input
+					id="video-title"
 					type="text"
 					value={titleFromInput}
 					onChange={(e) => handleInputTitle(e)}
 				></input>
-				<label>Enter Video's URL:</label>
+				<label htmlFor="video-src">Enter Video's URL:</label>
 				<input
+					id="video-src"
 					type="text"
 					value={srcFromInput}
 					onChange={(e) => handleInputUrl(e)}
 				></input>
-				<button type="submit">Add it!</button>
+				<button type="submit" aria-label="add-video-button" role="button">
+					Add The Video!
+				</button>
 			</form>
 		</>
 	);
