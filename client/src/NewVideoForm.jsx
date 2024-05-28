@@ -34,41 +34,6 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 			throw error; // Rethrow error to handle it further if needed
 		}
 	}
-	//This function gets the url and make it a proper link to be embeded.
-	// function makeTheLinkToEmbed(url) {
-	// 	//if part check if user is entering an embded linkk
-
-	// 	if (false) {
-	// 		alert("Wrong url");
-	// 	} else if (!url.includes("&t=")) {
-	// 		//checks the first part is like https://www.youtube.com/watch?v=
-	// 		const firstPartOfUrl = url.substring(0, url.indexOf("v=") + 2);
-	// 		//then search for the video id
-	// 		const uTubeVideoId = url.substring(url.indexOf("v=") + 2);
-	// 		//validate url and video id to be correct
-	// 		const validFirstPart =
-	// 			firstPartOfUrl === "https://www.youtube.com/watch?v=";
-	// 		const validUTubeVideoId = uTubeVideoId !== "";
-	// 		if (firstPartOfUrl && secondPartOfUrl) {
-	// 			//Link for being embded
-	// 			return "https://www.youtube.com/embed/" + uTubeVideoId;
-	// 		} else {
-	// 			alert("Youtube url is not valid!");
-	// 		}
-	// 	} else {
-	// 		//checks the first part is like https://www.youtube.com/watch?v=
-	// 		const firstPartOfUrl = url.substring(0, url.indexOf("v=") + 2);
-	// 		//validate the first part
-	// 		const validFirstPart =
-	// 			firstPartOfUrl === "https://www.youtube.com/watch?v=";
-
-	// 		const uTubeVideoId = url.substring(indexOf("v=") + 2, indexOf("&t="));
-	// 		const validatUTubeVideoId = uTubeVideoId !== "";
-	// 		if (validFirstPart && validatUTubeVideoId) {
-	// 			return "https://www.youtube.com/embed/" + uTubeVideoId;
-	// 		}
-	// 	}
-	// }
 
 	function makeTheLinkToEmbed(url) {
 		if (url && url !== "") {
@@ -80,12 +45,12 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 				return "https://www.youtube.com/embed/" + match[2] + "?autoplay=0";
 			} else {
 				// Invalid URL: handle appropriately
-				alert("Invalid YouTube URL");
+				// alert("Invalid YouTube URL");
 				return null;
 			}
 		} else {
 			// Empty URL: handle appropriately
-			alert("Please enter a YouTube URL");
+			// alert("Please enter a YouTube URL");
 			return null;
 		}
 	}
@@ -94,10 +59,12 @@ function NewVideoForm({ addNewVideoToRecommended }) {
 		e.preventDefault();
 		const title = titleFromInput;
 		const src = makeTheLinkToEmbed(srcFromInput);
-		// this object send the video title and its embded format src to the back end
+		// this object send the video title and its embded format src to the back-end
 		const objectToPost = { title, src };
 		if (src && title) {
-			PostNewVideo("api/videos", objectToPost);
+			PostNewVideo("/api/videos", objectToPost);
+		} else {
+			alert("Title or URL is invalid!");
 		}
 	};
 
