@@ -6,11 +6,22 @@ function SortVideos({ onSortChange }) {
 	};
 
 	return (
-		<select name="order" onChange={handleChange}>
-			<option value="">Default</option>
-			<option value="asc">Ascending</option>
-			<option value="desc">Descending</option>
-		</select>
+		<>
+			<div id="drop-down-container">
+				<label htmlFor="sort-videos">Sort Videos:</label>
+				<select name="order" onChange={handleChange} id="sort-videos">
+					<option value="" label="default">
+						Default
+					</option>
+					<option value="asc" label="ascending">
+						Ascending
+					</option>
+					<option value="desc" label="descending">
+						Descending
+					</option>
+				</select>
+			</div>
+		</>
 	);
 }
 

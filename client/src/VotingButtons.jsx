@@ -15,7 +15,11 @@ const VotingButtons = ({ videoId, updateVideoVotes, votes }) => {
 	return (
 		<>
 			<div id="like-holder">
-				<FontAwesomeIcon icon={faHeart} id="heart-icon" />
+				<FontAwesomeIcon
+					icon={faHeart}
+					id="heart-icon"
+					aria-label="heart-icon"
+				/>
 				<span id="likes">{votes}</span>
 			</div>
 			<div className="vote-button-container">
@@ -23,11 +27,15 @@ const VotingButtons = ({ videoId, updateVideoVotes, votes }) => {
 					icon={faThumbsDown}
 					onClick={handleVoteDown}
 					className="button-icon"
+					role="button"
+					aria-label="dislike-video"
 				/>
 				<FontAwesomeIcon
 					icon={faThumbsUp}
 					onClick={handleVoteUp}
 					className="button-icon"
+					role="button"
+					aria-label="like-video"
 				/>
 			</div>
 		</>

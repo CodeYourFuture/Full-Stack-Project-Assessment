@@ -28,6 +28,8 @@ const DeleteVideobutton = ({ idToDelete, fetchRecommendedVids }) => {
 				icon={faTrashCan}
 				onClick={() => handleClickDelete()}
 				className="button-icon"
+				aria-label="delete-video-button"
+				role="button"
 			/>
 		</>
 	);

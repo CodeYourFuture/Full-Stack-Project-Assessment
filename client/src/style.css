@@ -188,29 +188,53 @@ form button:hover {
     /* Align items to the top */
     margin-bottom: 2em;
     gap: 1em;
-    /* Adds spacing between form and select */
+    
 }
 
-/* Select element styling */
-#form-and-sort-container>select {
-    width: 10rem;
-    height: 2rem;
+#drop-down-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Ensure the label and select are vertically aligned */
+}
+
+#drop-down-container>label {
+    color: whitesmoke;
+    font-weight: bolder;
+    margin-right: 5px;
+}
+
+#drop-down-container>select {
+    width: 9rem;
+    height: 2.5rem;
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-    padding: 0.5em;
+    padding: 0.3em;
     font-size: 1em;
     transition: background-color 0.3s ease, border 0.3s ease;
+    text-align: center;
+    /* Center the text horizontally */
+    -webkit-appearance: none;
+    /* Remove default styling in WebKit browsers */
+    -moz-appearance: none;
+    /* Remove default styling in Firefox */
+    appearance: none;
+    /* Remove default styling in modern browsers */
+    
 }
 
-#form-and-sort-container>select>option {
+#drop-down-container>select>option {
     font-weight: bold;
+    text-align: center;
+   
+    /* Center the text horizontally */
 }
 
 /* Hover and focus styles for select element */
-#form-and-sort-container>select:hover,
-#form-and-sort-container>select:focus {
-    background-color: #e0e0e0;
+#drop-down-container>select:hover,
+#drop-down-container>select:focus {
+    background-color: #d3d3d3;
     border-color: #0050a6;
 }
