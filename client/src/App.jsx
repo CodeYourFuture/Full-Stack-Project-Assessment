@@ -5,6 +5,7 @@ import DeleteVideobutton from "./DeleteVideoButton";
 import "./style.css";
 import VotingButtons from "./VotingButtons";
 import SortVideos from "./SortVideos";
+import Footer from "./Footer";
 
 const App = () => {
 	const [recommendedVids, setRecommendedVids] = useState([]);
@@ -122,6 +123,7 @@ const App = () => {
 				<NewVideoForm addNewVideoToRecommended={addNewVideoToRecommended} />
 			</div>
 			<div>{videoDisplayer(recommendedVids)}</div>
+			<Footer />
 		</>
 	);
 };
