@@ -1,21 +1,23 @@
+import DeleteVideo from "./DeleteVideo";
 import React, { useEffect, useState } from "react";
 
 function ListVideos() {
 	const [videos, setVideos] = useState([]);
 
-	useEffect(() => {
-		const fetchVideos = async () => {
-			try {
-				const response = await fetch("/api/videos");
-				const data = await response.json();
-				setVideos(data.data);
-			} catch (error) {
-				console.error("Error fetching videos:", error);
-			}
-		};
+	const fetchVideos = async () => {
+		try {
+			const response = await fetch("/api/videos");
+			const data = await response.json();
+			setVideos(data.data);
+		} catch (error) {
+			console.error("Error fetching videos:", error);
+		}
+	};
 
+	useEffect(() => {
 		fetchVideos();
 	}, []);
+
 	const getEmbedUrl = (url) => {
 		try {
 			const urlObj = new URL(url);
@@ -26,6 +28,7 @@ function ListVideos() {
 			return null;
 		}
 	};
+
 	return (
 		<>
 			<ul className="list-videos">
@@ -44,6 +47,7 @@ function ListVideos() {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
+						<DeleteVideo videoId={video.id} fetchVideos={fetchVideos} />
 					</li>
 				))}
 			</ul>
