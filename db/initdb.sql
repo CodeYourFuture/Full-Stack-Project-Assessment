@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS videos CASCADE;
 
 CREATE TABLE videos (
-    id serial primary key,
+    id serial PRIMARY KEY,
     title VARCHAR,
     src VARCHAR
 );
