@@ -1,8 +1,4 @@
-import {
-	render,
-	screen,
-	waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 
@@ -58,13 +54,19 @@ describe("Main Page", () => {
 		);
 
 		// we find the delete button on the website
-		const deleteButton = screen.getAllByText("Remove video")[0];
+		const deleteButton = screen.getAllByRole("button", {
+			name: "Remove video",
+		})[0];
 
 		// then we click it
 		await user.click(deleteButton);
 
 		// wait for the video to get deleted from the page
-		await waitForElementToBeRemoved(deleteButton);
+		await waitFor(() =>
+			expect(
+				screen.getAllByRole("button", { name: "Remove video" })
+			).toHaveLength(1)
+		);
 
 		// we calculate the number of videos after the call
 		const videoContainers = screen.getAllByText(
