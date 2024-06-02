@@ -21,7 +21,7 @@ describe("/api", () => {
 				it("Returns a successful response if the id exists", async () => {
 					const response = await request(app).delete("/api/videos/1");
 
-					expect(response.statusCode).toBe(200);
+					expect(response.statusCode).toBe(204);
 				});
 
 				it("Deletes the video from the database if the id exists", async () => {
