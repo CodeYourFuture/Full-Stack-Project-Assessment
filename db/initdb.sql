@@ -1,5 +1,3 @@
-\c videorec;
-
 DROP TABLE IF EXISTS videos CASCADE;
 
 CREATE TABLE videos (
