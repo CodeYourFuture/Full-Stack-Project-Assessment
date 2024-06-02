@@ -50,7 +50,10 @@ describe("Main Page", () => {
 	it("Removes the video when asked to do", async () => {
 		// we create another fake backend that listens on the delete call, and returns success
 		server.use(
-			http.delete("/api/videos/1", () => HttpResponse.json({ success: true }))
+			http.delete(
+				"/api/videos/1",
+				() => new HttpResponse(null, { status: 204 })
+			)
 		);
 
 		// we find the delete button on the website
