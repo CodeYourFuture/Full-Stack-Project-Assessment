@@ -9,10 +9,12 @@ describe("/api", () => {
 				const response = await request(app).get("/api/videos");
 
 				expect(response.statusCode).toBe(200);
-				expect(response.body).toEqual([{
-					title: "Never Gonna Give You Up",
-					url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-				}]);
+				expect(response.body).toEqual([
+					{
+						title: "Never Gonna Give You Up",
+						url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+					},
+				]);
 			});
 		});
 
