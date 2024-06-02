@@ -1,9 +1,9 @@
 import {
 	render,
 	screen,
-	fireEvent,
 	waitForElementToBeRemoved,
 } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 
 import { server } from "./tests/setupTests.js";
@@ -11,6 +11,9 @@ import { server } from "./tests/setupTests.js";
 import App from "./App.jsx";
 
 describe("Main Page", () => {
+	/** @type {import("@testing-library/user-event").UserEvent} */
+	let user;
+
 	beforeEach(async () => {
 		// Here we create a fake backend that will always return two videos when calling the /api/videos endpoint
 		server.use(
@@ -35,6 +38,7 @@ describe("Main Page", () => {
 
 		// Let's wait for one of the videos to appear
 		await screen.findByText("Never Gonna Give You Up");
+		user = userEvent.setup();
 	});
 
 	it("Renders the videos", async () => {
@@ -57,7 +61,7 @@ describe("Main Page", () => {
 		const deleteButton = screen.getAllByText("Remove video")[0];
 
 		// then we click it
-		fireEvent.click(deleteButton);
+		await user.click(deleteButton);
 
 		// wait for the video to get deleted from the page
 		await waitForElementToBeRemoved(deleteButton);
@@ -87,15 +91,11 @@ describe("Main Page", () => {
 		);
 
 		// we fill in the form
-		fireEvent.change(screen.getByRole("textbox", { name: "Title:" }), {
-			target: { value: title },
-		});
-		fireEvent.change(screen.getByRole("textbox", { name: "Url:" }), {
-			target: { value: url },
-		});
+		await user.type(screen.getByRole("textbox", { name: "Title:" }), title);
+		await user.type(screen.getByRole("textbox", { name: "Url:" }), url);
 
 		// then click submit
-		fireEvent.click(screen.getByRole("button", { name: "Submit" }));
+		await user.click(screen.getByRole("button", { name: "Submit" }));
 
 		// wait for the new video to appear
 		await screen.findByText(title);
