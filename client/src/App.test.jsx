@@ -4,8 +4,9 @@ import {
 	fireEvent,
 	waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { server } from "./tests/setupTests.js";
 import { http, HttpResponse } from "msw";
+
+import { server } from "./tests/setupTests.js";
 
 import App from "./App.jsx";
 
@@ -43,7 +44,7 @@ describe("Main Page", () => {
 		);
 
 		// We have two videos, so the amount should be two
-		expect(videoContainers.length).toBe(2);
+		expect(videoContainers).toHaveLength(2);
 	});
 
 	it("Removes the video when asked to do", async () => {
@@ -67,41 +68,37 @@ describe("Main Page", () => {
 		);
 
 		// this should now be only 1
-		expect(videoContainers.length).toBe(1);
+		expect(videoContainers).toHaveLength(1);
 	});
 
 	it("Adds a new video when asked to do", async () => {
+		const title = "New Title";
+		const url = "https://www.youtube.com/watch?v=CDEYRFUTURE";
+
 		// we set up a fake backend that allows us to send a new video. It only allows one specific title and url however
 		server.use(
 			http.post("/api/videos", async ({ request }) => {
 				const data = await request.json();
-				if (
-					data.title != "New Title" ||
-					data.url != "https://www.youtube.com/watch?v=CDEYRFUTURE"
-				) {
-					return HttpResponse.json({ success: false });
+				if (data.title !== title || data.url !== url) {
+					return HttpResponse.json({ success: false }, { status: 400 });
 				}
-				return HttpResponse.json({
-					id: 3,
-					title: "New Title",
-					url: "https://www.youtube.com/watch?v=CDEYRFUTURE",
-				});
+				return HttpResponse.json({ id: 3, title, url });
 			})
 		);
 
 		// we fill in the form
 		fireEvent.change(screen.getByRole("textbox", { name: "Title:" }), {
-			target: { value: "New Title" },
+			target: { value: title },
 		});
 		fireEvent.change(screen.getByRole("textbox", { name: "Url:" }), {
-			target: { value: "https://www.youtube.com/watch?v=CDEYRFUTURE" },
+			target: { value: url },
 		});
 
 		// then click submit
 		fireEvent.click(screen.getByRole("button", { name: "Submit" }));
 
 		// wait for the new video to appear
-		await screen.findByText("New Title");
+		await screen.findByText(title);
 
 		// afterwards we calculate the number of videos on the page
 		const videoContainers = screen.getAllByText(
@@ -109,6 +106,6 @@ describe("Main Page", () => {
 		);
 
 		// this should now be three
-		expect(videoContainers.length).toBe(3);
+		expect(videoContainers).toHaveLength(3);
 	});
 });
