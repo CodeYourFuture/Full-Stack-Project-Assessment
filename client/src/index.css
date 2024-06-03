@@ -49,7 +49,8 @@ h1 {
 	border: none;
 	border-radius: 10px;
 }
-.delete-video {
+.delete-video,
+.voting {
 	display: block;
 	text-align: center;
 	text-decoration: none;
@@ -60,7 +61,8 @@ h1 {
 	border: none;
 	border-radius: 5px;
 }
-.delete-video button {
+.delete-video button,
+.voting button {
 	padding: 10px 20px;
 	border-radius: 10px;
 	background-color: #dee2ff;
@@ -69,4 +71,9 @@ h1 {
 }
 .delete-video button:hover {
 	background-color: #a9b1f1;
+}
+.voting {
+	display: flex;
+	gap: 6px;
+	justify-content: center;
 }

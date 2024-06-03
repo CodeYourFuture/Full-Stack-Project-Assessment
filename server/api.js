@@ -11,6 +11,7 @@ router.get("/videos", async (_, res) => {
 				id: video.id,
 				title: video.title,
 				url: video.src,
+				vote: video.vote,
 			};
 		});
 
@@ -32,10 +33,10 @@ router.get("/videos", async (_, res) => {
 });
 
 router.post("/videos", async (req, res) => {
-	const { title, url } = req.body;
+	const { title, url, vote } = req.body;
 	const addVideoInDatabase = await db.query(
-		"INSERT INTO videos (title, src) VALUES ($1, $2) RETURNING *",
-		[title, url]
+		"INSERT INTO videos (title, src,vote) VALUES ($1, $2, $3) RETURNING *",
+		[title, url, vote]
 	);
 	res.json({
 		success: true,
@@ -56,5 +57,17 @@ router.delete("/videos", async (req, res) => {
 router.get("/health", (_, res) => {
 	res.json({ status: "ok" });
 });
-
+router.put("/vote", async (req, res) => {
+	const { videoId, voteChange } = req.body;
+	try {
+		const result = await db.query(
+			`UPDATE videos SET vote = vote + $1 WHERE id = $2 RETURNING *`,
+			[voteChange, videoId]
+		);
+		res.json({ success: true, data: result.rows[0] });
+	} catch (error) {
+		console.error("Error updating vote:", error);
+		res.status(500).json({ success: false, message: "Error updating vote" });
+	}
+});
 export default router;

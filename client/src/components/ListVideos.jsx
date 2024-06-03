@@ -1,4 +1,5 @@
 import DeleteVideo from "./DeleteVideo";
+import Voting from "./Voting";
 import React, { useEffect, useState } from "react";
 
 function ListVideos() {
@@ -47,6 +48,7 @@ function ListVideos() {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 						></iframe>
+						<Voting videoId={video.id} initialVote={video.vote || 0} />
 						<DeleteVideo videoId={video.id} fetchVideos={fetchVideos} />
 					</li>
 				))}
