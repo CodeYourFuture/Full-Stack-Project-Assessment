@@ -96,4 +96,4 @@ Connect to the database (`psql -d videorec`) to confirm the tables and data have
 
 ## Sample data
 
-You will need some example video data in your database. Please check [the example data](./data/example_data.csv), and modify your `initdb.sql`. Add the relevant `INSERT INTO` calls that will add all of this example data every time you run `initdb.sql`.
+You will need some example video data in your database. Please check [the example data](../../data/example_data.csv), and modify your `initdb.sql`. Add the relevant `INSERT INTO` calls that will add all of this example data every time you run `initdb.sql`.
