@@ -1,15 +1,15 @@
-import {
-	render,
-	screen,
-	fireEvent,
-	waitForElementToBeRemoved,
-} from "@testing-library/react";
-import { server } from "./tests/setupTests.js";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
+
+import { server } from "./tests/setupTests.js";
 
 import App from "./App.jsx";
 
 describe("Main Page", () => {
+	/** @type {import("@testing-library/user-event").UserEvent} */
+	let user;
+
 	beforeEach(async () => {
 		// Here we create a fake backend that will always return two videos when calling the /api/videos endpoint
 		server.use(
@@ -34,6 +34,7 @@ describe("Main Page", () => {
 
 		// Let's wait for one of the videos to appear
 		await screen.findByText("Never Gonna Give You Up");
+		user = userEvent.setup();
 	});
 
 	it("Renders the videos", async () => {
@@ -43,23 +44,32 @@ describe("Main Page", () => {
 		);
 
 		// We have two videos, so the amount should be two
-		expect(videoContainers.length).toBe(2);
+		expect(videoContainers).toHaveLength(2);
 	});
 
 	it("Removes the video when asked to do", async () => {
 		// we create another fake backend that listens on the delete call, and returns success
 		server.use(
-			http.delete("/api/videos/1", () => HttpResponse.json({ success: true }))
+			http.delete(
+				"/api/videos/1",
+				() => new HttpResponse(null, { status: 204 })
+			)
 		);
 
 		// we find the delete button on the website
-		const deleteButton = screen.getAllByText("Remove video")[0];
+		const deleteButton = screen.getAllByRole("button", {
+			name: "Remove video",
+		})[0];
 
 		// then we click it
-		fireEvent.click(deleteButton);
+		await user.click(deleteButton);
 
 		// wait for the video to get deleted from the page
-		await waitForElementToBeRemoved(deleteButton);
+		await waitFor(() =>
+			expect(
+				screen.getAllByRole("button", { name: "Remove video" })
+			).toHaveLength(1)
+		);
 
 		// we calculate the number of videos after the call
 		const videoContainers = screen.getAllByText(
@@ -67,41 +77,33 @@ describe("Main Page", () => {
 		);
 
 		// this should now be only 1
-		expect(videoContainers.length).toBe(1);
+		expect(videoContainers).toHaveLength(1);
 	});
 
 	it("Adds a new video when asked to do", async () => {
+		const title = "New Title";
+		const url = "https://www.youtube.com/watch?v=CDEYRFUTURE";
+
 		// we set up a fake backend that allows us to send a new video. It only allows one specific title and url however
 		server.use(
 			http.post("/api/videos", async ({ request }) => {
 				const data = await request.json();
-				if (
-					data.title != "New Title" ||
-					data.url != "https://www.youtube.com/watch?v=CDEYRFUTURE"
-				) {
-					return HttpResponse.json({ success: false });
+				if (data.title !== title || data.url !== url) {
+					return HttpResponse.json({ success: false }, { status: 400 });
 				}
-				return HttpResponse.json({
-					id: 3,
-					title: "New Title",
-					url: "https://www.youtube.com/watch?v=CDEYRFUTURE",
-				});
+				return HttpResponse.json({ id: 3, title, url });
 			})
 		);
 
 		// we fill in the form
-		fireEvent.change(screen.getByRole("textbox", { name: "Title:" }), {
-			target: { value: "New Title" },
-		});
-		fireEvent.change(screen.getByRole("textbox", { name: "Url:" }), {
-			target: { value: "https://www.youtube.com/watch?v=CDEYRFUTURE" },
-		});
+		await user.type(screen.getByRole("textbox", { name: "Title:" }), title);
+		await user.type(screen.getByRole("textbox", { name: "Url:" }), url);
 
 		// then click submit
-		fireEvent.click(screen.getByRole("button", { name: "Submit" }));
+		await user.click(screen.getByRole("button", { name: "Submit" }));
 
 		// wait for the new video to appear
-		await screen.findByText("New Title");
+		await screen.findByText(title);
 
 		// afterwards we calculate the number of videos on the page
 		const videoContainers = screen.getAllByText(
@@ -109,6 +111,6 @@ describe("Main Page", () => {
 		);
 
 		// this should now be three
-		expect(videoContainers.length).toBe(3);
+		expect(videoContainers).toHaveLength(3);
 	});
 });
