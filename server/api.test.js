@@ -9,10 +9,12 @@ describe("/api", () => {
 				const response = await request(app).get("/api/videos");
 
 				expect(response.statusCode).toBe(200);
-				expect(response.body[0].title).toBe("Never Gonna Give You Up");
-				expect(response.body[0].url).toBe(
-					"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-				);
+				expect(response.body).toEqual([
+					{
+						title: "Never Gonna Give You Up",
+						url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+					},
+				]);
 			});
 		});
 
@@ -21,7 +23,7 @@ describe("/api", () => {
 				it("Returns a successful response if the id exists", async () => {
 					const response = await request(app).delete("/api/videos/1");
 
-					expect(response.statusCode).toBe(200);
+					expect(response.statusCode).toBe(204);
 				});
 
 				it("Deletes the video from the database if the id exists", async () => {
@@ -31,7 +33,7 @@ describe("/api", () => {
 						"SELECT * FROM videos WHERE id = $1",
 						[1]
 					);
-					expect(dbResponse.rows.length).toBe(0);
+					expect(dbResponse.rows).toHaveLength(0);
 				});
 			});
 		});
