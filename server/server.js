@@ -10,16 +10,17 @@ const server = http.createServer(app);
 const port = parseInt(process.env.PORT ?? "3000", 10);
 
 //GET ALL VIDEOS
-app.get("/videos", (request, response) => {
+app.get("/api/videos", (request, response) => {
+	console.log("api videos");
 	db.query("SELECT * FROM videos")
 		.then((result) => {
+			console.log(result);
 			response.status(200).json({ videos: result.rows });
 		})
 		.catch((err) => {
 			console.log(err);
 		});
 });
-
 
 server.on("listening", () => {
 	const addr = server.address();
