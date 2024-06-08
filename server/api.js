@@ -3,17 +3,15 @@ import db from "./db.js";
 const router = Router();
 
 router.get("/videos", async (_, res) => {
-    try {
-        const result = await db.query("SELECT 'ok' ok");
-        res.json(result.rows[0]);
-    } catch (error) {
-        console.error("Database connection error:", error);
-        res.status(500).json({
-			
-            error: "Database connection error",
-            message: error.message
-        });
-    }
+	console.log("api videos");
+	db.query("SELECT * FROM videos")
+		.then((result) => {
+			//console.log(result);
+			res.status(200).json({ videos: result.rows });
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 });
 
 export default router;

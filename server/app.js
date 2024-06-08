@@ -5,9 +5,6 @@ import { fileURLToPath } from "node:url";
 
 const app = express();
 
-
-
-
 app.use(express.json());
 // api calls are all under /api and are handled in api.js
 app.use("/api", apiRouter);
@@ -24,6 +21,7 @@ app.use((req, res, next) => {
 	if (req.method === "GET" && !req.url.startsWith("/api")) {
 		return res.sendFile(path.join(staticDir, "index.html"));
 	}
+	console.log("Next " + next);
 	next();
 });
 
