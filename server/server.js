@@ -12,6 +12,13 @@ const port = parseInt(process.env.PORT ?? "3000", 10);
 //GET ALL VIDEOS
 app.get("/videos", (request, response) => {
 	db.query("SELECT * FROM videos")
+		.then((result) => {
+			response.status(200).json({ videos: result.rows });
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 
 
 server.on("listening", () => {
