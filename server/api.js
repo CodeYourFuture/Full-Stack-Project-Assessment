@@ -9,8 +9,8 @@ router.get("/videos", async (_, res) => {
 			//console.log(result);
 			res.status(200).json({ videos: result.rows });
 		})
-		.catch((err) => {
-			console.log(err);
+		.catch((error) => {
+			console.log(error);
 		});
 });
 
