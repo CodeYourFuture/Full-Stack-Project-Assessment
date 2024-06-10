@@ -27,6 +27,13 @@ const Videos = () => {
 
 
 
+    const deleteVideo = (index) => {
+        setVideos((prevVideos) => prevVideos.filter((_, i) => i !== index));
+    };
+
+
+
+
 
     return (
         <div>
@@ -40,6 +47,7 @@ const Videos = () => {
                         <a href={video.src} target="_blank" rel="noopener noreferrer">
                             {video.title}
                         </a>
+                        <button onClick={() => deleteVideo(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
