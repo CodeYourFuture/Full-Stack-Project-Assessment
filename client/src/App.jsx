@@ -1,3 +1,4 @@
+import VideoForm from "./components/VideoForm";
 import Videos from "./components/Videos";
 
 const App = () => {
@@ -5,6 +6,7 @@ const App = () => {
 		<>
 			<h1>Video Recommendations</h1>
 			<Videos />
+			
 		</>
 	);
 };

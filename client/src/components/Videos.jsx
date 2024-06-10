@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import VideoForm from './VideoForm';
 
 
 const Videos = () => {
@@ -19,8 +20,19 @@ const Videos = () => {
         fetchVideos();
     }, []);
 
+
+    const addVideo = (video) => {
+        setVideos((prevVideos) => [...prevVideos, video]);
+    };
+
+
+
+
     return (
         <div>
+
+            <h2> Video List</h2>
+            <VideoForm addVideo={addVideo} />
             
             <ul>
                 {videos.map((video, index) => (
